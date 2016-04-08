@@ -135,16 +135,18 @@ drop if abc == 1
 rename m_ed0y m_edu0
 rename f_home0y f_home0
 rename m_age0y m_age0
-rename p_inc0y p_inc0
+rename hh_inc0y p_inc0
 keep id f_home0 m_edu0 m_age0 p_inc0 treat male
 append using "`data_psid'"
 replace caredata = 1 if caredata == .
+
+replace p_inc0 = p_inc0/1000
 
 // save abccare_file
 tempfile   care_psid
 save     "`care_psid'", replace
 append using "`abc_psid'"
-
+replace p_inc0 = p_inc0/1000
 
 // plot analysis
 cd $output
@@ -156,30 +158,35 @@ global femalecondition & male == 0
 global f_home0_ylabel 0[.2].8
 global m_age0_ylabel  16[4]28
 global m_edu0_ylabel  8[2]12
-global p_inc0_ylabel  0[10]60
+global p_inc0_ylabel  0[10]40
+
+global f_home0_stat mean
+global m_age0_stat  mean
+global m_edu0_stat  mean
+global p_inc0_stat  p50
  
-foreach gender in pool male female {
+foreach gender in pool {
 	matrix allvars`gender' = J(4,1,.)
 	matrix rownames allvars`gender' = c1 c2 c3 c4
 	
 	// means
-	foreach var of varlist f_home0 /*m_age0 m_edu0 p_inc0*/ {
+	foreach var of varlist f_home0 m_age0 m_edu0 p_inc0 {
 		summ `var' [aw = cweight2005] if (abcdata == 0 | caredata == 0) ${`gender'condition}, det
-		local `var'`gender'psid  = r(mean)
+		local `var'`gender'psid  = r(${`var'_stat})
 		summ `var'  if (abcdata == 0 | caredata == 0) ${`gender'condition}
 		local `var'`gender'psidN = r(N)
 		
 		summ `var' [aw = cweight2005] if (abcdata == 0 | caredata == 0) & black == 1 ${`gender'condition}, det
-		local `var'`gender'psidblack = r(mean)
+		local `var'`gender'psidblack = r(${`var'_stat})
 		summ `var'  if (abcdata == 0 | caredata == 0) & black == 1 ${`gender'condition}
 		local `var'`gender'psidblackN = r(N)
 		
 		summ `var' if abcdata == 1 ${`gender'condition}, det
-		local `var'`gender'abc  = r(mean)
+		local `var'`gender'abc  = r(${`var'_stat})
 		local `var'`gender'abcN = r(N)
 		
 		summ `var' if caredata == 1 ${`gender'condition}, det
-		local `var'`gender'care  = r(mean)
+		local `var'`gender'care  = r(${`var'_stat})
 		local `var'`gender'careN = r(N)
 		
 		matrix `var'`gender' = [``var'`gender'psid',``var'`gender'psidblack',``var'`gender'abc',``var'`gender'care']'
@@ -195,13 +202,13 @@ foreach gender in pool male female {
 	svmat allvars`gender', names(col)
 	gen category = _n*2 - 1
 	
-	foreach var in f_home0 /*m_age0 m_edu0 p_inc0*/ {
+	foreach var in f_home0 m_age0 m_edu0 p_inc0 {
 	#delimit
-	twoway 	(bar `var'`gender' category, lwidth(medium) lcolor(gs0) fcolor(none)),
+	twoway 	(bar `var'`gender' category, lwidth(medium) lcolor(gs0) fcolor(gs6)),
 		xlabel(1 "National, All (N = ``var'`gender'psidN')" 3 "National, Black (N = ``var'`gender'psidblackN')" 5 "ABC (N = ``var'`gender'abcN')"
 		       7 "CARE (N = ``var'`gender'careN')", grid glcolor(gs14) angle(55) labsize(medsmall)) 
 		     ylabel(${`var'_ylabel}, angle(h) glcolor(gs14))
-		xtitle("") ytitle(Mean, size(small))
+		xtitle("") ytitle("")
 		graphregion(color(white)) plotregion(fcolor(white));
 	#delimit cr
 	graph export abccarepsid_`var'`gender'.eps, replace
