@@ -20,12 +20,12 @@ global googledrive: env googledrive
 
 // set general locations
 // do files
-global scripts    = "$projects/abc-care-treatmenteffects-finalseason/scripts/"
+global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
 global datapsid    = "$klmshare/Data_Central/data-repos/psid/base/"
-global dataabccare = "{klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
+global dataabccare = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
 // output
-global output     = "$projects/abc-care-treatmenteffects-finalseason/output/"
+global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 
 // ABC
 // open psid-abc match
@@ -64,46 +64,25 @@ foreach y in f_home m_age m_edu fam_inc {
 la var fam_inc0 "Labor income of parents (2014$)"
 rename fam_inc0 p_inc0
 
-// arrange later life outcomes (abc + psid are in 2014 dollars) 
-foreach y in inc_labor cig edu{
-	gen  `y'30 = .
-	replace `y'30 = `y'2003 if (year31 == 2003 | year31 == 2002)
-	replace `y'30 = `y'2005 if (year31 == 2005 | year31 == 2004)
-	replace `y'30 = `y'2007 if (year31 == 2007 | year31 == 2006)
-}
-
-rename inc_labor30 inc30
-rename cig30 cigs30
-rename edu30 years30
-
-foreach y in bmi{
-	gen `y'34 = .
-	replace `y'34 = `y'2005 if (year31 == 2003 | year31 == 2002)
-	replace `y'34 = `y'2007 if (year31 == 2005 | year31 == 2004)
-	replace `y'34 = `y'2009 if (year31 == 2007 | year31 == 2006)
-}
 gen black =( race == 2 ) if race != .
 
 // append psid-abc 
 gen abcdata = 0
-keep id abcdata f_home0 m_age0 m_edu0 p_inc0 inc30 cigs30 bmi34 years30 cweight2005 black male
+keep id abcdata f_home0 m_age0 m_edu0 p_inc0 cweight2005 black male
 tempfile   data_psid
 save     "`data_psid'", replace
 
 cd $dataabccare
 use append-abccare_iv.dta, clear
-keep if abc == 1
-rename m_ed0 m_edu0
-rename si34_bmi bmi34
-rename si30_inc_labor inc30
-rename si30_cig_num cigs30 
-keep id f_home0 m_edu0 m_age0 m_edu0 p_inc0 inc30 cigs30 years30 bmi34 treat male
-append using "`data_psid'"
-replace abcdata = 1 if abcdata == .
 
-foreach var of varlist p_inc0 inc30 {
-	replace `var' = `var'/1000
-}
+keep if abc == 1
+gen abcdata = 1
+rename m_ed0y m_edu0
+rename f_home0y f_home0
+rename m_age0y m_age0 
+rename p_inc0y p_inc0 
+keep id f_home0 m_edu0 m_age0 m_edu0 p_inc0 treat male abcdata
+append using "`data_psid'"
 
 // save abccare_file
 tempfile abc_psid
@@ -112,13 +91,13 @@ save     "`abc_psid'", replace
 // CARE
 // open psid-abc match
 cd $datapsid
-use append-abccare_iv.dta, clear
+use psid-base.dta, clear
 
 // grab relevant cohort at 1978-1979
 keep if inlist(age1978,0,1,2,3)
 
 // keep relevant outcomes and flags for abc-comparable sample 
-keep id cweight2005 age1978 f_home* m_age* m_edu* fam_inc* inc_labor* edu* cig* bmi* race* male
+keep id cweight2005 age1978 f_home* m_age* m_edu* fam_inc* race* male
 
 gen     year0 = .
 replace year0 = 1978 if age1978 == 1 //
@@ -140,47 +119,26 @@ foreach y in f_home m_age m_edu fam_inc {
 }
 la var fam_inc0 "Labor income of parents (2014$)"
 rename fam_inc0 p_inc0
-
-// arrange later life outcomes (abc + psid are in 2014 dollars) 
-foreach y in inc_labor cig edu{
-	gen  `y'30 = .
-	replace `y'30 = `y'2009 if (year31 == 2008 | year31 == 2009)
-	replace `y'30 = `y'2011 if (year31 == 2010 | year31 == 2011)
-}
-
-rename inc_labor30 inc30
-rename cig30 cigs30
-rename edu30 years30
-
-foreach y in bmi {
-	gen `y'34 = .
-	replace `y'34 = `y'2009 if (year31 == 2008 | year31 == 2009)
-	replace `y'34 = `y'2009 if (year31 == 2010 | year31 == 2011)  // only bmi available
-} 
+ 
 gen black =( race == 2 ) if race != .
 
 // append psid-abc 
 gen caredata = 0
-keep id caredata f_home0 m_age0 m_edu0 p_inc0 inc30 cigs30 bmi34 years30 cweight2005 black male
+keep id caredata f_home0 m_age0 m_edu0 p_inc0 cweight2005 black male
 tempfile   data_psid
 save     "`data_psid'", replace
 
 cd $dataabccare
-use append-abccare_iv.dta.dta, clear
+use append-abccare_iv.dta, clear
 
-drop if abc == 0 
-rename m_ed0 m_edu0
-rename PE_BMI bmi34
-rename hh_inc0 p_inc0
-drop inc30
-rename si30_inc_labor inc30
-keep id f_home0 m_edu0 m_age0 p_inc0 inc30 cigs30 years30 bmi34 treat male
+drop if abc == 1
+rename m_ed0y m_edu0
+rename f_home0y f_home0
+rename m_age0y m_age0
+rename p_inc0y p_inc0
+keep id f_home0 m_edu0 m_age0 p_inc0 treat male
 append using "`data_psid'"
 replace caredata = 1 if caredata == .
-
-foreach var of varlist p_inc0 inc30 {
-	replace `var' = `var'/1000
-}
 
 // save abccare_file
 tempfile   care_psid
@@ -199,18 +157,13 @@ global f_home0_ylabel 0[.2].8
 global m_age0_ylabel  16[4]28
 global m_edu0_ylabel  8[2]12
 global p_inc0_ylabel  0[10]60
-global inc30_ylabel   0[10]50
-global cigs30_ylabel  0[1]6
-global years30_ylabel 10[1]15
-global bmi34_ylabel   25[5]45
-
  
 foreach gender in pool male female {
 	matrix allvars`gender' = J(4,1,.)
 	matrix rownames allvars`gender' = c1 c2 c3 c4
 	
 	// means
-	foreach var of varlist f_home0 m_age0 m_edu0 p_inc0 inc30 cigs30 years30 bmi34 {
+	foreach var of varlist f_home0 /*m_age0 m_edu0 p_inc0*/ {
 		summ `var' [aw = cweight2005] if (abcdata == 0 | caredata == 0) ${`gender'condition}, det
 		local `var'`gender'psid  = r(mean)
 		summ `var'  if (abcdata == 0 | caredata == 0) ${`gender'condition}
@@ -242,7 +195,7 @@ foreach gender in pool male female {
 	svmat allvars`gender', names(col)
 	gen category = _n*2 - 1
 	
-	foreach var in f_home0 m_age0 m_edu0 p_inc0 inc30 cigs30 years30 bmi34 {
+	foreach var in f_home0 /*m_age0 m_edu0 p_inc0*/ {
 	#delimit
 	twoway 	(bar `var'`gender' category, lwidth(medium) lcolor(gs0) fcolor(none)),
 		xlabel(1 "National, All (N = ``var'`gender'psidN')" 3 "National, Black (N = ``var'`gender'psidblackN')" 5 "ABC (N = ``var'`gender'abcN')"
