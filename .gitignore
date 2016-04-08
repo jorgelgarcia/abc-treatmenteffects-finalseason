@@ -1,0 +1,92 @@
+#    Backup files     #
+#######################
+*~
+*backup
+*.synctex.gz
+*#
+
+# LateX Auxilary Files #
+########################
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.log
+*.toc
+*.lof
+*.lot
+*.out
+*.bak
+*.fdb_latexmk
+*.nav
+*.snm
+*.synctex
+*.xwm
+
+# Log files
+##################################
+!analysis/income/log/*.log
+analysis/bin/ate/log/
+scripts/analysis/abc/ate/log/
+scripts/analysis/care/ate/log/
+scripts/analysis/abc/balance_tables/log/
+scripts/analysis/care/balance_tables/log/
+scripts/analysis/abccare/balance_tables/log/
+
+# Python Compiled Code #
+########################
+*.pyc
+
+# Image Files #
+###############
+#*png
+*pdf
+*svg
+!draft/output/crime/regfuture_black_0.pdf
+!draft/output/crime/regfuture_black_1.pdf
+
+# Data Files #
+##############
+analysis/income/data/*.dta
+analysis/income/data/*.csv
+scripts/analysis/abc/sampling/*.csv
+scripts/analysis/care/sampling/*.csv
+scripts/analysis/abccare/variables_table/*.csv
+scripts/analysis/abccare/variables_table/*.xlsx
+scripts/analysis/abccare/variables_table/*.xls
+data/hrs/
+data/abc/
+data/meps/
+data/nlsy/
+data/psid/
+*.dat
+*.dta
+
+# Tables and Figures #
+######################
+analysis/income/output/*
+analysis/bin/ate/tables/*
+analysis/bin/balance/tables/*
+
+# Result Files #
+################
+analysis/income/rslt/*.pickle
+analysis/income/rslt/*.pkl
+analysis/income/rslt/*.csv
+analysis/bin/ate/rslt/*pkl
+analysis/cba/rslt/
+scripts/analysis/abc/ate/rslt/
+scripts/analysis/abc/ccate/rslt*
+scripts/analysis/care/ate/rslt/
+scripts/analysis/abc/balance_tables/rslt/
+scripts/analysis/care/balance_tables/rslt/
+scripts/analysis/abccare/balance_tables/rslt/
+
+
+
+# Store files #
+###############
+*DS_Store
+*Rhistory
+*data_cache*
+
