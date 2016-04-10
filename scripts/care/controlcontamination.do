@@ -31,16 +31,16 @@ global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 cd $dataabccare
 use append-abccare_iv.dta, clear
 
+replace dc_mo_pre = 0 if dc_mo_pre == 2 & random == 3
 sort    dc_mo_pre
 cumul   dc_mo_pre if program=="care" & random  == 0, gen(cdf_dc_mo_pre_control)
 sort    dc_mo_pre
-cumul   dc_mo_pre if program=="care" & random  == 3, gen(cdf_dc_mo_pre_fccb)
- 
-// replace dc_mo_pre = 52 if dc_mo_pre >= 52
+cumul   dc_mo_pre if program=="care" & random  == 3, gen(cdf_dc_mo_pre_fc)
+
 
 #delimit
 twoway (line cdf_dc_mo_pre_control dc_mo_pre if program=="care", lwidth(vthick) lcolor(gs0))
-       (line cdf_dc_mo_pre_fccb    dc_mo_pre if program=="care", lwidth(vthick) lpattern(dash) lcolor(gs0))
+       (line cdf_dc_mo_pre_fc      dc_mo_pre if program=="care", lwidth(vthick) lpattern(dash) lcolor(gs0))
       , 
 		  legend(label(1 "Control") label(2 "Family Education Treatment"))
 		  xlabel(0[10]60, grid glcolor(gs14)) ylabel(0[.1]1, angle(h) glcolor(gs14))
