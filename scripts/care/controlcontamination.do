@@ -6,7 +6,7 @@ set maxvar  32000
 
 /*
 Project :       ABC, CARE Treatment Effects
-Description:    this .do file compares ABC and CARE to PSID
+Description:    this .do file plots control contamination cdf's 
 *This version:  April 8, 2015
 *This .do file: Jorge L. Garcia
 */
@@ -32,15 +32,20 @@ cd $dataabccare
 use append-abccare_iv.dta, clear
 
 sort    dc_mo_pre
-cumul   dc_mo_pre if program=="abc" & treat == 0, gen(cdf_dc_mo_pre) 
+cumul   dc_mo_pre if program=="care" & random  == 0, gen(cdf_dc_mo_pre_control)
+sort    dc_mo_pre
+cumul   dc_mo_pre if program=="care" & random  == 3, gen(cdf_dc_mo_pre_fccb)
+ 
 // replace dc_mo_pre = 52 if dc_mo_pre >= 52
 
 #delimit
-twoway (scatter cdf_dc_mo_pre dc_mo_pre if program=="abc" & treat == 0, msymbol(circle) mfcolor(none) mlcolor(gs0) msize(large))
+twoway (line cdf_dc_mo_pre_control dc_mo_pre if program=="care", lwidth(vthick) lcolor(gs0))
+       (line cdf_dc_mo_pre_fccb    dc_mo_pre if program=="care", lwidth(vthick) lpattern(dash) lcolor(gs0))
       , 
+		  legend(label(1 "Control") label(2 "Family Education Treatment"))
 		  xlabel(0[10]60, grid glcolor(gs14)) ylabel(0[.1]1, angle(h) glcolor(gs14))
 		  xtitle(Months in Preschool) ytitle(Cumulative Density Function)
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 cd $output
-graph export abc_controlcontamination_months.eps, replace
+graph export care_controlcontamination_months.eps, replace
