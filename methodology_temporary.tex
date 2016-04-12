@@ -1,0 +1,100 @@
+%Input preamble
+\input{preamble}
+
+% \externaldocument{abccaretreatmenteffects_report_appendix}
+
+\begin{document}
+
+\section{Methodology} \label{section:methodology}
+
+\subsection{Parameters of Interest and Policy Questions}
+
+\noindent Randomized assignment to treatment does not guarantee for the simple estimates commonly used in the literature to provide meaningful. This simple estimators do not inform policy-making if it is not clear how they relate to policy-relevant questions in the specific context they are used in.\\
+
+\noindent First, we focus on a single phase of treatment and on a single comparison between the control and a single treatment group. We clarify how to extend our methodology to the second-phase treatment and to multiple treatment branches below. Let $Y_{d}$ denote a counter-factual outcome. $Y_{1}$ is the outcome when an individual is fixed to treatment and $Y_{0}$ is the outcome when an individual is fixed to control. The standard way to evaluate the treatment of a program is to compare the distributions of $Y_{0}$ and $Y_{1}$. That is, test the hypothesis 
+
+\begin{equation}
+H_{0}: Y_{0} \sim Y_{1}. \label{eq:ho}
+\end{equation}
+
+\noindent A common way to contrast this hypothesis is to test if the intent-to-treat (ITT) estimator is different from zero. The ITT is 
+
+\begin{equation}
+\text{ITT} = \mathbb{E} \left[ Y | R = 1 \right] - \mathbb{E} \left[ Y | R = 0 \right]. \label{eq:itt}
+\end{equation} 
+
+\noindent Under perfect compliance to treatment and control status, the ITT helps contrast \eqref{eq:ho} because $\mathbb{E} \left[ Y | R = 1 \right]$ identifies the expectation of the outcome $Y$ when the individual is fixed to treatment status. Similarly, $\mathbb{E} \left[ Y | R = 0 \right]$ identifies the expectation of $Y$ when the individual is fixed to control status. The ITT is the difference between the expectations of distributions of $Y_{0}$ and $Y_{1}$.
+
+\noindent \begin{assumption} \normalfont (Perfect Compliance) Let $R$ indicate randomization to treatment and $D$ indicate treatment take-up. Perfect compliance occurs whenever  $R = D$.\end{assumption}
+
+\noindent As we explain in Section~\ref{section:background}, compliance to treatment was not perfect. Thus, if we were to test the hypothesis in \eqref{eq:ho} using an estimate of the ITT, we would need to correct the estimates of $\mathbb{E} \left[ Y | R = 1 \right]$ and $\mathbb{E} \left[ Y | R = 0 \right]$ for non-compliance. That is, we need to correct the estimates for different situations in which we do not observe data of the individuals originally assigned to either control or treatment status. This could be because their families refused to participate of treatment, moved to another city, or did not answer an specific questionnaire.\footnote{These instances of non-compliance are conceptually different, but we group them under the same correction. We could define a correction for each instance and arrive to a very similar method. In practice, it is not practical to distinguish between correction methods because each instance is present a few times and our sample is small. Thus, we refer to non-compliance as any case in which data from the original assignment to treatment or control of an individual is missing.} To see this, let $A$ denote compliance and $Y_{d} \left(\text{fix } A = a \right)$ denote the counter-factual outcome $Y$ when $A$ is fixed to compliance ($A = 0$) or non-compliance ($A = 1$). It is not necessarily the case that 
+
+\begin{equation}
+Y_{d} \left(\text{fix } A = 0 \right) \sim Y_{d} \left(\text{fix } A = 1 \right). 
+\end{equation}
+
+\begin{assumption} \normalfont \label{assumption:balance} (Conditional Independence in Non-compliance) The counter-factual outcome $Y_{d} \left(\text{fix } A = a \right)$ follows the same distribution regardless on the value $A$ is fixed at, once $X$ (observed characteristics) is conditioned on: 
+
+\begin{equation}
+Y_{d} \left(\text{fix } A = a \right) | X \sim Y_{d} | X. 
+\end{equation}
+
+\end{assumption}
+
+\noindent Under Assumption~\ref{assumption:balance}, however, we are able to correct our estimates of $\mathbb{E} \left[ Y | R = 1 \right]$ and $\mathbb{E} \left[ Y | R = 0 \right]$ for non-compliance by using an inverse-probability weighting (IPW) scheme. That is, we reweight the data to obtain balance on observed characteristics between individuals who complied and who did not comply to treatment. Assumption~\ref{assumption:balance} states that once $X$ is balanced, non-compliance does not affect the counter-factual distributions of interest and we are able to identify them.\footnote{We could relax Assumption~\ref{assumption:balance} if we would only be interested on identifying the counterfactual expectations, as when we calculate the ITT. It is in that sense that Assumption~\ref{assumption:balance} is sufficient but not necessary. A weaker assumption as mean independence condition also suffices to identify the ITT.} Once we account for non-compliance, the ITT represents the average treatment effect of ABC, as implemented and not relative an specific preschool alternative. For clarity, we omit the argument $A$ henceforth, although in our empirical application we show estimates correcting for non-compliance.\\
+
+\noindent In the case of ABC, using the ITT to compare the treatment and the control groups relates to the following policy question: what is the effect of ABC as it was implemented? That is, what is the effect of ABC without accounting for the fact that $70 \%$ control children enrolled in different preschool alternatives. This question does not address the efficacy of ABC as an early childhood education program. It addresses its efficacy relative to the available supply when the program was implemented.\footnote{If the preschool alternatives were beneficial for the children in the control group, the ITT is attenuated towards zero. This is common in early childhood education programs in which alternatives are close in quality to the program itself. Perhaps the most iconic example is the randomized evaluation of Head Start, the Head Start Impact Study, in which $15\%$ of children in the control group had access to alternative Head Start centers. ITT estimates reported by \cite{Puma_Bell_etal_2010_HeadStartImpact} are close to zero. That does not mean that the efficacy of Head Start is low, it means that Head Start treatment is being compared to close substitutes in the when computing the ITT.} The case is similar for CARE, when comparing each of its treatment groups to the control group.\\
+
+\noindent A more relevant question to ask is: what is the effect of ABC relative to a counter-factual scenario in which all children are fixed to the same alternative, e.g. staying at home, attending a low-quality preschool. This question needs to account for treatment substitution by the control group because it requires the counter-factual in control status to be fixed to a homogeneous alternative. By doing so, it makes the adequate comparison between the children in the treatment group and the children in the control group, fixing their level to alternative preschool.\\
+
+\noindent Let $P$ indicate if the children attended alternative preschool. The value of $P$ could either be fixed to no take-up of preschool alternative ($P = 0$) or take-up of preschool alternative $(P = 1)$. We want to contrast the following hypotheses: 
+
+\begin{eqnarray}
+H_{0}^0 &:& Y_{0} \left( \text{fix } P = 0 \right) \sim Y_{1} \left( \text{fix } P = 0 \right) \\
+H_{0}^1 &:& Y_{0} \left( \text{fix } P = 1 \right) \sim Y_{1} \left( \text{fix } P = 1\right). 
+\end{eqnarray}
+
+\noindent That is, we want to compare the counter-factual treatment distributions when fixing children to no alternative preschool ($H_{0}^0$) and when fixing children to alternative preschool ($H_{0}^1$).\footnote{This treats alternative preschool as a binary decision, although it is continuous as we show in Figure~\ref{fig:treatsubabc}. We take this approach because we are limited by our sample size when predicting preschool take-up as we show in Appendix~\ref{appendix:methods}.}\\
+
+\noindent To contrasts these hypotheses, consider the following estimators: 
+
+\begin{eqnarray}
+ITT \left( \text{fix } P = 0 \right) &=& \mathbb{E} \left[ Y | R = 1, \text{fix } P = 0 \right] - \mathbb{E} \left[ Y | R = 1, \text{fix } P = 0 \right] \label{eq:ittp0} \\
+ITT \left( \text{fix } P = 1 \right) &=& \mathbb{E} \left[ Y | R = 1, \text{fix } P = 1 \right] - \mathbb{E} \left[ Y | R = 1, \text{fix } P = 1 \right]. \label{eq:ittp1}  
+\end{eqnarray}
+
+\noindent Providing estimates for the expectations in \eqref{eq:ittp0}, \eqref{eq:ittp1} is not as straightforward as computing the expectations in \eqref{eq:itt}. The reason is the following: while treatment fixes an individual to either treatment or control status, it does not fix her to any of the two alternative preschool statuses.\\
+
+\begin{assumption} \normalfont (Conditional Independence in Preschool Alternatives Take-up) The counter-factual outcome $Y_{d} \left( \text{fix } P=p \right)$ follows the same distribution regardless of the value $P$ is fixed at, once $X$ (observed characteristics) is conditioned on: 
+\begin{equation}
+Y_{d} \left( \text{fix } P=p \right) | X \sim Y_{d}  | X 
+\end{equation}
+ \end{assumption}
+a
+\noindent Assumption~\ref{assumption:matching} is a sufficient condition to provide estimates for \eqref{eq:ittp0}, \eqref{eq:ittp1}.  It states that the observed characteristics in $X$ account the parental decision of whether or not to enroll the child in preschool alternatives.\\
+
+\noindent The estimates for $ITT \left( \text{fix } P = 0 \right) $ and $ITT \left( \text{fix } P = 1 \right)$ relate to the second policy question, which evaluates the efficacy of ABC. Once non-compliance is accounted for as explained above, they represent the average treatment effect of ABC relative to receiving no treatment at all and relative to receiving a preschool alternative, respectively.
+
+\noindent For illustration, suppose we want to provide an estimate of $ITT \left( \text{fix } P = 0 \right)$ using a linear and separable parameterization. Then, estimate the following model 
+
+\begin{equation}
+Y = \Delta \left( \text{fix } P = 0 \right) + X \beta + \varepsilon, 
+\end{equation}
+
+\noindent which provides a consistent estimate for $\Delta \left( \text{fix } P = 0 \right)$ under Assumption~\ref{assumption:matching}. $\Delta \left( \text{fix } P = 0 \right)$ is the average treatment effect of ABC with respect to no treatment at all. It allows to evaluate the efficacy of ABC with respect to a well-defined alternative, no treatment at all. Note that Assumption~\ref{assumption:matching} is a sufficient condition for consistency, but a weaker condition (mean independence) suffices for identifying $\Delta \left( \text{fix } P = 0 \right)$. To account for non-compliance in this framework, we could weight the linear regression with individual-level estimates of the probability of compliance.\\
+
+\noindent We present estimates of $\Delta \left( \text{fix } P = 0 \right)$ and $\Delta \left( \text{fix } P = 1 \right)$ using this parameterization and using other alternatives to more flexibly  condition on $X$, e.g. nearest neighbor matching, propensity score matching, and kernel-based weighting.
+
+\subsection{Multiple Treatment Groups}
+
+\subsection{Second-phase Treatment}
+
+\subsection{Treatment Effects on Multiple Outcomes}
+
+%References
+\clearpage
+\singlespace
+\bibliographystyle{chicago}
+\bibliography{heckman}
+
+\end{document} 
