@@ -7,7 +7,7 @@
 
 \section{Methodology} \label{section:methodology}
 
-\subsection{Parameters of Interest and Policy Questions}
+\subsection{Parameters of Interest and Policy Questions} \label{section:methodsquestions}
 
 \noindent Randomized assignment to treatment does not guarantee for the simple estimates commonly used in the literature to provide meaningful. This simple estimators do not inform policy-making if it is not clear how they relate to policy-relevant questions in the specific context they are used in.\\
 
@@ -59,13 +59,13 @@ H_{0}^1 &:& Y_{0} \left( \text{fix } P = 1 \right) \sim Y_{1} \left( \text{fix }
 \noindent To contrasts these hypotheses, consider the following estimators: 
 
 \begin{eqnarray}
-ITT \left( \text{fix } P = 0 \right) &=& \mathbb{E} \left[ Y | R = 1, \text{fix } P = 0 \right] - \mathbb{E} \left[ Y | R = 1, \text{fix } P = 0 \right] \label{eq:ittp0} \\
-ITT \left( \text{fix } P = 1 \right) &=& \mathbb{E} \left[ Y | R = 1, \text{fix } P = 1 \right] - \mathbb{E} \left[ Y | R = 1, \text{fix } P = 1 \right]. \label{eq:ittp1}  
+\text{ITT} \left( \text{fix } P = 0 \right) &=& \mathbb{E} \left[ Y | R = 1, \text{fix } P = 0 \right] - \mathbb{E} \left[ Y | R = 0, \text{fix } P = 0 \right] \label{eq:ittp0} \\
+\text{ITT} \left( \text{fix } P = 1 \right) &=& \mathbb{E} \left[ Y | R = 1, \text{fix } P = 1 \right] - \mathbb{E} \left[ Y | R = 0, \text{fix } P = 1 \right]. \label{eq:ittp1}  
 \end{eqnarray}
 
 \noindent Providing estimates for the expectations in \eqref{eq:ittp0}, \eqref{eq:ittp1} is not as straightforward as computing the expectations in \eqref{eq:itt}. The reason is the following: while treatment fixes an individual to either treatment or control status, it does not fix her to any of the two alternative preschool statuses.\\
 
-\begin{assumption} \normalfont (Conditional Independence in Preschool Alternatives Take-up) The counter-factual outcome $Y_{d} \left( \text{fix } P=p \right)$ follows the same distribution regardless of the value $P$ is fixed at, once $X$ (observed characteristics) is conditioned on: 
+\begin{assumption} \label{assumption:matching} \normalfont (Conditional Independence in Preschool Alternatives Take-up) The counter-factual outcome $Y_{d} \left( \text{fix } P=p \right)$ follows the same distribution regardless of the value $P$ is fixed at, once $X$ (observed characteristics) is conditioned on: 
 \begin{equation}
 Y_{d} \left( \text{fix } P=p \right) | X \sim Y_{d}  | X 
 \end{equation}
@@ -73,9 +73,9 @@ Y_{d} \left( \text{fix } P=p \right) | X \sim Y_{d}  | X
 a
 \noindent Assumption~\ref{assumption:matching} is a sufficient condition to provide estimates for \eqref{eq:ittp0}, \eqref{eq:ittp1}.  It states that the observed characteristics in $X$ account the parental decision of whether or not to enroll the child in preschool alternatives.\\
 
-\noindent The estimates for $ITT \left( \text{fix } P = 0 \right) $ and $ITT \left( \text{fix } P = 1 \right)$ relate to the second policy question, which evaluates the efficacy of ABC. Once non-compliance is accounted for as explained above, they represent the average treatment effect of ABC relative to receiving no treatment at all and relative to receiving a preschool alternative, respectively.
+\noindent The estimates for $\text{ITT} \left( \text{fix } P = 0 \right) $ and $\text{ITT} \left( \text{fix } P = 1 \right)$ relate to the second policy question, which evaluates the efficacy of ABC. Once non-compliance is accounted for as explained above, they represent the average treatment effect of ABC relative to receiving no treatment at all and relative to receiving a preschool alternative, respectively.\\
 
-\noindent For illustration, suppose we want to provide an estimate of $ITT \left( \text{fix } P = 0 \right)$ using a linear and separable parameterization. Then, estimate the following model 
+\noindent For illustration, suppose we want to provide an estimate of $\text{ITT} \left( \text{fix } P = 0 \right)$ using a linear and separable parameterization. Then, estimate the following model 
 
 \begin{equation}
 Y = \Delta \left( \text{fix } P = 0 \right) + X \beta + \varepsilon, 
@@ -86,6 +86,24 @@ Y = \Delta \left( \text{fix } P = 0 \right) + X \beta + \varepsilon,
 \noindent We present estimates of $\Delta \left( \text{fix } P = 0 \right)$ and $\Delta \left( \text{fix } P = 1 \right)$ using this parameterization and using other alternatives to more flexibly  condition on $X$, e.g. nearest neighbor matching, propensity score matching, and kernel-based weighting.
 
 \subsection{Multiple Treatment Groups}
+
+\noindent We can readily apply the methodology in Section~\ref{section:methodsquestions}  to test either of the hypotheses in \eqref{eq:itt}, \eqref{eq:ittp0}, \eqref{eq:ittp1} for ABC. In CARE, however, there was one control and two treatment groups. A simple extension to the framework in Section~\ref{section:methodsquestions} allows us to test various hypotheses that inform on the effectiveness of the program.\\
+
+\noindent As before, let $Y_{d}$ denote a counter-factual outcome. $Y_{0}$ is the outcome when the individual is fixed to control, $Y_{1}$ when she is fixed to family education treatment, and $Y_{2}$ when she is fixed to center-based childcare and family education treatment.\footnote{Compliance was near to perfect, and we can apply a weighting method as in Section~\ref{section:methodsquestions} to adjust for the single non-compliance case. Thus, we do not discuss non-compliance in this argument.} To evaluate the program, we consider testing the following hypotheses: 
+
+\begin{eqnarray}
+H_{0,1}: Y_{0} \sim Y_{1} \\ 
+H_{0,2}: Y_{0} \sim Y_{2} \\
+H_{0,3}: Y_{1} \sim Y_{2} 
+\end{eqnarray}
+
+\noindent These hypotheses relate to the first policy question we discussed before: what is the effect of CARE as it was implemented? The first hypothesis asks what is the effect of the family education treatment as implemented; the second hypothesis asks what is the effect of the center-based childcare and family education treatment as implemented; and the third hypothesis asks what is the effect of one treatment relative to the other, as implemented. We can test these hypotheses constructing ITT estimators analogous to \eqref{eq:itt}.\\ 
+
+\noindent Alternatively, we can ask the second policy question: what is the effect of CARE fixing the counter-factual scenarios to a fixed level of alternative preschool. Fixing a preschool alternative is as relevant in CARE as it is in ABC. Both the children in the control and the family education treatment groups were substantially enrolled in alternative preschool (see Figure~\ref{fig:treatsubabc}). Under Assumption~\ref{assumption:matching}, we are able to construct ITT estimators fixing $P$ at either no preschool alternative or preschool alternative, as in \eqref{eq:ittp0}, \eqref{eq:ittp1}, and present estimates that account for $X$ using different parameterizations.\\
+
+\subsection{Combining ABC and CARE}
+
+\noindent An alternative to evaluate CARE
 
 \subsection{Second-phase Treatment}
 
