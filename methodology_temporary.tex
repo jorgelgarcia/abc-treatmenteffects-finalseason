@@ -5,114 +5,50 @@
 
 \begin{document}
 
-\section{Methodology} \label{section:methodology}
+\newgeometry{top=.5in, bottom=.5in, left=.5in, right=.5in}
 
-\subsection{Parameters of Interest and Policy Questions} \label{section:methodsquestions}
+\begin{sidewaystable}[H] 
+\begin{threeparttable}
+\caption{Randomization Compromises, ABC and CARE}
+\label{table:yourlabel}
+\centering
+\tiny
+\begin{tabular}{cccccc} \hline \hline
+Case & Child ID & Initial Assignment & Compromise Description & Data Availability & Methodology Assumption \\ \\ \hline
+\multicolumn{6}{l}{\textbf{ABC}} \\ 
+1 & N/A (Case A) & Treatment & Left the study & No data & Missing at random \\
+2 & N/A (Case B) & Treatment & Left the study & No data & Missing at random \\
+3 & N/A (Case C) & Treatment & Left the study & No data & Missing at random \\
+4 & N/A (Case D)          & Treatment & Left the study & No data & Missing at random \\
+5 & .x & Control            & Died at age 0, heart disease & Baseline characteristics, any data collection before dead      & Attrition after dead \\
+6 & 914 & Control         & Died at age 0, heart disease & Baseline characteristics, any data collection before dead   & Attrition after dead \\
+7 & 74 & Treatment      & Died at age 0, SIDS  5 & Baseline characteristics, any data collection before dead & Attrition after dead \\
+8 & 99 & Treatment      & Died at age 4, pedestrian accident & Baseline characteristics, any data collection before dead & Attrition after dead \\
+9 & 95   & Treatment       & Diagnosed as developmentally delayed at 6 months old   & No data after diagnosis & Dropped from the sample (non-eligible) \\ 
+10 & 124 & Treatment       & Diagnosed as developmentally delayed at 36 months old & No data after diagnosis & Dropped from the sample (non-eligible) \\ 
+11   & 900 & Treatment  & Did not comply to treatment status  & Baseline characteristics, any data collection up to age 8 & Attrition after age 8  \\
+12 & 912 & Treatment  & Did not comply to treatment status  & Baseline characteristics, any data collection up to age 8 & Attrition after age 8 \\
+13 & 922 & Treatment  & Did not comply to treatment status  & Baseline characteristics, any data collection up to age 8 & Attrition after age 8 \\
+14 & 906 & Treatment  & Abandoned study at 54 months old  & Baseline characteristics, any data collection up to age 54 months & Attrition after age 54 months \\
+15 & 82 & Control       & Moved to unspecified place after age 15 &   Baseline characteristics, any data collection up to age 15 & Attrition beginning at age 21 \\
+16 &  78  & Control       & Crossover from control to treatment  & Baseline characteristics, any data collection up to age 8 months & Attrition after age 8 \\
+17 &  82 & Control       & Crossover from control to treatment due to special needs & Baseline characteristics, any data collection up to age 8 & Dropped from the sample \\ 
+18 & 119 & Control       & Crossover from control to treatment due to special needs & Baseline characteristics, any data collection up to age 8 & Dropped from the sample \\ 
+19 & 85 & Treatment         & Only 3 months of treatment  & All follow-ups available   & Same as complying treatment children  \\ 
+20 & 103 & Treatment         & Only 3 months of treatment  & All follow-ups available   & Same as complying treatment children  \\ 
+21 & 108 & Treatment         & Only 3 months of treatment  & All follow-ups available   & Same as complying treatment children  \\ 
+22 & 123 & Treatment         & Only 3 months of treatment  & All follow-ups available   & Same as complying treatment children  \\ \\ \hline
+\multicolumn{6}{l}{\textbf{CARE}} \\
+1 & 310 & Family education & Died at age 0, unknown causes & Baseline characteristics & Attrition after dead \\
+2 & 301 & Center-based Childcare  & Abandoned study at age 5  & Baseline characteristics, any data collection up to age 5 & Attrition after age 5 \\
+3 & 910 & Control & Move to unspecified place at 11 months old & Baseline characteristics, any data collection up to 11 months old & Attrition beginning at 11 months old interview \\
+4 & 142 & Center-based Childcare & Move to unspecified place after age 5 months old & Baseline characteristics, any data collection up to 5 months old & Attrition beginning at 5 months old \\
+ &  & and Family Education &  &  & \\
+5 & 150 & Center-based Childcare & Move to unspecified place after age 5 & Baseline characteristics, any data collection up to 5 & Attrition beginning at 5 \\
+ &  & and Family Education &  &  & \\ \hline \hline 
+\end{tabular}
+\end{threeparttable}
+\end{sidewaystable}
 
-\noindent Randomized assignment to treatment does not guarantee for the simple estimates commonly used in the literature to provide meaningful. This simple estimators do not inform policy-making if it is not clear how they relate to policy-relevant questions in the specific context they are used in.\\
-
-\noindent First, we focus on a single phase of treatment and on a single comparison between the control and a single treatment group. We clarify how to extend our methodology to the second-phase treatment and to multiple treatment branches below. Let $Y_{d}$ denote a counter-factual outcome. $Y_{1}$ is the outcome when an individual is fixed to treatment and $Y_{0}$ is the outcome when an individual is fixed to control. The standard way to evaluate the treatment of a program is to compare the distributions of $Y_{0}$ and $Y_{1}$. That is, test the hypothesis 
-
-\begin{equation}
-H_{0}: Y_{0} \sim Y_{1}. \label{eq:ho}
-\end{equation}
-
-\noindent A common way to contrast this hypothesis is to test if the intent-to-treat (ITT) estimator is different from zero. The ITT is 
-
-\begin{equation}
-\text{ITT} = \mathbb{E} \left[ Y | R = 1 \right] - \mathbb{E} \left[ Y | R = 0 \right]. \label{eq:itt}
-\end{equation} 
-
-\noindent Under perfect compliance to treatment and control status, the ITT helps contrast \eqref{eq:ho} because $\mathbb{E} \left[ Y | R = 1 \right]$ identifies the expectation of the outcome $Y$ when the individual is fixed to treatment status. Similarly, $\mathbb{E} \left[ Y | R = 0 \right]$ identifies the expectation of $Y$ when the individual is fixed to control status. The ITT is the difference between the expectations of distributions of $Y_{0}$ and $Y_{1}$.
-
-\noindent \begin{assumption} \normalfont (Perfect Compliance) Let $R$ indicate randomization to treatment and $D$ indicate treatment take-up. Perfect compliance occurs whenever  $R = D$.\end{assumption}
-
-\noindent As we explain in Section~\ref{section:background}, compliance to treatment was not perfect. Thus, if we were to test the hypothesis in \eqref{eq:ho} using an estimate of the ITT, we would need to correct the estimates of $\mathbb{E} \left[ Y | R = 1 \right]$ and $\mathbb{E} \left[ Y | R = 0 \right]$ for non-compliance. That is, we need to correct the estimates for different situations in which we do not observe data of the individuals originally assigned to either control or treatment status. This could be because their families refused to participate of treatment, moved to another city, or did not answer an specific questionnaire.\footnote{These instances of non-compliance are conceptually different, but we group them under the same correction. We could define a correction for each instance and arrive to a very similar method. In practice, it is not practical to distinguish between correction methods because each instance is present a few times and our sample is small. Thus, we refer to non-compliance as any case in which data from the original assignment to treatment or control of an individual is missing.} To see this, let $A$ denote compliance and $Y_{d} \left(\text{fix } A = a \right)$ denote the counter-factual outcome $Y$ when $A$ is fixed to compliance ($A = 0$) or non-compliance ($A = 1$). It is not necessarily the case that 
-
-\begin{equation}
-Y_{d} \left(\text{fix } A = 0 \right) \sim Y_{d} \left(\text{fix } A = 1 \right). 
-\end{equation}
-
-\begin{assumption} \normalfont \label{assumption:balance} (Conditional Independence in Non-compliance) The counter-factual outcome $Y_{d} \left(\text{fix } A = a \right)$ follows the same distribution regardless on the value $A$ is fixed at, once $X$ (observed characteristics) is conditioned on: 
-
-\begin{equation}
-Y_{d} \left(\text{fix } A = a \right) | X \sim Y_{d} | X. 
-\end{equation}
-
-\end{assumption}
-
-\noindent Under Assumption~\ref{assumption:balance}, however, we are able to correct our estimates of $\mathbb{E} \left[ Y | R = 1 \right]$ and $\mathbb{E} \left[ Y | R = 0 \right]$ for non-compliance by using an inverse-probability weighting (IPW) scheme. That is, we reweight the data to obtain balance on observed characteristics between individuals who complied and who did not comply to treatment. Assumption~\ref{assumption:balance} states that once $X$ is balanced, non-compliance does not affect the counter-factual distributions of interest and we are able to identify them.\footnote{We could relax Assumption~\ref{assumption:balance} if we would only be interested on identifying the counterfactual expectations, as when we calculate the ITT. It is in that sense that Assumption~\ref{assumption:balance} is sufficient but not necessary. A weaker assumption as mean independence condition also suffices to identify the ITT.} Once we account for non-compliance, the ITT represents the average treatment effect of ABC, as implemented and not relative an specific preschool alternative. For clarity, we omit the argument $A$ henceforth, although in our empirical application we show estimates correcting for non-compliance.\\
-
-\noindent In the case of ABC, using the ITT to compare the treatment and the control groups relates to the following policy question: what is the effect of ABC as it was implemented? That is, what is the effect of ABC without accounting for the fact that $70 \%$ control children enrolled in different preschool alternatives. This question does not address the efficacy of ABC as an early childhood education program. It addresses its efficacy relative to the available supply when the program was implemented.\footnote{If the preschool alternatives were beneficial for the children in the control group, the ITT is attenuated towards zero. This is common in early childhood education programs in which alternatives are close in quality to the program itself. Perhaps the most iconic example is the randomized evaluation of Head Start, the Head Start Impact Study, in which $15\%$ of children in the control group had access to alternative Head Start centers. ITT estimates reported by \cite{Puma_Bell_etal_2010_HeadStartImpact} are close to zero. That does not mean that the efficacy of Head Start is low, it means that Head Start treatment is being compared to close substitutes in the when computing the ITT.} The case is similar for CARE, when comparing each of its treatment groups to the control group.\\
-
-\noindent A more relevant question to ask is: what is the effect of ABC relative to a counter-factual scenario in which all children are fixed to the same alternative, e.g. staying at home, attending a low-quality preschool. This question needs to account for treatment substitution by the control group because it requires the counter-factual in control status to be fixed to a homogeneous alternative. By doing so, it makes the adequate comparison between the children in the treatment group and the children in the control group, fixing their level to alternative preschool.\\
-
-\noindent Let $P$ indicate if the children attended alternative preschool. The value of $P$ could either be fixed to no take-up of preschool alternative ($P = 0$) or take-up of preschool alternative $(P = 1)$. We want to contrast the following hypotheses: 
-
-\begin{eqnarray}
-H_{0}^0 &:& Y_{0} \left( \text{fix } P = 0 \right) \sim Y_{1} \left( \text{fix } P = 0 \right) \\
-H_{0}^1 &:& Y_{0} \left( \text{fix } P = 1 \right) \sim Y_{1} \left( \text{fix } P = 1\right). 
-\end{eqnarray}
-
-\noindent That is, we want to compare the counter-factual treatment distributions when fixing children to no alternative preschool ($H_{0}^0$) and when fixing children to alternative preschool ($H_{0}^1$).\footnote{This treats alternative preschool as a binary decision, although it is continuous as we show in Figure~\ref{fig:treatsubabc}. We take this approach because we are limited by our sample size when predicting preschool take-up as we show in Appendix~\ref{appendix:methods}.}\\
-
-\noindent To contrasts these hypotheses, consider the following estimators: 
-
-\begin{eqnarray}
-\text{ITT} \left( \text{fix } P = 0 \right) &=& \mathbb{E} \left[ Y | R = 1, \text{fix } P = 0 \right] - \mathbb{E} \left[ Y | R = 0, \text{fix } P = 0 \right] \label{eq:ittp0} \\
-\text{ITT} \left( \text{fix } P = 1 \right) &=& \mathbb{E} \left[ Y | R = 1, \text{fix } P = 1 \right] - \mathbb{E} \left[ Y | R = 0, \text{fix } P = 1 \right]. \label{eq:ittp1}  
-\end{eqnarray}
-
-\noindent Providing estimates for the expectations in \eqref{eq:ittp0}, \eqref{eq:ittp1} is not as straightforward as computing the expectations in \eqref{eq:itt}. The reason is the following: while treatment fixes an individual to either treatment or control status, it does not fix her to any of the two alternative preschool statuses.\\
-
-\begin{assumption} \label{assumption:matching} \normalfont (Conditional Independence in Preschool Alternatives Take-up) The counter-factual outcome $Y_{d} \left( \text{fix } P=p \right)$ follows the same distribution regardless of the value $P$ is fixed at, once $X$ (observed characteristics) is conditioned on: 
-\begin{equation}
-Y_{d} \left( \text{fix } P=p \right) | X \sim Y_{d}  | X 
-\end{equation}
- \end{assumption}
-a
-\noindent Assumption~\ref{assumption:matching} is a sufficient condition to provide estimates for \eqref{eq:ittp0}, \eqref{eq:ittp1}.  It states that the observed characteristics in $X$ account the parental decision of whether or not to enroll the child in preschool alternatives.\\
-
-\noindent The estimates for $\text{ITT} \left( \text{fix } P = 0 \right) $ and $\text{ITT} \left( \text{fix } P = 1 \right)$ relate to the second policy question, which evaluates the efficacy of ABC. Once non-compliance is accounted for as explained above, they represent the average treatment effect of ABC relative to receiving no treatment at all and relative to receiving a preschool alternative, respectively.\\
-
-\noindent For illustration, suppose we want to provide an estimate of $\text{ITT} \left( \text{fix } P = 0 \right)$ using a linear and separable parameterization. Then, estimate the following model 
-
-\begin{equation}
-Y = \Delta \left( \text{fix } P = 0 \right) + X \beta + \varepsilon, 
-\end{equation}
-
-\noindent which provides a consistent estimate for $\Delta \left( \text{fix } P = 0 \right)$ under Assumption~\ref{assumption:matching}. $\Delta \left( \text{fix } P = 0 \right)$ is the average treatment effect of ABC with respect to no treatment at all. It allows to evaluate the efficacy of ABC with respect to a well-defined alternative, no treatment at all. Note that Assumption~\ref{assumption:matching} is a sufficient condition for consistency, but a weaker condition (mean independence) suffices for identifying $\Delta \left( \text{fix } P = 0 \right)$. To account for non-compliance in this framework, we could weight the linear regression with individual-level estimates of the probability of compliance.\\
-
-\noindent We present estimates of $\Delta \left( \text{fix } P = 0 \right)$ and $\Delta \left( \text{fix } P = 1 \right)$ using this parameterization and using other alternatives to more flexibly  condition on $X$, e.g. nearest neighbor matching, propensity score matching, and kernel-based weighting.
-
-\subsection{Multiple Treatment Groups}
-
-\noindent We can readily apply the methodology in Section~\ref{section:methodsquestions}  to test either of the hypotheses in \eqref{eq:itt}, \eqref{eq:ittp0}, \eqref{eq:ittp1} for ABC. In CARE, however, there was one control and two treatment groups. A simple extension to the framework in Section~\ref{section:methodsquestions} allows us to test various hypotheses that inform on the effectiveness of the program.\\
-
-\noindent As before, let $Y_{d}$ denote a counter-factual outcome. $Y_{0}$ is the outcome when the individual is fixed to control, $Y_{1}$ when she is fixed to family education treatment, and $Y_{2}$ when she is fixed to center-based childcare and family education treatment.\footnote{Compliance was near to perfect, and we can apply a weighting method as in Section~\ref{section:methodsquestions} to adjust for the single non-compliance case. Thus, we do not discuss non-compliance in this argument.} To evaluate the program, we consider testing the following hypotheses: 
-
-\begin{eqnarray}
-H_{0,1}: Y_{0} \sim Y_{1} \\ 
-H_{0,2}: Y_{0} \sim Y_{2} \\
-H_{0,3}: Y_{1} \sim Y_{2} 
-\end{eqnarray}
-
-\noindent These hypotheses relate to the first policy question we discussed before: what is the effect of CARE as it was implemented? The first hypothesis asks what is the effect of the family education treatment as implemented; the second hypothesis asks what is the effect of the center-based childcare and family education treatment as implemented; and the third hypothesis asks what is the effect of one treatment relative to the other, as implemented. We can test these hypotheses constructing ITT estimators analogous to \eqref{eq:itt}.\\ 
-
-\noindent Alternatively, we can ask the second policy question: what is the effect of CARE fixing the counter-factual scenarios to a fixed level of alternative preschool. Fixing a preschool alternative is as relevant in CARE as it is in ABC. Both the children in the control and the family education treatment groups were substantially enrolled in alternative preschool (see Figure~\ref{fig:treatsubabc}). Under Assumption~\ref{assumption:matching}, we are able to construct ITT estimators fixing $P$ at either no preschool alternative or preschool alternative, as in \eqref{eq:ittp0}, \eqref{eq:ittp1}, and present estimates that account for $X$ using different parameterizations.\\
-
-\subsection{Combining ABC and CARE}
-
-\noindent An alternative to evaluate CARE
-
-\subsection{Second-phase Treatment}
-
-\subsection{Treatment Effects on Multiple Outcomes}
-
-%References
-\clearpage
-\singlespace
-\bibliographystyle{chicago}
-\bibliography{heckman}
 
 \end{document} 
