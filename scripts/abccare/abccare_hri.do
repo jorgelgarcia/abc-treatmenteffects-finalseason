@@ -38,7 +38,7 @@ cd $output
 // plot
 # delimit
 twoway (histogram hrabc_index if abc == 0, start(10) discrete fraction color(gs0)  barwidth(.75)),
-	   xtitle(High Risk Index) ytitle(Fraction)
+	   xtitle(High-risk Index) ytitle(Fraction)
 	   xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 	   graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
@@ -50,7 +50,7 @@ graph export care_hri.eps, replace
 cd $output
 # delimit
 twoway (histogram hrabc_index if abc == 1, start(10) discrete fraction color(gs0)  barwidth(.75)),
-	   xtitle(High Risk Index) ytitle(Fraction)
+	   xtitle(High-risk Index) ytitle(Fraction)
 	   xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 	   graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
