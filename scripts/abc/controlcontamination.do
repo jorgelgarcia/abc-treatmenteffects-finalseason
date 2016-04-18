@@ -39,7 +39,7 @@ cumul   dc_mo_pre if program=="abc" & treat == 0, gen(cdf_dc_mo_pre)
 twoway (line cdf_dc_mo_pre dc_mo_pre if program=="abc" & treat == 0, lwidth(vthick) lcolor(gs0))
       , 
 		  xlabel(0[10]60, grid glcolor(gs14)) ylabel(0[.1]1, angle(h) glcolor(gs14))
-		  xtitle(Months in Preschool) ytitle(Cumulative Density Function)
+		  xtitle(Total Months in Preschool) ytitle(Cumulative Density Function)
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 cd $output

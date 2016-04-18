@@ -44,7 +44,7 @@ twoway (line cdf_dc_mo_pre_control dc_mo_pre if program=="care", lwidth(vthick) 
       , 
 		  legend(label(1 "Control") label(2 "Family Education Treatment"))
 		  xlabel(0[10]60, grid glcolor(gs14)) ylabel(0[.1]1, angle(h) glcolor(gs14))
-		  xtitle(Months in Preschool) ytitle(Cumulative Density Function)
+		  xtitle(Total Months in Preschool) ytitle(Cumulative Density Function)
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 cd $output
