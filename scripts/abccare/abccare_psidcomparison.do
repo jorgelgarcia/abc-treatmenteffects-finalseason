@@ -205,8 +205,8 @@ foreach gender in pool {
 	foreach var in f_home0 m_age0 m_edu0 p_inc0 {
 	#delimit
 	twoway 	(bar `var'`gender' category, lwidth(medium) lcolor(gs0) fcolor(gs6)),
-		xlabel(1 "National, All (N = ``var'`gender'psidN')" 3 "National, Black (N = ``var'`gender'psidblackN')" 5 "ABC (N = ``var'`gender'abcN')"
-		       7 "CARE (N = ``var'`gender'careN')", grid glcolor(gs14) angle(55) labsize(medsmall)) 
+		xlabel(1 "National, All" 3 "National, Black" 5 "ABC"
+		       7 "CARE", grid glcolor(gs14) angle(55) labsize(medium)) 
 		     ylabel(${`var'_ylabel}, angle(h) glcolor(gs14))
 		xtitle("") ytitle("")
 		graphregion(color(white)) plotregion(fcolor(white));
