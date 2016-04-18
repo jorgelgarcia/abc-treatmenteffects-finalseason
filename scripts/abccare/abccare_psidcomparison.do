@@ -206,8 +206,8 @@ foreach gender in pool {
 	#delimit
 	twoway 	(bar `var'`gender' category, lwidth(medium) lcolor(gs0) fcolor(gs6)),
 		xlabel(1 "National, All" 3 "National, Black" 5 "ABC"
-		       7 "CARE", grid glcolor(gs14) angle(55) labsize(medium)) 
-		     ylabel(${`var'_ylabel}, angle(h) glcolor(gs14))
+		       7 "CARE", grid glcolor(gs14) angle(55) labsize(large)) 
+		     ylabel(${`var'_ylabel}, angle(h) glcolor(gs14) labsize(large))
 		xtitle("") ytitle("")
 		graphregion(color(white)) plotregion(fcolor(white));
 	#delimit cr
