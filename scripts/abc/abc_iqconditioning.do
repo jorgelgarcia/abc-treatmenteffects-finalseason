@@ -35,28 +35,21 @@ cd $output
 // abc sample
 keep if abc == 1
 
-
 // bayley mdi by cohort
 tab cohort, gen(cohort_)
 
 foreach num of numlist 1(1)4 { 
-	gen treat_coh`num' = treat*cohort_`num'
+	gen treat_cohort_`num' = treat*cohort_`num'
 }
 
 foreach var of varlist mdi0y6m mdi1y {
-	reg `var' treat_* treat cohort_* 
-	est sto `var'
+	reg `var' treat_cohort_1 treat_cohort_2 treat_cohort_3 treat_cohort_4 cohort_1 cohort_2 cohort_3
+	est sto `var'_est
 }
 
 cd $output
-# delimit
-	outreg2 [mdi0y6m mdi1y]
-			using ihdp_bayley, replace                                  
-			tex dec(3) par(se) r2 nocons label noni nonotes
-			keep(treatcohort_1 treatcohort_2 treatcohort_3 treatcohort_4) ;
-# delimit cr
-
-
+outreg2 [mdi0y6m_est mdi1y_est] using abc_cohorts, replace tex dec(3) par(se) r2 nocons nonotes /// 
+				keep(treat_cohort_1 treat_cohort_2 treat_cohort_3 treat_cohort_4)
 
 // iq conditional on bayley mdi at 12 and 24 months 
 global condition0 if male == 0
