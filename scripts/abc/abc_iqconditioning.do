@@ -32,14 +32,37 @@ cd $dataabccare
 use append-abccare_iv.dta, clear
 cd $output
 
-// preparation preamble
+// abc sample
 keep if abc == 1
 
+
+// bayley mdi by cohort
+tab cohort, gen(cohort_)
+
+foreach num of numlist 1(1)4 { 
+	gen treat_coh`num' = treat*cohort_`num'
+}
+
+foreach var of varlist mdi0y6m mdi1y {
+	reg `var' treat_* treat cohort_* 
+	est sto `var'
+}
+
+cd $output
+# delimit
+	outreg2 [mdi0y6m mdi1y]
+			using ihdp_bayley, replace                                  
+			tex dec(3) par(se) r2 nocons label noni nonotes
+			keep(treatcohort_1 treatcohort_2 treatcohort_3 treatcohort_4) ;
+# delimit cr
+
+
+
+// iq conditional on bayley mdi at 12 and 24 months 
 global condition0 if male == 0
 global condition1 if male == 1 
 global condition2 
 
-cd $output
 foreach sex in 2 {
 	matrix iq_`sex' = J(1,4,.)
 	matrix colnames iq_`sex' = itt seitt ittc seittc
