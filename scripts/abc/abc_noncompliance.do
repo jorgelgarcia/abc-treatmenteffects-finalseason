@@ -36,7 +36,9 @@ cd $output
 keep if abc == 1
 
 // first exercise, non-compliance of children 900, 912, 922... drop rest of the cases
-drop if id == 99 | id == 95 | id == 124 | id == 906 | id == 82 | id == 119 
+preserve
+drop if id == 99 | id == 95 | id == 124 | id == 906 | id == 82 | id == 119 /// 
+                 | id == 85 | id == 103 | id == 108 | id == 123 
 
 foreach var of varlist iq3y iq5y {
 	reg `var' R
@@ -54,3 +56,4 @@ cd $output
 			tex dec(3) par(se) r2 nocons label noni nonotes
 			keep(R D) ;
 # delimit cr
+restore 
