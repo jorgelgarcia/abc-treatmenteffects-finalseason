@@ -1,0 +1,9 @@
+		(1)	(2)
+		bmdi1	bmdi2
+VARIABLES	LABELS	bayley_mdi1	bayley_mdi2
+			
+treat	Treatment group	0.142	9.958***
+		(0.968)	(1.498)
+			
+Observations		893	910
+R-squared		0.000	0.067

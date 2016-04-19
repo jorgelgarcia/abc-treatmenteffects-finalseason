@@ -40,7 +40,7 @@ global condition1 if male == 1
 global condition2 
 
 cd $output
-foreach sex in 0 1 2 {
+foreach sex in 2 {
 	matrix iq_`sex' = J(1,4,.)
 	matrix colnames iq_`sex' = itt seitt ittc seittc
 	foreach age in 3 4 5 7 8 12 15 21 { 

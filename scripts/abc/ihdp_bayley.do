@@ -30,6 +30,7 @@ global dataabccare = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extension
 global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 
 
+cd $dataihdp
 use ihdp-analysis.dta, clear
 
 // make groups of cluster (state + llbw) 
@@ -37,11 +38,11 @@ egen z = group(state llbw)
 
 // bayley mdi 1 
 reg bayley_mdi1 treat, vce(cluster z)
-est out bmdi1
+est sto bmdi1
 
 // bayley mdi 2
 reg bayley_mdi2 treat, vce(cluster z)
-est out bmdi2
+est sto bmdi2
 
 cd $output
 # delimit
