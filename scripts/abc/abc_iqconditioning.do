@@ -35,18 +35,22 @@ cd $output
 // preparation preamble
 keep if abc == 1
 
+global condition0 if male == 0
+global condition1 if male == 1 
+global condition2 
+
 cd $output
-foreach sex in 0 1 {
+foreach sex in 0 1 2 {
 	matrix iq_`sex' = J(1,4,.)
 	matrix colnames iq_`sex' = itt seitt ittc seittc
 	foreach age in 3 4 5 7 8 12 15 21 { 
-		reg iq`age'y treat if male == `sex'
+		reg iq`age'y treat ${condition`sex'}
 		matrix bitt_`sex'_`age' = e(b)
 		matrix bitt_`sex'_`age' = bitt_`sex'_`age'[1,1]
 		matrix Vitt_`sex'_`age' = e(V)
 		matrix Vitt_`sex'_`age' = sqrt(Vitt_`sex'_`age'[1,1])
 		
-		reg iq`age'y treat mdi1y mdi0y6m if male == `sex'
+		reg iq`age'y treat mdi1y mdi0y6m ${condition`sex'}
 		matrix bittc_`sex'_`age' = e(b)
 		matrix bittc_`sex'_`age' = bittc_`sex'_`age'[1,1]
 		matrix Vittc_`sex'_`age' = e(V)
@@ -70,19 +74,19 @@ foreach sex in 0 1 {
 	gen age = _n
 	
 	#delimit
-	twoway (scatter itt    age, msymbol(circle) mfcolor(gs0) msize(large) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0))
-		   (line ittmse age, lwidth(medium) lpattern(solid) lcolor(gs7))
-		   (line ittpse age, lwidth(medium) lpattern(solid) lcolor(gs7))	       
-		   (scatter ittc    age if age > 1, msymbol(square) msize(large) mfcolor (gs0) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0))
-		   (line ittcmse age if age > 1, lwidth(medium) lpattern(dash) lcolor(gs7))
-		   (line ittcpse age if age > 1, lwidth(medium) lpattern(dash) lcolor(gs7))	  
+	twoway (scatter itt      age, msymbol(circle) mfcolor(gs0) msize(large) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0))
+		   (line ittmse  age, lwidth(medium) lpattern(solid) lcolor(gs7))
+		   (line ittpse  age, lwidth(medium) lpattern(solid) lcolor(gs7))	       
+		   (scatter ittc age , msymbol(square) msize(large) mfcolor (gs0) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0))
+		   (line ittcmse age, lwidth(medium) lpattern(dash) lcolor(gs7))
+		   (line ittcpse age, lwidth(medium) lpattern(dash) lcolor(gs7))	  
 	        , 
-			  legend(label(1 "Mean Treatment - Mean Control") label(2 "+/- s.e.") label(4 "Mean Treatment - Mean Control, Controlling for IQ at Age 3") 
+			  legend(label(1 "Mean Treatment - Mean Control") label(2 "+/- s.e.") label(4 "Mean Treatment - Mean Control, Controlling for MDI at 6 & 12 Months") 
 			  		 label(5 "+/- s.e.") size(small) order(1 2 4 5) rows(2) cols(2))
-			  xlabel(1 "3" 2 "4" 3 "5" 4 "7" 5 "8" 6 "12" 7 "15" 8 "21", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
+			  xlabel(1 "3" 2 "4" 3 "5" 4 "7" 5 "8" 6 "12" 7 "15" 8 "21", grid glcolor(gs14)) ylabel(-2[2]18, angle(h) glcolor(gs14))
 			  xtitle(Age) ytitle("", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
 	#delimit cr
-	graph export iq3fixing_`sex'.eps, replace 
+	graph export abc_mdifixing_`sex'.eps, replace 
 	restore 
 }	
