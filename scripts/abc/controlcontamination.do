@@ -36,7 +36,7 @@ cumul   dc_mo_pre if program=="abc" & treat == 0, gen(cdf_dc_mo_pre)
 // replace dc_mo_pre = 52 if dc_mo_pre >= 52
 
 #delimit
-twoway (line cdf_dc_mo_pre dc_mo_pre if program=="abc" & treat == 0, lwidth(vthick) lcolor(gs0))
+twoway (line cdf_dc_mo_pre dc_mo_pre if program=="abc" & treat == 0 & P ==1, lwidth(vthick) lcolor(gs0))
       , 
 		  xlabel(0[10]60, grid glcolor(gs14)) ylabel(0[.1]1, angle(h) glcolor(gs14))
 		  xtitle(Total Months in Preschool) ytitle(Cumulative Density Function)
