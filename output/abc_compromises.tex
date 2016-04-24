@@ -1,0 +1,33 @@
+\begin{sidewaystable}[H] 
+\begin{threeparttable}
+\caption{Randomization Compromises, ABC}
+\label{table:abccompromises}
+\centering
+\footnotesize
+\begin{tabular}{ccccc} \toprule
+Child ID & Initial Assignment & Compromise Description & Data Availability & Methodology Assumption \\ \\ \midrule
+N/A (Case A) & Treatment & Left the study & None & Missing at random \\
+N/A (Case B) & Treatment & Left the study & None & Missing at random \\
+N/A (Case C) & Treatment & Left the study & None & Missing at random \\
+N/A (Case D) & Treatment & Left the study & No data & Missing at random \\ \midrule
+.x    & Control  & Died (age 0), heart disease & Baseline; before dead & Attrition after dead \\
+914 & Control  & Died (age 0), heart disease & Baseline; before dead & Attrition after dead \\
+74 & Treatment & Died (age 0), SIDS & Baseline; before dead & Attrition after dead \\
+99 & Treatment  & Died (age 4), pedestrian accident & Baseline; before dead & Attrition after dead \\ \midrule
+82 & Control       & Moved at age 15 &   Baseline; before age 15 & Attrition after age 15 \\ \midrule
+900 & Treatment  & Non-compliance  & Baseline; before age 8 & Attrition after age 8  \\
+912 & Treatment  & Non-compliance  & Baseline; before age 8 & Attrition after age 8  \\
+922 & Treatment  & Non-compliance  & Baseline; before age 8 & Attrition after age 8  \\ \midrule
+78  & Control        & Crossover from control to treatment & Baseline; before age 8 & Attrition after age 8  \\ \midrule
+85 & Treatment   & 3 months of treatment &  Baseline; after 2 & Same as treatment group  \\  
+103 & Treatment &10 months of treatment &  Baseline; after 2 & Same as treatment group  \\
+108 & Treatment & 6 months of treatment &  Baseline; after 2 & Same as treatment group  \\ 
+123 & Treatment & 9 months of treatment &  Baseline; after 2 & Same as treatment group  \\  \midrule
+906 & Treatment  & Left study at 54 months & Baseline; before 54 months & Attrition after 54 months \\ \midrule
+95   & Treatment       & Developmentally delayed at 6 months & No data after diagnosis & Dropped (non-eligible) \\ 
+124 & Treatment       & Developmentally delayed at 36 months & No data after diagnosis & Dropped (non-eligible) \\ \midrule
+ 82 & Control       & Crossover from control to treatment & Baseline, before age 8 & Dropped (non-eligible)  \\ 
+ 119 & Control       & Crossover from control to treatment & Baseline, before age 8 & Dropped (non-eligible)  \\ \bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{sidewaystable}

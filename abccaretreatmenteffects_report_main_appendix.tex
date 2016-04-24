@@ -36,7 +36,7 @@ The University of Chicago}
 \setcounter{figure}{0}  \renewcommand{\thefigure}{A.\arabic{figure}}
 \setcounter{table}{0}   \renewcommand{\thetable}{A.\arabic{table}}
 
-\section{Background}
+\section{Background} \label{appendix:background}
 
 \subsection{ABC}
 
@@ -177,7 +177,9 @@ Note: The starred ratios represent the ones we believe were the most relevant fo
 
 \subsubsection{Data} \label{appendix:data}
 
-Children were followed annually throughout elementary school and at ages 12, 15, 21, and 30. In addition, health and administrative crime data were collected at age 34.  Attrition was low, as displayed in Figure \ref{fig:attrition}.\\
+In Table~\ref{tab:ecvars_1} to Table~\ref{tab:adultvars_2}, we summarize the data availability for both ABC and CARE. The data collection processes in both programs were analogous by design. For both programs, the treatment and control groups were followed into adulthood with relatively low attrition. For ABC, children were followed annually through elementary school and at ages 12, 15, 21, and 30. Health and administrative crime data were collected when the children reached their mid-30s. For CARE, the exact same follow-ups are available with the exception of the age 15 follow-up.\\
+
+\input{output/abc-care_dataavailability.tex}
 
 \begin{figure}[H]
 \caption{Attrition by Age} \label{fig:attrition}
@@ -189,7 +191,7 @@ Note: This plot shows the number of participants, by experimental group, for who
 }
 \end{figure}
 
-\noindent Attrition was low. Information is available on 100 children in the age 30 follow-up. Figure~\ref{fig:abc-flow} describes the flow of retention through all follow-ups. Additionally, 88 participants (45 from the control group and 43 from the treatment group) consented to release their criminal records and 70 participants (31 from the control group and 39 from the treatment group) released information on a full-range biomedical sweep. The data include measures such as prevalence of diabetes and high blood pressure, waist-to-hip ratio, height, weight, and cholesterol levels.\\ 
+\noindent Attrition was low, as displayed in Figure \ref{fig:attrition}. Information is available on 100 children in the age 30 follow-up. Figure~\ref{fig:abc-flow} describes the flow of retention through all follow-ups. Additionally, 88 participants (45 from the control group and 43 from the treatment group) consented to release their criminal records and 70 participants (31 from the control group and 39 from the treatment group) released information on a full-range biomedical sweep. The data include measures such as prevalence of diabetes and high blood pressure, waist-to-hip ratio, height, weight, and cholesterol levels.\\ 
 
 \noindent In the following set of tables, we compare the observed, baseline characteristics between the first-stage control and treatment groups, which are the main groups we analyze, at different stages of the data collection follow-ups. For each observed characteristic, we present the bootstrapped $p$-value associated with the standard $t$-test. We also present the bootstrapped, step-down $p$-value on jointly testing the difference in observed characteristics across the two blocks of variables separated by the horizontal line \citep{Lehmann_Romano_2005_testing}.
 
@@ -241,7 +243,7 @@ Note: This plot shows the number of participants, by experimental group, for who
 \setcounter{table}{0}   \renewcommand{\thetable}{C.\arabic{table}}
 \section{Alternative Evaluation Methodologies} \label{appendix:methodology}
 
-\section{Assessing Common Critiques to ABC}
+\section{Assessing Common Critiques to ABC} \label{appendix:assessingcc}
 
 \noindent This section of the appendix assesses some of the critiques to ABC, which could apply to CARE as well. The critiques focus on the first phase of the program, to which we refer simply as ABC in this section of the appendix.\\
 
@@ -275,54 +277,9 @@ Note: This plot shows the number of participants, by experimental group, for who
 
 \noindent This critique relates to a second critique that has been made to ABC.\footnote{See, for example, \citet{Besharov-etal_2011_ABCProject}.} Mostly based on the fade-out of the effects on cognition and on results on age-21 outcomes, some studies claim that ABC had no sustained long-term effects. In addition to the evidence we cite above, it is important to add the following. \textbf{4. The treatment effects of ABC differed by gender.} For example, we find substantial effects on employment for males and high-school graduation for females. This does not mean that the program did not work. It means that market conditions could affect the way in which the participants of the program could have benefited from its effects.\\
 
-\newgeometry{top=.5in, bottom=.5in, left=.5in, right=.5in}
+\input{output/abc_compromises}
 
-\begin{sidewaystable}[H] 
-\begin{threeparttable}
-\caption{Randomization Compromises, ABC and CARE}
-\label{table:compromised}
-\centering
-\tiny
-\begin{tabular}{cccccc} \hline \hline
-Case & Child ID & Initial Assignment & Compromise Description & Data Availability & Methodology Assumption \\ \\ \hline
-\multicolumn{6}{l}{\textbf{ABC}} \\ 
-1 & N/A (Case A) & Treatment & Left the study & No data & Missing at random \\
-2 & N/A (Case B) & Treatment & Left the study & No data & Missing at random \\
-3 & N/A (Case C) & Treatment & Left the study & No data & Missing at random \\
-4 & N/A (Case D)          & Treatment & Left the study & No data & Missing at random \\
-5 & .x & Control            & Died at age 0, heart disease & Baseline characteristics, any data collection before dead      & Attrition after dead \\
-6 & 914 & Control         & Died at age 0, heart disease & Baseline characteristics, any data collection before dead   & Attrition after dead \\
-7 & 74 & Treatment      & Died at age 0, SIDS  5 & Baseline characteristics, any data collection before dead & Attrition after dead \\
-8 & 99 & Treatment      & Died at age 4, pedestrian accident & Baseline characteristics, any data collection before dead & Attrition after dead \\
-9 & 95   & Treatment       & Diagnosed as developmentally delayed at 6 months old   & No data after diagnosis & Dropped from the sample (non-eligible) \\ 
-10 & 124 & Treatment       & Diagnosed as developmentally delayed at 36 months old & No data after diagnosis & Dropped from the sample (non-eligible) \\ 
-11   & 900 & Treatment  & Did not comply to treatment status  & Baseline characteristics, any data collection up to age 8 & Attrition after age 8  \\
-12 & 912 & Treatment  & Did not comply to treatment status  & Baseline characteristics, any data collection up to age 8 & Attrition after age 8 \\
-13 & 922 & Treatment  & Did not comply to treatment status  & Baseline characteristics, any data collection up to age 8 & Attrition after age 8 \\
-14 & 906 & Treatment  & Abandoned study at 54 months old  & Baseline characteristics, any data collection up to age 54 months & Attrition after age 54 months \\
-15 & 82 & Control       & Moved to unspecified place after age 15 &   Baseline characteristics, any data collection up to age 15 & Attrition beginning at age 21 \\
-16 &  78  & Control       & Crossover from control to treatment  & Baseline characteristics, any data collection up to age 8 months & Attrition after age 8 \\
-17 &  82 & Control       & Crossover from control to treatment due to special needs & Baseline characteristics, any data collection up to age 8 & Dropped from the sample \\ 
-18 & 119 & Control       & Crossover from control to treatment due to special needs & Baseline characteristics, any data collection up to age 8 & Dropped from the sample \\ 
-19 & 85 & Treatment         & Only 3 months of treatment  & All post-age 21 follow-ups available   & Same as complying treatment children  \\ 
-20 & 103 & Treatment         & Only 10 months of treatment  & All post-age 21 follow-ups available   & Same as complying treatment children  \\ 
-21 & 108 & Treatment         & Only 6 months of treatment  & All post-age 21 follow-ups available   & Same as complying treatment children  \\ 
-22 & 123 & Treatment         & Only 9 months of treatment  & All post-age 21 follow-ups available   & Same as complying treatment children  \\ \\ \hline
-\multicolumn{6}{l}{\textbf{CARE}} \\
-1 & 310 & Family education & Died at age 0, unknown causes & Baseline characteristics & Attrition after dead \\
-2 & 301 & Center-based Childcare  & Abandoned study at age 5  & Baseline characteristics, any data collection up to age 5 & Attrition after age 5 \\
-3 & 910 & Control & Move to unspecified place at 11 months old & Baseline characteristics, any data collection up to 11 months old & Attrition beginning at 11 months old interview \\
-4 & 142 & Center-based Childcare & Move to unspecified place after age 5 months old & Baseline characteristics, any data collection up to 5 months old & Attrition beginning at 5 months old \\
- &  & and Family Education &  &  & \\
-5 & 150 & Center-based Childcare & Move to unspecified place after age 5 & Baseline characteristics, any data collection up to 5 & Attrition beginning at 5 \\
- &  & and Family Education &  &  & \\ \hline \hline 
-\end{tabular}
-\end{threeparttable}
-\end{sidewaystable}
-
-\restoregeometry
-
-\noindent The third and last critique we assess is that of compromised randomization.\footnote{See for example \citet{Baumeister-Bacharach_2000_Early-Generic} and the multiple studies cited there.} The main critique to the program with this respect is that seven children in the treatment group did not comply to their initial assignment and one child switched from control to treatment status. This critique refers to the children labeled with the following IDs by the program: N/A Case A, N/A Case B, N/A Case C, N/A Case D, 900, 912, 922, and 78 (see Table~\ref{table:compromised}). Although we document more cases of compromised randomization, we start by assessing these eight cases.\footnote{Our methodology assess all the cases except the children for whom we do not have data at all (Case A, N/A Case B, N/A Case C, N/A Case D). We are not able to account for them because our method is based on observing at least some baseline characteristics. See Section~\ref{section:methodology} in the main paper for more details.}\\
+\noindent The third and last critique we assess is that of compromised randomization.\footnote{See for example \citet{Baumeister-Bacharach_2000_Early-Generic} and the multiple studies cited there.} The main critique to the program with this respect is that seven children in the treatment group did not comply to their initial assignment and one child switched from control to treatment status. This critique refers to the children labeled with the following IDs by the program: N/A Case A, N/A Case B, N/A Case C, N/A Case D, 900, 912, 922, and 78 (see Table~\ref{table:abccompromises}, which we reproduce from the main paper). Although we document more cases of compromised randomization, we start by assessing these eight cases.\footnote{Our methodology assess all the cases except the children for whom we do not have data at all (Case A, N/A Case B, N/A Case C, N/A Case D). We are not able to account for them because our method is based on observing at least some baseline characteristics. See Section~\ref{section:methodology} in the main paper for more details.}\\
 
 \noindent First, we propose a method to assess the non-compliance of children 900, 912, 922, and 78, for whom we have data available from ages 0 to 8. This allows for the possibility to adjust the mean difference between the treatment and the control groups, using a standard Bloom estimator \citep{Bloom_1984_ER}. This estimator accounts for compliance, by weighting the mean difference by a measure of the probability of compliance. It takes the following form: 
 
