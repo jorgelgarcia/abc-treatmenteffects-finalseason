@@ -4,7 +4,7 @@
 \externaldocument{abccaretreatmenteffects_report_main_appendix}
 
 \begin{document}
-\title{\Large \textbf{Analyzing the Short and Long-term Effects of Early Childhood Education on Multiple Dimensions of Human Development}\thanks{This research was supported in part by the American Bar Foundation; the Pritzker Children's Initiative, the
+\title{\Large \textbf{Analyzing the Short- and Long-term Effects of Early Childhood Education on Multiple Dimensions of Human Development}\thanks{This research was supported in part by the American Bar Foundation; the Pritzker Children's Initiative, the
 Buffett Early Childhood Fund, NIH grants NICHD R37HD065072, NICHD R01HD54702, and NIA R24AG048081, an
 anonymous funder, Successful Pathways from School to Work, an initiative of the University of Chicago's Committee
 on Education funded by the Hymen Milgrom Supporting Organization, and the Human Capital and Economic
@@ -71,9 +71,9 @@ The University of Chicago}
 
 \noindent We also test diverse hypotheses to assess the effectiveness of the second phase of randomization. The effectiveness of the first phase of treatment is much weaker if compared to that of the second. We conclude that ABC and CARE were much more effective when intervening before age 5, rather than between ages 5 to 8.\\
 
-\noindent This paper extends the work of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}, who analyze the effectiveness of ABC at improving long-term health outcomes. It presents the methodology for the calculation of the treatment effect estimates that underpin our companion paper, \citet{Elango_et_al_2015_ABC_unpublished}. In it, we use the treatment effects in this paper and forecast the life-cycle gains of ABC on multiple dimensions of human development, from birth and until death, to calculate its internal rate of return and its benefit-to-cost ratio.\\
+\noindent This paper extends the work of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}, who analyze the effectiveness of ABC at improving long-term health outcomes. It presents the methodology for the calculation of the treatment effect estimates that underpin our companion paper, \citet{Elango_et_al_2015_ABC_unpublished}. In it, we use the treatment effects in this paper and forecast the life-cycle gains of ABC on multiple dimensions of human development, from birth and until death, to calculate its internal rate of return and its benefit-to-cost ratio.\footnote{\cite{Campbell_Pungello_etal_2012_DP} estimate treatment effects on adulthood outcomes in ABC. Unlike our approach, this report does not assess outcomes such as health status, criminal behavior, and non-cognitive skills. \cite{Campbell_Conti_etal_2014_EarlyChildhoodInvestments} is the only other paper to assess health outcomes, but they do not address control contamination. In addition to providing a comprehensive analysis of ABC's effects, our paper is a valuable contribution since it is the first to correct for control contamination, to correct for non-random attrition, and to adjust for the cherry-picking of significant treatment effects by using count statistics. Furthermore, we broaden the analysis by analyzing ABC together with CARE, which was close in implementation objectives and design.}\\
 
-\noindent The rest of the paper proceeds as follows. Section~\ref{section:background} describes the background of each program. It includes an overview, a description of the eligibility criteria and the populations served, a characterization of the randomization protocol and of treatment substitution, and a comprehensive summary of the treatment.  Section~\ref{section:methodology} formalizes our methodology by discussing how we correct for compromised randomization and non-compliance, treatment substitution, and multiple hypotheses testing. Section~\ref{section:results} presents our main results and Section~\ref{section:conclusion} offers some final comments. An extensive appendix presents a much more thorough description of the program and data relative to what we present in the main text. It also discusses various alternative methodologies to evaluate the programs accounting for treatment substitution, and documents the results we present to a further extent.
+\noindent The rest of the paper proceeds as follows. Section~\ref{section:background} describes the background of each program. It includes an overview, a description of the eligibility criteria and the populations served, a characterization of the randomization protocol and of treatment substitution, and a comprehensive summary of the treatment.  Section~\ref{section:methodology} formalizes our methodology by discussing how we correct for compromised randomization, treatment substitution, and multiple hypotheses testing. Section~\ref{section:results} presents our main results and Section~\ref{section:conclusion} offers some final comments. An extensive appendix presents a much more thorough description of the program and data relative to what we present in the main text. It also discusses various alternative methodologies to evaluate the programs accounting for treatment substitution, and documents the results we present to a further extent.
 
 \section{Background} \label{section:background}
 \subsection{Overview}
@@ -144,7 +144,7 @@ The University of Chicago}
 
 \input{output/abc_compromises}
 
-\noindent Fifth, one child initially assigned to control status was enrolled into treatment (identifier 78). Her mother wanted to work and the program staff decided to admit her child into treatment.\footnote{Correspondence with the program officers stating this is available under request from the authors of the present document.} Both in terms of data collection and in terms of methodological purposes, this child is analogous to the children in the third case.\footnote{The sensitivity analysis finding little evidence when adjusting for non-compliance includes this case}\\
+\noindent Fifth, one child initially assigned to control status was enrolled into treatment (identifier 78). Her mother wanted to work and the program staff decided to admit her child into treatment.\footnote{Correspondence with the program officers stating this is available under request from the authors of the present document.} Both in terms of data collection and in terms of methodological purposes, this child is analogous to the children in the third case.\footnote{The sensitivity analysis finding little evidence when adjusting for non-compliance includes this case.}\\
 
 \noindent Sixth, four children treatment-group did not complete treatment in its entirety (identifiers 85, 103, 108, and 123). They were treated for 3, 10, 6, and 9 months, respectively. Except for the childhood follow-ups, in which our main results are not based on, we observe most of the data for these children. We avoid taking a stand on how beneficial was the program at each age, because we do not have a way to document this. Thus, we assume that they were treated as other child in the treatment group.\footnote{If anything, this biases downwards the effects of the program we estimate.} \\
 
@@ -221,54 +221,64 @@ The University of Chicago}
 
 \subsection{Parameters of Interest and Policy Questions} \label{section:methodsquestions}
 
-\noindent Random assignment does not guarantee that simple estimators commonly used in the literature are able to answer policy-relevant questions. For estimators to properly inform policy-making, they must relate to parameters that correctly state the the program being evaluated and the counterfactual scenario, had the individual not taken the program.\\
+\noindent Random assignment to treatment does not guarantee that simple estimators commonly used in the literature are able to answer policy-relevant questions. For estimators to properly inform policy-making, they must relate to policy-relevant parameters. These parameters make a clear statement of the program being evaluated and the counterfactual scenario with respect to which the program is being compared.\\
 
-\noindent In this section, we outline our methodology for estimating policy-relevant parameters of interest. First, we focus on comparisons made between single treatment and control groups separately for each treatment phase. We then clarify how to extend our methodology to the second phase of treatment and to multiple treatment branches.\\
+\noindent In this section, we outline our methodology for estimating policy-relevant parameters of interest. We start by comparing children who \textit{take up} treatment to children who did not. Thus, for the moment, we think of estimating the effect of ABC's first phase of treatment. We clarify how to incorporate the second phase of treatment and multiple, simultaneous treatments afterwards.\\
 
-\noindent Let $Y$ denote an individual's outcome. Further, let $Y_{1}$ denote her counterfactual outcome when she is fixed to treatment and $Y_{0}$ her counterfactual outcome when she is fixed to control. The standard way to evaluate the effect of a program is to compare the distributions of $Y_{0}$ and $Y_{1}$. That is, test the hypothesis 
+\noindent Let $D$ be an indicator of treatment take-up: $D = 1$ if the child took-up treatment and $D=0$ if she did not. Let $Y$ be an outcome of interest. We write
 
 \begin{equation}
-H_{0}^A: Y_{0} \sim Y_{1}. \label{eq:ho}
+Y = D Y_{1} + \left( 1 - D \right) Y_{0}, 
 \end{equation}
 
-\noindent A common way to test this hypothesis is to test if the intent-to-treat (ITT) estimator is different from zero. This estimator is defined as 
+\noindent where $Y_{1}$  is the outcome when she is fixed to a counterfactual scenario in which she takes up treatment; $Y_{0}$ is her outcome when fixed not to take up treatment.\\
+
+\noindent An alternative to evaluate the treatment a program offers is to compare the expectation of $Y_{1}$ ($\mu_{1}$) to the expectation of $Y_{0}$ ($\mu_{0}$). That is, to test the hypothesis 
+
+\begin{equation}
+H_{0}^A: \mu_{0} = \mu_{1}. \label{eq:ho}
+\end{equation}\\
+
+\noindent We follow this alternative because it allows us to provide a transparent explanation of the methods with which we account for treatment substitution and program attrition. We can extend these methods to test various other hypothesis---e.g., difference in higher order moments, rank differences, etc.\\
+
+\noindent \begin{assumption} \label{assumption:pc} \normalfont (Perfect Compliance) Let $R$ indicate randomization to treatment and $D$ indicate treatment take-up. Perfect compliance occurs whenever  $R = D$.\end{assumption}
+
+\noindent Under Assumption~\ref{assumption:pc}, it is straightforward to test \eqref{eq:ho}: it is equivalent to test if the intent-to-treat (ITT) estimator is different from zero. This estimator is defined as 
 
 \begin{equation}
 \text{ITT} = \mathbb{E} \left[ Y | R = 1 \right] - \mathbb{E} \left[ Y | R = 0 \right]. \label{eq:itt}
-\end{equation} 
+\end{equation}\\ 
 
 \noindent Given perfect compliance to randomization status, the ITT tests \eqref{eq:ho} because $\mathbb{E} \left[ Y | R = 1 \right]$ and $\mathbb{E} \left[ Y | R = 0 \right]$ identify the expectations of outcome $Y$ when the individual is fixed to treatment and control, respectively. The ITT is simply the difference between the expectations of the distributions of $Y_{0}$ and $Y_{1}$. It is related to the following policy question: what is the effect of fixing an individual to treatment status, relative to fixing her to control status?\\
 
-\noindent \begin{assumption} \normalfont (Perfect Compliance) Let $R$ indicate randomization to treatment and $D$ indicate treatment take-up. Perfect compliance occurs whenever  $R = D$.\end{assumption}
+\noindent In ABC, however, there were randomization compromises we need to assess in order for the ITT to represent an adequate estimator to test the hypothesis in \eqref{eq:ho}. After age 8, all the compromises consist of cases of program attrition. That is, we stop observing data from the children in the subsequent data collections. Before age eight there were cases of non-compliance into the initial assignment to treatment. We propose a methodology to address the latter and not the former for three reasons: (i) most of our analysis focuses on outcomes after age 8; and (ii) for outcomes after age 8, non-compliance becomes program attrition because we do not observe data on children who did not comply after age 8; and (iii) when studying the sensitivity of the results before age 8 to non-compliance, we find little sensitivity (see Appendix~\ref{appendix:assessingcc}).\\
 
-\noindent As we explain in Section~\ref{section:background}, compliance to treatment was imperfect in both programs. Thus, if we were to test the hypothesis in \eqref{eq:ho} using an estimate of the ITT, we would need to correct the estimates of $\mathbb{E} \left[ Y | R = 1 \right]$ and $\mathbb{E} \left[ Y | R = 0 \right]$ for non-compliance by addressing situations in which we do not observe treated (control) outcome data for certain individuals originally assigned treatment (control).\footnote{These situations could arise from families refusing to participate in treatment, relocating to another city, or refusing to answer a specific questionnaire. These instances of non-compliance are conceptually different, but we group them under the same correction. We could define a correction for each instance and arrive at a very similar method. In practice, it is not practical to distinguish between correction methods because each instance is present only a few times and our sample is small. Thus, we refer to non-compliance as any case in which data from the original assignment to treatment or control of an individual is missing.} \\
-
-\noindent To see why, let $Y_r$ denote a counterfactual outcome and $A$ denote compliance.Then, $Y_{r} \left(\text{fix } A = a \right)$ represents the counterfactual outcome $Y$ when $A$ is fixed to compliance ($A = 0$) or non-compliance ($A = 1$). It is not necessarily the case that 
+\noindent To account for program attrition, we propose a correction to the elements that compose the ITT. Let $A$ denote denote program attrition: $Y_{d} \left(\text{fix } A = a \right)$ represents the counterfactual outcome $Y$ when $A$ is fixed to no program attrition ($A = 0$) or program attrition ($A = 1$). It is not necessarily the case that 
 
 \begin{equation}
-Y_{r} \left(\text{fix } A = 0 \right) \sim Y_{r} \left(\text{fix } A = 1 \right). 
-\end{equation}
+\mathbb{E} \left[ Y_{d} | \text{fix } A = 0 \right]  = \mathbb{E} \left[ Y_{d} | \text{fix } A = 0  \right].
+\end{equation}\\
 
-\begin{assumption} \normalfont \label{assumption:balance} (Conditional Independence in Non-compliance) The counterfactual outcome $Y_{r} \left(\text{fix } A = a \right)$ follows the same distribution regardless of the value on which $A$ is fixed, after conditioning on observed characteristics, $X$: 
+\begin{assumption} \normalfont \label{assumption:balance} (Conditional Independence in Program Attrition) The expectation of the counterfactual outcome $Y_{d} \left(\text{fix } A = a \right)$ is independent of the value on which $A$ is fixed, after conditioning on observed characteristics, $X$: 
 
 \begin{equation}
-Y_{r} \left(\text{fix } A = a \right) | X \sim Y_{r} | X. 
+\mathbb{E} \left[ Y_{d} | \text{fix } A = a, X \right] = \mathbb{E} \left[ Y_{d} | X \right].
 \end{equation}
 
 \end{assumption}
 
-\noindent Under Assumption~\ref{assumption:balance}, we are able to correct our estimates of $\mathbb{E} \left[ Y | R = 1 \right]$ and $\mathbb{E} \left[ Y | R = 0 \right]$ for non-compliance by using an inverse-probability weighting (IPW) scheme. In other words, we can weight the data to achieve balance in the observed characteristics of compliers and non-compliers. Assumption~\ref{assumption:balance} states that once $X$ is balanced, non-compliance does not affect the counter-factual distributions of interest, so we are able to identify them.\footnote{We could relax Assumption~\ref{assumption:balance} if we were only interested in identifying the counterfactual expectations, as when we calculate the ITT. In that sense, Assumption~\ref{assumption:balance} is sufficient but not necessary. The weaker assumption of mean independence also suffices to identify the ITT.} Once we account for non-compliance, the ITT represents the average treatment effect of ABC as implemented, rather than relative to a specific alternative preschool. For clarity, we omit the argument $A$ henceforth, although in our empirical application we show estimates correcting for non-compliance.\\
+\noindent Under Assumption~\ref{assumption:balance}, we are able to correct our estimates of $\mathbb{E} \left[ Y | R = 1 \right]$ and $\mathbb{E} \left[ Y | R = 0 \right]$ for program attrition by using an inverse-probability weighting (IPW) scheme. In other words, we can weight the data to achieve balance in the observed characteristics of children for who we have program attrition and children for who we do not. Assumption~\ref{assumption:balance} states that once $X$ is balanced, program attrition does not affect the counterfactual distributions of interest, so we are able to identify them. Once we account for program attrition, the ITT represents the average treatment effect of ABC as implemented, rather than relative to a specific alternative preschool. For clarity, we omit the argument $A$ henceforth, although in our empirical application we show estimates correcting for program attrition.\\
 
-\noindent The standard ITT does not account for the fact that approximately $70 \%$ of control children enrolled in different preschool alternatives across both programs. Therefore, this estimator only captures the effects of the programs relative to the available supply of alternatives when the programs were implemented.\footnote{If the preschool alternatives were beneficial for the children in the control group, the ITT is attenuated. This is common in early childhood education programs in which alternatives are close in quality to the program itself. Perhaps the most iconic example is the randomized evaluation of Head Start, the Head Start Impact Study, in which $15\%$ of children in the control group had access to alternative Head Start centers. ITT estimates reported by \cite{Puma_Bell_etal_2010_HeadStartImpact} are close to zero. However, this does not mean that the efficacy of Head Start is low, but rather that Head Start treatment is being compared to close substitutes when computing the ITT.} \\
+\noindent The standard ITT does not account for the fact that almost $70 \%$ of control-group children enrolled in different preschool alternatives across both programs. Therefore, this estimator only captures the effects of the program relative to the available supply of alternatives when the programs was implemented.\footnote{If the preschool alternatives were beneficial for the children in the control group, the ITT is attenuated. This is common in early childhood education programs in which alternatives are close in quality to the program itself. Perhaps the most iconic example is the randomized evaluation of Head Start, the Head Start Impact Study, in which $15\%$ of children in the control group had access to alternative Head Start centers. ITT estimates reported by \cite{Puma_Bell_etal_2010_HeadStartImpact} are close to zero. However, this does not mean that the efficacy of Head Start is low, but rather that Head Start treatment is being compared to close substitutes when computing the ITT.} \\
 
-\noindent To measure the effects of ABC as a program \emph{per se}, it is more meaningful to estimate the effect of treatment relative to a counterfactual in which all children are fixed to the same alternative, such as staying at home or attending a low-quality preschool. This question needs to account for treatment substitution in the control group. By fixing the children in the control group to a homogeneous alternative, we can more meaningfully compare children in the treatment and control groups. \\
+\noindent To measure the effect of ABC as a program \emph{per se}, it is more meaningful to estimate the effect of treatment relative to a counterfactual in which all children are fixed to the same alternative---e.g. staying at home, attending a low-quality preschool. Answering this question requires  to account for treatment substitution in the control group. By fixing the children who did not take up treatment into a homogeneous alternative, we can more meaningfully compare children in the treatment and control groups. \\
 
 \noindent Let $P$ indicate whether a child attended a substitute preschool. The value of $P$ could either be fixed to indicate no take-up of a preschool alternative ($P = 0$) or take-up of a preschool alternative $(P = 1)$. We are interested in the following hypotheses: 
 
 \begin{eqnarray}
-H_{0}^B &:& Y_{0} \left( \text{fix } P = 0 \right) \sim Y_{1} \left( \text{fix } P = 0 \right) \label{eq:hoB} \\
-H_{0}^C &:& Y_{0} \left( \text{fix } P = 1 \right) \sim Y_{1} \left( \text{fix } P = 1\right) \label{eq:hoC}. 
-\end{eqnarray}
+H_{0}^B &:& \mathbb{E} \left[ Y_{0} | \text{fix } P = 0 \right] =  \mathbb{E} \left[ Y_{1} | \text{fix } P = 0 \right] \label{eq:hoB} \\
+H_{0}^C &:&  \mathbb{E} \left[ Y_{0} | \text{fix } P = 1 \right] =  \mathbb{E} \left[ Y_{1} | \text{fix } P = 1 \right] \label{eq:hoC}. 
+\end{eqnarray}\\
 
 \noindent That is, we want to compare the counterfactual treatment distributions when fixing children to no alternative preschool ($H_{0}^B$) and when fixing children to alternative preschool ($H_{0}^C$).\footnote{This treats alternative preschool as a binary decision, although it is continuous as we show in Figure~\ref{fig:treatsubabc}. We take this approach because we are limited by our sample size when predicting preschool take-up as we show in Appendix~\ref{appendix:methodology}.}\\
 
@@ -277,19 +287,19 @@ H_{0}^C &:& Y_{0} \left( \text{fix } P = 1 \right) \sim Y_{1} \left( \text{fix }
 \begin{eqnarray}
 \text{ITT} \left( \text{fix } P = 0 \right) &=& \mathbb{E} \left[ Y | R = 1, \text{fix } P = 0 \right] - \mathbb{E} \left[ Y | R = 0, \text{fix } P = 0 \right] \label{eq:ittp0} \\
 \text{ITT} \left( \text{fix } P = 1 \right) &=& \mathbb{E} \left[ Y | R = 1, \text{fix } P = 1 \right] - \mathbb{E} \left[ Y | R = 0, \text{fix } P = 1 \right]. \label{eq:ittp1}  
-\end{eqnarray}
+\end{eqnarray}\\
 
-\noindent Estimating the expectations in \eqref{eq:ittp0} and \eqref{eq:ittp1} is not as straightforward as computing the expectations in \eqref{eq:itt}. While randomization fixes an individual to either treatment or control, it does not fix either of the two alternative preschool statuses.\\
+\noindent Estimating the expectations in \eqref{eq:ittp0} and \eqref{eq:ittp1} is not as straightforward as computing the expectations in \eqref{eq:itt} because families select whether or not to enroll their children into preschool alternatives.\\
 
-\begin{assumption} \normalfont \label{assumption:matching} (Conditional Independence in Preschool Alternatives Take-up) The counterfactual outcome $Y_{r} \left( \text{fix } P=p \right)$ follows the same distribution regardless of the value to which $P$ is fixed, after conditioning on $X$ (observed characteristics): 
+\begin{assumption} \normalfont \label{assumption:matching} (Conditional Independence in Preschool Alternatives Enrollment) The expectation of the counterfactual outcome $Y_{d} \left( \text{fix } P=p \right)$ follows the same distribution regardless of the value to which $P$ is fixed, after conditioning on $X$ (observed characteristics): 
 \begin{equation}
-Y_{r} \left( \text{fix } P=p \right) | X \sim Y_{r}  | X 
+\mathbb{E} \left [ Y_{d} | \text{fix } P=p, X  \right] = \mathbb{E} \left [ Y_{d} | X  \right].
 \end{equation}
  \end{assumption}
 
-\noindent Assumption~\ref{assumption:matching} is a sufficient condition to provide estimates for \eqref{eq:ittp0} and\eqref{eq:ittp1}. It states that the observed characteristics in $X$ account for the parental decision of whether or not to enroll the child in preschool alternatives.\\
+\noindent Assumption~\ref{assumption:matching} states that the observed characteristics in $X$ account for the parental decision of whether or not to enroll the child in preschool alternatives.\\
 
-\noindent The estimates for $\text{ITT} \left( \text{fix } P = 0 \right) $ and $\text{ITT} \left( \text{fix } P = 1 \right)$ relate to the second policy question, which evaluates the efficacy of ABC as a program \emph{per se}. Once non-compliance is accounted for, the ITT estimates represent the average treatment effect of ABC relative to receiving no treatment at all and relative to receiving a preschool alternative.\\
+\noindent The estimates for $\text{ITT} \left( \text{fix } P = 0 \right) $ and $\text{ITT} \left( \text{fix } P = 1 \right)$ relate to the second policy question, which evaluates the efficacy of ABC as a program \emph{per se}. Once program attrition is accounted for, the ITT estimates represent the average treatment effect of ABC relative to receiving no treatment at all and relative to receiving a \textit{fixed} preschool alternative.\\
 
 \noindent To illustrate, suppose we want to estimate $\text{ITT} \left( \text{fix } P = 0 \right)$ using a linear and separable parameterization. We estimate the following model: 
 
@@ -297,7 +307,7 @@ Y_{r} \left( \text{fix } P=p \right) | X \sim Y_{r}  | X
 Y = \Delta \left( \text{fix } P = 0 \right) R + X \beta + \varepsilon, 
 \end{equation}
 
-\noindent which provides a consistent estimate for $\Delta \left( \text{fix } P = 0 \right)$ under Assumption~\ref{assumption:matching}. $\Delta \left( \text{fix } P = 0 \right)$ is the average treatment effect of ABC with respect to a well-defined alternative: no center-based childcare. Note that Assumption~\ref{assumption:matching} is a sufficient condition for consistency, but a weaker condition---mean independence---suffices for identifying $\Delta \left( \text{fix } P = 0 \right)$. To account for non-compliance in this framework, we could weight the linear regression with individual-level estimates of the probability of compliance.\\
+\noindent which provides a consistent estimate for $\Delta \left( \text{fix } P = 0 \right)$ under Assumption~\ref{assumption:matching}. $\Delta \left( \text{fix } P = 0 \right)$ is the average treatment effect of ABC with respect to a well-defined alternative: no center-based childcare. To account for program attrition in this framework, we could weight the linear regression with individual-level estimates of the probability of program attrition.\\
 
 \noindent We present estimates of $\Delta \left( \text{fix } P = 0 \right)$ and $\Delta \left( \text{fix } P = 1 \right)$ using this parameterization and using other alternatives to more flexibly  condition on $X$---e.g., nearest-neighbor matching, propensity-score matching, and kernel-based weighting.
 
@@ -307,61 +317,52 @@ Y = \Delta \left( \text{fix } P = 0 \right) R + X \beta + \varepsilon,
 
 \noindent In CARE, however, there were two treatment groups. A simple extension of the framework in Section~\ref{section:methodsquestions} allows us to test various hypotheses that measure the effectiveness of the program.\\
 
-\noindent As before, let $Y_{r}$ denote a counter-factual outcome. $Y_{0}$ is the outcome when the individual is fixed to control, $Y_{1}$ when she is fixed to family education treatment, and $Y_{2}$ when she is fixed to center-based childcare and family education treatment.\footnote{Since compliance was nearly perfect, we can apply a weighting method as in Section~\ref{section:methodsquestions} to adjust for the single non-compliance case, we do not discuss non-compliance in this argument.} To evaluate the program, we consider the following hypotheses: 
+\noindent As before, let $Y_{d}$ denote a counterfactual outcome. $Y_{0}$ corresponds to fixing the child to no treatment take-up;  $Y_{1}$ to take-up of family education treatment; $Y_{2}$ to center-based childcare and family education treatment.\footnote{To adjust for program attrition, we can apply a weighting method as in Section~\ref{section:methodsquestions}.} To evaluate the program, we consider the following hypotheses: 
 
 \begin{eqnarray}
-H_{0}^D: Y_{0} \sim Y_{1} \\ 
-H_{0}^E: Y_{0} \sim Y_{2} \\
-H_{0}^F: Y_{1} \sim Y_{2} 
-\end{eqnarray}
+H_{0}^D: \mathbb{E} \left[ Y_{0} \right] &=&  \mathbb{E} \left[ Y_{1} \right] \\ 
+H_{0}^E: \mathbb{E} \left[ Y_{0} \right] &=&  \mathbb{E} \left[ Y_{2} \right] \\
+H_{0}^F: \mathbb{E} \left[ Y_{1} \right] &=&  \mathbb{E} \left[ Y_{2} \right]. 
+\end{eqnarray}\\
 
-\noindent The first null hypothesis implies that family education has no treatment effect, while the second null hypothesis implies that the center-based childcare and family education have no treatment effect. The third hypothesis implies that the two treatments have the same effect, which could be no effect at all. The three hypotheses help to evaluate the program as implemented. That is, without correcting for alternative preschool enrollment of the children in either the family education treatment or the control groups. We can test these hypotheses constructing ITT estimators analogous to \eqref{eq:itt}.\\ 
+\noindent The first null hypothesis implies that family education has no average treatment effect, while the second null hypothesis implies that the center-based childcare and family education have no average treatment effect. The third hypothesis implies that the two treatments have the same average effect, which could be no average effect at all. The three hypotheses help to evaluate the program as implemented. That is, without correcting for alternative preschool enrollment of the children in either the family education treatment or the control groups. We can test these hypotheses constructing ITT estimators analogous to \eqref{eq:itt}.\\ 
 
-\noindent Alternatively, we can measure the effect of CARE by fixing the counterfactual scenarios to a given level of preschool alternative. Fixing a preschool alternative is as relevant to CARE as it is to ABC since substantial numbers of children in the control groups for both programs were enrolled in alternative preschools (see Figure~\ref{fig:treatsubabc}). Under Assumption~\ref{assumption:matching}, we are able to construct ITT estimators fixing $P$ at either no preschool alternative or preschool alternative, as in \eqref{eq:ittp0} and \eqref{eq:ittp1}. We present estimates that account for $X$ using different parameterizations.\\
+\noindent Alternatively, we can measure the average treatment effect of CARE by fixing the counterfactual scenarios to a given setting of preschool alternative. Fixing a preschool alternative is as relevant to CARE as it is to ABC since substantial numbers of children in the control groups for both programs were enrolled in alternative preschools (see Figure~\ref{fig:treatsubcare}). Under Assumption~\ref{assumption:matching}, we are able to construct ITT estimators fixing $P$ at either no preschool alternative or preschool alternative, as in \eqref{eq:ittp0} and \eqref{eq:ittp1}. We present estimates that account for $X$ using different parameterizations.\\
 
 \subsection{Combining ABC and CARE}
 
 \noindent An alternative method for evaluating the first phases of ABC and CARE is to combine the data from both programs and to test effects for the common elements of their designs. The ABC treatment group and the CARE center-based childcare and family education treatment group were subject to the same center-based childcare treatment component, with the CARE children receiving an additional family education component. If there is no evidence for the treatment effect of family education in CARE, then any effect of center-based childcare and family education treatment in CARE can be attributed to the center-based childcare component, which was shared with ABC. We outline a methodology to combine the data and to exploit this fact.\\
 
-\noindent Suppose that we fail to reject $H_{0}^D$. That is, we fail to reject that the distribution of the outcome of interest differs in the family education group, relative to the control group. Suppose further that we reject $H_{0}^F$, so that the counterfactual distributions of family education and center-based childcare and family education treatments differ. Together, this evidence favors assuming that center-based childcare was the main component generating treatment effects in CARE, if there were any. If this claim holds, we can pool the children fixed to control in ABC and CARE and pool the children fixed to treatment in ABC and to center-based childcare and family education treatment in CARE to test \eqref{eq:ho}, the effect of center-based childcare. Moreover, we can fix the children in the treatment groups to either no alternative preschool or to alternative preschool. We can then proceed as in Section~\ref{section:methodsquestions} to construct the estimates and correct for non-compliance.\\
-
-\noindent We can also parameterize the effect of the family education component. Consider a linear and separable parameterization to estimate $\text{ITT} \left( \text{fix } P = 0\right)$---the effect of center-based childcare---after combining data across ABC and CARE. As in Section~\ref{section:methodsquestions}, $R$ denotes being assigned to a treatment group with center-based childcare---i.e., to treatment in ABC or to center-based childcare and family education in CARE. Similarly, $H$ indicates being assigned to family education treatment---i.e., to family education treatment in CARE. We can then write 
-
-\begin{equation}
-Y = \Delta \left( \text{fix } P = 0\right) R +  \Gamma \left( \text{fix } P = 0\right) H + \upsilon. \label{eq:fixfam}
-\end{equation}
-
-\noindent In this case, $\text{ITT} \left( \text{fix } P = 0\right)$ is the effect of center-based childcare when fixing the preschool alternative to no alternative at all and family education treatment. Note that randomization to family education treatment allows us to fix family education without needing assumptions similar to Assumption~\ref{assumption:matching}.\\
+\noindent Suppose that we fail to reject $H_{0}^D$. That is, we fail to reject that the distribution of the outcome of interest differs in the family education group, relative to the control group. Suppose further that we reject $H_{0}^F$, so that the counterfactual distributions of family education and center-based childcare and family education treatments differ. Together, this evidence favors assuming that center-based childcare was the main component generating treatment effects in CARE, if there were any. If this claim holds, we can pool the children fixed to control in ABC and CARE and pool the children fixed to treatment in ABC and to center-based childcare and family education treatment in CARE to test \eqref{eq:ho}, the effect of center-based childcare. Moreover, we can fix the children in the treatment groups to either no alternative preschool or to alternative preschool. We can then proceed as in Section~\ref{section:methodsquestions} to construct the estimates and correct for non-compliance.\footnote{This reasoning implicitly imposes that there is no interaction reinforcing the two treatments CARE offered. Our evidence supports this implicit assumption: when evaluating the effect of center-based childcare either by (i) comparing the treatment and control groups of ABC; or (ii) pooling the treatment group of ABC and the treatment group of of CARE receiving center-based childcare and family education and comparing it to a group pooling the control groups of both programs and the family education treatment group we find very similar results.}\\
 
 \noindent We report results in Section~\ref{section:results} for these two methods of combining information in ABC and CARE.
 
 \subsection{Second-phase Treatment}
 
-\noindent ABC and CARE had by design comparable second phases of treatment. In ABC, children were randomized to the second phase, which enables the testing of a series of hypotheses measuring the efficacy of the treatment. 
-In order to do this, we consider an additional dimension in the sub-index of the counter-factual outcome notation. Let $S$ indicate random assignment to the second phase of treatment and $Y_{r,s}$ denote the outcome when the first phase of treatment is fixed to $r$ and the second phase is fixed to $s$.\\
+\noindent ABC and CARE had by design comparable second phases of treatment. In ABC, children were randomized to the second phase, which enables the testing of a series of hypotheses measuring the efficacy of the treatment. In order to do this, we consider an additional dimension in the sub-index of the counterfactual outcome notation. Let $S$ indicate random assignment to the second phase of treatment and $Y_{d,s}$ be a counterfactual outcome defined by treatment take-up of the two phases of the program. That is, a counterfactual outcome allowing to fix two dimensions of treatment take-up.\\
 
-\begin{table}[H] 
+\begin{sidewaystable}[H] 
 \begin{threeparttable}
 \caption{First-phase and Second-phase Hypotheses}
 \label{table:hypotheses}
 \centering 
-\begin{tabular}{ccc} \hline \hline
- & Fixing First-phase Treatment & Fixing Second-phase Treatment \\ \\ \hline
-Fixed to control       & $H_{0}^G: Y_{0,0} = Y_{0,1}$ & $H_{0}^H: Y_{0,0} = Y_{1,0}$ \\
-Fixed to treatment  & $H_{0}^I: Y_{1,0} = Y_{1,1}$ & $H_{0}^J: Y_{0,1} = Y_{1,1}$ \\ \\ \hline
-Not fixed                 & $H_{0}^A: Y_{r,0} = Y_{r,1}$ & $H_{0}^K: Y_{0,s} = Y_{1,s}$ \\  \hline \hline
+\begin{tabular}{ccc} \toprule
+ & Fixing First-phase Treatment & Fixing Second-phase Treatment \\ \\ \midrule
+Fixed to control       & $H_{0}^G: \mathbb{E} \left[ Y \text{ fix } D = 0, S = 0 \right]  = \mathbb{E} \left[ Y \text{ fix } D = 0, S = 1 \right]$ & $H_{0}^H: \mathbb{E} \left[ Y \text{ fix } D = 0, S = 0 \right] = \mathbb{E} \left[ Y \text{ fix } D = 1, S = 0 \right]$ \\
+Fixed to treatment  & $H_{0}^I: \mathbb{E} \left[ Y \text{ fix } D = 1, S = 0 \right] = \mathbb{E} \left[ Y \text{ fix } D = 1, S = 1 \right]$ & $H_{0}^J: \mathbb{E} \left[ Y \text{ fix } D = 0, S = 1 \right] = \mathbb{E} \left[ Y \text{ fix } D = 1, S = 1 \right]$ \\ \\ \midrule
+Not fixed                 & $H_{0}^K: \mathbb{E} \left[ Y \text{ fix } D = d, S = 0 \right] = \mathbb{E} \left[ Y \text{ fix } D = d, S = 1 \right]$ & $H_{0}^A: \mathbb{E} \left[ Y \text{ fix } D = 0, S = s \right] = \mathbb{E} \left[ Y \text{ fix } D = 1, S = s \right]$ \\  \toprule
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
 \item Note: This table displays the hypotheses we test for the counterfactual distributions of an outcome $Y$, when fixing first-stage treatment status to treatment ($R = 1$) or control ($R = 0$) and/or second-stage treatment status to treatment ($S = 1$) or control ($S = 0$).
 \end{tablenotes}
 \end{threeparttable}
-\end{table}
+\end{sidewaystable}
 
 \noindent Table~\ref{table:hypotheses} outlines the different hypotheses we are able to test. To illustrate how we construct the tests, consider the following hypothesis: 
 
 \begin{equation}
-H_{0}^G: Y_{0,0} \sim Y_{0,1}  \label{eq:h0fixfirst}
+H_{0}^G: \mathbb{E} \left[ Y \text{ fix } D = d, S = 0 \right]  = \mathbb{E} \left[ Y \text{ fix } D = d, S = 1 \right]  \label{eq:h0fixfirst}
 \end{equation}
 
 \noindent In words, we test the effect of second-phase treatment, fixing first-phase treatment to control status. Following the methodology in Section~\ref{section:methodsquestions}, we can construct an ITT to test this hypothesis: 
@@ -375,7 +376,7 @@ H_{0}^G: Y_{0,0} \sim Y_{0,1}  \label{eq:h0fixfirst}
 \noindent Alternatively, it is also meaningful to test if the second phase of treatment had an effect independent of assignment in the first phase. That is, we test 
 
 \begin{equation}
-H_{0}^K: Y_{d,1} \sim Y_{d,0} \label{eq:h02}
+H_{0}^K: \mathbb{E} \left[ Y \text{ fix } D = 0, S = s \right] = \mathbb{E} \left[ Y \text{ fix } D = 1, S = s \right] \label{eq:h02}
 \end{equation}
 
 \noindent where $d \in \{0,1\}$. The hypothesis in \eqref{eq:h02} is the second-phase counterpart to the hypotheses in \eqref{eq:ho} and addresses the effectiveness of the second phase of ABC. Importantly, the test does \emph{not} consider dynamics between the first and second phases of treatment, while hypotheses that fix the first phase of treatment do consider these dynamics.\\
@@ -386,27 +387,27 @@ H_{0}^K: Y_{d,1} \sim Y_{d,0} \label{eq:h02}
 
 \noindent While our discussion thus far addresses how to test the effectiveness of the interventions at improving a single life-cycle outcome, human development is ultimately multidimensional. Therefore, we want to exploit the numerous measures of human development throughout the participants' lifetimes in both ABC and CARE to test the effect of the program in numerous dimensions. \\
 
-\noindent In our companion paper, \citet{Elango_et_al_2015_ABC_unpublished}, we offer one method for measuring the effectiveness of a program using two statistics: the benefit-to-cost ratio and the internal rate of return. To do this, we account for the life-cycle gains of the program in several dimensions such as employment, income, government transfers, health, and crime. A simpler but informative alternative is to count the number of socially-positive outcomes that the program influences and present inference methods for each of them.\\
+\noindent In our companion paper, \citet{Elango_et_al_2015_ABC_unpublished}, we offer one method for measuring the effectiveness of a program using two statistics: the benefit-to-cost ratio and the internal rate of return. To do this, we account for the life-cycle gains of the program in several dimensions such as employment, income, government transfers, health, and crime. A simpler but informative alternative is to count the number of socially-positive outcomes that the program influences an inference methodology for this procedure.\\
 
-\noindent This latter method requires classifying each outcome as socially positive or negative, which is inherently biased. In the interest of objectivity, we present the counts on 547 outcomes, all of which we think are unambiguously either socially positive or socially negative, in Appendix~\ref{appendix:data}. We offer some relevant examples in Section~\ref{section:data}.\\
+\noindent This latter method requires classifying each outcome as socially positive or negative, which is inherently biased. In the interest of objectivity, we present the counts on 141 outcomes, all of which we think are either unambiguously socially positive or unambiguously socially negative. We offer some relevant examples in Section~\ref{section:data}.\\
 
 \noindent The different counts we propose are forms of combining functions \citep{Pesarin_Salmaso_2010_PermutationTests}.\footnote{This reference offers a comprehensive treatment of combining functions.} These functions combine information on several outcomes for testing patterns in a scientific or social phenomenon---in our case, an early childhood education program. For instance, suppose we want to test the hypothesis: 
 
 \begin{equation}
-H_{0}^A: Y_{0} \sim Y_{1} \label{eq:hoagain}
+H_{0}^A: \mathbf{E} \left[ Y_{0} \right] =  \left[ Y_{1} \right] \label{eq:hoagain}
 \end{equation}
 
 \noindent for multiple outcomes $Y$, and that, for each outcome individually, we already have an inference procedure readily available---i.e., we know the hypothesis, the statistics we use to test it, and the $p$-value associated with the test. For instance, we want to test \eqref{eq:hoagain} using the ITT and a bootstrapped, non-parametric $p$-value.\\
 
-\noindent We consider three counts. First, a sum of the socially positive treatment effects. We can calculate this sum over the complete set of outcomes or certain categories of outcomes (e.g. employment, health, crime), without consideration of their significance when individually contrasted in \eqref{eq:hoagain}. Next, we sum the outcomes that are significantly socially positive at the $10\%$ level, when hypothesis \eqref{eq:hoagain} is tested individually. Finally, we use the same sum but at a $5\%$ significance level.\\
+\noindent We consider three counts. First, a count of the socially positive treatment effects. We can calculate this count over the complete set of outcomes or certain categories of outcomes (e.g. employment, health, crime), without consideration of their significance when \eqref{eq:hoagain} is individually tested. Next, we count the outcomes that are significantly socially positive at the $10\%$ level, when hypothesis \eqref{eq:hoagain} is individually tested. Finally, we use the same sum but at a $5\%$ significance level.\\
 
-\noindent Consider constructing a combining function---in our case, a count---for a group or block of outcomes $\mathcal{O}^g$ with $g \in \mathcal{G}$, where $\mathcal{G}$ is the index set for the groups of outcomes.\footnote{It is not necessarily the case that the groups in $\mathcal{G}$ are exclusively. It could be of interest to study groups which have overlapping outcomes. The test does not require for the groups to be exclusive.} Alternatively, we can construct the count for $\mathcal{O} : =  \bigcup \limits _{g \in \mathcal{G}} \mathcal{O}^g$. Each group includes the number of outcomes $\# \mathcal{O}^g$ and an associated sequence of treatment effects $\{ \widehat{\Delta}_{j}^{g} \}_{j = 1}^{\# \mathcal{O}^g}$. The test statistic for group $g$ is the count. For example, if we count the number of socially positive outcomes, the test statistic for group $g$ is 
+\noindent Consider constructing a combining function---in our case, a count---for a group or block of outcomes $\mathcal{O}^g$ with $g \in \mathcal{G}$, where $\mathcal{G}$ is the index set for the groups of outcomes.\footnote{It is not necessarily the case that the groups in $\mathcal{G}$ are exclusive. It could be of interest to study groups which have overlapping outcomes. The test does not require the groups to be exclusive.} Alternatively, we can construct the count for $\mathcal{O} : =  \bigcup \limits _{g \in \mathcal{G}} \mathcal{O}^g$. Each group includes the number of outcomes $\# \mathcal{O}^g$ and an associated sequence of treatment effects $\{ \widehat{\Delta}_{j}^{g} \}_{j = 1}^{\# \mathcal{O}^g}$. The test statistic for group $g$ is the count. For example, if we count the number of socially positive outcomes, the test statistic for group $g$ is 
 
 \begin{equation}
 T_{g} = \sum _{j=1}^{\# \mathcal{O}^g} \mathbf{1} \left[ \widehat{\Delta}_{j}^{g} > 0\right]. 
 \end{equation} 
 
-\noindent In order to produce an inference, we bootstrap this procedure and construct a null distribution. The $p$-value for the number of socially positive treatment effects in group $g$ is $1 - \widehat{F} \left( T_{g} \right)$, where $ F_{g}$ is the empirical bootstrap distribution of group $g$. The procedure is analogous when constructing statistics for the second and third combining functions.\\
+\noindent For inference purposes, we bootstrap this procedure and construct a null distribution. The $p$-value for the number of socially positive treatment effects in group $g$ is $1 - \widehat{F} \left( T_{g} \right)$, where $ \widehat{F}_{g}$ is the empirical bootstrap distribution of group $g$. The procedure is analogous when constructing statistics for the second and third combining functions.\\
 
 \noindent In Section~\ref{section:results}, we present tests for the three combining functions for different groups of outcomes and for the unions of all of these group of outcomes, $\mathcal{O}$.
 
