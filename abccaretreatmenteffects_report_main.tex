@@ -61,14 +61,6 @@ The University of Chicago}
 
 \noindent \textbf{[JLG: next three paragraphs, description of results, pending.]}\\
 
-\begin{comment}
-\noindent In the rest of the paper, we formalize through several procedures the data description in Table~\ref{table:}, and find solid robustness \textbf{[MT: Unclear what this means...]}. We evaluate 141 outcomes describing human development throughout the life-cycle. Although we present counts over all the outcomes, we group them into categories for simplicity. These categories are maternal employment, life-cycle cognition, adolescent socio-emotional skills, adulthood socio-emotional skills, education, employment and income, crime, and health. For each outcome, we calculate the mean difference between the treatment and control groups in ABC and the treatment groups and the control group in CARE.\\
-
-\noindent For ABC, 100 out of 141 outcomes indicate a positive treatment effects, as measured by the mean difference between the treatment and the control groups. When we limit the control sample to children who did not participate in any treatment alternatives, this number increases to 108. As we argue throughout the paper, this number more accurately describes the effectiveness of ABC because it compares treatment to a fixed, relative alternative: no treatment at all. Of the results, $54\%$ are positive and significant at the $10\%$ level. At the significance level of $10\%$, 14 outcomes should be positive and significant, a much lower number than $54\%$ \textbf{[MT: Something is wrong here, but I can't correct since the results have yet to be incorporated into the paper.]}.\\
-
-\noindent For CARE, our findings indicate that the treatment incorporating center-based childcare \emph{and} home visits was much more effective than the treatment that had home visits only. These results are very much aligned with the results of ABC. Taken together, these comparisons establish that center-based childcare treatment is much more effective than home visits.\\
-\end{comment}
-
 \noindent We also test diverse hypotheses to assess the effectiveness of the second phase of randomization. The effectiveness of the first phase of treatment is much weaker if compared to that of the second. We conclude that ABC and CARE were much more effective when intervening before age 5, rather than between ages 5 to 8.\\
 
 \noindent This paper extends the work of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}, who analyze the effectiveness of ABC at improving long-term health outcomes. It presents the methodology for the calculation of the treatment effect estimates that underpin our companion paper, \citet{Elango_et_al_2015_ABC_unpublished}. In it, we use the treatment effects in this paper and forecast the life-cycle gains of ABC on multiple dimensions of human development, from birth and until death, to calculate its internal rate of return and its benefit-to-cost ratio.\footnote{\cite{Campbell_Pungello_etal_2012_DP} estimate treatment effects on adulthood outcomes in ABC. Unlike our approach, this report does not assess outcomes such as health status, criminal behavior, and non-cognitive skills. \cite{Campbell_Conti_etal_2014_EarlyChildhoodInvestments} is the only other paper to assess health outcomes, but they do not address control contamination. In addition to providing a comprehensive analysis of ABC's effects, our paper is a valuable contribution since it is the first to correct for control contamination, to correct for non-random attrition, and to adjust for the cherry-picking of significant treatment effects by using count statistics. Furthermore, we broaden the analysis by analyzing ABC together with CARE, which was close in implementation objectives and design.}\\
@@ -394,7 +386,7 @@ H_{0}^K: \mathbb{E} \left[ Y \text{ fix } D = 0, S = s \right] = \mathbb{E} \lef
 \noindent The different counts we propose are forms of combining functions \citep{Pesarin_Salmaso_2010_PermutationTests}.\footnote{This reference offers a comprehensive treatment of combining functions.} These functions combine information on several outcomes for testing patterns in a scientific or social phenomenon---in our case, an early childhood education program. For instance, suppose we want to test the hypothesis: 
 
 \begin{equation}
-H_{0}^A: \mathbf{E} \left[ Y_{0} \right] =  \left[ Y_{1} \right] \label{eq:hoagain}
+H_{0}^A: \mathbb{E} \left[ Y_{0} \right] =  \mathbb{E} \left[ Y_{1} \right] \label{eq:hoagain}
 \end{equation}
 
 \noindent for multiple outcomes $Y$, and that, for each outcome individually, we already have an inference procedure readily available---i.e., we know the hypothesis, the statistics we use to test it, and the $p$-value associated with the test. For instance, we want to test \eqref{eq:hoagain} using the ITT and a bootstrapped, non-parametric $p$-value.\\
@@ -407,7 +399,7 @@ H_{0}^A: \mathbf{E} \left[ Y_{0} \right] =  \left[ Y_{1} \right] \label{eq:hoaga
 T_{g} = \sum _{j=1}^{\# \mathcal{O}^g} \mathbf{1} \left[ \widehat{\Delta}_{j}^{g} > 0\right]. 
 \end{equation} 
 
-\noindent For inference purposes, we bootstrap this procedure and construct a null distribution. The $p$-value for the number of socially positive treatment effects in group $g$ is $1 - \widehat{F} \left( T_{g} \right)$, where $ \widehat{F}_{g}$ is the empirical bootstrap distribution of group $g$. The procedure is analogous when constructing statistics for the second and third combining functions.\\
+\noindent For inference purposes, we bootstrap this procedure and construct a null distribution. The $p$-value for the number of socially positive treatment effects in group $g$ is $1 - \widehat{F}_{g} \left( T_{g} \right)$, where $ \widehat{F}_{g}$ is the empirical bootstrap distribution of group $g$. The procedure is analogous when constructing statistics for the second and third combining functions.\\
 
 \noindent In Section~\ref{section:results}, we present tests for the three combining functions for different groups of outcomes and for the unions of all of these group of outcomes, $\mathcal{O}$.
 
