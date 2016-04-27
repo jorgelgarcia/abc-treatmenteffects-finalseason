@@ -239,11 +239,13 @@ Note: This plot shows the number of participants, by experimental group, for who
 \setcounter{table}{0}   \renewcommand{\thetable}{B.\arabic{table}}
 \section{Controlling for Background Variables} \label{appendix:controls}
 
-\noindent We employ a two-step procedure in selecting our control variables. In the first step, we estimate a series of linear probability models for enrollment into alternative preschool for subjects randomized out of treatment. In each model we condition on an indicator for sex, and three additional variables chosen from a list of 18 variables that we believe to potentially impact either outcomes or the decision to enroll in alternative preschool. These variables are listed below in Table~\ref{tab:pselectvars}.  We fit each of the $18 \choose 3$ models to the data, and select the set of covariates generating the lowest Bayesian Information Criterion (BIC) to be the first subset of the controls we use in our main estimations.\\
+\noindent We select the background variables that we control for as follows. First, we select the three variables that best predict enrollment into preschool alternatives for children who were randomly assigned not to receive center-based childcare---the control group in ABC and the control and family education treatment groups in CARE. To choose the best predicting control set, we estimate of the $17 \choose 3$ linear models, using the variables in Panels 1. and 2. of Table~\ref{tab:pselectvars}. The best predicting model is the one generating the lowest Bayesian Information Criterion (BIC).\\
 
-\noindent In the second step, we perform a similar procedure for every outcome of interest. Namely, we estimate a linear model for every outcome, regressing the outcome variable on treatment, an indicator variable for sex, and three additional covariates. The three covariates are chosen from a list of 15 variables, a subset of the 18 variables after removing those we believe to only impact the decision to enroll in alternative preschool and not the outcomes of interest. For each outcome, we rank each of the $15 \choose 3$ models by the BIC value. We then sum the ranks over all the outcomes to determine which model best fits the data. The three covariates we permute over from this model are then pooled with those from the first step of the model selection procedure to form the set of controls we use in our main estimations.
+\noindent We proceed in a similar way to choose the second set of background variables. Instead of predicting preschool enrollment, we predict the relevant outcome of interest. For this exercise we use the variables in Panel 2., so we estimate $14 \choose 3$ models.\\
 
-\noindent \textbf{[JLG: Anna, please insert here the table of controls Josh will send.]}
+\noindent Our set of control variables consists of these two sets of background variables.
+
+\input{output/controlsets}
 
 \setcounter{figure}{0}  \renewcommand{\thefigure}{C.\arabic{figure}}
 \setcounter{table}{0}   \renewcommand{\thetable}{C.\arabic{table}}
