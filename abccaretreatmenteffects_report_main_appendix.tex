@@ -256,50 +256,51 @@ Note: This plot shows the number of participants, by experimental group, for who
 
 \section{Alternative Evaluation Methodologies} \label{appendix:methodology}
 
-\noindent In the main paper, we develop and document the results for two alternative methodologies to account for treatment substitution in the first phase of treatment of ABC and CARE. The objective of each method is to estimate the average treatment effect center-based childcare, as offered by ABC and CARE, holding fixed take up of alternative preschool by the control group. We want to think of a particular scenario in which the children in the control group do not attend alternative preschools. This allows us to compare evaluate center-based childcare relative to a counterfactual scenario in which children stay at home.\\
+\noindent In the main paper, we develop and document the results from two methodologies to account for treatment substitution in the first phases of ABC and CARE. The objective of each method is to estimate the average treatment effect of ABC and CARE, holding fixed take-up of alternative preschool by the control group. We want to think of a particular scenario in which the children in the control group do not attend alternative preschools. This allows us to evaluate center-based childcare relative to a counterfactual scenario in which children stay at home.\\
 
-\noindent This methodology is an alternative to evaluate the first phase of treatment. Throughout the rest of this section, we refer to treatment in either ABC or CARE generically as center-based childcare. We refer to take-up of treatment substitution as alternative preschools. As in our main methodology, we chose the control sets to account fro background variables using the method in Appendix~\ref{appendix:controls}.\\
+\noindent This section presents alternative methodologies to evaluate the first-phase treatment. Throughout the rest of this section, we refer to treatment in either ABC or CARE generically as center-based childcare. We refer to take-up of treatment substitution as enrollment into alternative preschools. As in our main methodology, we chose the control sets to account for background variables using the method in Appendix~\ref{appendix:controls}.\\
 
-\noindent To illustrate the methods we propose, we present results for a small set of outcomes. First, we consider various IQ tests. Second, we present results on three long-term outcomes of interest: years of education, employment, and labor income. The latter set of results are useful because they follow a predictable patter. Thus, we are able to easily assess the sensitivity of these set of results to different strategies.\\
+\noindent To illustrate the alternative methods, we present results for a small set of outcomes. First, we consider time series of IQ scores. Second, we present results on three long-term outcomes of interest: years of education, employment, and labor income. Both IQ scores and the chosen long-term outcomes follow predictable patterns and are straightforward to interpret. These characteristics allow us to evaluate the sensitivity of the estimates of treatment effects using the different strategies.\\
 
-\noindent We define the notation in the same way as in the main paper and add individual subscripts for the sake of clarifying some of the arguments. $\mathbf{X}_{i}$ is a of vector of individual- or household-level observed characteristics; $P_i$ is an indicator for alternative preschool enrollments; $Q_{i}$ is the number of months in alternative preschool. $P_i$ and $Q_i$ are zero for pariticipants of the treatment groups. $D_i=0$ denotes take up of center-based childcare, either in ABC or CARE.
+\noindent We use the notation defined in the main paper and add individual subscripts to clarify some of the arguments. $\mathbf{X}_{i}$ is a of vector of individual- or household-level observed characteristics; $P_i$ is an indicator for alternative preschool enrollments; $Q_{i}$ is the number of months in alternative preschool. $P_i$ and $Q_i$ are zero for participants of the treatment groups. $D_i=1$ denotes take-up of treatment, either in ABC or CARE.
 
 \subsection{Instrumental Variables}
 
-\noindent Our first exploration to find evaluation alternatives is based on a standard, linear instrumental variables framework.
+\noindent The first alternative method we present is based on a standard, linear instrumental variables framework.
 
 \subsubsection{Model and Conditions}
 
-\noindent Consider the following equation for an outcome of interes $Y_{i}$:
+\noindent Consider the following equation for an outcome of interest $Y_{i}$:
 
 
 \begin{equation}
-Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X_i} \beta + \varepsilon_i,
+Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
 \label{eq:ivnot}
 \end{equation}
 
-\noindent where $D_{i}, Q_{i}$ are endogenous. That is, treatment or alternative preschool take-up are likely correlated with unobservable characteristics, not observed when estimating the coefficients characterizing the outcome equation: $Cov(D_i,\varepsilon_i) \neq 0$ and $Cov(Q_i,\varepsilon_i) \neq 0$. Estimating the coefficients in \eqref{eq:ivnot} by OLS yields inconsistent estimates.\\
+\noindent where $D_{i}, Q_{i}$ are endogenous. Selection into treatment or alternative preschool is likely correlated with characteristics not observed when estimating the coefficients characterizing the outcome equation, i.e., $Cov(D_i,\varepsilon_i) \neq 0$ and $Cov(Q_i,\varepsilon_i) \neq 0$. Estimating the coefficients in \eqref{eq:ivnot} by OLS yields inconsistent estimates.\\
 
-\noindent A standard solution is to introduce a vector of instrumental variables, $\mathbf{Z_i}$, satisfying two conditions: (i) we need the matrix $\Pi$ of the coefficients in the population regression of $D_i$ and $Q_i$ on $\mathbf{Z_i}$ to be full rank; and (ii) $\mathbf{Z_i}$ is uncorrelated with $\varepsilon_i$.
+\noindent A standard solution is to introduce a vector of instrumental variables, $\mathbf{Z}_i$, satisfying two conditions: (i) the matrix $\Pi$ of the coefficients in the population regression of $D_i$ and $Q_i$ on $\mathbf{Z}_i$ is full rank; and (ii) $\mathbf{Z}_i$ is uncorrelated with $\varepsilon_i$.
 
 
 \subsubsection{Instrumental Variables in Practice}
 
-\noindent To identify the coefficients in \eqref{eq:ivnot} using an instrumental variables strategy we need at least two instruments. The first instrument we use is randomization into center-based childcare treatment, $R_i$. In addition, we consider up to three other instruments.
+\noindent To identify the coefficients in \eqref{eq:ivnot} using an instrumental variable strategy we need at least two instruments. We consider as an instrument randomization into ABC or CARE center-based treatment, denoted as an indicator, $R_{i}$. We then consider up to three other instruments.
 
 \begin{enumerate}
-\item Randomization into center-based treatment in ABC or CARE
-\item Whether the child was born in the fall. The argument for this variable to be an instrument is that children born in the fall can enter preschool when they are younger. There is evidence in the economics literature that being born in specific times in the year might have consequences for the child's outcomes. The main channel for this effect seems to be the disproportionate selection into season of birth by high-income mothers \citep{Buckles-Hungerman_2013_RES}. Given that in our sample mothers are very young and socioeconomically disadvantaged, we assume that a negligible proportion of them selected their quarter of birth.
-\item Whether there is a grandmother of the child living in the same county. Our hypothesis is that grandmothers, who are relatively young and still working in this sample, could help the mothers of the study take care of their children. We consider the likelihood that the mothers of the study children could not greatly influence whether the grandmothers lived in the county or not. We also assume that the grandmothers do not have effects on the children different from the effects of other types of informal care, such as care from a neighbor. In practice, the presence of a grandmother has a positive effect on preschool attendance, which could indicate that they helped take the children to preschool. Further, this variable is only available for ABC.
-\item How many relatives live in the household in addition to mother, child, siblings, and male partner. We assume that the relatives could take care of the study child while the mother is working, but also assume that they do not have effects on the children different from the effects of any other forms of informal care. In practice, having additional relatives living at home decreases the probability that a child goes into preschool.
+\item \textit{Season child's birth}. This variable is coded as an indicator for being born in the fall (born between June and November). If daycares accepted children primarily in the fall, then children born in the fall can enter preschool when they are younger. Although there is evidence in the economics literature that being born in specific times in the year can influence the child's outcomes, the main channel for this effect seems to be the disproportionate selection into season of birth by high-income mothers \citep{Buckles-Hungerman_2013_RES}. Given that in our sample mothers are very young and disadvantaged, we assume that a negligible proportion of them selected their quarter of birth.
+
+\item \textit{Presence of a grandmother in the county}. Our hypothesis is that the grandmothers of the children, who in this sample are relatively young and still working, could help the mothers of the study take care of their children. We assume that the mothers would have less influence over presence of a grandmother in the county relative to a grandmother living in the home. We also assume that the grandmothers do not affect the children differently than any other avenue of informal care, such as care from a neighbor. In practice, the presence of a grandmother has a positive effect on preschool attendance, which could indicate that they helped take the children to preschool. This variable is only available for ABC.
+
+\item \textit{Number of relatives living in the household apart from the mother, child, siblings, and male partner}. We assume that the relatives could take care of the study child while the mother is working, but also that they do not affect the children differently than any other avenue of informal care. In practice, having additional relatives living at home decreases the probability that a child goes into preschool.
 \end{enumerate}
 
 \subsubsection{Sets of Instruments}
 \noindent We consider three combinations of the instruments.  All of them include randomization into center-based treatments and birth in the fall. All of them include at least one variable representing access to informal care from relatives. The sets are the following:
 \begin{enumerate}
-\item Randomization, Born in Fall, Grandmother in County, \# Relatives at Home
+\item Randomization, Born in Fall, Grandmother in County, Number of Relatives at Home
 \item Randomization, Born in Fall, Grandmother in County
-\item Randomization, Born in Fall, \# Relatives at Home
+\item Randomization, Born in Fall, Number of Relatives at Home
 \end{enumerate}
 
 \subsubsection{Specifications for the Instruments}
