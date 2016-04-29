@@ -294,7 +294,7 @@ Note: This plot shows the number of participants, by experimental group, for who
 
 \subsection{Controlling for Background Variables}
 
-\noindent We select the background variables that we control for as follows. First, we select the three variables, from 17 potential variables, that best predict enrollment into preschool alternatives for children who were randomly assigned not to receive center-based childcare---the control group in ABC and the control and family education treatment groups in CARE. To choose the best predicting control set, we estimate of the $17 \choose 3$ linear models, using the variables in Panels (1) and (2) of Table~\ref{tab:pselectvars}. The best predicting model is the one generating the lowest Bayesian Information Criterion (BIC).\\
+\noindent We select the background variables that we control for as follows. First, we select the three variables, from 17 potential variables, that best predict enrollment into preschool alternatives for children who were randomly assigned not to receive center-based childcare---the control group in ABC and the control and family education treatment groups in CARE. To choose the best predicting control set, we estimate the $17 \choose 3$ linear models, using the variables in Panels (1) and (2) of Table~\ref{tab:pselectvars}. The best predicting model is the one generating the lowest Bayesian Information Criterion (BIC).\\
 
 \noindent We proceed in a similar way to choose the second set of background variables. Instead of predicting enrollment into alternative preschool, we predict the relevant outcome of interest. For this exercise we use the variables in Panel (2), so we estimate $14 \choose 3$ models.\\
 
@@ -304,7 +304,7 @@ Note: This plot shows the number of participants, by experimental group, for who
 
 \subsection{Tested Outcomes}
 
-\noindent The following tables list the outcomes we test treatment effects for when calculating out statistics. We reverse the outcomes for which we consider a negative treatment effect socially positive.
+\noindent The following tables list the outcomes we test treatment effects for when calculating our statistics. We reverse the outcomes for which we consider a negative treatment effect socially positive.
 
 \input{output/abccare_outcomes_list}
 
@@ -319,11 +319,11 @@ Note: This plot shows the number of participants, by experimental group, for who
 
 \noindent In the main paper, we develop and document the results from two methodologies to account for treatment substitution in the first phases of ABC and CARE. The objective of each method is to estimate the average treatment effect of ABC and CARE, holding fixed take-up of alternative preschool by the control group. We want to construct a scenario in which the children in the control group do not attend alternative preschools. This allows us to evaluate center-based childcare relative to a counterfactual scenario in which children stay at home.\\
 
-\noindent This section presents alternative methodologies to evaluate the first-phase treatment. Throughout the rest of this section, we refer to treatment in either ABC or CARE generically as center-based childcare. We refer to take-up of treatment substitution as enrollment into alternative preschools. As in our main methodology, we chose the control sets to account for background variables using the method in Appendix~\ref{appendix:controls}.\\
+\noindent This section presents alternative methodologies to evaluate the first-phase treatment. Throughout the rest of this section, we refer to treatment in either ABC or CARE generically as center-based childcare. We refer to take-up of treatment substitution as enrollment into alternative preschools. As in our main methodology, we choose the control sets to account for background variables using the method in Appendix~\ref{appendix:controls}.\\
 
 \noindent To illustrate the alternative methods, we present results for a small set of outcomes. First, we consider time series of IQ scores. Second, we present results on three long-term outcomes of interest: years of education, employment, and labor income. Both IQ scores and the chosen long-term outcomes follow predictable patterns and are straightforward to interpret. These characteristics allow us to evaluate the sensitivity of the estimated treatment effects using the different strategies.\\
 
-\noindent We use the notation defined in the main paper and add individual subscripts to clarify some of the arguments. $\mathbf{X}_{i}$ is a vector of observed individual- or household-level characteristics; $P_i$ is an indicator for alternative preschool enrollments; $Q_{i}$ is the number of months in alternative preschool. $P_i$ and $Q_i$ are zero for participants of the treatment groups. $D_i=1$ denotes take-up of treatment, either in ABC or CARE.
+\noindent We use the notation defined in the main paper and add individual subscripts to clarify some of the arguments. $\mathbf{X}_{i}$ is a vector of observed individual- or household-level characteristics; $P_i$ is an indicator for alternative preschool enrollment; $Q_{i}$ is the number of months in alternative preschool. $P_i$ and $Q_i$ are zero for participants of the treatment groups. $D_i=1$ denotes take-up of treatment, either in ABC or CARE.
 
 \subsection{Instrumental Variables}
 
@@ -377,7 +377,7 @@ Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
 
 \subsubsection{Functional forms for Enrollment in Alternative Preschool}
 
-\noindent We use different parameterization for $Q_{i}$ in \eqref{eq:ivnot}: 
+\noindent We use different parameterization for enrollment in alternative preschool in \eqref{eq:ivnot}: 
 
 \begin{enumerate}[(i)]
 \item The number of months in alternative preschool, $Q_{i}$.
@@ -433,7 +433,7 @@ Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
 
 \subsubsection{Varying the Specification of the Instruments}
 
-\noindent We now present an exercise to evaluate the sensitivity of the results to different specifications of the instrumental variables. First, Figure~ \ref{fig:nointer_Q_iv} and Figure \ref{fig:nointer_Q_other} present the results using the set of instruments that are not interacted with an indicator for randomization into the control group ($R_i -1$). Figure \ref{fig:inter_Q_iv} and Figure \ref{fig:inter_Q_other} present results not only interacting the instruments but also interacting the observed characteristics we control for. In both exercises, we use $Q_i$ as the endogenous variable, along with $D_i$.\\
+\noindent We now present an exercise to evaluate the sensitivity of the results to different specifications of the instrumental variables. First, Figure~ \ref{fig:nointer_Q_iv} and Figure \ref{fig:nointer_Q_other} present the results using the set of instruments that are not interacted with an indicator for randomization into the control group ($1-R_i$). Figure \ref{fig:inter_Q_iv} and Figure \ref{fig:inter_Q_other} present results not only interacting the instruments but also interacting the observed characteristics we control for. In both exercises, we use $Q_i$ as the endogenous variable, along with $D_i$.\\
 
 \noindent The results follow the same patterns as before, although they change when the instruments are not interacted. This makes economic sense because the interacted instruments better represent the economic intuition we offer before: the instruments other than $R_{i}$ are more likely to shift the decisions of the families of the control-group children compared to those of the treatment-group children.
 
@@ -512,7 +512,7 @@ Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
 
 \subsubsection{Setup}
 
-\noindent The method we propose is an application of of the selection correction in \citet{Heckman_1979_Econometrica}. We model the selection into both endogenous variables of interest, center-based childcare and preschool alternatives. The method involves three equations: (i) the outcome equation; (ii) the probability of participating in center-based childcare; (iii) a linear equation describing the number of months enrolled in preschool alternatives.\\
+\noindent The method we propose is an application of the selection correction in \citet{Heckman_1979_Econometrica}. We model the selection into both endogenous variables of interest, center-based childcare and preschool alternatives. The method involves three equations: (i) the outcome equation; (ii) the probability of participating in center-based childcare; (iii) a linear equation describing the number of months enrolled in preschool alternatives.\\
 
 \noindent Let $Y^{0}_{i}$ be the counterfactual outcome of child $i$ when not participating in center-based childcare. Similarly, let $Y^{1}_{i}$ be her potential outcome if she participates. We model the outcome as: 
  
@@ -600,9 +600,9 @@ Q_i = \mathbf{W}_i \gamma^{Q} + \varepsilon^{Q}_i, \label{eq:selq}
 
 \subsection{Estimates}
 
-\noindent By including the control functions, we can recover consistent estimates of the parameters in \eqref{eq:potout} through a linear regression. The effect of center-based childcare is the difference of the difference in the intercepts in the two outcome equations.\\
+\noindent By including the control functions, we can recover consistent estimates of the parameters in \eqref{eq:potout} through a linear regression. The effect of center-based childcare is the difference of the intercepts in the two outcome equations.\\
 
-\noindent The charts below present the estimates for the parameter associated with $D_i$. That is, the effect of participating of center-based childcare relative to a counterfactual of receiving no preschool alternative. As before, we present results for IQ scores at different ages and for a set of relevant adult outcomes. The results are not compelling, as they present irregularities over the life-cycle that differ from the rest of results we present in the main paper and throughout this appendix. 
+\noindent The charts below present the estimates for the parameter associated with $D_i$. That is, the effect of participating in center-based childcare relative to a counterfactual of receiving no preschool alternative. As before, we present results for IQ scores at different ages and for a set of relevant adult outcomes. The results are not compelling, as they present irregularities over the life-cycle that differ from the rest of results we present in the main paper and throughout this appendix. 
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous (log) Months of Take-up of Alternative Preschool} \label{output/appendixplots/Q_cf_te.eps}
@@ -644,7 +644,7 @@ Q_i = \mathbf{W}_i \gamma^{Q} + \varepsilon^{Q}_i, \label{eq:selq}
 
 \input{output/ihdp_bayley}
 
-\noindent \textbf{3. The effects on cognition are sustained throughout childhood and up to age 21 even when partialing out the Bayley MDI at ages 12 and 24 months.} When partialing out from a linear regression the score in the Bayley MDI tests both at 12 and 24 months of age, the treatment effect on cognition, measured by the mean difference in IQ scores at different ages between the treatment and control groups, is still significant and are sustained up to age 21 (see Figure~\ref{fig:treatiqsabc}).
+\noindent \textbf{3. The effects on cognition are sustained throughout childhood and up to age 21 even when partialing out the Bayley MDI at ages 12 and 24 months.} When partialing out from a linear regression the score in the Bayley MDI tests both at 12 and 24 months of age, the treatment effects on cognition, measured by the mean difference in IQ scores at different ages between the treatment and control groups, are still significant and are sustained up to age 21 (see Figure~\ref{fig:treatiqsabc}).
 
 \begin{figure}[H]
 		\caption{Treatment Effects on IQ, ABC} \label{fig:treatiqsabc}
