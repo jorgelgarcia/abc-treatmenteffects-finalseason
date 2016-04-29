@@ -237,7 +237,9 @@ Note: This plot shows the number of participants, by experimental group, for who
 
 \setcounter{figure}{0}  \renewcommand{\thefigure}{B.\arabic{figure}}
 \setcounter{table}{0}   \renewcommand{\thetable}{B.\arabic{table}}
-\section{Controlling for Background Variables} \label{appendix:controls}
+\section{Background Variables and Tested Outcomes} \label{appendix:controls}
+
+\section{Controlling for Background Variables}
 
 \noindent We select the background variables that we control for as follows. First, we select the three variables, from 17 potential variables, that best predict enrollment into preschool alternatives for children who were randomly assigned not to receive center-based childcare---the control group in ABC and the control and family education treatment groups in CARE. To choose the best predicting control set, we estimate of the $17 \choose 3$ linear models, using the variables in Panels (1) and (2) of Table~\ref{tab:pselectvars}. The best predicting model is the one generating the lowest Bayesian Information Criterion (BIC).\\
 
@@ -247,9 +249,16 @@ Note: This plot shows the number of participants, by experimental group, for who
 
 \input{output/controlsets}
 
+\subsection{Tested Outcomes}
+
+\noindent The following tables list the outcomes we test treatment effects for when calculating out statistics. We reverse the outcomes for which we consider a negative treatment effect socially positive.
+
+\input{output/abccare_outcomes_list}
+
 \setcounter{figure}{0}  \renewcommand{\thefigure}{C.\arabic{figure}}
 \setcounter{table}{0}   \renewcommand{\thetable}{C.\arabic{table}}
-\section{Results}
+
+\section{Results} \label{appendix:results}
 
 \setcounter{figure}{0}  \renewcommand{\thefigure}{D.\arabic{figure}}
 \setcounter{table}{0}   \renewcommand{\thetable}{D.\arabic{table}}

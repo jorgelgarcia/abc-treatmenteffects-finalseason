@@ -380,7 +380,7 @@ H_{0}^K: \mathbb{E} \left[ Y_{d,0} \right] = \mathbb{E} \left[ Y_{d,1} \right] \
 
 \noindent While our discussion thus far addresses how to test the effectiveness of the programs at improving a single outcome, human development is obviously multidimensional. In our companion paper, \citet{Elango_et_al_2015_ABC_unpublished}, we offer one method for measuring the effectiveness of a program using two statistics: the benefit-to-cost ratio and the internal rate of return. To do this, we account for the life-cycle gains of the program in dimensions such as employment, income, government transfers, health, and crime. A simpler but informative alternative is to count the number of socially positive outcomes that the program influences. We present an inference methodology for this procedure.\\
 
-\noindent This latter method requires classifying each outcome as socially positive or negative, which is an inherently subjective procedure. In the interest of objectivity, we present the counts on 141 outcomes, all of which we think are either unambiguously socially positive or unambiguously socially negative. We list these outcomes and how we classify them in Appendix~\ref{appendix:data}.\\
+\noindent This latter method requires classifying each outcome as socially positive or negative, which is an inherently subjective procedure. In the interest of objectivity, we present the counts on 141 outcomes, all of which we think are either unambiguously socially positive or unambiguously socially negative. We list these outcomes and how we classify them in Appendix~\ref{appendix:controls}.\\
 
 \noindent The different counts we propose are examples of combining functions \citep[see][]{Pesarin_Salmaso_2010_PermutationTests}. These functions combine information on several outcomes for testing patterns in a scientific or social phenomenon---in our case, an early childhood education program. For instance, suppose we want to test the hypothesis: 
 
@@ -410,7 +410,7 @@ T_{g} = \sum _{j=1}^{\# \mathcal{O}^g} \mathbf{1} \left[ \widehat{\Delta}_{j}^{g
 
 \section{Results} \label{section:results}
 
-\noindent To start the discussion of the effects ABC and CARE have, we consider the 141 measures of human development across the life cycle we construct for our analysis and count the measures for which the program had a ``socially beneficial'' effect. For both ABC and CARE, we do this by focusing on the first phase of treatment to compare children who received center-based childcare to children who did not---noting that assignment was random.\footnote{In ABC, this implies comparing the children who were randomly assigned to the treatment group to the children who were randomly assigned to the control group, in the first phase. In CARE, this implies comparing the children who were randomly assigned to receive center-based childcare and home visits to the children who were randomly assigned either to the group receiving home visits only or to the control group, in the first phase as well.} Figure~\ref{fig:ppositive} displays the results from this exercise: ABC and CARE positively impact a noticeable majority of the outcomes we consider.
+\noindent To start the discussion of the effects ABC and CARE have, we consider the 141 measures of human development across the life cycle we construct for our analysis and count the measures for which the program had a ``socially positive'' effect. For both ABC and CARE, we do this by focusing on the first phase of treatment to compare children who received center-based childcare to children who did not---noting that assignment was random.\footnote{In ABC, this implies comparing the children who were randomly assigned to the treatment group to the children who were randomly assigned to the control group, in the first phase. In CARE, this implies comparing the children who were randomly assigned to receive center-based childcare and home visits to the children who were randomly assigned either to the group receiving home visits only or to the control group, in the first phase as well.} Figure~\ref{fig:ppositive} displays the results from this exercise: ABC and CARE positively impact a noticeable majority of the outcomes we consider.
 
 \begin{figure}[H]
 		\caption{Positively Impacted Outcomes, ABC and CARE} \label{fig:ppositive}
@@ -454,11 +454,11 @@ T_{g} = \sum _{j=1}^{\# \mathcal{O}^g} \mathbf{1} \left[ \widehat{\Delta}_{j}^{g
 
 \subsubsection{Males} \label{section:centermales}
 
-\noindent The results for males differ somewhat from the results for females, but they also signal socially beneficial effects from center-based childcare. We display them in Table~\ref{tab:ate_male_main1} and Table~\ref{tab:ate_male_main2}. There are two main differences between males and females. First, for males, outcomes of greatest policy interest such as employment and labor income exhibit a much stronger effect. In general, males have greater attachment to the labor force. Therefore, the difference in the effects could simply be an artifact of the general conditions of the labor market. As noted in \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}, a perhaps more surprising fact is that there are stronger effects on males' health. Second, as we will discuss, the pattern in which the effects we present from columns (1) to (8) is not as clear as in the case of females.\\
+\noindent The results for males differ somewhat from the results for females, but they also signal socially positive effects from center-based childcare. We display them in Table~\ref{tab:ate_male_main1} and Table~\ref{tab:ate_male_main2}. There are two main differences between males and females. First, for males, outcomes of greatest policy interest such as employment and labor income exhibit a much stronger effect. In general, males have greater attachment to the labor force. Therefore, the difference in the effects could simply be an artifact of the general conditions of the labor market. As noted in \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}, a perhaps more surprising fact is that there are stronger effects on males' health. Second, as we will discuss, the pattern in which the effects we present from columns (1) to (8) is not as clear as in the case of females.\\
 
 \noindent For males, correcting for self-selection in the estimates that fix the counterfactual does not consistently indicate that parents enrolled their male children based on potential gains. Instead, for some outcomes this correction points toward the opposite effect. To illustrate this, consider years of education. When fixing children to no alternative preschool, the treatment effect increases by more than 0.4 years with respect to the effect where alternative preschool is not fixed. This pattern is the same in the case for females. However, unlike females, when correcting for potential self-selection in the preschool enrollment decision, the estimate further increases from 1.224 to 1.696 years of preschool. While this estimate suggests that children with the most potential (or with the best home environment) stay at home, the analogous estimate for females indicates the opposite---that female children with the least potential (or with the worst home environment) stay at home.\\
 
-\noindent We also present the counts of positive effects, with a comparable inference exercise, in Table~\ref{tab:counts_male}. We fail to reject that at most 50\% of the outcomes are socially beneficial for any of the estimates we consider. The effects are weaker than for the case of females.\\
+\noindent We also present the counts of positive effects, with a comparable inference exercise, in Table~\ref{tab:counts_male}. We fail to reject that at most 50\% of the outcomes are socially positive for any of the estimates we consider. The effects are weaker than for the case of females.\\
 
 \input{output/tables/abccare/rslt_male_main1}
 \input{output/tables/abccare/rslt_male_main2}
@@ -472,7 +472,23 @@ T_{g} = \sum _{j=1}^{\# \mathcal{O}^g} \mathbf{1} \left[ \widehat{\Delta}_{j}^{g
 
 \section{Final Comments} \label{section:conclusion}
 
-\noindent \textbf{[JLG: let's finish the paper before this.]}
+\noindent Early childhood education has been in the public agenda during the presidential term of President Obama. Various statements by the candidates to succeed President Obama and the evolution of governmental spending in early education indicate that this topic will still be a relevant public matter in the years to come.\\ 
+
+\noindent Noting that the evidence from policies related to early childhood education is still scarce, we provide a thorough evaluation of two randomized controlled trials: the Carolina Abecedarian Project (ABC) and the Carolina Approach to Responsive Education (CARE).\\ 
+
+\noindent As policies providing high-quality center-based childcare, ABC and CARE have a positive effect on a variety of outcomes measuring human development throughout childhood to adulthood---including cognition, socio-emotional skills, criminal behavior, and adulthood health. We provide statistics that represent a simple alternative to summarize the effectiveness of the program and that account for common critiques to these programs: (i) non-compliance and program attrition, to which we find little sensitivity; and (ii) ``cherry picking'' when testing multiple hypotheses. The statistics we provide reduce to a simple exercise as counting the number of outcomes for which the program has a positive (or positive and significant) treatment effect, for which we formalize an inference procedure.
+
+\noindent Two main results are worth noting: 
+
+\begin{enumerate}
+
+\item Center-based childcare provided by ABC and CARE had substantial treatment effects, as implemented. That is, children randomly assigned to receive the program perform much better from childhood to adulthood if compared to children randomly assigned to not receive the program.
+
+\item When fixing the counterfactual scenario of the control-group children to receiving no alternative preschool, the effects are even stronger. 
+
+\end{enumerate}
+
+\noindent The first result helps evaluate the policies as implemented, not the effectiveness of the policies \textit{per se}. To evaluate the effectiveness of the policies \textit{per se}, policy-makers need to perform exercises as the one used to obtain the second result. This allows evaluation of the effectiveness of a program with respect to a well-defined counterfactual. 
 
 %References
 \singlespace
