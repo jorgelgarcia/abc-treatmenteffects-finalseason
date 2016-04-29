@@ -239,7 +239,7 @@ Note: This plot shows the number of participants, by experimental group, for who
 \setcounter{table}{0}   \renewcommand{\thetable}{B.\arabic{table}}
 \section{Background Variables and Tested Outcomes} \label{appendix:controls}
 
-\section{Controlling for Background Variables}
+\subsection{Controlling for Background Variables}
 
 \noindent We select the background variables that we control for as follows. First, we select the three variables, from 17 potential variables, that best predict enrollment into preschool alternatives for children who were randomly assigned not to receive center-based childcare---the control group in ABC and the control and family education treatment groups in CARE. To choose the best predicting control set, we estimate of the $17 \choose 3$ linear models, using the variables in Panels (1) and (2) of Table~\ref{tab:pselectvars}. The best predicting model is the one generating the lowest Bayesian Information Criterion (BIC).\\
 
@@ -264,17 +264,17 @@ Note: This plot shows the number of participants, by experimental group, for who
 \setcounter{table}{0}   \renewcommand{\thetable}{D.\arabic{table}}
 \section{Alternative Evaluation Methodologies} \label{appendix:methodology}
 
-\noindent In the main paper, we develop and document the results from two methodologies to account for treatment substitution in the first phases of ABC and CARE. The objective of each method is to estimate the average treatment effect of ABC and CARE, holding fixed take-up of alternative preschool by the control group. We want to think of a particular scenario in which the children in the control group do not attend alternative preschools. This allows us to evaluate center-based childcare relative to a counterfactual scenario in which children stay at home.\\
+\noindent In the main paper, we develop and document the results from two methodologies to account for treatment substitution in the first phases of ABC and CARE. The objective of each method is to estimate the average treatment effect of ABC and CARE, holding fixed take-up of alternative preschool by the control group. We want to construct a scenario in which the children in the control group do not attend alternative preschools. This allows us to evaluate center-based childcare relative to a counterfactual scenario in which children stay at home.\\
 
 \noindent This section presents alternative methodologies to evaluate the first-phase treatment. Throughout the rest of this section, we refer to treatment in either ABC or CARE generically as center-based childcare. We refer to take-up of treatment substitution as enrollment into alternative preschools. As in our main methodology, we chose the control sets to account for background variables using the method in Appendix~\ref{appendix:controls}.\\
 
-\noindent To illustrate the alternative methods, we present results for a small set of outcomes. First, we consider time series of IQ scores. Second, we present results on three long-term outcomes of interest: years of education, employment, and labor income. Both IQ scores and the chosen long-term outcomes follow predictable patterns and are straightforward to interpret. These characteristics allow us to evaluate the sensitivity of the estimates of treatment effects using the different strategies.\\
+\noindent To illustrate the alternative methods, we present results for a small set of outcomes. First, we consider time series of IQ scores. Second, we present results on three long-term outcomes of interest: years of education, employment, and labor income. Both IQ scores and the chosen long-term outcomes follow predictable patterns and are straightforward to interpret. These characteristics allow us to evaluate the sensitivity of the estimated treatment effects using the different strategies.\\
 
-\noindent We use the notation defined in the main paper and add individual subscripts to clarify some of the arguments. $\mathbf{X}_{i}$ is a of vector of individual- or household-level observed characteristics; $P_i$ is an indicator for alternative preschool enrollments; $Q_{i}$ is the number of months in alternative preschool. $P_i$ and $Q_i$ are zero for participants of the treatment groups. $D_i=1$ denotes take-up of treatment, either in ABC or CARE.
+\noindent We use the notation defined in the main paper and add individual subscripts to clarify some of the arguments. $\mathbf{X}_{i}$ is a vector of observed individual- or household-level characteristics; $P_i$ is an indicator for alternative preschool enrollments; $Q_{i}$ is the number of months in alternative preschool. $P_i$ and $Q_i$ are zero for participants of the treatment groups. $D_i=1$ denotes take-up of treatment, either in ABC or CARE.
 
 \subsection{Instrumental Variables}
 
-\noindent The first alternative method we present is based on a standard, linear instrumental variables framework.
+\noindent The first alternative method we present is based on a standard, linear instrumental variable framework.
 
 \subsubsection{Model and Conditions}
 
@@ -296,11 +296,11 @@ Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
 \noindent To identify the coefficients in \eqref{eq:ivnot} using an instrumental variable strategy we need at least two instruments. We consider as an instrument randomization into ABC or CARE center-based treatment, denoted as an indicator, $R_{i}$. We then consider up to three other instruments.
 
 \begin{enumerate}[(i)]
-\item \textit{Season child's birth}. This variable is coded as an indicator for being born in the fall (born between June and November). If daycares accepted children primarily in the fall, then children born in the fall can enter preschool when they are younger. Although there is evidence in the economics literature that being born in specific times in the year can influence the child's outcomes, the main channel for this effect seems to be the disproportionate selection into season of birth by high-income mothers \citep{Buckles-Hungerman_2013_RES}. Given that in our sample mothers are very young and disadvantaged, we assume that a negligible proportion of them selected their quarter of birth.
+\item \textit{Season of child's birth}. This variable is coded as an indicator for being born in the fall (born between June and November). If daycares accepted children primarily in the fall, then children born in the fall can enter preschool when they are younger. Although there is evidence in the economics literature that being born in specific times in the year can influence the child's outcomes, the main channel for this effect seems to be the disproportionate selection into season of birth by high-income mothers \citep{Buckles-Hungerman_2013_RES}. Given that in our sample mothers are very young and disadvantaged, we assume that a negligible proportion of them selected their quarter of birth.
 
-\item \textit{Presence of a grandmother in the county}. Our hypothesis is that the grandmothers of the children, who in this sample are relatively young and still working, could help the mothers of the study take care of their children. We assume that the mothers would have less influence over presence of a grandmother in the county relative to a grandmother living in the home. We also assume that the grandmothers do not affect the children differently than any other avenue of informal care, such as care from a neighbor. In practice, the presence of a grandmother has a positive effect on preschool attendance, which could indicate that they helped take the children to preschool. This variable is only available for ABC.
+\item \textit{Presence of a grandmother in the county}. Our hypothesis is that the grandmothers, who in this sample are relatively young and still working, could help the study mothers take care of their children. We assume that the mothers would have less influence over the presence of a grandmother in the county relative to the presence of a grandmother living in the home. We also assume that the grandmothers do not affect the children differently than any other avenue of informal care, such as care from a neighbor. In practice, the presence of a grandmother has a positive effect on preschool attendance, which could indicate that they helped take the child to preschool. This variable is only available for ABC.
 
-\item \textit{Number of relatives living in the household apart from the mother, child, siblings, and male partner}. We assume that the relatives could take care of the study child while the mother is working, but also that they do not affect the children differently than any other avenue of informal care. In practice, having additional relatives living at home decreases the probability that a child goes into preschool.
+\item \textit{Number of relatives living in the household apart from the mother, child, siblings, and male partner}. We assume that the relatives could take care of the study child while the mother was working or in school, but also that they do not affect the children differently than any other avenue of informal care. In practice, having additional relatives living at home decreases the probability that a child goes into preschool.
 \end{enumerate}
 
 \subsubsection{Sets of Instruments}
@@ -315,12 +315,12 @@ Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
 \noindent We test various specifications where we allow for interactions of the potential instruments with the first-phase randomization indicator. In particular, we test three specifications for our instruments:
 
 \begin{enumerate}[(i)]
-\item Instruments measured in levels: $ \left( R_i,\mathbf{Z_i} \right) $
-\item\label{interact} Instruments measured in levels and interactions of treatment with the instruments and the controls: $ \left(R_i,\mathbf{Z_i},\mathbf{Z_i}R_i,\mathbf{X_i}R_i \right)$
-\item\label{inverse} Interactions of the instruments with an indicator for being randomized into the control group: $\left( R_i,\mathbf{Z_i} \left( 1-R_i \right) \right)$
+\item Instruments measured in levels: $ \left( R_i,\mathbf{Z_i} \right) $.
+\item\label{interact} Instruments measured in levels and interactions of treatment with the instruments and the controls: $ \left(R_i,\mathbf{Z_i},\mathbf{Z_i}R_i,\mathbf{X_i}R_i \right)$.
+\item\label{inverse} Interactions of the instruments with an indicator for being randomized into the control group: $\left( R_i,\mathbf{Z_i} \left( 1-R_i \right) \right)$.
 \end{enumerate}
 
-\noindent In practice, the specification in \eqref{inverse} is the most stable across outcomes. This makes economic sense because the instruments are less likely to affect the participants of the treatment group, given that almost all the families of these participants comply to the first-phase randomization protocol.
+\noindent In practice, the specification in \eqref{inverse} is the most stable across outcomes. This makes economic sense because the instruments are less likely to affect the participants of the treatment group, given that almost all the treatment families comply to the first-phase randomization protocol.
 
 \subsubsection{Functional forms for Enrollment in Alternative Preschool}
 
@@ -329,12 +329,12 @@ Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
 \begin{enumerate}[(i)]
 \item The number of months in alternative preschool, $Q_{i}$.
 \item An indicator for take-up of alternative preschool, $P_i$.
-\item The $\log$ of months in alternative preschool, $\log(Q_{i})$.
+\item The $\log$ of months in alternative preschool, $\log Q_{i}$.
 \end{enumerate}
 
 \subsection{Results}
 
-\noindent In this section, we present the results of the instrumental variable approach. We discuss the estimates of the coefficient for $D_{i}$ in \eqref{eq:ivnot}, while accounting for endogenous take-up of alternative preschool. The results are roughly stable for all presented outcomes: the effect considering the take-up of alternative preschool in the control group is much stronger that the intent-to-treat effect (the mean difference between the treatment and control groups). At ages 15 and 21, the effects on IQ scores are close to zero.
+\noindent In this section, we present the results of the instrumental variable approach. We discuss the estimates of the coefficient for $D_{i}$ in \eqref{eq:ivnot}, while accounting for endogenous take-up of alternative preschool. The results are roughly stable for all presented outcomes: the effect considering the take-up of alternative preschool in the control group is much stronger than the intent-to-treat effect (the mean difference between the treatment and control groups). At ages 15 and 21, the effects on IQ scores are close to zero.
 
 \subsubsection{Main Specification}
 
@@ -382,7 +382,7 @@ Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
 
 \noindent We now present an exercise to evaluate the sensitivity of the results to different specifications of the instrumental variables. First, Figure~ \ref{fig:nointer_Q_iv} and Figure \ref{fig:nointer_Q_other} present the results using the set of instruments that are not interacted with an indicator for randomization into the control group ($R_i -1$). Figure \ref{fig:inter_Q_iv} and Figure \ref{fig:inter_Q_other} present results not only interacting the instruments but also interacting the observed characteristics we control for. In both exercises, we use $Q_i$ as the endogenous variable, along with $D_i$.\\
 
-\noindent The results follow the same patterns as before, although they change when the instruments are not interacted. This makes economic sense because the interacted instruments better represent the economic intuition we offer before: the instruments other than $R_{i}$ are more likely to shift the decisions of the families of the control-group children when compared to the families of the treatment-group children. 
+\noindent The results follow the same patterns as before, although they change when the instruments are not interacted. This makes economic sense because the interacted instruments better represent the economic intuition we offer before: the instruments other than $R_{i}$ are more likely to shift the decisions of the families of the control-group children compared to those of the treatment-group children.
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous Take-up of Alternative Preschool Using Various Instrumental Variables Specifications} \label{fig:nointer_Q_iv}
@@ -485,7 +485,7 @@ D_{i} = \left\{
 D^{*}_i = \mathbf{W}_i \gamma^{D} + \varepsilon^{D}_i, \label{eq:probitD}
 \end{equation}
 
-\noindent where $\mathbf{W}_i$ is a vector that includes $\mathbf{X}_i$ and $R_i$ and can include variables that shift the decision to enroll children into ABC or CARE without shifting the counterfactual outcome of interest, $Y^{d}_{i}$. 
+\noindent where $\mathbf{W}_i$ is a vector that includes $\mathbf{X}_i$ and $R_i$ and can include variables that shift the decision to enroll children into ABC or CARE without shifting the counterfactual outcome of interest, $Y^{d}_{i}$. \\
 
 \noindent We write the selection equation into months of preschool as a linear equation with fixed coefficients, assuming homogeneous treatment effects:
 
@@ -571,7 +571,7 @@ Q_i = \mathbf{W}_i \gamma^{Q} + \varepsilon^{Q}_i, \label{eq:selq}
 \setcounter{table}{0}   \renewcommand{\thetable}{E.\arabic{table}}
 \section{Assessing Common Critiques to ABC} \label{appendix:assessingcc}
 
-\noindent This section of the appendix assesses some of the critiques to ABC, which could apply to CARE as well. The critiques focus on the first phase of the program, to which we refer simply as ABC in this section of the appendix. We consider the following categories of critiques: (i) validity treatment effects given early differences between treatment and control groups, (ii) fadeout of the treatment effect on cognitive outcomes, and (iii) compromised randomization. \\
+\noindent This section of the appendix assesses some of the critiques to ABC, which could apply to CARE as well. The critiques focus on the first phase of the program, to which we refer simply as ABC in this section of the appendix. We consider the following categories of critiques: (i) validity of treatment effects given early differences between treatment and control groups, (ii) fadeout of the treatment effect on cognitive outcomes, and (iii) compromised randomization. \\
 
 \subsection{Treatment Effects vs. Early Differences Between Groups}
 
@@ -585,13 +585,13 @@ Q_i = \mathbf{W}_i \gamma^{Q} + \varepsilon^{Q}_i, \label{eq:selq}
 
 \noindent We present some annotations with respect to the comments in \citet{Spitz_1992_ABC-Retardation}.\\ 
 
-\noindent \textbf{1. Mothers do not significantly differ in observed characteristics between the treatment and the control groups in any ABC cohort.} When jointly testing the hypothesis of differences in a battery of observed characteristics, we fail to reject any difference between the families of these children (see Table~\ref{tab:baseline_coh1} to Table~\ref{tab:baseline_coh4}). Even when the point estimates present some differences, they are minimal. For example, treatment-group mothers differ from control-group mothers, on average, by having one point higher IQ score, which has a population standard deviation of 15.\\
+\noindent \textbf{1. Mothers do not significantly differ in observed characteristics between the treatment and the control groups in any ABC cohort.} When jointly testing the hypothesis of differences in a battery of observed characteristics, we fail to reject any difference between the families of these children (see Table~\ref{tab:baseline_coh1} to Table~\ref{tab:baseline_coh4}). Even when the point estimates present some differences, they are minimal. For example, treatment-group mothers differ from control-group mothers, on average, by having one point higher IQ score (the population standard deviation is 15 points).\\
 
-\noindent \textbf{2. Other early childhood education programs have generated gains in cognition very early in life, as soon as a year after the start of the program.} A more recent program, the Infant Health and Development Program (IHDP), treated children from ages 0 to 3. \citet{Gross_Spiker_etal_1997_BOOKHelpinglowbirth} thoroughly describe this program. A lot of its elements were based on ABC and CARE. The program offered, on average, eight hours a week of center-based childcare from ages 1 to 3, weekly home visits from ages 0 to 1, and bi-monthly home visits from ages 1 to 3. Measures on the Bayley MDI at 12 and 24 months are available. The most intensive part of the treatment, center-based childcare, began in IHDP at 12 months of age while it began in ABC at birth. As in ABC, after a few months of center-based childcare, the effects on cognition were substantial in IHDP.
+\noindent \textbf{2. Other early childhood education programs have generated gains in cognition very early in life, as soon as a year after the start of the program.} A more recent program, the Infant Health and Development Program (IHDP), treated children from ages 0 to 3. \citet{Gross_Spiker_etal_1997_BOOKHelpinglowbirth} thoroughly describe this program. A lot of its elements were based on ABC and CARE. The program offered, on average, eight hours a week of center-based childcare from ages 1 to 3, weekly home visits from ages 0 to 1, and bi-monthly home visits from ages 1 to 3. Measures of the Bayley MDI at 12 and 24 months are available. The most intensive part of the treatment, center-based childcare, began in IHDP at 12 months of age while it began in ABC at birth. As in ABC, after a few months of center-based childcare, the effects on cognition were substantial in IHDP.
 
 \input{output/ihdp_bayley}
 
-\noindent \textbf{3. The effects on cognition are sustained throughout childhood and up to age 21 even when partialing out the Bayley MDI at ages 12 and 24 months.} When partialing out from a linear regression the score in the Bayley MDI tests both at twelve and twenty-four months of age, the treatment effect on cognition, measured by the mean difference in IQ scores at different ages between the treatment and control groups, is still significant and are sustained up to age 21 (see Figure~\ref{fig:treatiqsabc}).
+\noindent \textbf{3. The effects on cognition are sustained throughout childhood and up to age 21 even when partialing out the Bayley MDI at ages 12 and 24 months.} When partialing out from a linear regression the score in the Bayley MDI tests both at 12 and 24 months of age, the treatment effect on cognition, measured by the mean difference in IQ scores at different ages between the treatment and control groups, is still significant and are sustained up to age 21 (see Figure~\ref{fig:treatiqsabc}).
 
 \begin{figure}[H]
 		\caption{Treatment Effects on IQ, ABC} \label{fig:treatiqsabc}
@@ -607,7 +607,7 @@ Q_i = \mathbf{W}_i \gamma^{Q} + \varepsilon^{Q}_i, \label{eq:selq}
 
 \noindent This sustained effect on life-cycle outcomes relates to another category of criticism of ABC---the fadeout of treatment effects after the actual treatment period.\footnote{See, for example, \citet{Besharov-etal_2011_ABCProject}.} Based on the fadeout of the effects on cognition and age-21 outcomes, some studies claim that ABC had no sustained long-term effects. In addition to the evidence we cite above, it is important to add the following.\\
 
-\noindent  \textbf{4. The treatment effects of ABC differed by gender.} For example, we find substantial effects on employment for males and high-school graduation for females. This does not mean that the program did not work. It means that market conditions could have affected the way in which the participants of the program could have benefited from the program's effects.\\
+\noindent  \textbf{4. The treatment effects of ABC differed by gender.} For example, we find substantial effects on employment for males and high-school graduation for females. This does not mean that the program did not work. It means that market conditions could have affected the way in which the treated subjects could have benefited from the program's effects.\\
 
 \subsection{Compromised Randomization}
 
@@ -623,9 +623,9 @@ Q_i = \mathbf{W}_i \gamma^{Q} + \varepsilon^{Q}_i, \label{eq:selq}
 
 \noindent where $R$ indicates randomization into treatment, $D$ indicates treatment take-up, and $Y$ is an outcome of interest.\\
 
-\noindent This estimator has gained attention as it coincides with the instrumental variables estimator of the parameter in linear regression of an outcome on a single explanatory variable, e.g. treatment take-up. As \citet{Angrist_Imbens_ea_1996_JASA} show, under certain assumptions it can be interpreted as the average treatment effect for those individuals induced to take up treatment by the instrument. This interpretation has various weaknesses \citep{Heckman_Urzua_etal_2006_REStat,Heckman_Urzua_2010_JoE}.\\
+\noindent This estimator coincides with the instrumental variable estimator of the parameter in a linear regression of an outcome on a single explanatory variable, e.g. treatment take-up. As \citet{Angrist_Imbens_ea_1996_JASA} show, under certain assumptions it can be interpreted as the average treatment effect for those individuals induced to take up treatment by the instrument. This interpretation has various weaknesses \citep{Heckman_Urzua_etal_2006_REStat,Heckman_Urzua_2010_JoE}.\\
 
-\noindent To compare the mean difference and the Bloom estimator we consider two measures of cognition, which are commonly used when evaluating ABC and are available for children 900, 912, 922, and 78: the Stanford Binet IQ test at age 3 and the Wechsler Preschool and Primary Scale of Intelligence at age 5. Table~\ref{table:nc1} presents the results and shows that the differences are minimal. \textbf{5. Adjusting for the non-compliance of children 900, 912, 922, and 78 makes little difference} when assessing outcomes for which we observe these children. 
+\noindent To compare the mean difference and the Bloom estimator we consider two measures of cognition, which are commonly used when evaluating ABC and are available for children 900, 912, 922, and 78: the Stanford-Binet Intelligence Scale at age 3 and the Wechsler Preschool and Primary Scale of Intelligence at age 5. Table~\ref{table:nc1} presents the results and shows that the differences are minimal. \textbf{5. Adjusting for the non-compliance of children 900, 912, 922, and 78 makes little difference} when assessing outcomes for which we observe these children. 
 
 \input{output/abc_noncomp_e1}
 
@@ -633,7 +633,7 @@ Q_i = \mathbf{W}_i \gamma^{Q} + \varepsilon^{Q}_i, \label{eq:selq}
 
 \input{output/abc_noncomp_e2}
 
-\noindent Finally, we note that our methodology in Section~\ref{section:methodology} and the results we present in Section~\ref{section:results} account for the remainder of randomization compromises, as when the families moved or abandoned the study later on. \textbf{7. The results are not greatly sensitive to adjusting for the rest of randomization compromises}, as we show in Section~\ref{section:results}.
+\noindent Finally, we note that our methodology in Section~\ref{section:methodology} and the results we present in Section~\ref{section:results} account for the remainder of randomization compromises, as when the families moved or abandoned the study later on. \textbf{7. The results are not greatly sensitive to adjusting for the rest of the randomization compromises}, as we show in Section~\ref{section:results}.
 
 \end{appendices}
 
