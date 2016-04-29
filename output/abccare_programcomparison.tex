@@ -1,31 +1,37 @@
+\newgeometry{left=.3in,right=.3in,top=1in,bottom=1in}
+
+\begin{center}
 \begin{table}[H]
 \begin{center}
 \begin{threeparttable}
 \caption{ABC and CARE, Programs Comparison} \label{tab:programcomparison}
 \footnotesize
-\scalebox{.9}{\begin{tabular}{L{4cm} L{7cm} L{5cm}} \toprule
-& \multicolumn{1}{c}{ABC}& \multicolumn{1}{c}{CARE}\\ \midrule
+\scalebox{.9}{\begin{tabular}{L{4cm} L{7cm} L{7cm} C{3cm}} \toprule
+& \multicolumn{1}{c}{ABC}& \multicolumn{1}{c}{CARE} & \multicolumn{1}{c}{ABC = CARE ?} \\ \midrule
 \textbf{Program Overview} &&\\
 \hspace{.5cm} Years Implemented &1972--1982&1978--1985\\
-\hspace{.5cm} Age of Entry/Exit & Birth to 5 years old &\checkmark\\
+\hspace{.5cm} First-phase Treatment & Birth to 5 years old & Birth to 5 years old &\checkmark \\
+\hspace{.5cm} Second-phase Treatment & 5 to 8 years old & Birth to 5 years old &\checkmark \\
 \hspace{.5cm} Initial Sample &122&64\\
 \hspace{.5cm} \# of Cohorts &4&2\\
 \midrule
-\textbf{Eligibility} & Socio-economic disadvantage according to a multi-factor index (see Section \ref{section:eligibility})&\checkmark\\
+\textbf{Eligibility} & Socio-economic disadvantage according to a multi-factor index (see Section \ref{section:eligibility})&Socio-economic disadvantage according to a multi-factor index (see Section \ref{section:eligibility}) & \checkmark\\
  \midrule
 \textbf{Control} &&\\
 \hspace{.5cm} N &54&23\\
-\hspace{.5cm} Compensation & Diapers from birth to age 3, unlimited formula from birth to 15 months & \checkmark \\
+\hspace{.5cm} Compensation & Diapers from birth to age 3, unlimited formula from birth to 15 months & Diapers from birth to age 3, unlimited formula from birth to 15 months & \checkmark \\
 \hspace{.5cm} Treatment Substitution & 66\% & 64\%\\
 \midrule
 \textbf{Treatment} & Center-based childcare & Center-based childcare and family education\\
-\hspace{.5cm} \textbf{Center-base Childcare} \\
+\hspace{.5cm} \textbf{Center-based} \\
+\hspace{.5cm} \textbf{Childcare} \\
 \hspace{.5cm} N &53 (participated)&17\\
-\hspace{.5cm} Intensity &6.5--9.75 hours a day for 50 weeks per year&\checkmark\\
-\hspace{.5cm} Components & Instruction, medical care, nutrition, social services &\checkmark\\
-\hspace{.5cm} Staff-to-child Ratio &1:3 during ages 0--1 &\checkmark\\
-&1:4--5 during age 1--4 &\checkmark\\&1:5--6 during ages 4--5 &\checkmark\\
-\hspace{.5cm} Staff Qualifications &Mixed diplomas; experienced&\checkmark\\ \\
+\hspace{.5cm} Intensity &6.5--9.75 hours a day for 50 weeks per year& 6.5--9.75 hours a day for 50 weeks per year & \checkmark\\
+\hspace{.5cm} Components & Instruction, medical care, nutrition, social services & Instruction, medical care, nutrition, social services & \checkmark\\
+\hspace{.5cm} Staff-to-child Ratio &1:3 during ages 0--1 &1:3 during ages 0--1 & \checkmark\\
+&1:4--5 during age 1--4 &1:4--5 during age 1--4 & \checkmark\\
+&1:5--6 during ages 4--5 & 1:5--6 during ages 4--5 & \checkmark\\
+\hspace{.5cm} Staff Qualifications &Mixed diplomas; experienced& Mixed diplomas; experienced & \checkmark\\ \\
 \hspace{.5cm} \textbf{Family Education}  & & \\
 \hspace{.5cm} N & (not part of the program) &24\\
 \hspace{.5cm} Intensity && One hour-long home visits. 2--3 per month during ages 0--3. 1--2 per month during ages 4--5\\
@@ -35,18 +41,20 @@
 \midrule
  \textbf{School-age Treatment} \\
  \hspace{.5cm} N&46 (participated) &39\\
-\hspace{.5cm} Intensity &Every other week& \checkmark\\
-\hspace{.5cm} Components &Parent-teacher meetings& \checkmark\\
-\hspace{.5cm} Curriculum & Reading and math &\checkmark\\
-\hspace{.5cm} Staff-to-child Ratio &1:1&\checkmark\\
-\hspace{.5cm} Staff Qualifications &Graduate degree and training in special education & \checkmark\\
+\hspace{.5cm} Intensity &Every other week& Every other week & \checkmark\\
+\hspace{.5cm} Components &Parent-teacher meetings& Parent-teacher meetings & \checkmark\\
+\hspace{.5cm} Curriculum & Reading and math &  Reading and math & \checkmark\\
+\hspace{.5cm} Staff-to-child Ratio &1:1& 1:1 &\checkmark\\
+\hspace{.5cm} Staff Qualifications &Graduate degree and training in special education & Graduate degree and training in special education & \checkmark\\
 \bottomrule
 \end{tabular}}
 \footnotesize
 \begin{tablenotes}
-\item Note: This table compares the main elements of ABC and CARE, summarized within this section.
-\item A \checkmark indicates that ABC and CARE had the same characteristic.
+\item Note: This table compares the main elements of ABC and CARE, summarized within this section. A \checkmark indicates that  \\ ABC and CARE had the same characteristic.
 \end{tablenotes}
 \end{threeparttable}
 \end{center}
 \end{table}
+\end{center}
+
+\restoregeometry 
