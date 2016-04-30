@@ -237,7 +237,7 @@ Note: This plot shows the number of participants in ABC for whom there exists da
 
 \noindent We do not evaluate the second-phase of treatment in CARE because it was not randomized. Rather, those in the center-based childcare and family education group and the family education group were offered school-age treatment, and those in the control group were not.  \\ 
 
-\noindent In the following set of tables, we compare the observed, baseline characteristics between the first-phase control and treatment groups in ABC, which are the main groups we analyze, at different stages of the data collection follow-ups. For each observed characteristic, we present the bootstrapped $p$-value associated with the standard $t$-test. We also present the bootstrapped, step-down $p$-value on jointly testing the difference in observed characteristics across the two blocks of variables separated by the horizontal line \citep{Lehmann_Romano_2005_testing}.\\
+\noindent In the following set of tables (Table~\ref{tab:baseline} through Table~\ref{tab:health_baseline}), we compare the observed, baseline characteristics between the first-phase control and treatment groups in ABC, which are the main groups we analyze, at different stages of the data collection follow-ups. For each observed characteristic, we present the bootstrapped $p$-value associated with the standard $t$-test. We also present the bootstrapped, step-down $p$-value on jointly testing the difference in observed characteristics across the two blocks of variables separated by the horizontal line \citep{Lehmann_Romano_2005_testing}.\\
 
 \noindent First, we compare the first-phase treatment and control groups on baseline characteristics. 
 
@@ -265,9 +265,12 @@ Note: This plot shows the number of participants in ABC for whom there exists da
 
 \input{output/postattrition_balance}
 
+% AZ: commenting out until we get the CORRECT numbers
+\begin{comment}
 \noindent Sixth, we compare the observed, baseline characteristics between the children in the first-phase treatment, restricting the sample to the children who consented to release their age-34 criminal records.
 
 \input{output/crime_balance}
+\end{comment}
 
 \noindent Finally, we compare the observed, baseline characteristics between the children in the first-phase treatment, restricting the sample to the children for whom we have information on the age-34 medical data collection.
 
@@ -275,7 +278,7 @@ Note: This plot shows the number of participants in ABC for whom there exists da
 
 \noindent Despite some exceptions, these tables indicate balance between the treatment and control groups from the first-phase randomization, which is the primary comparison we analyze in the main paper. The balance in observed characteristics holds for the different samples we consider, which differs from the initial sample due to various instances of item non-response. For the second-phase randomization, there is also balance in observed characteristics. \\
 
-\noindent Table \ref{tab:care_baseline2} through Table \ref{tab:baseline_coh6_care_t1} are the analogous tables for CARE. We compare the two treatment groups (center-based childcare and family education, and only family education) separately across the full sample and by cohort. The inference statistics are constructed using the same methods as for Table \ref{tab:baseline_coh1} through Table \ref{tab:health_baseline}. \\
+\noindent Table \ref{tab:care_baseline2} through Table \ref{tab:baseline_coh6_care_t1} are the analogous tables for CARE. We compare the two treatment groups (center-based childcare and family education, and only family education) separately across the full sample and by cohort. The inference statistics are constructed using the same methods as for Table \ref{tab:baseline} through Table \ref{tab:health_baseline}. \\
 
 \input{output/baseline_balance_care_2}
 
@@ -315,6 +318,8 @@ Note: This plot shows the number of participants in ABC for whom there exists da
 \setcounter{table}{0}   \renewcommand{\thetable}{C.\arabic{table}}
 
 \section{Results} \label{appendix:results}
+
+\textbf{[JLG: Professor, we are displaying this in a separate file because the file is monstrous. We have separately attach it. It contains the treatment effects estimates on all 95 outcomes for all the hypothesis we have discussed. That is why we presented a selected variety of outcomes in the main paper.]}
 
 \setcounter{figure}{0}  \renewcommand{\thefigure}{D.\arabic{figure}}
 \setcounter{table}{0}   \renewcommand{\thetable}{D.\arabic{table}}
