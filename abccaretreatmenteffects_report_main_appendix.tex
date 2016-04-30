@@ -23,7 +23,7 @@ The University of Chicago}
 \date{First Draft: April 16, 2016\\ This Draft: \today}
 \maketitle
 
-\singlespacing
+\doublespacing
 %\pagebreak
 \tableofcontents
 \listoffigures
@@ -212,7 +212,7 @@ Note: The starred ratios represent the ones we believe were the most relevant fo
 
 \subsubsection{Costs}
 
-\noindent Center-based childcare centers had a uniform rate for subsidy-eligible children, independent of which program the children were eligible for. This was mandated by the County Department of Social Services. The most common way for a child to be eligible was by belonging to a poor family with either a single mother who worked or studied or with both parents who either worked or studied. Other conditions, such as abuse risk, were also considered. Our information on the rates paid is limited, but evidence from 1982 records indicates that at that time, the subsidy value for full-time center-based childcare was between \$59 and \$111 (2014 USD) per week.\footnote{\citet{ReportNCGenAssembly_DayCare_1983}.} 
+\noindent Center-based childcare centers had a uniform rate for subsidy-eligible children, independent of which program the children were eligible for. This was mandated by the County Department of Social Services. The most common way for a child to be eligible was by belonging to a poor family with either a single mother who worked or studied or with both parents who either worked or studied. Other conditions, such as abuse risk, were also considered. Information on the subsidy rates paid is limited, but evidence from 1982 records indicates that at that time, the subsidy value for full-time center-based childcare was between \$59 and \$111 (2014 USD) per week.\footnote{\citet{ReportNCGenAssembly_DayCare_1983}.} 
 
 \subsection{Data} \label{appendix:data}
 
@@ -235,9 +235,9 @@ Note: This plot shows the number of participants in ABC for whom there exists da
 
 \noindent Attrition was low in ABC. Information is available on 100 children in the age 30 follow-up, which we call the adult follow-up. In addition, 80 participants—40 from the control group and 40 from the treatment group—consented to the release of their criminal records. Further, 70 participants consented to the release of information regarding a full-range biomedical panel—31 from the control group and 39 from the treatment group. \\
 
-\noindent We do not evaluate the second-phase of treatment in CARE because it was not randomized. Rather, those in the center-based childcare and family education group and the family education group were offered school-age treatment, and those in the control group were not.  \\ 
+\noindent Attrition was also low for CARE subjects. Information is available on 58 children (more than 85\% of the initial sample) in the age-30 follow-up. Additionally, 40 participants (11 from the control group, 18 from the family education group, and 11 from the center-based childcare and family education group) released information on the full-range biomedical sweep. Administrative crime data are not available for CARE. We do not evaluate the second-phase of treatment in CARE because it was not randomized. Rather, those in the center-based childcare and family education group and the family education group were offered school-age treatment, and those in the control group were not.  \\ 
 
-\noindent In the following set of tables (Table~\ref{tab:baseline} through Table~\ref{tab:health_baseline}), we compare the observed, baseline characteristics between the first-phase control and treatment groups in ABC, which are the main groups we analyze, at different stages of the data collection follow-ups. For each observed characteristic, we present the bootstrapped $p$-value associated with the standard $t$-test. We also present the bootstrapped, step-down $p$-value on jointly testing the difference in observed characteristics across the two blocks of variables separated by the horizontal line \citep{Lehmann_Romano_2005_testing}.\\
+\noindent In the following set of tables (Table~\ref{tab:abc_baseline} through Table~\ref{tab:health_baseline}), we compare the observed, baseline characteristics between the first-phase control and treatment groups in ABC, which are the main groups we analyze, at different stages of the data collection follow-ups. For each observed characteristic, we present the bootstrapped $p$-value associated with the standard $t$-test. We also present the bootstrapped, step-down $p$-value on jointly testing the difference in observed characteristics across the two blocks of variables separated by the horizontal line \citep{Lehmann_Romano_2005_testing}.\\
 
 \noindent First, we compare the first-phase treatment and control groups on baseline characteristics. 
 
@@ -278,7 +278,7 @@ Note: This plot shows the number of participants in ABC for whom there exists da
 
 \noindent Despite some exceptions, these tables indicate balance between the treatment and control groups from the first-phase randomization, which is the primary comparison we analyze in the main paper. The balance in observed characteristics holds for the different samples we consider, which differs from the initial sample due to various instances of item non-response. For the second-phase randomization, there is also balance in observed characteristics. \\
 
-\noindent Table \ref{tab:care_baseline2} through Table \ref{tab:baseline_coh6_care_t1} are the analogous tables for CARE. We compare the two treatment groups (center-based childcare and family education, and only family education) separately across the full sample and by cohort. The inference statistics are constructed using the same methods as for Table \ref{tab:baseline} through Table \ref{tab:health_baseline}. \\
+\noindent Table \ref{tab:care_baseline2} through Table \ref{tab:health_baseline_care_t1} are the analogous tables for CARE. We compare the two treatment groups (center-based childcare and family education, and only family education) separately across the full sample and by cohort. The inference statistics are constructed using the same methods as for Table \ref{tab:abc_baseline} through Table \ref{tab:health_baseline}. \\
 
 \input{output/baseline_balance_care_2}
 
@@ -291,6 +291,10 @@ Note: This plot shows the number of participants in ABC for whom there exists da
 \input{output/baseline_coh6_care_2}
 
 \input{output/baseline_coh6_care_1}
+
+\input{output/health_balance_care_2}
+
+\input{output/health_balance_care_1}
 
 \noindent Overall, these tables indicate balance between the treatment and control groups, both when considering center-based childcare and family education and only family education as treatment.
 
@@ -306,13 +310,16 @@ Note: This plot shows the number of participants in ABC for whom there exists da
 
 \noindent Our set of control variables consists of these two sets of background variables.
 
+\singlespacing
 \input{output/controlsets}
-
+\doublespacing
 \subsection{Tested Outcomes}
 
 \noindent The following tables list the outcomes we test treatment effects for when calculating our statistics. We reverse the outcomes for which we consider a negative treatment effect socially positive.
 
+\singlespacing
 \input{output/abccare_outcomes_list}
+\doublespacing
 
 \setcounter{figure}{0}  \renewcommand{\thefigure}{C.\arabic{figure}}
 \setcounter{table}{0}   \renewcommand{\thetable}{C.\arabic{table}}
