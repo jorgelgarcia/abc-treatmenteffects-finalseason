@@ -105,7 +105,7 @@ Sources: \cite{Wasik_Ramey_etal_1990_CD}, internal documentation of the program,
 	\end{figure}
 \end{center}
 
-\noindent Although most randomization compromises occurred at early stages, this methodology also accounts for the fact that a few individuals were not in the sample either for the second-phase randomization or for the adult-age follow-ups. The following tables test differences in observed characteristics between the treatment and control groups. We test differences both by cohort and with the four cohorts pooled. Despite the randomization compromises, we only find slight differences in observed characteristics between the children in the treatment and the control groups. In Appendix~\ref{appendix:data}, we describe the sample reductions that attrition at different stages of the study generates and test potential differences between the children who completed data follow-ups and the children who did not.\\
+\noindent Although most randomization compromises occurred at early stages, this methodology also accounts for the fact that a few individuals were not in the sample either for the second-phase randomization or for the adult-age follow-ups. In Appendix~\ref{appendix:data}, we describe the sample reductions that attrition at different stages of the study generates and test potential differences between the children who completed data follow-ups and the children who did not.\\
 
 \subsubsection{Program Description and Content}
 
@@ -206,7 +206,7 @@ Age	& Level I &  Standards  & CARE Ratios\\ \hline
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-Sources: \cite{Department-of-Health_1968_DayCareRequirements,NCGA_1971_House-Bill-100,Ramey-et-al_1977_Intro-to-ABC,Ramey_Campbell_1979_SR,Ramey_McGinness_etal_1982_Abecedarianapproach, Burchinal_Campbell_etal_1997_CD}. \\
+Sources: \cite{Department-of-Health_1968_DayCareRequirements,NCGA_1971_House-Bill-100,Ramey-et-al_1977_Intro-to-ABC,Ramey_Campbell_1979_SR,Ramey_McGinness_etal_1982_Abecedarianapproach, Burchinal_Campbell_etal_1997_CD}.\\
 Note: The starred ratios represent the ones we believe were the most relevant for ABC control-group children and CARE control-group and family-visits-group children.
 \end{tablenotes}
 \end{threeparttable}
@@ -370,7 +370,7 @@ Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
 \begin{enumerate}[(i)]
 \item Instruments measured in levels: $ \left( R_i,\mathbf{Z_i} \right) $.
 \item\label{interact} Instruments measured in levels and interactions of treatment with the instruments and the controls: $ \left(R_i,\mathbf{Z_i},\mathbf{Z_i}R_i,\mathbf{X_i}R_i \right)$.
-\item\label{inverse} Interactions of the instruments with an indicator for being randomized into the control group: $\left( R_i,\mathbf{Z_i} \left( 1-R_i \right) \right)$.
+\item\label{inverse} Interactions of the instruments and the controls with an indicator for being randomized into the control group: $\left( R_i, \mathbf{X_i} \left( 1-R_i \right), \mathbf{Z_i} \left( 1-R_i \right) \right)$.
 \end{enumerate}
 
 \noindent In practice, the specification in \eqref{inverse} is the most stable across outcomes. This makes economic sense because the instruments are less likely to affect the participants of the treatment group, given that almost all the treatment families comply to the first-phase randomization protocol.
@@ -666,19 +666,19 @@ Q_i = \mathbf{W}_i \gamma^{Q} + \varepsilon^{Q}_i, \label{eq:selq}
 
 \input{output/abc_compromises}
 
-\noindent The third and last critique we assess is that of compromised randomization.\footnote{See for example \citet{Baumeister-Bacharach_2000_Early-Generic} and the multiple studies cited there.} The main critique to the program in this respect is that seven children in the treatment group did not comply to their initial assignment and one child switched from control to treatment status. This critique refers to the children labeled with the following IDs by the program: Case A, Case B, Case C, Case D, 900, 912, 922, and 78 (see Table~\ref{table:abccompromises}, which we reproduce from the main paper). Although we document more cases of compromised randomization, we start by assessing these eight cases.\footnote{Our main methodology assesses all the cases except the children for whom we do not have data at all (Case A, Case B, Case C, Case D). We are not able to account for them because our method is based on observing at least some baseline characteristics. See Section~\ref{section:methodology} in the main paper for more details.}\\
+\noindent The third and last critique we assess is that of compromised randomization.\footnote{See for example \citet{Baumeister-Bacharach_2000_Early-Generic} and the multiple studies cited there.} The main critique to the program in this respect is that seven children in the treatment group did not comply to their initial assignment and one child switched from control to treatment status. This critique refers to the children labeled with the following IDs by the program: Case A, Case B, Case C, Case D, 900, 912, 922, 78, 82, and 119 (see Table~\ref{table:abccompromises}, which we reproduce from the main paper). Although we document more cases of compromised randomization, we start by assessing these eight cases.\footnote{Our main methodology assesses all the cases except the children for whom we do not have data at all (Case A, Case B, Case C, Case D). We are not able to account for them because our method is based on observing at least some baseline characteristics. See Section~\ref{section:methodology} in the main paper for more details.}\\
 
-\noindent First, we propose a method to assess the non-compliance of children 900, 912, 922, and 78, for whom we have data available from ages 0 to 8. This allows for the possibility to adjust the mean difference between the treatment and the control groups, using a standard Bloom estimator \citep{Bloom_1984_ER}. This estimator accounts for compliance, by weighting the mean difference by a measure of the probability of compliance. It takes the following form: 
+\noindent First, we propose a method to assess the non-compliance of children 900, 912, 922, 78, 82, and 119 for whom we have data available from ages 0 to 8. This allows for the possibility to adjust the mean difference between the treatment and the control groups, using a standard Bloom estimator \citep{Bloom_1984_ER}. This estimator accounts for compliance, by weighting the mean difference by a measure of the probability of compliance. It takes the following form: 
 
 \begin{equation}
-\Delta^{\textbf{Bloom}} = \frac{\mathbb{E} \left[ Y | R = 1 \right] - \mathbb{E} \left[ Y | R = 0 \right] }{\mathbb{E} \left[ D = 1 | R = 1 \right] - \mathbb{E} \left[ D = 0 | R = 0 \right]}, 
+\Delta^{\textbf{Bloom}} = \frac{\mathbb{E} \left[ Y | R = 1 \right] - \mathbb{E} \left[ Y | R = 0 \right] }{\mathbb{E} \left[ D | R = 1 \right] - \mathbb{E} \left[ D | R = 0 \right]}, 
 \end{equation}
 
 \noindent where $R$ indicates randomization into treatment, $D$ indicates treatment take-up, and $Y$ is an outcome of interest.\\
 
 \noindent This estimator coincides with the instrumental variable estimator of the parameter in a linear regression of an outcome on a single explanatory variable, e.g. treatment take-up. As \citet{Angrist_Imbens_ea_1996_JASA} show, under certain assumptions it can be interpreted as the average treatment effect for those individuals induced to take up treatment by the instrument. This interpretation has various weaknesses \citep{Heckman_Urzua_etal_2006_REStat,Heckman_Urzua_2010_JoE}.\\
 
-\noindent To compare the mean difference and the Bloom estimator we consider two measures of cognition, which are commonly used when evaluating ABC and are available for children 900, 912, 922, and 78: the Stanford-Binet Intelligence Scale at age 3 and the Wechsler Preschool and Primary Scale of Intelligence at age 5. Table~\ref{table:nc1} presents the results and shows that the differences are minimal. \textbf{5. Adjusting for the non-compliance of children 900, 912, 922, and 78 makes little difference} when assessing outcomes for which we observe these children. 
+\noindent To compare the mean difference and the Bloom estimator we consider two measures of cognition, which are commonly used when evaluating ABC and are available for children 900, 912, 922, 78, 82, 119: the Stanford-Binet Intelligence Scale at age 3 and the Wechsler Preschool and Primary Scale of Intelligence at age 5. Table~\ref{table:nc1} presents the results and shows that the differences are minimal. \textbf{5. Adjusting for the non-compliance of children 900, 912, 922, 78, 82, and 119 makes little difference} when assessing outcomes for which we observe these children. 
 
 \input{output/abc_noncomp_e1}
 
