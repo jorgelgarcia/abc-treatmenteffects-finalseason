@@ -275,50 +275,69 @@ H_{0}^A: \mathbb{E} \left[ Y_{1} \right]  = \mathbb{E} \left[ Y_{0} \right]. \la
 
 \subsection{Accounting for Treatment Substitution}
 
-\noindent The ATE parameter does not account for the fact that almost $70 \%$ of the control group were enrolled in different preschool alternatives across both programs. Therefore, it only captures the effect of the program \emph{relative to} the mix of alternatives used in the control group, such as home care or preschools of different quality.\footnote{If the preschool alternatives were beneficial for the children in the control group, the ATE is attenuated. This is common in early childhood education programs in which alternatives are close in quality to the program itself. Perhaps the most iconic example is the randomized evaluation of Head Start, the Head Start Impact Study, in which $15\%$ of children in the control group had access to alternative Head Start centers. ITT estimates reported by \cite{Puma_Bell_etal_2010_HeadStartImpact} are close to zero. However, this does not mean that the efficacy of Head Start is low, but rather that Head Start treatment is being compared to close substitutes.} We refer to the take-up of alternative forms of child care in the control group as treatment substitution. Therefore, to more precisely characterize the effects of the program \emph{per se}, we define two parameters fixing the alternative form of care among untreated children: 
+\noindent The ATE parameter does not account for the fact that almost $70 \%$ of the children in the control groups of both programs were enrolled in different preschool alternatives. Therefore, it only captures the effect of the program \emph{relative to} the mix of alternatives used in the control group, such as home care or preschools of different quality.\footnote{If the preschool alternatives were beneficial for the children in the control group, the ATE is attenuated. This is common in early childhood education programs in which alternatives are close in quality to the program itself. Perhaps the most iconic example is the randomized evaluation of Head Start, the Head Start Impact Study, in which $15\%$ of children in the control group had access to alternative Head Start centers. ITT estimates reported by \cite{Puma_Bell_etal_2010_HeadStartImpact} are close to zero. However, this does not mean that the efficacy of Head Start is low, but rather that Head Start treatment is being compared to close substitutes.} We refer to the take-up of alternative forms of child care in the control group as treatment substitution.\\
+
+\noindent Let $P$ indicate whether a child takes up a given treatment substitute. The value of $P$ can be fixed to either $0$ or $1$, indicating no take-up or take-up of a preschool alternative, respectively. The potential outcome of a child not taking up ABC is
+
+\begin{equation}
+Y_{0} = Y_{0}^0 + P \left( Y_{0}^1 - Y_{0}^0\right), \label{eq:y0}
+\end{equation}
+
+\noindent where the subscripts refer to take-up of ABC and the superscripts refer to take-up of preschool alternatives.\\ 
+
+\noindent To more precisely characterize the effects of the program \emph{per se}, we define two parameters fixing the alternative form of care among untreated children: 
 
 \begin{eqnarray}
-\text{ATE} \left( \text{fix } P = 0 \right) &:=& \mathbb{E} \left[ Y_{1} \left( \text{fix } P = 0 \right) \right] -  \mathbb{E} \left[ Y_{0} \left( \text{fix } P = 0 \right) \right] \\
-\text{ATE} \left( \text{fix } P = 1 \right) &:=& \mathbb{E} \left[ Y_{1} \left( \text{fix } P = 1 \right) \right] -  \mathbb{E} \left[ Y_{0} \left( \text{fix } P = 1 \right) \right],
+\text{ATE}^0 &:=& \mathbb{E} \left[ Y_{1} \right] -  \mathbb{E} \left[ Y_{0}^0 \right] \\
+\text{ATE}^1 &:=& \mathbb{E} \left[ Y_{1} \right] -  \mathbb{E} \left[ Y_{0}^1 \right].
 \end{eqnarray}
-
-\noindent where $P$ indicates whether a child takes up a given treatment substitute. The value of $P$ can be fixed to either $0$ or 1, indicating no take-up or take-up of a preschool alternative, respectively. $Y_{0} \left( \text{fix } P = 0 \right)$ is the child's potential outcome under no treatment or preschool alternative take up, and where $Y_{1} \left( \text{fix } P = 0 \right)$, $Y_{0} \left( \text{fix } P = 1 \right)$, and $Y_{1} \left( \text{fix } P = 1 \right) $ are similarly defined.\footnote{An alternative definition for the potential outcomes is to subscript ABC take-up and superscript alternative preschool take-up and write, for example, $Y_{0} = Y_{0}^0 + P \left( Y_{0}^1 - Y_{0}^0 \right)$.}\\
 
 \noindent We are interested in testing the following hypotheses:
 \begin{eqnarray}
-H_{0}^B &:& \mathbb{E} \left[ Y_{0} \left( \text{fix } P = 0 \right) \right] =  \mathbb{E} \left[ Y_{1} \left( \text{fix } P = 0 \right) \right] \label{eq:hoB} \\
-H_{0}^C &:&  \mathbb{E} \left[ Y_{0} \left( \text{fix } P = 1 \right) \right] =  \mathbb{E} \left[ Y_{1} \left( \text{fix } P = 1 \right)  \right] \label{eq:hoC},
+H_{0}^B &:& \mathbb{E} \left[ Y_{0}^0 \right] =  \mathbb{E} \left[ Y_{1} \right] \label{eq:hoB} \\
+H_{0}^C &:&  \mathbb{E} \left[ Y_{0}^1 \right] =  \mathbb{E} \left[ Y_{1}   \right] \label{eq:hoC}.
 \end{eqnarray}
 
-\noindent That is, we want to compare the expectation of the treatment distribution against the expectation of a counterfactual distribution where children are fixed to no alternative preschool ($H_{0}^B$) and where children are fixed to an alternative preschool ($H_{0}^C$).\footnote{This treats alternative preschool as a binary decision on the extensive margin, which ignores the continuous decisions made on the intensive margin, as we show in Figure~\ref{fig:treatsubabc}. We take this approach because we are limited by our sample size when predicting preschool take-up, as we show in Appendix~\ref{appendix:methodology}.}\\
+\noindent That is, we want to compare the expectation of the treatment distribution against the expectation of one counterfactual distribution in which children are fixed to no alternative preschool ($H_{0}^B$) and against another counterfactual distribution in which children are fixed to an alternative preschool ($H_{0}^C$).\footnote{This treats alternative preschool as a binary decision on the extensive margin, which ignores the continuous decisions made on the intensive margin, as we show in Figure~\ref{fig:treatsubabc}. We take this approach because we are limited by our sample size when predicting preschool take-up, as we show in Appendix~\ref{appendix:methodology}.}\\
 
 \noindent To contrast these hypotheses, consider the following estimators: 
 
 \begin{eqnarray}
-\text{ITT} \left( \text{fix } P = 0 \right) &:=& \mathbb{E} \left[ Y \left( \text{fix } P = 0 \right)  | R = 1 \right] - \mathbb{E} \left[ Y \left( \text{fix } P = 0 \right) | R = 0 \right] \label{eq:ittp0} \\
-\text{ITT} \left( \text{fix } P = 1 \right) &:=& \mathbb{E} \left[ Y \left( \text{fix } P = 1 \right) | R = 1 \right] - \mathbb{E} \left[ Y \left( \text{fix } P = 1 \right) | R = 0 \right]. \label{eq:ittp1}  
+\text{ITT}^0 &:=& \mathbb{E} \left[ Y | R = 1 \right] - \mathbb{E} \left[ Y | R = 0, P = 0 \right] \label{eq:ittp0} \\
+\text{ITT}^1 &:=& \mathbb{E} \left[ Y | R = 1 \right] - \mathbb{E} \left[ Y | R = 0, P = 1 \right]. \label{eq:ittp1}  
 \end{eqnarray}
 
-\noindent Estimating the expectations in \eqref{eq:ittp0} and \eqref{eq:ittp1} is not as straightforward as computing the expectations in \eqref{eq:itt}, since families select whether or not to enroll their children into preschool alternatives. To estimate \eqref{eq:ittp0} and \eqref{eq:ittp1}, we introduce the following assumption. \\
+\noindent These estimators relate to the parameters $\text{ATE}^0, \text{ATE}^1$ under Assumption~\ref{assumption:matching}. 
 
-\begin{assumption} \normalfont \label{assumption:matching} (Conditional Independence in Preschool Alternative Enrollment) The expectation of the counterfactual outcome $Y_{d} \left( \text{fix } P=p \right)$ follows the same distribution regardless of the value to which $P$ is fixed after conditioning on observed characteristics, $X$:
+\begin{assumption} \normalfont \label{assumption:matching} (Conditional Independence in Preschool Alternative Enrollment) Observed characteristics, $X$, suffice to explain the expected parental decision for whether or not to enroll a child in a preschool alternative:
 
 \begin{equation}
-\mathbb{E} \left [ Y_{d} \left( P = p \right) | X  \right] = \mathbb{E} \left [ Y_{d} | X  \right]
+\mathbb{E} \left [ Y_{0}^p |  R = 0, P = p, X \right] = \mathbb{E} \left [ Y_{0}^p |  R = 0, X \right].
 \end{equation}
  \end{assumption}
 
-\noindent Assumption~\ref{assumption:matching} states that observed characteristics, $X$, explain the parental decision for whether or not to enroll a child in a preschool alternative. Under this assumption, $\text{ITT} \left( \text{fix } P = 0 \right) $ and $\text{ITT} \left( \text{fix } P = 1 \right)$ provide estimates of $\text{ATE} \left( \text{fix } P = 0 \right)$ and $\text{ATE} \left( \text{fix } P = 1 \right)$. These parameters relate to the effectiveness of ABC \emph{per se}. Once program attrition is accounted for, they represent the average treatment effect of ABC relative to receiving no treatment at all and relative to receiving a \textit{fixed} preschool alternative.\\
+\noindent To see this, consider computing $\text{ITT}^0$ and explicitly condition on $X$:
 
-\noindent To illustrate our estimation, suppose we are interested in $\text{ITT} \left( \text{fix } P = 0 \right)$ and that the data generating process is linear. Under Assumption~\ref{assumption:matching} and no program attrition, OLS provides a consistent estimate of $\text{ITT} \left( \text{fix } P = 0 \right)$. That is, we want to estimate $\Delta \left( \text{fix } P = 0 \right)$ in the model
+\begin{eqnarray}
+\text{ITT}^0| X &=& \mathbb{E} \left[ Y | R = 1, X\right] - \mathbb{E} \left[ Y | R = 0, P = 0, X \right] \nonumber \\
+                   &=& \mathbb{E}  \left[ Y | D = 1, X \right] - \mathbb{E} \left[ Y | D = 0, P = 0, X \right] \nonumber \\
+                   &=& \mathbb{E}  \left[ Y_{1} | X \right] - \mathbb{E} \left[ Y_{0}^0 | X \right] \nonumber \\ 
+                   &=& \text{ATE}^0 | X,
+\end{eqnarray}
+
+\noindent where the second line follows from perfect compliance and the third line follows from the definitions of $Y$ and $Y_{0}$ in \eqref{eq:outcome} and \eqref{eq:y0}, respectively, and Assumption~\ref{assumption:matching}. Similarly, we can show that $\text{ITT}^1 | X = \text{ATE}^1 | X$.\\
+
+\noindent Under Assumption~\ref{assumption:matching}, $\text{ITT}^0 | X $ and $\text{ITT}^1 | X $ provide estimates of $\text{ATE}^0 | X$ and $\text{ATE}^1 | X$, respectively. These parameters relate to the effectiveness of ABC \emph{per se}. Once program attrition is accounted for, they represent the average treatment effect of ABC relative to receiving no treatment at all and relative to receiving a \textit{fixed} preschool alternative.\\
+
+\noindent To illustrate our estimation, suppose we are interested in $\text{ITT}^0|X$ and that the data generating process is linear. Under Assumption~\ref{assumption:matching} and no program attrition, OLS provides a consistent estimate of $\text{ITT}^0|X$. That is, we want to estimate $\Delta^0$ in the model
 
 \begin{equation}
-Y = \Delta \left( \text{fix } P = 0 \right) R + X \beta + \varepsilon. \label{eq:ittmodel}
+Y = \Delta^0 R + X \beta + \varepsilon. \label{eq:ittmodel}
 \end{equation}
 
-\noindent $\Delta \left( \text{fix } P = 0 \right)$ represents the average treatment effect of ABC with respect to a well-defined alternative: no center-based childcare and no preschool alternative. To account for program attrition in this framework, we could weight the linear regression with individual-level estimates of the probability of program attrition to obtain a consistent estimate of $\Delta \left( \text{fix } P = 0 \right)$.\\
+\noindent $\Delta^0$ represents the average treatment effect of ABC with respect to a well-defined alternative: no center-based childcare and no preschool alternative. To account for program attrition in this framework, we could weight the linear regression with individual-level estimates of the probability of program attrition to obtain a consistent estimate of $\Delta^0$.\\
 
-\noindent We present estimates of $\Delta \left( \text{fix } P = 0 \right)$ and $\Delta \left( \text{fix } P = 1 \right)$ using this parameterization and using an alternative specification to more flexibly condition on $X$, kernel-based weighting. There is little sensitivity when using other parameterizations---e.g., nearest-neighbor matching, propensity-score matching.\footnote{To illustrate our estimation in practice, we explain how we obtain an estimate of $\Delta \left( \text{fix } P = 0 \right)$ when using the linear parameterization. The procedure readily extends to the more flexible parameterization we also present results for. First, we predict the probability of program attrition using a fully saturated linear probability model. We use the predictions from this model to construct the IPW scheme. Second, we drop the individuals in the control group for whom P = 1. Third, we run a weighted regression of $Y$ on $R$ and $X$. The coefficient on $ R $ is the estimate of $\Delta \left( \text{fix } P = 0 \right)$. There is little sensitivity to other functional forms to predict program attrition, i.e. probit, logit.}
+\noindent We present estimates of $\Delta^0$ and $\Delta^1$, equivalently defined, using this parameterization and using an alternative specification to more flexibly condition on $X$, kernel-based weighting. There is little sensitivity when using other parameterizations---e.g., nearest-neighbor matching, propensity-score matching.\footnote{To illustrate our estimation in practice, we explain how we obtain an estimate of $\Delta^0$ when using the linear parameterization. The procedure readily extends to the more flexible parameterization we also present results for. First, we predict the probability of program attrition using a fully saturated linear probability model. We use the predictions from this model to construct the IPW scheme. Second, we drop the individuals in the control group for whom P = 1. Third, we run a weighted regression of $Y$ on $R$ and $X$. The coefficient on $ R $ is the estimate of $\Delta^0$. There is little sensitivity to other functional forms to predict program attrition, e.g. probit, logit.}
 
 \subsection{Multiple Treatment Groups}
 
@@ -370,7 +389,7 @@ Not Fixed                 & $H_{0}^K: \mathbb{E} \left[ Y_{\cdot,0} \right] = \m
 \noindent Table~\ref{table:hypotheses} outlines the different hypotheses we are able to test. To illustrate how we construct the tests, consider the following hypothesis: 
 
 \begin{equation}
-H_{0}: \mathbb{G} \left[ Y_{0,1} \right]  = \mathbb{E} \left[ Y_{0,0} \right]  \label{eq:h0fixfirst}
+H_{0}: \mathbb{E} \left[ Y_{0,1} \right]  = \mathbb{E} \left[ Y_{0,0} \right]  \label{eq:h0fixfirst}
 \end{equation}
 
 \noindent In words, we test the effect of second-phase treatment, fixing first-phase treatment to control status. Following the methodology in Section~\ref{section:methodsquestions}, we can construct an ITT to test this hypothesis.\\
