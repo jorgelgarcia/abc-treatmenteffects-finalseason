@@ -22,179 +22,97 @@ global googledrive: env googledrive
 // do files
 global scripts     = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global dataresults = "$klmmexico/abc/may-24"
+global dataresults = "$klmmexico/abccare/outputfiles/may-24"
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
-cd $dataresults
 
-// abc
-
-
-// care
-
-
-// abc + care
-
-// cd into abc itt results
-cd $dataresults
-
-
-
-/*
-insheet using outcomes_abc.csv, clear
-keep variable hyp
-rename variable rowname
-sort rowname
-tempfile revsheet
-save "`revsheet'", replace
-
-// abc
-cd abc_ate/rslt_itt/
-foreach var in male female pooled {
-	insheet using itt_`var'.csv, clear
-	keep if ddraw == 0 & draw == 0
-	duplicates drop rowname, force
-	keep rowname itt_noctrl
-	sort rowname
-	merge 1:1 rowname using "`revsheet'" 
-	drop if _merge != 3
-	replace itt_noctrl = - itt_noctrl if hyp == "-"
-	gen itt_pos = 0
-	replace itt_pos = 1 if itt_noctrl > 0 & itt_noctrl !=.
-	summ itt_pos
-	local itt_`var' = r(mean)
-}
-matrix abc = [1,`itt_female',`itt_male',`itt_pooled']
-matrix colnames abc = program female male pooled
-
-// care
-cd $dataresults
-cd care_ate/rslt_itt/
-foreach var in male female pooled {
-	insheet using itt_`var'.csv, clear
-	keep if ddraw == 0 & draw == 0
-	duplicates drop rowname, force
-	keep rowname itt_noctrl
-	sort rowname
-	merge 1:1 rowname using "`revsheet'" 
-	drop if _merge != 3
-	replace itt_noctrl = - itt_noctrl if hyp == "-"
-	gen itt_pos = 0
-	replace itt_pos = 1 if itt_noctrl > 0 & itt_noctrl !=.
-	summ itt_pos
-	local itt_`var' = r(mean)
-}
-matrix care = [2,`itt_female',`itt_male',`itt_pooled']
-matrix colnames care = program female male pooled
-
-// abc + care
-cd $dataresults
-cd abccare_ate/rslt_itt/
-foreach var in male female pooled {
-	insheet using itt_`var'.csv, clear
-	keep if ddraw == 0 & draw == 0
-	duplicates drop rowname, force
-	keep rowname itt_noctrl
-	sort rowname
-	merge 1:1 rowname using "`revsheet'" 
-	drop if _merge != 3
-	replace itt_noctrl = - itt_noctrl if hyp == "-"
-	gen itt_pos = 0
-	replace itt_pos = 1 if itt_noctrl > 0 & itt_noctrl !=.
-	summ itt_pos
-	local itt_`var' = r(mean)
-}
-matrix abccare = [3,`itt_female',`itt_male',`itt_pooled']
-matrix colnames abccare = program female male pooled
-
-// care family education
-cd $dataresults
-cd care_family/rslt_itt/
-foreach var in male female pooled {
-	insheet using itt_`var'.csv, clear
-	keep if ddraw == 0 & draw == 0
-	duplicates drop rowname, force
-	keep rowname itt_noctrl
-	sort rowname
-	merge 1:1 rowname using "`revsheet'" 
-	drop if _merge != 3
-	replace itt_noctrl = - itt_noctrl if hyp == "-"
-	gen itt_pos = 0
-	replace itt_pos = 1 if itt_noctrl > 0 & itt_noctrl !=.
-	summ itt_pos
-	local itt_`var' = r(mean)
+local progcount = 0
+foreach program in abc care abccare {
+	cd $dataresults/`program'/csv
+	local progcount = `progcount' + 1
+	local sexind = 2
+	foreach sex in male female {
+		local sexind = `sexind' - 1
+		insheet using rslt_`sex'_counts.csv, clear
+		foreach s in point pval se {
+			preserve
+			drop index
+			keep if stat == "`s'"
+			foreach var of varlist * {
+				rename `var' `var'_`s'
+			}
+			rename category_`s' category
+			tempfile `program'_`s'
+			drop stat
+			save "``program'_`s''", replace
+			restore
+		}
+		
+		use "``program'_point'", clear
+		foreach s in pval se {
+			
+			merge 1:1 category using "``program'_`s''"
+			tab _merge
+			keep if _merge == 3
+			drop _merge
+		}
+		
+		gen abc    = `progcount'
+		gen male = `sexind'
+		tempfile `program'_`sex'_all
+		save "``program'_`sex'_all'", replace
+	}
+	append using "``program'_male_all'"
+	tempfile `program'_all
+	save "``program'_all'", replace
 }
 
-matrix care_family = [4,`itt_female',`itt_male',`itt_pooled']
-matrix colnames care_family = program female male pooled
+append using "`abc_all'"
+append using "`care_all'"
+tempfile all
+save "`all'", replace
 
-// abc school age
-cd $dataresults
-cd abcsa_ate/rslt_itt/
-foreach var in male female pooled {
-	insheet using itt_`var'.csv, clear
-	keep if ddraw == 0 & draw == 0
-	duplicates drop rowname, force
-	keep rowname itt_noctrl
-	sort rowname
-	merge 1:1 rowname using "`revsheet'" 
-	drop if _merge != 3
-	replace itt_noctrl = - itt_noctrl if hyp == "-"
-	gen itt_pos = 0
-	replace itt_pos = 1 if itt_noctrl > 0 & itt_noctrl !=.
-	summ itt_pos
-	local itt_`var' = r(mean)
-}
+// plots
+gen abcfemale = abc*3 - 1
+gen abcmale   = abc*3
 
-matrix abcsa = [5,`itt_female',`itt_male',`itt_pooled']
-matrix colnames abcsa = program female male pooled
+// plot positive treatment effect counts
+sort category
+gen index = _n
 
-// all results
-matrix all = J(1,4,.)
-matrix colnames all = program female male pooled
-foreach p in abc care abccare care_family abcsa {
-	mat_rapp all : all `p'
-}
-
-matrix all = all[2...,1...]
-matrix all = [[all[1...,1..2]] \ [all[1...,1],all[1...,3]] \ [all[1...,1],all[1...,4]]]
-mat colnames all = program ppositive
-
-
-// plot
-preserve
-clear
-svmat all, names(col)
-gen count = _n
-gen     sex = 0 if count <= 5
-replace sex = 1 if count > 5 & count <= 10
-replace sex = 2 if count > 10
-drop count
-
-drop if sex == 2
-replace program = program*2 - 1
-replace ppositive = ppositive*100
-
-label define programlabel 1 "ABC" 3 "CARE" 5 "ABC and CARE" 7 "Family Education, CARE" 9 "School-age, ABC", replace
-la values program programlabel
-
-#delimit
-graph bar ppositive if program <= 5, over(sex) bar(1, color(gs12)) bar(2, lcolor(black) lwidth(medium) fcolor(black)) bar(3, color(gs4)) 
-			asyvar bargap(0) over(program)
-		        ytitle("% Outcomes with Positive Treatment-Control Mean Difference", size(small)) ylabel(0[15]90, angle(h) glcolor(gs14))
-			legend(label(1 Females) label(2 Males) size(medsmall) cols(2))
-			graphregion(color(white)) plotregion(fcolor(white));
-# delimit cr
 cd $output
-graph export abccare_positiveeffects.eps, replace
+foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
+	gen `var'_min = `var'_point - `var'_se
+	gen `var'_max = `var'_point + `var'_se
 
-#delimit
-graph bar ppositive if program > 5, over(sex) bar(1, color(gs12)) bar(2, lcolor(black) lwidth(medium) fcolor(black))
-			asyvar bargap(0) over(program)
-		        ytitle("% Outcomes with Positive Treatment-Control Mean Difference", size(small)) ylabel(0[15]90, angle(h) glcolor(gs14))
-			legend(label(1 Females) label(2 Males) size(medsmall) cols(2))
-			graphregion(color(white)) plotregion(fcolor(white));
-# delimit cr
-graph export abccare_othertreatments.eps, replace
-restore
+	// plot all positive treatment effects
+	# delimit
+	twoway (bar `var'_point abcfemale if male == 0 & index > 6, color(gs6))
+	       (bar `var'_point abcmale   if male == 1 & index > 6, color(black))
+	       (rcap `var'_max `var'_min abcfemale if male == 0 & index > 6, lcolor(gs0))
+	       (rcap `var'_max `var'_min abcmale   if male == 1 & index > 6, lcolor(gs0)),
+	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
+			  xlabel(2.5 "ABC" 5.5 "CARE" 8.5 "ABC and CARE",noticks grid glcolor(white)) 
+			  ylabel(40[10]90, angle(h) glcolor(gs14))
+			  xtitle("", size(small)) 
+			  ytitle("", size(small))
+			  graphregion(color(white)) plotregion(fcolor(white));
+	# delimit cr
+	graph export `var'_all.eps, replace
+	
+	// plot all positive and significant treatment effects
+	# delimit
+	twoway (bar `var'_point abcfemale if male == 0 & index <= 6, color(gs6))
+	       (bar `var'_point abcmale   if male == 1 & index <= 6, color(black))
+	       (rcap `var'_max `var'_min abcfemale if male == 0 & index <= 6, lcolor(gs0))
+	       (rcap `var'_max `var'_min abcmale   if male == 1 & index <= 6, lcolor(gs0)),
+	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
+			  xlabel(2.5 "ABC" 5.5 "CARE" 8.5 "ABC and CARE",noticks grid glcolor(white)) 
+			  ylabel(0[10]50, angle(h) glcolor(gs14))
+			  xtitle("", size(small)) 
+			  ytitle("", size(small))
+			  graphregion(color(white)) plotregion(fcolor(white));
+	# delimit cr
+	graph export `var'_all_sig10.eps, replace
+}
