@@ -114,7 +114,7 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 			  xlabel($xlabels1, angle(45) noticks grid glcolor(white)) 
 			  ylabel(0[20]100, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
-			  ytitle("\% of Outcomes with Positive (adjusted) ATE, significant at 10\%", size(vsmall))
+			  ytitle("% of Outcomes with Positive (adjusted) ATE, significant at 10\%", size(vsmall))
 			  graphregion(color(white)) plotregion(fcolor(white));
 	# delimit cr
 	graph export `var'_cats1_sig10.eps, replace
@@ -130,7 +130,7 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 			  xlabel($xlabels2, angle(45) noticks grid glcolor(white)) 
 			  ylabel(0[20]100, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
-			  ytitle("\% of Outcomes with Positive (adjusted) ATE, significant at 10\%", size(vsmall))
+			  ytitle("% of Outcomes with Positive (adjusted) ATE, significant at 10\%", size(vsmall))
 			  graphregion(color(white)) plotregion(fcolor(white));
 	# delimit cr
 	graph export `var'_cats2_sig10.eps, replace

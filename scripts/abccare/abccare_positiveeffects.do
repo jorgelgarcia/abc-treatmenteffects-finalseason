@@ -81,9 +81,9 @@ gen abcmale   = abc*3
 sort category
 gen index = _n
 
-global itt_noctrl_label  \% of Outcomes with Positive ITT
-global epan_ipw_p0_label \% of Outcomes with Positive (adjusted) ATE
-global epan_ipw_p1_label \% of Outcomes with Positive (adjusted) ATE
+global itt_noctrl_label  % of Outcomes with Positive ITT
+global epan_ipw_p0_label % of Outcomes with Positive (adjusted) ATE
+global epan_ipw_p1_label % of Outcomes with Positive (adjusted) ATE
 
 cd $output
 foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
@@ -115,7 +115,7 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 			  xlabel(2.5 "ABC" 5.5 "CARE" 8.5 "ABC and CARE",noticks grid glcolor(white)) 
 			  ylabel(0[10]50, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
-			  ytitle("${`var'_label}, significant at 10\%", size(small))
+			  ytitle("${`var'_label}, significant at 10%", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
 	# delimit cr
 	graph export `var'_all_sig10.eps, replace
