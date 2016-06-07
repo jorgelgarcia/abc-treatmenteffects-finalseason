@@ -33,6 +33,7 @@ use append-abccare_iv.dta, clear
 
 replace Q = 0 if dc_mo_pre == 2 & random == 3
 sort    Q
+replace Q = Q/60
 cumul   Q if program=="care" & random  == 0, gen(cdf_Q_pre_control)
 sort    Q
 cumul   Q if program=="care" & random  == 3, gen(cdf_Q_fc)
@@ -43,8 +44,8 @@ twoway (line cdf_Q_pre_control Q if program=="care", lwidth(vthick) lcolor(gs0))
        (line cdf_Q_fc          Q if program=="care", lwidth(vthick) lpattern(dash) lcolor(gs0))
       , 
 		  legend(label(1 "Control") label(2 "Family Education Treatment"))
-		  xlabel(0[10]60, grid glcolor(gs14)) ylabel(0[.1]1, angle(h) glcolor(gs14))
-		  xtitle(Total Months in Preschool) ytitle(Cumulative Density Function)
+		  xlabel(, grid glcolor(gs14)) ylabel(0[.1]1, angle(h) glcolor(gs14))
+		  xtitle(Proportion of Months in Preschool from Ages 0 to 5) ytitle(Cumulative Density Function)
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 cd $output
