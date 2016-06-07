@@ -81,9 +81,9 @@ gen abcmale   = abc*3
 sort category
 gen index = _n
 
-global itt_noctrl_label  % of Outcomes with Positive ITT
-global epan_ipw_p0_label % of Outcomes with Positive (adjusted) ATE
-global epan_ipw_p1_label % of Outcomes with Positive (adjusted) ATE
+global itt_noctrl_label  % of Outcomes with Positive TE
+global epan_ipw_p0_label % of Outcomes with Positive TE (adjusted) 
+global epan_ipw_p1_label % of Outcomes with Positive TE (adjusted)
 
 cd $output
 foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
@@ -97,7 +97,7 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 	       (rcap `var'_max `var'_min abcfemale if male == 0 & index > 6, lcolor(gs0))
 	       (rcap `var'_max `var'_min abcmale   if male == 1 & index > 6, lcolor(gs0)),
 	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
-			  xlabel(2.5 "ABC" 5.5 "CARE" 8.5 "ABC and CARE",noticks grid glcolor(white)) 
+			  xlabel(2.5 "ABC" 5.5 "CARE" 8.5 "ABC and CARE Pooled",noticks grid glcolor(white)) 
 			  ylabel(40[10]90, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("${`var'_label}", size(small))
@@ -112,7 +112,7 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 	       (rcap `var'_max `var'_min abcfemale if male == 0 & index <= 6, lcolor(gs0))
 	       (rcap `var'_max `var'_min abcmale   if male == 1 & index <= 6, lcolor(gs0)),
 	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
-			  xlabel(2.5 "ABC" 5.5 "CARE" 8.5 "ABC and CARE",noticks grid glcolor(white)) 
+			  xlabel(2.5 "ABC" 5.5 "CARE" 8.5 "ABC and CARE Pooled",noticks grid glcolor(white)) 
 			  ylabel(0[10]50, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("${`var'_label}, significant at 10%", size(small))
