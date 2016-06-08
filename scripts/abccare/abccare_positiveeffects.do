@@ -22,7 +22,7 @@ global googledrive: env googledrive
 // do files
 global scripts     = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global dataresults = "$klmmexico/abccare/outputfiles/may-26"
+global dataresults = "$klmmexico/abccare/outputfiles/jun-05"
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
