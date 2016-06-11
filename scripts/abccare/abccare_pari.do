@@ -32,12 +32,13 @@ global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 cd $dataabccare
 use append-abccare_iv.dta, clear
 
-global  pari_auth_label Authority
-global pari_hostl_label Hostility 
+global  pari_auth_label "Parent is Authoritarian to Child" 
 global  pari_demo_label "Parent-Child Democratic Relationship"
 
+keep if program == "abc"
+
 cd $output
-foreach var of varlist pari_auth pari_hostl pari_demo { 
+foreach var of varlist pari_auth pari_demo { 
 	#delimit
 	twoway (kdensity `var' if R == 0, lwidth(medthick) lpattern(solid) lcolor(gs0))
 	       (kdensity `var' if R == 1, lwidth(medthick) lpattern(solid) lcolor(gs8))
