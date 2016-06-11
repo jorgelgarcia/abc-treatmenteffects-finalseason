@@ -85,7 +85,7 @@ sort catindex male
 drop if catindex == .
 
 // plots
-gen catfemale = catindex*3 - 1
+gen catfemale =  catindex*3 - 1
 gen catmale   =  catfemale + 1
 
 # delimit
