@@ -1,0 +1,359 @@
+%Input preamble
+\input{preamble}
+
+\externaldocument{abc_comprehensivecba_appendix}
+\pagenumbering{roman}
+
+\begin{document}
+\title{\Large \textbf{Analyzing the Short- and Long-term Effects of Early Childhood Education on Multiple Dimensions of Human Development}\thanks{This research was supported in part by the American Bar Foundation; the Pritzker Children's Initiative, the
+Buffett Early Childhood Fund, NIH grants NICHD R37HD065072, NICHD R01HD54702, and NIA R24AG048081, an
+anonymous funder, Successful Pathways from School to Work, an initiative of the University of Chicago's Committee
+on Education funded by the Hymen Milgrom Supporting Organization, and the Human Capital and Economic
+Opportunity Global Working Group, an initiative of the Center for the Economics of Human Development, affiliated with
+the Becker Friedman Institute for Research in Economics, and funded by the Institute for New Economic Thinking. The
+views expressed in this paper are solely those of the authors and do not necessarily represent those of the funders or
+the official views of the National Institutes of Health. Collaboration with Yu Kyung Koh, Stefano Mosso, Rodrigo Pinto, Jake Torcasso, and Anna Ziff on related work has helped us construct strengthened the analysis in this paper. For helpful comments, we thank St\'{e}phane Bonhomme, Fl\'{a}vio Cunha, Steven Durlauf, Azeem Shaikh, and Ed Vytlacil. For information on the implementation of the Carolina Abecedarian Project and assistance in data acquisition, we thank Peg Burchinal, Carrie Bynum, Frances Campbell, and Elizabeth Gunn. For information on childcare in North Carolina, we thank Richard Clifford and Sue Russell. For very useful comments, we thank Matthew Tauzer. Lastly, we thank Sylvi Kuperman for sharing detailed and careful descriptions of the Carolina Abecedarian Project.}}
+
+\author{
+Jorge Luis Garc\'{i}a\\
+The University of Chicago \and
+James J. Heckman \\
+American Bar Foundation \\
+The University of Chicago \and
+Andr\'{e}s Hojman\\
+The University of Chicago \and
+Duncan Ermini Leaf \\ 
+University of Southern California \and
+Mar\'{i}a Jos\'{e} Prados \\
+University of Southern California \and
+Joshua Shea \\
+The University of Chicago}
+\date{First Draft: January 5, 2016\\ This Draft: \today}
+\maketitle
+\thispagestyle{empty}
+
+\doublespacing
+\begin{comment}
+\pagebreak
+\renewcommand{\abstractname}{Summary} 
+\begin{abstract}
+\noindent The growing interest in early childhood education as a means for promoting social mobility makes the evaluation of its economic efficiency policy relevant. This paper uses data from two high-quality randomized, controlled trials and multiple non-experimental sources with an ultimate goal: providing a life-cycle cost-benefit analysis of early childhood education programs, as well as an understanding of its components. We define evaluation parameters related to two different questions: (i) How efficient is a program relative to a particular preschool alternative, where one of these alternatives might be no treatment at all?; and (ii) How efficient is it to add a program causal effect to the available set of choices? We provide treatment-effect estimates for these parameters accounting for methodological and practical issues, especially multiple hypothesis testing and substitution bias---around 70\% of control-group children attended preschool alternatives. We account for multiple hypothesis in a standard way \citep{Lehman_Romano_2005_AnnStat,Romano_Shaikh_2006_AnnStat} and point out some of the challenges that arise when doing so. We propose and formalize an alternative: count the positive (and significant) treatment effects across a wide variety of life-cycle outcomes. This crude summary informs what outcome categories have the most effects, and therefore are heavily weighted in the cost-benefit calculations. 
+Compared to no exposure to the high-quality programs we analyze, about 80\% (45\%) of the 95 considered outcomes have positive (and significant) treatment effects on females, and 70\% (30\%) have positive (and significant) effects on males. Our cost-benefit analysis accounts for experimentally induced effects in education, income of program participants and their parents, social costs of welfare participation, criminal activity, and health outcomes. The costs we consider include the deadweight loss to society from taxing individuals to fund the programs. Pooling males and females, we estimate an internal rate of return of $16\%$ (s.e. $6\%$) and a benefit-to-cost ratio of $4.30$ (s.e. $2.15$). For males, these numbers are $25\%$ (s.e. $10\%$) and $6.91$ (s.e. $4.43$); for females, these numbers are $5\%$ (s.e. $12\%$) and $1.56$ (s.e. $1.42$). We provide a sensitivity study and find that our estimates are robust to the various parameterizations our cost-benefit analysis requires.
+\end{abstract}
+\pagebreak
+\end{comment}
+
+\renewcommand{\abstractname}{Abstract}
+\begin{abstract}
+\noindent This paper uses data from two high-quality randomized, controlled trials and multiple non-experimental sources to provide a life-cycle cost-benefit analysis of early childhood education programs, as well as an understanding of its components. We define and estimate parameters that have a link with different policy-evaluation questions. We explore the outcome categories that are most important when accounting for the programs' costs and benefits and formalize an alternative to the standard solution to multiple hypotheses testing \citep{Lehman_Romano_2005_AnnStat,Romano_Shaikh_2006_AnnStat}. Compared to no exposure to the high-quality programs we analyze, about 80\% (45\%) of the 95 considered outcomes have positive (and significant) treatment effects on females, and 70\% (30\%) have positive (and significant) effects on males. Our cost-benefit analysis accounts for experimentally induced effects in education, income of program participants and their parents, social costs of welfare participation, criminal activity, and health outcomes. The costs we consider include the deadweight loss to society from taxing individuals to fund the programs. Pooling males and females, we estimate an internal rate of return of $16\%$ (s.e. $6\%$) and a benefit-to-cost ratio of $4.30$ (s.e. $2.15$). For males, these numbers are $25\%$ (s.e. $10\%$) and $6.91$ (s.e. $4.43$); for females, these numbers are $5\%$ (s.e. $12\%$) and $1.56$ (s.e. $1.42$). We provide a sensitivity study and find that our estimates are robust to the various parameterizations our cost-benefit analysis requires.
+\end{abstract} 
+
+\singlespacing
+%\pagebreak
+\tableofcontents
+\listoffigures
+\listoftables
+%\pagebreak
+\doublespacing
+
+\pagebreak
+\setcounter{page}{0}
+\pagenumbering{arabic}
+
+\section{Introduction}
+
+\noindent There is a growing interest in early childhood education as a means for promoting social mobility.\footnote{\citet{Bajaj_Labaton_2009_ObamaRiskAssets,White_House_2014_Econ_of_EC_Investments,White_House_2014_Fact_Sheet_Press}.} Overall state-spending on such programs increased by 12 percent in 2015. The proposed federal budget for 2017 includes a \$300 million increase in spending on early childhood education.\footnote{\citet{US-Gov_2016_Budget,Parker-etal_2016_50-State-Review,Smith_2016_Early-Learning-Budget}.}\\
+
+\noindent Despite the growing emphasis on early childhood education in public policy, comprehensive and methodologically rigorous evidence on its economic benefits is still scarce. Many recent studies: (i) focus on a limited set of outcomes that fail to capture a comprehensive array of program effects;\footnote{An extreme example is the evaluation of preschool programs using an age-eligibility cutoff. A battery of studies compare children who were just eligible and just ineligible for preschool. They therefore only assess the gains of an additional, earlier year of preschool. This does not represent a comprehensive evaluation approach; it evaluates a specific set of children for a very narrow set of tests and within a time horizon of a single year of treatment. Examples of these studies include: \citet{Gormley_Gayer_2005_JHR,Gormley_Gayer_etal_2005_DP,Weiland_2013_CD_Impacts-of-Pre-K}.} (ii) are based on data follow-ups that are short-term in nature; (iii) do not correct for program attrition or for non-compliance to assigned treatment, threatening the policy relevance of their estimates;\footnote{Consider the evaluation of Head Start through its randomized controlled trial, the Head Start Impact Study \citep{Puma_Bell_etal_2010_HeadStartImpact}. Comparing children in the treatment and the control groups usually yields relatively low gains. This attenuation happens because a substantial proportion of children randomized out of the program were enrolled into preschool alternatives, some of them to other Head Start centers. Thus, a raw comparison between the treatment- and the control-group children does not inform on either the efficiency or the effectiveness of Head Start \emph{per se}. Studies providing a methodology to account for treatment substitution find that Head Start has substantial effects, although they focus on a single, short-term outcome \citep{Kline-Walters_2015_NBER-Evaluating,Feller_Grindal_etal_2016_ComparedtoWhat}.} or (iv) are based on randomized controlled trials with flawed designs.\footnote{An evaluation of the Tennessee Voluntary Prekindergarten is an example \citep{Lipsey_et_al_2013_Tennessee_Kindergrtn_PRI,Lipsey_et_al_2015_Randomized_Control_Trial_PRI}. The researchers designed a randomized controlled trial to evaluate the program. Unfortunately, they asked permission to assess the children after the randomization protocol. Thus, their main evaluation is based on information for children whose parents agreed for them to be evaluated \textit{post} randomization, inducing a potential imbalance between the children randomized into and out of the program. The evaluation does not account for that. Further, results for this evaluation represent a narrow set of short-term outcomes.}\\ 
+
+\noindent  The case for the long-term effectiveness and the economic efficiency of early childhood education in the U.S. is largely based on evidence from the Perry Preschool Program (referred to simply as Perry). Analyses of Perry suggest that early childhood education has significant positive effects on multiple short- and long-term socio-economic outcomes, even when accounting for compromised randomization, small-sample-size inference, and multiple hypothesis testing \citep{Heckman_Moon_etal_2010_QE}. The analyses also show that early childhood education could have an annual internal rate of return that ranges from 7 to 10 percent.\footnote{That is, if one dollar were to be invested at age 4, and then reinvested annually and compounded over a lifetime, the return would accrue to 60 to 300 dollars by age 65. This accounts for both the program's cost and the social burden a government would cause by raising taxes to pay for it \citep{Heckman_Moon_etal_2010_RateofReturn}.}\\
+
+\noindent One of the criticisms of the empirical evidence favoring the economic case for early childhood education is the lack of an ampler evidence base. In response, we analyze the life-cycle short- and long-term effects of early childhood on multiple dimensions of human development using data from two randomized-controlled trials, the Carolina Abecedarian Project (ABC) and the Carolina Approach to Responsive Education (CARE)---we complement this data with several non-experimental, nationally-representative sources.\\
+
+\noindent ABC and CARE were programs implemented in the 1970s and early 1980s. We observe short- and long-term outcomes for their participants. The programs were separated into two phases. In the first phase, both programs randomly assigned children to high-quality center-based childcare from ages 0 to 5. In addition, the children who were assigned to center-based childcare in CARE also received home visits that aimed to foster the relationship between participating children and their parents. Furthermore, CARE incorporated a second treatment group that received home visits without center-based childcare. The second phase of treatment, from ages 5 to 8, consisted of home visits that aimed to continue promoting childhood development. In ABC, the second-phase treatment was randomly assigned independently of the first-phase randomization. In CARE, the second-phase was not randomized; children initially randomized to either of the treatment groups maintained their assignment.\footnote{Our main evidence is based on the firs-phase component that the two programs share: high-quality center-based childcare. We offer some results on first-phase home visits and the second-phase treatment as complementary.}\\
+
+\noindent The experimental data from ABC and CARE includes measures of cognitive and socio-emotional skills, educational and labor market outcomes, administrative criminal records, and a full medical examination when subjects reached their mid-30s. Data from administrative criminal records and from the full medical panel are novel to the literature evaluating early childhood education programs. The non-experimental, nationally-representative data includes sources to forecast life-cycle gains in transfer and individual income, health, and crime. Examples of these sources include: the Medical Expenditure Panel Survey (MEPS), the Medicare Current Beneficiary Survey (MCBS), and the Uniform Crime Reporting Statistics (UCRS) of the Federal Bureau of Investigation (FBI).\\
+
+\noindent Our ultimate goal is to provide a cost-benefit analysis of early childhood education programs. To construct this, we proceed in three steps. In the first step, we begin by defining the treatment-effect parameters we estimate and state how they link to different policy questions. Our methodology accounts for different forms of attrition and non-compliance. More importantly, it considers that the parents of roughly 70\% of the children randomized out of center-based childcare enrolled their children in relatively high-quality preschool alternatives. We refer to this phenomenon as control substitution.\footnote{Control  substitution was not an issue in Perry. Informal conversations with Perry's staff indicate that there were no alternative preschools in the area in which subjects were treated during that time---Ypsilanti, Michigan during the 1960s. This issue is more pressing when evaluating recent programs. Examples include both ABC and Head Start---see \citep{Puma_Bell_etal_2010_HeadStartImpact} for a documentation of treatment substitution in the Head Start Impact Study.}\\
+
+\noindent In the second and intermediate step, we provide treatment-effect estimates for a wide variety of outcomes. When doing so, a challenge arises: we test multiple hypothesis. We account for this in a standard way \citep{Lehman_Romano_2005_AnnStat,Romano_Shaikh_2006_AnnStat} and point out some of the issues that arise when doing so. Specifically, it is often the case that arbitrary blocks need to be formed in order to adjust the inference using the step-down procedure. We propose and formalize an alternative: count the positive (and significant) treatment effects across the outcomes we consider. This crude summary does not weigh the relative importance of each outcome but informs what outcome categories have the most effects, and therefore are relevant to the cost-benefit analysis calculations.\\ 
+
+\noindent Finally, we combine the experimental and non-experimental sources of data to forecast and monetize the life-cycle parental income, transfer income, labor income, education, health, and crime outcomes to provide estimates of the benefit-to-cost ratio and the internal rate of return of early-childhood education. These statistics summarize economic efficiency and present a comprehensive solution to the multiple hypothesis testing challenge, as they summarize the effectiveness of a program accounting for all its components in a single statistic (and a single inference test).\\
+
+\noindent ABC's and CARE's center-based childcare from ages 0 to 5 as implemented, had substantial treatment effects on a comprehensive set of measures of human development from childhood through adulthood. For females, 79\% of the outcomes we study have a \textit{positive} average treatment effect; 37\% of the outcomes we study have a \textit{positive and significant} average treatment effect, at the 10\% level. For males, the analogous figures are 68\% and 41\%.\footnote{These are our preferred results and account for program attrition.} The effects strengthen when accounting for control substitution by the families of the children who were randomized out of the main treatment  the programs offered.\\
+
+\noindent This paper extends the work of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}, who analyze the effectiveness of ABC at improving long-term health outcomes. We extend the analysis by (i) assessing a multiple measures of human development; (ii) accounting for treatment substitution; and (iii) providing an alternative to test multiple hypotheses.\footnote{\cite{Campbell_Pungello_etal_2012_DP} also precede our work. The authors estimate treatment effects on adulthood outcomes in ABC. Unlike our approach, the authors do not assess outcomes such as health status, criminal behavior, and non-cognitive skills.} Furthermore, we complement the analysis by studying ABC together with CARE.\\ 
+
+\noindent Two previous peaces of related work provide a cost-benefit analysis of ABC \citep{Masse_Barnett_2002_BOOKBenefitCostAnalysis,Barnett_Masse_2007_EER}. Their analysis is limited to outcomes up to age 21, before any of the labor income, crime, and health benefits of the program arise according to our own calculations. It does not provide standard errors or an analysis of the estimates' sensitivity to different modeling assumptions. It is more similar to a back-of-the-envelope calculation based on a few outcomes as that of \citet{Kline-Walters_2015_NBER-Evaluating} using the Head Start Impact Study than an analysis of the life-cycle benefits and costs of early childhood education as the one we present.\footnote{We present our own back-of-the-envelope cost-benefit analysis in Appendix~\ref{appendix:back}. It is in the same spirit to that of \citet{
+Kline-Walters_2015_NBER-Evaluating}. It considers only the gains on labor income implied by the gain in kindergarten IQ proposed by \citet{
+Chetty_Friedman_etal_2011_QJoE}. We find that the benefit-to-cost ratio is $.4$. This reinforces that idea that a comprehensive evaluation of the costs and benefits needs to consider multiple dimensions of human capital, and not only the labor income gains implied by short-term IQ.} \\ 
+
+\noindent The plan for the rest of the paper is the following. Section~\ref{section:background}  provides an overview of each program. It includes a description of the eligibility criteria and the populations served, a characterization of the randomization protocol and of control substitution, a comprehensive summary of the treatment, and a description of the data sources. Section~\ref{section:methodology} formalizes our methodology by discussing how we correct for compromised randomization and control substitution, by explaining how we test for treatment effects across multiple outcomes, and how we forecast outcomes across the life-cycle. Section~\ref{section:results} presents our main results and Section~\ref{section:conclusion} offers some final comments. An extensive appendix presents a much more thorough description of the program and its costs, the data relative to what we present in the main text, and details on how we monetize the life-cycle outcomes. It also discusses various alternative methodologies to evaluate the programs accounting for control substitution, and documents the results we present to a further extent.
+
+\section{Background and Data Sources} \label{section:background}
+\subsection{Overview}
+
+\noindent The Carolina Abecedarian Project (ABC) and the Carolina Approach to Responsive Education (CARE) programs were designed and implemented by researchers at the Frank Porter Graham Center (FPGC) of the University of North Carolina in Chapel Hill. The programs targeted disadvantaged children from the semi-rural communities in the surrounding area. 
+
+\noindent ABC recruited four cohorts of children born between 1972 and 1977. CARE recruited two cohorts of children, one born in 1978 and one in 1979. The recruitment processes in each study were identical. Potential families were referred to researchers by local social service agencies and hospitals at the beginning of the mother's last trimester of pregnancy. Eligibility was determined by a score of 11 or above in a High-risk Index (HRI).\footnote{See Appendix~\ref{appendix:background} for details on the construction of the HRI. Examples of variables in the HRI are maternal education and father's stability at work.} \\
+
+\noindent To better characterize the socio-economic status of the families participating in ABC and CARE, we construct two comparison groups using the Panel Study of Income Dynamics (PSID), a nationally representative cohort of children born in the same years as the ABC and CARE participants (1972-1979), and a similar cohort restricted to black children. We show a comparison in Figure~\ref{figure:baselineabccare}. Compared to both nationally representative groups, ABC children were were born to younger, less educated mothers, most of whom were raising their children without the support of a father. The CARE participants were similarly disadvantaged compared to nationally representative groups with respect to these basic household demographic characteristics.\\
+
+\begin{figure}[H]
+\caption{Family Environment Baseline Characteristics, ABC and CARE}  \label{figure:baselineabccare}
+    \centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \subcaption{Average Maternal Age}
+  \includegraphics[height=2.3in]{output/abccarepsid_m_age0pool.eps}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \subcaption{Average Maternal Years of Education} 
+  \includegraphics[height=2.3in]{output/abccarepsid_m_edu0pool.eps}
+\end{subfigure}
+
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \subcaption{Proportion of Households with Father at Home}
+  \includegraphics[height=2.3in]{output/abccarepsid_f_home0pool.eps}
+\end{subfigure}%
+\floatfoot{
+\footnotesize
+\noindent  Note: These panels plot mother's age, mother's education, and an indicator of father at home. In each panel, the first bar shows the national-level for a cohort born in the same years as the ABC and CARE individuals (1972-1979), obtained from the Panel Study of Income Dynamics (PSID). The second bar uses this same information restricted to black individuals. The third and fourth bars plot the same variables for ABC and CARE, pooling the treatment and control groups.
+}
+\end{figure}
+
+\noindent The design and implementation of both programs was very similar. Both studies had a small sample size. ABC recruited 122 children over four cohorts, while CARE recruited 67 children over two cohorts. ABC had two phases, the first of which lasted from birth until the age of 5. In this phase, children were randomly assigned to either treatment or control groups. The treatment group received: (i) center-based childcare; (ii) breakfast, lunch, an afternoon snack, iron-fortified formula for the first 15 months of life, and a monthly supply of diapers; and (iii) medical care from licensed nurses who were supervised by a pediatrician, frequent health check-ups, and hospital referrals when serious medical treatment was needed. In contrast, the control group only received formula and diapers. In the second phase of treatment, at the age of 5, the 95 children still in the study were randomly assigned again to treatment or control groups, independently of their status in the prior randomization. This treatment consisted of home visits targeting both children and parents and lasted until age 8.\\ 
+
+\noindent  CARE also had two treatment phases, though children were randomized only once. While the two programs had essentially identical second phases, the first phase of CARE differed significantly from the first phase of ABC by including a family education component. This component was designed to study the effects of improving the home environment on child development.\footnote{\citet{Wasik_Ramey_etal_1990_CD}.} The first treatment phase of CARE lasted from birth until the age of 5. Children were randomly assigned to one of three experimental groups: control (23 children), family education (25 children), and both family education and center-based childcare (17 children). As in ABC, the control group received diapers and complementary nutrition from birth to 15 months. The family education group received home visits that aimed to help parents solve common problems related to childrearing. Both treatment groups received the second phase of treatment from ages 5 to 8. The ABC and CARE programs shared many objectives and program characteristics, as summarized in Table~\ref{tab:programcomparison}.\\
+
+\input{output/abccare_programcomparison.tex}
+
+\noindent In both programs, from birth until the age of 8, data was collected annually on cognitive and socio-emotional skills, home environment, family structure, and family economic characteristics. After age 8, the collection of data was less frequent. Information on cognitive and socio-emotional skills, education, and family economic characteristics was collected at ages 12, 15, 21, and 30.\footnote{At age 30, information on cognitive skills is unavailable for both ABC and CARE.} In addition, we have two sources of data that are novel to the literature evaluating early childhood education programs: long-term measures of socio-emotional skills and administrative criminal records and a full medical panel at age 34. These rich sources of data allow us to study the long-term effects of the programs on multiple aspects of human development. Table~\ref{tab:datasumm_1} and Table~\ref{tab:datasumm_2} summarize the available data. The data collection process was analogous in both programs.\footnote{In Appendix~\ref{appendix:randomization}, we document balance in observed, baseline characteristics across the treatment and control groups, once we drop the individuals for whom we have crime or health information, for which there is substantial attrition. Further, the methodology we propose addresses missing information in either of these two data categories.}
+
+\input{output/abccare_data}
+
+\subsection{Randomization Protocol and Compromises} \label{section:randomization}
+
+\subsubsection{ABC}
+
+\noindent Both the first and second phases of randomization were conducted at the family level, so pairs of siblings and twins were jointly randomized to either treatment or control groups.\footnote{Sibling pairs occurred when the two siblings were close enough in age such that both of them were eligible for the program.} Although we know that pairing was based on HRI, maternal IQ, maternal education, maternal age, and gender, we do not know the original pairs. The study collected an initial sample of 120 families. Twenty-two children did not complete the first-phase of treatment as initially assigned by the randomization. We characterize each of the cases in Appendix~\ref{appendix:assessingcc} and document that our estimations show little sensitivity when accounting for them. We explain how we do so in Section~\ref{section:methodology}.\footnote{In Appendix~\ref{appendix:controls}, we compare the observed, baseline characteristics of the children in Table~\ref{table:abccompromises} to the observed, baseline characteristics of the children who complied to the initial treatment assignment. We find little evidence of differences.}\\
+
+
+\subsubsection{CARE}
+
+\noindent The randomization protocol in CARE had no major compromises.\footnote{\citet{Wasik_Ramey_etal_1990_CD,Burchinal_Campbell_etal_1997_CD}.} Of the 65 initial families, 23 were randomized to control, 25 to the family education treatment group, and 17 to the family education and center-based childcare treatment group. Two families in the family education treatment group had twins who were jointly randomized, as in ABC. There were four cases of program attrition.\footnote{In Appendix~\ref{appendix:controls}, we compare the observed, baseline characteristics of the children in Table~\ref{table:care_compromises} to the observed, baseline characteristics of the children who complied to the initial treatment assignment. We find little evidence of differences.} For methodological purposes, we consider these children analogous to their corresponding cases in ABC. We do not present exercises to evaluate the sensitivity to non-compliance because there was none in CARE. Figure~\ref{fig:care-flow} in Appendix~\ref{appendix:background} illustrates CARE's randomization protocol and the flow of participants throughout the data follow-ups.\\
+
+\subsection{Control Substitution}
+
+\noindent In both programs, many children without access to center-based childcare through random assignment nevertheless attended alternative preschools. In this section, we characterize the types of care received by the treatment group. We propose a methodology to answer policy-relevant questions in Section~\ref{section:methodology}.\\
+
+\begin{figure}[H]
+		\caption{Control Substitution, ABC} \label{fig:treatsubabc}
+		\includegraphics[width=.9\columnwidth]{output/abc_controlcontamination_months.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This figure displays the cumulative density function of enrollment in an alternative preschool for the control group in ABC.}
+\end{figure}
+
+\noindent In ABC, $66\%$ of control-group children were enrolled in one of 11 local center-based childcare centers (see Figure~\ref{fig:treatsubabc}). Each of these centers received federal subsidies and were therefore regulated by the Federal Interagency of Daycare Requirements. Therefore, their staff members were required to be trained in early childhood education, and the centers were required to implement approved curricula designed to enhance cognitive, social, and linguistic competence in disadvantaged children.\footnote{\citet{Burchinal_etal_1989_CD_Daycare-Pre-K-Dev}.} In CARE, $74\%$ of the control group and $59\%$ of the family education group were enrolled in alternative preschools by their parents (see Figure~\ref{fig:treatsubcare}). Parents in both of these groups had as options the same set of local center-based childcare centers as the ABC children in the control group.
+
+\begin{figure}[H]
+		\caption{Treatment Substitution, CARE} \label{fig:treatsubcare}
+		\includegraphics[width=.9\columnwidth]{output/care_controlcontamination_months.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This figure displays the cumulative density function of enrollment in an alternative preschool for the control and family education treatment groups in CARE.}
+\end{figure}
+
+\noindent The available documentation indicates that the preschool alternatives were of high-quality. Most received federal subsidies and, therefore, were regulated by the Federal Interagency of Day Care Requirements. They were required to have trained staff who were able to implement curricula designed to enhance cognitive, social, and linguistic competence in disadvantaged children.\footnote{\citet{Burchinal_etal_1989_CD_Daycare-Pre-K-Dev}.} We document this more thoroughly in Appendix~\ref{appendix:background}.
+
+\subsection{Program Costs}
+
+\noindent The costs of the program are a fundamental input to our calculations of the benefit-to-cost ratio and the internal rate of return of early. We only perform these calculations due to data limitations---the documentation of the costs of CARE is minimal. We provide a brief documentation of the costs of ABC next and complement it in Appendix \ref{app:programcosts}. In Appendix \ref{app:programcosts} we also explain other important components of the costs. This include education, which is relevant given the substantial increase in long-term education for participants of the control group. Similarly, it includes the costs of health and crime.\\
+
+
+\noindent The program provided comprehensive center-based childcare and medical services. While we use some estimates from \cite{Masse_Barnett_2002_BOOKBenefitCostAnalysis}, our calculations of the program costs differ in two key aspects: (i) we account for the treatment group's medical care costs; and (ii) we incorporate new information on staff and program implementation to update costs. We calculate all costs as treatment effects; thus, costs of the program represent the costs of treatment minus the costs of the control services. \\
+
+\begin{table}[H]
+\begin{threeparttable}
+\caption{Average Individual Costs, ABC} \label{tab:totalcosts}
+\footnotesize
+\input{Output/progcost_main.tex}
+\begin{tablenotes}
+\footnotesize
+\item Sources: See Appendix~\ref{app:programcosts}.\\
+\item Note: This table summarizes the cost of the program by treatment and control group in 2014 USD, discounted to the year in which individuals were born. We consider only the rental rates of facilities and equipment. We include only the staff costs of staff who interacted with children directly or provided administrative support. $^{*}$The year 1 medical cost for the control group was only for the first cohort of ABC; the control groups of subsequent cohorts received no medical care. The change in costs between years 1, 2, 3, and years 4 and 5 reflect the change in childcare costs for infants, toddlers, and preschool-age children. The categories are described in the text below. Further details on each category of the table are provided in Appendix~\ref{app:programcosts}.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+
+\noindent Table \ref{tab:totalcosts} shows the average costs per individual enrolled
+in the program. It is important to note that we provide rental and marginal costs only, to capture, as closely as possible, the cost of replicating ABC. The costs of the program are substantial and add up to \$95,024 for the average individual after discounting. This is the difference between the cost of goods and services provided to the treated children and the cost of those provided to the control children. \\
+
+\subsection{Non-experimental Data Sources}
+
+\noindent Our cost-benefit analysis requires two (i) \textit{interpolate} components we do not observe due to intermittent data collection; (ii) \textit{extrapolate} or forecasts components we do not observe because the data collections stops when the participants of the program were in their mid 30s. We use multiple sources of nationally- and state-representative, non-experimental data to construct these interpolations and extrapolations. Table~\ref{table:sources} details the components for which we do these exercises and the sources we use. Section~\ref{section:methodology} explains our methodology for doing so. 
+
+\begin{table}[H]
+\begin{threeparttable}
+\caption{Auxiliary Data Sources for Interpolation and Extrapolation of Life-Cycle Benefits and Costs, ABC} \label{table:sources}
+\footnotesize
+\input{Output/auxiliary.tex}
+\begin{tablenotes}
+\footnotesize
+Note: This table details the non-experimental data sources we use to interpolate and extrapolate the life-cycle benefits and costs of ABC. cNLSY: Children of the National Longitudinal Survey of the Youth 1979; NLSY79: National Longitudinal Survey of the Youth 1979; PSID: Panel Study of Income Dynamics; MEPS: Medical Expenditure Panel Survey; Medicare Current Beneficiary Survey (MCBS); Health and Retirement Study (HRS); North Carolina Department of Public Safety Data (NCDPS); National Crime Victimization Survey (NVS); Uniform Crime Reporting Statistics (UCR).
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\section{Methodology} \label{section:methodology}
+
+\subsection{Parameters of Interest and Policy Questions} \label{section:methodsquestions}
+
+\noindent Random assignment does not guarantee that conventional treatment effect estimates used in the literature are able to answer policy-relevant questions. For an estimator to be useful in policy design, it should relate to a relevant parameter by clearly stating the counterfactual scenario to which the evaluated program is being compared.\\
+
+\subsection{Treatment Effects on Multiple Outcomes} \label{section:counts}
+
+\noindent While our discussion thus far addresses how to test the effectiveness of the programs at improving a single outcome, human development is obviously multidimensional. In our companion paper, \citet{Garcia_et_al_2016_ABC_unpublished}, we offer one method for measuring the effectiveness of a program using two statistics: the benefit-to-cost ratio and the internal rate of return. To do this, we account for the life cycle gains of the program in dimensions such as employment, income, government transfers, health, and crime. A simpler but informative alternative is to count the number of socially positive outcomes that the program influences. We present an inference methodology for this procedure.\\
+
+\noindent This latter method requires classifying each outcome as socially positive or negative, which is an inherently subjective procedure. In the interest of objectivity, we present the counts on 95 outcomes, all of which we think are either unambiguously socially positive or unambiguously socially negative. We list these outcomes and how we classify them in Appendix~\ref{appendix:controls}.\\
+
+\noindent The different counts we propose are examples of combining functions \citep[see][]{Pesarin_Salmaso_2010_PermutationTests}. These functions combine information on several outcomes for testing patterns in a scientific or social phenomenon---in our case, an early childhood education program. For instance, suppose we want to test the hypothesis: 
+
+\begin{equation}
+H_{0}^A: \mathbb{E} \left[ Y_{0} \right] =  \mathbb{E} \left[ Y_{1} \right] \label{eq:hoagain}
+\end{equation}
+
+\noindent for multiple outcomes $Y$, and that, for each outcome individually, we already have an inference procedure readily available. That is, we know the hypothesis, the statistics we use to test it, and the $p$-value associated with the test. For instance, we may want to test \eqref{eq:hoagain} using the ITT and a bootstrapped, non-parametric $p$-value.\\
+
+\noindent Consider constructing a combining function---in our case, a count---for a group or block of outcomes $\mathcal{O}^g$ with $g \in \mathcal{G}$, where $\mathcal{G}$ is the index set for the groups of outcomes.\footnote{It is not necessarily the case that the groups in $\mathcal{G}$ are exclusive. It could be of interest to study groups which have overlapping outcomes. The test does not require the groups to be exclusive.} Alternatively, we can construct the count for $\mathcal{O} : =  \bigcup \limits _{g \in \mathcal{G}} \mathcal{O}^g$. Each group includes the number of outcomes $\# \mathcal{O}^g$ and an associated sequence of treatment effects $\{ \widehat{\Delta}_{j}^{g} \}_{j = 1}^{\# \mathcal{O}^g}$. The test statistic for group $g$ is a count of the elements in the sequence satisfying a criterion. For example, if we count the number of socially positive outcomes, the test statistic for group $g$ is 
+
+\begin{equation}
+T_{g} = \sum _{j=1}^{\# \mathcal{O}^g} \mathbf{1} \left[ \widehat{\Delta}_{j}^{g} > 0\right]. \label{eq:count}
+\end{equation} 
+
+\noindent For inference purposes, we bootstrap this procedure and construct a null distribution. The $p$-value for the number of socially positive treatment effects in group $g$ is $1 - \widehat{F}_{g} \left( T_{g} \right)$, where $ \widehat{F}_{g}$ is the empirical bootstrap distribution of group $g$.\footnote{For the case where we count the number of positive and significant outcomes, we use a ``double bootstrap'' to produce an inference on the count. We resample $B_{0}$ times to obtain the $p$-value for testing the hypothesis of interest for each individual outcome. This allows us to compute the number of positive and significant treatment effects, for example. We repeat this procedure $B_{1}$ times to obtain a distribution for this count. Thus, the double bootstrap consists of $B_{0} \times B_{1}$ data resamplings.}\\
+
+\noindent We consider two counts. First, a count of the socially positive treatment effects, which is directly presented in~\eqref{eq:count}. We can construct this count over the complete set of outcomes or over subsets---e.g. employment, health, crime---without consideration of their significance when \eqref{eq:hoagain} is individually tested. Second, we count the outcomes that are  socially positive at a $10\%$ significance level when hypothesis \eqref{eq:hoagain} is individually tested.\\
+
+\noindent Combining information from different outcomes to form a single statistic to test the effectiveness of a program avoids (i) arbitrarily picking outcomes that have statistically significant effects---``cherry picking''; and (ii) arbitrarily blocking sets of outcomes to correct the $p$-values when accounting for multiple hypothesis testing.\\
+
+\noindent When evaluating a program in which information on multiple outcomes is available, researchers could report treatment effects on an arbitrary or relatively small set of outcomes. This does not necessarily inform policy makers on the effectiveness of a program. To see this, note that 10\% of outcomes should have a significant treatment effect \textit{by chance}, if a 10\% level of significance is chosen when performing inference. Therefore, researchers could ``cherry-pick'' treatment effects that are significant by chance. By considering a statistic that summarizes information on \emph{all} available outcomes, we avoid this issue by construction.\\
+
+\noindent An alternative method of avoiding ``cherry-picking'' is to form blocks of outcomes and to correct the $p$-values using different procedures---such as correcting for family-wise error rates using permutation testing \citep{Lehmann_Romano_2005_testing,Romano_Shaikh_2006_AnnStat,Heckman_Moon_etal_2010_QE}. Blocking, however, represents an inherently arbitrary procedure: there is no theory on how to block outcomes and there is an arbitrarily large set of possible blocks. However, combining functions allow us to consider all the outcomes in the set $\mathcal{O}$ and require no blocking, avoiding any arbitrary results. If the researcher has specific reasons to block outcomes, the procedure is also readily available---i.e. a block of outcomes is the set $\mathcal{O}^g$, as we explain above. In Section~\ref{section:results}, we present tests for the three combining functions we propose.
+
+\section{Results} \label{section:results}
+
+\noindent To start the discussion of the effects ABC and CARE have, we consider the 95 measures of human development across the life cycle that we construct for our analysis and count the measures for which the program had a ``socially positive'' effect. For both ABC and CARE, we do this by focusing on the first phase of treatment to compare children who received center-based childcare to children who did not---noting that assignment was random.\footnote{In ABC, this implies comparing the children who were randomly assigned to the treatment group to the children who were randomly assigned to the control group, in the first phase. In CARE, this implies comparing the children who were randomly assigned to receive center-based childcare and family education to the children who were randomly assigned either to the group receiving family education only or to the control group, in the first phase as well.} Figure~\ref{fig:ppositive} displays the results from this exercise: ABC and CARE positively impact a large percentage of the outcomes we consider. These percentages have noticeably tight standard errors.\footnote{The calculation of the standard errors follows from the bootstrap procedure we discuss in Section~\ref{section:methodology}.}
+
+\begin{figure}[H]
+		\caption{Positively Impacted Outcomes, ABC and CARE} \label{fig:ppositive}
+		\includegraphics[width=.9\columnwidth]{output/itt_noctrl_all.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: The first two bars (ABC) compare the treatment and control groups in ABC. The third and four bars (CARE) compare the children who received center-based childcare and family education to the children who receive either family education or no treatment at all. The last two bars (ABC and CARE) pool the two previous sets of comparisons.}
+\end{figure}
+
+\noindent We can further decompose the counts in Figure~\ref{fig:ppositive} into arbitrary categories. To economize space, we present this exercise pooling ABC and CARE. That is, we decompose the effects described in the last two bars of Figure~\ref{fig:ppositive}. Figure~\ref{fig:ppositivecategory1} and Figure~\ref{fig:ppositivecategory2} present this exercise. This helps us better understand the type of outcomes in which the programs had effects. The results indicate that a large and precise fraction of effects are positive in outcomes spanning the life cycle, from parental income to crime and including a wide variety of health categories.\\
+
+\begin{figure}[H]
+		\caption{Positively Impacted Outcomes by Category, ABC and CARE} \label{fig:ppositivecategory1}
+		\includegraphics[width=.9\columnwidth]{output/itt_noctrl_cats1.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: For each outcome category, we compare the mean of the children who received center-based childcare in ABC and center-based childcare and family education in CARE to the mean of the children in the control group in ABC and the control group and the family education treatment group in CARE and count the number of positive comparisons.}
+\end{figure}
+
+\noindent Although the exercise in Figure~\ref{fig:ppositive}, Figure~\ref{fig:ppositivecategory1}, and Figure~\ref{fig:ppositivecategory2} is informative by itself, more rigor and more detail are necessary to inform policy-making. We present a thorough documentation of our results next. The results we present are by gender. The motivation for us to do this, is that the effects of early-childhood education program usually differ by gender \citep{Heckman_Moon_etal_2010_QE,Campbell_Conti_etal_2014_EarlyChildhoodInvestments}.\footnote{In fact, recent some studies show that the effects of exposure to different environments differ by gender. A recent example is \citet{Autor-etal_2015_Family-Disadvantage}, which includes a discussion of the related literature.} Generally, the point estimates indicate that the benefits are similar for both females and males.\\
+
+\begin{figure}[H]
+		\caption{Positively Impacted Outcomes, ABC and CARE} \label{fig:ppositivecategory2}
+		\includegraphics[width=.9\columnwidth]{output/itt_noctrl_cats2.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: For each outcome category, we compare the mean of the children who received center-based childcare in ABC and center-based childcare and family education in CARE to the mean of the children in the control group in ABC and the control group and the family education treatment group in CARE and count the number of positive comparisons.}
+\end{figure}
+
+\noindent The reminder of this section proceeds as follows. Section~\ref{section:center} presents our main results, which test the effect of the first phase of treatment. Section~\ref{section:centerfemales} focuses on females and Section~\ref{section:centermales} on males. Section~\ref{section:second} discusses the effects of the treatment's second phase.\\
+
+\subsection{First Phase of Treatment} \label{section:center}
+
+\noindent Our main results are based on pooling the data from ABC and CARE to test the hypothesis in \eqref{eq:ho}. That is, to test the effect of center-based childcare. We compare children who were randomly assigned to treatment in ABC and to center-based childcare and family education treatment in CARE to children who were not assigned center-based childcare in either program, correcting for program attrition and accounting for treatment substitution. The motivation for pooling the sample in this way is based on two facts: (i) the family education treatment had no substantial effect compared to the control group, providing evidence on center-based childcare being the main component causing treatment effects in CARE; and (ii) comparing the groups receiving center-based childcare to the control groups of ABC and CARE independently, provides results very similar to those we discuss here. We document these two facts in Appendix~\ref{appendix:results}.\\
+
+\noindent By pooling ABC and CARE, we are able to test the effectiveness of center-based childcare as a policy, rather than testing the effectiveness of a program as it was implemented.\\
+
+\subsubsection{Females} \label{section:centerfemales}
+
+\noindent We consider a large variety of outcomes when evaluating the program in its entirety. To illustrate how our program attrition and treatment substitution, we present a summary of results in Tables~\ref{tab:ate_female_main1} and \ref{tab:ate_female_main2}. For each outcome, we present eight estimates. To illustrate how we interpret each estimate, consider high school graduation at age 30. We discuss the other outcomes afterward.\\
+
+\noindent Column~(1) displays the mean difference in graduation between children assigned and not assigned to receive center-based childcare. This difference amounts to 20 percentage points. In column~(2) we present this difference controlling for a set of variables and accounting for program attrition.\footnote{See Appendix~\ref{appendix:controls} for our procedure for selecting controls.} In this case, the estimate remains practically unchanged. This is generally the case for all the estimates we consider, so we will restrict our discussion to estimates in which we include controls and account for program attrition.\\
+
+\noindent The estimates in column (2) correspond to our first policy question: What is the effect of center-based childcare relative to the mix of alternatives at implementation? That is, we do not fix alternative preschools take-up.\\
+
+\noindent Columns (4) and (5) provide estimates where the treatment substitute is fixed. Specifically, they assess the more policy-relevant question: What is the effect of center-based childcare relative to a counterfactual where the child receives no alternative preschool? In column (4), we compare the adjusted mean of children assigned and not assigned to center-based childcare. For children not assigned to center-based childcare, we restrict the sample to those who did not enroll in any alternative preschools. Compared to that of column (1), the effect almost doubles. To take into account possible selection into preschool alternatives, we consider a matching strategy.\footnote{We parameterize the matching using an Epanechnikov kernel-weight approach. Results are not sensitive to matching using nearest neighbor or propensity score matching.} If selection into preschool is based on observed characteristics, column (5) provides a selection-corrected estimate, relative to the estimate in column (3). The difference between (3) and (5) is economically sizable, as it amounts to a 6 percentage point decrease in high school graduation. This difference suggests that parents select on potential gains when enrolling their female children into preschool alternatives. However, estimates in both columns (3) and (5) suggest that fixing children to an alternative of no preschool implies a sizable increase in the estimated treatment effect of center-based childcare. \\
+
+\noindent Columns (7) and (8) present estimates that inform another policy question: What is the effect of center-based childcare relative to a counterfactual where the child receives care from a fixed preschool alternative? The alternative we fixed is a non-program preschool, which was high but  presumably lower quality than ABC or CARE and started treatment later, from ages 3 to 5 (see Appendix~\ref{appendix:background}, where we document this and argue that the alternative preschools were roughly homogeneous in quality). Therefore, this experiment consists of evaluating high-quality center-based childcare to an alternative of lower quality and intensity. As expected, the estimates decrease compared to the estimates in which children receive no center-based treatment. As before, the comparison between the estimates in columns (6) and column (8) suggest that parents select on potential gains. This reinforces the claim we make throughout the paper: evaluation estimates depend substantially on the counterfactual.\\
+
+\noindent Next we discuss the reminder of outcomes in Table~\ref{tab:ate_female_main1} and Table~\ref{tab:ate_female_main2}. For cognition, we present treatment effects at age 12 because it is the latest age at which results on this outcome are available for both programs---the measure we use is the Wechsler Intelligence Scale for Children. Independently of the treatment substitution correction, the effect amounts to half standard deviation of the population's distribution. This effect is sizable, especially considering that early childhood education programs have been criticized for the fade out of their treatment effects on cognition \citep{Elango_Hojman_etal_2016_Early-Edu}. This phenomenon usually occurs at elementary school entry, way before age 12. For ABC, actually, we find sizable effects at age 21, for which we have cognition tests available (see Appendix~\ref{appendix:results}). For achievement at age 8, the effects are sizable as well. The effects accounting for treatment substitution are 3 points above the results not doing so; this amounts to more than 2/3 of the population standard deviation.\\
+
+\noindent The labor market outcomes for women substantially improved. When not accounting for treatment substitution, women's employment increases 11\%, welfare dependency decreases by almost 1,000 yearly dollars (2014 USD), and labor income increases by barely \$700 (2014 USD). When accounting for treatment substitution these results strengthen, although they lose statistical significance. The programs also reduce criminal activity, especially the number of misdemeanor arrests. When (not) accounting for treatment substitution, the program causes a decrease of (1.08) 2.28 misdemeanor arrests by age 34.\\
+
+\noindent For females, the program does not have many statistically precise effects on health outcomes. However, these effects help verify the pattern we describe for high-school graduation, which almost all outcomes satisfy: (i) a socially positive effect of the programs, although not statistically significant for every outcome; (ii) controlling for background characteristics and correcting for program attrition has little effect on our estimates; (iii) when fixing the counterfactual to no alternative preschool, the effect of center-based childcare with respect to the counterfactual strengthens; (iv) likewise, the effect weakens when fixing the counterfactual to a lower-quality preschool; and (v) the estimates in which we correct for potential selection shrink in absolute value, but the pattern in (iii) and (iv) persists.\\
+
+\noindent To conclude our discussion of results for female outcomes, we summarize the total number of socially positive effects that the program has on the multiple outcomes we consider in Table~\ref{tab:counts_female}.\footnote{By ``socially positive'' we mean that we reverse the effects for outcomes such as crime or obesity when counting the effects of the program.} These outcomes represent multiple measures of human development from birth to adulthood and go beyond what we present in Table~\ref{tab:ate_female_main1} and Table~\ref{tab:ate_female_main2}---see Section~\ref{section:data} and Appendix~\ref{appendix:data} for a thorough discussion on all the outcomes.\\ 
+
+\noindent The results in Table~\ref{tab:counts_female} are compelling. Our count statistic shows that more than 78\% of all treatment effect estimates we present are positive; 37\% are positive and significant. We test the first percentage against the null hypothesis of at most 50\% of the outcomes having a positive effect and the second against the null hypothesis of at most 10\% of the outcomes being positive and significant. We strongly reject both hypotheses---the $p$-value's are in parentheses underneath the counts in Table~\ref{tab:counts_female}. 
+
+\noindent When we fix to no preschool alternative the children who were not randomly assigned to receive center-based childcare, our count statistic shows that nearly 50\% of the effects are positive and significant at the 10\% level. For these estimates, we reject the null hypothesis of at most 10\% of the effects being significant at the 10\% level.\\
+
+\input{output/tables/abccare/rslt_female_main1}
+\input{output/tables/abccare/rslt_female_main2}
+\input{output/tables/abccare/rslt_female_counts}
+
+\subsubsection{Males} \label{section:centermales}
+
+\noindent To illustrate the extent of effects for males, we also present a summary of results. This is in Table~\ref{tab:ate_male_main1} and Table~\ref{tab:ate_male_main2}. There are two main differences between males and females. First, for males, outcomes of greatest policy interest such as employment and labor income exhibit a much stronger effect. Second, as we discuss below, the pattern in which the effects we present from columns (1) to (8) is not as clear as in the case of females.\\
+
+\noindent The results for cognition and achievement are not economically sizable for males. This is recurrent finding in the literature. It is also recurrent to find much less stronger effect on high school graduation \citep{Elango_Hojman_etal_2016_Early-Edu}, although the effect on years of education at age 30 are economically and statistically significant. When not accounting for treatment substitution, the positive effect is .80 years of schooling, which more than doubles when accounting for attrition.\\
+
+\noindent For males, correcting for self-selection in the estimates that fix the counterfactual does not consistently indicate that parents enrolled their male children into preschool alternatives based on potential gains. Instead, for some outcomes this correction points toward the opposite effect. To illustrate this, consider years of education. When fixing children to no alternative preschool, the treatment effect increases by more than 0.4 years with respect to the effect where alternative preschool is not fixed. This pattern is the same in the case for females. However, unlike females, when correcting for potential self-selection in the preschool enrollment decision, the estimate further increases remains similar in magnitude. This estimate could suggest that children with the most potential (or with the best home environment) stay at home, although the analogous estimate for females indicates that female children with the least potential (or with the worst home environment) stay at home.\\
+
+\noindent The effects on income are large and precise. When (not) accounting for treatment substitution, they amount to (\$6,055 2014 USD) \$11,310 2014 USD at age 30. Other effects as crime and reliance on public-transfer income are not as precisely estimated as the effect on income or employment but they align in pattern and signal the socially positive effects the program had. Finally, as noted in \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}, the effects the program has on long-term health are substantial and go from improvements in blood pressure to decrease in self-reported drug use. As before, accounting for treatment substitution strengthens these results.\\
+
+\noindent We also present the counts of positive effects, with a comparable inference exercise, in Table~\ref{tab:counts_male}. We reject the null hypothesis that at most 50\% of the outcomes are socially positive for any of the estimates we consider.
+
+\input{output/tables/abccare/rslt_male_main1}
+\input{output/tables/abccare/rslt_male_main2}
+\input{output/tables/abccare/rslt_male_counts}
+
+\subsection{Second Phase of Treatment} \label{section:second}
+
+\noindent To finalize the discussion of our results, we evaluate the effect of the second-phase of treatment. When comparing children randomized into second-phase treatment to children randomized into second-phase control, we find weak effects: the proportion of positive and significant treatment effects is negligible---we present a comprehensive set of results in Appendix~\ref{appendix:results}.\\
+
+\noindent A further step would be to test the set of hypotheses we present in Table~\ref{table:hypotheses} for this phase. Unfortunately, doing so requires partitioning the ABC sample, which in this case would incur a loss of power that inhibits us from finding any statistical treatment effects. It remains a research question of interest to understand (i) if treating children during multiple phases of childhood provides more enduring effects, relative to treating them during a single phase; and (ii) at what phase of childhood is providing early-life education most effective.
+
+\section{Final Comments} \label{section:conclusion}
+
+\noindent Early childhood education has been in the public agenda during the presidential term of President Obama. Various statements by the candidates to succeed President Obama and the evolution of governmental spending in early education indicate that this topic will still be a relevant public matter in the years to come.\\ 
+
+\noindent Noting that the evidence from policies related to early childhood education is still scarce, we provide a thorough evaluation of two randomized controlled trials: the Carolina Abecedarian Project (ABC) and the Carolina Approach to Responsive Education (CARE).\\ 
+
+\noindent As policies providing high-quality center-based childcare, ABC and CARE have a positive effect on a variety of outcomes measuring human development throughout childhood to adulthood---including cognition, socio-emotional skills, criminal behavior, and adulthood health.\\
+
+\noindent A crude but informative exercise is the following. Center-based childcare offered by either ABC and CARE causes a positive treatment effect in more than 75\% of the outcomes we consider for females. For males, this same count yields a number a little below 75\%. In fact, we formalize and provide an inference for these type of counts as statistics to summarize the effectiveness of the programs. We do so while accounting for: (i) non-compliance and program attrition, to which we find little sensitivity; and (ii) ``cherry picking'' when testing multiple hypotheses.\\
+
+\noindent Center-based childcare provided by ABC and CARE had substantial treatment effects, as implemented. That is, children randomly assigned to receive the program perform much better from childhood to adulthood if compared to children randomly assigned to not receive the program. For females, 37\% of the outcomes we study have a \textit{positive and significant} average treatment effect, at the 10\% level. For males, the analogous figure is 41\%.
+
+\noindent These results helps evaluate the programs as implemented, not their effectiveness \textit{per se}. To evaluate the effectiveness of the programs \textit{per se}, we compare them to a scenario in which children were not enrolled into preschool alternatives,  a well-defined counterfactual. This accounts for the fact that families randomly denied access to center-based childcare found treatment alternatives. If compared to the results not considering treatment substitution, ABC and CARE are even more effective than previously studied.\\
+
+\noindent Our findings indicate that, when adequately assessed, early childhood education programs enhance human development; they provide a vehicle to promote social mobility.
+
+%References
+\singlespace
+\bibliographystyle{chicago}
+\bibliography{heckman}
+
+\end{document} 

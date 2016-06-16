@@ -1,0 +1,412 @@
+\section{Quantifying the Benefits in Crime Reduction} \label{appendix:crime}
+
+\subsection{Data Description}
+
+\noindent The crime data available in ABC comes from four different sources provided by the program, which we supplement with external datasets. \\
+
+\subsubsection{ABC Datasets}
+\begin{enumerate}
+\item Administrative Youth Arrests Dataset.  This dataset records all arrests up to the age at which the data were obtained (April, 1996), when ABC individuals were around 21 years old. The categories of crimes in this dataset are coarser than the ones that we use in the other datasets: it categorizes crimes into property, violent, drug, and miscellaneous crimes. We assume some equivalences, as shown in Table~\ref{tab:crime_cat}.
+\item Administrative Adult Arrests Dataset. Gathered when ABC individuals were around 34 years old, this dataset includes individual data on arrests, with short descriptions of the associated offenses. This dataset has some individuals for whom the arrest history is missing. To resolve this, we use a methodology (detailed below) involving the sentences data, which does not have missing values.
+\item Administrative Sentences Dataset. Gathered when ABC individuals were around 34 years old, this dataset includes individual data on sentences, with descriptions of the crimes. It also includes total sentence length (projected and actual) and punishment type (jail, prison, parole).
+\item Self-reported Adult Crimes Dataset. A module on crimes was included at the age-21 and age-30 interviews. After matching all datasets, we use the information from the self-reported crimes whenever a particular crime does not appear in the other datasets.
+\end{enumerate}
+
+\subsubsection{Auxiliary Datasets}
+\begin{enumerate}
+\item National Crime Victimization Survey (NCVS). The NCVS is a survey (self-reported) on crime victimization reported by households. The NCVS does not cover crimes to businesses, and it might under-report crimes such as rape, that might not be known to all members of a family. It also does not give statistics for murders. The data are available from 1993 to 2013. We use NCVS to estimate the total number of victims per type of crime in the US, which is used to construct victims-to-arrests ratios.
+\item Uniform Crime Reporting (UCR). This dataset contains all crimes that are reported to the police. It contains crimes to households, individuals, and businesses that are captured by most of the law enforcement agencies in the country. We used data from this dataset spanning the years 1996 to 2012. We use UCR as a complement to NCVS when we estimate the total number of victims per type of crime in the US. %We use UCR to construct national arrest-to-sentences and victims-to-arrests ratios for our crime categories.
+%\item Bureau of Justice Statistics (BJS): the BJS' Arrest Data Analysis Tool has data on arrests per year per type of crime. This data only includes arrests made by state authorities. There are 133 federal authorities with the jurisdiction to arrest individuals, such as the FBI and Custom and Border Patrol, but this data is not publicly available. As with arrests, there is a distinction between Federal and State sentences given to offenders, depending on whether they were convicted in a state or federal court. We also used the BJS's Offender Sentences tool to acquire data on Federal sentences from 1998 to 2012. It is, however, in more general categories and only includes Violent, Property, Public Order, Drug and Other Offenses.
+\item National Judicial Reporting Program (NJRP). We use the NJRP to get data for total number of sentences in the US. The data were taken from published reports, which are biennial, from 1986 to 2006. We use this dataset to construct arrest-to-sentences ratios for our crime categories.
+\item North Carolina Department of Public Safety database (NCDPS). This database contains information since 1972 on each individual who is convicted of a crime and enters the state prison system or community supervision in North Carolina. The data does not include arrests, or people sentenced to jail or unsupervised probation. The North Carolina Department of Public Safety was created 3 years ago to consolidate the state's Department of Correction, Department of Juvenile Justice, Crime Control, and a few other state agencies, so these data were mostly constructed by the other agencies. We use this dataset to fit a prediction model that we use to predict future crimes for ABC individuals.
+\end{enumerate}
+
+\subsubsection{Crime Categories}
+\noindent Our administrative adult datasets have descriptions of all crimes. We categorize those crimes to be as comparable as possible to the categories in the other data sources and in the literature on calculating the cost of crime. However, it is inevitable to have some compromises. As shown in Table \ref{tab:crime_cat}, the different datasets and the literature use different crime categories. Our final categorization represents our best effort to make all sources comparable. \\
+
+\begin{table}[H]
+\begin{threeparttable}
+\scriptsize \caption{Crime Categories} \label{tab:crime_cat}
+\begin{tabular}{lllll}
+\hline  \hline
+{Our Categories}	&	{Youth Data} & {Costs of Crime} & {Nat. Arrests Data} & {Nat. Sentences Data}	\\
+\hline
+%				&				& \cite{mccollister2010cost} 	&			&					\\ \hline
+{Arson}			&			& Arson					&	Arson			&					\\	
+{Assault}			&	Violent			& Assault				&	Total assaults	& Aggravated 		\\		
+				&				&						&					& assaults 			\\ 		
+{Burglary}		&				& Household burglary	&	Burglary		& Burglary			\\		
+{Fraud}			&				& Fraud					&	Fraud,			& Fraud,			\\		
+				&				&						&	Forgery,		& Forgery			\\
+				&				&						&	Embezzlement	&					\\		
+{Larceny}			&	Property	& Larceny/theft			&	Larceny			& Larceny/theft		\\		
+{Miscellaneous}	& 	Drug, Misc.	& 					&	Drug abuse		& Drug offenses		\\		
+				&				&						&	total			&					\\ 		
+{Vehicle Theft}	&				& MV theft	&	MV theft		& MV theft			\\		
+{Murder}			&				& Murder				&	Murder,			& Murder,			\\	
+				&				&						& 	Non-negligent 	& Manslaughter		\\
+				&				&						& 	manslaughter	&   				\\
+{Rape}			&				& Rape/sexual assault	&	Forcible rape, 	& Rape 				\\
+				&				&						&	Sex offense		&					\\
+{Robbery}			&				& Robbery 				&	Robbery			&					\\
+{Vandalism}		&				& Vandalism				&	Vandalism		& 				\\	\hline \hline
+\end{tabular}
+\begin{tablenotes}
+\item Note: this table shows the various measures we have for our categories of crimes from each dataset. ``Costs of Crime'' are from \cite{McCollister_etal_2010_DAD}.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{Methodology for Estimating Crime Costs}
+\noindent In this section we explain in depth the steps taken for our calculations of total treatment effects on crime and the costs associated with that crime. We first give a more abstract and formal summary of the process, and then discuss the details for each step. \\
+%We follow four steps towards constructing our estimates: (i) First, we count the total number of arrests and sentences for each ABC study individual up to age 34; (ii) then we predict, based on the age 34 count of sentences, the number of sentences that the ABC  individuals will have in the future; (iii) next, based on the two previous points, and on the national victims-to-arrests and arrests-to-sentences ratios for the different categories of crimes we use, we estimate the number of victims that might have suffered (observed and unobserved) crimes by ABC study participants; (iv) finally, using the estimated numbers of victims, we impute costs of the crimes based on the literature. We discuss in detail the different costs associated with criminal activity, and the two main approaches to these calculations as categorized by Bottom-Up and Top-Down methodologies. We now give a more formal summary of those four steps. The details are discussed in the rest of this section.
+
+\begin{enumerate}
+\item \textit{Count Arrests and Sentences}. We start counting the total number of sentences for each individual, $i$, and category of crime (robbery, larceny, etc.), $j$, up to age 34,  which we denote by $S_{i,j}^{34}$. We also match the data on adult arrests, juvenile arrests, and self-reported crimes, to construct total number of  arrests for each category of crime up to that age, $A_{i,j}^{34}$. For some individuals, the arrest data is missing. In those cases, we impute the missing data by assuming that the national arrests-to-sentences ratio for crime $j$ is valid for each individual. Let $\overline{A_j}$ be the national total number of arrests for category $j$, and let $\overline{S_j}$ be the national total number of sentences. Then, we construct $r_j=\frac{\overline{A_j}}{\overline{S_j}}$, and we impute $A_{i,j}^{34}=r_j S_{i,j}^{34}$.
+
+\item \textit{Construct Predictions}. From our external data, we have a dataset to predict lifetime sentences. In that dataset, we start by using sentences up to age 34 in all types of crime to predict future sentences for each type of crime, $\widehat{S_{i,j}^{35-50}}$. Then, we get an estimate of the lifetime sentences as $\widehat{S_{i,j}}=S_{i,j}^{34}+\widehat{S_{i,j}^{35-50}}$. Given that we do not have an analogous dataset to predict lifetime arrests, we impute the predicted arrests as a linear function of the predicted number of sentences: $\widehat{A_{i,j}^{35-50}}=r_j \widehat{S_{i,j}^{35-50}}$. Then, we calculate $\widehat{A_{i,j}}=A_{i,j}^{34}+\widehat{A_{i,j}^{35-50}}$.
+
+\item \textit{Estimate Number of Victims}. Let the national number of victims of a given type of crime be $\overline{V_j}$. We start by constructing a victimization inflation factor: $f_j=\frac{\overline{V_j}}{\overline{A_j}}$. It represents the number of times someone is arrested as a fraction of the number of victims to his crimes. Then, the estimated number of victims of individual $i$ in category of crime $j$ based on arrests is estimated as $\widehat{V_{i,j}^{A}}=A_{i,j}f_j$. For sentences, we calculate an analogous estimate of crime victims based on the victimization inflation factor and the arrests-to-sentences ratio: $\widehat{V_{i,j}^{S}}=S_{i,j}f_j r_j$. Both estimates are similar, as we show below. We construct our final estimate of the lifetime victims of individual $i$ for crime $j$ as the average of both estimates to achieve greater precision: $\widehat{V_{i,j}}=\left(\widehat{V_{i,j}^A}+\widehat{V_{i,j}^S}\right)/2$.
+
+\item \textit{Find Total Costs of Crimes}. We use estimates of the cost of crimes for victims from the literature for each category of crime $j$, $c_j^V$. We impute the total victim costs of individual $i$ for category of crime $j$ as $\widehat{C_{i,j}^V}=\widehat{V_{i,j}} c_j^V$. We also calculate different costs from the justice system (including police) associated with the different categories of crime, but only for the ones that included arrests or sentences (i.e. we do not consider the victimization inflation), as: $C_{i,j}^{JS}=\widehat{A_{i,j}} c_j^{JS}$. Finally, we also construct the total costs of incarceration for category of crime $j$, $\widehat{C_{i,j}^{P}}$ as the total time the individual was imprisoned for that type of crime, $P_{i,j}$, multiplied by the cost of a day in prison $c_P$. All of our cost estimates are discounted to age 0.
+\end{enumerate}
+
+
+\subsubsection{Count Arrests and Sentences}
+\noindent A main advantage that we have over previous studies is that we are able to jointly use many different datasets to create measures of crimes committed. Our first task is to generate a complete counting of the number of arrests and of the number of sentences by crime category for each ABC individual. We start by counting sentences, which is trivial, as we have complete information on sentences for all individuals in one dataset. \\
+
+\noindent Unlike counting sentences, the count of arrests is more involved.\footnote{Throughout this appendix, for all the calculations involving counting arrests, if the arrest was the result of more than one \textit{offense}, we count the number and type of offenses separately, rather than counting all of them as one. An offense is the precise definition for the unit that we work with.} We now describe the procedure we follow to get a count of arrests that is as complete as possible. We begin by matching, based on crime description and date, the arrests from the adult administrative data, the youth administrative data, and the self-reported dataset. The adult data can be missing youth arrests that were deleted from the criminal records or crimes committed in states other than North Carolina, which were not obtained in the collection of administrative data. We are able to ensure that we are not duplicating any arrests, because we observe the arrest dates. One problem we have is that the categories for the youth arrests are just violent, property, drug, and miscellaneous. We assume that all violent crimes are assaults (the most common category of violent crime in our sample) and that all property crimes are larcenies (the most common category of property crime). We categorize both drug and miscellaneous crimes in our miscellaneous category (no victim costs). \\
+%The original number of arrests in the data was 444. Both the youth administrative data and the self-reported arrests were matched in a case-by case basis with the administrative arrest records, thus making the pre-1995 records much more complete. The number of arrests in the data after the matching and elimination of overlapping arrests is 794.
+
+\noindent The main problem we face with these data is that there are some individuals who are missing their arrests information around age 34. We know this is the case because there are sentences for which we do not observe the corresponding arrests. While this is expected for some crimes, such as speeding or shoplifting, it is not possible for others. This seems to be due to the difficulty in collecting administrative information on arrests. Counting arrests using many sources of data makes the task of reconstructing the adult arrests data more feasible. We tackle this challenge by first identifying those individuals who should have arrests, because they present sentences that necessarily imply they were arrested at some point of time. Then we impute the number of arrests for each of those sentences, based on the national arrests-to-sentences ratio. We estimate that 11 individuals (10\% of the ABC sample) have missing arrest data. This issue is confronted by the result that the final estimates of effects on reduction in crime costs using only sentences (which do not have any missing values) are very similar to the ones using arrests. \\
+
+\noindent The effect of adding the different datasets, as well as the final counts of both arrests and sentences is presented in Figure \ref{fig:datagraph}. In the first three pairs of bars, it is possible to see how many additional crimes are brought into the data by the additions of self-reported, juvenile, and sentences datasets. In the case of sentences, we first show the effect of imputing just one arrest per sentence, and only for individuals with missing arrests. Notice that the Juvenile data only adds assaults, larcenies, and miscellaneous, as discussed before. The next pair of bars shows the effect of adding more than one arrest per sentence for the individuals with missing data, using the arrests-to-sentences ratios. The effect is significant, adding about 30\% more crimes to the previous estimate. Importantly, some rape arrests are added to the control group in this step, because of one individual that presented a sentence for that crime. Finally, we can see that the total number of sentences is far lower than the total number of arrests, even if only the original arrests are counted. We can also see in this chart that the volume of the crimes is mostly driven by miscellaneous crimes (which are mostly drug and traffic crimes). As these crimes are counted as victimless in our methodology, their effect on the final estimates is much smaller than what this chart might suggest. \\
+
+\begin{figure}[H]
+\caption{Count of Arrests and Sentences}
+\centering \label{fig:datagraph}
+{\scalebox{0.8}{\includegraphics{AppOutput/Crime/counts_misc}}}
+\floatfoot{
+\footnotesize
+\noindent Note: this chart shows the arrests per capita for the control (C) and treatment (T) groups. The first pair of bars shows the original arrests data from the administrative adult dataset. The next pair adds the self-reported crimes that did not match with the original arrests data. The next pair adds data from the administrative juvenile dataset that did not match with the previous datasets. The next pair adds one arrest for every sentence that did not match with the previous datasets and one arrest for every sentence that had arrest data missing. The next pair adds $n$ arrests instead of one for each sentence, where $n$ is calculated using the arrests-to-sentences ratio obtained from national data. The final pair of bars, just for reference, is the total number of sentences. We take this from the Administrative Sentences Dataset.
+}
+\end{figure}
+
+\subsubsection{Construct Predictions}
+\noindent The data that we have available for the ABC individuals goes up to around age 34. However, we believe that the effect of the program on crime does not stop at that age. To predict the number of crimes that the study participants commit beyond age 34, we use data from the North Carolina Department of Public Safety (NCDPS). Our crime data is obtained from the same state in which the program was developed, making the prediction model more valid for our sample. To the best of our knowledge, no study of the effects of an early childhood education program has ever used microdata to estimate a predictive model for future crimes. We present this as an innovation of this paper. The estimations in \cite{Heckman_Moon_etal_2010_RateofReturn} are based on national age ratios (crimes of a certain category committed by older people over crimes of the same category committed by younger people at a moment in time), rather than on microdata. The problem of using age ratios is that the results can be altered by demographic transitions and only considers the same category of crime as input for the estimation model. \\
+
+\noindent We would ideally like to use prediction models estimated from the same cohorts as the ABC participants. However, if we want to predict crimes committed until relatively old ages, that is not possible, as the participants in ABC are currently around 46 years old. For predicting crimes at older ages, it is necessary to use earlier cohorts. The data are available from 1972 (43 years ago as of 2015), and thus it does not contain a totally complete crime history for any cohort of individuals. 
+%Given that, we have to choose specific cohorts for the estimations, such that they are old enough to cover the ages we need to predict, and young enough to have their entire crime life covered in the dataset, in the same way as the entire crime life of ABC individuals in covered in our data. In particular,
+We assume that few crimes are committed after the age of 50. \\
+%, and that crime life does not start until age 16.
+ We estimate separately predictions from ages 35-40, 40-45 and 45-50. We have plenty of observations to estimate crimes in all the age ranges. %\footnote{As an example, to predict crimes at ages 45-50 we need individuals aged 50+. To have enough birth year cohorts, we consider individuals aged 50-59 in 2015. The oldest of these individuals were aged 16 in 1972, so we can reasonably expect them to having committed few crimes before that year. Finding observations for crime predictions at earlier ages is even easier.}
+%Age 5 in 2015-->Age 12 in 1972.            Age 50 in 2015-->Age 16 in 1972.
+%Age 55 in 2015-->Age 12 in 1972.            Age 59 in 2015-->Age 16 in 1972.
+We calculate our predictions using a five-step procedure: \\
+\begin{enumerate}
+\item Find individuals that are at least 40 years old as of today in the NCDPS dataset.
+\item Regress their number of crimes of each type at ages 35--40 on those at ages 16--34.
+\item Use the estimated prediction model for ABC individuals, attributing those crimes to age 40 for discounting purposes.
+\item Repeat the three previous steps for ages 40--45 and 45--50. %50-55?
+\item For individuals with no criminal histories before age 34, assume that they commit no crimes after 34.
+\end{enumerate}
+
+\noindent We perform the previous process separately for males and females. We use linear predictions, but we replace negative predicted values of crime by zero. Tables \ref{tab:reg1f}--\ref{tab:reg3m} show the estimated models. As expected, generally the most important prediction factor for a crime is the number of occurrences of the same category of crime in a previous period. The coefficients in some cases are substantial, which implies that considering predicted crimes is an important part of an assessment of the crime benefits of the program. \\
+%include more tables if ages 55 are covered, not just 50
+\begin{sidewaystable}[H]
+\caption{NCDPS Regressions from Ages 35--40 on Ages 16--35, Females} \label{tab:reg1f}
+\begin{adjustbox}{max width=\textwidth}
+\begin{threeparttable}
+\input{AppOutput/Crime/reg2_black_0.tex}
+\begin{tablenotes}
+\item Note: this table shows how the crimes at ages 35--40 (in the columns) are predicted by crimes at ages 16--35 (in the rows). The estimations are run on the North Carolina Department of Public Safety dataset, which contains information on all individuals that have ever been sentenced in North Carolina. We use linear regressions in all cases. The sample for this model is limited to individuals who are 40 years old or more. *~$p<0.05$; **~$p<0.01$.
+\end{tablenotes}
+\end{threeparttable}
+\end{adjustbox}
+\end{sidewaystable}
+
+
+\begin{sidewaystable}[H]
+\caption{NCDPS Regressions from Ages 35--40 on Ages 16--35, Males} \label{tab:reg1m}
+\begin{adjustbox}{max width=\textwidth}
+\begin{threeparttable}
+\input{AppOutput/Crime/reg2_black_1.tex}
+\begin{tablenotes}
+\item Note: this table shows how the crimes at ages 35--40 (in the columns) are predicted by crimes at ages 16--35 (in the rows). The estimations are run on the North Carolina Department of Public Safety dataset, which contains information on all individuals that have ever been sentenced in North Carolina. We use linear regressions in all cases. The sample for this model is limited to individuals who are 40 years old or more. *~$p<0.05$; **~$p<0.01$.
+\end{tablenotes}
+\end{threeparttable}
+\end{adjustbox}
+\end{sidewaystable}
+
+\begin{sidewaystable}[H]
+\caption{NCDPS Regressions from Ages 40--45 on Ages 16--35, Females} \label{tab:reg2f}
+\begin{adjustbox}{max width=\textwidth}
+\begin{threeparttable}
+\input{AppOutput/Crime/reg3_black_0.tex}
+\begin{tablenotes}
+\item Note: this table shows how the crimes at ages 40--45 (in the columns) are predicted by crimes at ages 16--35 (in the rows). The estimations are run on the North Carolina Department of Public Safety dataset, which contains information on all individuals that have ever been sentenced in North Carolina. We use linear regressions in all cases. The sample for this model is limited to individuals who are 45 years old or more. *~$p<0.05$; **~$p<0.01$.
+\end{tablenotes}
+\end{threeparttable}
+\end{adjustbox}
+\end{sidewaystable}
+
+
+\begin{sidewaystable}[H]
+\caption{NCDPS Regressions from Ages 40--45 on Ages 16--35, Males} \label{tab:reg2m}
+\begin{adjustbox}{max width=\textwidth}
+\begin{threeparttable}
+\input{AppOutput/Crime/reg3_black_1.tex}
+\begin{tablenotes}
+\item Note: this table shows how the crimes at ages 40--45 (in the columns) are predicted by crimes at ages 16--35 (in the rows). The estimations are run on the North Carolina Department of Public Safety dataset, which contains information on all individuals that have ever been sentenced in North Carolina. We use linear regressions in all cases. The sample for this model is limited to individuals who are 45 years old or more. *~$p<0.05$; **~$p<0.01$.
+\end{tablenotes}
+\end{threeparttable}
+\end{adjustbox}
+\end{sidewaystable}
+
+\begin{sidewaystable}[H]
+\caption{NCDPS Regressions from Ages 45--50 on Ages 16--35, Females} \label{tab:reg3f}
+\begin{adjustbox}{max width=\textwidth}
+\begin{threeparttable}
+\input{AppOutput/Crime/reg4_black_0.tex}
+\begin{tablenotes}
+\item Note: this table shows how the crimes at ages 45--50 (in the columns) are predicted by crimes at ages 16--35 (in the rows). The estimations are run on the North Carolina Department of Public Safety dataset, which contains information on all individuals that have ever been sentenced in North Carolina. We use linear regressions in all cases. The sample for this model is limited to individuals who are 50 years old or more. *~$p<0.05$; **~$p<0.01$.
+\end{tablenotes}
+\end{threeparttable}
+\end{adjustbox}
+\end{sidewaystable}
+
+
+\begin{sidewaystable}[H]
+\caption{NCDPS Regressions from Ages 45--50 on Ages 16--35, Males} \label{tab:reg3m}
+\begin{adjustbox}{max width=\textwidth}
+\begin{threeparttable}
+\input{AppOutput/Crime/reg4_black_1.tex}
+\begin{tablenotes}
+\item Note: this table shows how the crimes at ages 45--50 (in the columns) are predicted by crimes at ages 16--35 (in the rows). The estimations are run on the North Carolina Department of Public Safety dataset, which contains information on all individuals that have ever been sentenced in North Carolina. We use linear regressions in all cases. The sample for this model is limited to individuals who are 50 years old or more. *~$p<0.05$; **~$p<0.01$.
+\end{tablenotes}
+\end{threeparttable}
+\end{adjustbox}
+\end{sidewaystable}
+
+%\begin{sidewaystable}[H]
+%\begin{threeparttable}
+%\caption{NCDPS Regressions from Ages 50--55 on Ages 16--35, Females} \label{tab:reg4f}
+%\input{AppOutput/Crime/reg5_black_0.tex}
+%\begin{tablenotes}
+%\item Note: this table shows how the crimes at ages 50--50 (in the columns) are predicted by crimes at ages 16--35 (in the rows). The estimations are run on the North Carolina Department of Public Safety dataset, which contains information on all individuals that have ever been sentenced in North Carolina. We use linear regressions or linear probability models in all cases. The sample for this model is limited to individuals who are 50 years old or more. * $p<0.05$; ** $p<0.01$
+%\end{tablenotes}
+%\end{threeparttable}
+%\end{sidewaystable}
+
+%\begin{sidewaystable}[H]
+%\begin{threeparttable}
+%\caption{NCDPS Regressions from Ages 50--55 on Ages 16--35, Males} \label{tab:reg4m}
+%\input{AppOutput/Crime/reg5_black_1.tex}
+%\begin{tablenotes}
+%\item Note: this table shows how the crimes at ages 50--55 (in the columns) are predicted by crimes at ages 16--35 (in the rows). The estimations are run on the North Carolina Department of Public Safety dataset, which contains information on all individuals that have ever been sentenced in North Carolina. We use linear regressions or linear probability models in all cases. The sample for this model is limited to individuals who are 55 years old or more. * $p<0.05$; ** $p<0.01$
+%\end{tablenotes}
+%\end{threeparttable}
+%\end{sidewaystable}
+
+
+\noindent This procedure gives us a prediction of the number of sentences that ABC individuals receive in the future. From this, we predict the number of arrests up to age 50. Figure \ref{fig:predictions} shows the effect of our prediction methodology. As expected, the effect is quantitatively much larger for arrests than for sentences. For both arrests and sentences, including the predicted crimes, this effect adds about 30-50\% more crimes to our previous totals. The predictions are roughly proportional to the previous crimes, as discussed before. \\
+
+\begin{figure}[H]
+\caption{Construct Predictions}
+\centering \label{fig:predictions}
+{\scalebox{0.8}{\includegraphics{AppOutput/Crime/predictions}}}
+\floatfoot{
+\footnotesize
+\noindent Note: this figure continues Figure \ref{fig:datagraph}. It shows, for the control (C) and treatment (T) groups, the effects of adding predictions. The first pair of columns is the same as the fifth pair of columns in Figure \ref{fig:datagraph}. The second pair of columns includes the arrests that we predict. The third and fourth pairs of columns are the analogous pairs for sentences.
+}\end{figure}
+
+\subsection{Victimization Inflation}
+\noindent Even though we have administrative data on crimes, we only observe the crimes that had justice system consequences (arrests or sentences). However, it is possible that the subjects committed more crimes than those that we observe. Victimization Inflation (VI) is a method to capture benefits in crime reduction for crimes that did not result in justice system consequences.\footnote{\citet{Belfield_Nores_etal_2006_JHR,Heckman_Moon_etal_2010_RateofReturn}.} For most types of crimes in the US, there are many more victims than arrests or sentences. Using arrests as an example, VI assumes that those ``unpunished crimes'' were committed by the same people who were arrested for crimes of the same type, and in the same proportion. The calculation of VI uses as an input the national ratios of total number of reported crimes over the number of arrests. VI assumes that those national ratios are also valid for each individual. Under those assumptions, it is possible to find the total number of crimes committed by an individual for a given type of crime as the total number of arrests for that type of crime multiplied by the estimated national ratios for that type of crime. We estimate the total number of victims using two methods, one based on arrests and one based on sentences. Given that the ``unpunished'' crimes are by definition unobserved, it is not straightforward to use a data-driven method to allocate them between those individuals with arrests, those with sentences, and those with neither arrests nor sentences. We calculate separate estimates for arrests and sentences and use the average of those estimates as our main estimate. \\
+
+\subsubsection{Construction of the Total Number of Victims in the US}
+The numerator of the VI ratio is an estimate of the total number of crimes of a certain type committed in the US. We construct this estimate using two datasets. First, we use the National Crime and Victimization Survey (NCVS). It has self-reported data on victimization of crimes reported by households. The NCVS does not cover crimes to businesses, and it might under-report crimes, such as rape, that might not be known to all members of a family. It also does not give statistics for murders. The data are available from 1995 to 2012. We also use the Uniform Crime Reports database (UCR), which contains all crimes to households, individuals, and businesses that are reported to the police. These data are available from 1960 to 2013. The limitation of such a dataset is that many crimes go unreported to the police. Given that these two datasets independently underestimate the total number of crimes, but likely have significant overlap between them, we choose the highest estimate among both datasets for each type of crime. We refer to this estimate, $\overline{V_{j,t}}$, as the total number of victims in the country for type of crime $j$ in year $t$.
+
+\subsubsection{Construction of the Total Number of Arrests in the US}
+\noindent The denominator of the VI ratio is an estimate of the total number of arrests of a certain type committed in the US. We have data from the ``National Arrests Analysis Tool'' of the National Bureau of Justice Statistics. These data are available from 1980 to 2012, which spans the years of all crimes that we observe in the ABC data. There is one problem with this dataset that we consider relatively minor: not all law enforcement agencies report the number of crimes (there are dozens of agencies that can legally arrest in the US). However, as a large majority of them do, and as we are using national estimates, this should not greatly affect our calculations. We use these data to create $\overline{A_{j,t}}$, the total number of arrests in the country for type of crime $j$ in year $t$. \\
+
+\subsubsection{Victimization Inflation Factors} 
+
+\noindent Figures \ref{fig:victim1} and \ref{fig:victim2} show the VI factors calculated by year. The ratios in the charts are constructed as $r_{j,t}=\frac{\overline{V_{j,t}}}{\overline{A_{j,t}}}$. In practice, we use an average of all the yearly measures in our calculations given that this exercise imputes unobserved crimes that do not have a clearly defined date. This average of all the yearly measures is given by $r_j=\Sigma_{t=t_0}^{T}r_{j,t}/T$, and has more precise estimates of the ratio. The VI factors we use for sentences are equal to the factors used for arrests, multiplied by the arrests-to-sentences ratios discussed earlier. In a later section, we will discuss combining these different estimates as per our arrest-based and sentence-based methodology. For sentences, we have data from the National Judicial Reporting Program (NJRP). These data are available from 1986 onwards. Using this dataset, we construct $\overline{S_{j,t}}$, the total number of sentences in the country for type of crime $j$ in year $t$. \\
+
+\begin{figure} [H]
+\caption{Victims-to-Arrests Ratios by Crime}
+\centering \label{fig:victim1}
+{\scalebox{0.8}{\includegraphics{AppOutput/Crime/v-to-a-ratios}}}
+\floatfoot{
+\footnotesize
+\noindent Note: this figure shows, by year and type of crime, the number of victims (estimated from the NCVS and the UCR datasets) divided by the number of arrests (estimated from the National Arrests Analysis Tool from the NBJS). In practice, we use a single number for each type of crime, which is an average across years.\\
+}
+\end{figure}
+
+\begin{figure} [H]
+\caption{Arrests-to-Sentences Ratio by Crime}
+\centering \label{fig:victim2}
+{\scalebox{0.8}{\includegraphics{AppOutput/Crime/a-to-s-ratios}}}
+\floatfoot{
+\footnotesize
+\noindent Note: this figure shows, by year and type of crime, the number of arrests (estimated from the National Arrests Analysis Tool from the NBJS) divided by the number of sentences (estimated from the National Justice Reporting Program). In practice, we use a single number for each type of crime, which is an average across years. \\
+}
+\end{figure}
+
+\subsubsection{Effects on Number of Crimes, After Victimization Inflation}
+\noindent Figure \ref{fig:count-vi} shows the effects of VI on our estimates of the number of crimes committed. Note that the magnitudes in the axis are much larger than those of previous charts. The largest effects are in larceny, which is very common in our data and has a victims-to-arrests factor of 12.6, the largest factor of all the categories of crime used in the paper. Given that the victim cost of larcenies is low, it has a total effect in our estimates that is lower than what this chart suggests. \\
+
+\begin{figure}[H]
+\caption{Effects on Number of Crimes, After Victimization Inflation}
+\centering \label{fig:count-vi}
+{\scalebox{0.8}{\includegraphics{AppOutput/Crime/vi}}}
+\floatfoot{
+\footnotesize
+\noindent Note: this chart continues Figure \ref{fig:predictions}. It shows, for the control (C) and treatment (T) groups, the effects of adding victimization inflation (VI). The first pair of columns is the same as the second pair of columns in Figure \ref{fig:predictions}. The second pair of columns expand the arrests to account for VI. The third pair of columns is the same as the fourth pair of columns in Figure \ref{fig:predictions}. The fourth pair of columns expand the sentences to account for VI. The last pair of columns averages the second and the fourth pairs of columns in this chart. \\
+}
+\end{figure}
+
+\noindent While the assumptions required for the victimization inflation methodology are strong, we believe that this is the best approximation for a total toll of crime's costs. The highest victims-to-arrests ratio shown in the figures are sensible and are not for the most costly categories of crime in the data, which helps the stability of the estimates. \\
+
+\subsection{Literature on Costs of Specific Crimes}
+\noindent There are many methods to estimate unit costs of representative crimes, and many studies estimating them.\footnote{\citet{Cohen-Bowles_2010_Estimating-Cost-Crime} and \citet{McCollister_etal_2010_DAD} give comprehensive reviews of the state of the literature.} In this document, we only review the literature in terms of the inputs that are necessary for this paper. \\
+
+\noindent We start by discussing a classification of costs of crime, which is necessary to later discuss the ways to estimate the costs. Then, we present the two general types of methodologies that are used to estimate the total costs of crime: the Top-Down methodologies and the Bottom-Up methodologies. The former attempts to quantify the value that people put in \emph{ex-ante} prevention of crime, while the latter attempts to gather \emph{ex-post} all sources of costs that crimes have. The difference between these two methods can be large: \cite{Cohen-Bowles_2010_Estimating-Cost-Crime} show that for the particular case of estimates of the cost of rape, the top-down approach gives a value that is twice as large as the value given by most bottom-up studies. Other studies give cost estimates that are more homogeneous between these two approaches.\\
+
+\subsubsection{A Classification of Costs of Crime}
+\noindent Some methodologies used to estimate costs of crime are only able to capture some types of costs, and it might not even be clear what other methodologies are capturing. Some important types of costs are: \\
+\begin{itemize}
+\item Costs to the victim that can be directly quantified, such as medical bills, property losses, and lost productivity.
+\item Costs to the victim that cannot be observed, such as pain and suffering.
+\item Costs to the community in terms of prevention of crime, such as alarms, avoidance behavior, and police presence.
+\item Costs to the community in terms of fear.
+\item Costs to the community in terms of the criminal justice system, especially imprisonment.
+\item Costs to the offender in terms of less productivity, such as forgone wages.
+\end{itemize}
+
+\subsubsection{Bottom Up (BU) Methodologies}
+\noindent These approaches add up each type of cost that is imposed after the crime has been realized. The most well-known studies combine direct (also known as tangible) costs of the crimes with intangible costs. Tangible costs are everything that can be directly measured by observation, such as foregone wages, hospital costs, and police expenditure. Intangible costs are subjective, like pain and suffering. One way to measure these costs is using jury awards. For example, a jury award given as a result of an arm broken at a construction site can be used as a proxy of the intangible cost of having an arm broken in an assault.\footnote{This was first used in \citet{cohen_1988_Pain-Suffering}, and has been extensively used in BU studies after that. \citet{Miller_Cohen_ea_1996_BOOKvictim} improved on previous estimates by using jury awards specifically coming from criminal cases.} The problem of these approaches is that many of the costs of crime are not directly imposed on the victim and are hard to quantify, such as the ``fear of crime,'' the increased expenditure on crime prevention, and the negative impact of imprisonment on the community. \\
+
+\subsubsection{Top Down (TD) Methodologies}
+\noindent The other way to estimate the cost of crime is using TD methods, based on eliciting willingness to pay for avoiding crimes. The main advantage of these methods is that, in principle, they consider costs that are hard or impossible to measure directly, such as the cost of fear, avoidance behavior, and expenditures in preventative measures. There are three main methodologies for this approach, which we now briefly describe. \\
+
+\begin{enumerate}
+\item Stated Preferences. This basic method elicits the willingness to pay for hypothetical programs that would reduce crime nationwide for a sample of people.\footnote{\citet{Cohen_Rust_etal_2004_Criminology}.} Being an example of a TD methodology, it is expected that the costs obtained by this method would include factors that affect the community, and that are hard to capture, such as fear. However, it is unclear whether people consider factors like the cost of the justice system in their answers to these questions. An obvious caveat of this method is that people might not answer the real amount they would be willing to pay in these surveys.
+%Then, multiplying that willingness to pay by the number individuals that would contribute, the total WTP for a certain reduction in crime is obtained. Dividing that total WTP by the number of crimes that would be avoided (number of crimes committed times the hypothetical effectiveness of the program), it is possible to find the WTP to avoid a particular crime.
+\item Revealed Preferences. This method infers the value that individuals assign to crime reductions from market transactions. The most standard way to calculate these estimations is running regressions to explain the total price of houses with several factors, including the rates of crime in the area. Those parameters associated with the crime rate are considered the revealed valuation of avoiding crimes.\footnote{\citet{Thaler_1978_Value-Crime-Control}.} One problem of this method is that it relies on a strong level of knowledge of people about the crime rates in the area. Another problem is that, in absence of extremely large and rich data on crimes and house prices, it is not possible to separately identify the costs of different types of crimes. To the best of our knowledge, no paper has yet been able to convincingly obtain estimates per type of crime with this method.
+\item Life Satisfaction: in this method, people are surveyed about their preferences between different life conditions, in which several different factors are considered. Some of those factors are income and rates of crime. By doing so, people implicitly associate monetary values to the levels of crime in the communities they would live in.\footnote{\citet{ Moore_etal_2006_Cost-of-Fear,Moore_2006_Value-Reducing-Fear}.}
+\end{enumerate}
+
+\subsubsection{Costs Used in this Study}
+\noindent To summarize, both approaches have strengths and weaknesses: the TD approaches are more likely to reflect costs to the community (e.g. fear and anxiety, avoidance behavior, and protective measures) and better capture the spirit of a prevention program. However, in practice TD estimates rely on strong assumptions, and there are methodological issues associated to obtaining detailed values for the different types of crimes. It is also possible that when people answer the survey used for TD calculations they include some costs that we are including separately, such as justice system costs, and risk of death from non-murder crimes, while BU correctly does not account for them. Given those considerations, and the lack of TD costs for some categories of crime, we use BU costs for our main estimates. For completeness, we present cost estimates using both approaches. We choose \cite{Cohen_Rust_etal_2004_Criminology} as representative of the TD approaches, and \cite{McCollister_etal_2010_DAD} as representative of the BU approaches. In terms of timing, both of these studies match well with our data. The bulk of crimes in the ABC data occurred between the late 1990s and early 2000s. While \cite{Cohen_Rust_etal_2004_Criminology} do not report the exact year of their survey, they use Census 2000 figures for their estimates. Even though \cite{McCollister_etal_2010_DAD} is a more recent study, many of the productivity estimates that their costs are based on are taken from papers using data from years with more crimes than in ABC. The costs in those studies are presented in Table \ref{tab:individual-crime-cost}. Notice that there are some very strong differences in the cost of crimes, such as assault, burglary, and especially robbery. \\
+
+%The fact that \cite{cohen1994costs} and \cite{miller1996victim} are relatively old studies is an advantage rather than a problem. The studies better reflect the costs of crimes in those years, which are part of the period in which most crimes were committed by subjects in the ABC data. More recent estimates will be based on assumptions about productivity and costs that are not representative of the losses relevant for this study. These studies are complementary, as \cite{miller1996victim} quantifies cost to victims (productivity, medical care, mental health care, police/fire services, social services, property loss and quality of life damages), while \cite{cohen1994costs} provides a quantification of criminal justice system costs. Importantly, this study distinguishes between sources of costs, so we can impute our own cost estimates to sentences, knowing precise information about time in jail for our sample. The most recent study  \citep{mccollister2010cost} is necessary because it considers some types of crimes omitted in the previous papers.
+
+\begin{table}[H]
+\begin{threeparttable}
+\caption{Unitary Costs of Crime for Victims} \label{tab:individual-crime-cost}
+\begin{tabular}{lcc}
+\hline \hline
+Crime				&Top-Down Approach	&Bottom-Up Approach	\\
+					& \cite{Cohen_Rust_etal_2004_Criminology}&\cite{McCollister_etal_2010_DAD}\\ \hline
+Arson				&					&12,093			\\
+Assault				&95,200			&16,132 			\\
+Burglary			&34,000			&1,467 			\\		
+Fraud				&				&0				\\
+Larceny				&				&528 				\\
+Motor Vehicle Theft	&				&6,699 			\\
+Murder				&13,192,000		&9,286,200 		\\
+Rape				&322,320			&224,021 			\\
+Robbery				&315,520			&7,273 			\\
+Vandalism			&					&0				\\ \hline \hline
+\end{tabular}
+\begin{tablenotes}
+\item Note: all amounts in 2014 USD. The amounts reported in \cite{McCollister_etal_2010_DAD} for non-murder crimes have their extra cost for risk of death and the cost of a crime career removed (both were obtained from correspondence with the author). Risk-of-death costs do not apply, as we know the outcomes of the crimes. Crime-career costs do not apply, as we directly observe the income of the individuals, so it would be double counting. These costs also don't include police and legal system costs, as those are imputed separately and only for the cases when individuals were arrested or sentenced.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsubsection{Timing of Effects: Incidence vs. Prevalence}
+\noindent We would like to discount the costs of crime according to whether they were \textit{incurred} during a particular age of program participants, because those values should be discounted at a different rate than costs incurred later, even if both costs were \textit{imposed} in the same year. Thus, the value of the imprisonment is discounted year-by-year. We have no information about the timing of costs for victims, so the value of the different crimes for the victims are discounted according to the time they were imposed (the time of the crime's occurrence). \\
+
+\subsubsection{Costs of Imprisonment}
+\noindent Unlike previous studies, we observe the sentences of the ABC participants. This allows for a precise estimation of the costs of imprisonment. For the cost of jail and state prisons, we use estimates from the \citet{US-Justice_1988_Report-Crime-Justice}. In 2014 dollars, these costs are \$25,338 for a year in a state prison, and \$21,939 for a year in jail.
+It is important to clarify that we only include costs of the justice system for the crimes that are known by the justice system, not for the crimes that we impute through victimization inflation. \\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Effects on Costs of Crime}
+
+%\subsubsection{Criminal Behavior.} The results show that there are clear reductions in the amount of crime committed between the control and treatment groups. This holds true for the majority of the categories of crime. The exceptions were Vehicle Theft, Assault, Robbery, and Arson. The visualization of the ABC data in Figure \ref{tab:lifehistory} represents the life history of each of the individuals within the ABC study that committed at least one crime, with each dot as an offense and each line as a period of incarceration. Also shown are the most serious crimes committed in the ABC data, including a habitual felon, manslaughter, and indecent liberties with children. The largest treatment effects occurred in cases of Miscellaneous, Fraud, and Larceny crimes. In sentences alone, there was a 46.3\% reduction in the number of cases, and in arrests, there was a 39\% reduction in cases for those in the treatment group compared to the control group. There are substantially fewer arrests for the individuals in the treatment group, and although there are still a few who committed a series of crimes, many did not have arrests at all.
+%numbers from combined_datasetv3
+
+\subsubsection{Effects on Costs Before Victimization Inflation}  Figure \ref{tab:diff-costs} presents the estimated costs per type of cost before victimization inflation.
+\noindent There are clear positive effects for the treatment group in terms of reductions in the costs of crime. Those reductions are almost exclusively given by the large effect of the murder case we observe in the control group (note that murder also appears in the treatment group costs because of the predictions). Comparing the bars in this figure, the costs from the justice system and from imprisonment are low compared with the victimization costs, even without victimization inflation. Figure \ref{tab:diff-costs} also shows that, while the levels of the arrest-based estimates are higher than the levels of the sentence-based estimates for both the treatment and control groups, the impacts of the program are quite similar across both methods. \\
+
+\begin{figure} [H]
+\caption{Costs of Crime Before Victimization Inflation}
+\centering  \label{tab:diff-costs}
+{\scalebox{0.8}{\includegraphics{AppOutput/Crime/different_costs}}}
+\floatfoot{
+\footnotesize
+\noindent Note: this figure depicts the per capita cost for the different categories of costs and crimes we use, by control (C) and treatment (T). The first pair of columns adds up the justice system costs (including police) for all arrests inputed for each individual. The second pair of columns adds up the cost of Imprisonment. It is important to note that the costs are per capita, so there are individual cases that have much higher costs. The next two pairs of columns show the pre-victimization inflation estimates of number of crimes multiplied by the individual victim cost of the different crimes. The costs are taken from the Bottom-Up approach in Table \ref{tab:individual-crime-cost}. All costs are in thousands of 2014 USD.\\
+}
+\end{figure}
+
+\subsubsection{Effects on Costs After Victimization Inflation}
+
+\noindent Figure \ref{tab:costs_vi} presents the data after applying the victimization inflation. As shown below, the inflation allows us to include a substantial amount of crime that otherwise would not have been considered. This chart shows that the treatment effects using arrest-based estimations are not substantively different from the ones using sentence-based estimations. Thus, to use all available information, we use the estimates based on the averages of the two for our analysis. \\
+
+\begin{figure} [H]
+\caption{Costs of Crime After Victimization Inflation}
+\centering  \label{tab:costs_vi}
+{\scalebox{0.9}{\includegraphics{AppOutput/Crime/costs_vi}}}
+\floatfoot{
+\footnotesize
+\noindent Note: this figure depicts the per capita cost for the different categories of costs and crimes we use, by control (C) and treatment (T). The first two pairs of columns adds up all of the arrest-based costs for each individual and compares the pre- and post-victimization inflation costs. The third and fourth pair of columns compare the pre- and post-victimization inflation sentence-based costs. It is important to note that the costs are per capita, so there are individual cases that have much higher costs. The next two pairs of columns show the post-victimization inflation estimates of number of crimes multiplied by the individual victim cost of the different crimes. The costs are taken from the Bottom-Up approach in Table \ref{tab:individual-crime-cost}. All costs are in thousands of 2014 USD.\\
+}
+\end{figure}
+
+\noindent We consider the impact on murder as a consequence of the program rather than a statistical coincidence. We use as precedent the CBA of Perry Preschool Project in which three control group individuals and one treatment group individual committed murders.\footnote{\citet{Heckman_Moon_etal_2010_RateofReturn}.} \\
+
+\noindent Our methodology integrates cost estimates from many sources in addition to crime. Some of those sources, such as the serious crimes, result in volatile estimates due to the small sample sizes. Our estimations of the standard errors associated to the objects of interest in this paper---the present value of the program and the internal rate of return---consider those sources of volatility. Ultimately, the benefit-cost analysis is a unidimensional summary of benefits of a program, and specific flows of benefits with high variability enter naturally into the process of aggregation. \\
+
+%\begin{table}[H]
+%\begin{threeparttable}
+%\caption{Effects on Total Costs}\label{tab:apx_impact-costs-total}
+%\input{AppOutput/Crime/costs_total.tex}
+%\begin{tablenotes}
+%\item  Note: this table presents the treatment effects of ABC on total costs of crime per capita, including Victimization Inflation. All costs are in 2014 USD. We present one-sided $p$-values.
+%\end{tablenotes}
+%\end{threeparttable}
+%\end{table}
+
+\subsection{Sensitivity Analyses Using Alternative Cost Estimates}
+\noindent So far, we study several ways to construct our estimates: \\
+
+\begin{enumerate}
+\item We show that not matching the different crime datasets could reduce the number of crimes, but that the general patterns are stable, and no dataset is especially influential.
+\item We show that not including predictions up to age 50 noticeably reduces the number of crimes, but the general patterns are not modified.
+\item We show estimates using arrest-based estimations versus sentence-based estimations, and found that the differences are large in terms of the number of crimes before victimization inflations, but small after it, and do not substantially change the total benefits calculations.
+\end{enumerate}
+
+\noindent In Figure \ref{fig:costs_schedules}, we present additional deviations from our main estimates. In particular, we show how the estimations change when two different cost schedules are used: (i) Top-Down costs, and (ii) Bottom-Up costs, assuming that the costs of murders and rapes are identical to the cost of an assault. We can see that BU costs are a ``conservative'' option in the sense that the effects of the program are higher using TD costs. We can also see that with no murders and rapes, the effect of the program on crime is still positive, but much smaller than when those crimes are considered. \\
+
+\begin{figure} [H]
+\caption{Different Cost Schedules}
+\centering  \label{fig:costs_schedules}
+{\scalebox{0.9}{\includegraphics{AppOutput/Crime/bu_td_nomur}}}
+\floatfoot{
+\footnotesize
+\noindent Note: this figure depicts the per capita cost for the different categories of costs and crimes we use, by control (C) and treatment (T). It presents some sensitivity analyses. The first pair of bars represents costs using the Bottom-Up approach in Table \ref{tab:individual-crime-cost} to determine individual costs of crime. The second pair of bars represents costs using the Top-Down approach in Table \ref{tab:individual-crime-cost} to determine individual costs of crime. The third pair of bars uses the Bottom-Up approach, but replaces the values of murders and rapes with that of assaults.\\
+}\end{figure}
+
+\noindent Finally, in Figure \ref{fig:crime_discounting}, we present the effect that discounting and applying deadweight loss has on our estimates. The first pair of bars represents the undiscounted cost estimates, the second pair of bars represents the discounted costs, and the third pair of bars represents the discounted costs including deadweight losses. It is clear that the effect of discounting is substantial, approximately halving the total cost estimates. The effect of applying deadweight loss barely changes the estimates. The effect of deadweight loss is most noticeable in the value of miscellaneous crimes, which are only public costs. Still, its impact in the overall costs is minor. \\
+
+\begin{figure} [H]
+\caption{Effect of Discounting in Our Estimates}
+\centering  \label{fig:crime_discounting}
+{\scalebox{0.9}{\includegraphics{AppOutput/Crime/crime_discounting}}}
+\floatfoot{
+\footnotesize
+\noindent Note: this figure depicts the per capita cost for the different categories of costs and crimes we use, by control (C) and treatment (T). The discounted costs use 3\% as a discount factor, and are discounted to age 0. The deadweight loss (DWL) adjustments increases the costs from justice system and imprisonment by 50\%. All costs are in thousands of 2014 USD.\\
+}\end{figure}

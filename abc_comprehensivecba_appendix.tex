@@ -1,0 +1,777 @@
+%Input preamble
+\input{preamble}
+
+\externaldocument{abc_comprehensivecba}
+\pagenumbering{roman}
+
+\begin{document}
+\title{\Large \textbf{Appendix: \\ Analyzing the Short- and Long-term Effects of Early Childhood Education on Multiple Dimensions of Human Development}}
+
+\author{
+Jorge Luis Garc\'{i}a\\
+The University of Chicago \and
+James J. Heckman \\
+American Bar Foundation \\
+The University of Chicago \and
+Andr\'{e}s Hojman\\
+The University of Chicago \and
+Duncan Ermini Leaf \\ 
+University of Southern California \and
+Mar\'{i}a Jos\'{e} Prados \\
+University of Southern California \and
+Joshua Shea \\
+The University of Chicago}
+\date{First Draft: January 5, 2016\\ This Draft: \today}
+\maketitle
+\thispagestyle{empty}
+
+%\pagebreak
+\tableofcontents
+\listoffigures
+\listoftables
+\pagebreak
+\doublespacing
+
+%Input Appendices
+\pagenumbering{arabic}
+\begin{appendices}
+\setcounter{figure}{0}  \renewcommand{\thefigure}{A.\arabic{figure}}
+\setcounter{table}{0}   \renewcommand{\thetable}{A.\arabic{table}}
+
+\section{Background} \label{appendix:background}
+
+\subsection{Overview}
+
+\noindent The Carolina Abecedarian Project (ABC) and the Carolina Approach to Responsive Education (CARE) were high-quality early childhood education programs each with two phases of randomized controlled design. They were both implemented at the Frank Porter Graham Center (FPGC) of the University of North Carolina in Chapel Hill. ABC served four cohorts of children born between 1972 and 1977, and CARE served two cohorts of children born between 1977 and 1980. In the main paper, we explain the eligibility requirements, the randomization protocol, and the programmatic contents of both programs. In this section of the appendix, we expand on additional important details of all these aspects.
+
+\subsection{Eligibility Criteria and Populations Served}
+
+\noindent The mothers of the ABC and CARE participant children were typically recruited during the last trimester  of pregnancy. Potential families were referred by local social service agencies and hospitals. Eligibility was determined by a score of 11 or more on a weighted 13-factor High-Risk Index (HRI).\\ 
+
+\noindent The HRI for ABC was based on 13 weighted variables, which are listed here with weights in parentheses: (i) maternal education level measured by years of education--- 6 (8), 7 (7), 8 (6), 9 (3), 10 (2), 11 (1), 12 (0); (ii) paternal education level with weights identical to those for maternal education; (iii) yearly family income measured in current dollars---\$1,000 or less (8), \$1,001-\$2000 (7), \$2,001-\$3,000 (6), \$3,001-\$4,000 (5), \$4,001-\$5,000 (4), \$5,001-\$6,000 (0); (iv) father's absence from the household for reasons other than health or death (3); (v) lack of maternal relatives in the area (3); (vi) siblings of school age one or more grades behind age-appropriate level, or with equivalently low scores on school-administered achievement tests (3); (vii) received payments from welfare agencies within the past 3 years (3); (viii) record of father's work indicates instability or unskilled and semi-skilled labor (3); (ix) record of maternal or paternal IQ score of 90 or below (3); (x) record of sibling IQ score of 90 or below (3); (xi) relevant social agencies in the community indicate the family is in need of assistance (3); (xii) one or more family members has sought counseling or professional help in the past 3 years (1); and (xiii) special circumstances not included in any of the above that are likely contributors to cultural or social disadvantage (1).\footnote{\citet{Ramey_Smith_1977_AJMD, Ramey_Campbell_1984_AJMD,Ramey_Campbell_1991_childreninpoverty,Ramey_Campbell_etal_2000_ADS}.} The weighting scale aimed to establish the relevant importance of each item in the index.\footnote{\citet{Ramey_Smith_1977_AJMD}.} Race was not  considered for eligibility; however, 98\% of the families who agreed to participate were African-American.\footnote{\citet{Ramey_Smith_1977_AJMD,Ramey_Campbell_1979_SR}.} \\
+
+\noindent The HRI for CARE was similar to that of ABC---it also had 13 weighted variables. Similarly, a score of 11 or above was required to be considered eligible. The items for maternal and paternal education levels have the same categories and weights as the ABC HRI. The other identical items are having an absent father,  school-age siblings performing lower than the norm in grade-level or achievement tests, a record of father's unstable job history or unskilled labor, social agencies indicating a high level of need, and other circumstances related to cultural or social disadvantage. The specification of the following items were changed between the ABC and CARE HRI. The weight associated with household income depended on the number of individuals in the family for CARE and the income categories range from less than \$2,000 to \$13,500 or more. In the CARE HRI, it is asked if payments were received from welfare agencies in the past 5 years instead of 3 years. Similarly, it asks if any family member has sought counseling in the past 5 years instead of 3 years. The threshold for maternal or paternal IQ is 85 in the CARE HRI instead of 90 as in the ABC HRI.  It does not have an item related to the absence of maternal relatives in the area, but replaces that item with asking if any member of the mother or father's immediate family has received services for the mentally disabled (the weight for this item is 3).\footnote{\citet{Ramey_etal_1985_Project-CARE_TiECSE}.}
+\begin{center}
+	\begin{figure}[H]
+		\caption{High-Risk Index Distribution, ABC} \label{figure:hridistabc}
+		\centering
+		\includegraphics[width=.9\columnwidth]{output/abc_hri.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot shows the distribution of the High-Risk Index (HRI) for ABC, which determined eligibility. Children were eligible if they had a score of 11 or more.}
+	\end{figure}
+\end{center}
+
+\begin{center}
+	\begin{figure}[H]
+		\caption{High-Risk Index Distribution, CARE} \label{figure:hridistcare}
+		\centering
+		\includegraphics[width=.9\columnwidth]{output/care_hri.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot shows the distribution of the High-Risk Index (HRI) for CARE, which determined eligibility. Children were eligible if they had a score of 11 or more.}
+	\end{figure}
+\end{center}
+
+\noindent Figures~\ref{figure:hridistabc} and \ref{figure:hridistcare} display the distribution of the HRI score among all participants in ABC and CARE, respectively. All children were substantially disadvantaged. Maternal age when the target child was born was, on average, 19.9 years in ABC and 21.1 years in CARE. Approximately half of the mothers of both treatment and control group participants in ABC were 19 years or younger and one third were 17 years or younger. In CARE, approximately half of the mothers of both treatment and control group participants were 20 years or younger and one third were 17.2 years or younger.  Mean maternal IQ score in ABC was approximately 85, one standard deviation below the national mean. In CARE, the mean maternal IQ score was approximately 87. Only 25\% of the ABC children lived with both biological parents, and more than 50\% lived with extended families in multi-generational households (61\% of treatment-group children and 56\% of control-group children).\footnote{\citet{Ramey_Campbell_1991_childreninpoverty,Campbell_Ramey_1994_CD}.} About 79\% of children did not have a father in the home in both ABC and CARE. \\
+
+\subsection{Randomization Protocol and Compromises} \label{appendix:randomization}
+
+\noindent Randomization compromises throughout ABC's and CARE's implementations pose a challenge when evaluating the programs' effects. We discuss each case of compromise in detail next. Figure~\ref{fig:abc-flow} and Figure~\ref{fig:care-flow} are visual flows that go from the first-phase randomization to the last data follow-up and account for all cases of attrition and non-compliance. In Section~\ref{section:methodology},  we propose a methodology for adequately evaluating the programs while accounting for these compromises.\\
+
+\noindent Although most randomization compromises occurred at early stages, this methodology also accounts for the fact that a few individuals were not in the sample either for the second-phase randomization or for the adult-age follow-ups. In Appendix~\ref{appendix:data}, we describe the sample reductions that attrition at different stages of the study generates and test potential differences between the children who completed data follow-ups and the children who did not.\\
+
+
+\begin{center}
+	\begin{figure}[H]
+		\caption{Randomization Protocol and Treatment Compliance, ABC} \label{fig:abc-flow}
+		\centering
+		\includegraphics[width=.7\columnwidth]{output/abc_Diagram.pdf}
+\floatfoot{
+\footnotesize
+\noindent
+Sources: \cite{Ramey_Collier_etal_1976_CarolinaAbecedarianProject, Ramey_Smith_1977_AJMD,Ramey_Campbell_1979_SR,Ramey_Campbell_1984_AJMD}, internal documentation of the program, and own calculations. Note: The variable $R$ represents randomization into treatment, $[R=1]$, or control, $[R=0]$, groups. After the original randomization, some children died or withdrew from the program early in life and were replaced. $R$ also includes those replacements. Arrows pointing outside of the diagram indicate children who left the study permanently. The variable $P$ represents participation in the preschool-age program. The variable $SR$ represents randomization into the school-age program, $[SR=1]$, or out of it, $[SR=0]$. Some children were not randomized at school age, $[SR=No]$. We use the term ``temporarily attrited" for children who did not participate in the study at school age, but were later interviewed in the age-21 followup.
+}
+	\end{figure}
+\end{center}
+
+\begin{center}
+	\begin{figure}[H]
+		\caption{Randomization Protocol and Treatment Compliance, CARE} \label{fig:care-flow}
+		\centering
+		\includegraphics[width=.7\columnwidth]{output/care_Diagram.pdf}
+\floatfoot{
+\footnotesize
+\noindent
+Sources: \cite{Wasik_Ramey_etal_1990_CD}, internal documentation of the program, and own calculations. Note: The variable $R$ represents randomization into center-based childcare and family education, $[R=2]$, family education, $[R=1]$, or control, $[R=0]$. Arrows pointing outside of the diagram indicate children who left the study permanently. The variable $P$ represents participation in the corresponding group of the preschool-age program. The variable $SR$ represents those who participated in the school-age program, $[SR=1]$, or did not, $[SR=0]$. Unlike in ABC, there was no second-phase randomization in CARE. Rather, those in the center-based childcare and family education group and those in the family education group were automatically assigned to receive the school-age treatment. We use the term ``temporarily attrited" for children who did not participate in the study at school age, but were later interviewed in the age-21 followup.
+}
+	\end{figure}
+\end{center}
+
+\subsubsection{ABC}
+
+\noindent Both the first and second phases of randomization were conducted at the family level, so pairs of siblings and twins were jointly randomized to either treatment or control groups.\footnote{Sibling pairs occurred when the two siblings were close enough in age such that both of them were eligible for the program.} Although we know that pairing was based on HRI, maternal IQ, maternal education, maternal age, and gender, we do not know the original pairs. The study collected an initial sample of 120 families. Twenty-two children did not complete the first-phase of treatment as initially assigned by the randomization (see Table~\ref{table:abccompromises}).\footnote{In Appendix~\ref{appendix:controls}, we compare the observed, baseline characteristics of the children in Table~\ref{table:abccompromises} to the observed, baseline characteristics of the children who complied to the initial treatment assignment. We find little evidence of differences.}\\
+
+
+\noindent Of these cases, there were four children assigned to treatment who left the study before any data on them was collected. The program staff did not assign them an identifier, and we classify them as Cases A, B, C, and D. In our main methodology, we assume that they are missing at random. Exercises assuming that these children had outcomes identical to the child with the lowest outcome in the treatment group suggest that, even in this extreme scenario, there is little sensitivity (see Appendix~\ref{appendix:assessingcc}).\\
+
+\noindent Second, four children died before age 5---two of them initially assigned to treatment and two of them initially assigned to control (identifiers ``.x'', 914, 74, and 99). For all of them, we observe baseline characteristics and any other data collected before their death. For methodological purposes, they represent cases of program attrition when we do not observe their outcomes.\\
+
+\noindent Third, three children in the treatment group did not comply to treatment status (identifiers 900, 912, 922). They are different from Cases A, B, C, and D because we observe data collected for them from birth to age 8. Afterward, the program staff chose not to follow them anymore.\footnote{Informal conversations with the program's staff do not indicate a clear reason for this.} Therefore, these children remain in treatment sample until age 8 or before. After, they represent cases of program attrition, given that we do not observe them anymore. In Appendix~\ref{appendix:assessingcc} we find little sensitivity to adjusting for non-compliance of these children in the results we show for age 8 or before.\\
+
+\input{output/abc_compromises}
+
+\noindent Fourth, one child initially assigned to control was enrolled into treatment (identifier 78). Her mother wanted to work and the program staff decided to admit her child in center-based care.\footnote{Correspondence with the program officers stating this permission is available under request from the authors.} Both in terms of data collection and in terms of methodological purposes, this child is analogous to the children in the third case.\footnote{The sensitivity analysis finding little evidence when adjusting for non-compliance includes this case.}\\
+
+\noindent Fifth, four children in the treatment group did not complete treatment in its entirety (identifiers 85, 103, 108, and 123). They were treated for 3, 10, 6, and 9 months, respectively. Except for follow-ups during childhood, which our main results do not use, we observe most of the data for these children. We avoid taking a stance on how beneficial the program was at each age, because we do not have a way to document this. Therefore, we assume that they were treated as other child in the treatment group.\footnote{If anything, this downward biases the effects of the program we estimate.} \\
+
+\noindent Sixth, the family of one child in the control group moved at age 54 months (identifier 906). We observe any data collection before the family moved, so we consider the child as part of the control group in any estimation before this event. Afterwards, we do not observe any data on the child, so we consider her a case of program attrition.\\
+
+\noindent Seventh, two children initially assigned to treatment status were diagnosed as developmentally delayed after six and thirty-six months of treatment (identifiers 95 and 124, respectively). No data for them are available after the diagnosis. We drop them from the sample because they were not eligible to be part of the program, to begin with.\\
+
+\noindent Finally, two children initially assigned to the control group were admitted into treatment (identifiers 82 and 119). Local authorities requested this because the children were considered highly at risk. Data on them is available from birth and up to age 8 and we treat them as the children in the third and fourth cases. They crossed over from the control group to the treatment group, although the reasons were different.\\
+
+\noindent Analysis of each of these cases leads to the following conclusions. For four children, we do not have data to methodologically assess them as cases of program attrition, though sensitivity analyses suggest that the treatment effects of the program persist after assigning them the same outcome as the children who did worst in the treatment group. For the children who did not comply to treatment, adjusting our estimates for non-compliance when data is available makes little difference. The remaining 14 children who did not complete treatment as initially assigned represent various cases of program attrition, for which we propose a correction methodology in Section~\ref{section:methodology}.\\
+
+\noindent To increase the number of children in the sample, the program officers recruited additional children who were added to the program before children were six months old. Our calculations indicate that there were eight replacements. We cannot distinguish in the data the children who were initially randomized from the substitute children and there is no documentation on how these children were recruited.\footnote{Three replacements are reported in \citet{Ramey_Campbell_1979_SR}. Three are documented in correspondence with the program officers, which is available from the authors of the present document upon request. The other two replacements are implied by the number of children who participated of the randomization protocol in each cohort.} After the various compromises, the sample consisted of 111 children: 53 in the treat group and 58 in the control group. The observed characteristics for each child indicate that they were eligible for the program; all children in the sample have an HRI of 11 or above. \\
+
+\noindent Prior to the second phase of randomization, 3 children in the first-phase control group and 3 children in the first-phase treatment group could not be located for follow-up. One child in the control group and 8 children in the treatment group of the first phase did not participate in the second phase but later agreed to participate in the data collections during adulthood. This yielded a sample of 96 children in the second phase: 49 in treatment and 47 in control. After the second-phase randomization, three children in the treatment group chose not to participate in the program, while all children in the control group adhered to their randomization status. Figure~\ref{fig:abc-flow} in Appendix~\ref{appendix:background} illustrates ABC's randomization protocol and the flow of participants throughout the data follow-ups.\\
+
+\subsubsection{CARE}
+
+\noindent The randomization protocol in CARE had no major compromises.\footnote{\citet{Wasik_Ramey_etal_1990_CD,Burchinal_Campbell_etal_1997_CD}.} Of the 65 initial families, 23 were randomized to control, 25 to the family education treatment group, and 17 to the family education and center-based childcare treatment group. Two families in the family education treatment group had twins who were jointly randomized, as in ABC. We document four cases of program attrition (see Table~\ref{table:care_compromises}).\footnote{In Appendix~\ref{appendix:controls}, we compare the observed, baseline characteristics of the children in Table~\ref{table:care_compromises} to the observed, baseline characteristics of the children who complied to the initial treatment assignment. We find little evidence of differences.} For methodological purposes, we consider these children analogous to their corresponding cases in ABC. We do not present exercises to evaluate the sensitivity to non-compliance because there was none in CARE. Figure~\ref{fig:care-flow} in Appendix~\ref{appendix:background} illustrates CARE's randomization protocol and the flow of participants throughout the data follow-ups.\\
+
+\input{output/care_compromises}
+
+
+\subsection{Program Description and Content}
+
+\subsubsection{Goals}
+\noindent The original goals of treatment were to prevent mental retardation by enhancing overall development from birth,\footnote{Note that the clinical understanding of mental retardation was once associated with disadvantages that hindered early-life development \citep{Mental-Retardation_America_2004_BOOK_NYU}.} in turn fostering school-readiness for an at-risk population. Additional curriculum goals were to (i) support language, motor, and cognitive development; (ii) minimize high-risk behaviors; and (iii) develop socio-emotional competencies considered crucial for school success including task-orientation, emotional self-expression, independence, sharing, and cooperation.\footnote{\citet{Ramey_Collier_etal_1976_CarolinaAbecedarianProject, Ramey_etal_1985_Project-CARE_TiECSE, Sparling_1974_Synth_Edu_Infant_SPEECH, Wasik_Ramey_etal_1990_CD, Ramey-etal_2012-ABC}.} Implementation of ABC's and CARE's educational treatments evolved each successive year as program staff evaluated ongoing outcome data.\footnote{ \citet{Ramey-etal_1975_AJoMD, Finkelstein_1982_Day_Care_YC, McGinness_1982_Language-Poverty-Child,Haskins_1985_CD}.}\\
+
+
+\subsubsection{Daily Schedule}
+\noindent For both ABC and CARE, FPGC was open to families from 7:45 a.m. to 5:30 p.m., 5 days per week and 50 weeks per year.\footnote{\citet{Ramey_Collier_etal_1976_CarolinaAbecedarianProject, Ramey_etal_1985_Project-CARE_TiECSE}.} Children were offered free transportation to and from the center. A driver and second adult staffed each vehicle (one van and two station wagons) equipped with child safety seats.\footnote{\citet{Ramey_Campbell_1979_SR,abc2014-2015interviews}.} Data provided by FPGC indicate that approximately 65\% of treated ABC families utilized the free transportation.\footnote{\citet{Barnett_Masse_2002_benefitcost}.} Vehicles typically arrived by 9:00 a.m. to the center and departed around 3:45 p.m.\footnote{\citet{Ramey-et-al_1977_Intro-to-ABC}.} At FPGC, ABC and CARE treated children received breakfast, lunch, and a snack planned by a nutritionist.\footnote{ \citet{Haskins_1985_CD, Bryant_et_al_1987_Carolina_Approach_TIECSE, Ramey-et-al_1977_Intro-to-ABC}.} Infants received iron-fortified formula  until doctors advised adding solid food. The control-group children also received an unlimited amount of iron-fortified formula.\footnote{\citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments,abc2014-2015interviews}.} Meals were catered by off-site kitchens. \\
+
+\subsubsection{Program Staff and Physical Space}
+\noindent To promote trust in FPGC within the sample families, staff were recruited from the local community.\footnote{\citet{Ramey-et-al_1977_Intro-to-ABC, Bryant_et_al_1987_Carolina_Approach_TIECSE, Feagans_1996_Childrens-Talk,abc2014-2015interviews}.} Infant and toddler caregivers and preschool teachers demonstrated varied educational backgrounds ranging from high school graduation to master's degrees. Their average professional working experience with young children was 7 years.\footnote{\citet{Ramey_McGinness_etal_1982_Abecedarianapproach, Ramey_etal_1985_Project-CARE_TiECSE, Wasik_Ramey_etal_1990_CD}.} All classroom staff participated in extensive training and were closely observed by FPGC's academic staff, as part of a broad variety of ongoing clinical and social research related to early childhood education, psychology, and health. In ABC, child-caregiver ratios varied by age: 3:1 for infants up to 13 to 15 months of age; 4:1 for toddlers up to 36 months; and 5:1 or 6:1 for children aged 3 to 5 years, depending on cohort size.\footnote{\citet{Ramey-et-al_1977_Intro-to-ABC,Ramey_Campbell_1979_SR,Ramey_McGinness_etal_1982_Abecedarianapproach}.} Child-caregiver ratios were similar in CARE.\footnote{\citet{Burchinal_Campbell_etal_1997_CD, Ramey_etal_1985_Project-CARE_TiECSE}}\\
+
+\noindent The ABC and CARE staff included a program director, a secretary, 12 to 14 teachers and assistant teachers, 3 administrative staff members, and a transportation supervisor.\footnote{\citet{Ramey-et-al_1977_Intro-to-ABC,Ramey_McGinness_etal_1982_Abecedarianapproach, Bryant_et_al_1987_Carolina_Approach_TIECSE}.} Classroom staff in both ABC and CARE included infant caregivers and preschool teachers who had an average of 7 years of experience in early childhood care at hiring. Lead caregivers and teachers had bachelor's or master's degrees. Teacher aides, recruited from the local community, held high school diplomas (at minimum) and were comparatively well-compensated in the childcare field. They remained a stable treatment component throughout the study. Classroom staff received weekly training, daily supervision, and frequent professional development from outside consultants.\footnote{\citet{Obrien-Sanders_1974_ABC-brochure, Ramey_etal_1985_Project-CARE_TiECSE, Sanders-Stokes_1979_Status-Report,Klein-Sanders_1982_Status-Report,abc2014-2015interviews}.}\\
+
+\noindent Infant nurseries, toddler rooms, and preschool classrooms were housed on different floors of FPGC. Early reports indicate that FPGC allocated two floors to ABC, but later reports indicate the use of three floors.\footnote{\citet{Ramey_Smith_1977_AJMD,Ramey_Campbell_1979_SR,Ramey_1981_Modification}.} Two infant nurseries were staffed by five adults in a suite of four adjoining rooms: two sleeping rooms contained seven cribs each, while the other two rooms were designated for activities.\footnote{ \citet{Ramey-et-al_1977_Intro-to-ABC}.} The four rooms opened into a large, shared space with feeding tables, an area for food preparation, and a couch.\footnote{\citet{Ramey_Campbell_1979_SR}.} Offices for the medical staff, along with two examining rooms and facilities for laboratory tests were located around the corner from the infant nurseries.\footnote{\citet{abc2014-2015interviews}.} Two multi-age toddler rooms were located one floor below the infant nurseries. One room served children who were 1 to 2 years old and the other served children 2 to 3 years old.\footnote{\citet{Ramey_Smith_1977_AJMD,Ramey_Campbell_1979_SR}.} 3-year-olds were housed in a closed classroom near the toddler rooms. On the lowest floor, 4-year-olds shared an open classroom with a public kindergarten program; the two classes were separated by a long, low bookcase. This information is not available for CARE to the best of the authors' knowledge. FPGC offered two outdoor play areas for both ABC and CARE: one for children up to age 3, and the other for older children.\footnote{\citet{Ramey_Campbell_1979_SR,Ramey_McGinness_etal_1982_Abecedarianapproach}.}\\
+
+\subsubsection{Approach to Child Development}
+%Direct from the paper
+\noindent Curriculum delivery enabled a highly customized learning experience for treated children in both ABC and CARE. Infant caregivers recorded child observations on progress charts and collaborated with FPGC's curriculum developers and academic researchers to rotate learning activities every 2 to 3 weeks for each treated child.\footnote{\citet{Ramey_Collier_etal_1976_CarolinaAbecedarianProject,Campbell_Ramey_1994_CD}.} Preschool rooms featured intentionally organized environments to promote pre-literacy and access to a rich set of learning tools. The full-day curriculum emphasized active learning experiences, dramatic play, and pre-academics. Frequent 1:1 or 2:1 child-adult interactions prioritized language development for social competence. For ages 3 through 5, as the cohorts approached public school entry, classroom experiences were increasingly structured  towards the development of pre-academic skills and ``socio-linguistic and communicative competence.''\footnote{\citet{Ramey-et-al_1977_Intro-to-ABC, Haskins_1985_CD, Ramey_1981_Modification, Ramey_Campbell_1979_SR, Ramey_Smith_1977_AJMD, Ramey_McGinness_etal_1982_Abecedarianapproach, Sparling_Lewis_1979_BOOKLearninggamesFirstThree,Sparling_Lewis_1984_BOOKLearningGamesThreesFours}.} In CARE, FPGC offered a summer program before the start of kindergarten designed to target specific skills to ensure success in a kindergarten classroom (e.g., lining up when exiting the classroom). This program was available to children in both the center-based childcare and family education group and the family education group.\footnote{\citet{Ramey_etal_1985_Project-CARE_TiECSE}.} \\
+
+\noindent ABC's and CARE's learning programs were influenced by key developmental theorists, including Bowlby, Piaget, Vygotsky, and Tough.\footnote{\citet{Sparling_1974_Synth_Edu_Infant_SPEECH,Mcginness_1981_Developing,abc2014-2015interviews}.} All four ABC cohorts and two CARE cohorts participated in curriculum developers Sparling and Lewis' ``Learningames for the First Three Years.''\footnote{ \citet{Sparling_Lewis_1979_BOOKLearninggamesFirstThree}.} The ``Learningames'' were implemented daily by infant and toddler caregivers in 1:1 child-adult interactions. Each ``Learningames'' activity stated a developmentally-appropriate objective, the necessary materials, directions for teacher behavior, and expected child outcome. The activities were designed for use both indoors and outdoors, while dressing, eating, bathing, or during play.\footnote{\citet{Ramey_Campbell_1979_SR, Ramey_1981_Modification,Sparling_Lewis_1979_BOOKLearninggamesFirstThree}.}\\
+
+\noindent Supplemental curricula for preschool rooms varied throughout the study, and included ``Cook and Learn,'' ``Bridges to Reading,'' ``Peabody Early Experiences Kit,'' ``GOAL Math Program,'' ``My Friends and Me,'' and ``Teaching all Children to Read.''\footnote{ \citet{Greenberg_Epstein_1973_BOOKBridgestoreading,Karnes1973,Dunn_Chun_etal_1976_BOOKPeabodyearlyeducation,Davis_1977_BOOKMyfriends,Wallach_1976_Teaching-All-Children}.} Packaged preschool supplemental curricula supported individual children's learning needs, and varied from year to year.\footnote{ \citet{Ramey_McGinness_etal_1982_Abecedarianapproach,Mcginness_1981_Developing,Finkelstein_1982_Day_Care_YC,Wasik_Ramey_etal_1990_CD}.}\\
+%SK notes to co-authors: I'm currently waiting for info from Lynne Vernon-Feagans to potentially include a social worker to the list of staff!
+
+\noindent Children in CARE randomized into the center-based childcare and family education group or the family education group also received home visits designed to transmit information on child development and skills involved with parenting including strategies for parent-child interactions based on ``Learningames" activities and problem-solving techniques.\footnote{\citet{Bryant_et_al_1987_Carolina_Approach_TIECSE, Wasik_Ramey_etal_1990_CD, Burchinal_Campbell_etal_1997_CD}} Home visitors were trained to ensure they were capable to form a strong relationship with the parent and successfully implement the curriculum.\footnote{\citet{Bryant_et_al_1987_Carolina_Approach_TIECSE}} The visits lasted about an hour, and occurred weekly until the child was 3 years old. After age 3, the home visits were less frequent and depended on the preferences of the parents. They were usually about once a month after age 3.\footnote{\citet{Bryant_et_al_1987_Carolina_Approach_TIECSE, Wasik_Ramey_etal_1990_CD, Burchinal_Campbell_etal_1997_CD}} 
+
+\subsubsection{Medical Care and Nutrition}
+%Direct from the paper
+ABC and CARE provided comprehensive on-site medical care because it was conducted in conjunction with a longitudinal medical research study on infectious respiratory diseases in group environments.\footnote{\citet{Henderson-et-al_1982_NEJoM}.} Treatment group children were monitored daily for signs of illness. All treated children received medical care while attending center-based childcare; the first ABC cohort of control-group children also received medical care during the program's first year of implementation.\footnote{\citet{Ramey_Collier_etal_1976_CarolinaAbecedarianProject, Bryant_et_al_1987_Carolina_Approach_TIECSE, Ramey_Campbell_1991_childreninpoverty,Campbell_Ramey_1994_CD}.}$^{,}$\footnote{Children in both the treatment and control groups of the first cohort received free medical care provided by ABC. The control group of the first cohort only received medical care in the first year of the program; the treatment group of the first cohort received medical care for all years of the program. In the subsequent cohorts, only children in the treatment group received free medical care provided by ABC. Both CARE cohorts of treated children received medical care.}\\
+%Direct from the paper
+
+\noindent In ABC, primary pediatric care was provided by a family nurse practitioner and a licensed practical nurse, both under the supervision of one pediatrician who was on continuous duty at the center.\footnote{\citet{Haskins-et-al_1978_JoPP}.} In CARE, the medical staff included two pediatricians, a family nurse practitioner, and a licensed practical nurse.\footnote{\citet{Bryant_et_al_1987_Carolina_Approach_TIECSE}.} The medical staff provided regularly scheduled check-ups, immunizations, parental counseling, and initial assessment of illnesses.\footnote{\citet{Ramey-et-al_1977_Intro-to-ABC, Bryant_et_al_1987_Carolina_Approach_TIECSE}.} The treatment group received standard check-ups when they were 2, 4, 6, 9, 12, 18, and 24 months old and annually thereafter. While in treatment, they also received the standard immunizations.\footnote{\citet{Bryant_et_al_1987_Carolina_Approach_TIECSE, Campbell_Conti_etal_2014_EarlyChildhoodInvestments}.} In ABC, a licensed practical nurse visited classrooms for up to two hours on a daily basis to monitor the children's health status.\footnote{\citet{Sanyal_Henderson_etal_1980_JoPediatrics}.} Although this medical care was offered to the treatment-group families free of charge, it was the policy of the medical staff to refer families to a community hospital for serious treatment. While ABC and CARE provided aspirin, immunizations, and basic medicines, families were responsible for purchasing any prescription medication subjects required. There is no data currently available on treatment received for serious conditions or use of prescription medication.  \\
+
+\noindent Infants were supplied with iron-fortified formula. Children older than 15 months of age were provided breakfast, lunch, and an
+afternoon snack all planned by a nutritionist.\footnote{\citet{Bryant_et_al_1987_Carolina_Approach_TIECSE, Campbell_Conti_etal_2014_EarlyChildhoodInvestments,abc2014-2015interviews}.} Control families received diapers for up to three years and unlimited iron-fortified bottled formula through 15 months.\footnote{\citet{Ramey_Collier_etal_1976_CarolinaAbecedarianProject,Ramey_Campbell_1979_SR, Ramey_etal_1985_Project-CARE_TiECSE}.}
+
+\subsubsection{School-age Treatment}
+
+\noindent The ABC participants were subject to a second-phase randomization into a school-age treatment (95 subjects continued to this stage of treatment). The CARE participants in the center-based childcare and family education group and the family education group received the school-age treatment without randomization. The school-age treatment lasted for the first three years of elementary school and consisted of home visits conducted by a Home/School Resource Teacher.\footnote{\cite{Burchinal_Campbell_etal_1997_CD}.} These visits were structured to increase exposure to reading and mathematics and promote parental involvement in the academic process.\\
+
+\noindent The curriculum was delivered through sets of activities (around 60 per year) that developed skills such as handwriting, phonics, and math facts.\footnote{\cite{Campbell-Ramey_1989_Preschool-vs-School-age}.} Teachers worked to encourage parental involvement in the children's academics and provided incentives to families to comply with the treatment, such as giving gift certificates to restaurants and books for children upon the completion of activity packets. Home activities were designed at the appropriate level to promote success.\\
+
+\noindent Teachers had graduate-level education, training in special education, \textit{or} were qualified to act as consultants for in-school teachers to address any problems that arose.\footnote{\cite{Ramey_Campbell_1991_childreninpoverty}.} They met with parents every other week to deliver new activities for them to complete with their children and discuss the child's level of success with the previous set of activities. In addition, they helped parents with issues such as adult literacy, housing, and medical care. Thus, the teacher had a dual role as a parent educator and an advocate for the child in their educational institution.
+
+\subsection{Control Substitution}
+
+\noindent In ABC, the families of almost $70\%$ of the control-group children enrolled their children in high-quality childcare. In CARE, $74\%$ of families in the control group and $62\%$ of families in the family education group enrolled their children in high-quality childcare. We refer to this phenomenon as treatment substitution; accounting for it is fundamental when evaluating the program, as we argue in Section~\ref{section:methodology}. In this Appendix, we thoroughly describe the characteristics and costs of the childcare centers providing alternative treatment, in order to create a comparison with the treatments offered by ABC and CARE.\\
+
+\noindent Most of the families in the ABC and CARE control groups enrolled their children in alternative preschools that received federal subsidies and, therefore, were regulated by the Federal Interagency of Day Care Requirements (FIDCR). Figure~\ref{fig:ccabc} and Figure~\ref{fig:cccare} show the amount of enrollment into subsidized and non-subsidized care for ABC and CARE, respectively. Subsidized centers were required to have trained staff who were able to implement curricula designed to enhance cognitive, social, and linguistic competence in disadvantaged children.\footnote{\citet{Burchinal_etal_1989_CD_Daycare-Pre-K-Dev}.} Thus, we consider these centers to offer high-quality center-based childcare.
+
+\begin{center}
+	\begin{figure}[H]
+		\caption{Average Number of Months in Preschool Substitutes, ABC Control Group} \label{fig:ccabc}
+		\centering
+		\includegraphics[width=.9\columnwidth]{output/blackwhite_CCnumber.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This figure describes the take-up of center-based childcare by families in the ABC control group. The vertical axis represents the average number of months per year the children of the control group spent in center-based childcare. Subsidized centers were highly regulated and, therefore, high-quality. Non-subsidized childcare services were center-based but not regulated. Other sources of childcare could have included care by parents, relatives, or non-relatives.}
+	\end{figure}
+\end{center}
+
+\begin{center}
+	\begin{figure}[H]
+		\caption{Average Number of Months in Preschool Substitutes, CARE Control and Family Education Groups} \label{fig:cccare}
+		\centering
+		\includegraphics[width=.9\columnwidth]{output/blackwhite_CCnumber_care.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This figure describes the take-up of center-based childcare by families in the CARE family education and control groups. The vertical axis represents the average number of months per year the children of the control group spent in center-based childcare. Subsidized centers were highly regulated and, therefore, high-quality. Non-subsidized childcare services were center-based but not regulated. Other sources of childcare could have included care by parents, relatives, or non-relatives.}
+	\end{figure}
+\end{center}
+
+
+\subsubsection{Regulation}
+
+\noindent During the ABC and CARE programs, North Carolina had an active, high-quality system of public childcare for vulnerable families funded by several public programs. Examples include Title IV-A of the Social Service Administration (SSA), Aid to Families with Dependent Children (AFDC), and Title IV-B of Child Welfare Services. These funding efforts were amplified in 1975 by Title XX of the SSA, Social Services Block Grant, which was the main federal source of childcare financing in the US when ABC was active.\footnote{\citet{Robins_1988_Federal-Child-Care}.}\\
+
+\noindent Federally funded childcare services were regulated according to FIDCR standards, which defined stringent regulation for center-based programs for children between the ages of 3 and 6.\footnote{\citet{Department-of-Health_1968_DayCareRequirements}.} These requirements were enforced and childcare providers were aware of them.\footnote{\citet{Kuperman_2015_Clifford-Russell-Interview}.} Additionally, North Carolina had a mandatory licensing law for childcare facilities. This regulation only applied to centers serving children below the age of 3 while FIDCR applied to centers for older children (between the ages of 3 and 6). The relative weakness of this regulation is not very relevant for our study because treatment substitution occurred mostly after age 3.\footnote{\citet{NCGA_1971_House-Bill-100}.} Table~\ref{table:staff} compares a widely-used quality standard, the child-staff ratio, between the North Carolina and FIDCR standards and the actual ABC and CARE numbers.
+
+%Not in main paper
+\begin{table}[H]
+\caption{Child-Staff Ratios for North Carolina, FIDCR, and Actual ABC and CARE Ratios}
+\label{table:staff}
+\begin{threeparttable}
+\begin{tabular}{lccc}
+\hline \hline
+ &NC Standards & FIDCR &  ABC and   \\
+Age	& Level I &  Standards  & CARE Ratios\\ \hline
+0--1	& 6:1*	&  				& 	3:1					\\
+1--2	& 8:1* 	& 				&   4-5:1				\\
+2--3	& 12:1* & 				& 	4-5:1				\\
+3--4	& 15:1 	& 		5:1*	& 	4-5:1 				\\
+4--5	& 20:1 	& 		7:1*	& 	5-6:1 				\\
+5--6 & 25:1  &		7:1*	&	5-6:1				\\
+\hline \hline
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+Sources: \cite{Department-of-Health_1968_DayCareRequirements,NCGA_1971_House-Bill-100,Ramey-et-al_1977_Intro-to-ABC,Ramey_Campbell_1979_SR,Ramey_McGinness_etal_1982_Abecedarianapproach, Burchinal_Campbell_etal_1997_CD}.\\
+Note: The starred ratios represent the ones we believe were the most relevant for ABC control-group children and CARE control-group and family-education-group children.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsubsection{Costs}
+
+\noindent Center-based childcare centers had a uniform rate for subsidy-eligible children, independent of which program the children were eligible for. This was mandated by the County Department of Social Services. The most common way for a child to be eligible was by belonging to a poor family with either a single mother who worked or studied or with both parents who either worked or studied. Other conditions, such as abuse risk, were also considered. Information on the subsidy rates paid is limited, but evidence from 1982 records indicates that at that time, the subsidy value for full-time center-based childcare was between \$59 and \$111 (2014 USD) per week.\footnote{\citet{NC-Leg-Res-Comm-Study_1983_Day-Care-Report}.} 
+
+\subsection{Data} \label{appendix:data}
+
+In Table~\ref{tab:ecvars_1} through Table~\ref{tab:adultvars_2}, we summarize the data availability for both ABC and CARE. The data collection processes in both programs were analogous by design. For both programs, the treatment and control groups were followed into adulthood with relatively low attrition. For ABC, children were followed annually through elementary school and at ages 12, 15, 21, and 30. Health and administrative crime data were collected when the children reached their mid-30s. For CARE, the exact same follow-ups are available with the exception of the age 15 follow-up.\\
+
+\input{output/abc-care_dataavailability.tex}
+
+% AZ: commenting out until we can get the CORRECT numbers in here for both ABC and CARE
+\begin{comment}
+\begin{figure}[H]
+\caption{Attrition by Age, ABC} \label{fig:attrition}
+    \centering
+  \includegraphics[width=.9\columnwidth]{output/abc_attrition.eps}
+  \floatfoot{
+\footnotesize
+Note: This plot shows the number of participants in ABC for whom there exists data at the periods of data collection by experimental group. The children who withdrew from the study did so due to several reasons, such as adoption. Children were not followed if they were found to be biologically retarded after randomization. The numbers in the bars indicate the number of individuals who were interviewed during that phase of data collection. The original sample was measured after randomization but before the start of the program, the baseline sample was measured at the start of the program, and the health sample was collected at age 34.
+}
+\end{figure}
+\end{comment}
+
+\noindent Attrition was low in ABC. Information is available on 100 children in the age 30 follow-up, which we call the adult follow-up. In addition, 80 participantsÑ40 from the control group and 40 from the treatment groupÑconsented to the release of their criminal records. Further, 70 participants consented to the release of information regarding a full-range biomedical panelÑ31 from the control group and 39 from the treatment group. \\
+
+\noindent Attrition was also low for CARE subjects. Information is available on 58 children (more than 85\% of the initial sample) in the age-30 follow-up. Additionally, 40 participants (11 from the control group, 18 from the family education group, and 11 from the center-based childcare and family education group) released information on the full-range biomedical sweep. Administrative crime data are not available for CARE. We do not evaluate the second-phase of treatment in CARE because it was not randomized. Rather, those in the center-based childcare and family education group and the family education group were offered school-age treatment, and those in the control group were not.  \\ 
+
+\noindent In the following set of tables (Table~\ref{tab:abc_baseline} through Table~\ref{tab:health_baseline}), we compare the observed, baseline characteristics between the first-phase control and treatment groups in ABC, which are the main groups we analyze, at different stages of the data collection follow-ups. For each observed characteristic, we present the bootstrapped $p$-value associated with the standard $t$-test. We also present the bootstrapped, step-down $p$-value on jointly testing the difference in observed characteristics across the two blocks of variables separated by the horizontal line \citep{Lehmann_Romano_2005_testing}.\\
+
+\noindent First, we compare the first-phase treatment and control groups on baseline characteristics. 
+
+\input{output/baseline_balance}
+
+\noindent Second, we present the same exercise for each of the four cohorts ABC served.
+
+\input{output/baseline_coh1}
+
+\input{output/baseline_coh2}
+
+\input{output/baseline_coh3}
+
+\input{output/baseline_coh4}
+
+\noindent Third, we compare the second-phase treatment and control groups on baseline characteristics. 
+
+\input{output/baseline_balance_sa}
+
+\noindent Fourth, we compare the observed, baseline characteristics of compliant and non-compliant children in the first-phase treatment assignment.
+
+\input{output/attrition_balance}
+
+\noindent Fifth, we compare the observed, baseline characteristics between the children in the treatment and the control groups, excluding the children who did not comply to treatment.
+
+\input{output/postattrition_balance}
+
+% AZ: commenting out until we get the CORRECT numbers
+\begin{comment}
+\noindent Sixth, we compare the observed, baseline characteristics between the children in the first-phase treatment, restricting the sample to the children who consented to release their age-34 criminal records.
+
+\input{output/crime_balance}
+\end{comment}
+
+\noindent Finally, we compare the observed, baseline characteristics between the children in the first-phase treatment, restricting the sample to the children for whom we have information on the age-34 medical data collection.
+
+\input{output/health_balance}
+
+\noindent Despite some exceptions, these tables indicate balance between the treatment and control groups from the first-phase randomization, which is the primary comparison we analyze in the main paper. The balance in observed characteristics holds for the different samples we consider, which differs from the initial sample due to various instances of item non-response. For the second-phase randomization, there is also balance in observed characteristics. \\
+
+\noindent Table \ref{tab:care_baseline2} through Table \ref{tab:health_baseline_care_t1} are the analogous tables for CARE. We compare the two treatment groups (center-based childcare and family education, and only family education) separately across the full sample and by cohort. The inference statistics are constructed using the same methods as for Table \ref{tab:abc_baseline} through Table \ref{tab:health_baseline}. \\
+
+\input{output/baseline_balance_care_2}
+
+\input{output/baseline_balance_care_1}
+
+\input{output/baseline_coh5_care_2}
+
+\input{output/baseline_coh5_care_1}
+
+\input{output/baseline_coh6_care_2}
+
+\input{output/baseline_coh6_care_1}
+
+\input{output/health_balance_care_2}
+
+\input{output/health_balance_care_1}
+
+\noindent Overall, these tables indicate balance between the treatment and control groups, both when considering center-based childcare and family education and only family education as treatment.
+
+\setcounter{figure}{0}  \renewcommand{\thefigure}{B.\arabic{figure}}
+\setcounter{table}{0}   \renewcommand{\thetable}{B.\arabic{table}}
+\section{Background Variables and Tested Outcomes} \label{appendix:controls}
+
+\subsection{Controlling for Background Variables}
+
+\noindent We select the background variables that we control for as follows. First, we select the three variables, from 17 potential variables, that best predict enrollment into preschool alternatives for children who were randomly assigned not to receive center-based childcare---the control group in ABC and the control and family education treatment groups in CARE. To choose the best predicting control set, we estimate the $17 \choose 3$ linear models, using the variables in Panels (1) and (2) of Table~\ref{tab:pselectvars}. The best predicting model is the one generating the lowest Bayesian Information Criterion (BIC).\\
+
+\noindent We proceed in a similar way to choose the second set of background variables. Instead of predicting enrollment into alternative preschool, we predict the relevant outcome of interest. For this exercise we use the variables in Panel (2), so we estimate $14 \choose 3$ models.\\
+
+\noindent Our set of control variables consists of these two sets of background variables.
+
+\singlespacing
+\input{output/controlsets}
+\doublespacing
+\subsection{Tested Outcomes}
+
+\noindent The following tables list the outcomes we test treatment effects for when calculating our statistics. We reverse the outcomes for which we consider a negative treatment effect socially positive.
+
+\singlespacing
+\input{output/abccare_outcomes_list}
+\doublespacing
+
+\setcounter{figure}{0}  \renewcommand{\thefigure}{C.\arabic{figure}}
+\setcounter{table}{0}   \renewcommand{\thetable}{C.\arabic{table}}
+
+\section{Results} \label{appendix:results}
+
+\textbf{[JLG: Professor, we are displaying this in a separate file because the file is monstrous. We have separately attach it. It contains the treatment effects estimates on all 95 outcomes for all the hypothesis we have discussed. That is why we presented a selected variety of outcomes in the main paper.]}
+
+\setcounter{figure}{0}  \renewcommand{\thefigure}{D.\arabic{figure}}
+\setcounter{table}{0}   \renewcommand{\thetable}{D.\arabic{table}}
+\section{Alternative Evaluation Methodologies} \label{appendix:methodology}
+
+\noindent In the main paper, we develop and document the results from two methodologies to account for treatment substitution in the first phases of ABC and CARE. The objective of each method is to estimate the average treatment effect of ABC and CARE, holding fixed take-up of alternative preschool by the control group. We want to construct a scenario in which the children in the control group do not attend alternative preschools. This allows us to evaluate center-based childcare relative to a counterfactual scenario in which children stay at home.\\
+
+\noindent This section presents alternative methodologies to evaluate the first-phase treatment. Throughout the rest of this section, we refer to treatment in either ABC or CARE generically as center-based childcare. We refer to take-up of treatment substitution as enrollment into alternative preschools. As in our main methodology, we choose the control sets to account for background variables using the method in Appendix~\ref{appendix:controls}.\\
+
+\noindent To illustrate the alternative methods, we present results for a small set of outcomes. First, we consider time series of IQ scores. Second, we present results on three long-term outcomes of interest: years of education, employment, and labor income. Both IQ scores and the chosen long-term outcomes follow predictable patterns and are straightforward to interpret. These characteristics allow us to evaluate the sensitivity of the estimated treatment effects using the different strategies.\\
+
+\noindent We use the notation defined in the main paper and add individual subscripts to clarify some of the arguments. $\mathbf{X}_{i}$ is a vector of observed individual- or household-level characteristics; $P_i$ is an indicator for alternative preschool enrollment; $Q_{i}$ is the number of months in alternative preschool. $P_i$ and $Q_i$ are zero for participants of the treatment groups. $D_i=1$ denotes take-up of treatment, either in ABC or CARE.
+
+\subsection{Instrumental Variables}
+
+\noindent The first alternative method we present is based on a standard, linear instrumental variable framework.
+
+\subsubsection{Model and Conditions}
+
+\noindent Consider the following equation for an outcome of interest $Y_{i}$:
+
+
+\begin{equation}
+Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
+\label{eq:ivnot}
+\end{equation}
+
+\noindent where $D_{i}, Q_{i}$ are endogenous. Selection into treatment or alternative preschool is likely correlated with characteristics not observed when estimating the coefficients characterizing the outcome equation, i.e., $Cov(D_i,\varepsilon_i) \neq 0$ and $Cov(Q_i,\varepsilon_i) \neq 0$. Estimating the coefficients in \eqref{eq:ivnot} by OLS yields inconsistent estimates.\\
+
+\noindent A standard solution is to introduce a vector of instrumental variables, $\mathbf{Z}_i$, satisfying two conditions: (i) the matrix $\Pi$ of the coefficients in the population regression of $D_i$ and $Q_i$ on $\mathbf{Z}_i$ is full rank; and (ii) $\mathbf{Z}_i$ is uncorrelated with $\varepsilon_i$.
+
+
+\subsubsection{Instrumental Variables in Practice}
+
+\noindent To identify the coefficients in \eqref{eq:ivnot} using an instrumental variable strategy we need at least two instruments. We consider as an instrument randomization into ABC or CARE center-based treatment, denoted as an indicator, $R_{i}$. We then consider up to three other instruments.
+
+\begin{enumerate}[(i)]
+\item \textit{Season of child's birth}. This variable is coded as an indicator for being born in the fall (born between June and November). If daycares accepted children primarily in the fall, then children born in the fall can enter preschool when they are younger. Although there is evidence in the economics literature that being born in specific times in the year can influence the child's outcomes, the main channel for this effect seems to be the disproportionate selection into season of birth by high-income mothers \citep{Buckles-Hungerman_2013_RES}. Given that in our sample mothers are very young and disadvantaged, we assume that a negligible proportion of them selected their quarter of birth.
+
+\item \textit{Presence of a grandmother in the county}. Our hypothesis is that the grandmothers, who in this sample are relatively young and still working, could help the study mothers take care of their children. We assume that the mothers would have less influence over the presence of a grandmother in the county relative to the presence of a grandmother living in the home. We also assume that the grandmothers do not affect the children differently than any other avenue of informal care, such as care from a neighbor. In practice, the presence of a grandmother has a positive effect on preschool attendance, which could indicate that they helped take the child to preschool. This variable is only available for ABC.
+
+\item \textit{Number of relatives living in the household apart from the mother, child, siblings, and male partner}. We assume that the relatives could take care of the study child while the mother was working or in school, but also that they do not affect the children differently than any other avenue of informal care. In practice, having additional relatives living at home decreases the probability that a child goes into preschool.
+\end{enumerate}
+
+\subsubsection{Sets of Instruments}
+\noindent We consider three combinations of the instruments.  All of them include randomization into center-based treatments and birth in the fall. All of them include at least one variable representing access to informal care from relatives. The sets are the following:
+\begin{enumerate}[(i)]
+\item Randomization, Born in Fall, Grandmother in County, Number of Relatives at Home
+\item Randomization, Born in Fall, Grandmother in County
+\item Randomization, Born in Fall, Number of Relatives at Home
+\end{enumerate}
+
+\subsubsection{Specifications for the Instruments}
+\noindent We test various specifications where we allow for interactions of the potential instruments with the first-phase randomization indicator. In particular, we test three specifications for our instruments:
+
+\begin{enumerate}[(i)]
+\item Instruments measured in levels: $ \left( R_i,\mathbf{Z_i} \right) $.
+\item\label{interact} Instruments measured in levels and interactions of treatment with the instruments and the controls: $ \left(R_i,\mathbf{Z_i},\mathbf{Z_i}R_i,\mathbf{X_i}R_i \right)$.
+\item\label{inverse} Interactions of the instruments and the controls with an indicator for being randomized into the control group: $\left( R_i, \mathbf{X_i} \left( 1-R_i \right), \mathbf{Z_i} \left( 1-R_i \right) \right)$.
+\end{enumerate}
+
+\noindent In practice, the specification in \eqref{inverse} is the most stable across outcomes. This makes economic sense because the instruments are less likely to affect the participants of the treatment group, given that almost all the treatment families comply to the first-phase randomization protocol.
+
+\subsubsection{Functional forms for Enrollment in Alternative Preschool}
+
+\noindent We use different parameterization for enrollment in alternative preschool in \eqref{eq:ivnot}: 
+
+\begin{enumerate}[(i)]
+\item The number of months in alternative preschool, $Q_{i}$.
+\item An indicator for take-up of alternative preschool, $P_i$.
+\item The $\log$ of months in alternative preschool, $\log Q_{i}$.
+\end{enumerate}
+
+\subsection{Results}
+
+\noindent In this section, we present the results of the instrumental variable approach. We discuss the estimates of the coefficient for $D_{i}$ in \eqref{eq:ivnot}, while accounting for endogenous take-up of alternative preschool. The results are roughly stable for all presented outcomes: the effect considering the take-up of alternative preschool in the control group is much stronger than the intent-to-treat effect (the mean difference between the treatment and control groups). At ages 15 and 21, the effects on IQ scores are close to zero.
+
+\subsubsection{Main Specification}
+
+\noindent Our main specification uses three instruments: randomization into center-based childcare in either ABC or CARE, the presence of a grandmother in the county, and being born in the fall. We interact the latter two instrument with an indicator for being randomized into the control group ($1-R_{i}$). The endogenous variables are $D_{i}$ and $Q_{i}$.\\
+
+\noindent Figure \ref{fig:main_iv1} and Figure~\ref{fig:mainiv2} display the estimates of the coefficient on $D_{i}$. That is, the effect of attending the ABC or CARE treatment, fixing take-up of alternative preschool. The results indicate the following: (i) the effects are stronger compared to those in the main paper, even to those in the main paper that fix children to no preschool alternatives; (ii) the estimates are less stable across ages compared to those in the main paper. For example, while the effects on IQ scores from ages 0 to 5 years average around 14 points in the main paper, they average 20 points using this specification of instrumental variables. 
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous Take-up of Alternative Preschool Using Instrumental Variables} \label{fig:main_iv1}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/main_iv_te.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_i$, using $R_i$ and $\mathbf{Z_i}(1-R_i)$ as instruments. The outcomes ($Y_i$) are IQ tests at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X_i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\end{figure}
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for Endogenous Take-up of Alternative Preschool Using Instrumental Variables} \label{fig:mainiv2}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/main_iv_other.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}(1-R_i)$ as instruments. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\end{figure}
+
+\subsubsection{Varying the Sets of Instruments}
+
+\noindent Figure \ref{fig:ins_inter_Q_iv1} and Figure \ref{fig:ins_inter_Q_iv2} explore the sensitivity of the estimates to different sets of instruments. The pattern of results indicates that the method is generally robust to the three sets of instrumental variables that we consider. 
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous Take-up of Alternative Preschool Using Various Instrumental Variables} \label{fig:ins_inter_Q_iv1}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_Q_iv_te.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}(1-R_i)$ as instruments. The outcomes ($Y_i$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X_i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\end{figure}
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for Endogenous Take-up of Alternative Preschool Using Various Instrumental Variables} \label{fig:ins_inter_Q_iv2}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_Q_iv_other.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}(1-R_i)$ as instruments. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\end{figure}
+
+\subsubsection{Varying the Specification of the Instruments}
+
+\noindent We now present an exercise to evaluate the sensitivity of the results to different specifications of the instrumental variables. First, Figure~ \ref{fig:nointer_Q_iv} and Figure \ref{fig:nointer_Q_other} present the results using the set of instruments that are not interacted with an indicator for randomization into the control group ($1-R_i$). Figure \ref{fig:inter_Q_iv} and Figure \ref{fig:inter_Q_other} present results not only interacting the instruments but also interacting the observed characteristics we control for. In both exercises, we use $Q_i$ as the endogenous variable, along with $D_i$.\\
+
+\noindent The results follow the same patterns as before, although they change when the instruments are not interacted. This makes economic sense because the interacted instruments better represent the economic intuition we offer before: the instruments other than $R_{i}$ are more likely to shift the decisions of the families of the control-group children compared to those of the treatment-group children.
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous Take-up of Alternative Preschool Using Various Instrumental Variables Specifications} \label{fig:nointer_Q_iv}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/nointer_Q_iv_te.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}$ as instruments. $Y_i$ is different IQ tests, with a national standard deviation of 15 and a mean of 100. $\mathbf{X_i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: Male, Mother's IQ, High-Risk Index, and APGAR Score at Age 1. The confidence intervals are calculated at the 10\% significance level.}
+\end{figure}
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for Endogenous Take-up of Alternative Preschool Using Various Instrumental Variables Specifications} \label{fig:nointer_Q_other}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/nointer_Q_iv_other.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated to $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}$ as instruments. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\end{figure}
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous Take-up of Alternative Preschool Using Various Instrumental Variables Specifications} \label{fig:inter_Q_iv}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/inter_Q_iv_te.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$ ,and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{X}_{i}(1 - R_i)$ and $\mathbf{Z}_{i}(1 - R_i)$ as instruments. The outcomes ($Y_i$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\end{figure}
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for Endogenous Take-up of Alternative Preschool Using Various Instrumental Variables Specifications} \label{fig:inter_Q_other}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/inter_Q_iv_other.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{X}_{i}(1 - R_i)$ and $\mathbf{Z}_{i}(1 - R_i$) as instruments. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\end{figure}
+
+\subsubsection{Varying the Parameterization of Alternative Preschool Take-up}
+
+\noindent Now, we explore the sensitivity to the specification of $Q_{i}$ in \eqref{eq:ivnot}. We consider two alternatives. First, we use an indicator of take-up of alternative preschool, $P_{i}$ (Figure~\ref{fig:ins_inter_P_iv} and Figure~\ref{fig:ins_inter_P_other}). Second, we take the $\log$ of $Q_{i}$ (Figure~\ref{fig:ins_inter_LogQ_iv} and Figure~\ref{fig:ins_inter_LogQ_other}).
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for an Endogenous Indicator of Take-up of Alternative Preschool} \label{fig:ins_inter_P_iv}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_P_iv_te.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $P_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{Z}_{i}(1 - R_i)$ as instruments. The outcomes ($Y_i$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\end{figure}
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for an Endogenous Indicator of Take-up of Alternative Preschool} \label{fig:ins_inter_P_other}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_P_iv_other.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated to $D_i$ from an IV regression of $Y_i$ on $D_i$, $P_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{Z}_{i}(1 - R_i$) as instruments. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\end{figure}
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous (log) Months of Take-up of Alternative Preschool} \label{fig:ins_inter_LogQ_iv}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_logQ_iv_te.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $\log Q_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{Z}_{i}(1 - R_i)$ as instruments. The outcomes ($Y_i$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\end{figure}
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for Endogenous (log) Months of Take-up of Alternative Preschool} \label{fig:ins_inter_LogQ_other}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_logQ_iv_other.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $\log Q_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{Z}_{i}(1 - R_i$) as instruments. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\end{figure}
+
+
+\subsection{Control Functions}
+
+\noindent We now consider a control function approach. With control functions, the objective is also to simultaneously account for take-up of center-based childcare and preschool alternatives. 
+
+\subsubsection{Setup}
+
+\noindent The method we propose is an application of the selection correction in \citet{Heckman_1979_Econometrica}. We model the selection into both endogenous variables of interest, center-based childcare and preschool alternatives. The method involves three equations: (i) the outcome equation; (ii) the probability of participating in center-based childcare; (iii) a linear equation describing the number of months enrolled in preschool alternatives.\\
+
+\noindent Let $Y^{0}_{i}$ be the counterfactual outcome of child $i$ when not participating in center-based childcare. Similarly, let $Y^{1}_{i}$ be her potential outcome if she participates. We model the outcome as: 
+ 
+\begin{eqnarray}
+Y_{i}^1 &=& \alpha^1+\mathbf{X}_{i} \mathbf{\beta}                 +\varepsilon_i^1 \nonumber  \\
+Y_{i}^0 &=& \alpha^0+\mathbf{X}_{i} \mathbf{\beta} + \alpha^Q Q_i+\varepsilon_i^0.  \label{eq:potout}
+\end{eqnarray}
+
+\noindent The equation describing participation in center-based childcare is: 
+
+\begin{equation}
+D_{i} = \left\{
+        \begin{array}{ll}
+        	0 &\text{if } D_{i}^* \leq  0 \\
+            1 &\text{if } D_{i}^* > 0, \label{eq:sel1}
+        \end{array}
+    \right. 
+\end{equation}
+
+\noindent where we interpret $D_{i}^*$ as a latent continuous variable representing the household's interest in sending the child to treatment. We write
+
+\begin{equation}
+D^{*}_i = \mathbf{W}_i \gamma^{D} + \varepsilon^{D}_i, \label{eq:probitD}
+\end{equation}
+
+\noindent where $\mathbf{W}_i$ is a vector that includes $\mathbf{X}_i$ and $R_i$ and can include variables that shift the decision to enroll children into ABC or CARE without shifting the counterfactual outcome of interest, $Y^{d}_{i}$. \\
+
+\noindent We write the selection equation into months of preschool as a linear equation with fixed coefficients, assuming homogeneous treatment effects:
+
+\begin{equation}
+Q_i = \mathbf{W}_i \gamma^{Q} + \varepsilon^{Q}_i, \label{eq:selq}
+\end{equation}
+
+\noindent In general, the unobserved variables in each of these equations are correlated. We assume that they are distributed as follows: 
+
+\begin{equation}
+        \left[ \begin{array}{l}
+        	 \varepsilon_{i}^1 \\
+            \varepsilon_{i}^0 \\
+            \varepsilon_{i}^D
+        \end{array} \right]  \sim \mathcal{N} \left[ \left( \begin{array}{l}
+        	 0 \\
+           0 \\ 
+           0
+        \end{array} \ \right), 
+                \left( \begin{array}{llll}
+        	 \sigma_{1}^2 & \sigma_{1,0} & \sigma_{1,D}   \\
+             \sigma_{1,0} & \sigma_{0}^2 & \sigma_{0,D}   \\
+             \sigma_{1,D} & \sigma_{0,D} & 1 
+        \end{array} \right) \right],  \label{eq:udist}
+\end{equation}
+
+\noindent where we normalize $\var \left( \varepsilon^D_i \right) =1$.\\
+
+\noindent Further, we assume that 
+\begin{equation}
+\mathbb{E}\left[\varepsilon_i^0|D_i=0,\mathbf{W}_i,\varepsilon^{Q}_i,Q_i=q\right]=\sigma^{0Q}\varepsilon^{Q}_i+\mathbb{E}\left[\varepsilon_i^0|D_i=0,\mathbf{W}_i\right].
+\label{eq:E[epsilon0]}
+\end{equation}
+
+\subsubsection{Identification}
+
+\noindent The following steps identify the parameters of interest. First, we estimate the parameters characterizing the decision to enroll the child in center-based childcare. We exploit the assumption that $\varepsilon_{i}^D \sim \mathcal{N} \left( 0, 1 \right)$ in \eqref{eq:udist} and estimate the parameters in \eqref{eq:probitD} using a probit model.\\
+
+\noindent Second, we approximate the unobserved term relevant to the choice of $Q_{i}$. We take the coefficients in \eqref{eq:selq} to obtain an estimate for $\varepsilon^{Q}_i$. By linearly conditioning on this term, we account for the correlation between the error term in the decision for $Q_{i}$ and the error term in the outcome equation, $\varepsilon_i^0$.\\
+
+\noindent Third, we estimate the coefficients in the outcome equation using the proxies for the unobserved components. We rewrite \eqref{eq:potout} using conditional expectations:
+
+\begin{eqnarray}
+\mathbb{E}\left[Y_i^1|D_i=1,\mathbf{W}_i\right]                         &=& \alpha^1+\mathbf{X}_i\mathbf{\beta}              +\mathbb{E}\left[\varepsilon_i^1|D_i=1,\mathbf{W}_i      \right] \nonumber \\
+\mathbb{E}\left[Y_i^0|D_i=0,\mathbf{W}_i,\varepsilon^{Q}_i,Q_i=q\right] &=& \alpha^0+\mathbf{X}_i\mathbf{\beta} +\alpha^Q q \label{eq:condout} \\ \nonumber && \quad + \mathbb{E}\left[\varepsilon_i^0|D_i=0,\mathbf{W}_i,\varepsilon^{Q}_i,Q_i=q\right].
+\end{eqnarray}
+
+\noindent Once we condition on the proxy for $\varepsilon^{Q}_i$, the error term in the outcome equations only depends on the selection into center-based childcare. The conditional error terms in equation \eqref{eq:condout} can be specified as control functions.\\ 
+
+\noindent For children enrolled in treatment, the control function is: 
+\begin{equation}
+\mathbb{E} \left[\varepsilon_i^1|D_i=1,\mathbf{W}_i \right]=\sigma_1\frac{\phi \left( \mathbf{W}_i \gamma^D \right) }{ \Phi \left( \mathbf{W}_i \gamma^D \right) }. \label{eq:contam}
+\end{equation}
+
+\noindent For children not enrolled in the treatment, the control function is:
+\begin{equation}
+\mathbb{E} \left[\varepsilon_i^0|D_i=0,\mathbf{W}_i,\varepsilon^{Q}_i,Q_i=q\right]= \sigma^{0Q}\varepsilon^{Q}_i - \sigma_0 \frac{\phi\left(\mathbf{W}_i\gamma^D\right)}{\Phi\left( - \mathbf{W}_{i} \gamma^D \right) }. \label{eq:home}
+\end{equation}
+
+\subsection{Estimates}
+
+\noindent By including the control functions, we can recover consistent estimates of the parameters in \eqref{eq:potout} through a linear regression. The effect of center-based childcare is the difference of the intercepts in the two outcome equations.\\
+
+\noindent The charts below present the estimates for the parameter associated with $D_i$. That is, the effect of participating in center-based childcare relative to a counterfactual of receiving no preschool alternative. As before, we present results for IQ scores at different ages and for a set of relevant adult outcomes. The results are not compelling, as they present irregularities over the life-cycle that differ from the rest of results we present in the main paper and throughout this appendix. 
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous (log) Months of Take-up of Alternative Preschool} \label{output/appendixplots/Q_cf_te.eps}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_logQ_iv_te.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated with $D_i$ estimated using Control Functions as described in the text. The outcomes ($Y_i$) are IQ scores at different ages with a national standard deviation of 15 and a mean of 100.  $D_i=1$ for children that participate in ABC or CARE center-based treatment, and $D_i=0$ for children who do not participate in treatment. $Q_i$ is the number of months attending preschool. It is coded as zero for children participating in ABC or CARE. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute.}
+\end{figure}
+
+\begin{figure}[H]
+		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for Endogenous (log) Months of Take-up of Alternative Preschool} \label{output/appendixplots/Q_cf_te.eps}
+		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_logQ_iv_other.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This plot presents the parameter associated with $D_i$ estimated using Control Functions as described in the text. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis.  $D_i=1$ for children that participate in ABC or CARE center-based treatment, and $D_i=0$ for children who do not participate in treatment. $Q_i$ is the number of months attending preschool. It is coded as zero for children participating in ABC or CARE. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute.}
+\end{figure}
+
+\setcounter{figure}{0}  \renewcommand{\thefigure}{E.\arabic{figure}}
+\setcounter{table}{0}   \renewcommand{\thetable}{E.\arabic{table}}
+\section{Assessing Common Critiques to ABC} \label{appendix:assessingcc}
+
+\noindent This section of the appendix assesses some of the critiques to ABC, which could apply to CARE as well. The critiques focus on the first phase of the program, to which we refer simply as ABC in this section of the appendix. We consider the following categories of critiques: (i) validity of treatment effects given early differences between treatment and control groups, (ii) fadeout of the treatment effect on cognitive outcomes, and (iii) compromised randomization. \\
+
+\subsection{Treatment Effects vs. Early Differences Between Groups}
+
+\noindent The first critique we assess is that of \citet{Spitz_1992_ABC-Retardation}. The author asks if ABC prevented socio-cultural mental retardation. He focuses on different measures of cognition, and generically calls them IQ. His main focus is on the raw mean difference between the treatment and the control groups in the Bayley Mental Development Index (MDI) from the Bayley Scales of Infant Development and Infant Behavior (BSID) at 1 year of age.\footnote{The Bayley Mental Development Index (MDI) is a standard measure of cognition at taken between ages 0 and 2 \citep{Childrens-Health_2016_Bayley-Scales}.} He finds a noticeable disparity in the mean difference between cohorts 1 and 2 and cohorts 3 and 4, as early as six months after the treatment began. As \citet{Spitz_1992_ABC-Retardation} argues, this difference is conspicuous and we display it in Table~\ref{table:cohorts}. Importantly, the author fails to note that the mean differences have noticeably high standard errors.
+
+\input{output/abc_cohorts}
+
+\noindent \citet{Spitz_1992_ABC-Retardation} states that: ``an essential question is whether the differences at 6 months of age were due to the intervention or were preexisting'' \citep[][p. 230]{Spitz_1992_ABC-Retardation}. \citet{Spitz_1992_ABC-Retardation} proceeds with speculative exercises that lead him to state that it is questionable to conclude that the mean difference between the treatment and control groups as early as 6 months of age is a consequence of the treatment.\footnote{The exact quote is: ``Even if the differences between experimental and control groups at 6 months of age were a consequence of the first few months of intervention, which is questionable, the negligible additional effects after age 4.5 more years in the program should at least make one cautious about this kind of intervention's potential [\ldots]'' \citep[][p. 235]{Spitz_1992_ABC-Retardation}. We assess the former point before getting to the latter.}\\
+
+\noindent His argument stems from not receiving information on the maternal characteristics, which he considers fundamental for his analysis to comparing test scores over the years.\footnote{He does not note that tests scores \textit{do not have a well-defined scale} and are hard to compare.}\\ 
+
+\noindent We present some annotations with respect to the comments in \citet{Spitz_1992_ABC-Retardation}.\\ 
+
+\noindent \textbf{1. Mothers do not significantly differ in observed characteristics between the treatment and the control groups in any ABC cohort.} When jointly testing the hypothesis of differences in a battery of observed characteristics, we fail to reject any difference between the families of these children (see Table~\ref{tab:baseline_coh1} to Table~\ref{tab:baseline_coh4}). Even when the point estimates present some differences, they are minimal. For example, treatment-group mothers differ from control-group mothers, on average, by having one point higher IQ score (the population standard deviation is 15 points).\\
+
+\noindent \textbf{2. Other early childhood education programs have generated gains in cognition very early in life, as soon as a year after the start of the program.} A more recent program, the Infant Health and Development Program (IHDP), treated children from ages 0 to 3. \citet{Gross_Spiker_etal_1997_BOOKHelpinglowbirth} thoroughly describe this program. A lot of its elements were based on ABC and CARE. The program offered, on average, eight hours a week of center-based childcare from ages 1 to 3, weekly home visits from ages 0 to 1, and bi-monthly home visits from ages 1 to 3. Measures of the Bayley MDI at 12 and 24 months are available. The most intensive part of the treatment, center-based childcare, began in IHDP at 12 months of age while it began in ABC at birth. As in ABC, after a few months of center-based childcare, the effects on cognition were substantial in IHDP.
+
+\input{output/ihdp_bayley}
+
+\noindent \textbf{3. The effects on cognition are sustained throughout childhood and up to age 21 even when partialing out the Bayley MDI at ages 12 and 24 months.} When partialing out from a linear regression the score in the Bayley MDI tests both at 12 and 24 months of age, the treatment effects on cognition, measured by the mean difference in IQ scores at different ages between the treatment and control groups, are still significant and are sustained up to age 21 (see Figure~\ref{fig:treatiqsabc}).
+
+\begin{figure}[H]
+		\caption{Treatment Effects on IQ, ABC} \label{fig:treatiqsabc}
+		\includegraphics[width=.9\columnwidth]{output/abc_mdifixing_2.eps}
+\floatfoot{
+\footnotesize
+\noindent Note: This figure displays the mean difference in IQ scores at different ages between the treatment and control groups, pooling males and females. The line with circles represents the raw difference. The line with squares represents the difference when linearly controlling for the Bayley Mental Development Index at 6 and 12 months.}
+\end{figure}
+
+\noindent The author raises an additional concern. He states that even if the early-life effects on the Bayley MDI were true, the effects were not long-lasting. When doing so, he exclusively refers to the effects the program had on cognition. As we document throughout the main paper, however, ABC had effects on a wide set of life-cycle outcomes, which perhaps are more important than the effects on cognition if measured by the economic gains they generate. Examples include: employment at age 30 for males, high-school graduation for females, and a variety of health measures at age 34 for males. We document these effects in the main paper.\\
+
+\subsection{Fadeout of Treatment Effects}
+
+\noindent This sustained effect on life-cycle outcomes relates to another category of criticism of ABC---the fadeout of treatment effects after the actual treatment period.\footnote{See, for example, \citet{Besharov-etal_2011_ABCProject}.} Based on the fadeout of the effects on cognition and age-21 outcomes, some studies claim that ABC had no sustained long-term effects. In addition to the evidence we cite above, it is important to add the following.\\
+
+\noindent  \textbf{4. The treatment effects of ABC differed by gender.} For example, we find substantial effects on employment for males and high-school graduation for females. This does not mean that the program did not work. It means that market conditions could have affected the way in which the treated subjects could have benefited from the program's effects.\\
+
+\subsection{Compromised Randomization}
+
+\noindent The third and last critique we assess is that of compromised randomization.\footnote{See for example \citet{Baumeister-Bacharach_2000_Early-Generic} and the multiple studies cited there.} The main critique to the program in this respect is that seven children in the treatment group did not comply to their initial assignment and one child switched from control to treatment status. This critique refers to the children labeled with the following IDs by the program: Case A, Case B, Case C, Case D, 900, 912, 922, 78, 82, and 119 (see Table~\ref{table:abccompromises}, which we reproduce from the main paper). Although we document more cases of compromised randomization, we start by assessing these eight cases.\footnote{Our main methodology assesses all the cases except the children for whom we do not have data at all (Case A, Case B, Case C, Case D). We are not able to account for them because our method is based on observing at least some baseline characteristics. See Section~\ref{section:methodology} in the main paper for more details.}\\
+
+\noindent First, we propose a method to assess the non-compliance of children 900, 912, 922, 78, 82, and 119 for whom we have data available from ages 0 to 8. This allows for the possibility to adjust the mean difference between the treatment and the control groups, using a standard Bloom estimator \citep{Bloom_1984_ER}. This estimator accounts for compliance, by weighting the mean difference by a measure of the probability of compliance. It takes the following form: 
+
+\begin{equation}
+\Delta^{\textbf{Bloom}} = \frac{\mathbb{E} \left[ Y | R = 1 \right] - \mathbb{E} \left[ Y | R = 0 \right] }{\mathbb{E} \left[ D | R = 1 \right] - \mathbb{E} \left[ D | R = 0 \right]}, 
+\end{equation}
+
+\noindent where $R$ indicates randomization into treatment, $D$ indicates treatment take-up, and $Y$ is an outcome of interest.\\
+
+\noindent This estimator coincides with the instrumental variable estimator of the parameter in a linear regression of an outcome on a single explanatory variable, e.g. treatment take-up. As \citet{Angrist_Imbens_ea_1996_JASA} show, under certain assumptions it can be interpreted as the average treatment effect for those individuals induced to take up treatment by the instrument. This interpretation has various weaknesses \citep{Heckman_Urzua_etal_2006_REStat,Heckman_Urzua_2010_JoE}.\\
+
+\noindent To compare the mean difference and the Bloom estimator we consider two measures of cognition, which are commonly used when evaluating ABC and are available for children 900, 912, 922, 78, 82, 119: the Stanford-Binet Intelligence Scale at age 3 and the Wechsler Preschool and Primary Scale of Intelligence at age 5. Table~\ref{table:nc1} presents the results and shows that the differences are minimal. \textbf{5. Adjusting for the non-compliance of children 900, 912, 922, 78, 82, and 119 makes little difference} when assessing outcomes for which we observe these children. 
+
+\input{output/abc_noncomp_e1}
+
+\noindent Second, we propose a method to account for non-compliance of the children Case A, Case B, Case C, Case D. For them, we have no data at all. We reproduce the estimates in Table~\ref{table:nc2}, assigning the lowest score across all the children in the treatment group to each of these four children. For each of the tests we consider, the lowest score was 71 for both the age-3 and the age-5 measures. \textbf{6. Even when assigning the worst score to the children who did not comply to treatment and for whom no data is available, the mean difference between treatment and control is sizable and not significantly different from the baseline cases where we do not adjust for non-compliance cases} (columns (1) and (3) in Table~\ref{table:nc1}).
+
+\input{output/abc_noncomp_e2}
+
+\noindent Finally, we note that our methodology in Section~\ref{section:methodology} and the results we present in Section~\ref{section:results} account for the remainder of randomization compromises, as when the families moved or abandoned the study later on. \textbf{7. The results are not greatly sensitive to adjusting for the rest of the randomization compromises}, as we show in Section~\ref{section:results}.
+
+\input{Appendices/Methodology}
+\setcounter{figure}{0}  \renewcommand{\thefigure}{F.\arabic{figure}}
+\setcounter{table}{0}   \renewcommand{\thetable}{F.\arabic{table}}
+\input{Appendices/ProgramCosts}
+\setcounter{figure}{0}  \renewcommand{\thefigure}{G.\arabic{figure}}
+\setcounter{table}{0}   \renewcommand{\thetable}{G.\arabic{table}}
+\input{Appendices/Education}
+\setcounter{figure}{0}  \renewcommand{\thefigure}{H.\arabic{figure}}
+\setcounter{table}{0}   \renewcommand{\thetable}{H.\arabic{table}}
+\input{Appendices/Crime}
+\setcounter{figure}{0}  \renewcommand{\thefigure}{I.\arabic{figure}}
+\setcounter{table}{0}   \renewcommand{\thetable}{I.\arabic{table}}
+\input{Appendices/Income}
+\setcounter{figure}{0}  \renewcommand{\thefigure}{J.\arabic{figure}} % anna note: note there are two income appendices
+\setcounter{table}{0}   \renewcommand{\thetable}{J.\arabic{table}}
+\input{Appendices/Health}
+\setcounter{figure}{0}  \renewcommand{\thefigure}{L.\arabic{figure}}
+\setcounter{table}{0}   \renewcommand{\thetable}{L.\arabic{table}}
+\input{Appendices/Sensitivity}
+\setcounter{figure}{0}  \renewcommand{\thefigure}{M.\arabic{figure}}
+\setcounter{table}{0}   \renewcommand{\thetable}{M.\arabic{table}}
+\input{Appendices/BackoftheEnvelopeCBA}
+\setcounter{figure}{0}  \renewcommand{\thefigure}{N.\arabic{figure}}
+\setcounter{table}{0}   \renewcommand{\thetable}{N.\arabic{table}}
+
+\end{appendices}
+
+%References
+\renewcommand{\refname}{Appendix References}
+\clearpage
+\singlespace
+\bibliographystyle{chicago}
+\bibliography{heckman}
+
+\end{document} 

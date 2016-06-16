@@ -1,0 +1,45 @@
+\begin{table}[H]
+\captionsetup{singlelinecheck=false,justification=centering}
+\caption{ABC Average Treatment Effects, Males \\ Adoption \label{tab:apx_ate_male_7}}
+
+  \begin{threeparttable}
+  \begin{tabular}{cccccccccc}
+  \hline\hline
+
+     &  &  & \tiny{Control} & \mc{6}{c}{\tiny{Treatment Effects}} \\  
+
+    \tiny{Variable} & \tiny{Age} & \tiny{Obs} & \tiny{Mean} & \tiny{(1)} & \tiny{(2)} & \tiny{(3)} & \tiny{(4)} & \tiny{(5)} & \tiny{(6)} \\ 
+    \hline  
+
+    \mc{1}{l}{\mr{3}{*}{\tiny{Ever Adopted}}} &  & \mc{1}{c}{\tiny{51}} & \mc{1}{c}{\tiny{0.048}} & \mc{1}{c}{\tiny{0.012}} & \mc{1}{c}{\tiny{-0.227}} & \mc{1}{c}{\tiny{-0.093}} & \mc{1}{c}{\tiny{0.102}} & \mc{1}{c}{\tiny{0.038}} & \mc{1}{c}{\tiny{0.013}} \\  
+
+     &  &  &  & \mc{1}{c}{\tiny{(0.455)}} & \mc{1}{c}{\tiny{(0.825)}} & \mc{1}{c}{\tiny{(0.815)}} & \mc{1}{c}{\tiny{(0.310)}} & \mc{1}{c}{\tiny{(0.380)}} & \mc{1}{c}{\tiny{(0.455)}} \\  
+
+     &  &  &  &  &  &  &  &  &  \\  
+
+  \hline\hline
+  \end{tabular}
+    \begin{tablenotes}
+    \scriptsize
+    \item 
+Note: this table displays the average treatment effects estimated using various methods to
+account for control contamination. The number number of observations is refers to the 
+original sample, and may differ across the estimation methods presented in Columns (1)--(6). 
+The control mean is the projected mean when estimating the treatment 
+effects using the method of Column (1). Column (1) displays the estimates using the original
+sample, without accounting for control contamination. 
+Column(2) displays the estimates when we drop control subjects with 1 month or more of preschool.
+Column (3) does the same for subjects with 24 months or more. Column (4) displays the LATE
+estimate when we consider control subjects with 1 month or more of preschool to have received
+equal treatment to ABC subjects. Column (5) does the same for subjects with 24 months or more.
+Column (6) displays the LATE estimates when we assume that alternative forms of childcare
+are of equal quality to ABC, but account for the number of months control subjects were
+enrolled in childcare. All estimates are the mean of the empirical bootstrap generated 
+from 200 resamples of the original data. Numbers in parentheses represent the naive $p$-value,
+numbers in brackets represent the $p$-value from multiple testing, both of which are obtained from 
+the standard deviations of the empirical bootstrap distribution.
+
+    \end{tablenotes}
+  \end{threeparttable}
+
+\end{table}

@@ -1,0 +1,57 @@
+\begin{table}[H]
+\captionsetup{singlelinecheck=false,justification=centering}
+\caption{ABC Average Treatment Effects, Males \\ Crime \label{tab:apx_ate_male_10}}
+
+  \begin{threeparttable}
+  \begin{tabular}{cccccccccc}
+  \hline\hline
+
+     &  &  & \tiny{Control} & \mc{6}{c}{\tiny{Treatment Effects}} \\  
+
+    \tiny{Variable} & \tiny{Age} & \tiny{Obs} & \tiny{Mean} & \tiny{(1)} & \tiny{(2)} & \tiny{(3)} & \tiny{(4)} & \tiny{(5)} & \tiny{(6)} \\ 
+    \hline  
+
+    \mc{1}{l}{\tiny{Total Felony Arrests}} & \mc{1}{c}{\tiny{Mid-30s}} & \mc{1}{c}{\tiny{42}} & \mc{1}{c}{\tiny{1.510}} & \mc{1}{c}{\tiny{-0.273}} & \mc{1}{c}{\tiny{0.826}} & \mc{1}{c}{\tiny{0.385}} & \mc{1}{c}{\tiny{-2.051}} & \mc{1}{c}{\tiny{-0.803}} & \mc{1}{c}{\tiny{-0.238}} \\  
+
+     &  &  &  & \mc{1}{c}{\tiny{(0.295)}} & \mc{1}{c}{\tiny{(0.745)}} & \mc{1}{c}{\tiny{(0.690)}} & \mc{1}{c}{\tiny{(0.195)}} & \mc{1}{c}{\tiny{(0.245)}} & \mc{1}{c}{\tiny{(0.310)}} \\  
+
+     &  &  &  & \mc{1}{c}{\tiny{[0.580]}} & \mc{1}{c}{\tiny{[0.970]}} & \mc{1}{c}{\tiny{[0.975]}} & \mc{1}{c}{\tiny{[0.530]}} & \mc{1}{c}{\tiny{[0.485]}} & \mc{1}{c}{\tiny{[0.605]}} \\  
+
+    \mc{1}{l}{\tiny{Total Misdemeanor Arrests}} & \mc{1}{c}{\tiny{Mid-30s}} & \mc{1}{c}{\tiny{42}} & \mc{1}{c}{\tiny{1.400}} & \mc{1}{c}{\tiny{-0.297}} & \mc{1}{c}{\tiny{-0.230}} & \mc{1}{c}{\tiny{-0.016}} & \mc{1}{c}{\tiny{-1.657}} & \mc{1}{c}{\tiny{-0.789}} & \mc{1}{c}{\tiny{-0.273}} \\  
+
+     &  &  &  & \mc{1}{c}{\tiny{(0.370)}} & \mc{1}{c}{\tiny{(0.440)}} & \mc{1}{c}{\tiny{(0.460)}} & \mc{1}{c}{\tiny{(0.280)}} & \mc{1}{c}{\tiny{(0.300)}} & \mc{1}{c}{\tiny{(0.380)}} \\  
+
+     &  &  &  & \mc{1}{c}{\tiny{[0.580]}} & \mc{1}{c}{\tiny{[0.770]}} & \mc{1}{c}{\tiny{[0.840]}} & \mc{1}{c}{\tiny{[0.460]}} & \mc{1}{c}{\tiny{[0.455]}} & \mc{1}{c}{\tiny{[0.585]}} \\  
+
+    \mc{1}{l}{\tiny{Total Years Incarcerated}} & \mc{1}{c}{\tiny{30}} & \mc{1}{c}{\tiny{54}} & \mc{1}{c}{\tiny{0.309}} & \mc{1}{c}{\tiny{0.222}} & \mc{1}{c}{\tiny{0.580}} & \mc{1}{c}{\tiny{0.613}} & \mc{1}{c}{\tiny{0.955}} & \mc{1}{c}{\tiny{0.443}} & \mc{1}{c}{\tiny{0.192}} \\  
+
+     &  &  &  & \mc{1}{c}{\tiny{(0.790)}} & \mc{1}{c}{\tiny{(0.825)}} & \mc{1}{c}{\tiny{(0.890)}} & \mc{1}{c}{\tiny{(0.775)}} & \mc{1}{c}{\tiny{(0.730)}} & \mc{1}{c}{\tiny{(0.740)}} \\  
+
+     &  &  &  & \mc{1}{c}{\tiny{[0.980]}} & \mc{1}{c}{\tiny{[0.985]}} & \mc{1}{c}{\tiny{[1.000]}} & \mc{1}{c}{\tiny{[0.975]}} & \mc{1}{c}{\tiny{[0.965]}} & \mc{1}{c}{\tiny{[0.960]}} \\  
+
+  \hline\hline
+  \end{tabular}
+    \begin{tablenotes}
+    \scriptsize
+    \item 
+Note: this table displays the average treatment effects estimated using various methods to
+account for control contamination. The number number of observations is refers to the 
+original sample, and may differ across the estimation methods presented in Columns (1)--(6). 
+The control mean is the projected mean when estimating the treatment 
+effects using the method of Column (1). Column (1) displays the estimates using the original
+sample, without accounting for control contamination. 
+Column(2) displays the estimates when we drop control subjects with 1 month or more of preschool.
+Column (3) does the same for subjects with 24 months or more. Column (4) displays the LATE
+estimate when we consider control subjects with 1 month or more of preschool to have received
+equal treatment to ABC subjects. Column (5) does the same for subjects with 24 months or more.
+Column (6) displays the LATE estimates when we assume that alternative forms of childcare
+are of equal quality to ABC, but account for the number of months control subjects were
+enrolled in childcare. All estimates are the mean of the empirical bootstrap generated 
+from 200 resamples of the original data. Numbers in parentheses represent the naive $p$-value,
+numbers in brackets represent the $p$-value from multiple testing, both of which are obtained from 
+the standard deviations of the empirical bootstrap distribution.
+
+    \end{tablenotes}
+  \end{threeparttable}
+
+\end{table}
