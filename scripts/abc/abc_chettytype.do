@@ -88,6 +88,8 @@ drop if pv < 0
 // generate cost-benefit cost ratio
 gen     bc = (1 + .131*b[1,1])*pv*`treatN' - pv*`controlN'
 // note bringing costs to age 5
+di ((96417*`treatN' + 1395*`controlN')*(1 + .03)^5)
+/*
 replace bc = bc/((96417*`treatN' + 1395*`controlN')*(1 + .03)^5)
 replace pv = pv/100000
 
