@@ -1,0 +1,57 @@
+\begin{table}[H]
+\captionsetup{singlelinecheck=false,justification=centering}
+\caption{ABC Average Treatment Effects, Males and Females \\ Crime \label{tab:apx_ate_pooled_10}}
+
+  \begin{threeparttable}
+  \begin{tabular}{cccccccccc}
+  \hline\hline
+
+     &  &  & \tiny{Control} & \mc{6}{c}{\tiny{Treatment Effects}} \\  
+
+    \tiny{Variable} & \tiny{Age} & \tiny{Obs} & \tiny{Mean} & \tiny{(1)} & \tiny{(2)} & \tiny{(3)} & \tiny{(4)} & \tiny{(5)} & \tiny{(6)} \\ 
+    \hline  
+
+    \mc{1}{l}{\tiny{Total Felony Arrests}} & \mc{1}{c}{\tiny{Mid-30s}} & \mc{1}{c}{\tiny{88}} & \mc{1}{c}{\tiny{1.008}} & \mc{1}{c}{\tiny{-0.395}} & \mc{1}{c}{\tiny{0.236}} & \mc{1}{c}{\tiny{-0.356}} & \mc{1}{c}{\tiny{-1.624}} & \mc{1}{c}{\tiny{-0.811}} & \mc{1}{c}{\tiny{-0.403}} \\  
+
+     &  &  &  & \mc{1}{c}{\tiny{(0.135)}} & \mc{1}{c}{\tiny{(0.685)}} & \mc{1}{c}{\tiny{(0.235)}} & \mc{1}{c}{\tiny{(0.160)}} & \mc{1}{c}{\tiny{(0.155)}} & \mc{1}{c}{\tiny{(0.145)}} \\  
+
+     &  &  &  & \mc{1}{c}{\tiny{[0.290]}} & \mc{1}{c}{\tiny{[0.920]}} & \mc{1}{c}{\tiny{[0.485]}} & \mc{1}{c}{\tiny{[0.275]}} & \mc{1}{c}{\tiny{[0.295]}} & \mc{1}{c}{\tiny{[0.325]}} \\  
+
+    \mc{1}{l}{\tiny{Total Misdemeanor Arrests}} & \mc{1}{c}{\tiny{Mid-30s}} & \mc{1}{c}{\tiny{88}} & \mc{1}{c}{\tiny{1.520}} & \mc{1}{c}{\tiny{-0.841}} & \mc{1}{c}{\tiny{-1.229}} & \mc{1}{c}{\tiny{-0.925}} & \mc{1}{c}{\tiny{-3.346}} & \mc{1}{c}{\tiny{-1.718}} & \mc{1}{c}{\tiny{-0.852}} \\  
+
+     &  &  &  & \mc{1}{c}{\tiny{\textbf{(0.080)}}} & \mc{1}{c}{\tiny{(0.195)}} & \mc{1}{c}{\tiny{(0.160)}} & \mc{1}{c}{\tiny{\textbf{(0.065)}}} & \mc{1}{c}{\tiny{\textbf{(0.075)}}} & \mc{1}{c}{\tiny{\textbf{(0.080)}}} \\  
+
+     &  &  &  & \mc{1}{c}{\tiny{[0.150]}} & \mc{1}{c}{\tiny{[0.420]}} & \mc{1}{c}{\tiny{[0.355]}} & \mc{1}{c}{\tiny{[0.145]}} & \mc{1}{c}{\tiny{[0.155]}} & \mc{1}{c}{\tiny{[0.170]}} \\  
+
+    \mc{1}{l}{\tiny{Total Years Incarcerated}} & \mc{1}{c}{\tiny{30}} & \mc{1}{c}{\tiny{115}} & \mc{1}{c}{\tiny{0.159}} & \mc{1}{c}{\tiny{0.079}} & \mc{1}{c}{\tiny{0.177}} & \mc{1}{c}{\tiny{0.178}} & \mc{1}{c}{\tiny{0.325}} & \mc{1}{c}{\tiny{0.154}} & \mc{1}{c}{\tiny{0.079}} \\  
+
+     &  &  &  & \mc{1}{c}{\tiny{(0.710)}} & \mc{1}{c}{\tiny{(0.795)}} & \mc{1}{c}{\tiny{(0.865)}} & \mc{1}{c}{\tiny{(0.700)}} & \mc{1}{c}{\tiny{(0.710)}} & \mc{1}{c}{\tiny{(0.700)}} \\  
+
+     &  &  &  & \mc{1}{c}{\tiny{[0.915]}} & \mc{1}{c}{\tiny{[0.960]}} & \mc{1}{c}{\tiny{[0.985]}} & \mc{1}{c}{\tiny{[0.920]}} & \mc{1}{c}{\tiny{[0.900]}} & \mc{1}{c}{\tiny{[0.895]}} \\  
+
+  \hline\hline
+  \end{tabular}
+    \begin{tablenotes}
+    \scriptsize
+    \item 
+Note: this table displays the average treatment effects estimated using various methods to
+account for control contamination. The number number of observations is refers to the 
+original sample, and may differ across the estimation methods presented in Columns (1)--(6). 
+The control mean is the projected mean when estimating the treatment 
+effects using the method of Column (1). Column (1) displays the estimates using the original
+sample, without accounting for control contamination. 
+Column(2) displays the estimates when we drop control subjects with 1 month or more of preschool.
+Column (3) does the same for subjects with 24 months or more. Column (4) displays the LATE
+estimate when we consider control subjects with 1 month or more of preschool to have received
+equal treatment to ABC subjects. Column (5) does the same for subjects with 24 months or more.
+Column (6) displays the LATE estimates when we assume that alternative forms of childcare
+are of equal quality to ABC, but account for the number of months control subjects were
+enrolled in childcare. All estimates are the mean of the empirical bootstrap generated 
+from 200 resamples of the original data. Numbers in parentheses represent the naive $p$-value,
+numbers in brackets represent the $p$-value from multiple testing, both of which are obtained from 
+the standard deviations of the empirical bootstrap distribution.
+
+    \end{tablenotes}
+  \end{threeparttable}
+
+\end{table}
