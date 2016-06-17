@@ -371,13 +371,13 @@ Note: This plot shows the number of participants in ABC for whom there exists da
 \setcounter{table}{0}   \renewcommand{\thetable}{D.\arabic{table}}
 \section{Alternative Evaluation Methodologies} \label{appendix:amethodology}
 
-\noindent In the main paper, we develop and document the results from two methodologies to account for treatment substitution in the first phases of ABC and CARE. The objective of each method is to estimate the average treatment effect of ABC and CARE, holding fixed take-up of alternative preschool by the control group. We want to construct a scenario in which the children in the control group do not attend alternative preschools. This allows us to evaluate center-based preschool relative to a counterfactual scenario in which children stay at home.\\
+\noindent In the main paper, we develop and document the results from two methodologies to account for treatment substitution in the first phases of ABC and CARE. The objective of each method is to estimate the average treatment effect of ABC and CARE, holding fixed take-up of alternative preschool by the control group. We want to construct a scenario in which the subjects in the control group do not attend alternative preschools. This allows us to evaluate center-based childcare relative to a counterfactual scenario in which subjects stay at home.\\
 
-\noindent This section presents alternative methodologies to evaluate the first-phase treatment. Throughout the rest of this section, we refer to treatment in either ABC or CARE generically as center-based precshool. We refer to take-up of treatment substitution as enrollment into alternative preschools. As in our main methodology, we choose the control sets to account for background variables using the method in Appendix~\ref{appendix:controls}.\\
+\noindent This section presents alternative methodologies to evaluate the first-phase treatment. Throughout the rest of this section, we refer to treatment in either ABC or CARE generically as center-based childcare. We refer to take-up of treatment substitution as enrollment into alternative preschools. As in our main methodology, we choose the control sets to account for background variables using the method in Appendix~\ref{appendix:controls}.\\
 
 \noindent To illustrate the alternative methodologies, we present results for a small set of outcomes. First, we consider a time series of IQ scores. Second, we present results for three long-term outcomes: years of education, employment, and labor income. Both IQ scores and the chosen long-term outcomes follow predictable patterns and are straightforward to interpret. These characteristics allow us to evaluate the sensitivity of the estimated treatment effects using the different strategies.\\
 
-\noindent We use the notation defined in the main paper and add individual subscripts to clarify some of the arguments. $\mathbf{X}_{i}$ is a vector of observed individual- or household-level characteristics; $P_i$ is an indicator for alternative preschool enrollment; $Q_{i}$ is the number of months in alternative preschool. $P_i$ and $Q_i$ are zero for participants of the treatment groups. $D_i=1$ denotes take-up of treatment, either in ABC or CARE.
+\noindent We explicitly define the discrete choice to enroll in alternative preschool, $P_i$, which is an indicator equal to 1 when the subject is enrolled. Instead of $V_i$, we define $Q_i$ as the number of months in alternative preschool to distinguish between the months of enrollment ($Q_i$) and the discrete choice to enroll ($P_i$). $\mathbf{X}_{i}$ is a vector of observed individual- or household-level characteristics. $P_i$ and $Q_i$ are zero for participants of the treatment groups. $D_i=1$ denotes take-up of treatment, either in ABC or CARE.
 
 \subsection{Instrumental Variables}
 
@@ -385,7 +385,7 @@ Note: This plot shows the number of participants in ABC for whom there exists da
 
 \subsubsection{Model and Conditions}
 
-\noindent Consider the following equation for an outcome of interest $Y_{i}$:
+\noindent Consider the following equation for an outcome $Y_{i}$:
 
 
 \begin{equation}
@@ -393,45 +393,45 @@ Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
 \label{eq:ivnot}
 \end{equation}
 
-\noindent where $D_{i}, Q_{i}$ are endogenous. Selection into treatment or alternative preschool is likely correlated with characteristics not observed when estimating the coefficients characterizing the outcome equation, i.e., $Cov(D_i,\varepsilon_i) \neq 0$ and $Cov(Q_i,\varepsilon_i) \neq 0$. Estimating the coefficients in \eqref{eq:ivnot} by OLS yields inconsistent estimates.\\
+\noindent where $D_{i}$ and $Q_{i}$ are endogenous. Selection into treatment or alternative preschool is likely correlated with characteristics not observed when estimating the coefficients characterizing the outcome equation, i.e., $Cov(D_i,\varepsilon_i) \neq 0$ and $Cov(Q_i,\varepsilon_i) \neq 0$. Estimating the coefficients in \eqref{eq:ivnot} by OLS yields inconsistent estimates.\\
 
 \noindent A standard solution is to introduce a vector of instrumental variables, $\mathbf{Z}_i$, satisfying two conditions: (i) the matrix $\Pi$ of the coefficients in the population regression of $D_i$ and $Q_i$ on $\mathbf{Z}_i$ is full rank; and (ii) $\mathbf{Z}_i$ is uncorrelated with $\varepsilon_i$.
 
 
 \subsubsection{Instrumental Variables in Practice}
 
-\noindent To identify the coefficients in \eqref{eq:ivnot} using an instrumental variable strategy we need at least two instruments. We consider as an instrument randomization into ABC or CARE center-based treatment, denoted as an indicator, $R_{i}$. We then consider up to three other instruments.
+\noindent To identify the coefficients in \eqref{eq:ivnot} using an instrumental variable strategy we need at least two instruments. We use randomization into ABC or CARE treatment as an instrument, denoted as an indicator, $R_{i}$. We then consider up to three other instruments.
 
 \begin{enumerate}[(i)]
-\item \textit{Season of child's birth}. This variable is coded as an indicator for being born in the fall (born between June and November). If daycares accepted children primarily in the fall, then children born in the fall can enter preschool when they are younger. Although there is evidence in the economics literature that being born in specific times in the year can influence the child's outcomes, the main channel for this effect seems to be the disproportionate selection into season of birth by high-income mothers \citep{Buckles-Hungerman_2013_RES}. Given that in our sample mothers are very young and disadvantaged, we assume that a negligible proportion of them selected their quarter of birth.
+\item \textit{Season of subject's birth}. This variable is coded as an indicator for being born in the fall (born between June and November). If preschools accepted children primarily in the fall, then children born in the fall could enter preschool when they were younger. Although there is evidence in the economics literature that being born during specific times in the year can influence a child's outcomes, the main channel for this effect seems to be the disproportionate selection into season of birth by high-income mothers \citep{Buckles-Hungerman_2013_RES}. Given that the mothers were very young and disadvantaged in the ABC and CARE samples, we assume that a negligible proportion of them selected their quarter of birth.
 
-\item \textit{Presence of a grandmother in the county}. Our hypothesis is that the grandmothers, who in this sample are relatively young and still working, could help the study mothers take care of their children. We assume that the mothers would have less influence over the presence of a grandmother in the county relative to the presence of a grandmother living in the home. We also assume that the grandmothers do not affect the children differently than any other avenue of informal care, such as care from a neighbor. In practice, the presence of a grandmother has a positive effect on preschool attendance, which could indicate that they helped take the child to preschool. This variable is only available for ABC.
+\item \textit{Presence of a grandmother in the county}. We hypothesize that the grandmothers of the subjects, who in this sample are relatively young and still working, could help the study mothers take care of their children. We assume that the mothers would have less influence over the presence of a grandmother in the county as opposed to the presence of a grandmother living in the home. We also assume that the grandmothers do not affect the subjects differently than any other avenue of informal care, such as care from a neighbor. In practice, the presence of a grandmother has a positive effect on preschool attendance, which could indicate that they helped take the subject to preschool. This variable is only available for ABC.
 
-\item \textit{Number of relatives living in the household apart from the mother, child, siblings, and male partner}. We assume that the relatives could take care of the study child while the mother was working or in school, but also that they do not affect the children differently than any other avenue of informal care. In practice, having additional relatives living at home decreases the probability that a child goes into preschool.
+\item \textit{Number of relatives living in the household apart from the mother, subject, siblings, and male partner}. We assume that the relatives could take care of the subject while the mother was at work or in school, but that they do not affect the subjects differently than any other avenue of informal care. In practice, having additional relatives living at home decreases the probability that the subject goes into preschool.
 \end{enumerate}
 
 \subsubsection{Sets of Instruments}
 \noindent We consider three combinations of the instruments.  All of them include randomization into center-based treatments and birth in the fall. All of them include at least one variable representing access to informal care from relatives. The sets are the following:
 \begin{enumerate}[(i)]
-\item Randomization, Born in Fall, Grandmother in County, Number of Relatives at Home
-\item Randomization, Born in Fall, Grandmother in County
-\item Randomization, Born in Fall, Number of Relatives at Home
+\item Randomization, Born in the Fall, Grandmother in County, Number of Relatives at Home
+\item Randomization, Born in the Fall, Grandmother in County
+\item Randomization, Born in the Fall, Number of Relatives at Home
 \end{enumerate}
 
 \subsubsection{Specifications for the Instruments}
-\noindent We test various specifications where we allow for interactions of the potential instruments with the first-phase randomization indicator. In particular, we test three specifications for our instruments:
+\noindent We test various specifications in which we allow for interactions of the potential instruments with the first-phase randomization indicator. In particular, we test three specifications for our instruments:
 
 \begin{enumerate}[(i)]
-\item Instruments measured in levels: $ \left( R_i,\mathbf{Z_i} \right) $.
-\item\label{interact} Instruments measured in levels and interactions of treatment with the instruments and the controls: $ \left(R_i,\mathbf{Z_i},\mathbf{Z_i}R_i,\mathbf{X_i}R_i \right)$.
-\item\label{inverse} Interactions of the instruments and the controls with an indicator for being randomized into the control group: $\left( R_i, \mathbf{X_i} \left( 1-R_i \right), \mathbf{Z_i} \left( 1-R_i \right) \right)$.
+\item Instruments measured in levels: $ \left( R_i,\mathbf{Z}_i \right) $.
+\item\label{interact} Instruments measured in levels and interactions of treatment with the instruments and the controls: $ \left(R_i,\mathbf{Z}_i,\mathbf{Z}_iR_i,\mathbf{X}_iR_i \right)$.
+\item\label{inverse} Interactions of the instruments and the controls with an indicator for being randomized into the control group: $\left( R_i, \mathbf{X}_i \left( 1-R_i \right), \mathbf{Z}_i \left( 1-R_i \right) \right)$.
 \end{enumerate}
 
 \noindent In practice, the specification in \eqref{inverse} is the most stable across outcomes. This makes economic sense because the instruments are less likely to affect the participants of the treatment group, given that almost all the treatment families comply to the first-phase randomization protocol.
 
-\subsubsection{Functional forms for Enrollment in Alternative Preschool}
+\subsubsection{Functional Forms of Enrollment in Alternative Preschool}
 
-\noindent We use different parameterization for enrollment in alternative preschool in \eqref{eq:ivnot}: 
+\noindent We use a different parameterization of enrollment into alternative preschool in \eqref{eq:ivnot}: 
 
 \begin{enumerate}[(i)]
 \item The number of months in alternative preschool, $Q_{i}$.
@@ -447,22 +447,22 @@ Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
 
 \noindent Our main specification uses three instruments: randomization into center-based childcare in either ABC or CARE, the presence of a grandmother in the county, and being born in the fall. We interact the latter two instrument with an indicator for being randomized into the control group ($1-R_{i}$). The endogenous variables are $D_{i}$ and $Q_{i}$.\\
 
-\noindent Figure \ref{fig:main_iv1} and Figure~\ref{fig:mainiv2} display the estimates of the coefficient on $D_{i}$. That is, the effect of attending the ABC or CARE treatment, fixing take-up of alternative preschool. The results indicate the following: (i) the effects are stronger compared to those in the main paper, even to those in the main paper that fix children to no preschool alternatives; (ii) the estimates are less stable across ages compared to those in the main paper. For example, while the effects on IQ scores from ages 0 to 5 years average around 14 points in the main paper, they average 20 points using this specification of instrumental variables. 
+\noindent Figure \ref{fig:main_iv1} and Figure~\ref{fig:mainiv2} display the estimates of the coefficient of $D_{i}$. That is, the effect of attending the ABC or CARE treatment, fixing take-up of alternative preschool. The results indicate the following: (i) the effects are stronger compared to those in the main paper, even compared to those in the main paper that fix subjects to no preschool alternatives; (ii) the estimates are less stable across ages compared to those in the main paper. For example, while the effects on IQ scores from ages 0 to 5 average around 14 points in the main paper, they average 20 points using this specification of instrumental variables. 
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous Take-up of Alternative Preschool Using Instrumental Variables} \label{fig:main_iv1}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/main_iv_te.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/main_iv_te.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_i$, using $R_i$ and $\mathbf{Z_i}(1-R_i)$ as instruments. The outcomes ($Y_i$) are IQ tests at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X_i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated with $D_i$ from a regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_i$, using $R_i$ and $\mathbf{Z}_i(1-R_i)$ as instruments. The outcomes ($Y_i$) are IQ tests at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}_i$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for Endogenous Take-up of Alternative Preschool Using Instrumental Variables} \label{fig:mainiv2}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/main_iv_other.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/main_iv_other.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}(1-R_i)$ as instruments. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated with $D_i$ from a regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}(1-R_i)$ as instruments. The outcomes ($Y_i$) are different adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 \subsubsection{Varying the Sets of Instruments}
@@ -471,56 +471,56 @@ Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous Take-up of Alternative Preschool Using Various Instrumental Variables} \label{fig:ins_inter_Q_iv1}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_Q_iv_te.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/ins_inter_Q_iv_te.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}(1-R_i)$ as instruments. The outcomes ($Y_i$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X_i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated with $D_i$ from a regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}(1-R_i)$ as instruments. The outcomes ($Y_i$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}_i$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for Endogenous Take-up of Alternative Preschool Using Various Instrumental Variables} \label{fig:ins_inter_Q_iv2}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_Q_iv_other.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/ins_inter_Q_iv_other.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}(1-R_i)$ as instruments. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated with $D_i$ from a regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}(1-R_i)$ as instruments. The outcomes ($Y_i$) are different adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 \subsubsection{Varying the Specification of the Instruments}
 
-\noindent We now present an exercise to evaluate the sensitivity of the results to different specifications of the instrumental variables. First, Figure~ \ref{fig:nointer_Q_iv} and Figure \ref{fig:nointer_Q_other} present the results using the set of instruments that are not interacted with an indicator for randomization into the control group ($1-R_i$). Figure \ref{fig:inter_Q_iv} and Figure \ref{fig:inter_Q_other} present results not only interacting the instruments but also interacting the observed characteristics we control for. In both exercises, we use $Q_i$ as the endogenous variable, along with $D_i$.\\
+\noindent We now present an exercise to evaluate the sensitivity of the results to different specifications of the instrumental variables. First, Figure~\ref{fig:nointer_Q_iv} and Figure~\ref{fig:nointer_Q_other} present the results using the set of instruments that are not interacted with an indicator for randomization into the control group ($1-R_i$). Figure~\ref{fig:inter_Q_iv} and Figure~\ref{fig:inter_Q_other} present results not only interacting the instruments but also interacting the observed characteristics we control for. In both exercises, we use $Q_i$ as the endogenous variable, along with $D_i$.\\
 
-\noindent The results follow the same patterns as before, although they change when the instruments are not interacted. This makes economic sense because the interacted instruments better represent the economic intuition we offer before: the instruments other than $R_{i}$ are more likely to shift the decisions of the families of the control-group children compared to those of the treatment-group children.
+\noindent The results follow the same patterns as before, although they change when the instruments are not interacted. This makes economic sense because the interacted instruments better represent the economic intuition we offer before: the instruments other than $R_{i}$ are more likely to shift the decisions of the families of the control-group subjects compared to those of the treatment-group subjects.
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous Take-up of Alternative Preschool Using Various Instrumental Variables Specifications} \label{fig:nointer_Q_iv}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/nointer_Q_iv_te.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/nointer_Q_iv_te.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}$ as instruments. $Y_i$ is different IQ tests, with a national standard deviation of 15 and a mean of 100. $\mathbf{X_i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: Male, Mother's IQ, High-Risk Index, and APGAR Score at Age 1. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated with $D_i$ from a regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}$ as instruments. $Y_i$ is different IQ tests, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}_i$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for Endogenous Take-up of Alternative Preschool Using Various Instrumental Variables Specifications} \label{fig:nointer_Q_other}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/nointer_Q_iv_other.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/nointer_Q_iv_other.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated to $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}$ as instruments. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated with $D_i$ from a regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$ and $\mathbf{Z}_{i}$ as instruments. The outcomes ($Y_i$) are different adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous Take-up of Alternative Preschool Using Various Instrumental Variables Specifications} \label{fig:inter_Q_iv}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/inter_Q_iv_te.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/inter_Q_iv_te.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$ ,and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{X}_{i}(1 - R_i)$ and $\mathbf{Z}_{i}(1 - R_i)$ as instruments. The outcomes ($Y_i$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated with $D_i$ from a regression of $Y_i$ on $D_i$, $Q_i$ ,and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{X}_{i}(1 - R_i)$ and $\mathbf{Z}_{i}(1 - R_i)$ as instruments. The outcomes ($Y_i$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for Endogenous Take-up of Alternative Preschool Using Various Instrumental Variables Specifications} \label{fig:inter_Q_other}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/inter_Q_iv_other.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/inter_Q_iv_other.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{X}_{i}(1 - R_i)$ and $\mathbf{Z}_{i}(1 - R_i$) as instruments. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated with $D_i$ from a regression of $Y_i$ on $D_i$, $Q_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{X}_{i}(1 - R_i)$ and $\mathbf{Z}_{i}(1 - R_i$) as instruments. The outcomes ($Y_i$) are different adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 \subsubsection{Varying the Parameterization of Alternative Preschool Take-up}
@@ -529,46 +529,46 @@ Y_i = \alpha^D D_i + \alpha^Q Q_i + \mathbf{X}_i \beta + \varepsilon_i,
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for an Endogenous Indicator of Take-up of Alternative Preschool} \label{fig:ins_inter_P_iv}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_P_iv_te.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/ins_inter_P_iv_te.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $P_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{Z}_{i}(1 - R_i)$ as instruments. The outcomes ($Y_i$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated with $D_i$ from a regression of $Y_i$ on $D_i$, $P_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{Z}_{i}(1 - R_i)$ as instruments. The outcomes ($Y_i$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for an Endogenous Indicator of Take-up of Alternative Preschool} \label{fig:ins_inter_P_other}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_P_iv_other.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/ins_inter_P_iv_other.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated to $D_i$ from an IV regression of $Y_i$ on $D_i$, $P_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{Z}_{i}(1 - R_i$) as instruments. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated to $D_i$ from a regression of $Y_i$ on $D_i$, $P_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{Z}_{i}(1 - R_i$) as instruments. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous (log) Months of Take-up of Alternative Preschool} \label{fig:ins_inter_LogQ_iv}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_logQ_iv_te.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/ins_inter_logQ_iv_te.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $\log Q_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{Z}_{i}(1 - R_i)$ as instruments. The outcomes ($Y_i$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated with $D_i$ from a regression of $Y_i$ on $D_i$, $\log Q_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{Z}_{i}(1 - R_i)$ as instruments. The outcomes ($Y_i$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for Endogenous (log) Months of Take-up of Alternative Preschool} \label{fig:ins_inter_LogQ_other}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_logQ_iv_other.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/ins_inter_logQ_iv_other.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated with $D_i$ from an IV regression of $Y_i$ on $D_i$, $\log Q_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{Z}_{i}(1 - R_i$) as instruments. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated with $D_i$ from a regression of $Y_i$ on $D_i$, $\log Q_i$, and $\mathbf{X}_{i}$, using $R_i$, $\mathbf{Z}_{i}(1 - R_i$) as instruments. The outcomes ($Y_i$) are different adult outcomes labeled in the horizontal axis. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 
 \subsection{Control Functions}
 
-\noindent We now consider a control function approach. With control functions, the objective is also to simultaneously account for take-up of center-based childcare and preschool alternatives. 
+\noindent We now consider a control function approach. With control functions, the objective is also to simultaneously account for take-up of center-based childcare and alternative preschool. 
 
 \subsubsection{Setup}
 
-\noindent The method we propose is an application of the selection correction in \citet{Heckman_1979_Econometrica}. We model the selection into both endogenous variables of interest, center-based childcare and preschool alternatives. The method involves three equations: (i) the outcome equation; (ii) the probability of participating in center-based childcare; (iii) a linear equation describing the number of months enrolled in preschool alternatives.\\
+\noindent The method we propose is an application of the selection correction in \citet{Heckman_1979_Econometrica}. We model the selection into both endogenous variables of interest, center-based childcare and alternative preschools. The method involves three equations: (i) the outcome equation; (ii) the probability of participating in center-based childcare; (iii) a linear equation describing the number of months enrolled in preschool alternatives.\\
 
-\noindent Let $Y^{0}_{i}$ be the counterfactual outcome of child $i$ when not participating in center-based childcare. Similarly, let $Y^{1}_{i}$ be her potential outcome if she participates. We model the outcome as: 
+\noindent Let $Y^{0}_{i}$ be the counterfactual outcome of subject $i$ when not participating in center-based childcare. Similarly, let $Y^{1}_{i}$ be her potential outcome if she participates. We model the outcome as: 
  
 \begin{eqnarray}
 Y_{i}^1 &=& \alpha^1+\mathbf{X}_{i} \mathbf{\beta}                 +\varepsilon_i^1 \nonumber  \\
@@ -586,15 +586,15 @@ D_{i} = \left\{
     \right. 
 \end{equation}
 
-\noindent where we interpret $D_{i}^*$ as a latent continuous variable representing the household's interest in sending the child to treatment. We write
+\noindent where we interpret $D_{i}^*$ as a latent continuous variable representing the household's interest in sending the subject to treatment. We write
 
 \begin{equation}
 D^{*}_i = \mathbf{W}_i \gamma^{D} + \varepsilon^{D}_i, \label{eq:probitD}
 \end{equation}
 
-\noindent where $\mathbf{W}_i$ is a vector that includes $\mathbf{X}_i$ and $R_i$ and can include variables that shift the decision to enroll children into ABC or CARE without shifting the counterfactual outcome of interest, $Y^{d}_{i}$. \\
+\noindent where $\mathbf{W}_i$ is a vector that includes $\mathbf{X}_i$ and $R_i$ and can include variables that shift the decision to enroll subjects into ABC or CARE without shifting the counterfactual outcome of interest, $Y^{d}_{i}$. \\
 
-\noindent We write the selection equation into months of preschool as a linear equation with fixed coefficients, assuming homogeneous treatment effects:
+\noindent We model the selection into months of alternative preschool as a linear equation with fixed coefficients, assuming homogeneous treatment effects:
 
 \begin{equation}
 Q_i = \mathbf{W}_i \gamma^{Q} + \varepsilon^{Q}_i, \label{eq:selq}
@@ -623,13 +623,13 @@ Q_i = \mathbf{W}_i \gamma^{Q} + \varepsilon^{Q}_i, \label{eq:selq}
 
 \noindent Further, we assume that 
 \begin{equation}
-\mathbb{E}\left[\varepsilon_i^0|D_i=0,\mathbf{W}_i,\varepsilon^{Q}_i,Q_i=q\right]=\sigma^{0Q}\varepsilon^{Q}_i+\mathbb{E}\left[\varepsilon_i^0|D_i=0,\mathbf{W}_i\right].
+\mathbb{E}\left[\varepsilon_i^0|D_i=0,\mathbf{W}_i,\varepsilon^{Q}_i,Q_i=q\right]=\sigma^{0,Q}\varepsilon^{Q}_i+\mathbb{E}\left[\varepsilon_i^0|D_i=0,\mathbf{W}_i\right].
 \label{eq:E[epsilon0]}
 \end{equation}
 
 \subsubsection{Identification}
 
-\noindent The following steps identify the parameters of interest. First, we estimate the parameters characterizing the decision to enroll the child in center-based childcare. We exploit the assumption that $\varepsilon_{i}^D \sim \mathcal{N} \left( 0, 1 \right)$ in \eqref{eq:udist} and estimate the parameters in \eqref{eq:probitD} using a probit model.\\
+\noindent The following steps identify the parameters of interest. First, we estimate the parameters characterizing the decision to enroll the subject in center-based childcare. We exploit the assumption that $\varepsilon_{i}^D \sim \mathcal{N} \left( 0, 1 \right)$ in \eqref{eq:udist} and estimate the parameters in \eqref{eq:probitD} using a probit model.\\
 
 \noindent Second, we approximate the unobserved term relevant to the choice of $Q_{i}$. We take the coefficients in \eqref{eq:selq} to obtain an estimate for $\varepsilon^{Q}_i$. By linearly conditioning on this term, we account for the correlation between the error term in the decision for $Q_{i}$ and the error term in the outcome equation, $\varepsilon_i^0$.\\
 
@@ -640,38 +640,38 @@ Q_i = \mathbf{W}_i \gamma^{Q} + \varepsilon^{Q}_i, \label{eq:selq}
 \mathbb{E}\left[Y_i^0|D_i=0,\mathbf{W}_i,\varepsilon^{Q}_i,Q_i=q\right] &=& \alpha^0+\mathbf{X}_i\mathbf{\beta} +\alpha^Q q \label{eq:condout} \\ \nonumber && \quad + \mathbb{E}\left[\varepsilon_i^0|D_i=0,\mathbf{W}_i,\varepsilon^{Q}_i,Q_i=q\right].
 \end{eqnarray}
 
-\noindent Once we condition on the proxy for $\varepsilon^{Q}_i$, the error term in the outcome equations only depends on the selection into center-based childcare. The conditional error terms in equation \eqref{eq:condout} can be specified as control functions.\\ 
+\noindent Once we condition on the proxy for $\varepsilon^{Q}_i$, the error term in the outcome equations only depends on the selection into center-based childcare. The conditional error terms in \eqref{eq:condout} can be specified using control functions.\\ 
 
-\noindent For children enrolled in treatment, the control function is: 
+\noindent For subjects enrolled in treatment, the control function is: 
 \begin{equation}
 \mathbb{E} \left[\varepsilon_i^1|D_i=1,\mathbf{W}_i \right]=\sigma_1\frac{\phi \left( \mathbf{W}_i \gamma^D \right) }{ \Phi \left( \mathbf{W}_i \gamma^D \right) }. \label{eq:contam}
 \end{equation}
 
-\noindent For children not enrolled in the treatment, the control function is:
+\noindent For subjects not enrolled in the treatment, the control function is:
 \begin{equation}
-\mathbb{E} \left[\varepsilon_i^0|D_i=0,\mathbf{W}_i,\varepsilon^{Q}_i,Q_i=q\right]= \sigma^{0Q}\varepsilon^{Q}_i - \sigma_0 \frac{\phi\left(\mathbf{W}_i\gamma^D\right)}{\Phi\left( - \mathbf{W}_{i} \gamma^D \right) }. \label{eq:home}
+\mathbb{E} \left[\varepsilon_i^0|D_i=0,\mathbf{W}_i,\varepsilon^{Q}_i,Q_i=q\right]= \sigma^{0,Q}\varepsilon^{Q}_i - \sigma_0 \frac{\phi\left(\mathbf{W}_i\gamma^D\right)}{\Phi\left( - \mathbf{W}_{i} \gamma^D \right) }. \label{eq:home}
 \end{equation}
 
 \subsection{Estimates}
 
 \noindent By including the control functions, we can recover consistent estimates of the parameters in \eqref{eq:potout} through a linear regression. The effect of center-based childcare is the difference of the intercepts in the two outcome equations.\\
 
-\noindent The charts below present the estimates for the parameter associated with $D_i$. That is, the effect of participating in center-based childcare relative to a counterfactual of receiving no preschool alternative. As before, we present results for IQ scores at different ages and for a set of relevant adult outcomes. The results are not compelling, as they present irregularities over the life-cycle that differ from the rest of results we present in the main paper and throughout this appendix. 
+\noindent The charts below present the estimates for the parameter associated with $D_i$. That is, the effect of participating in center-based childcare relative to a counterfactual of receiving no preschool alternative. As before, we present results for IQ scores at different ages and for a set of relevant adult outcomes. The results are not compelling, as they present irregularities over the life cycle that differ from the rest of results we present in the main paper and throughout this appendix. 
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous (log) Months of Take-up of Alternative Preschool} \label{output/appendixplots/Q_cf_te.eps}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_logQ_iv_te.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/ins_inter_logQ_iv_te.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated with $D_i$ estimated using Control Functions as described in the text. The outcomes ($Y_i$) are IQ scores at different ages with a national standard deviation of 15 and a mean of 100.  $D_i=1$ for children that participate in ABC or CARE center-based treatment, and $D_i=0$ for children who do not participate in treatment. $Q_i$ is the number of months attending preschool. It is coded as zero for children participating in ABC or CARE. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute.}
+\noindent Note: This plot presents the parameter associated with $D_i$ estimated using Control Functions as described in the text. The outcomes ($Y_i$) are IQ scores at different ages with a national standard deviation of 15 and a mean of 100.  $D_i=1$ for subjects that participate in ABC or CARE center-based childcare, and $D_i=0$ for subjects who do not participate in treatment. $Q_i$ is the number of months attending preschool. It is coded as zero for subjects participating in ABC or CARE. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute.}
 \end{figure}
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on Labor Market Outcomes, Accounting for Endogenous (log) Months of Take-up of Alternative Preschool} \label{output/appendixplots/Q_cf_te.eps}
-		\includegraphics[width=.6\columnwidth]{output/appendixplots/ins_inter_logQ_iv_other.eps}
+		\includegraphics[width=.7\columnwidth]{output/appendixplots/ins_inter_logQ_iv_other.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated with $D_i$ estimated using Control Functions as described in the text. The outcomes ($Y_i$) are different relevant adult outcomes labeled in the horizontal axis.  $D_i=1$ for children that participate in ABC or CARE center-based treatment, and $D_i=0$ for children who do not participate in treatment. $Q_i$ is the number of months attending preschool. It is coded as zero for children participating in ABC or CARE. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: male, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute.}
+\noindent Note: This plot presents the parameter associated with $D_i$ estimated using Control Functions as described in the text. The outcomes ($Y_i$) are different adult outcomes labeled in the horizontal axis.  $D_i=1$ for subjects that participate in ABC or CARE center-based childcare, and $D_i=0$ for subjects who do not participate in treatment. $Q_i$ is the number of months attending preschool. It is coded as zero for subjects participating in ABC or CARE. $\mathbf{X}_{i}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-Risk Index, and Apgar Score at 1 minute.}
 \end{figure}
 
 \setcounter{figure}{0}  \renewcommand{\thefigure}{E.\arabic{figure}}
