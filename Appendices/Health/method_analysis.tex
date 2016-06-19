@@ -40,10 +40,10 @@ We use this model to compute the probability of having insurance at the start of
 Then, we generate a Monte Carlo binary random variate according to this probability.
 If the outcome is positive, the subject is assigned to have some private insurance. \\
 
-\noindent FAM uses six activities of daily living (ADLs) about which there is data in PSID: walking, dressing, eating, bathing or showering, getting in and out of bed or a chair, and using the toilet, including getting to the toilet.
+\noindent FAM uses six Activities of Daily Living (ADLs) about which there is data in PSID: walking, dressing, eating, bathing or showering, getting in and out of bed or a chair, and using the toilet, including getting to the toilet.
 FAM simulates the number of these ADLs in which the subject has difficulty.
 ADL difficulties predict FAM transitions in benefits claiming, mortality, employment status, insurance category, and nursing home residency.
-FAM also transitions the count of difficulties among six instrumental activities of daily living (IADLs) from PSID: preparing one's own meals; shopping for personal toilet items or medicines; managing one's own money, such as keeping track of expenses or paying bills; using the phone; doing heavy housework, like scrubbing floors or washing windows; and doing light housework, like doing dishes, straightening up, or light housecleaning.
+FAM also transitions the count of difficulties among six Instrumental Activities of Daily Living (IADLs) from PSID: preparing one's own meals; shopping for personal toilet items or medicines; managing one's own money, such as keeping track of expenses or paying bills; using the phone; doing heavy housework, like scrubbing floors or washing windows; and doing light housework, like doing dishes, straightening up, or light housecleaning.
 Both ADLs and IADLs are components of FAM's model for quality-adjusted life years (QALYs).
 The ABC age-30 subject interview does not ask about ADLs or IADLs, but it does ask if the subject has a physical or nervous condition that keeps them from working.
 PSID respondents are also asked this question.
@@ -73,12 +73,12 @@ The ABC age-30 subject interview has a single yes/no question about claiming whi
 Additionally, we estimate transition probabilities by gender, race and ethnicity, and educational attainment as a function of individual characteristics (see below).
 Each transition model includes a subset of variables and relevant interactions from the following list: age, gender, race and ethnicity, education, parents' education,
 % excluding this because it was not available in ABC data: childhood health,
-childhood home situation (both parents in the home), body-mass index (BMI), smoking history, lagged health conditions, number of biological children, number of children in the household, past earnings and work status, partnership status (single, cohabiting, married, separated/divorced, or widowed), disability status, and health insurance status.
+childhood home situation (both parents in the home), body mass index (BMI), smoking history, lagged health conditions, number of biological children, number of children in the household, past earnings and work status, partnership status (single, cohabiting, married, separated/divorced, or widowed), disability status, and health insurance status.
 We consider three racial and ethnic groups (black non-Hispanic, white non-Hispanic, and Hispanic), and four educational groups (less than high school degree; high school graduate, including some college or associate's degree; college; and more than college). \\
 
-\noindent The health transition models estimate the probability that a person transitions between health states, e.g. obesity or heart disease, as a function of current health status, demographic characteristics (including race, gender, age, education, parents' education, and childhood health), and risk factors (including weight, smoking status, and number of births if female for BMI transitions), enabling us to age the cohorts. This mehanism to model health transitions accounts for the fact that certain health conditions increase the likelihood of comorbidities.
+\noindent The health transition models estimate the probability that a person transitions between health states, e.g. obesity or heart disease, as a function of current health status, demographic characteristics (including race, gender, age, education, parents' education, and childhood health), and risk factors (including weight, smoking status, and number of births if female for BMI transitions), enabling us to age the cohorts. This mechanism to model health transitions accounts for the fact that certain health conditions increase the likelihood of comorbidities.
 We estimate a transition model for each of the following health conditions: heart disease, blood pressure, stroke, lung disease, diabetes, and cancer. Each disease model includes gender, race and ethnicity, and educational group as covariates.
-We select conditions that are prevalent in the US and are characterized by significant disparities in outcomes across education, race and ethnicity, and income. Additionally, the incidence and progression of these conditions can potentially be reduced by preventive services, education policies, and modifications in health behaviors. These chronic conditions are treated as absorbing states, i.e., once the individual transitions into a chronic condition, the condition persists until death. \\
+We select conditions that are prevalent in the U.S. and are characterized by significant disparities in outcomes across education, race and ethnicity, and income. Additionally, the incidence and progression of these conditions can potentially be reduced by preventive services, education policies, and modifications in health behaviors. These chronic conditions are treated as absorbing states, i.e., once the individual transitions into a chronic condition, the condition persists until death. \\
 
 \noindent Additionally, we allow individuals to transition in and out of risk factors, such as smoking and BMI.
 These transitions are estimated as a function of demographics, past health, and risk factors.
@@ -110,8 +110,8 @@ Childbearing is modeled as an ordered probit model that is a function of past he
 
 \noindent We compute a QALY model based on the EQ-5D instrument, a widely-used, health-related
 quality-of-life (HRQoL) measure. %\footnote{Section \ref{sec:model_development_qalys_hrqol} gives some background on HRQoL measures.}
-The scoring system for EQ-5D was first developed using a UK sample.\footnote{\citet{Dolan_1997_Modeling_MC}.} Later, a scoring system based on
-a US sample was generated.\footnote{\citet{Shaw_etal_2005_EQ5D_MC}.} The PSID does not ask the appropriate questions for computing EQ-5D, but the MEPS does. \\
+The scoring system for EQ-5D was first developed using a U.K. sample.\footnote{\citet{Dolan_1997_Modeling_MC}.} Later, a scoring system based on
+a U.S. sample was generated.\footnote{\citet{Shaw_etal_2005_EQ5D_MC}.} The PSID does not ask the appropriate questions for computing EQ-5D, but the MEPS does. \\
 
 % review this:
 \noindent We map EQ-5D scores from the MEPS onto the PSID data using common measures between the MEPS and PSID.\footnote{The main variables in this mapping are self-reported health and requiring help with ADLs.} We then predict the EQ-5D scores for all PSID members running a linear regression using the variables that are transitioned in FAM (including ADL counts, IADL counts, and diseases). The microsimulation uses this linear regression to compute QALYs. \\
@@ -150,12 +150,12 @@ individual outcome $m$ has occurred as of age $j_i$. We assume the
 individual-specific component of the hazard can be decomposed into time-invariant and time-variant parts. The time-invariant part is composed of the effect of
 observed characteristics, $x_i$, that are constant over the entire life course and
 initial conditions, $h_{i,j_0,-m}$, (where $-m$ denotes outcomes other than the outcome
-$m$) that are determined before the first age in which each individual is observed. \\
+$m$) that are determined before the first age in which each subject is observed. \\
 
 %\footnote{Section \ref{sec:model_development_transition_model} explains why the $h_{i,j_0,-m}$ terms are included.}.
 \noindent The time-variant part is the effect of previously diagnosed outcomes, $h_{i,j_i-1,-m}$,
 on the hazard for $m$.\footnote{With some abuse of notation, $j_i-1$ denotes
-the previous age at which the respondent was observed.}  We assume an index of
+the previous age at which the subject was observed.}  We assume an index of
 the form  $z_{j_i,m} = x_i\beta_m + h_{i,j_i-1,-m} \gamma_m + h_{i,j_0,-m}\psi_m$. Hence, the
 latent component of the hazard is modeled as
 \begin{equation}
@@ -240,7 +240,7 @@ conditions, are also independent across diseases, the joint
 probability over all disease-specific sequences is simply the product of
 those probabilities. \\
 
-\noindent For a given respondent observed from the initial age, $j_{i0}$, to the last age, $j_{T_i}$, the probability of the observed health history is
+\noindent For a given subject observed from the initial age, $j_{i0}$, to the last age, $j_{T_i}$, the probability of the observed health history is
 (omitting the conditioning on covariates for notational simplicity)
 \begin{equation*}
 	l^{-0}_i(\mathbf{\theta}; h_{i,j_{i0}}) = \left[\prod_{m=1}^{M-1} \prod_{j=j_{i1}}^{j_{T_i}} P_{ij,m}(\mathbf{\theta})^{(1-h_{ij-1,m})(1-h_{ij,M})} \right] \times \left[\prod_{j=j_{i1}}^{j_{T_i}} P_{ij,M}(\mathbf{\theta}) \right]
@@ -357,7 +357,7 @@ The medical cost growth assumptions are derived from several underlying assumpti
 	  \includegraphics[height=3.5in]{AppOutput/Health/nwi.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: real wage growth projections are taken from Table VI.F6 in the 2009 Social Security Trustees Report \citep{Trustees_2009_Annual-Report-Old-Age-Survivors}. In years after the Trustees report projections, real wage growth is assumed to be 1.1\% annually.
+\noindent Note: Real wage growth projections are taken from Table VI.F6 in the 2009 Social Security Trustees Report \citep{Trustees_2009_Annual-Report-Old-Age-Survivors}. In years after the Trustees report projections, real wage growth is assumed to be 1.1\% annually.
 }
 \end{figure}
 
@@ -374,7 +374,7 @@ GDP assumptions for 2020-2100 are based on the 2008 OASDI Trustee's Report long-
 \floatfoot{
 \footnotesize
 \noindent Sources: Congressional Budget Office, Social Security Administration.\\
-\noindent Note: the year-over-year excess real medical cost growth over GDP is used to model medical cost growth in FAM.
+\noindent Note: The year-over-year excess real medical cost growth over GDP is used to model medical cost growth in FAM.
 }
 \end{figure}
 
