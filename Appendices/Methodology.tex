@@ -17,13 +17,13 @@ and number of siblings. Subjects from each subsample were then matched on HRI, a
 into their respective experimental groups. Sex, maternal IQ, number of siblings, and HRI
 therefore comprise $Z$. Thus, to obtain an
 unbiased estimate of the treatment effect, we regress the outcome variable on treatment status,
-controlling for those four baseline variables, as well as cohort. \\
+controlling for those four baseline variables, as well as for cohort. \\
 
 \noindent We perform this estimation on 1,000 bootstrap resamples of the original ABC data. We take the
 mean of the empirical bootstrap distribution as our point estimate, and the standard deviation
 of the distribution as the standard error. We estimate these effects on the
 pooled ABC sample, as well as the male and female subsamples. This allows us to generate
-rates of return and benefit-cost ratios for males and females. \\
+rates of return and benefit-cost ratios for the male subsample, the female subsample, and the pooled sample. \\
 %Moreover, we are able to obtain more precise estimates of the treatment
 %effect for males, as the data for females generally exhibit more noise. See Table \ref{table:nonipw} for the list of outcomes to which we apply this method.
 
@@ -33,24 +33,24 @@ rates of return and benefit-cost ratios for males and females. \\
 
 \noindent Given the small sample size of the ABC data, we consider outcome variables with fewer than 100 observations
 to exhibit a sizable rate of attrition. These variables include parental income at ages 2, 3, 4, 5, 9, 12,
-and 15, for which we observe no more than 91 subjects at any given age; and the subject health survey at
+and 15, for which we observe no more than 91 subjects at any given age; and the health survey at
 age 34, for which we observe no more than 72 subjects. \\
 
 \noindent We weight each subject by
 his/her propensity to select into treatment and propensity to respond. We estimate the
-former with a Logit model for treatment status, controlling for baseline
+former with a logit model for treatment status, controlling for baseline
 variables used to determine randomization into treatment status: cohort,
 maternal IQ, number of siblings, HRI, and sex (in the case of pooled estimates). \\
 
-\noindent To estimate the propensity to respond, we similarly estimate a Logit model for observing the outcome,
+\noindent To estimate the propensity to respond, we similarly estimate a logit model of observing the outcome,
 controlling for treatment status and three additional covariates. The additional covariates are
 chosen amongst a set of variables likely to be correlated with non-response rates for the outcome variable.
 This set of variables includes baseline characteristics determining randomization,
-baseline variables separate from randomization, and observed adult outcomes potentially affected by
+baseline variables other than randomization, and observed adult outcomes potentially affected by
 treatment. To select these variables, we estimate the
-aforementioned Logit model controlling for treatment status and every three-variable combination from
+aforementioned logit model controlling for treatment status and every three-variable combination from
 the described set of variables. The model with the lowest Akaike Information Criteria (AIC) value is used to estimate the propensity
-to respond. We limit the number of covariates in our Logit models to three as this noticeably reduces the frequency of bootstrap resamples which exhibit perfect separation in the covariates. \\
+to respond. We limit the number of covariates in our logit models to three as this noticeably reduces the frequency of bootstrap resamples which exhibit perfect separation in the covariates. \\
 
 \noindent To estimate the treatment effect, we regress the outcome of interest on treatment status, and weight the
 observations by the inverse of the product of the two propensity scores estimated with the method
@@ -66,7 +66,7 @@ the treatment effect on parental income at those ages. Given the rate of attriti
 parental income from age 2 onwards, we estimate these treatment effects accounting for attrition
 with IPW weights.
 To obtain a more complete picture of how the
-program affected parent income, we estimate the treatment effect in the missing ages by linearly
+program affected parental income, we estimate the treatment effect in the missing ages by linearly
 interpolating the treatment effects between the years for which we observe parental income. We assume
 there are no impacts from age 16 onwards (i.e. a treatment effect of 0). \\
 
@@ -82,7 +82,7 @@ the income streams of subjects for ages 22 to 29, and extrapolate income streams
 31 to 67 using three auxiliary datasets: NLSY79, CNLSY, and PSID. \\
 
 \noindent We assume common support between the auxiliary
-datasets and the analysis sample. This is required in order for us to reliably use external data to provide inference for the primary sample. Figure~\ref{fig:support} validates this
+datasets and the analysis sample. This is required in order for us to reliably use external data to provide inference for the ABC sample. Figure~\ref{fig:support} validates this
 assumption by displaying the overlapping support sets of ABC and our auxiliary data for
 the variables used to interpolate and extrapolate earnings. For details about these datasets, see Appendix \ref{app:subject_income}. \\
 
@@ -152,7 +152,7 @@ for early adult outcomes consist of labor income at ages 21 and 30, years of edu
 PIAT math scores from ages 5 to 10, and BMI at age 34. We estimate the model on 1,000 bootstrap
 resamples of the CNLSY to obtain a measure of prediction error, and denote the vectors of coefficients
 \emph{for the outcome variables} by $\beta_{a,s}$, where $a \in \{22, 23, \dots, 29\}$ denotes age, and
-$s \in \{1,2,\dots\,1,000\}$ indexes the bootstrap samples. \\
+$s \in \{1,2,\dots,1,000\}$ indexes the bootstrap samples. \\
 
 % We impose two restrictions on the CNLSY dataset: one on birth year, and one on income.
 % In regard to birth year, we limit the sample to subjects born in between 1978 and 1983. As our
@@ -175,7 +175,7 @@ $s \in \{1,2,\dots\,1,000\}$ indexes the bootstrap samples. \\
 
 \noindent The outcome variables we use as independent variables to fit the model to the CNLSY data are also
 observed in the ABC data, and we are able to calculate the treatment effects on each of these outcomes
-using the procedures described in Appendices \ref{app:method_fullobs} and \ref{app:method_partialobs}. We
+using the procedures described in Appendix \ref{app:method_fullobs} and Appendix \ref{app:method_partialobs}. We
 obtain these estimates for 1,000 bootstrap resamples of the ABC data, and denote the vectors of
 coefficients by $\gamma_r$, where $r \in \{1,2,\dots,1,000\}$ indexes the bootstrap samples. \\
 
@@ -185,8 +185,8 @@ prediction error by first randomly drawing residuals from our fitted model on th
 them to the ABC subjects. We then take the mean difference of these residuals across treatment and control
 groups, and add it to the previously described scalar. We do this for all 1,000,000 scalars. These scalars form the empirical
 bootstrap distribution of the treatment effect. Note that
-we bypass the estimation of the subjects' actual incomes, which we are unable to obtain an
-unbiased estimate of. Instead, we directly obtain an unbiased estimate of the treatment effect. This
+we bypass the estimation of the subjects' actual incomes, of which we are unable to obtain an
+unbiased estimate. Instead, we directly obtain an unbiased estimate of the treatment effect. This
 method implies that the impacts of the treatment on adult labor income can be expressed through
 the observed early-adult outcomes. In this case, the observed early-adult outcomes are labor income at ages 21 and
 30, years of education at age 30, average PIAT math scores from ages 5 to 10, and BMI at age 34. Since $\gamma_r$ has
@@ -199,8 +199,8 @@ pooled, male, and female samples. \\
 
 \noindent To extrapolate labor income, we employ the NLSY79 and PSID datasets. We execute the same estimation
 strategy as above, but with a reduced set of control variables in order to limit the number
-of lost cases. Specifically, the set of background variables we control for include an indicator for
-being black and sex. As the NLSY79 and PSID are not as rich as the CNLSY, we also
+of dropped cases. Specifically, the set of background variables we control for include an indicator for
+being black and gender of the subject. As the NLSY79 and PSID are not as rich as the CNLSY, we also
 restrict our outcome variables to years of education at age 30 and subject labor income at age 30. \\
 % Similar to the CNLSY, we restrict the PSID to individuals born between 1945 and 1980. As the PSID
 % extends until 2013, this means we are using the most recent subsample of individuals aged 30 to 67.
@@ -220,14 +220,14 @@ and the standard deviation of the distribution to be the standard error. \\
 
 \noindent The same procedure is carried out to interpolate public-transfer income, where we instead utilize public-transfer
 income as the dependent variable in the regressions on our auxiliary datasets. In the case of
-extrapolating transfer income from welfare, unemployment benefits, AFDC, and food stamps, we also apply
+extrapolating public-transfer income from welfare, unemployment benefits, AFDC, and food stamps, we also apply
 the same methodology as for labor income. However, in the case of disability insurance, social
-security, and supplemental security income, we apply an alternative approach. Instead, we estimate
+security, and supplemental security income, we apply an alternative approach. For these cases, we estimate
 the probability each ABC individual claims each of those benefits at ages 31--67, and multiply those
 probabilities by the average annual claims of each type of public transfer reported by the Social
 Security Administration in 2014. See Appendix \ref{section:FAM_ABC_impute}
 for an explanation of how we estimate these probabilities. For each age, we sum across our estimates of
-each type of public transfer receipt to obtain the total transfer income of ABC subjects. \\
+each type of public transfer received to obtain the total public-transfer income of ABC subjects. \\
 
 
 \paragraph{Health Costs}
@@ -250,7 +250,7 @@ to estimate the treatment effect on the cost of criminal activity at every age f
 
 \begin{table}[H]
 \begin{threeparttable}
-\caption{Non-IPW Estimates}
+\caption{Variables Estimated without IPW}
 \label{table:nonipw}
 \centering
 \input{AppOutput/Methodology/nonipw_vars.tex}
@@ -273,9 +273,9 @@ treatment effects.
 \input{AppOutput/Methodology/model_select_pooled.tex}
 \begin{tablenotes}
 \tiny
-\item Note: the table above lists the variables used to generate the component of the
+\item Note: The table above lists the variables used to generate the component of the
 inverse probability weights we use to account for attrition. To obtain this
-component for attrition, we estimate a Logit model for observing the outcome variable,
+component for attrition, we estimate a logit model for observing the outcome variable,
 controlling for treatment, and three additional covariates depending on the outcome
 variable. The additional variables are chosen from a list of covariates possibly affecting
 response rates. The set yielding the lowest Akaike Information Criteria value is used to
@@ -294,9 +294,9 @@ generate the IPW weights, and are listed in the table above.
 \input{AppOutput/Methodology/model_select_female.tex}
 \begin{tablenotes}
 \tiny
-\item Note: the table above lists the variables used to generate the component of the
+\item Note: The table above lists the variables used to generate the component of the
 inverse probability weights we use to account for attrition. To obtain this
-component for attrition, we estimate a Logit model for observing the outcome variable,
+component for attrition, we estimate a logit model for observing the outcome variable,
 controlling for treatment, and three additional covariates depending on the outcome
 variable. The additional variables are chosen from a list of covariates possibly affecting
 response rates. The set yielding the lowest Akaike Information Criteria value is used to
@@ -317,9 +317,9 @@ generate the IPW weights, and are listed in the table above.
 \input{AppOutput/Methodology/model_select_male.tex}
 \begin{tablenotes}
 \tiny
-\item Note: the table above lists the variables used to generate the component of the
+\item Note: The table above lists the variables used to generate the component of the
 inverse probability weights we use to account for attrition. To obtain this
-component for attrition, we estimate a Logit model for observing the outcome variable,
+component for attrition, we estimate a logit model for observing the outcome variable,
 controlling for treatment, and three additional covariates depending on the outcome
 variable. The additional variables are chosen from a list of covariates possibly affecting
 response rates. The set yielding the lowest Akaike Information Criteria value is used to
@@ -342,7 +342,7 @@ generate the IPW weights, and are listed in the table above.
 program at time $t$, and define $\mathbb{E}$ to be the sample mean. \\
 
 \noindent All outcomes of the parents and subjects that we observe as having been affected by the program
-are treated as benefits. For this to make sense, we reverse the sing of the monetized effect of the program
+are treated as benefits. For this to make sense, we reverse the sign of the monetized effect of the program
 on specific outcomes. Costs of ABC consist only of the initial program costs from ages 0 to 5.
 Table \ref{table:bc_comp} provides a full list of the benefits and costs of ABC. \\
 
@@ -357,7 +357,7 @@ control contamination costs, and health costs. To account for deadweight loss, w
 impose a marginal welfare cost of 50\% by multiplying public costs by a factor of
 $1.5$.\footnote{There is no clear consensus on the marginal welfare cost of tax revenue. However,
 most researchers estimate the welfare cost per tax dollar to be between \$0.30 and \$0.50. See
-\citet{Feldstein_1999_REStat}, \citet{Heckman_Smith_1998_evaluating}, and \citet{Browning_1987_AER}.} Public costs include education cost up until age 17, jail costs, justice system costs, Medicare costs,
+\citet{Feldstein_1999_REStat}, \citet{Heckman_Smith_1998_evaluating}, and \citet{Browning_1987_AER}.} Public costs include education costs up until age 17, jail costs, justice system costs, Medicare costs,
 Medicaid costs, disability insurance claims, social security claims, and supplemental security
 income. \\
 
@@ -386,9 +386,9 @@ and 90\textsuperscript{th} quantiles of each bootstrap distribution. \\
 \input{AppOutput/Methodology/bc_components.tex}
 \begin{tablenotes}
 \tiny
-\item Note: the table above lists the components of the costs and benefits of ABC.
+\item Note: The table above lists the components of the costs and benefits of ABC.
 In order for some components to be categorized as benefits, we reversed the sign
-of the treatment effect. $^{*}$ Only education costs up until age 18 are multiplied by 1.5 to account for welfare costs.
+of the treatment effect. *Only education costs up until age 18 are multiplied by 1.5 to account for welfare costs.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
