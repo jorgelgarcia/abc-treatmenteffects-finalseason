@@ -1,5 +1,5 @@
 \subsection{Data Sources} \label{section:data}
-\noindent FAM uses data from ABC  follow-up surveys to build the initial state of the cohort. 
+\noindent FAM uses data from ABC and CARE follow-up surveys to build the initial state of the cohort. 
 The transition model parameters are estimated from the 1997 to 2013 waves of the Panel Study of Income Dynamics (PSID). 
 We supplement the PSID with data from the Health and Retirement Study (HRS). 
 To estimate medical care costs associated with health conditions, we use the Medical Expenditures Panel Survey (MEPS) and the Medicare Current Beneficiaries Survey (MCBS). \\
@@ -13,7 +13,7 @@ To estimate medical care costs associated with health conditions, we use the Med
 
 \noindent We estimate the transition models using waves from 1997 to 2013. We create a dataset of respondents who have formed their own households, either
 as single heads of households, cohabiting partners, or married partners.  These heads, wives, and husbands respond to the richest
-set of PSID questions, including the health questions that are critical for our purposes. We use all respondents aged 25 and older.\footnote{While we use the full sample, we explored using a few different subsamples to better adapt to the demographics of the ABC subjects.}  
+set of PSID questions, including the health questions that are critical for our purposes. We use all respondents aged 25 and older.\footnote{While we use the full sample, we explored using a few different subsamples to better adapt to the demographics of the ABC and CARE subjects.}  
 The length of the PSID is a significant advantage, because we can include past health behaviors as explanatory variables for current health outcomes. This dataset provides adequate sample sizes to explore health outcomes of specific groups. 
 PSID does not follow individuals who are institutionalized in nursing homes or other long-term care facilities. To overcome this weakness, we pool the PSID sample with the Health and Retirement Study (HRS) sample when
 estimating mortality models. \\
@@ -57,8 +57,8 @@ including age, race and ethnicity, educational attainment, census region, and ma
 and utilization using data from 2007 to 2010. We use waves from 2001 to 2003 to estimate models of quality-adjusted life years (QALYs), due to availability of EQ-5D instrument in these waves.\footnote{Section \ref{section:FAM_models} explains the estimation of the QALY model.} \\
 
 
-\subsubsection{ABC}
-\noindent FAM uses ABC data to initialize the state of each ABC subject when they enter into the simulation.  
+\subsubsection{ABC and CARE}
+\noindent FAM uses ABC and CARE data to initialize the state of each ABC or CARE subject when they enter into the simulation.  
 These data are taken from the the age-21 parent interview; age-30 subject interview; age-30 tobacco, alcohol, and drugs interview; and age-34 health interview.  
 The goal is to have each subject's initial state match their status at the age-30 subject interview. Because several key FAM inputs are not available at the age-30 interview, we use surveys corresponding to other ages to impute missing elements. These imputations are discussed in Section \ref{section:FAM_ABC_impute}. \\
 
