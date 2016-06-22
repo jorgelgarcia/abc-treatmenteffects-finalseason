@@ -32,6 +32,9 @@ cd $dataabccare
 use append-abccare_iv.dta, clear
 
 replace Q = 0 if dc_mo_pre == 2 & random == 3
+replace P = 0 if dc_mo_pre == 2 & random == 3
+summ P if random == 3
+summ P if random == 0
 sort    Q
 replace Q = Q/60
 cumul   Q if program=="care" & random  == 0, gen(cdf_Q_pre_control)
