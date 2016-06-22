@@ -35,6 +35,7 @@ use append-abccare_iv.dta, clear
 sort    Q
 replace Q = Q/60
 cumul   Q if program=="abc" & treat == 0, gen(cdf_Q) 
+summ    P if program=="abc" & treat == 0
 // replace dc_mo_pre = 52 if dc_mo_pre >= 52
 
 #delimit
