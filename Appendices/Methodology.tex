@@ -22,7 +22,7 @@ controlling for those four baseline variables, as well as for cohort. \\
 \noindent We perform this estimation on 1,000 bootstrap resamples of the original ABC and CARE data. We take the
 mean of the empirical bootstrap distribution as our point estimate, and the standard deviation
 of the distribution as the standard error. We estimate these effects on the
-pooled ABC and CARE sample, as well as the male and female subsamples. This allows us to generate
+pooled ABC and CARE samples, as well as the male and female subsamples. This allows us to generate
 rates of return and benefit-cost ratios for the male subsample, the female subsample, and the pooled sample. \\
 %Moreover, we are able to obtain more precise estimates of the treatment
 %effect for males, as the data for females generally exhibit more noise. See Table \ref{table:nonipw} for the list of outcomes to which we apply this method.
@@ -31,7 +31,7 @@ rates of return and benefit-cost ratios for the male subsample, the female subsa
 \subsubsection{Partially Observed Outcomes}
 \label{app:method_partialobs}
 
-\noindent Given the small sample size of the ABC and CARE data, we consider outcome variables with fewer than 100 observations
+\noindent Given the small sample sizes of the ABC and CARE data, we consider outcome variables with fewer than 100 observations
 to exhibit a sizable rate of attrition. These variables include parental income at ages 2, 3, 4, 5, 9, 12,
 and 15, for which we observe no more than 91 subjects at any given age; and the health survey at
 age 34, for which we observe no more than 72 subjects. \\
@@ -83,7 +83,7 @@ the income streams of subjects for ages 22 to 29, and extrapolate income streams
 
 \noindent We assume common support between the auxiliary
 datasets and the analysis sample. This is required in order for us to reliably use external data to provide inference for the ABC and CARE samples. Figure~\ref{fig:support} validates this
-assumption by displaying the overlapping support sets of ABC and CARE and our auxiliary data for
+assumption by displaying the overlapping support sets of ABC and our auxiliary data for
 the variables used to interpolate and extrapolate earnings. For details about these datasets, see Appendix \ref{app:subject_income}. \\
 
 
@@ -192,7 +192,7 @@ the observed early-adult outcomes. In this case, the observed early-adult outcom
 30, years of education at age 30, average PIAT math scores from ages 5 to 10, and BMI at age 34. Since $\gamma_r$ has
 been adjusted to address selection into treatment and attrition in the ABC and CARE data, the bootstrap distribution
 is devoid of selection and attrition issues. In addition, the bootstrap distribution captures
-the error stemming from the ABC and CARE datasets, and prediction error of the model fitted to the CNLSY dataset.
+the error stemming from the ABC or CARE datasets, and prediction error of the model fitted to the CNLSY dataset.
 We take the mean of the empirical bootstrap distribution as our point estimate, and the standard deviation
 of the distribution as the standard error. Again, we carry out this procedure for the
 pooled, male, and female samples. \\
@@ -223,11 +223,11 @@ income as the dependent variable in the regressions on our auxiliary datasets. I
 extrapolating public-transfer income from welfare, unemployment benefits, AFDC, and food stamps, we also apply
 the same methodology as for labor income. However, in the case of disability insurance, social
 security, and supplemental security income, we apply an alternative approach. For these cases, we estimate
-the probability each ABC and CARE individual claims each of those benefits at ages 31--67, and multiply those
+the probability each ABC or CARE individual claims each of those benefits at ages 31--67, and multiply those
 probabilities by the average annual claims of each type of public transfer reported by the Social
 Security Administration in 2014. See Appendix \ref{section:FAM_ABC_impute}
 for an explanation of how we estimate these probabilities. For each age, we sum across our estimates of
-each type of public transfer received to obtain the total public-transfer income of ABC subjects. \\
+each type of public transfer received to obtain the total public-transfer income of both ABC and CARE subjects. \\
 
 
 \paragraph{Health Costs}
@@ -344,7 +344,7 @@ program at time $t$, and define $\mathbb{E}$ to be the sample mean. \\
 \noindent All outcomes of the parents and subjects that we observe as having been affected by the program
 are treated as benefits. For this to make sense, we reverse the sign of the monetized effect of the program
 on specific outcomes. Costs of ABC and CARE consist only of the initial program costs from ages 0 to 5.
-Table \ref{table:bc_comp} provides a full list of the benefits and costs of ABC and CARE. \\
+Table \ref{table:bc_comp} provides a full list of the benefits and costs of ABC. \\
 
 \noindent We take the sum of the treatment effects on each component of the benefits to
 be the total benefit, $B_t$, of the ABC and CARE programs (see Appendix \ref{app:method_identify} on how
@@ -369,7 +369,7 @@ component of the benefits and costs at time $t$ for the pooled, male, and
 female samples. We do this for 1,000 bootstrap resamples of the original ABC and CARE data.
 In the case of health costs and subject income, for which we employ auxiliary datasets to
 estimate the treatment effects, we also obtain 1,000 bootstrap estimates from the auxiliary data
-for every ABC and CARE bootstrap resample, resulting in a total of 1,000,000 estimates.
+for every ABC or CARE bootstrap resample, resulting in a total of 1,000,000 estimates.
 By reusing each bootstrap estimate of the treatment effect on outcomes that do not require any auxiliary data
 set 1,000 times, we obtain a total of 1,000,000 estimates of the cash flow.
 We estimate the IRR on each of those cash flows.
