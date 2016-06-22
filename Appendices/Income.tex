@@ -1,4 +1,4 @@
-\section{Interpolation Parental Income}
+\section{Interpolation of Parental Income}
 \label{app:parent_income}
 
 
@@ -29,9 +29,9 @@ sum the labor income of the respondent and her partner. \\
 % At all ages, income from other family members are excluded, and all values are inflated
 % to 2014 dollars.
 
-\setcounter{figure}{0}  \renewcommand{\thefigure}{E.\arabic{figure}}
-\setcounter{table}{0}   \renewcommand{\thetable}{E.\arabic{table}}
-\section{Extrapolating Individual Income}
+\setcounter{figure}{0}  \renewcommand{\thefigure}{K.\arabic{figure}}
+\setcounter{table}{0}   \renewcommand{\thetable}{Ks.\arabic{table}}
+\section{Extrapolation of Individual Income}
 \label{app:subject_income}
 
 \subsection{Data Sources}
@@ -56,7 +56,7 @@ individuals representing the non-institutionalized civilian population, a supple
 sample of 5,295 civilian Hispanics, Latinos, blacks, non-blacks/non-Hispanics, and economically
 disadvantaged youth, and a sample of 1,280 who served in the military as of September 30,
 1978. When appropriately weighted, the NLSY is nationally representative of the youth
-living in the US on January 1, 1979. We include individuals from all three subsamples
+living in the U.S. on January 1, 1979. We include individuals from all three subsamples
 in our analysis. \\
 
 \noindent The NLSY collected data on labor market participation, education, family background,
@@ -77,10 +77,10 @@ we extrapolate the income of the ABC subjects. \\
 
 \noindent Given the biennial nature of the NLSY, we only observe each subject at either odd or even
 ages. Not only does this reduce the size of the sample on which we fit our prediction model
-at each age, but it possibly introduces biases associated with the odd-aged and even-aged cohorts.
-To address this issue, we perform a linear interpolation on the variables in the CNLSY data
+at each age, but it can introduce biases associated with the odd-aged and even-aged cohorts.
+To address this issue, we perform a linear interpolation on the variables in the NLSY data
 that enter into our prediction model. This allows us to estimate our prediction model on
-all subjects of the CNLSY satisfying our restrictions at every age. \\
+all subjects of the NLSY satisfying our restrictions at every age. \\
 
 \subsubsection{CNLSY}
 \label{app:subject_income_cnlsy}
@@ -99,7 +99,7 @@ and more. We use these data to estimate a prediction model for subject income fo
 
 \noindent As we did with the NLSY, we restrict the CNLSY sample to individuals with labor income less than
 \$300,000 (2014 USD) at any given year. In addition to this, we limit the sample to subjects born
-between 1978 and 1983. As our CNLSY data extends up to 2012, this implies that we use the most
+between 1978 and 1983. Because the CNLSY data extend to 2012, this implies that we use the most
 recent data from the CNLSY in which individuals are aged 29 to 34. Finally, given the biennial
 nature of the survey, we perform a linear interpolation on the variables that enter into our prediction
 model. This allows us to use as much of the CNLSY data as possible at every age when
@@ -109,15 +109,15 @@ interpolating subject income. \\
 \label{app:subject_income_psid}
 
 \noindent The Panel Survey of Income Dynamics (PSID) is a longitudinal household survey containing between 5,000
-and 8,500 families in each wave. It began yearly in 1968 and has been fielded biennially since 1996.
-When appropriately weighted, the PSID is designed to be representative of US households. The PSID
+and 8,500 families in each wave. It began as yearly survey in 1968 and has been fielded biennially since 1996.
+When appropriately weighted, the PSID is designed to be representative of U.S. households. The PSID
 provides extensive information concerning demographics, economic outcomes, health outcomes, marriage
 and fertility, and more. In addition to using the PSID to forecast future earnings of ABC subjects, we
 use the PSID to forecast health outcomes. See Appendix \ref{section:data_psid} for details on how the
 PSID relates to health outcomes. \\
 
-\noindent Similar to the CNLSY, we restrict the PSID to individuals born between 1945 and 1981. As the data
-extend up to 2013, this means we use the most recent subsample of individuals aged 30 to 67.
+\noindent Similar to the CNLSY, we restrict the PSID to individuals born between 1945 and 1981. Because the data
+extend to 2013, this means we use the most recent subsample of individuals aged 30 to 67.
 We also exclude all individuals with labor income exceeding \$300,000 (2014 USD) at any given year.
 Finally, given the biennial nature of the survey, we perform a linear interpolation on the variables
 that enter into our prediction model. This allows us to use as much of the PSID data as possible at
