@@ -166,28 +166,39 @@ Chetty_Friedman_etal_2011_QJoE}. For simplicity, we restrict this analysis to AB
 \noindent Note: This figure displays the cumulative density function of enrollment in alternative preschools of the control and family education treatment groups in CARE.}
 \end{figure}
 
-\subsection{Program Costs}
+\subsection{Program Costs} \label{section:programscosts}
 
-\noindent The costs of the programs are a fundamental input to our calculations of the benefit-to-cost ratio and the internal rate of return. We provide a brief documentation of the costs of ABC and CARE next. Appendix \ref{app:programcosts} explains other important components of the costs, including education, which is relevant given the substantial increase in long-term education for subjects of the treatment group. Similarly, it includes the costs of health and crime.\\
+\noindent The costs of the programs are a fundamental input to our calculations of the benefit-to-cost ratio and the internal rate of return. We improve on previous estimates of the costs by using primary-source documentation---progress reports written by the principal investigators and related documentation we recovered in the archives of the research center where the program was implemented. We display these sources in Appendix \ref{app:programcosts}.\\
 
-\noindent The program provided comprehensive center-based childcare and medical services. While we use some estimates from \cite{Masse_Barnett_2002_BOOKBenefitCostAnalysis}, our calculations of the program costs differ in two key aspects: (i) we account for the treatment group's medical care costs; and (ii) we incorporate new information on staff and program implementation to update costs.\footnote{CARE's treatment group that is relevant to our calculations, the center-based childcare and family education treatment group, received an additional service if compared to the treatment group in ABC: family education. In Appendix~\ref{app:programcosts}, we argue that this resulted in no additional cost. The staff implementing the center-based childcare treatment implemented the home visits without receiving an additional payment for doing so. We argue that any transportation costs to the children's home were minimal.}
+\noindent Table~\ref{tab:totalcosts} breaks down the costs by different categories and items for a year of treatment. We obtain the personnel wages from the primary sources we show in Appendix \ref{app:programcosts} and include the type of personnel based on conversations with the programs' staff. Our sources display the actual wages without accounting for fringe benefits. We add $15\%$ to the wages to account for fringe benefits. The costs we label as ``other'' account for nutrition and services that the subjects  received when they were sick, diapers during the first 15 months of their lives, and transportation to the center.\footnote{The control children also received diapers during approximately 15 months, and iron-fortified formula. We assume that this generated a cost of half that amounts to half of ``other'' category for the first 15 months of their lives.} The costs are based on sources describing ABC treatment for $52$ children. We use the same costs estimates for CARE, for which information is scarcer. We have no reasons to expect sizable differences in the costs of the two programs.\footnote{CARE's treatment group that is relevant to our calculations, the center-based childcare and family education treatment group, received an additional service if compared to the treatment group in ABC: family education. The primary sources that we use indicate that this resulted in no additional cost. The staff implementing the center-based childcare treatment implemented the home visits without receiving an additional payment for doing so. We assume that any transportation costs to the children's home were minimal.}
 
 \begin{table}[H]
 \begin{threeparttable}
-\caption{Average Individual Costs, ABC} \label{tab:totalcosts}
+\caption{Yearly Program Costs, ABC and CARE} \label{tab:totalcosts}
 \footnotesize
-\input{Output/progcost_main.tex}
+\begin{tabular}{lc} \toprule
+\multicolumn{1}{c}{Item} & Yearly Cost in 2014 USD \\ \midrule
+1 Program Director & $60,935$ \\ 
+1 Social Worker      &  $35,869$ \\ 
+3 Lead Teachers and 2 Teachers Aides (Nursery)  & $204,457$ \\
+4 Lead Teachers and 4 Teacher Aides  (Toddlers) & $305,181$ \\ 
+2 Teaching Support Staff & $53,341$ \\ 
+1 Secretary & $32,973$ \\ 
+1 Clerk        & $32,537$ \\ 
+Workers' Fringe Benefits & $124,935$ \\ 
+Other & $4, 891$ \\ \\ \midrule 
+Total  & $962,726$ \\ 
+Total per Subject & $18,514$ \\ \bottomrule
+\end{tabular}
 \begin{tablenotes}
 \footnotesize
 \item Sources: See Appendix~\ref{app:programcosts}.\\
-\item Note: This table summarizes the cost of the program by treatment and control group in 2014 USD, discounted to the year in which subjects were born. We consider only the rental rates of facilities and equipment. We include only the staff costs of staff who interacted with subjects directly or provided administrative support. $^{*}$The year 1 medical cost for the control group was only for the first cohort of ABC; the control groups of subsequent cohorts received no medical care. The change in costs between years 1, 2, 3, and years 4 and 5 reflect the change in childcare costs for infants and toddlers, and preschool-age children. The categories are described in the text below. Further details on each category of the table are provided in Appendix~\ref{app:programcosts}.
+\item Note: This table summarizes the yearly costs for ABC and CARE. They are based on primary-source documentation describing ABC. We assume that the costs for ABC and CARE were the same based on conversations with programs' staff \citet{projectcare2014interviews,abc2014-2015interviews}.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
-
-\noindent Table \ref{tab:totalcosts} shows the average costs per subject enrolled
-in the program. It is important to note that we provide rental and marginal costs only, to capture, as closely as possible, the cost of replicating ABC.  For example, the costs do not include costs of research. The costs of the program are substantial and add up to \$95,024 for the average subject after discounting. This is the difference between the cost of goods and services provided to the treated subjects and the cost of those provided to the control subjects. \\
+\noindent We intend to report the cost of replicating ABC. The costs exclude research-related or policy-analyses expenses. Our calculation amounts to $\$295,239$ (1979 USD). Notably, a completely independent calculation reported in \citet{FPG_1979_Progress-Report} indicates that the yearly cost of the program was $\$275,475$  (1979 USD). Although the calculations might have been based on the same primary sources, \citet{FPG_1979_Progress-Report} does not provide a break down of the costs.
 
 \subsection{Non-experimental Data Sources}
 
@@ -401,8 +412,6 @@ that the ABC and CARE subjects will have after that age. The NCDPS data provide 
 
 \noindent A quality-adjusted life year (QALY) reweighs a year of life according to its quality given the burden of disease. A QALY of 1 denotes a year of life in the absence of disease (perfect health). The value of QALY for an individual in a given year is smaller than 1 when there is positive burden of disease, as worse health conditions imply lower QALYs.\footnote{When an individual dies, her QALY equals zero. It is worth noting that there are extreme combinations of disease and disability that may generate negative QALYs, although this case is unusual.} We compute a QALY model based on the EQ-5D instrument, a widely-used Health-related Quality-of-life (HRQoL) measure, available in MEPS. We then estimate this model from the PSID. Appendix~\ref{appendix:health} provides more details on this estimation strategy. \\
 
-\noindent We estimate four models of medical spending: total medical spending (medical spending from all payment sources), Medicare spending (annual medical spending paid by parts A, B, and D of Medicare), Medicaid spending (medical spending paid by Medicaid), and out-of-pocket spending (medical spending paid directly by the individual). Each medical spending model is estimated through pooled weighted least squares regressions that include a person€™s demographics, economic status, current health, risk factors, and functional status as explanatory variables. The MCBS-based medical spending models also include lagged health because of the length of time for which MCBS subjects are observed.
-
 \begin{sidewaystable}[H]
 \begin{threeparttable}
 \caption{Health State Transitions, Age $a$ as Predictor of Age $a+1$}\label{table:transition}
@@ -414,6 +423,8 @@ that the ABC and CARE subjects will have after that age. The NCDPS data provide 
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
+
+\noindent We estimate four models of medical spending: total medical spending (medical spending from all payment sources), Medicare spending (annual medical spending paid by parts A, B, and D of Medicare), Medicaid spending (medical spending paid by Medicaid), and out-of-pocket spending (medical spending paid directly by the individual). Each medical spending model is estimated through pooled weighted least squares regressions that include a person€™s demographics, economic status, current health, risk factors, and functional status as explanatory variables. The MCBS-based medical spending models also include lagged health because of the length of time for which MCBS subjects are observed.\\ 
 
 \noindent \textbf{Medical Expenditure before Age 30}
 
@@ -450,7 +461,11 @@ Working, if working age & \checkmark & \checkmark & \checkmark & \checkmark \\
 
 \subsection{Treatment Effects} \label{section:teresults}
 
-\noindent We consider \noutcomes\ measures of human development across the life cycle and count the measures for which the program had a ``socially positive'' effect, without accounting for control substitution. We do this for both ABC and CARE by focusing on the first phase of treatment to compare subjects who received center-based childcare to control-group subjects---noting that assignment was random.\footnote{In ABC, this implies comparing the subjects who were randomly assigned to the treatment group to the subjects who were randomly assigned to the control group, in the first phase. In CARE, this implies comparing the subjects who were randomly assigned to receive center-based childcare and family education to the subjects who were randomly assigned to the control group, in the first phase as well.} Figure~\ref{fig:ppositive} displays the results from this exercise: ABC and CARE positively impact a large percentage of the outcomes we consider.\footnote{The calculation of the standard errors follows from the bootstrap procedure we discuss in Section~\ref{section:methodology}.}
+\noindent We consider \noutcomes\ measures of human development across the life cycle and count the measures for which the program had a ``socially positive'' effect, without accounting for control substitution. We do this for both ABC and CARE by focusing on the first phase of treatment to compare subjects who received center-based childcare to control-group subjects---noting that assignment was random.\footnote{In ABC, this implies comparing the subjects who were randomly assigned to the treatment group to the subjects who were randomly assigned to the control group, in the first phase. In CARE, this implies comparing the subjects who were randomly assigned to receive center-based childcare and family education to the subjects who were randomly assigned to the control group, in the first phase as well.} Figure~\ref{fig:ppositive} displays the results from this exercise: ABC and CARE positively impact a large percentage of the outcomes we consider.\footnote{The calculation of the standard errors follows from the bootstrap procedure we discuss in Section~\ref{section:methodology}.}\\
+
+\noindent We can further decompose the counts in Figure~\ref{fig:ppositive} into arbitrary categories. To economize space, we present this exercise pooling ABC and CARE. That is, we decompose the effects described in the last two bars of Figure~\ref{fig:ppositive}. Figure~\ref{fig:ppositivecategory1} and Figure~\ref{fig:ppositivecategory2} present this exercise. This helps us better understand the type of outcomes the programs affected. The results indicate that a large and precise fraction of effects are positive for outcomes spanning the life cycle, from parental income to crime and including a wide variety of health categories.\\
+
+\noindent Next we present an overview of outcome-specific results. Appendix~\ref{appendix:results} displays an extensive summary of the estimates for the \noutcomes\ outcomes we consider. Note that: (i) we arbitrarily pick the outcomes we discuss next because we consider them of economic interest; and (ii) Appendix~\ref{appendix:results} displays results accounting for multiple hypothesis testing as in \citet{Lehman_Romano_2005_AnnStat} and \citet{Romano_Shaikh_2006_AnnStat}. We do not lose significance in the majority of outcomes.
 
 \begin{figure}[H]
 		\caption{Positively Impacted Outcomes, ABC and CARE} \label{fig:ppositive}
@@ -460,9 +475,7 @@ Working, if working age & \checkmark & \checkmark & \checkmark & \checkmark \\
 \noindent Note: The first two bars (ABC) compare the treatment and control groups in ABC. The third and fourth bars (CARE) compare the subjects who received center-based childcare and family education to the subjects who receive either family education or no treatment at all. The last two bars (ABC and CARE) pool the two previous sets of comparisons.}
 \end{figure}
 
-\noindent We can further decompose the counts in Figure~\ref{fig:ppositive} into arbitrary categories. To economize space, we present this exercise pooling ABC and CARE. That is, we decompose the effects described in the last two bars of Figure~\ref{fig:ppositive}. Figure~\ref{fig:ppositivecategory1} and Figure~\ref{fig:ppositivecategory2} present this exercise. This helps us better understand the type of outcomes the programs affected. The results indicate that a large and precise fraction of effects are positive for outcomes spanning the life cycle, from parental income to crime and including a wide variety of health categories.\\
-
-\noindent Next we present an overview of outcome-specific results. Appendix~\ref{appendix:results} displays an extensive summary of the estimates for the \noutcomes\ outcomes we consider. Note that: (i) we arbitrarily pick the outcomes we discuss next because we consider them of economic interest; and (ii) Appendix~\ref{appendix:results} displays results accounting for multiple hypothesis testing as in \citet{Lehman_Romano_2005_AnnStat} and \citet{Romano_Shaikh_2006_AnnStat}. We do not lose significance in the majority of outcomes.
+\noindent Table~\ref{table:females} presents the results for females. We focus on three columns. Columns~(2) displays the estimates of the parameter in \eqref{eq:mainest}. This parameter speaks to the effectiveness of the programs, \textit{as implemented}. Columns~(5) and ~(8) display estimates of the parameters in \eqref{eq:par0} and \eqref{eq:par1}. The former speaks to the effectiveness of the programs relative to the counterfactual of \textit{staying at home}. The latter speaks to the effectiveness of the programs relative to \textit{attending an alternative preschool}. All of these three estimates account for program attrition and control for a set of background variables.\footnote{See Appendix~\ref{appendix:methodology} for our methodology to account for attrition and Appendix~\ref{appendix:controls} for our procedure for selecting controls.}
 
 \begin{figure}[H]
 		\caption{Positively Impacted Outcomes by Category, ABC and CARE} \label{fig:ppositivecategory1}
@@ -472,7 +485,7 @@ Working, if working age & \checkmark & \checkmark & \checkmark & \checkmark \\
 \noindent Note: For each outcome category, we compare the mean of the subjects who received center-based childcare in ABC and center-based childcare and family education in CARE to the mean of the subjects in the control group in both programs and count the number of positive comparisons.}
 \end{figure}
 
-\noindent Table~\ref{table:females} presents the results for females. We focus on three columns. Columns~(2) displays the estimates of the parameter in \eqref{eq:mainest}. This parameter speaks to the effectiveness of the programs, \textit{as implemented}. Columns~(5) and ~(8) display estimates of the parameters in \eqref{eq:par0} and \eqref{eq:par1}. The former speaks to the effectiveness of the programs relative to the counterfactual of \textit{staying at home}. The latter speaks to the effectiveness of the programs relative to \textit{attending an alternative preschool}. All of these three estimates account for program attrition and control for a set of background variables.\footnote{See Appendix~\ref{appendix:methodology} for our methodology to account for attrition and Appendix~\ref{appendix:controls} for our procedure for selecting controls.}\\
+\noindent Column~(2) shows that the program caused substantial gains in a variety of economically relevant short- and long-term outcomes, as implemented. First, the programs have an effect on IQ that goes beyond the effects of many early childhood education programs, which usually fade out after a year of elementary school \citep{Hojman_2015_EvidenceFadeOut,Elango_Hojman_etal_2016_Early-Edu}. To put this effect in perspective, note that IQ and achievement tests scores are standardized to a nationally representative population with a standard deviation of 15 points. The effect of the programs we study amounts to more than $2/3$ of a standard deviation. The largest effect of Head Start, for example, happens before elementary school and amounts to half of the effect of ABC and CARE at age 12, the latter effect being measured after elementary school \citep{Elango_Hojman_etal_2016_Early-Edu}. The programs also have a substantial effect on achievement, which not only measures cognition but mathematics and reading knowledge.
 
 \begin{figure}[H]
 		\caption{Positively Impacted Health Outcomes, ABC and CARE} \label{fig:ppositivecategory2}
@@ -482,7 +495,9 @@ Working, if working age & \checkmark & \checkmark & \checkmark & \checkmark \\
 \noindent Note: For each outcome category, we compare the mean of the subjects who received center-based childcare in ABC and center-based childcare and family education in CARE to the mean of the subjects in the control group in both programs and count the number of positive comparisons.}
 \end{figure} 
 
-\noindent Column~(2) shows that the program caused substantial gains in a variety of economically relevant short- and long-term outcomes, as implemented. First, the programs have an effect on IQ that goes beyond the effects of many early childhood education programs, which usually fade out after a year of elementary school \citep{Hojman_2015_EvidenceFadeOut,Elango_Hojman_etal_2016_Early-Edu}. To put this effect in perspective, note that IQ and achievement tests scores are standardized to a nationally representative population with a standard deviation of 15 points. The effect of the programs we study amounts to more than $2/3$ of a standard deviation. The largest effect of Head Start, for example, happens before elementary school and amounts to half of the effect of ABC and CARE at age 12, the latter effect being measured after elementary school \citep{Elango_Hojman_etal_2016_Early-Edu}. The programs also have a substantial effect on achievement, which not only measures cognition but mathematics and reading knowledge.
+\noindent The effects that the programs have on high-school graduation and years of education at age 30 are sizable---column~(2). The former increases by \hsgradf\ percentage points and the latter by more than \yearsedf\ years. Although marginally not significant, the programs also: (i) increase labor income; (ii) reduce the dependence on public-transfer income; and (iii) increase employment. When we group the education and employment outcomes across ages 21 and 30 all of them display a positive treatment effect (see Figure~\ref{fig:ppositivecategory1}).\\
+
+\noindent When fixing the counterfactuals, a clear pattern emerges: females benefit much more from the programs relative to staying at home compared to how they benefit from the programs relative to attending alternative preschools. The differences are substantial: more than $30$ percentage points in high school graduation, almost a year of education, around $\$ 3,000$ 2014 USD of labor income, among other examples.
 
 \begin{table}[H] 
 \begin{threeparttable}
@@ -498,9 +513,7 @@ Working, if working age & \checkmark & \checkmark & \checkmark & \checkmark \\
 \end{threeparttable}
 \end{table}
 
-\noindent The effects that the programs have on high-school graduation and years of education at age 30 are sizable---column~(2). The former increases by \hsgradf\ percentage points and the latter by more than \yearsedf\ years. Although marginally not significant, the programs also: (i) increase labor income; (ii) reduce the dependence on public-transfer income; and (iii) increase employment. When we group the education and employment outcomes across ages 21 and 30 all of them display a positive treatment effect (see Figure~\ref{fig:ppositivecategory1}).\\
-
-\noindent When fixing the counterfactuals, a clear pattern emerges: females benefit much more from the programs relative to staying at home compared to how they benefit from the programs relative to attending alternative preschools. The differences are substantial: more than $30$ percentage points in high school graduation, almost a year of education, around $\$ 3,000$ 2014 USD of labor income, among other examples.
+\noindent When comparing the parameter estimates in columns (2), (5), and (8) we see that for females: the effectiveness of the program \textit{as implemented} is lower than the effectiveness of the program relative to \textit{staying at home}, while it is greater relative to attending alternative preschools. In an exercise analogous to that of Figure~\ref{fig:ppositive} we find that the programs relative to staying at home cause \positivecsnf\ (\positivescsnf) positive (and significant outcomes). The analogous number relative to attending alternative preschool is \positivecsaf\ (\positivescsaf). These results are relevant for the calculation of the cost-benefit ratio: they order the relative magnitude of the estimates we provide, depending on the counterfactual comparison.
 
 \begin{table}[H] 
 \begin{threeparttable}
@@ -516,8 +529,6 @@ Working, if working age & \checkmark & \checkmark & \checkmark & \checkmark \\
 \end{threeparttable}
 \end{table}
 
-\noindent When comparing the parameter estimates in columns (2), (5), and (8) we see that for females: the effectiveness of the program \textit{as implemented} is lower than the effectiveness of the program relative to \textit{staying at home}, while it is greater relative to attending alternative preschools. In an exercise analogous to that of Figure~\ref{fig:ppositive} we find that the programs relative to staying at home cause \positivecsnf\ (\positivescsnf) positive (and significant outcomes). The analogous number relative to attending alternative preschool is \positivecsaf\ (\positivescsaf). These results are relevant for the calculation of the cost-benefit ratio: they order the relative magnitude of the estimates we provide, depending on the counterfactual comparison.\\ 
-
 \noindent Table~\ref{table:males} presents the results for males. The programs \textit{as implemented} had statistically and economically significant effects on high-school graduation, employment, prediabetes, and diastolic pressure. The effect on labor income amounts to nearly $\$20,000$ 2014 USD.\\
 
 \noindent When fixing the counterfactual comparison, a clear pattern, as in the case of females, is not evident. When complementing the information with counts of positive (and significant) treatment effects, a pattern does emerge: relative to the programs, males benefit more from \textit{staying at home} than \textit{attending alternative preschools}. Relative to staying at home, ABC and CARE have positive (and significant) treatment effects for \positivecsnm\ (\positivescsnm) of outcomes. The analogous number relative to attending alternative preschool is \positivecsam\ (\positivescsam). The magnitudes of the results in the cost-benefit analysis are  consistent with these results.
@@ -526,13 +537,19 @@ Working, if working age & \checkmark & \checkmark & \checkmark & \checkmark \\
 
 \noindent Table~\ref{table:cba} summarizes the cost-benefit analysis of the programs without accounting for control substitution. All the money figures are in 2014 USD and are discounted to each child's birth age, unless otherwise specified.\\
 
-\noindent First, we analyze the results pooling males and females. These results indicate that the program is socially efficient: the baseline estimates for the internal rate of return and the benefit-to-cost ratio are \irrp\ and \bcp. The program generates a benefit of \bcp\ for every dollar spent on it. This is of particular importance because ABC and CARE were much more expensive than other early childhood education programs like Perry or Head Start \citep{Elango_Hojman_etal_2016_Early-Edu}---the treatment involved more services over a longer time period. \\ 
+\noindent Pooling males and females, the results indicate that the program is socially efficient: the baseline estimates for the internal rate of return and the benefit-to-cost ratio are \irrp\ and \bcp. The program generates a benefit of \bcp\ for every dollar spent on it. This is of particular importance because ABC and CARE were much more expensive than other early childhood education programs like Perry or Head Start \citep{Elango_Hojman_etal_2016_Early-Edu}---the treatment involved more services over a longer time period.\\ 
 
-\noindent The internal rate of return and the benefit-to-cost ratio are robust to several sensitivity exercises. First, we remove the component due to parental income. In practice, ABC and CARE had a childcare subsidy component because it allowed the mothers to work causing additional parental income. This component amounts to \parincomenpvp. Even after removing this component, the internal rate of return and benefit-to-cost ratio indicate social efficiency of the program and remain statistically significant.\\ 
+\noindent The internal rate of return and the benefit-to-cost ratio are robust to sensitivity exercises. First, we remove the component due to parental income. In practice, ABC and CARE had a childcare subsidy component because it allowed the mothers to work causing additional parental income. This component amounts to \parincomenpvp. Even after removing this component, the internal rate of return and benefit-to-cost ratio indicate social efficiency of the program and remain statistically significant.\\ 
 
-\noindent Parental income and crime are the components for which the internal rate of return and the benefit-to-cost ratio are the most sensitive. The reason for the sensitivity to parental income is that the amount is substantial and it is not heavily discounted because it accumulates during the first $15$ years of the children's life.\footnote{We do not account for treatment effects on parental income beyond age 15. Some children report to move out of their households as early as this age. This makes ambiguous the effects that parental income could have on the subjects after age 15.} Although crime is subject to more discounting, the amount due to crime savings is large so removing it diminishes both the internal rate of return and the benefit-to-cost ratio.\\ 
+\noindent Parental income and crime are the components for which the internal rate of return and the benefit-to-cost ratio are the most sensitive.\footnote{We do not account for treatment effects on parental income beyond age 15 because some children report to move out of their households as early as this age. This makes ambiguous the effects that parental income could have on the subjects after age 15.} The reason for the sensitivity to parental income is that the amount is substantial and it is not heavily discounted because it accumulates during the first $15$ years of the children's life. Although crime is subject to more discounting, the amount due to crime savings is large so removing it diminishes both the internal rate of return and the benefit-to-cost ratio.\\ 
 
-\noindent The estimates are robust to individually removing the rest of the components, and in most cases remain statistically significant. This happens for one of either two reasons: (i) the effects are substantial but they are heavily discounted because they happen later in life---e.g. labor income; or (ii) the effects happen early in life but are not as substantial---as in the amount that the control-group parents pay for their children to attend alternative preschools.
+\noindent The estimates are robust to individually removing the rest of the components, and in most cases remain statistically significant. This happens for one of either two reasons: (i) the effects are substantial but they are heavily discounted because they happen later in life---e.g. labor income; or (ii) the effects happen early in life but are not as substantial---as in the amount that the control-group parents pay for their children to attend alternative preschools.\\
+
+\noindent Next, we analyze the estimates when splitting the sample by males and females. Some of the estimates lose significance due to the reduction of observations after splitting the sample by gender. The point estimates remain robust across  the sensitivity analysis.\\
+
+\noindent For females, we observe consistency except for the case where we remove the parental income component. We can observe that the female sample is the main driver of parental income when comparing its net present value between females and males.\\
+
+\noindent For males, the estimates are robust, similar to the female samples. An exception occurs when we remove the component corresponding to quality-adjusted life years. Although the cost-to-benefit ratio remains virtually unchanged, the internal rate of return is negative. In this case, the internal rate of return is actually uninformative: it is negative due to the fact that, when excluding the quality-adjusted life years, the net-benefit streams cross from negative to positive generating multiple roots. The interpretation of the internal rate of return when the net-benefit streams cross in unclear \citep{Arrow-Levhari_1969_EJ}.\footnote{This reinforces the importance of considering the quality-life improvement due to better health conditions.}
 
 \begin{sidewaystable}[H] 
 \begin{threeparttable}
@@ -578,12 +595,6 @@ Deadweight Loss	&		&	0.23	&	\textbf{4.74}	&		&	0.15	&	10.19	&		&	0.13	&	\textbf{
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
-
-\noindent Next, we analyze the estimates when splitting the sample by males and females. Some of the estimates lose significance due to the reduction of observations after splitting the sample by gender. The point estimates remain robust across  the sensitivity analysis.\\
-
-\noindent For females, we observe consistency except for the case where we remove the parental income component. We can observe that the female sample is the main driver of parental income when comparing its net present value between females and males.\\
-
-\noindent For males, the estimates are robust, similar to the female samples. An exception occurs when we remove the component corresponding to quality-adjusted life years. Although the cost-to-benefit ratio remains virtually unchanged, the internal rate of return is negative. This internal rate of return is actually uninformative: it is negative due to the fact that, when excluding the quality-adjusted life years, the net-benefit streams cross from negative to positive generating multiple roots. The interpretation of the internal rate of return when the net-benefit streams cross in unclear \citep{Arrow-Levhari_1969_EJ}. This actually reinforces the importance of considering the improvement in the subject's life due to better health conditions.\footnote{The analysis in which we do not account for control substitution is the only case of crossing net-benefit streams.}\\
 
 \noindent Finally, we provide a cost-benefit analysis of the program when accounting for control substitution (Table~\ref{table:cbacs}). The first row shows the estimates without accounting for control substitution, i.e. the same as those of the first row in Table~\ref{table:cba}. The second and third rows present results for the two counterfactual comparisons we consider.\\ 
 
