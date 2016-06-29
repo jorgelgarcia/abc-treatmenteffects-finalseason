@@ -176,20 +176,7 @@ Chetty_Friedman_etal_2011_QJoE}. For simplicity, we restrict this analysis to AB
 \begin{threeparttable}
 \caption{Yearly Program Costs, ABC and CARE} \label{tab:totalcosts}
 \footnotesize
-\begin{tabular}{lc} \toprule
-\multicolumn{1}{c}{Item} & Yearly Cost in 2014 USD \\ \midrule
-1 Program Director & $60,935$ \\ 
-1 Social Worker      &  $35,869$ \\ 
-3 Lead Teachers and 2 Teachers Aides (Nursery)  & $204,457$ \\
-4 Lead Teachers and 4 Teacher Aides  (Toddlers) & $305,181$ \\ 
-2 Teaching Support Staff & $53,341$ \\ 
-1 Secretary & $32,973$ \\ 
-1 Clerk        & $32,537$ \\ 
-Workers' Fringe Benefits & $124,935$ \\ 
-Other & $4, 891$ \\ \\ \midrule 
-Total  & $962,726$ \\ 
-Total per Subject & $18,514$ \\ \bottomrule
-\end{tabular}
+\input{output/programcosts}
 \begin{tablenotes}
 \footnotesize
 \item Sources: See Appendix~\ref{app:programcosts}.\\
@@ -556,40 +543,7 @@ Working, if working age & \checkmark & \checkmark & \checkmark & \checkmark \\
 \caption{Cost-benefit Analysis of ABC and CARE, Summary}
 \label{table:cba}
 \centering
-\begin{tabular}{l r r r r r r r r r}
-\toprule
-	&	\mc{3}{c}{Females}					&	\mc{3}{c}{Males}					&	\mc{3}{c}{Pooled}					\\
-		\cmidrule(lr){2-4}						\cmidrule(lr){5-7}						\cmidrule(lr){8-10}					
-Removed Component	&	NPV	&	IRR	&	B/C	&	NPV	&	IRR	&	B/C	&	NPV	&	IRR	&	B/C	\\ 
-
-\midrule
-
-None	&		&	0.15	&	\textbf{3.42}	&		&	0.13	&	7.11	&		&	\textbf{0.10}	&	\textbf{4.93}	\\
-	&		&	(0.15)	&	(2.91)	&		&	(0.12)	&	(12.50)	&		&	(0.09)	&	(2.29)	\\\\
-Parental Income	&	\textbf{158,017}	&	0.05	&	1.75	&	45,511	&	\textbf{0.12}	&	6.63	&	\textbf{74,718}	&	\textbf{0.08}	&	\textbf{4.14}	\\
-	&	(43,586)	&	(0.10)	&	(2.86)	&	(45,289)	&	(0.10)	&	(12.44)	&	(25,250)	&	(0.06)	&	(2.29)	\\
-Subject QALY	&	2,465	&	0.15	&	\textbf{3.39}	&	33,040	&	-.10	&	6.74	&	15,351	&	0.10	&	\textbf{4.77}	\\
-	&	(146,824)	&	(0.14)	&	(2.02)	&	(912,533)	&	(0.12)	&	(8.62)	&	(37,988)	&	(0.11)	&	(2.20)	\\
-Subject Labor Income	&	44,201	&	0.16	&	\textbf{2.95}	&	124,655	&	0.13	&	5.78	&	93,992	&	0.10	&	\textbf{3.94}	\\
-	&	(151,724)	&	(0.14)	&	(2.43)	&	(639,086)	&	(0.11)	&	(10.33)	&	(119,314)	&	(0.09)	&	(1.97)	\\
-Subject Transfer Income	&	-396	&	0.16	&	\textbf{3.42}	&	-1,158	&	0.13	&	7.10	&	7,519	&	\textbf{0.10}	&	\textbf{4.85}	\\
-	&	(36,216)	&	(0.15)	&	(2.87)	&	(44,350)	&	(0.12)	&	(12.30)	&	(9,755)	&	(0.09)	&	(2.29)	\\
-Medical Expenditures	&	14,344	&	0.15	&	\textbf{3.27}	&	14,905	&	\textbf{0.13}	&	6.94	&	14,645	&	\textbf{0.10}	&	\textbf{4.78}	\\
-	&	(82,883)	&	(0.13)	&	(2.42)	&	(146,935)	&	(0.09)	&	(13.11)	&	(39,129)	&	(0.08)	&	(2.20)	\\
-Control Substitution 	&	\textbf{19,884}	&	0.12	&	3.21	&	\textbf{15,608}	&	0.12	&	6.93	&	\textbf{15,073}	&	\textbf{0.10}	&	\textbf{4.77}	\\
-	&	(3,147)	&	(0.13)	&	(2.92)	&	(2,324)	&	(0.11)	&	(12.50)	&	(2,229)	&	(0.08)	&	(2.28)	\\
-Education Costs	&	-47,183	&	0.16	&	\textbf{3.91}	&	15,340	&	0.13	&	6.93	&	-11,353	&	\textbf{0.11}	&	\textbf{5.05}	\\
-	&	(14,395)	&	(0.15)	&	(2.92)	&	(13,222)	&	(0.11)	&	(12.51)	&	(11,316)	&	(0.09)	&	(2.31)	\\
-Crime Costs	&	\textbf{133,116}	&	0.14	&	2.02	&	427,343	&	0.07	&	2.59	&	\textbf{257,780}	&	0.07	&	2.22	\\
-	&	(44,756)	&	(0.15)	&	(2.85)	&	(447,081)	&	(0.10)	&	(11.36)	&	(172,485)	&	(0.07)	&	(1.45)	\\\\
-Deadweight Loss	&		&	0.23	&	\textbf{4.74}	&		&	0.15	&	10.19	&		&	0.13	&	\textbf{7.02}	\\
-	&		&	(0.20)	&	(4.22)	&		&	(0.14)	&	(18.35)	&		&	(0.14)	&	(3.40)	\\
-0\% Discount Rate	&		&		&	7.25	&		&		&	16.70	&		&		&	\textbf{12.80}	\\
-	&		&		&	(8.77)	&		&		&	(42.06)	&		&		&	(5.98)	\\
-5\% Discount Rate	&		&		&	\textbf{2.41}	&		&		&	4.39	&		&		&	\textbf{2.88}	\\
-	&		&		&	(1.57)	&		&		&	(6.40)	&		&		&	(1.31)	\\
-\bottomrule
-\end{tabular}
+\input{output/tables/abccare/sensitivity.tex}
 \begin{tablenotes}
 \item Note: This table presents the estimates of the net present value (NPV) for each component, and the internal rate of return (IRR) and the benefit-to-cost ratio (B/C) of ABC for different scenarios based on comparing the groups randomly assigned to receive center-based childcare and the groups randomly assigned as control in ABC and CARE. The first row represents the baseline estimates. The rest of the rows present estimates for scenarios in which we remove the NPV estimates of the component listed in the first column. The quantity listed in the NPV columns is the component we actually remove when computing the calculation in each row. All the money figures are in 2014 USD and are discounted to each child's birth, unless otherwise specified. For the B/C we use a discount rate of $3\%$, unless otherwise specified. The results in bold are significant at the 10\% level in a single-sided, non-parametric, bootstrapped test. We resample both the experimental and the auxiliary data sources. 
 \end{tablenotes}
@@ -607,22 +561,7 @@ Deadweight Loss	&		&	0.23	&	\textbf{4.74}	&		&	0.15	&	10.19	&		&	0.13	&	\textbf{
 \caption{Cost-benefit Analysis Accounting for Control Substitution, ABC and CARE}
 \label{table:cbacs}
 \centering
-\begin{tabular}{l c c c c c c }
-\toprule
-	&	\mc{2}{c}{Females}					&	\mc{2}{c}{Males}					&	\mc{2}{c}{Pooled}					\\
-		\cmidrule(lr){2-3}						\cmidrule(lr){4-5}						\cmidrule(lr){6-7}					
-Estimate 	&	IRR	&	B/C	&	IRR	&	B/C	&	IRR	&	B/C	\\
-\midrule
-
-Baseline	&	0.15	&	\textbf{3.42}	&	0.13	&	7.11	&	\textbf{0.10}	&	\textbf{4.93}	\\
-	&	(0.15)	&	(2.91)	&	(0.12)	&	(12.50)	&	(0.09)	&	(2.29)	\\
-Relative to Staying at Home &	-0.15	&	\textbf{6.30}	&		&	0.08	&	0.05	&	2.16	\\
-	&	(0.15)	&	(2.01)	&		&	(2.53)	&	(0.08)	&	(2.29)	\\
-Relative to Alternative Preschools	&	\textbf{0.16}	&	2.20	&	\textbf{0.21}	&	\textbf{9.87}	&	\textbf{0.12}	&	\textbf{5.49}	\\
-	&	(0.13)	&	(1.40)	&	(0.15)	&	(6.22)	&	(0.08)	&	(2.43)	\\
-
-\bottomrule
-\end{tabular}
+\input{output/tables/abccare/cba_summary.tex}
 \begin{tablenotes}
 \item Note: This table displays estimates of the internal rate of return (IRR) and the benefit-to-cost ratio (B/C) for ABC and CARE for three cases. Not accounting for control substitution (baseline); comparing ABC and CARE to staying at home (relative to staying at home); and comparing ABC to alternative preschools (relative to alternative preschools). For the B/C we use a discount rate of $3\%$. The results in bold are significant at the 10\% level in a single-sided, non-parametric, bootstrapped test. We resample both the experimental and the auxiliary data sources. 
 \end{tablenotes}
