@@ -112,7 +112,7 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 	       (rcap `var'_max `var'_min catmale   if male == 1 & catmale   <= 21, lcolor(gs0)),
 	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
 			  xlabel($xlabels1, angle(45) noticks grid glcolor(white)) 
-			  ylabel(40[10]100, angle(h) glcolor(gs14))
+			  ylabel(0[10]100, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("% of Outcomes with Positive TE", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
