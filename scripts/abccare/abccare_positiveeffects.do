@@ -22,13 +22,13 @@ global googledrive: env googledrive
 // do files
 global scripts     = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global dataresults = "$klmmexico/abccare/outputfiles/jun-16"
+global dataresults = "$klmmexico/abccare/outputfiles/jun-24"
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 
 local progcount = 0
-foreach program in abc care abccare {
+foreach program in abccare {
 	cd $dataresults/`program'/csv
 	local progcount = `progcount' + 1
 	local sexind = 2
@@ -68,8 +68,8 @@ foreach program in abc care abccare {
 	save "``program'_all'", replace
 }
 
-append using "`abc_all'"
-append using "`care_all'"
+// append using "`abc_all'"
+// append using "`care_all'"
 tempfile all
 save "`all'", replace
 
@@ -85,20 +85,20 @@ global itt_noctrl_label  % of Outcomes with Positive TE
 global epan_ipw_p0_label % of Outcomes with Positive TE (adjusted) 
 global epan_ipw_p1_label % of Outcomes with Positive TE (adjusted)
 
-cd $output
+cd $output 
 foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 	gen `var'_min = `var'_point - `var'_se
 	gen `var'_max = `var'_point + `var'_se
 
 	// plot all positive treatment effects
 	# delimit
-	twoway (bar `var'_point abcfemale if male == 0 & index > 6, color(gs6))
-	       (bar `var'_point abcmale   if male == 1 & index > 6, color(black))
-	       (rcap `var'_max `var'_min abcfemale if male == 0 & index > 6, lcolor(gs0))
-	       (rcap `var'_max `var'_min abcmale   if male == 1 & index > 6, lcolor(gs0)),
+	twoway (bar `var'_point abcfemale if male == 0 & index > 2, color(gs6))
+	       (bar `var'_point abcmale   if male == 1 & index > 2, color(black))
+	       (rcap `var'_max `var'_min abcfemale if male == 0 & index > 2, lcolor(gs0))
+	       (rcap `var'_max `var'_min abcmale   if male == 1 & index > 2, lcolor(gs0)),
 	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
-			  xlabel(2.5 "ABC" 5.5 "CARE" 8.5 "ABC and CARE Pooled",noticks grid glcolor(white)) 
-			  ylabel(40[10]90, angle(h) glcolor(gs14))
+			  xlabel("",noticks grid glcolor(white)) 
+			  ylabel(, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("${`var'_label}", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
@@ -107,13 +107,13 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 	
 	// plot all positive and significant treatment effects
 	# delimit
-	twoway (bar `var'_point abcfemale if male == 0 & index <= 6, color(gs6))
-	       (bar `var'_point abcmale   if male == 1 & index <= 6, color(black))
-	       (rcap `var'_max `var'_min abcfemale if male == 0 & index <= 6, lcolor(gs0))
-	       (rcap `var'_max `var'_min abcmale   if male == 1 & index <= 6, lcolor(gs0)),
+	twoway (bar `var'_point abcfemale if male == 0 & index <= 2, color(gs6))
+	       (bar `var'_point abcmale   if male == 1 & index <= 2, color(black))
+	       (rcap `var'_max `var'_min abcfemale if male == 0 & index <= 2, lcolor(gs0))
+	       (rcap `var'_max `var'_min abcmale   if male == 1 & index <= 2, lcolor(gs0)),
 	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
-			  xlabel(2.5 "ABC" 5.5 "CARE" 8.5 "ABC and CARE Pooled",noticks grid glcolor(white)) 
-			  ylabel(0[10]50, angle(h) glcolor(gs14))
+			  xlabel("",noticks grid glcolor(white)) 
+			  ylabel(, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("${`var'_label}, significant at 10%", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));

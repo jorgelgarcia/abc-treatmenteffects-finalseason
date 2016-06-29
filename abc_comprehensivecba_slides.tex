@@ -309,7 +309,6 @@ Category & Age 0-5 & Age 5-15  & Adult \\
 
 \begin{itemize}
 \item Treatment group (59); Control group (57)
-	\item 70\% of control-group children attended alternative preschools
 	\item Data on non-compliers available up to age 8: analyses accounting for these indicate insensitivity
 	\item Account for attrition using inverse probability weighting \\
 	$\rightarrow$ Based on conditional independence \citep{Horvitz_Thompson_1952_JASA}
@@ -735,7 +734,7 @@ We estimate the treatment effects on $\hat{Y}$
 \leftright{\textbf{(3)} $\mathbb{E}_\Omega \big[ Y^1(\omega) \big] - \mathbb{E}_\Omega \big[ Y^0(v, \omega) | V =0, D =1 \big]$}{\textbf{(6)} $\mathbb{E}_\Omega \big[ Y^1(v, \omega) - Y^0(v, \omega) | V > 0 , D = 1\big]$}
 
 \end{tiny}
-\hyperlink{stepdownfemales}{\beamergotobutton{Stepdown}} \hyperlink{royfemales}{\beamergotobutton{Roy}}
+\hyperlink{stepdownfemales}{\beamergotobutton{Stepdown}}
 \end{frame}
 
 %% ---------------------------------------------------------------------------
@@ -752,7 +751,6 @@ We estimate the treatment effects on $\hat{Y}$
 
 \end{tiny}
 \hyperlink{stepdownmales}{\beamergotobutton{Stepdown}}
-\hyperlink{roymales}{\beamergotobutton{Roy}}
 \end{frame}
 
 %% ---------------------------------------------------------------------------
@@ -1245,46 +1243,6 @@ We estimate the treatment effects on $\hat{Y}$
 
 %% ---------------------------------------------------------------------------
 
-\begin{frame} \label{royfemales}
-
-\frametitle{Treatment Effects on Females}
-\begin{table}
-	\caption{ABC and CARE Females, Roy Model Estimates}
-	\scalebox{0.75}{\input{output/selected_rslt_female_cf.tex}}
-\end{table}
-\begin{tiny}
-\textbf{(1)} $\mathbb{E}_{\Omega} \left[ Y^1 \left( \omega \right) | D = 1 \right] - \mathbb{E}_{\Omega} \left[ Y^0_H \left( \omega, v \right) | V = 0 , D = 1  \right]$\\ 
-\textbf{(2)} $\mathbb{E}_{\Omega} \left[ Y^1 \left( \omega \right) | , D = 1 \right] - \mathbb{E}_{\Omega} \left[ Y^0_C \left( \omega, v \right) | V = 1 , D = 1  \right]$\\
-\textbf{(3)}  Coefficient on $V$
-\end{tiny}
-
-\begin{flushleft}
-\hyperlink{resultsfemales}{\beamergotobutton{Back}}
-\end{flushleft}
-\end{frame}
-
-%% ---------------------------------------------------------------------------
-
-\begin{frame} \label{roymales}
-
-\frametitle{Treatment Effects on Males}
-\begin{table}
-	\caption{ABC and CARE Males, Roy Model Estimates}
-	\scalebox{0.65}{\input{output/selected_rslt_male_cf.tex}}
-\end{table}
-\begin{tiny}
-\textbf{(1)} $\mathbb{E}_{\Omega} \left[ Y^1 \left( \omega \right) | D = 1 \right] - \mathbb{E}_{\Omega} \left[ Y^0_H \left( \omega, v \right) | V = 0 , D = 1  \right]$\\ 
-\textbf{(2)} $\mathbb{E}_{\Omega} \left[ Y^1 \left( \omega \right) | , D = 1 \right] - \mathbb{E}_{\Omega} \left[ Y^0_C \left( \omega, v \right) | V = 1 , D = 1  \right]$\\
-\textbf{(3)}  Coefficient on $V$
-\end{tiny}
-
-\begin{flushleft}
-\hyperlink{resultsmales}{\beamergotobutton{Back}}
-\end{flushleft}
-\end{frame}
-
-%% ---------------------------------------------------------------------------
-
 \begin{frame} \label{components}
 
 \frametitle{Components of the CBA}
@@ -1423,7 +1381,7 @@ Other costs
 
 \caption{Individual Program Costs by Group}
 
-\scalebox{.7}{
+\scalebox{.5}{
 \input{output/programcosts}}
 
 \end{center}
