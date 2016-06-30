@@ -22,14 +22,9 @@ from paths import paths
 
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
-klmpath = os.environ['klmMexico'] + '/abccare/outputfiles/jun-24'
 
-pathext = 'abccare'
 path_results = os.path.join(filedir, 'rslts-jun24/abccare_ate/')
 path_outcomes = os.path.join(filedir, 'outcomes_abccare.csv')
-controls = """Apgar scores 1 minute and 5 minutes after birth, the HRI index, maternal IQ,
-an indicator for having a grandmother residing in the same county, and an index for the number
-of relatives living in the same household"""
 abccare = 'abccare'
 
 # provide option for two sided tests
@@ -550,9 +545,9 @@ for t in [1,2]:    # t is for stepdown or no stepdown
 
         # write out tables
         if t == 1:
-            table.write(os.path.join(paths.tmp_tables, pathext, 'rslt_{}_main'.format(sex)))
+            table.write(os.path.join(paths.maintables, 'rslt_{}_main'.format(sex)))
         if t == 2:
-            table.write(os.path.join(paths.tmp_tables, pathext, 'rslt_{}_main_sd'.format(sex)))
+            table.write(os.path.join(paths.maintables, 'rslt_{}_main_sd'.format(sex)))
     
 #=========================================
 # Make Appendix Tables of results
@@ -642,9 +637,9 @@ for t in [1,2]:
             
             # write out tables
             if t == 1:
-                table.write(os.path.join(paths.tmp_tables, pathext, 'rslt_{}_cat{}'.format(sex, i)))
+                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}'.format(sex, i)))
             if t == 2:
-                table.write(os.path.join(paths.tmp_tables, pathext, 'rslt_{}_cat{}_sd'.format(sex, i)))            
+                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}_sd'.format(sex, i)))            
 
 #=========================================
 # Make Counts Table, aggregated
@@ -655,6 +650,8 @@ if twosided == 0:
 if twosided == 1:
     criteria = 'significant'
 
+# declare a new header for this table, as it is different from the ones above
+header = [['', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)', '(7)', '(8)']]
 
 # prepare table for pytabular
 for sex in ['pooled', 'male', 'female']:
@@ -691,7 +688,7 @@ for sex in ['pooled', 'male', 'female']:
         tmp_k += 1
     tab_csv.set_index(['category', 'stat'], append = True, inplace=True)
     tab_csv.index.names = ['index', 'category', 'stat']
-    tab_csv.to_csv(os.path.join(klmpath, pathext, 'csv', 'rslt_{}_counts.csv'.format(sex)))   
+    tab_csv.to_csv(os.path.join(paths.klmmexico, 'abccare', 'outputfiles', 'jun-24', 'abccare', 'csv', 'rslt_{}_counts.csv'.format(sex)))   
 
     # having made the .csv file, now make actual .tex table
     tab = aggcounts.loc[agg_count_order, rslt_columns].reset_index(drop=True)   
@@ -729,7 +726,8 @@ for sex in ['pooled', 'male', 'female']:
     table.tabular = 1
     
     # write out tables
-    table.write(os.path.join(paths.tmp_tables, pathext, 'rslt_{}_counts'.format(sex)))
+    table.write(os.path.join(paths.apptables, 'rslt_{}_counts'.format(sex)))
+    #table.write(os.path.join(paths.maintables, 'rslt_{}_counts'.format(sex)))
     
     
 
@@ -748,6 +746,9 @@ categories_order = ["IQ Scores","Achievement Scores","HOME Scores","Parent Incom
 categories_order.remove("Child Behavior")
 categories_order.remove("Adoption")
 categories_order.remove("Mother's Education")    
+
+# declare new header again
+header = [['Category', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)', '(7)', '(8)', '']]
 
 for sex in ['pooled', 'male', 'female']:
    
@@ -783,7 +784,7 @@ for sex in ['pooled', 'male', 'female']:
             tmp_k += 1
         tab_csv.set_index(['category', 'stat'], append = True, inplace=True)
         tab_csv.index.names = ['index', 'category', 'stat']
-        tab_csv.to_csv(os.path.join(klmpath, pathext, 'csv', 'rslt_{}_counts_n{}a{}.csv'.format(sex, n, a)))
+        tab_csv.to_csv(os.path.join(paths.klmmexico, 'abccare', 'outputfiles', 'jun-24', 'abccare', 'csv', 'rslt_{}_counts_n{}a{}.csv'.format(sex, n, a)))
        
         # now make tables for paper       
         if a == 100:
@@ -836,7 +837,7 @@ for sex in ['pooled', 'male', 'female']:
         table.tabular = 1
         
         # write out tables
-        table.write(os.path.join(paths.tmp_tables, pathext, 'rslt_{}_counts_n{}a{}'.format(sex, n, a)))
+        table.write(os.path.join(paths.apptables, 'rslt_{}_counts_n{}a{}'.format(sex, n, a)))
 
 
 #======================================
@@ -907,9 +908,9 @@ for t in [1,2]: # t is for stepdown
         
         # write out tables
         if t == 1:
-            table.write(os.path.join(paths.tmp_tables, pathext, 'rslt_{}_pres'.format(sex)))
+            table.write(os.path.join(paths.maintables, 'rslt_{}_pres'.format(sex)))
         if t == 2:
-            table.write(os.path.join(paths.tmp_tables, pathext, 'rslt_{}_pres_sd'.format(sex)))
+            table.write(os.path.join(paths.maintables, 'rslt_{}_pres_sd'.format(sex)))
 
 #=========================================
 # Presentation tables: aggregate counts
@@ -973,4 +974,4 @@ for sex in ['pooled', 'male', 'female']:
     table.tabular = 1
     
     # write out tables
-    table.write(os.path.join(paths.tmp_tables, pathext, 'rslt_{}_counts_pres'.format(sex)))
+    table.write(os.path.join(paths.maintables, 'rslt_{}_counts_pres'.format(sex)))
