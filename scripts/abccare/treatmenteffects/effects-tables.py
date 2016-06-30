@@ -5,16 +5,11 @@ Created on Fri Mar 11 15:17:41 2016
 @author: jkcshea
 
 Description: this file takes the estimates in .csv files and produces a series of
-tables displaying various ITT estimates.
+tables displaying various ITT estimates. Regular and step down p-values are estimated.
 
-It also presents the count of socially positive treatment effects and conducts 
+The code also presents the count of socially positive treatment effects and conducts 
 inference on those counts.
 
-THINGS TO CLEAN UP:
-- if in 'uniform category'---that list is empty
-- labels for sex... don't you just ned to capitalize instead of use a dictionary?
-- do you need to declare the 'main' dictionary for the outcomes tables twice? they're identical
-- eventually you shoud remove the ABC/CARE options, it should always be for ABC + CARE.
 """
 
 import os
@@ -29,70 +24,17 @@ from paths import paths
 filedir = os.path.join(os.path.dirname(__file__))
 klmpath = os.environ['klmMexico'] + '/abccare/outputfiles/jun-24'
 
-#global for ABC/CARE or just ABC
-abc = 1
-care =1
-twosided = 0
-visits = 0
-schoolage = 0
-tabular = 1
-
-# declare blank paths to prevent errors
-path_results = ''
-path_outcomes= ''
-
-# declare general options for paths and table notes
-if abc == 1 and care == 0:
-    pathext = 'abc'
-    path_results = os.path.join(filedir, 'rslts-jun24/abc_ate/')
-    path_outcomes = os.path.join(filedir, 'outcomes_abc.csv')
-    controls = """the Apgar score 1 minute after birth, the HRI index, maternal IQ, an
-indicator for teenage pregnancy of the mother, an indicator for the father being at 
-home, and an indicator for having a grandmother residing in the same county"""
-    abccare = 'abc'
-    
-if abc == 1 and care == 1:
-    pathext = 'abccare'
-    path_results = os.path.join(filedir, 'rslts-jun24/abccare_ate/')
-    path_outcomes = os.path.join(filedir, 'outcomes_abccare.csv')
-    controls = """Apgar scores 1 minute and 5 minutes after birth, the HRI index, maternal IQ,
+pathext = 'abccare'
+path_results = os.path.join(filedir, 'rslts-jun24/abccare_ate/')
+path_outcomes = os.path.join(filedir, 'outcomes_abccare.csv')
+controls = """Apgar scores 1 minute and 5 minutes after birth, the HRI index, maternal IQ,
 an indicator for having a grandmother residing in the same county, and an index for the number
 of relatives living in the same household"""
-    abccare = 'abccare'
-    
-if abc == 0 and care == 1: 
-    pathext = 'care'
-    path_results = os.path.join(filedir, 'rslts-jun24/care_ate/')
-    path_outcomes = os.path.join(filedir, 'outcomes_care.csv')
-    controls = """Apgar scores 1 minute and 5 minutes after birth, an indicator for the subject 
-being born prematurely, an indicator for the mother being married at baseline, an indicator for
-teenage pregnancy of the mother, and an indicator for being born in the fall"""
-    abccare = 'care'
+abccare = 'abccare'
 
-# refine paths for cases of school-age treatment and home visits
-if abc == 1 and care == 0 and schoolage == 1:
-    pathext = 'abcsa'
-    path_results = os.path.join(filedir, 'rslts-jun24/abcsa_ate/')
+# provide option for two sided tests
+twosided = 0
 
-if abc == 0 and care == 1 and visits == 1 and twosided == 0:
-    pathext = 'carefam'
-    path_results = os.path.join(filedir, 'rslts-jun24/care_family/')
-
-if abc == 0 and care == 1 and visits == 1 and twosided == 1:
-    pathext = 'carefam_2sided'
-    path_results = os.path.join(filedir, 'rslts-jun24/care_family/')
-
-# declare suffix for file names
-if schoolage == 1:
-    abccare = abccare + 'sa'
-if visits == 1:
-    abccare = abccare + 'hv'
-if twosided == 1:
-    abccare = abccare + '2s'
-    
-# assert that paths are not blank
-assert path_results != '', 'ERROR: blank path for .csv containing results'
-assert path_outcomes != '', 'ERROR: blank path for .csv containing list of outcomes'
 
 #=========================================
 # Bring in estimates and necessary files
@@ -100,13 +42,6 @@ assert path_outcomes != '', 'ERROR: blank path for .csv containing list of outco
 
 # bring in .csv with all labels and step-down groupings
 outcomes = pd.read_csv(path_outcomes, index_col='variable')
-
-'''
-COMMENT:
-What do you do with the error column? The error rows? 
-Decide what to do with the error rows, and then drop the
-error column
-'''
 
 # bring in all results
 rslt_y = {}
@@ -140,43 +75,53 @@ outcomes = outcomes.loc[ind_outcomes,:]
 #outcomes = outcomes.loc[rslt_y.index.get_level_values(2).unique(),:]
 
 
-# drop the t-score for mental health so we don't have 2
+# drop the t-score for mental health so we don't have 2 of the same mental health sets of variables
 rslt_y.drop(outcomes.loc[outcomes.category=="Mental Health $t$-Score"].index, level=2, inplace=True)
 outcomes.drop(list(outcomes.loc[outcomes.category=="Mental Health $t$-Score"].index), axis=0, inplace=True)
 
 
-if abc == 1 and care == 1: # check these conditional drops
-    abc_drop = ['ibr_coop0y6m', 'irb_coop1y', 'ibr_coop1y6m', 'ibr_coop2y']
-    outcomes.drop(['ach12y', 'iq2y6m'], axis=0, inplace=True)
-    rslt_y.drop(['ach12y', 'iq2y6m'], level=2, inplace=True)
-    
-if care == 1:
-    care_drop = ['iq6y', 'iq15y', 'iq21y', 'factor_iq21',
-                 'ach6y6m', 'ach7y', 'ach15y', 'ach21y', 'factor_achv21',
-                 'adopted_ever', 'm_work21y']
-    
-    # first drop rows from rslt_y so the counts will be correct---we do this using outcomes.csv
-    rslt_y.drop(care_drop, level=2, inplace=True)
-    rslt_y.drop(list(outcomes.loc[outcomes.category=="Mother's Education"].index), level=2, inplace=True)
-    rslt_y.drop(list(outcomes.loc[outcomes.category=="Child Behavior"].index), level=2, inplace=True)
-    # now drop the rows from the outcomes.csv
-    for dvar in care_drop:    
-        try:        
-            outcomes.drop(dvar, axis=0, inplace=True)
-        except:
-            pass
-    outcomes.drop(list(outcomes.loc[outcomes.category=="Mother's Education"].index), axis=0, inplace=True)
-    outcomes.drop(list(outcomes.loc[outcomes.category=="Child Behavior"].index), axis=0, inplace=True)
+# TEMPORARY: deal with dropping variables that exist only for ABC or CARE
+# First drop variables that don't exist for ABC
+abc_drop = ['ibr_coop0y6m', 'irb_coop1y', 'ibr_coop1y6m', 'ibr_coop2y']
+outcomes.drop(['ach12y', 'iq2y6m'], axis=0, inplace=True)
+rslt_y.drop(['ach12y', 'iq2y6m'], level=2, inplace=True)
+
+care_drop = ['iq6y', 'iq15y', 'iq21y', 'factor_iq21',
+             'ach6y6m', 'ach7y', 'ach15y', 'ach21y', 'factor_achv21',
+             'adopted_ever', 'm_work21y']
+
+# now drop variables that don't exist for CARE
+# first drop rows from rslt_y so the counts will be correct---we do this using outcomes.csv
+rslt_y.drop(care_drop, level=2, inplace=True)
+rslt_y.drop(list(outcomes.loc[outcomes.category=="Mother's Education"].index), level=2, inplace=True)
+rslt_y.drop(list(outcomes.loc[outcomes.category=="Child Behavior"].index), level=2, inplace=True)
+# drop the rows from the outcomes.csv
+for dvar in care_drop:    
+    try:        
+        outcomes.drop(dvar, axis=0, inplace=True)
+    except:
+        pass
+outcomes.drop(list(outcomes.loc[outcomes.category=="Mother's Education"].index), axis=0, inplace=True)
+outcomes.drop(list(outcomes.loc[outcomes.category=="Child Behavior"].index), axis=0, inplace=True)
 
 # blank out failed estimates
 rslt_y.sortlevel(axis=1, inplace=True)
 rslt_cols = ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw']
-rslt_y.loc[:, (slice(None), slice(None), rslt_cols)] = rslt_y.loc[:, (slice(None), slice(None), rslt_cols)].replace(0, nan)
+rslt_y.loc[:, (slice(None), slice(None), rslt_cols)] = rslt_y.loc[:, (slice(None), slice(None), rslt_cols)].replace(0, np.nan)
 
 #=========================================
 # single-hypothesis tests
 #=========================================
 
+'''
+We now obtain the p-values. There are two p-values we are interested in. One is
+the p-value generated across the 'big'/'outer' bootstrap, which is displayed in 
+the table of treatment effects. This corresponds to agg == 0 in the loop ('agg' 
+refers to the 'aggregated counts' from the combining function).
+
+The second p-value of interest is the p-value for each outer draw. This is estimated
+when agg == 1.
+'''
 for agg in [0,1]:
     # obtain point estimate and null distribution
     if agg == 0:    
@@ -195,7 +140,6 @@ for agg in [0,1]:
     point_ext = pd.concat([tmp_rslt.loc[(0, slice(None), slice(None)), :] for j in range(draw_max + 1)], axis=0, keys=[k for k in range(draw_max + 1)], names=['newdraw'])
     point_ext.reset_index('draw', drop=True, inplace=True)
     point_ext.index.names = ['draw', 'ddraw','variable']
-    #point_ext = point_ext.reorder_levels(['draw', 'ddraw', 'variable'])
     point_ext = point_ext.loc[null.index,:]
     
     # two-sided test for each individual effect
@@ -213,24 +157,24 @@ for agg in [0,1]:
     pval_tmp.sortlevel(axis=1, inplace = True)
     pval_tmp.sort_index(inplace=True)
 
+    # obtain point estimates, standard errors, and the regular p-values for the ATE tables
     if agg == 0:   
-        # point estimates and standard errors
         point = rslt_y.sort_index().loc[(0,0,slice(None)), :]
         point.sortlevel(axis=1, inplace=True)
         point.reset_index(level=[0,1], drop=True, inplace=True)
         pval = pval_tmp.loc[(0, slice(None))]
         se = tmp_rslt.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True).std(level='variable') 
-        
+    
+    # obtain the p-values to determine significance for the combining functino (hence, "_cf")    
     if agg == 1:
         pval_cf = pval_tmp
 
 
 #=========================================
-# multiple-hypothesis tests
+# step down, multiple hypotheses tests
 #=========================================
 
-# 1. Convert to t-Statistics
-
+# 1. Convert distribution of results to t-Statistics
 mean = rslt_y.groupby(level=['variable', 'ddraw']).transform(lambda x: x.mean())
 null = rslt_y - mean
 null = null.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True)/se
@@ -241,10 +185,10 @@ tstat = point/se
 tstat.sort_index(inplace=True)
 tstat.loc[outcomes.query('hyp == "-"').index, :] = tstat.loc[outcomes.query('hyp == "-"').index, :] * -1
 
-# 2. create stepdown for tables
+# 2. provide blocks and dictionary to estimate/store stepdown results
 stepdown = pd.DataFrame([], columns=tstat.columns, index=tstat.index)
 blocks = list(pd.Series(outcomes.block.values).unique())
-blocks.remove(nan)
+blocks.remove(np.nan)
 
 for block in blocks:
     print "Stepdown test for main tables, %s block..." % (block)
@@ -254,14 +198,14 @@ for block in blocks:
         # genreate dataframe to store t-statistics
         tmp_pval = pd.DataFrame([1 for j in range(len(ix))], index=ix)
         tmp_tstat = tstat.loc[ix, coef].copy()
-        # apply stepdown
+        # perform stepdown method
         do_stepdown = 1
         while do_stepdown == 1:
             sd_dist = null.loc[(slice(None), ix), coef].groupby(level=0).max().dropna()
             sd_ptest = lambda x: 1 - percentileofscore(sd_dist, x)/100
             sd_pval_tmp = map(sd_ptest, list(tmp_tstat))
             sd_pval_tmp = pd.DataFrame(sd_pval_tmp, index=ix)
-            # update p-values as necessary            
+            # update p-values as the stepdown procedure continues
             tmp_pval.loc[ix] = sd_pval_tmp.loc[ix]
             
             # determine if stepdown needs to continue (alpha of 0.10 is the threshold)
@@ -285,35 +229,12 @@ for block in blocks:
                 stepdown.loc[ix, coef] = tmp_pval.values
                 do_stepdown = 0                    
 
+# for variables we do not perform stepdown on, fill in stepdown matrix of p-value with regular p-values
 stepdown.fillna(pval, inplace=True)
 
-#=========================================
-# discount earnings variables
-#=========================================
-'''
-# variables to discount
-if care == 0:
-    discount_vars = ['p_inc1y6m', 'p_inc2y6m', 'p_inc3y6m', 'p_inc4y6m', 'p_inc8y', 'p_inc12y', 
-            'p_inc15y', 'si21y_inc_labor', 'si30y_inc_labor', 'si21y_inc_trans_pub',
-            'si30y_inc_trans_pub']        
-if care == 1:
-    discount_vars = ['p_inc1y6m', 'p_inc2y6m', 'p_inc3y6m', 'p_inc4y6m',
-                     'si21y_inc_labor', 'si30y_inc_labor', 'si21y_inc_trans_pub',
-                     'si30y_inc_trans_pub']            
-
-# generate discount index
-discount_index = pd.Series([1.03 for j in range(len(discount_vars))], index=discount_vars)
-discount_index.index.names = ['variable']
-discount_index = 1 / (discount_index ** outcomes.loc[discount_vars].age.astype('float'))
-
-discount_coefs = ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw']
-
-# apply discount index
-point.loc[discount_vars,(slice(None), slice(None), discount_coefs)] = point.loc[discount_vars,(slice(None), slice(None), discount_coefs)].multiply(discount_index, axis="index")
-'''
 
 #=========================================
-# combine tables (this dataframe is for making the tables)
+# combine point estimate and p-value tables (this dataframe is for making the tables)
 #=========================================
 
 data = pd.concat([point, pval, stepdown], keys = ['point', 'pval', 'sdpval'], names=['stat', 'variable'])
@@ -329,6 +250,7 @@ data.loc[(slice(None), ['pval']), (slice(None), slice(None), notest_cols)] = ""
 # prepare dataframes for combining function
 #=========================================
 
+# merge in the 'category', 'hyp', and 'variable' columns from outcomes.csv to the dataframe of results
 N_point = rslt_y.loc[(slice(None),0, slice(None)),:].reset_index(level=1, drop=True)
 category = outcomes.loc[:, ['category', 'hyp']].reset_index()
 N_point = N_point.reset_index(level=0).merge(category, how='left', left_index=True, right_on='variable') 
@@ -337,7 +259,7 @@ N_point.set_index(['variable', 'draw', 'category'], inplace=True)
 N_point.sortlevel(axis=1, inplace=True) 
 N_point.sort_index(inplace=True)
 
-# reverse signs so all effects are beneficial
+# using 'hyp' column, reverse signs so all effects are beneficial
 N_point.loc[N_point.hyp=='+' ,:] = np.sign(N_point.loc[N_point.hyp=='+' ,:] * 1) * N_point.loc[N_point.hyp=='+' ,:].notnull()
 N_point.loc[N_point.hyp=='-' ,:] = np.sign(N_point.loc[N_point.hyp=='-' ,:] * -1) * N_point.loc[N_point.hyp=='-' ,:].notnull()
 
@@ -364,7 +286,7 @@ count_pos.columns = pval_cf.columns
 # check the positives are counted correctly
 assert all(count_pos.isin([0,1])), "ERROR: non-binary entry in 'count_pos' matrix."
 
-# generate matrix of 1s for significant treatment effects
+# generate matrix of 1s for significant treatment effects using the pval_cf dataframe
 pdrop_ix = pval_cf.index.difference(count_pos.reset_index(level=2).index)
 pval_cf.drop(pdrop_ix, inplace=True)
 pval_cf.sort_index(inplace=True)
@@ -404,12 +326,17 @@ for a in [100, 10]:
 #=========================================
 
 allcounts = collections.OrderedDict()
+'''
+we loop throuhg the different types of counts using the tuples labeled 'cen_sig'.
+The first entry is the center of the null, the second entry is the alpha level.
+'''
 for cen_sig in [(0.5, 100), (0.1, 10)]:
 
     n = cen_sig[0]
     a = cen_sig[1]
 
     key = 'n{}a{}'.format(int(n*100),a)
+    # declare some labels that we need for latex tables
     if a == 100:
         extra = ' ($H_0$: $\le$ {}\%)'.format(int(n*100))
     else:
@@ -439,7 +366,7 @@ for cen_sig in [(0.5, 100), (0.1, 10)]:
     point = count_sig[a].sort_index().loc[(0,slice(None)), :].reset_index(level=0, drop=True) * 100
     point.sortlevel(axis=1, inplace=True)
     
-    # join tables
+    # join tables of point estimates, p-values, and standard errors for combining functions
     allcounts[key] = pd.concat([point, pval, se], keys = ['point', 'pval', 'se'], names=['stat', 'category'])
     allcounts[key] = allcounts[key].reorder_levels(['category', 'stat'], axis=0)
     allcounts[key].sort_index(axis=0, inplace=True)
@@ -458,9 +385,8 @@ allcounts.sort_index(inplace=True)
 allcounts.sortlevel(inplace=True)
 
 
-
 #=========================================
-# Do hypothesis testing on counts, aggregated
+# Do hypothesis testing on counts, aggregated (so acrosss all categories)
 #=========================================
 
 aggcounts = collections.OrderedDict()
@@ -470,6 +396,7 @@ for cen_sig in [(0.5, 100), (0.1, 10)]:
     a = cen_sig[1]
         
     key = 'n{}a{}'.format(int(n*100),a)
+    # declare some labels for the latex table
     if a == 100:
         extra = ' ($H_0$: $\le$ {}\%)'.format(int(n*100))
     else:
@@ -507,7 +434,7 @@ aggcounts.sort_index(inplace=True)
 aggcounts.sortlevel(inplace=True)
 
 #=========================================
-# Define functions required to make tables
+# Define functions required to make latex tables
 #=========================================
 def format_int(x):
     try:
@@ -544,41 +471,8 @@ def format_sdpvalue(x):
         return '[{}]'.format(x)      
 
 
-labels = {'pooled':'Males and Females', 'male':'Males', 
-	'female':'Females'}
-
-note = '''
-Note: This table displays various estimates of the treatment effect of {}'s {}.
-Column (1) displays the ITT, without accounting for any controls.
-Column (2) displays the ITT conditioning on vector of controls, $X$, consisting of {}. We also apply IPW weights, $W$, to account for attrition.
-Columns (3)--(4) are analogous to columns (1)--(2), but we restrict the control sample to subjects
-who did not enroll in any alternative care.
-Column (5) displys the matching estimate, where we use the Mahalanobis metric and Epanechnikov kernel
-to match on controls $X$ listed above, and restrict the control sample to subjects who did not enroll
-in any alternative care. Additionally, we apply IPW weights, $W$.
-Columns (6)--(8) are analogous to Columns (3)--(5), except we restrict the control sample to subejcts
-who did enroll in alternative care. {} 
-Numbers in parentheses represent the $p$-value from a single hypothesis test, and are obtained from 
-the empirical bootstrap distribution generated by 75 resamples of the original data. 
-Bold $p$-values indicate significance at the 10\% level.
-Blank point estimates indicate that we are unable to obtain estimates due to a lack of support in the data. 
-'''
-
-note_extension = '''The final three pairs of rows display the proportion of treatment effects in the table that are 
-socially positive. The first row in each pair displays the percentage of treatment effects, and the
-second row presents the inference.'''
-
-if visits == 0 and schoolage == 0:
-    caretype = 'center-based care'
-if visits == 1:
-    caretype = 'family education program'
-if schoolage == 1:
-    caretype = 'school age program'
-
-
-
 #======================================
-# MAIN TABLES: Males and Female Results
+# Main tables
 #======================================
 
 uniform_categories = ['IQ Scores', 'HOME Scores', 'Parent Income', \
@@ -637,17 +531,6 @@ for t in [1,2]:    # t is for stepdown or no stepdown
         table = pytab.Table(tab)
         table.set_fontsize('scriptsize')                      
 
-        if abc == 1 and care == 0:        
-            table.set_caption('ABC {}, Selected Outcomes'.format(labels[sex]))
-        
-        if abc == 1 and care == 1:        
-            table.set_caption('ABC and CARE {}, Selected Outcomes'.format(labels[sex]))
-
-        if abc == 0 and care == 1:        
-            table.set_caption('CARE {}, Selected Outcomes'.format(labels[sex]))            
-        
-        table.set_label('tab:ate_{}_{}_main'.format(abccare, sex))
-
         # Set lines and alignment
         table[0].set_lines(1)
         table[1:, 0].set_alignment('l')
@@ -662,17 +545,8 @@ for t in [1,2]:    # t is for stepdown or no stepdown
             table[row,2:].set_formatter(format_pvalue) # format p-value
             row += 1
 
-        # add table notes       
-        if abc == 1 and care == 0: 
-            table.add_note(note.format('ABC', caretype, controls,''))
-        if abc == 1 and care == 1: 
-            table.add_note(note.format('ABC/CARE', caretype, controls,''))
-        if abc == 0 and care == 1: 
-            table.add_note(note.format('CARE', caretype, controls, ''))            
-        
-        # decide on tabular environment
-        if tabular == 1:
-            table.tabular = 1
+        # ouput only tabular environment
+        table.tabular = 1
 
         # write out tables
         if t == 1:
@@ -683,14 +557,7 @@ for t in [1,2]:    # t is for stepdown or no stepdown
 #=========================================
 # Make Appendix Tables of results
 #=========================================
-"""
-uniform_categories = ['IQ Scores', 'HOME Scores', 'Parent Income', \
-    '''Mother's Education''', 'Father at Home', '''Mother's Employment''', \
-    'Adoption', 'Vitamin D Deficiency', 'Self-Reported Health']
-"""
-uniform_categories = []
 
-header = [['Variable', 'Age', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)', '(7)', '(8)']]
 
 for t in [1,2]:
     # prepare table for pytabular (t=1 regular p-values, t=2 stepdown)
@@ -699,22 +566,25 @@ for t in [1,2]:
     if t == 2:
         data_app = data.loc[(slice(None), ['point', 'sdpval']),:]
        
+    # set the index of the dataframes according to outcomes.csv
     data_app.index = outcomes.loc[data_app.reset_index(level=1).index, ['label', 'age', 'category']].set_index(['label', 'age', 'category']).index
     
+    # now make tables looping throuh sex and outcome categories
     for sex in ['pooled', 'male', 'female']:
         for i, cat in enumerate(outcomes.category.drop_duplicates().tolist()):
             
+            # select the columns of results that you want
             rslt_columns = [(sex, 'pall', 'itt_noctrl'), (sex, 'pall', 'itt_wctrl'),
                             (sex, 'p0', 'itt_noctrl'), (sex, 'p0', 'itt_wctrl'), (sex, 'p0', 'epan_ipw'),
                             (sex, 'p1', 'itt_noctrl'), (sex, 'p1', 'itt_wctrl'), (sex, 'p1', 'epan_ipw')]
     
             ix = outcomes.set_index(['label', 'age']).query('category=="{}"'.format(cat))
             ix = ix.set_index(['category'], append=True).drop(ix.set_index(['category'], append=True).index.difference(data_app.index)).index # TO ACCOUNT FOR CASES WHERE EFFECT COULD NTO BE ESTIMATED
-            
+
             tab = data_app.loc[ix, rslt_columns].reset_index()
             tab.drop(['category'], axis=1, level=0, inplace=True)
             
-            # add in the counts
+            # append the combining functions to the table
             if t == 1:
                 add_count_order = [('n50a100',cat,'point'), ('n50a100',cat,'pval'),
                                    ('n10a10',cat,'point'), ('n10a10',cat,'pval')]
@@ -722,22 +592,20 @@ for t in [1,2]:
                 tab = tab.append(add_counts)
     
             # create blank spaces for ages
-            if cat not in uniform_categories:
-                row = 1
-                while row < tab.shape[0]:
-                    tab.iloc[row,1] = ''
-                    row += 2
+            row = 1
+            while row < tab.shape[0]:
+                tab.iloc[row,1] = ''
+                row += 2
     
             # prepare to create blank spaces for labels 
-            if cat not in uniform_categories:
-                row = 0
-                vname = ''
-                while row < tab.shape[0]:
-                    if tab.iloc[row,0] == vname:
-                        tab.iloc[row,0] = ''
-                    else:
-                        vname = tab.iloc[row,0]
-                    row += 1                     
+            row = 0
+            vname = ''
+            while row < tab.shape[0]:
+                if tab.iloc[row,0] == vname:
+                    tab.iloc[row,0] = ''
+                else:
+                    vname = tab.iloc[row,0]
+                row += 1                     
     
             # set headers
             tab = header + tab.values.tolist()
@@ -745,23 +613,13 @@ for t in [1,2]:
             table = pytab.Table(tab)
             table.set_fontsize('scriptsize')                      
     
-            if abc == 1 and care == 0:        
-                table.set_caption('ABC Average Treatment Effects, {} \\\\ {}'.format(labels[sex], cat))
-            
-            if abc == 1 and care == 1:        
-                table.set_caption('ABC/CARE Average Treatment Effects, {} \\\\ {}'.format(labels[sex], cat))
-    
-            if abc == 0 and care == 1:        
-                table.set_caption('CARE Average Treatment Effects, {} \\\\ {}'.format(labels[sex], cat))            
-            
-            table.set_label('tab:ate_{}_{}_apx{}'.format(abccare, sex, i))
-    
             # Set lines and alignment
             table[0].set_lines(1)
             table[1:, 0].set_alignment('l')
             table[1:, 1:].set_alignment('c')  
             table[1:, 1].set_formatter(format_int)
 
+            # only set line for combining functions if we are not doing stepdown            
             if t == 1:            
                 table[-5].set_lines(1)
                 table[-4,0:2].merge()
@@ -775,37 +633,12 @@ for t in [1,2]:
                 table[row,2:].set_formatter(format_pvalue) # format p-value
                 row += 1
         
-            # format counts
+            # format combining function results if we are not using stepdown
             if t == 1:        
                 table[-4,2:].set_formatter(format_int)    
                 table[-2,2:].set_formatter(format_int)    
     
-            # Merging same-labeled rows in label column
-            if cat in uniform_categories:
-                row = 1
-                begin = 1
-                vals = np.array(table.original_content)
-                while row < table.shape[0] - 1:
-                    if vals[row, 0] == vals[row + 1, 0]:
-                        pass
-                    else:
-                        table[begin:row + 1, 0].merge(force=True)
-                        begin = row + 1
-                        table[row].set_space_below('0.1cm')    
-                    row += 1
-                table[begin:, 0].merge(force=True)        
-    
-            # add table notes       
-            if abc == 1 and care == 0: 
-                table.add_note(note.format('ABC', caretype, controls, note_extension))
-            if abc == 1 and care == 1: 
-                table.add_note(note.format('ABC/CARE', caretype, controls, note_extension))
-            if abc == 0 and care == 1: 
-                table.add_note(note.format('CARE', caretype, controls, note_extension))            
-    
-            # decide on tabular environment
-            if tabular == 1:
-                table.tabular = 1
+            table.tabular = 1
             
             # write out tables
             if t == 1:
@@ -817,27 +650,6 @@ for t in [1,2]:
 # Make Counts Table, aggregated
 #=========================================
 
-counts_note ='''
-Note: This table displays the percentage of the {} outcomes for which we estimate {}
-treatment effects. For outcomes where a negative treatment effect is beneficial to the subjects
-(e.g. prevalence of diabetes), we reverse the signs of treatment effects so that all beneficial 
-effects have positive signs. We present the percentage of socially positive treatment effect estimates
-with and without conditioning on being statistically significant at the 10\% level.
-Column (1) correpsonds to the ITT, without accounting for any controls.
-Column (2) correpsonds to the ITT conditioning on vector of controls, $X$, consisting of {}. We also apply IPW weights, $W$, to account for attrition.
-Columns (3)--(4) are analogous to columns (1)--(2), but we restrict the control sample to subjects
-who did not enroll in any alternative care.
-Column (5) correpsonds to the matching estimate, where we use the Mahalanobis metric and Epanechnikov kernel
-to match on controls $X$ listed above, and restrict the control sample to subjects who did not enroll
-in any alternative care. Additionally, we apply IPW weights, $W$.
-Columns (6)--(8) are analogous to Columns (3)--(5), except we restrict the control sample to subejcts
-who did enroll in alternative care. 
-Numbers in parentheses represent the $p$-value from a single hypothesis test, and are obtained from 
-the empirical bootstrap distribution generated by 5,625 resamples of the original data. 
-Bold $p$-values indicate significance at the 10\% level. Blank point estimates indicate that
-we are unable to obtain estimates due to a lack of support in the data. 
-'''
-
 if twosided == 0:
     criteria = 'positive'
 if twosided == 1:
@@ -845,11 +657,9 @@ if twosided == 1:
 
 
 # prepare table for pytabular
-
-header = [['', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)', '(7)', '(8)']]
-
 for sex in ['pooled', 'male', 'female']:
-    
+
+    # choose columns and determine row order in the table    
     rslt_columns = [('label', '', ''), 
                     (sex, 'pall', 'itt_noctrl'), (sex, 'pall', 'itt_wctrl'),
                     (sex, 'p0', 'itt_noctrl'), (sex, 'p0', 'itt_wctrl'), (sex, 'p0', 'epan_ipw'),
@@ -865,7 +675,7 @@ for sex in ['pooled', 'male', 'female']:
         agg_count_order = [('n10a10','point'), ('n10a10','pval')]
         agg_count_order_csv = [('n10a10','point'), ('n10a10','pval'), ('n10a10','se')]
 
-    # make csv files for creating plots and graphics    
+    # prepare csv files for creating plots and graphics
     tab_csv = aggcounts.loc[agg_count_order_csv, rslt_columns].reset_index(drop=True)   
     tab_csv.columns = ['category', 'itt_noctrl', 'itt_wctrl', 
                            'itt_noctrl_p0', 'itt_wctrl_p0', 'epan_ipw_p0',
@@ -883,7 +693,7 @@ for sex in ['pooled', 'male', 'female']:
     tab_csv.index.names = ['index', 'category', 'stat']
     tab_csv.to_csv(os.path.join(klmpath, pathext, 'csv', 'rslt_{}_counts.csv'.format(sex)))   
 
-    # make actual .tex table
+    # having made the .csv file, now make actual .tex table
     tab = aggcounts.loc[agg_count_order, rslt_columns].reset_index(drop=True)   
     
     tab.label = '' 
@@ -903,17 +713,6 @@ for sex in ['pooled', 'male', 'female']:
     table = pytab.Table(tab)
     table.set_fontsize('scriptsize')                      
 
-    if abc == 1 and care == 0:        
-        table.set_caption('ABC Percentage of {} Treatment Effects, {}'.format(criteria.capitalize(), labels[sex]))
-
-    if abc == 1 and care == 1:        
-        table.set_caption('ABC/CARE Percentage of {} Treatment Effects, {}'.format(criteria.capitalize(), labels[sex]))
-    
-    if abc == 0 and care == 1:        
-        table.set_caption('CARE Percentage of {} Treatment Effects, {}'.format(criteria.capitalize(), labels[sex]))
-    
-    table.set_label('tab:counts_{}_{}'.format(abccare, sex))
-
     # Set lines and alignment
     table[0].set_lines(1)
     table[1:, 0].set_alignment('l')
@@ -927,12 +726,7 @@ for sex in ['pooled', 'male', 'female']:
         table[row,1:].set_formatter(format_pvalue) # format p-value
         row += 1
 
-    # add table notes
-    table.add_note(counts_note.format(total_count, criteria, controls))
-
-    # decide on tabular environment
-    if tabular == 1:
-        table.tabular = 1
+    table.tabular = 1
     
     # write out tables
     table.write(os.path.join(paths.tmp_tables, pathext, 'rslt_{}_counts'.format(sex)))
@@ -950,15 +744,13 @@ categories_order = ["IQ Scores","Achievement Scores","HOME Scores","Parent Incom
                     "Vitamin D Deficiency","Obesity", "Mental Health","Child Behavior"]
                     #"Mental Health $t$-Score"
 
-if care == 1:
-    categories_order.remove("Child Behavior")
-    categories_order.remove("Adoption")
-    categories_order.remove("Mother's Education")    
-
-header = [['Category', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)', '(7)', '(8)', '']]
+# REMOVE THIS COMENT CODE LATER WHEN THE FULL 550 RESULTS ARE BROUGHT IN.
+categories_order.remove("Child Behavior")
+categories_order.remove("Adoption")
+categories_order.remove("Mother's Education")    
 
 for sex in ['pooled', 'male', 'female']:
-    
+   
     rslt_columns = [('category', '', ''), 
                     (sex, 'pall', 'itt_noctrl'), (sex, 'pall', 'itt_wctrl'),
                     (sex, 'p0', 'itt_noctrl'), (sex, 'p0', 'itt_wctrl'), (sex, 'p0', 'epan_ipw'),
@@ -1025,18 +817,7 @@ for sex in ['pooled', 'male', 'female']:
             
         table = pytab.Table(tab)
         table.set_fontsize('scriptsize')                      
-    
-        if abc == 1 and care == 0:        
-            table.set_caption('ABC Percentage of {} Treatment Effects by Category, {} \\\\ {}'.format(criteria.capitalize(), labels[sex], extra))
-    
-        if abc == 1 and care == 1:        
-            table.set_caption('ABC/CARE Percentage of {} Treatment Effects by Category, {} \\\\ {}'.format(criteria.capitalize(), labels[sex], extra))
         
-        if abc == 0 and care == 1:        
-            table.set_caption('CARE Percentage of {} Treatment Effects by Category, {} \\\\ {}'.format(criteria.capitalize(), labels[sex], extra))
-        
-        table.set_label('tab:counts_{}_{}_n{}a{}'.format(abccare, sex, n, a))
-    
         # Set lines and alignment
         table[0].set_lines(1)
         table[1:, 0].set_alignment('l')
@@ -1051,29 +832,19 @@ for sex in ['pooled', 'male', 'female']:
             row += 1
         
         table[:,-1].set_formatter(format_int) # format count of outcomes
-    
-        # add table notes
-        table.add_note(counts_note.format(total_count, criteria, controls))
-
-        # decide on tabular environment
-        if tabular == 1:
-            table.tabular = 1
+        
+        table.tabular = 1
         
         # write out tables
         table.write(os.path.join(paths.tmp_tables, pathext, 'rslt_{}_counts_n{}a{}'.format(sex, n, a)))
 
 
 #======================================
-# PRESENTATION TABLES: Males and Female Results
+# Presentation tables: Males and Female Results
 #======================================
 
-
+# we reduce the number of estimates shown in the slides
 header = [['Variable', 'Age', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)']]
-
-main = {}
-main['male'] = ['years_30y', 'si30y_inc_labor', 'si30y_works_job', 'ad34_mis', 'si34y_dia_bp', 'si34y_vitd_def', 'si34y_drugs']
-main['female'] = ['iq12y', 'years_30y', 'si30y_inc_trans_pub', 'si30y_works_job', 'si30y_adlt_totinc', 'si34y_diab']
-
 
 for t in [1,2]: # t is for stepdown
     # prepare table for pytabular
@@ -1084,7 +855,6 @@ for t in [1,2]: # t is for stepdown
        
     data_app.index = outcomes.loc[data_app.reset_index(level=1).index, ['label', 'age', 'category']].set_index(['label', 'age', 'category']).index
     
-        
     for sex in ['male', 'female']:
             
         rslt_columns = [(sex, 'pall', 'itt_noctrl'), (sex, 'pall', 'itt_wctrl'),
@@ -1118,7 +888,6 @@ for t in [1,2]: # t is for stepdown
             
         table = pytab.Table(tab)
         table.set_fontsize('scriptsize')
-        table.set_label('tab:ate_{}_{}_main'.format(abccare, sex))
 
         # Set lines and alignment
         table[0].set_lines(1)
@@ -1143,7 +912,7 @@ for t in [1,2]: # t is for stepdown
             table.write(os.path.join(paths.tmp_tables, pathext, 'rslt_{}_pres_sd'.format(sex)))
 
 #=========================================
-# PRESENTATION TABLE: aggregate counts
+# Presentation tables: aggregate counts
 #=========================================
 
 if twosided == 0:
@@ -1152,7 +921,6 @@ if twosided == 1:
     criteria = 'significant'
 
 # prepare table for pytabular
-
 header = [['', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)']]
 
 for sex in ['pooled', 'male', 'female']:
