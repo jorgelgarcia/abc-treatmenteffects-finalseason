@@ -247,9 +247,9 @@ data.loc[(slice(None), ['pval']), (slice(None), slice(None), notest_cols)] = ""
 
 # merge in the 'category', 'hyp', and 'variable' columns from outcomes.csv to the dataframe of results
 N_point = rslt_y.loc[(slice(None),0, slice(None)),:].reset_index(level=1, drop=True)
-category = outcomes.loc[:, ['category', 'hyp']].reset_index()
+category = outcomes.loc[:, ['cf_category', 'hyp']].reset_index()
 N_point = N_point.reset_index(level=0).merge(category, how='left', left_index=True, right_on='variable') 
-N_point = N_point.rename(columns={'category':('category','',''), 'variable':('variable','',''), 'hyp':('hyp','','')})
+N_point = N_point.rename(columns={'cf_category':('category','',''), 'variable':('variable','',''), 'hyp':('hyp','','')})
 N_point.set_index(['variable', 'draw', 'category'], inplace=True)
 N_point.sortlevel(axis=1, inplace=True) 
 N_point.sort_index(inplace=True)
@@ -580,12 +580,13 @@ for t in [1,2]:
             tab.drop(['category'], axis=1, level=0, inplace=True)
             
             # append the combining functions to the table
+            '''
             if t == 1:
                 add_count_order = [('n50a100',cat,'point'), ('n50a100',cat,'pval'),
                                    ('n10a10',cat,'point'), ('n10a10',cat,'pval')]
                 add_counts = allcounts.loc[add_count_order, tab.columns].reset_index(drop=True)
                 tab = tab.append(add_counts)
-    
+            '''
             # create blank spaces for ages
             row = 1
             while row < tab.shape[0]:
@@ -615,10 +616,12 @@ for t in [1,2]:
             table[1:, 1].set_formatter(format_int)
 
             # only set line for combining functions if we are not doing stepdown            
+            '''
             if t == 1:            
                 table[-5].set_lines(1)
                 table[-4,0:2].merge()
                 table[-2,0:2].merge()
+            '''
             
             # format point estimates and p-values
             row = 1
@@ -629,9 +632,11 @@ for t in [1,2]:
                 row += 1
         
             # format combining function results if we are not using stepdown
+            '''            
             if t == 1:        
                 table[-4,2:].set_formatter(format_int)    
                 table[-2,2:].set_formatter(format_int)    
+            '''
     
             table.tabular = 1
             
@@ -688,7 +693,7 @@ for sex in ['pooled', 'male', 'female']:
         tmp_k += 1
     tab_csv.set_index(['category', 'stat'], append = True, inplace=True)
     tab_csv.index.names = ['index', 'category', 'stat']
-    tab_csv.to_csv(os.path.join(paths.klmmexico, 'abccare', 'outputfiles', 'jun-24', 'abccare', 'csv', 'rslt_{}_counts.csv'.format(sex)))   
+    tab_csv.to_csv(os.path.join(paths.apptables, 'rslt_{}_counts.csv'.format(sex)))   
 
     # having made the .csv file, now make actual .tex table
     tab = aggcounts.loc[agg_count_order, rslt_columns].reset_index(drop=True)   
@@ -734,6 +739,15 @@ for sex in ['pooled', 'male', 'female']:
 #=========================================
 # Make counts tables, by category
 #=========================================
+
+'''
+# 500 category version
+categories_order = ["Cognitive Skills", "Noncognitive Skills", "Mother's Employment, Education, and Income",
+                    "Mother's Employment","Mother's Education","Father at Home", "Childhood Household Environment", 
+                    "Adult Household Environment", "Education, Employment, Income",
+                    "Adoption","Education","Employment and Income","Crime","Tobacco, Drugs, Alcohol", "Crime", 
+                    "Childhood Health", "Adult Health", "Mental Health"]
+'''
 
 categories_order = ["IQ Scores","Achievement Scores","HOME Scores","Parent Income",
                     "Mother's Employment","Mother's Education","Father at Home",
@@ -784,7 +798,7 @@ for sex in ['pooled', 'male', 'female']:
             tmp_k += 1
         tab_csv.set_index(['category', 'stat'], append = True, inplace=True)
         tab_csv.index.names = ['index', 'category', 'stat']
-        tab_csv.to_csv(os.path.join(paths.klmmexico, 'abccare', 'outputfiles', 'jun-24', 'abccare', 'csv', 'rslt_{}_counts_n{}a{}.csv'.format(sex, n, a)))
+        tab_csv.to_csv(os.path.join(paths.apptables, 'rslt_{}_counts_n{}a{}.csv'.format(sex, n, a)))
        
         # now make tables for paper       
         if a == 100:
