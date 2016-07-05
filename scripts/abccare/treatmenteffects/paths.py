@@ -8,6 +8,6 @@ paths = TreeDict()
 paths.maintables = os.path.join(filedir, '..','..','..','output')
 paths.apptables = os.path.join(filedir, '..','..','..','AppResOutput', 'abccare')
 paths.csvtables = os.path.join(filedir, '..','..','..','AppResOutput', 'csv')
-paths.klmmexico = os.environ['klmMexico']
+#paths.klmmexico = os.environ['klmMexico']
 
 

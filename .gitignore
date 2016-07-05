@@ -81,8 +81,17 @@ scripts/analysis/care/ate/rslt/
 scripts/analysis/abc/balance_tables/rslt/
 scripts/analysis/care/balance_tables/rslt/
 scripts/analysis/abccare/balance_tables/rslt/
-
-
+scripts/abccare/cba/ratio_irr/flows/ncc_ctrl/*.csv
+scripts/abccare/cba/ratio_irr/flows/ncc_noctrl/*.csv
+scripts/abccare/cba/ratio_irr/flows/ncc_wctrl/*.csv
+scripts/abccare/cba/ratio_irr/flows/p0_ctrl/*.csv
+scripts/abccare/cba/ratio_irr/flows/p0_noctrl/*.csv
+scripts/abccare/cba/ratio_irr/flows/p0_wctrl/*.csv
+scripts/abccare/cba/ratio_irr/flows/p0_match/*.csv
+scripts/abccare/cba/ratio_irr/flows/p1_ctrl/*.csv
+scripts/abccare/cba/ratio_irr/flows/p1_noctrl/*.csv
+scripts/abccare/cba/ratio_irr/flows/p1_wctrl/*.csv
+scripts/abccare/cba/ratio_irr/flows/p1_match/*.csv
 
 # Store files #
 ###############

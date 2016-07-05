@@ -1,0 +1,3 @@
+Best AIC: R male m_iq0y m_age0y p_inc0y 
+
+Best BIC: R male m_iq0y m_age0y p_inc0y
