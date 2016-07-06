@@ -12,8 +12,19 @@ plots = os.path.join(filedir, '..', 'rslt', 'sensitivity')
 
 from cba_setup import bc_calc, makeflows
 
-#rate_range = [0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3]
-rate_range = [0,1]
+rate_range = [0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3]
+#rate_range = [0,1]
+
+'''
+1: "ITT", no controls
+2: ITT, with controls and weights
+3: P=0, "ITT" no controls
+4: P=0, "ITT" with controls  and weights
+5: P=0, matching
+6: P=1, "ITT" no controls
+7: P=1, "ITT" with controls  and weights
+8: P=1, matching
+'''
 
 etype = 2
 filled = makeflows(etype=etype)
