@@ -1,0 +1,14 @@
+variable,cf_category,category,age,label,block,hyp,ipw_var,ipw_pooled1,ipw_pooled2,ipw_pooled3,ipw_pooled4,only_abc,only_care
+piat_math7y,Cognitive Skills,Achievement Scores,7.0,PIAT Math Std. Score,achievement,+,piat_math7y,hrabc_index,p_inc0y,m_work0y,,1,0
+ach5y6m,Cognitive Skills,Achievement Scores,5.5,Std. Achv.  Test,achievement,+,ach5y6m,m_age0y,hrabc_index,p_inc0y,,0,0
+ach6y,Cognitive Skills,Achievement Scores,6.0,Std. Achv.  Test,achievement,+,,,,,,0,0
+ach6y6m,Cognitive Skills,Achievement Scores,6.5,Std. Achv.  Test,achievement,+,ach6y6m,hrabc_index,p_inc0y,m_work0y,,1,0
+ach7y,Cognitive Skills,Achievement Scores,7.0,Std. Achv.  Test,achievement,+,ach7y,hrabc_index,p_inc0y,m_work0y,,1,0
+ach7y6m,Cognitive Skills,Achievement Scores,7.5,Std. Achv.  Test,achievement,+,,,,,,0,0
+ach8y,Cognitive Skills,Achievement Scores,8.0,Std. Achv.  Test,achievement,+,,,,,,0,0
+ach8y6m,Cognitive Skills,Achievement Scores,8.5,Std. Achv.  Test,achievement,+,,,,,,0,0
+ach12y,Cognitive Skills,Achievement Scores,12.0,Std. Achv.  Test,achievement,+,,,,,,0,1
+ach15y,Cognitive Skills,Achievement Scores,15.0,Std. Achv.  Test,achievement,+,,,,,,1,0
+ach21y,Cognitive Skills,Achievement Scores,21.0,Std. Achv.  Test,achievement,+,,,,,,1,0
+iq2y,Cognitive Skills,IQ Scores,2.0,Std. IQ Test,iq,+,,,,,,0,0
+iq2y6m,Cognitive Skills,IQ Scores,2.5,Std. IQ Test,iq,+,,,,,,0,1

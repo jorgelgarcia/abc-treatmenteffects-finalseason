@@ -1,0 +1,9 @@
+variable,category,age,label,block,block_appendix,hyp,ipw,ipw_pooled1,ipw_pooled2,ipw_pooled3,ipw_pooled4,ipw_male1,ipw_male2,ipw_male3,ipw_male4,ipw_female1,ipw_female2,ipw_female3,ipw_female4
+male,Baseline Characteristics,0,Male,child,,+,,,,,,,,,,,,,
+wt0y,Baseline Characteristics,0,Birth Weight,child,,+,,,,,,,,,,,,,
+hh_sibs0y,Baseline Characteristics,0,No. Siblings in Household,child,,+,,,,,,,,,,,,,
+birthyear,Baseline Characteristics,0,Birth Year,child,,+,,,,,,,,,,,,,
+m_ed0y,Baseline Characteristics,0,Mother's Education,parent,,+,,,,,,,,,,,,,
+m_age0y,Baseline Characteristics,0,Mother's Age,parent,,+,,,,,,,,,,,,,
+m_iq0y,Baseline Characteristics,0,Mother's IQ,parent,,+,,,,,,,,,,,,,
+f_home0y,Baseline Characteristics,0,Father at Home,parent,,+,,,,,,,,,,,,,
