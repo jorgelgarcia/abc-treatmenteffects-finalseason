@@ -42,5 +42,5 @@ irr_dwl = Parallel(n_jobs=25)(
 	delayed(irr_dwl)(d) for d in rate_range)
 irr_dwl = pd.concat(irr_dwl, axis=0)
 irr_dwl.sort_index(inplace=True)
-irr_dwl.to_csv(os.path.join(plots, 'irr_dwl_mp.csv'), index=True)
+irr_dwl.to_csv(os.path.join(plots, 'irr_dwl.csv'), index=True)
 

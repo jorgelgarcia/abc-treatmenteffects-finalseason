@@ -51,4 +51,4 @@ bc_factors = Parallel(n_jobs=25)(
 	delayed(bc_factors)(part, f) for part, f in combo)
 bc_factors = pd.concat(bc_factors, axis=0)
 bc_factors.sort_index(inplace=True)
-bc_factors.to_csv(os.path.join(plots, 'bc_factors_mp.csv'), index=True)
+bc_factors.to_csv(os.path.join(plots, 'bc_factors.csv'), index=True)
