@@ -29,7 +29,7 @@ adraws = 75
 
 # Paths
 filedir = os.path.join(os.path.dirname(__file__))
-tables = os.path.join(filedir, 'rslt')
+tables = os.path.join(filedir, 'rslt', 'tables')
 
 #----------------------------------------
 
@@ -63,12 +63,12 @@ flows = {
 # declare function to prepare matrices of flows
 def makeflows(etype):
     edict = {}
-    edict[1] = os.path.join(filedir, 'flows', 'ncc_nctrl')
+    edict[1] = os.path.join(filedir, 'flows', 'ncc_noctrl')
     edict[2] = os.path.join(filedir, 'flows', 'ncc_wctrl')
-    edict[3] = os.path.join(filedir, 'flows', 'p0_nctrl')
+    edict[3] = os.path.join(filedir, 'flows', 'p0_noctrl')
     edict[4] = os.path.join(filedir, 'flows', 'p0_ctrl')
     edict[5] = os.path.join(filedir, 'flows', 'p0_match')
-    edict[6] = os.path.join(filedir, 'flows', 'p1_nctrl')
+    edict[6] = os.path.join(filedir, 'flows', 'p1_noctrl')
     edict[7] = os.path.join(filedir, 'flows', 'p1_ctrl')
     edict[8] = os.path.join(filedir, 'flows', 'p1_match')
     flowscsv = edict[etype]
