@@ -59,9 +59,9 @@ save "`abc_cc'"
 
 // describe
 summ P if male == 1 & treat == 0
-local mABC = round(r(mean),.001)
+local mABC = round(100*r(mean),.01)
 summ P if male == 0 & treat == 0
-local fABC = round(r(mean),.001)
+local fABC = round(100*r(mean),.001)
 
 // care
 // open data
@@ -85,9 +85,9 @@ save "`care_cc'"
 
 // describe
 summ P if male == 1 & random == 0
-local mCARE = round(r(mean),.001)
+local mCARE = round(100*r(mean),.01)
 summ P if male == 0 & random == 0
-local fCARE = round(r(mean),.001)
+local fCARE = round(100*r(mean),.01)
 
 append using "`abc_cc'"
 
@@ -98,9 +98,9 @@ twoway (line cdf_Q              Q if program=="abc", lwidth(vthick) lcolor(gs0))
       , 
 		  legend(label(1 "ABC") label(2 "CARE") position(12))
 		  xlabel(, grid glcolor(gs14)) ylabel(0[.1]1, angle(h) glcolor(gs14))
-		  xtitle("Proportion of Months in Alternative Preschools from Ages 0 to 5, Control Group") ytitle(Cumulative Density Function)
+		  xtitle("Proportion of Months in Alternative Preschools, Control Group") ytitle(Cumulative Density Function)
 		  graphregion(color(white)) plotregion(fcolor(white)) 
-		  note("(Propotion in Alternative Preschools in ABC (CARE): `fABC' (`fCARE') Females; `mABC' (`mCARE') Males)");
+		  note("[Alternative Preschools in ABC (CARE): `fABC'% (`fCARE'%) Females; `mABC'% (`mCARE'%) Males]");
 #delimit cr
 cd $output
 graph export abccare_controlcontamination.eps, replace
