@@ -1,0 +1,7 @@
+variable,category,age,label,block,block_appendix,hyp,ipw_var,ipw_pooled1,ipw_pooled2,ipw_pooled3,ipw_pooled4,ipw_male1,ipw_male2,ipw_male3,ipw_male4,ipw_female1,ipw_female2,ipw_female3,ipw_female4
+cccostpublic0,Costs,0,Control Contamination Cost,,,-,,,,,,,,,,,,,
+cccostpublic1,Costs,1,Control Contamination Cost,,,-,,,,,,,,,,,,,
+cccostpublic2,Costs,2,Control Contamination Cost,,,-,,,,,,,,,,,,,
+cccostpublic3,Costs,3,Control Contamination Cost,,,-,,,,,,,,,,,,,
+cccostpublic4,Costs,4,Control Contamination Cost,,,-,,,,,,,,,,,,,
+cccostpublic5,Costs,5,Control Contamination Cost,,,-,,,,,,,,,,,,,

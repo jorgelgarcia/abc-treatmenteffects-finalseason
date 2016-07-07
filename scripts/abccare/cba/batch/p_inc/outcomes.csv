@@ -1,0 +1,9 @@
+variable,category,age,label,block,block_appendix,hyp,ipw_var,ipw_pooled1,ipw_pooled2,ipw_pooled3,ipw_pooled4,ipw_male1,ipw_male2,ipw_male3,ipw_male4,ipw_female1,ipw_female2,ipw_female3,ipw_female4
+p_inc1y6m,Parent Income,1.5,Parental income,,parent_income,+,p_inc1y6m,m_age0y,apgar1,cohort,,,,,,,,,
+p_inc2y6m,Parent Income,2.5,Parental income,,parent_income,+,p_inc2y6m,m_age0y,apgar1,cohort,,,,,,,,,
+p_inc3y6m,Parent Income,3.5,Parental income,,parent_income,+,p_inc3y6m,m_age0y,apgar1,cohort,,,,,,,,,
+p_inc4y6m,Parent Income,4.5,Parental income,,parent_income,+,p_inc4y6m,hrabc_index,apgar1,cohort,,,,,,,,,
+p_inc8y,Parent Income,8,Parental income,,parent_income,+,p_inc8y,hrabc_index,apgar1,cohort,,,,,,,,,
+p_inc12y,Parent Income,12,Parental income,,parent_income,+,p_inc12y,hrabc_index,apgar1,cohort,,,,,,,,,
+p_inc15y,Parent Income,15,Parental income,,parent_income,+,p_inc15y,apgar5,prem_birth,hh_sibs0y,,,,,,,,,
+p_inc21y,Parent Income,21,Parental income,,parent_income,+,p_inc21y,hrabc_index,apgar1,cohort,,,,,,,,,

@@ -45,7 +45,7 @@ for age in [79]:
     point_m = irr.loc['m',0,0]
     point_p = irr.loc['p',0,0]
 
-    qtrim = 0.01        
+    qtrim = 0.01
     
     irrf = irr.loc['f'].dropna()
     irrm = irr.loc['m'].dropna()
@@ -109,7 +109,7 @@ for age in [79]:
     point_m = ratio.loc['m',0,0]
     point_p = ratio.loc['p',0,0]
 
-    qtrim = 0.01        
+    qtrim = 0.01
    
     ratiof = ratio.loc['f'].dropna()
     ratiom = ratio.loc['m'].dropna()
