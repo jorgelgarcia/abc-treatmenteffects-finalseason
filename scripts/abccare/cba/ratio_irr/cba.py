@@ -105,7 +105,6 @@ for age in [79]:
     benefits_age = benefits.loc[:, slice('c{}'.format(age))].apply(robust_npv, axis=1)
     ratio = -benefits_age/costs_age
 
-
     point_f = ratio.loc['f',0,0]
     point_m = ratio.loc['m',0,0]
     point_p = ratio.loc['p',0,0]
@@ -128,7 +127,6 @@ for age in [79]:
     ratio_mp = 1 - percentileofscore(ratiom - ratiom.mean() + null_center, point_m)/100
     ratio_pp = 1 - percentileofscore(ratiop - ratiop.mean() + null_center, point_p)/100
 
-    # MAKE ALL STATISTICS RELY ON THE QUANTILED VERSION
 
     # Save results
     ratio_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])

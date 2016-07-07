@@ -48,4 +48,4 @@ irr_factors = Parallel(n_jobs=25)(
 	delayed(irr_factors)(part, f) for part, f in combo)
 irr_factors = pd.concat(irr_factors, axis=0)
 irr_factors.sort_index(inplace=True)
-irr_factors.to_csv(os.path.join(plots, 'irr_factors_mp.csv'), index=True)
+irr_factors.to_csv(os.path.join(plots, 'irr_factors.csv'), index=True)
