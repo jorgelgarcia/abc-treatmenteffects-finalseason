@@ -1,0 +1,7 @@
+Author	Joshua Shea
+Date	July 7, 2016
+
+This folder contains the code used to generate the ABC and CARE data 
+for the baseline comparison tables. We resample in stata and save the
+indexes since python does not have a build in resampler allowing
+for strata and clusters.
