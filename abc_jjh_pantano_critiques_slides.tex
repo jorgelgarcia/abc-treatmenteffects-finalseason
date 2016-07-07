@@ -1,0 +1,422 @@
+%%-------------------------------------------------------------------------------------------------
+%%                           Template Notes:
+%% Make sure to have all template files from klmweb/revisions/templates/JJH_Beamer before using
+%% this file. Also please read the Beamer Reference document for typists if you have any questions
+%% on the usage of this template.
+% -------------------------------------------------------------------------------------------------
+\documentclass[static]{JJH-Beamer}
+
+%% -- Extra Packages (Place Packages here if they are not included in the default template)--------
+
+\usepackage{booktabs}
+\usepackage{soul}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage[para]{threeparttable}
+\usepackage{epstopdf}
+\usepackage{subfig}
+\usepackage{bbding}
+\usepackage{appendixnumberbeamer}
+
+%% ------ Extra Preamble Definitions (Place any other extra preamble stuff here) ------------------
+
+\newcommand{\mr}{\multirow}
+\newcommand{\mc}{\multicolumn}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+\newcommand*\leftright[2]{%
+  \leavevmode
+  \rlap{#1}%
+  \hspace{0.5\linewidth}%
+  #2}
+
+% ------------ Title, author, date (ALWAYS UPDATE THESE THINGS) -----------------------------------
+
+\def \thetitle {ABC and CARE: Some Clarifications} % Full title goes here
+
+\def \theshorttitle {Analyzing Early Childhood Education} %Short title goes here
+
+\def \theauthor {Jorge Luis Garc\'{i}a, James J. Heckman, Andr\'{e}s Hojman,\\ Duncan Ermini Leaf, Mar\'{i}a Jos\'{e} Prados, \\ Joshua Shea, Jake Torcasso} % Author name(s) go here
+
+\def \theshortauthor {Garc\'{i}a et al.} % Short author name(s) go here; should fit on this one line.
+
+\def \thedate {} % Date and venue information
+
+\def \eventnotes {\noindent
+\textbf{Date:}  \\
+\textbf{Event Title:}  \\
+\textbf{Host:}  \\
+\textbf{Location:} \\
+\textbf{Format:}  \\
+\textbf{Length:} \\
+\textbf{Audience Background:} 
+} % Other event info, to appear on the front of the private notes
+
+% -------------------------------------------------------------------------------------------------
+
+\begin{document}
+\renewcommand*{\inserttotalframenumber}{\pageref{lastframe}}
+\mode<all>{\theTitlePages} % Macro to insert both title pages DO NOT REMOVE!
+
+%%
+%% ------------------------- Content starts here --------------------------------------------------
+%%
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Plan for Presentation}
+\begin{enumerate}
+	\item Control substitution: providing participants by sex
+	\item Treatment effects before control substitution onsets
+	\item Compare ``old'', ``Tuesday's'', and ``current'  estimates
+		\begin{itemize}
+				\item Updates to crime in CARE, account for deaths 
+		\end{itemize}
+	\item Show empirical distributions of IRRs and BCs of ``current'' estimates
+	\item Show new results: baseline, trimming, no controls
+\end{enumerate}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Control-group Substitution}\label{substitution}
+\begin{figure}
+\caption{Months in Alternative Preschools (Control Group)}
+	\includegraphics[width=20em]{output/abccare_controlcontamination.eps}
+\end{figure}
+\hyperlink{abc_subsidized}{\beamergotobutton{Proportion Subsidized, ABC}}
+\hyperlink{care_subsidized}{\beamergotobutton{Proportion Subsidized, CARE}}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Alternative Preschools Take-up, ABC}\label{abc_subsidized}
+\begin{figure}
+\caption{Average Months in Control Substitution, ABC}
+	\includegraphics[width=18em]{output/blackwhite_CCnumber}
+\end{figure}
+\hyperlink{substitution}{\beamerreturnbutton{Back}}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Alternative Preschools Take-up, CARE}\label{care_subsidized}
+\begin{figure}
+\caption{Average Months in Control Substitution, CARE}
+	\includegraphics[width=18em]{output/blackwhite_CCnumber_care}
+\end{figure}
+\hyperlink{substitution}{\beamerreturnbutton{Back}}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Treatment Effects before Control Substitution, Females}
+\begin{center}
+\begin{table}
+	\caption{Treatment Effects, Females} \label{tab:onsetsfemales}
+	\scalebox{.60}{\input{AppResOutput/abccare/early-measures_abccare_females.tex}}
+\end{table}
+\end{center}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Treatment Effects before Control Substitution, Males}
+\begin{center}
+\begin{table}
+	\caption{Treatment Effects, Males} \label{tab:onsetsmales}
+	\scalebox{.60}{\input{AppResOutput/abccare/early-measures_abccare_males.tex}}
+\end{table}
+\end{center}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Yale Estimates}
+\begin{figure}
+\caption{CBA (Summary)}
+	\includegraphics[width=.8\columnwidth]{output/yaleresults.pdf}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Tuesday Estimates}
+\begin{figure}
+\caption{CBA (Summary)}
+	\includegraphics[width=.8\columnwidth]{output/pantanotuesdayestimates.pdf}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Current Estimates}
+\begin{center}
+\begin{table}
+	\caption{CBA Summary}
+	\scalebox{.60}{\input{output/cba_summary_controls_notrim}}
+\end{table}
+\end{center}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Current Estimates}
+\begin{center}
+\begin{table}
+	\caption{CBA Summary}
+	\scalebox{.40}{\input{output/sensitivity}}
+\end{table}
+\end{center}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{IRR Females, Treatment vs. Control} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/irr_2_sexf.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{IRR Males, Treatment vs. Control} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/irr_2_sexm.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{IRR Pooled, Treatment vs. Control} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/irr_2_sexp.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{IRR Females, Treatment vs. Control (Stay at Home)} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/irr_5_sexf.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{IRR Males, Treatment vs. Control (Stay at Home)} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/irr_5_sexm.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{IRR Pooled, Treatment vs. Control (Stay at Home)} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/irr_5_sexp.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{IRR Females, Treatment vs. Control (Alternative Preschools)} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/irr_8_sexf.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{IRR Males, Treatment vs. Control (Alternative Preschools)} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/irr_8_sexm.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{IRR Pooled, Treatment vs. Control (Alternative Preschools)} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/irr_8_sexp.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{B/C Females, Treatment vs. Control} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/ratios_2_sexf.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{B/C Males, Treatment vs. Control} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/ratios_2_sexm.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{B/C Pooled, Treatment vs. Control} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/ratios_2_sexp.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{B/C Females, Treatment vs. Control (Stay at Home)} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/ratios_5_sexf.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{B/C Males, Treatment vs. Control (Stay at Home)} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/ratios_5_sexm.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{B/C Pooled, Treatment vs. Control (Stay at Home)} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/ratios_5_sexp.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{B/C Females, Treatment vs. Control (Alternative Preschools)} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/ratios_8_sexf.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{B/C Males, Treatment vs. Control (Alternative Preschools)} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/ratios_8_sexm.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{B/C Pooled, Treatment vs. Control (Alternative Preschools)} 
+\begin{figure}
+	\includegraphics[width=.8\columnwidth]{output/ratios_8_sexp.eps}
+\end{figure}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Current Estimates}
+\begin{center}
+\begin{table}
+	\caption{CBA Summary}
+	\scalebox{.60}{\input{output/cba_summary_controls_notrim}}
+\end{table}
+\end{center}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Current Estimates, Trimming}
+\begin{center}
+\begin{table}
+	\caption{CBA Summary}
+	\scalebox{.60}{\input{output/cba_summary_controls_trim}}
+\end{table}
+\end{center}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Current Estimates, No Controls}
+\begin{center}
+\begin{table}
+	\caption{CBA Summary}
+	\scalebox{.60}{\input{output/cba_summary_nocontrols_notrim}}
+\end{table}
+\end{center}
+\end{frame}
+
+%% ---------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Current Estimates, Trimming and No Controls}
+\begin{center}
+\begin{table}
+	\caption{CBA Summary}
+	\scalebox{.60}{\input{output/cba_summary_nocontrols_trim}}
+\end{table}
+\end{center}
+\end{frame}
+\clearpage
+
+%% ---------------------------------------------------------------------------
+%% ----------------------------Appendix slides-----------------------------------------------
+
+\appendix
+
+%% ---------------------------------------------------------------------------
+
+
+%%
+%%--------------------------- Content ends here ---------------------------------------------------
+%%
+
+% --------------------- Bibliography hidden with a save box ---------------------------------------
+\mode<all>
+\bibliographystyle{chicago}
+\savebox\hiddenbib{\parbox{\textwidth}{\bibliography{heckman}}}
+
+\end{document} 
