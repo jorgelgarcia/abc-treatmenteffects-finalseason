@@ -70,17 +70,24 @@ analysis/bin/balance/tables/*
 
 # Result Files #
 ################
-analysis/income/rslt/*.pickle
-analysis/income/rslt/*.pkl
-analysis/income/rslt/*.csv
-analysis/bin/ate/rslt/*pkl
-analysis/cba/rslt/
-scripts/analysis/abc/ate/rslt/
-scripts/analysis/abc/ccate/rslt*
-scripts/analysis/care/ate/rslt/
-scripts/analysis/abc/balance_tables/rslt/
-scripts/analysis/care/balance_tables/rslt/
-scripts/analysis/abccare/balance_tables/rslt/
+scripts/abccare/cba/income/nlsy_sampling/*.csv
+scripts/misc/sampling/*.csv
+
+scripts/abc/baselinetables/rslt/*.pkl
+scripts/abccare/baselinetables/rslt/*.pkl
+scripts/care/baselinetables/rslt/*.pkl
+
+scripts/abccare/cba/batch/rslt/itt/*.csv
+scripts/abccare/cba/batch/rslt/matching/*.csv
+scripts/abccare/cba/health/rslt/itt/*.csv
+scripts/abccare/cba/health/rslt/matching/*.csv
+scripts/abccare/cba/income/rslt/itt/*.csv
+scripts/abccare/cba/income/rslt/matching/*.csv
+scripts/abccare/cba/income/rslt/projections/*.csv
+
+scripts/abccare/cba/ratio_irr/rslt/tables/*.csv
+scripts/abccare/cba/ratio_irr/rslt/sensitivity/*.csv
+
 scripts/abccare/cba/ratio_irr/flows/ncc_ctrl/*.csv
 scripts/abccare/cba/ratio_irr/flows/ncc_noctrl/*.csv
 scripts/abccare/cba/ratio_irr/flows/ncc_wctrl/*.csv
