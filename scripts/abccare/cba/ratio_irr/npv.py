@@ -7,7 +7,7 @@ from scipy.stats import percentileofscore
 
 # Paths
 filedir = os.path.join(os.path.dirname(__file__))
-tables = os.path.join(filedir, 'rslt')
+tables = os.path.join(filedir, 'rslt', 'tables')
 if not os.path.exists(tables):
 	os.mkdir(tables)
 

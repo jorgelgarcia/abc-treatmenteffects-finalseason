@@ -3,7 +3,9 @@
 Author      Joshua Shea
 Date        July 5, 2016
 Description This code defines all the functions used to estimate the IRR and BCR.
-            This includes functions to estimate the NPV and IRR.     
+            This includes functions to estimate the NPV and IRR.   
+            
+WARNING     THE QUANTILES IN THE bc_calc AND irr_calc FUNCTIONS HAVE NOT BEEN UPDATED FOR TRIMMING
 """
 import os
 from collections import OrderedDict
@@ -13,12 +15,12 @@ from scipy.stats import percentileofscore
 
 '''
 1: "ITT", no controls
-2: ITT, with controls
+2: ITT, with controls and weights
 3: P=0, "ITT" no controls
-4: P=0, "ITT" with controls
+4: P=0, "ITT" with controls  and weights
 5: P=0, matching
 6: P=1, "ITT" no controls
-7: P=1, "ITT" with controls
+7: P=1, "ITT" with controls  and weights
 8: P=1, matching
 '''
 #----------------------------------------
@@ -222,21 +224,43 @@ def bc_calc(filled, components=flows.keys(), rate=0.03):
     costs = costs.apply(robust_npv, rate=rate, axis=1)
     benefits = benefits.apply(robust_npv, rate=rate, axis=1)
     ratio = -benefits/costs
-    
-    null_center = 1
-    ratio_fp = 1 - percentileofscore(ratio.loc['f'].dropna() - ratio.mean(level='sex').loc['f'] + null_center, ratio.loc['f',0,0])/100
-    ratio_mp = 1 - percentileofscore(ratio.loc['m'].dropna() - ratio.mean(level='sex').loc['m'] + null_center, ratio.loc['m',0,0])/100
-    ratio_pp = 1 - percentileofscore(ratio.loc['p'].dropna() - ratio.mean(level='sex').loc['p'] + null_center, ratio.loc['p',0,0])/100
-    ratio_p = pd.DataFrame([ratio_fp, ratio_mp, ratio_pp], index = ['f', 'm', 'p'], columns=[''])
-    ratio_pnt = pd.DataFrame([ratio.loc['f',0,0], ratio.loc['m',0,0], ratio.loc['p',0,0]], index=['f','m','p'])
 
-    mean = ratio.mean(level='sex')
-    std = ratio.std(level='sex')
-    lb = ratio.groupby(level='sex').quantile(0.1)
-    ub = ratio.groupby(level='sex').quantile(0.9) 
-    output = pd.concat([ratio_pnt, mean, std, lb, ub, ratio_p], axis=1)
-    output.columns = ['point', 'mean', 'se', 'lb', 'ub', 'pval']
-    return output
+    point_f = ratio.loc['f',0,0]
+    point_m = ratio.loc['m',0,0]
+    point_p = ratio.loc['p',0,0]
+
+    qtrim = 0.01        
+   
+    ratiof = ratio.loc['f'].dropna()
+    ratiom = ratio.loc['m'].dropna()
+    ratiop = ratio.loc['p'].dropna()
+
+    ratiof = ratiof.ix[(ratiof>ratiof.quantile(q=qtrim)) & (ratiof<ratiof.quantile(q=1-qtrim))]
+    ratiom = ratiom.ix[(ratiom>ratiom.quantile(q=qtrim)) & (ratiom<ratiom.quantile(q=1-qtrim))]
+    ratiop = ratiop.ix[(ratiop>ratiop.quantile(q=qtrim)) & (ratiop<ratiop.quantile(q=1-qtrim))]
+    
+    # Conduct inference    
+    null_center = 1  
+    ratio_fp = 1 - percentileofscore(ratiof - ratiof.mean() + null_center, point_f)/100
+    ratio_mp = 1 - percentileofscore(ratiom - ratiom.mean() + null_center, point_m)/100
+    ratio_pp = 1 - percentileofscore(ratiop - ratiop.mean() + null_center, point_p)/100
+
+
+    # Save results
+    ratio_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])
+    ratio_mean = pd.DataFrame([ratiof.mean(), ratiom.mean(), ratiop.mean()], index = ['f', 'm', 'p'])    
+    ratio_p = pd.DataFrame([ratio_fp, ratio_mp, ratio_pp], index = ['f', 'm', 'p'])    
+    ratio_se = pd.DataFrame([ratiof.std(), ratiom.std(), ratiop.std()], index=['f','m','p'])
+    try:
+        ratio_quant = ratio.groupby(level='sex').quantile([0.1, 0.9]).unstack()
+    except:
+        ratio_quant = pd.DataFrame(np.array([[np.nan, np.nan], [np.nan, np.nan], [np.nan, np.nan]]), index = ['f', 'm', 'p'])
+        ratio_quant.index.name = 'sex'
+
+    # Output results    
+    table = pd.concat([ratio_pnt, ratio_mean, ratio_p, ratio_se, ratio_quant], axis=1)
+    table.columns = ['point', 'mean', 'pval', 'se', 'lb', 'ub']
+    return table
 
 #----------------------------------------
 
@@ -248,17 +272,42 @@ def irr_calc(filled, components=flows.keys()):
     # Rate of Return
     print 'Calculating IRR...'
     irr = total.apply(robust_irr, axis=1)
-    null_center = 0
-    irr_fp = 1 - percentileofscore(irr.loc['f'].dropna() - irr.groupby(level='sex').mean().loc['f'] + null_center, irr.loc['f',0,0])/100
-    irr_mp = 1 - percentileofscore(irr.loc['m'].dropna() - irr.groupby(level='sex').mean().loc['m'] + null_center, irr.loc['m',0,0])/100
-    irr_pp = 1 - percentileofscore(irr.loc['p'].dropna() - irr.groupby(level='sex').mean().loc['p'] + null_center, irr.loc['p',0,0])/100
-    irr_p = pd.DataFrame([irr_fp, irr_mp, irr_pp], index = ['f', 'm', 'p'], columns=[''])
-    irr_pnt = pd.DataFrame([irr.loc['f',0,0], irr.loc['m',0,0], irr.loc['p',0,0]], index=['f','m','p'])
-    mean = irr.groupby(level='sex').mean()
-    std = irr.groupby(level='sex').std()
-    lb = irr.groupby(level='sex').quantile(0.1)
-    ub = irr.groupby(level='sex').quantile(0.9) 
-    output = pd.concat([irr_pnt, mean, std, lb, ub, irr_p], axis=1)
-    output.columns = ['point', 'mean', 'se', 'lb', 'ub', 'pval']
-    return output
+    
+    point_f = irr.loc['f',0,0]
+    point_m = irr.loc['m',0,0]
+    point_p = irr.loc['p',0,0]
+
+    qtrim = 0.01
+    
+    irrf = irr.loc['f'].dropna()
+    irrm = irr.loc['m'].dropna()
+    irrp = irr.loc['p'].dropna()
+    
+    irrf = irrf.ix[(irrf>irrf.quantile(q=qtrim)) & (irrf<irrf.quantile(q=1-qtrim))]
+    irrm = irrm.ix[(irrm>irrm.quantile(q=qtrim)) & (irrm<irrm.quantile(q=1-qtrim))]
+    irrp = irrp.ix[(irrp>irrp.quantile(q=qtrim)) & (irrp<irrp.quantile(q=1-qtrim))]
+    
+    # Conduct inference    
+    null_center = 0.03
+    irr_fp = 1 - percentileofscore(irrf - irrf.mean() + null_center, point_f)/100
+    irr_mp = 1 - percentileofscore(irrm - irrm.mean() + null_center, point_m)/100
+    irr_pp = 1 - percentileofscore(irrp - irrp.mean() + null_center, point_p)/100
+
+    # Save results
+    irr_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])    
+    irr_mean = pd.DataFrame([irrf.mean(), irrm.mean(), irrp.mean()], index = ['f', 'm', 'p'])   
+    irr_p = pd.DataFrame([irr_fp, irr_mp, irr_pp], index = ['f', 'm', 'p'])
+    irr_se = pd.DataFrame([irrf.std(), irrm.std(), irrp.std()], index=['f','m','p'])    
+
+    try:
+        irr_quant = irr.groupby(level='sex').quantile([0.1, 0.9]).unstack()
+    except:
+        irr_quant = pd.DataFrame(np.array([[np.nan, np.nan], [np.nan, np.nan], [np.nan, np.nan]]), index = ['f', 'm', 'p'])
+        irr_quant.index.name = 'sex'
+
+    # Output the results
+    table = pd.concat([irr_pnt, irr_mean, irr_p, irr_se, irr_quant], axis=1)
+    table.columns = ['point', 'mean', 'pval', 'se', 'lb', 'ub']
+
+    return table
      
