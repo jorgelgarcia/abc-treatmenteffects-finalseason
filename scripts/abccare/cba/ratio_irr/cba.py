@@ -4,6 +4,8 @@ Author      Joshua Shea
 Date        July 5, 2016
 Description This code uses the functions defined in cba_setup.py to estimate
             the IRR and BCR.
+            
+WARNING     THE QUANTILES IN THE bc_calc AND irr_calc FUNCTIONS HAVE NOT BEEN UPDATED FOR TRIMMING            
 """
 import os
 import pandas as pd
@@ -25,7 +27,7 @@ Select estimation type ('etype')
 #----------------------------------------
 # Generate the matrices of flows
 #----------------------------------------
-etype = 8
+etype = 2
 filled = makeflows(etype=etype)
 benefits, costs = bcflows(filled=filled)
 total = irrflows(filled=filled)
@@ -43,9 +45,7 @@ for age in [79]:
     point_m = irr.loc['m',0,0]
     point_p = irr.loc['p',0,0]
 
-    qtrim = 0.05        
-    q95 = irr.quantile(q=1-qtrim)
-    q05 = irr.quantile(q=qtrim)
+    qtrim = 0.01        
     
     irrf = irr.loc['f'].dropna()
     irrm = irr.loc['m'].dropna()
@@ -109,10 +109,8 @@ for age in [79]:
     point_m = ratio.loc['m',0,0]
     point_p = ratio.loc['p',0,0]
 
-    qtrim = 0.05        
-    q95 = ratio.quantile(q=1-qtrim)
-    q05 = ratio.quantile(q=qtrim)
-    
+    qtrim = 0.01        
+   
     ratiof = ratio.loc['f'].dropna()
     ratiom = ratio.loc['m'].dropna()
     ratiop = ratio.loc['p'].dropna()
