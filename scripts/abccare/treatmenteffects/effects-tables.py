@@ -25,7 +25,6 @@ filedir = os.path.join(os.path.dirname(__file__))
 
 path_results = os.path.join(filedir, 'rslts-jun25/abccare_ate/')
 path_outcomes = os.path.join(filedir, 'outcomes_cba.csv')
-abccare = 'abccare'
 
 # provide option for two sided tests
 twosided = 0

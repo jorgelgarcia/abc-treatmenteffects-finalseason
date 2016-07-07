@@ -44,6 +44,7 @@ foreach stat in point se pval {
 
 	// by component, b/c ratio
 	insheet using bc_factors.csv, names clear
+	rename v1 sex
 	replace lb = "" if strpos(lb, "inf")
 	replace ub = "" if strpos(ub, "inf")
 	destring lb ub, replace
@@ -62,6 +63,7 @@ foreach stat in point se pval {
 
 	// by component, irr
 	insheet using irr_factors.csv, names clear
+	rename v1 sex
 	gen sig = pval < 0.10
 	gen keep = 0
 	replace keep = 1 if rate == 0
@@ -77,6 +79,7 @@ foreach stat in point se pval {
 
 	// DWL, b/c ratio
 	insheet using bc_dwl.csv, names clear
+	rename v1 sex
 	gen part = "dwl"
 	gen sig = pval < 0.10
 	keep if rate == 0
@@ -89,6 +92,7 @@ foreach stat in point se pval {
 
 	// DWL, irr
 	insheet using irr_dwl.csv, names clear
+	rename v1 sex
 	gen part = "dwl"
 	gen sig = pval < 0.10
 	keep if rate == 0
@@ -102,6 +106,7 @@ foreach stat in point se pval {
 
 	// discount
 	insheet using bc_discount.csv, names clear
+	rename v1 sex
 	gen part = "discount" + string(rate)
 	gen sig = pval < 0.10
 	gen rate_s = string(rate)
@@ -302,9 +307,10 @@ save `stats'
 // prepare footer
 preserve
 clear
-set obs 1
+set obs 2
 gen part = ""
-replace part = "\end{tabular}" in 1
+replace part = "\bottomrule" in 1
+replace part = "\end{tabular}" in 2
 tempfile footer
 save `footer'
 restore

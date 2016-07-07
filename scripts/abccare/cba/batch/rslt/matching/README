@@ -1,0 +1,6 @@
+Author	Joshua Shea
+Date 	July 7
+
+This folder contains the bootstrap treatment effects estimates for 
+the CBA outcomes that do not need to an auxiliary bootstrap. 
+In particlar, it includes the matching estimates.
