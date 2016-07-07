@@ -77,6 +77,9 @@ foreach file in ratios irr {
 			local pointp90 = r(p90)
 			local pointp95 = r(p95)
 			local pointp99 = r(p99)
+			local total    = r(N)
+			summ `file'`type' if `file'`type' > 0
+			local propz = round(100*(`total' - r(N))/`total',.01) 
 			
 			replace `file'`type' = `file'`type' - r(mean) + 1   if "`file'" == "ratios"
 			replace `file'`type' = `file'`type' - r(mean) + .03 if "`file'" == "irr"
@@ -86,7 +89,7 @@ foreach file in ratios irr {
 			local pointp = round(r(mean),.001)
 			restore 
 			
-			// trim 5/5
+			// trim 1/99
 			preserve
 			keep if male == "`sex'"
 			keep if `file'`type' > `pointp1' & `file'`type' < `pointp99'
@@ -111,9 +114,76 @@ foreach file in ratios irr {
 					  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 					  xtitle(" ") ytitle(Density, size(small))
 					  graphregion(color(white)) plotregion(fcolor(white))
-					  note("Case 1: `point'(`pointse')[`pointp']; Case 2: `point'(`pointse2')[`pointp2']");
+					  note("Case 1: `point'(`pointse')[`pointp']; Case 2: `point'(`pointse2')[`pointp2'].     < 0, `propz'%");
 			#delimit cr 
 			graph export `file'_`type'_sex`sex'.eps, replace
+			// di in r "Enter after seeing Figure" _request(Hello)
+			restore
+		}
+	}
+}
+
+/*
+// irr
+foreach file in irr {
+	foreach type of numlist 2 5 8{
+		foreach sex in f m p {
+			di "`file'`type', `sex'"
+			
+			preserve
+			keep if male == "`sex'"
+			// point estimate
+			summ `file'`type' if b1 == 0 & b2 == 0
+			local point   = round(r(mean),.0001)
+			
+			// non-trim standard error
+			summ `file'`type', d
+			local pointse  = round(r(sd),.0001)
+			local pointme  = r(mean)
+			local pointp1  = r(p1)
+			local pointp5  = r(p5)
+			local pointp10 = r(p10)
+			local pointp90 = r(p90)
+			local pointp95 = r(p95)
+			local pointp99 = r(p99)
+			
+			replace `file'`type' = `file'`type' - r(mean) + .03
+			gen     `file'`type'`sex'ind = 0
+			replace `file'`type'`sex'ind = 1 if `file'`type' > `point'
+			summ    `file'`type'`sex'ind
+			local pointp = round(r(mean),.0001)
+			restore 
+			
+			// trim 0/inf
+			preserve
+			keep if male == "`sex'"
+			summ irr`type' 
+			local tot = r(N)
+			keep if irr`type' > 0
+			summ `file'`type'
+			local zp  = round((`tot' - r(N))/`tot',.001)
+			local pointse2  = round(r(sd),.001)
+			local pointme2  = r(mean)
+			replace `file'`type' = `file'`type' - r(mean) + .03
+			gen `file'`type'`sex'ind = 0 
+			replace `file'`type'`sex'ind = 1 if `file'`type' > `point'
+			summ `file'`type'`sex'ind
+			local pointp2 = round(r(mean),.001)
+			restore
+			
+			// plot
+			preserve
+			keep if male == "`sex'"
+			#delimit
+			twoway (kdensity `file'`type', lwidth(medthick) lpattern(solid) lcolor(gs0))
+				, 
+					  legend(off)
+					  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
+					  xtitle(" ") ytitle(Density, size(small))
+					  graphregion(color(white)) plotregion(fcolor(white))
+					  note("Case 1: `point'(`pointse')[`pointp']; Case 2: `point'(`pointse2')[`pointp2'].     Proportion < 0, `zp'");
+			#delimit cr 
+			graph export `file'_`type'_sex`sex'_new.eps, replace
 			di in r "Enter after seeing Figure" _request(Hello)
 			restore
 		}
