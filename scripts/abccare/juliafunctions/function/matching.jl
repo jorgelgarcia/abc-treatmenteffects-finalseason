@@ -171,7 +171,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
       Output = hcat(outMat["matching_pooled_P0"], outMat["matching_pooled_P1"])
     end
     println("Matching Draw $(draw) DDRAW $(ddraw) OUTPUT SUCCESS")
-    
+
     return Output
   end
 end

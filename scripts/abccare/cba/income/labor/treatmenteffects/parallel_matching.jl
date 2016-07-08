@@ -13,12 +13,12 @@ srand(1)
 # ITT Estimates Using Parallel Processing
 # ======================================================= #
 # Call number of processors
-procs = 24
+procs = 19
 addprocs(procs)
 
 # Define "to parallelize process"
 require("$here/bootstrap_matching.jl")
-B = 25 # number of workers being used
+B = 20 # number of workers being used
 b = 1  # number of work each worker does
 
 matchboot = pmap(matchingrun [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])

@@ -20,5 +20,5 @@ include("$atecode/helper/IPW.jl")
 include("$atecode/helper/epanechnikov.jl")
 
 # Include function files
-include("$scripts/function/matching.jl")
-include("$scripts/function/ITT.jl")
+include("$atecode/function/matching.jl")
+include("$atecode/function/ITT.jl")

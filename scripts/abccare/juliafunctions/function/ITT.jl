@@ -257,9 +257,9 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
   end
 
   # Horizontally concatenate items in the dictionary
-  if bygender = 1
+  if bygender == 1
     Output = hcat(outMat["ITT_male_P0"], outMat["ITT_male_P1"], outMat["ITT_male_P10"], outMat["ITT_female_P0"], outMat["ITT_female_P1"], outMat["ITT_female_P10"], outMat["ITT_pooled_P0"], outMat["ITT_pooled_P1"], outMat["ITT_pooled_P10"])
-  elseif bygender = 0
+  elseif bygender == 0
     Output = hcat(outMat["ITT_pooled_P0"], outMat["ITT_pooled_P1"], outMat["ITT_pooled_P10"])
   end
   println("Draw $(draw) DDRAW $(ddraw) OUTPUT SUCCESS")
