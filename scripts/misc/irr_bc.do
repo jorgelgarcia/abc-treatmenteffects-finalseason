@@ -226,7 +226,7 @@ foreach type of numlist 2 5 8  {
 				  note("Case 1: `point'(`pointse')[`pointp']; Case 2: `point'(`pointse2')[`pointp2'].     < 0: `propz'%.     < 0, Multiple: `mnegroots`type'`sex''%");
 		#delimit cr 
 		graph export irr_`type'_sex`sex'.eps, replace
-		// di in r "Enter after seeing Figure" _request(Hello)
+		di in r "Enter after seeing Figure" _request(Hello)
 		restore
 	}
 }
