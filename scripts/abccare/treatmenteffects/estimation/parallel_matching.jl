@@ -6,7 +6,6 @@
 # ================================================================ #
 
 global thisdir = pwd()
-global scripts = "$thisdir/.."
 
 srand(1)
 
@@ -18,7 +17,7 @@ procs = 24
 addprocs(procs)
 
 # Define "to parallelize process"
-require("$scripts/function/matchingrun.jl")
+require("$thisdir/matchingrun.jl")
 B = 25 # number of workers being used
 b = 4  # number of work each worker does
 
@@ -58,7 +57,7 @@ for gender in genderloop
 			ResultOutput["matching_$(gender)_P$(P_switch)"] = Matchfinal[:, colnames]
 			delete!(Matchfinal, colnames)
 		end
-		writetable("$(output)/abccare/matching/matching_$(gender)_P$(P_switch).csv", ResultOutput["matching_$(gender)_P$(P_switch)"])
+		writetable("$(output)/matching/matching_$(gender)_P$(P_switch).csv", ResultOutput["matching_$(gender)_P$(P_switch)"])
 		n = n + 1
   end
 end

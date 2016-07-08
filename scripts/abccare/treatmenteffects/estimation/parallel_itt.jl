@@ -6,7 +6,6 @@
 # ================================================================ #
 
 global thisdir = pwd()
-global scripts = "$thisdir/.."
 
 srand(1)
 
@@ -18,7 +17,7 @@ procs = 24
 addprocs(procs)
 
 # Define "to parallelize process"
-require("$scripts/function/ITTrun.jl")
+require("$thisdir/ITTrun.jl")
 B = 25 # number of workers being used
 b = 4  # number of work each worker does
 
@@ -62,7 +61,7 @@ for gender in genderloop
 			ResultOutput["itt_$(gender)_P$(P_switch)"] = ITTfinal[:, colnames]
 			delete!(ITTfinal, colnames)
 		end
-		writetable("$(output)/abccare/itt/itt_$(gender)_P$(P_switch).csv", ResultOutput["itt_$(gender)_P$(P_switch)"])
+		writetable("$(output)/itt/itt_$(gender)_P$(P_switch).csv", ResultOutput["itt_$(gender)_P$(P_switch)"])
 		n = n + 1
   end
 end
