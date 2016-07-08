@@ -18,11 +18,10 @@ end
 
 # ======================================================================- #
 
-cd("$results")
 # ----------------------- #
 # Bring in pooled results #
 # ----------------------- #
-labor_proj_p = readtable("labor_proj_pooled.csv")
+labor_proj_p = readtable("$results/projections/labor_proj_pooled.csv")
 labor_proj_p[labor_proj_p[:id] .== "nan", :id] = 9999
 
 # Destring "id" column
@@ -50,7 +49,7 @@ projections = labor_proj_p
 # --------------------- #
 # Bring in male results #
 # --------------------- #
-labor_proj_m = readtable("labor_proj_male.csv")
+labor_proj_m = readtable("$results/projections/labor_proj_male.csv")
 
 colnames = names(labor_proj_m)
 colnames = !delete(colnames, [:id])
@@ -64,7 +63,7 @@ projections = join(projections, labor_proj_m, on = [:id, :adraw]. kind = :outer)
 # ----------------------- #
 # Bring in female results #
 # ----------------------- #
-labor_proj_f = readtable("labor_proj_female.csv")
+labor_proj_f = readtable("$results/projections/labor_proj_female.csv")
 labor_proj_f[labor_proj_f[:id] .== "nan", :id] = 9999
 
 # Destring "id" column

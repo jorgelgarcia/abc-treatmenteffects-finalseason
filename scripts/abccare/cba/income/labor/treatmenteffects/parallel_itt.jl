@@ -17,7 +17,7 @@ procs = 24
 addprocs(procs)
 
 # Define "to parallelize process"
-require("$here/boostrap_itt.jl")
+require("$here/bootstrap_itt.jl")
 B = 25 # number of workers being used
 b = 1  # number of work each worker does
 
