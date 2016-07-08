@@ -150,7 +150,7 @@ def robust_irr(values):
             return np.nan
         res = res[mask].real
         rate = 1.0/res - 1
-   
+  
         # NPV(rate) = 0 can have more than one solution so we return
         # only the solution closest to zero.
         lim_rate = [r for r in list(rate) if (r<1)]     

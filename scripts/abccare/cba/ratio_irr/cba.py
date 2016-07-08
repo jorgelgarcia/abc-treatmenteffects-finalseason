@@ -33,14 +33,43 @@ benefits, costs = bcflows(filled=filled)
 total = irrflows(filled=filled)
 
 #----------------------------------------
+
+# this alternate version saves all the roots
+# find a better way to do this.
+
+def robust_irr_roots(values):
+    try:
+        res = np.roots(values[::-1])
+        mask = (res.imag == 0) & (res.real > 0)
+        if res.size == 0:
+            return np.nan
+        res = res[mask].real
+        rate = 1.0/res - 1
+        global roots
+        roots = roots + [rate]
+   
+        # NPV(rate) = 0 can have more than one solution so we return
+        # only the solution closest to zero.
+        lim_rate = [r for r in list(rate) if (r<1)]     
+        lim_rate = lim_rate[np.argmin(np.abs(lim_rate))]
+        return lim_rate
+        
+    except:
+        return np.nan  
+
+#----------------------------------------
 # Estimate the IRR
 #----------------------------------------
 
 print 'Calculating IRR...'
 irr_ages = {}
-#for age in [5, 8, 15, 21, 30, 79]: 
-for age in [79]:
-    irr = total.loc[:, slice('c{}'.format(age))].apply(robust_irr, axis=1)
+for age in [5, 8, 15, 21, 30, 79]: 
+#for age in [79]:
+    if age == 79:
+        roots = []
+        irr = total.loc[:, slice('c{}'.format(age))].apply(robust_irr_roots, axis=1)    
+    else:
+        irr = total.loc[:, slice('c{}'.format(age))].apply(robust_irr, axis=1)
     point_f = irr.loc['f',0,0]
     point_m = irr.loc['m',0,0]
     point_p = irr.loc['p',0,0]
@@ -89,6 +118,8 @@ for age in [79]:
                 index=True)
         irr.std(level='sex').to_csv(os.path.join(tables, 'irr_se.csv'),
                 index=True) 
+        roots = pd.DataFrame(roots, index=irr.index)
+        roots.to_csv(os.path.join(tables, 'all_roots_type{}.csv'.format(etype)), index=True)
     
 irr_ages = pd.concat(irr_ages, axis=0, names=['age', 'sex'])
 irr_ages.to_csv(os.path.join(tables, 'irr_age_type{}.csv'.format(etype)), index=True)
@@ -99,8 +130,8 @@ irr_ages.to_csv(os.path.join(tables, 'irr_age_type{}.csv'.format(etype)), index=
 
 print 'Calculating B/C ratios...'
 bcr_ages = {}
-#for age in [5, 8, 15, 21, 30, 79]:
-for age in [79]:
+for age in [5, 8, 15, 21, 30, 79]:
+#for age in [79]:
     costs_age = costs.loc[:, slice('c{}'.format(age))].apply(robust_npv, axis=1)
     benefits_age = benefits.loc[:, slice('c{}'.format(age))].apply(robust_npv, axis=1)
     ratio = -benefits_age/costs_age

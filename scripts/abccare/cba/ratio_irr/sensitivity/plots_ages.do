@@ -1,17 +1,14 @@
-set more off
-
-/* TEMP FILE PATH FOR JOSH*/
-cd "/home/jkcshea/Documents/cehd/projects/abc-cba/analysis/cba/plots"
+	set more off
 
 // Check file path
 local filedir: pwd
-if strpos("`filedir'", "plots")==0 {
+if strpos("`filedir'", "ratio_irr")==0 | strpos("`filedir'", "sensitivity")==0  {
 	di as error "ERROR: Must run file from its directory."
 	exit 101
 }
 
 // output file path
-global relpath ../../../abc-cba-draft/AppOutput/Sensitivity
+global relpath ../../../../../AppOutput/Sensitivity
 
 
 *---------------------------------------
@@ -19,7 +16,7 @@ global relpath ../../../abc-cba-draft/AppOutput/Sensitivity
 *---------------------------------------
 
 // Bring in data
-insheet using "../tables/irr_age_type2.csv", names clear
+insheet using "../rslt/tables/irr_age_type2.csv", names clear
 
 label var sex "Sex"
 label var age "Age"
@@ -49,7 +46,7 @@ graph export "$relpath/irr_age.eps", replace
 *---------------------------------------
 
 // Bring in data
-insheet using "../tables/ratios_age_type2.csv", names clear
+insheet using "../rslt/tables/ratios_age_type2.csv", names clear
 
 label var sex "Sex"
 label var age "Age"

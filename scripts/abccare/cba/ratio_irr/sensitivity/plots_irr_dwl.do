@@ -1,21 +1,19 @@
 set more off
 
-/* TEMP FILE PATH FOR JOSH*/
-cd "/home/jkcshea/Documents/cehd/projects/abc-cba/analysis/cba/plots"
-
 // Check file path
 local filedir: pwd
-if strpos("`filedir'", "plots")==0 {
+if strpos("`filedir'", "ratio_irr")==0 | strpos("`filedir'", "sensitivity")==0  {
 	di as error "ERROR: Must run file from its directory."
 	exit 101
 }
 
 // output file path
-global relpath ../../../abc-cba-draft/AppOutput/Sensitivity
-
+global relpath ../../../../../AppOutput/Sensitivity
 
 // Bring in data
-insheet using irr_dwl_mp.csv, names clear
+insheet using ../rslt/sensitivity/irr_dwl.csv, names clear
+rename v1 sex
+
 /*
 * rename
 rename r1 	r100
