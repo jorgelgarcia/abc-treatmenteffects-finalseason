@@ -13,7 +13,6 @@ using Distances
 # Set globals and directories
 global current = pwd()
 global data = "$current/../../../../../data/abccare/extensions/cba-iv"
-C:\Users\Jessica Yu Kyung\abc-treatmenteffects-finalseason\scripts\abccare\treatmenteffects\scripts-julia\function
 global output = "$current/../../rslt"
 global scripts = "$current/.."
 
