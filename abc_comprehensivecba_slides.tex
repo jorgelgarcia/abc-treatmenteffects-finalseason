@@ -201,7 +201,7 @@ $\rightarrow$ Strengthen when accounting for substitution bias
 			$\rightarrow$ Benefits: reduced special education; parental income; labor income; judicial, incarceration, and victimization costs; health expenditures; quality-adjusted life years 
 	\end{itemize}
 	\begin{center}
-	\scalebox{.75}{\input{output/cba_summary}}
+	\scalebox{.75}{\input{output/cba_summary_controls_trim}}
 	\end{center}	
 \end{frame}
 
@@ -392,23 +392,13 @@ Y^0 \left( \omega \right) := \left[ 1 - V\left( \omega \right) \right] Y_H^0 \le
 %% ---------------------------------------------------------------------------
 
 \begin{frame}
-\frametitle{Control-group Substitution, ABC}\label{t_abc_substitution}
+\frametitle{Control-group Substitution}\label{substitution}
 \begin{figure}
-\caption{Months in Alternative Preschools, ABC Control Group}
-	\includegraphics[width=20em]{output/abc_controlcontamination_months.eps}
+\caption{Months in Alternative Preschools (Control Group)}
+	\includegraphics[width=20em]{output/abccare_controlcontamination.eps}
 \end{figure}
-\hyperlink{abc_subsidized}{\beamergotobutton{Proportion Subsidized}}
-\end{frame}
-
-%% ---------------------------------------------------------------------------
-
-\begin{frame}
-\frametitle{Control-group Substitution, CARE}\label{t_care_substitution}
-\begin{figure}
-\caption{Months in Alternative Preschools, CARE}
-	\includegraphics[width=20em]{output/care_controlcontamination_months.eps}
-\end{figure}
-\hyperlink{care_subsidized}{\beamergotobutton{Proportion Subsidized}}
+\hyperlink{abc_subsidized}{\beamergotobutton{Proportion Subsidized, ABC}}
+\hyperlink{care_subsidized}{\beamergotobutton{Proportion Subsidized, CARE}}
 \end{frame}
 
 %% ---------------------------------------------------------------------------
@@ -1147,10 +1137,10 @@ We estimate the treatment effects on $\hat{Y}$
 \begin{frame}
 \frametitle{Selection into Subsidized Alternative Preschools}\label{abc_subsidized}
 \begin{figure}
-\caption{Average Months in Treatment Substitution by Subsidized Status, ABC}
+\caption{Average Months in Control Substitution by Subsidized Status, ABC}
 	\includegraphics[width=18em]{output/blackwhite_CCnumber}
 \end{figure}
-\hyperlink{t_abc_substitution}{\beamerreturnbutton{Back}}
+\hyperlink{substitution}{\beamerreturnbutton{Back}}
 \end{frame}
 
 %% ---------------------------------------------------------------------------
@@ -1158,10 +1148,10 @@ We estimate the treatment effects on $\hat{Y}$
 \begin{frame}
 \frametitle{Selection into Subsidized Alternative Preschools}\label{care_subsidized}
 \begin{figure}
-\caption{Average Months in Treatment Substitution by Subsidized Status, CARE}
+\caption{Average Months in Control Substitution by Subsidized Status, CARE}
 	\includegraphics[width=18em]{output/blackwhite_CCnumber_care}
 \end{figure}
-\hyperlink{t_care_substitution}{\beamerreturnbutton{Back}}
+\hyperlink{substitution}{\beamerreturnbutton{Back}}
 \end{frame}
 
 %% ---------------------------------------------------------------------------

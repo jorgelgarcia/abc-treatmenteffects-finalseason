@@ -43,13 +43,14 @@ foreach component in labor transfer {
 		converter, csvin(${income}/itt/`component'_`sex') csvout(${output}/ncc_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(c) 
 	}
 }
+*/
 
 
 *---------------------------------
 * Health
 *---------------------------------
 
-foreach component in  diclaim_surv ssiclaim_surv ssclaim_surv qaly_surv health_private health_public { /* */
+foreach component in  diclaim_surv ssiclaim_surv ssclaim_surv qaly_surv health_private_surv health_public_surv { /* */
 	foreach sex in male female pooled {
 		foreach pre in 0 1 {
 			* matching
@@ -66,12 +67,13 @@ foreach component in  diclaim_surv ssiclaim_surv ssclaim_surv qaly_surv health_p
 	}
 }
 
-*/
+
+/*
 *---------------------------------
 * Batch
 *---------------------------------
 
-foreach component in private_crime public_crime { // p_inc educost progcost cccostprivate cccostpublic 
+foreach component in private_crime public_crime p_inc educost progcost cccostprivate cccostpublic { 
 	foreach sex in male female pooled {
 		foreach pre in 0 1 {
 			* matching
@@ -89,7 +91,7 @@ foreach component in private_crime public_crime { // p_inc educost progcost ccco
 	}
 }
 
-/*
+
 /*
 * special crimes, without murder
 foreach component in private_crime public_crime {
@@ -141,7 +143,5 @@ foreach sex in male female pooled {
 	}
 }
 
-
-
-
 */
+

@@ -13,6 +13,7 @@ plots = os.path.join(filedir, '..', 'rslt', 'sensitivity')
 from cba_setup import irr_calc, makeflows
 
 rate_range = [0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3]
+#rate_range = [0, 1]
 
 etype = 2
 filled = makeflows(etype=etype)

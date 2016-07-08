@@ -34,7 +34,7 @@ if strpos("`filedir'", "cba")==0 &  strpos("`filedir'", "ratio_irr")==0 & strpos
 
 // output file path
 global csvs	../rslt/sensitivity/
-global output	../../../../../AppOutput/Sensitivity
+global output	../../../../../../output
 
 // change into directory
 
@@ -44,6 +44,7 @@ foreach stat in point se pval {
 
 	// by component, b/c ratio
 	insheet using bc_factors.csv, names clear
+	rename v1 sex
 	replace lb = "" if strpos(lb, "inf")
 	replace ub = "" if strpos(ub, "inf")
 	destring lb ub, replace
@@ -62,6 +63,7 @@ foreach stat in point se pval {
 
 	// by component, irr
 	insheet using irr_factors.csv, names clear
+	rename v1 sex
 	gen sig = pval < 0.10
 	gen keep = 0
 	replace keep = 1 if rate == 0
@@ -77,6 +79,7 @@ foreach stat in point se pval {
 
 	// DWL, b/c ratio
 	insheet using bc_dwl.csv, names clear
+	rename v1 sex
 	gen part = "dwl"
 	gen sig = pval < 0.10
 	keep if rate == 0
@@ -89,6 +92,7 @@ foreach stat in point se pval {
 
 	// DWL, irr
 	insheet using irr_dwl.csv, names clear
+	rename v1 sex
 	gen part = "dwl"
 	gen sig = pval < 0.10
 	keep if rate == 0
@@ -102,6 +106,7 @@ foreach stat in point se pval {
 
 	// discount
 	insheet using bc_discount.csv, names clear
+	rename v1 sex
 	gen part = "discount" + string(rate)
 	gen sig = pval < 0.10
 	gen rate_s = string(rate)
@@ -272,5 +277,59 @@ drop if stat == "3. pval"
 sort order stat
 drop order stat
 
+// deal with spacing
+gen alt_part = part
+local N = _N
+forvalues j = 1/`N'  {
+	if `j' == 1 {
+		levelsof alt_part in 1, local(prevpart)
+	}
+	else {
+		replace alt_part = `prevpart' in `j' if alt_part == ""
+		levelsof alt_part in `j', local(prevpart)
+	}
+}
+gen order = _n
+gen n = 1
+sort alt_part order
+by alt_part: gen sum1 = sum(n)
+by alt_part: egen sum2 = sum(n)
+sort order
+
+replace amp10 = "\\ \\" if alt_part == "None" & sum1 == sum2
+replace amp10 = "\\ \\" if alt_part == "Crime Costs" & sum1 == sum2
+
+drop order n sum1 sum2 alt_part
+
+tempfile stats
+save `stats'
+
+// prepare footer
+preserve
+clear
+set obs 2
+gen part = ""
+replace part = "\bottomrule" in 1
+replace part = "\end{tabular}" in 2
+tempfile footer
+save `footer'
+restore
+
+// add header
+clear 
+set obs 6
+gen part = ""
+replace part = "\begin{tabular}{l r r r r r r r r r}" in 1
+replace part = "\toprule" in 2
+replace part = "	&	\mc{3}{c}{Females}	&	\mc{3}{c}{Males}	&	\mc{3}{c}{Pooled}	\\" in 3
+replace part = "\cmidrule(lr){2-4}	\cmidrule(lr){5-7}	\cmidrule(lr){8-10}" in 4
+replace part = "Removed Component	&	NPV	&	IRR	&	B/C	&	NPV	&	IRR	&	B/C	&	NPV	&	IRR	&	B/C	\\" in 5
+replace part = "\midrule" in 6
+
+append using `stats'
+append using `footer'
+
+
 // save
-outsheet using "$output/sensitivity_stacked.txt", noquote nonames replace
+
+outsheet using "$output/sensitivity.tex", noquote nonames replace

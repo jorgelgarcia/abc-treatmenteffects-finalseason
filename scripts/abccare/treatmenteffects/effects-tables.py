@@ -23,9 +23,8 @@ from paths import paths
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
 
-path_results = os.path.join(filedir, 'rslts-jun24/abccare_ate/')
-path_outcomes = os.path.join(filedir, 'outcomes_abccare.csv')
-abccare = 'abccare'
+path_results = os.path.join(filedir, 'rslts-jun25/abccare_ate/')
+path_outcomes = os.path.join(filedir, 'outcomes_cba.csv')
 
 # provide option for two sided tests
 twosided = 0
@@ -60,44 +59,24 @@ rslt_y = rslt_y.reorder_levels(['draw', 'ddraw', 'rowname'])
 rslt_y.index.names = ['draw', 'ddraw', 'variable']
 rslt_y.sort_index(inplace=True)
 
-# drop variables from outcomes.csv that we do not estimate things on
-rslt_y.drop(['iq6y', 'si30y_cig_daily'], axis=0, level=2, inplace=True)
-outcomes.drop(['iq6y', 'si30y_cig_daily'], axis=0, inplace=True)
+# drop factors
+factors = ['factor_iq5','factor_iq12','factor_iq21','factor_achv12','factor_achv21','factor_home',
+'factor_pinc','factor_mwork','factor_meduc','factor_fhome','factor_educ','factor_emp',
+'factor_crime','factor_tad','factor_shealth','factor_hyper','factor_chol','factor_diabetes',
+'factor_obese','factor_bsi','factor_ext_p','factor_ext_e','factor_ext_t','factor_agr_p',
+'factor_agr_e','factor_agr_t','factor_nrt_p','factor_nrt_e','factor_cns_p','factor_cns_e',
+'factor_cns_t','factor_opn_e','factor_opn_t','factor_act_p']
+
+for dvar in factors:
+    try:
+        rslt_y.drop(dvar, axis=0, level=2, inplace=True)
+    except:
+        pass
 
 ind_rslt_y = rslt_y.index.get_level_values(2).unique()
 ind_outcomes = [i for i in outcomes.index if i in ind_rslt_y]
 outcomes = outcomes.loc[ind_outcomes,:]
 #outcomes = outcomes.loc[rslt_y.index.get_level_values(2).unique(),:]
-
-
-# drop the t-score for mental health so we don't have 2 of the same mental health sets of variables
-rslt_y.drop(outcomes.loc[outcomes.category=="Mental Health $t$-Score"].index, level=2, inplace=True)
-outcomes.drop(list(outcomes.loc[outcomes.category=="Mental Health $t$-Score"].index), axis=0, inplace=True)
-
-
-# TEMPORARY: deal with dropping variables that exist only for ABC or CARE
-# First drop variables that don't exist for ABC
-abc_drop = ['ibr_coop0y6m', 'irb_coop1y', 'ibr_coop1y6m', 'ibr_coop2y']
-outcomes.drop(['ach12y', 'iq2y6m'], axis=0, inplace=True)
-rslt_y.drop(['ach12y', 'iq2y6m'], level=2, inplace=True)
-
-care_drop = ['iq6y', 'iq15y', 'iq21y', 'factor_iq21',
-             'ach6y6m', 'ach7y', 'ach15y', 'ach21y', 'factor_achv21',
-             'adopted_ever', 'm_work21y']
-
-# now drop variables that don't exist for CARE
-# first drop rows from rslt_y so the counts will be correct---we do this using outcomes.csv
-rslt_y.drop(care_drop, level=2, inplace=True)
-rslt_y.drop(list(outcomes.loc[outcomes.category=="Mother's Education"].index), level=2, inplace=True)
-rslt_y.drop(list(outcomes.loc[outcomes.category=="Child Behavior"].index), level=2, inplace=True)
-# drop the rows from the outcomes.csv
-for dvar in care_drop:    
-    try:        
-        outcomes.drop(dvar, axis=0, inplace=True)
-    except:
-        pass
-outcomes.drop(list(outcomes.loc[outcomes.category=="Mother's Education"].index), axis=0, inplace=True)
-outcomes.drop(list(outcomes.loc[outcomes.category=="Child Behavior"].index), axis=0, inplace=True)
 
 # blank out failed estimates
 rslt_y.sortlevel(axis=1, inplace=True)
@@ -740,13 +719,12 @@ for sex in ['pooled', 'male', 'female']:
 # Make counts tables, by category
 #=========================================
 
-'''
+
 # 500 category version
+
 categories_order = ["Cognitive Skills", "Noncognitive Skills", "Mother's Employment, Education, and Income",
-                    "Mother's Employment","Mother's Education","Father at Home", "Childhood Household Environment", 
-                    "Adult Household Environment", "Education, Employment, Income",
-                    "Adoption","Education","Employment and Income","Crime","Tobacco, Drugs, Alcohol", "Crime", 
-                    "Childhood Health", "Adult Health", "Mental Health"]
+                    "Childhood Household Environment", "Adult Household Environment", "Education, Employment, Income",
+                    "Crime", "Childhood Health", "Adult Health", "Mental Health", "Drugs and Alcohol"]
 '''
 
 categories_order = ["IQ Scores","Achievement Scores","HOME Scores","Parent Income",
@@ -760,6 +738,7 @@ categories_order = ["IQ Scores","Achievement Scores","HOME Scores","Parent Incom
 categories_order.remove("Child Behavior")
 categories_order.remove("Adoption")
 categories_order.remove("Mother's Education")    
+'''
 
 # declare new header again
 header = [['Category', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)', '(7)', '(8)', '']]
