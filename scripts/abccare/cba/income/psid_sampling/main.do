@@ -19,4 +19,4 @@ include psid_ids_label_define.do
 include psid_ids_organize.do
 include psid_usc_merge.do
 
-save "`savefile'", replace
+saveold "`savefile'", replace version(12)
