@@ -58,6 +58,7 @@ save "`allestimates'", replace
 cd $output
 
 // ratios
+/*
 foreach type of numlist 2 5 8  {
 	foreach sex in f m p {
 		di "type `type', sex `sex'"
@@ -119,7 +120,7 @@ foreach type of numlist 2 5 8  {
 		// di in r "Enter after seeing Figure" _request(Hello)
 		restore
 	}
-}
+}*/
 
 // irr
 // first count roots
@@ -131,7 +132,7 @@ gen b = _n
 foreach type of numlist 2 5 8 {
 	preserve
 	insheet using all_roots_type`type'.csv, clear
-	sort draw adraw
+	sort adraw draw
 	gen b  = _n
 	keep b sex adraw draw v*
 	egen totroot`type' = rownonmiss(v*)
@@ -196,8 +197,12 @@ foreach type of numlist 2 5 8  {
 		
 		// trim 1/99
 		preserve
+		sort b1 b2
+		merge 1:1 b using "`roots`type''"
+		gen mulroot`type' = 0 if totroot`type' == 1
+		replace mulroot`type' = 1 if totroot`type' != 1 & totroot`type' != .
 		keep if male == "`sex'"
-		keep if irr`type' > 0 //  `pointp1' & irr`type' < `pointp99'
+		keep if mulroot`type' == 0 //  `pointp1' & irr`type' < `pointp99'
 		summ irr`type' 
 		local pointse2  = round(r(sd),.001)
 		local pointme2  = r(mean)
@@ -221,7 +226,7 @@ foreach type of numlist 2 5 8  {
 				  note("Case 1: `point'(`pointse')[`pointp']; Case 2: `point'(`pointse2')[`pointp2'].     < 0: `propz'%.     < 0, Multiple: `mnegroots`type'`sex''%");
 		#delimit cr 
 		graph export irr_`type'_sex`sex'.eps, replace
-		// di in r "Enter after seeing Figure" _request(Hello)
+		di in r "Enter after seeing Figure" _request(Hello)
 		restore
 	}
 }
