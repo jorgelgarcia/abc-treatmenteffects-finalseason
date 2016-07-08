@@ -122,7 +122,7 @@ for age in [5, 8, 15, 21, 30, 79]:
         roots.to_csv(os.path.join(tables, 'all_roots_type{}.csv'.format(etype)), index=True)
     
 irr_ages = pd.concat(irr_ages, axis=0, names=['age', 'sex'])
-irr_ages.to_csv(os.path.join(tables, 'irr_age_type{}.csv'.format(etype)), index=True)
+irr_ages.to_csv(os.path.join(sensitivity, 'irr_age_type{}.csv'.format(etype)), index=True)
 
 #----------------------------------------
 # Estimate the benefit-cost ratios
@@ -186,4 +186,4 @@ for age in [5, 8, 15, 21, 30, 79]:
         	index=True)
     
 bcr_ages = pd.concat(bcr_ages, axis=0, names=['age', 'sex'])
-bcr_ages.to_csv(os.path.join(tables, 'ratios_age_type{}.csv'.format(etype)), index=True)
+bcr_ages.to_csv(os.path.join(sensitivity, 'ratios_age_type{}.csv'.format(etype)), index=True)

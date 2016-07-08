@@ -32,6 +32,7 @@ adraws = 75
 # Paths
 filedir = os.path.join(os.path.dirname(__file__))
 tables = os.path.join(filedir, 'rslt', 'tables')
+sensitivity = os.path.join(filedir, 'rslt', 'sensitivity')
 
 #----------------------------------------
 

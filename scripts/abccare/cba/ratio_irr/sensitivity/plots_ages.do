@@ -16,7 +16,7 @@ global relpath ../../../../../AppOutput/Sensitivity
 *---------------------------------------
 
 // Bring in data
-insheet using "../rslt/tables/irr_age_type2.csv", names clear
+insheet using "../rslt/sensitivity/irr_age_type2.csv", names clear
 
 label var sex "Sex"
 label var age "Age"
