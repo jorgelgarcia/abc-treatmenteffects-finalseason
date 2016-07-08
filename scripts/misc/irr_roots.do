@@ -40,8 +40,19 @@ foreach type of numlist 2 5 8 {
 	gen b  = _n
 	keep b sex adraw draw v*
 	egen totroot`type' = rownonmiss(v*)
-	rename v4 reproot`type'
-	drop v*
+	foreach var of varlist v* {
+		gen abs`var'  =  abs(`var')
+		gen sign`var' =  1 if `var' > 0
+		replace sign`var' = -1 if `var' < 0
+	}
+	egen absmin = rowmin(abs*)
+	
+	foreach var of varlist v* {
+		replace absmin = sign`var'*absmin if absmin == abs`var'
+	}
+		
+	rename absmin reproot`type'
+	drop abs* v*
 	tempfile roots`type'
 	save "`roots`type''", replace
 	restore
@@ -82,7 +93,7 @@ foreach type of numlist 2 5 8  {
 		gen mulroot`type' = 0 if totroot`type' == 1
 		replace mulroot`type' = 1 if totroot`type' != 1 & totroot`type' != .
 		summ mulroot`type' if reproot`type' < 0
-		local mnegroots`type'`sex' = round(100*r(mean),.01)
+		local mnegroots = round(100*r(mean),.01)
 		
 		// percentage multiple roots
 		replace reproot`type' = reproot`type' - r(mean) + .03
@@ -116,7 +127,7 @@ foreach type of numlist 2 5 8  {
 				  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 				  xtitle(" ") ytitle(Density, size(small))
 				  graphregion(color(white)) plotregion(fcolor(white))
-				  note("Case 1: `pointr'(`pointse')[`pointp']; Case 2: `point'(`pointse2')[`pointp2'].     < 0: `propz'%.     Multiple, < 0: `mnegroots'%");
+				  note("Case 1: `pointr'(`pointse')[`pointp']; Case 2: `pointr'(`pointse2')[`pointp2'].     < 0: `propz'%.     Multiple, < 0: `mnegroots'%");
 		#delimit cr 
 		graph export reproot`type'_`sex'.eps, replace
 		di in r "Enter after seeing Figure" _request(Hello)
