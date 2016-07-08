@@ -11,15 +11,16 @@ using StatsBase
 using Distances
 
 # Set globals and directories
-global base =	"~/abc-cba"
-global abc = "~/abc-cba/data/abccare/extensions/cba-iv"
-global dofiles = "~/abc-cba/analysis/income/code/labor/stata"
-global results = "~/abc-cba/analysis/income/rslt"
-global atecode = "~/abc-care/scripts/controlcontamination/atecode"
+global current = pwd()
+global base =	"$current/../../../.."		# This is script/abccare folder
+global data = "$current/../../../../../../data/abccare/extensions/cba-iv"
+global dofiles = "$current"
+global results = "$current/../../rslt"
+global atecode = "$current/../../../../juliafunctions"
 
 # Include necessary files
-include("driver.jl")
-include("data.jl")
+include("$current/driver.jl")
+include("$current/data.jl")
 
 # ================================================================ #
 # Implement options

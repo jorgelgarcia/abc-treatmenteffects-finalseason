@@ -6,7 +6,7 @@
 # ======================================================================== #
 
 # Collect variable names to estimate effects for
-outcomes = readtable("$(base)/analysis/income/code/outcomes.csv")
+outcomes = readtable("$(base)/outcomes/outcomes.csv")
 outcomes_col = outcomes[:variable]
 
 # Collect names of the outcomes and put them into an array so that we can use in the estimation
@@ -93,7 +93,7 @@ projections = join(projections, labor_proj_f, on = [:id, :adraw]. kind = :outer)
 # ----------------------------- #
 # Merge in age 21 and 30 income #
 # ----------------------------- #
-abccare = readtable("$abc/append-abccare_iv.csv")
+abccare = readtable("$data/append-abccare_iv.csv")
 
 # Drop home-visit only kids
 abccare = abccare[!((abccare[:R] .== 0) & (abccare[:RV] .== 1)), :]

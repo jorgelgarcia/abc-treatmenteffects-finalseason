@@ -5,7 +5,7 @@
 # Updated: 07/08/2016
 # ================================================================ #
 
-global scripts = filedir
+global here = pwd()
 
 srand(1)
 
@@ -17,50 +17,47 @@ procs = 24
 addprocs(procs)
 
 # Define "to parallelize process"
-require("$scripts/boostrap_matching.jl")
+require("$here/boostrap_matching.jl")
 B = 25 # number of workers being used
-b = 4  # number of work each worker does
+b = 1  # number of work each worker does
 
-ITTboot = pmap(ITTrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
-ITTfinal = Dict()
+matchboot = pmap(matchingrun [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
+Matchfinal = Dict()
 # Increase the number of "draw" according to the worker number
 for gender in genderloop
 	for i in 2:B
-		ITTboot[i]["$(gender)"][:draw] = ITTboot[i]["$(gender)"][:draw] .+ (b*(i-1))
+		matchboot[i]["$(gender)"][:draw] = matchboot[i]["$(gender)"][:draw] .+ (b*(i-1))
 		for j in 1:2 # concatenated
-		ITTboot[i]["$(gender)"][parse("draw_$(j)")] = ITTboot[i]["$(gender)"][parse("draw_$(j)")] .+ (b*(i-1))
+		matchboot[i]["$(gender)"][parse("draw_$(j)")] = matchboot[i]["$(gender)"][parse("draw_$(j)")] .+ (b*(i-1))
 		end
 	end
 
 	# Concatenate outputs from all workers
-	ITTfinal_pre1 = vcat(ITTinitial["$(gender)"], ITTboot[1]["$(gender)"], ITTboot[2]["$(gender)"], ITTboot[3]["$(gender)"], ITTboot[4]["$(gender)"], ITTboot[5]["$(gender)"], ITTboot[6]["$(gender)"], ITTboot[7]["$(gender)"], ITTboot[8]["$(gender)"], ITTboot[9]["$(gender)"], ITTboot[10]["$(gender)"])
-	ITTfinal_pre2 = vcat(ITTfinal_pre1, ITTboot[11]["$(gender)"], ITTboot[12]["$(gender)"], ITTboot[13]["$(gender)"], ITTboot[14]["$(gender)"], ITTboot[15]["$(gender)"], ITTboot[16]["$(gender)"], ITTboot[17]["$(gender)"], ITTboot[18]["$(gender)"], ITTboot[19]["$(gender)"], ITTboot[20]["$(gender)"])
-	ITTfinal["$(gender)"] = vcat(ITTfinal_pre2, ITTboot[21]["$(gender)"], ITTboot[22]["$(gender)"], ITTboot[23]["$(gender)"], ITTboot[24]["$(gender)"], ITTboot[25]["$(gender)"])
+	matchfinal_pre1 = vcat(matchinitial["$(gender)"], matchboot[1]["$(gender)"], matchboot[2]["$(gender)"], matchboot[3]["$(gender)"], matchboot[4]["$(gender)"], matchboot[5]["$(gender)"], matchboot[6]["$(gender)"], matchboot[7]["$(gender)"], matchboot[8]["$(gender)"], matchboot[9]["$(gender)"], matchboot[10]["$(gender)"])
+	matchfinal_pre2 = vcat(matchfinal_pre1, matchboot[11]["$(gender)"], matchboot[12]["$(gender)"], matchboot[13]["$(gender)"], matchboot[14]["$(gender)"], matchboot[15]["$(gender)"], matchboot[16]["$(gender)"], matchboot[17]["$(gender)"], matchboot[18]["$(gender)"], matchboot[19]["$(gender)"], matchboot[20]["$(gender)"])
+	Matchfinal["$(gender)"] = vcat(matchfinal_pre2, matchboot[21]["$(gender)"], matchboot[22]["$(gender)"], matchboot[23]["$(gender)"], matchboot[24]["$(gender)"], matchboot[25]["$(gender)"])
 
 	# ===================================================== #
 	# Export to csv
 	# ===================================================== #
 	# Define a dictionary for the file outputs to allow for file handles to include locals
 	ResultOutput = Dict()
-	colnames = [:rowname, :draw, :ddraw, :itt_noctrl, :itt_noctrl_p, :itt_noctrl_N, :itt_ctrl, :itt_ctrl_p, :itt_ctrl_N, :itt_wctrl, :itt_wctrl_p, :itt_wctrl_N]
+	colnames = [:rowname, :draw, :ddraw, :epan_ipw, :epan_N]
 
 	# open the necessary matrix
 	c = 0
 	for P_switch in (0, 1, 10)
-		ResultOutput["itt_$(gender)_P$(P_switch)"] = DataFrame(rowname = [], draw = [], ddraw = [],
-		                               										itt_noctrl = [], itt_noctrl_p = [], itt_noctrl_N = [],
-		                               										itt_ctrl = [], itt_ctrl_p = [], itt_ctrl_N = [],
-		                               										itt_wctrl = [], itt_wctrl_p = [], itt_wctrl_N = [])
+		ResultOutput["matching_$(gender)_P$(P_switch)"] = DataFrame(rowname = [], draw = [], ddraw = [], epan_ipw = [], epan_N = [])
 
 		if c == 0
-			ResultOutput["itt_$(gender)_P$(P_switch)"] = ITTfinal["$(gender)"][:, colnames]
-			delete!(ITTfinal["$(gender)"], colnames)
+			ResultOutput["matching_$(gender)_P$(P_switch)"] = Matchfinal[:, colnames]
+			delete!(Matchfinal, colnames)
 		else
-			rename!(ITTfinal["$(gender)"], [parse("rowname_$(c)"), parse("draw_$(c)"), parse("ddraw_$(c)"), parse("itt_noctrl_$(c)"), parse("itt_noctrl_p_$(c)"), parse("itt_noctrl_N_$(c)"), parse("itt_ctrl_$(c)"), parse("itt_ctrl_p_$(c)"), parse("itt_ctrl_N_$(c)"), parse("itt_wctrl_$(c)"), parse("itt_wctrl_p_$(c)"), parse("itt_wctrl_N_$(c)")], colnames)
-			ResultOutput["itt_$(gender)_P$(P_switch)"] = ITTfinal["$(gender)"][:, colnames]
-			delete!(ITTfinal["$(gender)"], colnames)
+			rename!(Matchfinal, [parse("rowname_$(c)"), parse("draw_$(c)"), parse("ddraw_$(c)"), parse("epan_ipw_$(c)"), parse("epan_N_$(c)")], colnames)
+			ResultOutput["matching_$(gender)_P$(P_switch)"] = Matchfinal[:, colnames]
+			delete!(Matchfinal, colnames)
 		end
-		writetable("$(output)/abccare/itt/itt_$(gender)_P$(P_switch).csv", ResultOutput["itt_$(gender)_P$(P_switch)"])
+		writetable("$(results)/matching/matching_$(gender)_P$(P_switch).csv", ResultOutput["matching_$(gender)_P$(P_switch)"])
 		c = c + 1
   end
 end

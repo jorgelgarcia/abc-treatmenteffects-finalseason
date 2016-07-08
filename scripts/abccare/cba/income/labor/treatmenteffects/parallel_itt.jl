@@ -5,7 +5,7 @@
 # Updated: 07/08/2016
 # ================================================================ #
 
-global scripts = filedir
+global here = pwd()
 
 srand(1)
 
@@ -17,9 +17,9 @@ procs = 24
 addprocs(procs)
 
 # Define "to parallelize process"
-require("$scripts/boostrap_itt.jl")
+require("$here/boostrap_itt.jl")
 B = 25 # number of workers being used
-b = 4  # number of work each worker does
+b = 1  # number of work each worker does
 
 ITTboot = pmap(ITTrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 ITTfinal = Dict()
@@ -60,7 +60,7 @@ for gender in genderloop
 			ResultOutput["itt_$(gender)_P$(P_switch)"] = ITTfinal["$(gender)"][:, colnames]
 			delete!(ITTfinal["$(gender)"], colnames)
 		end
-		writetable("$(output)/abccare/itt/itt_$(gender)_P$(P_switch).csv", ResultOutput["itt_$(gender)_P$(P_switch)"])
+		writetable("$(results)/itt/itt_$(gender)_P$(P_switch).csv", ResultOutput["itt_$(gender)_P$(P_switch)"])
 		c = c + 1
   end
 end
