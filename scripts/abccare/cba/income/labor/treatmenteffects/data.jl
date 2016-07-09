@@ -28,8 +28,8 @@ colnames = names(labor_proj_p)
 colnames = deleteat!(colnames, findin(colnames, [:id]))
 colnames = deleteat!(colnames, findin(colnames, [:adraw]))
 for col in colnames
-  newcol = split("$(col)", x)[2]
-	rename!(labor_proj_f, col, parse("c$(newcol)_pooled"))
+  newcol = split("$(col)", "x")[2]
+	rename!(labor_proj_p, col, parse("c$(newcol)_pooled"))
 end
 
 # Define "projection" data to merge in gender-specific projections
@@ -44,8 +44,8 @@ colnames = names(labor_proj_m)
 colnames = deleteat!(colnames, findin(colnames, [:id]))
 colnames = deleteat!(colnames, findin(colnames, [:adraw]))
 for col in colnames
-  newcol = split("$(col)", x)[2]
-	rename!(labor_proj_f, col, parse("c$(newcol)_male"))
+  newcol = split("$(col)", "x")[2]
+	rename!(labor_proj_m, col, parse("c$(newcol)_male"))
 end
 
 # Merge 1:1 id adraw using `projections', nogen
@@ -60,7 +60,7 @@ colnames = names(labor_proj_f)
 colnames = deleteat!(colnames, findin(colnames, [:id]))
 colnames = deleteat!(colnames, findin(colnames, [:adraw]))
 for col in colnames
-  newcol = split("$(col)", x)[2]
+  newcol = split("$(col)", "x")[2]
 	rename!(labor_proj_f, col, parse("c$(newcol)_female"))
 end
 
@@ -82,6 +82,39 @@ keepvar = [:id, :R, :P, :family, :male, :si21y_inc_labor, :si30y_inc_labor]
 keepvar = append!(keepvar, controls)
 keepvar = append!(keepvar, ipwvars_all)
 abccare = abccare[:, keepvar]
+
+# for var in keepvar
+for var in [:id, :R, :P]
+    println("variable: $(var)")
+    occurrence = 0  # To convert a column with occurrence > 0 from string to integer (shown below)
+    for alphabet in ['a':'z']
+     if in(string(".",alphabet), abccare[!isna(abccare[var]), var])
+        occurrence = occurrence + 1
+      end
+      abccare[abccare[var] .== string(".",alphabet), var] = NA
+    end
+
+  # Variables that originally contained ".a"&& etc. are saved as string. Now we need to convert string to integers. I could not find destring command for Julia. To be updated later.
+   if occurrence > 0 # If a column contains ".a" etc.
+    # Create a new column (to be deleted later) that will be filled in with integer values for string column.
+   abccare[:var_new] = 0
+    # Now run the loop over each row
+      for i in 1:length(abccare[var])
+        if !isna(abccare[i,var])
+          abccare[i,:var_new] = parse(Float64,abccare[i,var])
+        else
+          abccare[i,:var_new] = NA
+        end
+      end
+    # Now delete the old (string) column and rename the new column to old column
+      delete!(abccare, var)
+      rename!(abccare, :var_new, var)
+  end
+end
+
+# ----------------------------------- #
+# Define ABC-CARE, ABC, CARE datasets #
+# ----------------------------------- #
 abccare[isna(abccare[:id]), :id] = 9999
 
 abccare = join(abccare, projections, on = [:id], kind = :outer)

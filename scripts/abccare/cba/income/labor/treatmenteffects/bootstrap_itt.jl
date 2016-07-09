@@ -35,6 +35,8 @@ datainuse = Dict()
 # Loop over gender and run estimate
 for gender in genderloop
 
+	println("$(abccare[:, [:id, :adraw, :male]])")
+
 	if gender == "male"
 		datainuse["$(gender)"] = abccare[abccare[:male] .== 1, :]
 	elseif gender == "female"
@@ -59,7 +61,9 @@ for gender in genderloop
 	# ==================== #
 	# Keep the IDs of the original sample to perform ABC boostraps
 	bsid_orig_tmp = datainuse["$(gender)"]
+
 	bsid_orig_tmp = bsid_orig_tmp[bsid_orig_tmp[:adraw] .== 0, [:id, :male, :family]]
+
 	bsid_orig["$(gender)"] = bsid_orig_tmp
 
 	# Define the result matrix for the first bootstrap (brep = 0)

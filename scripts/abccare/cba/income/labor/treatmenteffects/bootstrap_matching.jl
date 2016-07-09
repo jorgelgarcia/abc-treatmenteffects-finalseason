@@ -35,6 +35,8 @@ datainuse = Dict()
 # Loop over gender and run estimate
 for gender in genderloop
 
+	println("$(abccare[:, [:id, :adraw, :male]])")
+
 	if gender == "male"
 		datainuse["$(gender)"] = abccare[abccare[:male] .== 1, :]
 	elseif gender == "female"
@@ -42,6 +44,8 @@ for gender in genderloop
 	elseif gender == "pooled"
 		datainuse["$(gender)"] = abccare
 	end
+
+	println("here???")
 
 	# Drop "_$(gender)" from column names
 	colnames = names(datainuse["$(gender)"])
@@ -53,6 +57,8 @@ for gender in genderloop
 			rename!(datainuse["$(gender)"], col, newname)
 		end
 	end
+
+	println("here???")
 
   # ==================== #
 	# Bootstrap esstimates #
@@ -99,7 +105,7 @@ function matchingrun(boots)
 				datainuse_tmp = join(datainuse_tmp, bsid_draw, on = [:id, :male, :family], kind = :inner)
 
 				global append_switch = 1
-				MatchDict["Matching_check_$(gender)"] = mestimate(datainuse_tmp, outcomes, outcomelist, controlset, brep, arep, "no", 0)
+			  	MatchDict["Matching_check_$(gender)"] = mestimate(datainuse_tmp, outcomes, outcomelist, controlset, brep, arep, "no", 0)
 
 				if (append_switch == 1) & (new_switch == 1)
 					MatchDict["Matching_new_$(gender)"] = MatchDict["Matching_check_$(gender)"]
