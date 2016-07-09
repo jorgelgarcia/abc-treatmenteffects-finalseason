@@ -5,7 +5,7 @@ use USC_PSID_bootstrap_draws.dta, clear
 joinby sestrat seclust using `psid_ids'
 
 drop sestrat seclust bsample
-replace brep = brep - 1
+
 bysort brep: gen i = _n
 
 // bring in bootstrap 0 --- No, since... well, USC set up the bootstrap to be... sampled to reflect PSID... but that doesn't relaly make a difference does it?
