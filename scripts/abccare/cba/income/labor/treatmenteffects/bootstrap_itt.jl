@@ -88,12 +88,18 @@ function ITTrun(boots)
 	  for brep in 1:boots
 	  	if brep != 0
 	  	  bsid_draw = bsample(bsid_orig_tmp, :male, :family)
+				println("printing bsid_draw")
+				println("$(bsid_draw)")
 	  	end
 
 	    for arep in 0:areps
 				datainuse_tmp = datainuse["$(gender)"]
 				datainuse_tmp = datainuse_tmp[datainuse_tmp[:adraw] .== arep, :]
+				println("printing datainuse_tmp")
+				println("$(datainuse_tmp)")
 				datainuse_tmp = join(datainuse_tmp, bsid_draw, on = [:id, :male, :family], kind = :inner)
+				println("printing joint data")
+				println("$(datainuse_tmp)")
 
 				if (brep == 1) & (arep == 0)
 					ITTresult["$(gender)"] = ITTestimator(datainuse_tmp, outcomes, outcomelist, controls, brep, arep, "no", 0)

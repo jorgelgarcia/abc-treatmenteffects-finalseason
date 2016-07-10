@@ -68,7 +68,6 @@ function IPWweight(sampledata, outcomes, outcomel)
 
               println("group_level: $(group_level)")
               println("group_list: $(group_list)")
-              println("$(sampledata)")
               g_min = minimum(group_level)
               deleteat!(group_list, findin(group_list, [parse("group_$(g_min)")]))
               deleteat!(group_list, findin(group_list, [:group_index]))
