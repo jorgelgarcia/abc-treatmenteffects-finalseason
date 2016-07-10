@@ -55,6 +55,9 @@ function bsample(sampledata::AbstractDataFrame, strata, cluster)
     # If index1 == 1, define resample. If not, append to the defined resample
     if index1 == 1
       resample = resampledict["x_$(i)"]
+      if strata_level[1] == 1
+        sampledata = resample
+      end
     else
       sampledata = append!(resample, resampledict["x_$(i)"])
     end
