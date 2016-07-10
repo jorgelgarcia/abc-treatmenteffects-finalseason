@@ -13,16 +13,6 @@ function IPWweight(sampledata, outcomes, outcomel)
     outcome_col = outcomes[:variable]
     ipw_var_col = outcomes[:ipw_var]
 
-  # Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise)
-   discretized = ["m_iq0y", "m_ed0y", "m_age0y", "hrabc_index", "apgar1", "apgar5", "prem_birth", "m_married0y", "m_teen0y", "has_relatives", "male", "f_home0y", "hh_sibs0y"]
-    for dvar in discretized
-      dvar_p = parse(dvar) # Making "d_var" to :d_var
-      med_d = median(sampledata[!isna(sampledata[dvar_p]),dvar_p]) # take the median of the non-missing values for each variables
-      sampledata[parse("$(dvar)_dum")] = 0 # Generate a new column for dummy
-      sampledata[sampledata[dvar_p] .> med_d, parse("$(dvar)_dum")] = 1 # Replace dummy column to one if d_var is greater than the median
-      sampledata[isna(sampledata[dvar_p]), parse("$(dvar)_dum")] = NA # Replace values of dunny column if corresponding rwo in original column is NA
-    end
-
   # -------------------- #
   # Generate IPW Weights #
   # -------------------- #
@@ -30,7 +20,7 @@ function IPWweight(sampledata, outcomes, outcomel)
         # ------------------------------------------------------- #
         # Now loop over variables that need IPWs and form weights #
         # ------------------------------------------------------- #
-          if !isna(outcomes[(outcome_col .== "$(var)"), [:ipw_var]][1,1])
+          if (!isna(outcomes[(outcome_col .== "$(var)"), [:ipw_var]][1,1])) & (in(var, names(sampledata)))
 
           # Collect the list of IPW column variables (only for ABC-CARE variables)
            IPW_cols = outcomes[(outcome_col .== "$(var)"), [:ipw_var, :ipw_pooled1, :ipw_pooled2, :ipw_pooled3]]
@@ -75,6 +65,10 @@ function IPWweight(sampledata, outcomes, outcomel)
                 sampledata[parse("group_$(value)")] = 1(sampledata[:group_index] .== value)
                 append!(group_list, [parse("group_$(value)")])
               end
+
+              println("group_level: $(group_level)")
+              println("group_list: $(group_list)")
+              println("$(sampledata)")
               g_min = minimum(group_level)
               deleteat!(group_list, findin(group_list, [parse("group_$(g_min)")]))
               deleteat!(group_list, findin(group_list, [:group_index]))

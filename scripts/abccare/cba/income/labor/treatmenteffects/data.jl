@@ -6,7 +6,7 @@
 # ======================================================================== #
 
 # Collect variable names to estimate effects for
-outcomes = readtable("$(base)/outcomes/outcomes_cba.csv")
+outcomes = readtable("$(base)/outcomes.csv")
 outcomes_col = outcomes[:variable]
 
 # Collect names of the outcomes and put them into an array so that we can use in the estimation
@@ -78,7 +78,7 @@ abccare = readtable("$data/append-abccare_iv.csv")
 abccare = abccare[!((abccare[:R] .== 0) & (abccare[:RV] .== 1)), :]
 
 # Keep only the variables we need for income
-keepvar = [:id, :R, :P, :family, :male, :si21y_inc_labor, :si30y_inc_labor]
+keepvar = [:id, :R, :P, :family, :male, :si21y_inc_labor, :si30y_inc_labor, :si34y_time]
 keepvar = append!(keepvar, controls)
 keepvar = append!(keepvar, ipwvars_all)
 abccare = abccare[:, keepvar]
@@ -120,8 +120,8 @@ abccare[isna(abccare[:id]), :id] = 9999
 abccare = join(abccare, projections, on = [:id], kind = :outer)
 
 # Organize data
-rename!(abccare, :si21y_inc_labor, :c21)
-rename!(abccare, :si30y_inc_labor, :c30)
+abccare[:c21] = abccare[:si21y_inc_labor]
+abccare[:c30] = abccare[:si30y_inc_labor]
 sort(abccare, cols = [:adraw, :id])
 
 # Deal with deaths
@@ -162,4 +162,18 @@ if deaths == 1
 			end
 		end
 	end
+end
+
+# Drop id 64
+abccare = abccare[!(abccare[:id] .== 64), :]
+
+# Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise)
+global discretized = ["m_iq0y", "m_ed0y", "m_age0y", "hrabc_index", "apgar1", "apgar5", "prem_birth", "m_married0y", "m_teen0y", "male", "f_home0y", "hh_sibs0y"]
+
+for dvar in discretized
+  dvar_p = parse(dvar) # Making "d_var" to :d_var
+  med_d = median(abccare[!isna(abccare[dvar_p]), dvar_p]) # take the median of the non-missing values for each variables
+  abccare[parse("$(dvar)_dum")] = 0 # Generate a new column for dummy
+  abccare[abccare[dvar_p] .> med_d, parse("$(dvar)_dum")] = 1 # Replace dummy column to one if d_var is greater than the median
+  abccare[isna(abccare[dvar_p]), parse("$(dvar)_dum")] = NA # Replace values of dunny column if corresponding rwo in original column is NA
 end

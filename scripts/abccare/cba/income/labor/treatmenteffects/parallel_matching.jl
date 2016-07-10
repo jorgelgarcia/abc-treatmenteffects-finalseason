@@ -21,7 +21,7 @@ require("$here/bootstrap_matching.jl")
 B = 20 # number of workers being used
 b = 1  # number of work each worker does
 
-matchboot = pmap(matchingrun [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
+matchboot = pmap(matchingrun [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 Matchfinal = Dict()
 # Increase the number of "draw" according to the worker number
 for gender in genderloop
