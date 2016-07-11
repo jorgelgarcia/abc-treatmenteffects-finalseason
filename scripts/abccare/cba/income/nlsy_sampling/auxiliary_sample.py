@@ -19,7 +19,7 @@ by : list or None
 '''
 
 seed = 1234
-draws = 1000
+draws = 1001
 by = None
 
 interp_baseline = ['male', 'black', 'm_ed0y']

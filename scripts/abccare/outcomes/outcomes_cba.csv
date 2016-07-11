@@ -50,14 +50,14 @@ paysd,"Education, Employment, Income",Job Satisfaction Score,30,Pay and remunera
 promotionsd,"Education, Employment, Income",Job Satisfaction Score,30,Promotion opportunities,jobsatisfcation,+,promotionsd,hrabc_index,apgar5,prem_birth,,0,0
 contrewsd,"Education, Employment, Income",Job Satisfaction Score,30,Recognition for good work,jobsatisfcation,+,contrewsd,hrabc_index,apgar5,prem_birth,,0,0
 jbsttotsd,"Education, Employment, Income",Job Satisfaction Score,30,Total,jobsatisfcation,+,jbsttotsd,hrabc_index,apgar1,prem_birth,,0,0
-ever_sped5,"Education, Employment, Income",Special Education and Retention,12,Ever Had Special Education by Grade 5,sped,-,,,,,,0,0
-ever_sped12,"Education, Employment, Income",Special Education and Retention,21,Ever Had Special Education by Grade 12,sped,-,,,,,,1,0
-tot_sped5,"Education, Employment, Income",Special Education and Retention,12,Total Number of Special Education by Grade 5,sped,-,,,,,,0,0
-tot_sped12,"Education, Employment, Income",Special Education and Retention,21,Total Number of Special Education by Grade 12,sped,-,,,,,,1,0
-ever_ret5,"Education, Employment, Income",Special Education and Retention,12,Ever Retained by Grade 5,sped,-,,,,,,0,0
-ever_ret12,"Education, Employment, Income",Special Education and Retention,21,Ever Retained by Grade 12,sped,-,,,,,,1,0
-tot_ret5,"Education, Employment, Income",Special Education and Retention,12,Total Number of Retention by Grade 5,sped,-,,,,,,0,0
-tot_ret12,"Education, Employment, Income",Special Education and Retention,21,Total Number of Retention by Grade 12,sped,-,,,,,,1,0
+ever_sped,"Education, Employment, Income",Special Education and Retention,12,Ever Had Special Education by Grade 5,sped,-,,,,,,0,0
+ever_sped,"Education, Employment, Income",Special Education and Retention,21,Ever Had Special Education by Grade 12,sped,-,,,,,,1,0
+tot_sped,"Education, Employment, Income",Special Education and Retention,12,Total Number of Special Education by Grade 5,sped,-,,,,,,0,0
+tot_sped,"Education, Employment, Income",Special Education and Retention,21,Total Number of Special Education by Grade 12,sped,-,,,,,,1,0
+ever_ret,"Education, Employment, Income",Special Education and Retention,12,Ever Retained by Grade 5,sped,-,,,,,,0,0
+ever_ret,"Education, Employment, Income",Special Education and Retention,21,Ever Retained by Grade 12,sped,-,,,,,,1,0
+tot_ret,"Education, Employment, Income",Special Education and Retention,12,Total Number of Retention by Grade 5,sped,-,,,,,,0,0
+tot_ret,"Education, Employment, Income",Special Education and Retention,21,Total Number of Retention by Grade 12,sped,-,,,,,,1,0
 si30y_works_job,"Education, Employment, Income",Subject Employment and Income,30,Employed,employment,+,,,,,,0,0
 si21y_inc_labor,"Education, Employment, Income",Subject Employment and Income,21,Labor Income,employment,+,si21y_inc_labor,hrabc_index,apgar1,cohort,,0,0
 si30y_inc_labor,"Education, Employment, Income",Subject Employment and Income,30,Labor Income,employment,+,si30y_inc_labor,m_ed0y,apgar5,cohort,,0,0
@@ -151,10 +151,6 @@ tht_t,Mental Health,Age 30 Adult Self Report Syndrome Scale $t$-Score,30,Thought
 with_t,Mental Health,Age 30 Adult Self Report Syndrome Scale $t$-Score,30,Withdrawn,mental_syndrome30,-,,,,,,0,0
 totp_t,Mental Health,Age 30 Adult Self Report Syndrome Scale $t$-Score,30,Total Problems,mental_syndrome30,-,,,,,,0,0
 crit_t,Mental Health,Age 30 Adult Self Report Syndrome Scale $t$-Score,30,Critical Items,mental_syndrome30,-,,,,,,0,0
-B18Anx_T,Mental Health,BSI 18 $t$-Score,Mid-30s,Anxiety,mental_bsi18,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-B18Dep_T,Mental Health,BSI 18 $t$-Score,Mid-30s,Depression,mental_bsi18,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-B18Som_T,Mental Health,BSI 18 $t$-Score,Mid-30s,Somatization,mental_bsi18,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-B18GSI_T,Mental Health,BSI 18 $t$-Score,Mid-30s,Global Severity Index,mental_bsi18,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 PSYC_ANX,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Anxiety,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 PSYC_NC,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Any Psychiatric Concern,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 PSYC_DEP,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Depression,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
@@ -165,25 +161,53 @@ PSYC_SUIC,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Conditi
 QLSTRES2,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Worried/Anxious in Past 30 Days,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 PE_ALERT,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Physical Exam: Mental Health Alert,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 PE_DISTRESS,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Physical Exam: Mental Status Distress,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-bsi_ranx,Mental Health,Mental Health,21,Anxiety,mental_bsi1821,-,,,,,,0,0
-BSIAnxRw,Mental Health,Mental Health,Mid-30s,Anxiety,mental_bsi1821,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-bsi_rdep,Mental Health,Mental Health,21,Depression,mental_bsi1821,-,,,,,,0,0
-BSIDepRw,Mental Health,Mental Health,Mid-30s,Depression,mental_bsi1821,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-bsi_rgsi,Mental Health,Mental Health,21,Global Severity Index,mental_bsi1821,-,,,,,,0,0
-B18Raw,Mental Health,Mental Health,Mid-30s,Global Severity Index,mental_bsi1821,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-bsi_rhos,Mental Health,Mental Health,21,Hostility,mental_bsi1821,-,,,,,,0,0
-BSIHosRw,Mental Health,Mental Health,Mid-30s,Hostility,mental_bsi1821,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-bsi_rsom,Mental Health,Mental Health,21,Somatization,mental_bsi1821,-,,,,,,0,0
-BSISomRw,Mental Health,Mental Health,Mid-30s,Somatization,mental_bsi1821,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 bsi_tanx,Mental Health,Mental Health $t$-Score,21,Anxiety $t$-Score,mental_bsi1821_t,-,,,,,,0,0
 BSIAnx_T,Mental Health,Mental Health $t$-Score,Mid-30s,Anxiety $t$-Score,mental_bsi1821_t,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+B18Anx_T,Mental Health,Mental Health $t$-Score,Mid-30s,Anxiety $t$-Score (BSI 18),mental_bsi18,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 bsi_tdep,Mental Health,Mental Health $t$-Score,21,Depression $t$-Score,mental_bsi1821_t,-,,,,,,0,0
 BSIDep_T,Mental Health,Mental Health $t$-Score,Mid-30s,Depression $t$-Score,mental_bsi1821_t,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+B18Dep_T,Mental Health,Mental Health $t$-Score,Mid-30s,Depression $t$-Score (BSI 18),mental_bsi18,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 bsi_thos,Mental Health,Mental Health $t$-Score,21,Hostility $t$-Score,mental_bsi1821_t,-,,,,,,0,0
 BSIHos_T,Mental Health,Mental Health $t$-Score,Mid-30s,Hostility $t$-Score,mental_bsi1821_t,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 bsi_tsom,Mental Health,Mental Health $t$-Score,21,Somatization $t$-Score,mental_bsi1821_t,-,,,,,,0,0
 BSISom_T,Mental Health,Mental Health $t$-Score,Mid-30s,Somatization $t$-Score,mental_bsi1821_t,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+B18Som_T,Mental Health,Mental Health $t$-Score,Mid-30s,Somatization $t$-Score (BSI 18),mental_bsi18,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 bsi_tgsi,Mental Health,Mental Health $t$-Score,21,Global Severity Index $t$-Score,mental_bsi1821_t,-,,,,,,0,0
+B18GSI_T,Mental Health,Mental Health $t$-Score,Mid-30s,Global Severity Index $t$-Score (BSI 18),mental_bsi18,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+ibr_actv0y3m,Infant Development,Infant Behavior Record,0.25,Temperament cluster - activity level,ibr,+,,,,,,1,0
+ibr_actv0y6m,Infant Development,Infant Behavior Record,0.5,Temperament cluster - activity level,ibr,+,,,,,,0,0
+ibr_actv0y9m,Infant Development,Infant Behavior Record,0.75,Temperament cluster - activity level,ibr,+,,,,,,1,0
+ibr_actv1y,Infant Development,Infant Behavior Record,1,Temperament cluster - activity level,ibr,+,,,,,,0,0
+ibr_actv1y6m,Infant Development,Infant Behavior Record,1.5,Temperament cluster - activity level,ibr,+,,,,,,0,0
+ibr_actv2y,Infant Development,Infant Behavior Record,2,Temperament cluster - activity level,ibr,+,ibr_actv2y,m_age0y,apgar1,cohort,,0,0
+ibr_coop0y6m,Infant Development,Infant Behavior Record,0.5,Temperament cluster - cooperativeness,ibr,+,,,,,,0,1
+ibr_coop1y,Infant Development,Infant Behavior Record,1,Temperament cluster - cooperativeness,ibr,+,,,,,,0,1
+ibr_coop1y6m,Infant Development,Infant Behavior Record,1.5,Temperament cluster - cooperativeness,ibr,+,,,,,,0,1
+ibr_coop2y,Infant Development,Infant Behavior Record,2,Temperament cluster - cooperativeness,ibr,+,,,,,,0,1
+ibr_sociab0y3m,Infant Development,Infant Behavior Record,0.25,Temperament cluster - sociability,ibr,+,,,,,,1,0
+ibr_sociab0y6m,Infant Development,Infant Behavior Record,0.5,Temperament cluster - sociability,ibr,+,,,,,,0,0
+ibr_sociab0y9m,Infant Development,Infant Behavior Record,0.75,Temperament cluster - sociability,ibr,+,,,,,,1,0
+ibr_sociab1y,Infant Development,Infant Behavior Record,1,Temperament cluster - sociability,ibr,+,,,,,,0,0
+ibr_sociab1y6m,Infant Development,Infant Behavior Record,1.5,Temperament cluster - sociability,ibr,+,,,,,,0,0
+ibr_sociab2y,Infant Development,Infant Behavior Record,2,Temperament cluster - sociability,ibr,+,ibr_sociab2y,m_age0y,apgar1,cohort,,1,0
+ibr_task0y3m,Infant Development,Infant Behavior Record,0.25,Temperament cluster - task orientation,ibr,+,,,,,,1,0
+ibr_task0y6m,Infant Development,Infant Behavior Record,0.5,Temperament cluster - task orientation,ibr,+,,,,,,0,0
+ibr_task0y9m,Infant Development,Infant Behavior Record,0.75,Temperament cluster - task orientation,ibr,+,,,,,,1,0
+ibr_task1y,Infant Development,Infant Behavior Record,1,Temperament cluster - task orientation,ibr,+,,,,,,0,0
+ibr_task1y6m,Infant Development,Infant Behavior Record,1.5,Temperament cluster - task orientation,ibr,+,,,,,,0,0
+ibr_task2y,Infant Development,Infant Behavior Record,2,Temperament cluster - task orientation,ibr,+,ibr_task2y,m_age0y,apgar1,cohort,,0,0
+mdi0y3m,Infant Development,Bayley Scale of Infant Development,0.25,Bayley Mental Scale,ibr,+,,,,,,1,0
+mdi0y6m,Infant Development,Bayley Scale of Infant Development,0.5,Bayley Mental Scale,ibr,+,,,,,,0,0
+mdi0y9m,Infant Development,Bayley Scale of Infant Development,0.75,Bayley Mental Scale,ibr,+,,,,,,1,0
+mdi1y,Infant Development,Bayley Scale of Infant Development,1,Bayley Mental Scale,ibr,+,,,,,,0,0
+mdi1y6m,Infant Development,Bayley Scale of Infant Development,1.5,Bayley Mental Scale,ibr,+,,,,,,0,0
+mdi2y,Infant Development,Bayley Scale of Infant Development,2,Bayley Mental Scale,ibr,+,,,,,,0,1
+pdi0y3m,Infant Development,Bayley Scale of Infant Development,0.25,Bayley Motor Scale,ibr,+,,,,,,1,0
+pdi0y6m,Infant Development,Bayley Scale of Infant Development,0.5,Bayley Motor Scale,ibr,+,,,,,,0,0
+pdi0y9m,Infant Development,Bayley Scale of Infant Development,0.75,Bayley Motor Scale,ibr,+,,,,,,1,0
+pdi1y,Infant Development,Bayley Scale of Infant Development,1,Bayley Motor Scale,ibr,+,,,,,,0,0
+pdi1y6m,Infant Development,Bayley Scale of Infant Development,1.5,Bayley Motor Scale,ibr,+,,,,,,0,0
+pdi2y,Infant Development,Bayley Scale of Infant Development,2,Bayley Motor Scale,ibr,+,,,,,,0,1
 ap_t_ac8y,Noncognitive Skills,Achenbach Behavior,8,Activities T Score (Reported by Mother),achenbach812,+,ap_t_ac8y,hrabc_index,apgar1,cohort,,1,0
 ap_t_ac12y,Noncognitive Skills,Achenbach Behavior,12,Activities T Score (Reported by Mother),achenbach812,+,,,,,,0,0
 at_bats12y,Noncognitive Skills,Achenbach Behavior,12,Behave Appropriate T Score (Reported by Teacher),achenbach812,+,at_bats12y,m_age0y,apgar1,f_home0y,,0,0
@@ -280,25 +304,30 @@ easy_deci,Noncognitive Skills,"Emotional, Activity, Sociability, Impulsivity Sur
 easy_pers,Noncognitive Skills,"Emotional, Activity, Sociability, Impulsivity Survey",8,Impulsitivity - perservere,easi,-,,,,,,0,0
 easy_sens,Noncognitive Skills,"Emotional, Activity, Sociability, Impulsivity Survey",8,Impulsitivity - sensation,easi,-,,,,,,0,0
 easy_soci,Noncognitive Skills,"Emotional, Activity, Sociability, Impulsivity Survey",8,Sociablity,easi,+,,,,,,0,0
-ibr_actv0y6m,Noncognitive Skills,Infant Behavior Record,0.5,Temperament cluster - activity level,ibr,+,,,,,,0,0
-ibr_actv1y,Noncognitive Skills,Infant Behavior Record,1,Temperament cluster - activity level,ibr,+,,,,,,0,0
-ibr_actv1y6m,Noncognitive Skills,Infant Behavior Record,1.5,Temperament cluster - activity level,ibr,+,,,,,,0,0
-ibr_actv2y,Noncognitive Skills,Infant Behavior Record,2,Temperament cluster - activity level,ibr,+,ibr_actv2y,m_age0y,apgar1,cohort,,0,0
-ibr_coop0y6m,Noncognitive Skills,Infant Behavior Record,0.5,Temperament cluster - cooperativeness,ibr,+,,,,,,0,1
-ibr_coop1y,Noncognitive Skills,Infant Behavior Record,1,Temperament cluster - cooperativeness,ibr,+,,,,,,0,1
-ibr_coop1y6m,Noncognitive Skills,Infant Behavior Record,1.5,Temperament cluster - cooperativeness,ibr,+,,,,,,0,1
-ibr_coop2y,Noncognitive Skills,Infant Behavior Record,2,Temperament cluster - cooperativeness,ibr,+,,,,,,0,1
-ibr_sociab0y6m,Noncognitive Skills,Infant Behavior Record,0.5,Temperament cluster - sociability,ibr,+,,,,,,0,0
-ibr_sociab1y,Noncognitive Skills,Infant Behavior Record,1,Temperament cluster - sociability,ibr,+,,,,,,0,0
-ibr_sociab1y6m,Noncognitive Skills,Infant Behavior Record,1.5,Temperament cluster - sociability,ibr,+,,,,,,0,0
-ibr_sociab2y,Noncognitive Skills,Infant Behavior Record,2,Temperament cluster - sociability,ibr,+,ibr_sociab2y,m_age0y,apgar1,cohort,,1,0
-ibr_task0y6m,Noncognitive Skills,Infant Behavior Record,0.5,Temperament cluster - task orientation,ibr,+,,,,,,0,0
-ibr_task1y,Noncognitive Skills,Infant Behavior Record,1,Temperament cluster - task orientation,ibr,+,,,,,,0,0
-ibr_task1y6m,Noncognitive Skills,Infant Behavior Record,1.5,Temperament cluster - task orientation,ibr,+,,,,,,0,0
-ibr_task2y,Noncognitive Skills,Infant Behavior Record,2,Temperament cluster - task orientation,ibr,+,ibr_task2y,m_age0y,apgar1,cohort,,0,0
-hic_beh12y,Noncognitive Skills,Harter Importance,12,Behavioral conduct,harter,+,hic_beh12y,apgar5,m_married0y,cohort,,0,0
-hic_phy12y,Noncognitive Skills,Harter Importance,12,Physical appearance,harter,+,hic_phy12y,apgar5,m_married0y,cohort,,0,0
-hic_soc12y,Noncognitive Skills,Harter Importance,12,Social acceptance,harter,+,hic_soc12y,apgar5,m_married0y,cohort,,0,0
+hic_ath12y,Noncognitive Skills,Harter,12,Perceived athletic competence,harter,+,hic_ath12y,apgar5,m_married0y,cohort,,0,0
+hic_ath15y,Noncognitive Skills,Harter,15,Perceived athletic competence,harter,+,,,,,,1,0
+hic_beh12y,Noncognitive Skills,Harter,12,Perceived behavioral conduct,harter,+,hic_beh12y,apgar5,m_married0y,cohort,,0,0
+hic_phy12y,Noncognitive Skills,Harter,12,Perceived physical appearance,harter,+,hic_phy12y,apgar5,m_married0y,cohort,,0,0
+hic_phy15y,Noncognitive Skills,Harter,15,Perceived physical appearance,harter,+,,,,,,1,0
+hic_soc12y,Noncognitive Skills,Harter,12,Perceived social acceptance,harter,+,hic_soc12y,apgar5,m_married0y,cohort,,0,0
+hic_soc15y,Noncognitive Skills,Harter,15,Perceived social acceptance,harter,+,,,,,,1,0
+hic_sch12y,Noncognitive Skills,Harter,12,Perceived scholastic competence,harter,+,hic_sch12y,apgar5,m_married0y,cohort,,0,0
+hic_sch15y,Noncognitive Skills,Harter,15,Perceived scholastic competence,harter,+,,,,,,1,0
+hcc_cog12y,Noncognitive Skills,Harter,12,Perceived cognitive competence,harter,+,,,,,,0,0
+hcc_est12y,Noncognitive Skills,Harter,12,Perceived self-esteem competence,harter,+,,,,,,0,0
+hcc_phy12y,Noncognitive Skills,Harter,12,Perceived physical competence,harter,+,,,,,,0,0
+hcc_soc12y,Noncognitive Skills,Harter,12,Perceived social competence,harter,+,,,,,,0,0
+hcc_con15y,Noncognitive Skills,Harter,15,Perceived conduct/morality,harter,+,,,,,,1,0
+hcc_frnd15y,Noncognitive Skills,Harter,15,Perceived close friendship,harter,+,,,,,,1,0
+hcc_job15y,Noncognitive Skills,Harter,15,Perceived job competence,harter,+,,,,,,1,0
+hcc_rom15y,Noncognitive Skills,Harter,15,Perceived romance,harter,+,,,,,,1,0
+hct_cog12y,Cognitive Skills,Harter,12,Teacher perceived cognitive competence score,harter,+,hct_cog12y,m_age0y,apgar1,prem_birth,,0,0
+hct_est12y,Noncognitive Skills,Harter,12,Teacher perceived self-esteem score,harter,+,hct_est12y,m_age0y,apgar1,m_teen0y,,0,0
+hct_phy12y,Noncognitive Skills,Harter,12,Teacher perceived physical competence score,harter,+,hct_phy12y,m_age0y,apgar1,apgar5,,0,0
+hct_soc12y,Noncognitive Skills,Harter,12,Teacher perceived social competence score,harter,+,hct_soc12y,m_age0y,apgar1,m_teen0y,,0,0
+hct_sk112y,Cognitive Skills,Harter,12,Teacher perceived intellectual competence,harter,+,hct_sk112y,m_age0y,apgar1,m_teen0y,,0,0
+hct_sk212y,Noncognitive Skills,Harter,12,Teacher perceived social competence,harter,+,hct_sk212y,m_age0y,apgar1,m_teen0y,,0,0
+hct_sk312y,Noncognitive Skills,Harter,12,Teacher perceived physical competence,harter,+,hct_sk312y,m_age0y,apgar1,m_teen0y,,0,0
 mtrt_con8y,Noncognitive Skills,Parent as Educator,8,Considerateness,pei_interview,+,mtrt_con8y,apgar1,apgar5,cohort,,0,0
 mtrt_ext8y,Noncognitive Skills,Parent as Educator,8,Extraversion,pei_interview,+,mtrt_ext8y,hrabc_index,apgar5,cohort,,0,0
 mtrt_tsk8y,Noncognitive Skills,Parent as Educator,8,Task Orientation,pei_interview,+,mtrt_tsk8y,apgar1,apgar5,cohort,,0,0
@@ -387,25 +416,51 @@ chsick7,Childhood Health,Childhood Health Problems,12,Has Health Problems,health
 si21y_hlthins,Adult Health,Health Insurance,21,Has Health Insurance,health_insurance,+,,,,,,0,0
 si30y_hlthins,Adult Health,Health Insurance,30,Has Health Insurance,health_insurance,+,,,,,,0,0
 si34y_hlthins,Adult Health,Health Insurance,Mid-30s,Has Health Insurance,health_insurance,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-sint30_078,Adult Health,Other Health-Related Information,30,How Subject Thinks of Own Weight,,-,,,,,,0,0
-sint30_023,Adult Health,Other Health-Related Information,30,Physical/Nervous Condition Prevents Work,,-,,,,,,0,0
+sint30_078,Adult Health,Other Health-Related Information,30,How Subject Thinks of Own Weight,physical health,-,,,,,,0,0
+sint30_023,Adult Health,Other Health-Related Information,30,Physical/Nervous Condition Prevents Work,physical health,-,,,,,,0,0
 poorhlth,Adult Health,Other Health-Related Information,Mid-30s,Number of Days Poor Health Stop Activities in Past 30 Days,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 physhlth,Adult Health,Other Health-Related Information,Mid-30s,Number of Days Unhealthy in Past 30 Days,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 QLHLTH2,Adult Health,Other Health-Related Information,Mid-30s,Number of Days Very Healthy in Past 30 Days,physical health,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
 PAINACT2,Adult Health,Other Health-Related Information,Mid-30s,Number of Days in Pain in Past 30 Days,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 si34y_dyslipid,Adult Health,Cholesterol,Mid-30s,Dyslipidemia,cholesterol,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 si34y_chol_hdl,Adult Health,Cholesterol,Mid-30s,High-Density Lipoprotein Chol. (mg/dL),cholesterol,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_orthop,Adult Health,Current Health Condition (Self-Reported),Mid-30s,Arthritis or Generative Disease,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_asthma,Adult Health,Current Health Condition (Self-Reported),Mid-30s,Asthma,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_cancer,Adult Health,Current Health Condition (Self-Reported),Mid-30s,Cancer,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_memory,Adult Health,Current Health Condition (Self-Reported),Mid-30s,Dementia,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_diabetes,Adult Health,Current Health Condition (Self-Reported),Mid-30s,Diabetes,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_heartatt,Adult Health,Current Health Condition (Self-Reported),Mid-30s,Heart Attack,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_othheart,Adult Health,Current Health Condition (Self-Reported),Mid-30s,Heart Attack or Coronary Disease,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_bloodpr,Adult Health,Current Health Condition (Self-Reported),Mid-30s,High Blood Pressure (Hypertension),physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_chol,Adult Health,Current Health Condition (Self-Reported),Mid-30s,High Cholesterol,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_sickle,Adult Health,Current Health Condition (Self-Reported),Mid-30s,Sickle Cell Anemia,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_stroke,Adult Health,Current Health Condition (Self-Reported),Mid-30s,Stroke,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si30y_hprob_allergy,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Allergies or fever,current_health,-,,,,,,0,0
+si30y_hprob_anemia,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Simple anemia,current_health,-,,,,,,0,0
+si30y_hprob_asthma,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Asthma,current_health,-,,,,,,0,0
+si30y_hprob_bloodpr ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,High blood pressure,current_health,-,,,,,,0,0
+si30y_hprob_cancer ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Cancer,current_health,-,,,,,,0,0
+si30y_hprob_cerbplsy ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Cerebral palsy,current_health,-,,,,,,0,0
+si30y_hprob_cystic ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Cystic fibrosis,current_health,-,,,,,,0,0
+si30y_hprob_diabetes ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Diabetes,current_health,-,,,,,,0,0
+si30y_hprob_gastro ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Chronic gastrointestinal conditions,current_health,-,,,,,,0,0
+si30y_hprob_hear ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Hearing problems or deafness,current_health,-,,,,,,0,0
+si30y_hprob_hiv ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,HIV or AIDS,current_health,-,,,,,,0,0
+si30y_hprob_infert,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Infertility,current_health,-,,,,,,0,0
+si30y_hprob_kidney ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Kidney disease,current_health,-,,,,,,0,0
+si30y_hprob_memory ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Problems with memory or mental confusion,current_health,-,,,,,,0,0
+si30y_hprob_mental,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Mental health conditions,current_health,-,,,,,,0,0
+si30y_hprob_orthop ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,"Chronic orthopedic, bone, or joint problems",current_health,-,,,,,,0,0
+si30y_hprob_other ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Other condition requiring medical specialists,current_health,-,,,,,,0,0
+si30y_hprob_othheart ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Chronic heart condition,current_health,-,,,,,,0,0
+si30y_hprob_othresp ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Other chronic respiratory,current_health,-,,,,,,0,0
+si30y_hprob_preg ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Pregnancy problems,current_health,-,,,,,,0,0
+si30y_hprob_seizure ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,"Epilepsy, convulsions, or seizures",current_health,-,,,,,,0,0
+si30y_hprob_sickle ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Sicle cell anemia,current_health,-,,,,,,0,0
+si30y_hprob_sleep ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Trouble sleeping,current_health,-,,,,,,0,0
+si30y_hprob_std ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Any STDs,current_health,-,,,,,,0,0
+si30y_hprob_stroke,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Stroke,current_health,-,,,,,,0,0
+si30y_hprob_vision,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Visual problems even with glasses,current_health,-,,,,,,0,0
+si34y_hprob_orthop,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Arthritis or Generative Disease,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_asthma,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Asthma,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_cancer,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Cancer,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_memory,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Dementia,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_diabetes,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Diabetes,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_heartatt,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Heart Attack,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_othheart,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Heart Attack or Coronary Disease,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_bloodpr,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,High Blood Pressure (Hypertension),physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_chol,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,High Cholesterol,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_sickle,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Sickle Cell Anemia,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_stroke,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Stroke,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 si34y_diab,Adult Health,Diabetes,Mid-30s,Diabetes,diabetes,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 si34y_hemoglobin,Adult Health,Diabetes,Mid-30s,Hemoglobin Level (\%),diabetes,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 si34y_prediab,Adult Health,Diabetes,Mid-30s,Prediabetes,diabetes,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
@@ -493,7 +548,7 @@ PE_HYD,Adult Health,Physical Exam - General I,Mid-30s,Hydration,phys_gen_i,-,si3
 PE_NUT,Adult Health,Physical Exam - General I,Mid-30s,Nutrition,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 PE_ORIENT,Adult Health,Physical Exam - General I,Mid-30s,Orientation,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 PE_POST,Adult Health,Physical Exam - General I,Mid-30s,Posture,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_PULS,Adult Health,Physical Exam - General I,Mid-30s,Pulse,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+PE_PULSE,Adult Health,Physical Exam - General I,Mid-30s,Pulse,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 PE_RESP,Adult Health,Physical Exam - General I,Mid-30s,Respirations,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 PE_TEMP,Adult Health,Physical Exam - General I,Mid-30s,Temp (F),phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
 PE_VOICE,Adult Health,Physical Exam - General I,Mid-30s,Voice,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
