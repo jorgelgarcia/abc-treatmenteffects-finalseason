@@ -24,6 +24,7 @@ function epanechnikov(sampledata, controls, bandwidth)
   Cinv1 = inv(cov1)    # for treated
   cov0 = cov(Array(covdata[covdata[:R] .== 0, controls]))
   Cinv0 = inv(cov0)    # for controls
+  println("covariance success!")
 
   # Create a temporary dataset (new_sampledata) in order to generate id-level columns
   for var in controls
@@ -56,6 +57,9 @@ function epanechnikov(sampledata, controls, bandwidth)
       maha_controls = [:drop]     # list to collect (X-mu) column names for all controls
 
       for var in controls
+        if typeof(id) == Float64
+          id = Int(id)
+        end
         sampledata[parse("$(var)_$(id)")] = 0.0     # Declare new column as flaat
         mu = sampledata[sampledata[:id] .== id, var][1,1]
         sampledata[parse("$(var)_$(id)")] = sampledata[parse("$(var)")] .- mu
@@ -70,22 +74,37 @@ function epanechnikov(sampledata, controls, bandwidth)
       try
         diag(maha) .^ (1/2)
       catch err
+        println("epanechnikove error: $(err)")
         continue
       end
+      println("maha successful")
+
       maha = diag(maha) .^ (1/2)
 
       # Convert Mahalanobis to Epanechnikov
-      inband = 1(abs(maha ./ bandwidth) .<= 1)
-      maha = ((1/bandwidth) * (3/4)) .* (1 .- (maha ./ bandwidth).^2) .* inband
+      newmaha = Float64[]
+      for item in maha
+        item = Float64(item)
+        newmaha = append!(newmaha, [item])
+      end
+
+      try
+        1(abs(newmaha ./ bandwidth) .<= 1)
+      catch err
+        println("error: $(err)")
+      end
+      inband = 1(abs(newmaha ./ bandwidth) .<= 1)
+      newmaha = ((1/bandwidth) * (3/4)) .* (1 .- (newmaha ./ bandwidth).^2) .* inband
 
       # Put weight into the sampledata
       sampledata[parse("epa_$(id)")] = 0.0
-      sampledata[sampledata[:R] .== treat_c, parse("epa_$(id)")] = maha
+      sampledata[sampledata[:R] .== treat_c, parse("epa_$(id)")] = newmaha
       sampledata[sampledata[:R] .== treat, parse("epa_$(id)")] = NA
       for var in controls
         delete!(sampledata, [parse("$(var)_$(id)")])
       end
     end
   end
+  println("Epa success!")
   return sampledata
 end

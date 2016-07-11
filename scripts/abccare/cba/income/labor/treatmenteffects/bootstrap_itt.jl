@@ -37,10 +37,13 @@ for gender in genderloop
 
 	if gender == "male"
 		datainuse["$(gender)"] = abccare[abccare[:male] .== 1, :]
+		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
 	elseif gender == "female"
 		datainuse["$(gender)"] = abccare[abccare[:male] .== 0, :]
+		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
 	elseif gender == "pooled"
 		datainuse["$(gender)"] = abccare
+		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male]
 	end
 
 	# Drop "_$(gender)" from column names
@@ -60,10 +63,13 @@ for gender in genderloop
 
 	# Define the result matrix for the first bootstrap (brep = 0)
 	for arep in 0:areps
+		datainuse_tmpz = datainuse["$(gender)"]
+		datainuse_arepz = datainuse_tmpz[datainuse_tmpz[:adraw] .== arep, :]
+
 		if arep == 0
-		  ITTinitial["$(gender)"] = ITTestimator(datainuse["$(gender)"], outcomes, outcomelist, controls, 0, arep, "no", 0)
+		  ITTinitial["$(gender)"] = ITTestimator(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
 	  else
-		  ITTinitial_add = ITTestimator(datainuse["$(gender)"], outcomes, outcomelist, controls, 0, arep, "no", 0)
+		  ITTinitial_add = ITTestimator(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
 		  ITTinitial["$(gender)"] = append!(ITTinitial["$(gender)"], ITTinitial_add)
 		end
 	end
@@ -79,29 +85,33 @@ function ITTrun(boots)
 
 	for gender in genderloop
 
+		if gender == "male"
+			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
+		elseif gender == "female"
+			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
+		elseif gender == "pooled"
+			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male]
+		end
+
 		# Keep the IDs of the original sample to perform ABC boostraps
 		bsid_orig_tmp = datainuse["$(gender)"]
-
 		bsid_orig_tmp = bsid_orig_tmp[bsid_orig_tmp[:adraw] .== 0, [:id, :male, :family]]
 
 	  #  bootstrap estimates
 	  for brep in 1:boots
 	  	if brep != 0
 	  	  bsid_draw = bsample(bsid_orig_tmp, :male, :family)
-				println("printing bsid_draw")
 	  	end
 
 	    for arep in 0:areps
 				datainuse_tmp = datainuse["$(gender)"]
-				datainuse_tmp = datainuse_tmp[datainuse_tmp[:adraw] .== arep, :]
-				println("printing datainuse_tmp")
-				datainuse_tmp = join(datainuse_tmp, bsid_draw, on = [:id, :male, :family], kind = :inner)
-				println("printing joint data")
+				datainuse_arep = datainuse_tmp[datainuse_tmp[:adraw] .== arep, :]
+				datainuse_act = join(datainuse_arep, bsid_draw, on = [:id, :male, :family], kind = :inner)
 
 				if (brep == 1) & (arep == 0)
-					ITTresult["$(gender)"] = ITTestimator(datainuse_tmp, outcomes, outcomelist, controls, brep, arep, "no", 0)
+					ITTresult["$(gender)"] = ITTestimator(datainuse_act, outcomes, outcomelist, controlset, brep, arep, "no", 0)
 				else
-					ITTnew = ITTestimator(datainuse_tmp, outcomes, outcomelist, controls, brep, arep, "no", 0)
+					ITTnew = ITTestimator(datainuse_act, outcomes, outcomelist, controlset, brep, arep, "no", 0)
 	      	ITTresult["$(gender)"] = append!(ITTresult["$(gender)"], ITTnew)
 				end
 	    end

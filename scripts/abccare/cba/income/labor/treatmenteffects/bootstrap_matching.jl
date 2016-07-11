@@ -12,7 +12,7 @@ using Distances
 
 # Set globals and directories
 global current = pwd()
-global base =	"$current/../../../.."		# This is script/abccare folder
+global base =	"$current/../.."		# This is script/abccare folder
 global data = "$current/../../../../../../data/abccare/extensions/cba-iv"
 global dofiles = "$current"
 global results = "$current/../../rslt"
@@ -35,17 +35,16 @@ datainuse = Dict()
 # Loop over gender and run estimate
 for gender in genderloop
 
-	println("$(abccare[:, [:id, :adraw, :male]])")
-
 	if gender == "male"
 		datainuse["$(gender)"] = abccare[abccare[:male] .== 1, :]
+		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
 	elseif gender == "female"
 		datainuse["$(gender)"] = abccare[abccare[:male] .== 0, :]
+		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
 	elseif gender == "pooled"
 		datainuse["$(gender)"] = abccare
+		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male]
 	end
-
-	println("here???")
 
 	# Drop "_$(gender)" from column names
 	colnames = names(datainuse["$(gender)"])
@@ -58,29 +57,23 @@ for gender in genderloop
 		end
 	end
 
-	println("here???")
-
   # ==================== #
 	# Bootstrap esstimates #
 	# ==================== #
-	# Keep the IDs of the original sample to perform ABC boostraps
-	bsid_orig_tmp = datainuse["$(gender)"]
-	bsid_orig_tmp = bsid_orig_tmp[bsid_orig_tmp[:adraw] .== 0, [:id, :male, :family]]
-	bsid_orig["$(gender)"] = bsid_orig_tmp
 
 	# Define the result matrix for the first bootstrap (brep = 0)
 	for arep in 0:areps
+		datainuse_tmpz = datainuse["$(gender)"]
+		datainuse_arepz = datainuse_tmpz[datainuse_tmpz[:adraw] .== arep, :]
 		if arep == 0
-		  MatchInitial["$(gender)"] = mestimate(datainuse["$(gender)"], outcomes, outcomelist, controls, 0, arep, "no", 0)
+		  MatchInitial["$(gender)"] = mestimate(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
 	  else
-		  MatchInitial_add = mestimate(datainuse["$(gender)"], outcomes, outcomelist, controls, 0, arep, "no", 0)
+		  MatchInitial_add = mestimate(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
 		  MatchInitial["$(gender)"] = append!(MatchInitial["$(gender)"], MatchInitial_add)
 		end
 	end
 	MatchInitial["$(gender)"] = sort(MatchInitial["$(gender)"], cols = [:draw, :ddraw])
 end
-
-global MatchInitial = MatchInitial
 
 	# ================================================= #
 	# Define the function for the rest of the bootstrap #
@@ -93,33 +86,45 @@ function matchingrun(boots)
 
 		global new_switch = 1
 
+		if gender == "male"
+			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
+		elseif gender == "female"
+			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
+		elseif gender == "pooled"
+			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male]
+		end
+
+		# Keep the IDs of the original sample to perform ABC boostraps
+		bsid_orig_tmp = datainuse["$(gender)"]
+		bsid_orig_tmp = bsid_orig_tmp[bsid_orig_tmp[:adraw] .== 0, [:id, :male, :family]]
+
 	  #  bootstrap estimates
 	  for brep in 1:boots
 	  	if brep != 0
-	  	  bsid_draw = bsample(bsid_orig["$(gender)"], :male, :family)
+	  	  bsid_draw = bsample(bsid_orig_tmp, :male, :family)
 	  	end
 
 	    for arep in 0:areps
 				datainuse_tmp = datainuse["$(gender)"]
 				datainuse_tmp = datainuse_tmp[datainuse_tmp[:adraw] .== arep, :]
-				datainuse_tmp = join(datainuse_tmp, bsid_draw, on = [:id, :male, :family], kind = :inner)
+				datainuse_act = join(datainuse_tmp, bsid_draw, on = [:id, :male, :family], kind = :inner)
 
 				global append_switch = 1
-			  	MatchDict["Matching_check_$(gender)"] = mestimate(datainuse_tmp, outcomes, outcomelist, controlset, brep, arep, "no", 0)
+			  MatchDict["Matching_check_$(gender)"] = mestimate(datainuse_act, outcomes, outcomelist, controlset, brep, arep, "no", 0)
 
 				if (append_switch == 1) & (new_switch == 1)
 					MatchDict["Matching_new_$(gender)"] = MatchDict["Matching_check_$(gender)"]
 					global new_switch = 0
 				elseif (append_switch == 1) & (new_switch == 0)
-					MatchDict["Matching_add_$(data)"] = MatchDict["Matching_check_$(data)"]
-					MatchDict["Matching_new_$(data)"] = append!(MatchDict["Matching_new_$(data)"], MatchDict["Matching_add_$(data)"])
+					MatchDict["Matching_add_$(gender)"] = MatchDict["Matching_check_$(gender)"]
+					MatchDict["Matching_new_$(gender)"] = append!(MatchDict["Matching_new_$(gender)"], MatchDict["Matching_add_$(gender)"])
 				end
 	    end
 	  end
 
-		Matchresult["$(gender)"] = MatchDict["Matching_new_$(data)"]
-
-		global Matchresult["$(gender)"] = sort(Matchresult["$(gender)"] , cols = [:draw, :ddraw])
+		Matchresult["$(gender)"] = MatchDict["Matching_new_$(gender)"]
+		Matchresult["$(gender)"] = sort(Matchresult["$(gender)"] , cols = [:draw, :ddraw])
 	end
+
 	return Matchresult
 end

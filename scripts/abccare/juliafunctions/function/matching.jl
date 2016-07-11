@@ -35,11 +35,13 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
 
   # Generate Epanechnikov weight for the bootstrapped sampledata (Epanechnikov might fail, so we need to capture that)
   success = 1
+  println("Beginning Epanechnikov")
   try
     matchingdata = epanechnikov(matchingdata, controls, 20)
   catch error
     success = 0
     global append_switch = 0
+    println("Epanechinikov failed")
   end
 
   # if Epanechnikov succeeds
@@ -63,8 +65,14 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
       end
       gender = parse(gender)
 
+      # Delete controls that have 0 variance (Julia cannot drop them automatically)
+      for var in controls
+        if levels(subdata["$(gender)"][var])[1] == 1
+          controls = deleteat!(controls, findin(controls, [var]))
+        end
+      end
 
-      # ------------------------------ #
+     # ------------------------------ #
      # Define sample for each p group #
      # ------------------------------ #
       for p in (0, 1)
@@ -84,7 +92,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
         # Perform estimation #
         # ------------------ #
         for y in outcome_list
-
+          println("Debugging. Here? 1")
           # Restrict the estimates to those who we can actually estimate effects
           fml = Formula(y, Expr(:call, :+, :R, controls...))
           try
@@ -93,12 +101,17 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
             push!(outMat["matching_$(gender)_P$(p)"], [y, draw, ddraw, NA, NA])
             continue
           end
-
+          println("Debugging. Here? 2")
           # Determine who is in treatment and who is in control
           cond_treat = (usedata[:R] .== 1)
           cond_control = (usedata[:R] .== 0)
 
           for id in usedata[:id]
+
+            if typeof(id) == Float64
+              id = Int(id)
+            end
+
             usedata[parse("ie_$(y)_$(id)")] = 0.0    # generate column for Epanechnikov*IPW
 
             if in(parse("ipw_$(y)"), names(usedata)) & in(parse("epa_$(id)"), names(usedata))
@@ -112,12 +125,18 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
 
           # Do not match treated with P = 1 to control with P = 0
           for id in usedata[(usedata[:R] .== 0) & (usedata[:P] .== 0), :id]
+            if typeof(id) == Float64
+              id = Int(id)
+            end
             if in(parse("ie_$(y)_$(id)"), names(usedata))
               usedata[(usedata[:R] .== 1) & (usedata[:P] .== 1), parse("ie_$(y)_$(id)")] = NA
             end
           end
           # Do not match control with P = 0 to treated with P = 1
           for id in usedata[(usedata[:R] .== 1) & (usedata[:P] .== 1), :id]
+            if typeof(id) == Float64
+              id = Int(id)
+            end
             if in(parse("ie_$(y)_$(id)"), names(usedata))
               usedata[(usedata[:R] .== 0) & (usedata[:P] .== 0), parse("ie_$(y)_$(id)")] = NA
             end
@@ -133,6 +152,9 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
           usedata[usedata[:R] .== 0, :counter1] = NA
 
           for id in usedata[:id]
+            if typeof(id) == Float64
+              id = Int(id)
+            end
             if in(parse("ie_$(y)_$(id)"), names(usedata))
               x = usedata[(!isna(usedata[parse("$(y)")])) & (!isna(usedata[parse("ie_$(y)_$(id)")])), parse("$(y)")]
               w = usedata[(!isna(usedata[parse("$(y)")])) & (!isna(usedata[parse("ie_$(y)_$(id)")])), parse("ie_$(y)_$(id)")]

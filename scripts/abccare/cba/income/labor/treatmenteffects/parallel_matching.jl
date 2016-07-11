@@ -21,21 +21,24 @@ require("$here/bootstrap_matching.jl")
 B = 20 # number of workers being used
 b = 1  # number of work each worker does
 
-matchboot = pmap(matchingrun [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
+matchboot = pmap(matchingrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 Matchfinal = Dict()
 # Increase the number of "draw" according to the worker number
 for gender in genderloop
+		println("matchboot check $(matchboot[1])")
 	for i in 2:B
 		matchboot[i]["$(gender)"][:draw] = matchboot[i]["$(gender)"][:draw] .+ (b*(i-1))
-		for j in 1:2 # concatenated
+		for j in 1:1 # concatenated
 		matchboot[i]["$(gender)"][parse("draw_$(j)")] = matchboot[i]["$(gender)"][parse("draw_$(j)")] .+ (b*(i-1))
 		end
 	end
 
+
+
 	# Concatenate outputs from all workers
 	matchfinal_pre1 = vcat(matchinitial["$(gender)"], matchboot[1]["$(gender)"], matchboot[2]["$(gender)"], matchboot[3]["$(gender)"], matchboot[4]["$(gender)"], matchboot[5]["$(gender)"], matchboot[6]["$(gender)"], matchboot[7]["$(gender)"], matchboot[8]["$(gender)"], matchboot[9]["$(gender)"], matchboot[10]["$(gender)"])
 	matchfinal_pre2 = vcat(matchfinal_pre1, matchboot[11]["$(gender)"], matchboot[12]["$(gender)"], matchboot[13]["$(gender)"], matchboot[14]["$(gender)"], matchboot[15]["$(gender)"], matchboot[16]["$(gender)"], matchboot[17]["$(gender)"], matchboot[18]["$(gender)"], matchboot[19]["$(gender)"], matchboot[20]["$(gender)"])
-	Matchfinal["$(gender)"] = vcat(matchfinal_pre2, matchboot[21]["$(gender)"], matchboot[22]["$(gender)"], matchboot[23]["$(gender)"], matchboot[24]["$(gender)"], matchboot[25]["$(gender)"])
+	Matchfinal["$(gender)"] = matchfinal_pre2
 
 	# ===================================================== #
 	# Export to csv

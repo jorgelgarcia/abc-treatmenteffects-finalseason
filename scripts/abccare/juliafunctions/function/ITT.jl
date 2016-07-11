@@ -55,6 +55,13 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
      end
      gender = parse(gender)
 
+     # Delete controls that have 0 variance (Julia cannot drop them automatically)
+     for var in controls
+       if levels(subdata["$(gender)"][var])[1] == 1
+         controls = deleteat!(controls, findin(controls, [var]))
+       end
+     end
+
      # ------------------------------ #
      # Define sample for each p group #
      # ------------------------------ #
