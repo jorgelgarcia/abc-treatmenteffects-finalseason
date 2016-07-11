@@ -57,7 +57,7 @@ for gender in genderloop
 			ResultOutput["matching_$(gender)_P$(P_switch)"] = Matchfinal["$(gender)"][:, colnames]
 			delete!(Matchfinal["$(gender)"], colnames)
 		end
-		writetable("$(results)/matching/labor_$(gender)_P$(P_switch).csv", ResultOutput["matching_$(gender)_P$(P_switch)"])
+		writetable("$(results)/matching/$(component)_$(gender)_P$(P_switch).csv", ResultOutput["matching_$(gender)_P$(P_switch)"])
 		c = c + 1
   end
 end

@@ -61,7 +61,7 @@ for gender in genderloop
 			ResultOutput["itt_$(gender)_P$(P_switch)"] = ITTfinal["$(gender)"][:, colnames]
 			delete!(ITTfinal["$(gender)"], colnames)
 		end
-		writetable("$(results)/itt/labor_$(gender)_P$(P_switch).csv", ResultOutput["itt_$(gender)_P$(P_switch)"])
+		writetable("$(results)/itt/$(component)_$(gender)_P$(P_switch).csv", ResultOutput["itt_$(gender)_P$(P_switch)"])
 		c = c + 1
   end
 end

@@ -6,7 +6,7 @@
 # ======================================================================== #
 
 # Collect variable names to estimate effects for
-outcomes = readtable("$(base)/analysis/health/code/$(component)/outcomes.csv")
+outcomes = readtable("$(base)/$(component)/outcomes.csv")
 outcomes_col = outcomes[:variable]
 
 # Collect names of the outcomes and put them into an array so that we can use in the estimation
@@ -17,7 +17,7 @@ end
 
 
 # Bring in USC projections
-fammerge = readtable("$(abc)/abc-fam-merge.csv")
+fammerge = readtable("$(data)/abc-fam-merge.csv")
 
 # Drop home-visit only kids
 fammerge  = fammerge[!((fammerge[:R] .== 0) & (fammerge[:RV] .== 1)), :]
