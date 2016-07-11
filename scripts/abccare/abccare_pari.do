@@ -57,7 +57,7 @@ foreach var of varlist pari_auth pari_demo {
 			  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 			  xtitle(${`var'_label}) ytitle(Density)
 			  graphregion(color(white)) plotregion(fcolor(white))
-	note(Treatment Effect Females: `b0' (p-value = `p0'). Treatment Effect Males: `b1' (p-value = `p1'), size(small) );
+	note(Treatment Effect Females: `b0' (p-value = `p0'). Treatment Effect Males: `b1' (p-value = `p1'), size(vsmall) );
 	#delimit cr 
 	graph export abccre_pari_`var'.eps, replace
 }
