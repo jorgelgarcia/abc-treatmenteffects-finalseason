@@ -39,6 +39,8 @@ keep if program == "abc"
 
 cd $output
 foreach var of varlist pari_auth pari_demo {
+	summ `var' 
+	replace `var' = (`var' - r(mean)/r(sd))
 	foreach num of numlist 0 1 {
 		reg `var' treat if male == `num'
 		matrix  b`num'  = e(b)
@@ -55,7 +57,7 @@ foreach var of varlist pari_auth pari_demo {
 			  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 			  xtitle(${`var'_label}) ytitle(Density)
 			  graphregion(color(white)) plotregion(fcolor(white))
-	note(Treatment Effect Females: `b0' (p-value = `p0'). Treatment Effect Males: `b1' (p-value = `p1'). );
+	note(Treatment Effect Females: `b0' (p-value = `p0'). Treatment Effect Males: `b1' (p-value = `p1'), size(small) );
 	#delimit cr 
 	graph export abccre_pari_`var'.eps, replace
 }
