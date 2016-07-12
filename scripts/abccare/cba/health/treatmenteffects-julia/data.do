@@ -1,5 +1,5 @@
 * collect variable names to estimate effects for
-cd "${base}/analysis/health/code/${component}"
+cd "${base}/${component}"
 insheet using "outcomes.csv", comma clear names
 levelsof variable, local(yvars)
 global yvars `yvars'
@@ -27,7 +27,7 @@ foreach var in `ipwvars'{
 cd "${results}"
 
 * bring in USC projections
-use "${abc}/abc-fam-merge", clear
+use "${data}/abc-fam-merge", clear
 *drop if R==0 & RV==1
 
 *keep id R P male family $controls $ipwvars_all

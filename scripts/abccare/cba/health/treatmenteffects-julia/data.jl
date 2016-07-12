@@ -27,7 +27,7 @@ for var in [:id, :R, :P]
     println("variable: $(var)")
     occurrence = 0  # To convert a column with occurrence > 0 from string to integer (shown below)
     for alphabet in ['a':'z']
-     if in(string(".",alphabet), abccare[!isna(fammerge[var]), var])
+     if in(string(".",alphabet), fammerge[!isna(fammerge[var]), var])
         occurrence = occurrence + 1
       end
       fammerge[fammerge[var] .== string(".",alphabet), var] = NA
@@ -97,7 +97,7 @@ end
 fammerge = fammerge[!(fammerge[:id] .== 64), :]
 
 # Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise)
-global discretized = ["m_iq0y", "m_ed0y", "m_age0y", "hrabc_index", "apgar1", "apgar5", "prem_birth", "m_married0y", "m_teen0y", "male", "f_home0y", "hh_sibs0y"]
+global discretized = ["apgar1", "apgar5", "prem_birth"]
 
 for dvar in discretized
   dvar_p = parse(dvar) # Making "d_var" to :d_var

@@ -28,7 +28,7 @@ global factors = 0
 global deaths = 1
 
 # Include helper files
-include("$atecode/helper/writematrix.jl")
+#include("$atecode/helper/writematrix.jl")
 include("$atecode/helper/bsample.jl")
 include("$atecode/helper/IPW.jl")
 include("$atecode/helper/epanechnikov.jl")
@@ -54,13 +54,13 @@ datainuse = Dict()
 for gender in genderloop
 
 	if gender == "male"
-		datainuse["$(gender)"] = abccare[abccare[:male] .== 1, :]
+		datainuse["$(gender)"] = fammerge[fammerge[:male] .== 1, :]
 		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
 	elseif gender == "female"
-		datainuse["$(gender)"] = abccare[abccare[:male] .== 0, :]
+		datainuse["$(gender)"] = fammerge[fammerge[:male] .== 0, :]
 		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
 	elseif gender == "pooled"
-		datainuse["$(gender)"] = abccare
+		datainuse["$(gender)"] = fammerge
 		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male]
 	end
 
@@ -82,7 +82,6 @@ for gender in genderloop
 	end
 	ITTinitial["$(gender)"] = sort(ITTinitial["$(gender)"], cols = [:draw, :ddraw])
 end
-
 
 	# ================================================= #
 	# Define the function for the rest of the bootstrap #

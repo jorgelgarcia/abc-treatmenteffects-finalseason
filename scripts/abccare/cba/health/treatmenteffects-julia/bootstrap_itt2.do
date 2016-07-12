@@ -7,11 +7,11 @@ foreach sex in male female pooled {
 	if "`sex'" == "female" keep if male == 0
 
 	* determine file names by P_switch
-	foreach P_switch in 0 1 {	
+	foreach P_switch in 10 0 1 {	
 		if `P_switch' == 0 local P_suffix _P0
 		else if `P_switch' == 1 local P_suffix _P1
 		else local P_suffix 
-		file open matching_pooled_P`P_switch' using "${results}/matching_stata/${component}_`sex'`P_suffix'.csv", write replace
+		file open itt_pooled_P`P_switch' using "${results}/itt_stata2/${component}_`sex'`P_suffix'.csv", write replace
 	}
 
 	* bootstrap estimates
@@ -44,14 +44,14 @@ foreach sex in male female pooled {
 			use `preaux', clear
 			keep if adraw == `arep'
 			if `brep' != 0 merge 1:m id male family using `bsid_draw', keep(3)
-			mestimate, draw(`brep') ddraw(`arep') yglobal("yvars") controls(${controls}) lipw nobsample
+			ittestimate, draw(`brep') ddraw(`arep') yglobal("yvars") controls(${controls}) lipw nobsample
 		}
 		restore
 	}
 
 	* close files
-	foreach P_switch in 0 1 {
-		file close matching_pooled_P`P_switch'
+	foreach P_switch in 10 0 1 {
+		file close itt_pooled_P`P_switch'
 	}
 }
 
@@ -59,4 +59,3 @@ foreach sex in male female pooled {
 
 
 cd "${dofiles}"
-

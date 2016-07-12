@@ -139,7 +139,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
             ITT_control = lm(ITT_controls_fml, usedata)
             ITT_control_coeff = coef(ITT_control)[2]
             ITT_control_stderr = stderr(ITT_control)[2]
-
+        
             # Check if Julia is able to calculate the p-value.
             pval_check = 1
             try

@@ -35,9 +35,9 @@ run itt
 run writematrix
 
 * set up number of bootstraps and controls
-global itt 1	// matching estimator is the default
-global breps 74	// remember to minus 1
-global areps 74	// remember to minus 1
+global itt 0	// matching estimator is the default
+global breps 1	// remember to minus 1
+global areps 3	// remember to minus 1
 global controls hrabc_index apgar1 apgar5 hh_sibs0y grandma_county has_relatives male
 global ipwvars_all apgar1 apgar5 prem_birth
 global component health_private_surv

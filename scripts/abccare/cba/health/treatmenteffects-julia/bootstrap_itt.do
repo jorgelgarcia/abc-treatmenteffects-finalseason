@@ -11,7 +11,7 @@ foreach sex in male female pooled {
 		if `P_switch' == 0 local P_suffix _P0
 		else if `P_switch' == 1 local P_suffix _P1
 		else local P_suffix 
-		file open itt_pooled_P`P_switch' using "${results}/itt/${component}_`sex'`P_suffix'.csv", write replace
+		file open itt_pooled_P`P_switch' using "${results}/itt_stata/${component}_`sex'`P_suffix'.csv", write replace
 	}
 
 	* bootstrap estimates
