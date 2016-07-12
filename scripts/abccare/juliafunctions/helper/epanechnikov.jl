@@ -100,6 +100,7 @@ function epanechnikov(sampledata, controls, bandwidth)
       sampledata[parse("epa_$(id)")] = 0.0
       sampledata[sampledata[:R] .== treat_c, parse("epa_$(id)")] = newmaha
       sampledata[sampledata[:R] .== treat, parse("epa_$(id)")] = NA
+
       for var in controls
         delete!(sampledata, [parse("$(var)_$(id)")])
       end

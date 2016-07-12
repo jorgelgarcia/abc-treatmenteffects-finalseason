@@ -1,10 +1,10 @@
 tempfile fulldata
 save `fulldata'
 
-foreach sex in male female pooled {
+foreach sex in male female pooled { 
 	use `fulldata', clear
 	if "`sex'" == "male" keep if male == 1
-	if "`sex'" == "female" keep if male == 0
+	if "`sex'" == "female" keep if male == 0 
 
 	* determine file names by P_switch
 	foreach P_switch in 0 1 {	
@@ -37,14 +37,16 @@ foreach sex in male female pooled {
 			restore
 		}
 		preserve
-		save `preaux', replace
-		forvalues arep = 0/$areps {
+		save `preaux', replace 
+		forvalues arep = 0/$areps { 
 			* now perform the auxiliary 'bootstrap'; note you are not truly resampling,
 			* hence the 'nobsample' option; instead, you're looping through the 'adraw' values
-			use `preaux', clear
+			use `preaux', clear 
 			keep if adraw == `arep'
-			if `brep' != 0 merge 1:m id male family using `bsid_draw', keep(3)
-			mestimate, draw(`brep') ddraw(`arep') yglobal("yvars") controls(${controls}) lipw nobsample
+		
+			if `brep' != 0 merge 1:m id male family using `bsid_draw', keep(3) 
+			mestimate, draw(`brep') ddraw(`arep') yglobal("yvars") controls(${controls}) lipw nobsample 
+			
 		}
 		restore
 	}

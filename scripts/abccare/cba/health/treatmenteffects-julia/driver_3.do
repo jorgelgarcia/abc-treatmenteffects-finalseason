@@ -15,7 +15,7 @@ set more off
 
 
 * set up paths
-global current "C:\Users\YuKyung\abc-treatmenteffects-finalseason\scripts\abccare\cba\health\treatmenteffects-julia"
+global current "C:\Users\Jessica Yu Kyung\abc-treatmenteffects-finalseason\scripts\abccare\cba\health\treatmenteffects-julia"
 global results	"~/abc-cba/analysis/health/rslt"
 global base "$current/.."
 global data "$current/../../../../../data/abccare/extensions/fam-merge"

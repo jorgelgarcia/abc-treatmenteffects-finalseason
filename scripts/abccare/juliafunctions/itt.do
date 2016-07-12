@@ -74,10 +74,9 @@ foreach sex in `gender_loop' {
 			local itt_noctrl_N = e(N)
 			
 			* ITT with controls
-			reg `y' R `controls'
+			capture reg `y' R `controls'
 			if _rc continue
 			mat r = r(table)
-			stop here
 			local itt_ctrl = r[1,1]
 			local itt_ctrl_p = r[4,1] // TWO-SIDED
 			local itt_ctrl_N = e(N)

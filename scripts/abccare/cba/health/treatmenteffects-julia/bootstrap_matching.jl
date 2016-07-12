@@ -67,7 +67,6 @@ for gender in genderloop
   # ==================== #
 	# Bootstrap esstimates #
 	# ==================== #
-
 	# Define the result matrix for the first bootstrap (brep = 0)
 	for arep in 0:areps
 		datainuse_tmpz = datainuse["$(gender)"]

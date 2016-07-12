@@ -53,7 +53,7 @@ if !_rc {
 		
 		tempfile allP
 		save `allP', replace
-		
+	
 		foreach p in 0 1 {
 			* limit to P=1 or P=0 as required
 			use `allP', clear
@@ -68,6 +68,7 @@ if !_rc {
 				* restrict the estimates to those who we can actually estimate effects for
 				capture reg `y' `controls' R
 				if _rc continue
+				keep if e(sample) == 1
 
 				* determine who is in treatment and who is in control
 				levelsof id if R == 1 & e(sample) == 1, local(ids_R)
@@ -89,13 +90,13 @@ if !_rc {
 				* Do not match treated with P = 1 to treatment with P = 0
 				levelsof id if R == 0 & P == 0, local(control_noP)
 				foreach id in `control_noP' {
-					capture replace _ie_`id' = . if R == 1 & P == 1
+					capture replace _ie_`y'`id' = . if R == 1 & P == 1
 				}	
 
 				* Do not match control with P = 0 to treatment with P = 1
 				levelsof id if R == 1 & P == 1, local(R_P)
 				foreach id in `R_P' {
-					capture replace _ie_`id' = . if R == 0 & P == 0
+					capture replace _ie_`y'`id' = . if R == 0 & P == 0
 				}
 				
 				* generate counterfactuals
@@ -130,7 +131,7 @@ if !_rc {
 					mat colname ddraw = ddraw
 					mat ate = [ddraw, ate]
 				}
-						
+				
 				writematrix, output(matching_`sex'_P`p') rowname("`y'") matrix(ate) write_draw(`draw') `header_switch'
 				local header_switch 
 				
@@ -138,7 +139,7 @@ if !_rc {
 					if `ddraw' == -999 di as input "Estimated ATE for (Draw `draw', `sex', `y')"
 					else di as input "Estimated ATE`lipw_warning' for (Draw (`draw', `ddraw'), `sex', `y')"
 				}
-					
+				
 				* drop y-specific variables
 				drop _ie_`y'*
 				drop _counter0 _counter1

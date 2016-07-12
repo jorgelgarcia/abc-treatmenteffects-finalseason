@@ -65,13 +65,6 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
       end
       gender = parse(gender)
 
-      # Delete controls that have 0 variance (Julia cannot drop them automatically)
-      for var in controls
-        if levels(subdata["$(gender)"][var])[1] == 1
-          controls = deleteat!(controls, findin(controls, [var]))
-        end
-      end
-
      # ------------------------------ #
      # Define sample for each p group #
      # ------------------------------ #
@@ -92,7 +85,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
         # Perform estimation #
         # ------------------ #
         for y in outcome_list
-          println("Debugging. Here? 1")
+
           # Restrict the estimates to those who we can actually estimate effects
           fml = Formula(y, Expr(:call, :+, :R, controls...))
           try
@@ -101,85 +94,90 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
             push!(outMat["matching_$(gender)_P$(p)"], [y, draw, ddraw, NA, NA])
             continue
           end
-          println("Debugging. Here? 2")
-          # Determine who is in treatment and who is in control
-          cond_treat = (usedata[:R] .== 1)
-          cond_control = (usedata[:R] .== 0)
+          control_list = [:R]
+          append!(control_list, controls)
+          obsdata = usedata
+          for var in control_list
+            obsdata = obsdata[!isna(obsdata[var]),:]
+          end
 
-          for id in usedata[:id]
+          # Determine who is in treatment and who is in control
+          cond_treat = (obsdata[:R] .== 1)
+          cond_control = (obsdata[:R] .== 0)
+
+          for id in obsdata[:id]
 
             if typeof(id) == Float64
               id = Int(id)
             end
 
-            usedata[parse("ie_$(y)_$(id)")] = 0.0    # generate column for Epanechnikov*IPW
+            obsdata[parse("ie_$(y)_$(id)")] = 0.0    # generate column for Epanechnikov*IPW
 
-            if in(parse("ipw_$(y)"), names(usedata)) & in(parse("epa_$(id)"), names(usedata))
-              usedata[parse("ie_$(y)_$(id)")] = usedata[parse("ipw_$(y)")] .* usedata[parse("epa_$(id)")]
-            elseif !in(parse("ipw_$(y)"), names(usedata)) & in(parse("epa_$(id)"), names(usedata))
-              usedata[parse("ie_$(y)_$(id)")] = usedata[parse("epa_$(id)")]
-            elseif !in(parse("epa_$(id)"), names(usedata))
-              usedata = delete!(usedata, parse("ie_$(y)_$(id)"))
+            if in(parse("ipw_$(y)"), names(obsdata)) & in(parse("epa_$(id)"), names(obsdata))
+              obsdata[parse("ie_$(y)_$(id)")] = obsdata[parse("ipw_$(y)")] .* obsdata[parse("epa_$(id)")]
+            elseif !in(parse("ipw_$(y)"), names(obsdata)) & in(parse("epa_$(id)"), names(obsdata))
+              obsdata[parse("ie_$(y)_$(id)")] = obsdata[parse("epa_$(id)")]
+            elseif !in(parse("epa_$(id)"), names(obsdata))
+              obsdata = delete!(obsdata, parse("ie_$(y)_$(id)"))
             end
           end
 
           # Do not match treated with P = 1 to control with P = 0
-          for id in usedata[(usedata[:R] .== 0) & (usedata[:P] .== 0), :id]
+          for id in obsdata[(obsdata[:R] .== 0) & (obsdata[:P] .== 0), :id]
             if typeof(id) == Float64
               id = Int(id)
             end
-            if in(parse("ie_$(y)_$(id)"), names(usedata))
-              usedata[(usedata[:R] .== 1) & (usedata[:P] .== 1), parse("ie_$(y)_$(id)")] = NA
+            if in(parse("ie_$(y)_$(id)"), names(obsdata))
+              obsdata[(obsdata[:R] .== 1) & (obsdata[:P] .== 1), parse("ie_$(y)_$(id)")] = NA
             end
           end
           # Do not match control with P = 0 to treated with P = 1
-          for id in usedata[(usedata[:R] .== 1) & (usedata[:P] .== 1), :id]
+          for id in obsdata[(obsdata[:R] .== 1) & (obsdata[:P] .== 1), :id]
             if typeof(id) == Float64
               id = Int(id)
             end
-            if in(parse("ie_$(y)_$(id)"), names(usedata))
-              usedata[(usedata[:R] .== 0) & (usedata[:P] .== 0), parse("ie_$(y)_$(id)")] = NA
+            if in(parse("ie_$(y)_$(id)"), names(obsdata))
+              obsdata[(obsdata[:R] .== 0) & (obsdata[:P] .== 0), parse("ie_$(y)_$(id)")] = NA
             end
           end
 
           # Declare counterfactuals and fill in values
-          usedata[:counter0] = 0.0
-          usedata[:counter1] = 0.0
+          obsdata[:counter0] = 0.0
+          obsdata[:counter1] = 0.0
 
-          usedata[usedata[:R] .== 0, :counter0] = usedata[usedata[:R] .== 0, y]
-          usedata[usedata[:R] .== 1, :counter0] = NA
-          usedata[usedata[:R] .== 1, :counter1] = usedata[usedata[:R] .== 1, y]
-          usedata[usedata[:R] .== 0, :counter1] = NA
+          obsdata[obsdata[:R] .== 0, :counter0] = obsdata[obsdata[:R] .== 0, y]
+          obsdata[obsdata[:R] .== 1, :counter0] = NA
+          obsdata[obsdata[:R] .== 1, :counter1] = obsdata[obsdata[:R] .== 1, y]
+          obsdata[obsdata[:R] .== 0, :counter1] = NA
 
-          for id in usedata[:id]
+          for id in obsdata[:id]
             if typeof(id) == Float64
               id = Int(id)
             end
-            if in(parse("ie_$(y)_$(id)"), names(usedata))
-              x = usedata[(!isna(usedata[parse("$(y)")])) & (!isna(usedata[parse("ie_$(y)_$(id)")])), parse("$(y)")]
-              w = usedata[(!isna(usedata[parse("$(y)")])) & (!isna(usedata[parse("ie_$(y)_$(id)")])), parse("ie_$(y)_$(id)")]
+            if in(parse("ie_$(y)_$(id)"), names(obsdata))
+              x = obsdata[(!isna(obsdata[parse("$(y)")])) & (!isna(obsdata[parse("ie_$(y)_$(id)")])), parse("$(y)")]
+              w = obsdata[(!isna(obsdata[parse("$(y)")])) & (!isna(obsdata[parse("ie_$(y)_$(id)")])), parse("ie_$(y)_$(id)")]
               mean_yw = mean(x, weights(Array(w)))
 
-              if usedata[(usedata[:id] .== id), :R][1,1] == 1
-                usedata[(usedata[:id] .== id), :counter0] = mean_yw
-              elseif usedata[(usedata[:id] .== id), :R][1,1] == 0
-                usedata[(usedata[:id] .== id), :counter1] = mean_yw
+              if obsdata[(obsdata[:id] .== id), :R][1,1] == 1
+                obsdata[(obsdata[:id] .== id), :counter0] = mean_yw
+              elseif obsdata[(obsdata[:id] .== id), :R][1,1] == 0
+                obsdata[(obsdata[:id] .== id), :counter1] = mean_yw
               end
             end
           end
 
           # Estimate treatment effects
-          usedata[:TE] = 0.0
-          usedata[:TE] = usedata[:counter1] .- usedata[:counter0]
+          obsdata[:TE] = 0.0
+          obsdata[:TE] = obsdata[:counter1] .- obsdata[:counter0]
 
-          if in(parse("ipw_$(y)"), names(usedata))
-             mean_te = mean(usedata[(!isna(usedata[:TE])) & (!isnan(usedata[:TE])), :TE],  weights(Array(usedata[!isna(usedata[:TE]) & (!isnan(usedata[:TE])), parse("ipw_$(y)")])))
-             N = length(usedata[!isna(usedata[:TE]) & (!isnan(usedata[:TE])), :TE])
+          if in(parse("ipw_$(y)"), names(obsdata))
+            mean_te = mean(obsdata[(!isna(obsdata[:TE])) & (!isnan(obsdata[:TE])), :TE],  weights(Array(obsdata[!isna(obsdata[:TE]) & (!isnan(obsdata[:TE])), parse("ipw_$(y)")])))
+            N = length(obsdata[!isna(obsdata[:TE]) & (!isnan(obsdata[:TE])), :TE])
           else
-            mean_te = mean(usedata[!isna(usedata[:TE]) & (!isnan(usedata[:TE])), :TE])
-            N = length(usedata[!isna(usedata[:TE]) & (!isnan(usedata[:TE])), :TE])
+            mean_te = mean(obsdata[!isna(obsdata[:TE]) & (!isnan(obsdata[:TE])), :TE])
+            N = length(obsdata[!isna(obsdata[:TE]) & (!isnan(obsdata[:TE])), :TE])
           end
-
           # Store estimation results for R (randomization into treatment in ABC) into the output_ITT matrix. push! adds a row to the matrix output_ITT.
           push!(outMat["matching_$(gender)_P$(p)"], [y, draw, ddraw, mean_te, N])
         end

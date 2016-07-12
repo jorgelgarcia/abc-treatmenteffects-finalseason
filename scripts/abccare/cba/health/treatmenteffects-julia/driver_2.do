@@ -15,7 +15,7 @@ set more off
 
 
 * set up paths
-global current "C:\Users\YuKyung\abc-treatmenteffects-finalseason\scripts\abccare\cba\health\treatmenteffects-julia"
+global current "C:\Users\Jessica Yu Kyung\abc-treatmenteffects-finalseason\scripts\abccare\cba\health\treatmenteffects-julia"
 global results	"~/abc-cba/analysis/health/rslt"
 global base "$current/.."
 global data "$current/../../../../../data/abccare/extensions/fam-merge"
@@ -36,7 +36,7 @@ run writematrix
 
 * set up number of bootstraps and controls
 global itt 0	// matching estimator is the default
-global breps 1	// remember to minus 1
+global breps 0	// remember to minus 1
 global areps 3	// remember to minus 1
 global controls hrabc_index apgar1 apgar5 hh_sibs0y grandma_county has_relatives male
 global ipwvars_all apgar1 apgar5 prem_birth
