@@ -12,14 +12,32 @@ using Distances
 
 # Set globals and directories
 global current = pwd()
-global base =	"$current/../.."
+global base =	"$current/../.."		# This is script/abccare folder
 global data = "$current/../../../../../../data/abccare/extensions/cba-iv"
 global dofiles = "$current"
 global results = "$current/../../rslt"
 global atecode = "$current/../../../../juliafunctions"
 
+# set up number of bootstraps and controls
+global itt = 0			# matching estimator is the default
+global breps = 74 		# remember to subtract 1, i.e. 50 becomes 49
+global areps = 2 	# remember to subtract 1, i.e. 50 becomes 49
+global controls = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male]
+global ipwvars_all = [:m_iq0y, :m_ed0y, :m_age0y, :hrabc_index, :p_inc0y, :apgar1, :apgar5, :prem_birth, :m_married0y, :m_teen0y, :f_home0y, :hh_sibs0y, :cohort, :m_work0y, :has_relatives]
+global factors = 0
+global deaths = 1
+
+# Include helper files
+include("$atecode/helper/writematrix.jl")
+include("$atecode/helper/bsample.jl")
+include("$atecode/helper/IPW.jl")
+include("$atecode/helper/epanechnikov.jl")
+
+# Include function files
+include("$atecode/function/matching.jl")
+include("$atecode/function/ITT.jl")
+
 # Include necessary files
-include("$current/driver.jl")
 include("$current/data.jl")
 
 # ================================================================ #
@@ -28,7 +46,7 @@ include("$current/data.jl")
 # Define the gender loop
 global genderloop = ["male", "female", "pooled"]
 
-ITTinitial = Dict()
+MatchInitial = Dict()
 bsid_orig = Dict()
 datainuse = Dict()
 
@@ -65,25 +83,26 @@ for gender in genderloop
 	for arep in 0:areps
 		datainuse_tmpz = datainuse["$(gender)"]
 		datainuse_arepz = datainuse_tmpz[datainuse_tmpz[:adraw] .== arep, :]
-
 		if arep == 0
-		  ITTinitial["$(gender)"] = ITTestimator(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
+		  MatchInitial["$(gender)"] = mestimate(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
 	  else
-		  ITTinitial_add = ITTestimator(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
-		  ITTinitial["$(gender)"] = append!(ITTinitial["$(gender)"], ITTinitial_add)
+		  MatchInitial_add = mestimate(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
+		  MatchInitial["$(gender)"] = append!(MatchInitial["$(gender)"], MatchInitial_add)
 		end
 	end
-	ITTinitial["$(gender)"] = sort(ITTinitial["$(gender)"], cols = [:draw, :ddraw])
+	MatchInitial["$(gender)"] = sort(MatchInitial["$(gender)"], cols = [:draw, :ddraw])
 end
-
 
 	# ================================================= #
 	# Define the function for the rest of the bootstrap #
 	# ================================================= #
-function ITTrun(boots)
-	ITTresult = Dict()
+function matchingrun(boots)
+	Matchresult = Dict()
+	MatchDict = Dict()
 
 	for gender in genderloop
+
+		global new_switch = 1
 
 		if gender == "male"
 			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
@@ -105,20 +124,25 @@ function ITTrun(boots)
 
 	    for arep in 0:areps
 				datainuse_tmp = datainuse["$(gender)"]
-				datainuse_arep = datainuse_tmp[datainuse_tmp[:adraw] .== arep, :]
-				datainuse_act = join(datainuse_arep, bsid_draw, on = [:id, :male, :family], kind = :inner)
+				datainuse_tmp = datainuse_tmp[datainuse_tmp[:adraw] .== arep, :]
+				datainuse_act = join(datainuse_tmp, bsid_draw, on = [:id, :male, :family], kind = :inner)
 
-				if (brep == 1) & (arep == 0)
-					ITTresult["$(gender)"] = ITTestimator(datainuse_act, outcomes, outcomelist, controlset, brep, arep, "no", 0)
-				else
-					ITTnew = ITTestimator(datainuse_act, outcomes, outcomelist, controlset, brep, arep, "no", 0)
-	      	ITTresult["$(gender)"] = append!(ITTresult["$(gender)"], ITTnew)
+				global append_switch = 1
+			  MatchDict["Matching_check_$(gender)"] = mestimate(datainuse_act, outcomes, outcomelist, controlset, brep, arep, "no", 0)
+
+				if (append_switch == 1) & (new_switch == 1)
+					MatchDict["Matching_new_$(gender)"] = MatchDict["Matching_check_$(gender)"]
+					global new_switch = 0
+				elseif (append_switch == 1) & (new_switch == 0)
+					MatchDict["Matching_add_$(gender)"] = MatchDict["Matching_check_$(gender)"]
+					MatchDict["Matching_new_$(gender)"] = append!(MatchDict["Matching_new_$(gender)"], MatchDict["Matching_add_$(gender)"])
 				end
 	    end
 	  end
 
-		ITTresult["$(gender)"] = sort(ITTresult["$(gender)"], cols = [:draw, :ddraw])
+		Matchresult["$(gender)"] = MatchDict["Matching_new_$(gender)"]
+		Matchresult["$(gender)"] = sort(Matchresult["$(gender)"] , cols = [:draw, :ddraw])
 	end
 
-	return ITTresult
+	return Matchresult
 end
