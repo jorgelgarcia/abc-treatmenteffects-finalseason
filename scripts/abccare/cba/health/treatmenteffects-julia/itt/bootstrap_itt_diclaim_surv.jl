@@ -12,18 +12,17 @@ using Distances
 
 # Set globals and directories
 global current = pwd()
-global base =	"$current/.."
-global data = "$current/../../../../../data/abccare/extensions/fam-merge"
-global dofiles = "$current"
-global results = "$current/../rslt"
-global atecode = "$current/../../../juliafunctions"
+global base =	"$current/../.."
+global data = "$current/../../../../../../data/abccare/extensions/fam-merge"
+global results = "$current/../../rslt"
+global atecode = "$current/../../../../juliafunctions"
 
 # set up number of bootstraps and controls
 global breps = 74 		# remember to subtract 1, i.e. 50 becomes 49
 global areps = 3 	# remember to subtract 1, i.e. 50 becomes 49
 global controls = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male]
 global ipwvars_all = [:apgar1, :apgar5, :prem_birth]
-global component = "health_private_surv"
+global component = "diclaim_surv"
 global factors = 0
 global deaths = 1
 
@@ -38,7 +37,7 @@ include("$atecode/function/matching.jl")
 include("$atecode/function/ITT.jl")
 
 # Include necessary files
-include("$current/data.jl")
+include("$current/../data.jl")
 
 # ================================================================ #
 # Implement options

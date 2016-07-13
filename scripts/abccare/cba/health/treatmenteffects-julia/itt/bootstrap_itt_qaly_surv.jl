@@ -22,12 +22,12 @@ global breps = 74 		# remember to subtract 1, i.e. 50 becomes 49
 global areps = 3 	# remember to subtract 1, i.e. 50 becomes 49
 global controls = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male]
 global ipwvars_all = [:apgar1, :apgar5, :prem_birth]
-global component = "health_private_surv"
+global component = "qaly_surv"
 global factors = 0
 global deaths = 1
 
 # Include helper files
-include("$atecode/helper/writematrix.jl")
+#include("$atecode/helper/writematrix.jl")
 include("$atecode/helper/bsample.jl")
 include("$atecode/helper/IPW.jl")
 include("$atecode/helper/epanechnikov.jl")
@@ -45,7 +45,7 @@ include("$current/../data.jl")
 # Define the gender loop
 global genderloop = ["male", "female", "pooled"]
 
-MatchInitial = Dict()
+ITTinitial = Dict()
 bsid_orig = Dict()
 datainuse = Dict()
 
@@ -66,30 +66,29 @@ for gender in genderloop
   # ==================== #
 	# Bootstrap esstimates #
 	# ==================== #
+
 	# Define the result matrix for the first bootstrap (brep = 0)
 	for arep in 0:areps
 		datainuse_tmpz = datainuse["$(gender)"]
 		datainuse_arepz = datainuse_tmpz[datainuse_tmpz[:adraw] .== arep, :]
+
 		if arep == 0
-		  MatchInitial["$(gender)"] = mestimate(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
+		  ITTinitial["$(gender)"] = ITTestimator(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
 	  else
-		  MatchInitial_add = mestimate(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
-		  MatchInitial["$(gender)"] = append!(MatchInitial["$(gender)"], MatchInitial_add)
+		  ITTinitial_add = ITTestimator(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
+		  ITTinitial["$(gender)"] = append!(ITTinitial["$(gender)"], ITTinitial_add)
 		end
 	end
-	MatchInitial["$(gender)"] = sort(MatchInitial["$(gender)"], cols = [:draw, :ddraw])
+	ITTinitial["$(gender)"] = sort(ITTinitial["$(gender)"], cols = [:draw, :ddraw])
 end
 
 	# ================================================= #
 	# Define the function for the rest of the bootstrap #
 	# ================================================= #
-function matchingrun(boots)
-	Matchresult = Dict()
-	MatchDict = Dict()
+function ITTrun(boots)
+	ITTresult = Dict()
 
 	for gender in genderloop
-
-		global new_switch = 1
 
 		if gender == "male"
 			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
@@ -111,25 +110,20 @@ function matchingrun(boots)
 
 	    for arep in 0:areps
 				datainuse_tmp = datainuse["$(gender)"]
-				datainuse_tmp = datainuse_tmp[datainuse_tmp[:adraw] .== arep, :]
-				datainuse_act = join(datainuse_tmp, bsid_draw, on = [:id, :male, :family], kind = :inner)
+				datainuse_arep = datainuse_tmp[datainuse_tmp[:adraw] .== arep, :]
+				datainuse_act = join(datainuse_arep, bsid_draw, on = [:id, :male, :family], kind = :inner)
 
-				global append_switch = 1
-			  MatchDict["Matching_check_$(gender)"] = mestimate(datainuse_act, outcomes, outcomelist, controlset, brep, arep, "no", 0)
-
-				if (append_switch == 1) & (new_switch == 1)
-					MatchDict["Matching_new_$(gender)"] = MatchDict["Matching_check_$(gender)"]
-					global new_switch = 0
-				elseif (append_switch == 1) & (new_switch == 0)
-					MatchDict["Matching_add_$(gender)"] = MatchDict["Matching_check_$(gender)"]
-					MatchDict["Matching_new_$(gender)"] = append!(MatchDict["Matching_new_$(gender)"], MatchDict["Matching_add_$(gender)"])
+				if (brep == 1) & (arep == 0)
+					ITTresult["$(gender)"] = ITTestimator(datainuse_act, outcomes, outcomelist, controlset, brep, arep, "no", 0)
+				else
+					ITTnew = ITTestimator(datainuse_act, outcomes, outcomelist, controlset, brep, arep, "no", 0)
+	      	ITTresult["$(gender)"] = append!(ITTresult["$(gender)"], ITTnew)
 				end
 	    end
 	  end
 
-		Matchresult["$(gender)"] = MatchDict["Matching_new_$(gender)"]
-		Matchresult["$(gender)"] = sort(Matchresult["$(gender)"] , cols = [:draw, :ddraw])
+		ITTresult["$(gender)"] = sort(ITTresult["$(gender)"], cols = [:draw, :ddraw])
 	end
 
-	return Matchresult
+	return ITTresult
 end
