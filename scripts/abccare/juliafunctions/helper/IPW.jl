@@ -37,7 +37,7 @@ function IPWweight(sampledata, outcomes, outcomel)
             end
 
           # Form columns for attrition indicator (NOT attrited => 1, Attrited => 0)
-            sampledata[:attr] = 1(!isna(sampledata[parse(IPW_cols[1,1])])) # putting "1" in front of the parentheses assigns "1" if the statement is true and "0" otherwise
+            sampledata[:attr] = 1(!isna(sampledata[var])) # putting "1" in front of the parentheses assigns "1" if the statement is true and "0" otherwise
             sampledata[:attr_treat] = sampledata[:attr] .* sampledata[:R] # R = 1 if treated, = 0 if control
             sampledata[:attr_control] = sampledata[:attr] .* (1-sampledata[:R])
 

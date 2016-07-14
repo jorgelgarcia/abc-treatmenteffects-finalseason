@@ -151,29 +151,29 @@ tht_t,Mental Health,Age 30 Adult Self Report Syndrome Scale $t$-Score,30,Thought
 with_t,Mental Health,Age 30 Adult Self Report Syndrome Scale $t$-Score,30,Withdrawn,mental_syndrome30,-,,,,,,0,0
 totp_t,Mental Health,Age 30 Adult Self Report Syndrome Scale $t$-Score,30,Total Problems,mental_syndrome30,-,,,,,,0,0
 crit_t,Mental Health,Age 30 Adult Self Report Syndrome Scale $t$-Score,30,Critical Items,mental_syndrome30,-,,,,,,0,0
-PSYC_ANX,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Anxiety,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PSYC_NC,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Any Psychiatric Concern,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PSYC_DEP,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Depression,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PSYC_INS,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Insomnia,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_mental,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Mental Problems,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-QLMENTL2,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Sad/Depressed in Past 30 Days,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PSYC_SUIC,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Suicidal Ideation,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-QLSTRES2,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Worried/Anxious in Past 30 Days,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_ALERT,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Physical Exam: Mental Health Alert,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_DISTRESS,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Physical Exam: Mental Status Distress,mental current34,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+PSYC_ANX,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Anxiety,mental current34,-,PSYC_ANX,apgar1,apgar5,prem_birth,,0,0
+PSYC_NC,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Any Psychiatric Concern,mental current34,-,PSYC_NC,apgar1,apgar5,prem_birth,,0,0
+PSYC_DEP,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Depression,mental current34,-,PSYC_DEP,apgar1,apgar5,prem_birth,,0,0
+PSYC_INS,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Insomnia,mental current34,-,PSYC_INS,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_mental,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Mental Problems,mental current34,-,si34y_hprob_mental,apgar1,apgar5,prem_birth,,0,0
+QLMENTL2,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Sad/Depressed in Past 30 Days,mental current34,-,QLMENTL2,apgar1,apgar5,prem_birth,,0,0
+PSYC_SUIC,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Suicidal Ideation,mental current34,-,PSYC_SUIC,apgar1,apgar5,prem_birth,,0,0
+QLSTRES2,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Current Condition: Worried/Anxious in Past 30 Days,mental current34,-,QLSTRES2,apgar1,apgar5,prem_birth,,0,0
+PE_ALERT,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Physical Exam: Mental Health Alert,mental current34,-,PE_ALERT,apgar1,apgar5,prem_birth,,0,0
+PE_DISTRESS,Mental Health,Mid-30s Mental Health Conditions,Mid-30s,Physical Exam: Mental Status Distress,mental current34,-,PE_DISTRESS,apgar1,apgar5,prem_birth,,0,0
 bsi_tanx,Mental Health,Mental Health $t$-Score,21,Anxiety $t$-Score,mental_bsi1821_t,-,,,,,,0,0
-BSIAnx_T,Mental Health,Mental Health $t$-Score,Mid-30s,Anxiety $t$-Score,mental_bsi1821_t,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-B18Anx_T,Mental Health,Mental Health $t$-Score,Mid-30s,Anxiety $t$-Score (BSI 18),mental_bsi18,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+BSIAnx_T,Mental Health,Mental Health $t$-Score,Mid-30s,Anxiety $t$-Score,mental_bsi1821_t,-,BSIAnx_T,apgar1,apgar5,prem_birth,,0,0
+B18Anx_T,Mental Health,Mental Health $t$-Score,Mid-30s,Anxiety $t$-Score (BSI 18),mental_bsi18,-,B18Anx_T,apgar1,apgar5,prem_birth,,0,0
 bsi_tdep,Mental Health,Mental Health $t$-Score,21,Depression $t$-Score,mental_bsi1821_t,-,,,,,,0,0
-BSIDep_T,Mental Health,Mental Health $t$-Score,Mid-30s,Depression $t$-Score,mental_bsi1821_t,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-B18Dep_T,Mental Health,Mental Health $t$-Score,Mid-30s,Depression $t$-Score (BSI 18),mental_bsi18,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+BSIDep_T,Mental Health,Mental Health $t$-Score,Mid-30s,Depression $t$-Score,mental_bsi1821_t,-,BSIDep_T,apgar1,apgar5,prem_birth,,0,0
+B18Dep_T,Mental Health,Mental Health $t$-Score,Mid-30s,Depression $t$-Score (BSI 18),mental_bsi18,-,B18Dep_T,apgar1,apgar5,prem_birth,,0,0
 bsi_thos,Mental Health,Mental Health $t$-Score,21,Hostility $t$-Score,mental_bsi1821_t,-,,,,,,0,0
-BSIHos_T,Mental Health,Mental Health $t$-Score,Mid-30s,Hostility $t$-Score,mental_bsi1821_t,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+BSIHos_T,Mental Health,Mental Health $t$-Score,Mid-30s,Hostility $t$-Score,mental_bsi1821_t,-,BSIHos_T,apgar1,apgar5,prem_birth,,0,0
 bsi_tsom,Mental Health,Mental Health $t$-Score,21,Somatization $t$-Score,mental_bsi1821_t,-,,,,,,0,0
-BSISom_T,Mental Health,Mental Health $t$-Score,Mid-30s,Somatization $t$-Score,mental_bsi1821_t,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-B18Som_T,Mental Health,Mental Health $t$-Score,Mid-30s,Somatization $t$-Score (BSI 18),mental_bsi18,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+BSISom_T,Mental Health,Mental Health $t$-Score,Mid-30s,Somatization $t$-Score,mental_bsi1821_t,-,BSISom_T,apgar1,apgar5,prem_birth,,0,0
+B18Som_T,Mental Health,Mental Health $t$-Score,Mid-30s,Somatization $t$-Score (BSI 18),mental_bsi18,-,B18Som_T,apgar1,apgar5,prem_birth,,0,0
 bsi_tgsi,Mental Health,Mental Health $t$-Score,21,Global Severity Index $t$-Score,mental_bsi1821_t,-,,,,,,0,0
-B18GSI_T,Mental Health,Mental Health $t$-Score,Mid-30s,Global Severity Index $t$-Score (BSI 18),mental_bsi18,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+B18GSI_T,Mental Health,Mental Health $t$-Score,Mid-30s,Global Severity Index $t$-Score (BSI 18),mental_bsi18,-,B18GSI_T,apgar1,apgar5,prem_birth,,0,0
 ibr_actv0y3m,Infant Development,Infant Behavior Record,0.25,Temperament cluster - activity level,ibr,+,,,,,,1,0
 ibr_actv0y6m,Infant Development,Infant Behavior Record,0.5,Temperament cluster - activity level,ibr,+,,,,,,0,0
 ibr_actv0y9m,Infant Development,Infant Behavior Record,0.75,Temperament cluster - activity level,ibr,+,,,,,,1,0
@@ -415,15 +415,15 @@ hospitl7,Childhood Health,Childhood Health Problems,12,Ever Hospitalized for Ove
 chsick7,Childhood Health,Childhood Health Problems,12,Has Health Problems,health_prob_child,-,chsick7,hrabc_index,apgar1,cohort,,0,0
 si21y_hlthins,Adult Health,Health Insurance,21,Has Health Insurance,health_insurance,+,,,,,,0,0
 si30y_hlthins,Adult Health,Health Insurance,30,Has Health Insurance,health_insurance,+,,,,,,0,0
-si34y_hlthins,Adult Health,Health Insurance,Mid-30s,Has Health Insurance,health_insurance,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_hlthins,Adult Health,Health Insurance,Mid-30s,Has Health Insurance,health_insurance,+,si34y_hlthins,apgar1,apgar5,prem_birth,,0,0
 sint30_078,Adult Health,Other Health-Related Information,30,How Subject Thinks of Own Weight,physical health,-,,,,,,0,0
 sint30_023,Adult Health,Other Health-Related Information,30,Physical/Nervous Condition Prevents Work,physical health,-,,,,,,0,0
-poorhlth,Adult Health,Other Health-Related Information,Mid-30s,Number of Days Poor Health Stop Activities in Past 30 Days,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-physhlth,Adult Health,Other Health-Related Information,Mid-30s,Number of Days Unhealthy in Past 30 Days,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-QLHLTH2,Adult Health,Other Health-Related Information,Mid-30s,Number of Days Very Healthy in Past 30 Days,physical health,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PAINACT2,Adult Health,Other Health-Related Information,Mid-30s,Number of Days in Pain in Past 30 Days,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_dyslipid,Adult Health,Cholesterol,Mid-30s,Dyslipidemia,cholesterol,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_chol_hdl,Adult Health,Cholesterol,Mid-30s,High-Density Lipoprotein Chol. (mg/dL),cholesterol,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
+poorhlth,Adult Health,Other Health-Related Information,Mid-30s,Number of Days Poor Health Stop Activities in Past 30 Days,physical health,-,poorhlth,apgar1,apgar5,prem_birth,,0,0
+physhlth,Adult Health,Other Health-Related Information,Mid-30s,Number of Days Unhealthy in Past 30 Days,physical health,-,physhlth,apgar1,apgar5,prem_birth,,0,0
+QLHLTH2,Adult Health,Other Health-Related Information,Mid-30s,Number of Days Very Healthy in Past 30 Days,physical health,+,QLHLTH2,apgar1,apgar5,prem_birth,,0,0
+PAINACT2,Adult Health,Other Health-Related Information,Mid-30s,Number of Days in Pain in Past 30 Days,physical health,-,PAINACT2,apgar1,apgar5,prem_birth,,0,0
+si34y_dyslipid,Adult Health,Cholesterol,Mid-30s,Dyslipidemia,cholesterol,-,si34y_dyslipid,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_chol_hdl,Adult Health,Cholesterol,Mid-30s,High-Density Lipoprotein Chol. (mg/dL),cholesterol,+,si34y_chol_hdl,apgar1,prem_birth,hh_sibs0y,,0,0
 si30y_hprob_allergy,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Allergies or fever,current_health,-,,,,,,0,0
 si30y_hprob_anemia,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Simple anemia,current_health,-,,,,,,0,0
 si30y_hprob_asthma,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Asthma,current_health,-,,,,,,0,0
@@ -450,20 +450,20 @@ si30y_hprob_sleep ,Adult Health,Current Health Condition at Age 30 (Self-Reporte
 si30y_hprob_std ,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Any STDs,current_health,-,,,,,,0,0
 si30y_hprob_stroke,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Stroke,current_health,-,,,,,,0,0
 si30y_hprob_vision,Adult Health,Current Health Condition at Age 30 (Self-Reported),30,Visual problems even with glasses,current_health,-,,,,,,0,0
-si34y_hprob_orthop,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Arthritis or Generative Disease,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_asthma,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Asthma,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_cancer,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Cancer,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_memory,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Dementia,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_diabetes,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Diabetes,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_heartatt,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Heart Attack,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_othheart,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Heart Attack or Coronary Disease,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_bloodpr,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,High Blood Pressure (Hypertension),physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_chol,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,High Cholesterol,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_sickle,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Sickle Cell Anemia,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_stroke,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Stroke,physical health,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_diab,Adult Health,Diabetes,Mid-30s,Diabetes,diabetes,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hemoglobin,Adult Health,Diabetes,Mid-30s,Hemoglobin Level (\%),diabetes,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_prediab,Adult Health,Diabetes,Mid-30s,Prediabetes,diabetes,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_orthop,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Arthritis or Generative Disease,physical health,-,si34y_hprob_orthop,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hprob_asthma,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Asthma,physical health,-,si34y_hprob_asthma,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_cancer,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Cancer,physical health,-,si34y_hprob_cancer,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hprob_memory,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Dementia,physical health,-,si34y_hprob_memory,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hprob_diabetes,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Diabetes,physical health,-,si34y_hprob_diabetes,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hprob_heartatt,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Heart Attack,physical health,-,si34y_hprob_heartatt,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hprob_othheart,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Heart Attack or Coronary Disease,physical health,-,si34y_hprob_othheart,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hprob_bloodpr,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,High Blood Pressure (Hypertension),physical health,-,si34y_hprob_bloodpr,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hprob_chol,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,High Cholesterol,physical health,-,si34y_hprob_chol,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hprob_sickle,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Sickle Cell Anemia,physical health,-,si34y_hprob_sickle,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hprob_stroke,Adult Health,Current Health Condition Mid-30s (Self-Reported),Mid-30s,Stroke,physical health,-,si34y_hprob_stroke,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_diab,Adult Health,Diabetes,Mid-30s,Diabetes,diabetes,-,si34y_diab,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hemoglobin,Adult Health,Diabetes,Mid-30s,Hemoglobin Level (\%),diabetes,-,si34y_hemoglobin,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_prediab,Adult Health,Diabetes,Mid-30s,Prediabetes,diabetes,-,si34y_prediab,apgar1,prem_birth,hh_sibs0y,,0,0
 alc_t,Adult Health,Drug Behavior and ASR Substance Scale,30,ASR Substance Use Scale: Alcohol,asr_risk,-,,,,,,0,0
 drug_t,Adult Health,Drug Behavior and ASR Substance Scale,30,ASR Substance Use Scale: Drugs,asr_risk,-,,,,,,0,0
 ms_t,Adult Health,Drug Behavior and ASR Substance Scale,30,ASR Substance Use Scale: Mean Substance Abuse,asr_risk,-,,,,,,0,0
@@ -473,70 +473,70 @@ si30y_coc_ever_reg,Adult Health,Drug Behavior and ASR Substance Scale,30,Cocaine
 si30y_coc_num,Adult Health,Drug Behavior and ASR Substance Scale,30,Cocaine: Times Used,asr_risk,-,,,,,,0,0
 si21y_risk32,Adult Health,Drug Behavior and ASR Substance Scale,21,Cocaine: Times Used in Past 30 Days,asr_risk,-,,,,,,0,0
 si30y_marj_reg,Adult Health,Drug Behavior and ASR Substance Scale,30,Marijuana: Smokes Regularly,asr_risk,-,,,,,,0,0
-si34y_marj_reg,Adult Health,Drug Behavior and ASR Substance Scale,Mid-30s,Marijuana: Smokes Regularly,asr_risk,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_marj_reg,Adult Health,Drug Behavior and ASR Substance Scale,Mid-30s,Marijuana: Smokes Regularly,asr_risk,-,si34y_marj_reg,m_ed0y,apgar1,apgar5,,0,0
 si30y_marj_num,Adult Health,Drug Behavior and ASR Substance Scale,30,Marijuana: Times Used,asr_risk,-,,,,,,0,0
 si21y_risk29,Adult Health,Drug Behavior and ASR Substance Scale,21,Marijuana: Times Used in Past 30 Days,asr_risk,-,,,,,,0,0
 si30y_marj_freq,Adult Health,Drug Behavior and ASR Substance Scale,30,Marijuana: Times Used in Past 30 Days,asr_risk,-,,,,,,0,0
 si21y_risk34,Adult Health,Drug Behavior and ASR Substance Scale,21,Times Used Other Illegal Drugs in Past 30 Days,asr_risk,-,,,,,,0,0
-si34y_dia_bp,Adult Health,Hypertension,Mid-30s,Diastolic Blood Pressure (mm Hg),hypertension,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_sys_bp,Adult Health,Hypertension,Mid-30s,Systolic Blood Pressure (mm Hg),hypertension,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_prehyper,Adult Health,Hypertension,Mid-30s,Prehypertension,hypertension,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hyper,Adult Health,Hypertension,Mid-30s,Hypertension,hypertension,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_ALT,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,ALT,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_AST,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,AST,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_ALB,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Albumin,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_ALB_GLOB,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Albumin/Globulin Ratio,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_ALKPHOS,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Alkaline Phosp,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_BILI,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Bilirubin,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_CA,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Calcium,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_CO2,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Carbon Dioxide,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_CL,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Chloride,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_CREAT,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Creatinine,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_GLOB,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Globulin,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_GLUCOSE,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Glucose,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_K,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Potassium,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_PROT,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Protein,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_NA,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Sodium,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CMP_UREA,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Urea Nitrogen,lab_metabolic,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_BASO,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Basophils,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_EOSINO,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Eosinophils,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_HCT,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Hematocrit,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_HEMOG,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Hemoglobin,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_LYMPHO,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Lymphocytes,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_MCV,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Mean Cell Volum,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_MCHC,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Mean Hb Concentration,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_MCH,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Mean Hemoglobin,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_MONO,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Monocytes,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_NEUTRO,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Neutrophils,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_PLATELET,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Platelets,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_RDW,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Red Cell Width,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_RED,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Red Cells,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-CBC_WHITE,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,White Cells,lab_count,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_obese_whr,Adult Health,Obesity,Mid-30s,Abdominal Obesity,obesity,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_fram_p1,Adult Health,Obesity,Mid-30s,Framingham Risk Score,obesity,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_bmi,Adult Health,Obesity,Mid-30s,Measured BMI,obesity,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_obese,Adult Health,Obesity,Mid-30s,Obesity,obesity,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_sev_obese,Adult Health,Obesity,Mid-30s,Severe Obesity,obesity,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_whr,Adult Health,Obesity,Mid-30s,Waist-hip Ratio,obesity,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_othheart_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Angina/Coronary Heart Disease,health_told,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-HAVARTH2,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Arthritis/Gout/Lupus/Fibromyalgia,health_told,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_orthop_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Arthritus or Generative Disease,health_told,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_asthma_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Asthma,health_told,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_cancer_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Cancer,health_told,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_diabetes_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Diabetes,health_told,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_heartatt_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Heart Attack,health_told,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_bloodpr_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: High Blood Pressure,health_told,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_chol_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: High Cholesterol,health_told,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PREDIAB1_R,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Prediabetes,health_told,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_sickle_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Sickle Cell Anemia,health_told,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_hprob_stroke_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Stroke,health_told,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PSH_APPEN,Adult Health,Past Medical History - Surgery (Self-Reported),Mid-30s,Past Surgery: Appendectomy,health_surgery,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PSH_CHOLEC,Adult Health,Past Medical History - Surgery (Self-Reported),Mid-30s,Past Surgery: Cholecystectomy,health_surgery,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PSH_ECT,Adult Health,Past Medical History - Surgery (Self-Reported),Mid-30s,Past Surgery: Ectopic Pregnancy,health_surgery,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PSH_HYST,Adult Health,Past Medical History - Surgery (Self-Reported),Mid-30s,Past Surgery: Hysterectomy,health_surgery,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PSH_ORTHO,Adult Health,Past Medical History - Surgery (Self-Reported),Mid-30s,Past Surgery: Orthopedic Surgery,health_surgery,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_dia_bp,Adult Health,Hypertension,Mid-30s,Diastolic Blood Pressure (mm Hg),hypertension,-,si34y_dia_bp,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_sys_bp,Adult Health,Hypertension,Mid-30s,Systolic Blood Pressure (mm Hg),hypertension,-,si34y_sys_bp,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_prehyper,Adult Health,Hypertension,Mid-30s,Prehypertension,hypertension,-,si34y_prehyper,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hyper,Adult Health,Hypertension,Mid-30s,Hypertension,hypertension,-,si34y_hyper,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_ALT,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,ALT,lab_metabolic,+,CMP_ALT,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_AST,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,AST,lab_metabolic,+,CMP_AST,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_ALB,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Albumin,lab_metabolic,+,CMP_ALB,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_ALB_GLOB,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Albumin/Globulin Ratio,lab_metabolic,+,CMP_ALB_GLOB,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_ALKPHOS,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Alkaline Phosp,lab_metabolic,+,CMP_ALKPHOS,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_BILI,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Bilirubin,lab_metabolic,+,CMP_BILI,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_CA,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Calcium,lab_metabolic,+,CMP_CA,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_CO2,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Carbon Dioxide,lab_metabolic,+,CMP_CO2,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_CL,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Chloride,lab_metabolic,+,CMP_CL,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_CREAT,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Creatinine,lab_metabolic,+,CMP_CREAT,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_GLOB,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Globulin,lab_metabolic,+,CMP_GLOB,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_GLUCOSE,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Glucose,lab_metabolic,+,CMP_GLUCOSE,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_K,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Potassium,lab_metabolic,+,CMP_K,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_PROT,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Protein,lab_metabolic,+,CMP_PROT,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_NA,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Sodium,lab_metabolic,+,CMP_NA,apgar1,prem_birth,hh_sibs0y,,0,0
+CMP_UREA,Adult Health,Laboratory Test  - Metabolic Panel,Mid-30s,Urea Nitrogen,lab_metabolic,+,CMP_UREA,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_BASO,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Basophils,lab_count,+,CBC_BASO,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_EOSINO,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Eosinophils,lab_count,+,CBC_EOSINO,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_HCT,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Hematocrit,lab_count,+,CBC_HCT,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_HEMOG,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Hemoglobin,lab_count,+,CBC_HEMOG,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_LYMPHO,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Lymphocytes,lab_count,+,CBC_LYMPHO,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_MCV,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Mean Cell Volum,lab_count,+,CBC_MCV,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_MCHC,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Mean Hb Concentration,lab_count,+,CBC_MCHC,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_MCH,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Mean Hemoglobin,lab_count,+,CBC_MCH,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_MONO,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Monocytes,lab_count,+,CBC_MONO,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_NEUTRO,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Neutrophils,lab_count,+,CBC_NEUTRO,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_PLATELET,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Platelets,lab_count,+,CBC_PLATELET,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_RDW,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Red Cell Width,lab_count,+,CBC_RDW,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_RED,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,Red Cells,lab_count,+,CBC_RED,apgar1,prem_birth,hh_sibs0y,,0,0
+CBC_WHITE,Adult Health,Laboratory Test - Complete Blood Count,Mid-30s,White Cells,lab_count,+,CBC_WHITE,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_obese_whr,Adult Health,Obesity,Mid-30s,Abdominal Obesity,obesity,-,si34y_obese_whr,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_fram_p1,Adult Health,Obesity,Mid-30s,Framingham Risk Score,obesity,-,si34y_fram_p1,apgar1,apgar5,prem_birth,,0,0
+si34y_bmi,Adult Health,Obesity,Mid-30s,Measured BMI,obesity,-,si34y_bmi,apgar1,apgar5,prem_birth,,0,0
+si34y_obese,Adult Health,Obesity,Mid-30s,Obesity,obesity,-,si34y_obese,apgar1,apgar5,prem_birth,,0,0
+si34y_sev_obese,Adult Health,Obesity,Mid-30s,Severe Obesity,obesity,-,si34y_sev_obese,apgar1,apgar5,prem_birth,,0,0
+si34y_whr,Adult Health,Obesity,Mid-30s,Waist-hip Ratio,obesity,-,si34y_whr,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hprob_othheart_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Angina/Coronary Heart Disease,health_told,-,si34y_hprob_othheart_p,apgar1,apgar5,prem_birth,,0,0
+HAVARTH2,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Arthritis/Gout/Lupus/Fibromyalgia,health_told,-,HAVARTH2,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_orthop_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Arthritus or Generative Disease,health_told,-,si34y_hprob_orthop_p,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hprob_asthma_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Asthma,health_told,-,si34y_hprob_asthma_p,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_cancer_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Cancer,health_told,-,si34y_hprob_cancer_p,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_diabetes_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Diabetes,health_told,-,si34y_hprob_diabetes_p,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_heartatt_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Heart Attack,health_told,-,si34y_hprob_heartatt_p,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_bloodpr_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: High Blood Pressure,health_told,-,si34y_hprob_bloodpr_p,apgar1,apgar5,prem_birth,,0,0
+si34y_hprob_chol_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: High Cholesterol,health_told,-,si34y_hprob_chol_p,apgar1,apgar5,prem_birth,,0,0
+PREDIAB1_R,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Prediabetes,health_told,-,PREDIAB1_R,apgar1,hh_sibs0y,cohort,,0,0
+si34y_hprob_sickle_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Sickle Cell Anemia,health_told,-,si34y_hprob_sickle_p,apgar1,prem_birth,hh_sibs0y,,0,0
+si34y_hprob_stroke_p,Adult Health,Past Medical History - Diagnosis (Self-Reported),Mid-30s,Ever Told Had: Stroke,health_told,-,si34y_hprob_stroke_p,apgar1,prem_birth,hh_sibs0y,,0,0
+PSH_APPEN,Adult Health,Past Medical History - Surgery (Self-Reported),Mid-30s,Past Surgery: Appendectomy,health_surgery,-,PSH_APPEN,apgar1,apgar5,prem_birth,,0,0
+PSH_CHOLEC,Adult Health,Past Medical History - Surgery (Self-Reported),Mid-30s,Past Surgery: Cholecystectomy,health_surgery,-,PSH_CHOLEC,apgar1,apgar5,prem_birth,,0,0
+PSH_ECT,Adult Health,Past Medical History - Surgery (Self-Reported),Mid-30s,Past Surgery: Ectopic Pregnancy,health_surgery,-,PSH_ECT,apgar1,apgar5,prem_birth,,0,0
+PSH_HYST,Adult Health,Past Medical History - Surgery (Self-Reported),Mid-30s,Past Surgery: Hysterectomy,health_surgery,-,PSH_HYST,apgar1,apgar5,prem_birth,,0,0
+PSH_ORTHO,Adult Health,Past Medical History - Surgery (Self-Reported),Mid-30s,Past Surgery: Orthopedic Surgery,health_surgery,-,PSH_ORTHO,apgar1,apgar5,prem_birth,,0,0
 si21y_phys_days,Adult Health,Physical Activity,21,Days Per Week of Physical Activity,physical_activity,+,,,,,,0,0
-si34y_phys_days,Adult Health,Physical Activity,Mid-30s,Days Per Week of Physical Activity,physical_activity,+,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_phys_days,Adult Health,Physical Activity,Mid-30s,Days Per Week of Physical Activity,physical_activity,+,si34y_phys_days,apgar1,apgar5,prem_birth,,0,0
 modpact,Adult Health,Physical Activity,Mid-30s,Do Moderate Activities At Least 10 Minute at a Time,physical_activity,+,modpact,m_ed0y,apgar1,apgar5,,0,0
 modpatimhrs,Adult Health,Physical Activity,Mid-30s,Hours Per Day Moderate Activity,physical_activity,+,modpatimhrs,hrabc_index,apgar1,cohort,,0,0
 modpaday,Adult Health,Physical Activity,Mid-30s,Days Per Week of Moderate Activity,physical_activity,+,modpaday,hrabc_index,apgar1,cohort,,0,0
@@ -544,51 +544,51 @@ vigpact,Adult Health,Physical Activity,Mid-30s,Do Vigorous Activities At Least 1
 vigpatimhrs,Adult Health,Physical Activity,Mid-30s,Hours Per Day Vigorous Activity,physical_activity,+,vigpatimhrs,m_ed0y,apgar1,cohort,,0,0
 vigpaday,Adult Health,Physical Activity,Mid-30s,Days Per Week Vigorous Activity,physical_activity,+,vigpaday,m_ed0y,apgar1,cohort,,0,0
 jobactiv,Adult Health,Physical Activity,Mid-30s,Level of Activity at Work,physical_activity,+,jobactiv,m_ed0y,apgar1,apgar5,,0,0
-PE_HYD,Adult Health,Physical Exam - General I,Mid-30s,Hydration,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_NUT,Adult Health,Physical Exam - General I,Mid-30s,Nutrition,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_ORIENT,Adult Health,Physical Exam - General I,Mid-30s,Orientation,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_POST,Adult Health,Physical Exam - General I,Mid-30s,Posture,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_PULSE,Adult Health,Physical Exam - General I,Mid-30s,Pulse,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_RESP,Adult Health,Physical Exam - General I,Mid-30s,Respirations,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_TEMP,Adult Health,Physical Exam - General I,Mid-30s,Temp (F),phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_VOICE,Adult Health,Physical Exam - General I,Mid-30s,Voice,phys_gen_i,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_CARDIO,Adult Health,Physical Exam - General II,Mid-30s,Cardiovascular General,phys_gen_ii,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_CHGEN,Adult Health,Physical Exam - General II,Mid-30s,Chest and Lung General,phys_gen_ii,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_BREAST,Adult Health,Physical Exam - General II,Mid-30s,Breast General,phys_gen_ii,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_HEAD,Adult Health,Physical Exam - General II,Mid-30s,Head General,phys_gen_ii,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_JOINT,Adult Health,Physical Exam - General II,Mid-30s,Musculoskeletal General,phys_gen_ii,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_NECK,Adult Health,Physical Exam - General II,Mid-30s,Neck General,phys_gen_ii,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_NEURO,Adult Health,Physical Exam - General II,Mid-30s,Neurologic General,phys_gen_ii,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_NOSE,Adult Health,Physical Exam - General II,Mid-30s,Nose General,phys_gen_ii,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_SKIN,Adult Health,Physical Exam - General II,Mid-30s,Skin General,phys_gen_ii,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_AUD,Adult Health,Physical Exam - Ear,Mid-30s,Ear: Auditory Canal,phys_ear,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_MAST,Adult Health,Physical Exam - Ear,Mid-30s,Ear: Mastoid,phys_ear,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_PINNA,Adult Health,Physical Exam - Ear,Mid-30s,Ear: Pinna,phys_ear,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_TYMP,Adult Health,Physical Exam - Ear,Mid-30s,Ear: Tympanic Membrane,phys_ear,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_EYEBALL,Adult Health,Physical Exam - Ear,Mid-30s,Eye: Eyeball,phys_ear,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_FUNDI,Adult Health,Physical Exam - Ear,Mid-30s,Eye: Fundi,phys_ear,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_PUPIL,Adult Health,Physical Exam - Ear,Mid-30s,Eye: Pupil,phys_ear,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_SCLERA,Adult Health,Physical Exam - Ear,Mid-30s,Eye: Sclera/Conjunctiva,phys_ear,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_AUS,Adult Health,Physical Exam (Part II),Mid-30s,Abdomen: Auscultation,physical_abdomen,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_ABD,Adult Health,Physical Exam (Part II),Mid-30s,Abdomen: Inspection,physical_abdomen,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_PALP,Adult Health,Physical Exam (Part II),Mid-30s,Abdomen: Palpation/Percussion,physical_abdomen,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_LAXI,Adult Health,Physical Exam (Part II),Mid-30s,Lymphatic: General Axillary Region,phys_lymph,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_LFEM,Adult Health,Physical Exam (Part II),Mid-30s,Lymphatic: General Femoral and Inguinal Lymphatics,phys_lymph,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_LHEAD,Adult Health,Physical Exam (Part II),Mid-30s,Lymphatic: General Head and Neck,phys_lymph,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_FLMOUTH,Adult Health,Physical Exam (Part II),Mid-30s,Mouth and Throat: Floor of Mouth,phys_mouth,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_LOWTEETH,Adult Health,Physical Exam (Part II),Mid-30s,Mouth and Throat: Lower Teeth,phys_mouth,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_ORO,Adult Health,Physical Exam (Part II),Mid-30s,Mouth and Throat: Oropharynx,phys_mouth,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_TONSIL,Adult Health,Physical Exam (Part II),Mid-30s,Mouth and Throat: Tonsils,phys_mouth,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_UPTEETH,Adult Health,Physical Exam (Part II),Mid-30s,Mouth and Throat: Upper Teeth,phys_mouth,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_BSTEM,Adult Health,Physical Exam (Part II),Mid-30s,Muscle Strength: Brainstem Reflexes,phys_muscle,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_COORD,Adult Health,Physical Exam (Part II),Mid-30s,Muscle Strength: Coordination,phys_muscle,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_GAIT,Adult Health,Physical Exam (Part II),Mid-30s,Muscle Strength: Gait,phys_muscle,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_LOEX,Adult Health,Physical Exam (Part II),Mid-30s,Muscle Strength: Lower Extremities,phys_muscle,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_REFL,Adult Health,Physical Exam (Part II),Mid-30s,Muscle Strength: Reflexes,phys_muscle,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-PE_UPEX,Adult Health,Physical Exam (Part II),Mid-30s,Muscle Strength: Upper Extremities,phys_muscle,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+PE_HYD,Adult Health,Physical Exam - General I,Mid-30s,Hydration,phys_gen_i,-,PE_HYD,apgar1,apgar5,prem_birth,,0,0
+PE_NUT,Adult Health,Physical Exam - General I,Mid-30s,Nutrition,phys_gen_i,-,PE_NUT,apgar1,apgar5,prem_birth,,0,0
+PE_ORIENT,Adult Health,Physical Exam - General I,Mid-30s,Orientation,phys_gen_i,-,PE_ORIENT,apgar1,apgar5,prem_birth,,0,0
+PE_POST,Adult Health,Physical Exam - General I,Mid-30s,Posture,phys_gen_i,-,PE_POST,apgar1,apgar5,prem_birth,,0,0
+PE_PULSE,Adult Health,Physical Exam - General I,Mid-30s,Pulse,phys_gen_i,-,PE_PULSE,apgar1,prem_birth,hh_sibs0y,,0,0
+PE_RESP,Adult Health,Physical Exam - General I,Mid-30s,Respirations,phys_gen_i,-,PE_RESP,apgar1,prem_birth,hh_sibs0y,,0,0
+PE_TEMP,Adult Health,Physical Exam - General I,Mid-30s,Temp (F),phys_gen_i,-,PE_TEMP,apgar1,apgar5,prem_birth,,0,0
+PE_VOICE,Adult Health,Physical Exam - General I,Mid-30s,Voice,phys_gen_i,-,PE_VOICE,apgar1,apgar5,prem_birth,,0,0
+PE_CARDIO,Adult Health,Physical Exam - General II,Mid-30s,Cardiovascular General,phys_gen_ii,-,PE_CARDIO,apgar1,apgar5,prem_birth,,0,0
+PE_CHGEN,Adult Health,Physical Exam - General II,Mid-30s,Chest and Lung General,phys_gen_ii,-,PE_CHGEN,apgar1,apgar5,prem_birth,,0,0
+PE_BREAST,Adult Health,Physical Exam - General II,Mid-30s,Breast General,phys_gen_ii,-,PE_BREAST,apgar1,apgar5,prem_birth,,0,0
+PE_HEAD,Adult Health,Physical Exam - General II,Mid-30s,Head General,phys_gen_ii,-,PE_HEAD,apgar1,apgar5,prem_birth,,0,0
+PE_JOINT,Adult Health,Physical Exam - General II,Mid-30s,Musculoskeletal General,phys_gen_ii,-,PE_JOINT,apgar1,apgar5,prem_birth,,0,0
+PE_NECK,Adult Health,Physical Exam - General II,Mid-30s,Neck General,phys_gen_ii,-,PE_NECK,apgar1,apgar5,prem_birth,,0,0
+PE_NEURO,Adult Health,Physical Exam - General II,Mid-30s,Neurologic General,phys_gen_ii,-,PE_NEURO,apgar1,apgar5,prem_birth,,0,0
+PE_NOSE,Adult Health,Physical Exam - General II,Mid-30s,Nose General,phys_gen_ii,-,PE_NOSE,apgar1,apgar5,prem_birth,,0,0
+PE_SKIN,Adult Health,Physical Exam - General II,Mid-30s,Skin General,phys_gen_ii,-,PE_SKIN,apgar1,apgar5,prem_birth,,0,0
+PE_AUD,Adult Health,Physical Exam - Ear,Mid-30s,Ear: Auditory Canal,phys_ear,-,PE_AUD,apgar1,apgar5,prem_birth,,0,0
+PE_MAST,Adult Health,Physical Exam - Ear,Mid-30s,Ear: Mastoid,phys_ear,-,PE_MAST,apgar1,apgar5,prem_birth,,0,0
+PE_PINNA,Adult Health,Physical Exam - Ear,Mid-30s,Ear: Pinna,phys_ear,-,PE_PINNA,apgar1,apgar5,prem_birth,,0,0
+PE_TYMP,Adult Health,Physical Exam - Ear,Mid-30s,Ear: Tympanic Membrane,phys_ear,-,PE_TYMP,apgar1,apgar5,prem_birth,,0,0
+PE_EYEBALL,Adult Health,Physical Exam - Ear,Mid-30s,Eye: Eyeball,phys_ear,-,PE_EYEBALL,apgar1,apgar5,prem_birth,,0,0
+PE_FUNDI,Adult Health,Physical Exam - Ear,Mid-30s,Eye: Fundi,phys_ear,-,PE_FUNDI,apgar1,apgar5,prem_birth,,0,0
+PE_PUPIL,Adult Health,Physical Exam - Ear,Mid-30s,Eye: Pupil,phys_ear,-,PE_PUPIL,apgar1,apgar5,prem_birth,,0,0
+PE_SCLERA,Adult Health,Physical Exam - Ear,Mid-30s,Eye: Sclera/Conjunctiva,phys_ear,-,PE_SCLERA,apgar1,apgar5,prem_birth,,0,0
+PE_AUS,Adult Health,Physical Exam (Part II),Mid-30s,Abdomen: Auscultation,physical_abdomen,-,PE_AUS,apgar1,apgar5,prem_birth,,0,0
+PE_ABD,Adult Health,Physical Exam (Part II),Mid-30s,Abdomen: Inspection,physical_abdomen,-,PE_ABD,apgar1,apgar5,prem_birth,,0,0
+PE_PALP,Adult Health,Physical Exam (Part II),Mid-30s,Abdomen: Palpation/Percussion,physical_abdomen,-,PE_PALP,apgar1,apgar5,prem_birth,,0,0
+PE_LAXI,Adult Health,Physical Exam (Part II),Mid-30s,Lymphatic: General Axillary Region,phys_lymph,-,PE_LAXI,apgar1,apgar5,prem_birth,,0,0
+PE_LFEM,Adult Health,Physical Exam (Part II),Mid-30s,Lymphatic: General Femoral and Inguinal Lymphatics,phys_lymph,-,PE_LFEM,apgar1,apgar5,prem_birth,,0,0
+PE_LHEAD,Adult Health,Physical Exam (Part II),Mid-30s,Lymphatic: General Head and Neck,phys_lymph,-,PE_LHEAD,apgar1,apgar5,prem_birth,,0,0
+PE_FLMOUTH,Adult Health,Physical Exam (Part II),Mid-30s,Mouth and Throat: Floor of Mouth,phys_mouth,-,PE_FLMOUTH,apgar1,apgar5,prem_birth,,0,0
+PE_LOWTEETH,Adult Health,Physical Exam (Part II),Mid-30s,Mouth and Throat: Lower Teeth,phys_mouth,-,PE_LOWTEETH,apgar1,apgar5,prem_birth,,0,0
+PE_ORO,Adult Health,Physical Exam (Part II),Mid-30s,Mouth and Throat: Oropharynx,phys_mouth,-,PE_ORO,apgar1,apgar5,prem_birth,,0,0
+PE_TONSIL,Adult Health,Physical Exam (Part II),Mid-30s,Mouth and Throat: Tonsils,phys_mouth,-,PE_TONSIL,apgar1,apgar5,prem_birth,,0,0
+PE_UPTEETH,Adult Health,Physical Exam (Part II),Mid-30s,Mouth and Throat: Upper Teeth,phys_mouth,-,PE_UPTEETH,apgar1,apgar5,prem_birth,,0,0
+PE_BSTEM,Adult Health,Physical Exam (Part II),Mid-30s,Muscle Strength: Brainstem Reflexes,phys_muscle,-,PE_BSTEM,apgar1,apgar5,prem_birth,,0,0
+PE_COORD,Adult Health,Physical Exam (Part II),Mid-30s,Muscle Strength: Coordination,phys_muscle,-,PE_COORD,apgar1,apgar5,prem_birth,,0,0
+PE_GAIT,Adult Health,Physical Exam (Part II),Mid-30s,Muscle Strength: Gait,phys_muscle,-,PE_GAIT,apgar1,apgar5,prem_birth,,0,0
+PE_LOEX,Adult Health,Physical Exam (Part II),Mid-30s,Muscle Strength: Lower Extremities,phys_muscle,-,PE_LOEX,apgar1,apgar5,prem_birth,,0,0
+PE_REFL,Adult Health,Physical Exam (Part II),Mid-30s,Muscle Strength: Reflexes,phys_muscle,-,PE_REFL,apgar1,apgar5,prem_birth,,0,0
+PE_UPEX,Adult Health,Physical Exam (Part II),Mid-30s,Muscle Strength: Upper Extremities,phys_muscle,-,PE_UPEX,apgar1,apgar5,prem_birth,,0,0
 si30y_subj_health,Adult Health,Self-Reported Health,30,Self-reported Health,selfhealth,-,,,,,,0,0
-si34y_subj_health,Adult Health,Self-Reported Health,Mid-30s,Self-reported Health,selfhealth,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
-si34y_vitd_def,Adult Health,Vitamin D Deficiency,Mid-30s,Vitamin D Deficiency,,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_subj_health,Adult Health,Self-Reported Health,Mid-30s,Self-reported Health,selfhealth,-,si34y_subj_health,apgar1,apgar5,prem_birth,,0,0
+si34y_vitd_def,Adult Health,Vitamin D Deficiency,Mid-30s,Vitamin D Deficiency,,-,si34y_vitd_def,apgar1,prem_birth,hh_sibs0y,,0,0
 cas_mbdrugs12y,Drugs and Alcohol,Smoking and Drinking Behavior,12,Used Alcohol and/or Drugs,risk_youth,-,,,,,,0,0
 cas_mbtralc12y,Drugs and Alcohol,Smoking and Drinking Behavior,12,Problems Due to Alcohol or Drugs,risk_youth,-,,,,,,0,0
 si21y_risk6,Drugs and Alcohol,Smoking and Drinking Behavior,21,Number of Times Ride Car of Other Drinker,risk_youth,-,,,,,,0,0
@@ -598,9 +598,9 @@ si21y_risk25,Drugs and Alcohol,Smoking and Drinking Behavior,21,Number of Days D
 si30y_cig_ever_reg,Drugs and Alcohol,Smoking and Drinking Behavior,30,Ever Smoked Regularly,risk_adult,-,,,,,,0,0
 si30y_cig_num,Drugs and Alcohol,"Tobacco, Drugs, Alcohol",30,Cig. Smoked per day last month,risk_adult,-,,,,,,0,0
 si30y_drink_binge_days,Drugs and Alcohol,Smoking and Drinking Behavior,30,Number of Days Binge Drank in Past 30 Days,risk_adult,-,,,,,,0,0
-si34y_drink_binge_days,Drugs and Alcohol,Smoking and Drinking Behavior,Mid-30s,Number of Days Binge Drank in Past 30 Days,risk_adult,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_drink_binge_days,Drugs and Alcohol,Smoking and Drinking Behavior,Mid-30s,Number of Days Binge Drank in Past 30 Days,risk_adult,-,si34y_drink_binge_days,apgar1,apgar5,prem_birth,,0,0
 si30y_drink_days,Drugs and Alcohol,Smoking and Drinking Behavior,30,Number of Days Drank Alcohol in Past 30 Days,risk_adult,-,,,,,,0,0
-si34y_drink_days,Drugs and Alcohol,Smoking and Drinking Behavior,Mid-30s,Number of Days Drank Alcohol in Past 30 Days,risk_adult,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_drink_days,Drugs and Alcohol,Smoking and Drinking Behavior,Mid-30s,Number of Days Drank Alcohol in Past 30 Days,risk_adult,-,si34y_drink_days,apgar1,apgar5,prem_birth,,0,0
 drink_binge_days,Drugs and Alcohol,"Tobacco, Drugs, Alcohol",30,Days binge drank alcohol last month,risk_adult,-,,,,,,0,0
 drink_days,Drugs and Alcohol,"Tobacco, Drugs, Alcohol",30,Days drank alcohol last month,risk_adult,-,,,,,,0,0
-si34y_drugs,Drugs and Alcohol,"Tobacco, Drugs, Alcohol",Mid-30s,Self-reported drug user,risk_adult,-,si34y_time,apgar1,apgar5,prem_birth,,0,0
+si34y_drugs,Drugs and Alcohol,"Tobacco, Drugs, Alcohol",Mid-30s,Self-reported drug user,risk_adult,-,si34y_drugs,apgar1,apgar5,prem_birth,,0,0
