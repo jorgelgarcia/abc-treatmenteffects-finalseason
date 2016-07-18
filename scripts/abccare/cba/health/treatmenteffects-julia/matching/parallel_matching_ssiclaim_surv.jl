@@ -19,7 +19,7 @@ addprocs(procs)
 # Define "to parallelize process"
 require("$here/bootstrap_matching_ssiclaim_surv.jl")
 B = 20 # number of workers being used
-b = 1  # number of work each worker does
+b = 5  # number of work each worker does
 
 matchboot = pmap(matchingrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 Matchfinal = Dict()

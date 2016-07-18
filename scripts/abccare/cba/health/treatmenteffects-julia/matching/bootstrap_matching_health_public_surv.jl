@@ -18,8 +18,8 @@ global results = "$current/../../rslt"
 global atecode = "$current/../../../../juliafunctions"
 
 # set up number of bootstraps and controls
-global breps = 74 		# remember to subtract 1, i.e. 50 becomes 49
-global areps = 3 	# remember to subtract 1, i.e. 50 becomes 49
+global breps = 99 		# remember to subtract 1, i.e. 50 becomes 49
+global areps = 99 	# remember to subtract 1, i.e. 50 becomes 49
 global controls = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male]
 global ipwvars_all = [:apgar1, :apgar5, :prem_birth]
 global component = "health_public_surv"
