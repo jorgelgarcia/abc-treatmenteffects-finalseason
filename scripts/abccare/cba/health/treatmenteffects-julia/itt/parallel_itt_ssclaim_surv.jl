@@ -4,9 +4,6 @@
 # Created: 06/28/2016
 # Updated: 07/08/2016
 # ================================================================ #
-# Use cluster managers to distribute the job across different computers
-using ClusterManagers
-addprocs_pbs(120)
 
 global here = pwd()
 
