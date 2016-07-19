@@ -19,6 +19,9 @@ end
 # Bring in USC projections
 fammerge = readtable("$(data)/abc-fam-merge.csv")
 
+# Drop id 64
+fammerge = fammerge[!(fammerge[:id] .== 64), :]
+
 # Drop home-visit only kids
 fammerge  = fammerge[!((fammerge[:R] .== 0) & (fammerge[:RV] .== 1)), :]
 
@@ -92,9 +95,6 @@ if deaths == 1
     end
 	end
 end
-
-# Drop id 64
-fammerge = fammerge[!(fammerge[:id] .== 64), :]
 
 # Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise)
 global discretized = ["apgar1", "apgar5", "prem_birth"]
