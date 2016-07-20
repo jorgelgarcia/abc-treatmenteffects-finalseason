@@ -89,9 +89,13 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
           # Restrict the estimates to those who we can actually estimate effects
           fml = Formula(y, Expr(:call, :+, :R, controls...))
           try
-            lm(fml, usedata)
+           #  lm(fml, usedata)
+            glm(fml, usedata, Normal(), IdentityLink())
           catch err
             push!(outMat["matching_$(gender)_P$(p)"], [y, draw, ddraw, NA, NA])
+            println("usedata $(usedata[:, [controls]])")
+            println("usedata_y $(usedata[:, [y]])")
+            println("error in linear regression: $(err)")
             continue
           end
           control_list = [:R]
@@ -178,6 +182,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
             mean_te = mean(obsdata[!isna(obsdata[:TE]) & (!isnan(obsdata[:TE])), :TE])
             N = length(obsdata[!isna(obsdata[:TE]) & (!isnan(obsdata[:TE])), :TE])
           end
+          println("mean_te: $(mean_te) and N: $(N)")
           # Store estimation results for R (randomization into treatment in ABC) into the output_ITT matrix. push! adds a row to the matrix output_ITT.
           push!(outMat["matching_$(gender)_P$(p)"], [y, draw, ddraw, mean_te, N])
         end
