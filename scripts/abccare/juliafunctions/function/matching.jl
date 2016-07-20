@@ -89,10 +89,12 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
           # Restrict the estimates to those who we can actually estimate effects
           fml = Formula(y, Expr(:call, :+, :R, controls...))
           try
-            lm(fml, usedata)
+           #  lm(fml, usedata)
+            glm(fml, usedata, Normal(), IdentityLink())
           catch err
             push!(outMat["matching_$(gender)_P$(p)"], [y, draw, ddraw, NA, NA])
             println("usedata $(usedata[:, [controls]])")
+            println("usedata_y $(usedata[:, [y]])")
             println("error in linear regression: $(err)")
             continue
           end
