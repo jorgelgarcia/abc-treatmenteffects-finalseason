@@ -92,6 +92,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
             lm(fml, usedata)
           catch err
             push!(outMat["matching_$(gender)_P$(p)"], [y, draw, ddraw, NA, NA])
+            println("error in linear regression: $(err)")
             continue
           end
           control_list = [:R]
