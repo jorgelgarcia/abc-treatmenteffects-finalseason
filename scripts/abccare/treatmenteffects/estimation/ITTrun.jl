@@ -12,7 +12,7 @@ using Distances
 
 # Set globals and directories
 global current = pwd()
-global data = "$current/../../../../../data/abccare/extensions/cba-iv"
+global data = "$current/../../../../data/abccare/extensions/cba-iv"
 global output = "$current/../rslt"
 global scripts = "$current/../../juliafunctions"
 
