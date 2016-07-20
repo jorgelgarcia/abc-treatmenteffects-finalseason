@@ -84,6 +84,7 @@ end
 # =============== #
 # Save the output #
 # =============== #
+Matchfinal = Dict()
 for gender in genderloop
 
 	Matchfinal["$(gender)"] = MatchInitial["$(gender)"]

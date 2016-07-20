@@ -81,7 +81,9 @@ for gender in genderloop
 	ITTinitial["$(gender)"] = sort(ITTinitial["$(gender)"], cols = [:draw, :ddraw])
 end
 
+
 # Export to csv
+ITTfinal = Dict()
 for gender in genderloop
 
 	ITTfinal["$(gender)"] = ITTinitial["$(gender)"]

@@ -82,6 +82,7 @@ for gender in genderloop
 end
 
 # Export to csv
+ITTfinal = Dict()
 for gender in genderloop
 
 	ITTfinal["$(gender)"] = ITTinitial["$(gender)"]
