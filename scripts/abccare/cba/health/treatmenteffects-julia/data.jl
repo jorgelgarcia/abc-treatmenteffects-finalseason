@@ -79,18 +79,18 @@ if deaths == 1
 		for age in [8:79]
 			if age > idage["id$(id_n)age"]
 				println("Dealing with deaths: $(id_n) at age $(age)")
-        fammerge[fammerge[:id] .== id_n, parse("health_private_surv$(age)")] = 0
-        fammerge[fammerge[:id] .== id_n, parse("health_public_surv$(age)")] = 0
+        fammerge[fammerge[:id] .== id_n, parse("health_private$(age)")] = 0
+        fammerge[fammerge[:id] .== id_n, parse("health_public$(age)")] = 0
       end
     end
 
     for age in [30:79]
 			if age > idage["id$(id_n)age"]
 				println("Dealing with deaths: $(id_n) at age $(age)")
-        fammerge[fammerge[:id] .== id_n, parse("diclaim_surv$(age)")] = 0
-        fammerge[fammerge[:id] .== id_n, parse("ssiclaim_surv$(age)")] = 0
-        fammerge[fammerge[:id] .== id_n, parse("ssclaim_surv$(age)")] = 0
-        fammerge[fammerge[:id] .== id_n, parse("qaly_surv$(age)")] = 0
+        fammerge[fammerge[:id] .== id_n, parse("diclaim$(age)")] = 0
+        fammerge[fammerge[:id] .== id_n, parse("ssiclaim$(age)")] = 0
+        fammerge[fammerge[:id] .== id_n, parse("ssclaim$(age)")] = 0
+        fammerge[fammerge[:id] .== id_n, parse("qaly$(age)")] = 0
       end
     end
 	end
