@@ -112,7 +112,8 @@ def makeflows(etype):
                 df = pd.read_csv(os.path.join(flowscsv, file_[sex]), index_col=['adraw','draw'])
                 full = pd.DataFrame(0., index=pd.MultiIndex.from_product([range(adraws), range(draws)], names=['adraw','draw']), 
                                     columns=['c{}'.format(i) for i in xrange(80)])
-                full.loc[df.index, df.columns] = df
+		
+                full.loc[full.index, full.columns] = df
                 full['sex'] = sex
                 full = full.set_index('sex', append=True)   
                 full = full.reorder_levels(['sex', 'adraw', 'draw'], axis=0).sort_index()   
