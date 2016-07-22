@@ -1,16 +1,20 @@
-\begin{tabular}{l|cccccccccccccc} \toprule
-\multicolumn{1}{c}{Age $a$} & \multicolumn{14}{c}{Age $a+1$} \\ \midrule
-  & Heart & Hypertension & Stroke & Lung Disease & Diabetes & Cancer & Disability & Mortality & Smoking & Obesity & Health  & DI  & SS  & SSI  \\
-&  Disease &  &  & Disease & & & & &  &  & Insurance & Claim & Claim & Claim \\
-Heart Disease & & & $\times$& & & &$\times$ &$\times$ &$\times$ &     $\times$        &  $\times$      &  $\times$  & $\times$ & $\times$\\
-Hypertension  & & & $\times$ & & & &$\times$ &$\times$ &$\times$ &         $\times$    &   $\times$    & $\times$   & $\times$ & $\times$ \\
-Stroke           & & & & & & &$\times$ &$\times$ &$\times$ &       $\times$       &     $\times$   &   $\times$  & $\times$ & $\times$ \\
-Lung Disease & & & & & & &$\times$ &$\times$ & $\times$&       $\times$      &   $\times$     &   $\times$  &$\times$  & $\times$ \\
-Diabetes       & $\times$ &$\times$  & &  $\times$ & & &$\times$ &$\times$ & $\times$&         $\times$    &   $\times$     &  $\times$   & $\times$ & $\times$ \\
-Cancer         & & & &  $\times$ & & &$\times$ & $\times$& $\times$&     $\times$       &   $\times$      &   $\times$  & $\times$ & $\times$ \\
-Disability     & & & & & & &$\times$ &$\times$ & $\times$&     $\times$       &    $\times$     &     $\times$  & $\times$ & $\times$  \\
+\begin{tabular}{l|ccccccccccccccc} \toprule
+\multicolumn{1}{c}{Age $a$} & \multicolumn{15}{c}{Age $a+1$} \\ \midrule
+  & Heart & Hypertension & Stroke & Lung  & Diabetes & Cancer & Disability & Mortality & Smoking & Binge & Obesity & Health  & DI  & SS  & SSI  \\
+&  Disease &  &  & Disease & & & & &  &Drinking&  & Insurance & Claim & Claim & Claim \\
+Heart Disease & & & $\times$& & & &$\times$ &$\times$ & $\times$ &          &       &  $\times$  & $\times$ & $\times$ & $\times$\\
+Hypertension  &  $\times$& & $\times$ & & & &$\times$ &$\times$ & $\times$ &      &     & $\times$   & $\times$ & $\times$  & $\times$\\
+Stroke           & & & & & & &$\times$ &$\times$ &  &            &      &   $\times$  & $\times$ & $\times$  & $\times$\\
+Lung Disease & & & & & & &$\times$ &$\times$ & $\times$&          &        &   $\times$  &$\times$  & $\times$  & $\times$\\
+Diabetes       & $\times$ &$\times$  & &  $\times$ & & &$\times$ &$\times$ & &           &       &  $\times$    & $\times$& $\times$ & $\times$ \\
+Cancer         & & & $\times$ &  & &   &$\times$ & $\times$&  &           &         &   $\times$  & $\times$ & $\times$  & $\times$\\
+Disability     & & & & & & &$\times$ &$\times$ & &         &      &     $\times$  & $\times$ & $\times$   & $\times$\\
 \midrule
-DI Claim      & & & & &  & & & & &            &    $\times$     & $\times$      & $\times$ & $\times$\\
-SS Claim     & & & & & & & & &           &         &    $\times$  & & & $\times$\\
-SSI Claim   & & & & &&  & & & &         &        &      & & $\times$ \\ \bottomrule
+Smoking & $\times$& $\times$&$\times$ & $\times$& $\times$& $\times$&$\times$ &$\times$ & $\times$ &  &  $\times$ &     $\times$  & $\times$ & $\times$   & $\times$\\
+Binge Drinking & & & & & & &  &$\times$ & $\times$  &        $\times$  &      &      & $\times$ & $\times$   & $\times$\\
+BMI & $\times$& $\times$&$\times$ & $\times$& $\times$& $\times$&$\times$ &$\times$ & $\times$ &   &  $\times$ &     $\times$  & $\times$ & $\times$   & $\times$\\
+\midrule
+DI Claim      & & & & &  & & & & &            &    $\times$     & $\times$    & $\times$   & $\times$ & $\times$\\
+SS Claim     & & & & & & & & &           &         &    $\times$  & &  & $\times$& $\times$\\
+SSI Claim   & & & & &&  & & & &         &        &      & & $\times$  & $\times$\\ \bottomrule
 \end{tabular}
