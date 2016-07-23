@@ -20,13 +20,28 @@ if `ddraw' == 0 keep rowname draw `ename'
 
 rename `ename' x
 
+di "`prefix' `ename' `csvin' `csvout'"
 if `ddraw' == 1 reshape wide x, i(draw ddraw) j(rowname) string
 if `ddraw' == 0 reshape wide x, i(draw) j(rowname) string
 
 forvalues age = 0/79 {
 	capture confirm variable x`prefix'`age'
-	if !_rc rename x`prefix'`age' c`age'
-	else gen c`age' = 0
+	if !_rc {
+		
+		capture confirm string x`prefix'`age'
+		if !_rc {
+			di "string variable: x`prefix'`age'"
+			replace x`prefix'`age' = "" if x`prefix'`age' == "NA" | x`prefix'`age' == "NaN"
+			destring x`prefix'`age', replace
+		}
+		
+		rename x`prefix'`age' c`age'
+	}
+	else {
+		gen c`age' = 0
+	}
+	
+	
 }
 
 order c*, sequential
