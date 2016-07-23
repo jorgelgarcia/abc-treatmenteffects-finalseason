@@ -52,8 +52,8 @@ flows = {
     'ccpublic':{'m':'cccostpublic_m.csv', 'f':'cccostpublic_f.csv', 'p':'cccostpublic_p.csv'},
     'ccprivate':{'m':'cccostprivate_m.csv', 'f':'cccostprivate_f.csv', 'p':'cccostprivate_p.csv'},
     # Health
-    'health_private': {'m': 'health_private_m.csv', 'f':'health_private_f.csv', 'p':'health_private_p.csv'},
-    'health_public': {'m': 'health_public_m.csv', 'f':'health_public_f.csv', 'p':'health_public_p.csv'},
+    'health_private': {'m': 'health_private_surv_m.csv', 'f':'health_private_surv_f.csv', 'p':'health_private_surv_p.csv'},
+    'health_public': {'m': 'health_public_surv_m.csv', 'f':'health_public_surv_f.csv', 'p':'health_public_surv_p.csv'},
     'qaly': {'m': 'qaly_surv_m.csv', 'f':'qaly_surv_f.csv', 'p':'qaly_surv_p.csv'},
     # Transfer claims
     'diclaim':{'m': 'diclaim_surv_m.csv', 'f':'diclaim_surv_f.csv', 'p':'diclaim_surv_p.csv' },
@@ -113,7 +113,7 @@ def makeflows(etype):
                 full = pd.DataFrame(0., index=pd.MultiIndex.from_product([range(adraws), range(draws)], names=['adraw','draw']), 
                                     columns=['c{}'.format(i) for i in xrange(80)])
 		
-                full.loc[full.index, full.columns] = df
+                full.loc[full.index, full.columns] = df.loc[full.index, full.columns]
                 full['sex'] = sex
                 full = full.set_index('sex', append=True)   
                 full = full.reorder_levels(['sex', 'adraw', 'draw'], axis=0).sort_index()   
@@ -226,12 +226,12 @@ def bc_calc(filled, components=flows.keys(), rate=0.03):
     costs = costs.apply(robust_npv, rate=rate, axis=1)
     benefits = benefits.apply(robust_npv, rate=rate, axis=1)
     ratio = -benefits/costs
-
+   
     point_f = ratio.loc['f',0,0]
     point_m = ratio.loc['m',0,0]
     point_p = ratio.loc['p',0,0]
-
-    qtrim = 0.01        
+    
+    qtrim = 0.05        
    
     ratiof = ratio.loc['f'].dropna()
     ratiom = ratio.loc['m'].dropna()
@@ -243,9 +243,9 @@ def bc_calc(filled, components=flows.keys(), rate=0.03):
     
     # Conduct inference    
     null_center = 1  
-    ratio_fp = 1 - percentileofscore(ratiof - ratiof.mean() + null_center, point_f)/100
-    ratio_mp = 1 - percentileofscore(ratiom - ratiom.mean() + null_center, point_m)/100
-    ratio_pp = 1 - percentileofscore(ratiop - ratiop.mean() + null_center, point_p)/100
+    ratio_fp = 1 - percentileofscore(ratiof - ratiof.mean() + null_center, ratiof.mean())/100
+    ratio_mp = 1 - percentileofscore(ratiom - ratiom.mean() + null_center, ratiom.mean())/100
+    ratio_pp = 1 - percentileofscore(ratiop - ratiop.mean() + null_center, ratiop.mean())/100
 
 
     # Save results
@@ -255,6 +255,11 @@ def bc_calc(filled, components=flows.keys(), rate=0.03):
     ratio_se = pd.DataFrame([ratiof.std(), ratiom.std(), ratiop.std()], index=['f','m','p'])
     try:
         ratio_quant = ratio.groupby(level='sex').quantile([0.1, 0.9]).unstack()
+        #ratio_quantf = ratiof.quantile([0.1, 0.9]).unstack()
+        #ratio_quantm = ratiom.quantile([0.1, 0.9]).unstack()
+        #ratio_quantp = ratiop.quantile([0.1, 0.9]).unstack()
+ 
+        #ratio_quant = pd.DataFrame([ratiof.quantile, ratiom.quantile, ratiop.quantile], index = ['f','m','p'])
     except:
         ratio_quant = pd.DataFrame(np.array([[np.nan, np.nan], [np.nan, np.nan], [np.nan, np.nan]]), index = ['f', 'm', 'p'])
         ratio_quant.index.name = 'sex'
@@ -279,21 +284,25 @@ def irr_calc(filled, components=flows.keys()):
     point_m = irr.loc['m',0,0]
     point_p = irr.loc['p',0,0]
 
-    qtrim = 0.01
+    qtrim = 0
     
     irrf = irr.loc['f'].dropna()
     irrm = irr.loc['m'].dropna()
     irrp = irr.loc['p'].dropna()
     
-    irrf = irrf.ix[(irrf>irrf.quantile(q=qtrim)) & (irrf<irrf.quantile(q=1-qtrim))]
-    irrm = irrm.ix[(irrm>irrm.quantile(q=qtrim)) & (irrm<irrm.quantile(q=1-qtrim))]
-    irrp = irrp.ix[(irrp>irrp.quantile(q=qtrim)) & (irrp<irrp.quantile(q=1-qtrim))]
+    #irrf = irrf.ix[(irrf>irrf.quantile(q=qtrim)) & (irrf<irrf.quantile(q=1-qtrim))]
+    #irrm = irrm.ix[(irrm>irrm.quantile(q=qtrim)) & (irrm<irrm.quantile(q=1-qtrim))]
+    #irrp = irrp.ix[(irrp>irrp.quantile(q=qtrim)) & (irrp<irrp.quantile(q=1-qtrim))]
+
+    irrf = irrf.ix[irrf > 0]
+    irrm = irrm.ix[irrm > 0]
+    irrp = irrp.ix[irrp > 0]
     
     # Conduct inference    
     null_center = 0.03
-    irr_fp = 1 - percentileofscore(irrf - irrf.mean() + null_center, point_f)/100
-    irr_mp = 1 - percentileofscore(irrm - irrm.mean() + null_center, point_m)/100
-    irr_pp = 1 - percentileofscore(irrp - irrp.mean() + null_center, point_p)/100
+    irr_fp = 1 - percentileofscore(irrf - irrf.mean() + null_center, irrf.mean())/100
+    irr_mp = 1 - percentileofscore(irrm - irrm.mean() + null_center, irrm.mean())/100
+    irr_pp = 1 - percentileofscore(irrp - irrp.mean() + null_center, irrp.mean())/100
 
     # Save results
     irr_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])    
