@@ -15,13 +15,18 @@ insheet using ../rslt/sensitivity/bc_factors.csv, names clear
 
 rename v1 sex
 
-replace point = "" if point == "-inf"
-replace point = "" if point == "inf"
-replace lb = "" if lb=="-inf"
-replace ub = "" if ub=="-inf"
-replace lb = "" if lb=="inf"
-replace ub = "" if ub=="inf"
-destring point lb ub, replace
+* make this statistic ofn interest (can change to point)
+gen stat = mean
+
+foreach v in stat lb ub {
+	capture confirm string `v'
+	if !_rc {
+		replace `v' = "" if `v' == "-inf" | `v' == "inf"
+		destring `v', replace
+	}
+}
+
+
 
 sort sex part rate
 
@@ -29,15 +34,15 @@ sort sex part rate
 gen errors = 0
 
 replace errors = 1 if rate < 0.6 & part == "costs" & inlist(sex, "m", "f")
-replace errors = 1 if point > ub & !missing(point)
-replace errors = 1 if point < lb & !missing(lb)
+replace errors = 1 if stat > ub & !missing(stat)
+replace errors = 1 if stat < lb & !missing(lb)
 
-replace point = . if errors == 1
+replace stat = . if errors == 1
 replace ub = . if errors == 1
 replace lb = . if errors == 1
 
 // prepare alternate CI and point estimate
-gen alt_point = point if rate == 1
+gen alt_stat = stat if rate == 1
 gen tmp1 = ub if rate == 1
 gen tmp2 = lb if rate == 1
 bysort sex: egen alt_ub = mean(tmp1)
@@ -47,7 +52,7 @@ drop tmp1 tmp2
 * label variables
 label var sex "Sex"
 label var rate "Factor"
-label var point "Benefit-Cost Ratio"
+label var stat "Benefit-Cost Ratio"
 label var lb "Lower bound (bootstrap 10th percentile)"
 label var ub "Upper bound (bootstrap 90th percentile)"
 
@@ -86,9 +91,9 @@ foreach sex in m f {
 		}*/
 
 		#delimit
-		twoway 	(scatter point rate if sex == "`sex'" & part == "`p'", msymbol(circle) mfcolor(gs0) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0) yline(1, lpattern(solid)))
+		twoway 	(scatter stat rate if sex == "`sex'" & part == "`p'", msymbol(circle) mfcolor(gs0) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0) yline(1, lpattern(solid)))
 				(line alt_ub alt_lb rate if sex == "`sex'" & part == "`p'", lwidth(thin thin) lpattern(dash dash) lcolor(gs0 gs0))
-				(scatter alt_point rate if sex == "`sex'" & part == "`p'", msymbol(circle) mfcolor(white) mlcolor(maroon) msize(medlarge))
+				(scatter alt_stat rate if sex == "`sex'" & part == "`p'", msymbol(circle) mfcolor(white) mlcolor(maroon) msize(medlarge))
 				, 
 				  legend(label(1 $y1label) label(2 $y2label) label(4 $y3label) order(4 1 2) size(small) rows(1))
 				  xlabel(, nogrid glcolor(gs14)) ylabel(, nogrid angle(h) glcolor(gs14))
