@@ -48,18 +48,18 @@ keep if _merge == 3
 drop _merge
 
 // to long 
-drop if bsrep == 0 & mcrep == 0
+keep if bsrep == 0 & mcrep == 1
 reshape long prvmd pubmd qaly, i(num_id) j(age)
 egen md = rowtotal(prvmd pubmd), missing 
-collapse (mean) md qaly, by(age R male)
+collapse (mean) md prvmd pubmd qaly, by(age R male)
 
 cd $output
 keep if age >= 30
 foreach sex of numlist 0 1 {
 	foreach var of varlist md qaly {
 		#delimit
-		twoway (scatter `var' age if R == 0 & male == `sex', msymbol(square)  mfcolor (gs0) mlcolor(gs0) msize(large) /*connect(l) lwidth(medthick) lpattern(solid) lcolor(gs4)*/)
-		       (scatter `var' age if R == 1 & male == `sex', msymbol(circle)  mfcolor (gs5) mlcolor(gs5) msize(large) /*connect(l) lwidth(medthick) lpattern(dash)  lcolor(gs8)*/)
+		twoway (lowess `var' age if R == 0 & male == `sex', msymbol(square)  mfcolor (gs0) mlcolor(gs0) msize(large) connect(l) lwidth(vthick) lpattern(solid) lcolor(gs4))
+		       (lowess `var' age if R == 1 & male == `sex', msymbol(circle)  mfcolor (gs5) mlcolor(gs5) msize(large) connect(l) lwidth(vthick) lpattern(dash)  lcolor(gs8))
 			, 
 				  legend(label(1 Control) label(2 Treatment))
 				  xlabel(30[10]80, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
