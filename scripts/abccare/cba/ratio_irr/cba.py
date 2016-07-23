@@ -18,7 +18,7 @@ Select estimation type ('etype')
 1: "ITT", no controls
 2: ITT, with controls and IPW
 3: P=0, "ITT" no controls
-4: P=0, "ITT" with controls and IPW
+4: P=0, "ITT" with controls and IPWc
 5: P=0, matching
 6: P=1, "ITT" no controls
 7: P=1, "ITT" with controls and IPW
@@ -27,7 +27,7 @@ Select estimation type ('etype')
 #----------------------------------------
 # Generate the matrices of flows
 #----------------------------------------
-etype = 2
+etype = 8
 filled = makeflows(etype=etype)
 benefits, costs = bcflows(filled=filled)
 total = irrflows(filled=filled)
@@ -74,21 +74,29 @@ for age in [5, 8, 15, 21, 30, 79]:
     point_m = irr.loc['m',0,0]
     point_p = irr.loc['p',0,0]
 
-    qtrim = 0.01
+    qtrim = 0
     
     irrf = irr.loc['f'].dropna()
     irrm = irr.loc['m'].dropna()
     irrp = irr.loc['p'].dropna()
     
-    irrf = irrf.ix[(irrf>irrf.quantile(q=qtrim)) & (irrf<irrf.quantile(q=1-qtrim))]
-    irrm = irrm.ix[(irrm>irrm.quantile(q=qtrim)) & (irrm<irrm.quantile(q=1-qtrim))]
-    irrp = irrp.ix[(irrp>irrp.quantile(q=qtrim)) & (irrp<irrp.quantile(q=1-qtrim))]
+    #irrf = irrf.ix[(irrf>irrf.quantile(q=qtrim)) & (irrf<irrf.quantile(q=1-qtrim))]
+    #irrm = irrm.ix[(irrm>irrm.quantile(q=qtrim)) & (irrm<irrm.quantile(q=1-qtrim))]
+    #irrp = irrp.ix[(irrp>irrp.quantile(q=qtrim)) & (irrp<irrp.quantile(q=1-qtrim))]
+
+    irrf = irrf.ix[irrf > 0]
+    irrm = irrm.ix[irrm > 0]
+    irrp = irrp.ix[irrp > 0]
     
     # Conduct inference    
     null_center = 0.03
-    irr_fp = 1 - percentileofscore(irrf - irrf.mean() + null_center, point_f)/100
-    irr_mp = 1 - percentileofscore(irrm - irrm.mean() + null_center, point_m)/100
-    irr_pp = 1 - percentileofscore(irrp - irrp.mean() + null_center, point_p)/100
+    #irr_fp = 1 - percentileofscore(irrf - irrf.mean() + null_center, point_f)/100
+    #irr_mp = 1 - percentileofscore(irrm - irrm.mean() + null_center, point_m)/100
+    #irr_pp = 1 - percentileofscore(irrp - irrp.mean() + null_center, point_p)/100
+
+    irr_fp = 1 - percentileofscore(irrf - irrf.mean() + null_center, irrf.mean())/100
+    irr_mp = 1 - percentileofscore(irrm - irrm.mean() + null_center, irrm.mean())/100
+    irr_pp = 1 - percentileofscore(irrp - irrp.mean() + null_center, irrp.mean())/100
 
     # Save results
     irr_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])    
@@ -112,12 +120,10 @@ for age in [5, 8, 15, 21, 30, 79]:
         irr.to_csv(os.path.join(tables, 'all_irr_type{}.csv'.format(etype)), index=True)
         irr_pnt.to_csv(os.path.join(tables, 'irr_pnt.csv'), index=True, header=False)
         irr_p.to_csv(os.path.join(tables, 'irr_pval.csv'), index=True, header=False)
-        irr.mean(level='sex').to_csv(os.path.join(tables, 'irr_mean.csv'),
-                index=True)
+        irr_mean.to_csv(os.path.join(tables, 'irr_mean.csv'), index=True, header=False)
         irr.groupby(level='sex').quantile([0.1, 0.9]).to_csv(os.path.join(tables, 'irr_ci.csv'),
                 index=True)
-        irr.std(level='sex').to_csv(os.path.join(tables, 'irr_se.csv'),
-                index=True) 
+        irr_se.to_csv(os.path.join(tables, 'irr_se.csv'), index=True, header=False) 
         roots = pd.DataFrame(roots, index=irr.index)
         roots.to_csv(os.path.join(tables, 'all_roots_type{}.csv'.format(etype)), index=True)
     
@@ -135,12 +141,12 @@ for age in [5, 8, 15, 21, 30, 79]:
     costs_age = costs.loc[:, slice('c{}'.format(age))].apply(robust_npv, axis=1)
     benefits_age = benefits.loc[:, slice('c{}'.format(age))].apply(robust_npv, axis=1)
     ratio = -benefits_age/costs_age
-
+    
     point_f = ratio.loc['f',0,0]
     point_m = ratio.loc['m',0,0]
     point_p = ratio.loc['p',0,0]
 
-    qtrim = 0.01
+    qtrim = 0.05
    
     ratiof = ratio.loc['f'].dropna()
     ratiom = ratio.loc['m'].dropna()
@@ -152,10 +158,10 @@ for age in [5, 8, 15, 21, 30, 79]:
     
     # Conduct inference    
     null_center = 1  
-    ratio_fp = 1 - percentileofscore(ratiof - ratiof.mean() + null_center, point_f)/100
-    ratio_mp = 1 - percentileofscore(ratiom - ratiom.mean() + null_center, point_m)/100
-    ratio_pp = 1 - percentileofscore(ratiop - ratiop.mean() + null_center, point_p)/100
 
+    ratio_fp = 1 - percentileofscore(ratiof - ratiof.mean() + null_center, ratiof.mean())/100
+    ratio_mp = 1 - percentileofscore(ratiom - ratiom.mean() + null_center, ratiom.mean())/100
+    ratio_pp = 1 - percentileofscore(ratiop - ratiop.mean() + null_center, ratiop.mean())/100
 
     # Save results
     ratio_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])
@@ -164,6 +170,7 @@ for age in [5, 8, 15, 21, 30, 79]:
     ratio_se = pd.DataFrame([ratiof.std(), ratiom.std(), ratiop.std()], index=['f','m','p'])
     try:
         ratio_quant = ratio.groupby(level='sex').quantile([0.1, 0.9]).unstack()
+        #ratio_quantf = ratiof.quantile([0.1, 0.9]).unstack()
     except:
         ratio_quant = pd.DataFrame(np.array([[np.nan, np.nan], [np.nan, np.nan], [np.nan, np.nan]]), index = ['f', 'm', 'p'])
         ratio_quant.index.name = 'sex'
@@ -178,11 +185,9 @@ for age in [5, 8, 15, 21, 30, 79]:
         ratio.to_csv(os.path.join(tables, 'all_ratios_type{}.csv'.format(etype)), index=True)
         ratio_pnt.to_csv(os.path.join(tables, 'ratio_pnt.csv'), index=True, header=False)
         ratio_p.to_csv(os.path.join(tables, 'ratio_pval.csv'), index=True, header=False) 
-        ratio.mean(level='sex').to_csv(os.path.join(tables, 'ratio_mean.csv'), 
-        	index=True)
+        ratio_mean.to_csv(os.path.join(tables,'ratio_mean.csv'), index=True, header=False)
+        ratio_se.to_csv(os.path.join(tables,'ratio_se.csv'), index=True,header=False)
         ratio.groupby(level='sex').quantile([0.1, 0.9]).to_csv(os.path.join(tables, 'ratio_ci.csv'),
-        	index=True)
-        ratio.std(level='sex').to_csv(os.path.join(tables, 'ratio_se.csv'),
         	index=True)
     
 bcr_ages = pd.concat(bcr_ages, axis=0, names=['age', 'sex'])
