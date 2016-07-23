@@ -3,7 +3,8 @@ set maxvar 32000
 set more off
 
 
-global projects: env projects
+//global projects: env projects
+global projects = "/home/aziff/projects"
 global dofiles "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/ratio_irr/flows"
 global income "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/rslt"
 global health "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/health/rslt"
@@ -50,20 +51,22 @@ foreach component in labor transfer {
 * Health
 *---------------------------------
 
-foreach component in  diclaim_surv ssiclaim_surv ssclaim_surv qaly_surv health_private_surv health_public_surv { /* */
+foreach component in diclaim ssiclaim ssclaim qaly health_private health_public { /* */
 	foreach sex in male female pooled {
+	
 		foreach pre in 0 1 {
 			* matching
-			converter, csvin(${health}/matching/`component'_`sex'_P`pre') csvout(${output}/p`pre'_match/`component'_`s`sex'') ename(epan_ipw) prefix(`component')
+			converter, csvin(${health}/matching/`component'_surv_`sex'_P`pre') csvout(${output}/p`pre'_match/`component'_surv_`s`sex'') ename(epan_ipw) prefix(`component')
 			* conditional ITT
-			converter, csvin(${health}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(`component') 
-			converter, csvin(${health}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
-			converter, csvin(${health}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component')			
+			converter, csvin(${health}/itt/`component'_surv_`sex'_P`pre') csvout(${output}/p`pre'_noctrl/`component'_surv_`s`sex'') ename(itt_noctrl) prefix(`component') 
+			converter, csvin(${health}/itt/`component'_surv_`sex'_P`pre') csvout(${output}/p`pre'_ctrl/`component'_surv_`s`sex'') ename(itt_ctrl) prefix(`component') 			
+			converter, csvin(${health}/itt/`component'_surv_`sex'_P`pre') csvout(${output}/p`pre'_wctrl/`component'_surv_`s`sex'') ename(itt_wctrl) prefix(`component')			
 		}
+	
 		* ITT
-		converter, csvin(${health}/itt/`component'_`sex') csvout(${output}/ncc_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(`component') 
-		converter, csvin(${health}/itt/`component'_`sex') csvout(${output}/ncc_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
-		converter, csvin(${health}/itt/`component'_`sex') csvout(${output}/ncc_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component')
+		converter, csvin(${health}/itt/`component'_surv_`sex'_P10) csvout(${output}/ncc_noctrl/`component'_surv_`s`sex'') ename(itt_noctrl) prefix(`component') 
+		converter, csvin(${health}/itt/`component'_surv_`sex'_P10) csvout(${output}/ncc_ctrl/`component'_surv_`s`sex'') ename(itt_ctrl) prefix(`component') 			
+		converter, csvin(${health}/itt/`component'_surv_`sex'_P10) csvout(${output}/ncc_wctrl/`component'_surv_`s`sex'') ename(itt_wctrl) prefix(`component')
 	}
 }
 

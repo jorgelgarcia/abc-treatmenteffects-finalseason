@@ -23,7 +23,7 @@ end
 
 	
 /* TEMP FILE PATH FOR JOSH*/
-cd "/home/jkcshea/Documents/cehd/projects/abc-treatmenteffects-finalseason/scripts/abccare/cba/ratio_irr/sensitivity"
+//cd "/home/jkcshea/Documents/cehd/projects/abc-treatmenteffects-finalseason/scripts/abccare/cba/ratio_irr/sensitivity"
 
 // Check file path
 local filedir: pwd
