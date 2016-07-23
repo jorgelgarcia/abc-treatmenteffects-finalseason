@@ -22,7 +22,7 @@ global googledrive: env googledrive
 // do files
 global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global data       = "$klmmexico/abccare/irr_ratios/jul-07"
+global data       = "$klmmexico/abccare/irr_ratios/jul-23"
 // output
 global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 
@@ -58,7 +58,6 @@ save "`allestimates'", replace
 cd $output
 
 // ratios
-/*
 foreach type of numlist 2 5 8  {
 	foreach sex in f m p {
 		di "type `type', sex `sex'"
@@ -116,12 +115,14 @@ foreach type of numlist 2 5 8  {
 				  graphregion(color(white)) plotregion(fcolor(white))
 				  note("Case 1: `point'(`pointse')[`pointp']; Case 2: `point'(`pointse2')[`pointp2'].     < 0, `propz'%");
 		#delimit cr 
-		graph export ratios_`type'_sex`sex'.eps, replace
+		// graph export ratios_`type'_sex`sex'.eps, replace
 		// di in r "Enter after seeing Figure" _request(Hello)
 		restore
 	}
-}*/
+}
 
+
+/*
 // irr
 // first count roots
 clear

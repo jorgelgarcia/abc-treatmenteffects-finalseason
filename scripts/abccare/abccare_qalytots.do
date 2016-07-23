@@ -55,7 +55,7 @@ collapse (mean) md prvmd pubmd qaly, by(age R male)
 
 cd $output
 keep if age >= 30
-foreach sex of numlist 0 {
+foreach sex of numlist 0 1 {
 	foreach var of varlist md qaly {
 		#delimit
 		twoway (lowess `var' age if R == 0 & male == `sex', msymbol(square)  mfcolor (gs0) mlcolor(gs0) msize(large) connect(l) lwidth(vthick) lpattern(solid) lcolor(gs4))
