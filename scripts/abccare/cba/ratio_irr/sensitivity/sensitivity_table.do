@@ -21,10 +21,6 @@ foreach varname in `varlist' {
 }
 end
 
-	
-/* TEMP FILE PATH FOR JOSH*/
-//cd "/home/jkcshea/Documents/cehd/projects/abc-treatmenteffects-finalseason/scripts/abccare/cba/ratio_irr/sensitivity"
-
 // Check file path
 local filedir: pwd
 if strpos("`filedir'", "cba")==0 &  strpos("`filedir'", "ratio_irr")==0 & strpos("`filedir'", "sensitivity")==0 {
@@ -40,7 +36,7 @@ global output	../../../../../../output
 
 cd "$csvs"
 
-foreach stat in point se pval {
+foreach stat in mean se pval {
 
 	// by component, b/c ratio
 	insheet using bc_factors.csv, names clear
@@ -124,7 +120,7 @@ foreach stat in point se pval {
 	drop sig_tmp
 	keep if type == "`stat'"
 	drop type
-	keep if inlist(part, "cc", "crime", "edu", "health", "inc_labor", "inc_parent", "qaly", "transfer")
+	keep if inlist(part, "all", "cc", "crime", "edu", "health", "inc_labor", "inc_parent", "qaly", "transfer")
 	gen type = "npv"
 	rename value `stat'
 	tempfile npv
@@ -194,7 +190,7 @@ foreach stat in point se pval {
 		}
 	}
 	
-	if "`stat'" == "point"{
+	if "`stat'" == "mean"{
 		foreach v of varlist `stat'* {
 			local suffix = subinstr("`v'", "`stat'", "", .)
 			replace `v' = "\textbf{" + `v' + "}" if sig`suffix' == "1"
@@ -221,7 +217,7 @@ foreach stat in point se pval {
 	order part `stat'fnpv `stat'firr `stat'fbcr `stat'mnpv `stat'mirr `stat'mbcr `stat'pnpv `stat'pirr `stat'pbcr order
 
 	// label
-	replace part = "None" if part == "base"
+	replace part = "None" if part == "base" | part == "all"
 	replace part = "Parental Income" if part == "inc_parent"
 	replace part = "Subject QALY" if part == "qaly"
 	replace part = "Subject Labor Income" if part == "inc_labor"
@@ -261,11 +257,11 @@ foreach stat in point se pval {
 	save `table_`stat'', replace
 }
 
-use `table_point', clear
+use `table_mean', clear
 append using `table_se'
 append using `table_pval'
 
-replace stat = "1. point" if stat == "point"
+replace stat = "1. mean" if stat == "mean"
 replace stat = "2. se" if stat == "se"
 replace stat = "3. pval" if stat == "pval"
 

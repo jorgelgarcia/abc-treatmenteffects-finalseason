@@ -15,20 +15,23 @@ insheet using ../rslt/sensitivity/bc_dwl.csv, names clear
 
 rename v1 sex
 
+* make this statistic ofn interest (can change to point)
+gen stat = mean
+
 * fix cases where IRR exhibits extreme values
 gen errors = 0
 
-replace errors = 1 if point > ub & !missing(point)
-replace errors = 1 if point < lb & !missing(lb)
+replace errors = 1 if stat > ub & !missing(stat)
+replace errors = 1 if stat < lb & !missing(lb)
 
-replace point = . if errors == 1
+replace stat = . if errors == 1
 replace ub = . if errors == 1
 replace lb = . if errors == 1
 
 // prepare alternate CI and point estimate
 gen rate_s = string(rate)
 
-gen alt_point = point if rate_s == ".5"
+gen alt_stat = stat if rate_s == ".5"
 gen tmp1 = ub if rate_s == ".5"
 gen tmp2 = lb if rate_s == ".5"
 bysort sex: egen alt_ub = mean(tmp1)
@@ -40,7 +43,7 @@ sort sex rate
 
 label var sex "Sex"
 label var rate "Marginal Cost of Welfare"
-label var point "Benefit-Cost Ratio"
+label var stat "Benefit-Cost Ratio"
 label var lb "Lower bound (bootstrap 10th percentile)"
 label var ub "Upper bound (bootstrap 90th percentile)"
 
@@ -57,9 +60,9 @@ global	ylabel Benefit-Cost Ratio
 foreach sex in m f {
 	local axis_range ylabel(0 5 10 15 20) yscale(r(0, 20))
 	#delimit
-		twoway 	(scatter point rate if sex == "`sex'", msymbol(circle) mfcolor(gs0) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0) yline(1, lpattern(solid)))
+		twoway 	(scatter stat rate if sex == "`sex'", msymbol(circle) mfcolor(gs0) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0) yline(1, lpattern(solid)))
 				(line alt_ub alt_lb rate if sex == "`sex'", lwidth(thin thin) lpattern(dash dash) lcolor(gs0 gs0))
-				(scatter alt_point rate if sex == "`sex'", msymbol(circle) mfcolor(white) mlcolor(maroon) msize(medlarge))
+				(scatter alt_stat rate if sex == "`sex'", msymbol(circle) mfcolor(white) mlcolor(maroon) msize(medlarge))
 				, 
 				  legend(label(1 $y1label) label(2 $y2label) label(4 $y3label) order(4 1 2) size(small) rows(1))
 				  xlabel(0 "0" 1 "100%" 2 "200%" 3 "300%", nogrid glcolor(gs14)) ylabel(, nogrid angle(h) glcolor(gs14))
@@ -81,7 +84,7 @@ global	ylabel Benfit-Cost Ratio
 
 foreach sex in m f {
 	#delimit
-		twoway 	(scatter point rate if sex == "`sex'", msymbol(circle) mfcolor(gs0) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0) yline(1, lpattern(solid)))
+		twoway 	(scatter stat rate if sex == "`sex'", msymbol(circle) mfcolor(gs0) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0) yline(1, lpattern(solid)))
 				(line ub lb rate if sex == "`sex'", lwidth(thin thin) lpattern(dash dash) lcolor(gs0 gs0))
 				
 				, 
@@ -98,8 +101,8 @@ foreach sex in m f {
 
 // GRAPHS COMINING SEX
 #delimit
-	twoway 	(scatter point rate if sex == "m", msymbol(circle) mfcolor(gs0) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0) yline(1, lpattern(dash)))
-			(scatter point rate if sex == "f", msymbol(triangle) mfcolor(gs8) mlcolor(gs8) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs8))
+	twoway 	(scatter stat rate if sex == "m", msymbol(circle) mfcolor(gs0) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0) yline(1, lpattern(dash)))
+			(scatter stat rate if sex == "f", msymbol(triangle) mfcolor(gs8) mlcolor(gs8) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs8))
 			/*(line ub lb rate if sex == "m", lwidth(thin thin) lpattern(dash dash) lcolor(gs0 gs0))
 			(line ub lb rate if sex == "f", lwidth(thin thin) lpattern(dash dash) lcolor(gs8 gs8))*/
 			, 
