@@ -27,7 +27,7 @@ Select estimation type ('etype')
 #----------------------------------------
 # Generate the matrices of flows
 #----------------------------------------
-etype = 8
+etype = 2
 filled = makeflows(etype=etype)
 benefits, costs = bcflows(filled=filled)
 total = irrflows(filled=filled)
@@ -105,7 +105,8 @@ for age in [5, 8, 15, 21, 30, 79]:
     irr_se = pd.DataFrame([irrf.std(), irrm.std(), irrp.std()], index=['f','m','p'])    
 
     try:
-        irr_quant = irr.groupby(level='sex').quantile([0.1, 0.9]).unstack()
+        #irr_quant = irr.groupby(level='sex').quantile([0.1, 0.9]).unstack()
+        irr_quant = pd.DataFrame(np.array([[irrf.quantile(0.10),irrf.quantile(0.90)],[irrm.quantile(0.10),irrm.quantile(0.90)],[irrp.quantile(0.10),irrp.quantile(0.90)]]), index=['f','m','p'])
     except:
         irr_quant = pd.DataFrame(np.array([[np.nan, np.nan], [np.nan, np.nan], [np.nan, np.nan]]), index = ['f', 'm', 'p'])
         irr_quant.index.name = 'sex'
@@ -168,9 +169,10 @@ for age in [5, 8, 15, 21, 30, 79]:
     ratio_mean = pd.DataFrame([ratiof.mean(), ratiom.mean(), ratiop.mean()], index = ['f', 'm', 'p'])    
     ratio_p = pd.DataFrame([ratio_fp, ratio_mp, ratio_pp], index = ['f', 'm', 'p'])    
     ratio_se = pd.DataFrame([ratiof.std(), ratiom.std(), ratiop.std()], index=['f','m','p'])
+    
     try:
-        ratio_quant = ratio.groupby(level='sex').quantile([0.1, 0.9]).unstack()
-        #ratio_quantf = ratiof.quantile([0.1, 0.9]).unstack()
+        #ratio_quant = ratio.groupby(level='sex').quantile([0.1, 0.9]).unstack()
+        ratio_quant = pd.DataFrame(np.array([[ratiof.quantile(0.10),ratiof.quantile(0.90)],[ratiom.quantile(0.10),ratiom.quantile(0.90)],[ratiop.quantile(0.10),ratiop.quantile(0.90)]]), index=['f','m','p'])
     except:
         ratio_quant = pd.DataFrame(np.array([[np.nan, np.nan], [np.nan, np.nan], [np.nan, np.nan]]), index = ['f', 'm', 'p'])
         ratio_quant.index.name = 'sex'
@@ -188,7 +190,7 @@ for age in [5, 8, 15, 21, 30, 79]:
         ratio_mean.to_csv(os.path.join(tables,'ratio_mean.csv'), index=True, header=False)
         ratio_se.to_csv(os.path.join(tables,'ratio_se.csv'), index=True,header=False)
         ratio.groupby(level='sex').quantile([0.1, 0.9]).to_csv(os.path.join(tables, 'ratio_ci.csv'),
-        	index=True)
+                index=True)
     
 bcr_ages = pd.concat(bcr_ages, axis=0, names=['age', 'sex'])
 bcr_ages.to_csv(os.path.join(sensitivity, 'ratios_age_type{}.csv'.format(etype)), index=True)

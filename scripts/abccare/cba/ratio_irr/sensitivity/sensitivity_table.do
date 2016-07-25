@@ -118,9 +118,14 @@ foreach stat in mean se pval {
 	gen sig_tmp = value < 0.10 & type == "pval"
 	bysort sex part: egen sig = max(sig_tmp)
 	drop sig_tmp
-	keep if type == "`stat'"
+	if "`stat'" == "mean" {
+		keep if type == "point"
+	}
+	else {
+		keep if type == "`stat'"
+	}
 	drop type
-	keep if inlist(part, "all", "cc", "crime", "edu", "health", "inc_labor", "inc_parent", "qaly", "transfer")
+	keep if inlist(part, "cc", "crime", "edu", "health", "inc_labor", "inc_parent", "qaly", "transfer")
 	gen type = "npv"
 	rename value `stat'
 	tempfile npv
@@ -217,7 +222,7 @@ foreach stat in mean se pval {
 	order part `stat'fnpv `stat'firr `stat'fbcr `stat'mnpv `stat'mirr `stat'mbcr `stat'pnpv `stat'pirr `stat'pbcr order
 
 	// label
-	replace part = "None" if part == "base" | part == "all"
+	replace part = "None" if part == "base"
 	replace part = "Parental Income" if part == "inc_parent"
 	replace part = "Subject QALY" if part == "qaly"
 	replace part = "Subject Labor Income" if part == "inc_labor"

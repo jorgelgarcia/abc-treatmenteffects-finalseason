@@ -240,7 +240,7 @@ def bc_calc(filled, components=flows.keys(), rate=0.03):
     ratiof = ratiof.ix[(ratiof>ratiof.quantile(q=qtrim)) & (ratiof<ratiof.quantile(q=1-qtrim))]
     ratiom = ratiom.ix[(ratiom>ratiom.quantile(q=qtrim)) & (ratiom<ratiom.quantile(q=1-qtrim))]
     ratiop = ratiop.ix[(ratiop>ratiop.quantile(q=qtrim)) & (ratiop<ratiop.quantile(q=1-qtrim))]
-    
+
     # Conduct inference    
     null_center = 1  
     ratio_fp = 1 - percentileofscore(ratiof - ratiof.mean() + null_center, ratiof.mean())/100
@@ -254,12 +254,8 @@ def bc_calc(filled, components=flows.keys(), rate=0.03):
     ratio_p = pd.DataFrame([ratio_fp, ratio_mp, ratio_pp], index = ['f', 'm', 'p'])    
     ratio_se = pd.DataFrame([ratiof.std(), ratiom.std(), ratiop.std()], index=['f','m','p'])
     try:
-        ratio_quant = ratio.groupby(level='sex').quantile([0.1, 0.9]).unstack()
-        #ratio_quantf = ratiof.quantile([0.1, 0.9]).unstack()
-        #ratio_quantm = ratiom.quantile([0.1, 0.9]).unstack()
-        #ratio_quantp = ratiop.quantile([0.1, 0.9]).unstack()
- 
-        #ratio_quant = pd.DataFrame([ratiof.quantile, ratiom.quantile, ratiop.quantile], index = ['f','m','p'])
+        #ratio_quant = ratio.groupby(level='sex').quantile([0.1, 0.9]).unstack()
+        ratio_quant = pd.DataFrame(np.array([[ratiof.quantile(0.10),ratiof.quantile(0.90)],[ratiom.quantile(0.10),ratiom.quantile(0.90)],[ratiop.quantile(0.10),ratiop.quantile(0.90)]]), index=['f','m','p'])
     except:
         ratio_quant = pd.DataFrame(np.array([[np.nan, np.nan], [np.nan, np.nan], [np.nan, np.nan]]), index = ['f', 'm', 'p'])
         ratio_quant.index.name = 'sex'
@@ -311,7 +307,8 @@ def irr_calc(filled, components=flows.keys()):
     irr_se = pd.DataFrame([irrf.std(), irrm.std(), irrp.std()], index=['f','m','p'])    
 
     try:
-        irr_quant = irr.groupby(level='sex').quantile([0.1, 0.9]).unstack()
+        #irr_quant = irr.groupby(level='sex').quantile([0.1, 0.9]).unstack()
+        irr_quant = pd.DataFrame(np.array([[irrf.quantile(0.10),irrf.quantile(0.90)],[irrm.quantile(0.10),irrm.quantile(0.90)],[irrp.quantile(0.10),irrp.quantile(0.90)]]), index=['f','m','p'])
     except:
         irr_quant = pd.DataFrame(np.array([[np.nan, np.nan], [np.nan, np.nan], [np.nan, np.nan]]), index = ['f', 'm', 'p'])
         irr_quant.index.name = 'sex'
