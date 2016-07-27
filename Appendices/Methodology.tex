@@ -19,8 +19,7 @@ therefore comprise $Z$. Thus, to obtain an
 unbiased estimate of the treatment effect, we regress the outcome variable on treatment status,
 controlling for those four baseline variables, as well as for cohort. \\
 
-\noindent We perform this estimation on 1,000 bootstrap resamples of the original ABC and CARE data. We take the
-mean of the empirical bootstrap distribution as our point estimate, and the standard deviation
+\noindent We perform this estimation on 75 bootstrap resamples of the original ABC and CARE data for inference purposes. We take the mean of the empirical bootstrap distribution as our point estimate, and the standard deviation
 of the distribution as the standard error. We estimate these effects on the
 pooled ABC and CARE samples, as well as the male and female subsamples. This allows us to generate
 rates of return and benefit-cost ratios for the male subsample, the female subsample, and the pooled sample. \\
@@ -54,7 +53,7 @@ to respond. We limit the number of covariates in our logit models to three as th
 
 \noindent To estimate the treatment effect, we regress the outcome of interest on treatment status, and weight the
 observations by the inverse of the product of the two propensity scores estimated with the method
-documented in Section~\ref{section:methodology} in the main paper. This procedure is performed on 1,000 bootstrap resamples of the original ABC and CARE data.
+documented in Section~\ref{section:methodology} in the main paper. This procedure is performed on 75 bootstrap resamples of the original ABC and CARE data.
 We take the mean of the empirical bootstrap distribution as our point estimate, and the standard deviation
 of the distribution as the standard error. Again, we carry out this procedure for the
 pooled sample, male subsample, and female subsample. \\
@@ -149,10 +148,10 @@ income at each age from 22 to 29. We use ordinary least squares and regress labo
 CNLSY subjects on background characteristics and early adult outcomes. Variables for background
 characteristics consist of an indicator for being  black, mother's education, and sex. Variables
 used to interpolate early adult outcomes consist of labor income at ages 21 and 30, years of education at age 30, average
-PIAT math scores from ages 5 to 10, and BMI at age 34. We estimate the model on 1,000 bootstrap
+PIAT math scores from ages 5 to 10, and BMI at age 34. We estimate the model on 75 bootstrap
 resamples of the CNLSY to obtain a measure of prediction error, and denote the vectors of coefficients
 \emph{for the outcome variables} by $\beta_{a,s}$, where $a \in \{22, 23, \dots, 29\}$ denotes age, and
-$s \in \{1,2,\dots,1,000\}$ indexes the bootstrap samples. \\
+$s \in \{1,2,\dots, 75\}$ indexes the bootstrap samples. \\
 
 % We impose two restrictions on the CNLSY dataset: one on birth year, and one on income.
 % In regard to birth year, we limit the sample to subjects born in between 1978 and 1983. As our
@@ -176,14 +175,14 @@ $s \in \{1,2,\dots,1,000\}$ indexes the bootstrap samples. \\
 \noindent The outcome variables we use as independent variables to fit the model to the CNLSY data are also
 observed in the ABC and CARE data, and we are able to calculate the treatment effects on each of these outcomes
 using the procedures described in Appendix \ref{app:method_fullobs} and Appendix \ref{app:method_partialobs}. We
-obtain these estimates for 1,000 bootstrap resamples of both the ABC and CARE data, and denote the vectors of
-coefficients by $\gamma_r$, where $r \in \{1,2,\dots,1,000\}$ indexes the bootstrap samples. \\
+obtain these estimates for 75 bootstrap resamples of both the ABC and CARE data, and denote the vectors of
+coefficients by $\gamma_r$, where $r \in \{1,2,\dots,75\}$ indexes the bootstrap samples. \\
 
 \noindent To interpolate the treatment effect on subject labor income at age $a$, we take the dot product
-of $\beta_{a, s}$ and $\gamma_r$ for all $s,r$ pairs, resulting in 1,000,000 scalars. We reintroduce
+of $\beta_{a, s}$ and $\gamma_r$ for all $s,r$ pairs, resulting in 5,625 scalars. We reintroduce
 prediction error by first randomly drawing residuals from our fitted model on the auxiliary data and assigning
 them to the ABC and CARE subjects. We then take the mean difference of these residuals across treatment and control
-groups, and add it to the previously described scalar. We do this for all 1,000,000 scalars. These scalars form the empirical
+groups, and add it to the previously described scalar. We do this for all 5,625scalars. These scalars form the empirical
 bootstrap distribution of the treatment effect. Note that
 we bypass the estimation of the subjects' actual incomes, of which we are unable to obtain an
 unbiased estimate. Instead, we directly obtain an unbiased estimate of the treatment effect. This
@@ -210,7 +209,7 @@ restrict our outcome variables to years of education at age 30 and subject labor
 % nature of the PSID and NLSY, we apply a linear interpolation to both data sets.
 
 \noindent We estimate the vectors $\beta_{a, s}$ for $a \in \{31, 32, \dots, 67\}$ and $\gamma_r$, where
-$s,r \in \{1,2,\dots,1,000\}$ index the bootstrap samples, and take the dot product of every pair of
+$s,r \in \{1,2,\dots,75\}$ index the bootstrap samples, and take the dot product of every pair of
 $\beta_{a,s}$ and $\gamma_r$ vectors to obtain the empirical bootstrap distribution of the treatment
 effect on labor income past age 30. We take the mean of the distribution to be the point estimate,
 and the standard deviation of the distribution to be the standard error. \\
@@ -366,12 +365,12 @@ reduces to an algebraic exercise. \\
 
 \noindent As described in Appendix \ref{app:method_identify}, we estimate the treatment effect on each
 component of the benefits and costs at time $t$ for the pooled, male, and
-female samples. We do this for 1,000 bootstrap resamples of the original ABC and CARE data.
+female samples. We do this for 75 bootstrap resamples of the original ABC and CARE data.
 In the case of health costs and subject income, for which we employ auxiliary datasets to
-estimate the treatment effects, we also obtain 1,000 bootstrap estimates from the auxiliary data
-for every ABC or CARE bootstrap resample, resulting in a total of 1,000,000 estimates.
+estimate the treatment effects, we also obtain 75 bootstrap estimates from the auxiliary data
+for every ABC or CARE bootstrap resample, resulting in a total of 5,625 estimates.
 By reusing each bootstrap estimate of the treatment effect on outcomes that do not require any auxiliary data
-set 1,000 times, we obtain a total of 1,000,000 estimates of the cash flow.
+set 75 times, we obtain a total of 5,625 estimates of the cash flow.
 We estimate the IRR on each of those cash flows.
 This is how we form our empirical bootstrap distribution of the IRR for the pooled, male, and female samples.
 We take the mean of the distributions to be the point estimates, and we take the standard deviations
@@ -466,12 +465,12 @@ components of the benefits and find the ratio with the discounted costs. \\
 
 \noindent As described in Appendix \ref{app:method_identify}, we estimate the treatment effect on each
 component of the benefits and costs at time $t$ for the pooled, male, and
-female samples. We do this for 1,000 bootstrap resamples of the original ABC and CARE data.
+female samples. We do this for 75 bootstrap resamples of the original ABC and CARE data.
 In the case of health costs and subject income, for which we employ auxiliary datasets to
-estimate the treatment effects, we also obtain 1,000 bootstrap estimates from the auxiliary data
-for every ABC and CARE bootstrap resample, resulting in a total of 1,000,000 estimates.
+estimate the treatment effects, we also obtain 75 bootstrap estimates from the auxiliary data
+for every ABC and CARE bootstrap resample, resulting in a total of 5,625 estimates.
 By reusing each bootstrap estimate of the treatment effect on outcomes that do not require any auxiliary data
-set 1,000 times, we obtain a total of 1,000,000 estimates of the costs stream and benefits stream.
+set 75 times, we obtain a total of 5,625 estimates of the costs stream and benefits stream.
 We estimate the benefit-cost ratio for each of those streams.
 This is how we form our empirical bootstrap distribution of the benefit-cost ratio for the pooled, male, and female samples.
 We take the mean of the distributions to be the point estimates, and we take the standard deviations
