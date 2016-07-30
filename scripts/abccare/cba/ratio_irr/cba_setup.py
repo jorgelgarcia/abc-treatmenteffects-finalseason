@@ -132,8 +132,8 @@ def makeflows(etype):
         filled['crimeprivate_{}'.format(sex)] = -filled['crimeprivate_{}'.format(sex)]
         filled['ccpublic_{}'.format(sex)] = -1.5*filled['ccpublic_{}'.format(sex)]
         filled['ccprivate_{}'.format(sex)] = -filled['ccprivate_{}'.format(sex)]
-        filled['health_private_{}'.format(sex)] = -filled['health_private_{}'.format(sex)]*1.1 # 1.1 is to account for inflation
-        filled['health_public_{}'.format(sex)] = -1.5*filled['health_public_{}'.format(sex)]*1.1 # 1.1 is to account for inflation
+        filled['health_private_{}'.format(sex)] = -filled['health_private_{}'.format(sex)] # 1.1 
+        filled['health_public_{}'.format(sex)] = -1.5*filled['health_public_{}'.format(sex)] # 1.1
         filled['qaly_{}'.format(sex)] = 150000*filled['qaly_{}'.format(sex)]
         filled['diclaim_{}'.format(sex)] = -0.5*filled['diclaim_{}'.format(sex)]
         filled['ssiclaim_{}'.format(sex)] = -0.5*filled['ssiclaim_{}'.format(sex)] * 1.02 * 12 * 901.5 # averaged beween single and married

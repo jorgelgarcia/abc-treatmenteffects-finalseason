@@ -40,15 +40,30 @@ for part in components:
 
 	npv = tmp.apply(robust_npv, rate=0.03, axis=1)
 
+        npvf = npv.loc['f'].dropna()
+        npvm = npv.loc['m'].dropna()
+        npvp = npv.loc['p'].dropna()
+
  	point = pd.DataFrame(npv.loc[slice(None), 0,0])
  	point.columns = ['value']
  	point['part'] = part
  	point['type'] = 'point'
  	point.set_index(['part', 'type'], append=True, inplace=True)
 
- 	npv_fp = 1 - percentileofscore(npv.loc['f'].dropna() - npv.mean(level='sex').loc['f'], npv.loc['f',0,0])/100
-    	npv_mp = 1 - percentileofscore(npv.loc['m'].dropna() - npv.mean(level='sex').loc['m'], npv.loc['m',0,0])/100
-    	npv_pp = 1 - percentileofscore(npv.loc['p'].dropna() - npv.mean(level='sex').loc['p'], npv.loc['p',0,0])/100
+        qtrim = 0.05
+
+        npvf = npvf.ix[(npvf>npvf.quantile(q=qtrim)) & (npvf<npvf.quantile(q=1-qtrim))]
+        npvm = npvm.ix[(npvm>npvm.quantile(q=qtrim)) & (npvm<npvm.quantile(q=1-qtrim))]
+        npvp = npvp.ix[(npvp>npvp.quantile(q=qtrim)) & (npvp<npvp.quantile(q=1-qtrim))]
+
+ 	#npv_fp = 1 - percentileofscore(npv.loc['f'].dropna() - npv.mean(level='sex').loc['f'], npv.loc['f',0,0])/100
+    	#npv_mp = 1 - percentileofscore(npv.loc['m'].dropna() - npv.mean(level='sex').loc['m'], npv.loc['m',0,0])/100
+    	#npv_pp = 1 - percentileofscore(npv.loc['p'].dropna() - npv.mean(level='sex').loc['p'], npv.loc['p',0,0])/100
+
+        npv_fp = 1 - percentileofscore(npvf - npv.mean(level='sex').loc['f'], npv.mean(level='sex').loc['f'])/100
+    	npv_mp = 1 - percentileofscore(npvm - npv.mean(level='sex').loc['m'], npv.mean(level='sex').loc['m'])/100
+    	npv_pp = 1 - percentileofscore(npvp - npv.mean(level='sex').loc['p'], npv.mean(level='sex').loc['p'])/100
+        
     	npv_p = pd.DataFrame([npv_fp, npv_mp, npv_pp], index = ['f', 'm', 'p'], columns=['value'])
     	npv_p['part']=part
     	npv_p['type']='pval'
@@ -79,3 +94,4 @@ for part in components:
 
 output.sort_index(inplace=True)
 output.to_csv(os.path.join(tables, 'npv_type{}.csv'.format(etype)), index=True)
+npv.to_csv(os.path.join(tables, 'all_npvs_type{}.csv'.format(etype)), index=True)
