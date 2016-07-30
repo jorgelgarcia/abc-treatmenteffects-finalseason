@@ -41,9 +41,16 @@ foreach stat in mean se pval {
 	// by component, b/c ratio
 	insheet using bc_factors.csv, names clear
 	rename v1 sex
-	replace lb = "" if strpos(lb, "inf")
-	replace ub = "" if strpos(ub, "inf")
-	destring lb ub, replace
+	capture confirm string lb
+	if !_rc {
+		replace lb = "" if strpos(lb, "inf")
+		capture confirm string ub 
+		if !_rc {
+			replace ub = "" if strpos(ub, "inf")
+			destring lb ub, replace
+		}
+	}
+	
 	gen sig = pval < 0.10
 	gen keep = 0
 	replace keep = 1 if rate == 0
@@ -118,12 +125,7 @@ foreach stat in mean se pval {
 	gen sig_tmp = value < 0.10 & type == "pval"
 	bysort sex part: egen sig = max(sig_tmp)
 	drop sig_tmp
-	if "`stat'" == "mean" {
-		keep if type == "point"
-	}
-	else {
-		keep if type == "`stat'"
-	}
+	keep if type == "`stat'"
 	drop type
 	keep if inlist(part, "cc", "crime", "edu", "health", "inc_labor", "inc_parent", "qaly", "transfer")
 	gen type = "npv"
