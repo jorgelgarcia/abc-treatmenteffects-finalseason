@@ -13,7 +13,7 @@ if not os.path.exists(tables):
 
 from cba_setup import robust_npv, makeflows, adraws, draws
 
-etype = 2
+etype = 8
 filled = makeflows(etype=etype)
 
 # aggregate certain componenets together
@@ -60,23 +60,27 @@ for part in components:
     	#npv_mp = 1 - percentileofscore(npv.loc['m'].dropna() - npv.mean(level='sex').loc['m'], npv.loc['m',0,0])/100
     	#npv_pp = 1 - percentileofscore(npv.loc['p'].dropna() - npv.mean(level='sex').loc['p'], npv.loc['p',0,0])/100
 
-        npv_fp = 1 - percentileofscore(npvf - npv.mean(level='sex').loc['f'], npv.mean(level='sex').loc['f'])/100
-    	npv_mp = 1 - percentileofscore(npvm - npv.mean(level='sex').loc['m'], npv.mean(level='sex').loc['m'])/100
-    	npv_pp = 1 - percentileofscore(npvp - npv.mean(level='sex').loc['p'], npv.mean(level='sex').loc['p'])/100
+        npv_fp = 1 - percentileofscore(npvf - npv.mean(), npvf.mean())/100
+    	npv_mp = 1 - percentileofscore(npvm - npv.mean(), npvm.mean())/100
+    	npv_pp = 1 - percentileofscore(npvp - npv.mean(), npvp.mean())/100
         
     	npv_p = pd.DataFrame([npv_fp, npv_mp, npv_pp], index = ['f', 'm', 'p'], columns=['value'])
     	npv_p['part']=part
     	npv_p['type']='pval'
     	npv_p.set_index(['part', 'type'], append=True, inplace=True)
 
- 	mean = pd.DataFrame(npv.mean(level='sex'))
- 	mean.columns = ['value']
-	mean['part']=part
+ 	#mean = pd.DataFrame(npv.mean(level='sex'))
+ 	#mean.columns = ['value']
+	
+        mean = pd.DataFrame([npvf.mean(), npvm.mean(), npvp.mean()], index = ['f', 'm', 'p'], columns=['value'])
+        mean['part']=part
 	mean['type']='mean'
 	mean.set_index(['part', 'type'], append=True, inplace=True)
 
- 	se = pd.DataFrame(npv.std(level='sex'))
- 	se.columns = ['value']
+ 	#se = pd.DataFrame(npv.std(level='sex'))
+        #se.columns = ['value']
+
+        se = pd.DataFrame([npvf.std(), npvm.std(), npvp.std()], index = ['f', 'm', 'p'], columns=['value'])
  	se['part']=part
  	se['type']='se'
  	se.set_index(['part', 'type'], append=True, inplace=True)
