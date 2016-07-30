@@ -97,7 +97,7 @@ foreach type of numlist 2 5 8  {
 				  note("Point Estimate: `point'(`pointse')[`pointp'].");
 		#delimit cr 
 		graph export ratios_`type'_sex`sex'.eps, replace
-		// di in r "Enter after seeing Figure" _request(Hello)
+		di in r "Enter after seeing Figure" _request(Hello)
 		restore
 	}
 }
@@ -137,7 +137,7 @@ foreach type of numlist 2 5 8  {
 				  note("Point Estimate: `point'(`pointse')[`pointp'].");
 		#delimit cr 
 		graph export irr_`type'_sex`sex'.eps, replace
-		// di in r "Enter after seeing Figure" _request(Hello)
+		di in r "Enter after seeing Figure" _request(Hello)
 		restore
 	}
 }

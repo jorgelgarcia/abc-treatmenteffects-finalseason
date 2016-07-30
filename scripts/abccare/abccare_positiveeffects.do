@@ -98,7 +98,7 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 	       (rcap `var'_max `var'_min abcmale   if male == 1 & index > 2, lcolor(gs0)),
 	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
 			  xlabel("",noticks grid glcolor(white)) 
-			  ylabel(, angle(h) glcolor(gs14))
+			  ylabel(0[20]80, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("${`var'_label}", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
@@ -113,7 +113,7 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 	       (rcap `var'_max `var'_min abcmale   if male == 1 & index <= 2, lcolor(gs0)),
 	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
 			  xlabel("",noticks grid glcolor(white)) 
-			  ylabel(, angle(h) glcolor(gs14))
+			  ylabel(0[20]80, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("${`var'_label}, significant at 10%", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
