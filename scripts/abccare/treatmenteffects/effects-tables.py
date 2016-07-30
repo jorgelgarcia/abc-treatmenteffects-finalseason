@@ -24,7 +24,7 @@ from paths import paths
 filedir = os.path.join(os.path.dirname(__file__))
 
 path_results = os.path.join(filedir, 'rslts-jun25/abccare_ate/')
-path_outcomes = os.path.join(filedir, 'outcomes_cba.csv')
+path_outcomes = os.path.join(filedir, 'outcomes_cba_merged.csv')
 
 # provide option for two sided tests
 twosided = 0
@@ -741,7 +741,7 @@ categories_order.remove("Mother's Education")
 '''
 
 # declare new header again
-header = [['Category', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)', '(7)', '(8)', '']]
+header = [['Category', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)', '(7)', '(8)', 'N']]
 
 for sex in ['pooled', 'male', 'female']:
    

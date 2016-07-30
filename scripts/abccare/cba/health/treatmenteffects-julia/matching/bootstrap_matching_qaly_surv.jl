@@ -20,7 +20,7 @@ global atecode = "$current/../../../../juliafunctions"
 # set up number of bootstraps and controls
 global breps = 99 		# remember to subtract 1, i.e. 50 becomes 49
 global areps = 99 	# remember to subtract 1, i.e. 50 becomes 49
-global controls = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male]
+global controls = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male, :abc]
 global ipwvars_all = [:apgar1, :apgar5, :prem_birth]
 global component = "qaly_surv"
 global factors = 0
@@ -54,13 +54,13 @@ for gender in genderloop
 
 	if gender == "male"
 		datainuse["$(gender)"] = fammerge[fammerge[:male] .== 1, :]
-		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
+		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :abc]
 	elseif gender == "female"
 		datainuse["$(gender)"] = fammerge[fammerge[:male] .== 0, :]
-		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
+		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :abc]
 	elseif gender == "pooled"
 		datainuse["$(gender)"] = fammerge
-		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male]
+		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male, :abc]
 	end
 
   # ==================== #
@@ -92,11 +92,11 @@ function matchingrun(boots)
 		global new_switch = 1
 
 		if gender == "male"
-			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
+			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :abc]
 		elseif gender == "female"
-			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives]
+			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :abc]
 		elseif gender == "pooled"
-			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male]
+			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male, :abc]
 		end
 
 		# Keep the IDs of the original sample to perform ABC boostraps

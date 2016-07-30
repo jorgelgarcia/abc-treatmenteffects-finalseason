@@ -74,14 +74,14 @@ f.write('\\def\\arraystretch{0.6}\n\n')
 f.write('\\setlength\\tabcolsep{0.3em}\n\n')
 
 
-f.write('\\subsection{{Combining Functions, Aggregated}}\n\n')
+f.write('\\subsection{{Combining Functions - \% of Positive Treatment Effects, Aggregated}}\n\n')
 # write in all other models
 for sex in ['pooled', 'male', 'female']:
     pass
     f.write(command_counts.format(sex.capitalize(), program, sex, pathext, sex))
 f.write('\\clearpage\n\n')
 
-f.write('\\subsection{{Combining Functions, by Category}}\n\n')
+f.write('\\subsection{{Combining Functions - \% of Positive Treatment Effects, by Category}}\n\n')
 for sex in ['pooled', 'male', 'female']:
     for cen_sig in [(0.5, 100), (0.1, 10)]:
         if cen_sig == (0.5, 100):
