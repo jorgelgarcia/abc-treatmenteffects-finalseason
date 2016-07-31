@@ -60,9 +60,9 @@ for part in components:
     	#npv_mp = 1 - percentileofscore(npv.loc['m'].dropna() - npv.mean(level='sex').loc['m'], npv.loc['m',0,0])/100
     	#npv_pp = 1 - percentileofscore(npv.loc['p'].dropna() - npv.mean(level='sex').loc['p'], npv.loc['p',0,0])/100
 
-        npv_fp = 1 - percentileofscore(npvf - npv.mean(), npvf.mean())/100
-    	npv_mp = 1 - percentileofscore(npvm - npv.mean(), npvm.mean())/100
-    	npv_pp = 1 - percentileofscore(npvp - npv.mean(), npvp.mean())/100
+        npv_fp = 1 - percentileofscore(npvf - npvf.mean(), npvf.mean())/100
+    	npv_mp = 1 - percentileofscore(npvm - npvm.mean(), npvm.mean())/100
+    	npv_pp = 1 - percentileofscore(npvp - npvp.mean(), npvp.mean())/100
         
     	npv_p = pd.DataFrame([npv_fp, npv_mp, npv_pp], index = ['f', 'm', 'p'], columns=['value'])
     	npv_p['part']=part
