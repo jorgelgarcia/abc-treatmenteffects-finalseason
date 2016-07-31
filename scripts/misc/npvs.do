@@ -106,5 +106,5 @@ foreach sex of numlist 1 2 3 {
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white));
 	#delimit cr 
-	graph export abccare_npvs`estimate'.eps, replace
+	graph export abccare_npvs`sex'.eps, replace
 }		
