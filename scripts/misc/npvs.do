@@ -22,7 +22,7 @@ global googledrive: env googledrive
 // do files
 global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global data       = "$klmmexico/abccare/irr_ratios/jul-30"
+global data       = "$klmmexico/abccare/irr_ratios/jul-30b"
 // output
 global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 
@@ -65,56 +65,45 @@ foreach estimate of numlist 2 5 8 {
 mat vall = vall[2...,1...]
 clear
 svmat vall, names(col)
-keep if part == 1 | part == 6 | part == 10 | part == 11 | part == 16 | part == 7 | part == 13 | part == 4
+keep if part == 1  | part == 2 | part == 3 | part == 4 | part == 6 | part == 7 | part == 8 /// 
+      | part == 10 | part == 11 | part == 13
 
-gen     ind = 1  if part == 6   
-replace ind = 5  if part == 11
-replace ind = 9  if part == 10 
-replace ind = 13 if part == 16 
-replace ind = 17 if part == 7 
-replace ind = 21 if part == 13 
-replace ind = 26 if part == 4
-replace ind = 30 if part == 1 
+gen     ind = 1  if part == 3   
+replace ind = 5  if part == 2
+replace ind = 9  if part == 6 
+replace ind = 13 if part == 11 
+replace ind = 17 if part == 10
+replace ind = 21 if part == 8
+replace ind = 25 if part == 7
+replace ind = 29 if part == 13
+replace ind = 34 if part == 4 
+replace ind = 39 if part == 1
 
-replace ind = 2  if part == 6  & sex == 2
-replace ind = 6  if part == 11 & sex == 2
-replace ind = 10 if part == 10 & sex == 2
-replace ind = 14 if part == 16 & sex == 2
-replace ind = 18 if part == 7  & sex == 2
-replace ind = 22 if part == 13 & sex == 2
-replace ind = 27 if part == 4  & sex == 2 
-replace ind = 31 if part == 1  & sex == 2
-
-replace ind = 3  if part == 6  & sex == 3
-replace ind = 7  if part == 11 & sex == 3
-replace ind = 11 if part == 10 & sex == 3
-replace ind = 15 if part == 16 & sex == 3
-replace ind = 19 if part == 7  & sex == 3
-replace ind = 23 if part == 13 & sex == 3
-replace ind = 28 if part == 4  & sex == 3 
-replace ind = 32 if part == 1  & sex == 3
+replace ind = ind + 1 if estimate == 2
+replace ind = ind + 2 if estimate == 3 
 
 replace pval = 1 - pval if m < 0
-gen sig = 1 if pval <= .10
+gen sig = 1 if pval <= .13
+replace sig = . if estimate == 2 & part == 2
 
 replace m = m/100000
-replace m = m/10 if ind >= 24 & ind <= 32
+replace m = m/10 if ind >= 34
 
 cd $output
-foreach estimate of numlist 1 2 3 {
+foreach sex of numlist 3 {
 	#delimit
-	twoway (bar m ind        if estimate == `estimate' & sex == 1, fcolor(white) lcolor(gs0) lwidth(medthick) text(-.13 29 "(In 1,000,000's 2014 USD)", size(small)))
-	       (bar m ind        if estimate == `estimate' & sex == 2, color(gs4) xline(24.3, lcolor(gs10) lpattern(dash)))
-	       (bar m ind        if estimate == `estimate' & sex == 3, color(gs8))
-	       (scatter m ind if sig == 1 & estimate == `estimate', msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
+	twoway (bar m ind        if estimate == 1 & sex == `sex', fcolor(white) lcolor(gs0) lwidth(medthick) text(-.12 37.5 "In 1,000,000s (2014 USD)", size(vsmall)))
+	       (bar m ind        if estimate == 2 & sex == `sex', color(gs4) xline(32.5, lcolor(gs10) lpattern(dash)))
+	       (bar m ind        if estimate == 3 & sex == `sex', color(gs8))
+	       (scatter m ind if sig == 1 & sex == `sex', msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
 		, 
-		legend(cols(3) order(1 "Female" 2 "Female" 3 "Pooled" 
+		legend(cols(3) order(1 "Baseline" 2 "Stay at Home" 3 "Alternative Preschool" 
 					    4 "Signicant at 10%") size(vsmall))
-			  xlabel(2 "Education" 6 "Parental Income" 10 "Labor Income" 14 "Public Transfers"
-			  18 "Medical Expenditures" 22 "QALYs" 27 "Crime" 31 "All", angle(45) noticks grid glcolor(white) labsize(small)) 
-			  ylabel(, angle(h) glcolor(gs14))
+			  xlabel(2 "Program Costs" 6 "Control Substitution" 10 "Education" 14 "Parental Income"
+			  18 "Labor Income" 22 "Private Medical Costs" 26 "Total Medical Costs" 30 "QALYs" 35 "Crime" 40 "All", angle(45) noticks grid glcolor(white) labsize(small)) 
+			  ylabel(-1[.5]2, angle(h) glcolor(gs14))
 			  xtitle(Cost Benefit Analysis Components, size(small)) 
-			  ytitle("Life-cycle Net Present Value (100,000's 2014 USD)", size(vsmall))
+			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white));
 	#delimit cr 
 	graph export abccare_npvs`estimate'.eps, replace
