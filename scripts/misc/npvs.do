@@ -90,7 +90,7 @@ replace m = m/100000
 replace m = m/10 if ind >= 34
 
 cd $output
-foreach sex of numlist 3 {
+foreach sex of numlist 1 2 3 {
 	#delimit
 	twoway (bar m ind        if estimate == 1 & sex == `sex', fcolor(white) lcolor(gs0) lwidth(medthick) text(-.12 37.5 "In 1,000,000s (2014 USD)", size(vsmall)))
 	       (bar m ind        if estimate == 2 & sex == `sex', color(gs4) xline(32.5, lcolor(gs10) lpattern(dash)))
