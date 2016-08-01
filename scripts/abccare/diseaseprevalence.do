@@ -29,14 +29,13 @@ global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 
 cd $datafam
-use health_projections_ipolated_0731.dta, clear
-aorder 
-save, replace
+use  health_projections_combined0731.dta,  clear
+// aorder
+// save, replace 
 
 replace mcrep = 0 if mcrep == .
 drop if (bsrep == 0) & (mcrep > 1)
 keep if bsrep == 0 & mcrep == 1
-drop *_surv*
 sort id
 
 // id's file
