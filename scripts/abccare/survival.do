@@ -28,7 +28,9 @@ global dataabccare = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extension
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 cd $datafam
-use health_projections_0720.dta, clear
+use  health_projections_combined0731.dta,  clear
+aorder
+save, replace 
 
 // keep private and public costs
 keep if bsrep == 0 & mcrep == 1

@@ -22,7 +22,7 @@ global googledrive: env googledrive
 // do files
 global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global data       = "$klmmexico/abccare/irr_ratios/jul-30b"
+global data       = "$klmmexico/abccare/irr_ratios/aug-01"
 // output
 global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 
@@ -37,8 +37,8 @@ global CBAComponents all cc costs crime diclaim edu health health_private health
 
 # delimit cr
 
-matrix vall = J(1,8,.)
-matrix colnames vall = estimate sex part p10 p90 m se pval
+matrix vall = J(1,7,.)
+matrix colnames vall = estimate sex part m point pval se
 local se = 0
 foreach estimate of numlist 2 5 8 {
 	local se = `se' + 1
@@ -55,8 +55,8 @@ foreach estimate of numlist 2 5 8 {
 				summ value if sex == "`sex'" & part == "`part'" & typen == `type'
 				matrix v`sex'`part'`type'_`estimate' = r(mean)
 			}
-		matrix v`sex'`part'_`estimate' = [`se',`sn',`sp',v`sex'`part'1_`estimate',v`sex'`part'2_`estimate',v`sex'`part'3_`estimate',v`sex'`part'4_`estimate',v`sex'`part'5_`estimate']
-		matrix colnames v`sex'`part'_`estimate' = estimate sex part p10 p90 m se pval
+		matrix v`sex'`part'_`estimate' = [`se',`sn',`sp',v`sex'`part'1_`estimate',v`sex'`part'2_`estimate',v`sex'`part'3_`estimate',v`sex'`part'4_`estimate']
+		matrix colnames v`sex'`part'_`estimate' = estimate sex part m point pval se
 		mat_rapp vall : vall v`sex'`part'_`estimate'
 		}
 	}
@@ -83,7 +83,7 @@ replace ind = ind + 1 if estimate == 2
 replace ind = ind + 2 if estimate == 3 
 
 replace pval = 1 - pval if m < 0
-gen sig = 1 if pval <= .13
+gen sig = 1 if pval <= .15
 replace sig = . if estimate == 2 & part == 2
 
 replace m = m/100000
