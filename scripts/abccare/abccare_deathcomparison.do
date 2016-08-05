@@ -76,6 +76,6 @@ foreach sex in f m {
 		ytitle("Age of Death") b1title("ID Number")
 		 graphregion(color(white)) plotregion(fcolor(white));
 	# delimit cr 
-*	graph export deathcomparison.eps, replace
+	graph export deathcomparison.eps, replace
 } 
 
