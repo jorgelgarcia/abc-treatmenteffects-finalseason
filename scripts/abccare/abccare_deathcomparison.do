@@ -36,10 +36,25 @@ replace id = 9999 if missing(id)
 
 
 // limit the data to point estimates of those who actually died
-keep if adraw == 0
+* keep if adraw == 0
 keep if (id == 920) | (id == 951) | (id == 117) | (id == 947) | (id == 943)
-keep id R P Q male hrabc_index died*
+keep id R P Q adraw male hrabc_index died*
 drop died_surv*
+
+
+// id's file
+aorder
+gen num_id = _n
+
+// Generate unique id
+foreach var of varlist id adraw {
+	tostring `var', gen(str_`var')
+}
+gen str_uniqueid = str_id + str_adraw
+duplicates report str_uniqueid
+duplicates report num_id 
+
+drop str_uniqueid
 
 // locals of death age for each individual who died after age 30
 local deathid   920 951 117 947 943
@@ -50,13 +65,14 @@ local id947age	= 38 // breast cancer
 local id943age	= 40 // unknown
 
 // reshape
-reshape long died, i(id) j(age)
+reshape long died, i(num_id) j(age)
 generate age2 = age
-replace age2= . if died == .
-bysort id: egen agedied = max(age2)
+replace age2 = . if died == .
+bysort num_id: egen agedied = max(age2)
+drop age2
+reshape wide died, i(num_id) j(age)
 
-// collapse
-collapse (mean) agedied, by(id)
+// proejcted died age
 generate projectdied = .
 foreach id in `deathid' {
 	replace projectdied = `id`id'age' if id == `id'
@@ -64,18 +80,18 @@ foreach id in `deathid' {
 
 
 cd "$output"
-foreach sex in f m {
-	# delimit
-	graph bar agedied projectdied, over(id)
-	       
-	bar(1, color(gs4)) bar(2, color(gs10))	   
-		   
-	legend(	label(1 Projected Death) size(small) 
-			label(2 Actual Death) 
-	        )
-		ytitle("Age of Death") b1title("ID Number")
-		 graphregion(color(white)) plotregion(fcolor(white));
-	# delimit cr 
-	graph export deathcomparison.eps, replace
-} 
 
+# delimit
+graph bar (mean) agedied projectdied, over(id)
+	   
+bar(1, color(gs4)) bar(2, color(gs10))	   
+	   
+legend(	label(1 Projected Death) size(small) 
+		label(2 Actual Death) 
+		)
+	ytitle("Age of Death") b1title("ID Number")
+	 graphregion(color(white)) plotregion(fcolor(white));
+# delimit cr 
+graph export deathcomparison.eps, replace
+
+* Need to add standard error bars
