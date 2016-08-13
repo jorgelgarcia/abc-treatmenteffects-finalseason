@@ -101,12 +101,13 @@ if deaths == 1
 	end
 end
 
+global ipwvars_all = [:m_iq0y, :m_ed0y, :m_age0y, :hrabc_index, :p_inc0y, :apgar1, :apgar5, :prem_birth, :m_married0y, :m_teen0y, :f_home0y, :hh_sibs0y, :cohort, :m_work0y]
 
 # Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise)
 for dvar in ipwvars_all
-  dvar_p = parse(dvar) # Making "d_var" to :d_var
-  med_d = median(outcomesate[!isna(outcomesate[dvar_p]), dvar_p]) # take the median of the non-missing values for each variables
+  println("Discretizing $(dvar)")
+  med_d = median(outcomesate[!isna(outcomesate[dvar]), dvar]) # take the median of the non-missing values for each variables
   outcomesate[parse("$(dvar)_dum")] = 0 # Generate a new column for dummy
-  outcomesate[outcomesate[dvar_p] .> med_d, parse("$(dvar)_dum")] = 1 # Replace dummy column to one if d_var is greater than the median
-  outcomesate[isna(outcomesate[dvar_p]), parse("$(dvar)_dum")] = NA # Replace values of dunny column if corresponding rwo in original column is NA
+  outcomesate[outcomesate[dvar] .> med_d, parse("$(dvar)_dum")] = 1 # Replace dummy column to one if d_var is greater than the median
+  outcomesate[isna(outcomesate[dvar]), parse("$(dvar)_dum")] = NA # Replace values of dunny column if corresponding rwo in original column is NA
 end
