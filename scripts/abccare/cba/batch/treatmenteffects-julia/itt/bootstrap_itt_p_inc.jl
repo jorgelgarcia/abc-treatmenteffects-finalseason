@@ -43,9 +43,9 @@ include("$current/../data.jl")
 # Implement options
 # ================================================================ #
 # Deal with no murder
-nm = ""
+global nm = ""
 if nomurder == 1
-	nm = "nm"
+	global nm = "nm"
 end
 
 # Define the gender loop
