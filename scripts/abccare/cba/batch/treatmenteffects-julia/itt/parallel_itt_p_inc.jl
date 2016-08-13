@@ -13,15 +13,17 @@ srand(1)
 # ITT Estimates Using Parallel Processing
 # ======================================================= #
 # Call number of processors
-procs = 19
-addprocs(procs)
+using ClusterManagers
+procs = 25
+#addprocs(procs)
+addprocs_pbs(procs)
 
 # Define "to parallelize process"
 require("$here/bootstrap_itt_p_inc.jl")
-B = 20 # number of workers being used
+B = 25 # number of workers being used
 b = 4  # number of work each worker does
 
-ITTboot = pmap(ITTrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
+ITTboot = pmap(ITTrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 ITTfinal = Dict()
 
 # Increase the number of "draw" according to the worker number

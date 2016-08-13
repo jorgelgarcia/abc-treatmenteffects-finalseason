@@ -13,16 +13,19 @@ srand(1)
 # ITT Estimates Using Parallel Processing
 # ======================================================= #
 # Call number of processors
-procs = 19
-addprocs(procs)
+using ClusterManagers
+procs = 25
+#addprocs(procs)
+addprocs_pbs(procs)
 
 # Define "to parallelize process"
 require("$here/bootstrap_matching_cccostpublic.jl")
-B = 20 # number of workers being used
+B = 25 # number of workers being used
 b = 4  # number of work each worker does
 
-matchboot = pmap(matchingrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
+matchboot = pmap(matchingrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 Matchfinal = Dict()
+
 # Increase the number of "draw" according to the worker number
 for gender in genderloop
 		println("matchboot check $(matchboot[1])")
