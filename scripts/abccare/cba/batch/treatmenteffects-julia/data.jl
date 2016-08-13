@@ -18,6 +18,9 @@ end
 # Bring in USC projections
 outcomesate = readtable("$(data)/outcomes_ate.csv")
 
+# Drop id 64
+outcomesate = outcomesate[!(outcomesate[:id] .== 64), :]
+
 # Drop home-visit only kids
 outcomesate  = outcomesate[!((outcomesate[:R] .== 0) & (outcomesate[:RV] .== 1)), :]
 
@@ -98,8 +101,6 @@ if deaths == 1
 	end
 end
 
-# Drop id 64
-outcomesate = outcomesate[!(outcomesate[:id] .== 64), :]
 
 # Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise)
 for dvar in ipwvars_all
