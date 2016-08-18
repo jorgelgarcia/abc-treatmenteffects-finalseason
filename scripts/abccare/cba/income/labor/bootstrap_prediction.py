@@ -23,14 +23,14 @@ from paths import paths
 #----------------------------------------------------------------
 
 seed = 1234
-aux_draw = 3
+aux_draw = 101
 
 #----------------------------------------------------------------
 
 # bring in file with indexes for interpolation bootstrap
 interp_index = pd.read_csv(paths.cnlsy_bsid)
 
-# bring in file with indexes for extrapolation bootstrap 
+# bring in file with indexes for extrapolation bootstrap
 reader = StataReader(paths.psid_bsid)
 psid = reader.data(convert_dates=False, convert_categoricals=False)
 psid = psid.iloc[:,0:aux_draw] # limit PSID to the number of repetitions you need
@@ -54,22 +54,22 @@ def boot_predict_aux(interp, extrap, adraw):
 	extrap_tuples = list(zip(*[extrap_source,extrap_draw]))
 	for i in xrange(len(extrap_tuples) - 1, -1, -1):
 		if isnan(extrap_tuples[i][1]):
-			del extrap_tuples[i]    
+			del extrap_tuples[i]
 	extrap_ind = pd.MultiIndex.from_tuples(extrap_tuples, names=['dataset','id'])
 
 	# deal with the fact that USC did alternative bootstrap method
 	# their bootstrap samples include observations you don't have
 	# so only keep the ones that you do have
-	tmp = extrap.index.isin(extrap_ind)   
+	tmp = extrap.index.isin(extrap_ind)
 	tmp = extrap[tmp].index
 	tmp = extrap_ind.isin(tmp)
- 	extrap_ind = extrap_ind[tmp]  
+ 	extrap_ind = extrap_ind[tmp]
 
 	# now estimate the earnings
 	params_interp, params_extrap, errors, proj_interp, proj_extrap = predict_abc(interp, extrap, interp_index=interp_ind, extrap_index=extrap_ind, abc = abcd, verbose=True)
-	
+
 	print 'Success auxiliary bootstrap {}.'.format(adraw)
- 
+
 	output = [params_interp, params_extrap, errors, proj_interp, proj_extrap]
 
 	return output
@@ -103,7 +103,6 @@ for sex in ['male', 'female', 'pooled']:
    	params_extrap[sex].to_pickle(os.path.join(paths.rslts, 'labor_extrap_params_{}.pkl'.format(sex)))
    	errors[sex].to_pickle(os.path.join(paths.rslts, 'labor_errors_{}.pkl'.format(sex)))
    	'''
-    
+
    	# output projections .csv
    	projections[sex].to_csv(os.path.join(paths.rslts, 'labor_proj_{}.csv'.format(sex)))
-
