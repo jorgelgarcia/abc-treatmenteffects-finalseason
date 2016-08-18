@@ -113,7 +113,7 @@ foreach stat in mean se pval {
 	gen part = "discount" + string(rate)
 	gen sig = pval < 0.10
 	gen rate_s = string(rate)
-	keep if inlist(rate_s, "0", ".05")
+	keep if inlist(rate_s, "0", ".07")
 	gen type = "bcr"
 	keep sex `stat' part sig type
 	destring `stat', replace
@@ -235,7 +235,7 @@ foreach stat in mean se pval {
 	replace part = "Crime Costs" if part == "crime"
 	replace part = "Deadweight Loss" if part == "dwl"
 	replace part = "0\% Discount Rate" if part == "discount0"
-	replace part = "5\% Discount Rate" if part == "discount.05"
+	replace part = "7\% Discount Rate" if part == "discount.07"
 
 
 	// add column separators 
