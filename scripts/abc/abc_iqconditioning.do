@@ -66,7 +66,7 @@ foreach sex in 0 1 2 {
 		matrix Vitt_`sex'_`age' = e(V)
 		matrix Vitt_`sex'_`age' = sqrt(Vitt_`sex'_`age'[1,1])
 		
-		reg iq`age'y treat iq3 ${condition`sex'}
+		reg iq`age'y treat iq3y ${condition`sex'}
 		matrix bittc_`sex'_`age' = e(b)
 		matrix bittc_`sex'_`age' = bittc_`sex'_`age'[1,1]
 		matrix Vittc_`sex'_`age' = e(V)
@@ -97,12 +97,12 @@ foreach sex in 0 1 2 {
 		   (line ittcmse age, lwidth(medium) lpattern(dash) lcolor(gs7))
 		   (line ittcpse age, lwidth(medium) lpattern(dash) lcolor(gs7))	  
 	        , 
-			  legend(label(1 "Mean Treatment - Mean Control") label(2 "+/- s.e.") label(4 "Mean Treatment - Mean Control, Controlling for MDI at 6 & 12 Months") 
+			  legend(label(1 "Mean Treatment - Mean Control") label(2 "+/- s.e.") label(4 "Mean Treatment - Mean Control, Controlling for IQ at Age 3") 
 			  		 label(5 "+/- s.e.") size(small) order(1 2 4 5) rows(2) cols(2))
-			  xlabel(1 "4" 2 "5" 3 "7" 4 "8" 5 "12" 6 "15" 7 "21", grid glcolor(gs14)) ylabel(-2[2]18, angle(h) glcolor(gs14))
+			  xlabel(1 "4" 2 "5" 3 "7" 4 "8" 5 "12" 6 "15" 7 "21", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 			  xtitle(Age) ytitle("", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
 	#delimit cr
-	graph export abc_mdifixing_`sex'.eps, replace 
+	graph export abc_iqfixing_`sex'.eps, replace 
 	restore 
 }	
