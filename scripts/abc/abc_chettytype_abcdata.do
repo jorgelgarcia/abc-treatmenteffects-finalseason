@@ -49,24 +49,21 @@ matrix b = b[1,1]
 matrix b = b/15
 
 // discounted income at age 12, 2014 USD 
-local inc2014  = 566717.69
-
-// vary the return to iq
-// discount to age 6 
-local inc2014d = (`inc2014')/((1 + .03)^7)
+local inc2014  = 182926.99
 
 clear
 set obs 1000
-generate uir = rnormal(.13,.10)
+generate uir = rnormal(.84,.10)
 sort uir
 drop if uir < 0
 
 // generate cost-benefit cost ratio
-gen     bc = (1 + uir*b[1,1])*(474617.143359)*`treatN' - (474617.143359)*`controlN'
+gen     bc = (1 + uir*b[1,1])*(`inc2014')*`treatN' - (`inc2014')*`controlN'
 // note bringing costs to age 5 and netting them 
 
-replace bc = bc/((92570*`treatN' - 3057*`controlN')*(1 + .03)^5)
+replace bc = bc/(92570*`treatN' - 3057*`controlN')
 
+/*
 cd $output
 #delimit
 twoway (lowess bc uir, lwidth(thick) lpattern(solid) lcolor(gs0) xline(.131, lcolor(black) lpattern(dash))), 

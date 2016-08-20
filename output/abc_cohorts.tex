@@ -1,27 +1,21 @@
-\begin{table}[H] 
-\begin{threeparttable}
-\caption{Treatment - Control Mean Difference by Cohort, ABC}
-\label{table:cohorts}
-\centering 
-\begin{tabular}{lcc} \toprule
+\documentclass[]{article}
+\setlength{\pdfpagewidth}{8.5in} \setlength{\pdfpageheight}{11in}
+\begin{document}
+\begin{tabular}{lcc} \hline
  & (1) & (2) \\
- & Bayley MDI & Bayley MDI \\ 
- & 12 Months & 24 Months \\ \midrule
+ & mdi0y6m\_est & mdi1y\_est \\
+VARIABLES & mdi0y6m & mdi1y \\ \hline
  &  &  \\
-Cohort 1 & 4.841 & -2.901 \\
+treat\_cohort\_1 & 4.841 & -2.901 \\
  & (6.013) & (5.926) \\
-Cohort 2 & 0.071 & 1.882 \\
+treat\_cohort\_2 & 0.071 & 1.882 \\
  & (6.013) & (5.830) \\
-Cohort 3 & 9.143 & 10.038 \\
+treat\_cohort\_3 & 9.143 & 10.038* \\
  & (5.801) & (5.926) \\
-Cohort 4 & 7.829 & 13.713 \\
- & (5.801) & (5.830) \\ \\ \midrule
+treat\_cohort\_4 & 7.829 & 13.713** \\
+ & (5.801) & (5.830) \\
+ &  &  \\
 Observations & 112 & 110 \\
-$R^2$ & 0.055 & 0.110 \\ \bottomrule
- \end{tabular}
-\begin{tablenotes}
-\footnotesize
-\item Note: This table displays the mean difference between the treatment and control groups in two measures of the Bayley Mental Development Index for ABC. Homoskedastic, asymptotic standard errors are in parentheses.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+ R-squared & 0.055 & 0.110 \\ \hline
+\end{tabular}
+\end{document}
