@@ -97,7 +97,7 @@ foreach sex of numlist 1 2 3 {
 	       (bar m ind        if estimate == 3 & sex == `sex', color(gs8))
 	       (scatter m ind if sig == 1 & sex == `sex', msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
 		, 
-		legend(cols(3) order(1 "Baseline" 2 "Stay at Home" 3 "Alternative Preschool" 
+		legend(cols(2) order(1 "Treat vs. Next Best" 2 "Treat vs. Stay at Home" 3 "Treat vs. Alternative Preschool" 
 					    4 "Signicant at 10%") size(vsmall))
 			  xlabel(2 "Program Costs" 6 "Control Substitution" 10 "Education" 14 "Parental Income"
 			  18 "Labor Income" 22 "Private Medical Costs" 26 "Total Medical Costs" 30 "QALYs" 35 "Crime" 40 "All", angle(45) noticks grid glcolor(white) labsize(small)) 
