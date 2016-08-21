@@ -1,0 +1,15 @@
+	(1)	(2)	(3)	(4)
+	years_30y0	si30y_works_job0	years_30y1	si30y_works_job1
+VARIABLES	years_30y	si30y_works_job	years_30y	si30y_works_job
+				
+Q	0.038*	0.001	0.010	-0.004
+	(0.019)	(0.004)	(0.018)	(0.004)
+hrabc_index	-0.103	-0.027**	-0.041	-0.026
+	(0.067)	(0.012)	(0.071)	(0.018)
+Constant	13.135***	1.295***	13.487***	1.310***
+	(1.681)	(0.312)	(1.446)	(0.365)
+				
+Observations	35	35	30	30
+R-squared	0.175	0.130	0.019	0.110
+Standard errors in parentheses				
+*** p<0.01, ** p<0.05, * p<0.10				
