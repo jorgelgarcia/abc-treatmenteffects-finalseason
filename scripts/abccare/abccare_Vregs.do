@@ -37,16 +37,19 @@ drop if random == 3
 
 foreach sex of numlist 0 1 {
 	foreach var of varlist years_30y si30y_works_job {
-		reg `var' P hrabc_index hh_sibs0y apgar1 apgar5 prem_birth if R == 0 & male == `sex'
+		reg `var' P hrabc_index hh_sibs0y apgar1 apgar5 prem_birth   if R == 0 & male == `sex'
 		est sto `var'`sex'P
-		reg `var' Q hrabc_index hh_sibs0y apgar1 apgar5 prem_birth if R == 0 & male == `sex'
+		reg `var' Q hrabc_index hh_sibs0y apgar1 apgar5 prem_birth   if R == 0 & male == `sex'
 		est sto `var'`sex'Q
+		reg `var' P Q hrabc_index hh_sibs0y apgar1 apgar5 prem_birth if R == 0 & male == `sex'
+		est sto `var'`sex'PQ
+		
 	}
 }
 
 foreach num of numlist 0 1{
 	#delimit
-	outreg2 [years_30y`num'P years_30y`num'Q si30y_works_job`num'P si30y_works_job`num'Q] using abccare_Vregs`num', replace tex(frag) 
+	outreg2 [years_30y`num'P years_30y`num'Q years_30y`num'PQ si30y_works_job`num'P si30y_works_job`num'Q si30y_works_job`num'PQ] using abccare_Vregs`num', replace tex(frag) 
 			alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 keep(P Q) nocons;
 	#delimit cr
 }

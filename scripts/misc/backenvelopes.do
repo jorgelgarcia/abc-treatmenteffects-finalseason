@@ -22,12 +22,26 @@ global googledrive: env googledrive
 // do files
 global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global data       = "$klmmexico/abccare/irr_ratios/aug-01"
+global data       = "$klmmexico/abccare/NPV/8-21b"
 // output
 global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 
+// parameters
+local treated    = 65
+local control    = 72
+local IQeff      = .45524217
+
+local ptotalcost = (92570*`treated' - 3057*`control')
+local atotalcost = 92750 - 3057
+
+
 // pool etimates
 cd $data
+use NPV_vectors_age27.dta, clear
+
+
+
+
 
 
 

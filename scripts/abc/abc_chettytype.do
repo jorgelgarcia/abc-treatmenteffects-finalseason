@@ -31,9 +31,10 @@ global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 cd $dataabccare
 use append-abccare_iv.dta, clear
 cd $output
+drop if random == 3 
 
 // abc sample
-keep if program == "abc"
+// keep if program == "abc"
 keep if wppsi5y != .
 
 // children in control and treatment

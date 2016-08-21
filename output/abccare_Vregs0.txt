@@ -1,13 +1,13 @@
-	(1)	(2)	(3)	(4)
-	years_30y0P	years_30y0Q	si30y_works_job0P	si30y_works_job0Q
-VARIABLES	years_30y	years_30y	si30y_works_job	si30y_works_job
-				
-P	2.829***		0.353*	
-	(0.972)		(0.183)	
-Q		0.041*		0.002
-		(0.021)		(0.004)
-				
-Observations	34	34	34	34
-R-squared	0.351	0.250	0.292	0.201
-Standard errors in parentheses				
-*** p<0.01, ** p<0.05, * p<0.10				
+	(1)	(2)	(3)	(4)	(5)	(6)
+	years_30y0P	years_30y0Q	years_30y0PQ	si30y_works_job0P	si30y_works_job0Q	si30y_works_job0PQ
+VARIABLES	years_30y	years_30y	years_30y	si30y_works_job	si30y_works_job	si30y_works_job
+						
+P	2.829***		2.760*	0.353*		0.552**
+	(0.972)		(1.374)	(0.183)		(0.252)
+Q		0.041*	0.002		0.002	-0.006
+		(0.021)	(0.028)		(0.004)	(0.005)
+						
+Observations	34	34	34	34	34	34
+R-squared	0.351	0.250	0.351	0.292	0.201	0.325
+Standard errors in parentheses						
+*** p<0.01, ** p<0.05, * p<0.10						
