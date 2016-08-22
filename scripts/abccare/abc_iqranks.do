@@ -45,24 +45,25 @@ matrix rownames ddec0a = 3 5 7 8 12 15 21
 matrix ddec1a = ddec0a
 matrix ddec2a = ddec0a
 
-foreach b of numlist 1(1)250 {
+foreach b of numlist 1(1)100 {
 	preserve
 	bsample
 	
 	foreach sex in 0 1 2 {
 		foreach num in 3 4 5 7 8 12 15 21 {
-			reg iq`num'y iq5y
+			reg iq5y iq`num'y iq3y // ${condition`sex'}
 			matrix b = e(b)
 			matrix b = b[1,1]
-			gen iq`num'y_anch_`sex' = iq`num'y*b[1,1]
+			gen iq`num'y_anch_`sex' = iq`num'y*b[1,1] // ${condition`sex'}
+			xtile iq`num'y_anchg_`sex' = iq`num'y_anch_`sex', nq(10)
 		}
 	}
 
 	foreach sex in 0 1 2 {
-		summ iq3y_anch_`sex' ${condition`sex'} & R == 0
+		summ iq3y_anchg_`sex' ${condition`sex'} & R == 0
 		local decs3`sex'_cont = r(mean)
 		
-		summ iq3y_anch_`sex' ${condition`sex'} & R == 1
+		summ iq3y_anchg_`sex' ${condition`sex'} & R == 1
 		local decs3`sex'_treat = r(mean)
 		
 		matrix ddec`sex' = J(1,2,.)
@@ -70,11 +71,11 @@ foreach b of numlist 1(1)250 {
 
 		foreach num in 3 5 7 8 12 15 21 {
 			
-			summ iq`num'y_anch_`sex' ${condition`sex'} & R == 0
+			summ iq`num'y_anchg_`sex' ${condition`sex'} & R == 0
 			local  decs`num'`sex'_cont  = r(mean)
 			local ddecs`num'`sex'_cont =  (`decs`num'`sex'_cont' -  `decs3`sex'_cont')/ `decs3`sex'_cont'
 		
-			summ iq`num'y_anch_`sex' ${condition`sex'} & R == 1
+			summ iq`num'y_anchg_`sex' ${condition`sex'} & R == 1
 			local  decs`num'`sex'_treat = r(mean)
 			local ddecs`num'`sex'_treat =  (`decs`num'`sex'_treat' -  `decs3`sex'_treat')/ `decs3`sex'_treat'
 		
@@ -104,7 +105,7 @@ foreach num of numlist 0 1 {
 	egen treatse   = rowsd(treat*)
 	egen controlse = rowsd(cont*)
 	
-	gen age = _n
+	gen age = _n + 1
 	
 	// p-values
 	gen ptreat   = 2*(1 - normal(abs(treat/treatse)))
@@ -121,7 +122,7 @@ foreach num of numlist 0 1 {
 	        , 
 			  legend(label(1 "Treatment") label(4 "Control") label(2 "p-value > .10") 
 			  		 label(3 "p-value {&le} .10") size(small) order(1 4 2 3) rows(2) cols(2))
-			  xlabel(1 "3" 2 "5" 3 "7" 4 "8" 5 "12" 6 "15" 7 "21", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
+			  xlabel(2 "3" 3 "5" 4 "7" 5 "8" 6 "12" 7 "15" 8 "21", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 			  xtitle(Age) ytitle("", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
 	#delimit cr
