@@ -106,7 +106,7 @@ replace m = m/100000
 // replace m = m/10 if ind >= 34
 
 cd $output
-foreach sex of numlist 3 {
+foreach sex of numlist 1 2 3 {
 	#delimit
 	twoway (bar m ind        if estimate == 1 & sex == `sex', fcolor(white) lcolor(gs0) lwidth(medthick))
 	       (bar m ind        if estimate == 2 & sex == `sex', color(gs4))
