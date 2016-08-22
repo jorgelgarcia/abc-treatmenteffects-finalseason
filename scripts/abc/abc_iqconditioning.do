@@ -35,6 +35,7 @@ cd $output
 // abc sample
 drop if random == 3
 
+/*
 // bayley mdi by cohort
 tab cohort, gen(cohort_)
 
@@ -54,12 +55,13 @@ outreg2 [mdi0y6m_est mdi1y_est] using abc_cohorts, replace tex dec(3) par(se) r2
 // iq conditional on bayley mdi at 12 and 24 months 
 global condition0 if male == 0
 global condition1 if male == 1 
-global condition2 
+global condition2
+*/ 
 
 foreach sex in 0 1 2 {
 	matrix iq_`sex' = J(1,4,.)
 	matrix colnames iq_`sex' = itt seitt ittc seittc
-	foreach age in 4 5 7 8 12 15 21 { 
+	foreach age in 3 4 5 7 8 12 15 21 { 
 		reg iq`age'y treat ${condition`sex'}
 		matrix bitt_`sex'_`age' = e(b)
 		matrix bitt_`sex'_`age' = bitt_`sex'_`age'[1,1]
@@ -99,7 +101,7 @@ foreach sex in 0 1 2 {
 	        , 
 			  legend(label(1 "Mean Treatment - Mean Control") label(2 "+/- s.e.") label(4 "Mean Treatment - Mean Control, Controlling for IQ at Age 3") 
 			  		 label(5 "+/- s.e.") size(small) order(1 2 4 5) rows(2) cols(2))
-			  xlabel(1 "4" 2 "5" 3 "7" 4 "8" 5 "12" 6 "15" 7 "21", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
+			  xlabel(1 "3" 2 "4" 3 "5" 4 "7" 5 "8" 6 "12" 7 "15" 8 "21", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 			  xtitle(Age) ytitle("", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
 	#delimit cr

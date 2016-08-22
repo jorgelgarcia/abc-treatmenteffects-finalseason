@@ -45,13 +45,13 @@ matrix rownames ddec0a = 3 5 7 8 12 15 21
 matrix ddec1a = ddec0a
 matrix ddec2a = ddec0a
 
-foreach b of numlist 1(1)10 {
+foreach b of numlist 1(1)100 {
 	preserve
 	bsample
 	
 	foreach sex in 0 1 2 {
 		foreach num in 3 4 5 7 8 12 15 21 {
-			reg years_30y iq`num'y // ${condition`sex'}
+			reg iq5y iq`num'y iq3y // ${condition`sex'}
 			matrix b = e(b)
 			matrix b = b[1,1]
 			gen iq`num'y_anch_`sex' = iq`num'y*b[1,1] // ${condition`sex'}
@@ -60,10 +60,10 @@ foreach b of numlist 1(1)10 {
 	}
 
 	foreach sex in 0 1 2 {
-		summ iq3y_anch_`sex' ${condition`sex'} & R == 0
+		summ iq3y_anchg_`sex' ${condition`sex'} & R == 0
 		local decs3`sex'_cont = r(mean)
 		
-		summ iq3y_anch_`sex' ${condition`sex'} & R == 1
+		summ iq3y_anchg_`sex' ${condition`sex'} & R == 1
 		local decs3`sex'_treat = r(mean)
 		
 		matrix ddec`sex' = J(1,2,.)
@@ -71,11 +71,11 @@ foreach b of numlist 1(1)10 {
 
 		foreach num in 3 5 7 8 12 15 21 {
 			
-			summ iq`num'y_anch_`sex' ${condition`sex'} & R == 0
+			summ iq`num'y_anchg_`sex' ${condition`sex'} & R == 0
 			local  decs`num'`sex'_cont  = r(mean)
 			local ddecs`num'`sex'_cont =  (`decs`num'`sex'_cont' -  `decs3`sex'_cont')/ `decs3`sex'_cont'
 		
-			summ iq`num'y_anch_`sex' ${condition`sex'} & R == 1
+			summ iq`num'y_anchg_`sex' ${condition`sex'} & R == 1
 			local  decs`num'`sex'_treat = r(mean)
 			local ddecs`num'`sex'_treat =  (`decs`num'`sex'_treat' -  `decs3`sex'_treat')/ `decs3`sex'_treat'
 		
