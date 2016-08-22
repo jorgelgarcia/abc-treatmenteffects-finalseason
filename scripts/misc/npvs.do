@@ -118,7 +118,7 @@ foreach sex of numlist 3 {
 			  xlabel(2 "Program Costs" 6 "Total Net Benefits" 10 "Labor Income" 14 "Parental Income"
 			  18 "Crime" 22 "QALYs" 26 "Total Medical Costs" 30 "Costs of Education", angle(45) noticks grid glcolor(white) labsize(small)) 
 			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
-			  xtitle(Cost Benefit Analysis Components, size(small)) 
+			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
 			  note("Per-annum Rate of Return: Treatment vs. Control = `te`sex''%; Treatment vs. Stay at Home = `sh`sex''%; Treatment vs. Alternative Preschool = `ap`sex''%", size(vsmall));
@@ -144,13 +144,13 @@ replace part1 = 8 if part == 6
 twoway (bar     m part1            if estimate == 1 & sex == 3, fcolor(white) lcolor(gs0) lwidth(medthick) barw(.9))
        (scatter m part1 if sig == 1 & estimate == 1 & sex == 3, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
 		, 
-		legend(cols(2) order(1 "Treatment vs. Next Best" 2 "Signicant at 10%") size(small))
+		legend(cols(2) order(1 "Treatment vs. Next Best" 2 "Signicant at 10%") position(north) size(small))
 			  xlabel(1 "Program Costs" 2 "Total Net Benefits" 3 "Labor Income" 4 "Parental Income"
-			  5 "Crime" 6 "QALYs" 7 "Total Medical Costs" 8 "Costs of Education", angle(45) noticks grid glcolor(white) labsize(small)) 
+			  5 "Crime" 6 "QALYs" 7 "Total Medical Costs" 8 "Costs of Education",  angle(45) noticks grid glcolor(white) labsize(small)) 
 			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
-			  xtitle(Cost Benefit Analysis Components, size(small)) 
+			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
-			  note("Per-annum Rate of Return: 13% (s.e. 4%)", size(small));
+			  note("Per-annum Rate of Return: 13% (s.e. 4%). Benefit-cost Ratio: 5.6 (s.e. 2.15)", size(small));
 #delimit cr 
 graph export abccare_npvssumm.eps, replace
