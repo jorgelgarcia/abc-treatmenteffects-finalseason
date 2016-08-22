@@ -45,16 +45,17 @@ matrix rownames ddec0a = 3 5 7 8 12 15 21
 matrix ddec1a = ddec0a
 matrix ddec2a = ddec0a
 
-foreach b of numlist 1(1)250 {
+foreach b of numlist 1(1)10 {
 	preserve
 	bsample
 	
 	foreach sex in 0 1 2 {
 		foreach num in 3 4 5 7 8 12 15 21 {
-			reg iq`num'y iq5y
+			reg years_30y iq`num'y // ${condition`sex'}
 			matrix b = e(b)
 			matrix b = b[1,1]
-			gen iq`num'y_anch_`sex' = iq`num'y*b[1,1]
+			gen iq`num'y_anch_`sex' = iq`num'y*b[1,1] // ${condition`sex'}
+			xtile iq`num'y_anchg_`sex' = iq`num'y_anch_`sex', nq(10)
 		}
 	}
 
@@ -104,7 +105,7 @@ foreach num of numlist 0 1 {
 	egen treatse   = rowsd(treat*)
 	egen controlse = rowsd(cont*)
 	
-	gen age = _n
+	gen age = _n + 1
 	
 	// p-values
 	gen ptreat   = 2*(1 - normal(abs(treat/treatse)))
@@ -121,7 +122,7 @@ foreach num of numlist 0 1 {
 	        , 
 			  legend(label(1 "Treatment") label(4 "Control") label(2 "p-value > .10") 
 			  		 label(3 "p-value {&le} .10") size(small) order(1 4 2 3) rows(2) cols(2))
-			  xlabel(1 "3" 2 "5" 3 "7" 4 "8" 5 "12" 6 "15" 7 "21", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
+			  xlabel(2 "3" 3 "5" 4 "7" 5 "8" 6 "12" 7 "15" 8 "21", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 			  xtitle(Age) ytitle("", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
 	#delimit cr
