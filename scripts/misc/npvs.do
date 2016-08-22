@@ -120,9 +120,8 @@ foreach sex of numlist 1 2 3 {
 			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
-			  graphregion(color(white)) plotregion(fcolor(white))
-			  note("Per-annum Rate of Return: Treatment vs. Control = `te`sex''%; Treatment vs. Stay at Home = `sh`sex''%; Treatment vs. Alternative Preschool = `ap`sex''%", size(vsmall));
-	#delimit cr 
+			  graphregion(color(white)) plotregion(fcolor(white));
+			 #delimit cr 
 	graph export abccare_npvs`sex'.eps, replace
 }		
 
