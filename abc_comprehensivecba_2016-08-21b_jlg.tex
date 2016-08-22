@@ -2,7 +2,7 @@
 \input{preamble}
 \input{output/mainstatistics}
 
-\externaldocument{abc_comprehensivecba_appendix_AA1_2016-08-19a_jbb.tex}
+\externaldocument{abc_comprehensivecba_appendix_2016-07-31a_jlg.tex}
 \pagenumbering{roman}
 
 \begin{document}
@@ -137,11 +137,11 @@ A fundamental problem facing the evaluation of any human capital program is asse
 
 An important contribution of this paper is our analysis of the long-run benefits of the intervention. We estimate the savings in life cycle medical costs and improvements on the quality of life.\footnote{\cite{Campbell_Conti_etal_2014_EarlyChildhoodInvestments} show the substantial adult (age 34) health benefits of ABC but do not present a cost/benefit analysis of their results.} We also find substantial childcare benefits that promote the work of mothers of participating children. There are substantial adult (age 34) benefits in terms of reduced crime, gains in life cycle earnings, and educational attainment.\footnote{The rate of return is a statistically significant 13\% with an associated benefit/cost ratio of 5.6.} \textbf{[JJH: Jorge, what do we have on special education, etc?] [JLG: we do have special education and grade repetition and it is part of the benefits of the program. There is a reduction. We are quantifying it. It's part of the benefits we quantify as part of education (most of education is costs because people in treatment got more to school. Special education and grade repetition are a benefit.) We do not have it as a separate item because it is small.]}
 
-Figure 1 summarizes the main findings of the paper. It displays the program costs and benefits for a pooled sample of participants: Costs are substantial, as has frequently been noted in public policy discussions.\footnote{\cite{Whitehurst_2014_Senate_Testimony}.} But so are benefits. Breaking down the benefits by category we find substantial benefits for the labor income of participants and their mothers, reduced medical costs, enhanced quality of life, and reduced crime.
+Figure~\ref{figure:npvsall} summarizes the main findings of the paper. It displays the program costs and benefits for a pooled sample of participants: Costs are substantial, as has frequently been noted in public policy discussions.\footnote{\cite{Whitehurst_2014_Senate_Testimony}.} But so are benefits. Breaking down the benefits by category we find substantial benefits for the labor income of participants and their mothers, reduced medical costs, enhanced quality of life, and reduced crime.
 
 \begin{sidewaysfigure}[H]
 \caption{Life-cycle Net Present Value of Main Components of the CBA, Pooled Sample of Males and Females}
-\label{figure:npvs}
+\label{figure:npvsall}
 \centering
 \includegraphics[width=.8\columnwidth]{output/abccare_npvssumm.eps}
 \floatfoot{
@@ -150,7 +150,7 @@ Note: This figure displays the life-cycle net present values of the main compone
 }
 \end{sidewaysfigure}
 
-\textbf{[JJH: Jorge, please make a coherent figure for the program overall. What are control substitutions and benefits? Where is reduced special education? At base of table please place definition of each item. What is ``control substitution''? Please be clear. Edit down --- figure too busy. Just present the overall numbers (stay at home and alt preschool)] [Typist: Jorge is working on this paper]}
+\textbf{[JJH: Jorge, please make a coherent figure for the program overall. What are control substitutions and benefits? Where is reduced special education? At base of table please place definition of each item. What is ``control substitution''? Please be clear. Edit down --- figure too busy. Just present the overall numbers (stay at home and alt preschool)] [Typist: Jorge is working on this figure.] [JLG: figure inserted.]}
 
 The rest of the paper justifies this figure and interprets it. We build up to it in the following way. Section~\ref{section:background} discusses main features of ABC/CARE. Many details are relegated to a Web Appendix. Section~\ref{section:methodology} discusses the methodological challenges faced in evaluating the program. There are many outcomes measured across multiple stages of the life cycle and across many domains. 
 
@@ -547,6 +547,18 @@ The samples used to produce estimates relative to enrollment in alternatives pre
 \input{output/cba_summary_controls_trim.tex}
 \begin{tablenotes}
 \item Note: This table displays estimates of the internal rate of return (IRR) and the benefit-to-cost ratio (B/C) for ABC and CARE for three cases. Not accounting for control substitution (baseline); comparing ABC and CARE to staying at home (relative to staying at home); and comparing ABC to alternative preschools (relative to alternative preschools). For the B/C we use a discount rate of $3\%$. We test the null hypotheses $\text{IRR} = 3\%$ and $\text{B/C} = 1$---we elect $3\%$ because that is the discount rate we use. The results in bold are significant at the 10\% level in a single-sided, non-parametric, bootstrapped test. We resample both the experimental and the auxiliary data sources.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+\begin{threeparttable}
+\caption{Comparing Methodologies and Period Sand when Calculating the Cost-benefit Ratios}
+\label{table:comparing}
+\centering
+\input{output/back-envelope-comparison-table.tex}
+\begin{tablenotes}
+\item Note: This table presents calculations of the benefit-cost ratio using different methodologies and life-spans. ``Age'' labels the life-span or age up to where we stop the calculation. Life-cycle considers up to age 79. NPV source lists the source of the net present value of the component. The column ``\citet{Kline-Walters_2016_QJE}'' is based on these authors’ methodology. They use the gain in an IQ test at age 5 and relate it to the gain in the NPV of earnings at age 27 using \citet{Chetty_Friedman_etal_2010_HowDoesYour} estimates.``Authors’ Method” presents our calculation---based on the method discussed so far.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
