@@ -119,8 +119,8 @@ foreach num of numlist 0 1 {
 	       (scatter control   age if pcontrol >  .10, msymbol(circle) msize(medium) mfcolor (none) mlcolor(gs0))
 	       (scatter control   age if pcontrol <= .10, msymbol(circle) msize(medium) mfcolor (gs0) mlcolor(gs0))   
 	        , 
-			  legend(label(1 "Treatment") label(4 "Control") label(2 "p-value > 0") 
-			  		 label(3 "p-value {&le} 0") size(small) order(1 4 2 3) rows(2) cols(2))
+			  legend(label(1 "Treatment") label(4 "Control") label(2 "p-value > .10") 
+			  		 label(3 "p-value {&le} .10") size(small) order(1 4 2 3) rows(2) cols(2))
 			  xlabel(1 "3" 2 "5" 3 "7" 4 "8" 5 "12" 6 "15" 7 "21", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 			  xtitle(Age) ytitle("", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
