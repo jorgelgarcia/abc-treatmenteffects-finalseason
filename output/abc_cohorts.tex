@@ -1,4 +1,9 @@
-\begin{tabular}{lcc} \hline
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Treatment - Control Mean Difference by Cohort, ABC}
+\label{table:cohorts}
+\centering 
+\begin{tabular}{lcc} \toprule
  & (1) & (2) \\
 Cohort 1 & 4.841 & -2.901 \\
  & (5.840) & (5.838) \\
@@ -11,4 +16,10 @@ Cohort 4 & 4.586 & 9.333* \\
  &  &  \\
 Observations & 135 & 132 \\
  R-squared & 0.040 & 0.081 \\ \hline
-\end{tabular}
+ \end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table displays the mean difference between the treatment and control groups in two measures of the Bayley Mental Development Index for ABC. Homoskedastic, asymptotic standard errors are in parentheses.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
