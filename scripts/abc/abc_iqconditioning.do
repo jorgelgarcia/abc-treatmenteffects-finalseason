@@ -58,10 +58,12 @@ global condition1 if male == 1
 global condition2
 */ 
 
-foreach sex in 0 1 2 {
+rename mdi1y iq1y
+
+foreach sex in 0 1 {
 	matrix iq_`sex' = J(1,4,.)
 	matrix colnames iq_`sex' = itt seitt ittc seittc
-	foreach age in 3 4 5 7 8 12 15 21 { 
+	foreach age in 1 2 3 4 5 7 8 12 15 21 { 
 		reg iq`age'y treat ${condition`sex'}
 		matrix bitt_`sex'_`age' = e(b)
 		matrix bitt_`sex'_`age' = bitt_`sex'_`age'[1,1]
@@ -101,7 +103,7 @@ foreach sex in 0 1 2 {
 	        , 
 			  legend(label(1 "Mean Treatment - Mean Control") label(2 "+/- s.e.") label(4 "Mean Treatment - Mean Control, Controlling for IQ at Age 3") 
 			  		 label(5 "+/- s.e.") size(small) order(1 2 4 5) rows(2) cols(2))
-			  xlabel(1 "3" 2 "4" 3 "5" 4 "7" 5 "8" 6 "12" 7 "15" 8 "21", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
+			  xlabel(1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "7" 7 "8" 8 "12" 9 "15" 10 "21", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 			  xtitle(Age) ytitle("", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
 	#delimit cr

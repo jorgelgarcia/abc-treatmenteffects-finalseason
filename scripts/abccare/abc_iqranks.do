@@ -50,7 +50,7 @@ matrix ddec2a = ddec0a
 	
 foreach sex in 0 1 2 {
 	foreach num in 1 2 3 4 5 7 8 12 15 21 {
-		reg iq5y iq`num'y ${condition`sex'}
+		reg iq5y iq`num'y hrabc_index f_home0y apgar1 apgar5 ${condition`sex'}
 		matrix b = e(b)
 		matrix b = b[1,1]
 		gen iq`num'y_anch_`sex' = iq`num'y*b[1,1] ${condition`sex'}
