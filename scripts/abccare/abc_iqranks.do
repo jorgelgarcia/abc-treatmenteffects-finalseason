@@ -89,7 +89,7 @@ matrix ddec0 = ddec0[2...,1...]
 matrix ddec1 = ddec1[2...,1...]
 matrix ddec2 = ddec2[2...,1...]
 
-foreach num of numlist 0 {
+foreach num of numlist 0 1 {
 	preserve
 	clear
 	svmat ddec`num', names(col)
@@ -101,7 +101,7 @@ foreach num of numlist 0 {
 	twoway (line treat   age, lwidth(medthick) lpattern(solid) lcolor(gs0))
 	       //(lowess treatmax   age, lwidth(medthick) lpattern(dash) lcolor(gs0))
 	       //(lowess treatmin   age, lwidth(medthick) lpattern(dash) lcolor(gs0))    
-	       (line cont   age, lwidth(medthick) lpattern(solid) lcolor(gs8))
+	       (line cont   age, lwidth(medthick) lpattern(dash) lcolor(gs8))
 	       //(lowess controlmax   age, lwidth(medthick) lpattern(dash) lcolor(gs0))
 	       //(lowess controlmin   age, lwidth(medthick) lpattern(dash) lcolor(gs0))
 	        , 
