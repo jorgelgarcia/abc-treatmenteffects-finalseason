@@ -45,13 +45,13 @@ matrix rownames ddec0a = 3 5 7 8 12 15 21
 matrix ddec1a = ddec0a
 matrix ddec2a = ddec0a
 
-foreach b of numlist 1(1)100 {
+foreach b of numlist 1(1)10 {
 	preserve
 	bsample
 	
 	foreach sex in 0 1 2 {
 		foreach num in 3 4 5 7 8 12 15 21 {
-			reg iq5y iq`num'y iq3y // ${condition`sex'}
+			reg iq5y iq`num'y // ${condition`sex'}
 			matrix b = e(b)
 			matrix b = b[1,1]
 			gen iq`num'y_anch_`sex' = iq`num'y*b[1,1] // ${condition`sex'}
@@ -94,7 +94,7 @@ matrix ddec0a = ddec0a[1...,2...]
 matrix ddec1a = ddec1a[1...,2...]
 matrix ddec2a = ddec2a[1...,2...]
 
-foreach num of numlist 0 1 {
+foreach num of numlist 0 {
 	preserve
 	clear
 	svmat ddec`num'a, names(col)
@@ -105,6 +105,12 @@ foreach num of numlist 0 1 {
 	egen treatse   = rowsd(treat*)
 	egen controlse = rowsd(cont*)
 	
+	gen controlmax = control + controlse
+	gen controlmin = control - controlse
+	
+	gen treatmax = treat + treatse
+	gen treatmin = treat - treatse
+	
 	gen age = _n + 1
 	
 	// p-values
@@ -113,15 +119,14 @@ foreach num of numlist 0 1 {
 	
 	
 	#delimit
-	twoway (line    treat   age, lwidth(medthick) lpattern(solid) lcolor(gs0))
-	       (scatter treat   age if ptreat >  .10, msymbol(circle) msize(medium) mfcolor (none) mlcolor(gs0))
-	       (scatter treat   age if ptreat <= .10, msymbol(circle) msize(medium) mfcolor (gs0) mlcolor(gs0))      
-	       (line    control   age, lwidth(medthick) lpattern(dash) lcolor(gs0))
-	       (scatter control   age if pcontrol >  .10, msymbol(circle) msize(medium) mfcolor (none) mlcolor(gs0))
-	       (scatter control   age if pcontrol <= .10, msymbol(circle) msize(medium) mfcolor (gs0) mlcolor(gs0))   
+	twoway (lowess treat   age, lwidth(medthick) lpattern(solid) lcolor(gs0))
+	       //(lowess treatmax   age, lwidth(medthick) lpattern(dash) lcolor(gs0))
+	       //(lowess treatmin   age, lwidth(medthick) lpattern(dash) lcolor(gs0))    
+	       (lowess control   age, lwidth(medthick) lpattern(solid) lcolor(gs8))
+	       //(lowess controlmax   age, lwidth(medthick) lpattern(dash) lcolor(gs0))
+	       //(lowess controlmin   age, lwidth(medthick) lpattern(dash) lcolor(gs0))
 	        , 
-			  legend(label(1 "Treatment") label(4 "Control") label(2 "p-value > .10") 
-			  		 label(3 "p-value {&le} .10") size(small) order(1 4 2 3) rows(2) cols(2))
+			  legend(label(1 "Treatment") label(2 "Control") size(small) order(1 2) rows(1))
 			  xlabel(2 "3" 3 "5" 4 "7" 5 "8" 6 "12" 7 "15" 8 "21", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 			  xtitle(Age) ytitle("", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
