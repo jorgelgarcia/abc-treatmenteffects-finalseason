@@ -168,7 +168,7 @@ end
 abccare = abccare[!(abccare[:id] .== 64), :]
 
 # Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise)
-global discretized = ["m_iq0y", "m_ed0y", "m_age0y", "hrabc_index", "apgar1", "apgar5", "prem_birth", "m_married0y", "m_teen0y", "male", "f_home0y", "hh_sibs0y"]
+global discretized = ["m_iq0y", "m_ed0y", "m_age0y", "hrabc_index", "apgar1", "apgar5", "hh_sibs0y"]
 
 for dvar in discretized
   dvar_p = parse(dvar) # Making "d_var" to :d_var
