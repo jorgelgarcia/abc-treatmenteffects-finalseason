@@ -54,7 +54,7 @@ foreach sex in 0 1 2 {
 		matrix b = e(b)
 		matrix b = b[1,1]
 		gen iq`num'y_anch_`sex' = iq`num'y*b[1,1] ${condition`sex'}
-		xtile iq`num'y_anchg_`sex' = iq`num'y_anch_`sex', nq(20)
+		xtile iq`num'y_anchg_`sex' = iq`num'y_anch_`sex', nq(10)
 	}
 }
 
@@ -89,7 +89,7 @@ matrix ddec0 = ddec0[2...,1...]
 matrix ddec1 = ddec1[2...,1...]
 matrix ddec2 = ddec2[2...,1...]
 
-foreach num of numlist 0 1 {
+foreach num of numlist 0 {
 	preserve
 	clear
 	svmat ddec`num', names(col)
