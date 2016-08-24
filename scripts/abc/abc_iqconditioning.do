@@ -96,13 +96,9 @@ foreach sex in 0 1 {
 	#delimit
 	twoway (scatter itt      age, msymbol(circle) mfcolor(gs0) msize(large) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0))
 		   (line ittmse  age, lwidth(medium) lpattern(solid) lcolor(gs7))
-		   (line ittpse  age, lwidth(medium) lpattern(solid) lcolor(gs7))	       
-		   (scatter ittc age , msymbol(square) msize(large) mfcolor (gs0) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0))
-		   (line ittcmse age, lwidth(medium) lpattern(dash) lcolor(gs7))
-		   (line ittcpse age, lwidth(medium) lpattern(dash) lcolor(gs7))	  
+		   (line ittpse  age, lwidth(medium) lpattern(solid) lcolor(gs7))	       	  
 	        , 
-			  legend(label(1 "Mean Treatment - Mean Control") label(2 "+/- s.e.") label(4 "Mean Treatment - Mean Control, Controlling for IQ at Age 3") 
-			  		 label(5 "+/- s.e.") size(small) order(1 2 4 5) rows(2) cols(2))
+			  legend(label(1 "Mean Treatment - Mean Control") label(2 "+/- s.e.") size(small) order(1 2) rows(1))
 			  xlabel(1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "7" 7 "8" 8 "12" 9 "15" 10 "21", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 			  xtitle(Age) ytitle("", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
