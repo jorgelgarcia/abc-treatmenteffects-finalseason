@@ -101,7 +101,7 @@ if deaths == 1
 	end
 end
 
-global discretized = [:m_iq0y, :m_ed0y, :m_age0y, :hrabc_index, :p_inc0y, :apgar1, :apgar5, :prem_birth, :m_married0y, :m_teen0y, :f_home0y, :hh_sibs0y, :m_work0y]
+global discretized = [:m_iq0y, :m_ed0y, :m_age0y, :hrabc_index, :p_inc0y, :apgar1, :apgar5, :hh_sibs0y]
 
 # Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise)
 for dvar in discretized
