@@ -97,7 +97,7 @@ if deaths == 1
 end
 
 # Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise)
-global discretized = ["apgar1", "apgar5", "prem_birth"]
+global discretized = ["apgar1", "apgar5"]
 
 for dvar in discretized
   dvar_p = parse(dvar) # Making "d_var" to :d_var
