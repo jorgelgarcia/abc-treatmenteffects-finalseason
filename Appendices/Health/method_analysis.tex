@@ -411,3 +411,32 @@ GDP assumptions for 2020-2100 are based on the 2008 OASDI Trustee's Report long-
 \noindent To estimate medical costs for ages 15 to 20, we first impute whether or not the subject spent time in the hospital for those who are missing this information in the age 21 interview.  The imputation model was based on race, asthma diagnosis between ages 15--20, and, for females, the birth of any children.  The age 21 interview asks about the number of days spent in the hospital.  However, it does not record the ages at which these hospital stays occurred.  Considering the difficulty of assigning the hospital days to specific ages in the absence of other information, we decided to use only the indicator of whether or not there were any days spent in the hospital.  Next, we separated subjects into a group that spent some time in the hospital between ages 15--20 and those who did not.  As before, we used the direct model to predict costs for those who had been to the hospital and used a two-stage model for those who had not.  The cost models predict costs based on race, asthma diagnosis, any births (female model only), use of food stamps, whether or not the subject was working age, work status, living at college, and living with parents, and marital status.\\
 
 \noindent Unlike the interviews at younger ages, the age 30 interview does not ask about utilization of medical services.  To estimate costs for ages 21--31, we skipped the utilization imputation step and moved directly to cost models. We used two-stage cost models.  The first stage predicts whether or not there were any costs based on race, asthma diagnosis between ages 21-31, education, use of food stamps, any births (female model only), whether or not the subject was working age, living at college, living with parents, and marital status.
+
+\noindent Table~\ref{table:pre30} summarizes individual and family characteristics used to predict medical expenditure models for each age.
+
+\begin{table}[H]
+\begin{threeparttable}
+\caption{Health Expenditure Models by Age Group, before Age 30}\label{table:pre30}
+\begin{tabular}{lcccc} \toprule
+Explanatory variable & \multicolumn{4}{c}{Age Group} \\
+& 8-11 & 12-14 & 15-20 & 21-30 \\
+\midrule
+Race/ethnicity & \checkmark & \checkmark & \checkmark & \checkmark \\
+Education        & $\times$ & $\times$ & $\times$ & \checkmark \\
+Asthma Diagnoses & \checkmark & \checkmark & \checkmark & \checkmark \\
+Hospital stays & if $\geq$ 1 week & any stay & any stay & $\times$ \\
+Births & $\times$ & $\times$ & \checkmark & \checkmark \\
+Mother present & $\times$ & \checkmark & \checkmark & $\times$ \\
+Father present & \checkmark & \checkmark & $\times$ & $\times$ \\
+Number of siblings & \checkmark & \checkmark & $\times$ & $\times$ \\
+Foodstamps & \checkmark & \checkmark & \checkmark & \checkmark \\
+Living arrangements & $\times$ & $\times$ & \checkmark & \checkmark \\
+Working, if working age & $\times$ & $\times$ & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table summarizes the explanatory variables included in the models we use to predict medical expenditure for each age group. Possible living arrangements are: living with parents, away at college, married, or other.\\
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
