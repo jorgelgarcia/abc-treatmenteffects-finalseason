@@ -102,8 +102,7 @@ twoway (line cdf_Q              Q if program=="abc", lwidth(vthick) lcolor(gs0))
 		  legend(label(1 "ABC") label(2 "CARE") position(12))
 		  xlabel(, grid glcolor(gs14)) ylabel(0[.1]1, angle(h) glcolor(gs14))
 		  xtitle("Proportion of Months in Alternative Preschools, Control Group") ytitle(Cumulative Density Function)
-		  graphregion(color(white)) plotregion(fcolor(white)) 
-		  note("[No Alternative Preschools in ABC (CARE): `fABC' (`fCARE') Females; `mABC' (`mCARE') Males]");
+		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 cd $output
 graph export abccare_controlcontamination.eps, replace
