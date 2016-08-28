@@ -161,34 +161,23 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
             # ----------------------------- #
             if in(parse("ipw_$(y)"), names(usedata))
 
-              # Define a weighted y column first as an empty column. (Julia's WLS function is not credible.)
-              usedata[:y_w] = 0.0
-              usedata[:y_w] = usedata[parse("$(y)")] .* sqrt(usedata[parse("ipw_$(y)")])
-
-              # Define a weighted R column
-              usedata[:R_w] = 0.0
-              usedata[:R_w] = usedata[:R] .* sqrt(usedata[parse("ipw_$(y)")])
-
-              # Define weighted controls
-              controls_w = []
-              for c in controls
-                usedata[parse("$(c)_w")] = 0.0
-                usedata[parse("$(c)_w")] = usedata[parse("$(c)")] .* sqrt(usedata[parse("ipw_$(y)")])
-                controls_w = push!(controls_w, parse("$(c)_w"))
-
+              wtsdata = usedata
+              for var in controls
+                wtsdata = wtsdata[!isna(wtsdata[var]), :]
               end
+              wtsdata = wtsdata[!isna(wtsdata[y]), :]   # otherwise, glm does not let us use the "wts" option with the missing values present.
 
-              ITT_weight_fml = Formula(:y_w, Expr(:call, :+, :R_w, controls_w...))
+              ITT_weight_fml = Formula(:y, Expr(:call, :+, :R, controls...))
 
               try # try/catch structure handles exceptions
-                lm(ITT_weight_fml, usedata)
+                glm(ITT_weight_fml, wtsdata, Normal(), IdentityLink(), wts = wtsdata[parse("ipw_$(y)")].data)
               # If the regression fails
               catch err
                   push!(outMat["ITT_$(gender)_P$(p)"], [y, draw, ddraw, ITT_none_coeff, ITT_none_pval, ITT_none_N, ITT_control_coeff, ITT_control_pval, ITT_control_N, NA, NA, NA])
                   continue
               end
 
-              ITT_weight = lm(ITT_weight_fml, usedata)
+              ITT_weight = glm(ITT_weight_fml, wtsdata, Normal(), IdentityLink(), wts = wtsdata[parse("ipw_$(y)")].data)
               ITT_weight_coeff = coef(ITT_weight)[2]
               ITT_weight_stderr = stderr(ITT_weight)[2]
               pval_check = 1
@@ -203,14 +192,8 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
                 ITT_weight_pval = ccdf(FDist(1, df_residual(ITT_weight)), abs2(ITT_weight_coeff./ITT_weight_stderr))
               end
 
-              # Create the data to check the number of observations used in the regression (non-missing X)
-                  wweight_list = [:y_w, :R_w]
-                  append!(wweight_list, controls_w)
-                  obsdata = usedata[:, wweight_list]
-                  for var in wweight_list
-                    obsdata = obsdata[!isna(obsdata[var]),:]
-                  end
-              ITT_weight_N = size(obsdata, 1)
+              # Check the number of observations used in the regression (non-missing X)
+              ITT_weight_N = size(wtsdata, 1)
 
             else
               ITT_weight_fml = Formula(y, Expr(:call, :+, :R, controls...))
