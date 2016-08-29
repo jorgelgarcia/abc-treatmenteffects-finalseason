@@ -26,6 +26,24 @@ global data       = "$klmmexico/abccare/irr_ratios/aug-01"
 // output
 global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 
+// rates of return
+local te3 = 13
+local sh3 = 9
+local ap3 = 13 
+
+local te2 = 15
+local sh2 = 8
+local ap2 = 16
+
+local te1 = 10
+local sh1 = 13
+local ap1 = 9
+
+// y labels
+global ylabel1 -2[1]4 
+global ylabel2 -2[2]10
+global ylabel3 -2[1]5
+
 // pool etimates
 cd $data
 set obs 16875
@@ -69,15 +87,13 @@ keep if part == 1  | part == 2 | part == 3 | part == 4 | part == 6 | part == 7 |
       | part == 10 | part == 11 | part == 13
 
 gen     ind = 1  if part == 3   
-replace ind = 5  if part == 2
-replace ind = 9  if part == 6 
+replace ind = 5  if part == 1
+replace ind = 9  if part == 10 
 replace ind = 13 if part == 11 
-replace ind = 17 if part == 10
-replace ind = 21 if part == 8
+replace ind = 17 if part == 4
+replace ind = 21 if part == 13
 replace ind = 25 if part == 7
-replace ind = 29 if part == 13
-replace ind = 34 if part == 4 
-replace ind = 39 if part == 1
+replace ind = 29 if part == 6 
 
 replace ind = ind + 1 if estimate == 2
 replace ind = ind + 2 if estimate == 3 
@@ -87,24 +103,53 @@ gen sig = 1 if pval <= .15
 replace sig = . if estimate == 2 & part == 2
 
 replace m = m/100000
-replace m = m/10 if ind >= 34
+// replace m = m/10 if ind >= 34
 
 cd $output
 foreach sex of numlist 1 2 3 {
 	#delimit
-	twoway (bar m ind        if estimate == 1 & sex == `sex', fcolor(white) lcolor(gs0) lwidth(medthick) text(-.12 37.5 "In 1,000,000s (2014 USD)", size(vsmall)))
-	       (bar m ind        if estimate == 2 & sex == `sex', color(gs4) xline(32.5, lcolor(gs10) lpattern(dash)))
+	twoway (bar m ind        if estimate == 1 & sex == `sex', fcolor(white) lcolor(gs0) lwidth(medthick))
+	       (bar m ind        if estimate == 2 & sex == `sex', color(gs4))
 	       (bar m ind        if estimate == 3 & sex == `sex', color(gs8))
 	       (scatter m ind if sig == 1 & sex == `sex', msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
 		, 
-		legend(cols(3) order(1 "Baseline" 2 "Stay at Home" 3 "Alternative Preschool" 
+		legend(cols(2) order(1 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 3 "Treatment vs. Alternative Preschool" 
 					    4 "Signicant at 10%") size(vsmall))
-			  xlabel(2 "Program Costs" 6 "Control Substitution" 10 "Education" 14 "Parental Income"
-			  18 "Labor Income" 22 "Private Medical Costs" 26 "Total Medical Costs" 30 "QALYs" 35 "Crime" 40 "All", angle(45) noticks grid glcolor(white) labsize(small)) 
-			  ylabel(-1[.5]2, angle(h) glcolor(gs14))
-			  xtitle(Cost Benefit Analysis Components, size(small)) 
+			  xlabel(2 "Program Costs" 6 "Total Net Benefits" 10 "Labor Income" 14 "Parental Income"
+			  18 "Crime" 22 "QALYs*" 26 "Total Medical Costs" 30 "Costs of Education", angle(45) noticks grid glcolor(white) labsize(small)) 
+			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
+			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white));
-	#delimit cr 
+			 #delimit cr 
 	graph export abccare_npvs`sex'.eps, replace
 }		
+
+// do treatment vs control only
+drop if ind == .
+keep if estimate == 1 & sex == 3
+keep if part == 1 | part == 3 | part == 4 | part == 6 | part == 7 | part == 10 | part == 11 | part == 13
+gen part1 = .
+replace part1 = 1 if part == 3
+replace part1 = 2 if part == 1 
+replace part1 = 3 if part == 10
+replace part1 = 4 if part == 11
+replace part1 = 5 if part == 4 
+replace part1 = 6 if part == 13 
+replace part1 = 7 if part == 7 
+replace part1 = 8 if part == 6
+
+# delimit
+twoway (bar     m part1            if estimate == 1 & sex == 3, fcolor(white) lcolor(gs0) lwidth(medthick) barw(.9))
+       (scatter m part1 if sig == 1 & estimate == 1 & sex == 3, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
+		, 
+		legend(cols(2) order(1 "Treatment vs. Next Best" 2 "Signicant at 10%") position(north) size(small))
+			  xlabel(1 "Program Costs" 2 "Total Net Benefits" 3 "Labor Income" 4 "Parental Income"
+			  5 "Crime" 6 "QALYs*" 7 "Total Medical Costs" 8 "Costs of Education",  angle(45) noticks grid glcolor(white) labsize(small)) 
+			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
+			  xtitle("", size(small)) 
+			  ytitle("100,000's (2014 USD)")
+			  graphregion(color(white)) plotregion(fcolor(white))
+			  note("Per-annum Rate of Return: 13% (s.e. 4%). Benefit-cost Ratio: 5.6 (s.e. 2.15)", size(small));
+#delimit cr 
+graph export abccare_npvssumm.eps, replace
