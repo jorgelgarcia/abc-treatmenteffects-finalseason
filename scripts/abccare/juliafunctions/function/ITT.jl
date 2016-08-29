@@ -170,9 +170,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
               wtsdata = wtsdata[!isnan(wtsdata[y]), :]
               wtsdata = wtsdata[!isna(wtsdata[parse("ipw_$(y)")]), :]
 
-              println("printing wtsdata: $(wtsdata)" )
-
-              ITT_weight_fml = Formula(:y, Expr(:call, :+, :R, controls...))
+              ITT_weight_fml = Formula(y, Expr(:call, :+, :R, controls...))
 
               try # try/catch structure handles exceptions
                 glm(ITT_weight_fml, wtsdata, Normal(), IdentityLink(), wts = wtsdata[parse("ipw_$(y)")].data)
