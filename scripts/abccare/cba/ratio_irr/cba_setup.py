@@ -26,8 +26,8 @@ from scipy.stats import percentileofscore
 #----------------------------------------
 
 # Bootstrap samples
-draws = 75
-adraws = 75
+draws = 3
+adraws = 3
 
 # Paths
 filedir = os.path.join(os.path.dirname(__file__))
@@ -86,6 +86,10 @@ def makeflows(etype):
     	columns=['c{}'.format(i) for i in xrange(80)])
     
     diclaim.loc[diclaim_tmp.index, diclaim_tmp.columns] = diclaim_tmp
+
+    diclaim.to_csv(os.path.join(tables,'diclaim_test.cslv'), index=True)
+
+    print diclaim
 
     filled = OrderedDict()
 
