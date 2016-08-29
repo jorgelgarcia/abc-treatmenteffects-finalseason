@@ -164,8 +164,10 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
               wtsdata = usedata
               for var in controls
                 wtsdata = wtsdata[!isna(wtsdata[var]), :]
+                wtsdata = wtsdata[!isnan(wtsdata[var]), :]
               end
               wtsdata = wtsdata[!isna(wtsdata[y]), :]   # otherwise, glm does not let us use the "wts" option with the missing values present.
+              wtsdata = wtsdata[!isnan(wtsdata[y]), :]
 
               ITT_weight_fml = Formula(:y, Expr(:call, :+, :R, controls...))
 
