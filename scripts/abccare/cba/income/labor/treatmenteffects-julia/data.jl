@@ -78,7 +78,7 @@ abccare = readtable("$data/append-abccare_iv.csv")
 abccare = abccare[!((abccare[:R] .== 0) & (abccare[:RV] .== 1)), :]
 
 # Keep only the variables we need for income
-keepvar = [:id, :R, :P, :family, :male, :si21y_inc_labor, :si30y_inc_labor, :si34y_time]
+keepvar = [:id, :R, :P, :family, :male, :si21y_inc_labor, :si30y_inc_labor, :si34y_time, :abc]
 keepvar = append!(keepvar, controls)
 keepvar = append!(keepvar, ipwvars_all)
 abccare = abccare[:, keepvar]
