@@ -1,5 +1,5 @@
 \subsection{Data Sources} \label{section:data}
-\noindent FAM uses data from ABC and CARE follow-up surveys to build the initial state of the cohort. 
+\noindent FAM uses data from ABC/CARE follow-up surveys to build the initial state of the cohort. 
 The transition model parameters are estimated from the 1997 to 2013 waves of the Panel Study of Income Dynamics (PSID). 
 We supplement the PSID with data from the Health and Retirement Study (HRS). We use the National Health and Nutrition Examination Survey (NHANES) 
 to account for differences between measured and self-reported BMI.
@@ -14,7 +14,7 @@ To estimate medical care costs associated with health conditions, we use the Med
 
 \noindent We estimate the transition models using waves from 1997 to 2013. We create a dataset of respondents who have formed their own households, either
 as single heads of households, cohabiting partners, or married partners.  These heads, wives, and husbands respond to the richest
-set of PSID questions, including the health questions that are critical for our purposes. We use all respondents aged 25 and older.\footnote{While we use the full sample, we explored using a few different subsamples to better adapt to the demographics of the ABC and CARE subjects.}  
+set of PSID questions, including the health questions that are critical for our purposes. We use all respondents aged 25 and older.\footnote{While we use the full sample, we explored using a few different subsamples to better adapt to the demographics of the ABC/CARE subjects.}  
 The length of the PSID is a significant advantage, because we can include past health behaviors as explanatory variables for current health outcomes. This dataset provides adequate sample sizes to explore health outcomes of specific groups. 
 PSID does not follow individuals who are institutionalized in nursing homes or other long-term care facilities. To overcome this weakness, we pool the PSID sample with the HRS sample when
 estimating mortality models. \\
@@ -62,9 +62,9 @@ and utilization using data from 2008 to 2010. We use waves from 2001 to 2003 to 
 \noindent 
 The National Health and Nutrition Examination Survey (NHANES) targets a nationally representative sample of approximately 5,000 individuals in each year since 1999.  The data collected includes responses to interview questions about demographics, disease conditions, height, and weight, as well as physical measurement of BMI.  We use NHANES years 2002 to 2010 to estimate a model for imputing measured BMI from self-reported BMI.  The methodology is described in Section \ref{section:FAM_ABC_impute}.
 
-\subsubsection{ABC and CARE}
-\noindent FAM uses ABC and CARE data to initialize the state of each ABC or CARE subject when they enter into the simulation.  
+\subsubsection{ABC/CARE}
+\noindent FAM uses ABC/CARE data to initialize the state of each ABC/CARE subject when they enter into the simulation.  
 These data are taken from the the age-21 parent interview; age-30 subject interview; age-30 tobacco, alcohol, and drugs interview; and age-34 health interview.  
-The goal is to have each subject's initial state match their status at the age-30 subject interview. Because several key FAM inputs are not available at the age-30 interview, we use PSID or ABC and CARE surveys corresponding to other ages to impute missing elements. These imputations are discussed in Section \ref{section:FAM_ABC_impute}. \\
+The goal is to have each subject's initial state match their status at the age-30 subject interview. Because several key FAM inputs are not available at the age-30 interview, we use PSID or ABC/CARE surveys corresponding to other ages to impute missing elements. These imputations are discussed in Section \ref{section:FAM_ABC_impute}. \\
 
 % \todo we could add a table of all the FAM input variables (rows) and three columns, as-is, rule imputed, model imputed, with checkmarks to indicate how the data were derived

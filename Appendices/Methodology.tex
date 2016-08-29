@@ -22,7 +22,7 @@ controlling for those four baseline variables, as well as for cohort. \\
 \noindent We perform this estimation on 75 bootstrap resamples of the original ABC and CARE data for inference purposes. We take the mean of the empirical bootstrap distribution as our point estimate, and the standard deviation
 of the distribution as the standard error. We estimate these effects on the
 pooled ABC and CARE samples, as well as the male and female subsamples. This allows us to generate
-rates of return and benefit-cost ratios for the male subsample, the female subsample, and the pooled sample. \\
+rates of return and benefit/cost ratios for the male subsample, the female subsample, and the pooled sample. \\
 %Moreover, we are able to obtain more precise estimates of the treatment
 %effect for males, as the data for females generally exhibit more noise. See Table \ref{table:nonipw} for the list of outcomes to which we apply this method.
 
@@ -30,7 +30,7 @@ rates of return and benefit-cost ratios for the male subsample, the female subsa
 \subsubsection{Partially Observed Outcomes}
 \label{app:method_partialobs}
 
-\noindent Given the small sample sizes of the ABC and CARE data, we consider outcome variables with fewer than 100 observations
+\noindent Given the small sample sizes of the ABC/CARE data, we consider outcome variables with fewer than 100 observations
 to exhibit a sizable rate of attrition. These variables include parental income at ages 2, 3, 4, 5, 9, 12,
 and 15, for which we observe no more than 91 subjects at any given age; and the health survey at
 age 34, for which we observe no more than 72 subjects. \\
@@ -53,7 +53,7 @@ to respond. We limit the number of covariates in our logit models to three as th
 
 \noindent To estimate the treatment effect, we regress the outcome of interest on treatment status, and weight the
 observations by the inverse of the product of the two propensity scores estimated with the method
-documented in Section~\ref{section:methodology} in the main paper. This procedure is performed on 75 bootstrap resamples of the original ABC and CARE data.
+documented in Section~\ref{section:methodology} in the main paper. This procedure is performed on 75 bootstrap resamples of the original ABC/CARE data.
 We take the mean of the empirical bootstrap distribution as our point estimate, and the standard deviation
 of the distribution as the standard error. Again, we carry out this procedure for the
 pooled sample, male subsample, and female subsample. \\
@@ -76,13 +76,13 @@ there are no impacts from age 16 onwards (i.e. a treatment effect of 0). \\
 \paragraph{Subject Income}
 
 \noindent Labor and public-transfer income of subjects are observed intermittently at ages 21 and 30 only. In order
-to obtain a complete measure of the impact of the ABC and CARE programs on subject income, we interpolate
+to obtain a complete measure of the impact of the ABC/CARE programs on subject income, we interpolate
 the income streams of subjects for ages 22 to 29, and extrapolate income streams for ages
 31 to 67 using three auxiliary datasets: NLSY79, CNLSY, and PSID. \\
 
 \noindent We assume common support between the auxiliary
-datasets and the analysis sample. This is required in order for us to reliably use external data to provide inference for the ABC and CARE samples. Figure~\ref{fig:support} validates this
-assumption by displaying the overlapping support sets of ABC and our auxiliary data for
+datasets and the analysis sample. This is required in order for us to reliably use external data to provide inference for the ABC/CARE samples. Figure~\ref{fig:support} validates this
+assumption by displaying the overlapping support sets of ABC/CARE and our auxiliary data for
 the variables used to interpolate and extrapolate earnings. For details about these datasets, see Appendix \ref{app:subject_income}. \\
 
 
@@ -173,15 +173,15 @@ $s \in \{1,2,\dots, 75\}$ indexes the bootstrap samples. \\
 % exclude high-earning individuals in the auxiliary sample that do not reflect the ABC sample well.
 
 \noindent The outcome variables we use as independent variables to fit the model to the CNLSY data are also
-observed in the ABC and CARE data, and we are able to calculate the treatment effects on each of these outcomes
+observed in the ABC/CARE data, and we are able to calculate the treatment effects on each of these outcomes
 using the procedures described in Appendix \ref{app:method_fullobs} and Appendix \ref{app:method_partialobs}. We
-obtain these estimates for 75 bootstrap resamples of both the ABC and CARE data, and denote the vectors of
+obtain these estimates for 75 bootstrap resamples of both the ABC/CARE data, and denote the vectors of
 coefficients by $\gamma_r$, where $r \in \{1,2,\dots,75\}$ indexes the bootstrap samples. \\
 
 \noindent To interpolate the treatment effect on subject labor income at age $a$, we take the dot product
 of $\beta_{a, s}$ and $\gamma_r$ for all $s,r$ pairs, resulting in 5,625 scalars. We reintroduce
 prediction error by first randomly drawing residuals from our fitted model on the auxiliary data and assigning
-them to the ABC and CARE subjects. We then take the mean difference of these residuals across treatment and control
+them to the ABC/CARE subjects. We then take the mean difference of these residuals across treatment and control
 groups, and add it to the previously described scalar. We do this for all 5,625scalars. These scalars form the empirical
 bootstrap distribution of the treatment effect. Note that
 we bypass the estimation of the subjects' actual incomes, of which we are unable to obtain an
@@ -189,9 +189,9 @@ unbiased estimate. Instead, we directly obtain an unbiased estimate of the treat
 method implies that the impacts of the treatment on adult labor income can be expressed through
 the observed early-adult outcomes. In this case, the observed early-adult outcomes are labor income at ages 21 and
 30, years of education at age 30, average PIAT math scores from ages 5 to 10, and BMI at age 34. Since $\gamma_r$ has
-been adjusted to address selection into treatment and attrition in the ABC and CARE data, the bootstrap distribution
+been adjusted to address selection into treatment and attrition in the ABC/CARE data, the bootstrap distribution
 is devoid of selection and attrition issues. In addition, the bootstrap distribution captures
-the error stemming from the ABC or CARE datasets, and prediction error of the model fitted to the CNLSY dataset.
+the error stemming from the ABC/CARE datasets, and prediction error of the model fitted to the CNLSY dataset.
 We take the mean of the empirical bootstrap distribution as our point estimate, and the standard deviation
 of the distribution as the standard error. Again, we carry out this procedure for the
 pooled, male, and female samples. \\
@@ -222,11 +222,11 @@ income as the dependent variable in the regressions on our auxiliary datasets. I
 extrapolating public-transfer income from welfare, unemployment benefits, AFDC, and food stamps, we also apply
 the same methodology as for labor income. However, in the case of disability insurance, social
 security, and supplemental security income, we apply an alternative approach. For these cases, we estimate
-the probability each ABC or CARE individual claims each of those benefits at ages 31--67, and multiply those
+the probability each ABC/CARE individual claims each of those benefits at ages 31--67, and multiply those
 probabilities by the average annual claims of each type of public transfer reported by the Social
 Security Administration in 2014. See Appendix \ref{section:FAM_ABC_impute}
 for an explanation of how we estimate these probabilities. For each age, we sum across our estimates of
-each type of public transfer received to obtain the total public-transfer income of both ABC and CARE subjects. \\
+each type of public transfer received to obtain the total public-transfer income of both ABC/CARE subjects. \\
 
 
 \paragraph{Health Costs}
@@ -342,11 +342,11 @@ program at time $t$, and define $\mathbb{E}$ to be the sample mean. \\
 
 \noindent All outcomes of the parents and subjects that we observe as having been affected by the program
 are treated as benefits. For this to make sense, we reverse the sign of the monetized effect of the program
-on specific outcomes. Costs of ABC and CARE consist only of the initial program costs from ages 0 to 5.
+on specific outcomes. Costs of ABC/CARE consist only of the initial program costs from ages 0 to 5.
 Table \ref{table:bc_comp} provides a full list of the benefits and costs of ABC. \\
 
 \noindent We take the sum of the treatment effects on each component of the benefits to
-be the total benefit, $B_t$, of the ABC and CARE programs (see Appendix \ref{app:method_identify} on how
+be the total benefit, $B_t$, of the ABC/CARE program (see Appendix \ref{app:method_identify} on how
 we estimate these treatment effects). This includes parental income, subject labor income, and QALYs
 (quality-adjusted life years).
 Treatment effects on costs borne by the subject or society have their signs
@@ -365,12 +365,12 @@ reduces to an algebraic exercise. \\
 
 \noindent As described in Appendix \ref{app:method_identify}, we estimate the treatment effect on each
 component of the benefits and costs at time $t$ for the pooled, male, and
-female samples. We do this for 75 bootstrap resamples of the original ABC and CARE data.
+female samples. We do this for 1,000 bootstrap resamples of the original ABC/CARE data.
 In the case of health costs and subject income, for which we employ auxiliary datasets to
-estimate the treatment effects, we also obtain 75 bootstrap estimates from the auxiliary data
-for every ABC or CARE bootstrap resample, resulting in a total of 5,625 estimates.
+estimate the treatment effects, we also obtain 1,000 bootstrap estimates from the auxiliary data
+for every ABC/CARE bootstrap resample, resulting in a total of 1,000,000 estimates.
 By reusing each bootstrap estimate of the treatment effect on outcomes that do not require any auxiliary data
-set 75 times, we obtain a total of 5,625 estimates of the cash flow.
+set 1,000 times, we obtain a total of 1,000,000 estimates of the cash flow.
 We estimate the IRR on each of those cash flows.
 This is how we form our empirical bootstrap distribution of the IRR for the pooled, male, and female samples.
 We take the mean of the distributions to be the point estimates, and we take the standard deviations
@@ -385,7 +385,7 @@ and 90\textsuperscript{th} quantiles of each bootstrap distribution. \\
 \input{AppOutput/Methodology/bc_components.tex}
 \begin{tablenotes}
 \tiny
-\item Note: The table above lists the components of the costs and benefits of ABC.
+\item Note: The table above lists the components of the costs and benefits of ABC/CARE.
 In order for some components to be categorized as benefits, we reversed the sign
 of the treatment effect. *Only education costs up until age 18 are multiplied by 1.5 to account for welfare costs.
 \end{tablenotes}
@@ -443,10 +443,10 @@ of the treatment effect. *Only education costs up until age 18 are multiplied by
 % and Medicaid costs. For the same reason, we multiply transfer income by a factor of 0.5.
 
 
-\subsection{Computing the Benefit-Cost Ratio}
+\subsection{Computing the Benefit/cost Ratio}
 \label{app:method_cbratio}
 
-\noindent The benefit-cost ratio can be expressed as,
+\noindent The benefit/cost ratio can be expressed as,
 
 \begin{align}
 \mathbb{E} \left( \frac{ \sum_{t=0}^T B_t}{\sum_{t=0}^T C_t} \right),
@@ -454,8 +454,8 @@ of the treatment effect. *Only education costs up until age 18 are multiplied by
 
 \noindent where we let $T = 79$, define $B_t$ and $C_t$ to be the total benefits and costs of the
 program at time $t$, and define $\mathbb{E}$ to be the sample mean. See Table \ref{table:bc_comp} for a detailed list of the components
-to the benefits and costs of ABC and CARE . We take the sum of the treatment effects on each component
-of the benefits to be the total benefits of the ABC and CARE programs (see Appendix~\ref{app:method_identify} on how we estimate these treatment effects). \\
+to the benefits and costs of ABC/CARE . We take the sum of the treatment effects on each component
+of the benefits to be the total benefits of the ABC/CARE programs (see Appendix~\ref{app:method_identify} on how we estimate these treatment effects). \\
 
 \noindent To account for deadweight loss, we assume a marginal welfare cost of 50\% by multiplying
 public costs components by a factor of $1.5$. For the same reason, we multiply public-transfer
@@ -465,14 +465,14 @@ components of the benefits and find the ratio with the discounted costs. \\
 
 \noindent As described in Appendix \ref{app:method_identify}, we estimate the treatment effect on each
 component of the benefits and costs at time $t$ for the pooled, male, and
-female samples. We do this for 75 bootstrap resamples of the original ABC and CARE data.
+female samples. We do this for 75 bootstrap resamples of the original ABC/CARE data.
 In the case of health costs and subject income, for which we employ auxiliary datasets to
 estimate the treatment effects, we also obtain 75 bootstrap estimates from the auxiliary data
-for every ABC and CARE bootstrap resample, resulting in a total of 5,625 estimates.
+for every ABC/CARE bootstrap resample, resulting in a total of 5,625 estimates.
 By reusing each bootstrap estimate of the treatment effect on outcomes that do not require any auxiliary data
 set 75 times, we obtain a total of 5,625 estimates of the costs stream and benefits stream.
-We estimate the benefit-cost ratio for each of those streams.
-This is how we form our empirical bootstrap distribution of the benefit-cost ratio for the pooled, male, and female samples.
+We estimate the benefit/cost ratio for each of those streams.
+This is how we form our empirical bootstrap distribution of the benefit/cost ratio for the pooled, male, and female samples.
 We take the mean of the distributions to be the point estimates, and we take the standard deviations
 to be the standard errors. To construct the 80\% confidence intervals, we take the 10\textsuperscript{th}
 and 90\textsuperscript{th} quantiles of each bootstrap distribution.
