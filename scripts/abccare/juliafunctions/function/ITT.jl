@@ -168,6 +168,9 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
               end
               wtsdata = wtsdata[!isna(wtsdata[y]), :]   # otherwise, glm does not let us use the "wts" option with the missing values present.
               wtsdata = wtsdata[!isnan(wtsdata[y]), :]
+              wtsdata = wtsdata[!isna(wtsdata[parse("ipw_$(y)")]), :]
+
+              println("printing wtsdata: $(wtsdata)" )
 
               ITT_weight_fml = Formula(:y, Expr(:call, :+, :R, controls...))
 
@@ -175,6 +178,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
                 glm(ITT_weight_fml, wtsdata, Normal(), IdentityLink(), wts = wtsdata[parse("ipw_$(y)")].data)
               # If the regression fails
               catch err
+                  println("printing error for WLS regression: $(err)")
                   push!(outMat["ITT_$(gender)_P$(p)"], [y, draw, ddraw, ITT_none_coeff, ITT_none_pval, ITT_none_N, ITT_control_coeff, ITT_control_pval, ITT_control_N, NA, NA, NA])
                   continue
               end
