@@ -108,11 +108,11 @@ foreach source in labor /*transfer*/ {
 		gen minus = mean_age - semean_age
 		
 		// limit to 25-60 and scale income
-		drop if age < 25 & age > 60
+		drop if age < 25 | age > 60
 		foreach v in mean_age semean_age plus minus {
 			replace `v' = `v'/1000
 		}
-	
+		
 	// graph
 	cd $output
 	forval sex = 0/1 {
