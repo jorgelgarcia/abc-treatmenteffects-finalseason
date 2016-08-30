@@ -20,12 +20,13 @@ global googledrive: env googledrive
 
 // set general locations
 // do files
-global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
+global scripts     = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
 global datapsid    = "$klmshare/Data_Central/data-repos/psid/base/"
+global datanlsy    = "klmmexico/BPSeason2/"
 global dataabccare = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
 // output
-global output     = "$projects/abc-treatmenteffects-finalseason/output/"
+global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 // open merged data
 cd $dataabccare

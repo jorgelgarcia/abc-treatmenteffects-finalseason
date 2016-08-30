@@ -20,14 +20,18 @@ local name1 male
 local name2 pooled
 
 global projects : env projects
+global klmshare:  env klmshare
+global klmmexico: env klmMexico
 
-global abc_dir = "${projects}/abc-treatmenteffects-finalseason/data/abccare/extensions/cba-iv"
-global data_dir = "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/rslt/projections"
+global dataabccare   = "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
+global data_dir      = "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/rslt/projections"
+global incomeresults = "${klmmexico}/abccare/income_projections/aug-30/"
+global output        = "${projects}/abc-treatmenteffects-finalseason/output/"
 
 // prepare data for graphing
 
-cd $abc_dir
-use append-abccare_iv, clear
+cd $dataabccare
+use append-abccare_iv.dta, clear
 
 drop if R == 0 & RV == 1
 keep id R male
@@ -36,9 +40,9 @@ tempfile abccare_data
 save `abccare_data'
 
 
-foreach source in labor transfer {
+foreach source in labor /*transfer*/ {
 
-	cd $data_dir
+	cd $incomeresults
 	insheet using "`source'_proj_pooled.csv", clear
 
 	local varlist
@@ -110,6 +114,7 @@ foreach source in labor transfer {
 		}
 	
 	// graph
+	cd $output
 	forval sex = 0/1 {
 	
 	preserve
@@ -118,8 +123,8 @@ foreach source in labor transfer {
 	
 		local graphregion		graphregion(color(white))
 		local yaxis				ytitle("``source'_name' Income (1000s 2014 USD)") ylabel(#6, format(%9.0gc) glcol(gs15))
-		local xaxis				xtitle("Age") xlabel(#6, grid glcol(gs15))
-		local legend			legend(rows(1) order(2 1 3) label(1 "Control") label(2 "Treatment") label(3 "+/- s.e.") label(4 "+/- s.e."))
+		local xaxis				xtitle("Age") xlabel(25[5]60, grid glcol(gs15))
+		local legend			legend(rows(1) order(2 1) label(1 "Control") label(2 "Treatment") label(3 "+/- s.e.") label(4 "+/- s.e."))
 	
 		local t_mean			lcol(gs9) lwidth(1.2)
 		local c_mean			lcol(black) lwidth(1.2)
@@ -137,7 +142,7 @@ foreach source in labor transfer {
 				`xaxis'
 				`yaxis'
 				`legend';
-		graph export "../../../../../../output/`source'_25-60_`name`sex''.eps", replace;
+		graph export "`source'_25-60_`name`sex''.eps", replace;
 		# delimit cr
 		
 	restore
