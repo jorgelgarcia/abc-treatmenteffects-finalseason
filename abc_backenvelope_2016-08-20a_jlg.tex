@@ -3,31 +3,30 @@
 
 \begin{document}
 
-\doublespacing
+\subsection{Using our Estimates to Understand Recent Cost-benefit Analyses}
 
-\noindent Back-of-the-envelope CBA Calculations \\
+\noindent An example of the approach recent studies take on cost-benefit analyses is \citet{Kline-Walters_2016_QJE}. They use data of the Head Start Impact Study (HSIS) to evaluate Head Start and find that its benefit/cost between $1.50$ and $1.84$.\footnote{HSIS is a one-year-long randomized version of Head Start.} They proceed in three steps: (i) calculate the treatment effect on Wechsler Preschool and Primary Scale of Intelligence (WPPSI) at age 5; (ii) monetize this gain using the return to WPPSI at age 5 in terms of net present value of earnings at age 27 \citep{Chetty_Friedman_etal_2011_QJoE}. Calculations from \citet{Chetty_Friedman_etal_2011_QJoE} indicate that a 1 standard deviation gain in WPPSI at age 5 implies a $13.1\%$ increase in the net present value of earnings at age 27;\footnote{This is based on combining information from Project Star and administrative data at age 27.} and (iii) calculate the benefit-to-cost ratio based on this gain and their own calculations of the program's cost. This calculation is based on assigning the net present value of earnings at age 27 of $\$385,907.17$ to the control-group participants, which is provided by  \citet{Chetty_Friedman_etal_2011_QJoE}.\footnote{All money values that we provide in this section are in 2014 USD.}\\
 
-\noindent \citet{Kline-Walters_2016_QJE} perform the following exercise:\\
 
-\noindent (i)  Calculate the treatment effect on WPPSI at age 5 for the Head Start Impact Study (HSIS). HSIS is a one-year-long randomized version of Head Start.\\
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Alternative Cost-benefit Analyses Calculations}
+\label{table:comparing}
+\centering 
+\footnotesize
+\input{output/back-envelope-comparison-table.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table displays displays benefit-cost ratios based on the methodology \citet{Kline-Walters_2016_QJE} and based on our own methodology. Age: age at which we stop calculating the net-present value. NPV Source: source where we obtain the net present value. Component: item used to compute net present value (all refers to the net present value of all the components). \citet{Kline-Walters_2016_QJE}: estimate based on these authors methodology. Author's method: estimates based on our methodology.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
 
-\noindent (ii) Monetize this gain using the return to WPPSI at age 5 in terms of net present value of earnings at age 27 \citep{Chetty_Friedman_etal_2010_HowDoesYour}. Calculations from \citet{Chetty_Friedman_etal_2010_HowDoesYour} indicate that a 1 standard deviation gain in WPPSI at age 5 implies a $13.1\%$ increase in the net present value of earnings at age 27.\\
+\noindent To analyze how our estimates compares to the method in \citet{Kline-Walters_2016_QJE}, we present a series of exercises in the third column of Table~\ref{table:comparing}. For comparison, the fourth column of Table~\ref{table:comparing} displays the analogous exercise using our own method.\\
 
-\noindent (iii) Calculate the benefit-to-cost ratio by dividing the gain in (ii) by the total costs of the program. This calculation is based on assigning the net present value of earnings at age 27 of $\$385,907.17$ to the control-group participants, which is provided by \citet{Chetty_Friedman_etal_2010_HowDoesYour}. The treatment-group participants are given a $13.1\%$ increase on this amount. \citet{Kline-Walters_2016_QJE} calculation indicates that the benefit-to-cost ratio of HSIS ranges between $1.50$ and $1.84$.\\ 
+\noindent In the first exercise, we use both the ``return to WPPSI'' and the net-present value of earnings at age 27 in  \citet{Chetty_Friedman_etal_2011_QJoE}. In the second exercise, we perform a similar exercise but we use our own estimate of the net-present value of earnings at age 27.\footnote{This allows us to compute our own ``return to WPPSI'' and impute it to the treatment-group individuals.} The reminder of exercises are similar, but (i) vary the age up to where we consider the net-present value of earnings; (ii) consider the value of all the components we analyze throughout the paper; or (iii) both.\\
 
-\noindent We perform three exercises related to this.\\
-
-\noindent First, we perform the same calculation described above, but use the gain in WPPSI at age 5 and the program costs of ABC/CARE. This gain amounts to 0.48 of a standard deviation. Using the same return to WPPSI in terms of earnings and the same net present value of income as in\citet{Chetty_Friedman_etal_2010_HowDoesYour} we obtain a benefit-to-cost of $0.45$.\\
-
-\noindent Second, we perform an analogous calculation but using our own calculation of the net present value of earnings at age 27, which allows us to calculate our own return to WPPSI at age 5. The net present value of earnings at age 27 is $\$53,187.53$ and the treatment effect is $\$10,542.88$. This implies a return to WPPSI of $41\%$ and a benefit-to-cost ratio of $.13$.\\
-
-\noindent Third, we calculate the return of WWPSI in terms of net present value of earnings at age 34, using our own calculation of this value. We choose age 34 because it is at that age that we observe the individuals for the last time. That is, after age 34 we use projections when estimating the net present value of income (or any other components). For the control group, this value is $76,939.02$. The treatment effect on net present value of earnings at age 34 is $\$39,855.79$. This implies a return of WPPSI of $108\%$. For this case, the benefit-to-cost ratio is $.47$.\\
-
-\noindent Fourth, we extend the exercise before to include not only the present value of earnings at age 34, but all the components we consider. For the control group, the net present value of all components at age 34 is $\$182,926.99$. This implies a return of WPPSI of $84\%$. For this case, the benefit-to-cost ratio is $.89$.\\
-
-\noindent Fifth, we calculate the return of WPPSI in terms of net present value of earnings. As opposed to \citet{Chetty_Friedman_etal_2010_HowDoesYour}, we consider the net present value of life-cycle earnings and not the net-present value of earnings at age 27. A gain of 1 standard deviation in WPPSI at age 5 implies a $84.6\%$ increase in life-cycle net present value of earnings. The net present value of life-cycle earnings for the control group is $\$298,611.90$ (in 2014 USD). Applying the ``return to WPPSI'' in terms of life-cycle earnings to this quantity to the participants of the treatment group, we are able to produce a benefit-to-cost ratio. The calculation indicates that this number is: $1.48$.\\
-
-\noindent Finally, we calculate the return of WPPSI in terms of life-cycle net present value of all the components we monetize in the paper. A gain of 1 standard deviation in WPPSI at age 5 implies an increase in the life-cycle net present value of all components of $119.03\%$. The life-cycle net present value of all components for the control group is $\$753,692.98$. Applying the ``return to WPPSI'' in terms of the life-cycle earnings to this quantity to the participants of the treatment group yields a benefit-to-cost ratio of $5.15$.\\
+\noindent Our methodology has three gains: (i) provides a more precise estimate of the net-present value (and the return to WPPSI) of the components, as our interpolation and extrapolation is based on matching our experimental sample to various non-experimental samples. We do not impute a net present value or a return of an \textit{ad hoc} experiment; (ii) we better quantify the effects of the analyzed experiment by considering the whole life-cycle; (iii) we better approximate the statistical uncertainty of our estimates by considering both the sampling error in the experimental and non-experimental samples and the forecasting error due to the interpolation and extrapolation.
 
 %References
 \singlespace
