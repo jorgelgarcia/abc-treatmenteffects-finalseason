@@ -68,7 +68,7 @@ cd $output
 #delimit
 twoway (line fm age, lwidth(thick) lpattern(solid) lcolor(gs0))
         , 
-		  xlabel(25[5]60, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
+		  xlabel(25[5]60, grid glcolor(gs14)) ylabel(5[5]25, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr 
@@ -77,7 +77,7 @@ graph export psid_incomeprofiles_s0.eps, replace
 #delimit
 twoway (line mm age, lwidth(thick) lpattern(solid) lcolor(gs0))
         , 
-		  xlabel(25[5]60, grid glcolor(gs14)) ylabel(10[10]40, angle(h) glcolor(gs14))
+		  xlabel(25[5]60, grid glcolor(gs14)) ylabel(20[10]70, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr 
