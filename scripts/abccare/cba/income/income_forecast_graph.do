@@ -124,7 +124,7 @@ foreach source in labor /*transfer*/ {
 		local graphregion		graphregion(color(white))
 		local yaxis				ytitle("``source'_name' Income (1000s 2014 USD)") ylabel(#6, format(%9.0gc) glcol(gs15))
 		local xaxis				xtitle("Age") xlabel(25[5]60, grid glcol(gs15))
-		local legend			legend(rows(1) order(2 1) label(1 "Control") label(2 "Treatment") label(3 "+/- s.e.") label(4 "+/- s.e."))
+		local legend			legend(rows(1) order(2 1 3) label(1 "Control") label(2 "Treatment") label(3 "+/- s.e.") size(small))
 	
 		local t_mean			lcol(gs9) lwidth(1.2)
 		local c_mean			lcol(black) lwidth(1.2)
