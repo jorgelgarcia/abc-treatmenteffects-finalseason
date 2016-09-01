@@ -31,58 +31,86 @@ global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 // open NLSY79
 cd $datapsid
 use psid-base.dta, clear
-keep id male  birthyear race age* edu inc_labor*
+keep id male birthyear race age* edu inc_labor* lweight*
 rename edu eduever
 
-reshape long age inc_labor, i(id) j(year)
+reshape long age inc_labor lweight, i(id) j(year)
 drop if birthyear == .
 bysort id: egen edueverbest = mean(eduever)
 drop eduever
 rename  edueverbest eduever
 drop if eduever == .
 keep if eduever <= 12 & age !=.
+keep if year >= 1997 & year <= 2011
 
-keep id male age inc_labor birthyear year
+keep id male age inc_labor birthyear year lweight
 bysort id : egen birthyear2 = mean(birthyear)
 gen age2 = year - birthyear2
 drop if age2 < 0
 
-keep id age2 inc_labor male inc_labor
-reshape wide inc_labor, i(id) j(age2)
-keep id male inc_labor25-inc_labor60
+keep id age2 inc_labor male inc_labor lweight
+reshape wide inc_labor lweight, i(id) j(age2)
+keep id male inc_labor25-inc_labor65 lweight25-lweight65
 
-collapse (median) inc_labor*, by(male)
+foreach sex of numlist 0 1 {
+	matrix all`sex' = J(1,3,.)
+	matrix colnames all`sex' = m`sex' sd`sex' n`sex'
+	foreach num of numlist 25(1)65 {
+		// replace inc_labor`num' = inc_labor`num'/1000
+		summ inc_labor`num' [iw = lweight`num'] if male == `sex'
+		local m`num'`sex'  = r(mean)
+		local sd`num'`sex' = r(sd)
+		local n`num'`sex'  = r(N)
+		
+		matrix stats`num'`sex' = [`m`num'`sex'',`sd`num'`sex'',`n`num'`sex'']
+		matrix colnames stats`num'`sex' =  m`sex' sd`sex' n`sex'
+		
+		mat_rapp all`sex' : all`sex' stats`num'`sex'
+	}
+	matrix all`sex' = all`sex'[2...,1...]
+}
+matrix all = [all1,all0]
 
-drop male
-mkmat *, matrix(allvars)
-matrix rownames allvars = fm mm
-matrix allvars = allvars'
-clear
-svmat allvars, names(col)
-gen age = _n + 23
+clear 
+svmat all, names(col)
+gen age = _n + 24
 
-foreach var of varlist fm mm {
+foreach sex of numlist 0 1 {
+	gen se`sex' = sd`sex'/sqrt(n`sex')
+}
+
+foreach sex of numlist 0 1 {
+	gen m`sex'max = m`sex' + se`sex' 
+	gen m`sex'min = m`sex' - se`sex'
+}
+
+foreach var of varlist m1 m0 m0max m0min m1max m1min {
 	replace `var' = `var'/1000
 }
+
 cd $output
-#delimit
-twoway (line fm age, lwidth(thick) lpattern(solid) lcolor(gs0))
-       (line fm age, lwidth(thick) lpattern(solid) lcolor(gs0))
-        , 
-		  legend(rows(1) order(1) label(1 "PSID, Disadvantaged") size(small))
-		  xlabel(25[5]60, grid glcolor(gs14)) ylabel(5[5]25, angle(h) glcolor(gs14))
-		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
-		  graphregion(color(white)) plotregion(fcolor(white));
-#delimit cr 
-graph export psid_incomeprofiles_s0.eps, replace
 
 #delimit
-twoway (line mm age, lwidth(thick) lpattern(solid) lcolor(gs0))
+twoway (lowess m1    age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.25))
+       (lowess m1max age, lwidth(thick) lpattern(dash) lcolor(gs0) bwidth(.25))
+       (lowess m1min age, lwidth(thick) lpattern(dash) lcolor(gs0) bwidth(.25))
         , 
-		  legend(rows(1) order(1) label(1 "PSID, Disadvantaged") size(small))
-		  xlabel(25[5]60, grid glcolor(gs14)) ylabel(20[10]70, angle(h) glcolor(gs14))
+		  legend(rows(1) order(1 2) label(1 "Mean") label(2 "+/- s.e.") size(small))
+		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(20[10]70, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr 
 graph export psid_incomeprofiles_s1.eps, replace
+
+#delimit
+twoway (lowess m0    age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.35))
+       (lowess m0max age, lwidth(thick) lpattern(dash) lcolor(gs0) bwidth(.35))
+       (lowess m0min age, lwidth(thick) lpattern(dash) lcolor(gs0) bwidth(.35))
+        , 
+		  legend(rows(1) order(1 2) label(1 "Mean") label(2 "+/- s.e.") size(small))
+		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(15[5]40, angle(h) glcolor(gs14))
+		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
+		  graphregion(color(white)) plotregion(fcolor(white));
+#delimit cr 
+graph export psid_incomeprofiles_s0.eps, replace
 
