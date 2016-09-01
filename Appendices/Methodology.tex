@@ -66,7 +66,7 @@ the described set of variables. The model with the lowest Akaike Information Cri
 to respond. We limit the number of covariates in our logit models to three as this noticeably reduces the frequency of bootstrap resamples which exhibit perfect separation in the covariates. \\
 
 \noindent To estimate the treatment effect, we regress the outcome of interest on treatment status, and weight the
-observations by the inverse of the product of the two estimated propensity scores. This procedure is performed on 1,000 bootstrap resamples of the original ABC/CARE data.
+observations by the inverse of the product of the two propensity scores estimated with the method discussed in Appendix~\ref{appendix:attrition}. This procedure is performed on 1,000 bootstrap resamples of the original ABC/CARE data.
 We take the mean of the empirical bootstrap distribution as our point estimate, and the standard deviation
 of the distribution as the standard error. We carry out this procedure for the
 pooled sample, male subsample, and female subsample. Table~\ref{table:ms_attrit_pooled} through Table~\ref{table:ms_attrit_males} summarize the model selection for IPW adjustment for each partially observed outcome. \\
