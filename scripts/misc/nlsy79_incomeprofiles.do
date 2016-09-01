@@ -108,7 +108,7 @@ twoway (lowess m0    age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.35))
        (lowess m0min age, lwidth(thick) lpattern(dash) lcolor(gs0) bwidth(.35))
         , 
 		  legend(rows(1) order(1 2) label(1 "Mean") label(2 "+/- s.e.") size(small))
-		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(15[5]40, angle(h) glcolor(gs14))
+		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(0[10]40, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr 
