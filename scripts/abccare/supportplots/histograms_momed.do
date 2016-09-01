@@ -5,8 +5,7 @@ set more off
 * set up global paths
 
 global klmshare:	env klmshare
-*global abc		"$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extension/cba-iv/append-abccare_iv.dta"
-global abc		"/home/jkcshea/Documents/cehd/projects/abc-cba/data/abccare/extensions/cba-iv/append-abccare_iv.dta"
+global abc		"$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/append-abccare_iv.dta"
 global psid		"$klmshare/Data_Central/data-repos/psid/extensions/abc-match/psid-abc-match.dta"
 global nlsy		"$klmshare/Data_Central/data-repos/nlsy/extensions/abc-match-nlsy/nlsy-abc-match.dta"
 global cnlsy		"$klmshare/Data_Central/data-repos/nlsy/extensions/abc-match-cnlsy/cnlsy-abc-match.dta"
@@ -177,17 +176,17 @@ gen xlab = "Mother's Years of Education"
 di "`dataobs'"
 di "`customlab'"
 	
-	
+
 * plot
 #delimit
 graph bar pdfabc pdfcnlsy, 
 	over(index,  relabel(`customlab') label(labsize(small))) 
 	over(xlab, label(labsize(small))) 
 	bar(1, color(gs1)) 
-	bar(2, color(gs8)) 
+	bar(2, color(gs10)) 
 
-	legend(label(1 ABC, CARE (N = `abc_n')) label(2 CNLSY (N = 3,620)) size(small) rows(1))
-	ylabel(, nolabels  nogrid angle(h) glcolor(gs14))
+	legend(label(1 ABC/CARE (N = `abc_n')) label(2 CNLSY (N = 3,620)) size(small) rows(1))
+	ylabel(, labsize(small) angle(h) glcolor(gs14))
 	ytitle(Density, size(small))
 	graphregion(color(white)) plotregion(fcolor(white))
 ;

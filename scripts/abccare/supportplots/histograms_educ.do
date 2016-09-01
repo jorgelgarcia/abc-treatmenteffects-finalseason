@@ -5,8 +5,7 @@ set more off
 * set up global paths
 
 global klmshare:	env klmshare
-*global abc		"$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extension/cba-iv/append-abccare_iv.dta"
-global abc		"/home/jkcshea/Documents/cehd/projects/abc-cba/data/abccare/extensions/cba-iv/append-abccare_iv.dta"
+global abc		"$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/append-abccare_iv.dta"
 global psid		"$klmshare/Data_Central/data-repos/psid/extensions/abc-match/psid-abc-match.dta"
 global nlsy		"$klmshare/Data_Central/data-repos/nlsy/extensions/abc-match-nlsy/nlsy-abc-match.dta"
 global cnlsy		"$klmshare/Data_Central/data-repos/nlsy/extensions/abc-match-cnlsy/cnlsy-abc-match.dta"
@@ -167,8 +166,8 @@ graph bar pdfabc pdfpsid pdfnlsy pdfcnlsy,
 	bar(3, color(gs8)) 
 	bar(4, color(gs12)) 
 
-	legend(label(1 ABC, CARE (N = `abc_n')) label(2 PSID (N = 14,599)) label(3 NLSY (N = 12, 686)) label(4 CNLSY (N = 2,222)) size(small) rows(2))
-	ylabel(, nolabels  nogrid angle(h) glcolor(gs14))
+	legend(label(1 ABC/CARE (N = `abc_n')) label(2 PSID (N = 14,599)) label(3 NLSY (N = 12, 686)) label(4 CNLSY (N = 2,222)) size(small) rows(2))
+	ylabel(,labsize(small)  grid angle(h) glcolor(gs14))
 	ytitle(Density, size(small))
 	graphregion(color(white)) plotregion(fcolor(white))
 ;
