@@ -1,6 +1,16 @@
 \section{Results} \label{appendix:results}
 
-\noindent In this appendix we present the treatment effects of the center-based treatment in ABC/CARE estimates for the 95 main outcomes we consider. For each set of estimates, we first present a summary of the effect of the program(s) using a combining function counting the number of socially positive treatment effects. We then present tables of treatment effect estimates for each outcome. Finally, we present the treatment effect estimates using the step-down procedure to test multiple hypotheses. \\
+\noindent In this appendix we first explain our method for selecting the background variables that we control for. Then, we present the treatment effects of the center-based treatment in ABC/CARE estimates for the 95 main outcomes we consider. For each set of estimates, we first present a summary of the effect of the program(s) using a combining function counting the number of socially positive treatment effects. We then present tables of treatment effect estimates for each outcome. Finally, we present the treatment effect estimates using the step-down procedure to test multiple hypotheses. \\
+
+\noindent We select the background variables that we control for as follows. First, we select the three variables, from 17 potential variables, that best predict enrollment into alternative preschool for subjects who were randomly assigned not to receive center-based childcare---the control group in ABC/CARE To choose the most predictive control set, we estimate the $17 \choose 3$ linear models, using the variables in Panels (1) and (2) of Table~\ref{tab:pselectvars}. The most predictive model is the one generating the lowest Bayesian Information Criterion (BIC).\\
+
+\noindent We proceed in a similar way to choose the second set of background variables. Instead of predicting enrollment into alternative preschool, we predict the relevant outcome of interest. For this exercise we use the variables in Panel (2), so we estimate $14 \choose 3$ models.\\
+
+\noindent Our set of control variables consists of these two sets of background variables.
+
+\singlespacing
+\input{output/controlsets}
+\doublespacing
 
 \noindent Table \ref{tab:main-outcomes} lists the 95 main outcomes that we test in our main analysis. We reverse the outcomes for which we consider a negative treatment effect socially positive.
 
