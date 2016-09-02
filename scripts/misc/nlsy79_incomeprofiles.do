@@ -92,8 +92,8 @@ cd $output
 
 #delimit
 twoway (lowess m1    age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.25))
-       (lowess m1max age, lwidth(thick) lpattern(dash) lcolor(gs0) bwidth(.25))
-       (lowess m1min age, lwidth(thick) lpattern(dash) lcolor(gs0) bwidth(.25))
+       (lowess m1max age,  lpattern(dash) lcolor(gs0) bwidth(.25))
+       (lowess m1min age,  lpattern(dash) lcolor(gs0) bwidth(.25))
         , 
 		  legend(rows(1) order(1 2) label(1 "Mean") label(2 "+/- s.e.") size(small))
 		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(20[10]70, angle(h) glcolor(gs14))
@@ -103,9 +103,9 @@ twoway (lowess m1    age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.25))
 graph export psid_incomeprofiles_s1.eps, replace
 
 #delimit
-twoway (lowess m0    age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.35))
-       (lowess m0max age, lwidth(thick) lpattern(dash) lcolor(gs0) bwidth(.35))
-       (lowess m0min age, lwidth(thick) lpattern(dash) lcolor(gs0) bwidth(.35))
+twoway (lowess m0    age, lwidth(1.2)   lpattern(solid) lcolor(gs0)  bwidth(.35))
+       (lowess m0max age,  lpattern(dash) lcolor(gs0) bwidth(.35))
+       (lowess m0min age,  lpattern(dash) lcolor(gs0) bwidth(.35))
         , 
 		  legend(rows(1) order(1 2) label(1 "Mean") label(2 "+/- s.e.") size(small))
 		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(0[10]40, angle(h) glcolor(gs14))
