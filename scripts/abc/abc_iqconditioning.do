@@ -64,13 +64,13 @@ foreach sex in 0 1 {
 	matrix iq_`sex' = J(1,4,.)
 	matrix colnames iq_`sex' = itt seitt ittc seittc
 	foreach age in 1 2 3 4 5 7 8 12 15 21 { 
-		reg iq`age'y treat ${condition`sex'}
+		reg iq`age'y treat ${condition`sex'} if male == `sex'
 		matrix bitt_`sex'_`age' = e(b)
 		matrix bitt_`sex'_`age' = bitt_`sex'_`age'[1,1]
 		matrix Vitt_`sex'_`age' = e(V)
 		matrix Vitt_`sex'_`age' = sqrt(Vitt_`sex'_`age'[1,1])
 		
-		reg iq`age'y treat iq3y ${condition`sex'}
+		reg iq`age'y treat iq3y ${condition`sex'} if male == `sex'
 		matrix bittc_`sex'_`age' = e(b)
 		matrix bittc_`sex'_`age' = bittc_`sex'_`age'[1,1]
 		matrix Vittc_`sex'_`age' = e(V)
