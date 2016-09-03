@@ -188,7 +188,7 @@ graph bar pdfabc pdfpsid pdfnlsy pdfcnlsy,
 	bar(3, color(gs8)) 
 	bar(4, color(gs12)) 
 
-	legend(label(1 ABC/CARE (N = `abc_n')) label(2 PSID (N = 14135)) label(3 NLSY (N = 10,119)) label(4 CNLSY (N = 1,887)) size(small) rows(2))
+	legend(label(1 ABC/CARE (N = `abc_n')) label(2 PSID (N = 14,135)) label(3 NLSY79 (N = 10,119)) label(4 cNLSY (N = 1,887)) size(small) rows(2))
 	ylabel(, labsize(small)  grid angle(h) glcolor(gs14))
 	ytitle(Density, size(small))
 	graphregion(color(white)) plotregion(fcolor(white))
