@@ -14,7 +14,7 @@ srand(1)
 # ======================================================= #
 # Call number of processors
 using ClusterManagers
-procs = 25
+procs = 20
 #addprocs(procs)
 addprocs_pbs(procs)
 
