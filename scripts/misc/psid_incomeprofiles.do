@@ -43,6 +43,13 @@ drop if eduever == .
 keep if eduever <= 12 & age !=.
 keep if year >= 1997 & year <= 2011
 
+// generate id's file for USC
+preserve
+keep id year
+cd $output
+saveold psid_interextra.dta, replace
+restore
+
 keep id male age inc_labor birthyear year lweight
 bysort id : egen birthyear2 = mean(birthyear)
 gen age2 = year - birthyear2
