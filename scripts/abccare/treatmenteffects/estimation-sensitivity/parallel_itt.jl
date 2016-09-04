@@ -28,7 +28,7 @@ ITTboot = pmap(ITTrun, [b, b, b, b, b, b, b, b, b, b])
 # Increase the number of "draw" according to the worker number
 for i in 2:B
 	ITTboot[i][:draw] = ITTboot[i][:draw] .+ (b*(i-1))
-	for j in 1:8 # concatenated
+	for j in 1:5 # concatenated
 	ITTboot[i][parse("draw_$(j)")] = ITTboot[i][parse("draw_$(j)")] .+ (b*(i-1))
 	end
 end
@@ -49,7 +49,7 @@ n = 0
 for gender in genderloop
 	c = 0
 	for P_switch in (0, 1, 10)
-		ResultOutput["itt_$(gender)_P$(P_switch)"] = DataFrame(rowname = [], draw = [], ddraw = [],
+		ResultOutput["itt_$(gender)_P$(P_switch)"] = DataFrame(rowname = [], draw = [], ddraw = [], controln = [],
 		                               										itt_noctrl = [], itt_noctrl_p = [], itt_noctrl_N = [],
 		                               										itt_ctrl = [], itt_ctrl_p = [], itt_ctrl_N = [],
 		                               										itt_wctrl = [], itt_wctrl_p = [], itt_wctrl_N = [])
@@ -58,7 +58,7 @@ for gender in genderloop
 			ResultOutput["itt_$(gender)_P$(P_switch)"] = ITTfinal[:, colnames]
 			delete!(ITTfinal, colnames)
 		else
-			rename!(ITTfinal, [parse("rowname_$(n)"), parse("draw_$(n)"), parse("ddraw_$(n)"), parse("itt_noctrl_$(n)"), parse("itt_noctrl_p_$(n)"), parse("itt_noctrl_N_$(n)"), parse("itt_ctrl_$(n)"), parse("itt_ctrl_p_$(n)"), parse("itt_ctrl_N_$(n)"), parse("itt_wctrl_$(n)"), parse("itt_wctrl_p_$(n)"), parse("itt_wctrl_N_$(n)")], colnames)
+			rename!(ITTfinal, [parse("rowname_$(n)"), parse("draw_$(n)"), parse("ddraw_$(n)"), parse("controln_$(n)"), parse("itt_noctrl_$(n)"), parse("itt_noctrl_p_$(n)"), parse("itt_noctrl_N_$(n)"), parse("itt_ctrl_$(n)"), parse("itt_ctrl_p_$(n)"), parse("itt_ctrl_N_$(n)"), parse("itt_wctrl_$(n)"), parse("itt_wctrl_p_$(n)"), parse("itt_wctrl_N_$(n)")], colnames)
 			ResultOutput["itt_$(gender)_P$(P_switch)"] = ITTfinal[:, colnames]
 			delete!(ITTfinal, colnames)
 		end
