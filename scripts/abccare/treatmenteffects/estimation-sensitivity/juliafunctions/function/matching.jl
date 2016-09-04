@@ -33,21 +33,6 @@ function mestimate(sampledata, outcomes, outcome_list, draw, ddraw, bootsample, 
   # Generate IPW weight for the bootstrapped sample
   matchingdata = IPWweight(matchingdata, outcomes, outcome_list)
 
-  # Generate Epanechnikov weight for the bootstrapped sampledata (Epanechnikov might fail, so we need to capture that)
-  success = 1
-  println("Beginning Epanechnikov")
-  try
-    matchingdata = epanechnikov(matchingdata, controls, 20)
-  catch error
-    success = 0
-    global append_switch = 0
-    global new_switch = 0
-    println("Epanechinikov failed")
-  end
-
-  # if Epanechnikov succeeds
-  if success == 1
-    new_switch = 1
     # ----------------------------------- #
     # Define sample for each gender group #
     # ----------------------------------- #
@@ -83,6 +68,20 @@ function mestimate(sampledata, outcomes, outcome_list, draw, ddraw, bootsample, 
         for controls_n in 1:rown
           # Define controls
           controls = conDict["controls$(controls_n)"]
+
+          # Generate Epanechnikov weight for the bootstrapped sampledata (Epanechnikov might fail, so we need to capture that)
+          success = 1
+          println("Beginning Epanechnikov")
+          try
+            matchingdata = epanechnikov(matchingdata, controls, 20)
+          catch error
+            success = 0
+            push!(outMat["matching_$(gender)_P$(p)"], [None, draw, ddraw, controls_n, NA, NA])
+            println("Epanechinikov failed")
+          end
+
+          # if Epanechnikov succeeds
+          if success == 1
 
           # ------------------ #
           # Perform estimation #

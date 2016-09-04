@@ -67,16 +67,15 @@ include("$current/prepare-data.jl")
 d_index = 1
 
 Matchini = Dict()
-global new_switch = 1
 
 for data in ("abccare")
 
-	datainuse = abccare_data
-	outcomelist = outcomeDict["outcome_abccare"]
+		datainuse = abccare_data
+		outcomelist = outcomeDict["outcome_abccare"]
 
 	for dbrep in 0:dbootstraps
 		global append_switch = 1
-		if 
+		if dbrep == 0
 		 Matchini["Matchini_$(data)"] = mestimate(datainuse, outcomes, outcomelist, 0, dbrep, "yes", 1)
 	  else
 	   MatchInitial_add = mestimate(datainuse, outcomes, outcomelist, 0, dbrep, "yes", 1)
@@ -107,8 +106,8 @@ function matchingrun(boots)
 
 	for data in ("abccare")
 
-			datainuse = abccare_data
-			outcomelist = outcomeDict["outcome_abccare"]
+		datainuse = abccare_data
+		outcomelist = outcomeDict["outcome_abccare"]
 
 
     MatchDict = Dict()
