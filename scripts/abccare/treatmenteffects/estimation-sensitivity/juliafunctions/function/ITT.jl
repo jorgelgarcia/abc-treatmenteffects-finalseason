@@ -79,7 +79,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, draw, ddraw, bootsampl
         # --------------- #
         # Define controls #
         # --------------- #
-        controls = conDict["controls$(controls_number)"]
+        controls = conDict["controls$(controls_n)"]
 
           # ------------------ #
           # Perform estimation #
