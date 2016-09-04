@@ -189,6 +189,7 @@ function mestimate(sampledata, outcomes, outcome_list, draw, ddraw, bootsample, 
         end
       end
     end
+  end
 
     if bygender == 1
       Output = hcat(outMat["matching_male_P0"], outMat["matching_male_P1"], outMat["matching_female_P0"], outMat["matching_female_P1"])
@@ -198,5 +199,4 @@ function mestimate(sampledata, outcomes, outcome_list, draw, ddraw, bootsample, 
     println("Matching Draw $(draw) DDRAW $(ddraw) OUTPUT SUCCESS")
 
     return Output
-  end
 end
