@@ -1,0 +1,3 @@
+variable,cf_category,category,age,label,block,hyp,ipw_var,ipw_pooled1,ipw_pooled2,ipw_pooled3,ipw_pooled4,only_abc,only_care
+years_30y,"Education, Employment, Income",Education,30,Years of Edu.,education,+,,,,,,0,0
+si30y_works_job,"Education, Employment, Income",Subject Employment and Income,30,Employed,employment,+,,,,,,0,0
