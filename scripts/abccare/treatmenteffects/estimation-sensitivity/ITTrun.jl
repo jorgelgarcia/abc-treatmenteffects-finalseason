@@ -68,11 +68,9 @@ d_index = 1
 ITTini = Dict()
 
 for data in ("abccare")
-	if data == "abccare"
+
 		datainuse = abccare_data
-		controlset = conDict["controls$(i)"]
 		outcomelist = outcomeDict["outcome_abccare"]
-	end
 
 	for dbrep in 0:dbootstraps
 		if dbrep == 0
@@ -102,11 +100,9 @@ function ITTrun(boots)
 	d_index = 1
 
 	for data in ("abccare")
-		if data == "abccare"
+
 			datainuse = abccare_data
-			controlset = conDict["controls_abccare"]
 			outcomelist = outcomeDict["outcome_abccare"]
-		end
 
 		ITTDict = Dict()
 
