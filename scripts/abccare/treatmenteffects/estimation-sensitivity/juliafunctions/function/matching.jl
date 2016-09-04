@@ -185,9 +185,10 @@ function mestimate(sampledata, outcomes, outcome_list, draw, ddraw, bootsample, 
             # Store estimation results for R (randomization into treatment in ABC) into the output_ITT matrix. push! adds a row to the matrix output_ITT.
             push!(outMat["matching_$(gender)_P$(p)"], [y, draw, ddraw, controls_n, mean_te, N])
           end
-            println("Bootstrap draw $(draw) - $(ddraw) - controln$(control_n) - $(gender) - $(p) Success!")
+            println("Bootstrap draw $(draw) - $(ddraw) - control - $(gender) - $(p) Success!")
         end
       end
+    end
 
     if bygender == 1
       Output = hcat(outMat["matching_male_P0"], outMat["matching_male_P1"], outMat["matching_female_P0"], outMat["matching_female_P1"])
