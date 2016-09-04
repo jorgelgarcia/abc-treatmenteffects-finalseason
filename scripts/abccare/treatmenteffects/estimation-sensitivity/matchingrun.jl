@@ -71,7 +71,6 @@ Matchini = Dict()
 for data in ("abccare")
 	if data == "abccare"
 		datainuse = abccare_data
-		controlset = conDict["controls_abccare"]
 		outcomelist = outcomeDict["outcome_abccare"]
 	end
 
@@ -109,7 +108,6 @@ function matchingrun(boots)
 	for data in ("abccare")
 		if data == "abccare"
 			datainuse = abccare_data
-			controlset = conDict["controls_abccare"]
 			outcomelist = outcomeDict["outcome_abccare"]
 		end
 
