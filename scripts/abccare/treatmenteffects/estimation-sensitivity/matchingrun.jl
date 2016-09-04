@@ -53,6 +53,9 @@ outcomes = readtable("$scripts/../outcomes/outcomes_cba_sensitivity.csv")
 # ABC/CARE data
 abccare = readtable("$data/append-abccare_iv.csv")
 
+# Controls data
+controldata = readtable("$current/controls/control_combination.csv")
+
 # Prepare data file
 include("$current/prepare-data.jl")
 
