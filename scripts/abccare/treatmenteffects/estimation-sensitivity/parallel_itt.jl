@@ -14,16 +14,16 @@ srand(1)
 # ======================================================= #
 # Call number of processors
 using ClusterManagers
-procs = 25
+procs = 10
 #addprocs(procs)
 addprocs_pbs(procs)
 
 # Define "to parallelize process"
 require("$thisdir/ITTrun.jl")
-B = 25 # number of workers being used
-b = 4  # number of work each worker does
+B = 10 # number of workers being used
+b = 10  # number of work each worker does
 
-ITTboot = pmap(ITTrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
+ITTboot = pmap(ITTrun, [b, b, b, b, b, b, b, b, b, b])
 
 # Increase the number of "draw" according to the worker number
 for i in 2:B
@@ -35,8 +35,7 @@ end
 
 # Concatenate outputs from all workers
 ITTfinal_pre1 = vcat(ITTinitial, ITTboot[1], ITTboot[2], ITTboot[3], ITTboot[4], ITTboot[5], ITTboot[6], ITTboot[7], ITTboot[8], ITTboot[9], ITTboot[10])
-ITTfinal_pre2 = vcat(ITTfinal_pre1, ITTboot[11], ITTboot[12], ITTboot[13], ITTboot[14], ITTboot[15], ITTboot[16], ITTboot[17], ITTboot[18], ITTboot[19], ITTboot[20])
-ITTfinal = vcat(ITTfinal_pre2, ITTboot[21], ITTboot[22], ITTboot[23], ITTboot[24], ITTboot[25])
+ITTfinal = ITTfinal_pre1
 
 # ===================================================== #
 # Export to csv

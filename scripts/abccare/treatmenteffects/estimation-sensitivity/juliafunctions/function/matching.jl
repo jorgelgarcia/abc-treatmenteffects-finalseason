@@ -41,12 +41,13 @@ function mestimate(sampledata, outcomes, outcome_list, draw, ddraw, bootsample, 
   catch error
     success = 0
     global append_switch = 0
+    global new_switch = 0
     println("Epanechinikov failed")
   end
 
   # if Epanechnikov succeeds
   if success == 1
-
+    new_switch = 1
     # ----------------------------------- #
     # Define sample for each gender group #
     # ----------------------------------- #
