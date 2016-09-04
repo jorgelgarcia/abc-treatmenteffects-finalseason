@@ -42,7 +42,7 @@ ITTfinal = ITTfinal_pre1
 # ===================================================== #
 # Define a dictionary for the file outputs to allow for file handles to include locals
 ResultOutput = Dict()
-colnames = [:rowname, :draw, :ddraw, :itt_noctrl, :itt_noctrl_p, :itt_noctrl_N, :itt_ctrl, :itt_ctrl_p, :itt_ctrl_N, :itt_wctrl, :itt_wctrl_p, :itt_wctrl_N]
+colnames = [:rowname, :draw, :ddraw, :controln, :itt_noctrl, :itt_noctrl_p, :itt_noctrl_N, :itt_ctrl, :itt_ctrl_p, :itt_ctrl_N, :itt_wctrl, :itt_wctrl_p, :itt_wctrl_N]
 
 # open the necessary matrix
 n = 0

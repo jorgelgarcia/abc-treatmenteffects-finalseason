@@ -28,7 +28,7 @@ Matchboot = pmap(matchingrun, [b, b, b, b, b, b, b, b, b, b])
 # Increase the number of "draw" according to the worker number
 for i in 2:B
 	Matchboot[i][:draw] = Matchboot[i][:draw] .+ (b*(i-1))
-	for j in 1:5 # concatenated
+	for j in 1:3 # concatenated
 	Matchboot[i][parse("draw_$(j)")] = Matchboot[i][parse("draw_$(j)")] .+ (b*(i-1))
 	end
 end
@@ -42,19 +42,19 @@ Matchfinal =  Machfinal_pre1
 # ===================================================== #
 # Define a dictionary for the file outputs to allow for file handles to include locals
 ResultOutput = Dict()
-colnames = [:rowname, :draw, :ddraw, :epan_ipw, :epan_N]
+colnames = [:rowname, :draw, :ddraw, :controln, :epan_ipw, :epan_N]
 
 # open the necessary matrix
 n = 0
 for gender in genderloop
 	for P_switch in (0, 1)
-		ResultOutput["matching_$(gender)_P$(P_switch)"] = DataFrame(rowname = [], draw = [], ddraw = [], epan_ipw = [], epan_N = [])
+		ResultOutput["matching_$(gender)_P$(P_switch)"] = DataFrame(rowname = [], draw = [], ddraw = [], controln = [], epan_ipw = [], epan_N = [])
 
 		if n == 0
 			ResultOutput["matching_$(gender)_P$(P_switch)"] = Matchfinal[:, colnames]
 			delete!(Matchfinal, colnames)
 		else
-			rename!(Matchfinal, [parse("rowname_$(n)"), parse("draw_$(n)"), parse("ddraw_$(n)"), parse("epan_ipw_$(n)"), parse("epan_N_$(n)")], colnames)
+			rename!(Matchfinal, [parse("rowname_$(n)"), parse("draw_$(n)"), parse("ddraw_$(n)"), parse("controln_$(n)"), parse("epan_ipw_$(n)"), parse("epan_N_$(n)")], colnames)
 			ResultOutput["matching_$(gender)_P$(P_switch)"] = Matchfinal[:, colnames]
 			delete!(Matchfinal, colnames)
 		end
