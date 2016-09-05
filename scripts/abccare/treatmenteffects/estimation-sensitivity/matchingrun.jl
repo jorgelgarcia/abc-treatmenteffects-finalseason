@@ -53,6 +53,9 @@ outcomes = readtable("$scripts/../outcomes/outcomes_cba_sensitivity.csv")
 # ABC/CARE data
 abccare = readtable("$data/append-abccare_iv.csv")
 
+# Controls data
+controldata = readtable("$current/controls/control_combination.csv")
+
 # Prepare data file
 include("$current/prepare-data.jl")
 
@@ -66,11 +69,9 @@ d_index = 1
 Matchini = Dict()
 
 for data in ("abccare")
-	if data == "abccare"
+
 		datainuse = abccare_data
-		controlset = conDict["controls_abccare"]
 		outcomelist = outcomeDict["outcome_abccare"]
-	end
 
 	for dbrep in 0:dbootstraps
 		global append_switch = 1
@@ -104,11 +105,10 @@ function matchingrun(boots)
 	d_index = 1
 
 	for data in ("abccare")
-		if data == "abccare"
-			datainuse = abccare_data
-			controlset = conDict["controls_abccare"]
-			outcomelist = outcomeDict["outcome_abccare"]
-		end
+
+		datainuse = abccare_data
+		outcomelist = outcomeDict["outcome_abccare"]
+
 
     MatchDict = Dict()
 
