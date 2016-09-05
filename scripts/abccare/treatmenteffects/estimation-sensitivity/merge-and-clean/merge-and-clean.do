@@ -10,7 +10,7 @@
 global current 	   : pwd
 global result		"${current}/../../rslt-sensitivity"
 
-local genderlist	male female
+local genderlist	female
 
 
 foreach gender in `genderlist' {
@@ -47,12 +47,13 @@ foreach gender in `genderlist' {
 	import delimited "${result}\matching\matching_`gender'_P0.csv", clear
 
 	* Drop unnecessary variables
-	drop ddraw epan_N
+	drop ddraw epan_n
 	drop if draw == 100
+	drop if rowname == "Union{}"
 
 	* Destring variables
 	local destringlist 		epan_ipw   
-
+	
 	foreach var in `destringlist' {
 		replace `var' = "" if `var' == "NA"
 		replace `var' = "" if `var' == "NaN"
@@ -62,12 +63,20 @@ foreach gender in `genderlist' {
 	* Drop duplicates
 	sort rowname controln draw
 	quietly by rowname controln draw:  gen dup = cond(_N==1,0,_n)
-	drop if dup>1
-	drop dup
 	
+	drop if dup>1 & draw == 0
+	
+	generate new_draw = .
+	replace new_draw = 0 if draw == 0
+	replace new_draw = dup + 7*(draw-1) if draw !=0
+
+	drop draw
+	rename new_draw draw
+
 	rename epan_ipw	epan_ipw_P0
 	
 	merge 1:1 rowname controln draw using "${current}/output/for_sensitivity_TE_`gender'"
+	drop _merge
 	save "${current}/output/for_sensitivity_TE_`gender'", replace 
 
 	* ---------------- *
@@ -76,7 +85,7 @@ foreach gender in `genderlist' {
 	import delimited "${result}\matching\matching_`gender'_P1.csv", clear
 
 	* Drop unnecessary variables
-	drop ddraw epan_N
+	drop ddraw epan_n
 	drop if draw == 100
 
 	* Destring variables
@@ -91,12 +100,21 @@ foreach gender in `genderlist' {
 	* Drop duplicates
 	sort rowname controln draw
 	quietly by rowname controln draw:  gen dup = cond(_N==1,0,_n)
-	drop if dup>1
-	drop dup
+	
+	drop if dup>1 & draw == 0
+	
+	generate new_draw = .
+	replace new_draw = 0 if draw == 0
+	replace new_draw = dup + 7*(draw-1) if draw !=0
+
+	drop draw
+	rename new_draw draw
+
 	
 	rename epan_ipw	epan_ipw_P1
 	
 	merge 1:1 rowname controln draw using "${current}/output/for_sensitivity_TE_`gender'"
+	drop _merge
 	save "${current}/output/for_sensitivity_TE_`gender'", replace 
 
 	* ------------------------ *
@@ -112,7 +130,7 @@ foreach gender in `genderlist' {
 	egen sd_epan_P1 = sd(epan_ipw_P1), by(group)
 	
 	* Keep the point estimates
-	keep if draw = 0
+	keep if draw == 0
 	drop draw
 	
 	* Save the final file
@@ -125,6 +143,8 @@ foreach gender in `genderlist' {
 	label var epan_ipw_P1 "Matching Estimate for Column 8"
 	label var sd_epan_P1 "Standard Error for Column 8"
 	
-	order rowname controln itt_wctrl sd_itt_wctrl epan_ipw_P0 sd_epan_P0 epan_ipw_1 sd_epan_P1 
+	drop dup group
+	
+	order rowname controln itt_wctrl sd_itt_wctrl epan_ipw_P0 sd_epan_P0 epan_ipw_P1 sd_epan_P1 
 	save "${current}/output/for_sensitivity_TE_`gender'", replace 
 }
