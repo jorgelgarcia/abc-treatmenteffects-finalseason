@@ -14,14 +14,14 @@ srand(1)
 # ======================================================= #
 # Call number of processors
 using ClusterManagers
-procs = 10
+procs = 15
 #addprocs(procs)
 addprocs_pbs(procs)
 
 # Define "to parallelize process"
 require("$thisdir/matchingrun.jl")
-B = 10 # number of workers being used
-b = 10  # number of work each worker does
+B = 15 # number of workers being used
+b = 7  # number of work each worker does
 
 Matchboot = pmap(matchingrun, [b, b, b, b, b, b, b, b, b, b])
 
