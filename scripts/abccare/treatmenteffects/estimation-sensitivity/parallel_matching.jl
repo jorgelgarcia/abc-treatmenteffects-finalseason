@@ -23,7 +23,7 @@ require("$thisdir/matchingrun.jl")
 B = 15 # number of workers being used
 b = 7  # number of work each worker does
 
-Matchboot = pmap(matchingrun, [b, b, b, b, b, b, b, b, b, b])
+Matchboot = pmap(matchingrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 
 # Increase the number of "draw" according to the worker number
 for i in 2:B
@@ -35,7 +35,7 @@ end
 
 # Concatenate outputs from all workers
 Matchfinal_pre1 = vcat(MatchInitial, Matchboot[1], Matchboot[2], Matchboot[3], Matchboot[4], Matchboot[5], Matchboot[6], Matchboot[7], Matchboot[8], Matchboot[9], Matchboot[10])
-Matchfinal =  Matchfinal_pre1
+Matchfinal =  vcat(Matchfinal_pre1, Matchboot[11], Matchboot[12], Matchboot[13], Matchboot[14], Matchboot[15])
 
 # ===================================================== #
 # Export to csv
