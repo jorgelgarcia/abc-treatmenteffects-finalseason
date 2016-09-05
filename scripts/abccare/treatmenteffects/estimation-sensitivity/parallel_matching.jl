@@ -35,7 +35,7 @@ end
 
 # Concatenate outputs from all workers
 Matchfinal_pre1 = vcat(MatchInitial, Matchboot[1], Matchboot[2], Matchboot[3], Matchboot[4], Matchboot[5], Matchboot[6], Matchboot[7], Matchboot[8], Matchboot[9], Matchboot[10])
-Matchfinal =  Machfinal_pre1
+Matchfinal =  Matchfinal_pre1
 
 # ===================================================== #
 # Export to csv
