@@ -30,13 +30,90 @@
 
 \subsubsection{Sensitivity Analysis}
 
-\noindent An immediate route of inquire has to do with the sensitivity of our estimates to the choice of background variables. Especially in the context of our small sample, in which estimates can be volatile to the choice of control sets. To investigate this, we estimate treatment effects for the three counterfactuals we consider under all possible control sets of the three variables we can form with the background variables in Table~\ref{tab:pselectvars}. We also consider all possible control sets of one and two variables in Table~\ref{tab:pselectvars}. For brevity, we present this exercise for two outcomes, employment and education. Similar exercises for the 95 main outcomes we consider are available upon request.
+\noindent An immediate route of inquire has to do with the sensitivity of our estimates to the choice of background variables. Especially in the context of our small sample, in which estimates can be volatile to the choice of control sets. To investigate this, we estimate treatment effects for the three counterfactuals we consider under all possible control sets of the three variables we can form with the background variables in Table~\ref{tab:pselectvars}. We also consider all possible control sets of one and two variables in Table~\ref{tab:pselectvars}. For brevity, we present this exercise for two outcomes, employment and education. Similar exercises for the 95 main outcomes we consider are available upon request.\\
 
-\noindent Figure~\ref{} displays the results from this exercise.
+\noindent Figures~\ref{fig:senstnb} to \ref{fig:senstap} display the results from this exercise. In any case, the support of the distributions is very compressed leading us to conclude that there is little sensitivity to the choice of controls sets.
 
+\begin{sidewaysfigure}[!htbp]
+\centering
+\caption{Sensitiviy to Choice of Control Set, Treatment vs. Next Best}\label{fig:senstnb}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Years of Education, Males}
+		\includegraphics[width=\textwidth]{output/sencontrols_male_years_30y_itt_wctrl.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{Employment, Males}
+		\includegraphics[width=\textwidth]{output/sencontrols_male_si30y_works_itt_wctrl.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Years of Education, Females}
+		\includegraphics[width=\textwidth]{output/sencontrols_female_years_30y_itt_wctrl.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{Employment, Females}
+		\includegraphics[width=\textwidth]{output/sencontrols_female_si30y_works_itt_wctrl.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: Panel (a) displays the distribution of the treatment effect estimate of the treatment compared to next best counterfactual for males years of education. The distribution is obtained by using all possible combinations of one, two, and three background variables listed in Table~\ref{tab:pselectvars}. The horizontal line marks the baseline estimate we use. The reminder panels present analogous distributions for the outcomes and genders indicated in the title.\\
+\end{sidewaysfigure}
 
+\begin{sidewaysfigure}[!htbp]
+\centering
+\caption{Sensitiviy to Choice of Control Set, Treatment vs. Stay at Home}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Years of Education, Males}
+		\includegraphics[width=\textwidth]{output/sencontrols_male_years_30y_epan_ipw_P0.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{Employment, Males}
+		\includegraphics[width=\textwidth]{output/sencontrols_male_si30y_works_epan_ipw_P0.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Years of Education, Females}
+		\includegraphics[width=\textwidth]{output/sencontrols_female_years_30y_epan_ipw_P0.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{Employment, Females}
+		\includegraphics[width=\textwidth]{output/sencontrols_female_si30y_works_epan_ipw_P0.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: Panel (a) displays the distribution of the treatment effect estimate of the treatment compared to stay at home counterfactual for males years of education. The distribution is obtained by using all possible combinations of one, two, and three background variables listed in Table~\ref{tab:pselectvars}. The horizontal line marks the baseline estimate we use. The reminder panels present analogous distributions for the outcomes and genders indicated in the title.\\
+\end{sidewaysfigure}
 
-
+\begin{sidewaysfigure}[!htbp]
+\centering
+\caption{Sensitiviy to Choice of Control Set, Treatment vs. Alternative Preschool}\label{fig:senstap}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Years of Education, Males}
+		\includegraphics[width=\textwidth]{output/sencontrols_male_years_30y_epan_ipw_P1.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{Employment, Males}
+		\includegraphics[width=\textwidth]{output/sencontrols_male_si30y_works_epan_ipw_P1.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Years of Education, Females}
+		\includegraphics[width=\textwidth]{output/sencontrols_female_years_30y_epan_ipw_P1.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{Employment, Females}
+		\includegraphics[width=\textwidth]{output/sencontrols_female_si30y_works_epan_ipw_P1.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: Panel (a) displays the distribution of the treatment effect estimate of the treatment compared to alternative preschool counterfactual for males years of education. The distribution is obtained by using all possible combinations of one, two, and three background variables listed in Table~\ref{tab:pselectvars}. The horizontal line marks the baseline estimate we use. The reminder panels present analogous distributions for the outcomes and genders indicated in the title.\\
+\end{sidewaysfigure}
 
 \subsection{Outcomes of Interest}
 
