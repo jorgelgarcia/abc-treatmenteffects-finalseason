@@ -41,10 +41,10 @@ foreach sex in female male {
 			twoway (kdensity `var' if control >= 1   & control <= 12, lwidth(medthick) lpattern(solid) lcolor(gs0) xline(`mcont', lwidth(medthick) lpattern("....._") lcolor(gs0)))
 			       (kdensity `var' if control >= 13 & control  <= 78, lwidth(medthick) lpattern(dash)  lcolor(gs0))
 			       (kdensity `var' if control >= 79 & control  <= 298, lwidth(medthick) lpattern(solid) lcolor(gs10))	
-			       // (function y = `mcont', horizontal lwidth(medthick) lpattern("....._") lcolor(gs0))
+			       (function y = `mcont', horizontal lwidth(medthick) lpattern("....._") lcolor(gs0))
 				, 
 					  legend(label(1 One Control) label(2 Two Controls) label(3 Three Controls) 
-					         label(4 Baseline Point Estimate) cols(2) rows(3))
+					         label(4 Baseline Point Estimate) cols(3) rows(2))
 					  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 					  xtitle(Point Estimate) ytitle(Density)
 					  graphregion(color(white)) plotregion(fcolor(white));
