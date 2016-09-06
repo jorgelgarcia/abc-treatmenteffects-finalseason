@@ -12,7 +12,7 @@
 
 \noindent We briefly formalize the choice of the control sets based on most predictive models in the next lines.\\ 
 
-\noindent Let $\mathcal{M}$ be the set of all the models we consider. In our application, $\mathcal{M}$ consists of all linear regressions of the an outcomes of interest on the different combinations of background variables. $m \in \mathcal{M}$ is one of such models. We choose the model minimizing the Bayesian Information Criterion (BIC) by ranking them according to their likelihood. That is, according to their posterior probability given the data. The data, in this case, is the dependent variable being predicted together with the background variables in each combination. We denote this by $\Pr( m | \text{Data} )$.\\
+\noindent Let $\mathcal{M}$ be the set of all the models we consider. In our application, $\mathcal{M}$ consists of all linear regressions of an outcome of interest on the different combinations of background variables. $m \in \mathcal{M}$ is one of such models. We choose the model minimizing the Bayesian Information Criterion (BIC) by ranking them according to their likelihood. That is, according to their posterior probability given the data. The data, in this case, are the dependent variable being predicted together with the background variables in each combination. We denote this by $\Pr( m | \text{Data} )$.\\
 
 \noindent Using Bayes Rule and the law of total probability, 
 
@@ -24,15 +24,15 @@
 
 \noindent where $\Pr(m)$ is the prior probability of model $m$ and $\Pr(\text{Data} | m)$ is the probability of observing $\text{Data}$ under model $m$.\\
 
-\noindent There are various approaches to rank the the likelihood of each model. Examples include rankings based on Bayesian Information Criterion (Schwarz), the Hannan-Quinn Information Criterion (HWIC), and the Akaike Information Criterion (AIC). We use the first because it has appealing consistency properties \citep{Diebold_2007_Forecasting}. This criterion minimizes the following loss function: $2 \log (\Pr( \text{Data} | m))$. We follow an specific approximation developed by \citet{Claeskens-Hjort_2008_Model-Selection}, which assumes uniform priors and simplifies the computation of the loss function.\\
+\noindent There are various approaches to rank the the likelihood of each model. Examples include rankings based on Bayesian Information Criterion (Schwarz), the Hannan-Quinn Information Criterion (HWIC), and the Akaike Information Criterion (AIC). We use the first approach because it has appealing consistency properties \citep{Diebold_2007_Forecasting}. This criterion minimizes the following loss function: $2 \log [\Pr( \text{Data} | m)]$. We follow an specific approximation developed by \citet{Claeskens-Hjort_2008_Model-Selection}, which assumes uniform priors and simplifies the computation of the loss function.\\
 
-\noindent This procedure allows us to choose one control set per outcomes of interest. To gain consistency across all specifications, we average the BIC across all outcomes and choose the background variables with lower average across models. These background variables form our control set across all estimations and appear bold in Table~\ref{tab:pselectvars}. 
+\noindent This procedure allows us to choose one control set per outcomes of interest. To gain consistency across all specifications, we sum the BIC across all outcomes and choose the background variables with lower average across models. These background variables form our control set across all estimations and appear bold in Table~\ref{tab:pselectvars}. 
 
 \subsubsection{Sensitivity Analysis}
 
-\noindent An immediate route of inquire has to do with the sensitivity of our estimates to the choice of background variables. Especially in the context of our small sample, in which estimates can be volatile to the choice of control sets. To investigate this, we estimate treatment effects for the three counterfactuals we consider under all possible control sets of the three variables we can form with the background variables in Table~\ref{tab:pselectvars}. We also consider all possible control sets of one and two variables in Table~\ref{tab:pselectvars}. For brevity, we present this exercise for two outcomes, employment and education. Similar exercises for the 95 main outcomes we consider are available upon request.\\
+\noindent An immediate route of inquire has to do with the sensitivity of our estimates to the choice of background variables. Especially in the context of our small sample, in which estimates can be volatile to different model specifications. To investigate this, we estimate treatment effects for the three counterfactuals we consider under all possible control sets of the three variables we can form with the background variables in Table~\ref{tab:pselectvars}. We also consider all possible control sets of one and two variables in Table~\ref{tab:pselectvars}. For brevity, we present this exercise for two outcomes, employment and education. Similar exercises for the 95 main outcomes we consider are available upon request.\\
 
-\noindent Figures~\ref{fig:senstnb} to \ref{fig:senstap} display the results from this exercise. In any case, the support of the distributions is very compressed leading us to conclude that there is little sensitivity to the choice of controls sets.
+\noindent Figure~\ref{fig:senstnb} to Figure~\ref{fig:senstap} display the results from this exercise. In any case, the support of the distributions is very compressed leading us to conclude that there is little sensitivity to the choice of controls sets.
 
 \begin{sidewaysfigure}[!htbp]
 \centering
