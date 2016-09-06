@@ -1,6 +1,6 @@
 \section{Accounting for Attrition} \label{appendix:attrition}
 
-\noindent We use a standard inverse probability weighting (IPW) scheme based on a logit model that predicts attrition using baseline characteristics.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} We discuss identification below. We describe our model selection process and the selected logit models in Tables \ref{table:nonipw}--\ref{table:ms_attrit_pooled} in Appendix \ref{app:method_identify}. We use the Akaike Information Criteria (AIC) to select the model with the best predictive ability. We use the same notation as in Section~\ref{section:cbamethodology} and a vector of background characteristics used in the randomization protocol; $W$ are background characteristics not used in this protocol.\\
+\noindent We use a standard inverse probability weighting (IPW) scheme based on a logit model that predicts attrition using baseline characteristics.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} We use the same notation as in Section~\ref{section:cbamethodology} and a vector of background characteristics used in the randomization protocol; $W$ are background characteristics not used in this protocol.\\
 
 \noindent Formally, let $A=1$ denote the case where we observe $Y$ and $A=0$ denote otherwise. We assume $A$ is independent of $Y$ conditional on $Z$, $R$, $X$, and $W$. More formally, we invoke
 
