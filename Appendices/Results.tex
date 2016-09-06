@@ -1,22 +1,52 @@
 \section{Results} \label{appendix:results}
 
-\noindent In this appendix we first explain our method for selecting the background variables that we control for. Then, we present the treatment effects of the center-based treatment in ABC/CARE estimates for the 95 main outcomes we consider. For each set of estimates, we first present a summary of the effect of the program(s) using a combining function counting the number of socially positive treatment effects. We then present tables of treatment effect estimates for each outcome. Finally, we present the treatment effect estimates using the step-down procedure to test multiple hypotheses. \\
+\noindent In this appendix we first explain our method for selecting the background variables that we control for. Then, we present the treatment effects of the center-based treatment in ABC/CARE estimates for the 95 main outcomes we consider. For each set of estimates, we first present a summary of the effect of the program using a combining function counting the number of socially positive treatment effects. We then present tables of treatment effect estimates for each outcome. Finally, we present the treatment effect estimates using the step-down procedure to test multiple hypotheses.\\
 
-\noindent We select the background variables that we control for as follows. First, we select the three variables, from 17 potential variables, that best predict enrollment into alternative preschool for subjects who were randomly assigned not to receive center-based childcare---the control group in ABC/CARE To choose the most predictive control set, we estimate the $17 \choose 3$ linear models, using the variables in Panels (1) and (2) of Table~\ref{tab:pselectvars}. The most predictive model is the one generating the lowest Bayesian Information Criterion (BIC).\\
+\subsection{Background Variables} \label{appendix:bvariables}
 
-\noindent We proceed in a similar way to choose the second set of background variables. Instead of predicting enrollment into alternative preschool, we predict the relevant outcome of interest. For this exercise we use the variables in Panel (2), so we estimate $14 \choose 3$ models.\\
-
-\noindent Our set of control variables consists of these two sets of background variables. \\
+\noindent We select three out of fourteen potential variables that best predict the relevant outcomes of interest, i.e. the outcomes we test treatment effects for. We list the fourteen variables in Table~\ref{tab:pselectvars} and bold the three we choose.
 
 \singlespacing
 \input{output/controlsets} 
 \doublespacing
+
+\noindent We briefly formalize the choice of the control sets based on most predictive models in the next lines.\\ 
+
+\noindent Let $\mathcal{M}$ be the set of all the models we consider. In our application, $\mathcal{M}$ consists of all linear regressions of the an outcomes of interest on the different combinations of background variables. $m \in \mathcal{M}$ is one of such models. We choose the model minimizing the Bayesian Information Criterion (BIC) by ranking them according to their likelihood. That is, according to their posterior probability given the data. The data, in this case, is the dependent variable being predicted together with the background variables in each combination. We denote this by $\Pr( m | \text{Data} )$.\\
+
+\noindent Using Bayes Rule and the law of total probability, 
+
+\begin{eqnarray}
+\Pr( m | \text{Data} ) &=& \frac{\Pr(\text{Data} | m)\times \Pr(m)}{ \Pr(\text{Data})}\\ \nonumber
+&=& \frac{\Pr(\text{Data} | m)\times \Pr(m)}{\sum \limits _{m' \in M} \Pr (\text{Data} | m') \Pr(m')} \\ \nonumber
+&\propto& \Pr (\text{Data} | m) \times \Pr(m),
+\end{eqnarray}
+
+\noindent where $\Pr(m)$ is the prior probability of model $m$ and $\Pr(\text{Data} | m)$ is the probability of observing $\text{Data}$ under model $m$.\\
+
+\noindent There are various approaches to rank the the likelihood of each model. Examples include rankings based on Bayesian Information Criterion (Schwarz), the Hannan-Quinn Information Criterion (HWIC), and the Akaike Information Criterion (AIC). We use the first because it has appealing consistency properties \citep{Diebold_2007_Forecasting}. This criterion minimizes the following loss function: $2 \log (\Pr( \text{Data} | m))$. We follow an specific approximation developed by \citet{Claeskens-Hjort_2008_Model-Selection}, which assumes uniform priors and simplifies the computation of the loss function.\\
+
+\noindent This procedure allows us to choose one control set per outcomes of interest. To gain consistency across all specifications, we average the BIC across all outcomes and choose the background variables with lower average across models. These background variables form our control set across all estimations and appear bold in Table~\ref{tab:pselectvars}. 
+
+\subsubsection{Sensitivity Analysis}
+
+\noindent An immediate route of inquire has to do with the sensitivity of our estimates to the choice of background variables. Especially in the context of our small sample, in which estimates can be volatile to the choice of control sets. To investigate this, we estimate treatment effects for the three counterfactuals we consider under all possible control sets of the three variables we can form with the background variables in Table~\ref{tab:pselectvars}. We also consider all possible control sets of one and two variables in Table~\ref{tab:pselectvars}. For brevity, we present this exercise for two outcomes, employment and education. Similar exercises for the 95 main outcomes we consider are available upon request.
+
+\noindent Figure~\ref{} displays the results from this exercise.
+
+
+
+
+
+\subsection{Outcomes of Interest}
 
 \noindent Table \ref{tab:main-outcomes} lists the 95 main outcomes that we test in our main analysis. We reverse the outcomes for which we consider a negative treatment effect socially positive. \\
 
 \singlespacing
 \input{output/abccare_outcomes_list}
 \doublespacing
+
+\subsection{Estimates}
 
 \noindent Table~\ref{table:abccare_rslt_pooled_counts} shows that across all methods of estimation, pooling males and females, over 70\% of the treatment effect estimates are socially positive. When conditioning on 10\% statistical significance, almost 40\% of all estimates are socially positive. These statistics allow us to reject the hypothesis that the treatment and control groups have the same marginal distributions in outcomes. \\
 

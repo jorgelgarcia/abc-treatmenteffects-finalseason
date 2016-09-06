@@ -57,19 +57,10 @@ maternal IQ, number of siblings, HRI, and sex (in the case of pooled estimates).
 
 \noindent To estimate the propensity to respond, we estimate a logit model of observing the outcome,
 controlling for treatment status and three additional covariates. The additional covariates are
-chosen amongst a set of variables likely to be correlated with non-response rates for the outcome variable.
-This set of variables includes baseline characteristics determining randomization,
-baseline variables other than randomization, and observed adult outcomes potentially affected by
-treatment. To select these variables, we estimate the
-aforementioned logit model controlling for treatment status and every three-variable combination from
-the described set of variables. The model with the lowest Akaike Information Criteria (AIC) value is used to estimate the propensity
-to respond. We limit the number of covariates in our logit models to three as this noticeably reduces the frequency of bootstrap resamples which exhibit perfect separation in the covariates. \\
+chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariables}.\\
 
 \noindent To estimate the treatment effect, we regress the outcome of interest on treatment status, and weight the
 observations by the inverse of the product of the two propensity scores estimated with the method discussed in Appendix~\ref{appendix:attrition}. This procedure is performed on 1,000 bootstrap resamples of the original ABC/CARE data.
-We take the mean of the empirical bootstrap distribution as our point estimate, and the standard deviation
-of the distribution as the standard error. We carry out this procedure for the
-pooled sample, male subsample, and female subsample. Table~\ref{table:ms_attrit_pooled} through Table~\ref{table:ms_attrit_males} summarize the model selection for IPW adjustment for each partially observed outcome. \\
 
 \paragraph{Parental Income}
 
@@ -81,69 +72,6 @@ To obtain a more complete picture of how the
 program affected parental income, we estimate the treatment effect in the missing ages by linearly
 interpolating the treatment effects between the years for which we observe parental income. We assume
 there are no impacts from age 16 onwards (i.e. a treatment effect of 0). \textbf{[JJH: Jorge, can we not do better? Impute profiles using PSID?]}\textbf{[JLG: the reason for doing a linear interpolation is that the support in the PSID doesn't let us do much here. The information on the parents is not very complete. PSID of course surveys parents and children, but the matches here are adults and their parents barely appear in PSID. In other words, we are matching the ABC/CARE subjects to individuals who are not young enough as for us to obtain a good income profile of their parents.  We have eight observations between ages 0 and 15 and we are relying on that now.]} \\
-
-\begin{sidewaystable}[H]
-\caption{Model Selection for Attrition IPW \\ Pooled }
-\label{table:ms_attrit_pooled}
-\centering
-\begin{adjustbox}{max width=\textwidth}
-\begin{threeparttable}
-\input{AppOutput/Methodology/model_select_pooled.tex}
-\begin{tablenotes}
-\tiny
-\item Note: The table above lists the variables used to generate the
-inverse probability weights we use to account for attrition. We estimate a logit model for observing the outcome variable,
-controlling for treatment, and three additional covariates depending on the outcome
-variable. The additional variables are chosen from a list of covariates possibly affecting
-response rates. The set yielding the lowest Akaike Information Criteria value is used to
-generate the IPW weights, and are listed in the table above.
-\end{tablenotes}
-\end{threeparttable}
-\end{adjustbox}
-\end{sidewaystable}
-
-\begin{sidewaystable}[H]
-\caption{Model Selection for Attrition IPW \\ Females }
-\label{table:ms_attrit_females}
-\centering
-\begin{adjustbox}{max width=\textwidth}
-\begin{threeparttable}
-\input{AppOutput/Methodology/model_select_female.tex}
-\begin{tablenotes}
-\tiny
-\item Note: The table above lists the variables used to generate the
-inverse probability weights we use to account for attrition. We estimate a logit model for observing the outcome variable,
-controlling for treatment, and three additional covariates depending on the outcome
-variable. The additional variables are chosen from a list of covariates possibly affecting
-response rates. The set yielding the lowest Akaike Information Criteria value is used to
-generate the IPW weights, and are listed in the table above.
-\end{tablenotes}
-\end{threeparttable}
-\end{adjustbox}
-\end{sidewaystable}
-
-
-
-\begin{sidewaystable}[H]
-\caption{Model Selection for Attrition IPW \\ Males }
-\label{table:ms_attrit_males}
-\centering
-\begin{adjustbox}{max width=\textwidth}
-\begin{threeparttable}
-\input{AppOutput/Methodology/model_select_male.tex}
-\begin{tablenotes}
-\tiny
-\item Note: The table above lists the variables used to generate the
-inverse probability weights we use to account for attrition. We estimate a logit model for observing the outcome variable,
-controlling for treatment, and three additional covariates depending on the outcome
-variable. The additional variables are chosen from a list of covariates possibly affecting
-response rates. The set yielding the lowest Akaike Information Criteria value is used to
-generate the IPW weights, and are listed in the table above.
-\end{tablenotes}
-\end{threeparttable}
-\end{adjustbox}
-\end{sidewaystable}
-
 
 \subsubsection{Incomplete Data}
 \label{app:method_noobs}

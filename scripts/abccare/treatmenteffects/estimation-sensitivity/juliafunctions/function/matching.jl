@@ -33,20 +33,6 @@ function mestimate(sampledata, outcomes, outcome_list, draw, ddraw, bootsample, 
   # Generate IPW weight for the bootstrapped sample
   matchingdata = IPWweight(matchingdata, outcomes, outcome_list)
 
-  # Generate Epanechnikov weight for the bootstrapped sampledata (Epanechnikov might fail, so we need to capture that)
-  success = 1
-  println("Beginning Epanechnikov")
-  try
-    matchingdata = epanechnikov(matchingdata, controls, 20)
-  catch error
-    success = 0
-    global append_switch = 0
-    println("Epanechinikov failed")
-  end
-
-  # if Epanechnikov succeeds
-  if success == 1
-
     # ----------------------------------- #
     # Define sample for each gender group #
     # ----------------------------------- #
@@ -82,6 +68,20 @@ function mestimate(sampledata, outcomes, outcome_list, draw, ddraw, bootsample, 
         for controls_n in 1:rown
           # Define controls
           controls = conDict["controls$(controls_n)"]
+
+          # Generate Epanechnikov weight for the bootstrapped sampledata (Epanechnikov might fail, so we need to capture that)
+          success = 1
+          println("Beginning Epanechnikov")
+          try
+            matchingdata = epanechnikov(matchingdata, controls, 20)
+          catch error
+            success = 0
+            push!(outMat["matching_$(gender)_P$(p)"], [None, draw, ddraw, controls_n, NA, NA])
+            println("Epanechinikov failed")
+          end
+
+          # if Epanechnikov succeeds
+          if success == 1
 
           # ------------------ #
           # Perform estimation #
@@ -183,11 +183,13 @@ function mestimate(sampledata, outcomes, outcome_list, draw, ddraw, bootsample, 
             end
 
             # Store estimation results for R (randomization into treatment in ABC) into the output_ITT matrix. push! adds a row to the matrix output_ITT.
-            push!(outMat["matching_$(gender)_P$(p)"], [y, draw, ddraw, , controls_n, mean_te, N])
+            push!(outMat["matching_$(gender)_P$(p)"], [y, draw, ddraw, controls_n, mean_te, N])
           end
-            println("Bootstrap draw $(draw) - $(ddraw) - controln$(control_n) - $(gender) - $(p) Success!")
+            println("Bootstrap draw $(draw) - $(ddraw) - control - $(gender) - $(p) Success!")
         end
       end
+    end
+  end
 
     if bygender == 1
       Output = hcat(outMat["matching_male_P0"], outMat["matching_male_P1"], outMat["matching_female_P0"], outMat["matching_female_P1"])
@@ -197,5 +199,4 @@ function mestimate(sampledata, outcomes, outcome_list, draw, ddraw, bootsample, 
     println("Matching Draw $(draw) DDRAW $(ddraw) OUTPUT SUCCESS")
 
     return Output
-  end
 end
