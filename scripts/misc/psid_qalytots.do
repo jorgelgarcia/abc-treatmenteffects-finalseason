@@ -66,7 +66,7 @@ twoway (lowess qaly    age if male == 0, lwidth(1.2)   lpattern(solid) lcolor(gs
        (lowess qalymin age if male == 0, lpattern(dash) lcolor(gs0))
 	, 
 		  legend(rows(1) order(1 2) label(1 "Mean") label(2 "+/- s.e.") size(small))
-		  xlabel(30[5]65, grid glcolor(gs14)) ylabel(80[10]130, angle(h) glcolor(gs14))
+		  xlabel(30[5]65, grid glcolor(gs14)) ylabel(80[10]140, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("QALYs (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr 
