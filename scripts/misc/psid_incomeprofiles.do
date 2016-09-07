@@ -31,7 +31,7 @@ global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 // open NLSY79
 cd $datapsid
 use psid-base.dta, clear
-keep id male birthyear race age* edu inc_labor* lweight*
+keep id male black birthyear race age* edu inc_labor* lweight*
 rename edu eduever
 
 reshape long age inc_labor lweight, i(id) j(year)
@@ -45,7 +45,7 @@ keep if year >= 1997 & year <= 2011
 
 // generate id's file for USC
 preserve
-keep id year
+keep id year male eduever black
 cd $output
 saveold psid_interextra.dta, replace
 restore
