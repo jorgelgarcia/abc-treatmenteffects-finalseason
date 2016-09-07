@@ -115,6 +115,8 @@ foreach source in labor /*transfer*/ {
 		
 	// graph
 	cd $output
+	global y0  0[10]50
+	global y1 10[10]80
 	forval sex = 0/1 {
 	
 	preserve
@@ -122,7 +124,7 @@ foreach source in labor /*transfer*/ {
 		`drop`sex''
 	
 		local graphregion		graphregion(color(white))
-		local yaxis				ytitle("``source'_name' Income (1000s 2014 USD)") ylabel(#6, format(%9.0gc) glcol(gs14))
+		local yaxis				ytitle("``source'_name' Income (1000s 2014 USD)") ylabel(${y`sex'}, angle(h) glcol(gs14))
 		local xaxis				xtitle("Age") xlabel(25[5]65, grid glcol(gs14))
 		local legend			legend(rows(1) order(2 1 3) label(1 "Control") label(2 "Treatment") label(3 "+/- s.e.") size(small))
 	

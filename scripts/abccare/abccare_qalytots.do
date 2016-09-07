@@ -52,22 +52,30 @@ drop _merge
 // to long 
 keep if bsrep == 0 & mcrep == 1
 reshape long prvmd pubmd qaly, i(num_id) j(age)
+replace qaly = qaly*150
 egen md = rowtotal(prvmd pubmd), missing 
-collapse (mean) md prvmd pubmd qaly, by(age R male)
+collapse (mean) md prvmd pubmd qaly (semean) seqaly=qaly semd=md seprvmd=prvmd sepubmd=pubmd, by(age R male)
 
 cd $output
-keep if age >= 30
+keep if age >=30 & age <=65
 foreach sex of numlist 0 1 {
-	foreach var of varlist md qaly {
+	foreach var of varlist qaly {
+		gen `var'min = `var' - se`var'
+		gen `var'max = `var' + se`var'
 		#delimit
-		twoway (lowess `var' age if R == 0 & male == `sex', msymbol(square)  mfcolor (gs0) mlcolor(gs0) msize(large) connect(l) lwidth(vthick) lpattern(solid) lcolor(gs4))
-		       (lowess `var' age if R == 1 & male == `sex', msymbol(circle)  mfcolor (gs5) mlcolor(gs5) msize(large) connect(l) lwidth(vthick) lpattern(dash)  lcolor(gs8))
+		twoway (lowess `var'    age if R == 0 & male == `sex', lwidth(1.2)   lpattern(solid) lcolor(gs0) )
+		       (lowess `var'    age if R == 1 & male == `sex', lwidth(1.2)   lpattern(solid) lcolor(gs9))
+		       (lowess `var'min age if R == 1 & male == `sex', lpattern(dash) lcolor(gs9) )
+		       (lowess `var'max age if R == 1 & male == `sex', lpattern(dash) lcolor(gs9) )
+		       (lowess `var'min age if R == 0 & male == `sex', lpattern(dash) lcolor(gs0) )
+		       (lowess `var'max age if R == 0 & male == `sex', lpattern(dash) lcolor(gs0) )
 			, 
-				  legend(label(1 Control) label(2 Treatment))
-				  xlabel(30[10]80, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
-				  xtitle(Age) ytitle("")
+				  legend(rows(1) order(2 1 5) label(1 "Control") label(2 "Treatment") label(5 "+/- s.e.") size(small))
+				  xlabel(30[5]65, grid glcolor(gs14)) ylabel(80[10]140, angle(h) glcolor(gs14))
+				  xtitle(Age) ytitle("QALYs (1000s 2014 USD)")
 				  graphregion(color(white)) plotregion(fcolor(white));
 		#delimit cr 
 		graph export `var'lcycle_s`sex'.eps, replace
+		drop *min *max
 	}
 }

@@ -28,10 +28,9 @@ global dataabccare = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extension
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
-// open NLSY79
 cd $datapsid
 use psid-base.dta, clear
-keep id male birthyear race age* edu inc_labor* lweight*
+keep id male black birthyear race age* edu inc_labor* lweight*
 rename edu eduever
 
 reshape long age inc_labor lweight, i(id) j(year)
@@ -45,7 +44,7 @@ keep if year >= 1997 & year <= 2011
 
 // generate id's file for USC
 preserve
-keep id year
+keep id year male eduever black
 cd $output
 saveold psid_interextra.dta, replace
 restore
@@ -103,7 +102,7 @@ twoway (lowess m1    age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.25))
        (lowess m1min age,  lpattern(dash) lcolor(gs0) bwidth(.25))
         , 
 		  legend(rows(1) order(1 2) label(1 "Mean") label(2 "+/- s.e.") size(small))
-		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(20[10]70, angle(h) glcolor(gs14))
+		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(10[10]80, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr 
@@ -115,7 +114,7 @@ twoway (lowess m0    age, lwidth(1.2)   lpattern(solid) lcolor(gs0)  bwidth(.35)
        (lowess m0min age,  lpattern(dash) lcolor(gs0) bwidth(.35))
         , 
 		  legend(rows(1) order(1 2) label(1 "Mean") label(2 "+/- s.e.") size(small))
-		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(0[10]40, angle(h) glcolor(gs14))
+		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(0[10]50, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr 
