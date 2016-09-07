@@ -70,7 +70,7 @@ twoway (lowess qaly    age if male == 0, lwidth(1.2)   lpattern(solid) lcolor(gs
 		  xtitle(Age) ytitle("QALYs (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr 
-graph export qalylcycle_s0.eps, replace
+graph export psidqaly_s0.eps, replace
 
 #delimit
 twoway (lowess qaly    age if male == 1, lwidth(1.2)   lpattern(solid) lcolor(gs0) bwidth(.7))
@@ -82,7 +82,4 @@ twoway (lowess qaly    age if male == 1, lwidth(1.2)   lpattern(solid) lcolor(gs
 		  xtitle(Age) ytitle("QALYs (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr 
-graph export qalylcycle_s1.eps, replace
-
-
-
+graph export psidqaly_s1.eps, replace
