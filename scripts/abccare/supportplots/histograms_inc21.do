@@ -172,7 +172,7 @@ forvalues j = 1/`N' {
 }
 
 * generate x axis label using tricky method
-gen xlab = "Labor Income, Age 30"
+gen xlab = "Labor Income, Age 21"
 
 di "`dataobs'"
 di "`customlab'"
