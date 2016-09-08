@@ -1,6 +1,8 @@
 \section{Accounting for Attrition} \label{appendix:attrition}
 
-\noindent We use a standard inverse probability weighting (IPW) scheme based on a logit model that predicts attrition using baseline characteristics.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} Let $R = 1$ if the child is randomized to treatment, and $R = 0$ otherwise. Similarly, let $A = 1$ denote the case where we observe outcome $Y$, and $A = 0$ otherwise. $X,W,Z$ are background variables. $X$ could be affected by treatment and $W,Z$ are pre-treatment. $Z$ is used as part of the randomization protocol and $Z$ is not.
+\noindent We use a standard inverse probability weighting (IPW) scheme based on a logit model that predicts attrition using baseline characteristics.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} Let $R = 1$ if the child is randomized to treatment, and $R = 0$ otherwise. Similarly, let $A = 1$ denote the case where we observe outcome $Y$, and $A = 0$ otherwise. $X,W,Z$ are background variables. $X$ could be affected by treatment and $W,Z$ are pre-treatment. $Z$ is used as part of the randomization protocol and $W$ is not.\\
+
+\noindent Note that this is a simplification of the notation we use in Section~\ref{section:methodology} of the main text, and it is for the sake of clarity. In the text, we allow for explicit dynamics of $X$ and refer to $W,Z$ as $\mathcal{B}$.\footnote{For the individuals in ABC/CARE, it is actually the case that $\mathcal{B}$ belongs to a subset $\mathcal{B}_{0}$. That distinction is not relevant to explain this general method to account for attrition.}
 
 \noindent We assume $A$ is independent of $Y$ conditional on $Z$, $R$, $X$, and $W$. More formally, we invoke
 

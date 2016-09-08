@@ -1,13 +1,13 @@
 \section{Details on Interpolation and Extrapolation} \label{appendix:methodology}
 
-\noindent In the next lines, we provide details on the estimation of treatment effects. The difference in the approach for each outcome is based on different scenarios of data availability.
+\noindent In the next lines, we provide details on the approach to estimate treatment effects. The difference in the approach for each outcome is based on different scenarios of data availability.
 
 \subsection{Complete Data}
 \label{app:method_fullobs}
 
-\noindent  In the case where we have complete data, we only need to address for compromised randomization. Appendix~\ref{appendix:assessingcc} shows that our estimates have little sensitivity to randomization compromises. Our baseline estimates throughout the paper do not account for this. By complete data, we mean that we observe the outcome for 100 individuals or more. Table~\ref{table:nonipw} lists the variables that are completely observed.\\
+\noindent  In the case where we have complete data, we only need to address compromised randomization. Appendix~\ref{appendix:assessingcc} shows that our estimates have little sensitivity to randomization compromises. Our baseline estimates throughout the paper do not account for this. By complete data, we mean that we observe the data for at least 90\% of the individuals in the sample. Table~\ref{table:nonipw} lists the variables that are completely observed.\\
 
-\noindent As in the rest of the paper, we estimate the standard errors of our estimates by resampling the ABC/CARE data. We estimate non-parametric $p$-values based on the bootstrap distribution. 
+\noindent For these outcomes, we estimate the standard errors of our estimates by resampling the ABC/CARE data. We estimate non-parametric $p$-values based on the bootstrap distribution. We perform inference in this same way throughout the paper.
 
 \begin{table}[H]
 \begin{threeparttable}
@@ -26,22 +26,22 @@ treatment effects.
 \subsection{Partially Complete Data}
 \label{app:method_partialobs}
 
-\noindent Given the small sample size of the ABC/CARE data, we consider outcomes with fewer than 100 observations as having a sizable rate of attrition. We call this outcomes partially complete. They include: parental income at ages 2, 3, 4, 5, 9, 12, and 15, for which we observe no more than 91 subjects at any given age; and the health survey at age 34, for which we observe no more than 72 subjects.\\
+\noindent When we do not observe data for more than 10\% of the individuals in the sample, we consider an outcome partially complete. These outcomes include: parental income at ages 2, 3, 4, 5, 9, 12, and 15, for which we observe no more than 91 subjects at any given age; and the health survey at age 34, for which we observe no more than 72 subjects.\\
 
 \noindent For partially complete outcomes, we correct for attrition using an inverse probability scheme (IPW) as in  \citet{Horvitz_Thompson_1952_JASA}. To estimate the propensity to respond, we estimate a logit model of observing the outcome,
 controlling for treatment status and three additional covariates. The additional covariates are
-chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariables}. We account for the sampling variation implied in the estimation by the scheme when producing our bootstrap-based inference.
+chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariables}. We account for the sampling variation implied in the estimation by the (IPW) scheme when producing our bootstrap-based inference.
 
 \noindent \textbf{[JJH: Is this still valid?] [JLG: Yes. Please see Appendix~\ref{appendix:bvariables}. It contains the discussion on how we select control variables when estimating the IPW and when controlling for background variables when estimating treatment effects. The discussion on background variables to produce the forecasts is separate.]}\\
 
 \subsection{Incomplete Data}
 \label{app:method_noobs}
 
-\noindent We do not observe life-cycle profiles for outcomes that are crucial to evaluate the effect of ABC/CARE. The three main examples are parental income, subject labor income, and public-transfer income. The importance of the first one is that ABC/CARE, in practice, had a childcare element. It relaxed the time constraints of the mothers of the children, who therefore were able to study or work more. Potentially, this shifted the life-cycle profile of the mothers, either by having more schooling or more working experience. We estimate these profiles. Similarly, a comprehensive evaluation accounts for the effect in the whole life-cycle profile of subject labor income and public-transfer income. We follow the strategy in Section~\ref{section:cbamethodology} to identify and estimate these profiles, i.e. to produce forecasts.
+\noindent We do not observe life-cycle profiles for outcomes that are crucial to evaluate the effect of ABC/CARE. The three main examples are parental income, subject labor income, and public-transfer income. The importance of the first one is that ABC/CARE, in practice, had a childcare element. It relaxed the time constraints of the mothers of the treated children, who therefore were able to study or to work more. Potentially, this shifted the life-cycle profile of the mothers, either by allowing her to have more schooling or more working experience. We estimate these profiles. Similarly, a comprehensive evaluation accounts for the effect on the whole life-cycle profile of subject labor income and public-transfer income. We follow the strategy in Section~\ref{section:cbamethodology} to identify and estimate these profiles, i.e. to produce forecasts.
 
 \subsubsection{Subject and Transfer Income}
 
-\noindent We observe labor income and public-transfer income of subjects are only observed at ages 21 and 30.\footnote{At age 21, public-transfer income includes Aid to Families with Dependent Children (AFDC) subsidies, food stamps, survivor benefits, disability benefits, social security, rent subsidies, and fuel subsidies. At age 30, public-transfer income includes food stamps, welfare, housing assistance, workman's compensation, disability, social security, supplemental security income, unemployment benefits, worker's compensation insurance, fuel subsidies, educational and aid grants, and other forms of welfare.} 
+\noindent Labor income and public-transfer income of subjects are only observed at ages 21 and 30.\footnote{At age 21, public-transfer income includes Aid to Families with Dependent Children (AFDC) subsidies, food stamps, survivor benefits, disability benefits, social security, rent subsidies, and fuel subsidies. At age 30, public-transfer income includes food stamps, welfare, housing assistance, workman's compensation, disability, social security, supplemental security income, unemployment benefits, worker's compensation insurance, fuel subsidies, educational and aid grants, and other forms of welfare.} For all other ages, we produce a forecast (either an interpolation or an extrapolation).
 
 \subsubsection{Parental Income}
 
@@ -53,15 +53,17 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \subsubsection{Auxiliary Datasets}
 
-\noindent We rely on the on the following datasets to estimate life-cycle profiles. We use this data in a very similar way to estimate the three life-cycle profiles of interest.\\
+\noindent We rely on the following datasets to estimate life-cycle profiles. We use this data in a very similar way to estimate the three life-cycle profiles of interest. For subject's labor income and parental labor income we use the exact same data. Two differences are: (i) for parental income, we need to produce a life-cycle profile from where the child is zero years old to when her mother is 65 (age at which we assume she retires); (ii) for parental income, we observe more years, and therefore need to produce a forecast for less time points.
+
+\noindent A brief description of the auxiliary or non-experimental datasets and their use follows.\\
 
 \noindent \textbf{The National Longitudinal Survey of Youth (NLSY79)} is a longitudinal survey beginning in 1979 that follows individuals born between 1957 and 1964. The initial interview included 12,686 respondents aged 14 to 22. The survey was designed to include 6,111 individuals representing the non-institutionalized civilian population, a supplemental sample of 5,295 civilian Hispanics, Latinos, blacks, non-blacks/non-Hispanics, and economically disadvantaged youth, and a sample of 1,280 who served in the military as of September 30, 1978. When appropriately weighted, the NLSY79 is nationally representative of the youth living in the U.S. on January 1, 1979. We include individuals from all three subsamples in our analysis. \\
 
-\noindent The NLSY79 collected data on labor market participation, education, family background, family life, health issues, assets and income, government program participation, and measures of cognitive skills. We use these data to estimate for our estimation from ages 31 to 67.
+\noindent The NLSY79 collected data on labor market participation, education, family background, family life, health issues, assets and income, government program participation, and measures of cognitive skills. We use these data for our estimation from ages 31 to 67.\\
 
 \noindent We restrict the NLSY79 sample to individuals with labor income less than \$300,000 (2014 USD) at any given year. With the mean labor income (2014 USD) in the ABC/CARE sample being \$12,232 at age 21 and \$32,782 at age 30, and the maximum reported being \$189,938, the cut-off we impose on the auxiliary data is high enough so that everyone in the ABC/CARE sample is represented, yet low enough to exclude high-earning individuals in the auxiliary sample that do not reflect the ABC/CARE sample well. \\
 
-\noindent We do not impose a restriction on birth year on the NLSY79 as all respondents are age between 47 and 55 at the time of the last interview (conducted in 2012). This age range is within the 31--67 range for which we extrapolate the income of the ABC/CARE subjects. \\
+\noindent We do not impose a restriction on birth year on the NLSY79 as all respondents are aged between 47 and 55 at the time of the last interview (conducted in 2012). This age range is within the 31--67 range for which we extrapolate the income of the ABC/CARE subjects. \\
 
 \noindent Given the biennial nature of the NLSY79, we only observe each subject at either odd or even ages. Not only does this reduce the size of the sample on which we fit our prediction model at each age, but it can introduce biases associated with the odd-aged and even-aged cohorts. To address this issue, we perform a linear interpolation on the variables in the NLSY79 data that enter into our prediction model. This allows us to estimate our prediction model on all subjects of the NLSY79 satisfying our restrictions at every age. \\
 
@@ -69,7 +71,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \noindent Similar to the NLSY, the CNLSY collected data on cognitive ability, motor and social development, home environment, health information, education, attitudes, employment, income, family decisions, and more. We use these data to estimate a prediction model for subject income for ages 22 through 29. \\
 
-\noindent As we did with the NLSY, we restrict the CNLSY sample to individuals with labor income less than \$300,000 (2014 USD) at any given year. In addition to this, we limit the sample to subjects born between 1978 and 1983. Because the CNLSY data extend to 2012, this implies that we use the most recent data from the CNLSY in which individuals are aged 29 to 34. Finally, given the biennial nature of the survey, we perform a linear interpolation on the variables that enter into our prediction model. This allows us to use as much of the CNLSY data as possible at every age when interpolating subject income. \\
+\noindent As we did with the NLSY, we restrict the CNLSY sample to individuals with labor income less than \$300,000 (2014 USD) at any given year. In addition to this, we limit the sample to subjects born between 1978 and 1983. Because the CNLSY data extends to 2012, this implies that we use the most recent data from the CNLSY in which individuals are aged 29 to 34. Finally, given the biennial nature of the survey, we perform a linear interpolation on the variables that enter into our prediction model. This allows us to use as much of the CNLSY data as possible at every age when interpolating subject income. \\
 
 \noindent \textbf{The Panel Survey of Income Dynamics (PSID)} is a longitudinal household survey containing between 5,000 and 8,500 families in each wave. It began as a yearly survey in 1968 and has been fielded biennially since 1996. When appropriately weighted, the PSID is designed to be representative of U.S. households. The PSID provides extensive information concerning demographics, economic outcomes, health outcomes, marriage and fertility, and more. In addition to using the PSID to forecast future earnings of ABC/CARE subjects, we use the PSID to forecast health outcomes. See Appendix \ref{section:data_psid} for details on how the PSID relates to health outcomes. \\
 
@@ -77,25 +79,31 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \subsubsection{Variables Used to Forecast}
 
-\noindent We base our forecasts on three types of variables. Variables that could have not been affected by treatment, or pre-treatment variables. We divide these into two categories, pre-treatment variables used in the randomization protocol of ABC/CARE and pre-treatment variables not used in this protocol. We denote this by $Z$ and $W$, respectively. We let $X$ denote denote the variables that could have been affected by treatment. We call $X,W,Z$ forecasting variables.\\
+\noindent We base our forecasts on three types of variables. We call $X,W,Z$ forecasting variables. Variables that could have not been affected by treatment, or pre-treatment variables. We divide these into two categories, pre-treatment variables used in the randomization protocol of ABC/CARE and pre-treatment variables not used in this protocol. We denote this by $Z$ and $W$, respectively. We let $X$ denote denote the variables that could have been affected by treatment.\\
 
-\noindent At each age, our forecast is a function of the forecasting variables.\footnote{As we explain in the main paper, t is also possible to let our forecast in $t$ depend on our forecast in $t-1$. Suppose we want to forecast $Y_{t}$. We can base our forecast not only on $X$ but also on our forecast of $Y_{t-1}$.} Our forecast is based on identifying and estimating a relationship between the outcome we want to forecast at time $t$, $Y_{t}$, in the non-experimental samples and then use this relationship in the experimental sample.\\
+\noindent At each age, our forecast is a function of the forecasting variables.\footnote{As we explain in the main paper, it is also possible to let our forecast in $t$ depend on our forecast in $t-1$. Suppose we want to forecast $Y_{t}$. We can base our forecast not only on $X,W,Z$ but also on our forecast of $Y_{t-1}$.} Our forecast is based on identifying and estimating a relationship between the outcome we want to forecast at time $t$, $Y_{t}$, in the non-experimental samples and then using this relationship in the experimental sample.\\
 
-\noindent Any candidate to be a forecasting variables has two satisfy three restrictions: (i) it has to be available in the experimental and non-experimental samples; (ii) it has to have predictive power on the forecasted outcome. The variables satisfying the first restriction are: an indicator variables for being male and being black ($Z$); mother's education ($W$); PIAT scores at ages 5-7;\footnote{We take the percentiles of the PIAT average from ages 5 to 7 in the experimental and non-experimental samples.} years of education at age 30; labor income at ages 21 and 30; and BMI at age 34 ($X$).\\
+\noindent To be considered a forecasting variable, the variable must satisfy three restrictions: (i) it has to be available in the experimental and non-experimental samples; (ii) it has to have predictive power on the forecasted outcome; (iii) a common support assumption between the experimental and non-experimental datasets needs to be satisfied, as we formalize in Section~\ref{section:methodology}.\\
+
+\noindent For a variable to satisfy restrictions (i) and (ii), it needs to be the case not only that the variable is available in the non-experimental sample but also that the survey question leading to it was introduced far enough back in time for us to observe it in a range that is common to the range in which we observe the variables in the experimental sample. To illustrate this, consider the case of body-mass index in the PSID. Survey questions leading to its availability were introduced in the late 1990s. The sample for whom the question was introduced, however, does not span enough observations for its support to cover the support of the experimental sample.\\
+
+\noindent An alternative we follow to lower this problem is to pool diverse auxiliary datasets to cover the support in the experimental dataset.\\
+
+\noindent The variables satisfying the first restriction are: indicator variables for being male and being black ($Z$); mother's education ($W$); PIAT scores at ages 5-7;\footnote{We take the average of the PIAT across ages 5 to 7. For ABC, we observe this variable. For CARE, we use the mathematics section of the Woodcock Johnson at these same ages because we do not observe PIAT.} years of education at age 30; labor income at ages 21 and 30; and BMI at age 34 ($X$). We provide tests for restrictions (i) and (ii) next and then discuss potential sensitivity to the choice of these variables.
 
 \subsubsection{Common Support}
 
-\noindent As we explain in the text, we not only require the forecasting variables to satisfy restriction (i) above. We \textbf{assume common support} between these auxiliary datasets and the analysis sample. This is required in order for us to reliably use external data to provide forecast for the ABC/CARE samples. Figure~\ref{fig:support} validates this assumption by displaying the overlapping support sets of ABC/CARE and our auxiliary data for the variables used to interpolate and extrapolate earnings.\\
+\noindent We \textbf{assume common support} between these auxiliary datasets and the analysis sample. This is required in order for us to reliably use external data to provide forecast for the ABC/CARE samples. Figure~\ref{fig:support} validates this assumption by displaying the overlapping support sets of ABC/CARE and our auxiliary data for the variables used to interpolate and extrapolate earnings.\footnote{For the male and black indicators, we do not provide evidence of common support. All three non-experimental samples have vast numbers of males, females, and black individuals to cover the support in the experimental samples.}\\
 
 \begin{figure}[H]
 		\caption{Support of ABC/CARE and Auxiliary Data} \label{fig:support}
-	\begin{subfigure}[h]{0.9\textwidth}
+	\begin{subfigure}[h]{0.8\textwidth}
 	\centering
 	\caption{Average PIAT Math Scores, Ages 5--7} \label{fig:support_math}
 	\includegraphics[width=\textwidth]{AppOutput/Methodology/support_math.eps}
 	\end{subfigure}
 	
-	\begin{subfigure}[h]{0.9\textwidth}
+	\begin{subfigure}[h]{0.8\textwidth}
 	\centering
 	\caption{Mother's Years of Education} \label{fig:support_meduc}
 	\includegraphics[width=\textwidth]{AppOutput/Methodology/support_momed.eps}
@@ -111,13 +119,13 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \begin{figure}[H]
 		\ContinuedFloat
-	\begin{subfigure}[h]{0.9\textwidth}
+	\begin{subfigure}[h]{0.8\textwidth}
 	\centering
 	\caption{Subject's Years of Education} \label{fig:support_educ}
 	\includegraphics[width=\textwidth]{AppOutput/Methodology/support_educ.eps}
 	\end{subfigure}
 	
-	\begin{subfigure}[h]{0.9\textwidth}
+	\begin{subfigure}[h]{0.8\textwidth}
 	\centering
 	\caption{Income at Age 21} \label{fig:support_inc21}
 	\includegraphics[width=\textwidth]{AppOutput/Methodology/support_inc21.eps}
@@ -128,14 +136,14 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \begin{figure}[H]
 	\ContinuedFloat
 	
-	\begin{subfigure}[h]{0.9\textwidth}
+	\begin{subfigure}[h]{0.8\textwidth}
 	\centering
 	\caption{Income at Age 30} \label{fig:support_inc30}
 	\includegraphics[width=\textwidth]{AppOutput/Methodology/support_inc30.eps}
 	\end{subfigure}
 
 	
-	\begin{subfigure}[h]{0.9\textwidth}
+	\begin{subfigure}[h]{0.8\textwidth}
 	\centering
 	\caption{Body Mass Index, Age 34} \label{fig:support_bmi}
 	\includegraphics[width=\textwidth]{AppOutput/Methodology/support_bmi.eps}
@@ -145,7 +153,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \subsubsection{Predictive Power}
 
-\noindent We present evidence on the second restriction next. In both the non-experimental and experimental samples, we observe transfer and subject labor income at ages 21 and 30. We test the correlation between these two variables the forecasting variables, $X,W,Z$, in both samples with the following idea. The better $X,W,Z$ predict $Y$ both in the experimental and the non-experimental samples, the more precise the forecast is.\footnote{Obviously, we exclude labor income at age 21(30) when testing the predictive power of labor income at age 21(30).} The results of this exercise are in Tables~\ref{table:predpsid} to \ref{table:predabc}. 
+\noindent We present evidence on the second restriction next. Tables~\ref{table:predpsid} to \ref{table:predcnlsy} show that, in each of the auxiliary samples that we use, the forecasting variables $X,W,Z$ are strong predictors of labor income at age 30. We present this evidence at age 30 both for brevity and to compare the predictive power of $X,W,Z$ on the outcomes we consider in the ABC/CARE sample.
 
 \begin{table}[H] 
 \begin{threeparttable}
@@ -155,7 +163,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \input{output/psid_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: .
+\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -168,7 +176,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \input{output/nlsy_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: .
+\item Note: Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -181,7 +189,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \input{output/cnlsy_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: .
+\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. BMI stands for body-mass index. PIAT (5-7) is the average of the PIAT mathematics score from ages 5 to 7. Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -194,14 +202,70 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \input{output/abc_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: .
+\item Note: Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. BMI stands for body-mass index. PIAT (5-7) is the average of the PIAT mathematics score from ages 5 to 7. For CARE children, we use the mathematics section of the Woodcock Johnson at these same ages because we do not observe PIAT Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+%%%%
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Predictors of Transfer Income at Age 30, PSID}
+\label{table:predpsid}
+\centering 
+\input{output/psid_predict_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: All columns display regressions of transfer income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Predictors of Transfer Income at Age 30, NLSY79}
+\label{table:prednlsy}
+\centering 
+\input{output/nlsy_predict_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Note: All columns display regressions of transfer income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Predictors of Transfer Income at Age 30, CLSY}
+\label{table:predcnlsy}
+\centering 
+\input{output/cnlsy_predict_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: All columns display regressions of transfer income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. BMI stands for body-mass index. PIAT (5-7) is the average of the PIAT mathematics score from ages 5 to 7. Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Predictors of Transfer Income at Age 30, ABC/CARE}
+\label{table:predabc}
+\centering 
+\input{output/abc_predict_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Note: All columns display regressions of transfer income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. BMI stands for body-mass index. PIAT (5-7) is the average of the PIAT mathematics score from ages 5 to 7. For CARE children, we use the mathematics section of the Woodcock Johnson at these same ages because we do not observe PIAT Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 \subsubsection{Sensitivity Analysis}
 
-\noindent An immediate route of inquire is the sensitivity of our forecasts to the use of different forecasting variables. We reproduce three exercises to analyze this for labor income: (i) our baseline forecast, which is based on $X,W,Z$ and the lagged value of the forecasted labor income, i.e. at time $t$ we base the forecast on $X,W,Z$ and (forecasted) labor income at $t-1$; (ii) the same as (i) but without using lagged labor income; (iii) the same as (i) but without using $W,Z$; (iv) the same as (i) but without using $X$. The results are in Figures~\ref{fig:lbaincome1} to \ref{fig:lbaincome4}.
+\noindent An immediate route of inquiry is the sensitivity of our forecasts to the use of different forecasting variables. We reproduce three exercises to analyze this for labor income: (i) our baseline forecast, which is based on $X,W,Z$ and the lagged value of the forecasted labor income, i.e. at time $t$ we base the forecast on $X,W,Z$ and (forecasted) labor income at $t-1$; (ii) the same as (i) but without using lagged labor income; (iii) the same as (i) but without using $W,Z$; (iv) the same as (i) but without using $X$.\\
+
+\noindent \textbf{[JLG: work in progress.]}
 
 \paragraph{Health Costs}
 
@@ -233,12 +297,14 @@ to estimate the treatment effect on the cost of criminal activity at every age f
 
 \noindent All outcomes of the parents and subjects that we observe as having been affected by the program are treated as benefits. For this to make sense, we reverse the sign of the monetized effect of the program on specific outcomes. Costs of ABC/CARE consist only of the initial program costs from ages 0 to 5. Table \ref{table:bc_comp} provides a full list of the benefits and costs of ABC. \\
 
-\noindent We take the sum of the treatment effects on each component of the benefits to be the total benefit, $B_t$, of the ABC/CARE program (see Appendix \ref{app:method_identify} on how we estimate these treatment effects). This includes parental income, subject labor income, and QALYs (quality-adjusted life years). Treatment effects on costs borne by the subject or society have their signs reversed and are included as benefits. We do this for subject public-transfer income, education costs, crime costs, control substitution costs, and health costs. To account for deadweight loss, we impose a marginal welfare cost of 50\% by multiplying public costs by a factor of $1.5$.\footnote{There is no clear consensus on the marginal welfare cost of tax revenue. However, most researchers estimate the welfare cost per tax dollar to be between \$0.30 and \$0.50. See \citet{Feldstein_1999_REStat}, \citet{Heckman_Smith_1998_evaluating}, and \citet{Browning_1987_AER}.} Public costs include education costs up until age 17, jail costs, justice system costs, Medicare costs, Medicaid costs, disability insurance claims, social security claims, and supplemental security income. \\
+\noindent We take the sum of the treatment effects on each component of the benefits to be the total benefit, $B_t$, of the ABC/CARE program. This includes parental income, subject labor income, and QALYs (quality-adjusted life years). Treatment effects on costs borne by the subject or society have their signs reversed and are included as benefits. We do this for subject public-transfer income, education costs, crime costs, control substitution costs, and health costs. To account for deadweight loss, we impose a marginal welfare cost of 50\% by multiplying public costs by a factor of $0.5$ when they are a direct transfer from the government to the individuals\footnote{There is no clear consensus on the marginal welfare cost of tax revenue. However, most researchers estimate the welfare cost per tax dollar to be between \$0.30 and \$0.50. See \citet{Feldstein_1999_REStat}, \citet{Heckman_Smith_1998_evaluating}, and \citet{Browning_1987_AER}.} When the public costs are not a direct transfer from the government to the individuals, we multiply them by a factor of $1.5$.\\
+
+\noindent The principle for multiplying the public costs is the following. We evaluate the social benefits of ABC/CARE and do not place a value on who receives the money. The only social cost from a direct transfer is the dead-weight loss that it generates: $50\%$ of its total value. We do not consider education and criminal costs a direct transfer. Thus, we multiply them by a factor of $1.5$: the value of their cost plus $50\%$ of the value of their cost (the dead-weight loss implied in raising the public revenue to fund them). Table \ref{table:bc_comp} lists the factor we use to multiply each cost to account for its implied dead-weigh loss.\\
 
 \noindent Having constructed our cash flow, $\mathbb{E} (B_t - C_t)$, solving for $\rho$
-reduces to an algebraic exercise. \\
+reduces to an algebraic exercise.\\
 
-\noindent As described in Appendix \ref{app:method_identify}, we estimate the treatment effect on each
+\noindent We estimate the treatment effect on each
 component of the benefits and costs at time $t$ for the pooled, male, and
 female samples. We do this for 1,000 bootstrap resamples of the original ABC/CARE data.
 In the case of health costs and subject income, for which we employ auxiliary datasets to
@@ -251,9 +317,6 @@ This is how we form our empirical bootstrap distribution of the internal rate of
 We take the mean of the distributions to be the point estimates, and we take the standard deviations
 to be the standard errors. To construct the 80\% confidence intervals, we take the 10\textsuperscript{th}
 and 90\textsuperscript{th} quantiles of each bootstrap distribution. \\
-
-\noindent \textbf{[JJH: What is the basis for the 0.5 in public-transfer income? Why the 1.5?]} \\
-\noindent \textbf{[JLG: basis is \citet{Browning_1987_AER,Heckman_Smith_1998_evaluating,Heckman_LaLonde_etal_1999_active,Feldstein_1999_REStat}, which is the basis for the Perry CBA as well.]}
 
 % We let $T = 79$. In Appendix \ref{app:method_identify}
 % we explain how we can estimate the summand of the numerator at every period $t$, which
@@ -317,18 +380,18 @@ and 90\textsuperscript{th} quantiles of each bootstrap distribution. \\
 \noindent where we let $T = 79$, define $B_t$ and $C_t$ to be the total benefits and costs of the
 program at time $t$, and define $\mathbb{E}(.)$ to be the sample mean. See Table \ref{table:bc_comp} for a detailed list of the components
 to the benefits and costs of ABC/CARE . We take the sum of the treatment effects on each component
-of the benefits to be the total benefits of the ABC/CARE programs (see Appendix~\ref{app:method_identify} on how we estimate these treatment effects). \\
+of the benefits to be the total benefits of the ABC/CARE programs. \\
 
 \noindent To account for deadweight loss, we assume a marginal welfare cost of 50\% by multiplying
 public costs components by a factor of $1.5$. For the same reason, we multiply public-transfer
-income by a factor of 0.5 \textbf{[JJH: Why? What principle?]}\textbf{[JLG: See previous comment. We base this on Perry CBA.]}. We discount each component of the benefits and costs
+income by a factor of 0.5. We discount each component of the benefits and costs
 by 3\% every year to obtain their net present value at birth. We then sum up the discounted
 components of the benefits and find the ratio with the discounted costs. \\
 
-\noindent As described in Appendix \ref{app:method_identify}, we estimate the treatment effect on each
+\noindent We estimate the treatment effect on each
 component of the benefits and costs at time $t$ for the pooled, male, and
 female samples. We do this for 1,000 bootstrap resamples of the original ABC/CARE data.
-In the case of health costs and subject income, for which we employ auxiliary datasets to
+In the case of health and subject income, for which we employ auxiliary datasets to
 estimate the treatment effects, we also obtain 1,000 bootstrap estimates from the auxiliary data
 for every ABC/CARE bootstrap resample, resulting in a total of 1,000,000 estimates.
 By reusing each bootstrap estimate of the treatment effect on outcomes that do not require any auxiliary data
