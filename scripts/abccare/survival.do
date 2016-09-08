@@ -61,19 +61,25 @@ rename agedied2 agedied
 replace died = 1 if agedied <= age & age != . & agedied != .
 replace died = 0 if died == .
 
-collapse (mean) died, by(age R male)
 replace died = 1 - died
+collapse (mean) died (semean) sedied = died, by(age R male)
+gen diedmin = died - sedied
+gen diedmax = died + sedied
 
 cd $output
 keep if age >= 30
 foreach sex of numlist 0 1 {
 	#delimit
-	twoway (lowess died age if R == 0 & male == `sex', msymbol(square)  mfcolor (gs0) mlcolor(gs0) msize(large) connect(l) lwidth(vthick) lpattern(solid) lcolor(gs4))
-	       (lowess died age if R == 1 & male == `sex', msymbol(circle)  mfcolor (gs5) mlcolor(gs5) msize(large) connect(l) lwidth(vthick) lpattern(dash)  lcolor(gs8))
+	twoway (lowess died    age if R == 0 & male == `sex', lwidth(1.2)   lpattern(solid) lcolor(gs0) )
+	       (lowess died    age if R == 1 & male == `sex', lwidth(1.2)   lpattern(solid) lcolor(gs9))
+	       (lowess diedmin age if R == 1 & male == `sex', lpattern(dash) lcolor(gs9) )
+	       (lowess diedmax age if R == 1 & male == `sex', lpattern(dash) lcolor(gs9) )
+	       (lowess diedmin age if R == 0 & male == `sex', lpattern(dash) lcolor(gs0) )
+	       (lowess diedmax age if R == 0 & male == `sex', lpattern(dash) lcolor(gs0) )
 		, 
-			  legend(label(1 Control) label(2 Treatment))
-			  xlabel(30[10]80, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
-			  xtitle(Age) ytitle("")
+			  legend(rows(1) order(2 1 5) label(1 "Control") label(2 "Treatment") label(5 "+/- s.e.") size(small))
+			  xlabel(30[5]80, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
+			  xtitle(Age) ytitle("Probability of Being Alive")
 			  graphregion(color(white)) plotregion(fcolor(white));
 	#delimit cr 
 	graph export diedlcycle_s`sex'.eps, replace

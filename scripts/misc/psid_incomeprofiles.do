@@ -30,7 +30,7 @@ global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 cd $datapsid
 use psid-base.dta, clear
-keep id male black birthyear race age* edu inc_labor* lweight*
+keep id male black birthyear race age* edu bmi* m_edu inc_labor* lweight*
 rename edu eduever
 
 reshape long age inc_labor lweight, i(id) j(year)
