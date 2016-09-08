@@ -47,7 +47,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \noindent We use the same methodology to identify and estimate the life-cycle profile of parental income as the one we use for subject and transfer income. There is one difference to note. For subject and transfer income, we initialize the forecast at age 21 and go all the way to age 65---assumed age of retirement. For parental income, we initialize the forecast at age 0, in which we observe the outcome. For ages 2, 3, 4, 5, 9, 12, and 15 we do not use an estimate because we observe the data.
 
-\textbf{[JJH: Jorge, can we not do better? Impute profiles using PSID?]}\textbf{[JLG: the reason for doing a linear interpolation is that the support in the PSID doesn't let us do much here. The information on the parents is not very complete. PSID of course surveys parents and children, but the matches here are adults and their parents barely appear in PSID. In other words, we are matching the ABC/CARE subjects to individuals who are not young enough as for us to obtain a good income profile of their parents.  We have eight observations between ages 0 and 15 and we are relying on that now.]} \textbf{[JJH: No, you are missing my point. Once the woman works she continues to work -at age 35 or so they have 25-30 years of work life left. Right now we underestimate parental income.] [JLG: I agree. I'm sorry for the confusion but the argument to follow up to age 15 only was other (that the child may not benefit from this given he might have moved out or so). The argument of women's wage growth was only recently brought up. I will produce a forecast with PSID, and details what are the support issues.]}\\
+\textbf{[JJH: Jorge, can we not do better? Impute profiles using PSID?]}\textbf{[JLG: the reason for doing a linear interpolation is that the support in the PSID doesn't let us do much here. The information on the parents is not very complete. PSID of course surveys parents and children, but the matches here are adults and their parents barely appear in PSID. In other words, we are matching the ABC/CARE subjects to individuals who are not young enough as for us to obtain a good income profile of their parents.  We have eight observations between ages 0 and 15 and we are relying on that now.]} \textbf{[JJH: No, you are missing my point. Once the woman works she continues to work -at age 35 or so they have 25-30 years of work life left. Right now we underestimate parental income.] [JLG: I agree. I'm sorry for the confusion but the argument to follow up to age 15 only was other (that the child may not benefit from this given he might have moved out or so). The argument of women's wage growth was only recently brought up. I'm producing a forecast.]}\\
 
 \subsection{Auxiliary Datasets and Variables Used to Forecast}
 
@@ -145,7 +145,59 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \subsubsection{Predictive Power}
 
-\noindent We present evidence on the second restriction next. In both the non-experimental and experimental samples, we observe transfer and subject labor income at ages 21 and 30. We test the correlation between these two variables the forecasting variables, $X,W,Z$, in both samples with the following idea. The better $X,W,Z$ predict $Y$ both in the experimental and the non-experimental samples, the more precise the forecast is.\footnote{Obviously, we exclude labor income at age 21(30) when testing the predictive power of labor income at age 21(30).} The results of this exercise are in Table~\ref{table:predict}. 
+\noindent We present evidence on the second restriction next. In both the non-experimental and experimental samples, we observe transfer and subject labor income at ages 21 and 30. We test the correlation between these two variables the forecasting variables, $X,W,Z$, in both samples with the following idea. The better $X,W,Z$ predict $Y$ both in the experimental and the non-experimental samples, the more precise the forecast is.\footnote{Obviously, we exclude labor income at age 21(30) when testing the predictive power of labor income at age 21(30).} The results of this exercise are in Tables~\ref{table:predpsid} to \ref{table:predabc}. 
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Predictors of Labor Income at Age 30, PSID}
+\label{table:predpsid}
+\centering 
+\input{output/psid_predict_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: .
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Predictors of Labor Income at Age 30, NLSY79}
+\label{table:prednlsy}
+\centering 
+\input{output/nlsy_predict_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: .
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Predictors of Labor Income at Age 30, CLSY}
+\label{table:predcnlsy}
+\centering 
+\input{output/cnlsy_predict_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: .
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Predictors of Labor Income at Age 30, ABC/CARE}
+\label{table:predabc}
+\centering 
+\input{output/abc_predict_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: .
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
 
 \subsubsection{Sensitivity Analysis}
 
