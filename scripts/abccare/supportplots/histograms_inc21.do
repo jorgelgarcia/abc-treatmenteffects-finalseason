@@ -172,7 +172,7 @@ forvalues j = 1/`N' {
 }
 
 * generate x axis label using tricky method
-gen xlab = "Labor Income, Age 30"
+gen xlab = "Labor Income, Age 21"
 
 di "`dataobs'"
 di "`customlab'"
@@ -187,7 +187,7 @@ graph bar pdfabc pdfcnlsy,
 	bar(1, color(gs1)) 
 	bar(2, color(gs10)) 
 
-	legend(label(1 ABC/CARE (N = `abc_n')) label(2 cNLSY (N = 1,890)) size(small) rows(1))
+	legend(label(1 ABC/CARE (N = `abc_n')) label(2 CNLSY (N = 1,890)) size(small) rows(1))
 	ylabel(, labsize(small)  grid angle(h) glcolor(gs14))
 	ytitle(Density, size(small))
 	graphregion(color(white)) plotregion(fcolor(white))
