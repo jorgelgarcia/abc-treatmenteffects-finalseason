@@ -91,7 +91,7 @@ egen piatcare = rowmean(wj_math5y6m wj_math6y wj_math7y6m) if program == "care"
 gen     piatmath = piatabc  if program == "abc"
 replace piatmath = piatcare if program == "care" 
 
-reg si30y_inc_labor male m_ed1y6m, robust
+reg si30y_inc_labor male m_ed0y, robust
 est sto abcZ
 
 reg si30y_inc_labor male m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi, robust
