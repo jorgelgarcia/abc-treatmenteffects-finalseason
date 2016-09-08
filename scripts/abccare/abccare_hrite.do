@@ -39,11 +39,11 @@ gen inter = R*hrabc_index
 foreach var of varlist iq5y years_30y si30y_works_job {
 	reg `var' R if  male == 1
 	est sto `var'1
-	reg `var' R inter if male == 1
+	reg `var' R hrabc_index inter if male == 1
 	est sto `var'i1
 	reg `var' R if  male == 0
 	est sto `var'0
-	reg `var' R inter if male == 0
+	reg `var' R hrabc_index inter if male == 0
 	est sto `var'i0
 }
 
