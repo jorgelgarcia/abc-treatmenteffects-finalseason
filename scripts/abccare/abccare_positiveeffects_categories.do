@@ -106,13 +106,14 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 
 	// plot all positive treatment effects
 	# delimit
-	twoway (bar `var'_point catfemale if male == 0 & catfemale <= 20, color(gs6))
-	       (bar `var'_point catmale   if male == 1 & catmale   <= 21, color(black))
+	twoway (bar `var'_point catfemale if male == 0 & catfemale <= 20, color(gs8))
+	       (bar `var'_point catmale   if male == 1 & catmale   <= 21, color(gs4))
 	       (rcap `var'_max `var'_min catfemale if male == 0 & catfemale <= 20, lcolor(gs0))
-	       (rcap `var'_max `var'_min catmale   if male == 1 & catmale   <= 21, lcolor(gs0)),
+	       (rcap `var'_max `var'_min catmale   if male == 1 & catmale   <= 21, lcolor(gs0))
+	       (function y = 50, range(-1.5 21.5) lwidth(thick) lcolor(gs0)),
 	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
 			  xlabel($xlabels1, angle(45) noticks grid glcolor(white)) 
-			  ylabel(0[20]100, angle(h) glcolor(gs14))
+			  ylabel(0[30]30 50 70[30]100, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("% of Outcomes with Positive TE", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
@@ -121,13 +122,14 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 	
 	// plot all positive treatment effects
 	# delimit
-	twoway (bar `var'_point catfemale if male == 0 & catfemale > 20, color(gs6))
-	       (bar `var'_point catmale   if male == 1 & catmale   > 21, color(black))
+	twoway (bar `var'_point catfemale if male == 0 & catfemale > 20, color(gs8))
+	       (bar `var'_point catmale   if male == 1 & catmale   > 21, color(gs4))
 	       (rcap `var'_max `var'_min catfemale if male == 0 & catfemale > 20, lcolor(gs0))
-	       (rcap `var'_max `var'_min catmale   if male == 1 & catmale   > 21, lcolor(gs0)),
+	       (rcap `var'_max `var'_min catmale   if male == 1 & catmale   > 21, lcolor(gs0))
+	       (function y = 50, range(25.5 42.5) lwidth(thick) lcolor(gs0)),
 	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
 			  xlabel($xlabels2, angle(45) noticks grid glcolor(white)) 
-			  ylabel(0[20]100, angle(h) glcolor(gs14))
+			  ylabel(0[30]30 50 70[30]100, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("% of Outcomes with Positive TE", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
