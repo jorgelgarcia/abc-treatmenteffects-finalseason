@@ -48,4 +48,4 @@ foreach var of varlist iq5y years_30y si30y_works_job {
 }
 
 cd $output
-outreg2 [iq5y1 iq5yi1 years_30y1 years_30yi1 si30y_works_job1 si30y_works_jobi1 iq5y1 iq5yi0 years_30y0 years_30yi0 si30y_works_job0 si30y_works_jobi0] using abccare_hrites, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 nonotes
+outreg2 [iq5y1 iq5yi1 years_30y1 years_30yi1 si30y_works_job1 si30y_works_jobi1 iq5y0 iq5yi0 years_30y0 years_30yi0 si30y_works_job0 si30y_works_jobi0] using abccare_hrites, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 nonotes
