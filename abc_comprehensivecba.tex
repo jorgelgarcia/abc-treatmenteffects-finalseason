@@ -377,12 +377,8 @@ Figure~\ref{fig:control-sub} shows the quality of the interpolation and extrapol
 		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s0.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: Panels (a) and (c) display the forecasted labor income profiles for ABC/CARE males and females by treatment status, based on forecasts that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (cNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
+Note: Panels (a) and (c) display the forecasted labor income profiles for ABC/CARE males and females by treatment status, based on forecasts that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
 \end{sidewaysfigure}
-
-\textbf{[JJH: We need a careful discussion of the forecasting variables used (what is reference?)] [JLG: To clarify the variables we use as X,W, I suggest adding the following as a footnote. ``In practice, we let $W$ = \{male indicator, black indicator, and mother's education\} and $X$ = \{PIAT scores from ages 5 to 7, years of education at age 30, and income at ages\}. We choose these variables based on availability across the experimental and non-experimental samples.'' In fact, if we keep the empirical application as it is now, we also need to specify that $X = X^t \ \forall t$. We can break this by including $Y_{t - 1}$ in $X^t$ but we would have serious variance issues because we are accounting for forecasting errors. Recall from Figure 6 that we are doing quite well in terms of forecast and its standard error. Please see a detailed answer I wrote to these and related questions you raised with respect to this issue in pages 61-62 of the Appendix.]}
-
-\textbf{[JLG: On a related note, I'm preparing the sensitivity study we agreed on with respect to the choice of control variables when calculating the treatment effects. You will see in tomorrow's round. The results are running.]}
 
 \subsection{Crime}  \label{sec:crime}
 
@@ -410,10 +406,6 @@ The methodology has five steps: (i) estimate age-by-age health state transition 
 
 Our microsimulation model starts the health predictions at age 30, with the information on observed characteristics available at this age. Restricting it to the individuals for whom we have information from the age-34 health follow-up allows us to account for components that are crucial for predicting health outcomes, such as the body mass index (BMI) and measures of diastolic and systolic health. The models predict the probability of being in any of the states in the horizontal axis of Table~\ref{table:transition} at age $a+1$ based on the state at age $a$, which is described by the vertical axis of the table.\footnote{In practice, the predictions are based on two-year lags, due to data limitations in the auxiliary sources we use to simulate the FAM. For example, if the individual is 30 (31) years old in the age-30 interview, we simulate the trajectory of her health status at ages 30 (31), 32 (33), 34 (35), and so on until her projected death.} Absorbing states are an exception. For example, heart disease at age $a$ does not enter in the estimation of transitions for heart disease at age $a+1$ because it is an absorbing state: once a person has heart disease, she carries it through the rest of her life.
 
-At each age, once we obtain the transition probability for each health outcome, we draw a Monte-Carlo simulation for each subject. Thus, each simulation depends on each individual's health history and on their particular characteristics. For every simulated trajectory of health outcomes, we predict the lifetime medical expenditure using the models estimated from the MEPS and the MCBS. We then obtain an estimate of the expected lifetime medical expenditure by taking the mean of each individual's simulated lifetime medical expenditure.
-
-The same procedure is applied to calculate quality-adjusted life years (QALYs).\footnote{A quality-adjusted life year (QALY) reweighs a year of life according to its quality given the burden of disease. A QALY of 1 denotes a year of life in the absence of disease (perfect health). The value of QALY for an individual in a given year is smaller than 1 when there is positive burden of disease, as worse health conditions imply lower QALYs. When an individual dies, her QALY equals zero. It is worth noting that there are extreme combinations of disease and disability that may generate negative QALYs, although this case is unusual.} We compute a QALY model based on the EQ-5D instrument, a widely-used Health-related Quality-of-life (HRQoL) measure, available in MEPS. We then estimate this model from the PSID.
-
 \begin{sidewaystable}[!htbp]
 \begin{threeparttable}
 \caption{Health State Transitions, Age $a$ as Predictor of Age $a+1$}\label{table:transition}
@@ -426,12 +418,46 @@ The same procedure is applied to calculate quality-adjusted life years (QALYs).\
 \end{threeparttable}
 \end{sidewaystable}
 
+At each age, once we obtain the transition probability for each health outcome, we draw a Monte-Carlo simulation for each subject. Thus, each simulation depends on each individual's health history and on their particular characteristics. For every simulated trajectory of health outcomes, we predict the lifetime medical expenditure using the models estimated from the MEPS and the MCBS. We then obtain an estimate of the expected lifetime medical expenditure by taking the mean of each individual's simulated lifetime medical expenditure.
+
+The same procedure is applied to calculate quality-adjusted life years (QALYs).\footnote{A quality-adjusted life year (QALY) reweighs a year of life according to its quality given the burden of disease. Suppose we assign a value of $\$150,000$ (2014 USD) to each years of life. A QALY of $\$150,000$ denotes a year of life in the absence of disease (perfect health). The value of QALY for an individual in a given year is smaller than $\$150,000$ when there is positive burden of disease, as worse health conditions imply lower QALYs. When an individual dies, her QALY equals zero. It is worth noting that there are extreme combinations of disease and disability that may generate negative QALYs, although this case is unusual.} We compute a QALY model based on the EQ-5D instrument, a widely-used Health-related Quality-of-life (HRQoL) measure, available in MEPS. We then estimate this model from the PSID. 
+
+QALYs are crucial to our estimations because they monetize the health of an individual at each age. Figure~\ref{fig:qalys} shows our estimation of QALYs together with a PSID comparison, in an analogous exercise to Figure~\ref{fig:labor-income-profiles}.\footnote{In our baseline estimation, we assume that each year of life is worth  $\$150,000$ (2014 USD). Our estimates are robust to substantial variation in this assumptions, as we show in Appendix~\ref{appendix:sensitivity}.} Although there is not a clear age-by-age treatment effect on QALYs, there is a significant difference in the accumulated present value of the QALYs between the treatment and the control groups. The QALYs for the control group correspond well to low-skilled individuals in the PSID.
+
 We estimate three models of medical spending: (i) Medicare spending (annual medical spending paid by parts A, B, and D of Medicare); (ii) out-of-pocket spending (medical spending paid directly by the individual); and (ii) all public spending other than Medicare. Each medical spending model is estimated through pooled weighted least squares regressions that include a person's demographics, economic status, current health, risk factors, and functional status as explanatory variables. The MCBS-based medical spending models also include lagged health because of the length of time for which MCBS subjects are observed.
 
 We also calculate medical expenditure before age 30. We combine the MEPS and retrospective information in the ABC/CARE interviews at ages 21 and 30 related to hospitalizations at ages 12 and 15 and births at age 15. In addition to this retrospective information, we use use individual and family demographics to predict medical expenditure models for each age.
 
-The first level of each model predicts the likelihood that the subject incurred any medical expenditure in the period. The second level predicts the medical expenditure for those with positive expenditures. \textbf{[JJH: Bias properties] [JJH: Do we have MEPS forecasts?] [JLG: I'm sorry, but they haven't sent me the results to produce this. I have everything to process them as soon as they send.]}
+The first level of each model predicts the likelihood that the subject incurred any medical expenditure in the period. The second level predicts the medical expenditure for those with positive expenditures.
 
+QALYs are crucial to our estimations because they monetize the health of an individual at each age. Figure~\ref{fig:qalys} shows our estimation of QALYs together with a PSID comparison, in an analogous exercise to Figure~\ref{fig:labor-income-profiles}.\footnote{In our baseline estimation, we assume that each year of life is worth  $\$150,000$ (2014 USD). Our estimates are robust to substantial variation in this assumption, as we show in Appendix~\ref{appendix:sensitivity}.} Although there is not a clear age-by-age treatment effect on QALYs, there is a significant difference in the accumulated present value of the QALYs between the treatment and the control groups. The QALYs for indivdiuals in the control group match the QALYs of low-skilled individuals in the PSID.
+
+\begin{sidewaysfigure}[!htbp]
+\centering
+\caption{Qality Adjusted Life Years}\label{fig:qalys}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Forecasted for ABC/CARE Males} \label{fig:qabcare1}
+		\includegraphics[width=\textwidth]{output/qalylcycle_s1.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{PSID, Disadvantaged Males} \label{fig:qpsid1}
+		\includegraphics[width=\textwidth]{output/psidqaly_s1.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Forecasted for ABC/CARE Females} \label{fig:qabcare0}
+		\includegraphics[width=\textwidth]{output/qalylcycle_s0.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{PSID, Disadvantaged Females} \label{fig:qpsid0}
+		\includegraphics[width=\textwidth]{output/psidqaly_s0.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: Panels (a) and (c) display the forecasted quality-adjusted life years (QALYs) for ABC/CARE males and females by treatment status, based on forecasts that combine data from the Panel Study of Income Dynamics (PSID), the Health Retirement Study, the Medical Expenditure Panel Survey (MEPS), and the Medicare Current Beneficiary Survey (MCBS). Panels (b) and (d) display the forecasted quality-adjusted life years for disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as being African American and having less than 12 years of education. QALYs are the quality-adjusted life years gain due to better health conditions\\
+\end{sidewaysfigure}
 
 \section{Cost/benefit Analysis} \label{section:cbaresults}
 
@@ -452,7 +478,7 @@ To construct cost-benefit estimates we (i) \textit{interpolate} components not o
 \input{Output/auxiliary.tex}
 \begin{tablenotes}
 \footnotesize
-Note: This table details the non-experimental data sources we use to interpolate and extrapolate the life-cycle benefits and costs of ABC/CARE. cNLSY: Children of the National Longitudinal Survey of the Youth 1979; NLSY79: National Longitudinal Survey of the Youth 1979; PSID: Panel Study of Income Dynamics; MEPS: Medical Expenditure Panel Survey; MCBS: Medicare Current Beneficiary Survey; HRS: Health and Retirement Study; NCDPS: North Carolina Department of Public Safety Data; NVS: National Crime Victimization Survey; NJRP: National Judicial Reporting Program; UCRS: Uniform Crime Reporting Statistics.
+Note: This table details the non-experimental data sources we use to interpolate and extrapolate the life-cycle benefits and costs of ABC/CARE. CNLSY: Children of the National Longitudinal Survey of the Youth 1979; NLSY79: National Longitudinal Survey of the Youth 1979; PSID: Panel Study of Income Dynamics; MEPS: Medical Expenditure Panel Survey; MCBS: Medicare Current Beneficiary Survey; HRS: Health and Retirement Study; NCDPS: North Carolina Department of Public Safety Data; NVS: National Crime Victimization Survey; NJRP: National Judicial Reporting Program; UCRS: Uniform Crime Reporting Statistics.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -472,7 +498,7 @@ It is important to note that although the net present values from the three comp
 \includegraphics[width=.7\columnwidth]{output/abccare_npvs3.eps}
 \floatfoot{
 \footnotesize
-Note: This figure displays the life-cycle net present values of the main components of the cost/benefit analysis of ABC/CARE from birth to age 79, discounted to birth at a rate of 3\%. ``Treatment vs. Control'': compares the treatment to the control group. ``Treatment vs. Stay at Home'': compares the treatment group to those subjects who stayed at home. ``Treatment vs. Alternative Preschool'': compares the treatment group to those subjects who attended alternative preschools. The latter two are based on matching estimators that account for selection on observable variables. By ``net" we mean that each component represents the total value for the treatment group minus the total value for the control group. Program costs: the total cost of implementing ABC/CARE. Total net benefits: the total net benefits of \textit{all} the components we consider. Labor income: total individual labor income from ages 20 to the retirement of program participants. Parental income: total parental labor income of the parents of the program participants from when the participants were ages 0 to 15. Crime: the total cost of crime (judicial and victimization costs). Total medical costs: both private and public medical costs from ages 15 to 79. Costs of education: the total costs of education of the individual from ages 6 to 26 and include any costs from special education and grade retention. \\
+Note: This figure displays the life-cycle net present values of the main components of the cost/benefit analysis of ABC/CARE from birth to age 79, discounted to birth at a rate of 3\%. ``Treatment vs. Control'': compares the treatment to the control group. ``Treatment vs. Stay at Home'': compares the treatment group to those subjects who stayed at home. ``Treatment vs. Alternative Preschool'': compares the treatment group to those subjects who attended alternative preschools. The latter two are based on matching estimators that account for selection on observable variables. By ``net" we mean that each component represents the total value for the treatment group minus the total value for the control group. Program costs: the total cost of implementing ABC/CARE. Total net benefits: the total net benefits of \textit{all} the components we consider. Labor income: total individual labor income from ages 20 to the retirement of program participants. Parental income: total parental labor income of the parents of the program participants from when the participants were ages 0 to 15. Crime: the total cost of crime (judicial and victimization costs). Total medical costs: both private and public medical costs from ages 15 to 79. Costs of education: the total costs of education of the individual from ages 6 to 26 and include any costs from special education and grade retention. The crime life-cycle net present value for Treatment vs. Stay at Home is different than zero. It is $-\$20,251.68$ (2014 USD).\\
 *QALYs refers to the quality-adjusted life years gain due to better health conditions through age 79.\\
 }
 \end{sidewaysfigure}

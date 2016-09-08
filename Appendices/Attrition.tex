@@ -1,8 +1,8 @@
 \section{Accounting for Attrition} \label{appendix:attrition}
 
-\noindent We use a standard inverse probability weighting (IPW) scheme based on a logit model that predicts attrition using baseline characteristics.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} We use the same notation as in Section~\ref{section:cbamethodology} and a vector of background characteristics used in the randomization protocol; $W$ are background characteristics not used in this protocol.\\
+\noindent We use a standard inverse probability weighting (IPW) scheme based on a logit model that predicts attrition using baseline characteristics.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} Let $R = 1$ if the child is randomized to treatment, and $R = 0$ otherwise. Similarly, let $A = 1$ denote the case where we observe outcome $Y$, and $A = 0$ otherwise. $X,W,Z$ are background variables. $X$ could be affected by treatment and $W,Z$ are pre-treatment. $Z$ is used as part of the randomization protocol and $Z$ is not.
 
-\noindent Formally, let $A=1$ denote the case where we observe $Y$ and $A=0$ denote otherwise. We assume $A$ is independent of $Y$ conditional on $Z$, $R$, $X$, and $W$. More formally, we invoke
+\noindent We assume $A$ is independent of $Y$ conditional on $Z$, $R$, $X$, and $W$. More formally, we invoke
 
 \begin{assumption} \label{ass:attr}
 	\begin{align*}
@@ -10,7 +10,7 @@
 	\end{align*}
 \end{assumption}
 
-\noindent Based on this assumption, we identify $\mathbb{E}[Y_r]$ as follows:
+\noindent Let $Y_{r}$ represent outcome $Y$ when $R$ is fixed to take the value $r$. Based on Assumption~\ref{ass:attr}, we identify $\mathbb{E}[Y_r]$ as follows:
 
 \begin{align} \label{eq:case2}
 \mathbb{E}[Y_r] & = \int y f_{Y_r|Z}(y) f_Z(z) dydz \\ \nonumber
