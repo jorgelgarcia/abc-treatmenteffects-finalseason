@@ -86,10 +86,11 @@ foreach var in itt_noctrl {
 
 	// plot all positive treatment effects
 	# delimit
-	twoway (bar `var'_point catfemale if male == 0, color(gs6))
-	       (bar `var'_point catmale   if male == 1, color(black))
+	twoway (bar `var'_point catfemale if male == 0, color(gs8))
+	       (bar `var'_point catmale   if male == 1, color(gs4))
 	       (rcap `var'_max `var'_min catfemale if male == 0, lcolor(gs0))
-	       (rcap `var'_max `var'_min catmale   if male == 1, lcolor(gs0)),
+	       (rcap `var'_max `var'_min catmale   if male == 1, lcolor(gs0))
+	       (function y = 50, range(1.5 3.5) lwidth(thick) lcolor(gs0)),
 	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
 			  xlabel($xlabels1, noticks grid glcolor(white)) 
 			  ylabel(0[20]100, angle(h) glcolor(gs14))

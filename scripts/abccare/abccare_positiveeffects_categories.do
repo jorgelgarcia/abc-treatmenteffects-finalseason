@@ -113,7 +113,7 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 	       (function y = 50, range(-1.5 21.5) lwidth(thick) lcolor(gs0)),
 	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
 			  xlabel($xlabels1, angle(45) noticks grid glcolor(white)) 
-			  ylabel(0[30]30 50 70[30]100, angle(h) glcolor(gs14))
+			  ylabel(0[25]100, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("% of Outcomes with Positive TE", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
@@ -129,7 +129,7 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 	       (function y = 50, range(25.5 42.5) lwidth(thick) lcolor(gs0)),
 	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
 			  xlabel($xlabels2, angle(45) noticks grid glcolor(white)) 
-			  ylabel(0[30]30 50 70[30]100, angle(h) glcolor(gs14))
+			  ylabel(0[25]100, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("% of Outcomes with Positive TE", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));

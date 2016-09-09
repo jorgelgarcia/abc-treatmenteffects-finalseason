@@ -99,12 +99,13 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 	       (function y = 50, range(1.5 3.5)lwidth(thick) lcolor(gs0)),
 	       legend(row(1) cols(3) order(1 "Females" 2 "Males" 4 "+/- s.e."))
 			  xlabel("",noticks grid glcolor(white)) 
-			  ylabel(0[20]40 50 60[20]80, angle(h) glcolor(gs14))
+			  ylabel(0[25]75, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("${`var'_label}", size(small))
 			  graphregion(color(white)) plotregion(fcolor(white));
 	# delimit cr
 	graph export `var'_all.eps, replace
+	
 	
 	// plot all positive and significant treatment effects
 	# delimit
