@@ -263,9 +263,144 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \subsubsection{Sensitivity Analysis}
 
-\noindent An immediate route of inquiry is the sensitivity of our forecasts to the use of different forecasting variables. We reproduce three exercises to analyze this for labor income: (i) our baseline forecast, which is based on $X,W,Z$ and the lagged value of the forecasted labor income, i.e. at time $t$ we base the forecast on $X,W,Z$ and (forecasted) labor income at $t-1$; (ii) the same as (i) but without using lagged labor income; (iii) the same as (i) but without using $W,Z$; (iv) the same as (i) but without using $X$.\\
+\noindent An immediate route of inquiry is the sensitivity of our forecasts to the use of different forecasting variables. We reproduce three exercises to analyze this for labor income: (i) our baseline forecast, which is based on $X,W,Z$ and the lagged value of the forecasted labor income, i.e. at time $t$ we base the forecast on $X,W,Z$ and (forecasted) labor income at $t-1$; (ii) the same as (i) but without using lagged labor income; (iii) the same as (i) but without using $X$; (iv) a forecast based exclusively on $W,Z$; (v) a forecast based exclusively on $X$.\\
 
-\noindent \textbf{[JLG: work in progress.]}
+\noindent Although the forecast in (i) is the most accurate if compared to low-skilled individuals in the PSID, they are robust to sensitivity analysis.\footnote{We obtain similar results exercises for transfer income and parental labor income and they are available under request.}
+
+\begin{sidewaysfigure}[!htbp]
+\centering
+\caption{Labor Income Profiles, Forecast Based on Lageed Labor Income and $X,W,Z$}\label{fig:labor-income-profiles}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Forecasted for ABC/CARE Males} \label{fig:abcare1}
+		\includegraphics[width=\textwidth]{output/labor_25-60_male_1.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{PSID, Disadvantaged Males} \label{fig:psid1}
+		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s1.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Forecasted for ABC/CARE Females} \label{fig:abcare0}
+		\includegraphics[width=\textwidth]{output/labor_25-60_female_1.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{PSID, Disadvantaged Females} \label{fig:psid0}
+		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s0.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: Panels (a) and (c) display the forecasted labor income profiles for ABC/CARE males and females by treatment status, based on forecasts that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}[!htbp]
+\centering
+\caption{Labor Income Profiles, Forecast Based on $X,W,Z$}\label{fig:labor-income-profiles}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Forecasted for ABC/CARE Males} \label{fig:abcare1}
+		\includegraphics[width=\textwidth]{output/labor_25-60_male_2.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{PSID, Disadvantaged Males} \label{fig:psid1}
+		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s1.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Forecasted for ABC/CARE Females} \label{fig:abcare0}
+		\includegraphics[width=\textwidth]{output/labor_25-60_female_2.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{PSID, Disadvantaged Females} \label{fig:psid0}
+		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s0.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: Panels (a) and (c) display the forecasted labor income profiles for ABC/CARE males and females by treatment status, based on forecasts that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}[!htbp]
+\centering
+\caption{Labor Income Profiles, Forecast Based on Lageed Labor Income and $W,Z$}\label{fig:labor-income-profiles}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Forecasted for ABC/CARE Males} \label{fig:abcare1}
+		\includegraphics[width=\textwidth]{output/labor_25-60_male_3.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{PSID, Disadvantaged Males} \label{fig:psid1}
+		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s1.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Forecasted for ABC/CARE Females} \label{fig:abcare0}
+		\includegraphics[width=\textwidth]{output/labor_25-60_female_3.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{PSID, Disadvantaged Females} \label{fig:psid0}
+		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s0.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: Panels (a) and (c) display the forecasted labor income profiles for ABC/CARE males and females by treatment status, based on forecasts that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}[!htbp]
+\centering
+\caption{Labor Income Profiles, Forecast Based $X$}\label{fig:labor-income-profiles}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Forecasted for ABC/CARE Males} \label{fig:abcare1}
+		\includegraphics[width=\textwidth]{output/labor_25-60_male_4.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{PSID, Disadvantaged Males} \label{fig:psid1}
+		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s1.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Forecasted for ABC/CARE Females} \label{fig:abcare0}
+		\includegraphics[width=\textwidth]{output/labor_25-60_female_4.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{PSID, Disadvantaged Females} \label{fig:psid0}
+		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s0.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: Panels (a) and (c) display the forecasted labor income profiles for ABC/CARE males and females by treatment status, based on forecasts that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}[!htbp]
+\centering
+\caption{Labor Income Profiles, Forecast Based on $W,Z$}\label{fig:labor-income-profiles}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Forecasted for ABC/CARE Males} \label{fig:abcare1}
+		\includegraphics[width=\textwidth]{output/labor_25-60_male_5.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{PSID, Disadvantaged Males} \label{fig:psid1}
+		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s1.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Forecasted for ABC/CARE Females} \label{fig:abcare0}
+		\includegraphics[width=\textwidth]{output/labor_25-60_female_5.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{PSID, Disadvantaged Females} \label{fig:psid0}
+		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s0.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: Panels (a) and (c) display the forecasted labor income profiles for ABC/CARE males and females by treatment status, based on forecasts that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
+\end{sidewaysfigure}
 
 \paragraph{Health Costs}
 
