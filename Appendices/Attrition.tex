@@ -1,49 +1,94 @@
 \section{Accounting for Attrition} \label{appendix:attrition}
 
-\noindent We use a standard inverse probability weighting (IPW) scheme based on a logit model that predicts attrition using baseline characteristics.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} Let $R = 1$ if the child is randomized to treatment, and $R = 0$ otherwise. Similarly, let $A = 1$ denote the case where we observe outcome $Y$, and $A = 0$ otherwise. $X,W,Z$ are background variables. $X$ could be affected by treatment and $W,Z$ are pre-treatment. $Z$ is used as part of the randomization protocol and $W$ is not.\\
+\noindent We use a standard inverse probability weighting (IPW) scheme based on a logit model that predicts attrition using baseline characteristics.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} Recall that $R = 1$ if the child is randomized to treatment, and $R = 0$ otherwise. Similarly, let $A = 1$ denote the case where we observe a generic outcome $Y$, and $A = 0$ otherwise. As in the main text, $\mathcal{B}$ represents background (pre-treatment) variables and $X$ variables that could be affected by treatment and that we use to predict $Y$. We abstract from dynamics in $Y$ and $X$ for simplicity, but the procedure could be easily generalized.\\
 
-\noindent Note that this is a simplification of the notation we use in Section~\ref{section:methodology} of the main text, and it is for the sake of clarity. In the text, we allow for explicit dynamics of $X$ and refer to $W,Z$ as $\mathcal{B}$.\footnote{For the individuals in ABC/CARE, it is actually the case that $\mathcal{B}$ belongs to a subset $\mathcal{B}_{0}$. That distinction is not relevant to explain this general method to account for attrition.}
+\noindent We assume $A$ is independent of $Y$ conditional on $\mathcal{B}$ and $X$. More formally, we invoke
 
-\noindent We assume $A$ is independent of $Y$ conditional on $Z$, $R$, $X$, and $W$. More formally, we invoke
 
 \begin{assumption} \label{ass:attr}
 	\begin{align*}
-		A \independent Y | W, Z, X, R.
+		A \independent Y | \mathcal{B}, X, R.
 	\end{align*}
 \end{assumption}
 
 \noindent Let $Y_{r}$ represent outcome $Y$ when $R$ is fixed to take the value $r$. Based on Assumption~\ref{ass:attr}, we identify $\mathbb{E}[Y_r]$ as follows:
 
 \begin{align} \label{eq:case2}
-\mathbb{E}[Y_r] & = \int y f_{Y_r|Z}(y) f_Z(z) dydz \\ \nonumber
-	           & = \int y f_{Y|Z,R=r}(y) f_Z(z) dydz \\ \nonumber
-				& = \int y f_{Y|R=r,W,Z,X}(y) f_{W,X|R=r}(w,x) f_Z(z) dydxdwdz \\ \nonumber
-				& = \int y f_{Y|R=r,W,Z,X,A=1}(y) f_{W,X|R=r,Z}(w,x) f_Z(z) dydxdwdz
+\mathbb{E}[Y_r] & = \int \int y f_{Y_r|X}(y) f_X(x) dydx \\ \nonumber
+	           & = \int \int y f_{Y|X,R=r}(y) f_X(x) dydx \\ \nonumber
+				& = \int \int \int y f_{Y|R=r,\mathcal{B},X}(y) f_{\mathcal{B}|R=r}(b) f_X(x) dydbdx \\ \nonumber
+				& = \int \int \int y f_{Y|R=r,\mathcal{B},X,A=1}(y) f_{\mathcal{B}|R=r,X}(b) f_X dydbdx
 \end{align}
-\noindent where each component of the last expression in \eqref{eq:case2} is straightforward to recover from the data. Using Bayes' Theorem, we can write an equivalent expression to make the IPW scheme explicit. That is, we apply Bayes' Theorem to $f_{W,X|R=r,Z}(w,x)$ and $f_Z(z)$ to obtain
+\noindent where each component of the last expression in \eqref{eq:case2} is straightforward to recover from the data. Using Bayes' Theorem, we can write an equivalent expression to make the IPW scheme explicit. That is, we apply Bayes' Theorem to $f_{\mathcal{B}|R=r,X}(b)$ and $f_X(x)$ to obtain
 
 \begin{equation*}
-f_{W,X|R=r,Z}(w,x) = \frac{f_{W,X|R=r,Z,A=1}(w,x) P(A=1|R=r,Z)}{P(A=1|R=r,W,Z,X)}
+f_{\mathcal{B}|R=r,X}(b) = \frac{f_{\mathcal{B}|R=r,X,A=1}(b) P(A=1|R=r,X)}{P(A=1|R=r,\mathcal{B},X)}
 \end{equation*}
 and
 \begin{equation*}
-	f_Z(z) = \frac{f_{Z|R=r,A=1}(z) P(R=r,A=1)}{P(R=r,A=1|Z)}.
+	f_X(x) = \frac{f_{X|R=r,A=1}(x) P(R=r,A=1)}{P(R=r,A=1|X)}.
 \end{equation*}
 \noindent Substituting these expressions into \eqref{eq:case2}, we obtain
 
 \begin{align*} \label{eq:case2ipw}
-\mathbb{E}[Y_r] & = \int y f_{Y,X,W,Z|R=r,A=1}(y,x,w,z) \frac{P(R=r,A=1) P(A=1|R=r,Z)}{P(R=r,A=1|Z) P(A=1|R=r,W,Z,X)} dydxdwdz \\
-	            & = \int y f_{Y,X,W,Z|R=r,A=1}(y,x,w,z) \frac{P(R=r,A=1)}{P(R=r|Z) P(A=1|R=r,W,Z,X)} dydxdwdz. \\
+\mathbb{E}[Y_r] & = \int \int \int y f_{Y,\mathcal{B},X|R=r,A=1}(y,b.x) \frac{P(R=r,A=1) P(A=1|R=r,X)}{P(R=r,A=1|X) P(A=1|R=r,\mathcal{B},X)} dydbdx \\
+	            & = \int \int  \int y f_{Y,\mathcal{B},X|R=r,A=1}(y,b,x) \frac{P(R=r,A=1)}{P(R=r|X) P(A=1|R=r,\mathcal{B},X)} dydbdx. \\
 \end{align*}
 
-\noindent Assumption \ref{ass:attr} generalizes the matching assumption of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}. It conditions not only on pre-program variables but on fully observed post-treatment variables, $X$. This enables us to account  for two types of selection:  (i) selection into treatment; and (ii) selection into item response. The corresponding sample estimator for $\mathbb{E}[Y_r]$ is
+\noindent Assumption \ref{ass:attr} generalizes the matching assumption of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}. It conditions not only on pre-program variables but on fully observed post-treatment variables, $X$. This enables us to account for two types of selection:  (i) selection into treatment; and (ii) selection into item response. The corresponding sample estimator for $\mathbb{E}[Y_r]$ is
 
 \begin{align*}
-\sum_{i \in \mathcal{I}} y a_{i} w_{i,r} \mathbf{1}(r_i = r)
+\sum_{i \in \mathcal{I}} y \alpha_{i} \beta_{i,r} \mathbf{1}(r_i = r)
 \end{align*}
 \noindent where $\mathcal{I}$ indexes the individuals in the sample, $a_i$ indicates whether we observe $Y$ for individual $i$, and
 
 \begin{align*}
-	w_{i,r} = \frac{1}{\pi_r(z_i) \alpha(r_i,w_i,z_i,x_i)} \frac{1}{\sum_k{\frac{\mathbf{1}(r_i = r) \mathbf{1}(a_i = 1)}{\pi_r(z_k)\alpha(r_k,w_k,z_k,x_k)}}},
+	\beta_{i,r} = \frac{1}{\pi_r(x_i) \alpha(r_i,b_i,x_i)} \frac{1}{\sum_k{\frac{\mathbf{1}(r_i = r) \mathbf{1}(a_i = 1)}{\pi_r(x_k)\alpha(r_k,b_k,x_k)}}},
 \end{align*}
-\noindent with $\pi_r(z) := P(R=r|Z=z)$ and $\alpha(r,w,z,x) := P(A=1|R=r,W=w,Z=z,X=x)$. The weight $\pi_r$ corrects for selection into treatment based on pre-program variables $Z$. The weight $\alpha$ corrects for item non-response based on $R, W, Z, X$. \\
+\noindent with $\pi_r(x) := P(R=r|X=x)$ and $\alpha(r,b,x) := P(A=1|R=r,\mathcal{B}=b,X=x)$. The weight $\pi_r$ corrects for selection into treatment based on pre-program variables $X$. The weight $\alpha_{i}$ corrects for item non-response based on $R, \mathcal{B}, X$.\\
+
+\subsection{Variables to Construct IPW}
+
+\noindent We follow the procedure in Section~\ref{appendix:bvariables} to choose the variables with which we construct the weights. Tables~\ref{table:attpooled}-\ref{table:attfemales} list the variables in which we account fro attrition, together with the variables we use to construct the IPW scheme. We provide different lists for estimates pooling females and males and estimates by gender. Section~\ref{appendix:methodology} explains the cases in which we account for attrition.
+
+\newgeometry{top=.1in, bottom=.1in, left=.1in, right=.1in}
+\begin{sidewaystable}[H] 
+\begin{threeparttable}
+\caption{Variables Used to Create IPW Scheme, Estimates Pooling Females and Males}
+\label{table:attpooled}
+\centering 
+\input{AppOutput/Methodology/model_select_pooled.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table provides a list of the variables we use to construct the IPW scheme to account for attrition when calculating treatment effects pooling females and males. The procedure to select these variables is described in Appendix~\ref{appendix:bvariables}.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\begin{sidewaystable}[H] 
+\begin{threeparttable}
+\caption{Variables Used to Create IPW Scheme, Estimates for Females}
+\label{table:attfemales}
+\centering 
+\input{AppOutput/Methodology/model_select_female.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table provides a list of the variables we use to construct the IPW scheme to account for attrition when calculating treatment effects for females. The procedure to select these variables is described in Appendix~\ref{appendix:bvariables}.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\begin{sidewaystable}[H] 
+\begin{threeparttable}
+\caption{Variables Used to Create IPW Scheme, Estimates for Males}
+\label{table:attfemales}
+\centering 
+\input{AppOutput/Methodology/model_select_male.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table provides a list of the variables we use to construct the IPW scheme to account for attrition when calculating treatment effects for males.  The procedure to select these variables is described in Appendix~\ref{appendix:bvariables}.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+\restoregeometry
+\doublespacing
