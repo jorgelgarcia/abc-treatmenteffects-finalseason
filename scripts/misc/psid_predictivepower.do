@@ -51,13 +51,13 @@ cd $datanlsymatch
 use nlsy-abc-match.dta, clear
 drop if si30y_inc_labor > 300000
 
-reg si30y_inc_labor male black, robust
+reg si30y_inc_labor male black [aw=wtabc_allids], robust
 est sto nlsyZ
 
-reg si30y_inc_labor male black years_30y, robust
+reg si30y_inc_labor male black years_30y [aw=wtabc_allids], robust
 est sto nlsyZX
 
-reg si30y_inc_labor male black years_30y inc_labor28, robust
+reg si30y_inc_labor male black years_30y inc_labor28 [aw=wtabc_allids], robust
 est sto nlsyZL
 
 cd $output
@@ -68,13 +68,13 @@ cd $dataCnlsymatch
 use cnlsy-abc-match.dta, clear
 drop if si30y_inc_labor > 300000
 
-reg si30y_inc_labor male black m_ed0y, robust
+reg si30y_inc_labor male black m_ed0y [aw=wtabc_allids], robust
 est sto cnlsyZ
 
-reg si30y_inc_labor male black m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi, robust
+reg si30y_inc_labor male black m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi [aw=wtabc_allids], robust
 est sto cnlsyZX
 
-reg si30y_inc_labor male black m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi inc_labor28, robust
+reg si30y_inc_labor male black m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi inc_labor28 [aw=wtabc_allids], robust
 est sto cnlsyZL
 
 cd $output
