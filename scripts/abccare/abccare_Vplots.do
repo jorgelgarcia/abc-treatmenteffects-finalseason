@@ -162,4 +162,5 @@ twoway (bar prob age, color(gs0) lwidth(medthick) barw(.5))
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr 
 graph export abccare_Vprobs.eps, replace
+
 restore
