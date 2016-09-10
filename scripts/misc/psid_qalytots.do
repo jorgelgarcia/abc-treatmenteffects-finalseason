@@ -109,7 +109,7 @@ twoway (bar qaly sample if sample == 1, color(gs0) barw(.98))
        (rcap maxqaly minqaly sample if sample <= 3, lcolor(gs0)),
        legend(rows(2) cols(2) order(1 "PSID, Disadvantaged" 2 "Control" 3 "Treatment" 4 "+/- s.e."))
 		  xlabel(1 " " 2 " " 3 " ", angle(45) noticks grid glcolor(white)) 
-		  ylabel(4.5[.1]5, angle(h) glcolor(gs14))
+		  ylabel(4.5[.1]5.1, angle(h) glcolor(gs14))
 		  xtitle(" ", size(small)) 
 		  ytitle("QALYs (100,000s 2014 USD)", size(small))
 		  graphregion(color(white)) plotregion(fcolor(white));
@@ -123,7 +123,7 @@ twoway (bar qaly sample if sample == 4, color(black) barw(.98))
        (rcap maxqaly minqaly sample if sample >=4, lcolor(gs0)),
        legend(rows(2) cols(2) order(1 "PSID, Disadvantaged" 2 "Control" 3 "Treatment" 4 "+/- s.e."))
 		  xlabel(4 " " 5 " " 6 " ", angle(45) noticks grid glcolor(white)) 
-		  ylabel(4.5[.1]5, angle(h) glcolor(gs14))
+		  ylabel(4.5[.1]5.1, angle(h) glcolor(gs14))
 		  xtitle("", size(small)) 
 		  ytitle("QALYs (100,000s 2014 USD)", size(small))
 		  graphregion(color(white)) plotregion(fcolor(white));
