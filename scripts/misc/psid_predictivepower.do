@@ -34,13 +34,13 @@ cd $datapsidmatch
 use psid-abc-match.dta, clear
 drop if si30y_inc_labor > 300000
 
-reg si30y_inc_labor male black, robust
+reg si30y_inc_labor male black [aw=wtabc_allids], robust
 est sto psidZ
 
-reg si30y_inc_labor male black years_30y, robust
+reg si30y_inc_labor male black years_30y [aw=wtabc_allids], robust
 est sto psidZX
 
-reg si30y_inc_labor male black years_30y inc_labor28, robust
+reg si30y_inc_labor male black years_30y inc_labor28 [aw=wtabc_allids], robust
 est sto psidZL
 
 cd $output
