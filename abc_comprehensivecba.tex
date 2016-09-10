@@ -151,11 +151,16 @@ Most of the alternative preschools received federal subsidies and were subject t
 		\includegraphics[width=\textwidth]{output/care_controlcontamination_months.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Enrollment Dynamics} \label{fig:treatsubcare}
+		\includegraphics[width=\textwidth]{output/abccare_Vprobs.eps}
+\end{subfigure}
+
+\begin{subfigure}[h]{0.4\textwidth}
 	\centering
 	\caption{Enrollment Intensity} \label{fig:proportion-alt-pre}
 		\includegraphics[width=\textwidth]{output/abccare_Vfractimes.eps}
-\end{subfigure}
-
+\end{subfigure}%
 \begin{subfigure}[h]{0.4\textwidth}
 	\centering
 	\caption{Enrollment by Age} \label{fig:salmonella}
@@ -163,7 +168,7 @@ Most of the alternative preschools received federal subsidies and were subject t
 \end{subfigure}
 
 \footnotesize \justify
-Note: Panel (a) displays the cumulative distribution function of enrollment in alternative preschools of the ABC/CARE control group. Panel (b) displays the fraction of children in the ABC/CARE control group enrolled in alternative preschool by months enrolled from ages 0 to 5 (conditional on ever being enrolled) on the $x$-axis. Panel (c) displays enrollment in alternative preschools of ABC/CARE control group by age in the left axis and average number of months in alternative preschool conditional on enrollment by age in the right axis.\\
+Note: Panel (a) displays the cumulative distribution function of enrollment in alternative preschools of the ABC/CARE control group. Panel (b) displays the fraction of ABC/CARE control-group children enrolled in preschool, conditional on being enrolled in the previous age (at least one month). Panel (c) displays the fraction of children in the ABC/CARE control group enrolled in alternative preschools (fraction of children who were enrolled in alternative preschools 20\%, 40\%, 60\%, 80\%, and 100\% of the time, from ages 0 to 5). Panel (d) displays the fraction enrolled in alternative preschools of ABC/CARE control group by age in the left axis and average number of months in alternative preschool by age in the right axis. Both plots in Panel (d) are conditional on enrollment.\\
 \end{sidewaysfigure}
 
 \section{Parameters of Interest and Related Policy Questions} \label{section:methodsquestions}
@@ -255,11 +260,8 @@ The results for males are somewhat different. Treated subjects reported lower dr
 \input{output/select_rslt_combined.tex}
 \end{scriptsize}
 \begin{tablenotes}
-\tiny
-\item \textbf{Treatment effects estimated}\\
-\leftright{\textbf{(1)} $\mathbb{E} \big[ Y^1 - Y^0 | D = 1, \bm{B} \in \mathcal{B}_0\big]$}{\textbf{(4)} $\mathbb{E} \big[ Y^1(v) - Y^0 | X, V=0, D = 1 \big] $} \par
-\leftright{\textbf{(2)} $\mathbb{E} \big[ Y^1 - Y^0 |  X, D = 1 \big]$}{\textbf{(5)} $\mathbb{E} \big[\big[ Y^1 \big] - \mathbb{E} \big[ Y^0 \big]| X, V=1, D =1 \big]$} \par
-\leftright{\textbf{(3)} $\mathbb{E} \big[\big[ Y^1 \big] - \mathbb{E} \big[ Y^0 \big]| X, V =0, D =1 \big]$}{\textbf{(6)} $\mathbb{E} \big[ Y^1 - Y^0(v) | X, V=1 , D = 1\big]$}
+\scriptsize
+Note: This table shows the treatment effects for categories outcomes that are important for our cost/benefit analysis. Systolic and Diastolic blood pressure are measured in terms of mm Hg. Each column present estimates for the following parameters: \textbf{(1)} $\mathbb{E} \big[ Y^1 - Y^0 | D = 1, \bm{B} \in \mathcal{B}_0\big]$; {\textbf{(2)} $\mathbb{E} \big[ Y^1 - Y^0 |  X, D = 1 \big]$}; {\textbf{(3)} $\mathbb{E} \big[\big[ Y^1 \big] - \mathbb{E} \big[ Y^0 \big]| X, V =0, D =1 \big]$}; {\textbf{(4)} $\mathbb{E} \big[ Y^1(v) - Y^0 | X, V=0, D = 1 \big] $}; {\textbf{(5)} $\mathbb{E} \big[\big[ Y^1 \big] - \mathbb{E} \big[ Y^0 \big]| X, V=1, D =1 \big]$}; {\textbf{(6)} $\mathbb{E} \big[ Y^1 - Y^0(v) | X, V=1 , D = 1\big]$}. All estimates control for Apgar scores at minutes 1 and 5 and the high-risk index. We define the high-risk index in Appendix~\ref{appendix:background} and explain how we chose the control variables in Appendix~\ref{appendix:bvariables}. Bootstrapped $p$-values are in parentheses. 
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -343,7 +345,7 @@ Our auxiliary data do not have direct information on program participation. Howe
 
 Formally, let $S \in \{0,1\}$ indicate membership in the experimental sample ($S=1$ if in the experimental sample; $S=0$ otherwise). Define $X_s = (X_0,\dots,X_T)_s$, $Y_s = (Y_0,\dots,Y_T)_s$, $\bm{\varepsilon}_s = (\varepsilon_0,\dots,\varepsilon_{T})_s$ where $s$ denotes sample membership. We assume
 
-\begin{assumption}
+\begin{assumption} \label{ass:contain}
 \begin{equation*}
 \sup(X, Y, B, \varepsilon)_{s=1} \subseteq \sup (X, Y, B, \varepsilon)_{s=0}.
 \end{equation*}
@@ -390,7 +392,7 @@ Figure~\ref{fig:control-sub} shows the quality of the interpolation and extrapol
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Forecasted for ABC/CARE Males} \label{fig:abcare1}
-		\includegraphics[width=\textwidth]{output/labor_25-60_male.eps}
+		\includegraphics[width=\textwidth]{output/labor_25-60_male_1_1000b.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.4\textwidth}
 	\centering
@@ -400,7 +402,7 @@ Figure~\ref{fig:control-sub} shows the quality of the interpolation and extrapol
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Forecasted for ABC/CARE Females} \label{fig:abcare0}
-		\includegraphics[width=\textwidth]{output/labor_25-60_female.eps}
+		\includegraphics[width=\textwidth]{output/labor_25-60_female_1_1000b.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.4\textwidth}
 	\centering
@@ -408,7 +410,7 @@ Figure~\ref{fig:control-sub} shows the quality of the interpolation and extrapol
 		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s0.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: Panels (a) and (c) display the forecasted labor income profiles for ABC/CARE males and females by treatment status, based on forecasts that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
+Note: Panels (a) and (c) display the forecasted labor income profiles for ABC/CARE females and males by treatment status, based on forecasts that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged females and males in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
 \end{sidewaysfigure}
 
 \subsection{Health} \label{section:health}
@@ -450,28 +452,18 @@ QALYs are crucial to our estimations because they monetize the health of an indi
 \begin{sidewaysfigure}[!htbp]
 \centering
 \caption{Quality Adjusted Life Years}\label{fig:qalys}
-\begin{subfigure}[h]{0.4\textwidth}
+\begin{subfigure}[h]{0.5\textwidth}
 		\centering
-		\caption{Forecasted for ABC/CARE Males} \label{fig:qabcare1}
-		\includegraphics[width=\textwidth]{output/qalylcycle_s1.eps}
+		\caption{Females} \label{fig:qabcare1}
+		\includegraphics[width=\textwidth]{output/qalyexppsid_0.eps}
 \end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
+\begin{subfigure}[h]{0.5\textwidth}
 	\centering
-	\caption{PSID, Disadvantaged Males} \label{fig:qpsid1}
-		\includegraphics[width=\textwidth]{output/psidqaly_s1.eps}
-\end{subfigure}
-\begin{subfigure}[h]{0.4\textwidth}
-		\centering
-		\caption{Forecasted for ABC/CARE Females} \label{fig:qabcare0}
-		\includegraphics[width=\textwidth]{output/qalylcycle_s0.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
-	\centering
-	\caption{PSID, Disadvantaged Females} \label{fig:qpsid0}
-		\includegraphics[width=\textwidth]{output/psidqaly_s0.eps}
+	\caption{Males} \label{fig:qpsid1}
+		\includegraphics[width=\textwidth]{output/qalyexppsid_1.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: Panels (a) and (c) display the forecasted quality-adjusted life years (QALYs) for ABC/CARE males and females by treatment status, based on forecasts that combine data from the Panel Study of Income Dynamics (PSID), the Health Retirement Study, the Medical Expenditure Panel Survey (MEPS), and the Medicare Current Beneficiary Survey (MCBS). Panels (b) and (d) display the forecasted quality-adjusted life years for disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as being African American and having less than 12 years of education. QALYs are the quality-adjusted life years gain due to better health conditions. \textbf{[JJH: This looks like a disaster.] [JLG: I'm working on a revised version of this.]}\\
+Note: Panels (a) and (b) display the life-cycle net-present value of predicted quality-adjusted life years (QALYs) for ABC/CARE females and males, respectively, by treatment status. The predictions are based on combining data from the Panel Study of Income Dynamics (PSID), the Health Retirement Study, the Medical Expenditure Panel Survey (MEPS), and the Medicare Current Beneficiary Survey (MCBS). Each panel displays a comparison to to disadvantaged females and males in the Panel Study of Income Dynamics (PSID),where disadvantaged is defined as having 12 years of education or less. QALYs are the quality-adjusted life years gain due to better health conditions. \textbf{[JJH: This looks like a disaster.] [JLG: See this new plot displaying the NPVs]}\\
 \end{sidewaysfigure}
 
 \subsection{Crime}  \label{sec:crime}
