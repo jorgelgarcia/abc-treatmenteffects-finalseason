@@ -80,7 +80,7 @@ est sto cnlsyZ
 reg si30y_inc_labor male black m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi [aw=wtabc_allids], robust
 est sto cnlsyZX
 
-reg si30y_inc_labor male black m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi inc_labor28 [aw=wtabc_allids], robust
+reg si30y_inc_labor male black m_ed0y piatmath years_30y si34y_bmi inc_labor28 [aw=wtabc_allids], robust
 est sto cnlsyZL
 
 cd $output
