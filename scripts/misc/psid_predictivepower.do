@@ -40,7 +40,7 @@ est sto psidZ
 reg si30y_inc_labor male black years_30y [aw=wtabc_allids], robust
 est sto psidZX
 
-reg si30y_inc_labor male black years_30y inc_labor28 [aw=wtabc_allids], robust
+reg si30y_inc_labor male black years_30y inc_labor21 [aw=wtabc_allids], robust
 est sto psidZL
 
 cd $output
@@ -57,7 +57,7 @@ est sto nlsyZ
 reg si30y_inc_labor male black years_30y [aw=wtabc_allids], robust
 est sto nlsyZX
 
-reg si30y_inc_labor male black years_30y inc_labor28 [aw=wtabc_allids], robust
+reg si30y_inc_labor male black years_30y inc_labor21 [aw=wtabc_allids], robust
 est sto nlsyZL
 
 cd $output
@@ -74,7 +74,7 @@ est sto cnlsyZ
 reg si30y_inc_labor male black m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi [aw=wtabc_allids], robust
 est sto cnlsyZX
 
-reg si30y_inc_labor male black m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi inc_labor28 [aw=wtabc_allids], robust
+reg si30y_inc_labor male black m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi inc_labor20 [aw=wtabc_allids], robust
 est sto cnlsyZL
 
 cd $output
@@ -102,6 +102,3 @@ est sto abcZL
 
 cd $output
 outreg2 [abcZ abcZX abcZL] using abc_predict, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 nonotes
-
-
-
