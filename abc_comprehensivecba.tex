@@ -251,6 +251,14 @@ The results for females show that the program increases employment, high school 
 
 The results for males are somewhat different. Treated subjects reported lower drug use and blood pressure. There are also effects on earnings and education. The results for employment, hypertension, blood pressure, and graduation from a 4-year college are strengthened when comparing the control group to those subjects who attend alternative preschools. This pattern is opposite to that for females, and is a main finding of this paper.\footnote{Results for treatment effects \eqref{eq:influenza} and \eqref{eq:smallpox} are given in Appendix~\ref{appendix:amethodology}.}
 
+\subsection{Estimated Combining Functions}
+
+We next report estimates of the proportion of beneficial effects by block and overall.\footnote{We consider a total of 95 outcomes that we classify in Appendix~\ref{appendix:results}. These are the outcomes that most clearly relate to the treatment offered by the program.} The analysis is based on the LATE-like treatment effect \eqref{eq:effect}. Figure~\ref{fig:ppositive} displays the results from this analysis: ABC/CARE positively impacted a large percentage of the outcomes. We show the count for treatment compared to the next best alternative parents chose in Figure~\ref{fig:ppositivenb}. Proportionately, more outcomes are beneficial for girls, but the proportions are high for both, and well above the benchmark of 1/2. In Tables~\ref{table:abccare_rslt_pooled_counts} to \ref{table:abccare_rslt_female_counts_n10a10}, we show that a large and precise fraction of effects are positive for both genders for categories of outcomes spanning the life cycle, including a wide variety of health categories.
+
+Using an $\alpha$ level of significance, one would expect to find that $\alpha\%$ of the treatment effects are statistically significant. For a 10\% level of significance, $46\%$ are statistically significant for females and $28\%$ for males, for this same counterfactual (see Figure~\ref{fig:ppositive10}).
+
+Figures~\ref{fig:ppositivehome} and Figure~\ref{fig:ppositivealternative} adjust the count in Figure~\ref{fig:ppositivenb} to analyze more clearly defined counterfactuals, treatment compared to stay at home and treatment compared to alternative preschool. This comparison indicates that females and males benefit differently from treatment. Females benefit more from any treatment compared to staying at home while males benefit more from treatment relative to alternative preschool, but not compared to staying at home. This pattern recurs throughout the paper. Boys seem to benefit much less from alternative preschools than girls.
+
 \newgeometry{top=.8in, bottom=.8in, left=.8in, right=.8in}
 \begin{table}[!htbp]
 \centering
@@ -267,14 +275,6 @@ Note: This table shows the treatment effects for categories outcomes that are im
 \end{table}
 \restoregeometry
 \doublespacing
-
-\subsection{Estimated Combining Functions}
-
-We next report estimates of the proportion of beneficial effects by block and overall.\footnote{We consider a total of 95 outcomes that we classify in Appendix~\ref{appendix:results}. These are the outcomes that most clearly relate to the treatment offered by the program.} The analysis is based on the LATE-like treatment effect \eqref{eq:effect}. Figure~\ref{fig:ppositive} displays the results from this analysis: ABC/CARE positively impacted a large percentage of the outcomes. We show the count for treatment compared to the next best alternative parents chose in Figure~\ref{fig:ppositivenb}. Proportionately, more outcomes are beneficial for girls, but the proportions are high for both, and well above the benchmark of 1/2. In Tables~\ref{table:abccare_rslt_pooled_counts} to \ref{table:abccare_rslt_female_counts_n10a10}, we show that a large and precise fraction of effects are positive for both genders for categories of outcomes spanning the life cycle, including a wide variety of health categories.
-
-Using an $\alpha$ level of significance, one would expect to find that $\alpha\%$ of the treatment effects are statistically significant. For a 10\% level of significance, $46\%$ are statistically significant for females and $28\%$ for males, for this same counterfactual (see Figure~\ref{fig:ppositive10}).
-
-Figures~\ref{fig:ppositivehome} and Figure~\ref{fig:ppositivealternative} adjust the count in Figure~\ref{fig:ppositivenb} to analyze more clearly defined counterfactuals, treatment compared to stay at home and treatment compared to alternative preschool. This comparison indicates that females and males benefit differently from treatment. Females benefit more from any treatment compared to staying at home while males benefit more from treatment relative to alternative preschool, but not compared to staying at home. This pattern recurs throughout the paper. Boys seem to benefit much less from alternative preschools than girls.
 
 \begin{sidewaysfigure}[!htbp]
 \centering
@@ -384,15 +384,15 @@ To simplify the analysis, we assume that the unobservables are the same across t
 
 Components of $\bm{X}^{d}_{t}$ may not be observed. To forecast out of sample outcomes, we project outcomes through $\bar{t}$ on all covariates through $\bar{t}$. \textbf{[JJH: Jorge, what exactly do we do? We need to meet to discuss exact conditioning sets used. Do we use dynamics?]  [JLG: yes, I'm preparing slides for such a meeting. But also, please see Appendix D, in which the variables are documented, the cross-walk across data sets is stated, predictive power of the forecasting variables is tested, and sensitivity analysis is provided.]}
 
-Figure~\ref{fig:control-sub} shows the quality of the interpolation and extrapolation of labor income by comparing the forecasts in the ABC/CARE data with the life-cycle profile of disadvantaged individuals in the PSID.\footnote{Our pattern of life-cycle labor income is typical for low-skilled workers. See, e.g., \cite{Blundell-etal_2015_J-Pub-E}.} \textbf{[JJH: How are these formed? What are the predictors?]}
+Figure~\ref{fig:control-sub} shows the quality of our prediction of labor income by comparing the forecasts in the ABC/CARE data with the life-cycle profile of disadvantaged individuals in the PSID.\footnote{Our pattern of life-cycle labor income is typical for low-skilled workers. See, e.g., \cite{Blundell-etal_2015_J-Pub-E}}.$^{,}$\footnote{Our prediction is based on indicator variables of being male and being black, mother's education, average PIAT scores from ages 5 to 7, years of education at age 30, body-mass index at 34, labor income at ages 21 and 30, and one-period lagged labor income. A justification for the use of these variables, evidence on their predictive power, a sensitivity analysis to using different prediction variables are in Appendix~\ref{appendix:methodology}. We weigh the individuals in the non-auxiliary datasets to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30.}.
 
 \begin{sidewaysfigure}[!htbp]
 \centering
-\caption{Labor Income Profiles}\label{fig:labor-income-profiles}
+\caption{Labor Income Profile, Predictions and Comparison to PSID}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Forecasted for ABC/CARE Males} \label{fig:abcare1}
-		\includegraphics[width=\textwidth]{output/labor_25-60_male_1_1000b.eps}
+		\includegraphics[width=\textwidth]{output/labor_25-60_male_1.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.4\textwidth}
 	\centering
@@ -402,7 +402,7 @@ Figure~\ref{fig:control-sub} shows the quality of the interpolation and extrapol
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Forecasted for ABC/CARE Females} \label{fig:abcare0}
-		\includegraphics[width=\textwidth]{output/labor_25-60_female_1_1000b.eps}
+		\includegraphics[width=\textwidth]{output/labor_25-60_female_1.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.4\textwidth}
 	\centering
@@ -451,7 +451,7 @@ QALYs are crucial to our estimations because they monetize the health of an indi
 
 \begin{sidewaysfigure}[!htbp]
 \centering
-\caption{Quality Adjusted Life Years}\label{fig:qalys}
+\caption{Quality Adjusted Life Years, Predictions and Comparison to PSID}\label{fig:qalys}
 \begin{subfigure}[h]{0.5\textwidth}
 		\centering
 		\caption{Females} \label{fig:qabcare1}

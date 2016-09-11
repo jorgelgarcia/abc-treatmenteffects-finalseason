@@ -75,17 +75,21 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \subsubsection{Variables Used to Predict}
 
-\noindent We base our predictions on three types of variables. We call $X,W,Z$ the prediction variables. Variables that could not have been affected by treatment, or pre-treatment variables, are divided into two categories: pre-treatment variables used in the randomization protocol of ABC/CARE, and pre-treatment variables not used in this protocol. We denote these by $Z$ and $W$, respectively. For the remainder of this section, we combine the two pre-treatment variables into a common vector of background variables and denote it $\mathcal{B}$. Lastly, we let $X$ denote the variables that could have been affected by treatment.\\
+\noindent We base our predictions of a generic outcome, $Y_{t}$ on background (pre-treatment) variables, $\mathcal{B}$, and variables that could have been affected by treatment $X_{t}$. $X_{t}$ could contain lagged values (or predictions) of $Y_{t}$.\\
 
-\noindent At each age, our prediction is a function of the prediction variables.\footnote{As we explain in the main paper, it is also possible to let our prediction in $t$ depend on our prediction in $t-1$. Suppose we want to predict $Y_{t}$. We can base our prediction not only on $X,\mathcal{B}$ but also on our prediction of $Y_{t-1}$.} Our prediction is based on identifying and estimating a relationship between the outcome we want to predict at time $t$, $Y_{t}$, in the non-experimental samples and then using this relationship in the experimental sample.\\
+\noindent At each age, our prediction is a function of the prediction variables. Our prediction is based on identifying and estimating a relationship between the outcome we want to predict at time $t$, $Y_{t}$, in the non-experimental samples and then using this relationship in the experimental sample.\\
 
 \noindent To be considered a prediction variable, the variable must satisfy three restrictions: (i) it has to be available in the experimental and non-experimental samples; (ii) it has to have predictive power on the predicted outcome; (iii) a containing support assumption between the experimental and non-experimental datasets, whereby, the support of the non-experimental samples contain the support of the experimental sample, as we formalize in  Section~\ref{section:methodology},  Assumption~\ref{ass:contain}.\\
 
 \noindent For a variable to satisfy restrictions (i) and (ii), it needs to be the case not only that the variable is available in the non-experimental sample but also that the survey question leading to it was introduced far enough back in time for us to observe it in a range that is common to the range in which we observe the variables in the experimental sample. To illustrate this, consider the case of body-mass index in the PSID. Survey questions leading to its availability were introduced in the late 1990s. The sample for whom the question was introduced, however, does not span enough observations for its support to cover the support of the experimental sample.\\
 
-\noindent An alternative we follow to lower this problem is to pool diverse auxiliary datasets to cover the support in the experimental dataset.\\
+\noindent An alternative we follow to lower this problem is to pool diverse auxiliary datasets to maximize the amount of prediction variables we are able to use. As we explain before, we use different non-experimental sources (and therefore different variables) produce our predictions at different ages.\\
 
-\noindent The variables satisfying the first restriction are: indicator variables for being male and being black ($Z$); mother's education ($W$); PIAT scores at ages 5-7;\footnote{We take the average of the PIAT across ages 5 to 7. For ABC, we observe this variable. For CARE, we use the mathematics section of the Woodcock Johnson at these same ages because we do not observe PIAT.} years of education at age 30; labor income at ages 21 and 30; and BMI at age 34 ($X$). We provide tests for restrictions (i) and (ii) next and then discuss potential sensitivity to the choice of these variables.
+\noindent The variables we use are: male and a black indicator ($\mathcal{B}$) in NLSY79, CNLSY, and PSID; mother's education in CNLSY ($\mathcal{B}$); PIAT scores at ages 5-7;\footnote{We take the average of the PIAT across ages 5 to 7. For ABC, we observe this variable. For CARE, we use the mathematics section of the Woodcock Johnson at these same ages because we do not observe PIAT.} in CNLSY ($X_{t}$); years of education at age 30 and labor income at ages 21 and 30 in in NLSY79, CNLSY, and PSID ($X_{t}$). All these variables are available in the experimental sample.\\
+
+\noindent We use CNLSY to predict between ages 21 and 30 and pool CNLSY and PSID to predict from age 30 to retirement (age 65, by assumption). We provide tests for restrictions (i) and (ii) next and then discuss potential sensitivity to the choice of these variables.
+
+\noindent When using the non-experimental samples, and with the objective of increasing the similarity on observed variables of the individuals in the experimental and non-experimental samples, weigh the individuals in the non-experimental samples to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30. We choose these variables because they are available in all three non-experimental samples and we intend to locate common comparison samples.
 
 \subsubsection{Containing Support}
 
@@ -159,7 +163,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \input{output/psid_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. We weigh the individuals in the PSID to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -172,20 +176,20 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \input{output/nlsy_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\item Note: Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. We weigh the individuals in the NLSY79 to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 \begin{table}[H] 
 \begin{threeparttable}
-\caption{Predictors of Labor Income at Age 30, CLSY}
+\caption{Predictors of Labor Income at Age 30, CNLSY}
 \label{table:predcnlsy}
 \centering 
 \input{output/cnlsy_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. BMI stands for body-mass index. PIAT (5-7) is the average of the PIAT mathematics score from ages 5 to 7. Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. BMI stands for body-mass index. PIAT (5-7) is the average of the PIAT mathematics score from ages 5 to 7. Robust standard errors are in parentheses. We weigh the individuals in the CNLSY to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -203,65 +207,13 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \end{threeparttable}
 \end{table}
 
-%%%%
-
-\begin{table}[H] 
-\begin{threeparttable}
-\caption{Predictors of Transfer Income at Age 30, PSID}
-\label{table:predpsid}
-\centering 
-\input{output/psid_predict_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item Note: All columns display regressions of transfer income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
-
-\begin{table}[H] 
-\begin{threeparttable}
-\caption{Predictors of Transfer Income at Age 30, NLSY79}
-\label{table:prednlsy}
-\centering 
-\input{output/nlsy_predict_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item Note: Note: All columns display regressions of transfer income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
-
-\begin{table}[H] 
-\begin{threeparttable}
-\caption{Predictors of Transfer Income at Age 30, CLSY}
-\label{table:predcnlsy}
-\centering 
-\input{output/cnlsy_predict_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item Note: All columns display regressions of transfer income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. BMI stands for body-mass index. PIAT (5-7) is the average of the PIAT mathematics score from ages 5 to 7. Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
-
-\begin{table}[H] 
-\begin{threeparttable}
-\caption{Predictors of Transfer Income at Age 30, ABC/CARE}
-\label{table:predabc}
-\centering 
-\input{output/abc_predict_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item Note: Note: All columns display regressions of transfer income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. BMI stands for body-mass index. PIAT (5-7) is the average of the PIAT mathematics score from ages 5 to 7. For CARE children, we use the mathematics section of the Woodcock Johnson at these same ages because we do not observe PIAT Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
-
 \subsubsection{Sensitivity Analysis}
 
 \noindent An immediate route of inquiry is the sensitivity of our predictions to the use of different prediction variables. We reproduce three exercises to analyze this for labor income: (i) our baseline prediction, which is based on $X, \mathcal{B}$ and the lagged value of the predicted labor income, i.e. at time $t$ we base the prediction on $X, \mathcal{B}$ and (predicted) labor income at $t-1$; (ii) the same as (i) but without using lagged labor income; (iii) the same as (i) but without using $X$; (iv) a prediction based exclusively on $\mathcal{B}$; (v) a prediction based exclusively on $X$.\\
 
-\noindent Although the prediction in (i) is the most accurate if compared to low-skilled individuals in the PSID, they are robust to sensitivity analysis.\footnote{We obtain similar results exercises for transfer income and parental labor income and they are available under request.}
+\noindent Any prediction based on $X$ produces labor income profiles with significant differences between the treatment and control groups, especially for males. Adding lagged labor income increases the precision of the prediction, while background variables $\mathcal{B}$ do not help distinguish treatment and control group (as expected given balance at baseline). Lagged labor income by itself is not sufficient to predict a difference between treatment and control. $X$ by itself is sufficient to match the life-cycle profile of the control group to the life-cycle profile of the disadvantaged individuals in the PSID.\\
+
+Although the prediction in (i) is the most accurate if compared to low-skilled individuals in the PSID, they are robust to sensitivity analysis.\footnote{We obtain similar results exercises for transfer income and parental labor income and they are available under request.}\\
 
 \begin{sidewaysfigure}[!htbp]
 \centering
@@ -346,7 +298,7 @@ Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CAR
 
 \begin{sidewaysfigure}[!htbp]
 \centering
-\caption{Labor Income Profiles, Prediction Based on $X$}\label{fig:labor-income-profiles}
+\caption{Labor Income Profiles, Prediction Based on $\mathcal{B}$}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Predicted for ABC/CARE Males} \label{fig:abcare1}
@@ -373,7 +325,7 @@ Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CAR
 
 \begin{sidewaysfigure}[!htbp]
 \centering
-\caption{Labor Income Profiles, Prediction Based on $\mathcal{B}$}\label{fig:labor-income-profiles}
+\caption{Labor Income Profiles, Prediction Based on $X$}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Predicted for ABC/CARE Males} \label{fig:abcare1}

@@ -388,6 +388,7 @@ GDP assumptions for 2020-2100 are based on the 2008 OASDI Trustee's Report long-
 }
 \end{figure}
 
+\begin{comment}
 \subsubsection{Bootstrap Sampling Strategy}
 
 \noindent The data sets used for estimating models in FAM are resampled in order to get estimates of sampling error in simulated outcomes.  PSID, HRS, MEPS, and MCBS all have complex survey designs that incorporate stratification and clustering.  In each of these data sets, the exact sampling strata and clusters are not publicly available, but approximations are included for the purpose of variance estimation.  The bootstrap methods in FAM were developed to implement the sampling strategy of \citet{McCarthy-Snowden_1985_Bootstrap}: randomly select $n_h-1$ sampling units with replacement from stratum $h$, where $n_h$ is the number of sampling units in stratum $h$. \\
@@ -399,6 +400,7 @@ GDP assumptions for 2020-2100 are based on the 2008 OASDI Trustee's Report long-
 \noindent In MCBS, $n_h-1$ individuals are resampled with replacement from each variance estimation stratum, where $n_h$ is the number of individual beneficiaries in the stratum. \\
 
 \noindent MEPS is resampled by dwelling unit.  Each MEPS bootstrap sample randomly selects $n_h-1$ dwelling units with replacement from each variance estimation stratum, where $n_h$ is the number of dwelling units in the stratum.  All members of the dwelling unit are eligible to be in the estimation sample.
+\end{comment}
 
 \subsubsection{Medical Costs Before Age 30 Interview}
 
