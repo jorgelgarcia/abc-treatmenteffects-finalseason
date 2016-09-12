@@ -167,7 +167,7 @@ twoway (lowess m1           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth
        (lowess mw1min age,  lpattern(dash) lcolor(gs8) bwidth(.25))
        
         , 
-		  legend(rows(1) order(1 2 3) label(1 "PSID, Disadvantaged") label(2 "PSID, Matched to Control Group") label(3 "+/- s.e.") size(small))
+		  legend(rows(1) order(1 2 3) label(1 "PSID, Disadvantaged") label(2 "PSID, Control-group Matches") label(3 "+/- s.e.") size(small))
 		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(10[10]50, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
@@ -185,49 +185,12 @@ twoway (lowess m0           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth
        (lowess mw0min age, lpattern(dash) lcolor(gs8) bwidth(.25))
        
         , 
-		  legend(rows(1) order(1 2 3) label(1 "PSID, Disadvantaged") label(2 "PSID, Matched to Control Group") label(3 "+/- s.e.") size(small))
+		  legend(rows(1) order(1 2 3) label(1 "PSID, Disadvantaged") label(2 "PSID, Control-group Matches") label(3 "+/- s.e.") size(small))
 		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(10[10]50, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 graph export psid_B0_match_s0.eps, replace
-
-// Control group vs. Control Matched
-#delimit
-twoway (lowess mean_age1           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.25))
-       (lowess mw1    age, lwidth(1.2) lpattern(solid) lcolor(gs8)  bwidth(.25))
-       
-       (lowess plus1  age,  lpattern(dash) lcolor(gs0) bwidth(.25))
-       (lowess minus1 age,  lpattern(dash) lcolor(gs0) bwidth(.25))
-       
-       (lowess mw1max age,  lpattern(dash) lcolor(gs8) bwidth(.25))
-       (lowess mw1min age, lpattern(dash) lcolor(gs8) bwidth(.25))
-       
-        , 
-		  legend(rows(1) order(1 2 3) label(1 "ABC/CARE Control") label(2 "PSID, Matched to Control Group") label(3 "+/- s.e.") size(small))
-		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(10[10]50, angle(h) glcolor(gs14))
-		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
-		  graphregion(color(white)) plotregion(fcolor(white));
-#delimit cr
-graph export psid_control_match_s1.eps, replace
-
-#delimit
-twoway (lowess mean_age0           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.25))
-       (lowess mw0    age, lwidth(1.2) lpattern(solid) lcolor(gs8)  bwidth(.25))
-       
-       (lowess plus0  age,  lpattern(dash) lcolor(gs0) bwidth(.25))
-       (lowess minus0 age,  lpattern(dash) lcolor(gs0) bwidth(.25))
-       
-       (lowess mw1max age,  lpattern(dash) lcolor(gs8) bwidth(.7))
-       (lowess mw1min age, lpattern(dash) lcolor(gs8) bwidth(.7))
-       
-        , 
-		  legend(rows(1) order(1 2 3) label(1 "ABC/CARE Control") label(2 "PSID, Matched to Control Group") label(3 "+/- s.e.") size(small))
-		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(10[10]50, angle(h) glcolor(gs14))
-		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
-		  graphregion(color(white)) plotregion(fcolor(white));
-#delimit cr
-graph export psid_control_match_s0.eps, replace
 
 // psid disadvantaged only
 #delimit
@@ -236,12 +199,12 @@ twoway (lowess m1           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth
        (lowess m1min age,  lpattern(dash) lcolor(gs0) bwidth(.25))
        
         , 
-		  legend(rows(1) order(1 2) label(2 "PSID, Matched to Control Group") label(2 "+/- s.e.") size(small))
-		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(10[10]80, angle(h) glcolor(gs14))
+		  legend(rows(1) order(1 2) label(1 "PSID, Disadvantaged") label(2 "+/- s.e.") size(small))
+		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(0[20]80, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
-graph export psid_match_s1.eps, replace
+graph export psid_disad_s1.eps, replace
 
 #delimit
 twoway (lowess m0           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.25))
@@ -249,9 +212,9 @@ twoway (lowess m0           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth
        (lowess m0min age,  lpattern(dash) lcolor(gs0) bwidth(.25))
        
         , 
-		  legend(rows(1) order(1 2) label(2 "PSID, Matched to Control Group") label(2 "+/- s.e.") size(small))
+		  legend(rows(1) order(1 2) label(1 "PSID, Disadvantaged") label(2 "+/- s.e.") size(small))
 		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(0[10]50, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
-graph export psid_match_s0.eps, replace
+graph export psid_disad_s0.eps, replace
