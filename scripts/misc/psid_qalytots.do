@@ -24,6 +24,7 @@ global scripts     = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
 global dataqalys   = "$klmmexico/abccare/NPV"
 global datapsid    = "$klmshare/Data_Central/data-repos/psid/extensions/abc-match/"
+global datafam     = "$klmmexico/abccare/health_plots"
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
