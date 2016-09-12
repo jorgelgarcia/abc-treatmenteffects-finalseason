@@ -229,7 +229,7 @@ twoway (lowess mean_age0           age, lwidth(1.2) lpattern(solid) lcolor(gs0) 
 #delimit cr
 graph export psid_control_match_s0.eps, replace
 
-// control matched only
+// psid disadvantaged only
 #delimit
 twoway (lowess m1           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.25))
        (lowess m1max age,  lpattern(dash) lcolor(gs0) bwidth(.25))
