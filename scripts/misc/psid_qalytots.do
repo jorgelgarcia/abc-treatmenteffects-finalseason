@@ -51,8 +51,8 @@ merge m:1 id using "`weights'"
 keep if _merge != 2
 drop _merge
 
-// keep if black == 1 & eduever < 12
-keep if age >=35 & age <=74
+keep if black == 1
+keep if age >=35 & age <=75
 replace qaly = qaly*.150
 
 matrix est = J(1,2,.)
