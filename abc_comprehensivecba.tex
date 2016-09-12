@@ -28,16 +28,10 @@ The University of Chicago \and
 James J. Heckman \\
 American Bar Foundation \\
 The University of Chicago \and
-Andr\'{e}s Hojman\\
-The University of Chicago \and
 Duncan Ermini Leaf \\
 University of Southern California \and
 Mar\'{i}a Jos\'{e} Prados \\
-University of Southern California \and
-Joshua Shea \\
-The University of Chicago \and
-Jake C. Torcasso\\
-The University of Chicago}
+University of Southern California}
 \date{First Draft: January 5, 2016\\ This Draft: \today}
 
 \maketitle
@@ -315,13 +309,13 @@ Note: This table shows the treatment effects for categories outcomes that are im
 
 \section{Predicting and Monetizing Life-cycle Costs and Benefits}\label{section:cbamethodology}
 
-A central focus of this paper is on summarizing the multiple benefits of ABC/CARE using benefit/cost and rate of return analysis. This requires predicting the out of sample benefits of the program over the remaining life cycle. This is a fundamental problem in social science and has been addressed in the literature in multiple ways.\footnote{See, e.g., \cite{Heckman_Lochner_ea_2006_HEE}. \citet{Heckman_Moon_etal_2010_RateofReturn} use a variety of methods to project future earnings. The various methods are in general agreement.} This section explains our strategy for using multiple data sources to extrapolate the life-cycle costs and benefits of education, labor income, crime, and health.\footnote{The methodology for doing this exercise for public-transfer income is analogous to that of labor income so we suppress the description for brevity.} Our approach is motivated by the analysis of \citet{Heckman_Pinto_etal_2013_PerryFactor} who show that the effect of treatment on outcomes operates through its effects of inputs in a stable production function. A variety of important practical details are discussed in Appendix~\ref{appendix:methodology}.
+A central focus of this paper is on summarizing the multiple benefits of ABC/CARE using benefit/cost and rate of return analysis. This requires predicting the out of sample benefits of the program over the remaining life cycle. This is a fundamental problem in social science and has been addressed in the literature in multiple ways.\footnote{See, e.g., \cite{Heckman_Lochner_ea_2006_HEE}. \citet{Heckman_Moon_etal_2010_RateofReturn} use a variety of methods to project future earnings. The various methods are in general agreement. Barnett uses above population level growth rates of earnings by age to extrapolate future earnings. Heckman et al. fit a variety of panel data earnings dynamics models and project future earnings with them.} This section explains our strategy for using multiple data sources to extrapolate the life-cycle costs and benefits of education, labor income, crime, and health.\footnote{The methodology for doing this exercise for public-transfer income is analogous to that of labor income so we suppress the description for brevity.} Our approach is motivated by the analysis of \citet{Heckman_Pinto_etal_2013_PerryFactor} who show that the effect of treatment on outcomes operates through its effects of inputs in a stable production function. A variety of important practical details are discussed in Appendix~\ref{appendix:methodology}.
 
 \subsection{Using Auxiliary Samples to Forecast Out of Sample Earnings}\label{sec:necrosis}
 
-We have data on treatments and controls through age $t^{\ast}$. We lack information on the participants afterward. Yet, we require post-$t^{\ast}$ information to construct counterfactual life-cycle profiles. We address this problem using auxiliary panel data documented in Table~\ref{table:sources}, which is discussed below. The goal is to find counterparts to both treatment and control individuals in the auxiliary data on whom we have post-$t^{\ast}$ data.
+We have data on treatments and controls through age $t^{\ast}$. We lack information on participant outcomes afterward. Yet, post-$t^{\ast}$ outcomes are required to construct counterfactual life-cycle profiles. The goal is to find counterparts to both treatment and control individuals in the auxiliary data on whom we have post-$t^{\ast}$ data.
 
-Because the participants of ABC/CARE are now in their mid-40s, there is no post-40s information on the same cohort  in any data. We use a synthetic cohort approach in which adjusted outcomes of older cohorts are used to estimate the future outcomes of the experimental cohort. This approach is standard in the human capital literature. Cohort effects may induce substantial biases.
+Because the participants of ABC/CARE are now in their mid-40s, there is no post-40s information on the same cohort  in any data. We use a synthetic cohort approach in which adjusted outcomes of older cohorts are used to estimate the future outcomes of the experimental cohort. This approach is standard in the human capital literature. However, cohort effects may induce substantial biases.
 
 Following the procedure in \citet{Heckman_Ichimura_etal_1998_REStud}, we use matching to find synthetic cohort counterparts in the auxiliary samples to both treatment and control group members. We match on baseline variables $\bm{B}$, as well as variables caused by treatment (i.e., for which there are treatment effects) that predict future outcomes---e.g., education, IQ, etc.---up through age $t^{\ast}$.
 
@@ -331,45 +325,43 @@ Let $Y^{d}_{i,t}$ be an outcome at time $t$ for an individual in treatment statu
 
 For individual $i$, find counterparts $j(i)$ such that
 \begin{equation}\label{eq:ingrownnail}
-\sum (\bm{X}^{d}_{i,t} - \bm{X}^{d}_{j(i),t})^{\prime} {(\bm{\sum}{^d})}^{-1} (\bm{X}_{i,t} - \bm{X}_{j(i)}) < \in
+\sum (\bm{X}^{d}_{i,t} - \bm{X}^{d}_{j(i),t})^{\prime} {(\bm{\sum}{^d})}^{-1} (\bm{X}_{i,t} - \bm{X}_{j(i)}) < \epsilon d \in \{0,1\}
 \end{equation}
 
-$j(i) \in Q_0$, for $t \leq t^{\ast}$, where $Q_0 \in$ is the index set in the auxiliary sample and $\sum{^d}$ is the covariance matrix of the $X$ in the experimental group $d$ sample. We construct both dynamic synthetic cohort samples using the same sample and weight using the inverse value of~\eqref{eq:ingrownnail} (samples may be re-weighted). We fit dynamic relationships in the synthetic cohort sample over the whole sample period. Using the dynamic relationships in the synthetic cohort sample and the initial conditions from the experimental sample, we predict future earnings. \textbf{[JJH: Jorge, your description in C is so imprecise, I cannot tell if you did this or not. Please clarify. I hope you did this.] [JLG: This is exactly what I did as discussed yesterday. The formalization was supposed to be in the text and the details in the appendix. We agreed on this.]} For this approach to be effective, we require that the support of the auxiliary sample includes the support of the experimental sample, an assumption formalized in the next section.
+$j(i) \epsilon Q_0$, for $t \leq t^{\ast}$, where $Q_0 \in$ is the index set in the auxiliary sample and $\sum{^d}$ is the covariance matrix of the $X$ in the experimental group $d$ sample. We construct both dynamic synthetic cohort samples using the same sample and weight using the inverse value of~\eqref{eq:ingrownnail} (samples may be re-weighted). We fit dynamic relationships in the synthetic cohort sample over the whole sample period. Using the dynamic relationships in the synthetic cohort sample and the initial conditions from the experimental sample, we predict future earnings. For this approach to be effective, we require that the support of the auxiliary sample includes the support of the experimental sample, an assumption formalized in the next section.
 
-Notice that for $\bm{B} \in \mathcal{B}_0$, given the small scale of the program and the asynchrony of the experimental and synthetic cohort samples, it is reasonable to assume (under no cohort effects) that the synthetic cohort is equivalent to the control group $(D=0)$. This means that a test of our matching assumption is to compare the dynamic relationships fit on the unweighted synthetic cohort (with $\bm{B} \in \mathcal{B}_0$) with those constructing using the matching metric~\eqref{eq:ingrownnail}. \textbf{[JJH: Jorge, have we done this?] [JLG: I will work on it and report it in Appendix C.]}
+Notice that when samples are restricted to satisfy $\bm{B} \in \mathcal{B}_0$, given the small scale of the ABC/CARE program and the asynchrony of the experimental and synthetic cohort samples, it is reasonable to assume (in the absence of cohort effects) that the synthetic cohort is equivalent to the control group $(D=0)$. This means that a test of our matching assumption is to compare the dynamic relationships fit on the unweighted synthetic cohort (with $\bm{B} \in \mathcal{B}_0$) with those constructing using the matching metric~\eqref{eq:ingrownnail}. 
 
 \subsection{Justifying the Matching Procedure}
 
-To examine the validity of the approach just presented, it is helpful to introduce a general notation. Let $Y^d_{j,t}$ be outcome $j$ at time $t$ for a treated person $(d\in\{0,1\})$. To simplify the analysis in this subsection, we do not further partition the control group. We define determinants of outcomes---vector $\bm{X}^d_t$---that may themselves be the outcomes of treatment, and may also depend on lagged outcomes also affected by treatment. Outcome variables are generated by the following equation
+To examine the validity of the matching approach just presented, and to provide an analytical framework for the extrapolation presented in this paper, it is helpful to introduce some general notation. Let $Y^d_{j,t}$ be outcome $j$ at time $t$ for a treated person $(d\in\{0,1\})$. To simplify the analysis in this subsection, we do not further partition the control group. We define determinants of outcomes---vector $\bm{X}^d_t$---that may themselves be the outcomes of treatment, and may also depend on lagged outcomes also affected by treatment. Outcome variables are generated by the following equation
 \begin{equation}\label{eq:trenchfoot}
-Y^d_{j,t} = \phi^d_{j,t} (\bm{X}^d_t, \bm{B}, \varepsilon^d_{j,t}), \quad d \in \{0,1\}, \quad j \in \mathcal{J}_t
+Y^d_{j,t} = \phi^d_{j,t} (\bm{X}^d_t, \bm{B}, \varepsilon^d_{j,t}), \quad d \in \{0,1\}, \quad j \in \mathcal{J}_t, t \in \{0,\dots,T\}
 \end{equation}
 where $\mathcal{J}_t$ is the index set of possible outcomes and $\varepsilon^d_{j,t}$ is a scalar unobserved determinant of $Y^d_{j,t}$. $\bm{Y}^d_{t-1}$ can be included among the $\bm{X}^d_{t}$. We fit first order Markov relationships for earnings, transfer income, and health in our empirical models. The equation of motion for determinant $k \in \mathcal{K}_t$ (the set of determinants at time $t$) is given by
 \begin{equation}\label{eq:frostbite}
-X^d_{k,t} = \gamma^d_{k,t} (\bm{X}^d_{t-1}, \bm{B}, \eta^d_{k,t}), \quad d \in \{0,1\}
+X^d_{k,t} = \gamma^d_{k,t} (\bm{X}^d_{t-1}, \bm{B}, \eta^d_{k,t}), \quad d \in \{0,1\}, k \in \mathcal{K}_t, t \in \{0,\dots,T\}
 \end{equation}
 where $\eta^d_{k,t}$ is an unobserved determinant of $X^d_{k,t}$. At this point, the dependence among the $\varepsilon^d_{j,t}$ and the $\eta^d_{k,t}$ is assumed to be general. The $X^d_{k,t}$ can be caused by treatment, as can $X^d_{k,t-1}$. Examples of $\bm{X}^d_t$ in our data are education, IQ, health, work experience, and crime. All are potential determinants of earnings.
 
-We assume \emph{structural invariance} of \eqref{eq:trenchfoot} and \eqref{eq:frostbite}.\footnote{See, e.g., \citet{Frisch_1938_autonomy}, \citet{Haavelmo_1943_Econometrica,Haavelmo_1944_Econometrica}, \citet{Hurwicz_1962_structural}, and \citet{Heckman_Pinto_2015_EconometTheory}.} This means that however the arguments of \eqref{eq:trenchfoot} and \eqref{eq:frostbite} are determined, for the same numerical values of $(\bm{X}^d_t, \bm{B}, \varepsilon^d_t)$ and $(\bm{X}^d_t, \bm{B}, \eta^d_{j,t})$, we obtain the same values of $Y^d_{j,t}$.\footnote{Frisch called the notion ``autonomy.'' Much later work in statistics captures structural invariance as one aspect of ``SUTVA.'' See \citet{Holland_1986_JASA} and \citet{Heckman_2008_ISR}.} This is a fundamental property of invariant economic relationships used by economists since the time of \citet{Frisch_1938_autonomy}.
+We assume \emph{structural invariance} of \eqref{eq:trenchfoot} and \eqref{eq:frostbite}.\footnote{See, e.g., \citet{Frisch_1938_autonomy}, \citet{Haavelmo_1943_Econometrica,Haavelmo_1944_Econometrica}, \citet{Hurwicz_1962_structural}, and \citet{Heckman_Pinto_2015_EconometTheory}.} This means that however the arguments of \eqref{eq:trenchfoot} and \eqref{eq:frostbite} are determined, for the same numerical values of $(\bm{X}^d_t, \bm{B}, \varepsilon^d_t)$ and $(\bm{X}^d_{t-1}, \bm{B}, \eta^d_{j,t})$, we obtain the same values of $Y^d_{j,t}$.\footnote{Frisch called the notion ``autonomy.'' Much later work in statistics captures structural invariance as one aspect of ``SUTVA.'' See \citet{Holland_1986_JASA} and \citet{Heckman_2008_ISR}.} This is a fundamental property of invariant economic relationships used by economists since the time of \citet{Frisch_1938_autonomy}.
 
 \begin{assumption}\label{ass:butts}
 (Structural Invariance)\\
 \begin{spacing}{1.5}
-\noindent Fixing $\bm{X}^d_t = (\bm{x}_t, \bm{b},\bar{\varepsilon}_t)$,\\
-$y^d_{j,t} = \phi^d_{j,t} (\bm{x}_t, \bm{b},  \bar{\varepsilon}^d_{j,t}) \quad j \in \mathcal{J}_t, \quad t \in \{0,\ldots,T\}$ is the same value assumed by $Y^d_{j,t}$ when $\bm{X}^d_{t-1} = \bm{x}_t$, $\bm{B} = \bm{b}$, and $\varepsilon^d_{j,t} = \bar{\varepsilon}_{j,t}$,\\
-and fixing $X^d_{t-1} = (x_{t-1}, b, \bar{\eta}_t)$, $X^d_{k,t} = \gamma^d_{k,t} (x_{t-1}, b, \bar{\eta}_t) \quad k \in \mathcal{K}_t$ assumes the same value as assumed by $X^d_{k,t-1} = x_{t-1}$, $B = b$, and $\eta^d_t = \bar{\eta}_t$.
+\noindent Fixing $\bm{X}^d_t = (\bm{x}_t, \bm{b},\bar{\varepsilon}_t)$, $y^d_{j,t} = \phi^d_{j,t} (\bm{x}_t, \bm{b},  \bar{\varepsilon}^d_{j,t}) \quad j \in \mathcal{J}_t, \quad t \in \{0,\ldots,T\}$ is the same value assumed by $Y^d_{j,t}$ when $\bm{X}^d_{t-1} = \bm{x}_t$, $\bm{B} = \bm{b}$, and $\varepsilon^d_{j,t} = \bar{\varepsilon}_{j,t}$, and fixing $X^d_{t-1} = (x_{t-1}, b, \bar{\eta}_t)$, $X^d_{k,t} = \gamma^d_{k,t} (x_{t-1}, b, \bar{\eta}_t) \quad k \in \mathcal{K}_t$ assumes the same value as assumed by $X^d_{k,t-1} = x_{t-1}$, $B = b$, and $\eta^d_t = \bar{\eta}_t, t \in \{0,\dots,T\}$.
 \end{spacing}
 \end{assumption}
 
-Equations~\eqref{eq:trenchfoot} and \eqref{eq:frostbite} can be estimated in the sample period $(0,\ldots,t^{*})$. We do not observe data on the experimental group after $t^{*}$. To predict outside the sample period, we access auxiliary data on older cohorts of individuals whose life cycle equations of motion are governed by Equations~\eqref{eq:trenchfoot} and \eqref{eq:frostbite}. This presumes absence of cohort effects. We discuss this assumption below when we turn to our empirical estimates. Such an assumption is maintained in many studies of human capital investments (see, e.g., \citealp{Heckman_Lochner_ea_2006_HEE}).
+Equations~\eqref{eq:trenchfoot} and \eqref{eq:frostbite} can be estimated in the sample period $(0,\ldots,t^{*})$. We do not observe data on the experimental group after $t^{*}$. To predict outside the sample period, we access auxiliary data on older cohorts of individuals whose life cycle equations of motion are governed by Equations~\eqref{eq:trenchfoot} and \eqref{eq:frostbite}. This presumes absence of cohort effects. We discuss the validity of this assumption when we turn to our empirical estimates. 
 
 \begin{assumption}\label{ass:crotchrot}
 \textbf{Absence of Cohort Effects}
 \end{assumption}
 
-Our auxiliary data do not have direct information on program participation. However, given the limited size of the experimental sample, it is reasonable to assume that no one in the auxiliary sample is treated ($D=0$). This means that \eqref{eq:trenchfoot} and \eqref{eq:frostbite} for $d=0$ can be identified over the supports of the available samples in the post-sample period. This implies that we can identify the post-experimental control group outcomes for the experiment if the support of the auxiliary data includes the support of the experimental data.
+Our auxiliary data do not have direct information on program participation. However, given the limited size of the experimental sample, and the fact that the auxiliary cohorts were not eligible to participate in the program, it is reasonable to assume that no one in the auxiliary sample is treated ($D=0$). This means that \eqref{eq:trenchfoot} and \eqref{eq:frostbite} for $d=0$ can be identified over the supports of the available samples in the post-sample period. This implies that we can identify the post-experimental control group outcomes for the experiment if the support of the auxiliary data includes the support of the experimental data.
 
-Let $\bm{Y}_j = (\bm{Y}^1_j, \bm{Y}^0_j)$, $\bm{X}_l = (\bm{X}^1_l, \bm{X}^0_l)$, $\varepsilon_n = (\varepsilon^1_n, \varepsilon^0_n)$, and define $\bm{X}^s = (\bm{X}_0,\dots,\bm{X}_T)_s$, $\bm{B}_s \bm{Y}^s = (\bm{Y}_0,\dots,\bm{Y}_T)_s$, $\bm{\varepsilon}^s = (\varepsilon_0,\dots,\varepsilon_{T})_s$ where $s$ denotes sample membership. We assume
+Let $\bm{Y}_j = (\bm{Y}^1_j, \bm{Y}^0_j)$, $\bm{X}_l = (\bm{X}^1_l, \bm{X}^0_l)$, $\varepsilon_n = (\varepsilon^1_n, \varepsilon^0_n)$, and define $\bm{X}^s = (\bm{X}_0,\dots,\bm{X}_T)_s$, $\bm{B}_s$ $\bm{Y}^s = (\bm{Y}_0,\dots,\bm{Y}_T)_s$, $\bm{\varepsilon}^s = (\varepsilon_0,\dots,\varepsilon_{T})_s$ where $s$ denotes sample membership. We assume
 
 \begin{assumption} \label{ass:contain}
 \begin{equation*}
@@ -408,11 +400,8 @@ To simplify the analysis, we assume that the unobservables are the same across t
 \end{align*}
 \end{assumption}
 
-Under the Assumptions~\ref{ass:butts}--\ref{ass:fox} we obtain the following theorem assuming observability of $\bm{X}^d_t$, $t \in \{0,\dots,T\}$.
+Under the Assumptions~\ref{ass:butts}--\ref{ass:corns} we obtain the following theorem assuming observability of $\bm{X}^d_t$, $t \in \{0,\dots,T\}$.
 
-\begin{theorem}
-Under Assumptions~\ref{ass:butts}--\ref{ass:corns}, full observability of $\bm{X}^d_t$, estimation on the samples generated from \eqref{eq:ingrownnail} generates unbiased treatment effects.
-\end{theorem}
 \begin{assumption}\label{ass:corns}
 \begin{align*}
 &\varepsilon_{j,t} \indep \varepsilon_{k,t^\prime} | \bm{X}\\
@@ -421,7 +410,18 @@ Under Assumptions~\ref{ass:butts}--\ref{ass:corns}, full observability of $\bm{X
 \end{align*}
 \end{assumption}
 
-When these methods are applied to the auxiliary data discussed in Section~\ref{section:cbaresults} they are effective. Figure~\ref{fig:control-sub} shows the prediction of labor income by comparing the forecasts in the ABC/CARE data with the life-cycle profile of disadvantaged individuals in the PSID.\footnote{Our pattern of life-cycle labor income is typical for low-skilled workers. See, e.g., \cite{Blundell-etal_2015_J-Pub-E},}$^{,}$\footnote{Our prediction is based on indicator variables of being male and being black, mother's education, average PIAT scores from ages 5 to 7, years of education at age 30, body-mass index at 34, labor income at ages 21 and 30, and one-period lagged labor income. A justification for the use of these variables, evidence on their predictive power, a sensitivity analysis to using different prediction variables are in Appendix~\ref{appendix:methodology}. We weigh the individuals in the non-auxiliary datasets to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30.} \textbf{[JJH: What are the test results from our specification test?]}
+\begin{theorem}
+Under Assumptions~\ref{ass:butts}--\ref{ass:corns}, full observability of $\bm{X}^d_t$, estimation on the samples generated from \eqref{eq:ingrownnail} generates unbiased out of sample treatment effects. $\Box$ 
+\end{theorem}
+\textbf{[JJH: Proof to come, but straightforward]}
+
+Chetty--Mincer point: at $t=t^*$, we get a good measure of perpetuity flow of lifetime earnings---i.e., $\frac{Y_{t^*}}{r}=NVP$ of earnings (this is Mincer's earnings at overtaken age). 
+
+Basic points we can get within sample experimental estimates of $\mathbb{E}(\bm{Y}^1_t - \bm{Y}^0_t | \bm{B} \subset \bm{B}_0), t < t^*$ but unless we assume that $\bm{X}^1_t-\bm{X}^0_t$ spans fully all omitted inputs, we cannot get causal effect of inputs even within experiments.
+
+On top of this, we have the problem that in the auxiliary sample the ($\bm{X}^t,\varepsilon^t$) dependence is generally different than within the experiment. For example: $\bm{X}^t$ is education ability ($\varepsilon^t$) causes people to go to school. It also affects earnings. We have a shifter (treatment) for education in experiments not in the auxiliary sample, and therefore a biased forecast.
+ 
+When these methods are applied to the auxiliary data discussed in Section~\ref{section:cbaresults} they are effective. Figure~\ref{fig:control-sub} shows the prediction of labor income by comparing the forecasts in the ABC/CARE data with the life-cycle profile of disadvantaged individuals in the PSID.\footnote{Our pattern of life-cycle labor income is typical for low-skilled workers. See, e.g., \cite{Blundell-etal_2015_J-Pub-E},}$^{,}$\footnote{Our prediction is based on indicator variables of being male and being black, mother's education, average PIAT scores from ages 5 to 7, years of education at age 30, body-mass index at 34, labor income at ages 21 and 30, and one-period lagged labor income. A justification for the use of these variables, evidence on their predictive power, a sensitivity analysis to using different prediction variables are in Appendix~\ref{appendix:methodology}. We weigh the individuals in the non-auxiliary datasets to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30.} \textbf{[JJH: What are the test results from our specification test?] [JJH: Will wait]}
 
 \begin{sidewaysfigure}[!htbp]
 \centering
