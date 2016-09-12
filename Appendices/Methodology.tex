@@ -35,7 +35,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \subsection{Incomplete Data}
 \label{app:method_noobs}
 
-\noindent We do not observe life-cycle profiles for outcomes that are crucial for estimating the life-cycle benefits of ABC/CARE. The main examples are parental income, subject labor income, public-transfer income, and health-related variables. The importance of the first one is that ABC/CARE, in practice, had a childcare feature. It relaxed the time constraints of the mothers of the treated children, who therefore were able to study or to work more. Potentially, this shifted the life-cycle profile of the mothers, either by allowing them to have more schooling or more work experience. We estimate these profiles. Similarly, a comprehensive evaluation accounts for the effect on the whole life-cycle profile of subject labor income and public-transfer income. We follow the strategy in Section~\ref{section:cbamethodology} to identify and estimate these profiles, i.e. to produce predictions. \textbf{[JJH: This is circular -- we refer to this in 6 + now we refer to 6!] [JLG: We are predicting as formalized in Section ~\ref{section:cbamethodology} and providing the details of the data sources, sensitivity analysis, and tests here. Why not constructing a common understanding instead of dismissing what is done on a daily basis? The fact that Section~\ref{section:cbamethodology} is under construction shouldn't mean that we cannot reference it across the text. Explaining here the projections would not follow any logic.]}
+\noindent We do not observe life-cycle profiles for outcomes that are crucial for estimating the life-cycle benefits of ABC/CARE. The main examples are parental income, subject labor income, public-transfer income, and health-related variables. The importance of the first one is that ABC/CARE, in practice, had a childcare feature. It relaxed the time constraints of the mothers of the treated children, who therefore were able to study or to work more. Potentially, this shifted the life-cycle profile of the mothers, either by allowing them to have more schooling or more work experience. We estimate these profiles. Similarly, a comprehensive evaluation accounts for the effect on the whole life-cycle profile of subject labor income and public-transfer income. We follow the strategy in Section~\ref{section:cbamethodology} to identify and estimate these profiles, i.e. to produce predictions. \textbf{[JJH: This is circular -- we refer to this in 6 + now we refer to 6!] [JLG: We are predicting as formalized in Section ~\ref{section:cbamethodology} and providing the details of the data sources, sensitivity analysis, and tests here. I was waiting for you to write it down as you told me.]}
 
 \subsubsection{Subject and Transfer Income}
 
@@ -48,7 +48,6 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \subsection{Auxiliary Datasets and Variables Used to Predict}
 
 \subsubsection{Auxiliary Datasets}
-\label{app:method_aux}
 
 \noindent We rely on the following datasets to estimate life-cycle profiles. We use this data in a very similar way to estimate the three life-cycle profiles of interest. For subject's labor income and parental labor income we use the exact same data. Two differences are: (i) for parental income, we need to produce a life-cycle profile from where the child is zero years old to when her mother is 65 (age at which we assume she retires); (ii) for parental income, we observe more years, and therefore need to produce predictions for fewer time points.
 
@@ -76,7 +75,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \subsubsection{Variables Used to Predict}
 
-\noindent We base our predictions of a generic outcome, $Y_{t}$ on background (pre-treatment) variables, $\mathcal{B}$, and variables that could have been affected by treatment $X_{t}$. $X_{t}$ can contain lagged values (or predictions) of $Y_{t}$.\\
+\noindent We base our predictions of a generic outcome, $Y_{t}$ on background (pre-treatment) variables, $\bm{B}$, and variables that could have been affected by treatment $\bm{X}_{t}$. $\bm{X}_{t}$ can contain lagged values (or predictions) of $Y_{t}$.\\
 
 \noindent At each age, our prediction is a function of the prediction variables. Our prediction is based on identifying and estimating a relationship between the outcome we want to predict at time $t$, $Y_{t}$, in the non-experimental samples and then using this relationship in the experimental sample. We produce one prediction for each outcome at each point of time. \textbf{[JJH: we have different predictors at different ages? I hope so.] [JLG: Yes, we are using \textit{lagged} $Y_{t}$ at each $t$ to predict $Y_{t}$. Further, we use different predictors to interpolate if compared to when we extrapolate. This is stated below.]}\\
 
@@ -86,15 +85,13 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \noindent An alternative we follow to lower this problem is to pool diverse auxiliary datasets to maximize the amount of prediction variables we are able to use. As we explain before, we use different non-experimental sources (and therefore different variables) produce our predictions at different ages.\\
 
-\noindent For the three outcomes we predict using these methodology (parental income, subject labor income, and transfer income), the prediction variables we use are: male and a black indicator ($\mathcal{B}$) in NLSY79, CNLSY, and PSID; mother's education in CNLSY ($\mathcal{B}$); PIAT scores at ages 5-7;\footnote{We take the average of the PIAT across ages 5 to 7. For ABC, we observe this variable. For CARE, we use the mathematics section of the Woodcock Johnson at these same ages because we do not observe PIAT.} in CNLSY ($X_{t}$); years of education at age 30 and labor income at ages 21 and 30 in in NLSY79, CNLSY, and PSID ($X_{t}$). All these variables are available in the experimental sample. In addition, we use the lagged variable of either of the predicted variables as a prediction variable (which in most cases is itself predicted).\footnote{At age 21, we start the predictions for subject labor income. We do no predict because we observe those values in the ABC/CARE data. At age 22, we predict using the lagged variable (which we observe). At age 23, we use the prediction at age 22 as a predictor. These illustrates how we predict based on the lagged (observed) variable or on its prediction.} \textbf{[JJH: same variables for all outcomes?] [JLG: no, there are differences, please read above paragraph and below paragraph. The variables differ depending on if we are interpolating or extrapolating and we use lagged values or predictions.]}\\
+\noindent For the three outcomes we predict using these methodology (parental income, subject labor income, and transfer income), the prediction variables we use are: male and a black indicator ($\bm{B}$) in NLSY79, CNLSY, and PSID; mother's education in CNLSY ($\bm{B}$); PIAT scores at ages 5-7;\footnote{We take the average of the PIAT across ages 5 to 7. For ABC, we observe this variable. For CARE, we use the mathematics section of the Woodcock Johnson at these same ages because we do not observe PIAT.} in CNLSY ($\bm{X}_{t}$); years of education at age 30 and labor income at ages 21 and 30 in in NLSY79, CNLSY, and PSID ($\bm{X}_{t}$). All these variables are available in the experimental sample. In addition, we use the lagged variable of either of the predicted variables as a prediction variable (which in most cases is itself predicted).\footnote{At age 21, we start the predictions for subject labor income. We do no predict because we observe those values in the ABC/CARE data. At age 22, we predict using the lagged variable (which we observe). At age 23, we use the prediction at age 22 as a predictor. These illustrates how we predict based on the lagged (observed) variable or on its prediction.} \textbf{[JJH: same variables for all outcomes?] [JLG: no, there are differences, please read above paragraph and below paragraph. The variables differ depending on if we are interpolating or extrapolating and we use lagged values or predictions.]}\\
 
 \noindent We use CNLSY to predict between ages 21 and 30 and pool NLSY79 and PSID to predict from age 30 to retirement (age 65, by assumption). We provide tests for restrictions (i) and (ii) next and then discuss potential sensitivity to the choice of these variables.
 
 \subsubsection{Matching the Experimental and Non-experimental Samples}
 
-\noindent \textbf{[JLG: not ready.]}\\
-
-\noindent When using the non-experimental samples, and with the objective of increasing the similarity on observed variables of the individuals in the experimental and non-experimental samples, weigh the individuals in the non-experimental samples to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30. We choose these variables because they are available in all three non-experimental samples and we intend to locate common comparison samples.
+\noindent When producing our predictions, we have two alternatives: (i) directly use the auxiliary samples; or (ii) use a weighted version of the auxiliary samples so that they more more closely align with respect to observed characteristics. We follow the second alternative and match the experimental and auxiliary or non-experimental samples following the procedure in Section~\ref{sec:necrosis}. We construct the weights using the formula in equation \eqref{eq:ingrownnail} of Section~\ref{sec:necrosis}. This allows us to weigh the individuals in the non-experimental samples to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30. We choose these variables because they are available in all three non-experimental samples and we intend to locate common comparison samples.
 
 \subsubsection{Containing Support}
 
@@ -158,7 +155,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \subsubsection{Predictive Power}
 
-\noindent We present evidence on the second restriction next. Tables~\ref{table:predpsid} to \ref{table:predcnlsy} show that, in each of the auxiliary samples that we use, the prediction variables $\bm{X}_{t}, \bm{B}$ are strong predictors of labor income at age 30. We present this evidence at age 30 both for brevity and to compare the predictive power of $\bm{X}_{t},\bm{B}$ on the outcomes we consider in the ABC/CARE sample.
+\noindent We present evidence on the predictive power of our prediction variables. Tables~\ref{table:predpsid} to \ref{table:predcnlsy} show that, in each of the auxiliary samples that we use, the prediction variables $\bm{X}_{t}, \bm{B}$ are strong predictors of labor income at age 30. We present this evidence at age 30 both for brevity and to compare the predictive power of $\bm{X}_{t},\bm{B}$ on the outcomes we consider in the ABC/CARE sample.
 
 \begin{table}[H] 
 \begin{threeparttable}
@@ -181,7 +178,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \input{output/nlsy_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. We weigh the individuals in the NLSY79 to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. We weigh the individuals in the NLSY79 to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -207,22 +204,20 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \input{output/abc_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. BMI stands for body-mass index. PIAT (5-7) is the average of the PIAT mathematics score from ages 5 to 7. For CARE children, we use the mathematics section of the Woodcock Johnson at these same ages because we do not observe PIAT Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. BMI stands for body-mass index. PIAT (5-7) is the average of the PIAT mathematics score from ages 5 to 7. For CARE children, we use the mathematics section of the Woodcock Johnson at these same ages because we do not observe PIAT Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 \subsubsection{Sensitivity Analysis}
 
-\noindent An immediate route of inquiry is the sensitivity of our predictions to the use of different prediction variables. We reproduce three exercises to analyze this for labor income: (i) our baseline prediction, which is based on $X_{t}, \mathcal{B}$ and the lagged value of the predicted labor income, i.e. at time $t$ we base the prediction on $X, \mathcal{B}$ and (predicted) labor income at $t-1$; (ii) the same as (i) but without using lagged labor income; (iii) the same as (i) but without using $X_{t}$; (iv) a prediction based exclusively on $\mathcal{B}$; (v) a prediction based exclusively on $X_{t}$.\\
+\noindent We examine the sensitivity of our predictions to the choice of different prediction variables. We reproduce three exercises to analyze this for labor income: (i) our baseline prediction, which is based on $\bm{X}_{t}, \bm{B}$ and the lagged value of the predicted labor income, i.e. at time $t$ we base the prediction on $\bm{X}_{t}, \bm{B}$ and (predicted) labor income at $t-1$; (ii) the same as (i) but without using lagged labor income; (iii) the same as (i) but without using $\bm{X}_{t}$; (iv) a prediction based exclusively on $\bm{B}$; (v) a prediction based exclusively on $\bm{X}_{t}$.\\
 
-\noindent Any prediction based on $X_{t}$ produces labor income profiles with significant differences between the treatment and control groups, especially for males. Adding lagged labor income increases the precision of the prediction, while background variables $\mathcal{B}$ do not help distinguish treatment and control group (as expected given balance at baseline). Lagged labor income by itself is not sufficient to predict a difference between treatment and control. $X_{t}$ by itself is sufficient to match the life-cycle profile of the control group to the life-cycle profile of the disadvantaged individuals in the PSID.\\
-
-Although the prediction in (i) is the most accurate if compared to low-skilled individuals in the PSID, they are robust to sensitivity analysis.\footnote{We obtain similar results exercises for transfer income and parental labor income and they are available under request.}\\
+\noindent Any prediction based on $\bm{X}_{t}$ produces labor income profiles with significant differences between the treatment and control groups, especially for males. Adding lagged labor income increases the precision of the prediction, while background variables $\bm{B}$ do not help distinguish treatment and control group (as expected given balance at baseline). Lagged labor income by itself is not sufficient to predict a difference between treatment and control. $\bm{X}_{t}$ by itself is sufficient to match the life-cycle profile of the control group to the life-cycle profile of the disadvantaged individuals in the PSID.\\
 
 \begin{sidewaysfigure}[!htbp]
 \centering
-\caption{Labor Income Profiles, Prediction Based on Lagged Labor Income and $X_{t},\mathcal{B}$}\label{fig:labor-income-profiles}
+\caption{Labor Income Profiles, Prediction Based on Lagged Labor Income and $\bm{X}_{t},\bm{B}$}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Predicted for ABC/CARE Males} \label{fig:abcare1}
@@ -249,7 +244,7 @@ Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CAR
 
 \begin{sidewaysfigure}[!htbp]
 \centering
-\caption{Labor Income Profiles, Prediction Based on $X,\mathcal{B}$}\label{fig:labor-income-profiles}
+\caption{Labor Income Profiles, Prediction Based on $\bm{X}_{t},\bm{B}$}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Predicted for ABC/CARE Males} \label{fig:abcare1}
@@ -276,7 +271,7 @@ Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CAR
 
 \begin{sidewaysfigure}[!htbp]
 \centering
-\caption{Labor Income Profiles, Prediction Based on Lagged Labor Income and $\mathcal{B}$}\label{fig:labor-income-profiles}
+\caption{Labor Income Profiles, Prediction Based on Lagged Labor Income and $\bm{B}$}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Predicted for ABC/CARE Males} \label{fig:abcare1}
@@ -303,7 +298,7 @@ Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CAR
 
 \begin{sidewaysfigure}[!htbp]
 \centering
-\caption{Labor Income Profiles, Prediction Based on $\mathcal{B}$}\label{fig:labor-income-profiles}
+\caption{Labor Income Profiles, Prediction Based on $\bm{B}$}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Predicted for ABC/CARE Males} \label{fig:abcare1}
@@ -330,7 +325,7 @@ Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CAR
 
 \begin{sidewaysfigure}[!htbp]
 \centering
-\caption{Labor Income Profiles, Prediction Based on $X$}\label{fig:labor-income-profiles}
+\caption{Labor Income Profiles, Prediction Based on $\bm{X}_{t}$}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Predicted for ABC/CARE Males} \label{fig:abcare1}
@@ -465,7 +460,7 @@ and 90\textsuperscript{th} quantiles of each bootstrap distribution. \\
 \mathbb{E} \left( \frac{ \sum_{t=0}^T B_t}{\sum_{t=0}^T C_t} \right),
 \end{align}
 
-\noindent where we let $T = 79$, define $B_t$ and $C_t$ to be the total benefits and costs of the
+\noindent where we let $T = 79$, define $B_t$ and $C_t$ to be the benefits and costs of the
 program at time $t$, and define $\mathbb{E}(.)$ to be the sample mean. See Table \ref{table:bc_comp} for a detailed list of the components
 to the benefits and costs of ABC/CARE . We take the sum of the treatment effects on each component
 of the benefits to be the total benefits of the ABC/CARE programs. \\
