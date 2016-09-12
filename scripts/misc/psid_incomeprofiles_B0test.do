@@ -86,7 +86,7 @@ foreach sex of numlist 0 1 {
 		matrix colnames stats`num'`sex' =  m`sex' sd`sex' n`sex'
 		
 		// weighted
-		summ inc_labor`num' [iw=wtabc_allids] if male == `sex' & black == 1 & m_ed0y <= 16
+		summ inc_labor`num' [iw=wtabc_allids] if male == `sex' & black == 1 & m_ed0y <= 12
 		local mw`num'`sex'  = r(mean)
 		local sdw`num'`sex' = r(sd)
 		local nw`num'`sex'  = r(N)
