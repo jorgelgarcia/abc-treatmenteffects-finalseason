@@ -6,6 +6,8 @@ Created on Fri Jun 10 19:22:00 2016
 
 This file just lists all the variables that are used for interpolation,
 extrapolation, and the weights.
+W = background
+X = outcomes
 """
 
 from treedict import TreeDict
