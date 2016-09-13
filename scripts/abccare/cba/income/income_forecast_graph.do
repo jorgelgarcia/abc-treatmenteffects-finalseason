@@ -117,8 +117,8 @@ foreach source in labor /*transfer*/ {
 	cd $output
 	global y0  0[10]50
 	global y1 10[10]80
-	local bwidth1 = .25
-	local bwidth0 = .45  
+	local bwidth1 = .65
+	local bwidth0 = .65  
 	forval sex = 0/1 {
 	
 	preserve

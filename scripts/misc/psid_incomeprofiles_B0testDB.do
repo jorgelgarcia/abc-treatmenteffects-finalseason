@@ -34,6 +34,7 @@ global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 // bring weights from psid file
 cd $datapsidw
 use psid-abc-match.dta, clear
+
 keep id wtabc_allids p_inc0y m_ed0y
 tempfile dandweights 
 save "`dandweights'", replace
