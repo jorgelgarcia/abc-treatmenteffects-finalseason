@@ -25,7 +25,7 @@ global klmmexico: env klmMexico
 
 global dataabccare   = "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
 global data_dir      = "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/rslt/projections"
-global incomeresults = "${klmmexico}/abccare/income_projections/aug-30/"
+global incomeresults = "${klmmexico}/abccare/income_projections/1_1000b/"
 global output        = "${projects}/abc-treatmenteffects-finalseason/output/"
 
 // prepare data for graphing
