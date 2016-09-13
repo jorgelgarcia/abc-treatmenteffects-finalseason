@@ -74,6 +74,8 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 			age_x = age - 1
 			predictors = cols.interp.predictors + ['inc_labor{}'.format(age_x)]
 			aux = deepcopy(interp.loc[interp_index, :])
+			
+			
 		
 		elif age in range(31, 68):
 			if age == 31:
@@ -84,6 +86,7 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 				age_x = age - 1
 				predictors = cols.extrap.predictors + ['inc_labor{}'.format(age_x)]
 			aux = deepcopy(extrap.loc[extrap_index, :])
+			
 
 		c = 'inc_labor{}'.format(age)
 
@@ -103,63 +106,71 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 				data = aux.loc[aux.male==0]
 				abcd = abc.loc[abc.male==0]
 				abcd_count = abcd.loc[abcd['male']==0]['male'].count()
-
-			# reset auxiliary index (why?)
+			
+			# reset auxiliary index (why?: because dmatrices drops na)
 			data.reset_index('id', drop=True, inplace=True)
 			data.index = [j for j in range(data.shape[0])]
-
 			# create design matrix for regressions
 			fmla = '{} ~ {}'.format(c, ' + '.join(predictors))
 			endog, exog = dmatrices(fmla, data, return_type='dataframe')
 			exog = sm.add_constant(exog)
-
-			# determine weights and format appropriately
+			exog_index = [x for x in exog.index]
+			print len(exog_index)
 			if age in range(22, 30):
-				# use CNLSY weights
-				weight_array = interp_weights
-			else:
-				# use NLSY+PSID weights
-				weigth_array = extrap_weights
-			weight_type = 'wtabc_allids_c' + str(cs) + weight
-			weight_array = weight_array.loc[:,weight_type]
+				# reset index of weights
+				interp_weights.reset_index('id', drop=True, inplace=True)
+				interp_weights.index = [j for j in range(interp_weights.shape[0])]
+				print interp_weights.index
+				#interp_weights.dropna(axis=0,how='any',inplace=True)
+				weight_array = deepcopy(interp_weights[exog_index])
 
+			elif age in range(31, 68):
+				# reset index of weights
+				extrap_weights.reset_index('id', drop=True, inplace=True)
+				extrap_weights.index = [j for j in range(extrap_weights.shape[0])]
+
+				#extrap_weights.dropna(axis=0,how='any',inplace=True)
+				weight_array = deepcopy(extrap_weights[exog_index])
+
+			weight_type = 'wtabc_allids_c' + cs + '_' + weight
+			weight_array = weight_array.loc[:,weight_type]
+			
+		
 			# estimate coefficients
 			fail_switch = 0
-			try:
-				model = sm.WLS(endog, exog, weights=weight_array)
-				fit = model.fit()
-				params = fit.params
-				resid = fit.resid
-			except:
-				fail_switch = 1
-				if age in range(22, 30):
-					params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.interp.predictors + ['y'])
-				else:
-					params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.extrap.predictors + ['y'])
-				resid = pd.Series([np.nan for j in range(endog.shape[0])])
+			#try:
+			model = sm.WLS(endog, exog, weights=weight_array)
+			fit = model.fit()
+			params = fit.params
+			resid = fit.resid
+			#except:
+			#	fail_switch = 1
+			#	if age in range(22, 30):
+			#		params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.interp.predictors + ['y'])
+			#	else:
+			#		params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.extrap.predictors + ['y'])
+			#	resid = pd.Series([np.nan for j in range(endog.shape[0])])
 			
-   			# calculate RMSE
-   			rmse = resid * resid
-   			rmse =  pd.Series(sqrt(rmse.mean(axis=0)), index=['rmse'])
-   			params = pd.concat([params, rmse],axis=0)
+			# calculate RMSE
+			rmse = resid * resid
+			rmse =  pd.Series(sqrt(rmse.mean(axis=0)), index=['rmse'])
+			params = pd.concat([params, rmse],axis=0)
 			params.rename({'inc_labor{}'.format(age_x):'y'}, inplace=True)
-			
-   			if age in range(22,30):
+			if age in range(22,30):
 				params_interp[sex].loc[age, :] = params
-   			else:
-				params_extrap[sex].loc[age, :] = params
-
-   			# resample the errors, and merge in with ABC IDs
-			if fail_switch == 0:
-   				ehat = pd.DataFrame(np.random.choice(resid, size=abcd_count))
 			else:
-   				ehat = pd.DataFrame([np.nan for j in range(abcd_count)])
-   			abcd_ix = abcd.reset_index(level=0)
-   			ehat = pd.concat([abcd_ix.loc[:,'id'], ehat], axis=1)
-   			ehat.columns = ['id', age]
-   			ehat.columns.name = 'age'
-   			ehat.set_index('id', inplace=True)
-   			error_mat[sex] = pd.concat([error_mat[sex], ehat], axis=1)
+				params_extrap[sex].loc[age, :] = params
+			# resample the errors, and merge in with ABC IDs
+			if fail_switch == 0:
+				ehat = pd.DataFrame(np.random.choice(resid, size=abcd_count))
+			else:
+				ehat = pd.DataFrame([np.nan for j in range(abcd_count)])
+			abcd_ix = abcd.reset_index(level=0)
+			ehat = pd.concat([abcd_ix.loc[:,'id'], ehat], axis=1)
+			ehat.columns = ['id', age]
+			ehat.columns.name = 'age'
+			ehat.set_index('id', inplace=True)
+			error_mat[sex] = pd.concat([error_mat[sex], ehat], axis=1)
 
 
 		if verbose:

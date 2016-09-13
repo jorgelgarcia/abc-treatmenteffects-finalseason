@@ -91,13 +91,12 @@ def boot_predict_aux(weight, controls, interp, extrap, adraw):
 
 	extrap_weights_index.sort_index(inplace=True)
 	extrap_weights = extrap_weights_index.loc[pd.IndexSlice[:,adraw],:]
-	
-	print extrap_weights
+
 	
 	# now estimate the earnings
 	params_interp, params_extrap, errors, proj_interp, proj_extrap = predict_abc(interp, extrap, interp_index=interp_ind, extrap_index=extrap_ind, weight=weight, interp_weights=interp_weights, extrap_weights=extrap_weights, cs=controls, abc = abcd, verbose=True)
 	
-	print 'Success auxiliary bootstrap {}.'.format(adraw)
+	print 'Success auxiliary bootstrap {}. Weight: {}. Control set: {}.'.format(adraw, weight, controls)
 
 	output = [params_interp, params_extrap, errors, proj_interp, proj_extrap]
 	
@@ -108,9 +107,10 @@ weights = ['full','treat','control']
 control_sets = ['1','2','3']
 
 for weight in weights:
-	print "Now on weight: " + weight
+	print 'Using weight: ' + weight
 
 	for cs in control_sets:
+		print 'Using control set: ' + cs
 
 		# run estimates
 		rslt = Parallel(n_jobs=1)(delayed(boot_predict_aux)(weight, cs, interp, extrap, k) for k in xrange(aux_draw))
