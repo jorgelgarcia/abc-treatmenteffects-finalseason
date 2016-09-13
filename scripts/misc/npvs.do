@@ -106,7 +106,7 @@ replace m = m/100000
 // replace m = m/10 if ind >= 34
 
 cd $output
-foreach sex of numlist 3 {
+foreach sex of numlist 1 2  3 {
 	#delimit
 	twoway (bar m ind        if estimate == 1 & sex == `sex', fcolor(white) lcolor(gs0) lwidth(medthick))
 	       (bar m ind        if estimate == 2 & sex == `sex', color(gs4))
@@ -116,7 +116,7 @@ foreach sex of numlist 3 {
 		legend(cols(2) order(1 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 3 "Treatment vs. Alternative Preschool" 
 					    4 "Signicant at 10%") size(vsmall))
 			  xlabel(2 "Program Costs" 6 "Total Net Benefits" 10 "Labor Income" 14 "Parental Income"
-			  18 "Crime" 22 "QALYs*" 26 "Total Medical Costs" 30 "Costs of Education", angle(45) noticks grid glcolor(white) labsize(small)) 
+			  18 "Crime" 22 "QALYs*" 26 "Total Medical Costs" 30 "Costs of Education", angle(45) noticks grid glcolor(gs14) labsize(small)) 
 			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
@@ -125,7 +125,6 @@ foreach sex of numlist 3 {
 	graph export abccare_npvs`sex'.eps, replace
 }		
 
-/*
 // do treatment vs control only
 drop if ind == .
 keep if estimate == 1 & sex == 3
@@ -146,7 +145,7 @@ twoway (bar     m part1            if estimate == 1 & sex == 3, fcolor(white) lc
 		, 
 		legend(cols(2) order(1 "Treatment vs. Next Best" 2 "Signicant at 10%") position(north) size(small))
 			  xlabel(1 "Program Costs" 2 "Total Net Benefits" 3 "Labor Income" 4 "Parental Income"
-			  5 "Crime" 6 "QALYs*" 7 "Total Medical Costs" 8 "Costs of Education",  angle(45) noticks grid glcolor(white) labsize(small)) 
+			  5 "Crime" 6 "QALYs*" 7 "Total Medical Costs" 8 "Costs of Education",  angle(45) noticks grid glcolor(gs14) labsize(small)) 
 			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
