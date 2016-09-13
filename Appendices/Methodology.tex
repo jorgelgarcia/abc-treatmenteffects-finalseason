@@ -35,7 +35,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \subsection{Incomplete Data}
 \label{app:method_noobs}
 
-\noindent We do not observe life-cycle profiles for outcomes that are crucial for estimating the life-cycle benefits of ABC/CARE. The main examples are parental income, subject labor income, public-transfer income, and health-related variables. The importance of the first one is that ABC/CARE, in practice, had a childcare feature. It relaxed the time constraints of the mothers of the treated children, who therefore were able to study or to work more. Potentially, this shifted the life-cycle profile of the mothers, either by allowing them to have more schooling or more work experience. We estimate these profiles. Similarly, a comprehensive evaluation accounts for the effect on the whole life-cycle profile of subject labor income and public-transfer income. We follow the strategy in Section~\ref{section:cbamethodology} to identify and estimate these profiles, i.e. to produce predictions. \textbf{[JJH: This is circular -- we refer to this in 6 + now we refer to 6!] [JLG: We are predicting as formalized in Section ~\ref{section:cbamethodology} and providing the details of the data sources, sensitivity analysis, and tests here. I was waiting for you to write it down as you told me.]}
+\noindent We do not observe life-cycle profiles for outcomes that are crucial for estimating the life-cycle benefits of ABC/CARE. The main examples are parental income, subject labor income, public-transfer income, and health-related variables. The importance of the first one is that ABC/CARE, in practice, had a childcare feature. It relaxed the time constraints of the mothers of the treated children, who therefore were able to study or to work more. Potentially, this shifted the life-cycle profile of the mothers, either by allowing them to have more schooling or more work experience. We estimate these profiles. Similarly, a comprehensive evaluation accounts for the effect on the whole life-cycle profile of subject labor income and public-transfer income. We follow the strategy in Section~\ref{section:cbamethodology} to identify and estimate these profiles, i.e. to produce predictions.
 
 \subsubsection{Subject and Transfer Income}
 
@@ -89,9 +89,13 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \noindent We use CNLSY to predict between ages 21 and 30 and pool NLSY79 and PSID to predict from age 30 to retirement (age 65, by assumption). We provide tests for restrictions (i) and (ii) next and then discuss potential sensitivity to the choice of these variables.
 
-\subsubsection{Matching the Experimental and Non-experimental Samples}
+\subsubsection{Matching the Experimental and Non-experimental Samples} \label{appendix:match}
 
-\noindent When producing our predictions, we have two alternatives: (i) directly use the auxiliary samples; or (ii) use a weighted version of the auxiliary samples so that they more more closely align with respect to observed characteristics. We follow the second alternative and match the experimental and auxiliary or non-experimental samples following the procedure in Section~\ref{sec:necrosis}. We construct the weights using the formula in equation \eqref{eq:ingrownnail} of Section~\ref{sec:necrosis}. This allows us to weigh the individuals in the non-experimental samples to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30. We choose these variables because they are available in all three non-experimental samples and we intend to locate common comparison samples.
+\noindent When producing our predictions, we have two alternatives: (i) directly use the auxiliary samples; or (ii) use a weighted version of the auxiliary samples so that they more more closely align with respect to observed characteristics. We follow the second alternative and match the experimental and auxiliary or non-experimental samples following the procedure in Section~\ref{sec:necrosis}. We construct the weights using the formula in equation \eqref{eq:ingrownnail} of Section~\ref{sec:necrosis}. This allows us to weigh the individuals in the non-experimental samples to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at age 30. We choose these variables because they are available in all three non-experimental samples and we intend to locate common comparison samples. 
+
+\paragraph{Sensitivity Analysis}
+
+\noindent \textbf{[JLG: In preparation.]}
 
 \subsubsection{Containing Support}
 
