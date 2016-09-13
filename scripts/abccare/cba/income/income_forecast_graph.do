@@ -117,6 +117,8 @@ foreach source in labor /*transfer*/ {
 	cd $output
 	global y0  0[10]50
 	global y1 10[10]80
+	local bwidth1 = .25
+	local bwidth0 = .45  
 	forval sex = 0/1 {
 	
 	preserve
@@ -134,12 +136,12 @@ foreach source in labor /*transfer*/ {
 		local c_se				lcol(black) lpattern(dash)
 	
 		# delimit ;
-		twoway (line mean_age age if R == 0, `c_mean')
-				(line mean_age age if R == 1, `t_mean')
-				(line plus age if R == 0, `c_se')
-				(line plus age if R == 1, `t_se')
-				(line minus age if R == 0, `c_se')
-				(line minus age if R == 1, `t_se'),
+		twoway (lowess mean_age age if R == 0, bwidth(`bwidth`sex'') `c_mean')
+				(lowess mean_age age if R == 1, bwidth(`bwidth`sex'') `t_mean')
+				(lowess plus age if R == 0, bwidth(`bwidth`sex'') `c_se')
+				(lowess plus age if R == 1, bwidth(`bwidth`sex'') `t_se')
+				(lowess minus age if R == 0, bwidth(`bwidth`sex'') `c_se')
+				(lowess minus age if R == 1, bwidth(`bwidth`sex'') `t_se'),
 				`graphregion'
 				`xaxis'
 				`yaxis'
