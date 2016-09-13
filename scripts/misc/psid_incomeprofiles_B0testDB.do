@@ -35,12 +35,8 @@ global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 cd $datapsidw
 use psid-abc-match.dta, clear
 keep id wtabc_allids p_inc0y m_ed0y
-tempfile weights 
+tempfile dandweights 
 save "`dandweights'", replace
-
-// constructed weights
-cd $dataweights
-use psid-weights-finaldata.dta, clear
 
 cd $datapsid
 use psid-base.dta, clear
@@ -77,34 +73,68 @@ reshape wide inc_labor lweight, i(id) j(age2)
 keep id male inc_labor25-inc_labor65 lweight25-lweight65 black eduever wtabc_allids p_inc0y m_ed0y
 replace m_ed0y = eduever if m_ed0y ==.
 
+tempfile psidwide 
+save   "`psidwide'", replace
+
 foreach sex of numlist 0 1 {
-	matrix all`sex' = J(1,6,.)
-	matrix colnames all`sex' = m`sex' sd`sex' n`sex' mw`sex' sdw`sex' nw`sex'
+	matrix all`sex' = J(1,3,.)
+	matrix colnames all`sex' = m`sex' sd`sex' n`sex'
 	foreach num of numlist 25(1)65 {
 		
 		// B \in B_{0}
-		summ inc_labor`num' if male == `sex' & black == 1 & m_ed0y <= 12
+		summ inc_labor`num' [aw = lweight`num'] if male == `sex' & black == 1 & m_ed0y <= 12 
 		local m`num'`sex'  = r(mean)
 		local sd`num'`sex' = r(sd)
 		local n`num'`sex'  = r(N)
 		matrix stats`num'`sex' = [`m`num'`sex'',`sd`num'`sex'',`n`num'`sex'']
 		matrix colnames stats`num'`sex' =  m`sex' sd`sex' n`sex'
-		
-		// weighted
-		summ inc_labor`num' [iw=wtabc_allids] if male == `sex' & black == 1 & m_ed0y <= 12
-		local mw`num'`sex'  = r(mean)
-		local sdw`num'`sex' = r(sd)
-		local nw`num'`sex'  = r(N)
-		matrix statsw`num'`sex' = [`mw`num'`sex'',`sdw`num'`sex'',`nw`num'`sex'']
-		matrix colnames statsw`num'`sex' =  mw`sex' sdw`sex' nw`sex'
-		
-		matrix stats`num'`sex' = [stats`num'`sex',statsw`num'`sex']
+
 		mat_rapp all`sex' : all`sex' stats`num'`sex'
 	}
 	matrix all`sex' = all`sex'[2...,1...]
 }
 matrix all = [all1,all0]
 
+cd $dataweights
+use psid-weights-finaldata.dta, clear
+merge m:1 id using  "`psidwide'" 
+keep if _merge == 3
+
+foreach sex of numlist 0 1 {
+	matrix allw`sex' = J(1,2,.)
+	matrix colnames allw`sex' = mw`sex' sdw`sex'
+		foreach num of numlist 25(1)65 {
+			matrix allw`sex'`num' = J(1,1,.)
+			matrix colnames allw`sex'`num' = mw`sex'
+			foreach draw of numlist 0(1)98 {
+				summ inc_labor`num' if male == `sex' & black == 1 & m_ed0y <= 12 & draw == `draw' [aw=wtabc_allids_c3_control], meanonly
+				local m`num'`draw'`sex'  = r(mean)
+				matrix stats`num'`draw'`sex' = [`m`num'`draw'`sex'']
+				matrix colnames stats`num'`draw'`sex' = mw`sex'
+				
+				mat_rapp allw`sex'`num' : allw`sex'`num' stats`num'`draw'`sex'
+			}
+			matrix allw`sex'`num' = allw`sex'`num'[2...,1...]
+			preserve
+			clear
+			svmat allw`sex'`num', names(col)
+			summ mw`sex'
+			local mean   = r(mean)
+			local sd     = r(sd)
+			local  N     = r(N)
+			local semean = `mean'/(`sd'/sqrt(`N'))
+			
+			matrix stats`num'`sex' = [`mean',`semean']
+			matrix colnames stats`num'`sex' = mw`sex' sdw`sex'
+			
+			mat_rapp allw`sex' : allw`sex' stats`num'`sex'
+			restore
+		}
+	matrix allw`sex' = allw`sex'[2...,1...]
+}
+matrix allw = [allw1,allw0]
+
+/*	
 clear 
 svmat all, names(col)
 gen age = _n + 24

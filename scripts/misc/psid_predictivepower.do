@@ -108,3 +108,49 @@ est sto abcZL
 
 cd $output
 outreg2 [abcZ abcZX abcZL] using abc_predict, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 nonotes
+
+// ABC + treat
+foreach var of varlist si30y_inc_labor male m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi {
+	gen treat`var' = treat*`var'
+}
+
+reg si30y_inc_labor treat male treatmale m_ed0y treatm_ed0y, robust
+est sto abcZf
+
+reg si30y_inc_labor treat male treatmale m_ed0y treatm_ed0y piatmath treatpiatmath years_30y treatyears_30y si21y_inc_labor treatsi21y_inc_labor, robust
+est sto abcZXf
+
+reg si30y_inc_labor treat male treatmale m_ed0y treatm_ed0y piatmath treatpiatmath years_30y treatyears_30y si21y_inc_labor treatsi21y_inc_labor si34y_bmi treatsi34y_bmi, robust
+est sto abcZLf
+
+cd $output
+outreg2 [abcZf abcZXf abcZLf] using abc_predictf, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 nonotes
+
+// females
+reg si30y_inc_labor treat m_ed0y treatm_ed0y if male == 0, robust
+est sto abcZff
+
+reg si30y_inc_labor treat m_ed0y treatm_ed0y piatmath treatpiatmath years_30y treatyears_30y si21y_inc_labor treatsi21y_inc_labor if male == 0, robust
+est sto abcZXff
+
+reg si30y_inc_labor treat m_ed0y treatm_ed0y piatmath treatpiatmath years_30y treatyears_30y si21y_inc_labor treatsi21y_inc_labor si34y_bmi treatsi34y_bmi if male == 0, robust
+est sto abcZLff
+
+cd $output
+outreg2 [abcZff abcZXff abcZLff] using abc_predictff, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 nonotes
+
+
+// males
+reg si30y_inc_labor treat m_ed0y treatm_ed0y if male == 1, robust
+est sto abcZfm
+
+reg si30y_inc_labor treat m_ed0y treatm_ed0y piatmath treatpiatmath years_30y treatyears_30y si21y_inc_labor treatsi21y_inc_labor if male == 1, robust
+est sto abcZXfm
+
+reg si30y_inc_labor treat m_ed0y treatm_ed0y piatmath treatpiatmath years_30y treatyears_30y si21y_inc_labor treatsi21y_inc_labor si34y_bmi treatsi34y_bmi if male == 1, robust
+est sto abcZLfm
+
+cd $output
+outreg2 [abcZfm abcZXfm abcZLfm] using abc_predictfm, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 nonotes
+
+
