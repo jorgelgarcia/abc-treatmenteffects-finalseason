@@ -23,3 +23,7 @@ paths.nlsy_bsid = os.path.join(filedir, 'nlsy_sampling', 'samples_nlsy.csv')
 paths.cnlsy_bsid = os.path.join(filedir, 'nlsy_sampling', 'samples_cnlsy.csv')
 
 paths.rslts = os.path.join(filedir, 'rslt', 'projections')
+
+paths.cnlsy_weights = os.path.join(filedir, '..', '..', '..', '..', 'data', 'nlsy', 'extensions', 'abc-match-cnlsy', 'cnlsy-weights-finaldata.dta')
+paths.nlsy_weights = os.path.join(filedir, '..', '..', '..', '..', 'data', 'nlsy', 'extensions', 'abc-match-nlsy', 'nlsy-weights-finaldata.dta')
+paths.psid_weights = os.path.join(filedir, '..', '..', '..', '..', 'data', 'psid', 'extensions', 'abc-match', 'psid-weights-finaldata.dta')
