@@ -31,6 +31,7 @@ function epanechnikov(sampledata, controls, bandwidth)
     sampledata = sampledata[!isna(sampledata[var]),:]
   end
   sampledata = sampledata[!isna(sampledata[:P]),:]
+
   # ----------------------------------------------- #
   # Estimate the Mahalanobis Distance for Each Pair #
   # ----------------------------------------------- #
@@ -52,7 +53,6 @@ function epanechnikov(sampledata, controls, bandwidth)
 
     # Loop through each id's to generate id-specific Epanechnikov weights
     for id in sampledata[condition, :id]
-
       # Generate vector of (X-mu), where mu is the observation for each individual
       maha_controls = [:drop]     # list to collect (X-mu) column names for all controls
 
@@ -74,10 +74,9 @@ function epanechnikov(sampledata, controls, bandwidth)
       try
         diag(maha) .^ (1/2)
       catch err
-        println("epanechnikove error: $(err)")
+        println("epanechnikov error: $(err)")
         continue
       end
-      println("maha successful")
 
       maha = diag(maha) .^ (1/2)
 

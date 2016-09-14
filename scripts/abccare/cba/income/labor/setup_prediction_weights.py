@@ -66,19 +66,25 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 		params_extrap[sex].index.names = ['age']
 		params_extrap[sex].columns = ['Intercept'] + cols.extrap.predictors + ['y'] + ['rmse']
 		error_mat[sex] = pd.DataFrame([])
-
+	
 	# obtain parameters for every age
 	for age in ages:
-
+			
 		if age in range(22, 30):
+			aux = deepcopy(interp.loc[interp_index, :])
+			if age == 22:
+
+				interp_weights.reset_index(inplace=True)
+				del interp_weights['draw']
+				interp_weights.set_index('id', inplace=True, drop=True)
+				weight_array = deepcopy(interp_weights.loc[pd.IndexSlice[interp_index],:])
+
 			age_x = age - 1
 			predictors = cols.interp.predictors + ['inc_labor{}'.format(age_x)]
-			aux = deepcopy(interp.loc[interp_index, :])
-
-			weight_array = deepcopy(interp_weights.loc[pd.IndexSlice[interp_index,:],:])
 
 
 		elif age in range(31, 68):
+			aux = deepcopy(extrap.loc[extrap_index, :])
 			if age == 31:
 				age_x = 29
 				predictors = cols.extrap.predictors + ['inc_labor{}'.format(age_x)]
@@ -86,11 +92,16 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 			else: 
 				age_x = age - 1
 				predictors = cols.extrap.predictors + ['inc_labor{}'.format(age_x)]
-			aux = deepcopy(extrap.loc[extrap_index, :])
 			
-			extrap_index_weight = [x[1] for x in extrap_index]
+			
+			
+			if age == 31:
+				extrap_index_weight = [x[1] for x in extrap_index]
 
-			weight_array =deepcopy(extrap_weights.loc[pd.IndexSlice[extrap_index_weight,:],:])
+				extrap_weights.reset_index(inplace=True)
+				del extrap_weights['draw']
+				extrap_weights.set_index('id', inplace=True, drop=True)
+				weight_array = deepcopy(extrap_weights.loc[extrap_index_weight,:])
 
 		c = 'inc_labor{}'.format(age)
 		# obtain parameters for different sexes
@@ -113,10 +124,9 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 		
 			if weight == 'treat':
 				abcd = abcd.loc[abcd.R==1]
-
 			elif weight == 'control':
 				abcd = abcd.loc[abcd.R==0]
-
+			
 			# reset auxiliary index (because dmatrices won't use id)
 			data.reset_index('id', drop=True, inplace=True)
 			data.index = [j for j in range(data.shape[0])]
@@ -131,27 +141,27 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 			endog, exog = dmatrices(fmla, data, return_type='dataframe')
 			exog = sm.add_constant(exog)
 			exog_index = [x for x in exog.index]
-			
-			weight_array = weight_array.loc[pd.IndexSlice[exog_index]]
-
-
+			weight_forWLS = weight_array.loc[pd.IndexSlice[exog_index]]
 			weight_type = 'wtabc_allids_c' + cs + '_' + weight
-			#weight_array = weight_array.loc[:, weight_type]
-		
+			weight_forWLS = weight_forWLS.loc[:, weight_type]
+			weight_forWLS.dropna(axis=0, inplace=True)
+			
+			exog = exog.loc[weight_forWLS.index,:]
+			endog = endog.loc[weight_forWLS.index,:]
 			# estimate coefficients
 			fail_switch = 0
-			try:
-				model = sm.WLS(endog, exog, weights=weight_array)
-				fit = model.fit()
-				params = fit.params
-				resid = fit.resid
-			except:
-				fail_switch = 1
-				if age in range(22, 30):
-					params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.interp.predictors + ['y'])
-				else:
-					params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.extrap.predictors + ['y'])
-				resid = pd.Series([np.nan for j in range(endog.shape[0])])
+			#try:
+			model = sm.WLS(endog, exog, weights=weight_forWLS)
+			fit = model.fit()
+			params = fit.params
+			resid = fit.resid
+			#except:
+			#	fail_switch = 1
+			#	if age in range(22, 30):
+			#		params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.interp.predictors + ['y'])
+			#	else:
+			#		params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.extrap.predictors + ['y'])
+			#	resid = pd.Series([np.nan for j in range(endog.shape[0])])
 			
 			# calculate RMSE
 			rmse = resid * resid
