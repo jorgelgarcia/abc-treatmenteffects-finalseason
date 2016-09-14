@@ -30,7 +30,7 @@ include("$scripts/function/matching.jl")
 # ================================================================ #
 # declare bootstraps
 global bootstraps = 99
-global dbootstraps = 99
+global dbootstraps = 1
 
 # declare other options
 global linear_ipw = 1
@@ -84,7 +84,7 @@ for data in ("abccare", "abc", "care")
 		global append_switch = 1
 		if dbrep == 0
 		 Matchini["Matchini_$(data)"] = mestimate(datainuse, outcomes, outcomelist, controlset, 0, dbrep, "yes", 1)
-		 println("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPprinting Matchini $(Matchini["Matchini_$(data)"])")
+		 println("printing Matchini $(Matchini["Matchini_$(data)"])")
 	  else
 	   MatchInitial_add = mestimate(datainuse, outcomes, outcomelist, controlset, 0, dbrep, "yes", 1)
 		 if append_switch == 1
