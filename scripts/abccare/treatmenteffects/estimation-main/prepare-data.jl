@@ -109,7 +109,7 @@ for var in keepvar
       abccare[abccare[var] .== string(".",alphabet), var] = NA
     end
 
-    if var == "hct_phy12y"
+    if var == :hct_phy12y
       println("Printing for hct_phy12y")
       println("$(abccare[:[:hct_phy12y,:hct_cog12y]])")
     end
@@ -133,20 +133,6 @@ for var in keepvar
 end
 
 
-# ------------------------------- #
-# Define ABC, CARE, ABC-CARE data #
-# ------------------------------- #
-abccare_data = abccare
-
-abc_data = abccare
-abc_data = abc_data[abc_data[:abc] .== 1, :]
-
-care_data = abccare
-care_data = care_data[care_data[:abc] .== 0, :]
-
-
-
-
 # -------------------------------------------------------------------------------- #
 # Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise) #
 # -------------------------------------------------------------------------------- #
@@ -159,3 +145,16 @@ for dvar in discretized
   abccare[abccare[dvar_p] .> med_d, parse("$(dvar)_dum")] = 1 # Replace dummy column to one if d_var is greater than the median
   abccare[isna(abccare[dvar_p]), parse("$(dvar)_dum")] = NA # Replace values of dunny column if corresponding rwo in original column is NA
 end
+
+
+
+# ------------------------------- #
+# Define ABC, CARE, ABC-CARE data #
+# ------------------------------- #
+abccare_data = abccare
+
+abc_data = abccare
+abc_data = abc_data[abc_data[:abc] .== 1, :]
+
+care_data = abccare
+care_data = care_data[care_data[:abc] .== 0, :]
