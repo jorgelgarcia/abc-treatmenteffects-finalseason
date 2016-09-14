@@ -55,8 +55,9 @@ function epanechnikov(sampledata, controls, bandwidth)
 
     # Loop through each id's to generate id-specific Epanechnikov weights
       println("Here? looping through id")
+      println("Printing id $(sampledata[:id])")
     for id in sampledata[condition, :id]
-
+     println("Here? looping through individual id $(id)")
       # Generate vector of (X-mu), where mu is the observation for each individual
       maha_controls = [:drop]     # list to collect (X-mu) column names for all controls
 
