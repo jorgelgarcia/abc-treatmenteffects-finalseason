@@ -84,7 +84,7 @@ for data in ("abccare", "abc", "care")
 		global append_switch = 1
 		if dbrep == 0
 		 Matchini["Matchini_$(data)"] = mestimate(datainuse, outcomes, outcomelist, controlset, 0, dbrep, "yes", 1)
-		 println("printing Matchini $(Matchini["Matchini_$(data)"])")
+		 println("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPprinting Matchini $(Matchini["Matchini_$(data)"])")
 	  else
 	   MatchInitial_add = mestimate(datainuse, outcomes, outcomelist, controlset, 0, dbrep, "yes", 1)
 		 if append_switch == 1
