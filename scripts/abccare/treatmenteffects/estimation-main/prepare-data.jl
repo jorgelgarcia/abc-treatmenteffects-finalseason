@@ -111,7 +111,7 @@ for var in keepvar
 
     if var == :hct_phy12y
       println("Printing for hct_phy12y")
-      println("$(abccare[:[:hct_phy12y,:hct_cog12y]])")
+      println("$(abccare[:,[:hct_phy12y,:hct_cog12y]])")
     end
 
   # Variables that originally contained ".a"&& etc. are saved as string. Now we need to convert string to integers. I could not find destring command for Julia. To be updated later.
