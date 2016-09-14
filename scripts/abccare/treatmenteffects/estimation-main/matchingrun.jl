@@ -80,6 +80,7 @@ for data in ("abccare", "abc", "care")
 		outcomelist = outcomeDict["outcome_care"]
 	end
 
+	println("Running matching initial for $(data)")
 	for dbrep in 0:dbootstraps
 		global append_switch = 1
 		if dbrep == 0
