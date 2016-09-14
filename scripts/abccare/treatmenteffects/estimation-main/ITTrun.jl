@@ -28,8 +28,8 @@ include("$scripts/function/ITT.jl")
 # Declare options, controls, and outcomes of interest
 # ================================================================ #
 # declare bootstraps
-global bootstraps = 100
-global dbootstraps = 100
+global bootstraps = 99
+global dbootstraps = 99
 
 # declare other options
 global linear_ipw = 1

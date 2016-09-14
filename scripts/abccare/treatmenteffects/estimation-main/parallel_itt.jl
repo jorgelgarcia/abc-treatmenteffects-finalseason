@@ -13,8 +13,10 @@ srand(1)
 # ITT Estimates Using Parallel Processing
 # ======================================================= #
 # Call number of processors
-procs = 24
-addprocs(procs)
+using ClusterManagers
+procs = 25
+#addprocs(procs)
+addprocs_pbs(procs)
 
 # Define "to parallelize process"
 require("$thisdir/ITTrun.jl")

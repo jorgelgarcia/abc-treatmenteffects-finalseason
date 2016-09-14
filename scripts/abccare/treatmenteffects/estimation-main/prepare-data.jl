@@ -73,7 +73,7 @@ for col in [:ipw_var, :ipw_pooled1, :ipw_pooled2, :ipw_pooled3]
 end
 
 # Collect names of discretized variables (used in IPW)
-discretized = [:m_iq0y, :m_ed0y, :m_age0y, :hrabc_index, :apgar1, :apgar5, :prem_birth, :m_married0y, :m_teen0y, :has_relatives, :male, :f_home0y, :hh_sibs0y, :cohort]
+discretized = [:m_iq0y, :m_ed0y, :m_age0y, :hrabc_index, :apgar1, :apgar5, :prem_birth, :m_married0y, :m_teen0y, :has_relatives, :male, :f_home0y, :hh_sibs0y]
 for item in discretized
   if !in(item, ipw_varlist)
     ipw_varlist = append!(ipw_varlist, [item])
@@ -132,3 +132,15 @@ abc_data = abc_data[abc_data[:abc] .== 1, :]
 
 care_data = abccare
 care_data = care_data[care_data[:abc] .== 0, :]
+
+
+# Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise)
+global discretized = ["m_iq0y", "m_ed0y", "m_age0y", "hrabc_index", "apgar1", "apgar5", "prem_birth", "m_married0y", "m_teen0y", "has_relatives", "male", "f_home0y", "hh_sibs0y"]
+
+for dvar in discretized
+  dvar_p = parse(dvar) # Making "d_var" to :d_var
+  med_d = median(abccare[!isna(abccare[dvar_p]), dvar_p]) # take the median of the non-missing values for each variables
+  abccare[parse("$(dvar)_dum")] = 0 # Generate a new column for dummy
+  abccare[abccare[dvar_p] .> med_d, parse("$(dvar)_dum")] = 1 # Replace dummy column to one if d_var is greater than the median
+  abccare[isna(abccare[dvar_p]), parse("$(dvar)_dum")] = NA # Replace values of dunny column if corresponding rwo in original column is NA
+end
