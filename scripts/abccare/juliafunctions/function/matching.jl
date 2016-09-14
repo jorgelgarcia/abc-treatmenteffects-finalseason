@@ -15,7 +15,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
     mgender = ["pooled", "male", "female"]
   elseif bygender == 0
     mgender = ["pooled"]
-  end 
+  end
 
   # Define outMat that will store the results
   outMat = Dict()
@@ -41,6 +41,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
   catch error
     success = 0
     global append_switch = 0
+    println("Epan error: $(error)")
     println("Epanechinikov failed")
   end
 

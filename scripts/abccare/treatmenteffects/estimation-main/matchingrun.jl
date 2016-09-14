@@ -29,8 +29,8 @@ include("$scripts/function/matching.jl")
 # Declare options, controls, and outcomes of interest
 # ================================================================ #
 # declare bootstraps
-global bootstraps = 100
-global dbootstraps = 100
+global bootstraps = 99
+global dbootstraps = 99
 
 # declare other options
 global linear_ipw = 1
@@ -48,7 +48,7 @@ global genderloop = ["male", "female", "pooled"]
 # Bring in data
 # ================================================================ #
 # List of outcomes
-outcomes = readtable("$scripts/../outcomes/outcomes_cba.csv")
+outcomes = readtable("$scripts/../outcomes/outcomes_cba_p_inc.csv")
 
 # ABC/CARE data
 abccare = readtable("$data/append-abccare_iv.csv")
@@ -84,6 +84,7 @@ for data in ("abccare", "abc", "care")
 		global append_switch = 1
 		if dbrep == 0
 		 Matchini["Matchini_$(data)"] = mestimate(datainuse, outcomes, outcomelist, controlset, 0, dbrep, "yes", 1)
+		 println("printing Matchini $(Matchini["Matchini_$(data)"])")
 	  else
 	   MatchInitial_add = mestimate(datainuse, outcomes, outcomelist, controlset, 0, dbrep, "yes", 1)
 		 if append_switch == 1
