@@ -53,10 +53,10 @@ cnlsy_weights['dataset'] = 'cnlsy'
 
 reader = StataReader(paths.psid_weights)
 psid_weights = reader.data(convert_dates=False, convert_categoricals=False)
-psid_weights = psid_weights.iloc[:,0:aux_draw]
+
+#psid_weights = psid_weights.iloc[:,0:aux_draw]
 psid_weights.set_index(['id','draw'],inplace=True)
 psid_weights['dataset'] = 'psid'
-
 interp_weights_index = cnlsy_weights
 
 extrap_weights_index = pd.concat([psid_weights, nlsy_weights], axis=0, names=('id','draw'))
@@ -103,9 +103,9 @@ def boot_predict_aux(weight, controls, interp, extrap, adraw):
 	return output
 
 #----------------------------------------------------------------
-weights = ['full','treat','control']
+weights = ['treat','control']
 control_sets = ['1']
-
+sexes = ['male', 'female', 'pooled']
 for weight in weights:
 	print 'Using weight: ' + weight
 
@@ -121,7 +121,7 @@ for weight in weights:
 		projections = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
 
 	# output results
-		for sex in ['male', 'female', 'pooled']:
+		for sex in sexes:
 			params_interp[weight][cs][sex] = pd.concat([rslt[k][0][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
 			params_extrap[weight][cs][sex] = pd.concat([rslt[k][1][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
 			errors[weight][cs][sex] = pd.concat([rslt[k][2][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
@@ -129,7 +129,13 @@ for weight in weights:
 
 			# output projections .csv
 			projections[weight][cs][sex].to_csv(os.path.join(paths.rslts, 'labor_proj_{}_{}_{}.csv'.format(sex,cs,weight)))
-	
-			#if weight == 'control':
-				#combined = pd.concat([projections['treat'][cs][sex], projections['control'][cs][sex]])
-				#combined.to_csv(os.path.join(paths.rslts, 'labor_proj_combined_{}_{}.csv'.format(sex,cs)
+
+for cs in control_sets:
+	for sex in sexes:
+		df_treat = projections['treat'][cs][sex]
+		df_control = projections['control'][cs][sex]
+		print df_treat
+		print df_control
+		combined = pd.concat([df_treat, df_control])
+		print combined
+		combined.to_csv(os.path.join(paths.rslts, 'labor_proj_combined_{}_{}.csv'.format(sex,cs)))
