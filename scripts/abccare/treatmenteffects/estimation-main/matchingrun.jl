@@ -65,7 +65,8 @@ d_index = 1
 
 Matchini = Dict()
 
-for data in ("abccare", "abc", "care")
+for data in ("abccare", "abc")
+#for data in ("abccare", "abc", "care")
 	if data == "abccare"
 		datainuse = abccare_data
 		controlset = conDict["controls_abccare"]
@@ -80,7 +81,6 @@ for data in ("abccare", "abc", "care")
 		outcomelist = outcomeDict["outcome_care"]
 	end
 
-	println("Running matching initial for $(data)")
 	for dbrep in 0:dbootstraps
 		global append_switch = 1
 		if dbrep == 0
