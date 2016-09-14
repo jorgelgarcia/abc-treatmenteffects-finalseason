@@ -38,7 +38,7 @@ for gender in genderloop
 	# Concatenate outputs from all workers
 	ITTfinal_pre1 = vcat(ITTinitial["$(gender)"], ITTboot[1]["$(gender)"], ITTboot[2]["$(gender)"], ITTboot[3]["$(gender)"], ITTboot[4]["$(gender)"], ITTboot[5]["$(gender)"], ITTboot[6]["$(gender)"], ITTboot[7]["$(gender)"], ITTboot[8]["$(gender)"], ITTboot[9]["$(gender)"], ITTboot[10]["$(gender)"])
 	ITTfinal_pre2 = vcat(ITTfinal_pre1, ITTboot[11]["$(gender)"], ITTboot[12]["$(gender)"], ITTboot[13]["$(gender)"], ITTboot[14]["$(gender)"], ITTboot[15]["$(gender)"], ITTboot[16]["$(gender)"], ITTboot[17]["$(gender)"], ITTboot[18]["$(gender)"], ITTboot[19]["$(gender)"], ITTboot[20]["$(gender)"])
-	ITTfinal["$(gender)"] = vcat(ITTfinal_pre2, , ITTboot[21]["$(gender)"], ITTboot[22]["$(gender)"], ITTboot[23]["$(gender)"], ITTboot[24]["$(gender)"], ITTboot[25]["$(gender)"])
+	ITTfinal["$(gender)"] = vcat(ITTfinal_pre2, ITTboot[21]["$(gender)"], ITTboot[22]["$(gender)"], ITTboot[23]["$(gender)"], ITTboot[24]["$(gender)"], ITTboot[25]["$(gender)"])
 
 	# ===================================================== #
 	# Export to csv
