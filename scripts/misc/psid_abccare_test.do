@@ -207,5 +207,5 @@ mat all = [all1,all2]
 cd $output
 #delimit
 outtable using allsamplesmatch, 
-mat(all) replace nobox center f(%9.3f);
+mat(all) replace nobox center norowlab f(%9.3f);
 #delimit cr
