@@ -102,7 +102,7 @@ for cat in categories
 		end
 
 		if factor_switch = 1
-			diagonalfac(factor["factor_$(cat())"], 1)
+			diagonalfac(factor["factor_$(cat)"], 1)
 
 		end
 	end

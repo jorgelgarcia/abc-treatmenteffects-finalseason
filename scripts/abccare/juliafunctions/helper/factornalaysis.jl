@@ -76,9 +76,9 @@ function diagonalfac(tofactordata, factorn)
     # Preparation to creating correlation matrix
     arraydata = Array(nonadata)
 
-    println("$(N) is the number of measures")
-    println("$(rankdata) are linearly independent")
-    println("$(N) should be identical to $(rankdata) for the code to finish with success")
+    #println("$(N) is the number of measures")
+    #println("$(rankdata) are linearly independent")
+    #println("$(N) should be identical to $(rankdata) for the code to finish with success")
 
     # Generate number of factors
     if factorn == "None"
