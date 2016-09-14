@@ -87,6 +87,23 @@ keepvar = append!(keepvar, outcome_list)
 keepvar = append!(keepvar, ipw_varlist)
 abccare = abccare[:, keepvar]
 
+
+# ----------------------------------- #
+# Define ABC-CARE, ABC, CARE datasets #
+# ----------------------------------- #
+abccare[isna(abccare[:id]), :id] = 9999
+abccare = abccare[abccare[:id] .!= 64, :]
+abccare = abccare[!((abccare[:RV] .== 1) & (abccare[:R] .== 0)), :]
+abccare_data = abccare
+
+abc_data = abccare
+abc_data = abc_data[abc_data[:abc] .== 1, :]
+
+care_data = abccare
+care_data = care_data[care_data[:abc] .== 0, :]
+
+
+
 # ---------------------------------------------------- #
 # Correcting weird variables (Unique Problem to Julia) #
 # ---------------------------------------------------- #
@@ -119,22 +136,10 @@ for var in keepvar
   end
 end
 
-# ----------------------------------- #
-# Define ABC-CARE, ABC, CARE datasets #
-# ----------------------------------- #
-abccare[isna(abccare[:id]), :id] = 9999
-abccare = abccare[abccare[:id] .!= 64, :]
-abccare = abccare[!((abccare[:RV] .== 1) & (abccare[:R] .== 0)), :]
-abccare_data = abccare
 
-abc_data = abccare
-abc_data = abc_data[abc_data[:abc] .== 1, :]
-
-care_data = abccare
-care_data = care_data[care_data[:abc] .== 0, :]
-
-
-# Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise)
+# -------------------------------------------------------------------------------- #
+# Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise) #
+# -------------------------------------------------------------------------------- #
 global discretized = ["m_iq0y", "m_ed0y", "m_age0y", "hrabc_index", "apgar1", "apgar5", "prem_birth", "m_married0y", "m_teen0y", "has_relatives", "male", "f_home0y", "hh_sibs0y"]
 
 for dvar in discretized
