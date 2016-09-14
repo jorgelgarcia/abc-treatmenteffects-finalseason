@@ -27,12 +27,11 @@ function epanechnikov(sampledata, controls, bandwidth)
   println("covariance success!")
 
   # Create a temporary dataset (new_sampledata) in order to generate id-level columns
-  println("Here? control limiting to non-NA")
   for var in controls
     sampledata = sampledata[!isna(sampledata[var]),:]
   end
   sampledata = sampledata[!isna(sampledata[:P]),:]
-    println("Here? after control limiting to non-NA")
+
   # ----------------------------------------------- #
   # Estimate the Mahalanobis Distance for Each Pair #
   # ----------------------------------------------- #
@@ -41,7 +40,6 @@ function epanechnikov(sampledata, controls, bandwidth)
     treat_c = 1 - treat
 
     # Define conditions to select only treated or only controls
-      println("Here? conditioning")
     cond_treat = (sampledata[:R] .== 1)
     cond_control = (sampledata[:R] .== 0)
 
@@ -54,10 +52,7 @@ function epanechnikov(sampledata, controls, bandwidth)
     end
 
     # Loop through each id's to generate id-specific Epanechnikov weights
-      println("Here? looping through id")
-      println("Printing id $(sampledata[:id])")
     for id in sampledata[condition, :id]
-     println("Here? looping through individual id $(id)")
       # Generate vector of (X-mu), where mu is the observation for each individual
       maha_controls = [:drop]     # list to collect (X-mu) column names for all controls
 
@@ -72,19 +67,16 @@ function epanechnikov(sampledata, controls, bandwidth)
       end
       deleteat!(maha_controls, findin(maha_controls, [:drop]))
       # Declare matrix of (X-mu) (I will call it X for convenience)
-      println("HERE? before X")
       X = Array(sampledata[sampledata[:R] .== treat_c, maha_controls])
 
       # Estimate Mahalanobis metric
       maha = X * invcov * X'
-      println("HERE? After maha")
       try
         diag(maha) .^ (1/2)
       catch err
         println("epanechnikov error: $(err)")
         continue
       end
-      println("maha successful")
 
       maha = diag(maha) .^ (1/2)
 
