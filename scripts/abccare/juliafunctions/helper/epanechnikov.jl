@@ -27,10 +27,12 @@ function epanechnikov(sampledata, controls, bandwidth)
   println("covariance success!")
 
   # Create a temporary dataset (new_sampledata) in order to generate id-level columns
+  println("Here? control limiting to non-NA")
   for var in controls
     sampledata = sampledata[!isna(sampledata[var]),:]
   end
   sampledata = sampledata[!isna(sampledata[:P]),:]
+    println("Here? after control limiting to non-NA")
   # ----------------------------------------------- #
   # Estimate the Mahalanobis Distance for Each Pair #
   # ----------------------------------------------- #
@@ -39,6 +41,7 @@ function epanechnikov(sampledata, controls, bandwidth)
     treat_c = 1 - treat
 
     # Define conditions to select only treated or only controls
+      println("Here? conditioning")
     cond_treat = (sampledata[:R] .== 1)
     cond_control = (sampledata[:R] .== 0)
 
@@ -51,6 +54,7 @@ function epanechnikov(sampledata, controls, bandwidth)
     end
 
     # Loop through each id's to generate id-specific Epanechnikov weights
+      println("Here? looping through id")
     for id in sampledata[condition, :id]
 
       # Generate vector of (X-mu), where mu is the observation for each individual
