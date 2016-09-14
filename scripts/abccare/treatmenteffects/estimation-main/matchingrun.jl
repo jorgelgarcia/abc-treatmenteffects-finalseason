@@ -65,7 +65,8 @@ d_index = 1
 
 Matchini = Dict()
 
-for data in ("abccare", "abc", "care")
+for data in ("abccare", "abc")
+#for data in ("abccare", "abc", "care")
 	if data == "abccare"
 		datainuse = abccare_data
 		controlset = conDict["controls_abccare"]
@@ -112,7 +113,7 @@ function matchingrun(boots)
 
 	d_index = 1
 
-	for data in ("abccare", "abc", "care")
+	for data in ("abccare", "abc")
 		if data == "abccare"
 			datainuse = abccare_data
 			controlset = conDict["controls_abccare"]

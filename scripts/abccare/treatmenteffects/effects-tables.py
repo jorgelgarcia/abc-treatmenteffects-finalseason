@@ -23,8 +23,12 @@ from paths import paths
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
 
-path_results = os.path.join(filedir, 'rslts-jun25/abccare_ate/')
-path_outcomes = os.path.join(filedir, 'outcomes_cba_merged.csv')
+# YK cross this out to generate the p_inc table
+#path_results = os.path.join(filedir, 'rslts-jun25/abccare_ate/')
+#path_outcomes = os.path.join(filedir, 'outcomes_cba_merged.csv')
+
+path_results = os.path.join(filedir, 'rslt/')
+path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_p_inc.csv')
 
 # provide option for two sided tests
 twosided = 0
@@ -41,12 +45,12 @@ outcomes = pd.read_csv(path_outcomes, index_col='variable')
 rslt_y = {}
 
 for sex in ['pooled', 'male', 'female']:
-    itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
-    itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
-    itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])
+    itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])    
+    itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])
     
-    matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
-    matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])    
+    matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])
     
     itt_all = itt_all.loc[:,['itt_noctrl', 'itt_ctrl', 'itt_wctrl']]
     rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
@@ -55,7 +59,7 @@ for sex in ['pooled', 'male', 'female']:
     rslt_y[sex] = pd.concat([itt_all, rslt_p1, rslt_p0], axis=1, keys=['pall', 'p1', 'p0'])
     
 rslt_y = pd.concat(rslt_y, axis=1, keys=rslt_y.keys(), names=['sex', 'type', 'coefficient'])
-rslt_y = rslt_y.reorder_levels(['draw', 'ddraw', 'rowname'])
+rslt_y = rslt_y.reorder_levels(['draw', 'ddraw', 'rowme'])
 rslt_y.index.names = ['draw', 'ddraw', 'variable']
 rslt_y.sort_index(inplace=True)
 
@@ -162,7 +166,7 @@ tstat.loc[outcomes.query('hyp == "-"').index, :] = tstat.loc[outcomes.query('hyp
 # 2. provide blocks and dictionary to estimate/store stepdown results
 stepdown = pd.DataFrame([], columns=tstat.columns, index=tstat.index)
 blocks = list(pd.Series(outcomes.block.values).unique())
-blocks.remove(np.nan)
+#blocks.remove(np.nan)
 
 for block in blocks:
     print "Stepdown test for main tables, %s block..." % (block)
