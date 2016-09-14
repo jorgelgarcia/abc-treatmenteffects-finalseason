@@ -176,7 +176,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
                 glm(ITT_weight_fml, wtsdata, Normal(), IdentityLink(), wts = wtsdata[parse("ipw_$(y)")].data)
               # If the regression fails
               catch err
-                  println("printing error for WLS regression: $(err)")
+                #  println("printing error for WLS regression: $(err)")
                   push!(outMat["ITT_$(gender)_P$(p)"], [y, draw, ddraw, ITT_none_coeff, ITT_none_pval, ITT_none_N, ITT_control_coeff, ITT_control_pval, ITT_control_N, NA, NA, NA])
                   continue
               end
