@@ -29,6 +29,7 @@ global datacnlsyw    = "$klmshare/Data_Central/data-repos/nlsy/extensions/abc-ma
 global dataabccare  = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
 global dataabcres   = "$klmmexico/abccare/income_projections"
 global dataweights  = "$klmmexico/abccare/as_weights/weights_09122016"
+global nlsyother    = "$klmmexico/BPSeason2"
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
@@ -46,7 +47,7 @@ keep if _merge == 3
 
 matrix allw = J(2,1,.)
 matrix rownames allw = m se
-	foreach var of varlist male years_30y  si30y_inc_labor si34y_bmi {
+	foreach var of varlist male years_30y m_ed0y si30y_inc_labor si34y_bmi {
 		summ `var' [aw=wtabc_allids_c3_control] if black == 1
 		mat  `var' = [r(mean) \ r(sd)]
 		matrix colnames `var' =`var'
@@ -55,9 +56,20 @@ matrix rownames allw = m se
 	}
 matrix allwp = allw[1...,2...]
 
+matrix allt = J(2,1,.)
+matrix rownames allt = m se
+	foreach var of varlist male years_30y m_ed0y si30y_inc_labor si34y_bmi {
+		summ `var' [aw=wtabc_allids_c3_treat] if black == 1
+		mat  `var' = [r(mean) \ r(sd)]
+		matrix colnames `var' =`var'
+		mat rownames `var' = m se
+		mat_capp allt : allt `var'
+	}
+matrix allpwt = allt[1...,2...]
+
 matrix allw = J(2,1,.)
 matrix rownames allw = m se
-	foreach var of varlist male years_30y  si30y_inc_labor si34y_bmi {
+	foreach var of varlist male years_30y m_ed0y si30y_inc_labor si34y_bmi {
 		summ `var'  if black == 1 & m_ed0y <= 12
 		mat  `var' = [r(mean) \ r(sd)]
 		matrix colnames `var' =`var'
@@ -69,7 +81,7 @@ matrix allwpb = allw[1...,2...]
 // nlsy
 cd $datanlsyw
 use  nlsy-abc-match.dta, clear
-keep id male black birthyear years_30y si30y_inc_labor si30y_inc_trans_pub 
+keep id black male years_30y si21y_inc_labor inc_labor35 inc_labor36
 tempfile dandweights 
 save   "`dandweights'", replace
 
@@ -77,11 +89,12 @@ cd $dataweights
 use nlsy-weights-finaldata.dta, clear
 merge m:1 id using  "`dandweights'" 
 keep if _merge == 3
+drop _merge
 
 matrix allw = J(2,1,.)
 matrix rownames allw = m se
-	foreach var of varlist male years_30y  si30y_inc_labor si30y_inc_trans_pub {
-		summ `var' [aw=wtabc_allids_c3_control] if  years_30y >= 9 & black == 1
+	foreach var of varlist male years_30y si21y_inc_labor inc_labor35 inc_labor36 {
+		summ `var' [aw=wtabc_allids_c3_control]
 		mat  `var' = [r(mean) \ r(sd)]
 		matrix colnames `var' =`var'
 		mat rownames `var' = m se
@@ -89,10 +102,21 @@ matrix rownames allw = m se
 	}
 matrix allwn = allw[1...,2...]
 
+matrix allt = J(2,1,.)
+matrix rownames allt = m se
+	foreach var of varlist male years_30y si21y_inc_labor inc_labor35 inc_labor36 {
+		summ `var' [aw=wtabc_allids_c3_treat]
+		mat  `var' = [r(mean) \ r(sd)]
+		matrix colnames `var' =`var'
+		mat rownames `var' = m se
+		mat_capp allt : allt `var'
+	}
+matrix allnwt = allt[1...,2...]
+
 matrix allw = J(2,1,.)
 matrix rownames allw = m se
-	foreach var of varlist male years_30y  si30y_inc_labor si30y_inc_trans_pub {
-		summ `var' if  years_30y >= 9 & black == 1 & years_30y <= 12
+	foreach var of varlist male years_30y si21y_inc_labor inc_labor35 inc_labor36 {
+		summ `var' if black == 1 & years_30y <= 12
 		mat  `var' = [r(mean) \ r(sd)]
 		matrix colnames `var' =`var'
 		mat rownames `var' = m se
@@ -103,7 +127,7 @@ matrix allwnb = allw[1...,2...]
 // cnlsy
 cd $datacnlsyw
 use  cnlsy-abc-match.dta, clear
-keep id male black birthyear years_30y si30y_inc_labor si34y_bmi m_ed0y
+keep id black male years_30y si21y_inc_labor si30y_inc_labor si34y_bmi m_ed0y
 tempfile dandweights 
 save   "`dandweights'", replace
 
@@ -114,7 +138,7 @@ keep if _merge == 3
 
 matrix allw = J(2,1,.)
 matrix rownames allw = m se
-	foreach var of varlist male years_30y  si30y_inc_labor si34y_bmi {
+	foreach var of varlist male years_30y si21y_inc_labor si30y_inc_labor si34y_bmi  {
 		summ `var' [aw=wtabc_allids_c3_control]
 		mat  `var' = [r(mean) \ r(sd)]
 		matrix colnames `var' =`var'
@@ -123,9 +147,20 @@ matrix rownames allw = m se
 	}
 matrix allwc = allw[1...,2...]
 
+matrix allcwt = J(2,1,.)
+matrix rownames allcwt = m se
+	foreach var of varlist male years_30y si21y_inc_labor si30y_inc_labor si34y_bmi  {
+		summ `var' [aw=wtabc_allids_c3_treat]
+		mat  `var' = [r(mean) \ r(sd)]
+		matrix colnames `var' =`var'
+		mat rownames `var' = m se
+		mat_capp allcwt : allcwt `var'
+	}
+matrix allcwt = allw[1...,2...]
+
 matrix allw = J(2,1,.)
 matrix rownames allw = m se
-	foreach var of varlist male years_30y  si30y_inc_labor si34y_bmi {
+	foreach var of varlist male years_30y  si21y_inc_labor si30y_inc_labor si34y_bmi {
 		summ `var' if black == 1 & m_ed0y <=12
 		mat  `var' = [r(mean) \ r(sd)]
 		matrix colnames `var' =`var'
@@ -137,12 +172,15 @@ matrix allwcb = allw[1...,2...]
 cd $dataabccare
 use append-abccare_iv.dta, clear
 drop if random == 3
-keep if R == 0
+foreach var of varlist si34y_bmi si30y_inc_labor { 
+	summ `var', d
+	replace `var' = . if `var' > r(p95) | `var' < r(p5)
+}
 
 matrix alle = J(2,1,.)
 matrix rownames alle = m se
-	foreach var of varlist male years_30y si30y_inc_labor si34y_bmi {
-		summ `var'
+	foreach var of varlist male years_30y si21y_inc_labor si30y_inc_labor si34y_bmi {
+		summ `var' if R == 0
 		mat  `var' = [r(mean) \ r(sd)]
 		matrix colnames `var' =`var'
 		mat rownames `var' = m se
@@ -150,8 +188,22 @@ matrix rownames alle = m se
 	}
 matrix alle = alle[1...,2...]
 
-mat all = [alle \ allwp \ allwn \ allwc \ allwpb \ allwnb \ allwcb]
+matrix allet = J(2,1,.)
+matrix rownames allet = m se
+	foreach var of varlist male years_30y si21y_inc_labor si30y_inc_labor si34y_bmi {
+		summ `var' if R == 1
+		mat  `var' = [r(mean) \ r(sd)]
+		matrix colnames `var' =`var'
+		mat rownames `var' = m se
+		mat_capp allet : allet `var'
+	}
+matrix allet = allet[1...,2...]
 
+matrix fill = J(2,5,.)
+mat all1 = [alle  \ allwp  \ allwn   \ allwc \ allwpb \ allwnb \ allwcb]
+mat all2 = [allet \ allpwt \ allnwt  \ allcwt  \ fill   \ fill \ fill ]
+
+mat all = [all1,all2]
 cd $output
 #delimit
 outtable using allsamplesmatch, 
