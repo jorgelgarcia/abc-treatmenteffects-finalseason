@@ -23,7 +23,7 @@ from paths import paths
 #----------------------------------------------------------------
 
 seed = 1234
-aux_draw = 99
+aux_draw = 2 # need to use more than 1
 
 #----------------------------------------------------------------
 
@@ -104,7 +104,7 @@ def boot_predict_aux(weight, controls, interp, extrap, adraw):
 
 #----------------------------------------------------------------
 weights = ['full','treat','control']
-control_sets = ['1','2','3']
+control_sets = ['1']
 
 for weight in weights:
 	print 'Using weight: ' + weight
@@ -115,17 +115,21 @@ for weight in weights:
 		# run estimates
 		rslt = Parallel(n_jobs=1)(delayed(boot_predict_aux)(weight, cs, interp, extrap, k) for k in xrange(aux_draw))
 
-		params_interp = {'full':{}, 'treat':{}, 'control':{}}
-		params_extrap = {'full':{}, 'treat':{}, 'control':{}}
-		errors = {'full':{}, 'treat':{}, 'control':{}}
-		projections = {'full':{}, 'treat':{}, 'control':{}}
+		params_interp = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
+		params_extrap = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
+		errors = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
+		projections = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
 
 	# output results
 		for sex in ['male', 'female', 'pooled']:
-			params_interp[sex][weight][cs] = pd.concat([rslt[k][0][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
-			params_extrap[sex][weight][cs] = pd.concat([rslt[k][1][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
-			errors[sex][weight][cs] = pd.concat([rslt[k][2][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
-			projections[sex][weight][cs] = pd.concat([pd.concat([rslt[k][3][sex], rslt[k][4][sex]], axis=1) for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
+			params_interp[weight][cs][sex] = pd.concat([rslt[k][0][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
+			params_extrap[weight][cs][sex] = pd.concat([rslt[k][1][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
+			errors[weight][cs][sex] = pd.concat([rslt[k][2][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
+			projections[weight][cs][sex] = pd.concat([pd.concat([rslt[k][3][sex], rslt[k][4][sex]], axis=1) for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
 
 			# output projections .csv
-			projections[sex].to_csv(os.path.join(paths.rslts, 'labor_proj_{}_{}_{}.csv'.format(sex,cs,weight)))
+			projections[weight][cs][sex].to_csv(os.path.join(paths.rslts, 'labor_proj_{}_{}_{}.csv'.format(sex,cs,weight)))
+	
+			#if weight == 'control':
+				#combined = pd.concat([projections['treat'][cs][sex], projections['control'][cs][sex]])
+				#combined.to_csv(os.path.join(paths.rslts, 'labor_proj_combined_{}_{}.csv'.format(sex,cs)
