@@ -67,14 +67,16 @@ function epanechnikov(sampledata, controls, bandwidth)
       end
       deleteat!(maha_controls, findin(maha_controls, [:drop]))
       # Declare matrix of (X-mu) (I will call it X for convenience)
+      println("HERE? before X")
       X = Array(sampledata[sampledata[:R] .== treat_c, maha_controls])
 
       # Estimate Mahalanobis metric
       maha = X * invcov * X'
+      println("HERE? After maha")
       try
         diag(maha) .^ (1/2)
       catch err
-        println("epanechnikove error: $(err)")
+        println("epanechnikov error: $(err)")
         continue
       end
       println("maha successful")
