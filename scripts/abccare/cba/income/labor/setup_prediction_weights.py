@@ -38,11 +38,11 @@ from variables import cols
 #----------------------------------------------------------------
 
 # Save the index of people who you cannot estimate income for
-male_interp_nix = abcd.loc[abcd.male==1].loc[pd.isnull(abcd.loc[abcd.male==1, cols.interp.predictors]).any(axis=1)].index
-female_interp_nix = abcd.loc[abcd.male==0].loc[pd.isnull(abcd.loc[abcd.male==0, cols.interp.predictors]).any(axis=1)].index
+#male_interp_nix = abcd.loc[abcd.male==1].loc[pd.isnull(abcd.loc[abcd.male==1, cols.interp.predictors]).any(axis=1)].index
+#female_interp_nix = abcd.loc[abcd.male==0].loc[pd.isnull(abcd.loc[abcd.male==0, cols.interp.predictors]).any(axis=1)].index
 
-male_extrap_nix = abcd.loc[abcd.male==1].loc[pd.isnull(abcd.loc[abcd.male==1, cols.extrap.predictors]).any(axis=1)].index
-female_extrap_nix = abcd.loc[abcd.male==0].loc[pd.isnull(abcd.loc[abcd.male==0, cols.extrap.predictors]).any(axis=1)].index
+#male_extrap_nix = abcd.loc[abcd.male==1].loc[pd.isnull(abcd.loc[abcd.male==1, cols.extrap.predictors]).any(axis=1)].index
+#female_extrap_nix = abcd.loc[abcd.male==0].loc[pd.isnull(abcd.loc[abcd.male==0, cols.extrap.predictors]).any(axis=1)].index
 
 #----------------------------------------------------------------
 
@@ -74,9 +74,10 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 			age_x = age - 1
 			predictors = cols.interp.predictors + ['inc_labor{}'.format(age_x)]
 			aux = deepcopy(interp.loc[interp_index, :])
-			
-			
-		
+
+			weight_array = deepcopy(interp_weights.loc[pd.IndexSlice[interp_index,:],:])
+
+
 		elif age in range(31, 68):
 			if age == 31:
 				age_x = 29
@@ -87,9 +88,11 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 				predictors = cols.extrap.predictors + ['inc_labor{}'.format(age_x)]
 			aux = deepcopy(extrap.loc[extrap_index, :])
 			
+			extrap_index_weight = [x[1] for x in extrap_index]
+
+			weight_array =deepcopy(extrap_weights.loc[pd.IndexSlice[extrap_index_weight,:],:])
 
 		c = 'inc_labor{}'.format(age)
-
 		# obtain parameters for different sexes
 		for sex in ['pooled', 'male', 'female']:
 
@@ -102,54 +105,53 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 				data = aux.loc[aux.male==1]
 				abcd = abc.loc[abc.male==1]
 				abcd_count = abcd.loc[abcd['male']==1]['male'].count()
+
 			else:
 				data = aux.loc[aux.male==0]
 				abcd = abc.loc[abc.male==0]
 				abcd_count = abcd.loc[abcd['male']==0]['male'].count()
-			
-			# reset auxiliary index (why?: because dmatrices drops na)
+		
+			if weight == 'treat':
+				abcd = abcd.loc[abcd.R==1]
+
+			elif weight == 'control':
+				abcd = abcd.loc[abcd.R==0]
+
+			# reset auxiliary index (because dmatrices won't use id)
 			data.reset_index('id', drop=True, inplace=True)
 			data.index = [j for j in range(data.shape[0])]
+			
+			weight_array.reset_index('id', drop=True, inplace=True)
+			weight_array.index = [j for j in range(weight_array.shape[0])]
+
+			#weight_array = weight_array[data.index]
+
 			# create design matrix for regressions
 			fmla = '{} ~ {}'.format(c, ' + '.join(predictors))
 			endog, exog = dmatrices(fmla, data, return_type='dataframe')
 			exog = sm.add_constant(exog)
 			exog_index = [x for x in exog.index]
-			print len(exog_index)
-			if age in range(22, 30):
-				# reset index of weights
-				interp_weights.reset_index('id', drop=True, inplace=True)
-				interp_weights.index = [j for j in range(interp_weights.shape[0])]
-				print interp_weights.index
-				#interp_weights.dropna(axis=0,how='any',inplace=True)
-				weight_array = deepcopy(interp_weights[exog_index])
+			
+			weight_array = weight_array.loc[pd.IndexSlice[exog_index]]
 
-			elif age in range(31, 68):
-				# reset index of weights
-				extrap_weights.reset_index('id', drop=True, inplace=True)
-				extrap_weights.index = [j for j in range(extrap_weights.shape[0])]
-
-				#extrap_weights.dropna(axis=0,how='any',inplace=True)
-				weight_array = deepcopy(extrap_weights[exog_index])
 
 			weight_type = 'wtabc_allids_c' + cs + '_' + weight
-			weight_array = weight_array.loc[:,weight_type]
-			
+			#weight_array = weight_array.loc[:, weight_type]
 		
 			# estimate coefficients
 			fail_switch = 0
-			#try:
-			model = sm.WLS(endog, exog, weights=weight_array)
-			fit = model.fit()
-			params = fit.params
-			resid = fit.resid
-			#except:
-			#	fail_switch = 1
-			#	if age in range(22, 30):
-			#		params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.interp.predictors + ['y'])
-			#	else:
-			#		params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.extrap.predictors + ['y'])
-			#	resid = pd.Series([np.nan for j in range(endog.shape[0])])
+			try:
+				model = sm.WLS(endog, exog, weights=weight_array)
+				fit = model.fit()
+				params = fit.params
+				resid = fit.resid
+			except:
+				fail_switch = 1
+				if age in range(22, 30):
+					params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.interp.predictors + ['y'])
+				else:
+					params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.extrap.predictors + ['y'])
+				resid = pd.Series([np.nan for j in range(endog.shape[0])])
 			
 			# calculate RMSE
 			rmse = resid * resid
@@ -182,6 +184,12 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 		error_mat[sex] = pd.concat([error_mat[sex], treat], axis=1, join='inner')
 		params_interp[sex].columns.name = 'variable'
 		params_extrap[sex].columns.name = 'variable'
+
+	male_interp_nix = abcd.loc[abcd.male==1].loc[pd.isnull(abcd.loc[abcd.male==1, cols.interp.predictors]).any(axis=1)].index
+	female_interp_nix = abcd.loc[abcd.male==0].loc[pd.isnull(abcd.loc[abcd.male==0, cols.interp.predictors]).any(axis=1)].index
+
+	male_extrap_nix = abcd.loc[abcd.male==1].loc[pd.isnull(abcd.loc[abcd.male==1, cols.extrap.predictors]).any(axis=1)].index
+	female_extrap_nix = abcd.loc[abcd.male==0].loc[pd.isnull(abcd.loc[abcd.male==0, cols.extrap.predictors]).any(axis=1)].index
 
 	# remove errors for ABC individuals for whom we do not predict earnings
 	# interp (we only check age 22 since predicatablity of each year are based on the same set of outcomes)
@@ -217,15 +225,7 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 		projection_extrap[sex] = pd.DataFrame([])
 
 		for age in ages: 
-
-			
-		
 			if age in range(22, 30):
-				if weight == 'treat':
-					abcd_interp = abcd_interp.loc[abcd_interp.R==1]
-				elif weight == 'control':
-					abcd_interp = abcd_interp.loc[abcd_interp.R==0]
-
 				if age == 22:
 					abcd_interp['y'] = 0 
 				params_interp_trans = pd.DataFrame(params_interp[sex].loc[age].drop('rmse').T)
@@ -234,10 +234,6 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 				projection_interp[sex] = pd.concat([projection_interp[sex], interp_dot], axis=1)	
 
 			else:
-				if weight == 'treat':
-					abcd_extrap = abcd_extrap.loc[abcd_extrap.R==1]
-				elif weight == 'control':
-					abcd_extrap = abcd_extrap.loc[abcd_extrap.R==0]
 
 				if age == 31:
 					params_extrap[sex].loc[31]['y'] = 0
