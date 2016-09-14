@@ -48,7 +48,7 @@ global genderloop = ["male", "female", "pooled"]
 # Bring in data
 # ================================================================ #
 # List of outcomes
-outcomes = readtable("$scripts/../outcomes/outcomes_cba_new.csv")
+outcomes = readtable("$scripts/../outcomes/outcomes_cba_p_inc.csv")
 
 # ABC/CARE data
 abccare = readtable("$data/append-abccare_iv.csv")
