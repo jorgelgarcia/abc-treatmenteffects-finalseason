@@ -91,7 +91,6 @@ abccare = abccare[:, keepvar]
 # ------------------------------------------ #
 # Limit the ABC-CARE data and fix weird ID's #
 # ------------------------------------------ #
-abccare[isna(abccare[:id]), :id] = 9999
 abccare = abccare[abccare[:id] .!= 64, :]
 abccare = abccare[!((abccare[:RV] .== 1) & (abccare[:R] .== 0)), :]
 
@@ -132,6 +131,7 @@ for var in keepvar
   end
 end
 
+abccare[isna(abccare[:id]), :id] = 9999
 
 # -------------------------------------------------------------------------------- #
 # Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise) #
