@@ -104,8 +104,14 @@ def boot_predict_aux(weight, controls, interp, extrap, adraw):
 
 #----------------------------------------------------------------
 weights = ['treat','control']
-control_sets = ['1']
+control_sets = ['1','2']
 sexes = ['male', 'female', 'pooled']
+
+params_interp = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
+params_extrap = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
+errors = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
+projections = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
+
 for weight in weights:
 	print 'Using weight: ' + weight
 
@@ -115,16 +121,14 @@ for weight in weights:
 		# run estimates
 		rslt = Parallel(n_jobs=1)(delayed(boot_predict_aux)(weight, cs, interp, extrap, k) for k in xrange(aux_draw))
 
-		params_interp = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
-		params_extrap = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
-		errors = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
-		projections = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
-
 	# output results
 		for sex in sexes:
 			params_interp[weight][cs][sex] = pd.concat([rslt[k][0][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
+
 			params_extrap[weight][cs][sex] = pd.concat([rslt[k][1][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
+
 			errors[weight][cs][sex] = pd.concat([rslt[k][2][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
+
 			projections[weight][cs][sex] = pd.concat([pd.concat([rslt[k][3][sex], rslt[k][4][sex]], axis=1) for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
 
 			# output projections .csv
@@ -134,8 +138,8 @@ for cs in control_sets:
 	for sex in sexes:
 		df_treat = projections['treat'][cs][sex]
 		df_control = projections['control'][cs][sex]
-		print df_treat
-		print df_control
+
 		combined = pd.concat([df_treat, df_control])
-		print combined
+		combined.dropna(inplace=True)
+
 		combined.to_csv(os.path.join(paths.rslts, 'labor_proj_combined_{}_{}.csv'.format(sex,cs)))
