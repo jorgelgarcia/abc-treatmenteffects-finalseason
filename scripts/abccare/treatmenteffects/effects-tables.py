@@ -23,8 +23,12 @@ from paths import paths
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
 
-path_results = os.path.join(filedir, 'rslts-jun25/abccare_ate/')
-path_outcomes = os.path.join(filedir, 'outcomes_cba_merged.csv')
+# YK cross this out to generate the p_inc table
+#path_results = os.path.join(filedir, 'rslts-jun25/abccare_ate/')
+#path_outcomes = os.path.join(filedir, 'outcomes_cba_merged.csv')
+
+path_results = os.path.join(filedir, 'rslts/')
+path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_p_inc.csv')
 
 # provide option for two sided tests
 twosided = 0
