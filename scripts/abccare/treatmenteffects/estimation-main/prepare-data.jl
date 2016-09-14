@@ -88,21 +88,12 @@ keepvar = append!(keepvar, ipw_varlist)
 abccare = abccare[:, keepvar]
 
 
-# ----------------------------------- #
-# Define ABC-CARE, ABC, CARE datasets #
-# ----------------------------------- #
+# ------------------------------------------ #
+# Limit the ABC-CARE data and fix weird ID's #
+# ------------------------------------------ #
 abccare[isna(abccare[:id]), :id] = 9999
 abccare = abccare[abccare[:id] .!= 64, :]
 abccare = abccare[!((abccare[:RV] .== 1) & (abccare[:R] .== 0)), :]
-abccare_data = abccare
-
-abc_data = abccare
-abc_data = abc_data[abc_data[:abc] .== 1, :]
-
-care_data = abccare
-care_data = care_data[care_data[:abc] .== 0, :]
-
-
 
 # ---------------------------------------------------- #
 # Correcting weird variables (Unique Problem to Julia) #
@@ -118,6 +109,11 @@ for var in keepvar
       abccare[abccare[var] .== string(".",alphabet), var] = NA
     end
 
+    if var == "hct_phy12y"
+      println("Printing for hct_phy12y")
+      println("$(abccare[:[:hct_phy12y,:hct_cog12y]])")
+    end
+
   # Variables that originally contained ".a"&& etc. are saved as string. Now we need to convert string to integers. I could not find destring command for Julia. To be updated later.
    if occurrence > 0 # If a column contains ".a" etc.
     # Create a new column (to be deleted later) that will be filled in with integer values for string column.
@@ -125,7 +121,7 @@ for var in keepvar
     # Now run the loop over each row
       for i in 1:length(abccare[var])
         if !isna(abccare[i,var])
-          abccare[i,:var_new] = parse(Float64,abccare[i,var])
+          abccare[i,:var_new] = parse(Float64, abccare[i,var])
         else
           abccare[i,:var_new] = NA
         end
@@ -135,6 +131,20 @@ for var in keepvar
       rename!(abccare, :var_new, var)
   end
 end
+
+
+# ------------------------------- #
+# Define ABC, CARE, ABC-CARE data #
+# ------------------------------- #
+abccare_data = abccare
+
+abc_data = abccare
+abc_data = abc_data[abc_data[:abc] .== 1, :]
+
+care_data = abccare
+care_data = care_data[care_data[:abc] .== 0, :]
+
+
 
 
 # -------------------------------------------------------------------------------- #
