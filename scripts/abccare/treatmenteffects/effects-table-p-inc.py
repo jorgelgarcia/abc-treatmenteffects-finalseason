@@ -268,7 +268,7 @@ def format_sdpvalue(x):
 # Make Appendix Tables of results
 #=========================================
 
-
+header = [['Variable', 'Age', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)', '(7)', '(8)']]
 for t in [1,2]:
     # prepare table for pytabular (t=1 regular p-values, t=2 stepdown)
     if t == 1:
