@@ -346,7 +346,7 @@ Testing whether the synthetic cohort constructed for the treatment group is a va
 \input{output/allsamplesmatch_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: each column displays the mean and standard deviation in parentheses of the variables labeled in the first row. Age in which the variables is measured is in parentheses. We use the matching procedure in this section to obtain the control and treatment matches. For this exercise, $\bm{B} \in \mathcal{B}_0$ is defined as being black with maternal education of 12 years or less. Cells missing indicate that variables are not available in the non-experimental. We also omit $\bm{B} \in \mathcal{B}_0$ in the treatment columns. Standard deviations are based on the empirical bootstrap distribution.
+\item Note: each column displays the mean and standard deviation in parentheses of the variables labeled in the first row. Age in which the variables is measured is in parentheses. We use the matching procedure in this section to obtain the control and treatment synthetic cohorts. For this exercise, $\bm{B} \in \mathcal{B}_0$ is defined as being black with maternal education of 12 years or less. Cells missing indicate that variables are not available in the non-experimental. We also omit $\bm{B} \in \mathcal{B}_0$ in the treatment columns. Standard deviations are based on the empirical bootstrap distribution.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -447,7 +447,7 @@ When these methods are applied to the auxiliary data discussed in Section~\ref{s
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Prediction for ABC/CARE Females} \label{fig:labor-income-profilesa}
-		\includegraphics[width=\textwidth]{output/labor_25-60_female_1.eps}
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_female.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.4\textwidth}
 	\centering
@@ -457,7 +457,7 @@ When these methods are applied to the auxiliary data discussed in Section~\ref{s
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Prediction for ABC/CARE Males} \label{fig:labor-income-profilesc}
-		\includegraphics[width=\textwidth]{output/labor_25-60_male_1.eps}
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_male.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.4\textwidth}
 	\centering
@@ -466,7 +466,6 @@ When these methods are applied to the auxiliary data discussed in Section~\ref{s
 \end{subfigure}
 \footnotesize \justify
 Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CARE females and males by treatment status, based on predictions that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) display the predicted labor income profiles of disadvantaged females ($\bm{B} \in \mathcal{B}_0$) in the PSID and control group matches in the PSID. The matches are constructed according to the procedure in Section~\ref{sec:necrosis}. For this exercise, we define disadvantaged females ($\bm{B} \in \mathcal{B}_0$) as black females whose mothers have 12 years of education or less. Panel (d) displays an analogous exercise for males. Standard errors are based on the empirical bootstrap distribution.\\
-\textbf{[JJH: Figure repeats 4!] [JLG: All in this figure now.]}
 \end{sidewaysfigure}
 
 \subsection{Health} \label{section:health}
