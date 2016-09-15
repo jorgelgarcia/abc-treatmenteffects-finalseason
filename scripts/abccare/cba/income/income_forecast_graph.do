@@ -8,7 +8,7 @@ Original date:	August 29, 2016
 */
 
 // macros
-local file_specs	pset3_mset2
+local file_specs	pset1_mset3
 /*
 Matching control sets (mset)
 	1. Baseline controls only (W)
@@ -20,6 +20,7 @@ Projection control sets (pset)
 	3. lag, W
 	4. W (not produced yet)
 	5. X (not produced yet)
+	6. lag, X
 */
 local transfer_name "Transfer"
 local labor_name	"Labor"
@@ -129,7 +130,7 @@ foreach source in labor /*transfer*/ {
 		}
 		
 		cd $incomeresults
-		save `source'_income_collapsed, replace
+		save `source'_income_collapsed_`file_specs', replace
 		
 	// graph
 	cd $output
