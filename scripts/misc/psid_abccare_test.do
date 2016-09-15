@@ -49,7 +49,7 @@ keep if _merge == 3
 
 matrix allw = J(2,1,.)
 matrix rownames allw = m se
-	foreach var of varlist male years_30y m_ed0y si30y_inc_labor si34y_bmi {
+	foreach var of varlist male years_30y si30y_inc_labor si30y_inc_labor si34y_bmi {
 		summ `var' [aw=wtabc_allids_c3_control]
 		mat  `var' = [r(mean) \ r(sd)]
 		matrix colnames `var' =`var'
@@ -60,7 +60,7 @@ matrix allwp = allw[1...,2...]
 
 matrix allt = J(2,1,.)
 matrix rownames allt = m se
-	foreach var of varlist male years_30y m_ed0y si30y_inc_labor si34y_bmi {
+	foreach var of varlist male years_30y si30y_inc_labor si30y_inc_labor si34y_bmi {
 		summ `var' [aw=wtabc_allids_c3_treat]
 		mat  `var' = [r(mean) \ r(sd)]
 		matrix colnames `var' =`var'
@@ -71,7 +71,7 @@ matrix allpwt = allt[1...,2...]
 
 matrix allw = J(2,1,.)
 matrix rownames allw = m se
-	foreach var of varlist male years_30y m_ed0y si30y_inc_labor si34y_bmi {
+	foreach var of varlist male years_30y si30y_inc_labor si30y_inc_labor si34y_bmi {
 		summ `var'  if black == 1 & m_ed0y <= 12
 		mat  `var' = [r(mean) \ r(sd)]
 		matrix colnames `var' =`var'
@@ -178,7 +178,7 @@ matrix rownames allcwt = m se
 		mat rownames `var' = m se
 		mat_capp allcwt : allcwt `var'
 	}
-matrix allcwt = allw[1...,2...]
+matrix allcwt = allcwt[1...,2...]
 
 matrix allw = J(2,1,.)
 matrix rownames allw = m se
@@ -239,7 +239,7 @@ local N_11 = r(N)
 
 // get predicted at age 30
 cd $collapseprj
-use labor_income_collapsed.dta, clear
+use labor_income_collapsed_pset1_mset3.dta, clear
 
 // go back to standard deviations
 foreach rand of numlist 0 1 {
