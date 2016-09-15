@@ -5,7 +5,7 @@
 # Updated: 05/31/2016
 # ================================================================ #
 
-function IPWweight(sampledata, outcomes, outcomel) 
+function IPWweight(sampledata, outcomes, outcomel)
   # ----------- #
   # Preparation #
   # ----------- #
@@ -66,7 +66,16 @@ function IPWweight(sampledata, outcomes, outcomel)
                 append!(group_list, [parse("group_$(value)")])
               end
 
+              # For some reason, income projection failed on this.
+              try
+                g_min = minimum(group_level)
+              catch err
+                println("IPW group minimum error: $(err)")
+              end
+
+
               g_min = minimum(group_level)
+
               deleteat!(group_list, findin(group_list, [parse("group_$(g_min)")]))
               deleteat!(group_list, findin(group_list, [:group_index]))
 
@@ -130,6 +139,7 @@ function IPWweight(sampledata, outcomes, outcomel)
             for level in group_list
               delete!(sampledata, [level])
             end
+
         end
     end
     return sampledata
