@@ -43,7 +43,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \subsubsection{Parental Income}
 
-\noindent We use the same methodology to identify and estimate the life-cycle profile of parental income as the one we use for subject and transfer income. There is one difference to note. For subject and transfer income, we initialize the prediction at age 21 and go all the way to age 65 (assumed age of retirement). For parental income, we initialize the prediction at age 0, in which we observe the outcome. For ages 2, 3, 4, 5, 9, 12, and 15 we do not use an estimate because we observe the data.
+\noindent Ideally, we would use the same methodology in Section~{section:cbamethodology} to identify and estimate the whole life-cycle profile of parental income (to allow for wage growth given gains in education and work experience). In practice, datasets allowing us to observe the parents of children with the characteristics in the ABC/CARE sample is not feasible. It is also unfeasible to use the methodology in an identical way for parents as we use it for children because we are much more limited with respect to observed characteristics. We use parental income at ages 1.5, 2.5,3.5, 4.5, 8, 12, 15, 21 to form an interpolated profile from ages 2 to 21. If anything this method underestimates the gain from ABC/CARE due to parental income.
 
 \subsection{Auxiliary Datasets and Variables Used to Predict}
 
@@ -157,61 +157,69 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 	
 \end{figure}
 
-\subsubsection{Predictive Power}
+\subsubsection{Predictive Power and Testing Assumption~\ref{ass:eczema}} \label{appendix:pred}
 
-\noindent We present evidence on the predictive power of our prediction variables. Tables~\ref{table:predpsid} to \ref{table:predcnlsy} show that, in each of the auxiliary samples that we use, the prediction variables $\bm{X}_{t}, \bm{B}$ are strong predictors of labor income at age 30. We present this evidence at age 30 both for brevity and to compare the predictive power of $\bm{X}_{t},\bm{B}$ on the outcomes we consider in the ABC/CARE sample.
+\noindent We present evidence on the predictive power of our prediction variables, in both the control and treatment synthetic groups we construct in the PSID, NLSY79, and CNLSY. Tables~\ref{table:predpsid} to \ref{table:predcnlsy} show that, in each of the auxiliary samples that we use, the prediction variables $\bm{X}_{t}, \bm{B}$ are strong predictors of labor income at age 30. We present this evidence at age 30 both for brevity and to compare the predictive power of $\bm{X}_{t},\bm{B}$ on the outcomes we consider in the ABC/CARE sample.\\
 
-\begin{table}[H] 
+\noindent This exercise also allows us to provide evidence in favor of Assumption~\ref{ass:eczema}. If $\bm{X}_{t}, \bm{B}$ are the inputs in the production of labor income at age 30, their marginal effects on this variable should be the same across the synthetic control and treatment groups, under Assumption~\ref{ass:eczema}. In each of the non-experimental samples we consider, the point estimates of the marginal effects of $\bm{X}_{t},\bm{B}$ on labor income at age 30 are very close. We would fail to reject any difference across these coefficients. We do not these tests both for brevity and because the point estimates across synthetic cohorts is evidently close.\\
+
+\noindent Being able to perform a test of Assumption~\ref{ass:eczema} using larger samples is appealing because recent tests of these assumptions have been based on small samples \citep{Heckman_Pinto_etal_2013_PerryFactor,Attanasio-etal_2015_NBER_Estimating-Production}. As Table~\ref{table:predabc} evidences, testing differences between the treatment and control groups becomes challenging because even when differences in coefficients could be stark, standard errors are sizable.
+
+\begin{sidewaystable}[H] 
 \begin{threeparttable}
 \caption{Predictors of Labor Income at Age 30, PSID}
 \label{table:predpsid}
 \centering 
+\footnotesize
 \input{output/psid_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. We weigh the individuals in the PSID to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measured as years of education. Robust standard errors are in parentheses. We weigh the individuals in the PSID to match them on observed characteristics to the individuals using the procedure in Section~\ref{sec:necrosis} based on male and black indicators, year of birth, years of education at age 30, and labor income at age 30 to find synthetic control and treatment groups in the PSID. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
-\end{table}
+\end{sidewaystable}
 
-\begin{table}[H] 
+\begin{sidewaystable}[H] 
 \begin{threeparttable}
 \caption{Predictors of Labor Income at Age 30, NLSY79}
 \label{table:prednlsy}
 \centering 
+\footnotesize
 \input{output/nlsy_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. Robust standard errors are in parentheses. We weigh the individuals in the NLSY79 to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measured as years of education. Robust standard errors are in parentheses. We weigh the individuals in the NLSY79 to match them on observed characteristics to the individuals using the procedure in Section~\ref{sec:necrosis} based on male and black indicators, year of birth, years of education at age 30, and labor income at age 30 to find synthetic control and treatment groups in the NLSY79. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
-\end{table}
+\end{sidewaystable}
 
-\begin{table}[H] 
+\begin{sidewaystable}[H] 
 \begin{threeparttable}
 \caption{Predictors of Labor Income at Age 30, CNLSY}
 \label{table:predcnlsy}
 \centering 
+\footnotesize
 \input{output/cnlsy_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. BMI stands for body-mass index. PIAT (5-7) is the average of the PIAT mathematics score from ages 5 to 7. Robust standard errors are in parentheses. We weigh the individuals in the CNLSY to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at ages 21 and 30, and marital status at age 30. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\item  Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measured as years of education. Robust standard errors are in parentheses. We weigh the individuals in the CNLSY to match them on observed characteristics to the individuals using the procedure in Section~\ref{sec:necrosis} based on male and black indicators, year of birth, years of education at age 30, and labor income at age 30 to find synthetic control and treatment groups in the CNLSY. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
-\end{table}
+\end{sidewaystable}
 
-\begin{table}[H] 
+\begin{sidewaystable}[H] 
 \begin{threeparttable}
 \caption{Predictors of Labor Income at Age 30, ABC/CARE}
 \label{table:predabc}
 \centering 
+\footnotesize
 \input{output/abc_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measures as years of education. BMI stands for body-mass index. PIAT (5-7) is the average of the PIAT mathematics score from ages 5 to 7. For CARE children, we use the mathematics section of the Woodcock Johnson at these same ages because we do not observe PIAT Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measured as years of education. BMI stands for body-mass index. PIAT (5-7) is the average of the PIAT mathematics score from ages 5 to 7. For CARE children, we use the mathematics section of the Woodcock Johnson at these same ages because we do not observe PIAT Robust standard errors are in parentheses. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
-\end{table}
+\end{sidewaystable}
 
 \subsubsection{Sensitivity Analysis}
 
@@ -219,7 +227,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \noindent Any prediction based on $\bm{X}_{t}$ produces labor income profiles with significant differences between the treatment and control groups, especially for males. Adding lagged labor income increases the precision of the prediction, while background variables $\bm{B}$ do not help distinguish treatment and control group (as expected given balance at baseline). Lagged labor income by itself is not sufficient to predict a difference between treatment and control. $\bm{X}_{t}$ by itself is sufficient to match the life-cycle profile of the control group to the life-cycle profile of the disadvantaged individuals in the PSID.\\
 
-\begin{sidewaysfigure}[!htbp]
+\begin{sidewaysfigure}[H]
 \centering
 \caption{Labor Income Profiles, Prediction Based on Lagged Labor Income and $\bm{X}_{t},\bm{B}$}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.4\textwidth}
@@ -246,7 +254,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CARE males and females by treatment status, based on predictions that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
 \end{sidewaysfigure}
 
-\begin{sidewaysfigure}[!htbp]
+\begin{sidewaysfigure}[H]
 \centering
 \caption{Labor Income Profiles, Prediction Based on $\bm{X}_{t},\bm{B}$}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.4\textwidth}
@@ -273,7 +281,7 @@ Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CAR
 Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CARE males and females by treatment status, based on predictions that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
 \end{sidewaysfigure}
 
-\begin{sidewaysfigure}[!htbp]
+\begin{sidewaysfigure}[H]
 \centering
 \caption{Labor Income Profiles, Prediction Based on Lagged Labor Income and $\bm{B}$}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.4\textwidth}
@@ -300,7 +308,7 @@ Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CAR
 Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CARE males and females by treatment status, based on predictions that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
 \end{sidewaysfigure}
 
-\begin{sidewaysfigure}[!htbp]
+\begin{sidewaysfigure}[H]
 \centering
 \caption{Labor Income Profiles, Prediction Based on $\bm{B}$}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.4\textwidth}
@@ -327,7 +335,7 @@ Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CAR
 Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CARE males and females by treatment status, based on predictions that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
 \end{sidewaysfigure}
 
-\begin{sidewaysfigure}[!htbp]
+\begin{sidewaysfigure}[H]
 \centering
 \caption{Labor Income Profiles, Prediction Based on $\bm{X}_{t}$}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.4\textwidth}

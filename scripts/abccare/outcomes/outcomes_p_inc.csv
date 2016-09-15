@@ -1,0 +1,22 @@
+variable,category,age,label,block,block_appendix,hyp,ipw_var,ipw_pooled1,ipw_pooled2,ipw_pooled3,only_abc,only_care
+ip_p_inc1y6m,Parent Income,1.5,Parental income,,parent_income,+,ip_p_inc1y6m,,,,0,0
+ip_p_inc2y6m,Parent Income,2.5,Parental income,,parent_income,+,ip_p_inc2y6m,,,,0,0
+ip_p_inc3y6m,Parent Income,3.5,Parental income,,parent_income,+,ip_p_inc3y6m,,,,0,0
+ip_p_inc4y6m,Parent Income,4.5,Parental income,,parent_income,+,ip_p_inc4y6m,,,,0,0
+ip_p_inc5y,Parent Income,5,Parental income,,parent_income,+,ip_p_inc5y,,,,0,0
+ip_p_inc6y,Parent Income,6,Parental income,,parent_income,+,ip_p_inc6y,,,,0,0
+ip_p_inc7y,Parent Income,7,Parental income,,parent_income,+,ip_p_inc7y,,,,0,0
+ip_p_inc8y,Parent Income,8,Parental income,,parent_income,+,ip_p_inc8y,,,,0,0
+ip_p_inc9y,Parent Income,9,Parental income,,parent_income,+,ip_p_inc9y,,,,0,0
+ip_p_inc10y,Parent Income,10,Parental income,,parent_income,+,ip_p_inc10y,,,,0,0
+ip_p_inc11y,Parent Income,11,Parental income,,parent_income,+,ip_p_inc11y,,,,0,0
+ip_p_inc12y,Parent Income,12,Parental income,,parent_income,+,ip_p_inc12y,,,,0,0
+ip_p_inc13y,Parent Income,13,Parental income,,parent_income,+,ip_p_inc13y,,,,0,0
+ip_p_inc14y,Parent Income,14,Parental income,,parent_income,+,ip_p_inc14y,,,,0,0
+ip_p_inc15y,Parent Income,15,Parental income,,parent_income,+,ip_p_inc15y,,,,0,0
+ip_p_inc16y,Parent Income,16,Parental income,,parent_income,+,ip_p_inc16y,,,,0,0
+ip_p_inc17y,Parent Income,17,Parental income,,parent_income,+,ip_p_inc17y,,,,0,0
+ip_p_inc18y,Parent Income,18,Parental income,,parent_income,+,ip_p_inc18y,,,,0,0
+ip_p_inc19y,Parent Income,19,Parental income,,parent_income,+,ip_p_inc19y,,,,0,0
+ip_p_inc20y,Parent Income,20,Parental income,,parent_income,+,ip_p_inc20y,,,,0,0
+ip_p_inc21y,Parent Income,21,Parental income,,parent_income,+,ip_p_inc21y,,,,0,0
