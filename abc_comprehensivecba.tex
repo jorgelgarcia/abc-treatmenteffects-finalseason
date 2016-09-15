@@ -303,7 +303,7 @@ Note: Panel (a) percentage of outcomes displaying a positive treatment effect, c
 
 \section{Predicting and Monetizing Life-cycle Costs and Benefits}\label{section:cbamethodology}
 
-A central focus of this paper is on summarizing the multiple benefits of ABC/CARE using benefit/cost and rate of return analysis. This requires predicting the out of sample benefits of the program over the remaining life cycle. This is a fundamental problem in social science and has been addressed in the literature in multiple ways.\footnote{See, e.g., \cite{Heckman_Lochner_ea_2006_HEE}. \citet{Heckman_Moon_etal_2010_RateofReturn} use a variety of methods to project future earnings in the Perry study. The various methods are in general agreement. They fit a variety of panel data earnings dynamics models and project future earnings with them.} This section explains our strategy for using multiple data sources to extrapolate the life-cycle costs and benefits of education, labor income, transfer income, crime, and health. Our approach is motivated by the analysis of \citet{Heckman_Pinto_etal_2013_PerryFactor} who show that the effect of treatment on outcomes operates through its effects of inputs in a stable production function. Practical details arising in implementing our approach are discussed in Appendix~\ref{appendix:methodology}.
+A central focus of this paper is on summarizing the multiple benefits of ABC/CARE using benefit/cost and rate of return analysis. This requires predicting the out-of-sample benefits of the program over the remaining life cycle. This is a fundamental problem in social science and has been addressed in the literature in multiple ways.\footnote{See, e.g., \cite{Heckman_Lochner_ea_2006_HEE}. \citet{Heckman_Moon_etal_2010_RateofReturn} use a variety of methods to project future earnings in the Perry study. The various methods are in general agreement. They fit a variety of panel data earnings dynamics models and project future earnings with them.} This section explains our strategy for using multiple data sources to extrapolate the life-cycle costs and benefits of education, labor income, transfer income, crime, and health. Our approach is motivated by the analysis of \citet{Heckman_Pinto_etal_2013_PerryFactor}, who show that the effect of treatment on outcomes operates through its effects of inputs in a stable production function. Practical details arising in implementing our approach are discussed in Appendix~\ref{appendix:methodology}.
 
 \subsection{Using Auxiliary Samples to Predict Out of Sample Earnings}\label{sec:necrosis}
 
@@ -311,9 +311,9 @@ We have data on treatments and controls through age $t^{\ast}$. We lack informat
 
 Because the participants of ABC/CARE are now in their mid-40s, there is no post-40s information on the same cohort  in any data. We use a synthetic cohort approach in which adjusted outcomes of older cohorts are used to estimate the future outcomes of the ABC/CARE participants. This approach is standard in the human capital literature. However, cohort effects may induce substantial biases.
 
-Following the procedure in \citet{Heckman_Ichimura_etal_1998_REStud}, we use matching to find synthetic cohort counterparts in the auxiliary samples for both treatment and control group members. We match on baseline variables $\bm{B}$, as well as variables caused by treatment (i.e., for which there are treatment effects) that predict future outcomes---e.g., education, IQ, etc.---up through age $t^{\ast}$. We then fit life-cycle relationships for outcomes beyond $t^{\ast}$ for the synthetic treatment and control groups using the initial conditions from the treatment and control groups at age $t^{\ast}$. From these predictions, we construct the life-cycle profiles. 
+Following the procedure in \citet{Heckman_Ichimura_etal_1998_REStud}, we use matching to find synthetic cohort counterparts in the auxiliary samples for both treatment and control group members. We match on baseline variables $\bm{B}$, as well as variables caused by treatment (i.e., for which there are treatment effects) that predict future outcomes---e.g., education, IQ, etc.---through age $t^{\ast}$. We then fit life-cycle relationships for outcomes beyond $t^{\ast}$ for the synthetic treatment and control groups using the initial conditions from the treatment and control groups at age $t^{\ast}$. From these predictions, we construct the life-cycle profiles. 
 
-Let $\bm{Y}^{d}_{i,t}$ be an outcome at time $t$ for an individual in treatment status. Measured predictors of the outcome are $\bm{X}^{d}_{i,t}$ and $\bm{B}_i$.\footnote{$\bm{B}$ is balanced across treatments and controls by randomization.} We determine the predictors using within experimental sample analyses. We then find counterparts in the synthetic cohort samples. Let $S \in \{ 0,1\}$ denote membership in the experimental sample $(S=1)$ or the auxiliary sample. $(S=0)$.
+Let $\bm{Y}^{d}_{i,t}$ be an outcome at time $t$ for an individual in treatment status. Measured predictors of the outcome are $\bm{X}^{d}_{i,t}$ and $\bm{B}_i$.\footnote{$\bm{B}$ is balanced across treatments and controls by randomization.} We determine the predictors using within experimental sample analyses. We then find counterparts in the synthetic cohort samples. Let $S \in \{ 0,1\}$ denote membership in the experimental sample $(S=1)$ or the auxiliary sample, $(S=0)$.
 
 For individual $i$, find counterparts $j(i)$ such that
 \begin{equation}\label{eq:ingrownnail}
@@ -326,13 +326,17 @@ When samples are restricted to satisfy $\bm{B} \in \mathcal{B}_0$, given the sma
 
 A second test compares the post--$t^*$ outcomes for the auxiliary sample alone (with $\bm{B} \in \mathcal{B}_0$) and the constructed synthetic cohort. Figure~\ref{fig:labor-income-profiles} displays a comparison of these profiles. For females, Figure~\ref{fig:labor-income-profilesa} displays the dynamics relationship for the control group. Figure~\ref{fig:labor-income-profilesb} displays the post--$t^*$ dynamics for the auxiliary sample alone (with $\bm{B} \in \mathcal{B}_0$) and the constructed experimental sample. Figures~\ref{fig:labor-income-profilesc} and Figure~\ref{fig:labor-income-profilesd} display an analogous exercise for males.
 
-It is also useful to compare pre--$t^*$ observed characteristics for (i) individuals with $\bm{B} \in \mathcal{B}_0$; (ii) the synthetic cohorts constructed based on \eqref{eq:ingrownnail}; (iii) control-group individuals. Comparing (i) allows us (ii) to asses if samples restricted to $\bm{B} \in \mathcal{B}_0$ are a comparable synthetic cohort in the absence of treatment; comparing (ii) and (iii) allows us to assess the quality of the matching procedure. Table~\ref{table:comp} presents this exercise. \textbf{[JJH: We want to test validity of our forecasts both within sample and out of sample for $d=0$.]}
+It is also useful to compare pre--$t^*$ observed characteristics for (i) individuals with $\bm{B} \in \mathcal{B}_0$; (ii) the synthetic cohorts constructed based on \eqref{eq:ingrownnail}; and (iii) control-group individuals. Comparing (i) and (ii) allows us to asses if samples restricted to $\bm{B} \in \mathcal{B}_0$ are a comparable synthetic cohort in the absence of treatment; comparing (ii) and (iii) allows us to assess the quality of the matching procedure. Table~\ref{table:comp} presents this exercise. 
+
+Testing whether the synthetic cohort constructed for the treatment group is a valid comparison is more complex than the above tests. There is not direct argument as when we compare the synthetic control-group cohort to the cohort such that $\bm{B} \in \mathcal{B}_0$. The reason is that treatment experimentally shifts human capital at early stages. When matching the individuals in the non-experimental sample to the treatment-group individuals, we could very well be obtaining matches to individuals with relatively higher unobserved ability (generating a standard omitted-variable bias). We develop this further in Section~\ref{section:just}. One comparison we can make, however, is between the synthetic treatment group we produce and the treatment group pre--$t^*$. Table~\ref{table:comp} evidences similarities. 
 
 Our matching is based on indicators for black and male indicators, year of birth, years of education and labor income at age 30. We include labor income at age 21 and body-mass index at age 34 in the samples in which it is available to assess the quality of the matching out the variables targeted by the matching procedure.\footnote{We omit black because the experimental sample is $99\%$ black and year of birth because, by construction, this variable does not help to assess the matching. The auxiliary samples include younger individuals. We include it as part of the match to obtain year of birth matches that are as close as possible to the experimental group.}
 
-Testing whether the synthetic cohort constructed for the treatment group is a valid comparison is harder. There is not direct argument as when we compare the synthetic control-group cohort to the cohort such that $\bm{B} \in \mathcal{B}_0$. The reason is that treatment experimentally shifts human capital at early stages. When matching the individuals in the non-experimental sample to the treatment-group individuals, we could very well be obtaining matches to individuals with relatively higher unobserved ability (generating a standard omitted-variable bias). We develop this further in Section~\ref{section:just}. One comparison we can make, however, is between the synthetic treatment group we produce and the treatment group pre--$t^*$. Table~\ref{table:comp} evidences similarities.
+As seen in Table~\ref{table:comp}, the average predicted labor income is very similar to the average observed labor income in both treatment and control groups. In addition to this correspondence in the levels, there is correspondence in the differences. Comparing the predicted and observed income between the treatment and control groups reinforces the true strength of the prediction: both differences are close to $\$12,000$.
 
-\textbf{[JJH: Too early.]}
+When these methods are applied to the auxiliary data discussed in Section~\ref{section:cbaresults} they are effective. Figure~\ref{fig:control-sub} shows the prediction of labor income by comparing the prediction in the ABC/CARE data with the life-cycle profile of disadvantaged individuals in the PSID. Our pattern of life-cycle labor income is typical for low-skilled workers. See, e.g., \cite{Blundell-etal_2015_J-Pub-E}.\footnote{Our prediction is based on indicator variables of being male and being black, mother's education, average PIAT scores from ages 5 to 7, years of education at age 30, body-mass index at 34, labor income at ages 21 and 30, and one-period lagged labor income. A justification for the use of these variables, evidence on their predictive power, a sensitivity analysis to using different prediction variables are in Appendix~\ref{appendix:methodology}.}
+
+
 \newgeometry{top=.6in, bottom=.8in, left=.8in, right=.8in}
 \begin{sidewaystable}[!htbp] 
 \begin{threeparttable}
@@ -343,12 +347,24 @@ Testing whether the synthetic cohort constructed for the treatment group is a va
 \input{output/allsamplesmatch_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: each column displays the mean and standard deviation in parentheses of the variables labeled in the first row. Age in which the variables is measured is in parentheses. We use the matching procedure in this section to obtain the control and treatment synthetic cohorts. For this exercise, $\bm{B} \in \mathcal{B}_0$ is defined as being black with maternal education of 12 years or less. Cells missing indicate that variables are not available in the non-experimental. We also omit $\bm{B} \in \mathcal{B}_0$ in the treatment columns. Standard deviations are based on the empirical bootstrap distribution.
+\item Note: Each column displays the mean and standard deviation in parentheses of the variables labeled in the first row. Age in which the variables is measured is in parentheses. We use the matching procedure in this section to obtain the control and treatment synthetic cohorts. For this exercise, $\bm{B} \in \mathcal{B}_0$ is defined as being black with maternal education of 12 years or less. Cells missing indicate that variables are not available in the non-experimental. We also omit $\bm{B} \in \mathcal{B}_0$ in the treatment columns. Standard deviations are based on the empirical bootstrap distribution.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 \restoregeometry
 \doublespacing
+
+A benchmark comparison for the labor income predictions we produce is to follow \citet{Mincer_1974_schooling}. We take our estimates of income at age 30 and calculate a perpetuity with a 3\% interest rate to correspond with our predicted NPV. This is because the Mincer-type estimates do not account for any income increase beyond age 30. Table~\ref{tab:mincerpred} presents the results from this exercise.
+
+\begin{table}[htbp]
+\centering
+\caption{Mincer-type Predictions, Age 30}\label{tab:mincerpred}
+\input{output/mincerpred_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table presents Mincer-type predictions \citep{Mincer_1974_schooling}. Prediction: predicted labor income at age 30 based on the procedure in Section~\ref{sec:necrosis}. Perpetuity: Prediction/.03. Life-cycle NPV: life-cycle predicted net present value of income based on the procedure in Section~\ref{sec:necrosis}. Standard errors are in parentheses and are based on the empirical bootstrap distribution.
+\end{tablenotes}
+\end{table}
 
 \subsection{Justifying the Matching Procedure} \label{section:just}
 
@@ -371,7 +387,7 @@ We assume \emph{structural invariance} of \eqref{eq:trenchfoot} and \eqref{eq:fr
 \end{spacing}
 \end{assumption}
 
-Equations~\eqref{eq:trenchfoot} and \eqref{eq:frostbite} can be estimated in the sample period $(0,\ldots,t^{*})$. We do not observe data on the experimental sample after $t^{*}$. To predict outside the sample period, we access auxiliary data on older cohorts of individuals whose life cycle equations of motion are governed by Equations~\eqref{eq:trenchfoot} and \eqref{eq:frostbite}. This presumes absence of cohort effects. We discuss the validity of this assumption when we turn to our empirical estimates.
+Equations~\eqref{eq:trenchfoot} and \eqref{eq:frostbite} can be estimated in the sample period $(0,\ldots,t^{*})$. We do not observe data on the experimental sample after $t^{*}$. To predict outside the sample period, we access auxiliary data on older cohorts of individuals whose life-cycle equations of motion are governed by Equations~\eqref{eq:trenchfoot} and \eqref{eq:frostbite}. This presumes the absence of cohort effects. We discuss the validity of this assumption when we turn to our empirical estimates.
 
 \begin{assumption}\label{ass:crotchrot}
 \textbf{Absence of Cohort Effects}
@@ -423,24 +439,10 @@ We assume that the elements of $\varepsilon_t^s, s \in \{0,1\}$, are mutually in
 Putting Assumptions~\ref{ass:butts}--\ref{ass:corns} together, we obtain full observability of $\bm{X}^d_t$, estimation on the matched samples based on \eqref{eq:ingrownnail} generates unbiased out of sample treatment effects. $\Box$
 \end{theorem}
 
-Following \cite{Mincer_1974_schooling} around $t=t^*$ (early 30s), we can estimate a good measure of perpetuity flow of lifetime earnings---i.e., $\frac{Y_{t^*}}{r}=NVP$ of earnings (this is Mincer's earnings at overtaken age). The estimated treatment effect for net present value in. Basic points we can get within sample experimental estimates of $\mathbb{E}[\frac{(\bm{Y}^{1}_{t^{\ast}} - \bm{Y}^{0}_{t^{\ast}})}{r}\large], t < t^*$ but unless we assume that $\bm{X}^1_t-\bm{X}^0_t$ spans fully all omitted inputs, we cannot get causal effect of inputs even within experiments.
+Our prediction is based on matching individuals in the non-experimental samples to the control-group individuals. In the non-experimental samples, however, the dependence between $\mathbf{X}_{t}$ and $\varepsilon_{t}$ is generally different from that dependence in the experimental sample. While the experiment randomly shifts inputs of the production function of the forecasted outcome, in the non-experimental individuals with relatively high educated individuals could come from a better background, be more motivated, etc. This would bias our prediction because it would align it with a trend that does not correspond to the unobserved characteristics of the experimental sample. 
 
+One solution for this problem is to obtain a measure of the potentially problematic unobserved component in the non-experimental sample and condition on it when estimating \eqref{eq:trenchfoot}, which we use to predict out of sample (in the experimental data). Three or more measures in the non-experimental sample would allow us to identify the distribution of this unobserved components and condition on them \citet{Cunha_Heckman_ea_2005_oep,Cunha_Heckman_etal_2010_est_tech_cognoncog}. If the endogeneity issue evolves dynamically, we would need these measures in every period. \textbf{[JLG: I'm exploring this. But I'm afraid we are asking too much from the non-experimental samples. We are already using various measures of PIAT for the match.]}
 
-
-\subsubsection{Model with Measurements}
-
-\begin{align}
-M^d_t &= \lambda^d \theta^d_t + U^d_t \quad \theta^d_t \indep U^d_t \forall t \\
-\varepsilon^d_t &= \beta^d \theta^d_t + w^d_t \quad \theta^d_t \indep w^d_t \forall t  \notag
-\end{align}
-
-With our auxiliary measurement system and three or more measures, given normalizations, we can identify $\lambda^d$, $\sum_{\theta^d_t}$, $\sum_{U^d_t} d \in \{0,1\} t \in \{0,\dots,T\}$ and use the Bartlett method to predict factors $\hat{\theta}^d_t$. We control for factors in fitting Equation~\eqref{eq:trenchfoot} and can correct for measurement error.
-
-Basic points we can get within sample experimental estimates of \\ $\mathbb{E}(\bm{Y}^1_t - \bm{Y}^0_t | \bm{B} \in \bm{B}_0), t < t^*$ but unless we assume that $\bm{X}^1_t-\bm{X}^0_t$ spans fully all omitted inputs, we cannot get causal effect of inputs even within experiments.
-
-On top of this, we have the problem that in the auxiliary sample the ($\bm{X}^t,\varepsilon^t$) dependence is generally different than within the experiment. For example: $\bm{X}^t$ is education ability ($\varepsilon^t$) causes people to go to school. It also affects earnings. We have a shifter (treatment) for education in experiments not in the auxiliary sample, and therefore a biased prediction.
-
-When these methods are applied to the auxiliary data discussed in Section~\ref{section:cbaresults} they are effective. Figure~\ref{fig:control-sub} shows the prediction of labor income by comparing the prediction in the ABC/CARE data with the life-cycle profile of disadvantaged individuals in the PSID. Our pattern of life-cycle labor income is typical for low-skilled workers. See, e.g., \cite{Blundell-etal_2015_J-Pub-E}.\footnote{Our prediction is based on indicator variables of being male and being black, mother's education, average PIAT scores from ages 5 to 7, years of education at age 30, body-mass index at 34, labor income at ages 21 and 30, and one-period lagged labor income. A justification for the use of these variables, evidence on their predictive power, a sensitivity analysis to using different prediction variables are in Appendix~\ref{appendix:methodology}.}
 
 \begin{sidewaysfigure}[!htbp]
 \centering
@@ -499,7 +501,7 @@ We also calculate medical expenditure before age 30. We combine the MEPS and ret
 
 The first level of each model predicts the likelihood that the subject incurred any medical expenditure in the period. The second level predicts the medical expenditure for those with positive expenditures.
 
-QALYs are crucial to our estimations because they monetize the health of an individual at each age. Figure~\ref{fig:qalys} shows our estimation of QALYs together with a PSID comparison, in an analogous exercise to Figure~\ref{fig:labor-income-profiles}.\footnote{In our baseline estimation, we assume that each year of life is worth  $\$150,000$ (2014 USD). Our estimates are robust to substantial variation in this assumption, as we show in Appendix~\ref{appendix:sensitivity}.} Although there is not a clear age-by-age treatment effect on QALYs, there is a significant difference in the accumulated present value of the QALYs between the treatment and the control groups. The QALYs for indivdiuals in the control group match the QALYs of low-skilled individuals in the PSID.
+QALYs are crucial to our estimations because they monetize the health of an individual at each age. Figure~\ref{fig:qalys} shows our estimation of QALYs together with a PSID comparison, in an analogous exercise to Figure~\ref{fig:labor-income-profiles}.\footnote{In our baseline estimation, we assume that each year of life is worth  $\$150,000$ (2014 USD). Our estimates are robust to substantial variation in this assumption, as we show in Appendix~\ref{appendix:sensitivity}.} Although there is not a clear age-by-age treatment effect on QALYs, there is a significant difference in the accumulated present value of the QALYs between the treatment and the control groups. The QALYs for individuals in the control group match the QALYs of low-skilled individuals in the PSID.
 
 \begin{sidewaysfigure}[!htbp]
 \centering
@@ -663,7 +665,7 @@ We provide a cost/benefit analysis of the program when accounting for control su
 \input{output/back-envelope-comparison-table.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table displays displays benefit/cost ratios based on the methodology in \citet{Kline_Walters_2016_QJE} and based on our own methodology. Age: age at which we stop calculating the net-present value. NPV Source: source where we obtain the net present value. Component: item used to compute net present value (all refers to the net present value of all the components). \citet{Kline_Walters_2016_QJE} Method: estimate based on these authors methodology. Author's Method: estimates based on our methodology. Standard errors are based on the empirical bootstrap distribution.
+\item Note: This table displays benefit/cost ratios based on the methodology in \citet{Kline_Walters_2016_QJE} and based on our own methodology. Age: age at which we stop calculating the net-present value. NPV Source: source where we obtain the net present value. Component: item used to compute net present value (all refers to the net present value of all the components). \citet{Kline_Walters_2016_QJE} Method: estimate based on these authors methodology. Author's Method: estimates based on our methodology. Standard errors are based on the empirical bootstrap distribution.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
