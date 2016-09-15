@@ -8,6 +8,19 @@ Original date:	August 29, 2016
 */
 
 // macros
+local file_specs	pset3_mset2
+/*
+Matching control sets (mset)
+	1. Baseline controls only (W)
+	2. Non-baseline controls only (X)
+	3. Full set of controls (W,X)
+Projection control sets (pset)
+	1. lag, W, X
+	2. X, W (not produced yet)
+	3. lag, W
+	4. W (not produced yet)
+	5. X (not produced yet)
+*/
 local transfer_name "Transfer"
 local labor_name	"Labor"
 
@@ -24,8 +37,8 @@ global klmshare:  env klmshare
 global klmmexico: env klmMexico
 
 global dataabccare   = "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
-global data_dir      = "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/rslt/projections"
-global incomeresults = "${klmmexico}/abccare/income_projections/1_1000b/"
+global data_dir      = "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/rslt/projections/`file_specs'"
+global incomeresults = "${klmmexico}/abccare/income_projections/"
 global output        = "${projects}/abc-treatmenteffects-finalseason/output/"
 
 // prepare data for graphing
@@ -42,8 +55,8 @@ save `abccare_data'
 
 foreach source in labor /*transfer*/ {
 
-	cd $incomeresults
-	insheet using "`source'_proj_pooled.csv", clear
+	cd $data_dir
+	insheet using "`source'_proj_combined_`file_specs'_pooled.csv", clear
 
 	local varlist
 	local ages
@@ -107,11 +120,16 @@ foreach source in labor /*transfer*/ {
 		gen plus = mean_age + semean_age
 		gen minus = mean_age - semean_age
 		
+		
+		
 		// limit to 25-60 and scale income
 		drop if age < 25 | age > 65
 		foreach v in mean_age semean_age plus minus {
 			replace `v' = `v'/1000
 		}
+		
+		cd $incomeresults
+		save `source'_income_collapsed, replace
 		
 	// graph
 	cd $output
@@ -146,7 +164,7 @@ foreach source in labor /*transfer*/ {
 				`xaxis'
 				`yaxis'
 				`legend';
-		graph export "`source'_25-60_`name`sex''.eps", replace;
+		graph export "`source'_25-65_`file_specs'_`name`sex''.eps", replace;
 		# delimit cr
 		
 	restore
