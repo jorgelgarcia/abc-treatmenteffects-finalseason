@@ -150,18 +150,18 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 			endog = endog.loc[weight_forWLS.index,:]
 			# estimate coefficients
 			fail_switch = 0
-			#try:
-			model = sm.WLS(endog, exog, weights=weight_forWLS)
-			fit = model.fit()
-			params = fit.params
-			resid = fit.resid
-			#except:
-			#	fail_switch = 1
-			#	if age in range(22, 30):
-			#		params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.interp.predictors + ['y'])
-			#	else:
-			#		params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.extrap.predictors + ['y'])
-			#	resid = pd.Series([np.nan for j in range(endog.shape[0])])
+			try:
+				model = sm.WLS(endog, exog, weights=weight_forWLS)
+				fit = model.fit()
+				params = fit.params
+				resid = fit.resid
+			except:
+				fail_switch = 1
+				if age in range(22, 30):
+					params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.interp.predictors + ['y'])
+				else:
+					params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.extrap.predictors + ['y'])
+				resid = pd.Series([np.nan for j in range(endog.shape[0])])
 			
 			# calculate RMSE
 			rmse = resid * resid

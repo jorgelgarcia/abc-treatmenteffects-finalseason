@@ -14,16 +14,16 @@ srand(1)
 # ======================================================= #
 # Call number of processors
 using ClusterManagers
-procs = 25
+procs = 20
 #addprocs(procs)
 addprocs_pbs(procs)
 
 # Define "to parallelize process"
 require("$here/bootstrap_matching_progcost.jl")
-B = 25 # number of workers being used
-b = 4  # number of work each worker does
+B = 20 # number of workers being used
+b = 5  # number of work each worker does
 
-matchboot = pmap(matchingrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
+matchboot = pmap(matchingrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 Matchfinal = Dict()
 
 # Increase the number of "draw" according to the worker number
