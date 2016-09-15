@@ -332,11 +332,6 @@ Testing whether the synthetic cohort constructed for the treatment group is a va
 
 Our matching is based on indicators for black and male indicators, year of birth, years of education and labor income at age 30. We include labor income at age 21 and body-mass index at age 34 in the samples in which it is available to assess the quality of the matching out the variables targeted by the matching procedure.\footnote{We omit black because the experimental sample is $99\%$ black and year of birth because, by construction, this variable does not help to assess the matching. The auxiliary samples include younger individuals. We include it as part of the match to obtain year of birth matches that are as close as possible to the experimental group.}
 
-As seen in Table~\ref{table:comp}, the average predicted labor income is very similar to the average observed labor income in both treatment and control groups. In addition to this correspondence in the levels, there is correspondence in the differences. Comparing the predicted and observed income between the treatment and control groups reinforces the true strength of the prediction: both differences are close to $\$12,000$.
-
-When these methods are applied to the auxiliary data discussed in Section~\ref{section:cbaresults} they are effective. Figure~\ref{fig:control-sub} shows the prediction of labor income by comparing the prediction in the ABC/CARE data with the life-cycle profile of disadvantaged individuals in the PSID. Our pattern of life-cycle labor income is typical for low-skilled workers. See, e.g., \cite{Blundell-etal_2015_J-Pub-E}.\footnote{Our prediction is based on indicator variables of being male and being black, mother's education, average PIAT scores from ages 5 to 7, years of education at age 30, body-mass index at 34, labor income at ages 21 and 30, and one-period lagged labor income. A justification for the use of these variables, evidence on their predictive power, a sensitivity analysis to using different prediction variables are in Appendix~\ref{appendix:methodology}.}
-
-
 \newgeometry{top=.6in, bottom=.8in, left=.8in, right=.8in}
 \begin{sidewaystable}[!htbp] 
 \begin{threeparttable}
@@ -353,6 +348,10 @@ When these methods are applied to the auxiliary data discussed in Section~\ref{s
 \end{sidewaystable}
 \restoregeometry
 \doublespacing
+
+As seen in Table~\ref{table:comp}, the average predicted labor income is very similar to the average observed labor income in both treatment and control groups. In addition to this correspondence in the levels, there is correspondence in the differences. Comparing the predicted and observed income between the treatment and control groups reinforces the true strength of the prediction: both differences are close to $\$12,000$.
+
+When these methods are applied to the auxiliary data discussed in Section~\ref{section:cbaresults} they are effective. Figure~\ref{fig:control-sub} shows the prediction of labor income by comparing the prediction in the ABC/CARE data with the life-cycle profile of disadvantaged individuals in the PSID. Our pattern of life-cycle labor income is typical for low-skilled workers. See, e.g., \cite{Blundell-etal_2015_J-Pub-E}.\footnote{Our prediction is based on indicator variables of being male and being black, mother's education, average PIAT scores from ages 5 to 7, years of education at age 30, body-mass index at 34, labor income at ages 21 and 30, and one-period lagged labor income. A justification for the use of these variables, evidence on their predictive power, a sensitivity analysis to using different prediction variables are in Appendix~\ref{appendix:methodology}.}
 
 A benchmark comparison for the labor income predictions we produce is to follow \citet{Mincer_1974_schooling}. We take our estimates of income at age 30 and calculate a perpetuity with a 3\% interest rate to correspond with our predicted NPV. This is because the Mincer-type estimates do not account for any income increase beyond age 30. Table~\ref{tab:mincerpred} presents the results from this exercise.
 
