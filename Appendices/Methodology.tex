@@ -91,11 +91,48 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \subsubsection{Matching the Experimental and Non-experimental Samples} \label{appendix:match}
 
-\noindent When producing our predictions, we have two alternatives: (i) directly use the auxiliary samples; or (ii) use a weighted version of the auxiliary samples so that they more more closely align with respect to observed characteristics. We follow the second alternative and match the experimental and auxiliary or non-experimental samples following the procedure in Section~\ref{sec:necrosis}. We construct the weights using the formula in equation \eqref{eq:ingrownnail} of Section~\ref{sec:necrosis}. This allows us to weigh the individuals in the non-experimental samples to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at age 30. We choose these variables because they are available in all three non-experimental samples and we intend to locate common comparison samples. 
+\noindent When producing our predictions, we have two alternatives: (i) directly use the auxiliary samples; or (ii) use a weighed version of the auxiliary samples so that they more closely align with respect to observed characteristics. We follow the second alternative and match the experimental and auxiliary or non-experimental samples following the procedure in Section~\ref{sec:necrosis}. We construct the weights using the formula in equation \eqref{eq:ingrownnail} of Section~\ref{sec:necrosis}. This allows us to weigh the individuals in the non-experimental samples to match them on observed characteristics to the individuals using a Mahalanobis distance based on male and black indicators, year of birth, years of education at age 30, and labor income at age 30. We choose these variables because they are available in all three non-experimental samples and we intend to locate common comparison samples. 
 
 \paragraph{Sensitivity Analysis}
 
-\noindent \textbf{[JLG: In preparation.]}
+\noindent To study the sensitivity of our predictions to the choice of different matching variables, we predict income using the following different sets of variables: (i) the baseline matching variables (male and black indicators, year of birth, years of education at age 30, and labor income at age 30); (ii) pre-treatment variables only (male and black indicators and year of birth); and (iii) post-treatment variables (years of education at age 30 and labor income at age 30). Figure~\ref{fig:matchsensitivity} displays this exercise. The top row represents the exercise for females and the bottom row for males. The predictions exhibit little sensitivity to the choice of matching variables within the set that we experiment with.
+
+\begin{sidewaysfigure}[H]
+\centering
+\caption{Predicted Labor Income Profiles, Varying the Matching Variables}\label{fig:matchsensitivity}
+\begin{subfigure}[h]{0.3\textwidth}
+		\centering
+		\caption{Pre-treatment Variables, Females} 
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset1_female.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.3\textwidth}
+	\centering
+	\caption{Post-treatment Variables, Females} 
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset2_female.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.3\textwidth}
+	\centering
+	\caption{Pre- and Post-treatment Variables, Females} 
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_female.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.3\textwidth}
+		\centering
+		\caption{Pre-treatment Variables, Males} 
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset1_male.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.3\textwidth}
+	\centering
+	\caption{Post-treatment Variables, Males} 
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset2_male.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.3\textwidth}
+	\centering
+	\caption{Pre- and Post-treatment Variables, Males} 
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_male.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: This figure displays the predicted labor income profile obtained when constructing control- and treatment-group matches according to the procedure in Section~\ref{sec:necrosis}. We combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). We vary the matching variables across the different panels, for both males and females. Pre-treatment variables: male and black indicators and year of birth. Post-treatment variables: years of education at age 30 and labor income at age 30.
+\end{sidewaysfigure}
 
 \subsubsection{Containing Support}
 
@@ -223,143 +260,45 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \subsubsection{Sensitivity Analysis}
 
-\noindent We examine the sensitivity of our predictions to the choice of different prediction variables. We reproduce three exercises to analyze this for labor income: (i) our baseline prediction, which is based on $\bm{X}_{t}, \bm{B}$ and the lagged value of the predicted labor income, i.e. at time $t$ we base the prediction on $\bm{X}_{t}, \bm{B}$ and (predicted) labor income at $t-1$; (ii) the same as (i) but without using lagged labor income; (iii) the same as (i) but without using $\bm{X}_{t}$; (iv) a prediction based exclusively on $\bm{B}$; (v) a prediction based exclusively on $\bm{X}_{t}$.\\
+\noindent We examine the sensitivity of our predictions to the choice of different prediction variables. We reproduce three exercises to analyze this for labor income: (i) our baseline prediction, which is based on $\bm{X}_{t}, \bm{B}$ and the lagged value of the predicted labor income, i.e. at time $t$ we base the prediction on $\bm{X}_{t}, \bm{B}$ and (predicted) labor income at $t-1$; (ii) the same as; (ii) the same as (i) but without using $\bm{B}$; (iii) the same as (i) but without using $\bm{X}_{t}$.\\
 
-\noindent Any prediction based on $\bm{X}_{t}$ produces labor income profiles with significant differences between the treatment and control groups, especially for males. Adding lagged labor income increases the precision of the prediction, while background variables $\bm{B}$ do not help distinguish treatment and control group (as expected given balance at baseline). Lagged labor income by itself is not sufficient to predict a difference between treatment and control. $\bm{X}_{t}$ by itself is sufficient to match the life-cycle profile of the control group to the life-cycle profile of the disadvantaged individuals in the PSID.\\
-
-\begin{sidewaysfigure}[H]
-\centering
-\caption{Labor Income Profiles, Prediction Based on Lagged Labor Income and $\bm{X}_{t},\bm{B}$}\label{fig:labor-income-profiles}
-\begin{subfigure}[h]{0.4\textwidth}
-		\centering
-		\caption{Predicted for ABC/CARE Males} \label{fig:abcare1}
-		\includegraphics[width=\textwidth]{output/labor_25-60_male_1.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
-	\centering
-	\caption{PSID, Disadvantaged Males} \label{fig:psid1}
-		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s1.eps}
-\end{subfigure}
-\begin{subfigure}[h]{0.4\textwidth}
-		\centering
-		\caption{Predicted for ABC/CARE Females} \label{fig:abcare0}
-		\includegraphics[width=\textwidth]{output/labor_25-60_female_1.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
-	\centering
-	\caption{PSID, Disadvantaged Females} \label{fig:psid0}
-		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s0.eps}
-\end{subfigure}
-\footnotesize \justify
-Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CARE males and females by treatment status, based on predictions that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
-\end{sidewaysfigure}
+\noindent Any prediction based on $\bm{X}_{t}$ produces labor income profiles with significant differences between the treatment and control groups, especially for males. Adding background variables $\bm{B}$ do not help distinguish treatment and control group (as expected given balance at baseline).
 
 \begin{sidewaysfigure}[H]
 \centering
-\caption{Labor Income Profiles, Prediction Based on $\bm{X}_{t},\bm{B}$}\label{fig:labor-income-profiles}
-\begin{subfigure}[h]{0.4\textwidth}
+\caption{Predicted Labor Income Profiles, Varying the Prediction Variables}\label{fig:matchsensitivity}
+\begin{subfigure}[h]{0.3\textwidth}
 		\centering
-		\caption{Predicted for ABC/CARE Males} \label{fig:abcare1}
-		\includegraphics[width=\textwidth]{output/labor_25-60_male_2.eps}
+		\caption{Lagged Labor Income and $\bm{B}$, Females} 
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset3_mset3_female.eps}
 \end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
+\begin{subfigure}[h]{0.3\textwidth}
 	\centering
-	\caption{PSID, Disadvantaged Males} \label{fig:psid1}
-		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s1.eps}
+	\caption{Lagged Labor Income and $\bm{X}_{t}$, Females} 
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset6_mset3_female.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.3\textwidth}
+	\centering
+	\caption{Lagged Labor Income and $\bm{B}, \bm{X}_{t}$, Females} 
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_female.eps}
 \end{subfigure}
-\begin{subfigure}[h]{0.4\textwidth}
+\begin{subfigure}[h]{0.3\textwidth}
 		\centering
-		\caption{Predicted for ABC/CARE Females} \label{fig:abcare0}
-		\includegraphics[width=\textwidth]{output/labor_25-60_female_2.eps}
+		\caption{Lagged Labor Income and $\bm{B}$, Males} 
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset3_mset3_male.eps}
 \end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
+\begin{subfigure}[h]{0.3\textwidth}
 	\centering
-	\caption{PSID, Disadvantaged Females} \label{fig:psid0}
-		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s0.eps}
-\end{subfigure}
-\footnotesize \justify
-Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CARE males and females by treatment status, based on predictions that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
-\end{sidewaysfigure}
-
-\begin{sidewaysfigure}[H]
-\centering
-\caption{Labor Income Profiles, Prediction Based on Lagged Labor Income and $\bm{B}$}\label{fig:labor-income-profiles}
-\begin{subfigure}[h]{0.4\textwidth}
-		\centering
-		\caption{Predicted for ABC/CARE Males} \label{fig:abcare1}
-		\includegraphics[width=\textwidth]{output/labor_25-60_male_3.eps}
+	\caption{Lagged Labor Income and $\bm{X}_{t}$, Males} 
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset6_mset3_male.eps}
 \end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
+\begin{subfigure}[h]{0.3\textwidth}
 	\centering
-	\caption{PSID, Disadvantaged Males} \label{fig:psid1}
-		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s1.eps}
-\end{subfigure}
-\begin{subfigure}[h]{0.4\textwidth}
-		\centering
-		\caption{Predicted for ABC/CARE Females} \label{fig:abcare0}
-		\includegraphics[width=\textwidth]{output/labor_25-60_female_3.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
-	\centering
-	\caption{PSID, Disadvantaged Females} \label{fig:psid0}
-		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s0.eps}
+	\caption{Lagged Labor Income and $\bm{B}, \bm{X}_{t}$, Males} 
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_male.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CARE males and females by treatment status, based on predictions that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
-\end{sidewaysfigure}
-
-\begin{sidewaysfigure}[H]
-\centering
-\caption{Labor Income Profiles, Prediction Based on $\bm{B}$}\label{fig:labor-income-profiles}
-\begin{subfigure}[h]{0.4\textwidth}
-		\centering
-		\caption{Predicted for ABC/CARE Males} \label{fig:abcare1}
-		\includegraphics[width=\textwidth]{output/labor_25-60_male_4.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
-	\centering
-	\caption{PSID, Disadvantaged Males} \label{fig:psid1}
-		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s1.eps}
-\end{subfigure}
-\begin{subfigure}[h]{0.4\textwidth}
-		\centering
-		\caption{Predicted for ABC/CARE Females} \label{fig:abcare0}
-		\includegraphics[width=\textwidth]{output/labor_25-60_female_4.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
-	\centering
-	\caption{PSID, Disadvantaged Females} \label{fig:psid0}
-		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s0.eps}
-\end{subfigure}
-\footnotesize \justify
-Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CARE males and females by treatment status, based on predictions that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
-\end{sidewaysfigure}
-
-\begin{sidewaysfigure}[H]
-\centering
-\caption{Labor Income Profiles, Prediction Based on $\bm{X}_{t}$}\label{fig:labor-income-profiles}
-\begin{subfigure}[h]{0.4\textwidth}
-		\centering
-		\caption{Predicted for ABC/CARE Males} \label{fig:abcare1}
-		\includegraphics[width=\textwidth]{output/labor_25-60_male_5.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
-	\centering
-	\caption{PSID, Disadvantaged Males} \label{fig:psid1}
-		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s1.eps}
-\end{subfigure}
-\begin{subfigure}[h]{0.4\textwidth}
-		\centering
-		\caption{Predicted for ABC/CARE Females} \label{fig:abcare0}
-		\includegraphics[width=\textwidth]{output/labor_25-60_female_5.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
-	\centering
-	\caption{PSID, Disadvantaged Females} \label{fig:psid0}
-		\includegraphics[width=\textwidth]{output/psid_incomeprofiles_s0.eps}
-\end{subfigure}
-\footnotesize \justify
-Note: Panels (a) and (c) display the predicted labor income profiles for ABC/CARE males and females by prediction status, based on predictions that combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). Panels (b) and (d) display the mean labor income profile of disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as having 12 years of education or less.\\
+Note: This figure displays the predicted labor income profile obtained when constructing control- and treatment-group matches according to the procedure in Section~\ref{sec:necrosis}. We combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). We vary the prediction variables across the different panels, for both males and females. $\bm{B}$ variables: male and black indicators, and mother's education. $\bm{X}_{t}$ variables: years of education at age 30, labor income at ages 21 and 30, and BMI at age 34.
 \end{sidewaysfigure}
 
 \paragraph{Health Costs}
