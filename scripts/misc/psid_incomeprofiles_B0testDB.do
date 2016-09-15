@@ -78,17 +78,19 @@ tempfile psidwide
 save   "`psidwide'", replace
 
 foreach sex of numlist 0 1 {
-	matrix all`sex' = J(1,3,.)
-	matrix colnames all`sex' = m`sex' sd`sex' n`sex'
+	matrix all`sex' = J(1,2,.)
+	matrix colnames all`sex' = m`sex' se`sex'
 	foreach num of numlist 25(1)65 {
 		
 		// B \in B_{0}
+		replace inc_labor`num' = inc_labor`num'/1000 if male == `sex' & black == 1 & m_ed0y <= 12
 		summ inc_labor`num' if male == `sex' & black == 1 & m_ed0y <= 12
 		local m`num'`sex'  = r(mean)
 		local sd`num'`sex' = r(sd)
 		local n`num'`sex'  = r(N)
-		matrix stats`num'`sex' = [`m`num'`sex'',`sd`num'`sex'',`n`num'`sex'']
-		matrix colnames stats`num'`sex' =  m`sex' sd`sex' n`sex'
+		local se`num'`sex' = (`m`num'`sex'')/(`sd`num'`sex''/(sqrt(`n`num'`sex'')))
+		matrix stats`num'`sex' = [`m`num'`sex'',`se`num'`sex'']
+		matrix colnames stats`num'`sex' =  m`sex' se`sex'
 
 		mat_rapp all`sex' : all`sex' stats`num'`sex'
 	}
@@ -137,26 +139,18 @@ foreach sex of numlist 0 1 {
 matrix allw = [allw1,allw0]
 matrix allallw = [all,allw]
 
-/*	
 clear 
-svmat all, names(col)
+svmat allallw, names(col)
 gen age = _n + 24
-
-foreach sex of numlist 0 1 {
-	gen se`sex'  = sd`sex'/sqrt(n`sex')
-	// rename sdw`sex' sew`sex'
-}
+rename sdw1 sew1 
+rename sdw0 sew0
 
 foreach sex of numlist 0 1 {
 	gen m`sex'max = m`sex' + se`sex' 
 	gen m`sex'min = m`sex' - se`sex'
 	
-	// gen mw`sex'max = mw`sex' + sew`sex' 
-	// gen mw`sex'min = mw`sex' - sew`sex'
-}
-
-foreach var of varlist m1* m0* /*mw**/ sd* {
-	replace `var' = `var'/1000
+	gen mw`sex'max = mw`sex' + sew`sex' 
+	gen mw`sex'min = mw`sex' - sew`sex'
 }
 
 tempfile psid
@@ -192,8 +186,12 @@ restore
 }
 use "`psid'", clear
 
-cd $output
+cd $dataabcres
+save allcontrolcomparisons.dta, replace
 
+
+/*
+cd $output
 // B \in B0 vs. Control
 
 #delimit
