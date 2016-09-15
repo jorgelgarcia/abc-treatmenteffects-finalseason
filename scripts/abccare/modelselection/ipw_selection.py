@@ -19,7 +19,7 @@ from paths import paths
 
 # import data
 reader = StataReader(paths.abccare)
-data = reader.data(convert_dates=False, convert_categoricals=False)
+data = reader.read(convert_dates=False, convert_categoricals=False)
 data = data.set_index('id')
 data = data.sort_index()
 data.drop(data.loc[(data.RV==1) & (data.R==0)].index, inplace=True)
