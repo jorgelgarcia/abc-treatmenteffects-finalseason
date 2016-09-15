@@ -248,7 +248,7 @@ foreach rand of numlist 0 1 {
 		replace mean_age   = mean_age*1000 if R == `rand' & male == `male'
 	}
 }
-keep if age == 29 | age == 31
+keep if age == 28 | age == 32
 collapse (mean) mean_age sdmean_age = semean_age, by(R)
 mkmat *, matrix(hojmantest)
 matrix hojmantest = hojmantest'
