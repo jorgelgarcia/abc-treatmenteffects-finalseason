@@ -14,16 +14,16 @@ srand(1)
 # ======================================================= #
 # Call number of processors
 using ClusterManagers
-procs = 25
+procs = 20
 #addprocs(procs)
 addprocs_pbs(procs)
 
 # Define "to parallelize process"
 require("$here/bootstrap_itt_p_inc.jl")
-B = 25 # number of workers being used
-b = 4  # number of work each worker does
+B = 20 # number of workers being used
+b = 5  # number of work each worker does
 
-ITTboot = pmap(ITTrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
+ITTboot = pmap(ITTrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 ITTfinal = Dict()
 
 # Increase the number of "draw" according to the worker number
