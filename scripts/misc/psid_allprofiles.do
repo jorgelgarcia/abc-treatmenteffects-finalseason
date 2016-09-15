@@ -83,8 +83,8 @@ foreach sex of numlist 0 1 {
 	foreach num of numlist 25(1)65 {
 		
 		// B \in B_{0}
-		replace inc_labor`num' = inc_labor`num'/1000 if male == `sex' & m_ed0y <= 12
-		summ inc_labor`num' if male == `sex' & m_ed0y <= 12
+		replace inc_labor`num' = inc_labor`num'/1000 if male == `sex' & black == 1 & m_ed0y <= 12
+		summ inc_labor`num' if male == `sex' & black == 1 & m_ed0y <= 12
 		local m`num'`sex'  = r(mean)
 		local sd`num'`sex' = r(sd)
 		local n`num'`sex'  = r(N)
@@ -97,6 +97,7 @@ foreach sex of numlist 0 1 {
 	matrix all`sex' = all`sex'[2...,1...]
 }
 matrix all = [all1,all0]
+
 
 /*
 cd $dataweights
@@ -139,20 +140,19 @@ foreach sex of numlist 0 1 {
 }
 matrix allw = [allw1,allw0]
 matrix allallw = [all,allw]
-*/
 
 clear 
-svmat all, names(col)
+svmat allallw, names(col)
 gen age = _n + 24
-// rename sdw1 sew1 
-// rename sdw0 sew0
+rename sdw1 sew1 
+rename sdw0 sew0
 
 foreach sex of numlist 0 1 {
 	gen m`sex'max = m`sex' + se`sex' 
 	gen m`sex'min = m`sex' - se`sex'
 	
-	// gen mw`sex'max = mw`sex' + sew`sex' 
-	// gen mw`sex'min = mw`sex' - sew`sex'
+	gen mw`sex'max = mw`sex' + sew`sex' 
+	gen mw`sex'min = mw`sex' - sew`sex'
 }
 
 tempfile psid
@@ -188,18 +188,20 @@ restore
 }
 use "`psid'", clear
 
-// cd $dataabcres
-// save allcontrolcomparisons.dta, replace
+cd $dataabcres
+save allcontrolcomparisons.dta, replace
+
 
 cd $output
 // B \in B0 vs. Control
 
+replace mean_age0 = . if age == 30
 #delimit
-twoway (lowess mean_age1 age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.3))
-       (lowess m1        age, lwidth(1.2) lpattern(solid) lcolor(gs8)  bwidth(.3))
+twoway (lowess m0  age if age >=25, lwidth(1.2) lpattern(solid) lcolor(gs0) bwidth(.5))
+       (lowess mean_age0  age if age >=25, lwidth(1.2) lpattern(solid) lcolor(gs8) bwidth(.7))
        
         , 
-		  legend(rows(1) order(1 2 3) label(1 "PSID, Disadvantaged") label(2 "PSID, Control-group Matches") label(3 "+/- s.e.") size(small))
+		  legend(rows(1) order(1 2 3) label(1 "Synthetic Cohort") label(2 "Control") label(3 "+/- s.e.") size(small))
 		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(10[10]50, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));

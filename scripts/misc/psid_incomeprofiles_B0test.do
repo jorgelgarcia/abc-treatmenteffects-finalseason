@@ -41,6 +41,9 @@ save "`dandweights'", replace
 // constructed weights
 cd $dataweights
 use psid-weights-finaldata.dta, clear
+keep if draw == 0
+tempfile newweights
+save    "`newweights'", replace
 
 cd $datapsid
 use psid-base.dta, clear
@@ -49,7 +52,11 @@ merge m:1 id using "`dandweights'"
 keep if _merge != 2
 drop _merge
 
-keep id male black birthyear race age* edu bmi* inc_labor* lweight* wtabc_allids p_inc0y m_ed0y
+merge m:1 id using "`newweights'"
+keep if _merge == 3
+drop _merge
+
+keep id male black birthyear race age* edu bmi* inc_labor* lweight* wtabc_allids* p_inc0y m_ed0y
 rename edu eduever
 
 reshape long age inc_labor lweight, i(id) j(year)
@@ -62,19 +69,19 @@ keep if year >= 1997 & year <= 2011
 
 // generate id's file for USC
 preserve
-keep id year male eduever black wtabc_allids p_inc0y m_ed0y
+keep id year male eduever black wtabc_allids* p_inc0y m_ed0y
 cd $output
 saveold psid_interextra.dta, replace
 restore
 
-keep id male age inc_labor birthyear year lweight black eduever wtabc_allids p_inc0y m_ed0y
+keep id male age inc_labor birthyear year lweight black eduever wtabc_allids* p_inc0y m_ed0y
 bysort id : egen birthyear2 = mean(birthyear)
 gen age2 = year - birthyear2
 drop if age2 < 0
 
-keep id age2 inc_labor male inc_labor lweight black eduever wtabc_allids p_inc0y m_ed0y
+keep id age2 inc_labor male inc_labor lweight black eduever wtabc_allids* p_inc0y m_ed0y
 reshape wide inc_labor lweight, i(id) j(age2)
-keep id male inc_labor25-inc_labor65 lweight25-lweight65 black eduever wtabc_allids p_inc0y m_ed0y
+keep id male inc_labor25-inc_labor65 lweight25-lweight65 black eduever wtabc_allids* p_inc0y m_ed0y
 replace m_ed0y = eduever if m_ed0y ==.
 
 foreach sex of numlist 0 1 {
@@ -83,7 +90,7 @@ foreach sex of numlist 0 1 {
 	foreach num of numlist 25(1)65 {
 		
 		// B \in B_{0}
-		summ inc_labor`num' if male == `sex' & black == 1 // & m_ed0y <= 12
+		summ inc_labor`num' if male == `sex' & black == 1 & m_ed0y <= 12
 		local m`num'`sex'  = r(mean)
 		local sd`num'`sex' = r(sd)
 		local n`num'`sex'  = r(N)
@@ -91,7 +98,7 @@ foreach sex of numlist 0 1 {
 		matrix colnames stats`num'`sex' =  m`sex' sd`sex' n`sex'
 		
 		// weighted
-		summ inc_labor`num' [iw=wtabc_allids] if male == `sex' & black == 1 // & m_ed0y <= 12
+		summ inc_labor`num' [iw=wtabc_allids_c3_control] if male == `sex' & black == 1 & m_ed0y <= 12
 		local mw`num'`sex'  = r(mean)
 		local sdw`num'`sex' = r(sd)
 		local nw`num'`sex'  = r(N)
@@ -174,7 +181,7 @@ twoway (lowess m1           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth
        
         , 
 		  legend(rows(1) order(1 2 3) label(1 "PSID, Disadvantaged") label(2 "PSID, Control-group Matches") label(3 "+/- s.e.") size(small))
-		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(0[20]80, angle(h) glcolor(gs14))
+		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(10[10]80, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
@@ -197,31 +204,3 @@ twoway (lowess m0           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 graph export psid_B0_match_s0.eps, replace
-
-/*
-// psid disadvantaged only
-#delimit
-twoway (lowess m1           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.25))
-       (lowess m1max age,  lpattern(dash) lcolor(gs0) bwidth(.25))
-       (lowess m1min age,  lpattern(dash) lcolor(gs0) bwidth(.25))
-       
-        , 
-		  legend(rows(1) order(1 2) label(1 "PSID, Disadvantaged") label(2 "+/- s.e.") size(small))
-		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(0[20]80, angle(h) glcolor(gs14))
-		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
-		  graphregion(color(white)) plotregion(fcolor(white));
-#delimit cr
-graph export psid_disad_s1.eps, replace
-
-#delimit
-twoway (lowess m0           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth(.25))
-       (lowess m0max age,  lpattern(dash) lcolor(gs0) bwidth(.25))
-       (lowess m0min age,  lpattern(dash) lcolor(gs0) bwidth(.25))
-       
-        , 
-		  legend(rows(1) order(1 2) label(1 "PSID, Disadvantaged") label(2 "+/- s.e.") size(small))
-		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(0[10]50, angle(h) glcolor(gs14))
-		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
-		  graphregion(color(white)) plotregion(fcolor(white));
-#delimit cr
-graph export psid_disad_s0.eps, replace
