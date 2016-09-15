@@ -1,9 +1,9 @@
 #!/bin/bash
-#PBS -N PythonTest
+#PBS -N IncomeProjections
 #PBS -j oe
 #PBS -V
-#PBS -l procs=25
+#PBS -l nodes=1:ppn=20
 
-cd $PBS_O_WORKDIR
+cd "/home/aziff/projects/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/labor"
 
-mpirun -n 25 -machinefile $PBS_NODEFILE python2.7 bootstrap_prediction_weights.py
+python2.7 bootstrap_prediction_weights.py
