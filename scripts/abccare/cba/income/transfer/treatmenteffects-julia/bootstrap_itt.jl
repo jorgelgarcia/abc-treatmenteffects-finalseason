@@ -82,6 +82,7 @@ for gender in genderloop
 	# Define the result matrix for the first bootstrap (brep = 0)
 	for arep in 0:areps
 		datainuse_tmpz = datainuse["$(gender)"]
+		datainuse_tmpz = datainuse_tmpz[!isna(datainuse_tmpz[:adraw]), :]
 		datainuse_arepz = datainuse_tmpz[datainuse_tmpz[:adraw] .== arep, :]
 
 		if arep == 0
@@ -123,6 +124,7 @@ function ITTrun(boots)
 
 	    for arep in 0:areps
 				datainuse_tmp = datainuse["$(gender)"]
+				datainuse_tmp = datainuse_tmp[!isna(datainuse_tmp[:adraw]), :]
 				datainuse_arep = datainuse_tmp[datainuse_tmp[:adraw] .== arep, :]
 				datainuse_act = join(datainuse_arep, bsid_draw, on = [:id, :male, :family], kind = :inner)
 
