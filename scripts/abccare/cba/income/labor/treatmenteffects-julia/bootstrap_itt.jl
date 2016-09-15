@@ -82,6 +82,9 @@ for gender in genderloop
 	# Define the result matrix for the first bootstrap (brep = 0)
 	for arep in 0:areps
 		datainuse_tmpz = datainuse["$(gender)"]
+		if arep == 0
+			println("printing arep: $(datainuse_tmpz[:,[:id,:adraw]])")
+		end
 		datainuse_arepz = datainuse_tmpz[datainuse_tmpz[:adraw] .== arep, :]
 
 		if arep == 0
