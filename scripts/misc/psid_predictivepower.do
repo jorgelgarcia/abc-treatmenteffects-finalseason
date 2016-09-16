@@ -313,12 +313,18 @@ foreach var in $estimates {
 		// generate p-value
 		egen    `vary'`var'pvalue  = rowmean(`vary'`var'ind`num'1-`vary'`var'ind`num'${bootstraps})
 		replace `vary'`var'pvalue  = . if `vary'`var'mean == .
-		replace `vary'`var'pvalue  = `vary'`var'pvalue/2       if `vary'`var'mean > 0
-		replace `vary'`var'pvalue  = (1 - `vary'`var'pvalue/2) if `vary'`var'mean >= 0
 	}
 }
 aorder
 keep *mean *pvalue
+
+// adjust to one sided p-value
+foreach var in $estimates {
+	foreach vary in c t tc {
+	replace `vary'`var'pvalue = `vary'`var'pvalue/2 if `vary'`var'mean > 0
+	replace `vary'`var'pvalue = (1 - `vary'`var'pvalue/2) if `vary'`var'mean < 0
+	}
+}	
 
 // arrange to output to a matrix
 # delimit
