@@ -26,28 +26,35 @@ b = 4  # number of work each worker does
 ITTboot = pmap(ITTrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 ITTfinal = Dict()
 
-
+"DEBUGGING 1"
 # Increase the number of "draw" according to the worker number
 for gender in genderloop
 	for i in 2:B
+		"DEBIGGING 2"
 		ITTboot[i]["$(gender)"][:draw] = ITTboot[i]["$(gender)"][:draw] .+ (b*(i-1))
+		"DEBIGGING 3"
 		for j in 1:2 # concatenated
 		ITTboot[i]["$(gender)"][parse("draw_$(j)")] = ITTboot[i]["$(gender)"][parse("draw_$(j)")] .+ (b*(i-1))
+		"DEBIGGING 4"
 		end
 	end
 
+	"DEBIGGING 5"
 	# Concatenate outputs from all workers
 	ITTfinal_pre1 = vcat(ITTinitial["$(gender)"], ITTboot[1]["$(gender)"], ITTboot[2]["$(gender)"], ITTboot[3]["$(gender)"], ITTboot[4]["$(gender)"], ITTboot[5]["$(gender)"], ITTboot[6]["$(gender)"], ITTboot[7]["$(gender)"], ITTboot[8]["$(gender)"], ITTboot[9]["$(gender)"], ITTboot[10]["$(gender)"])
 	ITTfinal_pre2 = vcat(ITTfinal_pre1, ITTboot[11]["$(gender)"], ITTboot[12]["$(gender)"], ITTboot[13]["$(gender)"], ITTboot[14]["$(gender)"], ITTboot[15]["$(gender)"], ITTboot[16]["$(gender)"], ITTboot[17]["$(gender)"], ITTboot[18]["$(gender)"], ITTboot[19]["$(gender)"], ITTboot[20]["$(gender)"])
 	ITTfinal["$(gender)"] = vcat(ITTfinal_pre2, ITTboot[21]["$(gender)"], ITTboot[22]["$(gender)"], ITTboot[23]["$(gender)"], ITTboot[24]["$(gender)"], ITTboot[25]["$(gender)"])
 
+	"DEBIGGING 6"
 	# ===================================================== #
 	# Export to csv
 	# ===================================================== #
 	# Define a dictionary for the file outputs to allow for file handles to include locals
+	"DEBIGGING 7"
 	ResultOutput = Dict()
 	colnames = [:rowname, :draw, :ddraw, :itt_noctrl, :itt_noctrl_p, :itt_noctrl_N, :itt_ctrl, :itt_ctrl_p, :itt_ctrl_N, :itt_wctrl, :itt_wctrl_p, :itt_wctrl_N]
 
+"DEBIGGING 8"
 	# open the necessary matrix
 	c = 0
 	for P_switch in (0, 1, 10)
