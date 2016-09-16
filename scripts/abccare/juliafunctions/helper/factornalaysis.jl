@@ -15,7 +15,7 @@
 # ===================================== #
 # Correlation matrix (standardize data) #
 # ===================================== #
-function stdcorrdata(tofactordata):
+function stdcorrdata(tofactordata)
     datasize = size(tofactordata)
     N = datasize[1]     # number of rows
     K = datasize[2]     # number of columns
@@ -23,8 +23,8 @@ function stdcorrdata(tofactordata):
     # Standardize each measure
     nonadata = tofactordata
     for k in range(0, K)
-        tofactordata[:,k] = (tofactordata[:,k] - mean(tofactordata[!isna(tofactordata[:,k]),k]))/std(tofactordata[!isna(tofactordata[:,k]),k])
-        nonadata = tofactordata[!isna(tofactordata[:,k]), :]
+        nonadata[:,k] = (nonadata[:,k] - mean(nonadata[!isna(nonadata[:,k]),k]))/std(nonadata[!isna(nonadata[:,k]),k])
+        nonadata = nonadata[!isna(nonadata[:,k]), :]
     end
 
     # Preparation to creating correlation matrix
@@ -39,7 +39,7 @@ end
 # ===================================================================================== #
 # Number of factors through Scree Plot rule (>1 eigen values of std correlation matrix) #
 # ===================================================================================== #
-function screeplot(tofactordata):
+function screeplot(tofactordata)
     datasize = size(tofactordata)
     N = datasize[1]     # number of rows
     K = datasize[2]     # number of columns
@@ -67,7 +67,7 @@ function diagonalfac(tofactordata, factorn)
     # Delete rows with NA values and create an array of tofactordata
     nonadata = tofactordata
     for k in range(0, K)
-        nonadata = tofactordata[!isna(tofactordata[:,k]), :]
+        nonadata = nonadata[!isna(nonadata[:,k]), :]
     end
 
     arraydata = Array(nonadata)
@@ -92,7 +92,7 @@ function diagonalfac(tofactordata, factorn)
     floads  = Array(Float64, K, factorn)
     floadsm = Array(Float64, K, K, factorn)
 
-    # Ingredientes to extraxt factors
+    # Ingredientes to extract factors
     for j in range(0,factorn)
         # sum of squares of the correlation matrix (sum(matrix, 1) means summing columns in matrix)
         ssCM = sum(CM .^ 2, 1)
@@ -108,9 +108,7 @@ function diagonalfac(tofactordata, factorn)
         CM -= floadsm[:,:,j]
     end
 
-    println("$(floads)")
-
     # Define and return factors
-    fscores = dot(dot(tofactordata,floads), inv(dot(transpose(floads),floads)))
+    fscores = dot(dot(nonadata,floads), inv(dot(transpose(floads),floads)))
     return fscores
 end
