@@ -26,7 +26,6 @@ b = 4  # number of work each worker does
 ITTboot = pmap(ITTrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 ITTfinal = Dict()
 
-
 # Increase the number of "draw" according to the worker number
 for gender in genderloop
 	for i in 2:B

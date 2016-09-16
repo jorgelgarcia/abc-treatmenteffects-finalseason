@@ -19,7 +19,7 @@ procs = 20
 addprocs_pbs(procs)
 
 # Define "to parallelize process"
-require("$here/bootstrap_itt_diclaim_surv.jl")
+require("$here/bootstrap_itt_m_ed.jl")
 B = 20 # number of workers being used
 b = 5  # number of work each worker does
 
@@ -38,8 +38,7 @@ for gender in genderloop
 	# Concatenate outputs from all workers
 	ITTfinal_pre1 = vcat(ITTinitial["$(gender)"], ITTboot[1]["$(gender)"], ITTboot[2]["$(gender)"], ITTboot[3]["$(gender)"], ITTboot[4]["$(gender)"], ITTboot[5]["$(gender)"], ITTboot[6]["$(gender)"], ITTboot[7]["$(gender)"], ITTboot[8]["$(gender)"], ITTboot[9]["$(gender)"], ITTboot[10]["$(gender)"])
 	ITTfinal_pre2 = vcat(ITTfinal_pre1, ITTboot[11]["$(gender)"], ITTboot[12]["$(gender)"], ITTboot[13]["$(gender)"], ITTboot[14]["$(gender)"], ITTboot[15]["$(gender)"], ITTboot[16]["$(gender)"], ITTboot[17]["$(gender)"], ITTboot[18]["$(gender)"], ITTboot[19]["$(gender)"], ITTboot[20]["$(gender)"])
-	ITTfinal_pre3 = ITTfinal_pre2
-	ITTfinal["$(gender)"] = ITTfinal_pre3
+	ITTfinal["$(gender)"] = ITTfinal_pre2
 
 	# ===================================================== #
 	# Export to csv
@@ -64,7 +63,7 @@ for gender in genderloop
 			ResultOutput["itt_$(gender)_P$(P_switch)"] = ITTfinal["$(gender)"][:, colnames]
 			delete!(ITTfinal["$(gender)"], colnames)
 		end
-		writetable("$(results)/itt/$(component)_$(gender)_P$(P_switch).csv", ResultOutput["itt_$(gender)_P$(P_switch)"])
+		writetable("$(results)/itt/$(component)_$(gender)_P$(P_switch)$(nm).csv", ResultOutput["itt_$(gender)_P$(P_switch)"])
 		c = c + 1
   end
 end

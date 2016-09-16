@@ -1,0 +1,6 @@
+variable,category,age,label,block,block_appendix,hyp,ipw_var,ipw_pooled1,ipw_pooled2,ipw_pooled3,only_abc,only_care
+m_ed1y6m,"Mother's Employment, Education, and Income",Mother's Education,2,Mother's Years of Education,m_ed,+,,,,,0,0
+m_ed2y6m,"Mother's Employment, Education, and Income",Mother's Education,3,Mother's Years of Education,m_ed,+,,,,,0,0
+m_ed3y6m,"Mother's Employment, Education, and Income",Mother's Education,4,Mother's Years of Education,m_ed,+,,,,,0,0
+m_ed4y6m,"Mother's Employment, Education, and Income",Mother's Education,5,Mother's Years of Education,m_ed,+,,,,,0,0
+m_ed8y,"Mother's Employment, Education, and Income",Mother's Education,9,Mother's Years of Education,m_ed,+,m_ed8y,hrabc_index,apgar1,cohort,0,0
