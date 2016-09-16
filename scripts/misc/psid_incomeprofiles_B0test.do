@@ -180,7 +180,7 @@ twoway (lowess m1           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth
        (lowess mw1min age, lpattern(dash) lcolor(gs8) bwidth(.25))
        
         , 
-		  legend(rows(1) order(1 2 3) label(1 "PSID, Disadvantaged") label(2 "PSID, Control-group Matches") label(3 "+/- s.e.") size(small))
+		  legend(rows(2) order(1 2 3) label(1 "PSID, Disadvantaged") label(2 "PSID, Control Group Constructed by Matching")  label(3 "+/- s.e.") size(small))
 		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(10[10]80, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
@@ -198,7 +198,7 @@ twoway (lowess m0           age, lwidth(1.2) lpattern(solid) lcolor(gs0)  bwidth
        (lowess mw0min age, lpattern(dash) lcolor(gs8) bwidth(.45))
        
         , 
-		  legend(rows(1) order(1 2 3) label(1 "PSID, Disadvantaged") label(2 "PSID, Control-group Matches") label(3 "+/- s.e.") size(small))
+		  legend(rows(2) order(1 2 3) label(1 "PSID, Disadvantaged") label(2 "PSID, Control Group Constructed by Matching")  label(3 "+/- s.e.") size(small))
 		  xlabel(25[5]65, grid glcolor(gs14)) ylabel(10[10]50, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
