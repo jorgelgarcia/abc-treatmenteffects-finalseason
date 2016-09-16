@@ -36,7 +36,7 @@ global collapseprj  = "$klmmexico/abccare/income_projections/"
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 // bootstraps 
-global bootstraps 101
+global bootstraps 200
 set seed 0
 
 // ABC
@@ -109,7 +109,7 @@ twoway (kdensity `var' if R == 0, lwidth(vthick) lpattern(solid) lcolor(gs0))
 		  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 		  xtitle({&theta}{subscript:`var'}) ytitle(Density)
 		  graphregion(color(white)) plotregion(fcolor(white))
-		  note("mean: `meanb`var''. s.e.: `seb`var''.");
+		  note("Mean Treatment - Control: `meanb`var'' (`seb`var'').");
 #delimit cr 
 graph export abccare_`var'factor.eps, replace
 }
