@@ -293,6 +293,7 @@ svmat allests, names(col)
 # delimit
 global estimates 1complete 1fcomplete 2complete 2fcomplete 3complete 3fcomplete;
 # delimit cr
+aorder
 
 foreach var in $estimates {	
 	foreach num of numlist 1(1)$bootstraps {
