@@ -38,6 +38,7 @@ local N = r(N)
 cd $datanpvs
 use  labor_r-male-draw.dta, clear
 egen labor30 = rowmean(labor_c28 labor_c29 labor_c31 labor_c32)
+replace labor30 = labor30/1000
 keep adraw r male labor30
 gen  perp30 = labor30/.03
 
@@ -58,6 +59,7 @@ foreach var in labor perp {
 cd $datanpvs
 use labor_r-male-draw.dta, clear
 egen labor_tot = rowtotal(labor_c22-labor_c67), missing
+replace labor_tot = labor_tot/1000
 keep labor_tot r
 collapse (mean) m = labor_tot (sd) sd = labor_tot, by(r)
 drop if r == .
