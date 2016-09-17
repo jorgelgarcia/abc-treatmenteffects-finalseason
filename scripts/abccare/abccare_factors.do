@@ -105,7 +105,7 @@ foreach var in c n {
 twoway (kdensity `var' if R == 0, lwidth(vthick) lpattern(solid) lcolor(gs0))
        (kdensity `var' if R == 1, lwidth(vthick) lpattern(solid) lcolor(gs8))
         , 
-		  legend(label(1 Controll) label(2 Treatment))
+		  legend(label(1 Control) label(2 Treatment))
 		  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 		  xtitle({&theta}{subscript:`var'}) ytitle(Density)
 		  graphregion(color(white)) plotregion(fcolor(white))
