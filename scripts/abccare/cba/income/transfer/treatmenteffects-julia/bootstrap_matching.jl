@@ -115,6 +115,7 @@ function matchingrun(boots)
 
 		# Keep the IDs of the original sample to perform ABC boostraps
 		bsid_orig_tmp = datainuse["$(gender)"]
+		bsid_orig_tmp = bsid_orig_tmp[!isna(bsid_orig_tmp[:adraw]), :]
 		bsid_orig_tmp = bsid_orig_tmp[bsid_orig_tmp[:adraw] .== 0, [:id, :male, :family]]
 
 	  #  bootstrap estimates
