@@ -8,7 +8,7 @@ Original date:	August 29, 2016
 */
 
 // macros
-local file_specs	pset1_mset3
+local file_specs	pset6_mset3
 /*
 Matching control sets (mset)
 	1. Baseline controls only (W)
@@ -48,7 +48,7 @@ cd $dataabccare
 use append-abccare_iv.dta, clear
 
 drop if R == 0 & RV == 1
-keep id R male
+keep id R male si30y_inc_labor
 
 tempfile abccare_data
 save `abccare_data'
@@ -77,10 +77,17 @@ foreach source in labor /*transfer*/ {
 			qui gen mean_age`vl`i'' = .
 		}
 	}
+	
+	merge m:1 id using `abccare_data', nogen
+	sum si30y_inc_labor, detail
+	local upper1 = r(p99)
+	local lower1 = r(p1)
 
+	drop if si30y_inc_labor > `upper1' //| si30y_inc_labor < `lower1'
+	
 	sort id adraw
 	levelsof id, local(ids)
-
+	
 
 	foreach id in `ids' {
 		foreach age in `ages' {
@@ -94,11 +101,9 @@ foreach source in labor /*transfer*/ {
 	drop age*
 	drop if adraw > 0
 	
-	merge 1:1 id using `abccare_data', nogen
+	//merge 1:1 id using `abccare_data', nogen
 	drop if id == 9999
-	drop adraw
-	
-	
+	drop adraw si30y_inc_labor
 	
 		foreach stat in mean semean {
 			preserve
