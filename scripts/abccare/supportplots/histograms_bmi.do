@@ -24,6 +24,7 @@ local dataobs
 
 foreach data in abc $auxdata {
 	use "${`data'}", clear
+	drop if black == 0
 	if "`data'" == "abc" {
 		drop if R == 0 & RV == 1
 		sum si34y_bmi

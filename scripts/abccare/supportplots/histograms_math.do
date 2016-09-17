@@ -21,7 +21,7 @@ local step = 10
 
 foreach data in abc cnlsy{
 	use "${`data'}", clear
-	
+	drop if black == 0
 	if "`data'" == "abc" {
 		drop if R == 0 & RV == 1	
 		egen piatmath = rowmean(piat_math5y6m piat_math6y piat_math6y6m piat_math7y)
