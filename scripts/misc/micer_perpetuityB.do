@@ -73,7 +73,7 @@ foreach num of numlist 0 1 {
 	matrix lpernpv30_`num' = [lper30_`num',npv30_`num']
 }
 
-matrix lpernpv = [lpernpv30_0,lpernpv30_1]
+matrix lpernpv = [lpernpv30_0 \ lpernpv30_1]
 
 cd $output
 #delimit
