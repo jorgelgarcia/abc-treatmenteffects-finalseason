@@ -79,7 +79,7 @@ twoway (scatter p  age, msymbol(circle) mfcolor (gs4) mlcolor(gs4) connect(l) lw
         , 
 		  legend(label(1 "Fraction Enrolled | Enrollment > 0") label(2 "Average Months| Enrollment > 0") size(small))
 		  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
-		  xtitle(Age) ytitle(Enrollment, axis(1)) ytitle("Avg. Months | Enrollment > 0", axis(2))
+		  xtitle(Age) ytitle(Enrollment, axis(1)) ytitle("Avg. Months | Enrollment > 0", axis(2) size(small))
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr 
 graph export abccare_Valtenrollment.eps, replace

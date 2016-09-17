@@ -37,7 +37,7 @@ local N = r(N)
 // get predicted at age 30
 cd $datanpvs
 use  labor_r-male-draw.dta, clear
-egen labor30 = rowmean(labor_c28 labor_c29 labor_c31 labor_c32)
+egen labor30 = rowmean(labor_c26 labor_c29 labor_c31 labor_c34)
 replace labor30 = labor30/1000
 keep adraw r male labor30
 gen  perp30 = labor30/.03
