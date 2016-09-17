@@ -8,7 +8,7 @@ Original date:	August 29, 2016
 */
 
 // macros
-local file_specs	pset6_mset3
+local file_specs	pset1_mset3
 /*
 Matching control sets (mset)
 	1. Baseline controls only (W)
@@ -129,7 +129,7 @@ foreach source in labor /*transfer*/ {
 		
 		
 		// limit to 25-60 and scale income
-		drop if age < 25 | age > 65
+		drop if age > 65  //age < 25 |
 		foreach v in mean_age semean_age plus minus {
 			replace `v' = `v'/1000
 		}
@@ -151,7 +151,7 @@ foreach source in labor /*transfer*/ {
 	
 		local graphregion		graphregion(color(white))
 		local yaxis				ytitle("``source'_name' Income (1000s 2014 USD)") ylabel(${y`sex'}, angle(h) glcol(gs14))
-		local xaxis				xtitle("Age") xlabel(25[5]65, grid glcol(gs14))
+		local xaxis				xtitle("Age") xlabel(20[5]65, grid glcol(gs14))
 		local legend			legend(rows(1) order(2 1 3) label(1 "Control") label(2 "Treatment") label(3 "+/- s.e.") size(small))
 	
 		local t_mean			lcol(gs9) lwidth(1.2)
