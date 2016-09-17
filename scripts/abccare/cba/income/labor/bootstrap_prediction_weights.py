@@ -2,9 +2,17 @@
 '''
 Created on Tue Oct 06 17:02:19 2015
 
-@author: Joshua
+@author: Anna Ziff, Joshua Shea
 Description: this script estimates the labor income for ABC subjects
 for multiple bootstraps of the auxiliary data.
+
+lag, X, W (1)
+X, W (2)
+lag, W (3)
+W (4)
+X (5)
+lag, X (6)
+lag, X, W with no 30 for extrapolation (7)
 '''
 
 import os
@@ -24,7 +32,7 @@ from paths import paths
 
 seed = 1234
 aux_draw = 99 # need to use more than 1
-pset_type = 1
+pset_type = 6
 
 #----------------------------------------------------------------
 
