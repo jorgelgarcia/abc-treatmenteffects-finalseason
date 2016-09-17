@@ -91,7 +91,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
           fml = Formula(y, Expr(:call, :+, :R, controls...))
           try
            #  lm(fml, usedata)
-            glm(fml, usedata, Normal(), IdentityLink())
+            lm(fml, usedata)
           catch err
             push!(outMat["matching_$(gender)_P$(p)"], [y, draw, ddraw, NA, NA])
             continue
