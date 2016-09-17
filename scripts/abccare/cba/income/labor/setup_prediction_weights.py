@@ -106,6 +106,7 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 		c = 'inc_labor{}'.format(age)
 
 		# drop black
+		# drop black
 		aux = aux.loc[aux.black == 1]
 
 		# obtain parameters for different sexes

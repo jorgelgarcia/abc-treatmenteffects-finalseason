@@ -25,8 +25,8 @@ from paths import paths
 #----------------------------------------------------------------
 
 seed = 1234
-aux_draw = 3 # need to use more than 1
-pset_type = 3
+aux_draw = 99 # need to use more than 1
+pset_type = 1
 
 #----------------------------------------------------------------
 
