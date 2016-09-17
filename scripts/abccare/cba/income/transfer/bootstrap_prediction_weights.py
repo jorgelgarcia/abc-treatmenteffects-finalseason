@@ -26,6 +26,7 @@ from paths import paths
 
 seed = 1234
 aux_draw = 3 # need to use more than 1
+pset_type = 3
 
 #----------------------------------------------------------------
 
@@ -134,7 +135,7 @@ for weight in weights:
 			projections[weight][cs][sex] = pd.concat([pd.concat([rslt[k][3][sex], rslt[k][4][sex]], axis=1) for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
 
 			# output projections .csv
-			projections[weight][cs][sex].to_csv(os.path.join(paths.rslts, 'transfer_proj_{}_{}_{}.csv'.format(sex,cs,weight)))
+			projections[weight][cs][sex].to_csv(os.path.join(paths.rslts, 'transfer_proj_{}_pset{}_mset{}_{}.csv'.format(weight, pset_type, cs,sex)))
 
 for cs in control_sets:
 	for sex in sexes:
@@ -144,4 +145,4 @@ for cs in control_sets:
 		combined = pd.concat([df_treat, df_control])
 		combined.dropna(axis=0,how='all',inplace=True)
 
-		combined.to_csv(os.path.join(paths.rslts, 'transfer_proj_combined_{}_{}.csv'.format(sex,cs)))
+		combined.to_csv(os.path.join(paths.rslts, 'transfer_proj_combined_pset{}_mset{}_{}.csv'.format(pset_type,cs,sex)))

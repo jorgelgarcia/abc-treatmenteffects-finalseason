@@ -104,6 +104,10 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 				weight_array = deepcopy(extrap_weights.loc[extrap_index_weight,:])
 
 		c = 'inc_labor{}'.format(age)
+
+		# drop black
+		aux = aux.loc[aux.black == 1]
+
 		# obtain parameters for different sexes
 		for sex in ['pooled', 'male', 'female']:
 
