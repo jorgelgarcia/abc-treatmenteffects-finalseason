@@ -11,7 +11,7 @@ import os
 from collections import OrderedDict
 import pandas as pd
 import numpy as np
-from scipy.stats import percentileofscore
+from scipy.stats import percentileofscore, sem
 
 '''
 1: "ITT", no controls
@@ -43,6 +43,7 @@ flows = {
     'inc_parent':{'m':'p_inc_m.csv', 'f':'p_inc_f.csv', 'p':'p_inc_p.csv'},
     'inc_trans_pub':{'m':'transfer_m.csv', 'f':'transfer_f.csv', 'p':'transfer_p.csv'},
     'edu':{'m':'educost_m.csv', 'f':'educost_f.csv', 'p':'educost_p.csv'},
+	'm_ed':{'m':'m_educost_m.csv', 'f':'m_educost_f.csv', 'p':'m_educost_p.csv'},
     # Crime
     'crimepublic':{'m':'public_crime_m.csv', 'f':'public_crime_f.csv', 'p':'public_crime_p.csv'},
     'crimeprivate':{'m':'private_crime_m.csv', 'f':'private_crime_f.csv', 'p':'private_crime_p.csv'},
@@ -96,7 +97,7 @@ def makeflows(etype):
     for sex in ['m', 'f', 'p']:
         #Filling with zero entries, and stacking non-auxiliary bootstrap estiamtes
         for key, file_ in flows.items():
-            if key in ['costs', 'ccpublic', 'ccprivate', 'edu', 'inc_parent', 'crimepublic', 'crimeprivate']:
+            if key in ['costs', 'ccpublic', 'ccprivate', 'edu', 'm_ed', 'inc_parent', 'crimepublic', 'crimeprivate']:
                 df = pd.read_csv(os.path.join(flowscsv, file_[sex]), index_col=['draw'])
                 tmp_full = df
 
@@ -132,6 +133,8 @@ def makeflows(etype):
         filled['costs_{}'.format(sex)] = -1.5*filled['costs_{}'.format(sex)]
         filled['edu_{}'.format(sex)] = -filled['edu_{}'.format(sex)]
         filled['edu_{}'.format(sex)].iloc[:, :19] = 1.5*filled['edu_{}'.format(sex)].iloc[:, :19]
+		filled['m_ed_{}'.format(sex)] = -filled['m_ed_{}'.format(sex)]
+        filled['m_ed_{}'.format(sex)].iloc[:, :19] = 1.5*filled['m_ed_{}'.format(sex)].iloc[:, :19]
         filled['crimepublic_{}'.format(sex)] = -1.5*filled['crimepublic_{}'.format(sex)]
         filled['crimeprivate_{}'.format(sex)] = -filled['crimeprivate_{}'.format(sex)]
         filled['ccpublic_{}'.format(sex)] = -1.5*filled['ccpublic_{}'.format(sex)]
@@ -256,7 +259,7 @@ def bc_calc(filled, components=flows.keys(), rate=0.03):
     ratio_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])
     ratio_mean = pd.DataFrame([ratiof.mean(), ratiom.mean(), ratiop.mean()], index = ['f', 'm', 'p'])    
     ratio_p = pd.DataFrame([ratio_fp, ratio_mp, ratio_pp], index = ['f', 'm', 'p'])    
-    ratio_se = pd.DataFrame([ratiof.std(), ratiom.std(), ratiop.std()], index=['f','m','p'])
+    ratio_se = pd.DataFrame([sem(ratiof), sem(ratiom), sem(ratiop)], index=['f','m','p'])
     try:
         #ratio_quant = ratio.groupby(level='sex').quantile([0.1, 0.9]).unstack()
         ratio_quant = pd.DataFrame(np.array([[ratiof.quantile(0.10),ratiof.quantile(0.90)],[ratiom.quantile(0.10),ratiom.quantile(0.90)],[ratiop.quantile(0.10),ratiop.quantile(0.90)]]), index=['f','m','p'])
@@ -308,7 +311,7 @@ def irr_calc(filled, components=flows.keys()):
     irr_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])    
     irr_mean = pd.DataFrame([irrf.mean(), irrm.mean(), irrp.mean()], index = ['f', 'm', 'p'])   
     irr_p = pd.DataFrame([irr_fp, irr_mp, irr_pp], index = ['f', 'm', 'p'])
-    irr_se = pd.DataFrame([irrf.std(), irrm.std(), irrp.std()], index=['f','m','p'])    
+    irr_se = pd.DataFrame([sem(irrf), sem(irrm), sem(irrp)], index=['f','m','p'])    
 
     try:
         #irr_quant = irr.groupby(level='sex').quantile([0.1, 0.9]).unstack()
