@@ -21,7 +21,7 @@ local step = 5
 
 foreach data in abc psid nlsy cnlsy{
 	use "${`data'}", clear
-	
+	drop if black == 0
 	if "`data'" == "abc" {
 		drop if R == 0 & RV == 1
 		sum years_30y
