@@ -25,33 +25,35 @@ global scripts     = "$projects/abc-treatmenteffects-finalseason/scripts/"
 global datanpvs    = "$klmmexico/abccare/NPV/"
 global collapseprj  = "$klmmexico/abccare/income_projections/"
 global dataabccare  = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
-
-
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
+// open merged data
+cd $dataabccare
+use append-abccare_iv.dta, clear
+summ R
+local N = r(N)
+
 // get predicted at age 30
-cd $collapseprj
-use labor_income_collapsed_pset1_mset3.dta, clear
-keep if age == 28 | age == 32
+cd $datanpvs
+use  labor_r-male-draw.dta, clear
+egen labor30 = rowmean(labor_c28 labor_c29 labor_c31 labor_c32)
+replace labor30 = labor30/1000
+keep adraw r male labor30
+gen  perp30 = labor30/.03
 
-preserve
-collapse (mean) mean_age, by(R)
-gen per3mean_age = mean_age/.03
-mkmat *, matrix(point)
-tempfile point
-save "`point'", replace
-restore
+foreach num of numlist 0 1{
+foreach var in labor perp {
 
-preserve
-collapse (mean) semean_age, by(R)
-gen seper3mean_age = (1/(.03)^2)*semean_age
-mkmat *, matrix(se)
-restore
-
-matrix all0 = [point[1,2...] \ se[1,2...]] 
-matrix all1 = [point[2,2...] \ se[2,2...]] 
-matrix all = [all0,all1]
+	summ   `var'30 if r   == `num'
+	local  `var'30_`num'm  = r(mean)
+	local  `var'30_`num'sd = r(sd)
+	local  `var'30_`num'se = ``var'30_`num'sd'/(sqrt(`N'))
+	
+	matrix `var'30_`num'  = [``var'30_`num'm' \ ``var'30_`num'se'] 
+}
+	matrix lper30_`num'   = [labor30_`num',perp30_`num']
+}
 
 // get actuals
 cd $datanpvs
@@ -59,20 +61,22 @@ use labor_r-male-draw.dta, clear
 egen labor_tot = rowtotal(labor_c22-labor_c67), missing
 replace labor_tot = labor_tot/1000
 keep labor_tot r
-drop if labor_tot == . | r == .
-collapse (mean) m=labor_tot (sd) se=labor_tot, by(r)
-drop r 
-mkmat *, matrix(real)
+collapse (mean) m = labor_tot (sd) sd = labor_tot, by(r)
+drop if r == .
+drop r
+replace sd = sd/`N'
+mkmat *, matrix(npv)
+matrix npv30_0 = [npv[1,1...]']
+matrix npv30_1 = [npv[2,1...]']
 
+foreach num of numlist 0 1 {
+	matrix lpernpv30_`num' = [lper30_`num',npv30_`num']
+}
 
-matrix rest = [[real[1,1] \ real[1,2]],[real[2,1] \ real[2,2]]]
-
-matrix all = [all[1..2,1..2],rest[1..2,1],all[1..2,3..4],rest[1..2,2]]
-matrix colnames all = pred30c perp30c npvc pred30t perp30t npvt
-matrix rownames all = m se
+matrix lpernpv = [lpernpv30_0 \ lpernpv30_1]
 
 cd $output
 #delimit
 outtable using mincerpred, 
-mat(all) replace nobox center norowlab f(%9.3f);
+mat(lpernpv) replace nobox center norowlab f(%9.3f);
 #delimit cr
