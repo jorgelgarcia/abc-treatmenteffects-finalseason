@@ -48,7 +48,7 @@ cd $dataabccare
 use append-abccare_iv.dta, clear
 
 drop if R == 0 & RV == 1
-keep id R male
+keep id R male si30y_inc_labor
 
 tempfile abccare_data
 save `abccare_data'
@@ -77,10 +77,17 @@ foreach source in labor /*transfer*/ {
 			qui gen mean_age`vl`i'' = .
 		}
 	}
+	
+	merge m:1 id using `abccare_data', nogen
+	sum si30y_inc_labor, detail
+	local upper1 = r(p99)
+	local lower1 = r(p1)
 
+	drop if si30y_inc_labor > `upper1' //| si30y_inc_labor < `lower1'
+	
 	sort id adraw
 	levelsof id, local(ids)
-
+	
 
 	foreach id in `ids' {
 		foreach age in `ages' {
@@ -94,11 +101,9 @@ foreach source in labor /*transfer*/ {
 	drop age*
 	drop if adraw > 0
 	
-	merge 1:1 id using `abccare_data', nogen
+	//merge 1:1 id using `abccare_data', nogen
 	drop if id == 9999
-	drop adraw
-	
-	
+	drop adraw si30y_inc_labor
 	
 		foreach stat in mean semean {
 			preserve
@@ -124,7 +129,7 @@ foreach source in labor /*transfer*/ {
 		
 		
 		// limit to 25-60 and scale income
-		drop if age < 25 | age > 65
+		drop if age > 65  //age < 25 |
 		foreach v in mean_age semean_age plus minus {
 			replace `v' = `v'/1000
 		}
@@ -146,7 +151,7 @@ foreach source in labor /*transfer*/ {
 	
 		local graphregion		graphregion(color(white))
 		local yaxis				ytitle("``source'_name' Income (1000s 2014 USD)") ylabel(${y`sex'}, angle(h) glcol(gs14))
-		local xaxis				xtitle("Age") xlabel(25[5]65, grid glcol(gs14))
+		local xaxis				xtitle("Age") xlabel(20[5]65, grid glcol(gs14))
 		local legend			legend(rows(1) order(2 1 3) label(1 "Control") label(2 "Treatment") label(3 "+/- s.e.") size(small))
 	
 		local t_mean			lcol(gs9) lwidth(1.2)
