@@ -25,13 +25,13 @@ def irr_dwl(d):
     for sex in ['m', 'f', 'p']:
         for part in ['inc_trans_pub_{}'.format(sex), 'diclaim_{}'.format(sex), 'ssclaim_{}'.format(sex), 'ssiclaim_{}'.format(sex)]:
             irr_tmp[part] = irr_tmp[part] * (d/0.5)
-        for part in ['edu_{}'.format(sex)]:
+        for part in ['edu_{}'.format(sex), 'm_ed_{}'.format(sex)]:
             irr_tmp[part].loc[(sex, slice(None), slice(None)), slice('c0','c18')] = \
                 irr_tmp[part].loc[(sex, slice(None), slice(None)), slice('c0','c18')] * ((1 + d)/1.5)
         for part in ['ccpublic_{}'.format(sex), 'crimepublic_{}'.format(sex), 'health_public_{}'.format(sex), 'costs_{}'.format(sex)]:
             irr_tmp[part]  = irr_tmp[part] * ((1+d)/1.5)
 
-    output = irr_calc(irr_tmp)
+    output = irr_calc(irr_tmp, etype=etype)
     
     output['rate'] = d
             

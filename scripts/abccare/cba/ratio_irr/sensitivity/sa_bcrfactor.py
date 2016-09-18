@@ -12,7 +12,7 @@ from copy import deepcopy
 sys.path.extend([os.path.join(os.path.dirname(__file__), '..')])
 filedir = os.path.join(os.path.dirname(__file__))
 plots = os.path.join(filedir, '..', 'rslt', 'sensitivity')
-
+from cba_N import N
 from cba_setup import bc_calc, makeflows
 
 etype = 2
@@ -24,7 +24,7 @@ for sex in ['m', 'f', 'p']:
     filled['health_{}'.format(sex)] = filled['health_private_{}'.format(sex)] + filled['health_public_{}'.format(sex)] 
     filled['transfer_{}'.format(sex)] = filled['inc_trans_pub_{}'.format(sex)] + filled['diclaim_{}'.format(sex)] + filled['ssclaim_{}'.format(sex)] + filled['ssiclaim_{}'.format(sex)]
 
-components = ['inc_labor', 'inc_parent', 'transfer', 'edu', 'crime', 'costs', 'cc', 'health', 'qaly']
+components = ['inc_labor', 'inc_parent', 'transfer', 'edu', 'crime', 'costs', 'cc', 'health', 'qaly', 'm_ed']
 factors = np.arange(0,3.1,0.25)
 
 combo = list(itertools.product(components, factors))
@@ -37,7 +37,7 @@ def bc_factors(part, f):
     for sex in ['m', 'f', 'p']:
         bc_tmp['{}_{}'.format(part, sex)] = bc_tmp['{}_{}'.format(part, sex)] * f
 
-    output = bc_calc(bc_tmp, components=components)        
+    output = bc_calc(bc_tmp, etype=etype, components=components)        
 
     output['rate'] = f
     output['part'] = part
