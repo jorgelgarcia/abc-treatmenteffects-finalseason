@@ -24,7 +24,8 @@ global scripts      = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
 global collapseprj  = "$klmmexico/abccare/income_projections/"
 global dataabccare  = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
-global datacnlsyw    = "$klmshare/Data_Central/data-repos/nlsy/extensions/abc-match-cnlsy/"
+global datacnlsyw   = "$klmshare/Data_Central/data-repos/nlsy/extensions/abc-match-cnlsy/"
+global datacnlsyp   = "$klmshare/Data_Central/data-repos/nlsy/primary/cnlsy/base"
 global datapsidw    = "$klmshare/Data_Central/data-repos/psid/extensions/abc-match/"
 global weights      = "$klmmexico/abccare/as_weights"
 // output
@@ -36,79 +37,71 @@ cd $collapseprj
 use  labor_income_collapsed_pset1_mset3.dta, clear
 keep if age >= 26 & age <= 34
 
-collapse (mean) mean_age semean_age, by(R)
-keep R mean_age semean_age 
+collapse (mean) mean_age semean_age, by(R male)
+keep R mean_age semean_age male
 
-foreach num of numlist 0 1 {
-	foreach var of varlist mean_age semean_age {
-		summ `var' if R == `num'
-		local `var'_`num' = r(mean)
+foreach male of numlist 0 1 {
+	foreach num of numlist 0 1 {
+		foreach var of varlist mean_age semean_age {
+			summ `var' if R == `num' & male == `male'
+			local `var'_`num' = r(mean)
+		}
+		matrix labor30pred_`num'`male' = [`mean_age_`num'', `semean_age_`num'']
 	}
-	matrix labor30pred_`num' = [`mean_age_`num'' \ `semean_age_`num'']
 }
 
 // realized
 cd $dataabccare
 use append-abccare_iv.dta, clear
+summ si30y_inc_labor, d
+drop if si30y_inc_labor > r(p99) 
 drop if random == 3
-summ R
-local N = r(N)
-
+summ R if male == 0
+local N0 = r(N)
+summ R if male == 1
+local N1 = r(N)
 replace si30y_inc_labor = si30y_inc_labor/1000
+
+foreach male of numlist 0 1 {
 foreach num of numlist 0 1 {
-	summ   si30y_inc_labor if R   == `num'
+	summ   si30y_inc_labor if R   == `num' & male == `male'
 	local  labor30real_`num'm  = r(mean)
 	local  labor30real_`num'sd = r(sd)
-	local  labor30real_`num'se = `labor30real_`num'sd'/(sqrt(`N'))
+	local  labor30real_`num'se = `labor30real_`num'sd'/(sqrt(`N`male''))
 	
-	matrix labor30real_`num'  = [`labor30real_`num'm' \ `labor30real_`num'se'] 
+	matrix labor30real_`num'`male'  = [`labor30real_`num'm',`labor30real_`num'se'] 
 	
 }
-
-// psid 
-// disadvantaged
-cd $datapsidw 
-use  psid-abc-match.dta, clear
-drop if si30y_inc_labor > 300000
-summ    si30y_inc_labor
-replace si30y_inc_labor = si30y_inc_labor/1000
-// disadvantaged
-preserve
-drop if black != 1 | m_ed0y > 12
-collapse (mean) m=si30y_inc_labor (semean) se=si30y_inc_labor
-mkmat *, matrix(labor30_psidB)
-matrix labor30_psidB = labor30_psidB'
-restore
-keep id si30y_inc_labor
-tempfile psidinc
-save   "`psidinc'", replace
-
-// weighted
-cd $weights 
-use psid-weights-finaldata.dta, clear
-merge m:1 id using "`psidinc'"
-keep if _merge == 3
-drop _merge
-
-// get N
-preserve
-duplicates drop id, force
-des
-local N = r(N)
-restore
-
-local numel = -1
-foreach var in control treat {
-	local numel = `numel' + 1
-	summ si30y_inc_labor [iw = wtabc_allids_c3_`var']
-	local m`var'  = r(mean)
-	local se`var' = r(sd)/`N'
-	
-	matrix labor30psid_`numel' = [`m`var'' \ `se`var'']
 }
 
-// construct a matrix to output
+foreach var in pred real {
+	matrix `var' = J(1,5,.)
+	matrix colnames `var' =  male `var'0 `var'se0 `var'1 `var'se1 
+	matrix labor30`var'_female = [0,labor30`var'_00,labor30`var'_10]
+	mat colnames labor30`var'_female = male `var'0 `var'se0 `var'1 `var'se1
+	mat_rapp `var' : `var' labor30`var'_female
+	
+	matrix labor30`var'_male   = [1,labor30`var'_01,labor30`var'_11]
+	mat colnames labor30`var'_male  = male `var'0 `var'se0 `var'1 `var'se1 
+	mat_rapp `var' : `var' labor30`var'_male
+	
+	matrix `var' = `var'[2...,1...]
+}
+matrix pred = pred[1...,2...]
+matrix realpred = [real,pred]
 
-matrix control   = [labor30real_0,labor30pred_0,labor30_psidB,labor30psid_0]
-matrix treatment = [labor30real_1,labor30pred_1,J(2,1,.),labor30psid_1]
+clear 
+svmat realpred, names(col)
+gen age = 30
+cd $output
+save realpredwide.dta, replace
+
+reshape long real realse pred predse, i(male) j(R)
+gen realplus  = real + realse
+gen realminus = real - realse
+gen predplus  = pred + predse
+gen predminus = pred - predse
+save realpred.dta, replace
+
+
 

@@ -136,14 +136,16 @@ foreach source in labor /*transfer*/ {
 		
 		cd $incomeresults
 		save `source'_income_collapsed_`file_specs', replace
+		cd  $output 
+		append using realpred
 		
 	// graph
 	cd $output
 	global y0  0[10]50
-	global y1 10[10]80
+	global y1  0[10]60
 	local bwidth1 = .65
 	local bwidth0 = .65  
-	forval sex = 0/1 {
+	foreach sex of numlist 0 {
 	
 	preserve
 
@@ -151,13 +153,14 @@ foreach source in labor /*transfer*/ {
 	
 		local graphregion		graphregion(color(white))
 		local yaxis				ytitle("``source'_name' Income (1000s 2014 USD)") ylabel(${y`sex'}, angle(h) glcol(gs14))
-		local xaxis				xtitle("Age") xlabel(20[5]65, grid glcol(gs14))
-		local legend			legend(rows(1) order(2 1 3) label(1 "Control") label(2 "Treatment") label(3 "+/- s.e.") size(small))
+		local xaxis				xtitle("Age") xlabel(30 "Interpolation {&larr} t* {&rarr} Extrapolation" 45 "40" 55 "50" 65 "60", grid glcol(gs14))
+		local legend			legend(rows(2) order(1 2 3 7 9 8) label(1 "Control Predicted") label(2 "Treatment Predicted") label(3 "Prediction +/- s.e.") label(7 "Control Observed") label(8 "Observed +/- s.e.") label(9 "Treatment Observed") size(small))
 	
 		local t_mean			lcol(gs9) lwidth(1.2)
 		local c_mean			lcol(black) lwidth(1.2)
 		local t_se				lcol(gs9) lpattern(dash)
 		local c_se				lcol(black) lpattern(dash)
+		
 	
 		# delimit ;
 		twoway (lowess mean_age age if R == 0, bwidth(`bwidth`sex'') `c_mean')
@@ -165,7 +168,13 @@ foreach source in labor /*transfer*/ {
 				(lowess plus age if R == 0, bwidth(`bwidth`sex'') `c_se')
 				(lowess plus age if R == 1, bwidth(`bwidth`sex'') `t_se')
 				(lowess minus age if R == 0, bwidth(`bwidth`sex'') `c_se')
-				(lowess minus age if R == 1, bwidth(`bwidth`sex'') `t_se'),
+				(lowess minus age if R == 1, bwidth(`bwidth`sex'') `t_se')
+				(scatter real  age      if R == 0, mlcolor(black) mfcolor(white) msize(large))
+				(rcap realplus  realminus age  if R == 0, lcolor(black) lwidth(medthick))
+				(scatter real  age      if R == 1, mlcolor(gs9) mfcolor(white) msize(large))
+				(rcap realplus  realminus age  if R == 1, lcolor(gs9) lwidth(medthick))
+				,
+				
 				`graphregion'
 				`xaxis'
 				`yaxis'
