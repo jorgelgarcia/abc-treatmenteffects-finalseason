@@ -89,7 +89,7 @@ function ITTrun(boots)
 		elseif gender == "female"
 			datainuse["$(gender)"] = outcomesate[outcomesate[:male] .== 0, :]
 			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :abc]
-			datainuse["$(gender)"][:male] = 1 # To bsample right
+			datainuse["$(gender)"][:male] = 1 # bsample does not work for [:male] == 0
 		elseif gender == "pooled"
 			datainuse["$(gender)"] = outcomesate
 			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male, :abc]
