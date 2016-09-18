@@ -324,7 +324,7 @@ twoway (lowess mdisad       age if male == 0 & age & age <= 44, lwidth(1.2) lpat
          "ABC/CARE Eligible at t*: `mdisad300' (s.e. `sedisad300')"
 	 " "
          "Synthetic Control Group at t*: `mcontrol300' (s.e. `secontrol300')"
-         , size(small) place(nw) box just(left) margin(l+1 b+1) width(55) fcolor(none))
+         , size(small) place(nw) box just(left) margin(l+1 b+1) width(58) fcolor(none))
 		  
 		  
 		  legend(rows(2) order(1 2 3 7 8) label(1 "ABC/CARE Eligible in PSID") label(2 "Synthetic Control Group-Matching Based") label(3 "+/- s.e.") 
