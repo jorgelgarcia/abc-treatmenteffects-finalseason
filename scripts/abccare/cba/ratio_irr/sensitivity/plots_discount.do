@@ -59,7 +59,7 @@ global	ylabel Benefit-Cost Ratio
 
 
 foreach sex in m f {
-	local axis_range ylabel(0 5 10 15 20) yscale(r(0, 20))
+	local axis_range ylabel(0 5 10 15 20 25) yscale(r(0, 25))
 	#delimit
 	twoway 	(scatter stat rate if sex == "`sex'", msymbol(circle) mfcolor(gs0) mlcolor(gs0) connect(l) lwidth(medthick) lpattern(solid) lcolor(gs0) yline(1, lpattern(solid)))
 			(line alt_ub alt_lb rate if sex == "`sex'", lwidth(thin thin) lpattern(dash dash) lcolor(gs0 gs0))
