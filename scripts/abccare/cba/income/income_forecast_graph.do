@@ -66,7 +66,7 @@ global box0  text( 10 45
 	 "Treatment at t*:"
          "Predicted, `pred1_s0' (s.e. `predse1_s0')"
 	 "Observed, `real1_s0' (s.e. `realse1_s0')"
-         , size(small) place(c) box just(left) margin(l+1 b+1) width(35) fcolor(none)); 
+         , size(small) place(c) box just(left) margin(l+1 b+1 t+1 r+1) width(35) fcolor(none)); 
 # delimit cr
 
 // note hard code of se for treat due to rounding issue in stata
@@ -79,7 +79,7 @@ global box1  text( 10 42
 	 "Treatment at t*:"
          "Predicted, `pred1_s1' (s.e. 9.53)"
 	 "Observed, `real1_s1' (s.e. `realse1_s1')"
-         , size(small) place(c) box just(left) margin(l+1 b+1) width(35) fcolor(none)); 
+         , size(small) place(c) box just(left) margin(l+1 b+1 t+1 r+1) width(35) fcolor(none)); 
 # delimit cr
 
 // prepare data for graphing
@@ -184,7 +184,7 @@ foreach source in labor /*transfer*/ {
 	global y1  0[10]60
 	local bwidth1 = .65
 	local bwidth0 = .65  
-	foreach sex of numlist 1 {
+	foreach sex of numlist 0 1 {
 	
 	preserve
 
