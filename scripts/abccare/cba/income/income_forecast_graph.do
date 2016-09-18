@@ -56,7 +56,7 @@ save `abccare_data'
 
 foreach source in labor /*transfer*/ {
 
-	cd $data_dir
+	cd $incomeresults
 	insheet using "`source'_proj_combined_`file_specs'_pooled.csv", clear
 
 	local varlist
