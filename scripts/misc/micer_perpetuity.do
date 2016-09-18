@@ -31,8 +31,10 @@ global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 // open merged data
 cd $dataabccare
 use append-abccare_iv.dta, clear
-summ R
-local N = r(N)
+summ R if male == 0
+local N0 = r(N)
+summ R if male == 1
+local N1 = r(N)
 
 // get predicted at age 30
 cd $datanpvs
@@ -42,17 +44,20 @@ replace labor30 = labor30/1000
 keep adraw r male labor30
 gen  perp30 = labor30/.03
 
+foreach sex of numlist 0 1{
 foreach num of numlist 0 1{
 foreach var in labor perp {
 
-	summ   `var'30 if r   == `num'
-	local  `var'30_`num'm  = r(mean)
-	local  `var'30_`num'sd = r(sd)
-	local  `var'30_`num'se = ``var'30_`num'sd'/(sqrt(`N'))
+	summ   `var'30 if r   == `num' & male == `sex'
+	local  `var'30_`num'_`sex'm  = r(mean)
+	local  `var'30_`num'_`sex'sd = r(sd)
+	local  `var'30_`num'_`sex'se = ``var'30_`num'_`sex'sd'/(sqrt(`N`sex''))
 	
-	matrix `var'30_`num'  = [``var'30_`num'm' \ ``var'30_`num'se'] 
+	matrix `var'30_`num'_`sex'  = [``var'30_`num'_`sex'm' \ ``var'30_`num'_`sex'se'] 
 }
-	matrix lper30_`num'   = [labor30_`num',perp30_`num']
+	// ontaining prediction from plots to get exact.
+	matrix per_`num'_`sex'   = [perp30_`num'_`sex']
+}
 }
 
 // get actuals
@@ -60,23 +65,48 @@ cd $datanpvs
 use labor_r-male-draw.dta, clear
 egen labor_tot = rowtotal(labor_c22-labor_c67), missing
 replace labor_tot = labor_tot/1000
-keep labor_tot r
-collapse (mean) m = labor_tot (sd) sd = labor_tot, by(r)
+keep labor_tot r male
+collapse (mean) m = labor_tot (sd) sd = labor_tot, by(r male)
 drop if r == .
-drop r
-replace sd = sd/`N'
-mkmat *, matrix(npv)
-matrix npv30_0 = [npv[1,1...]']
-matrix npv30_1 = [npv[2,1...]']
+
+replace sd = sd/`N1' if male == 1
+replace sd = sd/`N0' if male == 0
 
 foreach num of numlist 0 1 {
-	matrix lpernpv30_`num' = [lper30_`num',npv30_`num']
+	foreach sex of numlist 0 1 {
+		foreach stat in m sd {
+			summ `stat' if r == `num' & male == `sex'
+			local `stat'_`num'_`sex' = r(mean)
+		}
+	matrix npv_`num'_`sex' = [`m_`num'_`sex'' \ `sd_`num'_`sex'']
+	}
 }
 
-matrix lpernpv = [lpernpv30_0 \ lpernpv30_1]
+cd $output
+use realpredwide.dta, clear
+drop real*
+
+foreach num of numlist 0 1 {
+	foreach sex of numlist 0 1 {
+		foreach stat in pred predse {
+			summ `stat'`num' if male == `sex'
+			local `stat'_`num'_`sex' = r(mean)
+		}
+	matrix pred_`num'_`sex' = [`pred_`num'_`sex'' \ `predse_`num'_`sex'']
+	}
+}
+
+
+// construct output matrices
+foreach sex of numlist 0 1 {
+matrix allperp_`sex' = [pred_0_`sex',per_0_`sex',npv_0_`sex',pred_1_`sex',per_1_`sex',npv_1_`sex']
+}
+
+matrix allperp = [allperp_0 \ allperp_1]
+
 
 cd $output
 #delimit
 outtable using mincerpred, 
-mat(lpernpv) replace nobox center norowlab f(%9.3f);
+mat(allperp) replace nobox center norowlab f(%9.3f);
 #delimit cr

@@ -320,14 +320,14 @@ twoway (lowess mdisad       age if male == 0 & age & age <= 44, lwidth(1.2) lpat
 	(rcap    realplus0  realminus0 age  if age == 30 & male == 0, lcolor(black) lwidth(medthick))
        
         , 
-        text( 30 32
+        text( 30 33
          "ABC/CARE Eligible at t*: `mdisad300' (s.e. `sedisad300')"
 	 " "
          "Synthetic Control Group at t*: `mcontrol300' (s.e. `secontrol300')"
          , size(small) place(nw) box just(left) margin(l+1 b+1 t+1 r+1) width(58) fcolor(none))
 		  
 		  
-		  legend(rows(2) order(1 2 3 7 8) label(1 "ABC/CARE Eligible in PSID") label(2 "Synthetic Control Group-Matching Based") label(3 "+/- s.e.") 
+		  legend(rows(2) order(1 2 3 7 8) label(1 "ABC/CARE Eligible in PSID ({bf:B} {&isin} {bf:{it:{&Beta}}}{sub:0})") label(2 "Synthetic Control Group-Matching Based") label(3 "+/- s.e.") 
 		                              label(7 "Control Observed") label(8 "Observed +/- s.e.") size(vsmall))
 		  xlabel(20 "20" 30 "Interpolation {&larr} t* {&rarr} Extrapolation" 40 "40", grid glcolor(gs14)) ylabel(10[10]50, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
@@ -349,14 +349,14 @@ twoway (lowess mdisad       age if male == 1 & age & age <= 44, lwidth(1.2) lpat
 	(rcap    realplus0  realminus0 age  if age == 30 & male == 1, lcolor(black) lwidth(medthick))
        
         , 
-        text( 37 34
+        text( 37 33
          "ABC/CARE Eligible at t*: `mdisad301' (s.e. `sedisad301')"
 	 " "
          "Synthetic Control Group at t*: `mcontrol301' (s.e. `secontrol301')"
          , size(small) place(nw) box just(left) margin(l+1 b+1 t+1 r+1) width(60) fcolor(none))
 		  
 		  
-		  legend(rows(2) order(1 2 3 7 8) label(1 "ABC/CARE Eligible in PSID") label(2 "Synthetic Control Group-Matching Based") label(3 "+/- s.e.") 
+		  legend(rows(2) order(1 2 3 7 8) label(1 "ABC/CARE Eligible in PSID ({bf:B} {&isin} {bf:{it:{&Beta}}}{sub:0})") label(2 "Synthetic Control Group-Matching Based") label(3 "+/- s.e.") 
 		                              label(7 "Control Observed") label(8 "Observed +/- s.e.") size(vsmall))
 		  xlabel(20 "20" 30 "Interpolation {&larr} t* {&rarr} Extrapolation" 40 "40", grid glcolor(gs14)) ylabel(10[10]50, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
