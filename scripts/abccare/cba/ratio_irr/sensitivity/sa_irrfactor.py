@@ -24,7 +24,7 @@ for sex in ['m', 'f', 'p']:
     filled['health_{}'.format(sex)] = filled['health_private_{}'.format(sex)] + filled['health_public_{}'.format(sex)] 
     filled['transfer_{}'.format(sex)] = filled['inc_trans_pub_{}'.format(sex)] + filled['diclaim_{}'.format(sex)] + filled['ssclaim_{}'.format(sex)] + filled['ssiclaim_{}'.format(sex)]
 
-components = ['inc_labor', 'inc_parent', 'transfer', 'edu', 'crime', 'costs', 'cc', 'health', 'qaly']
+components = ['inc_labor', 'inc_parent', 'transfer', 'edu', 'crime', 'costs', 'cc', 'health', 'qaly', 'm_ed']
 factors = np.arange(0,3.1,0.25)
 combo = list(itertools.product(components, factors))
 
@@ -36,7 +36,7 @@ def irr_factors(part, f):
     for sex in ['m', 'f', 'p']:
         irr_tmp['{}_{}'.format(part, sex)] = irr_tmp['{}_{}'.format(part, sex)] * f
 
-    output = irr_calc(irr_tmp, components=components)        
+    output = irr_calc(irr_tmp, etype=etype, components=components)        
 
     output['rate'] = f
     output['part'] = part

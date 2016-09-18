@@ -10,8 +10,10 @@ WARNING     THE QUANTILES IN THE bc_calc AND irr_calc FUNCTIONS HAVE NOT BEEN UP
 import os
 import pandas as pd
 import numpy as np
-from scipy.stats import percentileofscore
+from scipy.stats import percentileofscore, zscore
 from cba_setup import *
+from math import sqrt
+from cba_N import N
 
 '''
 Select estimation type ('etype')
@@ -27,7 +29,7 @@ Select estimation type ('etype')
 #----------------------------------------
 # Generate the matrices of flows
 #----------------------------------------
-etype = 2
+etype = 8
 filled = makeflows(etype=etype)
 benefits, costs = bcflows(filled=filled)
 total = irrflows(filled=filled)
@@ -67,7 +69,8 @@ for age in [5, 8, 15, 21, 30, 79]:
 #for age in [79]:
     if age == 79:
         roots = []
-        irr = total.loc[:, slice('c{}'.format(age))].apply(robust_irr_roots, axis=1)    
+        irr = total.loc[:, slice('c{}'.format(age))].apply(robust_irr_roots, axis=1) 
+
     else:
         irr = total.loc[:, slice('c{}'.format(age))].apply(robust_irr, axis=1)
     point_f = irr.loc['f',0,0]
@@ -102,7 +105,7 @@ for age in [5, 8, 15, 21, 30, 79]:
     irr_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])    
     irr_mean = pd.DataFrame([irrf.mean(), irrm.mean(), irrp.mean()], index = ['f', 'm', 'p'])   
     irr_p = pd.DataFrame([irr_fp, irr_mp, irr_pp], index = ['f', 'm', 'p'])
-    irr_se = pd.DataFrame([irrf.std(), irrm.std(), irrp.std()], index=['f','m','p'])    
+    irr_se = pd.DataFrame([irrf.std()/sqrt(N['f'][etype]),irrm.std()/sqrt(N['m'][etype]), irrp.std()/sqrt(N['p'][etype])], index=['f','m','p'])    
 
     try:
         #irr_quant = irr.groupby(level='sex').quantile([0.1, 0.9]).unstack()
@@ -125,8 +128,8 @@ for age in [5, 8, 15, 21, 30, 79]:
         irr.groupby(level='sex').quantile([0.1, 0.9]).to_csv(os.path.join(tables, 'irr_ci.csv'),
                 index=True)
         irr_se.to_csv(os.path.join(tables, 'irr_se.csv'), index=True, header=False) 
-        roots = pd.DataFrame(roots, index=irr.index)
-        roots.to_csv(os.path.join(tables, 'all_roots_type{}.csv'.format(etype)), index=True)
+        roots = pd.DataFrame(roots) #, index=irr.index
+        roots.to_csv(os.path.join(tables, 'all_roots_type{}.csv'.format(etype)), index=False)
     
 irr_ages = pd.concat(irr_ages, axis=0, names=['age', 'sex'])
 irr_ages.to_csv(os.path.join(sensitivity, 'irr_age_type{}.csv'.format(etype)), index=True)
@@ -168,7 +171,7 @@ for age in [5, 8, 15, 21, 30, 79]:
     ratio_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])
     ratio_mean = pd.DataFrame([ratiof.mean(), ratiom.mean(), ratiop.mean()], index = ['f', 'm', 'p'])    
     ratio_p = pd.DataFrame([ratio_fp, ratio_mp, ratio_pp], index = ['f', 'm', 'p'])    
-    ratio_se = pd.DataFrame([ratiof.std(), ratiom.std(), ratiop.std()], index=['f','m','p'])
+    ratio_se = pd.DataFrame([ratiof.std()/sqrt(N['f'][etype]),ratiom.std()/sqrt(N['m'][etype]), ratiop.std()/sqrt(N['p'][etype])], index=['f','m','p'])
     
     try:
         #ratio_quant = ratio.groupby(level='sex').quantile([0.1, 0.9]).unstack()

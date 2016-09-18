@@ -19,7 +19,7 @@ local smale m
 local sfemale f
 local spooled p
 
-local sitt10
+local sitt10 _P10
 local sitt0 _P0 
 local sitt1 _P1
 
@@ -56,27 +56,27 @@ foreach component in diclaim ssiclaim ssclaim qaly health_private health_public 
 	
 		foreach pre in 0 1 {
 			* matching
-			converter, csvin(${health}/matching/`component'_surv_`sex'_P`pre') csvout(${output}/p`pre'_match/`component'_surv_`s`sex'') ename(epan_ipw) prefix(`component')
+			converter, csvin(${health}/matching/`component'_`sex'_P`pre') csvout(${output}/p`pre'_match/`component'_`s`sex'') ename(epan_ipw) prefix(`component')
 			* conditional ITT
-			converter, csvin(${health}/itt/`component'_surv_`sex'_P`pre') csvout(${output}/p`pre'_noctrl/`component'_surv_`s`sex'') ename(itt_noctrl) prefix(`component') 
-			converter, csvin(${health}/itt/`component'_surv_`sex'_P`pre') csvout(${output}/p`pre'_ctrl/`component'_surv_`s`sex'') ename(itt_ctrl) prefix(`component') 			
-			converter, csvin(${health}/itt/`component'_surv_`sex'_P`pre') csvout(${output}/p`pre'_wctrl/`component'_surv_`s`sex'') ename(itt_wctrl) prefix(`component')			
+			converter, csvin(${health}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(`component') 
+			converter, csvin(${health}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
+			converter, csvin(${health}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component')			
 		}
 	
 		* ITT
-		converter, csvin(${health}/itt/`component'_surv_`sex'_P10) csvout(${output}/ncc_noctrl/`component'_surv_`s`sex'') ename(itt_noctrl) prefix(`component') 
-		converter, csvin(${health}/itt/`component'_surv_`sex'_P10) csvout(${output}/ncc_ctrl/`component'_surv_`s`sex'') ename(itt_ctrl) prefix(`component') 			
-		converter, csvin(${health}/itt/`component'_surv_`sex'_P10) csvout(${output}/ncc_wctrl/`component'_surv_`s`sex'') ename(itt_wctrl) prefix(`component')
+		converter, csvin(${health}/itt/`component'_`sex'_P10) csvout(${output}/ncc_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(`component') 
+		converter, csvin(${health}/itt/`component'_`sex'_P10) csvout(${output}/ncc_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
+		converter, csvin(${health}/itt/`component'_`sex'_P10) csvout(${output}/ncc_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component')
 	}
 }
 
 
-/*
+
 *---------------------------------
 * Batch
 *---------------------------------
 
-foreach component in private_crime public_crime p_inc educost progcost cccostprivate cccostpublic { 
+foreach component in /*private_crime public_crime*/ ip_p_inc m_educost /*educost progcost cccostprivate cccostpublic*/ { 
 	foreach sex in male female pooled {
 		foreach pre in 0 1 {
 			* matching
@@ -87,9 +87,9 @@ foreach component in private_crime public_crime p_inc educost progcost cccostpri
 			converter, csvin(${batch}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component') 						
 		}
 		* ITT
-		converter, csvin(${batch}/itt/`component'_`sex') csvout(${output}/ncc_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(`component') 
-		converter, csvin(${batch}/itt/`component'_`sex') csvout(${output}/ncc_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
-		converter, csvin(${batch}/itt/`component'_`sex') csvout(${output}/ncc_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component') 		
+		converter, csvin(${batch}/itt/`component'_`sex'_P10) csvout(${output}/ncc_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(`component') 
+		converter, csvin(${batch}/itt/`component'_`sex'_P10) csvout(${output}/ncc_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
+		converter, csvin(${batch}/itt/`component'_`sex'_P10) csvout(${output}/ncc_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component') 		
 		
 	}
 }
@@ -115,7 +115,7 @@ foreach component in private_crime public_crime {
 	}
 }
 */
-
+/*
 *---------------------------------
 * Parent Income
 *---------------------------------

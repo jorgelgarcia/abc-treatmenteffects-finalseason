@@ -4,6 +4,7 @@ from collections import OrderedDict
 import pandas as pd
 import numpy as np
 from scipy.stats import percentileofscore
+from cba_N import N
 
 # Paths
 filedir = os.path.join(os.path.dirname(__file__))
@@ -23,10 +24,10 @@ for sex in ['m', 'f', 'p']:
     filled['health_{}'.format(sex)] = filled['health_public_{}'.format(sex)] + filled['health_private_{}'.format(sex)]
     filled['transfer_{}'.format(sex)] = filled['inc_trans_pub_{}'.format(sex)] + filled['diclaim_{}'.format(sex)] + filled['ssclaim_{}'.format(sex)] + filled['ssiclaim_{}'.format(sex)]
 
-    filled['all_{}'.format(sex)] = filled['inc_labor_{}'.format(sex)] + filled['inc_parent_{}'.format(sex)] + filled['transfer_{}'.format(sex)] + filled['edu_{}'.format(sex)] + filled['crime_{}'.format(sex)] + filled['cc_{}'.format(sex)] + filled['health_{}'.format(sex)] + filled['qaly_{}'.format(sex)] + filled['costs_{}'.format(sex)]
+    filled['all_{}'.format(sex)] = filled['inc_labor_{}'.format(sex)] + filled['inc_parent_{}'.format(sex)] + filled['transfer_{}'.format(sex)] + filled['edu_{}'.format(sex)] + filled['crime_{}'.format(sex)] + filled['cc_{}'.format(sex)] + filled['health_{}'.format(sex)] + filled['qaly_{}'.format(sex)] + filled['costs_{}'.format(sex)] + filled['m_ed_{}'.format(sex)]
 
 components = ['inc_labor', 'inc_parent', 'transfer', 'edu', 'crime', 'costs', 'cc', 'health', 'qaly',
-              'health_public', 'health_private', 'inc_trans_pub','diclaim', 'ssclaim', 'ssiclaim','all'] #
+              'health_public', 'health_private', 'inc_trans_pub','diclaim', 'ssclaim', 'ssiclaim', 'm_ed', 'all'] #
 
 output = pd.DataFrame([])
 for part in components:
@@ -80,7 +81,7 @@ for part in components:
  	#se = pd.DataFrame(npv.std(level='sex'))
         #se.columns = ['value']
 
-        se = pd.DataFrame([npvf.std(), npvm.std(), npvp.std()], index = ['f', 'm', 'p'], columns=['value'])
+        se = pd.DataFrame([npvf.std()/(N['f'][etype]), npvm.std()/(N['m'][etype]), npvp.std()/(N['p'][etype])], index = ['f', 'm', 'p'], columns=['value'])
  	se['part']=part
  	se['type']='se'
  	se.set_index(['part', 'type'], append=True, inplace=True)

@@ -11,7 +11,9 @@ import os
 from collections import OrderedDict
 import pandas as pd
 import numpy as np
-from scipy.stats import percentileofscore, sem
+from scipy.stats import percentileofscore, zscore
+from math import sqrt
+from cba_N import N
 
 '''
 1: "ITT", no controls
@@ -26,8 +28,8 @@ from scipy.stats import percentileofscore, sem
 #----------------------------------------
 
 # Bootstrap samples
-draws = 3
-adraws = 3
+draws = 99
+adraws = 99
 
 # Paths
 filedir = os.path.join(os.path.dirname(__file__))
@@ -40,7 +42,7 @@ sensitivity = os.path.join(filedir, 'rslt', 'sensitivity')
 flows = {
     # Income and Education
     'inc_labor':{'m':'labor_m.csv', 'f':'labor_f.csv', 'p':'labor_p.csv'},
-    'inc_parent':{'m':'p_inc_m.csv', 'f':'p_inc_f.csv', 'p':'p_inc_p.csv'},
+    'inc_parent':{'m':'ip_p_inc_m.csv', 'f':'ip_p_inc_f.csv', 'p':'ip_p_inc_p.csv'},
     'inc_trans_pub':{'m':'transfer_m.csv', 'f':'transfer_f.csv', 'p':'transfer_p.csv'},
     'edu':{'m':'educost_m.csv', 'f':'educost_f.csv', 'p':'educost_p.csv'},
 	'm_ed':{'m':'m_educost_m.csv', 'f':'m_educost_f.csv', 'p':'m_educost_p.csv'},
@@ -53,13 +55,13 @@ flows = {
     'ccpublic':{'m':'cccostpublic_m.csv', 'f':'cccostpublic_f.csv', 'p':'cccostpublic_p.csv'},
     'ccprivate':{'m':'cccostprivate_m.csv', 'f':'cccostprivate_f.csv', 'p':'cccostprivate_p.csv'},
     # Health
-    'health_private': {'m': 'health_private_surv_m.csv', 'f':'health_private_surv_f.csv', 'p':'health_private_surv_p.csv'},
-    'health_public': {'m': 'health_public_surv_m.csv', 'f':'health_public_surv_f.csv', 'p':'health_public_surv_p.csv'},
-    'qaly': {'m': 'qaly_surv_m.csv', 'f':'qaly_surv_f.csv', 'p':'qaly_surv_p.csv'},
+    'health_private': {'m': 'health_private_m.csv', 'f':'health_private_f.csv', 'p':'health_private_p.csv'},
+    'health_public': {'m': 'health_public_m.csv', 'f':'health_public_f.csv', 'p':'health_public_p.csv'},
+    'qaly': {'m': 'qaly_m.csv', 'f':'qaly_f.csv', 'p':'qaly_p.csv'},
     # Transfer claims
-    'diclaim':{'m': 'diclaim_surv_m.csv', 'f':'diclaim_surv_f.csv', 'p':'diclaim_surv_p.csv' },
-    'ssiclaim':{'m': 'ssiclaim_surv_m.csv', 'f':'ssiclaim_surv_f.csv', 'p':'ssiclaim_surv_p.csv' },
-    'ssclaim':{'m': 'ssclaim_surv_m.csv', 'f':'ssclaim_surv_f.csv', 'p':'ssclaim_surv_p.csv' }
+    'diclaim':{'m': 'diclaim_m.csv', 'f':'diclaim_f.csv', 'p':'diclaim_p.csv' },
+    'ssiclaim':{'m': 'ssiclaim_m.csv', 'f':'ssiclaim_f.csv', 'p':'ssiclaim_p.csv' },
+    'ssclaim':{'m': 'ssclaim_m.csv', 'f':'ssclaim_f.csv', 'p':'ssclaim_p.csv' }
 }
 
 #----------------------------------------
@@ -89,8 +91,6 @@ def makeflows(etype):
     diclaim.loc[diclaim_tmp.index, diclaim_tmp.columns] = diclaim_tmp
 
     diclaim.to_csv(os.path.join(tables,'diclaim_test.cslv'), index=True)
-
-    print diclaim
 
     filled = OrderedDict()
 
@@ -133,7 +133,7 @@ def makeflows(etype):
         filled['costs_{}'.format(sex)] = -1.5*filled['costs_{}'.format(sex)]
         filled['edu_{}'.format(sex)] = -filled['edu_{}'.format(sex)]
         filled['edu_{}'.format(sex)].iloc[:, :19] = 1.5*filled['edu_{}'.format(sex)].iloc[:, :19]
-		filled['m_ed_{}'.format(sex)] = -filled['m_ed_{}'.format(sex)]
+	filled['m_ed_{}'.format(sex)] = -filled['m_ed_{}'.format(sex)]
         filled['m_ed_{}'.format(sex)].iloc[:, :19] = 1.5*filled['m_ed_{}'.format(sex)].iloc[:, :19]
         filled['crimepublic_{}'.format(sex)] = -1.5*filled['crimepublic_{}'.format(sex)]
         filled['crimeprivate_{}'.format(sex)] = -filled['crimeprivate_{}'.format(sex)]
@@ -223,7 +223,7 @@ def irrflows(filled, components=flows.keys()):
 
 #----------------------------------------
 
-def bc_calc(filled, components=flows.keys(), rate=0.03):
+def bc_calc(filled, etype, components=flows.keys(), rate=0.03):
 
     # prepare matrix of flows
     benefits, costs = bcflows(filled, components = components)
@@ -253,13 +253,13 @@ def bc_calc(filled, components=flows.keys(), rate=0.03):
     ratio_fp = 1 - percentileofscore(ratiof - ratiof.mean() + null_center, ratiof.mean())/100
     ratio_mp = 1 - percentileofscore(ratiom - ratiom.mean() + null_center, ratiom.mean())/100
     ratio_pp = 1 - percentileofscore(ratiop - ratiop.mean() + null_center, ratiop.mean())/100
-
-
-    # Save results
+					
+    # Save results	
     ratio_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])
     ratio_mean = pd.DataFrame([ratiof.mean(), ratiom.mean(), ratiop.mean()], index = ['f', 'm', 'p'])    
     ratio_p = pd.DataFrame([ratio_fp, ratio_mp, ratio_pp], index = ['f', 'm', 'p'])    
-    ratio_se = pd.DataFrame([sem(ratiof), sem(ratiom), sem(ratiop)], index=['f','m','p'])
+    ratio_se = pd.DataFrame([ratiof.std()/sqrt(N['f'][etype]),ratiom.std()/sqrt(N['m'][etype]), ratiop.std()/sqrt(N['p'][etype])], index=['f','m','p'])
+
     try:
         #ratio_quant = ratio.groupby(level='sex').quantile([0.1, 0.9]).unstack()
         ratio_quant = pd.DataFrame(np.array([[ratiof.quantile(0.10),ratiof.quantile(0.90)],[ratiom.quantile(0.10),ratiom.quantile(0.90)],[ratiop.quantile(0.10),ratiop.quantile(0.90)]]), index=['f','m','p'])
@@ -274,7 +274,7 @@ def bc_calc(filled, components=flows.keys(), rate=0.03):
 
 #----------------------------------------
 
-def irr_calc(filled, components=flows.keys()):        	
+def irr_calc(filled, etype, components=flows.keys()):        	
 
     # prepare matrix of flows 
     total = irrflows(filled, components=components)
@@ -311,7 +311,7 @@ def irr_calc(filled, components=flows.keys()):
     irr_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])    
     irr_mean = pd.DataFrame([irrf.mean(), irrm.mean(), irrp.mean()], index = ['f', 'm', 'p'])   
     irr_p = pd.DataFrame([irr_fp, irr_mp, irr_pp], index = ['f', 'm', 'p'])
-    irr_se = pd.DataFrame([sem(irrf), sem(irrm), sem(irrp)], index=['f','m','p'])    
+    irr_se = pd.DataFrame([irrf.std()/sqrt(N['f'][etype]),irrm.std()/sqrt(N['m'][etype]), irrp.std()/sqrt(N['p'][etype])], index=['f','m','p'])    
 
     try:
         #irr_quant = irr.groupby(level='sex').quantile([0.1, 0.9]).unstack()
