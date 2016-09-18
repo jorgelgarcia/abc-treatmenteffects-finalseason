@@ -23,13 +23,13 @@ local sitt10 _P10
 local sitt0 _P0 
 local sitt1 _P1
 
-/*
+
 *---------------------------------
 * Income
 *---------------------------------
 
 foreach component in labor transfer {
-	foreach sex in male female pooled {
+	foreach sex in /*male*/ female /*pooled*/ {
 		foreach pre in 0 1 {
 			* matching
 			converter, csvin(${income}/matching/`component'_`sex'_P`pre') csvout(${output}/p`pre'_match/`component'_`s`sex'') ename(epan_ipw) prefix(c)
@@ -44,9 +44,9 @@ foreach component in labor transfer {
 		converter, csvin(${income}/itt/`component'_`sex') csvout(${output}/ncc_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(c) 
 	}
 }
-*/
 
 
+/*
 *---------------------------------
 * Health
 *---------------------------------
@@ -71,13 +71,13 @@ foreach component in diclaim ssiclaim ssclaim qaly health_private health_public 
 }
 
 
-
+*/
 *---------------------------------
 * Batch
 *---------------------------------
 
-foreach component in /*private_crime public_crime*/ ip_p_inc m_educost /*educost progcost cccostprivate cccostpublic*/ { 
-	foreach sex in male female pooled {
+foreach component in private_crime public_crime ip_p_inc m_educost educost progcost cccostprivate cccostpublic { 
+	foreach sex in /*male*/ female /*pooled*/ {
 		foreach pre in 0 1 {
 			* matching
 			converter, csvin(${batch}/matching/`component'_`sex'_P`pre') csvout(${output}/p`pre'_match/`component'_`s`sex'') ename(epan_ipw) prefix(`component') 
