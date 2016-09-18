@@ -96,12 +96,10 @@ gen age = 30
 cd $output
 save realpredwide.dta, replace
 
+/*
 reshape long real realse pred predse, i(male) j(R)
 gen realplus  = real + realse
 gen realminus = real - realse
 gen predplus  = pred + predse
 gen predminus = pred - predse
 save realpred.dta, replace
-
-
-
