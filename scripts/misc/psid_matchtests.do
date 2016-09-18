@@ -320,7 +320,7 @@ twoway (lowess mdisad       age if male == 0 & age & age <= 44, lwidth(1.2) lpat
 	(rcap    realplus0  realminus0 age  if age == 30 & male == 0, lcolor(black) lwidth(medthick))
        
         , 
-        text( 30 32
+        text( 30 33
          "ABC/CARE Eligible at t*: `mdisad300' (s.e. `sedisad300')"
 	 " "
          "Synthetic Control Group at t*: `mcontrol300' (s.e. `secontrol300')"
@@ -349,7 +349,7 @@ twoway (lowess mdisad       age if male == 1 & age & age <= 44, lwidth(1.2) lpat
 	(rcap    realplus0  realminus0 age  if age == 30 & male == 1, lcolor(black) lwidth(medthick))
        
         , 
-        text( 37 34
+        text( 37 35
          "ABC/CARE Eligible at t*: `mdisad301' (s.e. `sedisad301')"
 	 " "
          "Synthetic Control Group at t*: `mcontrol301' (s.e. `secontrol301')"
