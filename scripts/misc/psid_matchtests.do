@@ -102,7 +102,6 @@ gen minus`group'cnlsy = m`group'cnlsy - se`group'cnlsy
 save   "`cnlsy`group''", replace
 }
 
-
 // PSID
 // get weights
 cd $weights 
@@ -117,8 +116,9 @@ cd $datapsidw
 use  psid-abc-match.dta, clear
 summ    si30y_inc_labor
 replace si30y_inc_labor = si30y_inc_labor/1000
+// replace m_ed0y = years_30y if m_ed0y ==.
 drop if black != 1 | m_ed0y > 12
-keep id male inc_labor31-inc_labor65
+keep id male inc_labor31-inc_labor44
 reshape long inc_labor, i(id) j(age)
 tempfile psiddisad
 save   "`psiddisad'", replace
@@ -132,6 +132,26 @@ collapse (mean) mdisadpsid = inc_labor (semean) sedisadpsid = inc_labor, by(age 
 gen plusdisadpsid  = mdisadpsid + sedisadpsid
 gen minusdisadpsid = mdisadpsid - sedisadpsid
 save   "`psiddisad'", replace
+
+// disadvantaged
+cd $datapsidw 
+use  psid-abc-match.dta, clear
+// replace m_ed0y = years_30y if m_ed0y ==.
+drop if black != 1 | p_inc0y > 33000
+keep id male inc_labor45-inc_labor65
+reshape long inc_labor, i(id) j(age)
+tempfile psiddisadlate
+save   "`psiddisadlate'", replace
+merge m:1 id using "`weights'"
+keep if _merge == 3
+drop _merge
+
+drop if inc_labor > 300000
+replace inc_labor = inc_labor/1000
+collapse (mean) mdisadpsidlate = inc_labor (semean) sedisadpsidlate = inc_labor, by(age male)
+gen plusdisadpsidlate  = mdisadpsidlate + sedisadpsidlate
+gen minusdisadpsidlate = mdisadpsidlate - sedisadpsidlate
+save   "`psiddisadlate'", replace
 
 // control/treatment
 foreach group in control treat {
@@ -192,10 +212,20 @@ gen minus`group'nlsy = m`group'nlsy - se`group'nlsy
 save   "`nlsy`group''", replace
 }
 
+// 
+clear
+set obs 160
+gen age = _n 
+gen male = 0
+replace male = 1 if age <= 80
+replace age = age - 80 if age > 80
+
 // merge all info
-use "`abc0'", clear
+merge 1:1 age male using "`abc0'"
+drop if _merge == 2
+drop _merge
 merge 1:1 age male using "`abc1'"
-keep if _merge == 3
+drop if _merge == 2
 drop _merge
 
 foreach group in control treat {
@@ -211,15 +241,17 @@ foreach data in cnlsy psid {
 	drop if _merge == 2
 	drop _merge
 }
-
+merge 1:1 age male using "`psiddisadlate'"
+drop if _merge ==2
+drop    _merge
 
 // plots
 cd $output
 foreach var in m plus minus {
-	foreach group in disad {
-		egen `var'`group' = rowtotal(`var'`group'cnlsy `var'`group'psid), missing
-	}
-	
+		egen `var'disad = rowtotal(`var'disadcnlsy `var'disadpsid `var'disadpsidlate), missing
+}
+
+foreach var in m plus minus {
 	foreach group in treat control {
 		gen     `var'`group' = . 
 		replace `var'`group' = `var'`group'cnlsy if age <= 30
@@ -230,32 +262,106 @@ foreach var in m plus minus {
 	}
 }
 
-append using realpredwide.dta
+merge 1:1 age male using realpredwide
+drop if _merge == 2
+drop _merge
+
 gen realplus0  = real0 + realse0
 gen realminus0 = real0 - realse0
 
+gen predplus0  = pred0 + predse0
+gen predminus0 = pred0 - predse0 
+
+replace mcontrol     = pred0      if age == 30
+replace pluscontrol  = predplus0  if age == 30
+replace minuscontrol = predminus0 if age == 30
+
+// at 21 real is predicted
+replace mdisad        = real0     if age == 21
+replace mcontrol     = real0      if age == 21
+replace pluscontrol  = realplus0  if age == 21
+replace minuscontrol = realminus0 if age == 21
+replace plusdisad    = realplus0  if age == 21
+replace minusdisad   = realminus0 if age == 21
+
+gen sedisad   = plusdisad - mdisad
+gen secontrol = pluscontrol - mcontrol
+
+foreach stat in disad {
 foreach num of numlist 0 1 {
+	summ  m`stat'  if (age == 30  | age == 31) & male == `num'
+	local  m`stat'30`num' = round(r(mean),.01)
+	summ se`stat'  if (age == 30  | age == 31) & male == `num'
+	local se`stat'30`num' = round(r(mean),.01)
+}
+}
+
+foreach stat in control {
+foreach num of numlist 0 1 {
+	summ  m`stat'  if (age == 30  | age == 31) & male == `num'
+	local  m`stat'30`num' = round(r(mean),.01)
+	summ se`stat'  if (age == 30  | age == 31) & male == `num'
+	local se`stat'30`num' = round(r(mean),.01)
+}
+}
+
+keep if age >= 21
 #delimit
-twoway (lowess mdisad       age if male == `num' & age <= 44, lwidth(1.2) lpattern(solid) lcolor(gs8))
-       (lowess mcontrol     age if male == `num' & age <= 44, lwidth(1.2) lpattern(solid) lcolor(gs0))
+twoway (lowess mdisad       age if male == 0 & age & age <= 44, lwidth(1.2) lpattern(solid) lcolor(gs8) bwidth(1))
+       (lowess mcontrol     age if male == 0 & age & age <= 44, lwidth(1.2) lpattern(solid) lcolor(gs0) bwidth(.6))
        
+       (lowess pluscontrol  age   if male == 0 & age <= 44 ,  lpattern(dash) lcolor(gs0) bwidth(.6))
+       (lowess minuscontrol age   if male == 0 & age <= 44,  lpattern(dash) lcolor(gs0)  bwidth(.6))
        
+       (lowess plusdisad  age if male == 0 & age <= 44,  lpattern(dash) lcolor(gs8))
+       (lowess minusdisad age if male == 0 & age <= 44,  lpattern(dash) lcolor(gs8))
        
-       (lowess pluscontrol  age   if male == `num' & age <= 44 ,  lpattern(dash) lcolor(gs0))
-       (lowess minuscontrol age   if male == `num' & age <= 44,  lpattern(dash) lcolor(gs0))
-       
-       (lowess plusdisad  age if male == `num' & age <= 44,  lpattern(dash) lcolor(gs8))
-       (lowess minusdisad age if male == `num' & age <= 44,  lpattern(dash) lcolor(gs8))
-       
-	(scatter real0  age                 if age == 30 & male == `num', mlcolor(black) mfcolor(white) msize(large))
-	(rcap    realplus0  realminus0 age  if age == 30 & male == `num', lcolor(black) lwidth(medthick))
+	(scatter real0  age                 if age == 30 & male == 0, mlcolor(black) mfcolor(white) msize(vlarge))
+	(rcap    realplus0  realminus0 age  if age == 30 & male == 0, lcolor(black) lwidth(medthick))
        
         , 
+        text( 30 32
+         "ABC/CARE Eligible at t*: `mdisad300' (s.e. `sedisad300')"
+	 " "
+         "Synthetic Control Group at t*: `mcontrol300' (s.e. `secontrol300')"
+         , size(small) place(nw) box just(left) margin(l+1 b+1) width(55) fcolor(none))
+		  
+		  
 		  legend(rows(2) order(1 2 3 7 8) label(1 "ABC/CARE Eligible in PSID") label(2 "Synthetic Control Group-Matching Based") label(3 "+/- s.e.") 
 		                              label(7 "Control Observed") label(8 "Observed +/- s.e.") size(vsmall))
 		  xlabel(20 "20" 30 "Interpolation {&larr} t* {&rarr} Extrapolation" 40 "40", grid glcolor(gs14)) ylabel(10[10]50, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
-graph export abccare_disad_`num'.eps, replace
-}
+graph export abccare_disad_0.eps, replace
+
+#delimit
+twoway (lowess mdisad       age if male == 1 & age & age <= 44, lwidth(1.2) lpattern(solid) lcolor(gs8))
+       (lowess mcontrol     age if male == 1 & age & age <= 44, lwidth(1.2) lpattern(solid) lcolor(gs0))
+       
+       (lowess pluscontrol  age   if male == 1 & age <= 44 ,  lpattern(dash) lcolor(gs0))
+       (lowess minuscontrol age   if male == 1 & age <= 44,  lpattern(dash) lcolor(gs0))
+       
+       (lowess plusdisad  age if male == 1 & age <= 44,  lpattern(dash) lcolor(gs8))
+       (lowess minusdisad age if male == 1 & age <= 44,  lpattern(dash) lcolor(gs8))
+       
+	(scatter real0  age                 if age == 30 & male == 1, mlcolor(black) mfcolor(white) msize(vlarge))
+	(rcap    realplus0  realminus0 age  if age == 30 & male == 1, lcolor(black) lwidth(medthick))
+       
+        , 
+        text( 37 34
+         "ABC/CARE Eligible at t*: `mdisad301' (s.e. `sedisad301')"
+	 " "
+         "Synthetic Control Group at t*: `mcontrol301' (s.e. `secontrol301')"
+         , size(small) place(nw) box just(left) margin(l+1 b+1) width(60) fcolor(none))
+		  
+		  
+		  legend(rows(2) order(1 2 3 7 8) label(1 "ABC/CARE Eligible in PSID") label(2 "Synthetic Control Group-Matching Based") label(3 "+/- s.e.") 
+		                              label(7 "Control Observed") label(8 "Observed +/- s.e.") size(vsmall))
+		  xlabel(20 "20" 30 "Interpolation {&larr} t* {&rarr} Extrapolation" 40 "40", grid glcolor(gs14)) ylabel(10[10]50, angle(h) glcolor(gs14))
+		  xtitle(Age) ytitle("Labor Income (1000s 2014 USD)")
+		  graphregion(color(white)) plotregion(fcolor(white));
+#delimit cr
+graph export abccare_disad_1.eps, replace
+
+

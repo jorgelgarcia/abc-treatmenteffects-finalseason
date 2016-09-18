@@ -42,8 +42,47 @@ global data_dir      = "${projects}/abc-treatmenteffects-finalseason/scripts/abc
 global incomeresults = "${klmmexico}/abccare/income_projections/"
 global output        = "${projects}/abc-treatmenteffects-finalseason/output/"
 
-// prepare data for graphing
+// obtained realized and predicted values to insert in plot
+cd $output
+use realpredwide.dta, clear
+foreach num of numlist 0 1 {
+	foreach cont of numlist 0 1 {
+		foreach stat in real pred {
+			summ `stat'`cont' if male == `num'
+			local `stat'`cont'_s`num' = round(r(mean),.01)
+			summ `stat'se`cont' if male == `num' 
+			local `stat'se`cont'_s`num' = round(r(mean),.01)
+		}
+	}
+}
 
+// prepare information boxes
+# delimit
+global box0  text( 10 45
+         "Control at t*:"
+	 "Predicted, `pred0_s0' (s.e. `predse0_s0')"
+	 "Observed, `real0_s0' (s.e. `realse0_s0')"
+	 " "
+	 "Treatment at t*:"
+         "Predicted, `pred1_s0' (s.e. `predse1_s0')"
+	 "Observed, `real1_s0' (s.e. `realse1_s0')"
+         , size(small) place(c) box just(left) margin(l+1 b+1) width(35) fcolor(none)); 
+# delimit cr
+
+// note hard code of se for treat due to rounding issue in stata
+# delimit
+global box1  text( 10 42
+         "Control at t*:"
+	 "Predicted, `pred0_s1' (s.e. `predse0_s1')"
+	 "Observed, `real0_s1' (s.e. `realse0_s1')"
+	 " "
+	 "Treatment at t*:"
+         "Predicted, `pred1_s1' (s.e. 9.53)"
+	 "Observed, `real1_s1' (s.e. `realse1_s1')"
+         , size(small) place(c) box just(left) margin(l+1 b+1) width(35) fcolor(none)); 
+# delimit cr
+
+// prepare data for graphing
 cd $dataabccare
 use append-abccare_iv.dta, clear
 
@@ -145,7 +184,7 @@ foreach source in labor /*transfer*/ {
 	global y1  0[10]60
 	local bwidth1 = .65
 	local bwidth0 = .65  
-	foreach sex of numlist 0 {
+	foreach sex of numlist 1 {
 	
 	preserve
 
@@ -169,12 +208,12 @@ foreach source in labor /*transfer*/ {
 				(lowess plus age if R == 1, bwidth(`bwidth`sex'') `t_se')
 				(lowess minus age if R == 0, bwidth(`bwidth`sex'') `c_se')
 				(lowess minus age if R == 1, bwidth(`bwidth`sex'') `t_se')
-				(scatter real  age      if R == 0, mlcolor(black) mfcolor(white) msize(large))
-				(rcap realplus  realminus age  if R == 0, lcolor(black) lwidth(medthick))
-				(scatter real  age      if R == 1, mlcolor(gs9) mfcolor(white) msize(large))
-				(rcap realplus  realminus age  if R == 1, lcolor(gs9) lwidth(medthick))
+				(scatter real  age      if R == 0 & age == 30, mlcolor(black) mfcolor(white) msize(large))
+				(rcap realplus  realminus age  if R == 0 & age == 30, lcolor(black) lwidth(medthick))
+				(scatter real  age      if R == 1 & age == 30, mlcolor(gs9) mfcolor(white) msize(large))
+				(rcap realplus  realminus age  if R == 1 & age == 30, lcolor(gs9) lwidth(medthick))
 				,
-				
+				${box`sex'}
 				`graphregion'
 				`xaxis'
 				`yaxis'
