@@ -208,9 +208,9 @@ foreach source in labor /*transfer*/ {
 				(lowess plus age if R == 1, bwidth(`bwidth`sex'') `t_se')
 				(lowess minus age if R == 0, bwidth(`bwidth`sex'') `c_se')
 				(lowess minus age if R == 1, bwidth(`bwidth`sex'') `t_se')
-				(scatter real  age      if R == 0 & age == 30, mlcolor(black) mfcolor(white) msize(large))
+				(scatter real  age      if R == 0 & age == 30, mlcolor(black) mfcolor(white) msize(large) msymbol(circle))
 				(rcap realplus  realminus age  if R == 0 & age == 30, lcolor(black) lwidth(medthick))
-				(scatter real  age      if R == 1 & age == 30, mlcolor(gs9) mfcolor(white) msize(large))
+				(scatter real  age      if R == 1 & age == 30, mlcolor(gs9) mfcolor(white) msize(large) msymbol(square))
 				(rcap realplus  realminus age  if R == 1 & age == 30, lcolor(gs9) lwidth(medthick))
 				,
 				${box`sex'}
