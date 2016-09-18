@@ -230,7 +230,7 @@ foreach stat in mean se pval {
 	replace part = "Subject Labor Income" if part == "inc_labor"
 	replace part = "Subject Transfer Income" if part == "transfer"
 	replace part = "Medical Expenditures" if part == "health"
-	replace part = "Control Contamination" if part == "cc"
+	replace part = "Control Substitution" if part == "cc"
 	replace part = "Education Costs" if part == "edu"
 	replace part = "Crime Costs" if part == "crime"
 	replace part = "Deadweight Loss" if part == "dwl"
