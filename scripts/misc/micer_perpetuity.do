@@ -42,21 +42,24 @@ use  labor_r-male-draw.dta, clear
 egen labor30 = rowmean(labor_c26 labor_c29 labor_c31 labor_c34)
 replace labor30 = labor30/1000
 keep adraw r male labor30
-gen  perp30 = labor30/.03
+gen  perp3   = labor30/(.03)
+gen  perp7   = labor30/(.07)
+gen  perp10  = labor30/(.10)
 
 foreach sex of numlist 0 1{
 foreach num of numlist 0 1{
-foreach var in labor perp {
 
-	summ   `var'30 if r   == `num' & male == `sex'
-	local  `var'30_`num'_`sex'm  = r(mean)
-	local  `var'30_`num'_`sex'sd = r(sd)
-	local  `var'30_`num'_`sex'se = ``var'30_`num'_`sex'sd'/(sqrt(`N`sex''))
+foreach var in perp3 perp7 perp10 {
+
+	summ   `var' if r   == `num' & male == `sex'
+	local  `var'_`num'_`sex'm  = r(mean)
+	local  `var'_`num'_`sex'sd = r(sd)
+	local  `var'_`num'_`sex'se = ``var'_`num'_`sex'sd'/(sqrt(`N`sex''))
 	
-	matrix `var'30_`num'_`sex'  = [``var'30_`num'_`sex'm' \ ``var'30_`num'_`sex'se'] 
+	matrix `var'_`num'_`sex'  = [``var'_`num'_`sex'm' \ ``var'_`num'_`sex'se'] 
 }
 	// ontaining prediction from plots to get exact.
-	matrix per_`num'_`sex'   = [perp30_`num'_`sex']
+	matrix per_`num'_`sex'   = [perp10_`num'_`sex',perp3_`num'_`sex',perp7_`num'_`sex']
 }
 }
 
