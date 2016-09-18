@@ -7,13 +7,6 @@ Author: Jake C. Torcasso, Joshua Shea, Anna Ziff
 
 Description: This file projects earnings of ABC subjects.
 
-1: lag, X, W (1)
-2: X, W (2)
-3: lag, X
-4: lag, W (3)
-5: W (4)
-6: X (5)
-
 '''
 
 import os
@@ -188,7 +181,6 @@ def predict_abc(interp, extrap, interp_index, extrap_index, weight, interp_weigh
 			ehat.columns.name = 'age'
 			ehat.set_index('id', inplace=True)
 			error_mat[sex] = pd.concat([error_mat[sex], ehat], axis=1)
-
 
 		if verbose:
 			print 'Successful predictions, age {}, n={}'.format(age, exog.shape[0])
