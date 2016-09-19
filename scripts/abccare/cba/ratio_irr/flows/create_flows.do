@@ -39,9 +39,9 @@ foreach component in labor transfer {
 			converter, csvin(${income}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(c) 			
 		}
 		* ITT
-		converter, csvin(${income}/itt/`component'_`sex') csvout(${output}/ncc_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(c) 
-		converter, csvin(${income}/itt/`component'_`sex') csvout(${output}/ncc_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(c) 			
-		converter, csvin(${income}/itt/`component'_`sex') csvout(${output}/ncc_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(c) 
+		converter, csvin(${income}/itt/`component'_`sex'_P10) csvout(${output}/ncc_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(c) 
+		converter, csvin(${income}/itt/`component'_`sex'_P10) csvout(${output}/ncc_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(c) 			
+		converter, csvin(${income}/itt/`component'_`sex'_P10) csvout(${output}/ncc_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(c) 
 	}
 }
 
