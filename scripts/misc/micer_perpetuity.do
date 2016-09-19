@@ -59,7 +59,7 @@ foreach var in perp3 perp7 perp10 {
 	matrix `var'_`num'_`sex'  = [``var'_`num'_`sex'm' \ ``var'_`num'_`sex'se'] 
 }
 	// ontaining prediction from plots to get exact.
-	matrix per_`num'_`sex'   = [perp10_`num'_`sex',perp3_`num'_`sex',perp7_`num'_`sex']
+	matrix per_`num'_`sex'   = [perp10_`num'_`sex',perp7_`num'_`sex',perp3_`num'_`sex']
 }
 }
 
