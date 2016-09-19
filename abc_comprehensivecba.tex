@@ -24,15 +24,19 @@
 
 \author{
 Jorge Luis Garc\'{i}a\\
+Department of Economics\\
 The University of Chicago \and
 James J. Heckman \\
 American Bar Foundation \\
+Department of Economics\\
 The University of Chicago \and
 Andr\'{e}s Hojman \\
-The University of Chicago \\ \and
+PUC-Chile School of Government \\ \and
 Duncan Ermini Leaf \\
+Leonard D. Schaeffer Center for Health Policy and Economics\\
 University of Southern California \and
 Mar\'{i}a Jos\'{e} Prados \\
+Dornsife Center for Economic and Social Research\\
 University of Southern California}
 \date{First Draft: January 5, 2016\\ This Draft: \today}
 
@@ -40,29 +44,58 @@ University of Southern California}
 
 \end{titlepage}
 
-\newgeometry{top=.8in, bottom=.8in, left=.8in, right=.8in}
 \singlespacing
 
+\newgeometry{top=.9in, bottom=.9in, left=.9in, right=.9in}
+
 \begin{abstract}
-This paper estimates the diverse array of life-cycle benefits of an influential early childhood program targeted to disadvantaged children and their families. The program is a prototype for numerous interventions currently in place around the world. It is evaluated by random assignment and follows participants through their mid-30s. It has substantial beneficial long-term effects on (a) health and the quality of life, (b) the labor incomes of participants, (c) crime, (d) education, and (e) the labor incomes of the mothers of the participants through subsidizing their childcare. There are benefits across the life cycle for both genders, but substantially greater monetized benefits for boys. The overall rate of return and benefit/cost ratio are economically and statistically significant: 13\% per annum and 5.6 respectively. These estimates account for the welfare costs of taxation to finance the program and survive a variety of sensitivity analyses.
+This paper estimates the diverse array of life-cycle benefits of an influential early childhood program targeted to disadvantaged children and their families. The program is a prototype for numerous interventions currently in place around the world. It is evaluated by random assignment and follows participants through their mid-30s. It has substantial beneficial long-term effects on (a) health and the quality of life, (b) the labor incomes of participants, (c) crime, (d) education, and (e) the labor incomes of the mothers of the participants through subsidizing their childcare. There are benefits in multiple domains across the life cycle for both genders, but substantially greater monetized benefits for boys. The overall rate of return and benefit/cost ratio are economically and statistically significant: 13\% per annum and 5.6 respectively. These estimates account for the welfare costs of taxation to finance the program and survive a variety of sensitivity analyses.
 \end{abstract}
 
 \noindent \textbf{Keywords}: Childcare, crime, early childhood education, gender differences in responses to programs, health, long-term predictions, quality of life, randomized trials \\
 \noindent \textbf{JEL codes}: J13, I28, C93
 
+\bigskip
 
-\tableofcontents
-%\listoffigures
-%\listoftables
-\restoregeometry
+\begin{tabular}{ll}
+Jorge Luis Garc\'{i}a                                       & James J. Heckman \\
+Department of Economics                                     & Department of Economics \\
+University of Chicago                                       & University of Chicago \\
+1126 East 59th Street                                       & 1126 East 59th Street \\
+Chicago, IL 60637                                           & Chicago, IL 60637 \\
+Phone: 773-677-7938                                         & Phone: 773-702-0634  \\
+Email: jorgelgarcia@uchicago.edu                            & Email: jjh@uchicago.edu \\
+                                                 & \\
+Andr\'{e}s Hojman                                & Duncan Ermini Leaf \\
+PUC-Chile School of Government                   & Leonard D. Schaeffer Center \\
+MIDE UC - Avenida Vicu\~{n}a Mackenna 4860       & for Health Policy and Economics \\
+Macul, Santiago de Chile                          & University of Southern California \\
+Email: andreshojman@uc.cl                        & 635 Downey Way, Dauterive Hall (VPD) \\
+                                                 & Los Angeles, CA 90089 \\
+                                                 & Phone: 213-821-6474 \\
+                                                 & Email: dleaf@healthpolicy.usc.edu\\
+                                                 & \\
+Mar\'{i}a Jos\'{e} Prados \\
+Dornsife Center for Economic and Social Research \\
+University of Southern California \\
+635 Downey Way, 314C, Dauterive Hall (VPD) \\
+Los Angeles, CA 90089 \\
+Phone: 213-821-7969 \\
+Email: prados@usc.edu
+\end{tabular}
+
 
 \clearpage
+
+\restoregeometry
 \doublespacing
 
 \setcounter{page}{0}
 \pagenumbering{arabic}
 
 \section{Introduction}
+
+\textbf{[JJH: Give me a copy today - 2 copies in fact. Even if Jorge wants to work on it later - there are different parts of the paper, many he is not working on.] [Typist: We will print 2 copies today.]}
 
 This paper documents the diverse array of life-cycle benefits of an influential early childhood program targeted to disadvantaged children. The program has substantial impacts on the lives of participants. Monetizing benefits and costs across multiple domains, we estimate a rate of return of 13\% per annum and a benefit/cost ratio of 5.6. There are substantial differences in monetized benefits across genders, favoring boys.
 
@@ -74,11 +107,11 @@ Evidence from these programs is relevant for contemporary policy discussions bec
 
 Summarizing the benefits of a program with a diverse array of outcomes across many domains and periods of life is both challenging and rewarding. Doing so highlights the numerous ways through which early childhood programs enhance capabilities. We use a variety of methodologies to characterize program benefits. Instead of reporting only individual treatment effects or categories of treatment effects, our benefit/cost analysis accounts for all program components, including the welfare costs of taxes to publicly finance the program.\footnote{\cite{Barnett_Masse_2002_benefitcost,Barnett_Masse_2007_EER} present a cost/benefit analysis for ABC through age 21, before many benefits are realized. They report a benefit/cost ratio of 2.5, but give no standard error or sensitivity analyses for their estimate. They do not disaggregate by gender. For want of the data collected on health at age 34, they do not account for health benefits. They use self-reported crime data (unlike the administrative crime data later collected that we analyze) and ignore the welfare costs of financing the program. We use cost data from primary sources not available to them.}
 
-A fundamental problem facing the evaluation of any human capital program is assessing out of sample future benefits of the program. Most solutions to this problem are based on versions of a synthetic cohort approach using the adjusted outcomes of older cohorts comparable to treated individuals to proxy treatment effects.\footnote{\cite{Mincer_1974_schooling} addresses this problem using a synthetic cohort approach and provides evidence on its validity. See the discussion of the synthetic cohort approach in \cite{Heckman_Lochner_ea_2006_HEE}.} We address this problem by using a variety of sources of information up to age 34, combined with information from multiple panel data sources to predict benefits and costs over the lifetimes of participants.\footnote{\citet{Ridder_Moffitt_2007_hbk_metricsdata} provide a valuable discussion of data pooling methods. These methods are related to the older ``surrogate marker'' literature in biostatistics (see e.g., \citealp{Prentice_1989_Surrogate_SiM}).}
+A fundamental problem facing the evaluation of any human capital program is assessing the out of sample future benefits of the program. Most solutions to this problem are based on versions of a synthetic cohort approach using the adjusted outcomes of older cohorts comparable to treated individuals to proxy treatment effects.\footnote{\cite{Mincer_1974_schooling} addresses this problem using a synthetic cohort approach and provides evidence on its validity. See the discussion of the synthetic cohort approach in \cite{Heckman_Lochner_ea_2006_HEE}.} We address this problem by using multiple sources of information up to age 34, combined with information from multiple panel data sources to predict benefits and costs over the lifetimes of participants.\footnote{\citet{Ridder_Moffitt_2007_hbk_metricsdata} provide a valuable discussion of data pooling methods. These methods are related to the older ``surrogate marker'' literature in biostatistics (see e.g., \citealp{Prentice_1989_Surrogate_SiM}).}
 
-A sufficient condition for making unbiased out-of-sample predictions (and for being able to test this condition) is that program treatment effects arise as a result of changes in inputs in a stable (across treatment regimes) production function. Evidence supporting this assumption is given in \citet{Heckman_Pinto_etal_2013_PerryFactor} and \cite{Attanasio-etal_2015_NBER_Estimating-Production}. We test and do not reject this assumption in this paper.
+We use a variety of methods to forecast future outcomes. This analysis is greatly simplified by our finding that all eligible families offered participation in the program took the offer. This facilitates the construction of valid comparison groups for experimental control group members. We construct a comparison for treatment groups drawing on the analysis of \citet{Heckman_Pinto_etal_2013_PerryFactor} that program treatment effects are produced through changes in inputs in a stable (across treatment regimes) production function for outcomes.
 
-We account for sampling uncertainty from pooling data and conduct sensitivity analyses for outcomes for which sampling uncertainty is not readily quantified. Our approach to pooling multiple data sets and analyzing blocks of outcomes is of interest in its own right as a template for evaluating other programs with numerous long-run outcomes using intermediate outcome measures.
+We account for sampling uncertainty from pooling data, estimating parameters, and simulating models, and conduct sensitivity analyses for outcomes for which sampling uncertainty is not readily quantified. Our approach to pooling multiple data sets and analyzing blocks of outcomes is of interest in its own right as a template for evaluating other programs with numerous long-run outcomes using intermediate outcome measures.
 
 Another major methodological challenge we confront is control group substitution bias.\footnote{See \cite{Heckman_1992_randomization}, \cite{Heckman_Hohmann_etal_2000_QJE}, and \cite{Kline_Walters_2016_QJE}.} Roughly 75\% of the control groups in ABC/CARE enroll in some form of alternative preschool at some point of time. We define and estimate parameters accounting for the variety of choices available and taken by the control groups in our study.
 
@@ -99,9 +132,9 @@ Note: This figure displays the life-cycle net present values of the main compone
 
 The rest of the paper justifies and interprets these estimates. We proceed in the following way. Section~\ref{section:background} discusses main features of ABC/CARE. Section~\ref{section:methodsquestions} defines the parameters of interest.
 
-Section~\ref{section:methodology} discusses our approaches to inference for vectors of treatment effects. We use  combining functions that summarize the \emph{number} of beneficial outcomes (as well as the number of statistically significant beneficial outcomes) within blocks of outcomes and overall. Section~\ref{section:c-functions} presents inference for combining functions. It also summarizes standard treatment effects of ABC/CARE. We account for multiple hypothesis testing by adjusting $p$-values for the multiplicity of reported outcomes to avoid cherry-picking ``significant'' results.\footnote{\citet{Lehman_Romano_2005_AnnStat,Romano_Shaikh_2006_AnnStat}. For an application, see, e.g., \cite{Heckman_Moon_etal_2010_QE}.}
+Section~\ref{section:methodology} discusses our approaches to inference for vectors of treatment effects. We use  combining functions that summarize the \emph{number} of beneficial outcomes, as well as the number of statistically significant beneficial outcomes, within blocks of outcomes and overall. Section~\ref{section:c-functions} presents inference for combining functions. We also summarize standard treatment effects of ABC/CARE. We account for multiple hypothesis testing by adjusting $p$-values for the multiplicity of reported outcomes to avoid cherry-picking ``significant'' results.\footnote{\citet{Lehman_Romano_2005_AnnStat,Romano_Shaikh_2006_AnnStat}. For an application, see, e.g., \cite{Heckman_Moon_etal_2010_QE}.}
 
-Our main approaches for summarizing the multiple program treatment effects are benefit/cost and rate of return analyses. They provide economically interpretable summaries of the program and its components. Section~\ref{section:cbamethodology} discusses our method for predicting life-cycle outcomes to conduct the benefit/cost analyses. Section~\ref{section:cbaresults} presents and analyzes estimates of the benefit/cost ratios and rates of return.
+Our main approach for summarizing the multiple program treatment effects uses benefit/cost and rate of return analyses. These parameters provide economically interpretable summaries of the program and its components. Section~\ref{section:cbamethodology} discusses and applies our approaches to predicting life-cycle outcomes to conduct the benefit/cost analyses. Section~\ref{section:cbaresults} presents and analyzes estimates of the benefit/cost ratios and rates of return.
 
 Section~\ref{section:conclusion} summarizes the paper. There are substantial benefits that differ by gender. In terms of treatment effects, females benefit across more domains. However, the monetized value of the treatment effects is substantially greater for males. This discrepancy is largely driven by labor income and health benefits, as well as reduced crime for males.
 
@@ -109,15 +142,15 @@ Section~\ref{section:conclusion} summarizes the paper. There are substantial ben
 
 \subsection{Overview}
 
-ABC/CARE targeted disadvantaged children in Chapel Hill/Durham, North Carolina.\footnote{Both ABC and CARE were designed and implemented by researchers at the Frank Porter Graham Center of the University of North Carolina in Chapel Hill.} Table~\ref{tab:programcomparison} presents an overview and compares the two programs. Appendix~\ref{appendix:background} describes these programs in detail. Here, we summarize its main features.
+ABC/CARE targeted disadvantaged children in Chapel Hill/Durham, North Carolina.\footnote{Both ABC and CARE were designed and implemented by researchers at the Frank Porter Graham Center of the University of North Carolina in Chapel Hill.} Table~\ref{tab:programcomparison} presents an overview and compares the two highly congruent programs. Appendix~\ref{appendix:background} describes these programs in detail. Here, we summarize their main features.
 
-The goals of the program are to enhance the early-life skills of a disadvantaged population. The program (i) supports language, motor, and cognitive development; (ii) minimizes high-risk behaviors; and (iii) develops socio-emotional competencies considered crucial for school success including task-orientation, competence in communications, independence, and pro-social behavior.\footnote{\citet{Ramey_Collier_etal_1976_CarolinaAbecedarianProject, Ramey_etal_1985_Project-CARE_TiECSE, Sparling_1974_Synth_Edu_Infant_SPEECH, Wasik_Ramey_etal_1990_CD, Ramey-etal_2012-ABC}.}
+The goals of these programs were to enhance the early-life skills of a disadvantaged population. The program (i) supported language, motor, and cognitive development; (ii) minimized high-risk behaviors; and (iii) developed socio-emotional competencies considered crucial for school success including task-orientation, competence in communications, independence, and pro-social behavior.\footnote{\citet{Ramey_Collier_etal_1976_CarolinaAbecedarianProject, Ramey_etal_1985_Project-CARE_TiECSE, Sparling_1974_Synth_Edu_Infant_SPEECH, Wasik_Ramey_etal_1990_CD, Ramey-etal_2012-ABC}.}
 
-The program provides individualized treatment. Each child's progress is recorded and learning activities are appropriately adjusted every 2 to 3 weeks. Environments are organized to promote pre-literacy and access to a rich set of learning tools.\footnote{The ``Learningames'' approach was implemented by infant and toddler caregivers in 1:1 child-adult interactions. Each ``Learningames'' activity state a developmentally-appropriate objective, the necessary materials, directions for teacher behavior, and expected child outcome.} The curriculum emphasizes active learning experiences, dramatic play, and basic ideas of order and category (``pre-academic skills''), as well as discipline and the ability to interact with and respect others.  At later ages (3 through 5), the program becomes increasingly structured, focusing on the development of ``socio-linguistic and communicative competence.''\footnote{\citet{Ramey-et-al_1977_Intro-to-ABC, Haskins_1985_CD, Ramey_1981_Modification, Ramey_Campbell_1979_SR, Ramey_Smith_1977_AJMD, Ramey_McGinness_etal_1982_Abecedarianapproach, Sparling_Lewis_1979_BOOKLearninggamesFirstThree,Sparling_Lewis_1984_BOOKLearningGamesThreesFours}.}
+The program provided individualized treatment. Each child's progress was recorded and learning activities were appropriately adjusted every 2 to 3 weeks. Environments were organized to promote pre-literacy and access to a rich set of learning tools.\footnote{The ``Learningames'' approach was implemented by infant and toddler caregivers in 1:1 child-adult interactions. Each ``Learningames'' activity state a developmentally-appropriate objective, the necessary materials, directions for teacher behavior, and expected child outcome.} The curriculum emphasized active learning experiences, dramatic play, and basic ideas of order and category (``pre-academic skills''), as well as discipline and the ability to interact with and respect others.  At later ages (3 through 5), the program becomes increasingly structured, focusing on the development of ``socio-linguistic and communicative competence.''\footnote{\citet{Ramey-et-al_1977_Intro-to-ABC, Haskins_1985_CD, Ramey_1981_Modification, Ramey_Campbell_1979_SR, Ramey_Smith_1977_AJMD, Ramey_McGinness_etal_1982_Abecedarianapproach, Sparling_Lewis_1979_BOOKLearninggamesFirstThree,Sparling_Lewis_1984_BOOKLearningGamesThreesFours}.}
 
 ABC recruited four cohorts of children born between 1972 and 1976. CARE recruited two cohorts of children, born in 1978 and 1979. The recruitment processes for each study were identical. Potential participant families were referred to researchers by local social service agencies and hospitals at the beginning of the mother's last trimester of pregnancy. Eligibility was determined by a score of 11 or above on a High-risk Index (HRI).\footnote{See Appendix~\ref{appendix:background} for details on the construction of the HRI. Maternal education, parental IQ, presence of the father, family income, and father's job stability are its major components.}
 
-As shown in Table~\ref{tab:programcomparison}, the design and implementation of both ABC and CARE were similar. ABC had two phases, the first of which lasted from birth until age 5. In this phase, children were randomly assigned to either a treatment group that received center-based childcare or a control group. The second phase of treatment consisted of academic support from ages 5 through 8. CARE consisted of two treatment phases that were very similar to those of ABC. The first phase of CARE, also lasting from birth until age 5, contained an additional treatment arm, family education, designed to study the effects of improving home environments on child development.\footnote{\citet{Wasik_Ramey_etal_1990_CD}.}
+As shown in Table~\ref{tab:programcomparison}, the design and implementation of both ABC and CARE were very similar. ABC had two phases, the first of which lasted from birth until age 5. In this phase, children were randomly assigned to either a treatment group that received center-based childcare or a control group. The second phase of treatment consisted of academic support from ages 5 through 8. CARE consisted of two treatment phases that were very similar to those of ABC. The first phase of CARE, also lasting from birth until age 5, contained an additional treatment arm, family education, designed to study the effects of improving home environments on child development.\footnote{\citet{Wasik_Ramey_etal_1990_CD}.}
 
 Our analysis pools the treatment group in CARE that received the center-based ABC curriculum with the ABC treatment group. We do not use the data on the CARE treatment group that only received family education.\footnote{\citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments} and \citet{ABCCARE_Dataset} show that there is no effect of the CARE family education component alone.} We analyze the first stage of both programs (through age 5).\footnote{The second-phase treatment of ABC/CARE had very weak, if any, effects (for evidence, see \citealp{Campbell_Conti_etal_2014_EarlyChildhoodInvestments} and \citealp{ABCCARE_Dataset}). \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments} establish the validity of pooling the data across the second arms of the experiments.}
 
@@ -140,56 +173,53 @@ For both programs, from birth until the age of 8, data were collected annually o
 
 \subsection{Randomization Protocol and Compromises} \label{section:randomization}
 
-Randomization for ABC/CARE was conducted at the family level. Pairs of siblings and twins were jointly randomized into either treatment or control groups.\footnote{Sibling pairs occurred when the two siblings were close enough in age such that both of them were eligible for the program.} Although we know that pairing was based on the HRI, maternal education, maternal age, and gender of the subject, we do not know the original pairs. ABC collected an initial sample of 122 subjects. 22 subjects did not complete the first-phase of treatment as initially assigned by the randomization. We characterize each of the cases in Appendix~\ref{appendix:background} and document that our estimates are robust when we adjust for missing data using standard methods.\footnote{In Appendix~\ref{appendix:assessingcc}, we compare the observed, baseline characteristics of the subjects in Table~\ref{table:abccompromises} to the observed, baseline characteristics of the subjects who complied to the initial treatment assignment. We find little evidence of differences.} We conduct a comparable analysis for the CARE sample.
+Randomization for ABC/CARE was conducted at the family level. Pairs of siblings and twins were jointly randomized into either treatment or control groups.\footnote{Sibling pairs occurred when the two siblings were close enough in age such that both of them were eligible for the program.} Although we know that pairing was based on the HRI, maternal education, maternal age, and gender of the subject, we do not know the original pairs. ABC collected an initial sample of 122 subjects. 22 subjects did not complete the first-phase of treatment as initially assigned by the randomization. We characterize each of the cases in Appendix~\ref{appendix:background} and document that our estimates are robust when we adjust for missing data using standard methods.\footnote{In Appendix~\ref{appendix:assessingcc}, we compare the observed, baseline characteristics of the subjects in Table~\ref{table:abccompromises} to the observed, baseline characteristics of the subjects who complied to the initial treatment assignment. We find few differences.} We conduct a comparable analysis for the CARE sample.
 
 \subsection{Control Group Substitution}
 
-In ABC/CARE, many control group members attended alternative preschools.\footnote{See \cite{Heckman_Hohmann_etal_2000_QJE} on the issue of substitution bias in social experiments.} In ABC, \treatsubsabc\ of control-group subjects were enrolled in one of 11 local center-based childcare centers. In CARE, \treatsubscarec\ of the control group were enrolled in alternative preschools. Figure~\ref{fig:treatsubcare} shows (for each program) the cumulative distribution of the proportion of the first five years that control subjects were enrolled in alternative preschools. Figure~\ref{fig:treatsubcare_2} shows the proportion of the sample enrolled in an alternative school at a previous age who persist in an alternative at the indicated age. Figure~\ref{fig:proportion-alt-pre} shows the distribution of time spent in the alternative program for all control group participants. Figure~\ref{fig:salmonella} shows the enrollment of the control families into alternative preschool by age of child for the full sample, and for those who enrolled in any alternative preschool for however long. Enrollment increases with the age of children. Once enrolled, they stay enrolled, and children generally go for a full year.
+In ABC/CARE, many control group members attended alternative preschools.\footnote{See \cite{Heckman_Hohmann_etal_2000_QJE} on the issue of substitution bias in social experiments.} In ABC, \treatsubsabc\ of control-group subjects were enrolled in one of 11 local center-based childcare centers. In CARE, \treatsubscarec\ of the control group were enrolled in alternative preschools. Figure~\ref{fig:salmonella} shows the enrollment of the control families into alternative preschool by age of child for the full sample, and for those who enrolled in any alternative preschool for however long. Enrollment increases with the age of children. Once enrolled, they stay enrolled, and children generally go for a full year. Figure~\ref{fig:treatsubcare_2} shows the proportion of the sample enrolled in an alternative school at a given age who persist in alternative care at the next age. Figure~\ref{fig:treatsubcare} shows (for each program) the cumulative distribution of the proportion of the first five years that control subjects were enrolled in alternative preschools. Figure~\ref{fig:proportion-alt-pre} shows the distribution of time spent in the alternative program for all control group participants.
 
-Most of the alternative preschools received federal subsidies and were subject to federal regulations of the 1970 era.\footnote{Appendix~\ref{appendix:tetanus} discusses the federal standards of that day. See \citet{Department-of-Health_1968_DayCareRequirements,NCGA_1971_House-Bill-100,Ramey-et-al_1977_Intro-to-ABC,Ramey_Campbell_1979_SR,Ramey_McGinness_etal_1982_Abecedarianapproach, Burchinal_Campbell_etal_1997_CD}.} Child caregivers were required to be trained in early childhood education. The centers were required to implement an approved curricula designed to enhance cognitive, social, and linguistic competence in disadvantaged children.\footnote{\citet{Burchinal_etal_1989_CD_Daycare-Pre-K-Dev}.} The access of control-group children to alternative programs affects the interpretation of estimated treatment effects. We discuss this next.
+Most of the alternative preschools received federal subsidies and were subject to the federal regulations of the era.\footnote{Appendix~\ref{appendix:tetanus} discusses the federal standards of that day. See \citet{Department-of-Health_1968_DayCareRequirements,NCGA_1971_House-Bill-100,Ramey-et-al_1977_Intro-to-ABC,Ramey_Campbell_1979_SR,Ramey_McGinness_etal_1982_Abecedarianapproach, Burchinal_Campbell_etal_1997_CD}.} The access of control-group children to alternative programs affects the interpretation of estimated treatment effects. We discuss this issue next.
 
 \begin{sidewaysfigure}[!htbp]
 \centering
 \caption{Control Substitution Characteristics, ABC/CARE Control Group}\label{fig:control-sub}
 \begin{subfigure}[h]{0.4\textwidth}
-		\centering
-		\caption{Enrollment} \label{fig:treatsubcare}
-		\includegraphics[width=\textwidth]{output/abccare_controlcontamination.eps}
-\end{subfigure}%
+	\centering
+	\caption{Enrollment by Age} \label{fig:salmonella}
+		\includegraphics[width=\textwidth]{output/abccare_Valtenrollment.eps}
+\end{subfigure}
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Enrollment Dynamics} \label{fig:treatsubcare_2}
 		\includegraphics[width=\textwidth]{output/abccare_Vprobs.eps}
+\end{subfigure}\\
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Cumulative Enrollment} \label{fig:treatsubcare}
+		\includegraphics[width=\textwidth]{output/abccare_controlcontamination.eps}
 \end{subfigure}
-
 \begin{subfigure}[h]{0.4\textwidth}
 	\centering
 	\caption{Enrollment Intensity} \label{fig:proportion-alt-pre}
 		\includegraphics[width=\textwidth]{output/abccare_Vfractimes.eps}
 \end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
-	\centering
-	\caption{Enrollment by Age} \label{fig:salmonella}
-		\includegraphics[width=\textwidth]{output/abccare_Valtenrollment.eps}
-\end{subfigure}
 
 \footnotesize \justify
-Note: Panel (a) displays the cumulative distribution function of enrollment in alternative preschools of the ABC/CARE control group. Panel (b) displays the fraction of ABC/CARE control-group children enrolled in preschool, conditional on being enrolled in the previous age (at least one month). Panel (c) displays the fraction of children in the ABC/CARE control group enrolled in alternative preschools (fraction of children who were enrolled in alternative preschools 20\%, 40\%, 60\%, 80\%, and 100\% of the time, from ages 0 to 5). Panel (d) displays the fraction enrolled in alternative preschools of ABC/CARE control group by age in the left axis and average number of months in alternative preschool by age in the right axis. Both plots in Panel (d) are conditional on enrollment.\\
+Note: Panel (a) displays the fraction enrolled in alternative preschools of ABC/CARE control group by age in the left axis and average number of months in alternative preschool by age in the right axis. Both plots in Panel (a) are conditional on enrollment. Panel (b) displays the fraction of ABC/CARE control-group children enrolled in preschool, conditional on being enrolled in the previous age (at least one month). Panel (c) displays the cumulative distribution function of enrollment in alternative preschools of the ABC/CARE control group. Panel (d) displays the fraction of children in the ABC/CARE control group enrolled in alternative preschools (fraction of children who were enrolled in alternative preschools 20\%, 40\%, 60\%, 80\%, and 100\% of the time, from ages 0 to 5). \\
 \end{sidewaysfigure}
 
 \section{Parameters of Interest} \label{section:methodsquestions}
 
-Random assignment to treatment does not guarantee that conventional treatment effects answer policy-relevant questions. We define and estimate three parameters that address different policy questions.
+Random assignment to treatment does not guarantee that conventional treatment effects answer policy-relevant questions. We define and estimate three parameters that address different policy questions that we estimate in this paper.
 
-We assume that life cycles consist of $T+1$ discrete periods. The treatment phase is the first $\bar{t}$ periods of life $\left[0,\dots,\bar{t}\right]$. We have data up to age $t^{*}>\bar{t}$. We lack data on the remainder of life $(t^*,\dots,T]$. $W=1$ indicate that parents wish to participate in the program.\footnote{Individual subscripts are omitted to improve clarity.} $R \in \{0,1\}$ where $R=1$ indicates that a child is randomized into eligibility to participate in the program. Let $D$ indicate participation in the program.
+We assume that life cycles consist of $T+1$ discrete periods. The treatment phase is the first $\bar{t}$ periods of life $\left[0,\dots,\bar{t}\right]$. We have data up through age $t^{*}>\bar{t}$. We lack follow-up data on the remainder of life $(t^*,\dots,T]$. $W=1$ indicate that parents wish to participate in the program.\footnote{Individual subscripts are omitted to improve clarity.} $R \in \{0,1\}$ where $R=1$ indicates that a child is randomized into eligibility to participate in the program. Let $D$ indicate participation in the program.
 
-Individuals are eligible to participate in the program if baseline background variables $\bm{B}\in\mathcal{B}_0$. In this paper, $\mathcal{B}_0$ is the set of scores on the high risk index (HRI) previously discussed. 
+Individuals are eligible to participate in the program if baseline background variables $\bm{B}\in\mathcal{B}_0$. In this paper, $\mathcal{B}_0$ is the set of scores on the high risk index (HRI) previously discussed.
 
-As it turns out, in the ABC/CARE study, all of the eligible persons ($\bm{B}\in\mathcal{B}_0$) given the option to participate choose to participate in the program $(W=1\text{, and } D=R)$. Thus, we can safely interpret the treatment effects generated by the experiment as average treatment effects for the population for which $\bm{B}\in\mathcal{B}_0$ and not just treatment effects for the treated (TOT). In Appendix~\ref{appendix:assessingcc}, we argue that, for all practical purposes, full compliance is a sensible assumption. There are few dropouts from the program. \emph{Ex ante} parents perceived that ABC/CARE was superior to other childcare alternatives.
+As it turns out, in the ABC/CARE study, all of the eligible persons ($\bm{B}\in\mathcal{B}_0$) given the option to participate choose to participate in the program $(W=1\text{, and } D=R)$. Thus, we can safely interpret the treatment effects generated by the experiment as average treatment effects for the population for which $\bm{B}\in\mathcal{B}_0$ and not just treatment effects for the treated (TOT). In Appendix~\ref{appendix:assessingcc}, we argue that full compliance is a sensible assumption. There are few dropouts from the program. \emph{Ex ante}, parents perceived that ABC/CARE was superior to other childcare alternatives.
 
-Let $\bm{Y}^1_t$ be the outcome vector for the treated. $\bm{Y}^0_t$ is the outcome vector for those denied treatment in the program.
-
-In principle, life-cycle treatment effects for the controls and treatment group members can depend on the exposures to treatment or to the various alternatives at each age. The pattern for controls is that most start in home care at the earliest ages and move to alternative preschools as the child ages (see Figure~\ref{fig:salmonella}). Once enrolled in an alternative preschool, they stay there through age 5 (see Figure~\ref{fig:treatsubcare_2}). It would be desirable to estimate treatment effects for each type of exposure but our samples are too small to make credible estimates for such detailed exposures. We simplify the analysis by creating two categories of control status. ``H'' denotes that the child is in home care throughout the entire length of the program. ``C'' denotes that the child was in an alternative preschool anytime. We test different categorizations in our empirical analysis reported below.
+Let $\bm{Y}^1_t$ be the outcome vector for the treated. $\bm{Y}^0_t$ is the outcome vector for those denied treatment in the program. In principle, life-cycle treatment effects for the controls and treatment group members can depend on the exposures to treatment or to the various alternatives at each age. The pattern for controls is that most start in home care at the earliest ages and move to alternative preschools as the child ages (see Figure~\ref{fig:salmonella}). Once enrolled in an alternative preschool, they stay there through age 5 (see Figure~\ref{fig:treatsubcare_2}). It would be desirable to estimate treatment effects for each type of exposure but our samples are too small to make credible estimates for such detailed exposures. We simplify the analysis by creating two categories of control status. ``H'' indicates that the child is in home care throughout the entire length of the program. ``C'' indicates that the child was in an alternative preschool anytime. We test different categorizations in our empirical analysis reported below.
 
 We thus compress a complex reality into two counterfactual outcome states at age $t$ for control group members:
 \begin{align*}
@@ -197,7 +227,7 @@ We thus compress a complex reality into two counterfactual outcome states at age
 \bm{Y}_{t,C}^0 \quad &: \quad \textbf{ Subject received some alternative childcare}.
 \end{align*}
 
-We define $V$ as a dummy variable indicating participation by controls in an alternative preschool. $V=0$ denotes staying at home. The counterfactual outcome when a child is in control status is $\bm{Y}^0_t$:
+We define $V$ as a dummy variable indicating participation by controls in an alternative preschool. $V=0$ denotes staying at home. The outcome when a child is in control status is $\bm{Y}^0_t$:
 \begin{equation}
 \bm{Y}^0_t : = \left( 1 - V \right) \bm{Y}^0_{t,H} + \left( V \right) \bm{Y}^0_{t,C}.
 \end{equation}
@@ -206,16 +236,17 @@ One parameter of interest addresses the question: what is the effect of the prog
 \begin{equation}\label{eq:effect}
 \bm{\Delta}_t := \mathbb{E} \left[ \bm{Y}^1_t -  \bm{Y}^0_t | W =1 \right] := \mathbb{E} \left[\bm{Y}^1_t - \bm{Y}^0_t | \bm{B} \in \mathcal{B}_0 \right],
 \end{equation}
-where the second equality follows because everyone eligible wants to participate in the program. This parameter addresses the effectiveness of the program relative to the quality of all alternatives available when the program was implemented for the sample of eligible persons.
+where the second equality follows because everyone eligible wants to participate in the program. For the sample of eligible persons, this parameter addresses the effectiveness of the program relative to the quality of all alternatives available when the program was implemented.
 
 It is also fruitful to ask: what is the effectiveness of the program with respect to a counterfactual world in which the child stays at home full time? The associated causal parameter for those who would choose to keep the child at home is:
 \begin{equation}\label{eq:influenza}
 \bm{\Delta}_t \left(V = 0 \right) : =   \mathbb{E} \left[ \bm{Y}^1_t - \bm{Y}^0_t | V = 0, D = 1 \right] := \mathbb{E} \left[\bm{Y}^1_t - \bm{Y}^0_t | V = 0, \bm{B} \in \mathcal{B}_0 \right].
 \end{equation}
-Random assignment to the treatment group does not directly identify this parameter. Lastly, it is also useful to assess the average effectiveness of a program relative to attendance in an alternative preschool for those who would choose an alternative is:
+Lastly, it is also useful to assess the average effectiveness of a program relative to attendance in an alternative preschool for those who would choose an alternative is:
 \begin{equation}\label{eq:smallpox}
 \bm{\Delta}_t \left( V =1 \right) : =   \mathbb{E} \left[ \bm{Y}^1_t - \bm{Y}^0_t | V = 1, D = 1 \right] := \mathbb{E} \left[\bm{Y}^1 - \bm{Y}^0 | V = 1, \bm{B} \in \mathcal{B}_0 \right].
 \end{equation}
+Random assignment to treatment does not directly identify \eqref{eq:influenza} or \eqref{eq:smallpox}. Econometric models are required to identify these questions.
 
 \section{Summarizing Multiple Treatment Effects} \label{section:methodology}
 
@@ -232,19 +263,21 @@ C_l = \sum^{N_l}_{j=1} 1 (\hat{\Delta}_{j,t} >0).
 \end{equation}
 The proportion of beneficial outcomes in block $l$ is $C_l / N_l$.\footnote{In our empirical application we consider all the outcomes as a block, and then different blocks grouped according to common categories---e.g., skills, health, crime.}
 
-Let $\mathcal{L}$ be the number of blocks. Under the null hypothesis of no treatment effects for all $j \in Q_l, l \in \mathcal{L}$, and assuming the validity of asymptotic approximations, $C_l / N_l$ should be centered around $1/2$. We bootstrap to obtain $p$-values for the null for each block and over all blocks. We also count the individually beneficial treatment effects that are statistically significant in the sets of outcomes across each of the groups indexed by the set $Q_l$. Using a 10\% significance level, on average 10\% of all outcomes should be ``significant'' at the 10\% level even if there is no treatment effect of the program. We provide evidence against both null hypotheses. 
+Let $\mathcal{L}$ be the number of blocks. Under the null hypothesis of no treatment effects for all $j \in Q_l, l \in \mathcal{L}$, and assuming the validity of asymptotic approximations, $C_l / N_l$ should be centered around $1/2$. We bootstrap to obtain $p$-values for the null for each block and over all blocks. We also count the individually beneficial treatment effects that are statistically significant in the sets of outcomes across each of the groups indexed by the set $Q_l$. Using a 10\% significance level, on average 10\% of all outcomes should be ``significant'' at the 10\% level even if there is no treatment effect of the program. We provide evidence against both null hypotheses.
 
-Combing counts across all blocks enables us to avoid (i) arbitrarily picking outcomes that have statistically significant effects---``cherry picking''; or (ii) arbitrarily selecting blocks of outcomes to correct the $p$-values when accounting for multiple hypothesis testing.
+Combining counts across all blocks enables us to avoid (i) arbitrarily picking outcomes that have statistically significant effects---``cherry picking''; or (ii) arbitrarily selecting blocks of outcomes to correct the $p$-values when accounting for multiple hypothesis testing.
 
 \section{Empirical Estimates of Treatment Effects and Combining Functions}\label{section:c-functions}
 
 ABC/CARE has hundreds of treatment effects corresponding to all of the measures collected in the multiple waves of the longitudinal surveys.\footnote{For estimates of treatment effects for each outcome analyzed, see Appendix~\ref{appendix:results}.} Reporting these treatment effects in the text would overwhelm the reader. Here we report estimates of the main treatment effects that underlie our benefit/cost and rate of return analyses.\footnote{Appendix~\ref{appendix:results} reports treatment effects and step-down $p$-values for all the outcomes analyzed. These account for multiple hypothesis testing as in \citet{Lehman_Romano_2005_AnnStat,Romano_Shaikh_2006_AnnStat}.}
 
-Evidence from ABC/CARE and other early childhood programs is often criticized because of their small sample sizes.\footnote{See, e.g., \cite{Murray_2013_GivingKids_JJHBOOK}.} An extensive analysis reported in \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments} shows that asymptotic inference and small sample permutation-based inference closely agree when applied to ABC/CARE data. For this reason, we use large sample inference throughout this paper.\footnote{Unless otherwise specified, the inference we present throughout the paper is based on $1,000$ draws from the empirical bootstrap distribution. $p$-values are one-sided, non-parametric. We high-light values when estimates are significant at $10\%$. For estimations using combining different datasets, we bootstrap all datasets and combine them to form bootstrap draws. Inference based on permutation tests is available on request.} We adjust all estimates for sample attrition using Horvitz--Thompson \citeyearpar{Horvitz_Thompson_1952_JASA} inverse probability estimators (see Appendix~\ref{appendix:attrition} for details). We account for control group substitution using a variety of econometric procedures: (a) matching, (b) instrumental variables, and (c) control functions. In the text, we rely on matching procedures to generate the inferences in this paper because the available instruments and exclusion restrictions are weak. Estimates from all of these procedures are in rough agreement, although the standard errors associated with IV and control function estimators are large. For further discussion, see Appendix~\ref{appendix:amethodology}.
+Evidence from ABC/CARE and other early childhood programs is often criticized because of their small sample sizes.\footnote{See, e.g., \cite{Murray_2013_GivingKids_JJHBOOK}.} An extensive analysis reported in \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments} shows that asymptotic inference and small sample permutation-based inference closely agree when applied to ABC/CARE data. For this reason, we use large sample inference throughout this paper.\footnote{Unless otherwise specified, the inference we present throughout the paper is based on $1,000$ draws from the empirical bootstrap distribution. $p$-values are one-sided, non-parametric. We high-light values when estimates are significant at $10\%$. For estimations using combining different datasets, we bootstrap all datasets and combine them to form bootstrap draws. Inference based on permutation tests is available on request.} We adjust all estimates for sample attrition using Horvitz--Thompson \citeyearpar{Horvitz_Thompson_1952_JASA} inverse probability estimators (see Appendix~\ref{appendix:attrition} for details).
+
+We account for control group substitution using a variety of econometric procedures: (a) matching, (b) instrumental variables, and (c) control functions (selection estimators). We rely on matching to generate the inferences in this paper because the available instruments and exclusion restrictions are weak. Estimates from all of these procedures are in rough agreement, although the standard errors associated with IV and control function estimators are large. For further discussion, see Appendix~\ref{appendix:amethodology}.
 
 \subsection{Treatment Effects}
 
-The results for females show that the program increases employment, high school graduation, and college graduation and it reduces arrests (see Table~\ref{table:tescombined}). These results strengthen when we analyze females who did not receive alternative preschool. The results for education, child income, parental income, and crime are robust to controlling for substitution bias. The results for males are different. Treated subjects reported lower drug use and blood pressure. There are also effects on earnings and education. The results for employment, hypertension, blood pressure, and graduation from a 4-year college are strengthened when comparing the control group to those subjects who attend alternative preschools.
+The results for females show that the program increases employment, income as an adult, parental income, high school graduation, and college graduation, and it reduces arrests (see Table~\ref{table:tescombined}). These results tend to strengthen when we analyze females who did not receive alternative preschool. The inference for education, child income, parental income, and crime tend to strengthen when controlling for substitution bias. The results for males are different. Treated subjects reported lower drug use and blood pressure. There are also effects on earnings and education. The results for employment, hypertension, blood pressure, and graduation from a 4-year college are strengthened when comparing the treatment group to those subjects who attend alternative preschools.
 
 \newgeometry{top=.6in, bottom=.8in, left=.8in, right=.8in}
 \begin{table}[!htbp]
@@ -265,11 +298,11 @@ Note: This table shows the treatment effects for categories outcomes that are im
 
 \subsection{Estimated Combining Functions}
 
-We next report estimates of the proportion of beneficial effects by block and overall.\footnote{We consider a total of 95 outcomes that we classify in Appendix~\ref{appendix:results}. These are the outcomes that most clearly relate to the treatment offered by the program.} The analysis is based on treatment effect \eqref{eq:effect}. Figure~\ref{fig:ppositive} displays the results from this analysis: ABC/CARE positively impacted a large percentage of the outcomes. We show the counts for treatment compared to the next best alternative parents chose in Figure~\ref{fig:ppositivenb}. Proportionately more outcomes are beneficial for girls, but the proportions are high for both groups and well above the benchmark of 1/2. In Tables~\ref{table:abccare_rslt_pooled_counts} to \ref{table:abccare_rslt_female_counts_n10a10} of Appendix~\ref{appendix:results}, we show that a large and precise fraction of effects are positive for both genders for categories of outcomes spanning the life cycle, including a wide variety of health categories.
+We next report estimates of the proportion of beneficial effects by block and overall.\footnote{We consider a total of 95 outcomes that we classify in Appendix~\ref{appendix:results}. These are the outcomes that most clearly relate to the treatment offered by the program.} The analysis is based on treatment effect \eqref{eq:effect}. Figure~\ref{fig:ppositive} displays the results from this analysis: ABC/CARE positively impacted a large percentage of the outcomes. We show the counts for treatment compared to the next best alternative chosen by parents in Figure~\ref{fig:ppositivenb}. Proportionately more outcomes are beneficial for girls, but the proportions are high for both groups and well above the benchmark of 1/2. In Tables~\ref{table:abccare_rslt_pooled_counts} to \ref{table:abccare_rslt_female_counts_n10a10} of Appendix~\ref{appendix:results}, we show that for categories of outcomes spanning the life cycle, including a wide variety of health categories, a large and precisely determined fraction of beneficial treatment effects are positive and well above one half for both genders.
 
 Using an $\alpha$-level of significance, one would expect to find that $\alpha\%$ of the treatment effects are statistically significant just from the operation of chance. For a 10\% level of significance, $46\%$ are statistically significant for females and $28\%$ for males (see Figure~\ref{fig:ppositive10}).
 
-Figures~\ref{fig:ppositivehome} and Figure~\ref{fig:ppositivealternative} adjust the count in Figure~\ref{fig:ppositivenb} to analyze more clearly defined counterfactuals, treatment compared to stay at home and treatment compared to alternative preschool. This comparison indicates that females and males benefit differently from this treatment. Females benefit more from any treatment compared to staying at home while males benefit more from treatment compared to attending an alternative preschool, but not compared to staying at home. This pattern recurs throughout the paper. Boys benefit much less from alternative preschools than girls.
+Figures~\ref{fig:ppositivehome} and Figure~\ref{fig:ppositivealternative} adjust the count in Figure~\ref{fig:ppositivenb} to analyze more clearly defined counterfactuals: treatment compared to stay at home and treatment compared to alternative preschool. This comparison indicates that females and males benefit differently from this treatment. Females benefit more from any treatment compared to staying at home while males benefit more from treatment compared to attending an alternative preschool, but not compared to staying at home. Boys benefit much less from alternative preschools than girls.
 
 \begin{sidewaysfigure}[!htbp]
 \centering
@@ -301,70 +334,82 @@ Note: Panel (a) percentage of outcomes displaying a positive treatment effect, c
 
 \section{Predicting and Monetizing Life-cycle Costs and Benefits}\label{section:cbamethodology}
 
-A central focus of this paper is on summarizing the multiple benefits of ABC/CARE using benefit/cost and rate of return analysis. This requires predicting the out-of-sample benefits of the program over the remaining life cycle. This is a fundamental problem in social science and has been addressed in the literature in multiple ways.\footnote{See, e.g., \cite{Heckman_Lochner_ea_2006_HEE}. \citet{Heckman_Moon_etal_2010_RateofReturn} use a variety of methods to project future earnings in the Perry study. The various methods are in general agreement. They fit a variety of panel data earnings dynamics models and project future earnings with them.} This section explains our strategy for using multiple data sources to extrapolate the life-cycle costs and benefits of education, labor income, transfer income, crime, and health. Our approach is motivated by the analysis of \citet{Heckman_Pinto_etal_2013_PerryFactor}, who show that the effect of treatment on outcomes operates through its effects of inputs in a stable production function. Practical details arising in implementing our approach are discussed in Appendix~\ref{appendix:methodology}.
+A central focus of this paper is on summarizing the multiple benefits of ABC/CARE using benefit/cost and rate of return analysis. This requires predicting the out-of-sample benefits of the program over the remaining life cycle. This is a fundamental problem in empirical social science that has been addressed in the literature in multiple ways.\footnote{See, e.g., \cite{Heckman_Lochner_ea_2006_HEE}. \citet{Heckman_Moon_etal_2010_RateofReturn} use a variety of methods to project future earnings in the Perry study. The various methods are in general agreement. They fit a variety of panel data earnings dynamics models and project future earnings with them.} This section explains our strategy for using multiple data sources to extrapolate the life-cycle costs and benefits of education, labor income, transfer income, crime, and health. Our approach is motivated by the analysis of \citet{Heckman_Pinto_etal_2013_PerryFactor}, who show that the effect of treatment on outcomes operates through its effects of inputs in a stable production function.
+
+To construct cost-benefit estimates we (i) \textit{interpolate} components not observed due to intermittent data collection; and (ii) \textit{extrapolate} (predict) components not observed because the follow-ups stop when the subjects were in their mid-30s. We use multiple sources of non-experimental data representative on the national or state level to construct these interpolations and extrapolations. Table~\ref{table:sources} presents the components for which we do these exercises and the sources we use.
+
+\begin{table}[!htbp]
+\begin{threeparttable}
+\caption{Auxiliary Data Sources for Interpolation and Extrapolation of Life-cycle Benefits and Costs} \label{table:sources}
+\footnotesize
+\input{Output/auxiliary.tex}
+\begin{tablenotes}
+\footnotesize
+Note: This table details the non-experimental data sources we use to interpolate and extrapolate the life-cycle benefits and costs of ABC/CARE. CNLSY: Children of the National Longitudinal Survey of the Youth 1979; NLSY79: National Longitudinal Survey of the Youth 1979; PSID: Panel Study of Income Dynamics; MEPS: Medical Expenditure Panel Survey; MCBS: Medicare Current Beneficiary Survey; HRS: Health and Retirement Study; NCDPS: North Carolina Department of Public Safety Data; NVS: National Crime Victimization Survey; NJRP: National Judicial Reporting Program; UCRS: Uniform Crime Reporting Statistics.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
 
 \subsection{Using Auxiliary Samples to Predict Out of Sample Earnings}\label{sec:necrosis}
 
 We have data on treatments and controls through age $t^{\ast}$. We lack information on participant outcomes afterward. Yet, post-$t^{\ast}$ outcomes are required to construct counterfactual life-cycle profiles. The goal is to find counterparts to both treatment and control individuals in the auxiliary data on whom we have post-$t^{\ast}$ data.
 
-Because the participants of ABC/CARE are now in their mid-40s, there is no post-40s information on the same cohort  in any data. We use a synthetic cohort approach in which adjusted outcomes of older cohorts are used to estimate the future outcomes of the ABC/CARE participants. This approach is standard in the human capital literature. However, cohort effects may induce substantial biases.
+Because the participants of ABC/CARE are now in their mid-40s, there is no post-40s information on the same cohort  in any data. We use a synthetic cohort approach in which adjusted outcomes of older cohorts are used to estimate the future outcomes of the ABC/CARE participants. This approach is standard in the human capital literature. However, cohort effects may induce substantial biases. \textbf{[JJH: Jorge, we should show estimates under different assumptions about wage growth, health care costs, etc.] [JLG: yes, working on an appendix for this.]}
 
-Following the procedure in \citet{Heckman_Ichimura_etal_1998_REStud}, we use matching to find synthetic cohort counterparts in the auxiliary samples for both treatment and control group members. We match on baseline variables $\bm{B}$, as well as variables caused by treatment (i.e., for which there are treatment effects) that predict future outcomes---e.g., education, IQ, etc.---through age $t^{\ast}$. We then fit life-cycle relationships for outcomes beyond $t^{\ast}$ for the synthetic treatment and control groups using the initial conditions from the treatment and control groups at age $t^{\ast}$. From these predictions, we construct the life-cycle profiles. 
+Following \citet{Heckman_Ichimura_etal_1998_REStud}, we use matching to find synthetic cohort counterparts in the auxiliary samples for both treatment and control group members. We match on baseline variables $\bm{B}$, as well as variables caused by treatment (i.e., for which there are treatment effects) that predict future outcomes---e.g., education, IQ, etc.---through age $t^{\ast}$. We then fit life-cycle relationships for outcomes beyond $t^{\ast}$ for the synthetic treatment and control groups using the initial conditions from the treatment and control groups at age $t^{\ast}$. From these predictions, we construct life-cycle profiles for the post-$t^*$ samples.
 
-Let $\bm{Y}^{d}_{i,t}$ be an outcome at time $t$ for an individual in treatment status. Measured predictors of the outcome are $\bm{X}^{d}_{i,t}$ and $\bm{B}_i$.\footnote{$\bm{B}$ is balanced across treatments and controls by randomization.} We determine the predictors using within experimental sample analyses. We then find counterparts in the synthetic cohort samples. Let $S \in \{ 0,1\}$ denote membership in the experimental sample $(S=1)$ or the auxiliary sample, $(S=0)$.
+Specifically, let $\bm{Y}^{d}_{i,t}$ be an outcome at time $t$ for an individual in treatment status $d$. Measured predictors of the outcome are $\bm{X}^{d}_{i,t}$ and $\bm{B}_i$.\footnote{$\bm{B}$ is balanced across treatments and controls by randomization.} We determine the predictors using within experimental sample analyses. We then find counterparts in the synthetic cohort samples. Let $S \in \{ 0,1\}$ denote membership in the experimental sample $(S=1)$ or the auxiliary sample $(S=0)$.
 
 For individual $i$, find counterparts $j(i)$ such that
 \begin{equation}\label{eq:ingrownnail}
 \sum_{j(i)\in F_0} \left( \bm{X}^{d}_{i,t} - \bm{X}_{j(i),t} \right)^{\prime} {\left( \bm{\Sigma}^d\right)}^{-1} \left(\bm{X}^{d}_{i,t} - \bm{X}_{j(i),t} \right) < \epsilon \text{ for } \qquad d \in \ \{0,1\}, t \in \{0,\dots,T\}
 \end{equation}
+where $\epsilon$ is arbitrarily small. $j(i) \in F_0$, for $t \leq t^{\ast}$, where $F_0$ is the index set in the auxiliary sample and $\bm{\Sigma}^d$ is the covariance matrix of the $\bm{X}$ in the experimental sample group $d$. We construct synthetic cohort samples using the same auxiliary samples and weight using the inverse value of~\eqref{eq:ingrownnail}. We fit dynamic relationships in the synthetic cohort sample over the whole sample period. Using the dynamic relationships in the synthetic cohort sample and the initial conditions from the experimental sample, we predict future outcomes. For this approach to be effective, we require that the support of the auxiliary sample includes the support of the experimental sample, an assumption formalized in the next subsection.\footnote{Evidence on this assumption is in Appendix~\ref{appendix:methodology}. In practice, we use indicators for black and male, year of birth, and years of education and labor income at age 30 as matching variables. We explain how we pick these variables and provide a sensitivity analysis to this choice in Appendix~\ref{appendix:methodology}.}
 
-\noindent where $\epsilon$ is arbitrarily small. $j(i) \in F_0$, for $t \leq t^{\ast}$, where $F_0$ is the index set in the auxiliary sample and $\bm{\Sigma}^d$ is the covariance matrix of the $\bm{X}$ in the experimental sample group $d$. We construct synthetic cohort samples using the same auxiliary samples and weight using the inverse value of~\eqref{eq:ingrownnail}. We fit dynamic relationships in the synthetic cohort sample over the whole sample period. Using the dynamic relationships in the synthetic cohort sample and the initial conditions from the experimental sample, we predict future outcomes. For this approach to be effective, we require that the support of the auxiliary sample includes the support of the experimental sample, an assumption formalized in the next subsection.\footnote{Evidence on this assumption is in Appendix~\ref{appendix:methodology}. In practice, we use indicators for black and male, year of birth, and years of education and labor income at age 30 as matching variables. We explain how we pick these variables and provide a sensitivity analysis to this choice in Appendix~\ref{appendix:methodology}.}
 
-\noindent Our matching is based on indicators for black and male indicators, year of birth, years of education and labor income at age 30. We include labor income at age 21 and body-mass index at age 34 in the samples in which it is available to assess the quality of the matching out the variables targeted by the matching procedure.\footnote{We omit black because the experimental sample is $99\%$ black and year of birth because, by construction, this variable does not help to assess the matching. The auxiliary samples include younger individuals. We include it as part of the match to obtain year of birth matches that are as close as possible to the experimental group.}
+Figure~\ref{fig:labor-income-profiles} displays the life-cycle profiles for synthetic treatments and controls that are generated from this procedure. It also displays the profiles of the experimental treatments and controls through $t^*$. For men, the agreement through $t^*$ is close. It is less accurate for women. Our pattern of life-cycle labor incomes is typical for low-skilled workers. See, e.g., \citet{Blundell-etal_2015_J-Pub-E}, \citet{Gladden_Taber_2000_WageProgression}, and \citet{Sanders-Taber_2012_AR}.\footnote{The prediction is based on indicator variables of being male and being black, mother's education, average PIAT scores from ages 5 to 7, years of education at age 30, body-mass index at 34, labor income at ages 21 and 30, and one-period lagged labor income. We do not have all of the components of the High Risk Index in our auxiliary samples after age 45, so we only use a subset to make the life-cycle matches. A justification for the use of these variables, evidence on their predictive power, a sensitivity analysis to using different prediction variables are in Appendix~\ref{appendix:methodology}.}
 
-\noindent When these methods are applied to the auxiliary data discussed in Section~\ref{section:cbaresults} they are effective. Figure~\ref{fig:control-sub} shows the prediction of labor income by comparing the prediction in the ABC/CARE data with the life-cycle profile of disadvantaged individuals in the PSID. Our pattern of life-cycle labor income is typical for low-skilled workers. See, e.g., \cite{Blundell-etal_2015_J-Pub-E}.\footnote{Our prediction is based on indicator variables of being male and being black, mother's education, average PIAT scores from ages 5 to 7, years of education at age 30, body-mass index at 34, labor income at ages 21 and 30, and one-period lagged labor income. A justification for the use of these variables, evidence on their predictive power, a sensitivity analysis to using different prediction variables are in Appendix~\ref{appendix:methodology}.}
+We also compare the predicted labor income based on the synthetic control and treatment groups with the realized labor income for the ABC/CARE control- and treatment-group participants. The match is very good.
 
 \begin{sidewaysfigure}[!htbp]
 \centering
 \caption{Labor Income Profile Predictions}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.5\textwidth}
 		\centering
-		\caption{Prediction for ABC/CARE Females} \label{fig:labor-income-profilesa}
-		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_female.eps}
+		\caption{Prediction for ABC/CARE Males} \label{fig:labor-income-profilesc}
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_male.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.5\textwidth}
 		\centering
-		\caption{Prediction for ABC/CARE Males} \label{fig:labor-income-profilesc}
-		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_male.eps}
+		\caption{Prediction for ABC/CARE Females} \label{fig:labor-income-profilesa}
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_female.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: Panels (a) displays the predicted labor income life-cycle profiles for ABC/CARE for females by treatment status, based on the method proposed in this section. We combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). We highlight the \textit{realized or observed} labor income at $t^*$ (age 30) for the ABC/CARE control- and treatment-group participants. Panel (b) displays the analogous exercise for males. Standard errors are based on the empirical bootstrap distribution.
+Note: Panels (a) displays the predicted labor income life-cycle profiles for ABC/CARE for males by treatment status, based on the method proposed in this section. We combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). We highlight the \textit{realized or observed} labor income at $t^*$ (age 30) for the ABC/CARE control- and treatment-group participants. Panel (b) displays the analogous figure for females. Standard errors are based on the empirical bootstrap distribution.  See Appendix~\ref{appendix:methodology} for a discussion of our choice of predictors and a sensitivity analysis to this choice. \textbf{[JJH: Jorge, looks bad.] [JLG: consequence of smoothing. Please see the boxes. I think they are useful but please cross them if else.]}
 \end{sidewaysfigure}
 
-\indent In the experimental sample, the parents of children with observed characteristics $\bm{B} \in \mathcal{B}_0$ generally accept to participate of the program. Given that in the non-experimental sample there is no treatment, a test of validity of our matching procedure is to compare the dynamic relationship in the non-experimental individuals such that  $\bm{B} \in \mathcal{B}_0$ to the synthetic control group we construct (i.e., the group in the non-experimental sample that we match on observed characteristics to the control group in the experimental sample). We can also compare labor income at $t^*$ of these two groups to the observed labor income in the experimental sample (we observe labor income at $t^*$). Figure~\ref{figure:controltests} displays these comparison. We plot the labor income of individuals in our non-experimental sample such that $\bm{B} \in \mathcal{B}_0$ and the synthetic control group from ages 20 to 45. We also highlight the labor income of the experimental control group at $t^*$ (age 30). We stop at age 45 because we do not observe individual characteristics in the non-experimental sample to construct the ABC/CARE high-risk index defining $\bm{B} \in \mathcal{B}_0$. 
-
-Another test we can implement at $t^*$ is to compare the predicted labor income based on the synthetic control and treatment groups with the realized labor income for the ABC/CARE control- and treatment-group participants. Figure~\ref{fig:labor-income-profiles} displays the prediction of labor income over the life cycle for the treatment and control groups, and highlights realized or observed labor income at  $t^*$. In neither of the tests can we reject differences that question the validity of our method to construct synthetic treatment and control groups.
+In the experimental sample, the parents of children with observed characteristics $\bm{B} \in \mathcal{B}_0$ accept participation in the program. Since in the non-experimental sample there are no treatment group members, a test of validity of our matching procedure is to compare the labor incomes of non-experimentals for whom $\bm{B} \in \mathcal{B}_0$ to the labor incomes of the synthetic control group members (i.e., the groups in the non-experimental samples that we use to extrapolate control group outcomes). We also compare labor income at $t^*$ of both groups to the observed labor income in the experimental sample (we observe labor income at $t^*$). Figure~\ref{figure:controltests} plots these comparisons. We plot the labor income of individuals in our non-experimental sample such that $\bm{B} \in \mathcal{B}_0$ and the synthetic control group from ages 20 to 45. We also display the labor income of the experimental control group at $t^*$ (age 30). The graphs stop at age 45 because, as previously noted, we do not observe all of the components of the High Risk Index after age 45 in the non-experimental samples. We use only a subset. Nonetheless, the subset variables are effective predictors over the range where the full set of $\bm{B}$ is available.
 
 \begin{sidewaysfigure}[!htbp]
 \centering
-\caption{Labor Income Profile, Synthetic Cohoers and Disadvantaged Individuals in the Non-experimental Samples}\label{figure:controltests}
+\caption{Labor Income Profile, Disadvantaged Individuals Synthetic Control Group in the Non-experimental Samples}\label{figure:controltests}
 \begin{subfigure}[h]{0.5\textwidth}
 		\centering
-		\caption{Females} 
-		\includegraphics[width=\textwidth]{output/abccare_disad_0.eps}
+		\caption{Males}
+		\includegraphics[width=\textwidth]{output/abccare_disad_1.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.5\textwidth}
 		\centering
-		\caption{Males} 
-		\includegraphics[width=\textwidth]{output/abccare_disad_1.eps}
+		\caption{Females}
+		\includegraphics[width=\textwidth]{output/abccare_disad_0.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: Panels (a) displays the predicted labor income for females in the non-experimental samples such that $\bm{B} \in \mathcal{B}_0$, i.e. ABC/CARE eligible, and for the synthetic control group we construct based on the method proposed in this section. We combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). We highlight the \textit{realized or observed} labor income at $t^*$ (age 30) for the ABC/CARE control- and treatment-group participants. We stop at age 45 for want of data to compute the high-risk index defining $\bm{B} \in \mathcal{B}_0$ in ABC/CARE. Panel (b) displays the analogous exercise for males. Standard errors are based on the empirical bootstrap distribution.
+Note: Panels (a) displays the predicted labor income for males in the non-experimental samples such that $\bm{B} \in \mathcal{B}_0$, i.e. ABC/CARE eligible, and for the synthetic control group we construct based on the method proposed in this section. We combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). We highlight the \textit{realized or observed} labor income at $t^*$ (age 30) for the ABC/CARE control- and treatment-group participants. We stop at age 45 for want of data to compute the high-risk index defining $\bm{B} \in \mathcal{B}_0$ in ABC/CARE in the non-experimental samples. Panel (b) displays the analogous figure for females. Standard errors are based on the empirical bootstrap distribution.
 \end{sidewaysfigure}
 
 \subsection{Justifying the Matching Procedure} \label{section:just}
 
-To examine the validity of the matching approach just presented, and to provide an analytical framework for the extrapolation presented in this paper, it is helpful to introduce some general notation. Recall that $Y^d_{j,t}$ is $j$ at time $t$ for a treated person $(d\in\{0,1\})$. To simplify the analysis in this subsection, we do not further partition the control group. We define determinants of outcomes---vector $\bm{X}^d_t$---that may themselves be the outcomes of treatment, and may also depend on lagged outcomes also affected by treatment. Outcome variables are generated by the following equation
+To examine the validity of the matching approach just discussed, and to provide an analytical framework for the extrapolation presented in this paper, it is helpful to introduce some general notation. Recall that $Y^d_{j,t}$ is $j$ at time $t$ for a treated person $(d\in\{0,1\})$. To simplify the analysis, in this subsection we do not further partition the control group. We define determinants of outcomes---vector $\bm{X}^d_t$---that may themselves be the outcomes of treatment, and may also depend on lagged outcomes also affected by treatment. Outcome variables are generated by the following equation
 \begin{equation}\label{eq:trenchfoot}
 Y^d_{j,t} = \phi^d_{j,t} (\bm{X}^d_t, \bm{B}, \varepsilon^d_{j,t}), \quad d \in \{0,1\}, \quad \  j \in \mathcal{J}_t, t \in \{0,\dots,T\}
 \end{equation}
@@ -372,7 +417,7 @@ where $\mathcal{J}_t$ is the index set of possible outcomes and $\varepsilon^d_{
 \begin{equation}\label{eq:frostbite}
 X^d_{k,t} = \gamma^d_{k,t} (\bm{X}^d_{t-1}, \bm{B}, \eta^d_{k,t}), \quad d \in \{0,1\}, \ k \in \mathcal{K}_t, t \in \{0,\dots,T\}
 \end{equation}
-where $\eta^d_{k,t}$ is an unobserved determinant of $X^d_{k,t}$. For now, the dependence among the $\varepsilon^d_{j,t}$ and the $\eta^d_{k,t}$ is left unspecified. The $X^d_{k,t}$ can be caused by treatment, as can $X^d_{k,t-1}$. Examples of $\bm{X}^d_t$ in our data are education, IQ, health, work experience, and crime. All are potential determinants of earnings.
+where $\eta^d_{k,t}$ is an unobserved determinant of $X^d_{k,t}$. We specify the dependence among the $\varepsilon^d_{j,t}$ and the $\eta^d_{k,t}$ below. The $X^d_{k,t}$ can be caused by treatment, as can $X^d_{k,t-1}$. Examples of $\bm{X}^d_t$ in our data are education, IQ, health, work experience, and crime. All are potential determinants of earnings.
 
 We assume \emph{structural invariance} of \eqref{eq:trenchfoot} and \eqref{eq:frostbite}.\footnote{See, e.g., \citet{Frisch_1938_autonomy}, \citet{Haavelmo_1943_Econometrica,Haavelmo_1944_Econometrica}, \citet{Hurwicz_1962_structural}, and \citet{Heckman_Pinto_2015_EconometTheory}.} This means that however the arguments of \eqref{eq:trenchfoot} and \eqref{eq:frostbite} are determined, for the same numerical values of $(\bm{X}^d_t, \bm{B}, \varepsilon^d_t)$ and $(\bm{X}^d_{t-1}, \bm{B}, \eta^d_{j,t})$, we obtain the same values of $Y^d_{j,t}$.\footnote{Frisch called this notion ``autonomy.'' Much later work in statistics captures structural invariance as one aspect of ``SUTVA.'' See \citet{Holland_1986_JASA} and \citet{Heckman_2008_ISR}.} This is a fundamental property of invariant economic relationships used by economists since the time of \citet{Frisch_1938_autonomy}.
 
@@ -383,7 +428,7 @@ We assume \emph{structural invariance} of \eqref{eq:trenchfoot} and \eqref{eq:fr
 \end{spacing}
 \end{assumption}
 
-Equations~\eqref{eq:trenchfoot} and \eqref{eq:frostbite} can be estimated in the sample period $(0,\ldots,t^{*})$. We do not observe data on the experimental sample after $t^{*}$. To predict outside the sample period, we access auxiliary data on older cohorts of individuals whose life-cycle equations of motion are governed by Equations~\eqref{eq:trenchfoot} and \eqref{eq:frostbite}. This presumes the absence of cohort effects. We discuss the validity of this assumption when we turn to our empirical estimates.
+Equations~\eqref{eq:trenchfoot} and \eqref{eq:frostbite} can be estimated in the sample period $\left(0,\ldots,t^{*}\right]$. We do not observe data on the experimental sample after $t^{*}$. To predict outside the sample period, we access auxiliary data on older cohorts of individuals whose life-cycle equations of motion are governed by Equations~\eqref{eq:trenchfoot} and \eqref{eq:frostbite}. This presumes the absence of cohort effects. We discuss the validity of this assumption when we turn to our empirical estimates.
 
 \begin{assumption}\label{ass:crotchrot}
 \textbf{Absence of Cohort Effects}
@@ -391,14 +436,14 @@ Equations~\eqref{eq:trenchfoot} and \eqref{eq:frostbite} can be estimated in the
 
 Our auxiliary data do not have direct information on program participation. However, given the limited size of the experimental sample, and the fact that the auxiliary cohorts were not eligible to participate in the program, it is reasonable to assume that no one in the auxiliary sample is treated ($D=0$). This means that \eqref{eq:trenchfoot} and \eqref{eq:frostbite} for $d=0$ can be identified over the supports of the available samples in the post-sample period. This implies that we can identify the post-experimental outcomes for the ABC/CARE control group if the support of the auxiliary data includes the support of the experimental data.
 
-Let $\bm{Y}_j = (\bm{Y}^1_j, \bm{Y}^0_j)$, $\bm{X}_l = (\bm{X}^1_l, \bm{X}^0_l)$, $\varepsilon_n = (\varepsilon^1_n, \varepsilon^0_n)$, and define $\bm{X}^s = (\bm{X}_0,\dots,\bm{X}_T)^s$, $\bm{B}^s$ $\bm{Y}^s = (\bm{Y}_0,\dots,\bm{Y}_T)^s$, $\bm{\varepsilon}^s = (\varepsilon_0,\dots,\varepsilon_{T})^s$ where $s$ denotes sample membership. We assume
+Let $\bm{Y}_j = (\bm{Y}^1_j, \bm{Y}^0_j)$, $\bm{X}_l = (\bm{X}^1_l, \bm{X}^0_l)$, $\bm{\varepsilon}_n = (\bm{\varepsilon}^1_n, \bm{\varepsilon}^0_n)$, and define $\bm{X}^s = (\bm{X}_0,\dots,\bm{X}_T)^s$, $\bm{B}^s$ $\bm{Y}^s = (\bm{Y}_0,\dots,\bm{Y}_T)^s$, $\bm{\varepsilon}^s = (\bm{\varepsilon}_0,\dots,\bm{\varepsilon}_{T})^s$ where $s$ denotes sample membership. We assume
 
 \begin{assumption} \label{ass:contain}
 \begin{equation*}
 \sup(\bm{X}, \bm{Y}, \bm{B}, \varepsilon)^{s=1} \subseteq \sup (\bm{X}, \bm{Y}, \bm{B}, \varepsilon)^{s=0}.
 \end{equation*}
 \end{assumption}
-In particular, we assume that the support of $\mathcal{B}_0$ is included in the auxiliary sample.
+In particular, we assume that the support of $\mathcal{B}_0$ is included in the auxiliary sample.\footnote{Tests for this assumption are in Appendix~\ref{appendix:methodology}.}
 
 Predicting treatment group outcomes is a more challenging task. We do so by invoking the assumption that outcome equations \eqref{eq:trenchfoot} and \eqref{eq:frostbite} are the same across treatment and control regimes. Formally, we assume
 
@@ -409,7 +454,7 @@ For any $\bm{X}^d_t, \bm{B}, \varepsilon^d_{j,t}$ in $\sup(\bm{X},\bm{Y},\bm{B})
 \phi^1_{j,t} (\bm{X}^d_t, \bm{B}, \varepsilon^d_{j,t}) = \phi^0_{j,t} (\bm{X}^d_t, \bm{B}, \varepsilon^d_{j,t}) \qquad j \in \mathcal J_t, \quad t \in \{0,\dots,T\},
 \end{equation*}
 \end{assumption}
-i.e., treatment effects operate through inputs and not shifts in the input-output functions. This allows us to use post-$t^*$ relationships fit on the auxiliary samples to forecast post-$t^*$ outcomes of treatment group members. Evidence for the validity of this assumption in the context of early childhood programs is presented in \citet{Heckman_Pinto_etal_2013_PerryFactor} and \citet{Attanasio-etal_2015_NBER_Estimating-Production}. Appendix~\ref{app:invariance} displays evidence favoring this assumption using our experimental sample.
+i.e., treatment effects operate through inputs and not shifts in the input-output functions. This allows us to use post-$t^*$ relationships fit on the auxiliary samples to forecast post-$t^*$ outcomes of treatment group members. Evidence for the validity of this assumption in the context of early childhood programs is presented in \citet{Heckman_Pinto_etal_2013_PerryFactor} and \citet{Attanasio-etal_2015_NBER_Estimating-Production}. In Appendix~\ref{app:invariance}, we test and do not reject this assumption using the factor structure control function approach developed in \citet{Heckman_Pinto_etal_2013_PerryFactor}.
 
 We make a corresponding assumption for the equation governing the evolution of inputs:
 \addtocounter{assumption}{-1}
@@ -420,7 +465,7 @@ Given $\bm{X}^d_{t-1}, \bm{B}, \eta^d_{l,t}$,
 \gamma^1_{j,t} (\bm{X}^d_{t-1}, \bm{B}, \eta^d_{t-1}) = \gamma^0_{j,t} (\bm{X}^d_{t-1}, \bm{B}, \eta^d_{t-1}) \qquad k \in \mathcal{K}_t, \quad t \in \{0,\dots,T\}.
 \end{equation*}
 \end{assumption}
-We assume that the elements of $\varepsilon_t^s, s \in \{0,1\}$, are mutually independent:
+We assume that the elements of $\bm{\varepsilon}_t^s, s \in \{0,1\}$, are mutually independent:
 
 \renewcommand\theassumption{A--\arabic{assumption}}
 \begin{assumption}\label{ass:corns}
@@ -435,17 +480,33 @@ We assume that the elements of $\varepsilon_t^s, s \in \{0,1\}$, are mutually in
 Putting Assumptions~\ref{ass:butts}--\ref{ass:corns} together, we obtain full observability of $\bm{X}^d_t$, estimation on the matched samples based on \eqref{eq:ingrownnail} generates unbiased out of sample treatment effects. $\Box$
 \end{theorem}
 
-Our prediction is based on matching individuals in the non-experimental samples to the control-group individuals. In the non-experimental samples, however, the dependence between $\mathbf{X}_{t}$ and $\varepsilon_{t}$ is generally different from that dependence in the experimental sample. While the experiment randomly shifts inputs of the production function of the forecasted outcome, in the non-experimental individuals with relatively high educated individuals could come from a better background, be more motivated, etc. This would bias our prediction because it would align it with a trend that does not correspond to the unobserved characteristics of the experimental sample. 
+Our prediction is based on matching individuals in the non-experimental samples to the control-group individuals. In the non-experimental samples, however, the dependence between $\bm{X}_{t}$ and $\bm{\varepsilon}_{t}$ is generally different from that dependence in the experimental sample. While the experiment randomly shifts inputs of the production function of the forecasted outcome, in the non-experimental individuals with relatively high educated individuals could come from a better background, be more motivated, etc. This would bias our prediction because it would align it with a trend that does not correspond to the unobserved characteristics of the experimental sample.
 
 One solution for this problem is to obtain a measure of the potentially problematic unobserved component in the non-experimental sample and condition on it when estimating \eqref{eq:trenchfoot}, which we use to predict out of sample (in the experimental data). Three or more measures in the non-experimental sample would allow us to identify the distribution of this unobserved components and condition on them \citet{Cunha_Heckman_ea_2005_oep,Cunha_Heckman_etal_2010_est_tech_cognoncog}. If the endogeneity issue evolves dynamically, we would need these measures in every period. While developing a test of Assumption~\ref{ass:eczema}, we explain these method in detail in Appendix~\ref{app:invariance}.
 
+Another approach to forecasting the lifetime present value of earnings uses an idea due to \citet{Mincer_1974_schooling}. Around $t^*$ (which is the early 30s) it is thought to be possible to get a good measure of the perpetuity flow of lifetime earnings, i.e., $Y_{t^*}$ is the net present value of earnings $r$. Using a discount rate of around 2\% we get the closes agreement with our life-cycle prediction.
+
+\begin{table}[!htbp]
+\begin{threeparttable}
+\caption{Mincer-type Predictions, Age 30}\label{tab:mincerpred}
+\scriptsize
+\centering
+\input{output/mincerpred_ready}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table compares the predicted net present value of labor income (Life-cycle Prediction) to a perpetuity estimated based predicted labor income at age 30 (Age-30 Prediction) and on different discount rates (Age-30 Perpetuity). Predictions are based on the method we explain in this section. All values are in 2014 USD. Standard errors are in parentheses and are based on the empirical bootstrap distribution.\\
+\item $\bm{r^*}$: discount rate such that the value of the perpetuity and the life-cycle prediction coincide.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
 \subsection{Health} \label{section:health}
 
-To predict and monetize health outcomes requires an adaptation of the method we just explained. We consider three additional issues: (i) health outcomes such as diabetes or heart disease are absorbing states; (ii) health outcomes are highly interdependent within and across time periods; and (iii) there is no obvious terminal time period for benefits and costs except death, which is endogenous.\footnote{For example, for income we extrapolate up to the retirement age of 67. However, for health, we need to predict an age of death for each individual.} Our auxiliary model for health is an adaptation of the Future America Model (FAM). This model predicts health outcomes from the subjects' mid-30s up to their projected death \citep{Goldman_etal_2015_Future-Elderly-Model-Report}.\footnote{The simulation starts at the age in which we observe the subject's age-34 health follow-up. On average this happened at age 34 for both males and females, but there is variation ranging from age 30 to age 37.} Appendix~\ref{appendix:health} discusses the FAM methodology in detail. We initialize the health prediction using the same variables that we use when predicting labor and transfer income, along with the initial health conditions as listed in Table~\ref{table:transition}.
+To predict and monetize health outcomes is based on a version of Equation~\eqref{eq:trenchfoot} with a full vector of lagged dependent variables. It requires an adaptation of the method we just explained. We consider three additional issues: (i) health outcomes such as diabetes or heart disease are absorbing states; (ii) health outcomes are highly interdependent within and across time periods; and (iii) there is no obvious terminal time period for benefits and costs except death, which is endogenous.\footnote{For example, for income we extrapolate up to the retirement age of 67. However, for health, we need to predict an age of death for each individual.} Our auxiliary model for health is an adaptation of the Future America Model (FAM). This model predicts health outcomes from the subjects' mid-30s up to their projected death \citep{Goldman_etal_2015_Future-Elderly-Model-Report}.\footnote{The simulation starts at the age in which we observe the subject's age-34 health follow-up. On average this happened at age 34 for both males and females, but there is variation ranging from age 30 to age 37.} Appendix~\ref{appendix:health} discusses the FAM methodology in detail. We initialize the health prediction using the same variables that we use when predicting labor and transfer income, along with the initial health conditions as listed in Table~\ref{table:transition}.
 
 The methodology has five steps: (i) estimate age-by-age health state transition probabilities using the Panel Study of Income Dynamics (PSID); (ii) match these transition probabilities to the ABC/CARE subjects based on observed characteristics; (iii) estimate quality-adjusted life year (QALY) models using the Medical Expenditure Panel Survey (MEPS) and the PSID; (iv) estimate medical cost models using the MEPS and the Medicare Current Beneficiary Survey (MCBS), allowing estimates to differ by health state and observed characteristics; and (v) predict the medical expenditure and QALYs that correspond to the simulated individual health trajectories.\footnote{As an intermediate step between (i) and (ii), we impute some of the variables used to initialize the FAM models (see Appendix~\ref{appendix:health}).}
 
-Our microsimulation model starts the health predictions at age 30, with the information on observed characteristics available at this age. Restricting it to the individuals for whom we have information from the age-34 health follow-up allows us to account for components that are crucial for predicting health outcomes, such as the body mass index (BMI) and measures of diastolic and systolic health. The models predict the probability of being in any of the states in the horizontal axis of Table~\ref{table:transition} at age $a+1$ based on the state at age $a$, which is described by the vertical axis of the table.\footnote{In practice, the predictions are based on two-year lags, due to data limitations in the auxiliary sources we use to simulate the FAM. For example, if the individual is 30 (31) years old in the age-30 interview, we simulate the trajectory of her health status at ages 30 (31), 32 (33), 34 (35), and so on until her projected death.} Absorbing states are an exception. For example, heart disease at age $a$ does not enter in the estimation of transitions for heart disease at age $a+1$ because it is an absorbing state: once a person has heart disease, she carries it through the rest of her life.
+Our microsimulation model starts the health predictions at age 30, with the information on observed characteristics available at this age. Restricting it to the individuals for whom we have information from the age-34 health follow-up allows us to account for components that are important for predicting health outcomes, such as the body mass index (BMI) and measures of diastolic and systolic health. The models predict the probability of being in any of the states in the horizontal axis of Table~\ref{table:transition} at age $a+1$ based on the state at age $a$, which is described by the vertical axis of the table.\footnote{In practice, the predictions are based on two-year lags, due to data limitations in the auxiliary sources we use to simulate the FAM. For example, if the individual is 30 (31) years old in the age-30 interview, we simulate the trajectory of her health status at ages 30 (31), 32 (33), 34 (35), and so on until her projected death.} Absorbing states are an exception. For example, heart disease at age $a$ does not enter in the estimation of transitions for heart disease at age $a+1$ because it is an absorbing state: once a person has heart disease, she carries it through the rest of her life.
 
 \begin{sidewaystable}[!htbp]
 \begin{threeparttable}
@@ -459,7 +520,7 @@ Our microsimulation model starts the health predictions at age 30, with the info
 \end{threeparttable}
 \end{sidewaystable}
 
-At each age, once we obtain the transition probability for each health outcome, we draw a Monte-Carlo simulation for each subject. Thus, each simulation depends on each individual's health history and on their particular characteristics. For every simulated trajectory of health outcomes, we predict the lifetime medical expenditure using the models estimated from the MEPS and the MCBS. We then obtain an estimate of the expected lifetime medical expenditure by taking the mean of each individual's simulated lifetime medical expenditure.
+At each age, once we obtain the transition probability for each health outcome, we make a Monte-Carlo draw for each subject. Thus, each simulation depends on each individual's health history and on their particular characteristics. For every simulated trajectory of health outcomes, we predict the lifetime medical expenditure using the models estimated from the MEPS and the MCBS. We then obtain an estimate of the expected lifetime medical expenditure by taking the mean of each individual's simulated lifetime medical expenditure.
 
 The same procedure is applied to calculate quality-adjusted life years (QALYs).\footnote{A quality-adjusted life year (QALY) reweighs a year of life according to its quality given the burden of disease. Suppose we assign a value of $\$150,000$ (2014 USD) to each years of life. A QALY of $\$150,000$ denotes a year of life in the absence of disease (perfect health). The value of QALY for an individual in a given year is smaller than $\$150,000$ when there is positive burden of disease, as worse health conditions imply lower QALYs. When an individual dies, her QALY equals zero. It is worth noting that there are extreme combinations of disease and disability that may generate negative QALYs, although this case is unusual.} We compute a QALY model based on the EQ-5D instrument, a widely-used Health-related Quality-of-life (HRQoL) measure, available in MEPS. We then estimate this model from the PSID.
 
@@ -490,7 +551,7 @@ Note: Panels (a) and (b) display the life-cycle net-present value of predicted q
 
 \subsection{Crime}  \label{sec:crime}
 
-To estimate the life-cycle benefits and costs of ABC/CARE related to criminal activity, we use rich data on crime outcomes.\footnote{Two previous studies consider the impacts of ABC on crime: \citet{Clarke_Campbell_1998_ABC_Comparison_ECRQ} use administrative crime records up to age 21, and find no significant differences between the treatment and the control groups. \cite{Barnett_Masse_2002_benefitcost,Barnett_Masse_2007_EER} account for self-reported crime at age 21. They find little effects, but the lack longer term, administrative data.} See Appendix \ref{appendix:crime} for a more complete explanation of the following procedures. We consider the following types of crime: arson, assault, burglary, fraud, larceny, miscellaneous (which includes traffic and non-violent drug crimes), murder, vehicle theft, rape, robbery, and vandalism. We use administrative data that detail: (i) youth arrests, gathered at the age-21 follow-up; (ii) adult arrests, gathered at the age-34 follow-up; and (iii) sentences, gathered at the age-34 follow-up. We also use self-reported data on adult crimes, gathered in the age-21 and age-30 subject interviews. Because none of these sources capture all criminal activity, it is necessary to combine them to more completely approximate the crimes the subjects committed. We also use several auxiliary datasets to complete the life-cycle profile of criminal activity and compute the costs of the committed crimes
+To estimate the life-cycle benefits and costs of ABC/CARE related to criminal activity, we use rich data on crime outcomes obtained from public police records.\footnote{Two previous studies consider the impacts of ABC on crime: \citet{Clarke_Campbell_1998_ABC_Comparison_ECRQ} use administrative crime records up to age 21, and find no significant differences between the treatment and the control groups. \cite{Barnett_Masse_2002_benefitcost,Barnett_Masse_2007_EER} account for self-reported crime at age 21. They find little effects, but the lack longer term, administrative data.} See Appendix \ref{appendix:crime} for a more complete explanation of the following procedures. We consider the following types of crime: arson, assault, burglary, fraud, larceny, miscellaneous (which includes traffic and non-violent drug crimes), murder, vehicle theft, rape, robbery, and vandalism. We use administrative data that detail: (i) youth arrests, gathered at the age-21 follow-up; (ii) adult arrests, gathered at the age-34 follow-up; and (iii) sentences, gathered at the age-34 follow-up. We also use self-reported data on adult crimes, gathered in the age-21 and age-30 subject interviews. Because none of these sources capture all criminal activity, it is necessary to combine them to more completely approximate the crimes the subjects committed. We also use several auxiliary datasets to complete the life-cycle profile of criminal activity and compute the costs of the committed crimes
 
 We follow four steps to estimate the costs of crime.
 
@@ -506,7 +567,7 @@ We follow four steps to estimate the costs of crime.
 
 \subsection{Education}
 
-Follow-up data on educational attainment were collected up to age 30. In Appendix \ref{appendix:education}, we show that using auxiliary data sources, education up to this age is an accurate portrayal of lifetime educational attainment. Therefore, we do not predict beyond age 30. To monetize the costs of education, we consider the public costs of K-12 education and the private costs of post-secondary education, including vocational programs and community college. Other costs of education include grade retention and special education.
+Follow-up data on educational attainment were collected up to age 30. In Appendix \ref{appendix:education}, we show that using auxiliary data sources, education up to this age is an accurate predictor of lifetime educational attainment. Therefore, we do not predict beyond age 30. To monetize the costs of education, we consider the public costs of K-12 education and the private costs of post-secondary education, including vocational programs and community college. Other costs of education include grade retention and special education.
 
 \section{Cost/benefit Analysis} \label{section:cbaresults}
 
@@ -516,25 +577,11 @@ This section reports cost/benefit and rate of return analyses underlying Figure~
 
 The yearly cost of the program was \$18,514 per participant in 2014 USD. We improve on previous cost estimates using primary-source documents.\footnote{Our calculations are based on progress reports written by the principal investigators and related documentation recovered in the archives of the research center where the program was implemented. We display these sources in Appendix \ref{app:programcosts}. The main component is related to staff costs. Other costs arise from nutrition and services that the subjects received when they were sick, diapers during the first 15 months of their lives, and transportation to the center. The control-group children also received diapers during approximately 15 months, and iron-fortified formula. The costs are based on sources describing ABC treatment for $52$ children. We use the same costs estimates for CARE, for which information is less available. The costs exclude any expenses related to research or policy analysis. Our calculation of the costs per year in 1979 USD is $\$295,239$. A separate calculation of the program as implemented indicates that the yearly cost of the program was $\$275,475$ (1979 USD). See Appendix \ref{app:programcosts}.}
 
-\subsection{Non-experimental Data Sources}
-
-To construct cost-benefit estimates we (i) \textit{interpolate} components not observed due to intermittent data collection; and (ii) \textit{extrapolate} (predict) components not observed because the follow-ups stop when the subjects were in their mid-30s. We use multiple sources of non-experimental data representative on the national or state level to construct these interpolations and extrapolations. Table~\ref{table:sources} presents the components for which we do these exercises and the sources we use.
-
-\begin{table}[!htbp]
-\begin{threeparttable}
-\caption{Auxiliary Data Sources for Interpolation and Extrapolation of Life-cycle Benefits and Costs} \label{table:sources}
-\footnotesize
-\input{Output/auxiliary.tex}
-\begin{tablenotes}
-\footnotesize
-Note: This table details the non-experimental data sources we use to interpolate and extrapolate the life-cycle benefits and costs of ABC/CARE. CNLSY: Children of the National Longitudinal Survey of the Youth 1979; NLSY79: National Longitudinal Survey of the Youth 1979; PSID: Panel Study of Income Dynamics; MEPS: Medical Expenditure Panel Survey; MCBS: Medicare Current Beneficiary Survey; HRS: Health and Retirement Study; NCDPS: North Carolina Department of Public Safety Data; NVS: National Crime Victimization Survey; NJRP: National Judicial Reporting Program; UCRS: Uniform Crime Reporting Statistics.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+\subsection{Benefit/Cost Estimates}
 
 Figure~\ref{figure:npvs} presents the net present values for the main components of the cost/benefit analysis pooling males and females. The ``Treatment vs. Next Best'' bars represent the estimates based on the first parameter of interest, comparing the treatment- to the control-group subjects. The ``Treatment vs.  Stay at Home'' bars represent the comparison between the treatment-group and the control-group subjects who stayed at home. The ``Treatment vs. Alternative Preschool'' bars represent the comparison between the treatment-group and the control-group subjects who attended alternative preschools.
 
-The first category, ``Program Costs," represents the cost of the programs' implementation. The second category, ``Total Net Benefits" quantifies the benefits for the treatment-group subjects net of the benefits of the control-group subjects. We consider labor income of both the participants and of their parents, ``Labor Income" and ``Parental Income." The program produces a positive net present value on labor income of the treated subjects. This considers income from age 21 all the way to retirement. 
+The first category, ``Program Costs," represents the cost of the programs' implementation. The second category, ``Total Net Benefits" quantifies the benefits for the treatment-group subjects net of the benefits of the control-group subjects. We consider labor income of both the participants and of their parents, ``Labor Income" and ``Parental Income." The program produces a positive net present value on labor income of the treated subjects. This considers income from age 21 all the way to retirement.
 
 We also account for the fact that the parents of the treatment-group subjects increased their labor supply and therefore their income. Ideally, we would like to consider the full life-cycle of parental income to allow for the possibility of wage growth induced by the education and work-experience accumulated while the childcare component of ABC/CARE. Especially because Table~\ref{table:tescombined} shows sizable and significant effects on parental income up to when the children are age 21. In practice, it is not feasible to find an auxiliary dataset allowing us to predict the income of parents with the observed characteristics of the children who attended ABC/CARE. The information we observe from the parents is too limited to produce a sensible prediction without using their children's characteristics. We take a more conservative approach and linearly interpolate parental labor income from chidren's ages 0 to 21, noting that we observe parental income at ages 1.5, 3.5, 4.5, 8, 12, 15, and 21.\footnote{Treatment effects for parental income at each of these ages are in Appendix~\ref{appendix:results}.}
 
@@ -578,7 +625,7 @@ Note: This figure displays the life-cycle net present values of the main compone
 }
 \end{sidewaysfigure}
 
-We analyze the internal rate of return and benefit/cost ratio implied by the net present values presented in Figure~\ref{figure:npvs} through Figure~\ref{figure:npvsm}. The results without accounting for control substitution are presented in Table~\ref{table:cba}. All the monetary figures are in 2014 USD and are discounted to each child's birth, at a $3\%$ discount rate.\footnote{We present sensitivity analysis to different discount rates in Table~\ref{table:cba} and in Appendix~\ref{appendix:sensitivity}.} 
+We analyze the internal rate of return and benefit/cost ratio implied by the net present values presented in Figure~\ref{figure:npvs} through Figure~\ref{figure:npvsm}. The results without accounting for control substitution are presented in Table~\ref{table:cba}. All the monetary figures are in 2014 USD and are discounted to each child's birth, at a $3\%$ discount rate.\footnote{We present sensitivity analysis to different discount rates in Table~\ref{table:cba} and in Appendix~\ref{appendix:sensitivity}.}
 
 Pooling males and females, the results indicate that the program is socially efficient: the baseline estimates for the internal rate of return and the benefit/cost ratio are \irrp\ and \bcp. \textit{The program generates a benefit of \bcp\ for every dollar spent on it}. This is of particular importance because ABC/CARE was much more expensive than other early childhood education programs---the treatment involved more services over a longer time period \citep{Elango_Hojman_etal_2016_Early-Edu}.
 
@@ -586,7 +633,7 @@ The conclusion of statistically significant and beneficial internal rates of ret
 
 Parental income and crime are the components for which the internal rate of return and the benefit/cost ratio are the most sensitive. The reason for the sensitivity to parental income is that the amount is substantial and it is not heavily discounted because it substantially accumulates during the first $21$ years of the children's life. Crime occurs later in life and its benefits are accordingly discounted. The amount due to crime savings is large so removing it diminishes both the internal rate of return and the benefit/cost ratio (but they remain statistically significant).
 
-The estimates are robust to individually removing the rest of the components, and in most cases remain statistically significant. This happens for one of either two reasons: (i) the effects are substantial but they are heavily discounted because they happen later in life---e.g. labor income; or (ii) the effects happen early in life but are not as substantial---as in the amount that the control-group parents pay for their children to attend alternative preschools.
+The estimates are robust when we do a drastic sensitivity analysis by removing components of the benefit/cost analysis entirely. In most cases, the estimated benefit/cost ratios and rates of return are large and statistically significant. This happens for one of either two reasons: (i) the effects are substantial but they are heavily discounted because they happen later in life---e.g. labor income; or (ii) the effects happen early in life but are not as substantial---as in the amount that the control-group parents pay for their children to attend alternative preschools.
 
 Next, we analyze the estimates when splitting the sample by males and females. Some of the estimates loose significance due to the reduction of observations after splitting the sample by gender. The point estimates remain robust across  the sensitivity analysis (see Table~\ref{table:cba}), which computes the benefit/cost ratio and the internal rate of return when removing a component. For females, we observe consistency except for the case where we remove the parental income component. We can observe that the female sample is the main driver of parental income when comparing its net present value between females and males. For males, the estimates are robust, similar to the female sample.
 
@@ -619,7 +666,7 @@ We provide a cost/benefit analysis of the program when accounting for control su
 \end{threeparttable}
 \end{table}
 
-\subsection{Using our Estimates to Understand Recent Cost/benefit Analyses}
+\subsection{Using our Estimates to Understand Recent Benefit/Cost Analyses}
 
 \noindent An example of the approach recent studies take on cost-benefit analyses is \citet{Kline_Walters_2016_QJE}. They use data of the Head Start Impact Study (HSIS) to evaluate Head Start and find that a benefit/cost ratio between $1.50$ and $1.84$.\footnote{HSIS is a one-year-long randomized evaluation of Head Start.} Their analysis contains three steps: (i) calculate the treatment effect on Wechsler Preschool and Primary Scale of Intelligence (WPPSI) at age 5; (ii) monetize this gain using the return to WPPSI at age 5 in terms of net present value of labor income at age 27 \citep{Chetty_Friedman_etal_2011_QJoE}.\footnote{For this comparison exercise, we interpret the earnings estimated in \citet{Chetty_Friedman_etal_2011_QJoE} to be equivalent to labor income.} Calculations from \citet{Chetty_Friedman_etal_2011_QJoE} indicate that a 1 standard deviation gain in WPPSI at age 5 implies a $13.1\%$ increase in the net present value of labor income at age 27;\footnote{This is based on combining information from Project Star and administrative data at age 27.} and (iii) calculate the benefit/cost ratio based on this gain and their own calculations of the program's cost. This calculation is based on assigning the net present value of labor income at age 27 of $\$385,907.17$ to the control-group participants, which is provided by  \citet{Chetty_Friedman_etal_2011_QJoE}.\footnote{All money values that we provide in this section are in 2014 USD. We discount the value provided by \citet{Chetty_Friedman_etal_2011_QJoE} to the age of birth of the children in our sample (first cohort).}
 
@@ -646,11 +693,12 @@ There are four gains from our methodology: (i) provides a more precise estimate 
 
 \section{Summary} \label{section:conclusion}
 
+\textbf{[JJH: Will redraft tonight.] [JLG: Ok]}
 We study two closely related early childhood education programs with randomized controlled design and provide a template to evaluate social programs solving a number of methodological and practical issues. These include non-compliance, attrition, multiple hypotheses testing, and the prediction of long-term outcomes. We provide a comprehensive evaluation by considering and summarizing the treatment effects for a multiplicity of outcomes. These have direct relationships with policy-relevant questions.
 
 As a program providing high-quality center-based childcare, ABC/CARE has positive effects on a variety of outcomes measuring human development throughout childhood to adulthood---including cognition, socio-emotional skills, criminal activity, and adulthood health. This translates into statistically and economically significant measures of social efficiency, like the benefit-cost ratio and the internal rate of return, which we calculate accounting for complications that arise when evaluating social programs and considering life-cycle gains.
 
-When adequately assessed, findings indicate that early childhood education programs enhance human development in that they provide a vehicle to promote social mobility.
+When adequately assessed, findings indicate that early childhood education programs enhance human development in that they provide a vehicle to promote social mobility. \textbf{[JJH: Flabby, but will fix]}
 
 %References
 \singlespace
