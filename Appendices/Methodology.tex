@@ -30,7 +30,9 @@ treatment effects.
 
 \noindent For partially complete outcomes, we correct for attrition using an inverse probability scheme (IPW) as in  \citet{Horvitz_Thompson_1952_JASA}. To estimate the propensity to respond, we estimate a logit model of observing the outcome,
 controlling for treatment status and three additional covariates. The additional covariates are
-chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariables}. See Appendix~\ref{appendix:attrition} for a derivation of the (IPW) scheme and for a list of the variables we use to construct it for each partially complete variables. We account for the sampling variation implied in the estimation by the (IPW) scheme when producing our bootstrap-based inference. \textbf{[JJH: Do we conduct sensitivity analysis?] [JLG: I'm adding this later today. I will produce an analogous exercise to the sensitivity analysis to different control sets.]}
+chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariables}. See Appendix~\ref{appendix:attrition} for a derivation of the (IPW) scheme and for a list of the variables we use to construct it for each partially complete variables. Whenever we use IPW, we account for the sampling variation implied in the estimation by the scheme when producing our bootstrap-based inference.\\
+
+\noindent In each of the estimates we present in this paper, we allow the reader to assess the sensibility that the estimates have to accounting for IPW. In Table~\ref{table:tescombined}, where we present our main estimates, we present estimates for the first counterfactual of our interest (``Treatment vs. Next Best'') without accounting for IPW in column (1). In column (2), we present estimates accounting for IPW. The rest of the columns display similar exercises for the other counterfactuals we consider. For the rest of the outcomes that do not appear in Table~\ref{table:tescombined}, we present this same information in Appendix~\ref{appendix:results}.\footnote{We only account for IPW for the list of variables listed here, or any calculation involving them.}
 
 \subsection{Incomplete Data}
 \label{app:method_noobs}
@@ -43,7 +45,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \subsubsection{Parental Income}
 
-\noindent Ideally, we would use the same methodology in Section~\ref{section:cbamethodology} to identify and estimate the whole life-cycle profile of parental income (to allow for wage growth given gains in education and work experience). In practice, datasets allowing us to observe the parents of children with the characteristics in the ABC/CARE sample is not feasible. It is also unfeasible to use the methodology in an identical way for parents as we use it for children because we are much more limited with respect to observed characteristics. We use parental income at ages 1.5, 2.5,3.5, 4.5, 8, 12, 15, 21 to form an interpolated profile from ages 2 to 21. If anything this method underestimates the gain from ABC/CARE due to parental income. \textbf{[JJH: Why can't we use just fitted Mincer profiles $ln Y=\alpha + \beta \text{ schooling} + \gamma \text{(exp) } + \iota {\text{(exp)}}^{2}$?] [JLG: because we do not observe experience in ABC/CARE. An specification with education only works very very similar to Panels (b) and (e) in Figure C.3. I think it's a little repetitive to add.]}
+\noindent Ideally, we would use the same methodology in Section~\ref{section:cbamethodology} to identify and estimate the whole life-cycle profile of parental income (to allow for wage growth given gains in education and work experience). In practice, datasets allowing us to observe the parents of children with the characteristics in the ABC/CARE sample is not feasible. It is also unfeasible to use the methodology in an identical way for parents as we use it for children because we are much more limited with respect to observed characteristics. We use parental income at ages 1.5, 2.5,3.5, 4.5, 8, 12, 15, 21 to form an interpolated profile from ages 2 to 21. If anything this method underestimates the gain from ABC/CARE due to parental income. \textbf{[JJH: Why can't we use just fitted Mincer profiles $ln Y=\alpha + \beta \text{ schooling} + \gamma \text{(exp) } + \iota {\text{(exp)}}^{2}$?] [JLG: that will be here. Working on it.]}
 
 \subsection{Auxiliary Datasets and Variables Used to Predict}
 
@@ -138,7 +140,7 @@ Note: This figure displays the predicted labor income profile obtained when cons
 
 \noindent We \textbf{assume containing support} between these auxiliary datasets and the analysis sample. This is required in order for us to reliably use external data to provide predictions for the ABC/CARE samples. Figure~\ref{fig:support} validates this assumption by displaying the overlapping support sets of ABC/CARE and our auxiliary data for the variables used to interpolate and extrapolate earnings.\footnote{For the male and black indicators, we do not provide evidence of containing support. All three non-experimental samples have vast numbers of males, females, and black individuals to cover the support in the experimental samples.}\\
 
-\textbf{[JJH: Make sure this is cited in text. Make sure it's in display (as link) for Sage.]  [JLG: This is being mentioned in the text.]}
+\textbf{[JJH: Make sure this is cited in text. Make sure it's in display (as link) for Sage.]  [JLG: This is being mentioned in the text and it appears in Sage.]}
 
 \begin{figure}[H]
 		\caption{Support of ABC/CARE and Auxiliary Data} \label{fig:support}
