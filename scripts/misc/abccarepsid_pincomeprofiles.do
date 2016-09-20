@@ -141,19 +141,20 @@ drop if p_inc >= r(p75) & abccare == 0
 tempfile psidabc
 save   "`psidabc'", replace
 
+/*
 // mincer equations
 foreach num of numlist 0 1 {
-	reg logp_inc m_ed if abccare == `num', robust
+	reg lp_inc m_ed if abccare == `num', robust
 	matrix          ed`num'       = e(b)
 	matrix colnames ed`num'       = b1_m_ed_abccare`num' b1_cons_abccare`num'
 	est sto         ed`num'
 	
-	reg logp_inc m_ed m_experience m_experience2 if abccare == `num', robust
+	reg lp_inc m_ed m_experience m_experience2 if abccare == `num', robust
 	est sto         edexp`num'
 	matrix          edexp`num'    = e(b)
 	matrix colnames edexp`num'    = b2_m_ed_abccare`num' b2_m_experience_abccare`num' b2_m_experience2_abccare`num' b2_cons_abccare`num'
 	
-	reg logp_inc m_ed m_experience m_experience2 m_birthyear hhchildren if abccare == `num'
+	reg lp_inc m_ed m_experience m_experience2 m_birthyear hhchildren if abccare == `num'
 	est sto         edexpsib`num'
 	matrix          edexpsib`num' = e(b)
 	matrix colnames edexpsib`num' = b3_m_ed_abccare`num' b3_m_experience_abccare`num' b3_m_experience2_abccare`num' b3_m_birthyear`num' b3_hhchildren_abccare`num' b3_cons_abccare`num'
@@ -164,17 +165,18 @@ cd $output
 outreg2 [ed0 ed1 edexp0 edexp1 edexpsib0 edexpsib1] using abccarepsid_mincerests, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(4) par(se) r2 nonotes
 
 // bootstrap starts here. 
-
 // construct matrix to then calculate treatment effects based on parameters
 matrix psid_parameters = [ed0,edexp0,edexpsib0]
 use "`abccare'", clear
 
 // generate each of the three NPV estimates
-gen predyearsworked = (65 - (m_age0y + 21))
+gen predyearsworked = 65 - m_age0y
+gen predyearsworkedfactor = 1/2*predyearsworked*(predyearsworked + 1)
 
-collapse (mean) m_ed predyearsworked m_birthyear hhchildren, by(R male)
 
+collapse (mean) m_ed predyearsworkedfactor m_birthyear hhchildren, by(R male)
 svmat psid_parameters, names(col)
+
 // parametrize vectors
 foreach var of varlist b1_* b2_* b3_* {
 	summ `var'
@@ -185,9 +187,9 @@ foreach var of varlist b1_* b2_* b3_* {
 
 
 # delimit
-gen NPV1 = exp(b1_m_ed_abccare0*m_ed + b1_cons_abccare0); 
-gen NPV2 = exp(b2_m_ed_abccare0*m_ed + b2_m_experience_abccare0*predyearsworked + b2_m_experience2_abccare0*predyearsworked + b2_cons_abccare0); 
-gen NPV3 = exp(b3_m_ed_abccare0*m_ed + b3_m_experience_abccare0*predyearsworked + b3_m_experience2_abccare0*predyearsworked + b3_m_birthyear0*m_birthyear + b3_hhchildren_abccare0*hhchildren + b3_cons_abccare0);
+gen NPV1 = b1_m_ed_abccare0*m_ed + b1_cons_abccare0; 
+gen NPV2 = b2_m_ed_abccare0*m_ed + b2_m_experience_abccare0*predyearsworked + b2_m_experience2_abccare0*predyearsworked + b2_cons_abccare0; 
+gen NPV3 = b3_m_ed_abccare0*m_ed + b3_m_experience_abccare0*predyearsworked + b3_m_experience2_abccare0*predyearsworked + b3_m_birthyear0*m_birthyear + b3_hhchildren_abccare0*hhchildren + b3_cons_abccare0;
 # delimit cr
 
 /*
