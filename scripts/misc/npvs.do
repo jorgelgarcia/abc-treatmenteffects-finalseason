@@ -137,8 +137,11 @@ replace part1 = 3 if part == 10
 replace part1 = 4 if part == 11
 replace part1 = 5 if part == 4 
 replace part1 = 6 if part == 14
+
+/*
 replace part1 = 7 if part == 7 
 replace part1 = 8 if part == 6
+*/
 
 # delimit
 twoway (bar     m part1            if estimate == 1 & sex == 3, fcolor(white) lcolor(gs0) lwidth(medthick) barw(.9))
@@ -146,7 +149,7 @@ twoway (bar     m part1            if estimate == 1 & sex == 3, fcolor(white) lc
 		, 
 		legend(cols(2) order(1 "Treatment vs. Next Best" 2 "Significant at 10%") position(north) size(small))
 			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
-			  5 "Crime" 6 "QALYs*" 7 "Total Medical Costs" 8 "Costs of Education",  angle(45) noticks grid glcolor(gs14) labsize(small)) 
+			  5 "Crime" 6 "QALYs*",  angle(45) noticks grid glcolor(gs14) labsize(small)) 
 			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
