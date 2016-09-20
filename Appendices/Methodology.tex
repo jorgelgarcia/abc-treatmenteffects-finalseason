@@ -421,6 +421,57 @@ Note: Panels (a) displays a factor score estimated based on the measurement syst
 \end{threeparttable}
 \end{sidewaystable}
 
+\subsection{Testing  Assumption~\ref{ass:corns}} \label{app:endogeneity}
+
+\noindent The framework in Appendix~\ref{app:invariance} is also useful to test Assumption~\ref{ass:corns} in the main paper. The reasoning is the following. Correlation between $\bm{X}_{t}$ and $\bm{\varepsilon}_{t}$ in the non-experimental sample biases our prediction. We can write and estimate a system similar to that in \eqref{eq:msystem} in the non-experimental sample and estimate an approximation of $\bm{\varepsilon}_{t}$. Then, we can ask if the coefficients characterizing our predictions change after controlling for this approximation. We can also ask if $\theta_{c}, \theta_{n}$ are significant predictors of the outcome being predicted. For want of data to approximate $\theta_{c}, \theta_{n}$ in PSID and NLSY79, we test this assumption using the CNLSY. Our measurement system for $\theta_{c}$ consists of PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT). Our measurement system for $\theta_{n}$ is based on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). 
+
+Table~\ref{table:endoginc} and ~\ref{table:endogti} show the results from this exercise for the two variables we predict, at age 30. We display specifications based on different control sets. The coefficients characterizing our predictions do not present major changes after controlling for estimates of $\theta_{c}, \theta_{n}$. Further, these terms do not significantly determine the outcomes being predicted when we account for the full control set we use when predicting.
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Labor Income at Age 30 Accounting for $\bm{B}$ and $\bm{\theta}, \bm{X}_{t}$, CNLSY}
+\label{table:endoginc}
+\centering
+\footnotesize
+\input{output/cnlsy_endog_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Transfer Income at Age 30 Accounting for $\bm{B}$ and $\bm{\theta}, \bm{X}_{t}$, CNLSY}
+\label{table:endogti}
+\centering
+\scriptsize
+\input{output/cnlsy_endog_ti_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\subsection{Alternative Prediction Based on \citet{Mincer_1974_schooling}}
+
+\citet{Mincer_1974_schooling} claims that it is possible to get a good measure of the perpetuity flow of lifetime earnings as follows. Take labor income at $t^*$ (age 30) and assume that the individual perpetually gets this labor income. Thus, predicted lifetime income is $Y_{t^*}/r$, where $r$ is the discount rate. A discount rate of 2\% is necessary to equate a Mincer-type prediction to our life-cycle prediction.
+
+\begin{table}[!htbp]
+\begin{threeparttable}
+\caption{Mincer-type Predictions, Age 30}\label{tab:mincerpred}
+\scriptsize
+\centering
+\input{output/mincerpred_ready}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table compares the predicted net present value of labor income (Life-cycle Prediction) to a perpetuity estimated based predicted labor income at age 30 (Age-30 Prediction) and on different discount rates (Age-30 Perpetuity). Predictions are based on the method we explain in this section. All values are in 2014 USD. Standard errors are in parentheses and are based on the empirical bootstrap distribution.\\
+\item $\bm{r^*}$: discount rate such that the value of the perpetuity and the life-cycle prediction coincide.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
 
 \subsection{Health Costs}
 
