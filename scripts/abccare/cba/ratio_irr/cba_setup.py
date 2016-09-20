@@ -258,7 +258,7 @@ def bc_calc(filled, etype, components=flows.keys(), rate=0.03):
     ratio_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])
     ratio_mean = pd.DataFrame([ratiof.mean(), ratiom.mean(), ratiop.mean()], index = ['f', 'm', 'p'])    
     ratio_p = pd.DataFrame([ratio_fp, ratio_mp, ratio_pp], index = ['f', 'm', 'p'])    
-    ratio_se = pd.DataFrame([ratiof.std()/sqrt(N['f'][etype]),ratiom.std()/sqrt(N['m'][etype]), ratiop.std()/sqrt(N['p'][etype])], index=['f','m','p'])
+    ratio_se = pd.DataFrame([np.std(ratiof)/sqrt(N['f'][etype]),np.std(ratiom)/sqrt(N['m'][etype]), np.std(ratiop)/sqrt(N['p'][etype])], index=['f','m','p'])
 
     try:
         #ratio_quant = ratio.groupby(level='sex').quantile([0.1, 0.9]).unstack()
@@ -311,7 +311,7 @@ def irr_calc(filled, etype, components=flows.keys()):
     irr_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])    
     irr_mean = pd.DataFrame([irrf.mean(), irrm.mean(), irrp.mean()], index = ['f', 'm', 'p'])   
     irr_p = pd.DataFrame([irr_fp, irr_mp, irr_pp], index = ['f', 'm', 'p'])
-    irr_se = pd.DataFrame([irrf.std()/sqrt(N['f'][etype]),irrm.std()/sqrt(N['m'][etype]), irrp.std()/sqrt(N['p'][etype])], index=['f','m','p'])    
+    irr_se = pd.DataFrame([np.std(irrf)/sqrt(N['f'][etype]),np.std(irrm)/sqrt(N['m'][etype]), np.std(irrp)/sqrt(N['p'][etype])], index=['f','m','p'])    
 
     try:
         #irr_quant = irr.groupby(level='sex').quantile([0.1, 0.9]).unstack()

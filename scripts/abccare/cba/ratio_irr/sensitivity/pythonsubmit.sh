@@ -14,8 +14,8 @@
 cd "/home/aziff/projects/abc-treatmenteffects-finalseason/scripts/abccare/cba/ratio_irr/sensitivity"
 
 # SINGLE PROCESS
-#python2.7 sa_bcrdwl.py
-#python2.7 sa_discount.py
+python2.7 sa_bcrdwl.py
+python2.7 sa_discount.py
 
 # PARALLEL PROCESS
 python2.7 sa_bcrfactor.py
