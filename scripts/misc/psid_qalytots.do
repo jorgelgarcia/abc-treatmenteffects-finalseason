@@ -80,7 +80,6 @@ matrix colnames psidqalys = sample qaly qalyse
 
 cd $dataqalys
 use qaly_r-male-draw.dta, clear
-// drop qaly71-qaly79
 egen    npvqaly = rowtotal(qaly*), missing
 replace npvqaly = npvqaly/1000000
 keep npvqaly r male

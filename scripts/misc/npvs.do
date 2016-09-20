@@ -22,7 +22,7 @@ global googledrive: env googledrive
 // do files
 global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global data       = "$klmmexico/abccare/irr_ratios/aug-01"
+global data       = "$klmmexico/abccare/irr_ratios/"
 // output
 global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 
@@ -51,7 +51,7 @@ gen b = _n
 
 # delimit
 global CBAComponents all cc costs crime diclaim edu health health_private health_public
-                     inc_labor inc_parent inc_trans_pub qaly ssclaim ssiclaim transfer;
+                     inc_labor inc_parent inc_trans_pub m_ed qaly ssclaim ssiclaim transfer;
 
 # delimit cr
 
@@ -61,6 +61,7 @@ local se = 0
 foreach estimate of numlist 2 5 8 {
 	local se = `se' + 1
 	insheet using npv_type`estimate'.csv, clear
+	drop if type == "0.1" | type == "0.9"
 	encode type, gen(typen)
 	levelsof typen, local(testimates)
 	local sn = 0
@@ -83,15 +84,15 @@ foreach estimate of numlist 2 5 8 {
 mat vall = vall[2...,1...]
 clear
 svmat vall, names(col)
-keep if part == 1  | part == 2 | part == 3 | part == 4 | part == 6 | part == 7 | part == 8 /// 
-      | part == 10 | part == 11 | part == 13
+keep if part == 1  | part == 3 | part == 4 | part == 6 | part == 7 | part == 8 /// 
+      | part == 10 | part == 11 | part == 14
 
 gen     ind = 1  if part == 3   
 replace ind = 5  if part == 1
 replace ind = 9  if part == 10 
 replace ind = 13 if part == 11 
 replace ind = 17 if part == 4
-replace ind = 21 if part == 13
+replace ind = 21 if part == 14
 replace ind = 25 if part == 7
 replace ind = 29 if part == 6 
 
@@ -106,7 +107,7 @@ replace m = m/100000
 // replace m = m/10 if ind >= 34
 
 cd $output
-foreach sex of numlist 1 2  3 {
+foreach sex of numlist 1 2 3 {
 	#delimit
 	twoway (bar m ind        if estimate == 1 & sex == `sex', fcolor(white) lcolor(gs0) lwidth(medthick))
 	       (bar m ind        if estimate == 2 & sex == `sex', color(gs4))
@@ -128,14 +129,14 @@ foreach sex of numlist 1 2  3 {
 // do treatment vs control only
 drop if ind == .
 keep if estimate == 1 & sex == 3
-keep if part == 1 | part == 3 | part == 4 | part == 6 | part == 7 | part == 10 | part == 11 | part == 13
+keep if part == 1 | part == 3 | part == 4 | part == 6 | part == 7 | part == 10 | part == 11 | part == 14
 gen part1 = .
 replace part1 = 1 if part == 3
 replace part1 = 2 if part == 1 
 replace part1 = 3 if part == 10
 replace part1 = 4 if part == 11
 replace part1 = 5 if part == 4 
-replace part1 = 6 if part == 13 
+replace part1 = 6 if part == 14
 replace part1 = 7 if part == 7 
 replace part1 = 8 if part == 6
 
@@ -150,6 +151,6 @@ twoway (bar     m part1            if estimate == 1 & sex == 3, fcolor(white) lc
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
-			  note("Per-annum Rate of Return: 13% (s.e. 4%). Benefit-cost Ratio: 5.6 (s.e. 2.15)", size(small));
+			  note("Per-annum Rate of Return: 13% (s.e. 5%). Benefit-cost Ratio: 5.6 (s.e. 2.39)", size(small));
 #delimit cr 
 graph export abccare_npvssumm.eps, replace
