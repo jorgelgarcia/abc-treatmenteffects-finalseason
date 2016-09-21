@@ -83,9 +83,6 @@ end
 	# Define the function for the rest of the bootstrap #
 	# ================================================= #
 function matchingrun(boots)
-	# Set seed
-	srand(1)
-
 
 	Matchresult = Dict()
 	MatchDict = Dict()
