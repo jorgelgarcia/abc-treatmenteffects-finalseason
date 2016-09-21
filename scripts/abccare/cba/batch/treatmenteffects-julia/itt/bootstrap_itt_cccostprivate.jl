@@ -80,6 +80,8 @@ end
 	# Define the function for the rest of the bootstrap #
 	# ================================================= #
 function ITTrun(boots)
+	srand(1)
+
 	ITTresult = Dict()
 
 	for gender in genderloop
