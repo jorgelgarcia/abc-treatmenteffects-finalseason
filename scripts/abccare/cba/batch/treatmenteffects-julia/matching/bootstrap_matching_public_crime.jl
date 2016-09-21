@@ -4,6 +4,9 @@
 # Created: 06/27/2016
 # Edited: 07/08/2016
 # =================================================================== #
+# Set seed
+srand(1)
+
 # Using packages
 using DataFrames
 using GLM
@@ -24,7 +27,7 @@ global controls = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, 
 global ipwvars_all = [:m_iq0y, :m_ed0y, :m_age0y, :hrabc_index, :p_inc0y, :apgar1, :apgar5, :prem_birth, :m_married0y, :m_teen0y, :f_home0y, :hh_sibs0y, :cohort, :m_work0y]
 global component = "public_crime"
 global factors = 0
-global nomurder = 1
+global nomurder = 0
 global deaths = 1
 
 # Include helper files
@@ -80,6 +83,9 @@ end
 	# Define the function for the rest of the bootstrap #
 	# ================================================= #
 function matchingrun(boots)
+	# Set seed
+	srand(1)
+
 	Matchresult = Dict()
 	MatchDict = Dict()
 
