@@ -32,6 +32,7 @@ global weights      = "$klmmexico/abccare/as_weights"
 // output
 global output       = "$projects/abc-treatmenteffects-finalseason/output/"
 
+set seed 0
 // ABC/CARE
 // get parental income profile
 cd $dataabccare
@@ -141,30 +142,27 @@ drop if p_inc >= r(p75) & abccare == 0
 tempfile psidabc
 save   "`psidabc'", replace
 
-/*
 // mincer equations
 foreach num of numlist 0 1 {
-	reg lp_inc m_ed if abccare == `num', robust
+	reg logp_inc m_ed if abccare == `num', robust
 	matrix          ed`num'       = e(b)
 	matrix colnames ed`num'       = b1_m_ed_abccare`num' b1_cons_abccare`num'
 	est sto         ed`num'
 	
-	reg lp_inc m_ed m_experience m_experience2 if abccare == `num', robust
+	reg logp_inc m_ed m_experience m_experience2 if abccare == `num', robust
 	est sto         edexp`num'
 	matrix          edexp`num'    = e(b)
 	matrix colnames edexp`num'    = b2_m_ed_abccare`num' b2_m_experience_abccare`num' b2_m_experience2_abccare`num' b2_cons_abccare`num'
 	
-	reg lp_inc m_ed m_experience m_experience2 m_birthyear hhchildren if abccare == `num'
+	reg logp_inc m_ed m_experience m_experience2 m_birthyear hhchildren if abccare == `num'
 	est sto         edexpsib`num'
 	matrix          edexpsib`num' = e(b)
-	matrix colnames edexpsib`num' = b3_m_ed_abccare`num' b3_m_experience_abccare`num' b3_m_experience2_abccare`num' b3_m_birthyear`num' b3_hhchildren_abccare`num' b3_cons_abccare`num'
-	
+	matrix colnames edexpsib`num' = b3_m_ed_abccare`num' b3_m_experience_abccare`num' b3_m_experience2_abccare`num' b3_m_birthyear`num' b3_hhchildren_abccare`num' b3_cons_abccare`num'	
 }
 
 cd $output
 outreg2 [ed0 ed1 edexp0 edexp1 edexpsib0 edexpsib1] using abccarepsid_mincerests, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(4) par(se) r2 nonotes
 
-// bootstrap starts here. 
 // construct matrix to then calculate treatment effects based on parameters
 matrix psid_parameters = [ed0,edexp0,edexpsib0]
 use "`abccare'", clear
@@ -173,8 +171,7 @@ use "`abccare'", clear
 gen predyearsworked = 65 - m_age0y
 gen predyearsworkedfactor = 1/2*predyearsworked*(predyearsworked + 1)
 
-
-collapse (mean) m_ed predyearsworkedfactor m_birthyear hhchildren, by(R male)
+collapse (mean) m_ed predyearsworked m_birthyear hhchildren, by(R male)
 svmat psid_parameters, names(col)
 
 // parametrize vectors
@@ -185,31 +182,112 @@ foreach var of varlist b1_* b2_* b3_* {
 	rename `var'_r `var'
 }
 
-
 # delimit
-gen NPV1 = b1_m_ed_abccare0*m_ed + b1_cons_abccare0; 
-gen NPV2 = b2_m_ed_abccare0*m_ed + b2_m_experience_abccare0*predyearsworked + b2_m_experience2_abccare0*predyearsworked + b2_cons_abccare0; 
-gen NPV3 = b3_m_ed_abccare0*m_ed + b3_m_experience_abccare0*predyearsworked + b3_m_experience2_abccare0*predyearsworked + b3_m_birthyear0*m_birthyear + b3_hhchildren_abccare0*hhchildren + b3_cons_abccare0;
+// to age 21
+foreach num of numlist 0(1)60 {;
+	gen PV3_`num' = (1/((1 + .03)^`num'))*exp(b3_m_ed_abccare0*m_ed + b3_m_experience_abccare0*predyearsworked + b3_m_experience2_abccare0*predyearsworked + b3_m_birthyear0*m_birthyear + b3_hhchildren_abccare0*hhchildren + b3_cons_abccare0);
+};
 # delimit cr
 
-/*
-// plot profiles 
-replace R = 2 if R == .
-egen m_experiencegroup = cut(m_experience), group(5)
-collapse (mean) p_inc (semean) p_incse = p_inc, by(m_experiencegroup R)
-sort m_experiencegroup R
-gen p_incplus  = p_inc + p_incse 
-gen p_incminus = p_inc - p_incse
+aorder
+egen PV3_all40 = rowtotal(PV3_0-PV3_35), missing
+egen PV3_all60 = rowtotal(PV3_0-PV3_55), missing
 
+matrix p_inc40 = J(1,5,0)
+matrix colnames p_inc40 = b n pooled male female
+matrix p_inc60 = p_inc40
+// bootstrap
+foreach b of numlist 1(1)100 {
+	use "`psidabc'", clear
+	bsample
+
+	reg logp_inc m_ed m_experience m_experience2 m_birthyear hhchildren if abccare == 0
+	est sto         edexpsib`num'_`b'
+	matrix          edexpsib`num'_`b' = e(b)
+	matrix colnames edexpsib`num'_`b' = b3_m_ed_abccare`num' b3_m_experience_abccare`num' b3_m_experience2_abccare`num' b3_m_birthyear`num' b3_hhchildren_abccare`num' b3_cons_abccare`num'
+	matrix psid_parameters = [edexpsib0]
+	
+	foreach n of numlist 1(1)100 {
+	
+	preserve
+	use "`abccare'", clear
+	bsample
+	// generate each of the three NPV estimates
+	gen predyearsworked = 65 - m_age0y
+	gen predyearsworkedfactor = 1/2*predyearsworked*(predyearsworked + 1)
+
+	collapse (mean) m_ed predyearsworked m_birthyear hhchildren, by(R male)
+	svmat psid_parameters, names(col)
+
+	// parametrize vectors
+	foreach var of varlist b3_* {
+		summ `var'
+		gen  `var'_r = r(mean)
+		drop `var' 
+		rename `var'_r `var'
+	}
+	
+	# delimit 
+	// to age 21
+	foreach num of numlist 0(1)60 {;
+		gen PV3_`num' = (1/((1 + .03)^`num'))*exp(b3_m_ed_abccare0*m_ed + b3_m_experience_abccare0*predyearsworked + b3_m_experience2_abccare0*predyearsworked + b3_m_birthyear0*m_birthyear + b3_hhchildren_abccare0*hhchildren + b3_cons_abccare0);
+	};
+	# delimit cr
+
+	aorder
+	egen PV3_all40 = rowtotal(PV3_0-PV3_35), missing
+	egen PV3_all60 = rowtotal(PV3_0-PV3_55), missing
+	
+	foreach age in 40 60 {
+	reg PV3_all`age' R
+	matrix pincpool_b`b'n`n' = e(b)
+	matrix pincpool_b`b'n`n' = pincpool_b`b'n`n'[1,1]
+	reg PV3_all`age' R if male == 0
+	matrix pincfemale_b`b'n`n' = e(b)
+	matrix pincfemale_b`b'n`n' = pincfemale_b`b'n`n'[1,1]
+	reg PV3_all`age' R if male == 1
+	matrix pincmale_b`b'n`n' = e(b)
+	matrix pincmale_b`b'n`n' = pincmale_b`b'n`n'[1,1]
+	
+	matrix pinc_b`b'n`n' = [`b',`n',pincpool_b`b'n`n',pincfemale_b`b'n`n',pincmale_b`b'n`n']
+	matrix colnames pinc_b`b'n`n' = b n pooled female male
+	
+	mat_rapp p_inc`age' : p_inc`age' pinc_b`b'n`n'
+	}
+	restore
+	}
+	
+}
+matrix p_inc40 = p_inc40[2...,1...]
+matrix p_inc60 = p_inc60[2...,1...]
+
+foreach num of numlist 40 60 {
+clear 
+svmat p_inc`num', names(col)
+// output here if want to bootstrap
+matrix p_incsum`num' = J(2,1,.)
+matrix rownames p_incsum`num' = est pvalue
+foreach var of varlist pooled male female {
+	summ `var'
+	local est`var' = r(mean)
+	
+	gen     `var'm   = r(mean)
+	replace `var'    = `var' - r(mean)
+	gen     `var'ind = 1
+	replace `var'ind = 0 if `var'm > `var'
+	
+	summ `var'ind 
+	local p`var' = r(mean)
+	
+	matrix `var' = [`est`var'' \ `p`var'']
+	matrix rownames `var' = est pvalue
+	matrix colnames `var' = `var'
+	mat_capp p_incsum`num' : p_incsum`num' `var'
+}
+matrix p_incsum`num' = p_incsum`num'[1...,2...]
+}
+matrix p_incsum = [p_incsum40 \ p_incsum60]
+cd $output
 #delimit
-twoway (line p_inc m_experiencegroup if R == 2, lwidth(medthick) lpattern(solid) lcolor(gs0))
-       (line p_inc m_experiencegroup if R == 0, lwidth(medthick) lpattern(dash)  lcolor(gs0))
-       (line p_inc m_experiencegroup if R == 0, lwidth(medthick) lpattern(solid)   lcolor(gs9))
-        , 
-		  legend(order(1 2 3 4) label(1 "ABC/CARE Eligible ({bf:B} {&isin} {bf:{it:{&Beta}}}{sub:0})") 
-		         label(2 "ABC/CARE Control") label(3 "ABC/CARE Treatment") size(small))
-		  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
-		  xtitle($xlabel) ytitle(, size(small))
-		  graphregion(color(white)) plotregion(fcolor(white));
-#delimit cr 	
-		
+outtable using abccarepsid_pincmincer, mat(p_incsum) replace nobox center f(%9.3f);
+#delimit cr

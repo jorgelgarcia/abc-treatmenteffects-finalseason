@@ -149,7 +149,7 @@ twoway (bar     m part1            if estimate == 1 & sex == 3, fcolor(white) lc
 		, 
 		legend(cols(2) order(1 "Treatment vs. Next Best" 2 "Significant at 10%") position(north) size(small))
 			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "{&lowast}Labor Income" 4 "Parental Income"
-			  5 "Crime" 6 "{&lowast}{&lowast}QALYs",  angle(40) noticks grid glcolor(gs14) labsize(vsmall)) 
+			  5 "Crime" 6 "{&lowast}{&lowast}QALYs",  angle(25) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
