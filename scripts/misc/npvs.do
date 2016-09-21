@@ -148,8 +148,8 @@ twoway (bar     m part1            if estimate == 1 & sex == 3, fcolor(white) lc
        (scatter m part1 if sig == 1 & estimate == 1 & sex == 3, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
 		, 
 		legend(cols(2) order(1 "Treatment vs. Next Best" 2 "Significant at 10%") position(north) size(small))
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
-			  5 "Crime" 6 "QALYs*",  angle(45) noticks grid glcolor(gs14) labsize(small)) 
+			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "*Labor Income" 4 "Parental Income"
+			  5 "Crime" 6 "**QALYs",  angle(45) noticks grid glcolor(gs14) labsize(small)) 
 			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
