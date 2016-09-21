@@ -84,8 +84,6 @@ end
 	# Define the function for the rest of the bootstrap #
 	# ================================================= #
 function ITTrun(boots)
-	# Set seed
-	srand(1)
 
 	ITTresult = Dict()
 
