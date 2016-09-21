@@ -4,6 +4,9 @@
 # Created: 06/27/2016
 # Edited: 07/08/2016
 # =================================================================== #
+# Set seed
+srand(1)
+
 # Using packages
 using DataFrames
 using GLM
@@ -81,6 +84,9 @@ end
 	# Define the function for the rest of the bootstrap #
 	# ================================================= #
 function ITTrun(boots)
+	# Set seed
+	srand(1)
+
 	ITTresult = Dict()
 
 	for gender in genderloop
