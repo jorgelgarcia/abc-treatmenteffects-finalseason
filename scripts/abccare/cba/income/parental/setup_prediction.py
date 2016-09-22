@@ -3,9 +3,17 @@ Created on Mon Oct 05 12:06:42 2015
 
 Setup module for ABC labor income imputations
 
-Author: Jake C. Torcasso, Joshua Shea
+Author: Jake C. Torcasso, Joshua Shea, Anna Ziff
 
 Description: This file projects earnings of ABC subjects.
+
+1: lag, X, W (1)
+2: X, W (2)
+3: lag, X
+4: lag, W (3)
+5: W (4)
+6: X (5)
+
 '''
 
 import os
@@ -47,26 +55,31 @@ def predict_abc(interp, extrap, interp_index, extrap_index, abc, verbose=True):
 
 	# set up matrices for interpolation/extrapolation parameters, and errors
 	for sex in ['pooled', 'male', 'female']:
-		params_interp[sex] = pd.DataFrame([[np.nan for j in range(len(cols.interp.predictors) + 2)] for k in range(22,30)], index = range(22,30))
+		params_interp[sex] = pd.DataFrame([[np.nan for j in range(len(cols.interp.predictors) + 3)] for k in range(22,30)], index = range(22,30))
 		params_interp[sex].index.names = ['age']
-		params_interp[sex].columns = ['Intercept'] + cols.interp.predictors + ['rmse']
+		params_interp[sex].columns = ['Intercept'] + cols.interp.predictors + ['y'] + ['rmse']
 
-		params_extrap[sex] = pd.DataFrame([[np.nan for j in range(len(cols.extrap.predictors) + 2)] for k in range(31,68)], index = range(31,68))
+		params_extrap[sex] = pd.DataFrame([[np.nan for j in range(len(cols.extrap.predictors) + 3)] for k in range(31,68)], index = range(31,68))
 		params_extrap[sex].index.names = ['age']
-		params_extrap[sex].columns = ['Intercept'] + cols.extrap.predictors + ['rmse']
-
+		params_extrap[sex].columns = ['Intercept'] + cols.extrap.predictors + ['y'] + ['rmse']
 		error_mat[sex] = pd.DataFrame([])
-
 
 	# obtain parameters for every age
 	for age in ages:
 
 		if age in range(22, 30):
-			predictors = cols.interp.predictors
+			age_x = age - 1
+			predictors = cols.interp.predictors + ['inc_labor{}'.format(age_x)]
 			aux = deepcopy(interp.loc[interp_index, :])
-
+		
 		elif age in range(31, 68):
-			predictors = cols.extrap.predictors
+			if age == 31:
+				age_x = 29
+				predictors = cols.extrap.predictors + ['inc_labor{}'.format(age_x)]
+				
+			else: 
+				age_x = age - 1
+				predictors = cols.extrap.predictors + ['inc_labor{}'.format(age_x)]
 			aux = deepcopy(extrap.loc[extrap_index, :])
 
 		c = 'inc_labor{}'.format(age)
@@ -106,17 +119,20 @@ def predict_abc(interp, extrap, interp_index, extrap_index, abc, verbose=True):
 				resid = fit.resid
 			except:
 				fail_switch = 1
-				params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + predictors)
+				if age in range(22, 30):
+					params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.interp.predictors + ['y'])
+				else:
+					params = pd.Series([np.nan for j in range(1 + len(predictors))], index=['Intercept'] + cols.extrap.predictors + ['y'])
 				resid = pd.Series([np.nan for j in range(endog.shape[0])])
-
+			
    			# calculate RMSE
    			rmse = resid * resid
    			rmse =  pd.Series(sqrt(rmse.mean(axis=0)), index=['rmse'])
    			params = pd.concat([params, rmse],axis=0)
-
+			params.rename({'inc_labor{}'.format(age_x):'y'}, inplace=True)
+			
    			if age in range(22,30):
 				params_interp[sex].loc[age, :] = params
-
    			else:
 				params_extrap[sex].loc[age, :] = params
 
@@ -131,6 +147,7 @@ def predict_abc(interp, extrap, interp_index, extrap_index, abc, verbose=True):
    			ehat.columns.name = 'age'
    			ehat.set_index('id', inplace=True)
    			error_mat[sex] = pd.concat([error_mat[sex], ehat], axis=1)
+
 
 		if verbose:
 			print 'Successful predictions, age {}, n={}'.format(age, exog.shape[0])
@@ -158,26 +175,43 @@ def predict_abc(interp, extrap, interp_index, extrap_index, abc, verbose=True):
 	projection_interp = {}
 	projection_extrap = {}
 	abc.loc[:, 'Intercept'] = [1 for j in range(abc.shape[0])]
-	for sex in ['pooled', 'male', 'female']:
 
+	for sex in ['pooled', 'male', 'female']:
+	
 		if sex == 'pooled':
 			abcd = abc
-			abcd_interp = abcd.loc[:, ['Intercept'] + cols.interp.predictors]
-   			abcd_extrap = abcd.loc[:, ['Intercept'] + cols.extrap.predictors]
 
 		elif sex == 'male':
 			abcd = abc.loc[abc.male==1]
-			abcd_interp = abcd.loc[:, ['Intercept'] + cols.interp.predictors]
-   			abcd_extrap = abcd.loc[:, ['Intercept'] + cols.extrap.predictors]
 
 		else:
 			abcd = abc.loc[abc.male==0]
-			abcd_interp = abcd.loc[:, ['Intercept'] + cols.interp.predictors]
-   			abcd_extrap = abcd.loc[:, ['Intercept'] + cols.extrap.predictors]
+
+		abcd_interp = abcd.loc[:, ['Intercept'] + cols.interp.predictors + ['y']]
+   		abcd_extrap = abcd.loc[:, ['Intercept'] + cols.extrap.predictors + ['y']]
 		
-		# peform projetions using dot product, add back in the errors
-		projection_interp[sex] = abcd_interp.dot(params_interp[sex].drop('rmse', axis=1).T) + error_mat[sex].drop('R', axis=1).loc[:,slice(22,29)]
-		projection_extrap[sex] = abcd_extrap.dot(params_extrap[sex].drop('rmse', axis=1).T) + error_mat[sex].drop('R', axis=1).loc[:,slice(31,67)]
+		projection_interp[sex] = pd.DataFrame([])
+		projection_extrap[sex] = pd.DataFrame([])
+
+		for age in ages:
+			
+			if age in range(22, 30):
+				if age == 22:
+					abcd_interp['y'] = 0 
+				params_interp_trans = pd.DataFrame(params_interp[sex].loc[age].drop('rmse').T)
+				interp_dot = abcd_interp.dot(params_interp_trans) + error_mat[sex][[age]]
+				abcd_interp['y'] = interp_dot
+				projection_interp[sex] = pd.concat([projection_interp[sex], interp_dot], axis=1)	
+
+			else:
+				if age == 31:
+					params_extrap[sex].loc[31]['y'] = 0
+					abcd_extrap['y'] = interp_dot	
+					abcd_extrap['y'].fillna(value=0, inplace=True)
+				params_extrap_trans = pd.DataFrame(params_extrap[sex].loc[age].drop('rmse').T)
+				extrap_dot = abcd_extrap.dot(params_extrap_trans) + error_mat[sex][[age]]
+				abcd_extrap['y'] = extrap_dot
+				projection_extrap[sex] = pd.concat([projection_extrap[sex], extrap_dot], axis=1)
 
 	return params_interp, params_extrap, error_mat, projection_interp, projection_extrap
 
@@ -190,7 +224,7 @@ if __name__ == '__main__':
 
 	np.random.seed(1234)
 
-	aux_draw = 50
+	aux_draw = 3
 
 	# Bring in auxiliary data
 	interp_index = pd.read_csv(paths.cnlsy_bsid)

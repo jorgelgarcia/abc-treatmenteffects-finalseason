@@ -68,7 +68,7 @@ cnlsy['id'] = cnlsy['id'].astype(int)
 cnlsy = cnlsy.set_index('id', drop=True)
 
 #--------------------------------------------------------------------
-'''
+
 print "Loading PSID"
 reader = StataReader(paths.psid)
 psid = reader.read(convert_dates=False, convert_categoricals=False)
@@ -97,7 +97,7 @@ psid = psid.loc[:, cols.extrap.keep + inc.columns.tolist() + wtabc.columns.tolis
 psid = psid.reset_index()
 psid['id'] = psid['id'].astype(int)
 psid = psid.set_index('id', drop=True)
-'''
+
 #--------------------------------------------------------------------
 
 print "Loading NLSY"
