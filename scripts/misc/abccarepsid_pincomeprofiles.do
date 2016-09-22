@@ -288,5 +288,5 @@ matrix p_incsum = [p_incsum22 \ p_incsum40]
 
 cd $output
 #delimit
-outtable using abccarepsid_pincmincer, mat(p_incsum) replace nobox center f(%9.3f);
+outtable using abccarepsid_pincmincer, mat(p_incsum) replace nobox center f(%9.5f);
 #delimit cr
