@@ -195,7 +195,7 @@ matrix colnames p_inc22 = b n pooled male female
 matrix p_inc40 = p_inc22
 
 // bootstrap
-foreach b of numlist 1(1)100 {
+foreach b of numlist 1(1)10 {
 	use "`psidabc'", clear
 	bsample 
 
@@ -205,7 +205,7 @@ foreach b of numlist 1(1)100 {
 	matrix colnames edexpsib`num'_`b' = b3_m_ed_abccare`num' b3_m_experience_abccare`num' b3_m_experience2_abccare`num' b3_m_birthyear`num' b3_hhchildren_abccare`num' b3_cons_abccare`num'
 	matrix psid_parameters = [edexpsib0]
 	
-	foreach n of numlist 1(1)100 {
+	foreach n of numlist 1(1)10 {
 	
 	preserve
 	use "`abccare'", clear
@@ -263,10 +263,11 @@ clear
 svmat p_inc`num', names(col)
 // output here if want to bootstrap
 matrix p_incsum`num' = J(2,1,.)
-matrix rownames p_incsum`num' = est pvalue
+matrix rownames p_incsum`num' = est se
 foreach var of varlist pooled male female {
 	summ `var'
 	local est`var' = r(mean)
+	local se`var' = r(sd)/r(N)
 	
 	gen     `var'm   = r(mean)
 	replace `var'    = `var' - r(mean)
@@ -276,8 +277,8 @@ foreach var of varlist pooled male female {
 	summ `var'ind 
 	local p`var' = r(mean)
 	
-	matrix `var' = [`est`var'' \ `p`var'']
-	matrix rownames `var' = est pvalue
+	matrix `var' = [`est`var'' \ `se`var'']
+	matrix rownames `var' = est se
 	matrix colnames `var' = `var'
 	mat_capp p_incsum`num' : p_incsum`num' `var'
 }
