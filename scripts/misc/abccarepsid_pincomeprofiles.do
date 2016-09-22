@@ -161,21 +161,18 @@ foreach num of numlist 0 1 {
 }
 
 cd $output
-outreg2 [ed0 ed1 edexp0 edexp1 edexpsib0 edexpsib1] using abccarepsid_mincerests, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(2) par(se) r2 nonotes
+outreg2 [ed0 ed1 edexp0 edexp1 edexpsib0 edexpsib1] using abccarepsid_mincerests, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(4) par(se) r2 nonotes
 
 // construct matrix to then calculate treatment effects based on parameters
-matrix psid_parameters = [ed0,edexp0,edexpsib0]
+matrix psid_parameters = [edexpsib0]
 use "`abccare'", clear
 
-// generate each of the three NPV estimates
-gen predyearsworked = 65 - m_age0y
-gen predyearsworkedfactor = 1/2*predyearsworked*(predyearsworked + 1)
-
+gen predyearsworked = 65 - m_age0y + 5
 collapse (mean) m_ed predyearsworked m_birthyear hhchildren, by(R male)
 svmat psid_parameters, names(col)
 
 // parametrize vectors
-foreach var of varlist b1_* b2_* b3_* {
+foreach var of varlist b3_* {
 	summ `var'
 	gen  `var'_r = r(mean)
 	drop `var' 
@@ -184,22 +181,23 @@ foreach var of varlist b1_* b2_* b3_* {
 
 # delimit
 // to age 21
-foreach num of numlist 0(1)60 {;
+foreach num of numlist 0(1)40 {;
 	gen PV3_`num' = (1/((1 + .03)^`num'))*exp(b3_m_ed_abccare0*m_ed + b3_m_experience_abccare0*predyearsworked + b3_m_experience2_abccare0*predyearsworked + b3_m_birthyear0*m_birthyear + b3_hhchildren_abccare0*hhchildren + b3_cons_abccare0);
 };
 # delimit cr
 
 aorder
-egen PV3_all40 = rowtotal(PV3_0-PV3_35), missing
-egen PV3_all60 = rowtotal(PV3_0-PV3_55), missing
+egen PV3_all22 = rowtotal(PV3_0-PV3_22), missing
+egen PV3_all40 = rowtotal(PV3_0-PV3_40), missing
 
-matrix p_inc40 = J(1,5,0)
-matrix colnames p_inc40 = b n pooled male female
-matrix p_inc60 = p_inc40
+matrix p_inc22 = J(1,5,0)
+matrix colnames p_inc22 = b n pooled male female
+matrix p_inc40 = p_inc22
+
 // bootstrap
 foreach b of numlist 1(1)100 {
 	use "`psidabc'", clear
-	bsample
+	bsample 
 
 	reg logp_inc m_ed m_experience m_experience2 m_birthyear hhchildren if abccare == 0
 	est sto         edexpsib`num'_`b'
@@ -213,8 +211,7 @@ foreach b of numlist 1(1)100 {
 	use "`abccare'", clear
 	bsample
 	// generate each of the three NPV estimates
-	gen predyearsworked = 65 - m_age0y
-	gen predyearsworkedfactor = 1/2*predyearsworked*(predyearsworked + 1)
+	gen predyearsworked = 65 - m_age0y + 5 
 
 	collapse (mean) m_ed predyearsworked m_birthyear hhchildren, by(R male)
 	svmat psid_parameters, names(col)
@@ -229,16 +226,16 @@ foreach b of numlist 1(1)100 {
 	
 	# delimit 
 	// to age 21
-	foreach num of numlist 0(1)60 {;
+	foreach num of numlist 0(1)40 {;
 		gen PV3_`num' = (1/((1 + .03)^`num'))*exp(b3_m_ed_abccare0*m_ed + b3_m_experience_abccare0*predyearsworked + b3_m_experience2_abccare0*predyearsworked + b3_m_birthyear0*m_birthyear + b3_hhchildren_abccare0*hhchildren + b3_cons_abccare0);
 	};
 	# delimit cr
 
 	aorder
-	egen PV3_all40 = rowtotal(PV3_0-PV3_35), missing
-	egen PV3_all60 = rowtotal(PV3_0-PV3_55), missing
+	egen PV3_all22 = rowtotal(PV3_0-PV3_22), missing
+	egen PV3_all40 = rowtotal(PV3_0-PV3_40), missing
 	
-	foreach age in 40 60 {
+	foreach age in 22 40 {
 	reg PV3_all`age' R
 	matrix pincpool_b`b'n`n' = e(b)
 	matrix pincpool_b`b'n`n' = pincpool_b`b'n`n'[1,1]
@@ -258,10 +255,10 @@ foreach b of numlist 1(1)100 {
 	}
 	
 }
+matrix p_inc22 = p_inc22[2...,1...]
 matrix p_inc40 = p_inc40[2...,1...]
-matrix p_inc60 = p_inc60[2...,1...]
 
-foreach num of numlist 40 60 {
+foreach num of numlist 22 40 {
 clear 
 svmat p_inc`num', names(col)
 // output here if want to bootstrap
@@ -286,7 +283,8 @@ foreach var of varlist pooled male female {
 }
 matrix p_incsum`num' = p_incsum`num'[1...,2...]
 }
-matrix p_incsum = [p_incsum40 \ p_incsum60]
+matrix p_incsum = [p_incsum22 \ p_incsum40]
+
 cd $output
 #delimit
 outtable using abccarepsid_pincmincer, mat(p_incsum) replace nobox center f(%9.3f);
