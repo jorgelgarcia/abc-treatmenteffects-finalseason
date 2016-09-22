@@ -161,7 +161,7 @@ foreach num of numlist 0 1 {
 }
 
 cd $output
-outreg2 [ed0 ed1 edexp0 edexp1 edexpsib0 edexpsib1] using abccarepsid_mincerests, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(4) par(se) r2 nonotes
+outreg2 [ed0 ed1 edexp0 edexp1 edexpsib0 edexpsib1] using abccarepsid_mincerests, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(2) par(se) r2 nonotes
 
 // construct matrix to then calculate treatment effects based on parameters
 matrix psid_parameters = [ed0,edexp0,edexpsib0]
