@@ -117,7 +117,7 @@ foreach sex of numlist 1 2 3 {
 		legend(cols(2) order(1 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 3 "Treatment vs. Alternative Preschool" 
 					    4 "Significant at 10%") size(vsmall))
 			  xlabel(2 "Program Costs" 6 "Total Benefits" 10 "Labor Income" 14 "Parental Income"
-			  18 "Crime" 22 "QALYs*" 26 "Total Medical Costs" 30 "Costs of Education", angle(45) noticks grid glcolor(gs14) labsize(small)) 
+			  18 "Crime" 22 "{&lowast}QALYs" 26 "Total Medical Costs" 30 "Costs of Education", angle(25) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
