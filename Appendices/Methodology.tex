@@ -569,20 +569,18 @@ Table~\ref{table:endoginc} and ~\ref{table:endogti} show the results from this e
 
 \noindent The results in Table~\ref{table:psens} display results that enable us to answer these two questions. Estimates based on \eqref{eq:mincer} allow for a precise estimate of the the predicted net present value of parental income (treatment - control) when the subjects are 21 years old. This is to be expected given that we estimate \eqref{eq:mincer} with data from the ABC/CARE individuals. When using these same estimates to predict parental labor income such that mothers work for 40 years in their life times, we find that the method we use in the main paper underestimates the gain based on parental income by around $\$30,000$ (2014 USD). The estimates we provide in the main paper represents a lower bound of the gain the program had due to its childcare components.
 
-
 \begin{table}[H] 
 \begin{threeparttable}
-\caption{Parental Labor Income, }
+\caption{Parental Labor Income, Interpolations and Prediction}
 \label{table:psens}
 \centering 
-\input{output/yourtable.tex}
+\input{output/abccarepsid_pincmincer_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: 
+\item Note:  Interpolated up to Age 21: linearly interpolated parental income from (child's) age 0 to 21. Mincer-based up to Age 21: prediction from (child's) age 0 to 21 based on estimates coefficients of \eqref{eq:mincer} (full control set). Mincer-based up to Retirement: prediction from (child's) age 0 to mother's retirement (40 years of labor force participation assumed) based on estimates coefficients of \eqref{eq:mincer} (full control set). All values are in 2014 USD discounted to child's age 0. Standard errors in parentheses are based on the empirical bootstrap distribution.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
-
 
 \subsection{Cohort Effects}\label{app:cohorteffects}
 
