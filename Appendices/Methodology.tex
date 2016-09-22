@@ -492,22 +492,25 @@ Table~\ref{table:endoginc} and ~\ref{table:endogti} show the results from this e
 
 \noindent In principle, there is no reason why the parameters characterizing the profile should differ across the treatment and control groups in ABC/CARE. Given the small sample in ABC/CARE, however, we assume that the profile is common across the control and treatment groups. This assumption is analogous to Assumption~\ref{ass:eczema}, which we fail to reject in Appendix~\ref{app:invariance}.\\
 
-\noindent We estimate the coefficients in \eqref{eq:mincer} using the sample of mothers in ABC/CARE. We pool the longitudinal information and estimate the coefficients using ordinary least squares. We use a standard Black-Welch measure of experience (age - education - 6) \citep{Smith_Welch_1979_IER}. For this estimation, we take mothers whose earnings are above $0$. For mothers living with a couple who report working, we consider $1/2$ of total parental income as $\ln Y_{a}$. To validate our estimates within ABC/CARE, we estimate the coefficients \eqref{eq:mincer} using a sub-sample of disadvantaged mothers in the PSID.\footnote{We define disadvantaged as follows: black, not married, labor income, education (at age 5 of child's participant), age and number of children (at age 5 of child's participant) in the same ranges as the ABC/CARE mothers, labor income below percentile 75.} The coefficients characterizing \eqref{eq:mincer} in ABC/CARE and PSID for different combinations of control sets are in agreement. We display them in Table~\ref{table:mincerpsid}.
+\noindent We estimate the coefficients in \eqref{eq:mincer} using the sample of mothers in ABC/CARE. We pool the longitudinal information and estimate the coefficients using ordinary least squares. We use a standard Black-Welch measure of experience (age - education - 6) \citep{Smith_Welch_1979_IER}. For this estimation, we take mothers whose earnings are above $0$. For mothers living with a couple who report working, we consider $1/2$ of total parental income as $\ln Y_{a}$. To validate our estimates within ABC/CARE, we estimate the coefficients \eqref{eq:mincer} using a sub-sample of disadvantaged mothers in the PSID.\footnote{We define disadvantaged as follows: black, not married, labor income, education (at age 5 of child's participant), age and number of children (at age 5 of child's participant) in the same ranges as the ABC/CARE mothers, labor income below percentile 75.} The coefficients characterizing \eqref{eq:mincer} in ABC/CARE and PSID for different combinations of control sets are in agreement. We display them in Table~\ref{table:mincerpsid}.\\
 
 \begin{table}[H] 
 \begin{threeparttable}
 \caption{Mincer Equation Estimates for Mothers in ABC/CARE and the PSID}
 \label{table:mincerpsid}
 \centering 
+\footnotesize
 \input{output/abccarepsid_mincerests_ready.tex}
 \begin{tablenotes}
-\footnotesize}
+\footnotesize
 \item Note: This table presents estimates of \eqref{eq:mincer} for ABC/CARE mothers and a subsample of disadvantaged mothers in the PSID. We define disadvantaged as follows: black, not married, labor income, education (at age 5 of child's participant), age and number of children (at age 5 of child's participant) in the same ranges as the ABC/CARE mothers, labor income below percentile 75. Robust standard errors are in parentheses. $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 \noindent Based on the estimates in Table~\ref{table:mincerpsid}, we can ask two questions: (i) what is the predicted net-present value of parental income (treatment - control) using a prediction based in the estimate of \eqref{eq:mincer} and how does it differ from the method that linearly interpolates income from child's age 0 to 21?; and (ii) what would be the predicted net present value of parental income if we go beyond and predict all the way up to age 60 (assumed retirement for mothers)?
+
+\noindent The results in Table~\ref{table:psens} present display results that enable us to answer these two questions. Estimates based on \eqref{eq:mincer} allow for a precise estimate of the the predicted net-present value of parental income (treatment - control) when children are 21 years old. This is to be expected given that we estimate \eqref{eq:mincer} with data from the ABC/CARE individuals. When using these same estimates to predict parental labor income such that mother works for 40 years in their life times, we find that the method we use in the main paper underestimates the gain based on parental income by around $\$30,000$ (2014 USD). The estimates we provide in the main paper represents a lower bound on the gain the program had due to its child care components.
 
 \subsection{Cohort Effects}\label{app:cohorteffects}
 
