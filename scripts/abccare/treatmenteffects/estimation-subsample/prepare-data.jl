@@ -158,6 +158,10 @@ if has_sibs == 0
   abccare = abccare[abccare[:hh_sibs0y] .== 0, :]
 end
 
+if has_sibs == 2
+  abccare = abccare
+end
+
 # ------------------------------- #
 # Define ABC, CARE, ABC-CARE data #
 # ------------------------------- #
