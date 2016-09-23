@@ -18,7 +18,7 @@ import pandas as pd
 import numpy as np
 import pytabular as pytab
 from scipy.stats import percentileofscore
-from pathssib1 import paths 
+from pathssib10 import paths 
 
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
