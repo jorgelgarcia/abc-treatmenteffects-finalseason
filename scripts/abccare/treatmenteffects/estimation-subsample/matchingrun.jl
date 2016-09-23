@@ -30,7 +30,7 @@ include("$scripts/function/matching.jl")
 # ================================================================ #
 # declare bootstraps
 global bootstraps = 99
-global dbootstraps = 99
+global dbootstraps = 0
 
 # declare other options
 global linear_ipw = 1
