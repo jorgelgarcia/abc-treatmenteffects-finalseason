@@ -158,7 +158,7 @@ if has_sibs == 0
   abccare = abccare[abccare[:hh_sibs0y] .== 0, :]
 end
 
-if has_sibs == 2
+if has_sibs == 10
   abccare = abccare
 end
 
