@@ -280,7 +280,7 @@ for t in [1,2]:
     data_app.index = outcomes.loc[data_app.reset_index(level=1).index, ['label', 'age', 'category']].set_index(['label', 'age', 'category']).index
     
     # now make tables looping throuh sex and outcome categories
-    for sex in ['pooled', 'male', 'female']:
+    for sex in ['all']:
         for i, cat in enumerate(outcomes.category.drop_duplicates().tolist()):
             
             # select the columns of results that you want
