@@ -263,12 +263,12 @@ def format_sdpvalue(x):
         return '[{}]'.format(x)      
 
 
-    
+     
 #=========================================
 # Make Appendix Tables of results
 #=========================================
 
-header = [['Variable', 'Age', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)', '(7)', '(8)']]
+header = [['Variable', 'Age', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)']]
 for t in [1,2]:
     # prepare table for pytabular (t=1 regular p-values, t=2 stepdown)
     if t == 1:
@@ -280,13 +280,13 @@ for t in [1,2]:
     data_app.index = outcomes.loc[data_app.reset_index(level=1).index, ['label', 'age', 'category']].set_index(['label', 'age', 'category']).index
     
     # now make tables looping throuh sex and outcome categories
-    for sex in ['pooled', 'male', 'female']:
+    for sex in ['all']:
         for i, cat in enumerate(outcomes.category.drop_duplicates().tolist()):
             
             # select the columns of results that you want
-            rslt_columns = [(sex, 'pall', 'itt_noctrl'), (sex, 'pall', 'itt_wctrl'),
-                            (sex, 'p0', 'itt_noctrl'), (sex, 'p0', 'itt_wctrl'), (sex, 'p0', 'epan_ipw'),
-                            (sex, 'p1', 'itt_noctrl'), (sex, 'p1', 'itt_wctrl'), (sex, 'p1', 'epan_ipw')]
+            rslt_columns = [('pooled', 'pall', 'itt_noctrl'), ('pooled', 'pall', 'itt_wctrl'),
+                            ('male', 'pall', 'itt_noctrl'), ('male', 'pall', 'itt_wctrl'),
+                            ('female', 'pall', 'itt_noctrl'), ('female', 'pall', 'itt_wctrl'),]
     
             ix = outcomes.set_index(['label', 'age']).query('category=="{}"'.format(cat))
             ix = ix.set_index(['category'], append=True).drop(ix.set_index(['category'], append=True).index.difference(data_app.index)).index # TO ACCOUNT FOR CASES WHERE EFFECT COULD NTO BE ESTIMATED
