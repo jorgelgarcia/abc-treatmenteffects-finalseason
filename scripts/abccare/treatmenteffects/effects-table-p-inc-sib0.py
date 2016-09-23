@@ -127,10 +127,10 @@ for agg in [0,1]:
     
     # obtain p-values
     less = (null <= point_ext); less[point_ext.isnull()] = np.nan
-    less = less.mean(axis=0, level=['ddraw', 'variable'])
+    less = less.mean(axis=0, level=['draw', 'variable'])
     
     pval_tmp = (null >= point_ext); pval_tmp[point_ext.isnull()] = np.nan
-    pval_tmp = pval_tmp.mean(axis=0, level=['ddraw', 'variable'])
+    pval_tmp = pval_tmp.mean(axis=0, level=['draw', 'variable'])
     pval_tmp.loc[(slice(None), outcomes.query('hyp == "-"').index), :] = less.loc[(slice(None), outcomes.query('hyp == "-"').index), :]
     pval_tmp.sortlevel(axis=1, inplace = True)
     pval_tmp.sort_index(inplace=True)
@@ -141,7 +141,7 @@ for agg in [0,1]:
         point.sortlevel(axis=1, inplace=True)
         point.reset_index(level=[0,1], drop=True, inplace=True)
         pval = pval_tmp.loc[(0, slice(None))]
-        se = tmp_rslt.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True).std(level='variable') 
+        se = tmp_rslt.loc[(slice(None), 0, slice(None)),:].reset_index('draw', drop=True).std(level='variable') 
     
     # obtain the p-values to determine significance for the combining functino (hence, "_cf")    
     if agg == 1:
@@ -153,9 +153,9 @@ for agg in [0,1]:
 #=========================================
 
 # 1. Convert distribution of results to t-Statistics
-mean = rslt_y.groupby(level=['variable', 'ddraw']).transform(lambda x: x.mean())
+mean = rslt_y.groupby(level=['variable', 'draw']).transform(lambda x: x.mean())
 null = rslt_y - mean
-null = null.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True)/se
+null = null.loc[(slice(None), 0, slice(None)),:].reset_index('draw', drop=True)/se
 null.sort_index(inplace=True)
 null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] = null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] * -1
 
@@ -263,7 +263,7 @@ def format_sdpvalue(x):
         return '[{}]'.format(x)      
 
 
-    
+     
 #=========================================
 # Make Appendix Tables of results
 #=========================================
