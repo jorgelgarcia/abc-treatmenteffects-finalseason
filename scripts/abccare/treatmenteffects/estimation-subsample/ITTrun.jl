@@ -36,6 +36,7 @@ global linear_ipw = 1
 global bygender = 1
 global factors = 1
 global quietly = 1
+global has_sibs = 1
 
 # ================================================================ #
 # Implement options

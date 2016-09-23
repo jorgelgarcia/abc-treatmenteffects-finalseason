@@ -63,7 +63,7 @@ for gender in genderloop
 			ResultOutput["itt_$(gender)_P$(P_switch)"] = ITTfinal[:, colnames]
 			delete!(ITTfinal, colnames)
 		end
-		writetable("$(output)/itt/itt_$(gender)_P$(P_switch).csv", ResultOutput["itt_$(gender)_P$(P_switch)"])
+		writetable("$(output)/itt/itt_$(gender)_P$(P_switch)_sib$(has_sibs).csv", ResultOutput["itt_$(gender)_P$(P_switch)"])
 		n = n + 1
   end
 end

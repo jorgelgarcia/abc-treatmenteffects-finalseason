@@ -146,7 +146,17 @@ for dvar in discretized
   abccare[isna(abccare[dvar_p]), parse("$(dvar)_dum")] = NA # Replace values of dunny column if corresponding rwo in original column is NA
 end
 
+abccare = abccare[!((abccare[:RV] .== 1) & (abccare[:R] .== 0)), :]
+# ------------------------------------------- #
+# Refine the data to no sibling / yes sibling #
+# ------------------------------------------- #
+if has_sibs == 1
+  abccare = abccare[abccare[:hh_sibs0y] .!= 0, :]
+end
 
+if has_sibs == 0
+  abccare = abccare[abccare[:hh_sibs0y] .== 0, :]
+end
 
 # ------------------------------- #
 # Define ABC, CARE, ABC-CARE data #
