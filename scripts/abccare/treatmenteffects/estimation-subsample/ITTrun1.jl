@@ -65,7 +65,7 @@ d_index = 1
 
 ITTini = Dict()
 
-for data in ("abccare", "abc", "care")
+for data in ("abccare", "abc")
 	if data == "abccare"
 		datainuse = abccare_data
 		controlset = conDict["controls_abccare"]
@@ -106,7 +106,7 @@ function ITTrun(boots)
 
 	d_index = 1
 
-	for data in ("abccare", "abc", "care")
+	for data in ("abccare", "abc")
 		if data == "abccare"
 			datainuse = abccare_data
 			controlset = conDict["controls_abccare"]
