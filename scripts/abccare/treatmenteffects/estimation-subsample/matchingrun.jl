@@ -29,15 +29,15 @@ include("$scripts/function/matching.jl")
 # Declare options, controls, and outcomes of interest
 # ================================================================ #
 # declare bootstraps
-global bootstraps = 50
-global dbootstraps = 50
+global bootstraps = 99
+global dbootstraps = 99
 
 # declare other options
 global linear_ipw = 1
 global bygender = 1
 global factors = 1
 global quietly = 1
-global has_sibs = 10
+global has_sibs = 0
 
 # ================================================================ #
 # Implement options
