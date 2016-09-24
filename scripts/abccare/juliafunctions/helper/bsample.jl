@@ -65,5 +65,6 @@ function bsample(sampledata::AbstractDataFrame, strata, cluster)
     index1 = index1 + 1
   end
 
+  println("Bootstrap success!")
   return sampledata
 end
