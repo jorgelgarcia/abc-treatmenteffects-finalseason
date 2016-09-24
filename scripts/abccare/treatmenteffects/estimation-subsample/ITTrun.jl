@@ -29,7 +29,7 @@ include("$scripts/function/ITT.jl")
 # ================================================================ #
 # declare bootstraps
 global bootstraps = 99
-global dbootstraps = 50
+global dbootstraps = 99
 
 # declare other options
 global linear_ipw = 1
