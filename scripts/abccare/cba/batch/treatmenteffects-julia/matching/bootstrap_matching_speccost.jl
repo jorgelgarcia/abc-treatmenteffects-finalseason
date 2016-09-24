@@ -4,9 +4,6 @@
 # Created: 06/27/2016
 # Edited: 07/08/2016
 # =================================================================== #
-# Set seed
-srand(1)
-
 # Using packages
 using DataFrames
 using GLM
@@ -25,7 +22,7 @@ global breps = 99 		# remember to subtract 1, i.e. 50 becomes 49
 # global areps = 3 	# remember to subtract 1, i.e. 50 becomes 49
 global controls = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male, :abc]
 global ipwvars_all = [:m_iq0y, :m_ed0y, :m_age0y, :hrabc_index, :p_inc0y, :apgar1, :apgar5, :prem_birth, :m_married0y, :m_teen0y, :f_home0y, :hh_sibs0y, :cohort, :m_work0y]
-global component = "private_crime"
+global component = "speccost"
 global factors = 0
 global nomurder = 0
 global deaths = 1
@@ -83,7 +80,6 @@ end
 	# Define the function for the rest of the bootstrap #
 	# ================================================= #
 function matchingrun(boots)
-
 	Matchresult = Dict()
 	MatchDict = Dict()
 
