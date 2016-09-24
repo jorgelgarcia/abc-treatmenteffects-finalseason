@@ -46,8 +46,10 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
 
      if gender == "male"
        subdata["$(gender)"] = ITTdata[ITTdata[:male] .== 1, :]
+       controls = deleteat!(controls, findin(controls, [:male]))
      elseif gender == "female"
        subdata["$(gender)"] = ITTdata[ITTdata[:male] .== 0, :]
+       controls = deleteat!(controls, findin(controls, [:male]))
      elseif gender == "pooled"
        subdata["$(gender)"] = ITTdata
      end
@@ -74,14 +76,14 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
        # -------------------------------- #
        # Delete control with no variation #
        # -------------------------------- #
-       usecontrols = controls
+    #=   usecontrols = controls
 
        for var in controls
          level = size(levels(usedata[var]))[1]
          if level == 1
            usecontrols = deleteat!(usecontrols, findin(usecontrols, [var]))
          end
-       end
+       end =#
 
 
        outMat["ITT_$(gender)_P$(p)"] = DataFrame(rowname = [], draw = [], ddraw = [],
