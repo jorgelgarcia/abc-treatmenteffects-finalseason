@@ -55,7 +55,7 @@ scripts/analysis/abccare/variables_table/*.csv
 scripts/analysis/abccare/variables_table/*.xlsx
 scripts/analysis/abccare/variables_table/*.xls
 data/hrs/
-data/abc/
+data/abccare/
 data/meps/
 data/nlsy/
 data/psid/
