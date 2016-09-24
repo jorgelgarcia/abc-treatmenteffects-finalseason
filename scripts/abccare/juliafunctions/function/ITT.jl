@@ -137,7 +137,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
             # ------------------ #
             # ITT with contronls #
             # ------------------ #
-            ITT_controls_fml = Formula(y, Expr(:call, :+, :R, usecontrols...))
+            ITT_controls_fml = Formula(y, Expr(:call, :+, :R, controls...))
             try # try/catch structure handles exceptions
               lm(ITT_controls_fml, usedata)
             # If the regression fails
@@ -164,7 +164,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
 
             # Create the data to check the number of observations used in the regression (non-missing Y and X)
             control_list = [y, :R]
-            append!(control_list, usecontrols)
+            append!(control_list, controls)
             obsdata = usedata[:, control_list]
             for var in control_list
               obsdata = obsdata[!isna(obsdata[var]),:]
@@ -185,7 +185,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
               wtsdata = wtsdata[!isnan(wtsdata[y]), :]
               wtsdata = wtsdata[!isna(wtsdata[parse("ipw_$(y)")]), :]
 
-              ITT_weight_fml = Formula(y, Expr(:call, :+, :R, usecontrols...))
+              ITT_weight_fml = Formula(y, Expr(:call, :+, :R, controls...))
 
               try # try/catch structure handles exceptions
                 glm(ITT_weight_fml, wtsdata, Normal(), IdentityLink(), wts = wtsdata[parse("ipw_$(y)")].data)
@@ -227,7 +227,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
               ITT_weight_N = size(wtsdata, 1)
 
             else
-              ITT_weight_fml = Formula(y, Expr(:call, :+, :R, usecontrols...))
+              ITT_weight_fml = Formula(y, Expr(:call, :+, :R, controls...))
               try # try/catch structure handles exceptions
                 lm(ITT_weight_fml, usedata)
               # If the regression fails
@@ -254,7 +254,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
 
               # Create the data to check the number of observations used in the regression (non-missing X)
                 woweight_list = [y, :R]
-                append!(woweight_list, usecontrols)
+                append!(woweight_list, controls)
                 obsdata = usedata[:, woweight_list]
                 for var in woweight_list
                   obsdata = obsdata[!isna(obsdata[var]),:]
