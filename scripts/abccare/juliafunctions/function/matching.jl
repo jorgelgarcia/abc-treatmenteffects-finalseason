@@ -79,7 +79,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
           usedata = predata[(predata[:P] .== 0) | (predata[:R] .== 1), :]
         end
 
-        # -------------------------------- #
+        #=# -------------------------------- #
         # Delete control with no variation #
         # -------------------------------- #
         usecontrols = controls
@@ -89,7 +89,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
           if level == 1
             usecontrols = deleteat!(usecontrols, findin(usecontrols, [var]))
           end
-        end
+        end =#
 
 
         outMat["matching_$(gender)_P$(p)"] = DataFrame(rowname = [], draw = [], ddraw = [],
@@ -101,7 +101,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
         for y in outcome_list
 
           # Restrict the estimates to those who we can actually estimate effects
-          fml = Formula(y, Expr(:call, :+, :R, usecontrols...))
+          fml = Formula(y, Expr(:call, :+, :R, controls...))
           try
            #  lm(fml, usedata)
             lm(fml, usedata)
@@ -109,7 +109,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
             push!(outMat["matching_$(gender)_P$(p)"], [y, draw, ddraw, NA, NA])
             continue
           end
-          
+
           control_list = [:R]
           append!(control_list, controls)
 
