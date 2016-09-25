@@ -138,6 +138,3 @@ for dvar in discretized
   abccare[abccare[dvar_p] .> med_d, parse("$(dvar)_dum")] = 1 # Replace dummy column to one if d_var is greater than the median
   abccare[isna(abccare[dvar_p]), parse("$(dvar)_dum")] = NA # Replace values of dunny column if corresponding rwo in original column is NA
 end
-
-println("$(abccare)")
-dcksjnckscndjsnc
