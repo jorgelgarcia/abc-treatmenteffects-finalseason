@@ -62,7 +62,7 @@ def boot_predict_aux(extrap, adraw):
 
 	print 'Success auxiliary bootstrap {}.'.format(adraw)
 
-	output = [params_interp, params_extrap, errors, proj_interp, proj_extrap]
+	output = [params_extrap, errors, proj_extrap]
 
 	return output
 
@@ -72,7 +72,6 @@ def boot_predict_aux(extrap, adraw):
 rslt = Parallel(n_jobs=1)(
 	delayed(boot_predict_aux)(extrap, k) for k in xrange(aux_draw))
 
-params_interp = {}
 params_extrap = {}
 errors = {}
 projections = {}
@@ -83,10 +82,9 @@ projections = {}
 
 for sex in ['male', 'female', 'pooled']:
 
-	params_interp[sex] = pd.concat([rslt[k][0][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
- 	params_extrap[sex] = pd.concat([rslt[k][1][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
- 	errors[sex] = pd.concat([rslt[k][2][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
-   	projections[sex] = pd.concat([pd.concat([rslt[k][3][sex], rslt[k][4][sex]], axis=1) for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
+ 	params_extrap[sex] = pd.concat([rslt[k][0][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
+ 	errors[sex] = pd.concat([rslt[k][1][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
+   	projections[sex] = pd.concat([rslt[k][2][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
 
    	# output projections .csv
-   	projections[sex].to_csv(os.path.join(paths.rslts, 'labor_proj_{}.csv'.format(sex)))
+   	projections[sex].to_csv(os.path.join(paths.rslts, 'parental_labor_proj_{}.csv'.format(sex)))

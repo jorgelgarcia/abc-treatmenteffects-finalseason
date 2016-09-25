@@ -36,7 +36,7 @@ psid = psid.dropna(subset=['id']).set_index('id')
 inc = psid.filter(regex='^inc_labor[0-9][0-9]')
 psid = psid.loc[psid.male == 0]
 psid = psid.loc[psid.black == 1]
-psid = psid.loc[((inc < 300000) | (inc.isnull())).all(axis=1)]
+psid = psid.loc[((inc < inc.quantile(0.90)) | (inc.isnull())).all(axis=1)]
 
 # Interpolating
 plong = pd.wide_to_long(psid[inc.columns].reset_index(), 
@@ -51,6 +51,8 @@ psid[pwide.columns] = pwide
 psid = psid.loc[:, cols.extrap.keep]
 #.dropna(subset=cols.extrap.keep, axis=0)
 #
+psid.loc[:,'inc_labor_mean'] = psid.loc[:, cols.extrap.outcomes].mean(axis=1)
+
 # + inc.columns.tolist()
 psid = psid.reset_index()
 psid['id'] = psid['id'].astype(int)
@@ -67,12 +69,12 @@ nlsy = nlsy.dropna(subset=['id']).set_index('id')
 inc = nlsy.filter(regex='^inc_labor[0-9][0-9]')
 nlsy = nlsy.loc[nlsy.male == 0]
 nlsy = nlsy.loc[nlsy.black == 1]
-nlsy = nlsy.loc[((inc < 300000) | (inc.isnull())).all(axis=1)]
+nlsy = nlsy.loc[((inc < inc.quantile(0.90)) | (inc.isnull())).all(axis=1)]
 
 # Interpolating
 nlong = pd.wide_to_long(nlsy[inc.columns].reset_index(), 
     ['inc_labor'], i='id', j='age').sort_index()
-nlong = nlong.interpolate(limit=1)
+nlong = nlong.interpolate(limit=5)
 nwide = nlong.unstack()
 nwide.columns = nwide.columns.droplevel(0)
 nwide.columns = ['{}{}'.format('inc_labor', a) for a in nwide.columns]
@@ -82,13 +84,16 @@ nlsy[nwide.columns] = nwide
 nlsy = nlsy.loc[:, cols.extrap.keep]
 # + inc.columns.tolist()
 #subset=cols.extrap.keep, axis=0
+
+nlsy.loc[:,'inc_labor_mean'] = nlsy.loc[:, cols.extrap.outcomes].mean(axis=1)
+
 nlsy = nlsy.reset_index()
 nlsy['id'] = nlsy['id'].astype(int)
 nlsy = nlsy.set_index('id', drop=True)
 
 
 extrap = pd.concat([psid, nlsy], axis=0, keys=('psid', 'nlsy'), names=('dataset', 'id'))
-
+print extrap.shape
 #--------------------------------------------------------------------
 
 print "Loading ABC"
@@ -98,7 +103,7 @@ abcd.id.fillna(9999, inplace = True)
 abcd = abcd.set_index('id')
 abcd.drop(abcd.loc[(abcd.RV==1) & (abcd.R==0)].index, inplace=True)
 
-abcd = abcd.loc[:,unique_list(['R'] + cols.interpABC.predictors + cols.extrap.predictors)]
+abcd = abcd.loc[:,unique_list(['R'] + cols.interpABC.keep)]
 
 print "Storing Datasets in HDF5 Format"
 

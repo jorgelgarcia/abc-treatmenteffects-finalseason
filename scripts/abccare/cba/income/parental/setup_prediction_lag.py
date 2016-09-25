@@ -19,7 +19,6 @@ from math import isnan, sqrt
 from copy import deepcopy
 from pandas.io.stata import StataReader
 
-sys.path.extend([os.path.join(os.path.dirname(__file__), '..')])
 from paths import paths
 from load_data import abcd
 from variables import cols
@@ -39,7 +38,7 @@ female_extrap_nix = abcd.loc[abcd.male_subject==0].loc[pd.isnull(abcd.loc[abcd.m
 def predict_abc(extrap, extrap_index, abc, verbose=True):
 
 	# set up age range
-	ages = range(13, 65)
+	ages = range(21, 65)
 
 	# set up dictionaries to store output
 	params_extrap = {}
@@ -47,19 +46,18 @@ def predict_abc(extrap, extrap_index, abc, verbose=True):
 
 	# set up matrices for interpolation/extrapolation parameters, and errors
 	for sex in ['pooled', 'male', 'female']:
-		params_extrap[sex] = pd.DataFrame([[np.nan for j in range(len(cols.extrap.predictors) + 3)] for k in range(13,65)], index = range(13,65))
+		params_extrap[sex] = pd.DataFrame([[np.nan for j in range(len(cols.extrap.predictors) + 3)] for k in range(21,65)], index = range(21,65))
 		params_extrap[sex].index.names = ['age']
 		params_extrap[sex].columns = ['Intercept'] + cols.extrap.predictors + ['y'] + ['rmse']
 		error_mat[sex] = pd.DataFrame([])
 
 	# obtain parameters for every age
 	for age in ages:
-	# might be a problem here with 13
 		age_x = age - 1
 		predictors = cols.extrap.predictors + ['inc_labor{}'.format(age_x)]
 				
 		aux = deepcopy(extrap.loc[extrap_index, :])
-
+		
 		c = 'inc_labor{}'.format(age)
 
 	# obtain parameters for different sexes
@@ -69,20 +67,18 @@ def predict_abc(extrap, extrap_index, abc, verbose=True):
 				data = aux
 				abcd = abc
 				abcd_count = abcd.shape[0]
-
 			elif sex == 'male':
-				data = aux.loc[aux.male_subject==1]
+				data = aux
 				abcd = abc.loc[abc.male_subject==1]
 				abcd_count = abcd.loc[abcd['male_subject']==1]['male_subject'].count()
 			else:
-				data = aux.loc[aux.male_subject==0]
+				data = aux
 				abcd = abc.loc[abc.male_subject==0]
 				abcd_count = abcd.loc[abcd['male_subject']==0]['male_subject'].count()
 
 			# reset auxiliary index because sm.OLS drops some rows
 			data.reset_index('id', drop=True, inplace=True)
 			data.index = [j for j in range(data.shape[0])]
-
 			# create design matrix for regressions
 			fmla = '{} ~ {}'.format(c, ' + '.join(predictors))
 			endog, exog = dmatrices(fmla, data, return_type='dataframe')
@@ -106,7 +102,6 @@ def predict_abc(extrap, extrap_index, abc, verbose=True):
    			rmse =  pd.Series(sqrt(rmse.mean(axis=0)), index=['rmse'])
    			params = pd.concat([params, rmse],axis=0)
 			params.rename({'inc_labor{}'.format(age_x):'y'}, inplace=True)
-			
 			params_extrap[sex].loc[age, :] = params
    			# resample the errors, and merge in with ABC IDs
 			if fail_switch == 0:
@@ -119,8 +114,7 @@ def predict_abc(extrap, extrap_index, abc, verbose=True):
    			ehat.columns.name = 'age'
    			ehat.set_index('id', inplace=True)
    			error_mat[sex] = pd.concat([error_mat[sex], ehat], axis=1)
-
-
+			
 		if verbose:
 			print 'Successful predictions, age {}, n={}'.format(age, exog.shape[0])
 
@@ -128,7 +122,6 @@ def predict_abc(extrap, extrap_index, abc, verbose=True):
 	treat = abc.loc[:,'R']
 	for sex in ['pooled', 'male', 'female']:
 		error_mat[sex] = pd.concat([error_mat[sex], treat], axis=1, join='inner')
-		params_interp[sex].columns.name = 'variable'
 		params_extrap[sex].columns.name = 'variable'
 
 	# extrap (we only check age 31 since predicatablity of each year are based on the same set of outcomes)
@@ -152,19 +145,26 @@ def predict_abc(extrap, extrap_index, abc, verbose=True):
 		else:
 			abcd = abc.loc[abc.male_subject==0]
 
-   		abcd_extrap = abcd.loc[:, ['Intercept'] + cols.extrapABC.predictors + ['y']]
+   		abcd_extrap = abcd.loc[:, ['Intercept'] + cols.extrap.predictors + ['y']]
 		
 		projection_extrap[sex] = pd.DataFrame([])
 
-		for age in ages:
-			if age == 13:
-				params_extrap[sex].loc[13]['y'] = 0 
-				abcd_extrap['y'] = interp_dot	
-				abcd_extrap['y'].fillna(value=0, inplace=True) 
-			params_extrap_trans = pd.DataFrame(params_extrap[sex].loc[age].drop('rmse').T)
-			extrap_dot = abcd_extrap.dot(params_extrap_trans) + error_mat[sex][[age]]
-			abcd_extrap['y'] = extrap_dot
-			projection_extrap[sex] = pd.concat([projection_extrap[sex], extrap_dot], axis=1)
+		for idx in abcd.iterrows():
+			age_extrap = pd.DataFrame([np.nan for k in range(21,65)], index = range(21,65))
+			age_extrap.index.names = ['age']
+			tmp_age = idx[1].loc['last_age']
+
+			if tmp_age < 21:
+				tmp_age = 21
+			for age in range(tmp_age, 65):
+				params_extrap_trans = pd.DataFrame(params_extrap[sex].loc[age].drop('rmse').T)
+				extrap_dot = abcd_extrap.loc[idx[0],:].dot(params_extrap_trans) + error_mat[sex][[age]].loc[idx[0],:]
+
+				abcd_extrap.loc[idx[0],'y'] = extrap_dot.iloc[0]
+				age_extrap[age] = extrap_dot.iloc[0]
+
+			projection_extrap[sex] = pd.concat([projection_extrap[sex], age_extrap], axis=1)
+			print projection_extrap[sex]
 
 	return params_extrap, error_mat, projection_extrap
 
