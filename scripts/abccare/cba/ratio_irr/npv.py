@@ -81,7 +81,7 @@ for part in components:
  	#se = pd.DataFrame(npv.std(level='sex'))
         #se.columns = ['value']
 
-        se = pd.DataFrame([np.std(npvf)/sqrt(N['f'][etype]), np.std(npvm)/sqrt(N['m'][etype]), np.std(npvp)/sqrt(N['p'][etype])], index = ['f', 'm', 'p'], columns=['value'])
+        se = pd.DataFrame([npvf.std(), npvm.std(),npvp.std()], index = ['f', 'm', 'p'], columns=['value'])
  	se['part']=part
  	se['type']='se'
  	se.set_index(['part', 'type'], append=True, inplace=True)

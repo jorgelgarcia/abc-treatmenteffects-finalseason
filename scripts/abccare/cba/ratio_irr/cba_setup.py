@@ -24,6 +24,9 @@ from cba_N import N
 6: P=1, "ITT" no controls
 7: P=1, "ITT" with controls  and weights
 8: P=1, matching
+9: ITT, with controls
+10: P=0, with controls
+11: P=1, with controls
 '''
 #----------------------------------------
 
@@ -77,6 +80,9 @@ def makeflows(etype):
     edict[6] = os.path.join(filedir, 'flows', 'p1_noctrl')
     edict[7] = os.path.join(filedir, 'flows', 'p1_ctrl')
     edict[8] = os.path.join(filedir, 'flows', 'p1_match')
+    edict[9] = os.path.join(filedir, 'flows', 'ncc_ctrl')
+    edict[10] = os.path.join(filedir, 'flows', 'p0_ctrl')
+    edict[11] = os.path.join(filedir, 'flows', 'p1_ctrl')
     flowscsv = edict[etype]
      
     # DI claim file
@@ -258,7 +264,7 @@ def bc_calc(filled, etype, components=flows.keys(), rate=0.03):
     ratio_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])
     ratio_mean = pd.DataFrame([ratiof.mean(), ratiom.mean(), ratiop.mean()], index = ['f', 'm', 'p'])    
     ratio_p = pd.DataFrame([ratio_fp, ratio_mp, ratio_pp], index = ['f', 'm', 'p'])    
-    ratio_se = pd.DataFrame([np.std(ratiof)/sqrt(N['f'][etype]),np.std(ratiom)/sqrt(N['m'][etype]), np.std(ratiop)/sqrt(N['p'][etype])], index=['f','m','p'])
+    ratio_se = pd.DataFrame([ratiof.std(),ratiom.std(), ratiop.std()], index=['f','m','p'])
 
     try:
         #ratio_quant = ratio.groupby(level='sex').quantile([0.1, 0.9]).unstack()
@@ -311,7 +317,7 @@ def irr_calc(filled, etype, components=flows.keys()):
     irr_pnt = pd.DataFrame([point_f, point_m, point_p], index=['f','m','p'])    
     irr_mean = pd.DataFrame([irrf.mean(), irrm.mean(), irrp.mean()], index = ['f', 'm', 'p'])   
     irr_p = pd.DataFrame([irr_fp, irr_mp, irr_pp], index = ['f', 'm', 'p'])
-    irr_se = pd.DataFrame([np.std(irrf)/sqrt(N['f'][etype]),np.std(irrm)/sqrt(N['m'][etype]), np.std(irrp)/sqrt(N['p'][etype])], index=['f','m','p'])    
+    irr_se = pd.DataFrame([irrf.std(),irrm.std(), irrp.std()], index=['f','m','p'])    
 
     try:
         #irr_quant = irr.groupby(level='sex').quantile([0.1, 0.9]).unstack()
