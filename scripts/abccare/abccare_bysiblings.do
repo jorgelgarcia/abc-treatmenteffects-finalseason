@@ -67,8 +67,8 @@ foreach group in all_sibling no_sibling yes_sibling {
 		foreach num of numlist 1(1)14 {
 			summ itt_noctrl if draw == 0 & ddraw == 0 & varind == `num'
 			local est = r(mean)
-			summ    itt_noctrl                                     if varind == `num'
-			gen     itt_noctrl_mean`num' = r(mean)                 if varind == `num'
+			summ    itt_noctrl                                 if varind == `num'
+			gen     itt_noctrl_mean`num' = r(mean)             if varind == `num'
 			replace itt_noctrl = itt_noctrl - itt_noctrl_mean`num' if varind == `num'
 			
 			gen     itt_noctrl_ind`num' = 1 if varind == `num'
@@ -92,7 +92,7 @@ foreach group in all_sibling no_sibling yes_sibling {
 
 
 cd $output
-foreach sex in female male pooled {
+foreach sex in  pooled {
 	matrix allest`sex'          = [no_sibling_`sex' \ yes_sibling_`sex' \ all_sibling_`sex']
 	matrix colnames allest`sex' = itt ittp varind sexnum
  	clear
@@ -101,6 +101,7 @@ foreach sex in female male pooled {
 	replace varind = varind + .25 if sexnum == 2
 	replace varind = varind + .5  if sexnum == 3
 	replace itt = itt/1000
+	
 	
 	/*
 	#delimit
@@ -119,7 +120,8 @@ foreach sex in female male pooled {
 	#delimit cr 
 	graph export abccare_pincombyage`sex'.eps, replace
 	*/
-
+	
+	
 	keep if varind >= 14
 	#delimit
 	twoway (bar itt varind if sexnum == 1 & varind <= 14.25, color(gs8) barwidth(.22))
@@ -134,4 +136,5 @@ foreach sex in female male pooled {
 			  graphregion(color(white)) plotregion(fcolor(white));
 	#delimit cr
 	graph export abccare_pincomesum_s`sex'.eps, replace
+	
 }
