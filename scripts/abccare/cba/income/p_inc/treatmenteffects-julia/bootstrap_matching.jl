@@ -20,8 +20,8 @@ global atecode = "$current/../../../../juliafunctions"
 
 # set up number of bootstraps and controls
 global itt = 0			# matching estimator is the default
-global breps = 99 		# remember to subtract 1, i.e. 50 becomes 49
-global areps = 99 	# remember to subtract 1, i.e. 50 becomes 49
+global breps = 98 		# remember to subtract 1, i.e. 50 becomes 49
+global areps = 98 	# remember to subtract 1, i.e. 50 becomes 49
 global controls = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male, :abc]
 global ipwvars_all = [:m_iq0y, :m_ed0y, :m_age0y, :hrabc_index, :p_inc0y, :apgar1, :apgar5, :prem_birth, :m_married0y, :m_teen0y, :f_home0y, :hh_sibs0y, :cohort, :m_work0y, :has_relatives]
 global factors = 0
@@ -44,7 +44,7 @@ include("$current/data.jl")
 # Implement options
 # ================================================================ #
 # Define the gender loop
-global genderloop = ["male", "female", "pooled"]
+global genderloop = ["pooled", "male", "female"]
 
 MatchInitial = Dict()
 bsid_orig = Dict()
@@ -59,6 +59,7 @@ for gender in genderloop
 	elseif gender == "female"
 		datainuse["$(gender)"] = abccare[abccare[:male] .== 0, :]
 		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :abc]
+		datainuse["$(gender)"][:male] = 1 # bsample does not work for [:male] == 0
 	elseif gender == "pooled"
 		datainuse["$(gender)"] = abccare
 		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male, :abc]
@@ -82,6 +83,7 @@ for gender in genderloop
 	# Define the result matrix for the first bootstrap (brep = 0)
 	for arep in 0:areps
 		datainuse_tmpz = datainuse["$(gender)"]
+	  datainuse_tmpz = datainuse_tmpz[!isna(datainuse_tmpz[:adraw]), :]
 		datainuse_arepz = datainuse_tmpz[datainuse_tmpz[:adraw] .== arep, :]
 		if arep == 0
 		  MatchInitial["$(gender)"] = mestimate(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
@@ -114,6 +116,7 @@ function matchingrun(boots)
 
 		# Keep the IDs of the original sample to perform ABC boostraps
 		bsid_orig_tmp = datainuse["$(gender)"]
+		bsid_orig_tmp = bsid_orig_tmp[!isna(bsid_orig_tmp[:adraw]), :]
 		bsid_orig_tmp = bsid_orig_tmp[bsid_orig_tmp[:adraw] .== 0, [:id, :male, :family]]
 
 	  #  bootstrap estimates
@@ -124,6 +127,7 @@ function matchingrun(boots)
 
 	    for arep in 0:areps
 				datainuse_tmp = datainuse["$(gender)"]
+				datainuse_tmp = datainuse_tmp[!isna(datainuse_tmp[:adraw]), :]
 				datainuse_tmp = datainuse_tmp[datainuse_tmp[:adraw] .== arep, :]
 				datainuse_act = join(datainuse_tmp, bsid_draw, on = [:id, :male, :family], kind = :inner)
 
