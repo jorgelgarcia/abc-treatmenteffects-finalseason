@@ -38,7 +38,7 @@ female_extrap_nix = abcd.loc[abcd.male_subject==0].loc[pd.isnull(abcd.loc[abcd.m
 def predict_abc(extrap, extrap_index, abc, verbose=True):
 
 	# set up age range
-	ages = range(21, 65)
+	ages = range(21, 68)
 
 	# set up dictionaries to store output
 	params_extrap = {}
@@ -150,21 +150,22 @@ def predict_abc(extrap, extrap_index, abc, verbose=True):
 		projection_extrap[sex] = pd.DataFrame([])
 
 		for idx in abcd.iterrows():
-			age_extrap = pd.DataFrame([np.nan for k in range(21,65)], index = range(21,65))
+			age_extrap = pd.DataFrame([np.nan for k in range(21,69)], index = [range(21,69)])
 			age_extrap.index.names = ['age']
 			tmp_age = idx[1].loc['last_age']
+			abcd_extrap.loc[idx[0], 'y'] = idx[1].loc['inc_labor_last']
 
-			if tmp_age < 21:
-				tmp_age = 21
-			for age in range(tmp_age, 65):
-				params_extrap_trans = pd.DataFrame(params_extrap[sex].loc[age].drop('rmse').T)
-				extrap_dot = abcd_extrap.loc[idx[0],:].dot(params_extrap_trans) + error_mat[sex][[age]].loc[idx[0],:]
+			if tmp_age > 20:
+				for age in range(tmp_age, 68):
+					params_extrap_trans = pd.DataFrame(params_extrap[sex].loc[age].drop('rmse').T)
+					extrap_dot = abcd_extrap.loc[idx[0],:].dot(params_extrap_trans) + error_mat[sex][[age]].loc[idx[0],:]
+					abcd_extrap.loc[idx[0],'y'] = extrap_dot.iloc[0]
+					age_extrap.loc[age] = extrap_dot.iloc[0]
+				
+				age_extrap.loc[69] = idx[0]
 
-				abcd_extrap.loc[idx[0],'y'] = extrap_dot.iloc[0]
-				age_extrap[age] = extrap_dot.iloc[0]
-
-			projection_extrap[sex] = pd.concat([projection_extrap[sex], age_extrap], axis=1)
-			print projection_extrap[sex]
+				projection_extrap[sex] = pd.concat([projection_extrap[sex], age_extrap.T], axis=0)
+		projection_extrap[sex].set_index(projection_extrap[sex].loc[:,69], inplace=True, drop=True)		
 
 	return params_extrap, error_mat, projection_extrap
 
