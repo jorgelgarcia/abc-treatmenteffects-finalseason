@@ -118,7 +118,7 @@ for agg in [0,1]:
     draw_max = int(tmp_rslt.index.get_level_values(0).unique().max())
     point_ext = pd.concat([tmp_rslt.loc[(0, slice(None), slice(None)), :] for j in range(draw_max + 1)], axis=0, keys=[k for k in range(draw_max + 1)], names=['newdraw'])
     point_ext.reset_index('draw', drop=True, inplace=True)
-    point_ext.index.names = ['draw', 'ddraw','variable']
+    point_ext.index.names = ['draw', 'ddraw', 'variable']
     point_ext = point_ext.loc[null.index,:]
     
     # two-sided test for each individual effect

@@ -79,6 +79,19 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
           usedata = predata[(predata[:P] .== 0) | (predata[:R] .== 1), :]
         end
 
+        #=# -------------------------------- #
+        # Delete control with no variation #
+        # -------------------------------- #
+        usecontrols = controls
+
+        for var in controls
+          level = size(levels(usedata[var]))[1]
+          if level == 1
+            usecontrols = deleteat!(usecontrols, findin(usecontrols, [var]))
+          end
+        end =#
+
+
         outMat["matching_$(gender)_P$(p)"] = DataFrame(rowname = [], draw = [], ddraw = [],
                               epan_ipw = [], epan_N = [])
 
@@ -96,8 +109,10 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
             push!(outMat["matching_$(gender)_P$(p)"], [y, draw, ddraw, NA, NA])
             continue
           end
+
           control_list = [:R]
           append!(control_list, controls)
+
           obsdata = usedata
           for var in control_list
             obsdata = obsdata[!isna(obsdata[var]),:]

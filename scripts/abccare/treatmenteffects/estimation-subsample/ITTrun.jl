@@ -28,15 +28,15 @@ include("$scripts/function/ITT.jl")
 # Declare options, controls, and outcomes of interest
 # ================================================================ #
 # declare bootstraps
-global bootstraps = 50
-global dbootstraps = 50
+global bootstraps = 99
+global dbootstraps = 99
 
 # declare other options
 global linear_ipw = 1
 global bygender = 1
 global factors = 1
 global quietly = 1
-global has_sibs = 10
+global has_sibs = 0
 
 # ================================================================ #
 # Implement options
@@ -65,7 +65,7 @@ d_index = 1
 
 ITTini = Dict()
 
-for data in ("abccare", "abc", "care")
+for data in ("abccare", "abc")
 	if data == "abccare"
 		datainuse = abccare_data
 		controlset = conDict["controls_abccare"]
@@ -106,7 +106,7 @@ function ITTrun(boots)
 
 	d_index = 1
 
-	for data in ("abccare", "abc", "care")
+	for data in ("abccare", "abc")
 		if data == "abccare"
 			datainuse = abccare_data
 			controlset = conDict["controls_abccare"]
