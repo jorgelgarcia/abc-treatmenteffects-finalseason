@@ -67,7 +67,6 @@ for gender in genderloop
 
 	# Drop "_$(gender)" from column names
 	colnames = names(datainuse["$(gender)"])
-	println("printing datainuse for $(gender): $(datainuse["$(gender)"])")
 	for col in colnames
 		strver = "$(col)"
 		if contains(strver, "_$(gender)")
