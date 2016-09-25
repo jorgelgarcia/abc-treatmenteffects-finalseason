@@ -126,7 +126,7 @@ sort(abccare, cols = [:adraw, :id])
 abccare = abccare[!(abccare[:id] .== 64), :]
 
 # Drop if male == NA
-abccare = abcccare[!isna(abccare[:male]), :]
+abccare = abccare[!isna(abccare[:male]), :]
 
 # Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise)
 global discretized = ["m_iq0y", "m_ed0y", "m_age0y", "hrabc_index", "apgar1", "apgar5", "hh_sibs0y"]
