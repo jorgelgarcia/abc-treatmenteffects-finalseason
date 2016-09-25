@@ -28,7 +28,7 @@ global dataabccare = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extension
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 cd $datafam
-use health_projections_ipolated_0731.dta, clear
+use health_projections_ipolated_0915.dta, clear
 // aorder 
 // save, replace
 
@@ -58,7 +58,7 @@ collapse (mean) md prvmd pubmd qaly (semean) seqaly=qaly semd=md seprvmd=prvmd s
 
 cd $output
 keep if age >=30 & age <=65
-foreach sex of numlist 0 1 {
+foreach sex of numlist 0 {
 	foreach var of varlist qaly {
 		gen `var'min = `var' - se`var'
 		gen `var'max = `var' + se`var'

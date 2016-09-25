@@ -11,6 +11,7 @@ function bsample(sampledata::AbstractDataFrame, strata, cluster)
   # ----------- #
   # Define the list of values for strata
   strata_level = levels(sampledata[parse("$(strata)")])
+  println("strata_level is $(strata_level)")
 
   # Define a dictionary in order to loop over variable names
   resampledict = Dict()
@@ -64,5 +65,6 @@ function bsample(sampledata::AbstractDataFrame, strata, cluster)
     index1 = index1 + 1
   end
 
+  println("Bootstrap success!")
   return sampledata
 end

@@ -46,13 +46,14 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
 
      if gender == "male"
        subdata["$(gender)"] = ITTdata[ITTdata[:male] .== 1, :]
-       controls = deleteat!(controls, findin(controls, [:male]))    # Julia does not automatically drop male
+       controls = deleteat!(controls, findin(controls, [:male]))
      elseif gender == "female"
        subdata["$(gender)"] = ITTdata[ITTdata[:male] .== 0, :]
        controls = deleteat!(controls, findin(controls, [:male]))
      elseif gender == "pooled"
        subdata["$(gender)"] = ITTdata
      end
+
      gender = parse(gender)
 
 
@@ -70,6 +71,20 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
        else
          usedata = subdata["$(gender)"]
        end
+
+
+       # -------------------------------- #
+       # Delete control with no variation #
+       # -------------------------------- #
+    #=   usecontrols = controls
+
+       for var in controls
+         level = size(levels(usedata[var]))[1]
+         if level == 1
+           usecontrols = deleteat!(usecontrols, findin(usecontrols, [var]))
+         end
+       end =#
+
 
        outMat["ITT_$(gender)_P$(p)"] = DataFrame(rowname = [], draw = [], ddraw = [],
                               itt_noctrl = [], itt_noctrl_p = [], itt_noctrl_N = [],
@@ -132,7 +147,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
             end
             ITT_control = lm(ITT_controls_fml, usedata)
             ITT_control_coeff = coef(ITT_control)[2]
-            ITT_control_stderr = stderr(ITT_control)[2]
+           ITT_control_stderr = stderr(ITT_control)[2]
 
             # Check if Julia is able to calculate the p-value.
             pval_check = 1
@@ -183,7 +198,19 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
 
               ITT_weight = glm(ITT_weight_fml, wtsdata, Normal(), IdentityLink(), wts = wtsdata[parse("ipw_$(y)")].data)
               ITT_weight_coeff = coef(ITT_weight)[2]
-              ITT_weight_stderr = stderr(ITT_weight)[2]
+
+              stderr_check = 1
+              try
+                ITT_weight_stderr = stderr(ITT_weight)[2]
+              catch error
+                stderr_check = 0
+                ITT_weight_stderr = NA
+              end
+
+              if stderr_check == 1
+                ITT_weight_stderr = stderr(ITT_weight)[2]
+              end
+
               pval_check = 1
               try
                 ccdf(FDist(1, df_residual(ITT_weight)), abs2(ITT_weight_coeff./ITT_weight_stderr))
@@ -212,6 +239,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
               ITT_weight = lm(ITT_weight_fml, usedata)
               ITT_weight_coeff = coef(ITT_weight)[2]
               ITT_weight_stderr = stderr(ITT_weight)[2]
+
               pval_check = 1
               try
                 ccdf(FDist(1, df_residual(ITT_weight)), abs2(ITT_weight_coeff./ITT_weight_stderr))
@@ -223,6 +251,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
               if pval_check == 1
                 ITT_weight_pval = ccdf(FDist(1, df_residual(ITT_weight)), abs2(ITT_weight_coeff./ITT_weight_stderr))
               end
+
               # Create the data to check the number of observations used in the regression (non-missing X)
                 woweight_list = [y, :R]
                 append!(woweight_list, controls)

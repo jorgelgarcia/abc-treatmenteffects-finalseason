@@ -168,7 +168,7 @@ foreach source in labor /*transfer*/ {
 				`xaxis'
 				`yaxis'
 				`legend';
-		graph export "`source'_25-65_`file_specs'_`name`sex''.eps", replace;
+		graph export "`source'_25-65_`file_specs'_`name`sex''_sensitivity.eps", replace;
 		# delimit cr
 		
 	restore

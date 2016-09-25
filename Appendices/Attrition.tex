@@ -49,7 +49,7 @@ and
 
 \subsection{Variables to Construct IPW}
 
-\noindent We follow the procedure in Section~\ref{appendix:bvariables} to choose the variables with which we construct the weights. Tables~\ref{table:attpooled}-\ref{table:attfemales} list the variables in which we account fro attrition, together with the variables we use to construct the IPW scheme. We provide different lists for estimates pooling females and males and estimates by gender. Section~\ref{appendix:methodology} explains the cases in which we account for attrition.
+\noindent We follow the procedure in Section~\ref{appendix:bvariables} to choose the variables with which we construct the weights. Tables~\ref{table:attpooled} lists the variables in which we account fro attrition, together with the variables we use to construct the IPW scheme. We jointly estimate these weights for males and females. Section~\ref{appendix:methodology} explains and justifies the cases in which we account for attrition.
 
 \newgeometry{top=.1in, bottom=.1in, left=.1in, right=.1in}
 \begin{sidewaystable}[H]
@@ -65,30 +65,5 @@ and
 \end{threeparttable}
 \end{sidewaystable}
 
-\begin{sidewaystable}[H]
-\begin{threeparttable}
-\caption{Variables Used to Create IPW Scheme, Estimates for Females}
-\label{table:attfemales}
-\centering
-\input{AppOutput/Methodology/model_select_female.tex}
-\begin{tablenotes}
-\footnotesize
-\item Note: This table provides a list of the variables we use to construct the IPW scheme to account for attrition when calculating treatment effects for females. The procedure to select these variables is described in Appendix~\ref{appendix:bvariables}.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
-
-\begin{sidewaystable}[H]
-\begin{threeparttable}
-\caption{Variables Used to Create IPW Scheme, Estimates for Males}
-\label{table:attfemales}
-\centering
-\input{AppOutput/Methodology/model_select_male.tex}
-\begin{tablenotes}
-\footnotesize
-\item Note: This table provides a list of the variables we use to construct the IPW scheme to account for attrition when calculating treatment effects for males.  The procedure to select these variables is described in Appendix~\ref{appendix:bvariables}.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
 \restoregeometry
 \doublespacing 

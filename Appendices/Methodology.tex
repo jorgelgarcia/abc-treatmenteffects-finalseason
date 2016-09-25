@@ -30,7 +30,9 @@ treatment effects.
 
 \noindent For partially complete outcomes, we correct for attrition using an inverse probability scheme (IPW) as in  \citet{Horvitz_Thompson_1952_JASA}. To estimate the propensity to respond, we estimate a logit model of observing the outcome,
 controlling for treatment status and three additional covariates. The additional covariates are
-chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariables}. See Appendix~\ref{appendix:attrition} for a derivation of the (IPW) scheme and for a list of the variables we use to construct it for each partially complete variables. We account for the sampling variation implied in the estimation by the (IPW) scheme when producing our bootstrap-based inference. \textbf{[JJH: Do we conduct sensitivity analysis?] [JLG: I'm adding this later today. I will produce an analogous exercise to the sensitivity analysis to different control sets.]}
+chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariables}. See Appendix~\ref{appendix:attrition} for a derivation of the (IPW) scheme and for a list of the variables we use to construct it for each partially complete variables. Whenever we use IPW, we account for the sampling variation implied in the estimation by the scheme when producing our bootstrap-based inference.\\
+
+\noindent In each of the estimates we present in this paper, we allow the reader to assess the sensibility that the estimates have to accounting for IPW. In Table~\ref{table:tescombined}, where we present our main estimates, we present estimates for the first counterfactual of our interest (``Treatment vs. Next Best'') without accounting for IPW in column (1). In column (2), we present estimates accounting for IPW. The rest of the columns display similar exercises for the other counterfactuals we consider. For the rest of the outcomes that do not appear in Table~\ref{table:tescombined}, we present this same information in Appendix~\ref{appendix:results}.\footnote{We only account for IPW for the list of variables listed here, or any calculation involving them.}
 
 \subsection{Incomplete Data}
 \label{app:method_noobs}
@@ -43,7 +45,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \subsubsection{Parental Income}
 
-\noindent Ideally, we would use the same methodology in Section~\ref{section:cbamethodology} to identify and estimate the whole life-cycle profile of parental income (to allow for wage growth given gains in education and work experience). In practice, datasets allowing us to observe the parents of children with the characteristics in the ABC/CARE sample is not feasible. It is also unfeasible to use the methodology in an identical way for parents as we use it for children because we are much more limited with respect to observed characteristics. We use parental income at ages 1.5, 2.5,3.5, 4.5, 8, 12, 15, 21 to form an interpolated profile from ages 2 to 21. If anything this method underestimates the gain from ABC/CARE due to parental income. \textbf{[JJH: Why can't we use just fitted Mincer profiles $ln Y=\alpha + \beta \text{ schooling} + \gamma \text{(exp) } + \iota {\text{(exp)}}^{2}$?] [JLG: because we do not observe experience in ABC/CARE. An specification with education only works very very similar to Panels (b) and (e) in Figure C.3. I think it's a little repetitive to add.]}
+\noindent We devote a self-contained section for parental income because we use a different procedure. We justify this decision and explain the data sources in Appendix~\ref{app:parentalincome}.
 
 \subsection{Auxiliary Datasets and Variables Used to Predict}
 
@@ -113,7 +115,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \begin{subfigure}[h]{0.3\textwidth}
 	\centering
 	\caption{Pre- and Post-treatment Variables, Females}
-		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_female.eps}
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_female_sensitivity.eps}
 \end{subfigure}
 \begin{subfigure}[h]{0.3\textwidth}
 		\centering
@@ -128,17 +130,17 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 \begin{subfigure}[h]{0.3\textwidth}
 	\centering
 	\caption{Pre- and Post-treatment Variables, Males}
-		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_male.eps}
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_male_sensitivity.eps}
 \end{subfigure}
 \footnotesize \justify
 Note: This figure displays the predicted labor income profile obtained when constructing control- and treatment-group matches according to the procedure in Section~\ref{sec:necrosis}. We combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). We vary the matching variables across the different panels, for both males and females. Pre-treatment variables: male and black indicators and year of birth. Post-treatment variables: years of education at age 30 and labor income at age 30.
 \end{sidewaysfigure}
 
-\subsubsection{Containing Support}
+\subsubsection{Containing Support}\label{app:containsupport}
 
 \noindent We \textbf{assume containing support} between these auxiliary datasets and the analysis sample. This is required in order for us to reliably use external data to provide predictions for the ABC/CARE samples. Figure~\ref{fig:support} validates this assumption by displaying the overlapping support sets of ABC/CARE and our auxiliary data for the variables used to interpolate and extrapolate earnings.\footnote{For the male and black indicators, we do not provide evidence of containing support. All three non-experimental samples have vast numbers of males, females, and black individuals to cover the support in the experimental samples.}\\
 
-\textbf{[JJH: Make sure this is cited in text. Make sure it's in display (as link) for Sage.]  [JLG: This is being mentioned in the text.]}
+\textbf{[JJH: Make sure this is cited in text. Make sure it's in display (as link) for Sage.]  [JLG: This is being mentioned in the text and it appears in Sage.]}
 
 \begin{figure}[H]
 		\caption{Support of ABC/CARE and Auxiliary Data} \label{fig:support}
@@ -266,7 +268,7 @@ Note: This figure displays the predicted labor income profile obtained when cons
 \begin{subfigure}[h]{0.3\textwidth}
 	\centering
 	\caption{Lagged Labor Income and $\bm{B}, \bm{X}_{t}$, Females}
-		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_female.eps}
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_male_sensitivity.eps}
 \end{subfigure}
 \begin{subfigure}[h]{0.3\textwidth}
 		\centering
@@ -281,7 +283,7 @@ Note: This figure displays the predicted labor income profile obtained when cons
 \begin{subfigure}[h]{0.3\textwidth}
 	\centering
 	\caption{Lagged Labor Income and $\bm{B}, \bm{X}_{t}$, Males}
-		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_male.eps}
+		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_male_sensitivity.eps}
 \end{subfigure}
 \footnotesize \justify
 Note: This figure displays the predicted labor income profile obtained when constructing control- and treatment-group matches according to the procedure in Section~\ref{sec:necrosis}. We combine data from the Panel Study of Income Dynamics (PSID), the National Longitudinal Survey of Youth 1979 (NLSY79), and the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79). We vary the prediction variables across the different panels, for both males and females. $\bm{B}$ variables: male and black indicators, and mother's education. $\bm{X}_{t}$ variables: years of education at age 30, labor income at ages 21 and 30, and BMI at age 34.
@@ -386,7 +388,7 @@ Note: Panels (a) displays a factor score estimated based on the measurement syst
 \input{output/abccare_funcform1_ti_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Prediction of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -400,7 +402,7 @@ Note: Panels (a) displays a factor score estimated based on the measurement syst
 \input{output/abccare_funcform2_ti_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Prediction of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -408,10 +410,34 @@ Note: Panels (a) displays a factor score estimated based on the measurement syst
 \begin{sidewaystable}[H]
 \begin{threeparttable}
 \caption{Prediction of Transfer Income at Age 30 Accounting for $\bm{B}$ and $\bm{\theta}, \bm{X}_{t} \text{ (set 2)}$, ABC/CARE}
-\label{table:predfac3}
+\label{table:predfacti3}
 \centering
 \footnotesize
 \input{output/abccare_funcform3_ti_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\subsection{Testing  Assumption~\ref{ass:corns}} \label{app:endogeneity}
+
+\noindent The framework in Appendix~\ref{app:invariance} is also useful to test Assumption~\ref{ass:corns} in the main paper. The reasoning is the following. Correlation between $\bm{X}_{t}$ and $\bm{\varepsilon}_{t}$ in the non-experimental sample biases our prediction. We can write and estimate a system similar to that in \eqref{eq:msystem} in the non-experimental sample and estimate an approximation of $\bm{\varepsilon}_{t}$. Then, we can ask if the coefficients characterizing our predictions change after controlling for this approximation. We can also ask if $\theta_{c}, \theta_{n}$ are significant predictors of the outcome being predicted. Using the estimates of $\theta_{c}, \theta_{n}$ that we obtain in Appendix~\ref{app:invariance}, we present evidence on this using the ABC/CARE sample by treatment status in this appendix.\\
+
+\noindent For want of data to approximate $\theta_{c}, \theta_{n}$ in PSID and NLSY79, we test this assumption using the CNLSY. Our measurement system for $\theta_{c}$ consists of PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT). Our measurement system for $\theta_{n}$ is based on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior).\\
+
+\noindent Table~\ref{table:endoginc} and ~\ref{table:endogti} show the results from this exercise for the two variables we predict, at age 30. We display specifications based on different control sets.\\ 
+
+\noindent The coefficients characterizing our predictions in ABC/CARE and CNLSY do not present major changes after controlling for estimates of $\theta_{c}, \theta_{n}$. Further, these terms do not significantly determine the outcomes being predicted when we account for the full control set we use when predicting.
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Labor Income at Age 30 Accounting for $\bm{B}$ and $\bm{\theta}, \bm{X}_{t}$, ABC/CARE Control Group}
+\label{table:endoginc}
+\centering
+\footnotesize
+\input{output/abccare_endog_control_ready.tex}
 \begin{tablenotes}
 \footnotesize
 \item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
@@ -419,6 +445,146 @@ Note: Panels (a) displays a factor score estimated based on the measurement syst
 \end{threeparttable}
 \end{sidewaystable}
 
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Labor Income at Age 30 Accounting for $\bm{B}$ and $\bm{\theta}, \bm{X}_{t}$, ABC/CARE Treatment Group}
+\centering
+\footnotesize
+\input{output/abccare_endog_treatment_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Transfer Income at Age 30 Accounting for $\bm{B}$ and $\bm{\theta}, \bm{X}_{t}$, ABC/CARE Control Group}
+\centering
+\footnotesize
+\input{output/abccare_endogcontrol_ti_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Transfer Income at Age 30 Accounting for $\bm{B}$ and $\bm{\theta}, \bm{X}_{t}$, ABC/CARE Treatment Group} \label{table:endogti}
+\centering
+\footnotesize
+\input{output/abccare_endogtreatment_ti_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Labor Income at Age 30 Accounting for $\bm{B}$ and $\bm{\theta}, \bm{X}_{t}$, CNLSY}
+\label{table:endoginc}
+\centering
+\footnotesize
+\input{output/cnlsy_endog_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Transfer Income at Age 30 Accounting for $\bm{B}$ and $\bm{\theta}, \bm{X}_{t}$, CNLSY}
+\label{table:endogti}
+\centering
+\scriptsize
+\input{output/cnlsy_endog_ti_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\subsection{Alternative Prediction Based on \citet{Mincer_1974_schooling}}\label{app:mincer}
+
+\citet{Mincer_1974_schooling} claims that it is possible to get a good measure of the perpetuity flow of lifetime earnings as follows. Take labor income at $t^*$ (age 30) and assume that the individual perpetually gets this labor income. Thus, predicted lifetime income is $Y_{t^*}/r$, where $r$ is the discount rate. A discount rate of 2\% is necessary to equate a Mincer-type prediction to our life-cycle prediction.
+
+\begin{table}[!htbp]
+\begin{threeparttable}
+\caption{Mincer-type Predictions, Age 30}\label{tab:mincerpred}
+\scriptsize
+\centering
+\input{output/mincerpred_ready}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table compares the predicted net present value of labor income (Life-cycle Prediction) to a perpetuity estimated based predicted labor income at age 30 (Age-30 Prediction) and on different discount rates (Age-30 Perpetuity). Predictions are based on the method we explain in this section. All values are in 2014 USD. Standard errors are in parentheses and are based on the empirical bootstrap distribution.\\
+\item $\bm{r^*}$: discount rate such that the value of the perpetuity and the life-cycle prediction coincide.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+
+\subsection{Parental Income}\label{app:parentalincome}
+
+\noindent A substantial fraction of the ABC/CARE benefits come from parental income. In practice, the program operates as a childcare center from the parents' perspective. These parents were, in essence,  mothers: only $27\%$ of the mothers lived with a partner at baseline and there is little change in this afterward. ABC/CARE relaxed the time constraint of the mothers, enabling them to educate themselves more and/or work more. The program had treatment effects on (i) maternal education; (ii) maternal labor supply; and (iii) parental income.\footnote{See Appendix~\ref{appendix:results}.} Quantifying the effect of ABC/CARE on parental income not only requires to quantify its effects from ages 0 to 5, while the program was active. The program could have shifted the labor income profile through education or work experience. To test this, we need to quantify the effect that the program had from when it started until the time when the parents retired.\\ 
+
+\noindent There are two options to monetize parental income. (i) A conservative approach that we follow in the main paper. We use the available information and calculate the treatment effect of the program on labor income from ages 0 to 21. We observe parental income at ages 0, 1.5, 3.5, 4.5, 8, 12, 15, and 21. We interpolate between the ages that we observe and stop at age 21. The average age of the mothers at baseline was 21. On average, then, we omit 19 years of labor income if the mothers decide to retire at 60, 24 if they retire at 65, etc. (ii) A second approach is to use the available data together with an auxiliary sample to predict income after the children are age 21. Option (i) is straightforward. We explain option (ii) next.\\
+
+\noindent To proceed with (ii), the first alternative would be to follow the methodology we propose in Section~\ref{section:cbamethodology}. The ideal dataset would allow us to construct a synthetic cohort of ABC/CARE-like mothers. Unfortunately, none of our auxiliary samples have mothers who are old enough to perform this exercise (i.e., we would be better off by limiting ourselves to the parental income we observe from ages 0 to 21). The second alternative would be use to construct a synthetic cohort based on mother's characteristics, disregarding the child's characteristics. This is poses the challenge that we do not observe high-quality enough mother-level data to perform a matching procedure.\footnote{As stated before, we only see a handful of realizations of maternal labor income per age.} A third more plausible alternative is the following.\\
+
+\noindent There is substantial variation on maternal age at baseline. Thus, when analyzing parental income, we need to consider that we have very few observations per age to estimate a parental labor income life-cycle profile. In this context, a useful alternative is to parameterize the profile of maternal labor income based on a Mincer-type equation.\footnote{See \citet{Mincer_1974_schooling} for the original source and \citet{Heckman_Lochner_ea_2006_HEE} for a extended discussion of the Mincer equation, its implications, and several extensions.} We specify how we deal with mothers living with a partner below. The parameterization we use is the following:
+
+\begin{equation}
+\ln Y_{a} = \alpha + \beta \cdot \text{school}_{a} + \gamma_{1}  \cdot \text{experience}_{a} + \gamma_{2} \cdot {\text{experience}_{t}}^2 + \bm{\gamma} \mathbf{X}_{a} + \eta_{a}, \label{eq:mincer}
+\end{equation}
+
+\noindent where variables are indexed by mother's age, $\ln Y$ is log-labor income, experience and schooling are measured in years, $ \mathbf{X}_{a}$ are observed characteristics, and $\eta_{a}$ is an unobserved component. $\alpha, \beta, \gamma_{1}, \gamma_{2}, \bm{\gamma}$ are coefficients and summarize the paramterization of the labor income profile.\\
+
+\noindent In principle, there is no reason why the parameters characterizing the profile should differ across the treatment and control groups in ABC/CARE. Given the small sample in ABC/CARE, however, we assume that the profile is common across the control and treatment groups. This assumption is analogous to Assumption~\ref{ass:eczema}, which we fail to reject in Appendix~\ref{app:invariance}.\\
+
+\noindent We estimate the coefficients in \eqref{eq:mincer} using the sample of mothers in ABC/CARE. We pool the longitudinal information and estimate the coefficients using ordinary least squares. We use a standard Black-Welch measure of experience (age - education - 6) \citep{Smith_Welch_1979_IER}. For this estimation, we take mothers whose earnings are above $0$. For mothers living with a partner who report to be working, we consider $1/2$ of total parental income as $\ln Y_{a}$. To validate our estimates within ABC/CARE, we estimate the coefficients \eqref{eq:mincer} using a sub-sample of disadvantaged mothers in the PSID.\footnote{We define disadvantaged as follows: black, not married, labor income, education (at age 5 of child's participant), age and number of children (at age 5 of child's participant) in the same ranges as the ABC/CARE mothers, labor income below percentile 75.} The coefficients characterizing \eqref{eq:mincer} in ABC/CARE and PSID for different combinations of control sets are in agreement. We display them in Table~\ref{table:mincerpsid}.\\
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Mincer Equation Estimates for Mothers in ABC/CARE and the PSID}
+\label{table:mincerpsid}
+\centering 
+\footnotesize
+\input{output/abccarepsid_mincerests_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table presents estimates of \eqref{eq:mincer} for ABC/CARE mothers and a subsample of disadvantaged mothers in the PSID. We define disadvantaged as follows: black, not married, labor income, education (at age 5 of child's participant), age and number of children (at age 5 of child's participant) in the same ranges as the ABC/CARE mothers, labor income below percentile 75. Robust standard errors are in parentheses. $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\noindent Based on the estimates in Table~\ref{table:mincerpsid}, we can ask two questions: (i) what is the predicted net present value of parental income (treatment - control) using a prediction based on the estimate of \eqref{eq:mincer} and how does it differ from the method that linearly interpolates income from child's age 0 to 21?; and (ii) what would be the predicted net present value of parental income if we go beyond and predict all the way up to age 60 (assumed retirement for mothers)?\\
+
+\noindent The results in Table~\ref{table:psens} display results that enable us to answer these two questions. Estimates based on \eqref{eq:mincer} allow for a precise estimate of the the predicted net present value of parental income (treatment - control) when the subjects are 21 years old. This is to be expected given that we estimate \eqref{eq:mincer} with data from the ABC/CARE individuals. When using these same estimates to predict parental labor income such that mothers work for 40 years in their life times, we find that the method we use in the main paper underestimates the gain based on parental income by around $\$30,000$ (2014 USD). The estimates we provide in the main paper represents a lower bound of the gain the program had due to its childcare components.
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Parental Labor Income, Interpolations and Prediction}
+\label{table:psens}
+\centering 
+\input{output/abccarepsid_pincmincer_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note:  Interpolated up to Age 21: linearly interpolated parental income from (child's) age 0 to 21. Mincer-based up to Age 21: prediction from (child's) age 0 to 21 based on estimates coefficients of \eqref{eq:mincer} (full control set). Mincer-based up to Retirement: prediction from (child's) age 0 to mother's retirement (40 years of labor force participation assumed) based on estimates coefficients of \eqref{eq:mincer} (full control set). All values are in 2014 USD discounted to child's age 0. Standard errors in parentheses are based on the empirical bootstrap distribution.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{Cohort Effects}\label{app:cohorteffects}
+
+\textbf{[JLG: Working on this.]}
 
 \subsection{Health Costs}
 

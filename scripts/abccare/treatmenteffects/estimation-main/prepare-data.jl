@@ -10,6 +10,7 @@
 # Declare the control sets, and the number of them you want to test
 conDict = Dict()
 
+#conDict["controls_abccare"] = [:male, :hrabc_index, :apgar1, :apgar5, :f_home0y, :grandma_county]
 conDict["controls_abccare"] = [:male, :abc, :hrabc_index, :apgar1, :apgar5, :f_home0y, :grandma_county]
 conDict["controls_abc"] = [:male, :hrabc_index, :apgar1, :apgar5, :m_teen0y, :hh_sibs0y, :grandma_county]
 conDict["controls_care"] = [:male, :apgar1, :m_married0y, :f_home0y, :cohort]

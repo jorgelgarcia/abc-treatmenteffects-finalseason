@@ -107,9 +107,42 @@ matrix allperp_`sex' = [pred_0_`sex',per_0_`sex',npv_0_`sex',pred_1_`sex',per_1_
 
 matrix allperp = [allperp_0 \ allperp_1]
 
+// r such that npv = mincer 
+
+matrix allperpredfemcont  = [allperp[1,1],allperp[1,5]]
+matrix allperpredfemtreat = [allperp[1,6],allperp[1,10]]
+
+matrix allperpredmalecont  = [allperp[3,1],allperp[3,5]]
+matrix allperpredmaletreat = [allperp[3,6],allperp[3,10]]
+
+foreach sex in fem male {
+	foreach group in treat cont {
+	clear
+	svmat allperpred`sex'`group'
+	set obs 300000
+
+	summ allperpred`sex'`group'2 
+	gen npv = r(mean)
+	summ allperpred`sex'`group'1 
+	gen pred30 = r(mean)
+
+	gen r = _n/1000000
+	gen perp30 = pred30/r
+	gen npvm5 = npv - .05
+	gen npvp5 = npv + .05
+	drop if perp30 > npvp5
+	drop if perp30 < npvm5
+
+	summ r
+	local rmean = round(r(mean),.0001)
+	matrix allperpred`sex'`group'_r = [`rmean']
+	}
+}
+
+matrix allperpr = [allperp[1...,1...5],[allperpredfemcont_r \ . \ allperpredmalecont_r \ .],allperp[1...,6...],[allperpredfemtreat_r \ . \ allperpredmaletreat_r \ .]]
 
 cd $output
 #delimit
 outtable using mincerpred, 
-mat(allperp) replace nobox center norowlab f(%9.3f);
+mat(allperpr) replace nobox center norowlab f(%9.3f);
 #delimit cr
