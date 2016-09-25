@@ -36,7 +36,7 @@ foreach num of numlist 1(1)11 {
 			summ v2 if v1 == "`sex'"
 			local `par'_mean_type`num'_`sex' = r(mean)
 		}
-		insheet using irr_se.csv, clear
+		insheet using `par'_se.csv, clear
 		foreach sex in m f p {
 			summ v2 if v1 == "`sex'"
 			local `par'_se_type`num'_`sex'   = r(mean)
@@ -53,7 +53,7 @@ foreach num of numlist 2 {
 			summ v2 if v1 == "`sex'"
 			local `par'_mean_type`num'_nm_`sex' = r(mean)
 		}
-		insheet using irr_se.csv, clear
+		insheet using `par'_se.csv, clear
 		foreach sex in m f p {
 			summ v2 if v1 == "`sex'"
 			local `par'_se_type`num'_nm_`sex'   = r(mean)
@@ -213,5 +213,5 @@ matrix rownames allirr = baseline specification "."  predictiontime "." counterf
 matrix colnames allirr = pooled pooled males males females females
 
 cd $output
-outtable using allbc_sens , mat(allbc)  replace nobox center f(%9.2f)
-outtable using allirr_sens, mat(allirr) replace nobox center f(%9.3f)
+putexcel A1 = matrix(allbc)  using allbc_sens, replace
+putexcel A1 = matrix(allirr) using allirr_sens, replace
