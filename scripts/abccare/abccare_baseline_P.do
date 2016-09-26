@@ -51,11 +51,11 @@ drop if P == .
 cd $output
 cap file close ptable
 file open ptable using "abccare_baseline_P.tex", write replace
-file write ptable "\begin{tabular}{l c c}" _n
+file write ptable "\begin{tabular}{l c c c}" _n
 file write ptable "\toprule" _n
-file write ptable "Characteristic & \mc{2}{c}{Control Substitution} \\" _n
-file write ptable "& No & Yes \\" _n
-file write ptable "& $ N=19 $ & $ N=55 $ \\" _n
+file write ptable "Characteristic & \mc{2}{c}{Control Substitution} & $ t $ -test\\" _n
+file write ptable "& No & Yes & $ p $ -value\\" _n
+file write ptable "& $ N=19 $ & $ N=55 $ & \\" _n
 file write ptable "\midrule" _n
 
 foreach v in `vars_to_compare' {
@@ -65,11 +65,15 @@ foreach v in `vars_to_compare' {
 			local `stat'_`v'_`p' = r(mean)
 			
 			local `stat'_`v'_`p' : di %9.2f ``stat'_`v'_`p''
+			
+			if ``v'_p' <= 0.1 {
+				local `stat'_`v'_`p' \textbf{``stat'_`v'_`p''}
+			}
 		}
 	}
 	
-	file write ptable "``v'_lab' & `mean_`v'_0' & `mean_`v'_1' \\" _n
-	file write ptable "			& (`se_`v'_0') & (`se_`v'_1')  \\" _n
+	file write ptable "``v'_lab' & `mean_`v'_0' & `mean_`v'_1' & ``v'_p' \\" _n
+	file write ptable "			& (`se_`v'_0') & (`se_`v'_1')  & \\" _n
 }
 
 
