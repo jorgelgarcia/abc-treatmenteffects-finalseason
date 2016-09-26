@@ -46,7 +46,7 @@ foreach num of numlist 2 {
 	foreach par in irr ratio {
 		cd $allresults/type`num'_nm
 		foreach stat in mean se pval {
-			insheet using `par'_mean.csv, clear
+			insheet using `par'_`stat'.csv, clear
 			foreach sex in m f p {
 				summ v2 if v1 == "`sex'"
 				local `par'_`stat'_type`num'_nm_`sex' = r(mean)
