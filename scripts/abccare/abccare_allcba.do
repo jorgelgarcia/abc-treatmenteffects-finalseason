@@ -174,10 +174,9 @@ matrix health          = [[`bc_mean_valife0_f' \ `bc_se_valife0_f' \ `bc_pval_va
 
 matrix allbc = [baselinebc \ specification \ predictiontime \ counterfactual \ dwl \ discount \ parental \ lincome \ crime \ health]
 matrix rownames allbc = baseline specification "." "." predictiontime "." "." counterfactual "." "." dwl "." "." discount "." "." parental "." "." lincome "." "." crime "." "." health "." "."
-matrix colnames allbc = pooled pooled males males females females
-matrix allbc = [allbc[1...,5..6],allbc[1...,1..4]]
+matrix allbc = [allbc[1...,5..6],allbc[1...,3..4],allbc[1...,1..2]]
 
-
+/*
 // irr
 matrix baselineirr      = [`irr_mean_type2_f',`irr_se_type2_f',`irr_mean_type2_m',`irr_se_type2_m',`irr_mean_type2_p',`irr_se_type2_p']
 matrix specification   = [[`irr_mean_type9_f' \ `irr_se_type9_f' \ `irr_pval_type9_f'], [`irr_mean_type1_f' \ `irr_se_type1_f' \ `irr_pval_type1_f' ],  [`irr_mean_type9_m' \ `irr_se_type9_m' \ `irr_pval_type9_m'], [`irr_mean_type1_m' \ `irr_se_type1_m' \ `irr_pval_type1_m'], [`irr_mean_type9_p' \ `irr_se_type9_p' \ `irr_pval_type9_p'],  [`irr_mean_type1_p' \ `irr_se_type1_p' \ `irr_pval_type1_p']]
