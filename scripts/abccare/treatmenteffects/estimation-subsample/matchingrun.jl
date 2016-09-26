@@ -49,7 +49,7 @@ global genderloop = ["male", "female", "pooled"]
 # Bring in data
 # ================================================================ #
 # List of outcomes
-outcomes = readtable("$scripts/../outcomes/outcomes_cba_p_inc.csv")
+outcomes = readtable("$scripts/../outcomes/outcomes_cba_dis_p_inc.csv")
 
 # ABC/CARE data
 abccare = readtable("$data/append-abccare_iv.csv")
@@ -66,7 +66,7 @@ d_index = 1
 
 Matchini = Dict()
 
-for data in ("abccare", "abc")
+for data in ("abccare")
 #for data in ("abccare", "abc", "care")
 	if data == "abccare"
 		datainuse = abccare_data
