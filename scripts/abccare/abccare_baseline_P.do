@@ -1,8 +1,8 @@
 /* 
-Project: 	ABC and CARE CBA
-This file:	Construct table comparing control group selection into alt. preschool
-Author:		Anna Ziff
-Date:		September 25, 2016
+Project: 			ABC and CARE CBA
+This file:			Construct table comparing control group selection into alt. preschool
+Author:				Anna Ziff
+Original date:		September 25, 2016
 */
 
 // macros
@@ -23,8 +23,6 @@ local male_lab			"Male"
 local apgar1_lab 		"Apgar Score, 1 min."
 local apgar5_lab 		"Apgar Score, 5 min."
 
-
-
 cd $abc_dir
 use append-abccare_iv, clear
 
@@ -33,6 +31,14 @@ keep if R == 0
 
 sum P
 
+// t test
+foreach v in `vars_to_compare' {
+	ttest `v', by(P) unequal welch
+	local `v'_p = r(p)
+	local `v'_p : di %9.2f ``v'_p'
+}
+
+// collapase
 local to_collapse
 foreach v in `vars_to_compare' {
 	local to_collapse `to_collapse' (mean) mean_`v'=`v' (sem) se_`v' = `v' (count) N_`v' = `v'
@@ -41,6 +47,7 @@ foreach v in `vars_to_compare' {
 collapse `to_collapse', by(P)
 drop if P == .
 
+// make table
 cd $output
 cap file close ptable
 file open ptable using "abccare_baseline_P.tex", write replace
