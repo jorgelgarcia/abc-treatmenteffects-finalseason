@@ -46,7 +46,7 @@ foreach num of numlist 2 {
 	foreach par in irr ratio {
 		cd $allresults/type`num'_nm
 		foreach stat in mean se pval {
-			insheet using `par'_mean.csv, clear
+			insheet using `par'_`stat'.csv, clear
 			foreach sex in m f p {
 				summ v2 if v1 == "`sex'"
 				local `par'_`stat'_type`num'_nm_`sex' = r(mean)
@@ -174,8 +174,8 @@ matrix health          = [[`bc_mean_valife0_f' \ `bc_se_valife0_f' \ `bc_pval_va
 
 matrix allbc = [baselinebc \ specification \ predictiontime \ counterfactual \ dwl \ discount \ parental \ lincome \ crime \ health]
 matrix rownames allbc = baseline specification "." "." predictiontime "." "." counterfactual "." "." dwl "." "." discount "." "." parental "." "." lincome "." "." crime "." "." health "." "."
+matrix allbc = [allbc[1...,5..6],allbc[1...,3..4],allbc[1...,1..2]]
 matrix colnames allbc = pooled pooled males males females females
-
 
 // irr
 matrix baselineirr      = [`irr_mean_type2_f',`irr_se_type2_f',`irr_mean_type2_m',`irr_se_type2_m',`irr_mean_type2_p',`irr_se_type2_p']
@@ -190,6 +190,7 @@ matrix health          = [[`irr_mean_valife0_f' \ `irr_se_valife0_f' \ `irr_pval
 
 matrix allirr = [baselineirr \ specification \ predictiontime \ counterfactual \ dwl \ parental \ lincome \ crime \ health]
 matrix rownames allirr = baseline specification "." "." predictiontime "." "." counterfactual "." "." dwl "." "." parental "." "." lincome "." "." crime "." "." health "." "."
+matrix allirr = [allirr[1...,5..6],allirr[1...,3..4],allirr[1...,1..2]]
 matrix colnames allirr = pooled pooled males males females females
 
 cd $output
