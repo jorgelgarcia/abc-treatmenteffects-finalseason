@@ -67,9 +67,10 @@ foreach v in `vars_to_compare' {
 			
 			local `stat'_`v'_`p' : di %9.2f ``stat'_`v'_`p''
 			
-			if ``v'_p' <= 0.1 {
-				local `stat'_`v'_`p' \textbf{``stat'_`v'_`p''}
-			}
+			
+		}
+		if ``v'_p' <= 0.1 {
+				local mean_`v'_`p' \textbf{`mean_`v'_`p''}
 		}
 	}
 	
