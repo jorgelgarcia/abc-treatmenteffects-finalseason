@@ -11,11 +11,12 @@ global projects	:	env projects
 global abc_dir 	= "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv"
 global output	= "${projects}/abc-treatmenteffects-finalseason/output"
 
-local vars_to_compare m_ed0y m_age0y m_iq0y hrabc_index hh_sibs0y male birthyear apgar1 apgar5
+local vars_to_compare m_ed0y m_work0y m_age0y m_iq0y hrabc_index hh_sibs0y male birthyear apgar1 apgar5
 
 local m_ed0y_lab 		"Mother's Yrs. of Edu."
 local m_age0y_lab		"Mother's Age"
 local m_iq0y_lab 		"Mother's IQ"
+local m_work0y_lab		"Mother Works"
 local hh_sibs0y_lab 	"Number of Siblings"
 local hrabc_index_lab 	"HRI Score"
 local birthyear_lab 	"Birth Year"
