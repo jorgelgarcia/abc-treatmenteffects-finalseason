@@ -114,7 +114,7 @@ function matchingrun(boots)
 
 	d_index = 1
 
-	for data in ("abccare", "abc")
+	for data in ("abccare")
 		if data == "abccare"
 			datainuse = abccare_data
 			controlset = conDict["controls_abccare"]
