@@ -190,7 +190,7 @@ matrix health          = [[`irr_mean_valife0_f' \ `irr_se_valife0_f' \ `irr_pval
 
 matrix allirr = [baselineirr \ specification \ predictiontime \ counterfactual \ dwl \ parental \ lincome \ crime \ health]
 matrix rownames allirr = baseline specification "." "." predictiontime "." "." counterfactual "." "." dwl "." "." parental "." "." lincome "." "." crime "." "." health "." "."
-matrix allbc = [allirr[1...,5..6],allirr[1...,3..4],allirr[1...,1..2]]
+matrix allirr = [allirr[1...,5..6],allirr[1...,3..4],allirr[1...,1..2]]
 matrix colnames allirr = pooled pooled males males females females
 
 cd $output
