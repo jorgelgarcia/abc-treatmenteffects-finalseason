@@ -22,7 +22,7 @@ global googledrive: env googledrive
 // do files
 global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global data       = "$klmmexico/abccare/irr_ratios/"
+global data       = "$klmmexico/abccare/irr_ratios/current/"
 // output
 global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 
@@ -60,6 +60,7 @@ matrix colnames vall = estimate sex part m point pval se
 local se = 0
 foreach estimate of numlist 2 5 8 {
 	local se = `se' + 1
+	cd $data/type`estimate'
 	insheet using npv_type`estimate'.csv, clear
 	drop if type == "0.1" | type == "0.9"
 	encode type, gen(typen)
@@ -106,8 +107,19 @@ replace sig = . if estimate == 2 & part == 2
 replace m = m/100000
 // replace m = m/10 if ind >= 34
 
+# delimit
+global xlabel_1 2 "Program Costs" 6 "Total Benefits" 10 "Labor Income" 14 "Parental Income"
+18 "Crime" 22 "{&lowast}QALYs" 26 "Total Medical Costs" 30 "Costs of Education";
+
+global xlabel_2 2 "Program Costs" 6 "Total Benefits" 10 "Labor Income" 14 "Parental Income"
+18 "{&lowast}Crime" 22 "{&lowast}{&lowast}QALYs" 26 "Total Medical Costs" 30 "Costs of Education";
+
+global xlabel_3 2 "Program Costs" 6 "Total Benefits" 10 "Labor Income" 14 "Parental Income"
+18 "Crime" 22 "{&lowast}QALYs" 26 "Total Medical Costs" 30 "Costs of Education";
+# delimit cr
+
 cd $output
-foreach sex of numlist 1 2 3 {
+foreach sex of numlist 2 {
 	#delimit
 	twoway (bar m ind        if estimate == 1 & sex == `sex', fcolor(white) lcolor(gs0) lwidth(medthick))
 	       (bar m ind        if estimate == 2 & sex == `sex', color(gs4))
@@ -116,8 +128,7 @@ foreach sex of numlist 1 2 3 {
 		, 
 		legend(cols(2) order(1 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 3 "Treatment vs. Alternative Preschool" 
 					    4 "Significant at 10%") size(vsmall))
-			  xlabel(2 "Program Costs" 6 "Total Benefits" 10 "Labor Income" 14 "Parental Income"
-			  18 "Crime" 22 "{&lowast}QALYs" 26 "Total Medical Costs" 30 "Costs of Education", angle(25) noticks grid glcolor(gs14) labsize(vsmall)) 
+			  xlabel(${xlabel_`sex'}, angle(25) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
