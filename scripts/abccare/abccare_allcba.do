@@ -175,6 +175,7 @@ matrix health          = [[`bc_mean_valife0_f' \ `bc_se_valife0_f' \ `bc_pval_va
 matrix allbc = [baselinebc \ specification \ predictiontime \ counterfactual \ dwl \ discount \ parental \ lincome \ crime \ health]
 matrix rownames allbc = baseline specification "." "." predictiontime "." "." counterfactual "." "." dwl "." "." discount "." "." parental "." "." lincome "." "." crime "." "." health "." "."
 matrix colnames allbc = pooled pooled males males females females
+matrix allbc = [allbc[1...,5..6],allbc[1...,1..4]]
 
 
 // irr
@@ -191,6 +192,7 @@ matrix health          = [[`irr_mean_valife0_f' \ `irr_se_valife0_f' \ `irr_pval
 matrix allirr = [baselineirr \ specification \ predictiontime \ counterfactual \ dwl \ parental \ lincome \ crime \ health]
 matrix rownames allirr = baseline specification "." "." predictiontime "." "." counterfactual "." "." dwl "." "." parental "." "." lincome "." "." crime "." "." health "." "."
 matrix colnames allirr = pooled pooled males males females females
+matrix allirr = [allirr[1...,5..6],allirr[1...,1..4]]
 
 cd $output
 putexcel A1 = matrix(allbc)  using allbc_sens, replace
