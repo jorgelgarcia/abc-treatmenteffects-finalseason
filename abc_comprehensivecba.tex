@@ -102,39 +102,6 @@ Evidence from these programs is relevant for contemporary policy discussions bec
 
 Summarizing the benefits of a program with a diverse array of outcomes across many domains and periods of life is both challenging and rewarding. Doing so highlights the numerous ways through which early childhood programs enhance capabilities. We use a variety of methodologies to characterize program benefits. Instead of reporting only individual treatment effects or categories of treatment effects, our benefit/cost analysis accounts for all program components, including the welfare costs of taxes to publicly finance the program.\footnote{\cite{Barnett_Masse_2002_benefitcost,Barnett_Masse_2007_EER} present a cost/benefit analysis for ABC through age 21, before many benefits are realized. They report a benefit/cost ratio of 2.5, but give no standard error or sensitivity analyses for their estimate. They do not disaggregate by gender. For want of the data collected on health at age 34, they do not account for health benefits. They use self-reported crime data (unlike the administrative crime data later collected that we analyze) and ignore the welfare costs of financing the program. We use cost data from primary sources not available to them.}
 
-\newgeometry{top=.6in, bottom=.6in, left=.6in, right=.6in}
-\begin{sidewaystable}[!htpb] 
-\begin{threeparttable}
-\caption{Sensitivity Analysis, Internal Rate of Return}
-\label{table:bcsens}
-\centering 
-\footnotesize
-\input{output/allirr_sens}
-\begin{tablenotes}
-\footnotesize
-\item Note: This table displays sensitivity analysis of our baseline internal rate of return calculation to the perturbations indexed in the different rows. The characteristics of the \textit{baseline} calculation are in the table header. IPW: adjusts for attrition and item non-response (see Appendix~\ref{appendix:attrition} for details). Controls: Apgar scores at ages 1 and 5 and a high-risk index (see Appendix~\ref{appendix:results} for details on how we choose these controls). When predicting up to ages 21 and 30, we consider all benefits and costs up to these ages, respectively. Counterfactuals: we consider treatment vs. next best (baseline), treatment vs. stay at home, and treatment vs. alternative preschools (see Section~\ref{section:methodsquestions} for a discussion). Dead-weight loss is the loss implied by any public expenditure (0\% is no loss and 100\% is one dollar loss per each dollar spent). Parental income: see Appendix~\ref{app:parentalincome} for details on the two alternative predictions (Mincer and Life-cycle). Labor Income: .5\ annual growth is an annual wage growth due to cohort effects; only benefit assumes labor income is the only benefit of the program. Crime: major crimes are rape and murder; half costs takes half of victimization and judiciary costs. Health (QALYs): drop all sets the value of life equal to zero. N/A: Standard errors obtained from the empirical bootstrap distribution are in parentheses.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
-\restoregeometry
-
-\newgeometry{top=.6in, bottom=.6in, left=.6in, right=.6in}
-\begin{sidewaystable}[!htpb] 
-\begin{threeparttable}
-\caption{Sensitivity Analysis, Benefit/cost Ratios}
-\label{table:bcsens}
-\centering 
-\footnotesize
-\input{output/allbc_sens}
-\begin{tablenotes}
-\footnotesize
-\item Note: This table displays sensitivity analysis of our baseline benefit/cost ratio calculation to the perturbations indexed in the different rows. The characteristics of the \textit{baseline} calculation are in the table header. IPW: adjusts for attrition and item non-response (see Appendix~\ref{appendix:attrition} for details). Controls: Apgar scores at ages 1 and 5 and a high-risk index (see Appendix~\ref{appendix:results} for details on how we choose these controls). When predicting up to ages 21 and 30, we consider all benefits and costs up to these ages, respectively. Counterfactuals: we consider treatment vs. next best (baseline), treatment vs. stay at home, and treatment vs. alternative preschools (see Section~\ref{section:methodsquestions} for a discussion). Dead-weight loss is the loss implied by any public expenditure (0\% is no loss and 100\% is one dollar loss per each dollar spent). Discount rate: rate to discount benefits to child's age 0 (in all calculations). Parental income: see Appendix~\ref{app:parentalincome} for details on the two alternative predictions (Mincer and Life-cycle). Labor Income: .5\ annual growth is an annual wage growth due to cohort effects; only benefit assumes labor income is the only benefit of the program. Crime: major crimes are rape and murder; half costs takes half of victimization and judiciary costs. Health (QALYs): drop all sets the value of life equal to zero. Standard errors obtained from the empirical bootstrap distribution are in parentheses.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
-\restoregeometry
-\doublespacing
-
 A fundamental problem facing the evaluation of any human capital program is assessing the out-of-sample future benefits of the program. Most solutions to this problem are based on versions of a synthetic cohort approach using the adjusted outcomes of older cohorts comparable to treated individuals to proxy treatment effects.\footnote{\cite{Mincer_1974_schooling} addresses this problem using a synthetic cohort approach and provides evidence on its validity. See the discussion of the synthetic cohort approach in \cite{Heckman_Lochner_ea_2006_HEE}.} We address this problem by using the available experimental data through age 34, combined with information from multiple auxiliary panel data sources to predict benefits and costs over the lifetimes of participants.\footnote{\citet{Ridder_Moffitt_2007_hbk_metricsdata} provide a valuable discussion of data pooling methods. These methods are related to the older ``surrogate marker'' literature in biostatistics (see e.g., \citealp{Prentice_1989_Surrogate_SiM}).}
 
 We use a variety of methods to forecast future outcomes. Our analysis is greatly simplified by our finding that all eligible families offered participation in the program took the offer. This facilitates the construction of valid comparison groups for experimental control group members. We construct comparison groups for the treatment groups drawing on the analysis of \citet{Heckman_Ichimura_etal_1998_REStud}. We show that program treatment effects are produced through changes in inputs in a stable (across treatment regimes) production function for outcomes and we use this function to make forecasts.
@@ -516,7 +483,7 @@ We address this issue in Appendix~\ref{app:endogeneity} using a factor-structure
 
 We also examine if our predictions differ when we control for the proxied factors, aside from the rest of the variables we use to predict. Predictions do not change much. We use this same procedure to test Assumption~\ref{ass:eczema} in Appendix~\ref{app:invariance} for the experimental sample. We fail to reject the null hypotheses of invariance of the technology across treatment regimes.
 
-\subsection{Parental Income}
+\subsection{Parental Income} \label{section:pincome}
 
 In practice, ABC/CARE had a childcare component: parents of treated children were able to have their children in the center for eight hours a day for five years. This gain was mainly for mothers, given that only $27\%$ of mothers of children reported to live with a partner at baseline and this barely changed afterward. Arguably, this is the component that generated the treatment effects in maternal education, labor force participation, and parental income that we report in Table~\ref{table:tescombined} and Appendix~\ref{appendix:results}.
 
@@ -605,7 +572,7 @@ Previous analyses of ABC pay particular attention to special education, arguing 
 
 \section{Benefit/Cost Analysis} \label{section:cbaresults}
 
-This section reports cost/benefit and rate of return analyses underlying Figure~\ref{figure:main}. The results we discuss are the central focus of this paper. Appendix~\ref{appendix:sensitivity} displays an intensive sensitivity analysis of each of the components we consider in our main results. It includes scenarios in which all our assumptions hold and scenarios in which they are drastically violated. It is an extension of the sensitivity analysis we present in Table~\ref{table:cba}.
+This section reports cost/benefit and rate of return analyses underlying Figure~\ref{figure:main}. The results we discuss are the central focus of this paper. Appendix~\ref{appendix:sensitivity} displays an intensive sensitivity analysis of each of the components we consider in our main results. It includes scenarios in which all our assumptions hold and scenarios in which they are drastically violated, providing a notion of bounds for our estimates. It is an extension of the sensitivity analysis we present in Table~\ref{table:cba}.
 
 \subsection{Program Costs} \label{section:programscosts}
 
@@ -613,6 +580,9 @@ The yearly cost of the program was \$18,514 per participant in 2014 USD. We impr
 
 \subsection{Benefit/Cost Estimates}
 
+\noindent \textbf{[JLG: I experimented with changing this section, but we can revert it back. The plots were too busy and are hard to read and grasp. The drastic sensitivity analysis seems also excessive as a first approach. I created tables that present the baseline estimates and depart from them in a more sensible way, I believe. We have all the previous material, so we can revert back.]}
+
+\begin{comment}
 Figure~\ref{figure:npvs} presents the net present values for the main components of the cost/benefit analysis pooling males and females. The ``Treatment vs. Next Best'' bars represent the estimates based on the first parameter of interest, comparing the treatment- to the control-group subjects. The ``Treatment vs.  Stay at Home'' bars represent the comparison between the treatment-group and the control-group subjects who stayed at home. The ``Treatment vs. Alternative Preschool'' bars represent the comparison between the treatment-group and the control-group subjects who attended alternative preschools.
 
 The first category, ``Program Costs," represents the cost of the programs' implementation. The second category, ``Total Net Benefits" quantifies the benefits for the treatment-group subjects net of the benefits of the control-group subjects. We consider labor income of both the participants and of their parents, ``Labor Income" and ``Parental Income." The program produces a positive net present value on labor income of the treated subjects. This considers income from age 21 all the way to retirement.
@@ -660,15 +630,54 @@ Note: This figure displays the life-cycle net present values of the main compone
 
 We compute the internal rate of return and benefit/cost ratio implied by the net present values presented in Figure~\ref{figure:npvs} through Figure~\ref{figure:npvsm}. The results without accounting for control substitution are presented in Table~\ref{table:cba}. All the monetary figures are in 2014 USD and are discounted to each child's birth, at a $3\%$ discount rate.\footnote{We present sensitivity analysis to different discount rates in Table~\ref{table:cba} and in Appendix~\ref{appendix:sensitivity}.}
 
-Pooling males and females, the results indicate that the program is socially efficient: the baseline estimates for the internal rate of return and the benefit/cost ratio are \irrp\ and \bcp. \textit{The program generates a benefit of \bcp\ for every dollar spent on it}. This is of particular importance because ABC/CARE was much more expensive than other early childhood education programs---the treatment involved more services over a longer time period \citep{Elango_Hojman_etal_2016_Early-Edu}.
+\end{comment}
 
-The estimates are robust when we conduct a drastic sensitivity analysis by removing components of the benefit/cost analysis entirely.\footnote{Doing this exercise for crime is especially important. In Appendix~\ref{appendix:results}, we note that there are greater effects for females relative to males across crime categories. However, males commit much more expensive crimes (e.g. murder, rape). The net-present value gain due to crime is substantial for males because of this. Even when completely removing the gain associates to crime for males, the program is socially efficient. Both the internal rate of return and the benefit/cost ratio are substantial. In Appendix~\ref{appendix:crime} we analyze sensitivity to different assumptions on crime costs. In Appendix~\ref{appendix:sensitivity}, we present exercises that are not as drastic as removing the whole component, but instead removing fractions of it. We do this for all outcome categories and not only crime.}$^,$\footnote{A relevant analysis to report is that when we drop individuals who commit crimes that could be considered exceptional as murder and rape. Two individuals in the treatment group committed a rape and one individual in the control group committed a murder. The benefit/cost ratios when dropping these individuals are $2.64$ (s.e. $1.02$), $11.74$ (s.e. $5.57$), $5.25$ (s.e. $2.37$) for females, males, and pooling females and males, respectively. The analogous internal rates of return are $9\%$ (s.e $5\%$), $14\%$ (s.e. $5\%$), and $12\%$ (s.e. $\%4)$. } In most cases, the estimated benefit/cost ratios and rates of return are large and statistically significant. This happens for one of either two reasons: (i) the effects are substantial but they are heavily discounted because they happen later in life---e.g. labor income; or (ii) the effects happen early in life but are not as substantial---as in the amount that the control-group parents pay for their children to attend alternative preschools.
+Table~\ref{table:bcsens} presents our baseline estimates of benefit/cost ratios and Table~\ref{table:irrsens} presents the analogous internal rates of return. Pooling males and females, the results indicate that the program is socially efficient: the internal rate of return and the benefit/cost ratio are $12.6\%$ and $5.6$. \textit{The program generates a benefit of \bcp\ for every dollar spent on it}. They are statistically significant, even after accounting for both sampling variation, serial correlation, and forecasting error in the experimental and non-experimental samples. These results are of importance because ABC/CARE was much more expensive than other early childhood education programs---the treatment involved more services over a longer time period \citep{Elango_Hojman_etal_2016_Early-Edu}.
 
-The conclusion of statistically significant internal rates of return and benefit/cost ratios are robust to deleting entire components of the benefit streams. First, we remove the component due to increased parental income. ABC/CARE had a childcare subsidy component allowing the mothers to work. This component amounts to \$82,287. Even after removing this component, the internal rate of return and benefit/cost ratio indicate social efficiency of the program and remain statistically significant.
+We accompany these estimates with a set of sensitivity checks of statistical and economic interest. Our estimates are not driven by our method to account for attrition and item non-response (IPW) or by the control sets we use when computing the net-present values (specification columns).  Although the internal rate of return remains relatively high when predicting only up to ages 21 or 30, the benefit/cost ratios indicate that accounting for benefits that go beyond age 30 is relevant. The return to each dollar is at most $3$ if accounting for benefits up to age 30 only (prediction span columns). The counterfactuals considered also make a difference. Males benefit the most of ABC/CARE relative to alternative preschools, while females benefit the most from ABC/CARE relative to staying at home. We further explore this difference below.
 
-Parental income and crime are the components for which the internal rate of return and the benefit/cost ratio are the most sensitive. The reason for the sensitivity to parental income is that the amount is substantial and it is not heavily discounted because it substantially accumulates during the first $21$ years of the children's life. Crime occurs later in life and its benefits are accordingly discounted. The amount due to crime savings is large so removing it diminishes both the internal rate of return and the benefit/cost ratio (but they remain statistically significant).
+Our baseline estimations account for the deadweight caused by the government by taxing individuals to budget its expenditure. We account for this in all government-related transactions.\footnote{When the transaction between the government and an individual is a direct transfer, we consider .5 as a cost per each transacted dollar as we do not weight the final recipient of the transaction (e.g., transfer income). When the transaction is indirect, we classify it as government spending as a whole and consider its cost as 1.5 per each dollar spend (e.g. public education).} Our baseline estimation assumes that the marginal tax rate is $50\%$. Our estimates are robust to dropping it to $0\%$ or doubling it to $100\%$ (deadweight loss columns). Our baseline estimation of benefit/cost ratios is based on a discount rate of $3\%$. Not discounting roughly doubles our benefit/cost ratios, while they remain significant under a higher discount rate of $7\%$ (discount rate columns).
 
-We also analyze the estimates when splitting the sample by males and females. Some of the estimates lose significance due to the reduction of observations after splitting the sample by gender. The point estimates remain robust across  the sensitivity analysis (see Table~\ref{table:cba}), which computes the benefit/cost ratio and the internal rate of return when removing a component. For females, we observe consistency except for the case where we remove the parental income component. We can observe that the female sample is the main driver of parental income when comparing its net present value between females and males. For males, the estimates are robust, similar to the female sample. 
+Parental income is an important component. As we explain in Section~\ref{section:pincome}, we take a conservative approach in our baseline estimates and do not account for the potential profile shift in parental income due to education and experience. This is based on observed parental income from when the ABC/CARE participants where ages 0 to 21. Alternative approaches considering the gain up to when the parent is 65 years old generate an increase in the gain due to parental income (parental income columns). As we mention in Section~\ref{section:cbamethodology}, our estimates could ignore cohort effects. The individuals in ABC/CARE could experience positive cohort effects that could (i) make them more productive and therefore experience wage growth \citep{Lagakos_Moll_etal_2016_LifeCycle_NBER}; (ii) experience a negative shock such as an economics crisis and therefore experience wage decline \citep{jarosch2014searching}. Our estimates are robust to annual growth and decay rates of $0.5\%$. 
+
+We do not perform sensitivity analysis to investigate cohort effects of health costs. The estimates indicate that treatment individuals are healthier, which reduces medical costs, but also that they live longer, increasing medical costs. These opposing effects negate each other making adjustments to potential cohort effects unecessary.
+
+\newgeometry{top=.6in, bottom=.6in, left=.6in, right=.6in}
+\begin{sidewaystable}[!htpb] 
+\begin{threeparttable}
+\caption{Sensitivity Analysis, Benefit/cost Ratios}
+\label{table:bcsens}
+\centering 
+\footnotesize
+\input{output/allbc_sens}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table displays sensitivity analysis of our baseline benefit/cost ratio calculation to the perturbations indexed in the different rows. The characteristics of the \textit{baseline} calculation are in the table header. IPW: adjusts for attrition and item non-response (see Appendix~\ref{appendix:attrition} for details). Controls: Apgar scores at ages 1 and 5 and a high-risk index (see Appendix~\ref{appendix:results} for details on how we choose these controls). When predicting up to ages 21 and 30, we consider all benefits and costs up to these ages, respectively. Counterfactuals: we consider treatment vs. next best (baseline), treatment vs. stay at home, and treatment vs. alternative preschools (see Section~\ref{section:methodsquestions} for a discussion). Deadweight loss is the loss implied by any public expenditure (0\% is no loss and 100\% is one dollar loss per each dollar spent). Discount rate: rate to discount benefits to child's age 0 (in all calculations). Parental income: see Appendix~\ref{app:parentalincome} for details on the two alternative predictions (Mincer and Life-cycle). Labor Income: .5\ annual growth (decay) is an annual wage growth (decay) due to cohort effects. Crime: major crimes are rape and murder; half costs takes half of victimization and judiciary costs. Health (QALYs): drop all sets the value of life equal to zero. Standard errors obtained from the empirical bootstrap distribution are in parentheses.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\begin{sidewaystable}[!htpb] 
+\begin{threeparttable}
+\caption{Internal Rate of Return, ABC/CARE}
+\label{table:irrsens}
+\centering 
+\footnotesize
+\input{output/allirr_sens}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table displays sensitivity analysis of our baseline internal rate of return calculation to the perturbations indexed in the different rows. The characteristics of the \textit{baseline} calculation are in the table header. IPW: adjusts for attrition and item non-response (see Appendix~\ref{appendix:attrition} for details). Controls: Apgar scores at ages 1 and 5 and a high-risk index (see Appendix~\ref{appendix:results} for details on how we choose these controls). When predicting up to ages 21 and 30, we consider all benefits and costs up to these ages, respectively. Counterfactuals: we consider treatment vs. next best (baseline), treatment vs. stay at home, and treatment vs. alternative preschools (see Section~\ref{section:methodsquestions} for a discussion). Deadweight loss is the loss implied by any public expenditure (0\% is no loss and 100\% is one dollar loss per each dollar spent). Parental income: see Appendix~\ref{app:parentalincome} for details on the two alternative predictions (Mincer and Life-cycle). Labor Income: .5\ annual growth is an annual wage growth due to cohort effects; only benefit assumes labor income is the only benefit of the program. Crime: major crimes are rape and murder; half costs takes half of victimization and judiciary costs. Health (QALYs): drop all sets the value of life equal to zero. N/A: Standard errors obtained from the empirical bootstrap distribution are in parentheses.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+\restoregeometry
+\doublespacing
+
+We also examine the sensitivity to (i) dropping the most costly crimes as murders and rapes;\footnote{Two individuals in the treatment group committed a rape and one individual in the control group committed a murder.} and (ii) halving the costs of victimization and judiciary costs related to crime.  The first is important because we would not want our calculation to be loaded on a few exceptional crimes. The second is important because victimization costs are somewhat subjective (see Appendix~\ref{appendix:crime}). Our benefit/cost analysis is robust to this, even when crime is a major component. Lastly, we examine the sensitivity with respect to our main health component: quality-adjusted life years. This is an important component because relatively healthier individuals survive longer and healthier, and treatment improves health conditions. However, it is important to note that this component majorly accumulates later in life and therefore it is heavily discounted. Dropping the component or doubling the value of life does not have a major impact in our calculations.
+
+The estimates are robust when we conduct a drastic sensitivity analysis by removing components of the benefit/cost analysis entirely (Table~\ref{table:cba}).\footnote{In Appendix~\ref{appendix:sensitivity}, we present exercises that are not as drastic as removing the whole component, but instead removing fractions of it.} Even when completely removing the gain associated with crime for males, the program is socially efficient. Both the internal rate of return and the benefit/cost ratio are substantial. Parental income and crime are the components for which the internal rate of return and the benefit/cost ratio are the most sensitive. The reason for the sensitivity to parental income is that the amount is substantial and it is not heavily discounted because it accumulates during the first $21$ years of the children's life. Crime occurs later in life and its benefits are discounted accordingly. The amount due to crime savings is large so removing it diminishes both the internal rate of return and the benefit/cost ratio (but they remain statistically significant).
+
+We also analyze the estimates when splitting the sample by males and females. Some of the estimates lose significance due to the reduction of observations after splitting the sample by gender. The point estimates remain robust. For females, we observe consistency except for the case where we remove the parental income component. We can observe that the female sample is the main driver of parental income when comparing its net present value between females and males. For males, the estimates are robust, similar to the female sample. 
 
 \begin{table}[!htbp]
 \centering
@@ -699,6 +708,8 @@ We also produce a benefit/cost analysis of the program when accounting for contr
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
+\noindent \textbf{[JLG: I'm analyzing different stories of the gender different, related to family size, as mentioned in the email, and others. Will report.]}
 
 \subsection{Using our Estimates to Understand Recent Benefit/Cost Analyses}
 
