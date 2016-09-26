@@ -44,7 +44,8 @@ include("$current/data.jl")
 # Implement options
 # ================================================================ #
 # Define the gender loop
-global genderloop = ["male", "female", "pooled"]
+#global genderloop = ["male", "female", "pooled"]
+global genderloop = ["female"]
 
 ITTinitial = Dict()
 bsid_orig = Dict()
@@ -61,7 +62,7 @@ for gender in genderloop
 		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :abc]
 		datainuse["$(gender)"][:male] = 1 # bsample does not work for [:male] == 0
 	elseif gender == "pooled"
-		datainuse["$(gender)"] = abccare
+		datainuse["$(gender)"] = abccare[!isna(abccare[:male]), :]
 		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male, :abc]
 	end
 
@@ -82,6 +83,7 @@ for gender in genderloop
 
 	# Define the result matrix for the first bootstrap (brep = 0)
 	for arep in 0:areps
+		println("arep number: $(arep)")
 		datainuse_tmpz = datainuse["$(gender)"]
     datainuse_tmpz = datainuse_tmpz[!isna(datainuse_tmpz[:adraw]), :]
 		datainuse_arepz = datainuse_tmpz[datainuse_tmpz[:adraw] .== arep, :]
