@@ -65,12 +65,20 @@ d_index = 1
 
 ITTini = Dict()
 
-for data in ["abccare"]
-
+for data in ["abccare", "abc"]
+	if data == "abccare"
 		datainuse = abccare_data
 		controlset = conDict["controls_abccare"]
 		outcomelist = outcomeDict["outcome_abccare"]
-
+	elseif data == "abc"
+		datainuse = abc_data
+		controlset = conDict["controls_abc"]
+		outcomelist = outcomeDict["outcome_abc"]
+	elseif data == "care"
+		datainuse = care_data
+		controlset = conDict["controls_care"]
+		outcomelist = outcomeDict["outcome_care"]
+	end
 
 	for dbrep in 0:dbootstraps
 		if dbrep == 0
@@ -98,7 +106,7 @@ function ITTrun(boots)
 
 	d_index = 1
 
-	for data in ["abccare"]
+	for data in ["abccare", "abc"]
 		if data == "abccare"
 			datainuse = abccare_data
 			controlset = conDict["controls_abccare"]
