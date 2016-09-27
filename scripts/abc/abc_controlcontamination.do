@@ -5,8 +5,8 @@ set matsize 11000
 set maxvar  32000
 
 /*
-Project :       ABC, CARE Treatment Effects
-Description:    this .do file plots control contamination cdf's 
+Project :       ABC CBA
+Description:    plots CDF of control contamination, ABC sample
 *This version:  April 8, 2015
 *This .do file: Jorge L. Garcia
 */
@@ -31,25 +31,19 @@ global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 cd $dataabccare
 use append-abccare_iv.dta, clear
 
-replace Q = 0 if dc_mo_pre == 2 & random == 3
-replace P = 0 if dc_mo_pre == 2 & random == 3
-summ P if random == 3
-summ P if random == 0
+// replace dc_mo_pre = 0 if dc_mo_pre == 2
 sort    Q
 replace Q = Q/60
-cumul   Q if program=="care" & random  == 0, gen(cdf_Q_pre_control)
-sort    Q
-cumul   Q if program=="care" & random  == 3, gen(cdf_Q_fc)
-
+cumul   Q if program=="abc" & treat == 0, gen(cdf_Q) 
+summ    P if program=="abc" & treat == 0
+// replace dc_mo_pre = 52 if dc_mo_pre >= 52
 
 #delimit
-twoway (line cdf_Q_pre_control Q if program=="care", lwidth(vthick) lcolor(gs0))
-       (line cdf_Q_fc          Q if program=="care", lwidth(vthick) lpattern(dash) lcolor(gs0))
+twoway (line cdf_Q Q if program=="abc" & treat == 0, lwidth(vthick) lcolor(gs0))
       , 
-		  legend(label(1 "Control") label(2 "Family Education Treatment"))
 		  xlabel(, grid glcolor(gs14)) ylabel(0[.1]1, angle(h) glcolor(gs14))
 		  xtitle(Proportion of Months in Preschool from Ages 0 to 5) ytitle(Cumulative Density Function)
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 cd $output
-graph export care_controlcontamination_months.eps, replace
+graph export abc_controlcontamination_months.eps, replace

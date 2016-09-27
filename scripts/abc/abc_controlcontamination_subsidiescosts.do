@@ -6,7 +6,7 @@ set maxvar  32000
 
 /*
 Project :       ABC CBA
-Description:    this .do file cleans the CCTS
+Description:    this .do file plots control contamination intensity by subsidiy status, ABC sample
 *This version:  December 29, 2015
 *This .do file: Jorge L. Garcia
 *This project : ABC CBA 

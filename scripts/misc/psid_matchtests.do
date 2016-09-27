@@ -5,7 +5,7 @@ set matsize 11000
 
 /*
 Project :       ABC
-Description:    plot estimates conditional on IQ
+Description:    PSID match test.
 *This version:  April 18, 2016
 *This .do file: Jorge L. Garcia
 *This project : All except Seong, B. and CC. 

@@ -4,11 +4,11 @@ clear all
 set matsize 11000
 
 /*
-Project :       ABC treatment effects
+Project :       ABC CBA
 Description:    this .do file prepares treatment effects on the Bayley MDI
 *This version:  April 18, 2015
 *This .do file: Jorge L. Garcia
-*This project : Seong Moon has the ingredients for success
+*This project : CBA Team
 */
 
 // set environment variables
