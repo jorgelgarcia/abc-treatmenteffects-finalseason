@@ -43,6 +43,12 @@ forval sex = 0/2 {
 preserve
 
 	`KEEP`sex''
+	
+	// get N
+	sum P if P == 0
+	local N0_sex`sex' = r(N)
+	sum P if P == 1
+	local N1_sex`sex' = r(N)
 
 	// t test
 	foreach v in `vars_to_compare' {
@@ -86,7 +92,7 @@ restore
 	file write ptable "\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}" _n
 	file write ptable "& \mc{2}{c}{Control Substitution} & $ p $ -value & \mc{2}{c}{Control Substitution} & $ p $ -value & \mc{2}{c}{Control Substitution} & $ p $ -value \\" _n
 	file write ptable "& No & Yes & & No & Yes & & No & Yes &\\" _n
-	//file write ptable "& $ N=19 $ & $ N=55 $ & \\" _n
+	file write ptable "& $ N =`N0_sex0' $ & $ N =`N1_sex0' $ & & $ N =`N0_sex1' $ &  $ N =`N1_sex1' $ & & $ N =`N0_sex2' $ & $ N =`N1_sex2' $ & \\" _n
 	file write ptable "\midrule" _n
 
 	foreach v in `vars_to_compare' {
@@ -99,7 +105,7 @@ restore
 		else {
 	
 			file write ptable "``v'_lab' & `mean_`v'_00' & `mean_`v'_10' & ``v'_p0' & `mean_`v'_01' & `mean_`v'_11' & ``v'_p1' & `mean_`v'_02' & `mean_`v'_12' & ``v'_p2' \\" _n
-			file write ptable "	& (`se_`v'_00') & (`se_`v'_10')  & & (`se_`v'_01') & (`se_`v'_11')  & & (`se_`v'_02') & (`se_`v'_12')  & \\" _n
+			file write ptable "	& $ (`se_`v'_00') $ & $ (`se_`v'_10') $  & & $ (`se_`v'_01') $ & $ (`se_`v'_11') $ & & $ (`se_`v'_02') $ & $ (`se_`v'_12') $  & \\" _n
 		}
 		
 	}
