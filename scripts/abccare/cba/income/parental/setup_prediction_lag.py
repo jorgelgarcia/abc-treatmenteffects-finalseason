@@ -46,7 +46,11 @@ def predict_abc(extrap, extrap_index, abc, verbose=True):
 
 	# set up matrices for interpolation/extrapolation parameters, and errors
 	for sex in ['pooled', 'male', 'female']:
-		params_extrap[sex] = pd.DataFrame([[np.nan for j in range(len(cols.extrap.predictors) + 3)] for k in range(21,65)], index = range(21,65))
+		params_interp[sex] = pd.DataFrame([[np.nan for j in range(len(cols.interpABC.predictors) + 3)] for k in range(13, 21)], index = range(13, 21))
+ -		params_interp[sex].index.names = ['age']
+ -		params_interp[sex].columns = ['Intercept'] + cols.interpABC.predictors + ['y'] + ['rmse']
+
+		params_extrap[sex] = pd.DataFrame([[np.nan for j in range(len(cols.extrap.predictors) + 3)] for k in range(21,68)], index = range(21,68))
 		params_extrap[sex].index.names = ['age']
 		params_extrap[sex].columns = ['Intercept'] + cols.extrap.predictors + ['y'] + ['rmse']
 		error_mat[sex] = pd.DataFrame([])

@@ -48,7 +48,7 @@ global genderloop = ["male", "female", "pooled"]
 # Bring in data
 # ================================================================ #
 # List of outcomes
-outcomes = readtable("$scripts/../outcomes/outcomes_cba_p_inc.csv")
+outcomes = readtable("$scripts/../outcomes/outcomes_cba_dis_p_inc.csv")
 
 # ABC/CARE data
 abccare = readtable("$data/append-abccare_iv.csv")
@@ -65,7 +65,7 @@ d_index = 1
 
 ITTini = Dict()
 
-for data in ("abccare", "abc")
+for data in ["abccare", "abc"]
 	if data == "abccare"
 		datainuse = abccare_data
 		controlset = conDict["controls_abccare"]
@@ -106,7 +106,7 @@ function ITTrun(boots)
 
 	d_index = 1
 
-	for data in ("abccare", "abc")
+	for data in ["abccare", "abc"]
 		if data == "abccare"
 			datainuse = abccare_data
 			controlset = conDict["controls_abccare"]
