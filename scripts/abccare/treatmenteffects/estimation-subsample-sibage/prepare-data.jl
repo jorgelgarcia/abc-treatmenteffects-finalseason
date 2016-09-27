@@ -156,7 +156,7 @@ end
 abccare = abccare[!((abccare[:RV] .== 1) & (abccare[:R] .== 0)), :]
 
 # Keep only those who are not only child at baseline.
-abccare = abccare[(abccare[:only_child0y .== 0]),:]
+abccare = abccare[(abccare[:only_child0y] .== 0),:]
 
 # ------------------------------------------- #
 # Refine the data to no sibling / yes sibling #
