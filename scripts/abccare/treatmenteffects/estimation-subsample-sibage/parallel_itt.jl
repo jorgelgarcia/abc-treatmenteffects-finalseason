@@ -21,7 +21,7 @@ addprocs_pbs(procs)
 # Define "to parallelize process"
 require("$thisdir/ITTrun.jl")
 B = 25 # number of workers being used
-b = 40  # number of work each worker does
+b = 10  # number of work each worker does
 
 ITTboot = pmap(ITTrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 
