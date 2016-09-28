@@ -5,7 +5,7 @@ set matsize 11000
 
 /*
 Project :       ABC CVA
-Description:    Test of endogeneity of prediction function, labor income, ABC and CARE samples control only
+Description:    Test of endogeneity of prediction function, labor income, CNLSY
 *This version:  April 18, 2016
 *This .do file: Jorge L. Garcia
 *This project : CBA Team
@@ -39,20 +39,22 @@ global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 global bootstraps 100
 set seed 0
 
-// ABC
-cd $dataabccare
-use append-abccare_iv.dta, clear
-drop if random == 3
+// open and save measures of cognition and IQ in CNLSY
+cd $datacnlsyp
+use cnlsy-base.dta, clear
 
-egen piatabc  = rowmean(piat5y6m piat6y piat6y6m piat7y)   if program == "abc"
-egen piatcare = rowmean(wj_math5y6m wj_math6y wj_math7y6m) if program == "care"
-gen     piatmath = piatabc  if program == "abc"
-replace piatmath = piatcare if program == "care" 
+global cog  piatrrec1986 piatrcom1986 ppvt1986
+global ncog bpi_scaleasoc1988 bpi_scaleanx1988 bpi_scalehstrong1988 bpi_scalehyp1988 bpi_scaledep1988 bpi_scalewithd1988
+keep id $cog $ncog
 
-global cog  iq2y iq3y iq4y iq5y iq7y iq8y
-global ncog bsi_tsom bsi_thos bsi_tdep bsi_tgsi
+tempfile cnlsyskills
+save   "`cnlsyskills'", replace
 
-foreach varyy of varlist si30y_inc_labor si30y_inc_trans_pub p_inc21y {
+cd $datacnlsyw
+use cnlsy-abc-match.dta, clear
+merge 1:1 id using "`cnlsyskills'"
+
+foreach varyy of varlist si30y_inc_labor si30y_inc_trans_pub {
 matrix allests`varyy' = J(11,1,.)
 matrix rownames allests`varyy' = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons F R2 N 
 
@@ -70,7 +72,7 @@ foreach b of numlist 1(1)$bootstraps {
 	predict noncogfactor
 	
 	// treatment regressions with factor
-	reg `varyy' m_ed0y cogfactor noncogfactor if R == 1, robust
+	reg `varyy' m_ed0y cogfactor noncogfactor, robust
 	matrix t1f = e(b)
 	matrix t1fcomplete`b' = [t1f[1,1],J(1,4,.),t1f[1,2...],e(F),e(r2),e(N)]'
 	matrix rownames t1fcomplete`b' = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons F R2 N
@@ -78,7 +80,7 @@ foreach b of numlist 1(1)$bootstraps {
 	mat_capp allests`varyy' : allests`varyy' t1fcomplete`b'
 
 	
-	reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor if R == 1, robust
+	reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor, robust
 	matrix t2f = e(b)
 	matrix t2fcomplete`b' = [t2f[1,1..4],J(1,1,.),t2f[1,5...],e(F),e(r2),e(N)]'
 	matrix rownames t2fcomplete`b' = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons F R2 N
@@ -86,7 +88,7 @@ foreach b of numlist 1(1)$bootstraps {
 	mat_capp allests`varyy' : allests`varyy' t2fcomplete`b'
 	
 
-	reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor if R == 1, robust
+	reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor, robust
 	matrix t3f = e(b)
 	matrix t3fcomplete`b' = [t3f[1,1..8],e(F),e(r2),e(N)]'
 	matrix rownames t3fcomplete`b' = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons F R2 N
@@ -95,21 +97,21 @@ foreach b of numlist 1(1)$bootstraps {
 
 	
 	// treatment regressions with no factor
-	reg `varyy' m_ed0y if R == 1, robust
+	reg `varyy' m_ed0y, robust
 	matrix t1 = e(b)
 	matrix t1complete`b' = [t1[1,1],J(1,6,.),t1[1,2],e(F),e(r2),e(N)]'
 	matrix rownames t1complete`b' = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons F R2 N
 	matrix colnames t1complete`b' = t1complete`b'
 	mat_capp allests`varyy' : allests`varyy' t1complete`b'
 	
-	reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor if R == 1, robust
+	reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor, robust
 	matrix t2 = e(b)
 	matrix t2complete`b' = [t2[1,1..4],J(1,3,.),t2[1,5],e(F),e(r2),e(N)]'
 	matrix rownames t2complete`b' = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons F R2 N
 	matrix colnames t2complete`b' = t2complete`b'
 	mat_capp allests`varyy' : allests`varyy' t2complete`b'
 
-	reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi if R == 1, robust
+	reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi, robust
 	matrix t3 = e(b)
 	matrix t3complete`b' = [t3[1,1..5],J(1,2,.),t3[1,6],e(F),e(r2),e(N)]'
 	matrix rownames t3complete`b' = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons F R2 N
@@ -166,6 +168,6 @@ order t1completemean t1completepvalue t1fcompletemean t1fcompletepvalue
 mkmat *, matrix(allcoeffs`varyy')
 
 cd $output
-outtable using abccare_endog`varyy'_treatment, mat(allcoeffs`varyy') replace nobox center f(%9.3f)
+outtable using abccare_endog`varyy'_cnsly, mat(allcoeffs`varyy') replace nobox center f(%9.3f)
 restore
 }
