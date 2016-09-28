@@ -52,7 +52,7 @@ replace piatmath = piatcare if program == "care"
 global cog  iq2y iq3y iq4y iq5y iq7y iq8y
 global ncog bsi_tsom bsi_thos bsi_tdep bsi_tgsi
 
-foreach varyy of varlist /*si30y_inc_labor si30y_inc_trans_pub*/ p_inc21y {
+foreach varyy of varlist si30y_inc_labor si30y_inc_trans_pub p_inc21y {
 matrix allests`varyy' = J(12,1,.)
 
 matrix rownames allests`varyy' = R m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons F R2 N
