@@ -36,7 +36,7 @@ global collapseprj  = "$klmmexico/abccare/income_projections/"
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 // bootstraps 
-global bootstraps 100
+global bootstraps 10
 set seed 0
 
 // ABC
@@ -52,8 +52,8 @@ replace piatmath = piatcare if program == "care"
 global cog  iq2y iq3y iq4y iq5y iq7y iq8y
 global ncog bsi_tsom bsi_thos bsi_tdep bsi_tgsi
 
-matrix allests = J(10,1,.)
-matrix rownames allests = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N 
+matrix allests = J(11,1,.)
+matrix rownames allests = R m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N 
 foreach b of numlist 1(1)$bootstraps {
 	preserve
 	bsample
@@ -68,49 +68,49 @@ foreach b of numlist 1(1)$bootstraps {
 	predict noncogfactor
 	
 	// treatment regressions with factor
-	reg si30y_inc_labor m_ed0y cogfactor noncogfactor if R == 0, robust
+	reg si30y_inc_labor R m_ed0y cogfactor noncogfactor, robust
 	matrix t1f = e(b)
-	matrix t1fcomplete`b' = [t1f[1,1],J(1,4,.),t1f[1,2..4],e(r2),e(N)]'
-	matrix rownames t1fcomplete`b' = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N
+	matrix t1fcomplete`b' = [t1f[1,1..2],J(1,4,.),t1f[1,3...],e(r2),e(N)]'
+	matrix rownames t1fcomplete`b' = R m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N
 	matrix colnames t1fcomplete`b' = t1fcomplete`b'
 	mat_capp allests : allests t1fcomplete`b'
 
 	
-	reg si30y_inc_labor m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor if R == 0, robust
+	reg si30y_inc_labor R m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor, robust
 	matrix t2f = e(b)
-	matrix t2fcomplete`b' = [t2f[1,1..4],J(1,1,.),t2f[1,2..4],e(r2),e(N)]'
-	matrix rownames t2fcomplete`b' = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N 
+	matrix t2fcomplete`b' = [t2f[1,1..5],J(1,1,.),t2f[1,6...],e(r2),e(N)]'
+	matrix rownames t2fcomplete`b' = R m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N
 	matrix colnames t2fcomplete`b' = t2fcomplete`b'
 	mat_capp allests : allests t2fcomplete`b'
 	
 
-	reg si30y_inc_labor m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor if R == 0, robust
+	reg si30y_inc_labor R m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor, robust
 	matrix t3f = e(b)
-	matrix t3fcomplete`b' = [t3f[1,1..8],e(r2),e(N)]'
-	matrix rownames t3fcomplete`b' = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N 
+	matrix t3fcomplete`b' = [t3f[1,1..9],e(r2),e(N)]'
+	matrix rownames t3fcomplete`b' = R m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N 
 	matrix colnames t3fcomplete`b' = t3fcomplete`b'
 	mat_capp allests : allests t3fcomplete`b'
 
 	
 	// treatment regressions with no factor
-	reg si30y_inc_labor m_ed0y if R == 0, robust
+	reg si30y_inc_labor R m_ed0y, robust
 	matrix t1 = e(b)
-	matrix t1complete`b' = [t1[1,1],J(1,6,.),t1[1,2],e(r2),e(N)]'
-	matrix rownames t1complete`b' = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N 
+	matrix t1complete`b' = [t1[1,1..2],J(1,6,.),t1[1,3],e(r2),e(N)]'
+	matrix rownames t1complete`b' = R m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N
 	matrix colnames t1complete`b' = t1complete`b'
 	mat_capp allests : allests t1complete`b'
 	
-	reg si30y_inc_labor m_ed0y piatmath years_30y si21y_inc_labor if R == 0, robust
+	reg si30y_inc_labor R m_ed0y piatmath years_30y si21y_inc_labor, robust
 	matrix t2 = e(b)
-	matrix t2complete`b' = [t2[1,1..4],J(1,3,.),t2[1,2],e(r2),e(N)]'
-	matrix rownames t2complete`b' = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N 
+	matrix t2complete`b' = [t2[1,1..5],J(1,3,.),t2[1,6],e(r2),e(N)]'
+	matrix rownames t2complete`b' = R m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N
 	matrix colnames t2complete`b' = t2complete`b'
 	mat_capp allests : allests t2complete`b'
 
-	reg si30y_inc_labor m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi if R == 0, robust
+	reg si30y_inc_labor R m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi, robust
 	matrix t3 = e(b)
-	matrix t3complete`b' = [t3[1,1..5],J(1,2,.),t3[1,6],e(r2),e(N)]'
-	matrix rownames t3complete`b' = m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N 
+	matrix t3complete`b' = [t3[1,1..6],J(1,2,.),t3[1,7],e(r2),e(N)]'
+	matrix rownames t3complete`b' = R m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi cogfactor noncogfactor cons R2 N
 	matrix colnames t3complete`b' = t3complete`b'
 	mat_capp allests : allests t3complete`b'
 	restore
@@ -163,4 +163,4 @@ order t1completemean t1completepvalue t1fcompletemean t1fcompletepvalue
 mkmat *, matrix(allcoeffs)
 
 cd $output
-outtable using abccare_endog_control, mat(allcoeffs) replace nobox center f(%9.3f)
+outtable using abccare_endog, mat(allcoeffs) replace nobox center f(%9.3f)
