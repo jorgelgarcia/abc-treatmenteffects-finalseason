@@ -67,7 +67,7 @@ foreach group in no_sibling yes_sibling all_sibling {
 }
 
 cd $output
-foreach sex in pooled {
+foreach sex in female male pooled {
 	matrix allest`sex'          = [no_sibling_`sex' \ yes_sibling_`sex']
 	matrix colnames allest`sex' = itt ittp sexnum
  	clear
