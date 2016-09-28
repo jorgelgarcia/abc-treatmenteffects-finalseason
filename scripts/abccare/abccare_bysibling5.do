@@ -3,12 +3,11 @@ set more off
 clear all
 set matsize 11000
 
-/*
-Project :       ABC
-Description:    plot estimates conditional on IQ
-*This version:  April 18, 2016
-*This .do file: Jorge L. Garcia
-*This project : All except Seong, B. and CC. 
+/* 
+Project: 			ABC and CARE CBA
+This file:			Compare TE on observed parental income by # of siblings
+Author:				Anna Ziff
+Original date:		September 27, 2016
 */
 
 // set environment variables (server)

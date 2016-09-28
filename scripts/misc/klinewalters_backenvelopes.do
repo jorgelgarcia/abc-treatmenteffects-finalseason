@@ -6,7 +6,7 @@ set maxvar  32000
 
 /*
 Project :       ABC, CARE Treatment Effects / CBA
-Description:    this .do file investigates the IRR/BC distributions
+Description:    this .do file investigates Kline-Walters CBAs
 *This version:  July 7, 2015
 *This .do file: Jorge L. Garcia
 */

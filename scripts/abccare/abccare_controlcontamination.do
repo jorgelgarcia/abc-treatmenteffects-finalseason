@@ -5,8 +5,8 @@ set matsize 11000
 set maxvar  32000
 
 /*
-Project :       ABC, CARE Treatment Effects
-Description:    this .do file compares ABC and CARE to PSID
+Project :       ABC CBA
+Description:    plots CDF of control contamination, ABC and CARE samples
 *This version:  April 8, 2015
 *This .do file: Jorge L. Garcia
 */

@@ -4,11 +4,11 @@ clear all
 set matsize 11000
 
 /*
-Project :       ABC
-Description:    plot estimates conditional on IQ
+Project :       ABC CBA
+Description:    plots mean treatment less control for IQ measures from age 1 to 21
 *This version:  April 18, 2016
 *This .do file: Jorge L. Garcia
-*This project : All except Seong, B. and CC. 
+*This project : CBA Team
 */
 
 // set environment variables (server)
@@ -34,43 +34,19 @@ cd $output
 
 // abc sample
 drop if random == 3
-
-/*
-// bayley mdi by cohort
-tab cohort, gen(cohort_)
-
-foreach num of numlist 1(1)4 { 
-	gen treat_cohort_`num' = treat*cohort_`num'
-}
-
-foreach var of varlist mdi0y6m mdi1y {
-	reg `var' treat_cohort_1 treat_cohort_2 treat_cohort_3 treat_cohort_4 cohort_1 cohort_2 cohort_3
-	est sto `var'_est
-}
-
-cd $output
-outreg2 [mdi0y6m_est mdi1y_est] using abc_cohorts, replace tex dec(3) par(se) r2 nocons nonotes /// 
-				keep(treat_cohort_1 treat_cohort_2 treat_cohort_3 treat_cohort_4)
-
-// iq conditional on bayley mdi at 12 and 24 months 
-global condition0 if male == 0
-global condition1 if male == 1 
-global condition2
-*/ 
-
 rename mdi1y iq1y
 
 foreach sex in 0 1 {
 	matrix iq_`sex' = J(1,4,.)
 	matrix colnames iq_`sex' = itt seitt ittc seittc
 	foreach age in 1 2 3 4 5 7 8 12 15 21 { 
-		reg iq`age'y treat ${condition`sex'} if male == `sex'
+		reg iq`age'y treat if male == `sex'
 		matrix bitt_`sex'_`age' = e(b)
 		matrix bitt_`sex'_`age' = bitt_`sex'_`age'[1,1]
 		matrix Vitt_`sex'_`age' = e(V)
 		matrix Vitt_`sex'_`age' = sqrt(Vitt_`sex'_`age'[1,1])
 		
-		reg iq`age'y treat iq3y ${condition`sex'} if male == `sex'
+		reg iq`age'y treat iq3y if male == `sex'
 		matrix bittc_`sex'_`age' = e(b)
 		matrix bittc_`sex'_`age' = bittc_`sex'_`age'[1,1]
 		matrix Vittc_`sex'_`age' = e(V)

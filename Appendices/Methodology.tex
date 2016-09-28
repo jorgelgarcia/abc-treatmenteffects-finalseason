@@ -586,6 +586,26 @@ Note: Panels (a) displays a factor score estimated based on the measurement syst
 
 \noindent The third approach is to predict parental income as in Section~\ref{section:cbamethodology}. For want of maternal characteristics enabling us to characterize a match, we skip the matching procedure and directly implement the prediction. As with labor income (of program participants) after age 30, we append the PSID and NLSY79 and use them as a common sample. For this approach, we assume that all parental income is earned by the mother and limit the sample to black females whose labor income at each age is below the in-sample 90th percentile (we calculate this for the PSID and NLSY79 separately before appending the samples). We use two predictors: (i) average observed income from ages 21 to 67; (ii) lagged income. We initialize the prediction with the last observed measure of maternal income and extrapolate until the mother is 65 years old. We present results based on this approach, as well the approach in Appendix~\ref{appendix:mincerpar} in Section~\ref{section:cbaresults}. 
 
+\noindent We show an equivalent to Figure~\ref{figure:pincome} in the main text with this measure of parental income next.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Discounted Parental Income by Participant's Number and Age of Siblings at Baseline}\label{figure:pincomeapp}
+\begin{subfigure}[h]{0.5\textwidth}
+		\centering
+		\caption{No Siblings vs. $>0$ Siblings}
+		\includegraphics[width=\textwidth]{output/abccare_pinc_npv_pooled.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.5\textwidth}
+		\centering
+		\caption{Siblings Younger than 5 vs. Siblings 5 or Older}
+		\includegraphics[width=\textwidth]{output/abccare_pinc_npv_sibs5_pooled.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: Panel (a) displays the average parental income of parents of children with and without siblings at baseline. Panel (b) displays the average parental income of parents of children with young siblings (younger than 18 years old) and children with adult siblings (18 years old or older) at baseline. Parental income is in 2014 USD discounted to child's participant age 0. We use the measure of parental income in Section~\ref{section:pincome}.
+\end{figure}
+
+
 \subsection{Health Costs}
 
 \noindent We predict health care costs from age 30 up to age 79, and criminal costs from birth
