@@ -58,11 +58,11 @@ def boot_predict_aux(extrap, adraw):
  	extrap_ind = extrap_ind[tmp]
 
 	# now estimate the earnings
-	params_extrap, errors, proj_extrap = predict_abc(extrap, extrap_index=extrap_ind, abc = abcd, verbose=True)
+	params_extrap, errors, proj_extrap, abc = predict_abc(extrap, extrap_index=extrap_ind, abc = abcd, verbose=True)
 
 	print 'Success auxiliary bootstrap {}.'.format(adraw)
 
-	output = [params_extrap, errors, proj_extrap]
+	output = [params_extrap, errors, proj_extrap, abc]
 
 	return output
 
@@ -72,6 +72,7 @@ def boot_predict_aux(extrap, adraw):
 rslt = Parallel(n_jobs=1)(
 	delayed(boot_predict_aux)(extrap, k) for k in xrange(aux_draw))
 
+params_interp = {}
 params_extrap = {}
 errors = {}
 projections = {}
@@ -81,10 +82,11 @@ projections = {}
 # output results
 
 for sex in ['male', 'female', 'pooled']:
-
+	params_interp[sex] = pd.concat([rslt[k][2][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
  	params_extrap[sex] = pd.concat([rslt[k][0][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
  	errors[sex] = pd.concat([rslt[k][1][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
-   	projections[sex] = pd.concat([rslt[k][2][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
+   	#projections[sex] = pd.concat([rslt[k][2][sex] for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
+	projections[sex] = pd.concat([pd.concat([rslt[k][0][sex], rslt[k][2][sex]], axis=1) for k in range(aux_draw)], axis=0, keys=range(aux_draw), names=['adraw'])
 
    	# output projections .csv
    	projections[sex].to_csv(os.path.join(paths.rslts, 'parental_labor_proj_{}.csv'.format(sex)))

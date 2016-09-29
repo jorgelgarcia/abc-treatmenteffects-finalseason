@@ -105,7 +105,7 @@ abcd.drop(abcd.loc[(abcd.RV==1) & (abcd.R==0)].index, inplace=True)
 
 inc = abcd.filter(regex='^inc_labor[0-9][0-9]')
 along = pd.wide_to_long(abcd[inc.columns].reset_index(), ['inc_labor'], i='id', j='age').sort_index()
-along = along.interpolate(limit=5)
+along = along.interpolate(limit=1)
 awide = along.unstack()
 awide.columns = awide.columns.droplevel(0)
 awide.columns = ['{}{}'.format('inc_labor', a) for a in awide.columns]
