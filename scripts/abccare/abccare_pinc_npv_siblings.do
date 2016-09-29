@@ -8,6 +8,7 @@ Original date:		September 27, 2016
 // macros
 global klmshare	:	env klmshare
 global projects	:	env projects
+
 global ate_dir 	= "${projects}/abc-treatmenteffects-finalseason/data/abccare/extensions/outcomes_ate"
 global proj_dir = "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/rslt/projections/parental"
 global output	= "${projects}/abc-treatmenteffects-finalseason/output"
