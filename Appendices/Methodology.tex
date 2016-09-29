@@ -463,6 +463,50 @@ Note: Panels (a) displays a factor score estimated based on the measurement syst
 \end{threeparttable}
 \end{sidewaystable}
 
+\noindent A \textbf{more direct} test is to use the experimental sample and ask if once we account for the variables $\bm{X}_{t}$, $R$ (randomization to treatment assignment in ABC/CARE) predicts the outcome of interest, conditional on $\bm{B}$. This tests if $\bm{X}_{t}$ suffices to summarize the treatment described by $R$. Note that $R = D$ in our main methodology. That is, children who are offered treatment attend to it. For the three main outcomes we predict, once we condition on $\bm{B}, \bm{X}_{t}, \bm{\theta}$, the coefficient associated to $R$ is not significant.
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Parental Income at (Child's) Age 21 Accounting for $R, \bm{B}, \bm{\theta},$ and $\bm{X}_{t}$, ABC/CARE}
+\label{table:end1}
+\centering
+\scriptsize
+\input{output/abccare_endog_p_inc21y_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of parental income at (child's) age 21 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Labor Income at Age 30 Accounting for $R, \bm{B}, \bm{\theta},$ and $\bm{X}_{t}$, ABC/CARE}
+\label{table:end2}
+\centering
+\scriptsize
+\input{output/abccare_endog_si30y_inc_labor_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Transfer Income at Age 30 Accounting for $R, \bm{B}, \bm{\theta},$ and $\bm{X}_{t}$, ABC/CARE}
+\label{table:end3}
+\centering
+\scriptsize
+\input{output/abccare_endog_si30y_inc_trans_pub_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
 
 \subsection{Testing  Assumption~\ref{ass:corns}} \label{app:endogeneity}
 
@@ -577,50 +621,6 @@ Note: Panels (a) displays a factor score estimated based on the measurement syst
 \begin{tablenotes}
 \footnotesize
 \item Note: Prediction of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\theta}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\theta}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
-
-\noindent A \textbf{more direct} test is to use the experimental sample and ask if once we account for the variables $\bm{X}_{t}$, $R$ (randomization to treatment assignment in ABC/CARE) predicts the outcome of interest, conditional on $\bm{B}$. This tests if $\bm{X}_{t}$ suffices to summarize the treatment described by $R$. Note that $R = D$ in our main methodology. That is, children who are offered treatment attend to it. For the three main outcomes we predict, once we condition on $\bm{B}, \bm{X}_{t}, \bm{\theta}$, the coefficient associated to $R$ is not significant.
-
-\begin{sidewaystable}[H]
-\begin{threeparttable}
-\caption{Prediction of Parental Income at (Child's) Age 21 Accounting for $R, \bm{B}, \bm{\theta},$ and $\bm{X}_{t}$, ABC/CARE}
-\label{table:end1}
-\centering
-\scriptsize
-\input{output/abccare_endog_p_inc21y_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item Note: Prediction of parental income at (child's) age 21 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
-
-\begin{sidewaystable}[H]
-\begin{threeparttable}
-\caption{Prediction of Labor Income at Age 30 Accounting for $R, \bm{B}, \bm{\theta},$ and $\bm{X}_{t}$, ABC/CARE}
-\label{table:end2}
-\centering
-\scriptsize
-\input{output/abccare_endog_si30y_inc_labor_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
-
-\begin{sidewaystable}[H]
-\begin{threeparttable}
-\caption{Prediction of Transfer Income at Age 30 Accounting for $R, \bm{B}, \bm{\theta},$ and $\bm{X}_{t}$, ABC/CARE}
-\label{table:end3}
-\centering
-\scriptsize
-\input{output/abccare_endog_si30y_inc_trans_pub_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item Note: Prediction of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
