@@ -63,7 +63,7 @@ matrix rownames allests`varyy' = treatment m_ed_base childIQ years30 inc27 healt
 		reg `varyy' treatment m_ed_base cogfactor extfactor academicfactor, robust
 		matrix t1f = e(b)
 		matrix t1fcomplete`b' = [t1f[1,1..2],J(1,4,.),t1f[1,3...],e(F),e(r2),e(N)]'
-		matrix rownames t1fcomplete`b' = treatment years30 m_ed_base inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
+		matrix rownames t1fcomplete`b' = treatment m_ed_base childIQ years30 inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
 		matrix colnames t1fcomplete`b' = t1fcomplete`b'
 		mat_capp allests`varyy' : allests`varyy' t1fcomplete`b'
 
@@ -71,7 +71,7 @@ matrix rownames allests`varyy' = treatment m_ed_base childIQ years30 inc27 healt
 		reg `varyy' treatment m_ed_base childIQ years30 inc27 cogfactor extfactor academicfactor, robust
 		matrix t2f = e(b)
 		matrix t2fcomplete`b' = [t2f[1,1..5],J(1,1,.),t2f[1,6...],e(F),e(r2),e(N)]'
-		matrix rownames t2fcomplete`b' = treatment years30 m_ed_base inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
+		matrix rownames t2fcomplete`b' = treatment m_ed_base childIQ years30 inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
 		matrix colnames t2fcomplete`b' = t2fcomplete`b'
 		mat_capp allests`varyy' : allests`varyy' t2fcomplete`b'
 		
@@ -79,7 +79,7 @@ matrix rownames allests`varyy' = treatment m_ed_base childIQ years30 inc27 healt
 		reg `varyy' treatment m_ed_base childIQ years30 inc27 healthy40 cogfactor extfactor academicfactor, robust
 		matrix t3f = e(b)
 		matrix t3fcomplete`b' = [t3f[1,1...],e(F),e(r2),e(N)]'
-		matrix rownames t3fcomplete`b' = treatment years30 m_ed_base inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
+		matrix rownames t3fcomplete`b' = treatment m_ed_base childIQ years30 inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
 		matrix colnames t3fcomplete`b' = t3fcomplete`b'
 		mat_capp allests`varyy' : allests`varyy' t3fcomplete`b'
 
@@ -88,21 +88,21 @@ matrix rownames allests`varyy' = treatment m_ed_base childIQ years30 inc27 healt
 		reg `varyy' treatment m_ed_base, robust
 		matrix t1 = e(b)
 		matrix t1complete`b' = [t1[1,1..2],J(1,7,.),t1[1,3],e(F),e(r2),e(N)]'
-		matrix rownames t1complete`b' = treatment years30 m_ed_base inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
+		matrix rownames t1complete`b' = treatment m_ed_base childIQ years30 inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
 		matrix colnames t1complete`b' = t1complete`b'
 		mat_capp allests`varyy' : allests`varyy' t1complete`b'
 		
 		reg `varyy' treatment m_ed_base childIQ years30 inc27, robust
 		matrix t2 = e(b)
 		matrix t2complete`b' = [t2[1,1..5],J(1,4,.),t2[1,6],e(F),e(r2),e(N)]'
-		matrix rownames t2complete`b' = treatment years30 m_ed_base inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
+		matrix rownames t2complete`b' = treatment m_ed_base childIQ years30 inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
 		matrix colnames t2complete`b' = t2complete`b'
 		mat_capp allests`varyy' : allests`varyy' t2complete`b'
 
 		reg `varyy' treatment m_ed_base childIQ years30 inc27 healthy40, robust
 		matrix t3 = e(b)
 		matrix t3complete`b' = [t3[1,1..6],J(1,3,.),t3[1,7],e(F),e(r2),e(N)]'
-		matrix rownames t3complete`b' = treatment years30 m_ed_base inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
+		matrix rownames t3complete`b' = treatment m_ed_base childIQ years30 inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
 		matrix colnames t3complete`b' = t3complete`b'
 		mat_capp allests`varyy' : allests`varyy' t3complete`b'
 		restore
