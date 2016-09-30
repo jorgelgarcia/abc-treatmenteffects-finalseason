@@ -45,12 +45,12 @@ outcomes = pd.read_csv(path_outcomes, index_col='variable')
 rslt_y = {}
 
 for sex in ['pooled', 'male', 'female']:
-    itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10_sib0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
-    itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1_sib0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
-    itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0_sib0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10_case1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1_case1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+    itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0_case1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
-    matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1_sib0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
-    matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0_sib0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1_case1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+    matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0_case1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
     itt_all = itt_all.loc[:,['itt_noctrl', 'itt_ctrl', 'itt_wctrl']]
     rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
@@ -264,12 +264,12 @@ def format_sdpvalue(x):
         return '[{}]'.format(x)      
 
 
-     
+    
 #=========================================
 # Make Appendix Tables of results
 #=========================================
 
-header = [['Variable', 'Age', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)']]
+header = [['Variable', 'Age', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)', '(7)', '(8)']]
 for t in [1,2]:
     # prepare table for pytabular (t=1 regular p-values, t=2 stepdown)
     if t == 1:
@@ -281,13 +281,13 @@ for t in [1,2]:
     data_app.index = outcomes.loc[data_app.reset_index(level=1).index, ['label', 'age', 'category']].set_index(['label', 'age', 'category']).index
     
     # now make tables looping throuh sex and outcome categories
-    for sex in ['all']:
+    for sex in ['pooled', 'male', 'female']:
         for i, cat in enumerate(outcomes.category.drop_duplicates().tolist()):
             
             # select the columns of results that you want
-            rslt_columns = [('pooled', 'pall', 'itt_noctrl'), ('pooled', 'pall', 'itt_wctrl'),
-                            ('male', 'pall', 'itt_noctrl'), ('male', 'pall', 'itt_wctrl'),
-                            ('female', 'pall', 'itt_noctrl'), ('female', 'pall', 'itt_wctrl'),]
+            rslt_columns = [(sex, 'pall', 'itt_noctrl'), (sex, 'pall', 'itt_wctrl'),
+                            (sex, 'p0', 'itt_noctrl'), (sex, 'p0', 'itt_wctrl'), (sex, 'p0', 'epan_ipw'),
+                            (sex, 'p1', 'itt_noctrl'), (sex, 'p1', 'itt_wctrl'), (sex, 'p1', 'epan_ipw')]
     
             ix = outcomes.set_index(['label', 'age']).query('category=="{}"'.format(cat))
             ix = ix.set_index(['category'], append=True).drop(ix.set_index(['category'], append=True).index.difference(data_app.index)).index # TO ACCOUNT FOR CASES WHERE EFFECT COULD NTO BE ESTIMATED
@@ -360,6 +360,4 @@ for t in [1,2]:
             if t == 1:
                 table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}'.format(sex, i)))
             if t == 2:
-                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}_sd'.format(sex, i)))            
-
-
+                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}_sd'.format(sex, i)))     
