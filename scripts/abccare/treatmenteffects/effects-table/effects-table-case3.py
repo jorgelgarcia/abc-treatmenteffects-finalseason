@@ -268,7 +268,7 @@ def format_sdpvalue(x):
 # Make Appendix Tables of results
 #=========================================
 
-header = [['Variable', 'Age', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)', '(7)', '(8)']]
+header = [['Variable', 'Age', '(1)', '(2)', '(4)', '(5)', '(7)', '(8)']]
 for t in [1,2]:
     # prepare table for pytabular (t=1 regular p-values, t=2 stepdown)
     if t == 1:
@@ -285,8 +285,8 @@ for t in [1,2]:
             
             # select the columns of results that you want
             rslt_columns = [(sex, 'pall', 'itt_noctrl'), (sex, 'pall', 'itt_wctrl'),
-                            (sex, 'p0', 'itt_noctrl'), (sex, 'p0', 'itt_wctrl'), (sex, 'p0', 'epan_ipw'),
-                            (sex, 'p1', 'itt_noctrl'), (sex, 'p1', 'itt_wctrl'), (sex, 'p1', 'epan_ipw')]
+                            (sex, 'p0', 'itt_wctrl'), (sex, 'p0', 'epan_ipw'),
+                           (sex, 'p1', 'itt_wctrl'), (sex, 'p1', 'epan_ipw')]
     
             ix = outcomes.set_index(['label', 'age']).query('category=="{}"'.format(cat))
             ix = ix.set_index(['category'], append=True).drop(ix.set_index(['category'], append=True).index.difference(data_app.index)).index # TO ACCOUNT FOR CASES WHERE EFFECT COULD NTO BE ESTIMATED
