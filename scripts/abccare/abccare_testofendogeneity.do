@@ -173,7 +173,7 @@ foreach sex in male female pooled {
 		matrix all`varyy'_s`sex'p2 = [all`varyy'_s`sex'[10..12,1], J(3,1,.),all`varyy'_s`sex'[10..12,3], J(3,1,.),all`varyy'_s`sex'[10..12,5], J(3,1,.),all`varyy'_s`sex'[10..12,7], J(3,1,.),all`varyy'_s`sex'[10..12,9], J(3,1,.),all`varyy'_s`sex'[10..12,11], J(3,1,.)]
 		
 		matrix all`varyy'_s`sex' = [all`varyy'_s`sex'p1 \ all`varyy'_s`sex'p2]		
-		matrix rownames all`varyy'_s`sex' = R "Mother'sEducation" BaselineIQ "Education(30)" "LaborIncome(27)" "HealthIndex(30)" Cognitive NonCognitive Constant "F-stat" "R2" Observations
+		matrix rownames all`varyy'_s`sex' = R "Mother'sEducation" "PIAT(5-7)" "Education(30)" "LaborIncome(21)" "BMI(34)" Cognitive NonCognitive Constant "F-stat" "R2" Observations
 
 		cd $output
 		outtable using abccare_endog_`varyy'_s`sex', mat(all`varyy'_s`sex') replace nobox center f(%9.3f)
