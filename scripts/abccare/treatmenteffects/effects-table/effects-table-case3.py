@@ -45,12 +45,12 @@ outcomes = pd.read_csv(path_outcomes, index_col='variable')
 rslt_y = {}
 
 for sex in ['pooled', 'male', 'female']:
-    itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10_sib0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
-    itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1_sib0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
-    itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0_sib0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10_case3.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1_case3.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+    itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0_case3.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
-    matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1_sib0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
-    matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0_sib0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1_case3.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+    matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0_case3.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
     itt_all = itt_all.loc[:,['itt_noctrl', 'itt_ctrl', 'itt_wctrl']]
     rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
