@@ -155,8 +155,15 @@ foreach sex in male female pooled {
 		      t2completemean t2completepvalue t2fcompletemean t2fcompletepvalue
 		      t3completemean t3completepvalue t3fcompletemean t3fcompletepvalue;
 		# delimit cr
-
+		
 		mkmat *, matrix(all`varyy'_s`sex')
+		
+		matrix all`varyy'_s`sex'p1 = all`varyy'_s`sex'[1..10,1...]
+		matrix all`varyy'_s`sex'p2 = [all`varyy'_s`sex'[11..13,1], J(3,1,.),all`varyy'_s`sex'[11..13,3], J(3,1,.),all`varyy'_s`sex'[11..13,5], J(3,1,.),all`varyy'_s`sex'[11..13,7], J(3,1,.),all`varyy'_s`sex'[11..13,9], J(3,1,.),all`varyy'_s`sex'[11..13,11], J(3,1,.)]
+		
+		matrix all`varyy'_s`sex' = [all`varyy'_s`sex'p1 \ all`varyy'_s`sex'p2]
+		
+		matrix rownames all`varyy'_s`sex' = R "Mother'sEducation" BaselineIQ "Education(30)" "LaborIncome(27)" "HealthIndex(30)" Cognitive Externalizing Academic Constant "F-stat" "R2" Observations
 
 		cd $output
 		outtable using perry_endog_`varyy'_s`sex', mat(all`varyy'_s`sex') replace nobox center f(%9.3f)
