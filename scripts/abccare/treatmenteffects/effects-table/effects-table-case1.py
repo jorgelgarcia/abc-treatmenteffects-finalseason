@@ -31,7 +31,7 @@ path_results = os.path.join(filedir, '..','rslt/')
 path_outcomes = os.path.join(filedir, '..','../outcomes/outcomes_cba_mainpaper.csv')
 
 # provide option for two sided tests
-twosided = 1
+twosided = 0
 
 
 #=========================================
@@ -269,7 +269,7 @@ def format_sdpvalue(x):
 # Make Appendix Tables of results
 #=========================================
 
-header = [['Variable', 'Age', '(1)', '(2)',  '(4)', '(5)', '(7)', '(8)']]
+header = [['Variable', 'Age', '(1)', '(2)', '(4)', '(5)', '(7)', '(8)']]
 for t in [1,2]:
     # prepare table for pytabular (t=1 regular p-values, t=2 stepdown)
     if t == 1:

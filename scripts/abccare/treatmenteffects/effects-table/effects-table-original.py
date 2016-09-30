@@ -31,7 +31,7 @@ path_results = os.path.join(filedir, '..','rslt/')
 path_outcomes = os.path.join(filedir, '..','../outcomes/outcomes_cba_mainpaper.csv')
 
 # provide option for two sided tests
-twosided = 1
+twosided = 0
 
 
 #=========================================
