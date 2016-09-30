@@ -154,11 +154,6 @@ end
 abccare[:Qthres] = abccare[:Q] ./ 60
 abccare[:P] = 1(abccare[:Qthres] .> 0.2)
 
-println("ABCCARE P threshold: $(abccare[:, [:P, :Q, :Qthres]])")
-dddddddddddddddddddddd
-
-
-
 # ------------------------------- #
 # Define ABC, CARE, ABC-CARE data #
 # ------------------------------- #
