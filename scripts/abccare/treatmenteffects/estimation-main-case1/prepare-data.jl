@@ -152,7 +152,7 @@ end
 # Generate the P variable (Q/60) <= 0.2 ==> P = 0 #
 # ----------------------------------------------- #
 abccare[:Qthres] = abccare[:Q] ./ 60
-abccare[:P] = (abccare[:Qthres] .> 0.2)
+abccare[:P] = 1(abccare[:Qthres] .> 0.2)
 
 println("ABCCARE P threshold: $(abccare[:, [:P, :Q, :Qthres]])")
 dddddddddddddddddddddd
