@@ -40,16 +40,16 @@ and
 \begin{align*}
 \sum_{i \in \mathcal{I}} y \alpha_{i} \beta_{i,r} \mathbf{1}(r_i = r)
 \end{align*}
-\noindent where $\mathcal{I}$ indexes the individuals in the sample, $a_i$ indicates whether we observe $Y$ for individual $i$, and
+\noindent where $\mathcal{I}$ indexes the individuals in the sample, $\alpha_i$ indicates whether we observe $Y$ for individual $i$, and
 
 \begin{align*}
-	\beta_{i,r} = \frac{1}{\pi_r(x_i) \alpha(r_i,b_i,x_i)} \frac{1}{\sum_k{\frac{\mathbf{1}(r_i = r) \mathbf{1}(a_i = 1)}{\pi_r(x_k)\alpha(r_k,b_k,x_k)}}},
+	\beta_{i,r} = \frac{1}{\pi_r(x_i) \alpha(r_i,b_i,x_i)} \frac{1}{\sum_k{\frac{\mathbf{1}(r_i = r) \mathbf{1}(\alpha_i = 1)}{\pi_r(x_k)\alpha(r_k,b_k,x_k)}}},
 \end{align*}
 \noindent with $\pi_r(x) := P(R=r|X=x)$ and $\alpha(r,b,x) := P(A=1|R=r,\bm{B}=b,X=x)$. The weight $\pi_r$ corrects for selection into treatment based on pre-program variables $X$. The weight $\alpha_{i}$ corrects for item non-response based on $R, \bm{B}, X$.\\
 
 \subsection{Variables to Construct IPW}
 
-\noindent We follow the procedure in Section~\ref{appendix:bvariables} to choose the variables with which we construct the weights. Tables~\ref{table:attpooled} lists the variables in which we account fro attrition, together with the variables we use to construct the IPW scheme. We jointly estimate these weights for males and females. Section~\ref{appendix:methodology} explains and justifies the cases in which we account for attrition.
+\noindent We follow the procedure in Section~\ref{appendix:bvariables} to choose the variables with which we construct the weights. Tables~\ref{table:attpooled} lists the variables in which we account for attrition, together with the variables we use to construct the IPW scheme. We jointly estimate these weights for males and females. Section~\ref{appendix:methodology} explains and justifies the cases in which we account for attrition.
 
 \newgeometry{top=.1in, bottom=.1in, left=.1in, right=.1in}
 \begin{sidewaystable}[H]

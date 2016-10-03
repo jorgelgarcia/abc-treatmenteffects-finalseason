@@ -522,7 +522,7 @@ We use a set of IQ measures from ages 2 to 8 to to obtain an estimate of $\bm{\t
 		\includegraphics[width=\textwidth]{output/abccare_nfactor.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: Panels (a) displays a factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). Panel (b) displays an analogous exercise using measures measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. The mean difference between treatment and control is displayed below each panel, with standard error in parentheses. Standard errors are based on the bootstrap empirical distribution.
+Note: Panels (a) displays a factor score estimated based on the measurement system in \eqref{eq:msystem} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). Panel (b) displays an analogous exercise using measures measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. ``Less'' in the factor measuring non-cognitive skills is ``positive'' given the measures we rely on to construct it. The mean difference between treatment and control is displayed below each panel, with standard error in parentheses. Standard errors are based on the bootstrap empirical distribution.
 \end{figure}
 
 Given the conditions in \eqref{eq:msystemmain}, the estimated coefficients characterizing \eqref{eq:eqs} are consistently estimates, and therefore we can test Assumption~\ref{ass:eczema} and Assumption~\ref{ass:corns}. The test for the former consists of asking if the predictions variables we use are enough to summarize the treatment effects on the variables we predict, and therefore an indicator of treatment take-up becomes irrelevant when conditioning on these variables. We cannot reject the hypothesis that the coefficient associated to random assignment to treatment is different from zero, once we condition on the variables we use to predict. This holds for the outcomes we predict, both when pooling males and females and when performing the tests by gender (see Appendix~\ref{app:invariance}). The test for the latter consists of asking if the coefficients characterizing our predictions change when we account for estimate of $\bm{\theta}_{t}^d$. We do not find strong evidence against it (see Appendix~\ref{app:endogeneity}).
@@ -537,7 +537,7 @@ If it is true that ABC/CARE had a childcare component benefits inducing benefits
 
 \begin{figure}[!htbp]
 \centering
-\caption{Discounted Parental Income by Participant's Number and Age of Siblings at Baseline}\label{figure:pincome}
+\caption{Discounted Net Present Value of Parental Income by Participant's Number and Age of Siblings at Baseline}\label{figure:pincome}
 \begin{subfigure}[h]{0.5\textwidth}
 		\centering
 		\caption{No Siblings vs. $>0$ Siblings}
@@ -549,7 +549,7 @@ If it is true that ABC/CARE had a childcare component benefits inducing benefits
 		\includegraphics[width=\textwidth]{output/abccare_pincomesumsibage_spooled.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: Panel (a) displays the average parental income of parents of children with and without siblings at baseline. Panel (b) displays the average parental income of parents of children with young siblings (younger than 5 years old) and children with older siblings (5 years old or older) at baseline. Panel (b) drops children without siblings at baseline. Parental income is in 2014 USD discounted to child's participant age 0. We use the baseline measure of parental income in Section~\ref{section:pincome}. Results using our alternative parental income measures are similar (see Appendix~\ref{app:parentalincome}).
+Note: Panel (a) displays the net-present value (treatment less control) of parental income of parents of children with and without siblings at baseline. Panel (b) displays the average parental income of parents of children with young siblings (younger than 5 years old) and children with older siblings (5 years old or older) at baseline. Panel (b) drops children without siblings at baseline. Parental income is in 2014 USD discounted to child's participant age 0 using a 3\% rate. We use the baseline measure of parental income in Section~\ref{section:pincome}. Results using our alternative parental income measures are similar (see Appendix~\ref{app:parentalincome}).
 \end{figure}
 
 \subsection{Health} \label{section:health}
@@ -584,22 +584,22 @@ The first level of each model predicts the likelihood that the subject incurred 
 
 QALYs are crucial to our estimations because they monetize the health of an individual at each age. Figure~\ref{fig:qalys} shows our estimation of QALYs together with a PSID comparison, in an exercise analogous to that used to produce Figure~\ref{fig:labor-income-profiles}.\footnote{In our baseline estimation, we assume that each year of life is worth  $\$150,000$ (2014 USD). Our estimates are robust to substantial variation in this assumption, as we show in Appendix~\ref{appendix:sensitivity}.} Although there is not a clear age-by-age treatment effect on QALYs, there is a significant difference in the accumulated present value of the QALYs between the treatment and the control groups. The QALYs for individuals in the control group match the QALYs of disadvantaged individuals in the PSID.\footnote{In Appendix~\ref{appendix:health} we further discuss and justify the parameterizations required to obtain estimates of QALYs. \citet{Goldman_etal_2015_Future-America-Model} examine the sensitivity to these parameterizations and discuss alternative micro-simulations monetizing health condition.}
 
-\begin{sidewaysfigure}[!htbp]
+\begin{figure}[!htbp]
 \centering
 \caption{Quality Adjusted Life Years, Predictions and Comparison to PSID}\label{fig:qalys}
-\begin{subfigure}[h]{0.5\textwidth}
+\begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Females} \label{fig:qabcare1}
 		\includegraphics[width=\textwidth]{output/qalyexppsid_0.eps}
 \end{subfigure}%
-\begin{subfigure}[h]{0.5\textwidth}
+\begin{subfigure}[h]{0.4\textwidth}
 	\centering
 	\caption{Males} \label{fig:qpsid1}
 		\includegraphics[width=\textwidth]{output/qalyexppsid_1.eps}
 \end{subfigure}
 \footnotesize \justify
 Note: Panels (a) and (b) display the life-cycle net-present value of predicted quality-adjusted life years (QALYs) for ABC/CARE females and males, respectively, by treatment status. The predictions are based on combining data from the Panel Study of Income Dynamics (PSID), the Health Retirement Study, the Medical Expenditure Panel Survey (MEPS), and the Medicare Current Beneficiary Survey (MCBS). Each panel displays a comparison to to disadvantaged females and males in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as being black and having 12 years of education or less. QALYs are the quality-adjusted life years gain due to better health conditions. Standard errors are based on the empirical bootstrap distribution.\\
-\end{sidewaysfigure}
+\end{figure}
 
 \subsection{Crime}  \label{sec:crime}
 
@@ -689,10 +689,6 @@ We accompany these estimates with a set of sensitivity checks of statistical and
 
 Our baseline estimates account for the deadweight caused by the government by taxing individuals to budget its expenditure for all government-related activities.\footnote{When the transaction between the government and an individual is a direct transfer, we consider .5 as a cost per each transacted dollar as we do not weight the final recipient of the transaction (e.g., transfer income). When the transaction is indirect, we classify it as government spending as a whole and consider its cost as 1.5 per each dollar spend (e.g. public education).} Our baseline estimate assumes that the marginal tax rate is $50\%$. Our estimates are robust to dropping it to $0\%$ or doubling it to $100\%$ (deadweight loss columns). Our baseline estimation of benefit/cost ratios is based on a discount rate of $3\%$. Not discounting roughly doubles our benefit/cost ratios, while they remain significant under a higher discount rate of $7\%$ (discount rate columns).
 
-Parental income is an important component of the benefit/cost ration. As explained in Section~\ref{section:pincome}, we take a conservative approach in our baseline estimates and do not account for the potential profile shift in parental income due to education and experience. This is based on observed parental income from when the ABC/CARE participants where ages 0 to 21. Alternative approaches considering the gain up to when the parent is 65 years old generate an increase in the gain due to parental income (parental income columns). As we mention in Section~\ref{section:cbamethodology}, our estimates ignore any cohort effects. Individuals in ABC/CARE could experience positive cohort effects that might (i) make them more productive and therefore experience wage growth \citep{Lagakos_Moll_etal_2016_LifeCycle_NBER}; (ii) experience a negative shock such as an economic crisis and therefore experience wage decline \citep{Jarosch_2016_JobSecurity_Econometrica}. Our estimates are robust when we vary annual growth and decay rates between $-.5\%$ to $.5\%$.
-
-We do not perform sensitivity analysis to investigate cohort effects of health costs. Treatment individuals are healthier, which reduces medical costs, but also that they live longer, increasing medical costs. These opposing effects negate each other. We have little guidance for predicting the future health costs and benefits of our cohort compared to the cohorts on which FAM is based.
-
 \newgeometry{top=.4in, bottom=.5in, left=.4in, right=.4in}
 \begin{sidewaystable}[!htpb]
 \begin{threeparttable}
@@ -723,6 +719,10 @@ We do not perform sensitivity analysis to investigate cohort effects of health c
 \end{sidewaystable}
 \restoregeometry
 \doublespacing
+
+Parental income is an important component of the benefit/cost ration. As explained in Section~\ref{section:pincome}, we take a conservative approach in our baseline estimates and do not account for the potential profile shift in parental income due to education and experience. This is based on observed parental income from when the ABC/CARE participants where ages 0 to 21. Alternative approaches considering the gain up to when the parent is 65 years old generate an increase in the gain due to parental income (parental income columns). As we mention in Section~\ref{section:cbamethodology}, our estimates ignore any cohort effects. Individuals in ABC/CARE could experience positive cohort effects that might (i) make them more productive and therefore experience wage growth \citep{Lagakos_Moll_etal_2016_LifeCycle_NBER}; (ii) experience a negative shock such as an economic crisis and therefore experience wage decline \citep{Jarosch_2016_JobSecurity_Econometrica}. Our estimates are robust when we vary annual growth and decay rates between $-.5\%$ to $.5\%$.
+
+We do not perform sensitivity analysis to investigate cohort effects of health costs. Treatment individuals are healthier, which reduces medical costs, but also that they live longer, increasing medical costs. These opposing effects negate each other. We have little guidance for predicting the future health costs and benefits of our cohort compared to the cohorts on which FAM is based.
 
 We also examine the sensitivity to (i) dropping the most costly crimes as murders and rapes;\footnote{Two individuals in the treatment group committed a rape and one individual in the control group committed a murder.} and (ii) halving the costs of victimization and judiciary costs related to crime.  The first is important because we would not want our calculation to be based on a few exceptional crimes. The second is important because victimization costs are somewhat subjective (see Appendix~\ref{appendix:crime}). Our benefit/cost analysis is robust to these adjustments, even when crime is a major component. Lastly, we examine the sensitivity with respect to our main health component: quality-adjusted life years. This is an important component because relatively healthier individuals survive longer and healthier, and treatment improves health conditions. It is important to note that this component largely accumulates later in life and therefore it is heavily discounted. Dropping the component or doubling the value of life does not have a major impact in our calculations.
 
