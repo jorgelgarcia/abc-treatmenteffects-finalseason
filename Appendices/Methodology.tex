@@ -463,7 +463,7 @@ Note: Panels (a) displays a factor score estimated based on the measurement syst
 \end{threeparttable}
 \end{sidewaystable}
 
-\noindent A \textbf{more direct} test is to use the experimental sample and ask if once we account for the variables $\bm{X}_{t}$, $R$ (randomization to treatment assignment in ABC/CARE) predicts the outcome of interest, conditional on $\bm{B}$. This tests if $\bm{X}_{t}$ suffices to summarize the treatment described by $R$. Note that $R = D$ in our main methodology. That is, children who are offered treatment attend to it. For the three main outcomes we predict, once we condition on $\bm{B}, \bm{X}_{t}, \bm{\theta}$, the coefficient associated to $R$ is not significant.
+\noindent A \textbf{more direct} test is to use the experimental sample and ask if once we account for a set of the variables in $\bm{X}_{t}$, $R$ (randomization to treatment assignment in ABC/CARE) predicts the outcome of interest, conditional on $\bm{B}$. This tests if that specific set of $\bm{X}_{t}$ suffices to summarize the treatment described by $R$. The set we tests this fore includes: PIAT scores at ages 5 to 7, education at age 30, and labor income at age 21. The reason why we do not use the the full set if variables in  $\bm{X}_{t}$ is that  $\bm{X}_{t}$ includes variables that are outcomes themselves, as body-mass index and labor income at age 30. Note that $R = D$ in our main methodology. That is, children who are offered treatment attend to it. For the three main outcomes we predict, once we condition on $\bm{B}, \bm{X}_{t}, \bm{\theta}$, the coefficient associated to $R$ is not significant.
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
@@ -471,7 +471,7 @@ Note: Panels (a) displays a factor score estimated based on the measurement syst
 \label{table:end1}
 \centering
 \scriptsize
-\input{output/abccare_endog_p_inc21y_ready.tex}
+\input{output/abccare_endog_p_inc21y_spooled_ready.tex}
 \begin{tablenotes}
 \footnotesize
 \item Note: Prediction of parental income at (child's) age 21 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
@@ -513,7 +513,7 @@ Note: Panels (a) displays a factor score estimated based on the measurement syst
 \label{table:end2}
 \centering
 \scriptsize
-\input{output/abccare_endog_si30y_inc_labor_ready.tex}
+\input{output/abccare_endog_si30y_inc_labor_spooled_ready.tex}
 \begin{tablenotes}
 \footnotesize
 \item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
@@ -555,7 +555,7 @@ Note: Panels (a) displays a factor score estimated based on the measurement syst
 \label{table:end3}
 \centering
 \scriptsize
-\input{output/abccare_endog_si30y_inc_trans_pub_ready.tex}
+\input{output/abccare_endog_si30y_inc_trans_pub_spooled_ready.tex}
 \begin{tablenotes}
 \footnotesize
 \item Note: Prediction of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
@@ -590,6 +590,49 @@ Note: Panels (a) displays a factor score estimated based on the measurement syst
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Body-Mass Index at Age 34 Accounting for $R, \bm{B}, \bm{\theta},$ and $\bm{X}_{t}$ Pooled Sample, ABC/CARE}
+\label{table:end3}
+\centering
+\scriptsize
+\input{output/abccare_endog_si34y_bmi_spooled_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of body-mass index at age 34 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Body-Mass Index at Age 34 Accounting for $R, \bm{B}, \bm{\theta},$ and $\bm{X}_{t}$ Females Sample, ABC/CARE}
+\label{table:end3}
+\centering
+\scriptsize
+\input{output/abccare_endog_si34y_bmi_sfemale_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of body-mass index at age 34 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Prediction of Body-Mass Index at Age 34 Accounting for $R, \bm{B}, \bm{\theta},$ and $\bm{X}_{t}$ Males Sample, ABC/CARE}
+\label{table:end3}
+\centering
+\scriptsize
+\input{output/abccare_endog_si34y_bmi_smale_ready.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Prediction of body-mass index at age 34 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:msystem} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
 
 \subsubsection{Complementing the Evidence Using Data from the Perry Preschool Project}
 
