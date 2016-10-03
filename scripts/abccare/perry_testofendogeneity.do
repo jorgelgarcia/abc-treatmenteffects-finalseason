@@ -43,9 +43,9 @@ global female if male == 0
 global pooled 
 
 foreach sex in male female pooled {
-	foreach varyy of varlist inc40 hs40 idle40 {
-		matrix allests`varyy' = J(13,1,.)
-		matrix rownames allests`varyy' = treatment m_ed_base childIQ years30 inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
+	foreach varyy of varlist inc40 hs40 idle40 healthy40 {
+		matrix allests`varyy' = J(12,1,.)
+		matrix rownames allests`varyy' = treatment m_ed_base childIQ years30 inc27 cognitive externalizing academicmotivation cons F R2 N
 		foreach b of numlist 1(1)$bootstraps {
 			preserve
 			bsample
@@ -65,49 +65,34 @@ foreach sex in male female pooled {
 			// treatment regressions with factor
 			reg `varyy' treatment m_ed_base cogfactor extfactor academicfactor ${`sex'}, robust
 			matrix t1f = e(b)
-			matrix t1fcomplete`b' = [t1f[1,1..2],J(1,4,.),t1f[1,3...],e(F),e(r2),e(N)]'
-			matrix rownames t1fcomplete`b' = treatment m_ed_base childIQ years30 inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
+			matrix t1fcomplete`b' = [t1f[1,1..2],J(1,3,.),t1f[1,3...],e(F),e(r2),e(N)]'
+			matrix rownames t1fcomplete`b' = treatment m_ed_base childIQ years30 inc27 cognitive externalizing academicmotivation cons F R2 N
 			matrix colnames t1fcomplete`b' = t1fcomplete`b'
 			mat_capp allests`varyy' : allests`varyy' t1fcomplete`b'
 
-			
 			reg `varyy' treatment m_ed_base childIQ years30 inc27 cogfactor extfactor academicfactor ${`sex'}, robust
 			matrix t2f = e(b)
-			matrix t2fcomplete`b' = [t2f[1,1..5],J(1,1,.),t2f[1,6...],e(F),e(r2),e(N)]'
-			matrix rownames t2fcomplete`b' = treatment m_ed_base childIQ years30 inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
+			matrix t2fcomplete`b' = [t2f[1,1...],e(F),e(r2),e(N)]'
+			matrix rownames t2fcomplete`b' = treatment m_ed_base childIQ years30 inc27 cognitive externalizing academicmotivation cons F R2 N
 			matrix colnames t2fcomplete`b' = t2fcomplete`b'
 			mat_capp allests`varyy' : allests`varyy' t2fcomplete`b'
-			
-
-			reg `varyy' treatment m_ed_base childIQ years30 inc27 healthy40 cogfactor extfactor academicfactor ${`sex'}, robust
-			matrix t3f = e(b)
-			matrix t3fcomplete`b' = [t3f[1,1...],e(F),e(r2),e(N)]'
-			matrix rownames t3fcomplete`b' = treatment m_ed_base childIQ years30 inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
-			matrix colnames t3fcomplete`b' = t3fcomplete`b'
-			mat_capp allests`varyy' : allests`varyy' t3fcomplete`b'
 
 			
 			// treatment regressions with no factor
 			reg `varyy' treatment m_ed_base ${`sex'}, robust
 			matrix t1 = e(b)
-			matrix t1complete`b' = [t1[1,1..2],J(1,7,.),t1[1,3],e(F),e(r2),e(N)]'
-			matrix rownames t1complete`b' = treatment m_ed_base childIQ years30 inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
+			matrix t1complete`b' = [t1[1,1..2],J(1,6,.),t1[1,3],e(F),e(r2),e(N)]'
+			matrix rownames t1complete`b' = treatment m_ed_base childIQ years30 inc27 cognitive externalizing academicmotivation cons F R2 N
 			matrix colnames t1complete`b' = t1complete`b'
 			mat_capp allests`varyy' : allests`varyy' t1complete`b'
 			
 			reg `varyy' treatment m_ed_base childIQ years30 inc27 ${`sex'}, robust
 			matrix t2 = e(b)
-			matrix t2complete`b' = [t2[1,1..5],J(1,4,.),t2[1,6],e(F),e(r2),e(N)]'
-			matrix rownames t2complete`b' = treatment m_ed_base childIQ years30 inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
+			matrix t2complete`b' = [t2[1,1..5],J(1,3,.),t2[1,6],e(F),e(r2),e(N)]'
+			matrix rownames t2complete`b' = treatment m_ed_base childIQ years30 inc27 cognitive externalizing academicmotivation cons F R2 N
 			matrix colnames t2complete`b' = t2complete`b'
 			mat_capp allests`varyy' : allests`varyy' t2complete`b'
 
-			reg `varyy' treatment m_ed_base childIQ years30 inc27 healthy40 ${`sex'}, robust
-			matrix t3 = e(b)
-			matrix t3complete`b' = [t3[1,1..6],J(1,3,.),t3[1,7],e(F),e(r2),e(N)]'
-			matrix rownames t3complete`b' = treatment m_ed_base childIQ years30 inc27 healthy40 cognitive externalizing academicmotivation cons F R2 N
-			matrix colnames t3complete`b' = t3complete`b'
-			mat_capp allests`varyy' : allests`varyy' t3complete`b'
 			restore
 		}
 		matrix allests`varyy' = allests`varyy'[1...,2...]
@@ -117,7 +102,7 @@ foreach sex in male female pooled {
 		svmat allests`varyy', names(col)
 
 		# delimit
-		global estimates 1complete 1fcomplete 2complete 2fcomplete 3complete 3fcomplete;
+		global estimates 1complete 1fcomplete 2complete 2fcomplete;
 		# delimit cr
 		aorder
 
@@ -152,18 +137,17 @@ foreach sex in male female pooled {
 		// arrange to output to a matrix
 		# delimit
 		order t1completemean t1completepvalue t1fcompletemean t1fcompletepvalue
-		      t2completemean t2completepvalue t2fcompletemean t2fcompletepvalue
-		      t3completemean t3completepvalue t3fcompletemean t3fcompletepvalue;
+		      t2completemean t2completepvalue t2fcompletemean t2fcompletepvalue;
 		# delimit cr
 		
 		mkmat *, matrix(all`varyy'_s`sex')
 		
-		matrix all`varyy'_s`sex'p1 = all`varyy'_s`sex'[1..10,1...]
-		matrix all`varyy'_s`sex'p2 = [all`varyy'_s`sex'[11..13,1], J(3,1,.),all`varyy'_s`sex'[11..13,3], J(3,1,.),all`varyy'_s`sex'[11..13,5], J(3,1,.),all`varyy'_s`sex'[11..13,7], J(3,1,.),all`varyy'_s`sex'[11..13,9], J(3,1,.),all`varyy'_s`sex'[11..13,11], J(3,1,.)]
+		matrix all`varyy'_s`sex'p1 = all`varyy'_s`sex'[1..9,1...]
+		matrix all`varyy'_s`sex'p2 = [[all`varyy'_s`sex'[10..11,1] \ round(all`varyy'_s`sex'[12,1],1)], J(3,1,.),[all`varyy'_s`sex'[10..11,3] \ round(all`varyy'_s`sex'[12,3],1)], J(3,1,.),[all`varyy'_s`sex'[10..11,5] \ round(all`varyy'_s`sex'[12,5],1)], J(3,1,.),[all`varyy'_s`sex'[10..11,7] \ round(all`varyy'_s`sex'[12,7],1)], J(3,1,.)]
 		
 		matrix all`varyy'_s`sex' = [all`varyy'_s`sex'p1 \ all`varyy'_s`sex'p2]
 		
-		matrix rownames all`varyy'_s`sex' = R "Mother'sEducation" BaselineIQ "Education(30)" "LaborIncome(27)" "HealthIndex(30)" Cognitive Externalizing Academic Constant "F-stat" "R2" Observations
+		matrix rownames all`varyy'_s`sex' = R "Mother'sEducation" BaselineIQ "Education(30)" "LaborIncome(27)" Cognitive Externalizing Academic Constant "F-stat" "R2" Observations
 
 		cd $output
 		outtable using perry_endog_`varyy'_s`sex', mat(all`varyy'_s`sex') replace nobox center f(%9.3f)
