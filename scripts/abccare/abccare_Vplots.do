@@ -36,7 +36,6 @@ cd $output
 drop if random == 3
 drop if R != 0
 keep if P == 1
-
 // binned density
 egen Qbinned = cut(Q), group (8)
 replace Qbinned = (Qbinned + 1)/8
