@@ -111,8 +111,16 @@ foreach type of numlist 2 5 8  {
 		
 		preserve
 		keep if male == "`sex'"
+		summ irr`type'
+		local Nt = r(N)
 		drop if irr`type' <= 0 | irr`type' == .
-	
+		summ irr`type'
+		local Nc = r(N)
+		
+		local perc = `Nc'/`Nt'
+		local perc = `perc'*100
+		local perc = round(`perc',.01)
+		
 		summ  irr`type'
 		local point    = round(r(mean),.001)
 		local pointnr  = r(mean)
@@ -136,10 +144,10 @@ foreach type of numlist 2 5 8  {
 				  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 				  xtitle(" ") ytitle(Density, size(small))
 				  graphregion(color(white)) plotregion(fcolor(white))
-				  note("Point Estimate: `point'(`pointse')[`pointp'].");
+				  note("Point Estimate: `point'(`pointse')[`pointp']. Percentage > 0: `perc'");
 		#delimit cr 
 		graph export irr_`type'_sex`sex'.eps, replace
-		// di in r "Enter after seeing Figure" _request(Hello)
+		di in r "Enter after seeing Figure" _request(Hello)
 		restore
 	}
 }
