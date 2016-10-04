@@ -22,7 +22,7 @@ global googledrive: env googledrive
 // do files
 global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global data       = "$klmmexico/abccare/irr_ratios/aug-01"
+global data       = "$klmmexico/abccare/irr_ratios/current/"
 // output
 global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 
@@ -36,6 +36,8 @@ gen b = _n
 foreach file in irr ratios {
 	foreach type of numlist 2 5 8 {
 		preserve
+		cd $data
+		cd "type`type'"
 		insheet using all_`file'_type`type'.csv, clear
 		gen b  = _n
 		keep b v1 v2 v3 v4
@@ -88,7 +90,7 @@ foreach type of numlist 2 5 8  {
 		keep if male == "`sex'"
 		keep if ratios`type' > `p5' & ratios`type' < `p95'
 		#delimit
-		twoway (kdensity ratios`type', lwidth(medthick) lpattern(solid) lcolor(gs0))
+		twoway (kdensity ratios`type', lwidth(vthick) lpattern(solid) lcolor(gs0))
 			, 
 				  legend(off)
 				  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
@@ -128,7 +130,7 @@ foreach type of numlist 2 5 8  {
 		keep if male == "`sex'"
 		drop if irr`type' <= 0 | irr`type' == .
 		#delimit
-		twoway (kdensity irr`type', lwidth(medthick) lpattern(solid) lcolor(gs0))
+		twoway (kdensity irr`type', lwidth(vthick) lpattern(solid) lcolor(gs0))
 			, 
 				  legend(off)
 				  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
@@ -141,6 +143,3 @@ foreach type of numlist 2 5 8  {
 		restore
 	}
 }
-
-
-
