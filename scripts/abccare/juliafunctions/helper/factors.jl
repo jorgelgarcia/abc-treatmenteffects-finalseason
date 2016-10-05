@@ -99,7 +99,7 @@ for cat in categories
 		factor_switch = 0
 	end
 
-	if factor_switch = 1
+	if factor_switch == 1
 		sampledata = diagonalfac(sampledata, factordata["factor_$(cat)"], 1)
     rename!(sampledata, :factor, parse("factor_$(cat)"))
 	end
