@@ -1,55 +1,56 @@
 \section{Accounting for Attrition} \label{appendix:attrition}
 
-\noindent We use a standard inverse probability weighting (IPW) scheme based on a logit model that predicts attrition using baseline characteristics.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} Recall that $R = 1$ if the child is randomized to treatment, and $R = 0$ otherwise. Similarly, let $A = 1$ denote the case where we observe a generic outcome $Y$, and $A = 0$ otherwise. As in the main text, $\bm{B}$ represents background (pre-treatment) variables and $X$ variables that could be affected by treatment and that we use to predict $Y$. We abstract from dynamics in $Y$ and $X$ for simplicity, but the procedure could be easily generalized.\\
+\noindent We use a standard inverse probability weighting (IPW) scheme based on a logit model that predicts attrition using baseline characteristics.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} Recall that $R = 1$ if the child is randomized to treatment, and $R = 0$ otherwise. Similarly, let $A = 1$ denote the case where we observe a generic outcome $Y$, and $A = 0$ otherwise. As in the main text, $\bm{B}$ represents background (pre-treatment) variables and $\bm{X}$ variables that could be affected by treatment and that we use to predict $Y$. We abstract from dynamics in $Y$ and $\bm{X}$ for simplicity, but the procedure could be easily generalized.\\
 
-\noindent We assume $A$ is independent of $Y$ conditional on $\bm{B}$ and $X$. More formally, we invoke
+\noindent We assume $A$ is independent of $Y$ conditional on $\bm{X}$ and $\bm{B}$. More formally, we invoke
 
 
 \begin{assumption} \label{ass:attr}
 	\begin{align*}
-		A \independent Y | \bm{B}, X, R.
+		A \independent Y | \bm{X}, \bm{B}, R.
 	\end{align*}
 \end{assumption}
 
 \noindent Let $Y_{r}$ represent outcome $Y$ when $R$ is fixed to take the value $r$. Based on Assumption~\ref{ass:attr}, we identify $\mathbb{E}[Y_r]$ as follows:
 
 \begin{align} \label{eq:case2}
-\mathbb{E}[Y_r] & = \int \int y f_{Y_r|X}(y) f_X(x) dydx \\ \nonumber
-	           & = \int \int y f_{Y|X,R=r}(y) f_X(x) dydx \\ \nonumber
-				& = \int \int \int y f_{Y|R=r,\bm{B},X}(y) f_{\bm{B}|R=r}(b) f_X(x) dydbdx \\ \nonumber
-				& = \int \int \int y f_{Y|R=r,\bm{B},X,A=1}(y) f_{\bm{B}|R=r,X}(b) f_X dydbdx
+\mathbb{E}[Y_r] & = \int \int y f_{ Y_ r| \bm{B} } (y) f_{\bm{B}} (b) dydb \\ \nonumber
+	           & = \int \int y f_{Y| \bm{B}, R=r}(y) f_{\bm{B}} (b) dydb \\ \nonumber
+	           & = \int \int \int y f_{Y|R=r,\bm{X}, \bm{B}} (y) f_{\bm{X} | R=r} (x) f_{\bm{B}} (b) dydxdb \\ \nonumber
+				& = \int \int \int y f_{Y|R=r,\bm{X}, \bm{B}, A=1} (y) f_{\bm{X} | R=r, \bm{B} }(x) f_{\bm{B}} (b) dydxdb
 \end{align}
-\noindent where each component of the last expression in \eqref{eq:case2} is straightforward to recover from the data. Using Bayes' Theorem, we can write an equivalent expression to make the IPW scheme explicit. That is, we apply Bayes' Theorem to $f_{\bm{B}|R=r,X}(b)$ and $f_X(x)$ to obtain
+
+\noindent where each component of the last expression in \eqref{eq:case2} is straightforward to recover from the data. Using Bayes' Theorem, we can write an equivalent expression to make the IPW scheme explicit. That is, we apply Bayes' Theorem to $f_{\bm{X} | R=r, \bm{B} }(x)$ and $f_{\bm{B}} (b)$ to obtain
 
 \begin{equation*}
-f_{\bm{B}|R=r,X}(b) = \frac{f_{\bm{B}|R=r,X,A=1}(b) P(A=1|R=r,X)}{P(A=1|R=r,\bm{B},X)}
+f_{\bm{X}|R=r,\bm{B}}(x) = \frac{f_{\bm{X}|R=r,\bm{B},A=1}(x) P(A=1|R=r,\bm{B})}{P(A=1|R=r,\bm{X},\bm{B})}
 \end{equation*}
 and
 \begin{equation*}
-	f_X(x) = \frac{f_{X|R=r,A=1}(x) P(R=r,A=1)}{P(R=r,A=1|X)}.
+	f_{\bm{B}} (b) = \frac{f_{\bm{B}|R=r,A=1} (x) P(R=r,A=1)}{P(R=r,A=1|\bm{B})}.
 \end{equation*}
 \noindent Substituting these expressions into \eqref{eq:case2}, we obtain
 
 \begin{align*} \label{eq:case2ipw}
-\mathbb{E}[Y_r] & = \int \int \int y f_{Y,\bm{B},X|R=r,A=1}(y,b.x) \frac{P(R=r,A=1) P(A=1|R=r,X)}{P(R=r,A=1|X) P(A=1|R=r,\bm{B},X)} dydbdx \\
-	            & = \int \int  \int y f_{Y,\bm{B},X|R=r,A=1}(y,b,x) \frac{P(R=r,A=1)}{P(R=r|X) P(A=1|R=r,\bm{B},X)} dydbdx. \\
+\mathbb{E}[Y_r] & = \int \int \int y f_{Y,\bm{X},\bm{B}|R=r,A=1}(y,x,b) \frac{P(R=r,A=1) P(A=1|R=r,\bm{B})}{P(R=r,A=1|\bm{B}) P(A=1|R=r,\bm{X},\bm{B})} dydxdb \\
+	            & = \int \int  \int y f_{Y,\bm{X},\bm{B}|R=r,A=1}(y,x,b) \frac{P(R=r,A=1)}{P(R=r|\bm{B}) P(A=1|R=r,\bm{X},\bm{B})} dydxdb. \\
 \end{align*}
 
-\noindent Assumption \ref{ass:attr} generalizes the matching assumption of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}. It conditions not only on pre-program variables but on fully observed post-treatment variables, $X$. This enables us to account for two types of selection:  (i) selection into treatment; and (ii) selection into item response. The corresponding sample estimator for $\mathbb{E}[Y_r]$ is
+\noindent Assumption \ref{ass:attr} generalizes the matching assumption of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}. It conditions not only on pre-program variables but on fully observed post-treatment variables, $\bm{X}$. This enables us to account for two types of selection:  (i) selection into treatment; and (ii) selection into item response. The corresponding sample estimator for $\mathbb{E}[Y_r]$ is
 
 \begin{align*}
 \sum_{i \in \mathcal{I}} y \alpha_{i} \beta_{i,r} \mathbf{1}(r_i = r)
 \end{align*}
-\noindent where $\mathcal{I}$ indexes the individuals in the sample, $a_i$ indicates whether we observe $Y$ for individual $i$, and
+\noindent where $\mathcal{I}$ indexes the individuals in the sample, $\alpha_i$ indicates whether we observe $Y$ for individual $i$, and
 
 \begin{align*}
-	\beta_{i,r} = \frac{1}{\pi_r(x_i) \alpha(r_i,b_i,x_i)} \frac{1}{\sum_k{\frac{\mathbf{1}(r_i = r) \mathbf{1}(a_i = 1)}{\pi_r(x_k)\alpha(r_k,b_k,x_k)}}},
+	\beta_{i,r} = \frac{1}{\pi_r(x_i) \alpha(r_i,x_i,b_i)} \frac{1}{\sum_k{\frac{\mathbf{1}(r_i = r) \mathbf{1}(\alpha_i = 1)}{\pi_r(x_k)\alpha(r_k,x_k,b_k)}}},
 \end{align*}
-\noindent with $\pi_r(x) := P(R=r|X=x)$ and $\alpha(r,b,x) := P(A=1|R=r,\bm{B}=b,X=x)$. The weight $\pi_r$ corrects for selection into treatment based on pre-program variables $X$. The weight $\alpha_{i}$ corrects for item non-response based on $R, \bm{B}, X$.\\
+\noindent with $\pi_r(x) := P(R=r|\bm{B}=b)$ and $\alpha(r,x,b) := P(A=1|R=r,\bm{X}=x,\bm{B}=b)$. The weight $\pi_r$ corrects for selection into treatment based on pre-program variables $\bm{B}$. The weight $\alpha_{i}$ corrects for item non-response based on $R, \bm{X}, \bm{B}$.\\
 
 \subsection{Variables to Construct IPW}
 
-\noindent We follow the procedure in Section~\ref{appendix:bvariables} to choose the variables with which we construct the weights. Tables~\ref{table:attpooled} lists the variables in which we account fro attrition, together with the variables we use to construct the IPW scheme. We jointly estimate these weights for males and females. Section~\ref{appendix:methodology} explains and justifies the cases in which we account for attrition.
+\noindent We follow the procedure in Section~\ref{appendix:bvariables} to choose the variables with which we construct the weights. Tables~\ref{table:attpooled} lists the variables in which we account for attrition, together with the variables we use to construct the IPW scheme. We jointly estimate these weights for males and females. Section~\ref{appendix:methodology} explains and justifies the cases in which we account for attrition.
 
 \newgeometry{top=.1in, bottom=.1in, left=.1in, right=.1in}
 \begin{sidewaystable}[H]

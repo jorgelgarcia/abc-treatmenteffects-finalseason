@@ -5,8 +5,8 @@ set matsize 11000
 set maxvar  32000
 
 /*
-Project :       ABC, CARE Predicted QALYs and Total Medical Costs
-Description:    
+Project :       ABC CBA
+Description:    Qalys, ABC vs. PSID
 *This version:  July 22, 2016
 *This .do file: Jorge L. Garcia
 */

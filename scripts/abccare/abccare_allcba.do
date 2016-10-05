@@ -4,11 +4,11 @@ clear all
 set matsize 11000
 
 /*
-Project :       ABC
-Description:    plot estimates conditional on IQ
+Project :       ABC CBA
+Description:    obtains all estimates to collate sensitivity of IRR and B/C
 *This version:  April 18, 2016
 *This .do file: Jorge L. Garcia
-*This project : All except Seong, B. and CC. 
+*This project : CBA Team
 */
 
 // set environment variables (server)
@@ -28,7 +28,7 @@ global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 
 // get all baseline types
-foreach num of numlist 1(1)11 {
+foreach num of numlist 1(1)9 {
 	foreach par in irr ratio {
 		cd $allresults/type`num'
 		foreach stat in mean se pval {
@@ -46,7 +46,7 @@ foreach num of numlist 2 {
 	foreach par in irr ratio {
 		cd $allresults/type`num'_nm
 		foreach stat in mean se pval {
-			insheet using `par'_mean.csv, clear
+			insheet using `par'_`stat'.csv, clear
 			foreach sex in m f p {
 				summ v2 if v1 == "`sex'"
 				local `par'_`stat'_type`num'_nm_`sex' = r(mean)
@@ -54,7 +54,6 @@ foreach num of numlist 2 {
 		}
 	}
 }
-
 
 // deadweight-loss cases
 cd $allresults/sensitivity
@@ -114,6 +113,21 @@ foreach par in bc irr {
 	}
 }
 
+// parental income life cycle
+cd $allresults/type2_p_inc
+foreach num of numlist 2 {
+	foreach par in irr ratio {
+		cd $allresults/type2_p_inc
+		foreach stat in mean se pval {
+			insheet using `par'_`stat'.csv, clear
+			foreach sex in m f p {
+				summ v2 if v1 == "`sex'"
+				local `par'_`stat'_type`num'_p_inc_`sex' = r(mean)
+			}
+		}
+	}
+}
+
 // half crime costs 
 cd $allresults/sensitivity
 foreach par in bc irr {
@@ -167,15 +181,15 @@ matrix predictiontime  = [[`ratios_mean_age21_f' \ `ratios_se_age21_f' \ `ratios
 matrix counterfactual  = [[`ratio_mean_type5_f' \ `ratio_se_type5_f' \ `ratio_pval_type5_f' ],[`ratio_mean_type8_f' \ `ratio_se_type8_f' \ `ratio_pval_type8_f' ],  [`ratio_mean_type5_m' \ `ratio_se_type5_m' \ `ratio_pval_type5_m'], [`ratio_mean_type8_m' \ `ratio_se_type8_m' \ `ratio_pval_type8_m'], [`ratio_mean_type5_p' \ `ratio_se_type5_p' \ `ratio_pval_type5_p'],  [`ratio_mean_type8_p' \ `ratio_se_type8_p' \ `ratio_pval_type8_p']]
 matrix dwl             = [[`bc_mean_rate0_f' \ `bc_se_rate0_f' \ `bc_pval_rate0_f'], [`bc_mean_rate1_f' \ `bc_se_rate1_f' \ `bc_pval_rate1_f'], [`bc_mean_rate0_m' \ `bc_se_rate0_m' \ `bc_pval_rate0_m'], [`bc_mean_rate1_m' \ `bc_se_rate1_m' \ `bc_pval_rate1_m'],  [`bc_mean_rate0_p' \ `bc_se_rate0_p' \ `bc_pval_rate0_p'], [`bc_mean_rate1_p' \ `bc_se_rate1_p' \ `bc_pval_rate1_p']]
 matrix discount        = [[`bc_mean_discount0_f' \ `bc_se_discount0_f' \ `bc_pval_discount0_f'], [`bc_mean_discount7_f' \ `bc_se_discount7_f' \ `bc_pval_discount7_f'], [`bc_mean_discount0_m' \ `bc_se_discount0_m' \ `bc_pval_discount0_m'], [`bc_mean_discount7_m' \ `bc_se_discount7_m' \ `bc_pval_discount7_m'],  [`bc_mean_discount0_p' \ `bc_se_discount0_p' \ `bc_pval_discount0_p'], [`bc_mean_discount7_p' \ `bc_se_discount7_p' \ `bc_pval_discount7_p']]
-matrix parental        = [[`bc_mean_mincer_f' \ `bc_se_mincer_f' \ `bc_pval_mincer_f'], [. \ . \ .] , [`bc_mean_mincer_m' \ `bc_se_mincer_m' \ `bc_pval_mincer_m'], [. \ . \ .] , [`bc_mean_mincer_p' \ `bc_se_mincer_p' \ `bc_pval_mincer_p'], [. \ . \ .]]
+matrix parental        = [[`bc_mean_mincer_f' \ `bc_se_mincer_f' \ `bc_pval_mincer_f'], [`ratio_mean_type2_p_inc_f' \ `ratio_se_type2_p_inc_f' \ `ratio_pval_type2_p_inc_f' ] , [`bc_mean_mincer_m' \ `bc_se_mincer_m' \ `bc_pval_mincer_m'], [`ratio_mean_type2_p_inc_m' \ `ratio_se_type2_p_inc_m' \ `ratio_pval_type2_p_inc_m'] , [`bc_mean_mincer_p' \ `bc_se_mincer_p' \ `bc_pval_mincer_p'], [`ratio_mean_type2_p_inc_p' \ `ratio_se_type2_p_inc_p' \ `ratio_pval_type2_p_inc_p']]
 matrix lincome         = [[`bc_mean_incgrowth7_f' \ `bc_se_incgrowth7_f' \ `bc_pval_incgrowth7_f'], [`bc_mean_incgrowth12_f' \ `bc_se_incgrowth12_f' \ `bc_pval_incgrowth12_f'],[`bc_mean_incgrowth7_m' \ `bc_se_incgrowth7_m' \ `bc_pval_incgrowth7_m'], [`bc_mean_incgrowth12_m' \ `bc_se_incgrowth12_m' \ `bc_pval_incgrowth12_m'], [`bc_mean_incgrowth7_p' \ `bc_se_incgrowth7_p' \ `bc_pval_incgrowth7_p'], [`bc_mean_incgrowth12_p' \ `bc_se_incgrowth12_p' \ `bc_pval_incgrowth12_p']] 
 matrix crime           = [[`ratio_mean_type2_nm_f' \ `ratio_se_type2_nm_f' \ `ratio_pval_type2_nm_f'], [`bc_mean_crimhalf_f' \ `bc_se_crimhalf_f' \ `bc_pval_crimhalf_f'], [`ratio_mean_type2_nm_m' \ `ratio_se_type2_nm_m' \ `ratio_pval_type2_nm_m'], [`bc_mean_crimhalf_m' \ `bc_se_crimhalf_m' \ `bc_pval_crimhalf_m'], [`ratio_mean_type2_nm_p' \ `ratio_se_type2_nm_p' \  `ratio_pval_type2_nm_p'], [`bc_mean_crimhalf_p' \ `bc_se_crimhalf_p' \ `bc_pval_crimhalf_p']]
 matrix health          = [[`bc_mean_valife0_f' \ `bc_se_valife0_f' \ `bc_pval_valife0_f'], [`bc_mean_valife2_f' \ `bc_se_valife2_f' \ `bc_pval_valife2_f'], [`bc_mean_valife0_m' \ `bc_se_valife0_m' \ `bc_pval_valife0_m'], [`bc_mean_valife2_m' \ `bc_se_valife2_m' \ `bc_pval_valife2_m'], [`bc_mean_valife0_p' \ `bc_se_valife0_p' \ `bc_pval_valife0_p'], [`bc_mean_valife2_p' \ `bc_se_valife2_p' \ `bc_pval_valife2_p']]
 
 matrix allbc = [baselinebc \ specification \ predictiontime \ counterfactual \ dwl \ discount \ parental \ lincome \ crime \ health]
 matrix rownames allbc = baseline specification "." "." predictiontime "." "." counterfactual "." "." dwl "." "." discount "." "." parental "." "." lincome "." "." crime "." "." health "." "."
+matrix allbc = [allbc[1...,5..6],allbc[1...,3..4],allbc[1...,1..2]]
 matrix colnames allbc = pooled pooled males males females females
-
 
 // irr
 matrix baselineirr      = [`irr_mean_type2_f',`irr_se_type2_f',`irr_mean_type2_m',`irr_se_type2_m',`irr_mean_type2_p',`irr_se_type2_p']
@@ -183,15 +197,16 @@ matrix specification   = [[`irr_mean_type9_f' \ `irr_se_type9_f' \ `irr_pval_typ
 matrix predictiontime  = [[`irr_mean_age21_f' \ `irr_se_age21_f' \ `irr_pval_age21_f'], [`irr_mean_age30_f' \ `irr_se_age30_f' \ `irr_pval_age30_f'], [`irr_mean_age21_m' \ `irr_se_age21_m' \ `irr_pval_age21_m'], [`irr_mean_age30_m' \ `irr_se_age30_m' \ `irr_pval_age30_m'], [`irr_mean_age21_p' \ `irr_se_age21_p' \ `irr_pval_age21_p'], [`irr_mean_age30_p' \ `irr_se_age30_p' \ `irr_pval_age30_p']] 
 matrix counterfactual  = [[`irr_mean_type5_f' \ `irr_se_type5_f' \ `irr_pval_type5_f' ],[`irr_mean_type8_f' \ `irr_se_type8_f' \ `irr_pval_type8_f' ],  [`irr_mean_type5_m' \ `irr_se_type5_m' \ `irr_pval_type5_m'], [`irr_mean_type8_m' \ `irr_se_type8_m' \ `irr_pval_type8_m'], [`irr_mean_type5_p' \ `irr_se_type5_p' \ `irr_pval_type5_p'],  [`irr_mean_type8_p' \ `irr_se_type8_p' \ `irr_pval_type8_p']]
 matrix dwl             = [[`irr_mean_rate0_f' \ `irr_se_rate0_f' \ `irr_pval_rate0_f'], [`irr_mean_rate1_f' \ `irr_se_rate1_f' \ `irr_pval_rate1_f'], [`irr_mean_rate0_m' \ `irr_se_rate0_m' \ `irr_pval_rate0_m'], [`irr_mean_rate1_m' \ `irr_se_rate1_m' \ `irr_pval_rate1_m'],  [`irr_mean_rate0_p' \ `irr_se_rate0_p' \ `irr_pval_rate0_p'], [`irr_mean_rate1_p' \ `irr_se_rate1_p' \ `irr_pval_rate1_p']]
-matrix parental        = [[`irr_mean_mincer_f' \ `irr_se_mincer_f' \ `irr_pval_mincer_f'], [. \ . \ .] , [`irr_mean_mincer_m' \ `irr_se_mincer_m' \ `irr_pval_mincer_m'], [. \ . \ .] , [`irr_mean_mincer_p' \ `irr_se_mincer_p' \ `irr_pval_mincer_p'], [. \ . \ .]]
+matrix parental        = [[`irr_mean_mincer_f' \ `irr_se_mincer_f' \ `irr_pval_mincer_f'], [`irr_mean_type2_p_inc_f' \ `irr_se_type2_p_inc_f' \ `irr_pval_type2_p_inc_f' ] , [`irr_mean_mincer_m' \ `irr_se_mincer_m' \ `irr_pval_mincer_m'], [`irr_mean_type2_p_inc_p' \ `irr_se_type2_p_inc_p' \ `irr_pval_type2_p_inc_p' ] , [`irr_mean_mincer_p' \ `irr_se_mincer_p' \ `irr_pval_mincer_p'], [`irr_mean_type2_p_inc_p' \ `irr_se_type2_p_inc_p' \ `irr_pval_type2_p_inc_p' ]]
 matrix lincome         = [[`irr_mean_incgrowth7_f' \ `irr_se_incgrowth7_f' \ `irr_pval_incgrowth7_f'], [`irr_mean_incgrowth12_f' \ `irr_se_incgrowth12_f' \ `irr_pval_incgrowth12_f'],[`irr_mean_incgrowth7_m' \ `irr_se_incgrowth7_m' \ `irr_pval_incgrowth7_m'], [`irr_mean_incgrowth12_m' \ `irr_se_incgrowth12_m' \ `irr_pval_incgrowth12_m'], [`irr_mean_incgrowth7_p' \ `irr_se_incgrowth7_p' \ `irr_pval_incgrowth7_p'], [`irr_mean_incgrowth12_p' \ `irr_se_incgrowth12_p' \ `irr_pval_incgrowth12_p']] 
 matrix crime           = [[`irr_mean_type2_nm_f' \ `irr_se_type2_nm_f' \ `irr_pval_type2_nm_f'], [`irr_mean_crimhalf_f' \ `irr_se_crimhalf_f' \ `irr_pval_crimhalf_f'], [`irr_mean_type2_nm_m' \ `irr_se_type2_nm_m' \ `irr_pval_type2_nm_m'], [`irr_mean_crimhalf_m' \ `irr_se_crimhalf_m' \ `irr_pval_crimhalf_m'], [`irr_mean_type2_nm_p' \ `irr_se_type2_nm_p' \  `irr_pval_type2_nm_p'], [`irr_mean_crimhalf_p' \ `irr_se_crimhalf_p' \ `irr_pval_crimhalf_p']]
 matrix health          = [[`irr_mean_valife0_f' \ `irr_se_valife0_f' \ `irr_pval_valife0_f'], [`irr_mean_valife2_f' \ `irr_se_valife2_f' \ `irr_pval_valife2_f'], [`irr_mean_valife0_m' \ `irr_se_valife0_m' \ `irr_pval_valife0_m'], [`irr_mean_valife2_m' \ `irr_se_valife2_m' \ `irr_pval_valife2_m'], [`irr_mean_valife0_p' \ `irr_se_valife0_p' \ `irr_pval_valife0_p'], [`irr_mean_valife2_p' \ `irr_se_valife2_p' \ `irr_pval_valife2_p']]
 
 matrix allirr = [baselineirr \ specification \ predictiontime \ counterfactual \ dwl \ parental \ lincome \ crime \ health]
 matrix rownames allirr = baseline specification "." "." predictiontime "." "." counterfactual "." "." dwl "." "." parental "." "." lincome "." "." crime "." "." health "." "."
+matrix allirr = [allirr[1...,5..6],allirr[1...,3..4],allirr[1...,1..2]]
 matrix colnames allirr = pooled pooled males males females females
 
 cd $output
-putexcel A1 = matrix(allbc)  using allbc_sens, replace
+putexcel A1 = matrix(allbc)  using allbc_sens , replace
 putexcel A1 = matrix(allirr) using allirr_sens, replace

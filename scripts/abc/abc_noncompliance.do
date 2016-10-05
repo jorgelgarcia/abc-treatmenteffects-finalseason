@@ -4,11 +4,11 @@ clear all
 set matsize 11000
 
 /*
-Project :       ABC
-Description:    plot estimates conditional on IQ
+Project :       ABC CBA
+Description:    this .do file makes exercises to sensitivity to non-compliance for critiques appendix, ABC sample only.
 *This version:  April 18, 2016
 *This .do file: Jorge L. Garcia
-*This project : All except Seong, B. and CC. 
+*This project : CBA Team
 */
 
 // set environment variables (server)

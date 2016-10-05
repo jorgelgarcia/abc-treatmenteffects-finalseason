@@ -6,7 +6,7 @@ set maxvar  32000
 
 /*
 Project :       CARE AND ABC
-Description:    this .do file plots the ABC and CARE HRIs
+Description:    this .do file plots the PARI for ABC
 *This version:  January 21, 2015
 *This .do file: Jorge L. Garcia
 *This project : HRI 

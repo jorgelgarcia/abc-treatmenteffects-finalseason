@@ -4,11 +4,11 @@ clear all
 set matsize 11000
 
 /*
-Project :       ABC
-Description:    plot estimates conditional on IQ
+Project :       ABC CBA
+Description:    plots of distributions of cognitive and non-cognitive skills for assumptions 4 and 5
 *This version:  April 18, 2016
 *This .do file: Jorge L. Garcia
-*This project : All except Seong, B. and CC. 
+*This project : CBA Team
 */
 
 // set environment variables (server)
@@ -36,7 +36,7 @@ global collapseprj  = "$klmmexico/abccare/income_projections/"
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 // bootstraps 
-global bootstraps 200
+global bootstraps 1000
 set seed 0
 
 // ABC
@@ -88,9 +88,9 @@ mat colnames b = bc bn
 preserve
 clear 
 svmat b, names(col)
-summ  bc 
 
 foreach var in c n {
+summ b`var'
 local meanb`var' = r(mean)
 local seb`var'   = round(r(sd)/sqrt(r(N)),.0001)
 local meanb`var' = round(`meanb`var'',.0001)

@@ -4,11 +4,11 @@ clear all
 set matsize 11000
 
 /*
-Project :       ABC
-Description:    plot estimates conditional on IQ
+Project :       ABC CVA
+Description:    Test of invariance of prediction function, transfer income, ABC and CARE samples
 *This version:  April 18, 2016
 *This .do file: Jorge L. Garcia
-*This project : All except Seong, B. and CC. 
+*This project : CBA Team
 */
 
 // set environment variables (server)

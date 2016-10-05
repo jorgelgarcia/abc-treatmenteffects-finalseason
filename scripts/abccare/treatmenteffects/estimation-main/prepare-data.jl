@@ -117,7 +117,7 @@ for var in keepvar
   # Variables that originally contained ".a"&& etc. are saved as string. Now we need to convert string to integers. I could not find destring command for Julia. To be updated later.
    if occurrence > 0 # If a column contains ".a" etc.
     # Create a new column (to be deleted later) that will be filled in with integer values for string column.
-   abccare[:var_new] = 0
+   abccare[:var_new] = 0.0
     # Now run the loop over each row
       for i in 1:length(abccare[var])
         if !isna(abccare[i,var])

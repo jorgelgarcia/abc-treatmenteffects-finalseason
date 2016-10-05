@@ -4,11 +4,11 @@ clear all
 set matsize 11000
 
 /*
-Project :       ABC
-Description:    plot estimates conditional on IQ
+Project :       ABC CBA
+Description:    plot combining functions for positive treatment effects, ABC and CARE samples (home scores only)
 *This version:  April 18, 2016
 *This .do file: Jorge L. Garcia
-*This project : All except Seong, B. and CC. 
+*This project : CBA Team
 */
 
 // set environment variables (server)

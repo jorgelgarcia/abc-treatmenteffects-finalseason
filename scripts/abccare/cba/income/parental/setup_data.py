@@ -103,8 +103,16 @@ abcd.id.fillna(9999, inplace = True)
 abcd = abcd.set_index('id')
 abcd.drop(abcd.loc[(abcd.RV==1) & (abcd.R==0)].index, inplace=True)
 
-abcd = abcd.loc[:,unique_list(['R'] + cols.interpABC.keep)]
+inc = abcd.filter(regex='^inc_labor[0-9][0-9]')
+along = pd.wide_to_long(abcd[inc.columns].reset_index(), ['inc_labor'], i='id', j='age').sort_index()
+along = along.interpolate(limit=1)
+awide = along.unstack()
+awide.columns = awide.columns.droplevel(0)
+awide.columns = ['{}{}'.format('inc_labor', a) for a in awide.columns]
+abcd[awide.columns] = awide
 
+abcd = abcd.loc[:,unique_list(['R'] + cols.interpABC.keep)]
+print abcd
 print "Storing Datasets in HDF5 Format"
 
 datasets = [

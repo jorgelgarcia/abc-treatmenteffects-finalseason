@@ -36,7 +36,6 @@ cd $output
 drop if random == 3
 drop if R != 0
 keep if P == 1
-
 // binned density
 egen Qbinned = cut(Q), group (8)
 replace Qbinned = (Qbinned + 1)/8
@@ -77,7 +76,7 @@ svmat pdc`num', names(col)
 twoway (scatter p  age, msymbol(circle) mfcolor (gs4) mlcolor(gs4) connect(l) lwidth(thick) lpattern(solid) lcolor(gs4) yaxis(1))
        (scatter dc age, msymbol(square) mfcolor (gs8) mlcolor(gs8) connect(l) lwidth(thick) lpattern(dash)  lcolor(gs8) yaxis(2))
         , 
-		  legend(label(1 "Fraction Enrolled | Enrollment > 0") label(2 "Average Months| Enrollment > 0") size(vsmall))
+		  legend(label(1 "Fraction Enrolled | Enrollment > 0") label(2 "Avg. Months| Enrollment > 0") size(vsmall))
 		  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 		  xtitle(Age) ytitle(Enrollment, axis(1)) ytitle("Avg. Months | Enrollment > 0", axis(2) size(small))
 		  graphregion(color(white)) plotregion(fcolor(white));
