@@ -92,7 +92,7 @@ function factors(datatouse)
 			end
 	  end
 
-		println("New cat local: $(new_cat_local)")
+		println("New cat local: $(newcatlocal)")
 		println("DATAAAAAAAAAAAAA $(datatouse)")
 		println("Data limited? $(datatouse[:, newcatlocal])")
 		factordata["factor_$(cat)"] = datatouse[:, newcatlocal]
