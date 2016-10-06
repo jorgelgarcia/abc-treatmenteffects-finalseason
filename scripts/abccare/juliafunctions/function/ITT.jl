@@ -32,9 +32,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
   end
 
   if factors == 1
-    datatouse = ITTdata[:,:]
-    include("$scripts/helper/factors.jl")
-    ITTdata = datatouse[:,:]
+    ITTdata = factors(ITTdata)
   end
 
   # Generate IPW weight for the bootstrapped sample

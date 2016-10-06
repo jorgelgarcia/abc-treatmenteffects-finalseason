@@ -21,7 +21,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
   outMat = Dict()
 
   # Define matching data
-  matchingdata = sampledata
+  matchingdata = sampledata[:,:]
 
   # Bootstrap resample if necessary
   if bootsample == "yes"
@@ -32,9 +32,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
 
   # Estimate factors if necessary
   if factors == 1
-    datatouse = matchingdata[:,:]
-    include("$scripts/helper/factors.jl")
-    matchingdata = datatouse[:,:]
+    matchingdata = factors(matchingdata)
   end
 
   # Generate IPW weight for the bootstrapped sample
