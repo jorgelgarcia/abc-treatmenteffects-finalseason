@@ -92,10 +92,11 @@ function factors(datatouse)
 			end
 	  end
 
-		println("New cat local: $(newcatlocal)")
-		println("DATAAAAAAAAAAAAA $(datatouse)")
-		println("Data limited? $(datatouse[:, newcatlocal])")
-		factordata["factor_$(cat)"] = datatouse[:, newcatlocal]
+		keepvar = [:id]
+		keepvar = append!(keepvar, newcatlocal)
+		keepvar = deleteat!(keepvar, findin(keepvar, [:id]))
+
+		factordata["factor_$(cat)"] = datatouse[:, keepvar]
 
 	# Calculate the number of factors using a defined function
 		factor_switch = 1
