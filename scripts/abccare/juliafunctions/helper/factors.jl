@@ -92,6 +92,7 @@ function factors(datatouse)
 			end
 	  end
 
+		println("New cat local: $(new_cat_local)")
 		factordata["factor_$(cat)"] = datatouse[:, new_cat_local]
 
 	# Calculate the number of factors using a defined function
