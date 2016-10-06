@@ -31,7 +31,7 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
     end
   end
 
-  if factors == 1
+  if factorswitch == 1
     ITTdata = factors(ITTdata)
   end
 

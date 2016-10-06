@@ -31,7 +31,7 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
   end
 
   # Estimate factors if necessary
-  if factors == 1
+  if factorswitch == 1
     matchingdata = factors(matchingdata)
   end
 
