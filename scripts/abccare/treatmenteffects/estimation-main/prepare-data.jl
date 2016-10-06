@@ -97,8 +97,6 @@ for var in factorscores
     keepvar = deleteat!(keepvar, findin(keepvar, [var]))
 end
 
-println("keepvarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: $(keepvar)")
-
 abccare = abccare[:, keepvar]
 
 # ------------------------------------------ #
