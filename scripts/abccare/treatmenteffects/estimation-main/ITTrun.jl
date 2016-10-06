@@ -21,6 +21,7 @@ include("$scripts/helper/writematrix.jl")
 include("$scripts/helper/bsample.jl")
 include("$scripts/helper/IPW.jl")
 include("$scripts/helper/factoranalysis.jl")
+include("$scripts/helper/factors.jl")
 
 # Include function files
 include("$scripts/function/ITT.jl")

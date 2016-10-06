@@ -22,6 +22,7 @@ include("$scripts/helper/bsample.jl")
 include("$scripts/helper/IPW.jl")
 include("$scripts/helper/epanechnikov.jl")
 include("$scripts/helper/factoranalysis.jl")
+include("$scripts/helper/factors.jl")
 
 # Include function files
 include("$scripts/function/matching.jl")
