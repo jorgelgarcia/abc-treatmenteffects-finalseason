@@ -15,7 +15,7 @@ function factors(datatouse)
 	factors["factor_iq5y"] = [:iq2y, :iq3y, :iq3y6m, :iq4y, :iq4y6m, :iq5y]
 	factors["factor_iq12y"] = [:iq7y, :iq8y, :iq12y]
 	factors["factor_iq21y"] = [:iq15y, :iq21y]
-	factors["factor_ach12y"] = [:ach5y6m, :ach6y, :ach6y6m, :ach7y, :ach7y6m, :ach8y, :ach8y6m, :piat_math7y]
+	factors["factor_ach12y"] = [:ach5y6m, :ach6y, :ach6y6m, :ach7y, :ach7y6m, :ach8y, :ach8y6m]
 	factors["factor_ach21y"] = [:ach15y, :ach21y]
 	factors["factor_home"] = [:home0y6m, :home1y6m, :home2y6m, :home3y6m, :home4y6m ,:home8y]
 	factors["factor_pinc"] = [:p_inc1y6m, :p_inc2y6m, :p_inc3y6m, :p_inc4y6m, :p_inc8y, :p_inc12y, :p_inc15y, :p_inc21y]
