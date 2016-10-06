@@ -20,7 +20,7 @@ factors["factor_pinc"] = [:p_inc1y6m, :p_inc2y6m, :p_inc3y6m, :p_inc4y6m, :p_inc
 factors["factor_mwork"] = [:m_work1y6m, :m_work2y6m, :m_work3y6m, :m_work4y6m, :m_work21y]
 # factors["factor_meduc"] = [:mb_ed1y6m, :mb_ed2y6m, :mb_ed3y6m, :mb_ed4y6m, :mb_ed8y]
 factors["factor_fhome"] = [:f_home1y6m, :f_home2y6m, :f_home3y6m, :f_home4y6m, :f_home8y]
-factors["factor_educ"] = [:sch_hs30y, :si30y_techcc_att, :si30y_univ_comp, :years_30y]
+factors["factor_educ"] = [:sch_hs30y, :si30y_techcc_att, :si30y_univ_comp, :years_30y, :inv_ever_sped, :inv_tot_sped, :inv_ever_ret, :inv_tot_ret]
 factors["factor_emp"] = [:si30y_works_job, :si21y_inc_labor, :si30y_inc_labor, :inv_si21y_inc_trans_pub, :inv_si30y_inc_trans_pub]
 factors["factor_crime"] = [:ad34_fel, :ad34_mis, :si30y_adlt_totinc]
 factors["factor_tad"] = [:si30y_cig_num, :drink_days, :drink_binge_days, :si34y_drugs]
@@ -31,27 +31,28 @@ factors["factor_diabetes"] = [:si34y_hemoglobin, :si34y_prediab, :si34y_diab]
 factors["factor_obese"] = [:si34y_bmi, :si34y_obese, :si34y_sev_obese, :si34y_whr, :si34y_obese_whr, :si34y_fram_p1]
 factors["factor_bsi"] = [:bsi_tsom, :BSISom_T, :bsi_tdep, :BSIDep_T, :bsi_tanx, :BSIAnx_T, :bsi_thos, :BSIHos_T, :bsi_tgsi, :B18GSI_T]
 
+
 # ================ #
 # Data preparation #
 # ================ #
 # Flip signs of some variables
-flip_variables = [:si34y_chol_hdl, :si21y_inc_trans_pub, :si30y_inc_trans_pub]
+flip_variables = [:si34y_chol_hdl, :si21y_inc_trans_pub, :si30y_inc_trans_pub, :ever_sped, :tot_sped, :ever_ret, :tot_ret]
 for var in flip_variables
-	sampledata[parse("inv_$(var)")] = sampledata[var] .* -1
+	datatouse[parse("inv_$(var)")] = datatouse[var] .* -1
 end
 
 # Create a list of all categories
-categories = [:iq5y, :iq12y, :iq21y, :ach12y, :ach21y, :home, :pinc, :mwork, :meduc, :fhome, :educ, :emp, :crime, :tad, :shealth, :hyper, :chol, :diabetes, :obese, :bsi]
+categories = [:iq5y, :iq12y, :iq21y, :ach12y, :ach21y, :home, :pinc, :mwork, :fhome, :educ, :emp, :crime, :tad, :shealth, :hyper, :chol, :diabetes, :obese, :bsi]
 
 # Determine if we need to deal with ABC
-if size(sampledata[sampledata[:abc] .== 1, :], 1) > 0
+if size(datatouse[datatouse[:abc] .== 1, :], 1) > 0
    abcfactor = 1
 else
    abcfactor = 0
 end
 
 # Determine if we need to deal with CARE
-if size(sampledata[sampledata[:abc] .== 0, :], 1) > 0
+if size(datatouse[datatouse[:abc] .== 0, :], 1) > 0
    carefactor = 1
 else
    carefactor = 0
@@ -74,33 +75,33 @@ for cat in categories
 
 		# Create a category local list if it is only ABC or only CARE
 		if ((carefactor == 0) & (abcfactor == 1)) | ((carefactor == 1) & (abcfactor == 0))
-			if sampledata[!isna(sampledata[var]), var] != 0
+			if datatouse[!isna(datatouse[var]), var] != 0
 				new_cat_local = push!(new_cat_local, var)
 			end
 		end
 
 		# Create a category local list if it is both ABC and CARE
 		if ((carefactor == 1) & (abcfactor == 1))
-			acount = length(sampledata[(!isna(sampledata[var])) & (sampledata[:abc] .== 1), var])
-			ccount = length(sampledata[(!isna(sampledata[var])) & (sampledata[:abc] .== 0), var])
+			acount = length(datatouse[(!isna(datatouse[var])) & (datatouse[:abc] .== 1), var])
+			ccount = length(datatouse[(!isna(datatouse[var])) & (datatouse[:abc] .== 0), var])
 			if ((acount != 0) & (ccount != 0))
 				new_cat_local = push!(new_cat_local, var)
 			end
 		end
   end
 
-	factordata["factor_$(cat)"] = sampledata[:, new_cat_local]
+	factordata["factor_$(cat)"] = datatouse[:, new_cat_local]
 
 # Calculate the number of factors using a defined function
 	factor_switch = 1
 	try
-		diagonalfac(sampledata, factordata["factor_$(cat)"], 1)
+		diagonalfac(datatouse, factordata["factor_$(cat)"], 1)
 	catch err
 		factor_switch = 0
 	end
 
 	if factor_switch == 1
-		sampledata = diagonalfac(sampledata, factordata["factor_$(cat)"], 1)
-    rename!(sampledata, :factor, parse("factor_$(cat)"))
+		datatouse = diagonalfac(datatouse, factordata["factor_$(cat)"], 1)
+    rename!(datatouse, :factor, parse("factor_$(cat)"))
 	end
 end
