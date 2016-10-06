@@ -30,6 +30,13 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
     end
   end
 
+  # Estimate factors if necessary
+  if factors == 1
+    datatouse = matchingdata[:,:]
+    include("$scripts/helper/factors.jl")
+    matchingdata = datatouse[:,:]
+  end
+
   # Generate IPW weight for the bootstrapped sample
   matchingdata = IPWweight(matchingdata, outcomes, outcome_list)
 
