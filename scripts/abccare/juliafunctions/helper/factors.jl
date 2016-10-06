@@ -72,13 +72,13 @@ function factors(datatouse)
 	factordata = Dict()
 
 	for cat in categories
-		new_cat_local = []
+		newcatlocal = []
 		for var in factors["factor_$(cat)"]
 
 			# Create a category local list if it is only ABC or only CARE
 			if ((carefactor == 0) & (abcfactor == 1)) | ((carefactor == 1) & (abcfactor == 0))
 				if datatouse[!isna(datatouse[var]), var] != 0
-					new_cat_local = push!(new_cat_local, var)
+					newcatlocal = push!(newcatlocal, var)
 				end
 			end
 
@@ -87,14 +87,15 @@ function factors(datatouse)
 				acount = length(datatouse[(!isna(datatouse[var])) & (datatouse[:abc] .== 1), var])
 				ccount = length(datatouse[(!isna(datatouse[var])) & (datatouse[:abc] .== 0), var])
 				if ((acount != 0) & (ccount != 0))
-					new_cat_local = push!(new_cat_local, var)
+					newcatlocal = push!(newcatlocal, var)
 				end
 			end
 	  end
 
 		println("New cat local: $(new_cat_local)")
-		println("DATAAAAAAAAAAAAA $(datatouse[:, [new_cat_local]])")
-		factordata["factor_$(cat)"] = datatouse[:, new_cat_local]
+		println("DATAAAAAAAAAAAAA $(datatouse)")
+		println("Data limited? $(datatouse[:, newcatlocal])")
+		factordata["factor_$(cat)"] = datatouse[:, newcatlocal]
 
 	# Calculate the number of factors using a defined function
 		factor_switch = 1
