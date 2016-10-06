@@ -13,13 +13,14 @@ using Distances
 # Set globals and directories
 global current = pwd()
 global data = "$current/../../../../data/abccare/extensions/cba-iv"
-global output = "$current/../rslt"
+global output = "$current/../rslt-appendix"
 global scripts = "$current/../../juliafunctions"
 
 # Include helper files
 include("$scripts/helper/writematrix.jl")
 include("$scripts/helper/bsample.jl")
 include("$scripts/helper/IPW.jl")
+include("$scripts/helper/factoranalysis.jl")
 
 # Include function files
 include("$scripts/function/ITT.jl")
@@ -47,7 +48,7 @@ global genderloop = ["male", "female", "pooled"]
 # Bring in data
 # ================================================================ #
 # List of outcomes
-outcomes = readtable("$scripts/../outcomes/outcomes_cba_mainpaper.csv")
+outcomes = readtable("$scripts/../outcomes/outcomes_cba_appendix.csv")
 
 # ABC/CARE data
 abccare = readtable("$data/append-abccare_iv.csv")
