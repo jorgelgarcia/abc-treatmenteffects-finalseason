@@ -244,7 +244,7 @@ Note: This figure displays the predicted labor income profile obtained when cons
 \end{threeparttable}
 \end{sidewaystable}
 
-\subsubsection{Sensitivity Analysis to the Variables Used to Predict}
+\subsubsection{Sensitivity Analysis to the Variables Used to Predict} \label{appendix:senspredict}
 
 \noindent We examine the sensitivity of our predictions to the choice of different prediction variables. We reproduce three exercises to analyze this for labor income: (i) our baseline prediction, which is based on $\bm{X}_{t}, \bm{B}$ and the lagged value of the predicted labor income, i.e. at time $t$ we base the prediction on $\bm{X}_{t}, \bm{B}$ and (predicted) labor income at $t-1$; (ii) the same as (i) but without using $\bm{B}$; (iii) the same as (i) but without using $\bm{X}_{t}$.\\
 
@@ -1049,22 +1049,66 @@ to estimate the treatment effect on the cost of criminal activity at every age f
 
 \noindent The principle for multiplying the public costs is the following. We evaluate the social benefits of ABC/CARE and do not place a value on who receives the money. The only social cost from a direct transfer is the dead-weight loss that it generates: $50\%$ of its total value. We do not consider education and criminal costs a direct transfer. Thus, we multiply them by a factor of $1.5$: the value of their cost plus $50\%$ of the value of their cost (the dead-weight loss implied in raising the public revenue to fund them). Table \ref{table:bc_comp} lists the factor we use to multiply each cost to account for its implied dead-weight loss.\\
 
-\noindent Having constructed our cash flow, $\mathbb{E} (B_t - C_t)$, solving for $\rho$
-reduces to an algebraic exercise.\\
+\noindent Having constructed our cash flow, $\mathbb{E} (B_t - C_t)$, solving for $\rho$ reduces to an algebraic exercise. The expected life-cycle profile of net benefits need to satisfy a ``single crossing property'' in order to obtain a unique solution for the internal rate of return.\footnote{See \citet{Arrow-Levhari_1969_EJ} for a formal discussion, although the discussion on multiplicity, sign, and real or complex nature of the roots of a polynomial traces back to Descarte's Rule.} The single crossing property holds when the benefits do not go from positive to negative across the life cycle. When the single crossing property is not satisfied, the internal rate of return is not a valid summary for the efficiency of an investment. To calculate the internal rate of return, we estimate the treatment effect on each component of the benefits and costs at time $t$ for the pooled, male, and female samples. We do this for 1,000 bootstrap resamples of the original ABC/CARE data. In the case of health costs and subject income, for which we employ auxiliary datasets to estimate the treatment effects, we also obtain 1,000 bootstrap estimates from the auxiliary data for every ABC/CARE bootstrap resample, resulting in a total of 1,000,000 estimates. By reusing each bootstrap estimate of the treatment effect on outcomes that do not require any auxiliary data set 1,000 times, we obtain a total of 1,000,000 estimates of the cash flow. We estimate the internal rate of return on each of those cash flows, and discard those for which we find a negative internal rate of return. The remaining estimates form our empirical bootstrap distribution of the internal rate of return for the pooled, male, and female samples. We take the mean of the distributions to be the point estimates, and we take the sample standard deviations to be the standard errors. To construct the 80\% confidence intervals, we take the 10\textsuperscript{th} and 90\textsuperscript{th} quantiles of each bootstrap distribution.\\
 
-\noindent We estimate the treatment effect on each
-component of the benefits and costs at time $t$ for the pooled, male, and
-female samples. We do this for 1,000 bootstrap resamples of the original ABC/CARE data.
-In the case of health costs and subject income, for which we employ auxiliary datasets to
-estimate the treatment effects, we also obtain 1,000 bootstrap estimates from the auxiliary data
-for every ABC/CARE bootstrap resample, resulting in a total of 1,000,000 estimates.
-By reusing each bootstrap estimate of the treatment effect on outcomes that do not require any auxiliary data
-set 1,000 times, we obtain a total of 1,000,000 estimates of the cash flow.
-We estimate the internal rate of return on each of those cash flows.
-This is how we form our empirical bootstrap distribution of the internal rate of return for the pooled, male, and female samples.
-We take the mean of the distributions to be the point estimates, and we take the standard deviations
-to be the standard errors. To construct the 80\% confidence intervals, we take the 10\textsuperscript{th}
-and 90\textsuperscript{th} quantiles of each bootstrap distribution. \\
+\noindent Figure~\ref{figure:irrdist} reports the distributions of the internal rates of return, by gender and for each of the three parameters that we consider (treatment vs. next best, treatment staying at home, treatment vs. alternative preschool). For some parameters and genders, we discard a high percentage of the internal rate of return of the outcomes. We next discuss how we calculate the benefit/cost ratios, noting that this statistics is not subject the same caveat as the internal rate of return: we can summarize the efficiency of the investment even in the absence of the single-crossing property.
+
+\newgeometry{top=.6in, bottom=.8in, left=.6in, right=.6in}
+\begin{sidewaysfigure}[!htbp]
+\centering
+\caption{Internal Rate of Return, by Gender and by Parameter}\label{figure:irrdist}
+\begin{subfigure}[h]{0.25\textwidth}
+		\centering
+		\caption{Treatment vs. Next Best, Pooled}
+		\includegraphics[width=\textwidth]{output/irr_2_sexp.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Next Best, Females}
+		\includegraphics[width=\textwidth]{output/irr_2_sexf.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.25\textwidth}
+		\centering
+		\caption{Treatment vs. Next Best, Males}
+		\includegraphics[width=\textwidth]{output/irr_2_sexm.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Staying at Home, Pooled} 
+		\includegraphics[width=\textwidth]{output/irr_5_sexp.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Staying at Home, Females}
+		\includegraphics[width=\textwidth]{output/irr_5_sexf.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Staying at Home, Males}
+		\includegraphics[width=\textwidth]{output/irr_5_sexm.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Alternative Preschool, Pooled} 
+		\includegraphics[width=\textwidth]{output/irr_8_sexp.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Alternative Preschool, Females}
+		\includegraphics[width=\textwidth]{output/irr_8_sexf.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Alternative Preschool, Males}
+		\includegraphics[width=\textwidth]{output/irr_8_sexm.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: Panel (a) displays the empirical bootstrap distribution for the estimate of the treatment vs. next parameter in the pooled sample. The reminder panels show an analogous distribution varying the parameter and the gender. See Section~\ref{section:methodology} for the definition of the parameters. We discard negative internal rates of returns. Each panel displays the point estimate with the standard error in parentheses and the $p$-value in brackets in the left corner and the percentage of positive internal rates of return out of the initial set of bootstrap resamples in the right corner. 
+\end{sidewaysfigure}
+\restoregeometry
+\doublespacing
+
+
 
 % We let $T = 79$. In Appendix \ref{app:method_identify}
 % we explain how we can estimate the summand of the numerator at every period $t$, which
@@ -1148,7 +1192,7 @@ We estimate the benefit/cost ratio for each of those streams.
 This is how we form our empirical bootstrap distribution of the benefit/cost ratio for the pooled, male, and female samples.
 We take the mean of the distributions to be the point estimates, and we take the standard deviations
 to be the standard errors. To construct the 80\% confidence intervals, we take the 10\textsuperscript{th}
-and 90\textsuperscript{th} quantiles of each bootstrap distribution.
+and 90\textsuperscript{th} quantiles of each bootstrap distribution. Figure~\ref{figure:ratiodist} presents the empirical distribution of the empirical bootstrap distribution, per parameter of interest and gender. 
 
 \begin{table}[H]
 \begin{threeparttable}
@@ -1164,5 +1208,60 @@ of the treatment effect. *Only education costs up until age 18 are multiplied by
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
+\newgeometry{top=.6in, bottom=.8in, left=.6in, right=.6in}
+\begin{sidewaysfigure}[!htbp]
+\centering
+\caption{Benefit/Cost Ratios, by Gender and by Parameter}\label{figure:ratiodist}
+\begin{subfigure}[h]{0.25\textwidth}
+		\centering
+		\caption{Treatment vs. Next Best, Pooled}
+		\includegraphics[width=\textwidth]{output/ratios_2_sexp.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Next Best, Females}
+		\includegraphics[width=\textwidth]{output/ratios_2_sexf.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.25\textwidth}
+		\centering
+		\caption{Treatment vs. Next Best, Males}
+		\includegraphics[width=\textwidth]{output/ratios_2_sexm.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Staying at Home, Pooled} 
+		\includegraphics[width=\textwidth]{output/ratios_5_sexp.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Staying at Home, Females}
+		\includegraphics[width=\textwidth]{output/ratios_5_sexf.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Staying at Home, Males}
+		\includegraphics[width=\textwidth]{output/ratios_5_sexm.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Alternative Preschool, Pooled} 
+		\includegraphics[width=\textwidth]{output/ratios_8_sexp.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Alternative Preschool, Females}
+		\includegraphics[width=\textwidth]{output/ratios_8_sexf.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.25\textwidth}
+	\centering
+	\caption{Treatment vs. Alternative Preschool, Males}
+		\includegraphics[width=\textwidth]{output/ratios_8_sexm.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: Panel (a) displays the empirical bootstrap distribution for the estimate of the treatment vs. next parameter in the pooled sample. The reminder panels show an analogous distribution varying the parameter and the gender. See Section~\ref{section:methodology} for the definition of the parameters. Each panel displays the point estimate with the standard error in parentheses and the $p$-value in brackets in the left corner.
+\end{sidewaysfigure}
+\restoregeometry
+\doublespacing
 
 

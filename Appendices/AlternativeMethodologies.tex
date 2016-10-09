@@ -1,12 +1,12 @@
 \section{Alternative Evaluation Methodologies} \label{appendix:amethodology}
 
-\noindent In the main paper, we develop and document the results from two methodologies to account for treatment substitution in the first phase of ABC/CARE. The objective of each method is to estimate the average treatment effect of ABC/CARE, holding fixed take-up of alternative preschool by the control groups. We want to construct a scenario in which the subjects in the control group do not attend alternative preschool. This allows us to evaluate center-based childcare relative to a counterfactual scenario in which subjects stay at home.\\
+\noindent In the main paper, we develop and document the results of one methodology to account for control substitution in the first phase of ABC/CARE. The objective of each method is to estimate the average treatment effect of ABC/CARE, holding fixed take-up of alternative preschool by the control groups. We want to construct a scenario in which the subjects in the control group do not attend alternative preschool. This allows us to evaluate center-based childcare relative to a counterfactual scenario in which subjects stay at home.\\
 
-\noindent This section presents alternative methodologies to evaluate the first-phase treatment. Throughout the rest of this section, we refer to treatment in either ABC/CARE generically as center-based childcare, as we discard the family education treatment group of CARE---as in the main paper, the control group consists of the control groups in both ABC and CARE. We refer to take-up of treatment substitution as enrollment into alternative preschool. As in our main methodology, we choose the control sets to account for background variables using the method in Appendix~\ref{appendix:results}.\\
+\noindent This section presents alternative methodologies to evaluate the first-phase treatment. Throughout the rest of this section, we refer to treatment in either ABC/CARE generically as center-based childcare, as we discard the family education treatment group of CARE---as in the main paper, the control group consists of the control groups in both ABC and CARE. We refer to take-up of control substitution as enrollment into alternative preschool. As in our main methodology, we choose the control sets to account for background variables using the method in Appendix~\ref{appendix:results}.\\
 
 \noindent To illustrate the alternative methodologies, we present results for a small set of outcomes. First, we consider a time series of IQ scores. Second, we present results for three long-term outcomes: years of education, employment, and labor income. Both IQ scores and the chosen long-term outcomes follow predictable patterns and are straightforward to interpret. These characteristics allow us to evaluate the sensitivity of the estimated treatment effects using the different strategies.\\
 
-\noindent Let the discrete choice to enroll in alternative preschool, $P$, be defined as $P=\mathbf{1}\left[V>0\right]$ which is an indicator equal to 1 when the subject is enrolled. Let $Q$ be the number of months in alternative preschool. $\mathbf{X}$ is a vector of observed individual- or household-level characteristics. $P$ and $Q$ are zero for participants of the treatment group. In this section, we allow for the take-up of the program to be imperfectly given by the randomization. Let $D$ be take-up of the ABC/CARE program.
+\noindent Let the discrete choice to enroll in alternative preschool, $V$, be defined as $P=\mathbf{1}\left[V>0\right]$ which is an indicator equal to 1 when the subject is enrolled. Let $Q$ be the number of months in alternative preschool. $\mathbf{X}$ is a vector of observed individual- or household-level characteristics. $V$ and $Q$ are zero for participants of the treatment group. In this section, we allow for the take-up of the program to be imperfectly given by the randomization. Let $D$ be take-up of the ABC/CARE program.\footnote{This is fundamentally different from the methodology in the paper given that it does not necessarily assume that $D = R$.}
 
 \subsection{Instrumental Variables}
 
@@ -64,7 +64,7 @@ Y = \alpha^D D + \alpha^Q Q + \mathbf{X} \beta + \varepsilon,
 
 \begin{enumerate}[(i)]
 \item The number of months in alternative preschool, $Q$.
-\item An indicator for take-up of alternative preschool, $P$.
+\item An indicator for take-up of alternative preschool, $V$.
 \item The $\log$ of months in alternative preschool, $\log Q$.
 \end{enumerate}
 
@@ -154,14 +154,14 @@ Y = \alpha^D D + \alpha^Q Q + \mathbf{X} \beta + \varepsilon,
 
 \subsubsection{Varying the Parameterization of Alternative Preschool Take-up}
 
-\noindent Now, we explore the sensitivity to the specification of $Q$ in \eqref{eq:ivnot}. We consider two alternatives. First, we use an indicator of take-up of alternative preschool, $P$ (Figure~\ref{fig:ins_inter_P_iv} and Figure~\ref{fig:ins_inter_P_other}). Second, we take the $\log$ of $Q$ (Figure~\ref{fig:ins_inter_LogQ_iv} and Figure~\ref{fig:ins_inter_LogQ_other}).
+\noindent Now, we explore the sensitivity to the specification of $Q$ in \eqref{eq:ivnot}. We consider two alternatives. First, we use an indicator of take-up of alternative preschool, $V$ (Figure~\ref{fig:ins_inter_P_iv} and Figure~\ref{fig:ins_inter_P_other}). Second, we take the $\log$ of $Q$ (Figure~\ref{fig:ins_inter_LogQ_iv} and Figure~\ref{fig:ins_inter_LogQ_other}).
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for an Endogenous Indicator of Take-up of Alternative Preschool} \label{fig:ins_inter_P_iv}
 		\includegraphics[width=.8\columnwidth]{output/appendixplots/ins_inter_P_iv_te.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated with $D$ from a regression of $Y$ on $D$, $P$, and $\mathbf{X}$, using $R$, $\mathbf{Z}(1 - R)$ as instruments. The outcomes ($Y$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated with $D$ from a regression of $Y$ on $D$, $V$, and $\mathbf{X}$, using $R$, $\mathbf{Z}(1 - R)$ as instruments. The outcomes ($Y$) are IQ scores at different ages, with a national standard deviation of 15 and a mean of 100. $\mathbf{X}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 \begin{figure}[H]
@@ -169,7 +169,7 @@ Y = \alpha^D D + \alpha^Q Q + \mathbf{X} \beta + \varepsilon,
 		\includegraphics[width=.8\columnwidth]{output/appendixplots/ins_inter_P_iv_other.eps}
 \floatfoot{
 \footnotesize
-\noindent Note: This plot presents the parameter associated to $D$ from a regression of $Y$ on $D$, $P$, and $\mathbf{X}$, using $R$, $\mathbf{Z}(1 - R$) as instruments. The outcomes ($Y$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
+\noindent Note: This plot presents the parameter associated to $D$ from a regression of $Y$ on $D$, $V$, and $\mathbf{X}$, using $R$, $\mathbf{Z}(1 - R$) as instruments. The outcomes ($Y$) are different relevant adult outcomes labeled in the horizontal axis. $\mathbf{X}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-risk Index, and Apgar Score at 1 minute. The confidence intervals are calculated at the 10\% significance level.}
 \end{figure}
 
 \begin{figure}[H]
@@ -223,7 +223,7 @@ D^{*} = \mathbf{W} \gamma^{D} + \varepsilon^{D}, \label{eq:probitD}
 
 \noindent where $\mathbf{W}$ is a vector that includes $\mathbf{X}$ and $R$ and can include variables that shift the decision to enroll subjects into ABC/CARE without shifting the counterfactual outcome of interest, $Y^{d}$. \\
 
-\noindent We model the selection into months of alternative preschool as a linear equation with fixed coefficients, assuming homogeneous treatment effects:
+\noindent We model the selection into months of alternative preschool as a linear equation with fixed coefficients:
 
 \begin{equation}
 Q = \mathbf{W} \gamma^{Q} + \varepsilon^{Q}, \label{eq:selq}

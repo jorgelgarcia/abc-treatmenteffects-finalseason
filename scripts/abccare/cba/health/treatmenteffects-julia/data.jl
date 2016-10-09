@@ -76,7 +76,7 @@ if deaths == 1
 
 	for id_n in [74, 9999, 914, 99, 909, 87, 920, 951, 117, 947, 943]
 
-		for age in [8:79]
+		for age in [8:108]
 			if age > idage["id$(id_n)age"]
 				println("Dealing with deaths: $(id_n) at age $(age)")
         fammerge[fammerge[:id] .== id_n, parse("health_private$(age)")] = 0
@@ -84,7 +84,7 @@ if deaths == 1
       end
     end
 
-    for age in [30:79]
+    for age in [30:108]
 			if age > idage["id$(id_n)age"]
 				println("Dealing with deaths: $(id_n) at age $(age)")
         fammerge[fammerge[:id] .== id_n, parse("diclaim$(age)")] = 0
