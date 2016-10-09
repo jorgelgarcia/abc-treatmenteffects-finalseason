@@ -101,7 +101,7 @@ replace ind = ind + 1 if estimate == 2
 replace ind = ind + 2 if estimate == 3 
 
 replace pval = 1 - pval if m < 0
-gen sig = 1 if pval <= .15
+gen sig = 1 if pval <= .10
 replace sig = . if estimate == 2 & part == 2
 
 replace m = m/100000
@@ -119,7 +119,7 @@ global xlabel_3 2 "Program Costs" 6 "Total Benefits" 10 "Labor Income" 14 "Paren
 # delimit cr
 
 cd $output
-foreach sex of numlist 2 {
+foreach sex of numlist 1 2 3 {
 	#delimit
 	twoway (bar m ind        if estimate == 1 & sex == `sex', fcolor(white) lcolor(gs0) lwidth(medthick))
 	       (bar m ind        if estimate == 2 & sex == `sex', color(gs4))
@@ -165,6 +165,6 @@ twoway (bar     m part1            if estimate == 1 & sex == 3, fcolor(white) lc
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
-			  note("Per-annum Rate of Return: 13% (s.e. 5%). Benefit-cost Ratio: 5.6 (s.e. 2.39)", size(small));
+			  note("Per-annum Rate of Return: 12% (s.e. 5%). Benefit-cost Ratio: 5.7 (s.e. 2.3)", size(small));
 #delimit cr 
 graph export abccare_npvssumm.eps, replace
