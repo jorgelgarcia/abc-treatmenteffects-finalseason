@@ -218,7 +218,7 @@ foreach sex in male female pooled {
 		matrix rownames all`varyy'_s`sex' = S "Mother'sEducation" "PIAT(5-7)" "Education(30)" "LaborIncome(21)" Cognitive NonCognitive Constant "F-stat" "R2" Observations
 
 		cd $output
-		outtable using abccarecnlsy_invariance_`varyy'_s`sex', mat(all`varyy'_s`sex') replace nobox center f(%9.3c)
+		outtable using abccarecnlsy_invariance_`varyy'_s`sex', mat(all`varyy'_s`sex') replace nobox center f(%9.3f)
 		restore 
 	}
 }
