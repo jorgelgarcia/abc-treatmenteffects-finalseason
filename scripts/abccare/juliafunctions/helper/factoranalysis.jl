@@ -111,7 +111,7 @@ function diagonalfac(sampledata, tofactordata, factorn)
     end
 
     # compute the factor score ("*" acts like a dot product here)
-    arnondata = Array(nonadata)
+    arnonadata = Array(nonadata)
     fscores = arnonadata * floads
 
     # ------------------------------- #
@@ -140,8 +140,9 @@ function diagonalfac(sampledata, tofactordata, factorn)
     end
 
     # Create new_id for the factor score
-    fscoresize = size(fscore)[1]
-    fscoreframe = DataFrame(new_id = 1:fscoresize, factor = fscore)
+    fscoresize = size(fscores)[1]
+    fscoresv = vec(fscores)
+    fscoreframe = DataFrame(new_id = 1:fscoresize, factor = fscoresv)
 
     # Merge factorscore using new_id
     mergedata = join(sampledata, fscoreframe, on = [:new_id], kind = :outer)

@@ -21,13 +21,18 @@ function mestimate(sampledata, outcomes, outcome_list, controls, draw, ddraw, bo
   outMat = Dict()
 
   # Define matching data
-  matchingdata = sampledata
+  matchingdata = sampledata[:,:]
 
   # Bootstrap resample if necessary
   if bootsample == "yes"
     if ddraw != 0
       matchingdata = bsample(matchingdata, :male, :family)
     end
+  end
+
+  # Estimate factors if necessary
+  if factorswitch == 1
+    matchingdata = factors(matchingdata)
   end
 
   # Generate IPW weight for the bootstrapped sample

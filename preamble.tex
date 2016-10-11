@@ -92,8 +92,9 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 
 %Math Environments
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{claim}[theorem]{Claim}
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}{Claim}
+\newtheorem{algorithm}{Algorithm}
 \newtheorem{assumption}{Assumption}
 \renewcommand\theassumption{A--\arabic{assumption}}
 \newtheorem{definition}[theorem]{Definition}
@@ -102,7 +103,7 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{condition}[theorem]{Condition}
 \newtheorem{result}[theorem]{Result}
-\newenvironment{proof}{\paragraph{Proof:}}{\hfill$\square$}
+\newenvironment{proof}{\textbf{Proof:}}{$\bullet$}
 
 %Commands
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
