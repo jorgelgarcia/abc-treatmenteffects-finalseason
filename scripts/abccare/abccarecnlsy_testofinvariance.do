@@ -22,15 +22,9 @@ global googledrive: env googledrive
 // do files
 global scripts     = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global datapsid     = "$klmshare/Data_Central/data-repos/psid/base/"
-global datapsidw    = "$klmshare/Data_Central/data-repos/psid/extensions/abc-match/"
-global datanlsyw    = "$klmshare/Data_Central/data-repos/nlsy/extensions/abc-match-nlsy/"
-global datacnlsyw   = "$klmshare/Data_Central/data-repos/nlsy/extensions/abc-match-cnlsy/"
 global datacnlsyp   = "$klmshare/Data_Central/data-repos/nlsy/primary/cnlsy/base/"
 global dataabccare  = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
-global dataabcres   = "$klmmexico/abccare/income_projections"
-global dataweights  = "$klmmexico/abccare/as_weights/"
-global collapseprj  = "$klmmexico/abccare/income_projections/"
+global weights      = "$klmshare/Data_Central/data-repos/nlsy/extensions/abc-match-cnlsy/"
 
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
@@ -49,59 +43,123 @@ egen piatcare = rowmean(wj_math5y6m wj_math6y wj_math7y6m) if program == "care"
 gen     piatmath = piatabc  if program == "abc"
 replace piatmath = piatcare if program == "care" 
 
-global cogabc    iq2y iq3y iq4y iq5y iq7y iq8y
-global ncogabc   bsi_tsom bsi_thos bsi_tdep bsi_tgsi
+global cogabc      iq2y iq3y iq4y iq5y iq7y iq8y
+global noncogabc   bsi_tsom bsi_thos bsi_tdep bsi_tgsi
 
 global male   if male == 1
 global female if male == 0
 global pooled 
 
+gen S = 1
+gen wtabc_allids = 1
+keep si30y_inc_labor si30y_inc_trans_pub si34y_bmi S male m_ed0y piatmath years_30y si21y_inc_labor wtabc_allids $cogabc $noncogabc
+
+tempfile ABC
+save "`ABC'", replace
+
+// open and save measures of cognition and IQ in CNLSY
+cd $datacnlsyp
+use cnlsy-base.dta, clear
+
+global cogcnlsy  piatrrec1986 piatrcom1986 ppvt1986
+global noncogcnlsy bpi_scaleasoc1988 bpi_scaleanx1988 bpi_scalehstrong1988 bpi_scalehyp1988 bpi_scaledep1988 bpi_scalewithd1988
+keep id $cogcnlsy $noncogcnlsy
+
+tempfile cnlsyskills
+save   "`cnlsyskills'", replace
+
+cd $datacnlsyw
+use cnlsy-abc-match.dta, clear
+merge 1:1 id using "`cnlsyskills'"
+keep if _merge == 3
+drop _merge
+
+cd $weights
+merge 1:1 id using cnlsy-abc-weights
+keep if _merge == 3
+drop _merge
+
+gen S = 0
+keep if black == 1
+drop if si30y_inc_labor > 300000 | si21y_inc_labor > 300000
+
+/*
+foreach var of varlist si30y_inc_labor si21y_inc_labor {
+	summ `var', d
+	drop if `var' > r(p95) | `var' < r(p5)
+}
+*/
+
+global cognlsy  piatrrec1986 piatrcom1986 ppvt1986
+global ncognlsy bpi_scaleasoc1988 bpi_scaleanx1988 bpi_scalehstrong1988 bpi_scalehyp1988 bpi_scaledep1988 bpi_scalewithd1988
+keep si30y_inc_labor si30y_inc_trans_pub si34y_bmi S male m_ed0y piatmath years_30y si21y_inc_labor wtabc_allids $cogcnlsy $noncogcnlsy
+append using "`ABC'"
+
 foreach sex in male female pooled {
-	foreach varyy of varlist si30y_inc_labor si30y_inc_trans_pub p_inc21y si34y_bmi {
+	foreach varyy of varlist si30y_inc_labor si30y_inc_trans_pub si34y_bmi {
 		matrix allests`varyy' = J(11,1,.)
-		matrix rownames allests`varyy' = R m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
+		matrix rownames allests`varyy' = S m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
 		foreach b of numlist 1(1)$bootstraps {
 			preserve
 			bsample
 
 			// construct factors
-			// cognitive
-			factor  $cog
-			predict cogfactor
+			// cognitive ABC
+			factor  $cogabc
+			predict cogfactorabc if S == 1
+			
+			// cognitive CNLSY
+			factor $cogcnlsy [aw = wtabc_allids]
+			predict cogfactorcnlsy if S == 0
+			
+			gen cogfactor     = cogfactorabc   if S == 1
+			replace cogfactor = cogfactorcnlsy if S == 0  
 
-			// non-cognitive
-			factor $ncog
-			predict noncogfactor
+			// non-cognitive ABC
+			factor $noncogabc 
+			predict noncogfactorabc if S == 1
+			
+			// non-cognitive CNLSY
+			factor $noncogcnlsy [aw = wtabc_allids]
+			predict noncogfactorcnlsy if S == 0
+			
+			gen noncogfactor     = noncogfactorabc   if S == 1
+			replace noncogfactor = noncogfactorcnlsy if S == 0
+			
+			foreach var of varlist cogfactor noncogfactor {
+				summ `var' 
+				replace `var' = (`var' - r(mean))/r(sd)
+			}
 			
 			// treatment regressions with factor
-			reg `varyy' R m_ed0y cogfactor noncogfactor ${`sex'}, robust
+			reg `varyy' S m_ed0y cogfactor noncogfactor ${`sex'} [aw = wtabc_allids], robust
 			matrix t1f = e(b)
 			matrix t1fcomplete`b' = [t1f[1,1..2],J(1,3,.),t1f[1,3...],e(F),e(r2),e(N)]'
-			matrix rownames t1fcomplete`b' = R m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
+			matrix rownames t1fcomplete`b' = S m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
 			matrix colnames t1fcomplete`b' = t1fcomplete`b'
 			mat_capp allests`varyy' : allests`varyy' t1fcomplete`b'
 
 			
-			reg `varyy' R m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor ${`sex'}, robust
+			reg `varyy' S m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor ${`sex'} [aw = wtabc_allids], robust
 			matrix t2f = e(b)
 			matrix t2fcomplete`b' = [t2f[1,1...],e(F),e(r2),e(N)]'
-			matrix rownames t2fcomplete`b' = R m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
+			matrix rownames t2fcomplete`b' = S m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
 			matrix colnames t2fcomplete`b' = t2fcomplete`b'
 			mat_capp allests`varyy' : allests`varyy' t2fcomplete`b'
 
 			
 			// treatment regressions with no factor
-			reg `varyy' R m_ed0y ${`sex'}, robust
+			reg `varyy' S m_ed0y ${`sex'} [aw = wtabc_allids], robust
 			matrix t1 = e(b)
 			matrix t1complete`b' = [t1[1,1..2],J(1,5,.),t1[1,3],e(F),e(r2),e(N)]'
-			matrix rownames t1complete`b' = R m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
+			matrix rownames t1complete`b' = S m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
 			matrix colnames t1complete`b' = t1complete`b'
 			mat_capp allests`varyy' : allests`varyy' t1complete`b'
 			
-			reg `varyy' R m_ed0y piatmath years_30y si21y_inc_labor ${`sex'}, robust
+			reg `varyy' S m_ed0y piatmath years_30y si21y_inc_labor ${`sex'} [aw = wtabc_allids], robust
 			matrix t2 = e(b)
 			matrix t2complete`b' = [t2[1,1..5],J(1,2,.),t2[1,6],e(F),e(r2),e(N)]'
-			matrix rownames t2complete`b' = R m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
+			matrix rownames t2complete`b' = S m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
 			matrix colnames t2complete`b' = t2complete`b'
 			mat_capp allests`varyy' : allests`varyy' t2complete`b'
 			restore
@@ -157,10 +215,10 @@ foreach sex in male female pooled {
 		matrix all`varyy'_s`sex'p2 = [[all`varyy'_s`sex'[9..10,1] \ round(all`varyy'_s`sex'[11,1],1)], J(3,1,.),[all`varyy'_s`sex'[9..10,3] \ round(all`varyy'_s`sex'[11,3],1)], J(3,1,.),[all`varyy'_s`sex'[9..10,5] \ round(all`varyy'_s`sex'[11,1],5)], J(3,1,.),[all`varyy'_s`sex'[9..10,7] \ round(all`varyy'_s`sex'[11,1],7)], J(3,1,.)]
 		
 		matrix all`varyy'_s`sex' = [all`varyy'_s`sex'p1 \ all`varyy'_s`sex'p2]		
-		matrix rownames all`varyy'_s`sex' = R "Mother'sEducation" "PIAT(5-7)" "Education(30)" "LaborIncome(21)" Cognitive NonCognitive Constant "F-stat" "R2" Observations
+		matrix rownames all`varyy'_s`sex' = S "Mother'sEducation" "PIAT(5-7)" "Education(30)" "LaborIncome(21)" Cognitive NonCognitive Constant "F-stat" "R2" Observations
 
 		cd $output
-		outtable using abccare_endog_`varyy'_s`sex', mat(all`varyy'_s`sex') replace nobox center f(%9.3f)
+		outtable using abccarecnlsy_invariance_`varyy'_s`sex', mat(all`varyy'_s`sex') replace nobox center f(%9.3c)
 		restore 
 	}
 }
