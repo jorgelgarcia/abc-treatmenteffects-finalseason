@@ -39,7 +39,7 @@ global klmmexico: env klmMexico
 
 global dataabccare   = "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
 global data_dir      = "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/rslt/projections/`file_specs'"
-global incomeresults = "${klmmexico}/abccare/income_projections/"
+global incomeresults = "${klmmexico}/abccare/income_projections/current"
 global output        = "${projects}/abc-treatmenteffects-finalseason/output/"
 
 // obtained realized and predicted values to insert in plot
@@ -180,11 +180,11 @@ foreach source in labor /*transfer*/ {
 		
 	// graph
 	cd $output
-	global y0  0[10]50
+	global y0  0[10]60
 	global y1  0[10]60
 	local bwidth1 = .65
 	local bwidth0 = .65  
-	foreach sex of numlist 0 {
+	foreach sex of numlist 0 1 {
 	
 	preserve
 
@@ -192,7 +192,7 @@ foreach source in labor /*transfer*/ {
 	
 		local graphregion		graphregion(color(white))
 		local yaxis				ytitle("``source'_name' Income (1000s 2014 USD)") ylabel(${y`sex'}, angle(h) glcol(gs14))
-		local xaxis				xtitle("Age") xlabel(30 "Interpolation {&larr} t* {&rarr} Extrapolation" 45 "40" 55 "50" 65 "60", grid glcol(gs14))
+		local xaxis				xtitle("Age") xlabel(30 "Interpolation {&larr} t* {&rarr} Extrapolation" 45 "45" 55 "55" 65 "65", grid glcol(gs14))
 		local legend			legend(rows(2) order(1 2 3 7 9 8) label(1 "Control Predicted") label(2 "Treatment Predicted") label(3 "Prediction +/- s.e.") label(7 "Control Observed") label(8 "Observed +/- s.e.") label(9 "Treatment Observed") size(small))
 	
 		local t_mean			lcol(gs9) lwidth(1.2)
