@@ -32,7 +32,7 @@ While the method in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} works wit
 on the spline interactions of \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} were also considered.  After estimating this model using NHANES data, covariate values from the PSID 
 age 30--34 data in years 2002--2013 were used to impute measured BMI values for PSID respondents. A Kolmogorov-Sminov (K-S) test and a visual inspection of smoothed histograms were used to compare the distribution of PSID imputed values to the distribution of observed values in the NHANES estimation sample.  The model specification selected for imputation had the smallest K-S distance between the two distributions.  The smoothed histogram of the distributions for the entire samples and the black subgroup in each data set appeared reasonably close.  \\
 
-\noindent After imputing values of measured BMI for PSID respondents age 30--34, we turned to the second problem: accounting for systematic trends in BMI from the age 30 interview to the health interview.  The goal was to have a model that could map from measured BMI at the health interview around age 34 to self-reported BMI at the age 30 interview.  Employing the longitudinal structure of PSID, we matched each respondent's first interview between age 30--32 with their imputed measured BMI at between ages 33--40.  We then estimated a model using self-reported BMI between ages 30--32 as the response variable and imputed measured BMI at ages 33--40, the age when BMI is measured, along with other variables observed at age 30 as explanatory variables. This imputation model was applied to any ABC/CARE subject who has their health interview at least one year after their age 30 interview.\\
+\noindent After imputing values of measured BMI for PSID respondents age 30--34, we turned to the second problem: accounting for systematic trends in BMI from the age 30 interview to the health interview.  The goal was to have a model that could map from measured BMI at the health interview around age 34 to self-reported BMI at the age 30 interview.  Employing the longitudinal structure of PSID, we matched each respondent's first interview between age 30--32 with their imputed measured BMI between ages 33--40.  We then estimated a model using self-reported BMI between ages 30--32 as the response variable and imputed measured BMI at ages 33--40, the age when BMI is measured, along with other variables observed at age 30 as explanatory variables. This imputation model was applied to any ABC/CARE subject who has their health interview at least one year after their age 30 interview.\\
 
 \noindent For ABC/CARE subjects who have their health interview within one year of the age 30 interview, we assumed that any systematic time trends in BMI are too small to have any practical significance.  However, we still needed to convert the imputed measured BMI to a self-reported value for compatibility with other transition models estimated in PSID.  This model was estimated on ages 30--32 in the PSID and uses covariates from the age 30 interview along with imputed measured BMI to predict self-reported BMI. \\
 
@@ -357,8 +357,7 @@ The normal retirement age is assumed to be 67 for all ABC/CARE subjects. \\
 \noindent The FAM mortality model is assumed to represent mortality in 2009.
 The estimated mortality probabilities are reduced in simulated future years to represent improvements in mortality from sources such as medical innovation that are not included in the model.
 There are different adjustment factors for the populations under and over the age of 65.
-The mortality reduction factors are taken from the intermediate cost mortality projections in the 2013 Social Security Trustee's Report.
-The medical cost growth assumptions are derived from several underlying assumptions about growth in GDP and the labor force. \\
+The mortality reduction factors are taken from the intermediate cost mortality projections in the 2013 Social Security Trustee's Report. \\
 
 %% Not using NWI growth in this project
 %\begin{figure}
@@ -371,7 +370,8 @@ The medical cost growth assumptions are derived from several underlying assumpti
 %}
 %\end{figure}
 
-\noindent The real medical cost growth factor in each year is calculated by first finding the minimum of (i) the year-over-year GDP growth plus year-over-year excess medical cost growth or (ii) the Affordable Care Act cap on year-over-year medical cost growth. In order to obtain the medical cost adjustment factor for the current year of the simulation, FAM takes the cumulative product of the yearly growth factors since 2004 and then divides it by the relative growth in the labor force since 2004.\footnote{The medical cost growth assumptions come from Congressional Budget Office and SSA assumptions.
+\noindent Medical cost growth assumptions are derived from several underlying assumptions about growth in GDP and the labor force.
+The real medical cost growth factor in each year is calculated by first finding the minimum of (i) the year-over-year GDP growth plus year-over-year excess medical cost growth or (ii) the Affordable Care Act cap on year-over-year medical cost growth. In order to obtain the medical cost adjustment factor for the current year of the simulation, FAM takes the cumulative product of the yearly growth factors since 2004 and then divides it by the relative growth in the labor force since 2004.\footnote{The medical cost growth assumptions come from Congressional Budget Office and SSA assumptions.
 The year-over-year growth assumptions for medical costs are shown in Figure \ref{figure:medgrowth_yearly}.
 The 2010-2019 GDP assumptions are based on CBO's analysis of the President's Budget, March 2009.
 GDP assumptions for 2020-2100 are based on the 2008 OASDI Trustee's Report long-term projection of 2.1\% real GDP growth.} \\
@@ -428,7 +428,7 @@ Education        & $\times$ & $\times$ & $\times$ & \checkmark \\
 Asthma Diagnoses & \checkmark & \checkmark & \checkmark & \checkmark \\
 Hospital stays & if $\geq$ 1 week & any stay & any stay & $\times$ \\
 Births & $\times$ & $\times$ & \checkmark & \checkmark \\
-Mother present & $\times$ & \checkmark & \checkmark & $\times$ \\
+Mother present & $\times$ & \checkmark & $\times$ & $\times$ \\
 Father present & \checkmark & \checkmark & $\times$ & $\times$ \\
 Number of siblings & \checkmark & \checkmark & $\times$ & $\times$ \\
 Foodstamps & \checkmark & \checkmark & \checkmark & \checkmark \\
