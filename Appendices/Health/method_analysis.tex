@@ -213,7 +213,7 @@ Note: This table illustrates how health outcomes at age $a$ predict health outco
 %\end{sidewaystable}
 
 
-\noindent We have five other types of outcomes: \\
+\noindent We have four other types of outcomes: \\
 \begin{enumerate}
 \item Binary outcomes that are not absorbing states, such as starting to smoke. We specify latent
 indices as in Equation~\ref{eqn:transition_hzd_latent} for these outcomes as well but where
@@ -222,11 +222,6 @@ the lag-dependent outcome also appears as an independent variable. This allows f
 \item Ordered outcomes, which are also modeled as in Equation~\ref{eqn:transition_hzd_latent} recognizing that the observation rule is
 a function of unknown thresholds $\varsigma_m$. Similar to binary outcomes, we allow for state-dependence by including the lagged outcome
 on the right-hand side.
-
-\item Censored outcomes, such as capital income, are considered. For capital income,
-there are a non-negligible number of observations with zero capital income. For these observations, we consider
-two-part models where the latent variable is specified as in Equation~\ref{eqn:transition_hzd_latent} but models
-probabilities only when censoring does not occur.
 
 \item Continuous outcomes are modeled with linear models. An example continuous outcome is the
 transitions in log(BMI). We allow for state-dependence by including the lagged outcome on the right-hand side.
