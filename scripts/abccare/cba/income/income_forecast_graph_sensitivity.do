@@ -6,7 +6,7 @@ Original date:	August 29, 2016
 */
 
 // macros
-local file_specs	pset1_mset3
+local file_specs	pset7_mset3
 /*
 Matching control sets (mset)
 	1. Baseline controls only (W)
@@ -37,7 +37,7 @@ global klmmexico: env klmMexico
 
 global dataabccare   = "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
 global data_dir      = "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/rslt/projections/`file_specs'"
-global incomeresults = "${klmmexico}/abccare/income_projections/"
+global incomeresults = "${klmmexico}/abccare/income_projections/current/`file_specs'"
 global output        = "${projects}/abc-treatmenteffects-finalseason/output/"
 
 // prepare data for graphing
@@ -127,7 +127,7 @@ foreach source in labor /*transfer*/ {
 		
 		
 		// limit to 25-60 and scale income
-		drop if age > 65  //age < 25 |
+		drop if age > 65  //| age < 25
 		foreach v in mean_age semean_age plus minus {
 			replace `v' = `v'/1000
 		}
@@ -168,7 +168,7 @@ foreach source in labor /*transfer*/ {
 				`xaxis'
 				`yaxis'
 				`legend';
-		graph export "`source'_25-65_`file_specs'_`name`sex''_sensitivity.eps", replace;
+		graph export "`source'_20-65_`file_specs'_`name`sex''_sensitivity.eps", replace;
 		# delimit cr
 		
 	restore
