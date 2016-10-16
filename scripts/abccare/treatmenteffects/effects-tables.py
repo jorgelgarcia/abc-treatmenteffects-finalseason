@@ -23,7 +23,7 @@ from paths import paths
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
 
-path_results = os.path.join(filedir, 'rslt/')
+path_results = os.path.join(filedir, 'rslt-appendix/')
 path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_appendix.csv')
 
 # provide option for two sided tests
