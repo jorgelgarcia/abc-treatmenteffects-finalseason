@@ -2,7 +2,7 @@
 """
 Created on Fri Mar 11 15:17:41 2016
 
-@author: jkcshea
+@author: jkcshea, jessicayk
 
 Description: this file takes the estimates in .csv files and produces a series of
 tables displaying various ITT estimates. Regular and step down p-values are estimated.
@@ -23,12 +23,8 @@ from paths import paths
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
 
-# YK cross this out to generate the p_inc table
-#path_results = os.path.join(filedir, 'rslts-jun25/abccare_ate/')
-#path_outcomes = os.path.join(filedir, 'outcomes_cba_merged.csv')
-
 path_results = os.path.join(filedir, 'rslt/')
-path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_p_inc.csv')
+path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_appendix.csv')
 
 # provide option for two sided tests
 twosided = 0
@@ -45,12 +41,12 @@ outcomes = pd.read_csv(path_outcomes, index_col='variable')
 rslt_y = {}
 
 for sex in ['pooled', 'male', 'female']:
-    itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])
-    itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])    
-    itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])
+    itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+    itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
-    matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])    
-    matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])
+    matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+    matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
     itt_all = itt_all.loc[:,['itt_noctrl', 'itt_ctrl', 'itt_wctrl']]
     rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
@@ -59,23 +55,11 @@ for sex in ['pooled', 'male', 'female']:
     rslt_y[sex] = pd.concat([itt_all, rslt_p1, rslt_p0], axis=1, keys=['pall', 'p1', 'p0'])
     
 rslt_y = pd.concat(rslt_y, axis=1, keys=rslt_y.keys(), names=['sex', 'type', 'coefficient'])
-rslt_y = rslt_y.reorder_levels(['draw', 'ddraw', 'rowme'])
+rslt_y = rslt_y.reorder_levels(['draw', 'ddraw', 'rowname'])
 rslt_y.index.names = ['draw', 'ddraw', 'variable']
 rslt_y.sort_index(inplace=True)
 
-# drop factors
-factors = ['factor_iq5','factor_iq12','factor_iq21','factor_achv12','factor_achv21','factor_home',
-'factor_pinc','factor_mwork','factor_meduc','factor_fhome','factor_educ','factor_emp',
-'factor_crime','factor_tad','factor_shealth','factor_hyper','factor_chol','factor_diabetes',
-'factor_obese','factor_bsi','factor_ext_p','factor_ext_e','factor_ext_t','factor_agr_p',
-'factor_agr_e','factor_agr_t','factor_nrt_p','factor_nrt_e','factor_cns_p','factor_cns_e',
-'factor_cns_t','factor_opn_e','factor_opn_t','factor_act_p']
 
-for dvar in factors:
-    try:
-        rslt_y.drop(dvar, axis=0, level=2, inplace=True)
-    except:
-        pass
 
 ind_rslt_y = rslt_y.index.get_level_values(2).unique()
 ind_outcomes = [i for i in outcomes.index if i in ind_rslt_y]
@@ -166,7 +150,7 @@ tstat.loc[outcomes.query('hyp == "-"').index, :] = tstat.loc[outcomes.query('hyp
 # 2. provide blocks and dictionary to estimate/store stepdown results
 stepdown = pd.DataFrame([], columns=tstat.columns, index=tstat.index)
 blocks = list(pd.Series(outcomes.block.values).unique())
-#blocks.remove(np.nan)
+blocks.remove(np.nan)
 
 for block in blocks:
     print "Stepdown test for main tables, %s block..." % (block)
