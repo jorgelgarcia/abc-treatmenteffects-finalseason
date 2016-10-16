@@ -150,7 +150,7 @@ tstat.loc[outcomes.query('hyp == "-"').index, :] = tstat.loc[outcomes.query('hyp
 # 2. provide blocks and dictionary to estimate/store stepdown results
 stepdown = pd.DataFrame([], columns=tstat.columns, index=tstat.index)
 blocks = list(pd.Series(outcomes.block.values).unique())
-blocks.remove(np.nan)
+#blocks.remove(np.nan)
 
 for block in blocks:
     print "Stepdown test for main tables, %s block..." % (block)
