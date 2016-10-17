@@ -1,11 +1,8 @@
 \section{Details on Estimation, Interpolation, and Extrapolation} \label{appendix:methodology}
 
-\noindent \textbf{[JLG: This is the corresponding adaptation of Appendix C, accounting for the few changes in the labels of the assumptions and the new test of invariance across the experimental and non-experimental samples that I am proposing. The rest remains unchaged.]}
+We provide details on the approach to estimate treatment effects out of sample. The difference in the approach for each outcome is based on different scenarios of data availability.
 
-\noindent We provide details on the approach to estimate treatment effects out of sample. The difference in the approach for each outcome is based on different scenarios of data availability.
-
-\subsection{Complete Data}
-\label{app:method_fullobs}
+\subsection{Complete Data}\label{app:method_fullobs}
 
 \noindent  In the case where we have complete data, we only need to address compromised randomization. Appendix~\ref{appendix:assessingcc} shows that our estimates are not sensitive to alternative approaches to compromised randomization. Our baseline estimates throughout this paper do not account for this. By complete data, we mean that we observe the data for at least 90\% of the individuals in the sample. Table~\ref{table:nonipw} lists the variables that are completely observed.\\
 
@@ -96,7 +93,7 @@ chosen among a set of variables, as detailed in Appendix~\ref{appendix:bvariable
 
 \noindent When producing our predictions, we have two alternatives: (i) directly use the auxiliary samples; or (ii) use a weighted version of the auxiliary samples so that they more closely align with respect to observed characteristics. We follow the second alternative and match the experimental and auxiliary or non-experimental as we explain next. Our matching is based on male and black indicators, year of birth, years of education at age 30, and labor income at age 30. We choose these variables because they are available in all three non-experimental samples and we intend to locate common comparison samples.\\
 
-\noindent We can construct synthetic control and treatment groups in the non-experimental samples by matching the experimental and non-experimental samples based on $\left( \bm{X}_{t}, \bm{B} \right)$ at $t \leq t^*$. Then, we can fit the dynamic relationship $\phi_{j,t} \left( \cdot \right)$ with which we predict out-of-sample based on these synthetic control and treatment groups. Algorithm~\ref{alg:match} formalizes the construction of the synthetic treatment and control groups, following, e.g., \citet{Heckman_Ichimura_etal_1998_REStud}.\\
+\noindent We construct synthetic control and treatment groups in the non-experimental samples by matching the experimental and non-experimental samples based on $\left( \bm{X}_{t}, \bm{B} \right)$ at $t \leq t^*$. Then, we can fit the dynamic relationship $\phi_{j,t} \left( \cdot \right)$ with which we predict out-of-sample based on these synthetic control and treatment groups. Algorithm~\ref{alg:match} formalizes the construction of the synthetic treatment and control groups, following, e.g., \citet{Heckman_Ichimura_etal_1998_REStud}.\\
 
 \onehalfspacing
 \begin{algorithm}\label{alg:match}\textbf{Matching Experimental to Non-experimental Sample Individuals}
@@ -311,24 +308,24 @@ Note: This figure displays the predicted labor income profile obtained when cons
 \noindent In this section we provide tests for Assumptions~\ref{ass:summary} and ~\ref{ass:invariance}. These assumptions, together with Assumptions~\ref{ass:exog} and ~\ref{ass:exogne}, imply the following null hypotheses. We test Assumptions~\ref{ass:summary} and ~\ref{ass:invariance} in this subsection and Assumptions~\ref{ass:exog} and ~\ref{ass:exogne} in the next.
 
 \begin{eqnarray}
-\phi_{j,t}^0 \left( \bm{X}_{t}^d, \bm{B} \right) &=& \phi_{j,t}^1 \left( \bm{X}_{t}^1 \right) \\ \nonumber 
+\phi_{j,t}^0 \left( \bm{X}_{t}^d, \bm{B} \right) &=& \phi_{j,t}^1 \left( \bm{X}_{t}^1 \right) \\ \nonumber
 &:= & \phi_{j,t} \left( \bm{X}_{t}^d, \bm{B} \right) \label{eq:firstimply}
 \end{eqnarray}
 
 \noindent and \\
- 
+
 \begin{eqnarray}
 \phi_{j,t} \left( \bm{X}_{t}^d, \bm{B} \right) = \widetilde{\phi}_{j,t} \left( \bm{X}_{t}^d, \bm{B} \right). \label{eq:secondimply}
 \end{eqnarray}
 
-\noindent First, we test Assumption~\ref{ass:summary}. In the main text, we show that this implies: 
+\noindent First, we test Assumption~\ref{ass:summary}. In the main text, we show that this implies:
 
 \begin{eqnarray}
 \mathbb{E} \left[ Y_{j,t}^d | \bm{X}_{t}^d  = \bm{x}_{t}^d, \bm{B} = \bm{b}, D = d \right] &=&  \mathbb{E} \left[ Y_{j,t} | \bm{X}_{t}^d  = \bm{x}_{t}^d, \bm{B} = \bm{b}, D = d \right] \\ \nonumber
 &=&\mathbb{E} \left[ Y_{j,t} | \bm{X}_{t}  = \bm{x}_{t}, \bm{B} =  \bm{b} \right]. \label{eq:invariancetestapp}
 \end{eqnarray}
 
-\noindent That is, a \textbf{direct} test is to use the experimental sample and ask if once we account for a set of the variables in $\bm{X}_{t}$, $R$ (randomization to treatment assignment in ABC/CARE) predicts the outcome of interest, conditional on $\bm{B}$. This tests if this specific set of $\bm{X}_{t}$ suffices to summarize the treatment described by $R$. The set of tests for this includes: PIAT scores at ages 5 to 7, education at age 30, and labor income at age 21. The reason why we do not use the the full set if variables in  $\bm{X}_{t}$ is that  $\bm{X}_{t}$ includes variables that are outcomes themselves, such as body-mass index and labor income at age 30. Note that $R = D$ in our main methodology. That is, children who are offered treatment attend it. For the three main outcomes we predict, once we condition on $\bm{B}, \bm{X}_{t}, \bm{\theta}$, the coefficient associated to $R$ is not significant. We test this with and without accounting for endogeneity, as explained in Appendix~{app:endogeneity}.
+\noindent That is, a \textbf{direct} test is to use the experimental sample and ask if once we account for a set of the variables in $\bm{X}_{t}$, $R$ (randomization to treatment assignment in ABC/CARE) predicts the outcome of interest, conditional on $\bm{B}$. This tests if this specific set of $\bm{X}_{t}$ suffices to summarize the treatment described by $R$. The set of tests for this includes: PIAT scores at ages 5 to 7, education at age 30, and labor income at age 21. The reason why we do not use the the full set if variables in  $\bm{X}_{t}$ is that  $\bm{X}_{t}$ includes variables that are outcomes themselves, such as body-mass index and labor income at age 30. Note that $R = D$ in our main methodology. That is, children who are offered treatment attend it. For the three main outcomes we predict, once we condition on $\bm{B}, \bm{X}_{t}, \bm{\theta}$, the coefficient associated to $R$ is not significant. We test this with and without accounting for endogeneity, as explained in Appendix~\ref{app:endogeneity}.
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
@@ -666,13 +663,13 @@ Note: This figure displays the predicted labor income profile obtained when cons
 \end{threeparttable}
 \end{sidewaystable}
 
-\noindent Second, we test Assumption~\ref{ass:invariance}. In the main text, we show that this implies: 
+\noindent Second, we test Assumption~\ref{ass:invariance}. In the main text, we show that this implies:
 
 \begin{equation}
 \mathbb{E} \left[ Y_{j,t} | \bm{X}_{t} = \bm{x}_{t}, \bm{B}, S = s \right] = \mathbb{E} \left[ Y_{j,t} | \bm{X}_{t} = \bm{x}_{t}, \bm{B} \right]. \label{eq:withbetimplicationapp}
 \end{equation}
 
-\noindent The test is analogous to that of Assumption~\ref{ass:summary}. We ask if, when pooling the experimental and the non-experimental samples, the indicator associated with being in the experimental ($S = 1$) or non-experimental ($S = 0$) sample is significantly different from zero. We are able to test this at $t = t^*$, where we observe the predicted outcomes at ages 30. As we explain before, our non-experimental source at $t = t^*$ is the CNLSY. Tables~\ref{table:inv0} to \ref{table:invfin}. Once we account for our complete set of prediction variables in $\bm{B}, \bm{X}_{t}$ we do not find strong evidence against Assumption~\ref{ass:invariance}. Body-mass index at age 34 is an expected exception given the noticeable outliers in the ABC/CARE sample. 
+\noindent The test is analogous to that of Assumption~\ref{ass:summary}. We ask if, when pooling the experimental and the non-experimental samples, the indicator associated with being in the experimental ($S = 1$) or non-experimental ($S = 0$) sample is significantly different from zero. We are able to test this at $t = t^*$, where we observe the predicted outcomes at ages 30. As we explain before, our non-experimental source at $t = t^*$ is the CNLSY. Tables~\ref{table:inv0} to \ref{table:invfin}. Once we account for our complete set of prediction variables in $\bm{B}, \bm{X}_{t}$ we do not find strong evidence against Assumption~\ref{ass:invariance}. Body-mass index at age 34 is an expected exception given the noticeable outliers in the ABC/CARE sample.
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
@@ -800,7 +797,7 @@ Note: This figure displays the predicted labor income profile obtained when cons
 
 \subsection{Testing  Assumptions~\ref{ass:exog} and ~\ref{ass:exogne}} \label{app:endogeneity}
 
-\noindent We use the following framework to test Assumptions~\ref{ass:exog} and ~\ref{ass:exogne}. Let 
+\noindent We use the following framework to test Assumptions~\ref{ass:exog} and ~\ref{ass:exogne}. Let
 
 \begin{align}\label{eq:sa-msystemmain}
 \bm{M}_{t}^d &= \bm{\lambda}^d \bm{\theta}_{t}^d +  \bm{\upsilon}_t^d   \nonumber \\
@@ -808,7 +805,7 @@ Note: This figure displays the predicted labor income profile obtained when cons
 \end{align}
 where $\bm{\theta}^d  \independent \bm{\upsilon}_{t}^d,  \bm{\omega}_{t}^d$ and $\bm{\upsilon_{t}^d} \independent \bm{\omega_{t}^d}$ for all $t \in \{0, \ldots, T \}$.
 
-\noindent With an auxiliary system of measures $\bm{M}_{t}^d $ consisting of at least three measures, we are able to identify the vectors of coefficients characterizing this system, $\bm{\lambda}^d, \bm{\beta}^d$, as well as the respective covariance matrices, $\Sigma_{\bm{\theta}_{t}^d}, \Sigma_{\bm{\upsilon}_{t}^d}, \Sigma_{\bm{\omega}_{t}^d}$, use the method in \citet{Bartlett_1938_Nature} to obtain an estimate of $\bm{\theta}_{t}^d$ \citep{Cunha_Heckman_ea_2005_oep,Cunha_Heckman_etal_2010_est_tech_cognoncog}, and use it as a control function when testing the validity of Assumption~\ref{ass:summary}, i.e. use it to ``control'' for endogeneity. We first estimate this system using the non-experimental sample. An analogous system in the non-experimental sample allows us to test Assumption~\ref{ass:invariance} and to assess the relevance of endogeneity when constructing our predictions.\\ 
+\noindent With an auxiliary system of measures $\bm{M}_{t}^d $ consisting of at least three measures, we are able to identify the vectors of coefficients characterizing this system, $\bm{\lambda}^d, \bm{\beta}^d$, as well as the respective covariance matrices, $\Sigma_{\bm{\theta}_{t}^d}, \Sigma_{\bm{\upsilon}_{t}^d}, \Sigma_{\bm{\omega}_{t}^d}$, use the method in \citet{Bartlett_1938_Nature} to obtain an estimate of $\bm{\theta}_{t}^d$ \citep{Cunha_Heckman_ea_2005_oep,Cunha_Heckman_etal_2010_est_tech_cognoncog}, and use it as a control function when testing the validity of Assumption~\ref{ass:summary}, i.e. use it to ``control'' for endogeneity. We first estimate this system using the non-experimental sample. An analogous system in the non-experimental sample allows us to test Assumption~\ref{ass:invariance} and to assess the relevance of endogeneity when constructing our predictions.\\
 
 \noindent The reasoning behind this approach is the following: correlation between $\bm{X}_{t}$ and $\bm{\varepsilon}_{t}$ in the non-experimental sample biases our prediction. We can write and estimate a system similar to that in \eqref{eq:sa-msystemmain} in the non-experimental sample and estimate an approximation of $\bm{\varepsilon}_{t}$. Then, we can ask if the coefficients characterizing our predictions change after controlling for this approximation. We can also ask if $\bm{\theta}_{c}, \bm{\theta}_{n}$ are significant predictors of the outcome being predicted. Using the estimates of $\bm{\theta}_{c}, \bm{\theta}_{n}$ that we obtain from this procedure, we present evidence on this using the ABC/CARE sample by treatment status in this appendix (see in Appendix~\ref{app:invariance}).\\
 
@@ -835,7 +832,7 @@ Note: Panel (a) displays a factor score estimated based on the measurement syste
 
 \noindent For want of data to approximate $\bm{\theta}_{c}, \bm{\theta}_{n}$ in PSID and NLSY79, we test this assumption using the CNLSY. Our measurement system for $\bm{\theta}_{c}$ consists of PIAT sections that we do not use to predict future outcomes (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT). Our measurement system for $\bm{\theta}_{n}$ is based on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior).\\
 
-\noindent Tables~\ref{table:endoginc} and ~\ref{table:endogti} show the results from this exercise for the parental income at (child's) age 21 and labor and transfer income at age 30. We display specifications based on different control sets. For parental income we do not present a test for the CNLSY because we base our forecast on PSID and NLSY79.\\ 
+\noindent Tables~\ref{table:endoginc} and ~\ref{table:endogti} show the results from this exercise for the parental income at (child's) age 21 and labor and transfer income at age 30. We display specifications based on different control sets. For parental income we do not present a test for the CNLSY because we base our forecast on PSID and NLSY79.\\
 
 \noindent The coefficients characterizing our predictions in ABC/CARE and CNLSY do not present major changes after controlling for estimates of $\bm{\theta}_{c}, \bm{\theta}_{n}$. Further, these terms do not significantly determine the outcomes being predicted when we account for the full control set we use when predicting.
 
@@ -967,7 +964,7 @@ Note: Panel (a) displays a factor score estimated based on the measurement syste
 
 \subsection{Parental Income}\label{app:parentalincome}
 
-\noindent A substantial fraction of the ABC/CARE benefits come from parental income. In practice, the program operates as a childcare center from the parents' perspective. These parents were, in essence,  mothers: only $27\%$ of the mothers lived with a partner at baseline and there is little change in this afterward. ABC/CARE relaxed the time constraint of the mothers, enabling them to educate themselves more and/or work more. The program had treatment effects on (i) maternal education; (ii) maternal labor supply; and (iii) maternal income.\footnote{See Appendix~\ref{appendix:results}.} Quantifying the effect of ABC/CARE on parental income requires quantifying its effects beyond ages 5, after the subjects entered school. The program could have shifted the labor income profile through education or work experience. To test this, we need to quantify the effect that the program had from when it started until the mothers retired.\\ 
+\noindent A substantial fraction of the ABC/CARE benefits come from parental income. In practice, the program operates as a childcare center from the parents' perspective. These parents were, in essence,  mothers: only $27\%$ of the mothers lived with a partner at baseline and there is little change in this afterward. ABC/CARE relaxed the time constraint of the mothers, enabling them to educate themselves more and/or work more. The program had treatment effects on (i) maternal education; (ii) maternal labor supply; and (iii) maternal income.\footnote{See Appendix~\ref{appendix:results}.} Quantifying the effect of ABC/CARE on parental income requires quantifying its effects beyond ages 5, after the subjects entered school. The program could have shifted the labor income profile through education or work experience. To test this, we need to quantify the effect that the program had from when it started until the mothers retired.\\
 
 \noindent There are three options to monetize parental income. (i) A conservative approach that we follow in the main paper. We use the available information and calculate the treatment effect of the program on labor income from ages 0 to 21. We observe parental income at ages 0, 1.5, 3.5, 4.5, 8, 12, 15, and 21. We interpolate between the ages that we observe and stop at age 21. The average age of the mothers at baseline was 21. On average, then, we omit 19 years of labor income if the mothers decide to retire at 60, 24 if they retire at 65, etc. (ii) A second approach is to use the available data together with an auxiliary sample to parameterize parental labor income when the subjects are older than 21. (iii) A third approach is to follow a similar methodology as the one we use for the subjects' labor and transfer income, making some adaptations given data limitations. Option (i) is straightforward. We explain options (ii) and (iii) next.\\
 
@@ -1004,11 +1001,11 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 
 \noindent We estimate the coefficients in \eqref{eq:mincer} using the sample of mothers in ABC/CARE. We pool the longitudinal information and estimate the coefficients using ordinary least squares. We use a standard Black-Welch measure of experience (age - education - 6) \citep{Smith_Welch_1979_IER}. For this estimation, we take mothers whose earnings are above $0$. For mothers living with a partner who report to be working, we consider $1/2$ of total parental income as $\ln Y_{a}$. To validate our estimates within ABC/CARE, we estimate the coefficients \eqref{eq:mincer} using a sub-sample of disadvantaged mothers in the PSID.\footnote{We define disadvantaged as follows: black, not married, labor income, education (at age 5 of child's participant), age and number of children (at age 5 of child's participant) in the same ranges as the ABC/CARE mothers, labor income below percentile 75.} The coefficients characterizing \eqref{eq:mincer} in ABC/CARE and PSID for different combinations of control sets are in agreement. We display them in Table~\ref{table:mincerpsid}.\\
 
-\begin{table}[H] 
+\begin{table}[H]
 \begin{threeparttable}
 \caption{Mincer Equation Estimates for Mothers in ABC/CARE and the PSID}
 \label{table:mincerpsid}
-\centering 
+\centering
 \footnotesize
 \input{output/abccarepsid_mincerests_ready.tex}
 \begin{tablenotes}
@@ -1022,11 +1019,11 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 
 \noindent Table~\ref{table:psens} display results that enable us to answer these two questions. Estimates based on \eqref{eq:mincer} allow for a precise estimate of the the predicted net present value of parental income (treatment - control) when the subjects are 21 years old. This is to be expected given that we estimate \eqref{eq:mincer} with data from the ABC/CARE individuals. When using these same estimates to predict parental labor income such that mothers work for 40 years in their life times, we find that the method we use in the main paper underestimates the gain based on parental income by around $\$30,000$ (2014 USD).
 
-\begin{table}[H] 
+\begin{table}[H]
 \begin{threeparttable}
 \caption{Parental Labor Income, Interpolations and Prediction}
 \label{table:psens}
-\centering 
+\centering
 \input{output/abccarepsid_pincmincer_ready.tex}
 \begin{tablenotes}
 \footnotesize
@@ -1039,7 +1036,7 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 
 \noindent The third approach is to predict parental income as in Section~\ref{section:cbamethodology}. For want of maternal characteristics enabling us to characterize a match, we skip the matching procedure and directly implement the prediction. As with labor income (of program participants) after age 30, we append the PSID and NLSY79 and use them as a common sample. For this approach, we assume that all parental income is earned by the mother and limit the sample to black females whose labor income at each age is below the in-sample 90th percentile (we calculate this for the PSID and NLSY79 separately before appending the samples). We use two predictors: (i) average observed income from ages 21 to 67; (ii) lagged income. We initialize the prediction with the last observed measure of maternal income and extrapolate until the mother is 65 years old.\\
 
-\noindent We show an equivalent to Figure~\ref{figure:pincome} using this parental income measure.
+\noindent We show an equivalent to Figure~\ref{figure:pincome} using this parental income measure. See Figure~\ref{figure:pincomeapp}.
 
 \begin{figure}[!htbp]
 \centering
@@ -1118,7 +1115,7 @@ to estimate the treatment effect on the cost of criminal activity at every age f
 \end{subfigure}
 \begin{subfigure}[h]{0.25\textwidth}
 	\centering
-	\caption{Treatment vs. Staying at Home, Pooled} 
+	\caption{Treatment vs. Staying at Home, Pooled}
 		\includegraphics[width=\textwidth]{output/irr_5_sexp.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.25\textwidth}
@@ -1133,7 +1130,7 @@ to estimate the treatment effect on the cost of criminal activity at every age f
 \end{subfigure}
 \begin{subfigure}[h]{0.25\textwidth}
 	\centering
-	\caption{Treatment vs. Alternative Preschool, Pooled} 
+	\caption{Treatment vs. Alternative Preschool, Pooled}
 		\includegraphics[width=\textwidth]{output/irr_8_sexp.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.25\textwidth}
@@ -1147,7 +1144,7 @@ to estimate the treatment effect on the cost of criminal activity at every age f
 		\includegraphics[width=\textwidth]{output/irr_8_sexm.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: Panel (a) displays the empirical bootstrap distribution for the estimate of the treatment vs. next parameter in the pooled sample. The reminder panels show an analogous distribution varying the parameter and the gender. See Section~\ref{section:methodology} for the definition of the parameters. We discard negative internal rates of returns. Each panel displays the point estimate with the standard error in parentheses and the $p$-value in brackets in the left corner and the percentage of positive internal rates of return out of the initial set of bootstrap resamples in the right corner. 
+Note: Panel (a) displays the empirical bootstrap distribution for the estimate of the treatment vs. next parameter in the pooled sample. The reminder panels show an analogous distribution varying the parameter and the gender. See Section~\ref{section:methodology} for the definition of the parameters. We discard negative internal rates of returns. Each panel displays the point estimate with the standard error in parentheses and the $p$-value in brackets in the left corner and the percentage of positive internal rates of return out of the initial set of bootstrap resamples in the right corner.
 \end{sidewaysfigure}
 \restoregeometry
 \doublespacing
@@ -1236,7 +1233,7 @@ We estimate the benefit/cost ratio for each of those streams.
 This is how we form our empirical bootstrap distribution of the benefit/cost ratio for the pooled, male, and female samples.
 We take the mean of the distributions to be the point estimates, and we take the standard deviations
 to be the standard errors. To construct the 80\% confidence intervals, we take the 10\textsuperscript{th}
-and 90\textsuperscript{th} quantiles of each bootstrap distribution. Figure~\ref{figure:ratiodist} presents the empirical distribution of the empirical bootstrap distribution, per parameter of interest and gender. 
+and 90\textsuperscript{th} quantiles of each bootstrap distribution. Figure~\ref{figure:ratiodist} presents the empirical distribution of the empirical bootstrap distribution, per parameter of interest and gender.
 
 \begin{table}[H]
 \begin{threeparttable}
@@ -1274,7 +1271,7 @@ of the treatment effect. *Only education costs up until age 18 are multiplied by
 \end{subfigure}
 \begin{subfigure}[h]{0.25\textwidth}
 	\centering
-	\caption{Treatment vs. Staying at Home, Pooled} 
+	\caption{Treatment vs. Staying at Home, Pooled}
 		\includegraphics[width=\textwidth]{output/ratios_5_sexp.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.25\textwidth}
@@ -1289,7 +1286,7 @@ of the treatment effect. *Only education costs up until age 18 are multiplied by
 \end{subfigure}
 \begin{subfigure}[h]{0.25\textwidth}
 	\centering
-	\caption{Treatment vs. Alternative Preschool, Pooled} 
+	\caption{Treatment vs. Alternative Preschool, Pooled}
 		\includegraphics[width=\textwidth]{output/ratios_8_sexp.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.25\textwidth}
