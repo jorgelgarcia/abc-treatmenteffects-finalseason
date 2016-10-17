@@ -33,7 +33,7 @@ command_counts = '''
 	\\begin{{table}}[H]
      \\caption{{Combining Functions, {} Sample}} 
      \\label{{table:{}_rslt_{}_counts}}
-	\\input{{{}rslt_{}_counts_all}}
+	\\input{{{}rslt_{}_counts}}
 	\\end{{table}}  
 '''
 
@@ -42,7 +42,7 @@ command_counts_cat = '''
 	\\begin{{table}}[H]
      \\caption{{Combining Functions by Category{}, {} Sample}} 
      \\label{{table:{}_rslt_{}_counts_n{}a{}}}
-	\\input{{{}rslt_{}_counts_n{}a{}_all}}
+	\\input{{{}rslt_{}_counts_n{}a{}}}
 	\\end{{table}}   
 '''
 

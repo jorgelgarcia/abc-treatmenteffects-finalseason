@@ -56,7 +56,7 @@ command_main = '''
 '''
 """
 
-f = open(os.path.join(paths.apptables, '..', '1_abccare.tex'), 'w')
+f = open(os.path.join(paths.apptables, '..', '1_abccare_appendix.tex'), 'w')
 
 head = '''
 \\input{Preamble} \n
