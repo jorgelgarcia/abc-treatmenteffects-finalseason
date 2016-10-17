@@ -710,11 +710,14 @@ for sex in ['pooled', 'male', 'female']:
 
 # 500 category version
 
+categories_order = ["Cognitive Skills", "Childhood Household Environment", "Mother's Employment, Education, and Income",
+					"Education, Employment, Income", "Crime", "Drugs and Alcohol", "Adult Health", "Mental Health"]					
+					
+'''
 categories_order = ["Cognitive Skills", "Noncognitive Skills", "Mother's Employment, Education, and Income",
                     "Childhood Household Environment", "Adult Household Environment", "Education, Employment, Income",
                     "Crime", "Childhood Health", "Adult Health", "Mental Health", "Drugs and Alcohol"]
-'''
-
+					
 categories_order = ["IQ Scores","Achievement Scores","HOME Scores","Parent Income",
                     "Mother's Employment","Mother's Education","Father at Home",
                     "Adoption","Education","Employment and Income","Crime","Tobacco, Drugs, Alcohol",
