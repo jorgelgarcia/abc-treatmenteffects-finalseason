@@ -139,8 +139,8 @@ foreach sex of numlist 1 2 3 {
 
 // do treatment vs control only
 drop if ind == .
-keep if estimate == 1 & sex == 3
 keep if part == 1 | part == 3 | part == 4 | part == 6 | part == 7 | part == 10 | part == 11 | part == 14
+
 gen part1 = .
 replace part1 = 1 if part == 3
 replace part1 = 2 if part == 1 
@@ -149,22 +149,26 @@ replace part1 = 4 if part == 11
 replace part1 = 5 if part == 4 
 replace part1 = 6 if part == 14
 
-/*
-replace part1 = 7 if part == 7 
-replace part1 = 8 if part == 6
-*/
+gen part0 = part1 - .215
+gen part2 = part1 + .215
 
 # delimit
-twoway (bar     m part1            if estimate == 1 & sex == 3, fcolor(white) lcolor(gs0) lwidth(medthick) barw(.9))
+twoway (bar     m part0            if estimate == 1 & sex == 1 & part == 10, color(gs4) barw(.441))
+       (bar     m part2            if estimate == 1 & sex == 2 & part == 10, color(gs8) barw(.442))
+       (bar     m part1            if estimate == 1 & sex == 3, fcolor(none) lcolor(gs0) lwidth(medthick) barw(.9))
        (scatter m part1 if sig == 1 & estimate == 1 & sex == 3, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
+       (scatter m part0 if sig == 1 & estimate == 1 & sex == 1 & part == 10, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
+       (scatter m part2 if sig == 1 & estimate == 1 & sex == 2 & part == 10, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
 		, 
-		legend(cols(2) order(1 "Treatment vs. Next Best" 2 "Significant at 10%") position(north) size(small))
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "{&lowast}Labor Income" 4 "Parental Income"
-			  5 "Crime" 6 "{&lowast}{&lowast}QALYs",  angle(25) noticks grid glcolor(gs14) labsize(vsmall)) 
+		legend(cols(2) order(3 "Treatment vs. Next Best" 4 "Significant at 10%") position(north) size(small))
+			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
+			  5 "Crime" 6 "{&lowast}QALYs",  angle(5) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
+			  text(-.1 2.785 "{bf:Females}", size(vsmall))
+			  text(-.1 3.215 "{bf:Males}"  , size(vsmall))
 			  note("Per-annum Rate of Return: 12% (s.e. 5%). Benefit-cost Ratio: 5.7 (s.e. 2.3)", size(small));
 #delimit cr 
 graph export abccare_npvssumm.eps, replace
