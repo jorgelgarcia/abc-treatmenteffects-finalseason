@@ -162,7 +162,7 @@ for block in blocks:
 		
 		# Merge tstat dataframe and null dataframe
 		tmp_tstat = tstat.loc[ix, coef].copy()
-		tmp_null = null.loc[ix, coef].groupby(level=0).copy()
+		tmp_null = null.groupby(level=0).loc[ix, coef].copy()
 		tmp_merged = pd.concat([tmp_tstat, tmp_null], axis = 1)
 		
 		print "printing merged dataframe: "
