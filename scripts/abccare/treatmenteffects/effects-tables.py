@@ -142,12 +142,14 @@ null = rslt_y - mean
 null = null.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True)/se
 null.sort_index(inplace=True)
 null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] = null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] * -1
-print "printing null: %" % (null)
+print "printing null: "
+print null
 
 tstat = point/se
 tstat.sort_index(inplace=True)
 tstat.loc[outcomes.query('hyp == "-"').index, :] = tstat.loc[outcomes.query('hyp == "-"').index, :] * -1
-print "printing tstat: %" % (tstat)
+print "printing tstat: "
+print tstat 
 
 stopppppppppppppppppppppppppp
 
