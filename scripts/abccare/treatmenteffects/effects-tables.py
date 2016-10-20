@@ -145,6 +145,12 @@ tstat = point/se
 tstat.sort_index(inplace=True)
 tstat.loc[outcomes.query('hyp == "-"').index, :] = tstat.loc[outcomes.query('hyp == "-"').index, :] * -1
 
+tmp_merged = pd.concat([tmp_tstat, tmp_null], axis = 1)
+
+print "printing merged dataframe: "
+print tmp_merged
+		
+stappppppppppppppppppppppppp
 
 # 2. provide blocks and dictionary to estimate/store stepdown results
 stepdown = pd.DataFrame([], columns=tstat.columns, index=tstat.index)
@@ -162,13 +168,6 @@ for block in blocks:
 		
 		# Merge tstat dataframe and null dataframe
 		tmp_tstat = tstat.loc[ix, coef].copy()
-		tmp_null = null.groupby(level=0).loc[ix, coef].copy()
-		tmp_merged = pd.concat([tmp_tstat, tmp_null], axis = 1)
-		
-		print "printing merged dataframe: "
-		print tmp_merged
-		
-		stappppppppppppppppppppppppp
 		
         # perform stepdown method
         do_stepdown = 1
