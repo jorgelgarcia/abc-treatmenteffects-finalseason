@@ -142,16 +142,11 @@ null = rslt_y - mean
 null = null.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True)/se
 null.sort_index(inplace=True)
 null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] = null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] * -1
-print "printing null: "
-print null
 
 tstat = point/se
 tstat.sort_index(inplace=True)
 tstat.loc[outcomes.query('hyp == "-"').index, :] = tstat.loc[outcomes.query('hyp == "-"').index, :] * -1
-print "printing tstat: "
-print tstat 
 
-stopppppppppppppppppppppppppp
 
 # 2. provide blocks and dictionary to estimate/store stepdown results
 stepdown = pd.DataFrame([], columns=tstat.columns, index=tstat.index)
@@ -164,9 +159,18 @@ for block in blocks:
     # generate dataframe to store p-values for block of outcomes
     ix = list(outcomes.loc[outcomes.block==block,:].index)
     for coef in tstat.columns:
-        # genreate dataframe to store t-statistics
+		# generate dataframe to store t-statistics
         tmp_pval = pd.DataFrame([1 for j in range(len(ix))], index=ix)
+		
+		# Merge tstat dataframe and null dataframe
         tmp_tstat = tstat.loc[ix, coef].copy()
+		tmp_null = null.loc[ix, coef].copy()
+		tmp_merged = pd.concat([tmp_tstat, tmp_null], axis = 1)
+		
+		print "printing merged dataframe: "
+		print tmp_merged
+		
+		
         # perform stepdown method
         do_stepdown = 1
         while do_stepdown == 1:
