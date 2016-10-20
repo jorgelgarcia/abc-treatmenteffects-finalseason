@@ -145,7 +145,7 @@ tstat = point/se
 tstat.sort_index(inplace=True)
 tstat.loc[outcomes.query('hyp == "-"').index, :] = tstat.loc[outcomes.query('hyp == "-"').index, :] * -1
 
-tmp_merged = pd.concat([null, tstat], axis = 1)
+tmp_merged = pd.join([null, tstat], how = 'outer', on = 'variable', axis = 1)
 
 print "printing merged dataframe: "
 print tmp_merged
