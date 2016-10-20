@@ -59,8 +59,6 @@ rslt_y = rslt_y.reorder_levels(['draw', 'ddraw', 'rowname'])
 rslt_y.index.names = ['draw', 'ddraw', 'variable']
 rslt_y.sort_index(inplace=True)
 
-
-
 ind_rslt_y = rslt_y.index.get_level_values(2).unique()
 ind_outcomes = [i for i in outcomes.index if i in ind_rslt_y]
 outcomes = outcomes.loc[ind_outcomes,:]
