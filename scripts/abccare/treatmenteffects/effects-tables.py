@@ -153,15 +153,15 @@ blocks = list(pd.Series(outcomes.block.values).unique())
 #blocks.remove(np.nan)
 
 for block in blocks:
-    print "Stepdown test for main tables, %s block..." % (block)
-    # generate dataframe to store p-values for block of outcomes
-    ix = list(outcomes.loc[outcomes.block==block,:].index)
-    for coef in tstat.columns:
+	print "Stepdown test for main tables, %s block..." % (block)
+	# generate dataframe to store p-values for block of outcomes
+	ix = list(outcomes.loc[outcomes.block==block,:].index)
+	for coef in tstat.columns:
 		# generate dataframe to store t-statistics
-        tmp_pval = pd.DataFrame([1 for j in range(len(ix))], index=ix)
+		tmp_pval = pd.DataFrame([1 for j in range(len(ix))], index=ix)
 		
 		# Merge tstat dataframe and null dataframe
-        tmp_tstat = tstat.loc[ix, coef].copy()
+		tmp_tstat = tstat.loc[ix, coef].copy()
 		tmp_null = null.loc[ix, coef].copy()
 		tmp_merged = pd.concat([tmp_tstat, tmp_null], axis = 1)
 		
