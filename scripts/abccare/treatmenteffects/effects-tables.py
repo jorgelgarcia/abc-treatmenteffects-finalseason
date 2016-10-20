@@ -168,6 +168,7 @@ for block in blocks:
 		print "printing merged dataframe: "
 		print tmp_merged
 		
+		stappppppppppppppppppppppppp
 		
         # perform stepdown method
         do_stepdown = 1
