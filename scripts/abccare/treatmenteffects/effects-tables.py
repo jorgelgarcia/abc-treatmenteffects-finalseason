@@ -41,21 +41,24 @@ outcomes = pd.read_csv(path_outcomes, index_col='variable')
 rslt_y = {}
 
 for sex in ['pooled', 'male', 'female']:
-    itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
-    itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
-    itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+	itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+	itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+	itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
-    matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
-    matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+	matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+	matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
-    itt_all = itt_all.loc[:,['itt_noctrl', 'itt_ctrl', 'itt_wctrl']]
+	itt_all = itt_all.loc[:,['itt_noctrl', 'itt_ctrl', 'itt_wctrl']]
 	print "Printing itt_p1"
 	print itt_p1
-    blahblah
-	rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
-    rslt_p0 = pd.concat([itt_p0, matching_p0], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
     
-    rslt_y[sex] = pd.concat([itt_all, rslt_p1, rslt_p0], axis=1, keys=['pall', 'p1', 'p0'])
+	rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
+	rslt_p0 = pd.concat([itt_p0, matching_p0], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
+    print "printing rslt_p1"
+	print rslt_p1
+	blahblah
+	
+	rslt_y[sex] = pd.concat([itt_all, rslt_p1, rslt_p0], axis=1, keys=['pall', 'p1', 'p0'])
     
 rslt_y = pd.concat(rslt_y, axis=1, keys=rslt_y.keys(), names=['sex', 'type', 'coefficient'])
 rslt_y = rslt_y.reorder_levels(['draw', 'ddraw', 'rowname'])
