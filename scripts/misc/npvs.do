@@ -163,7 +163,7 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(
 		legend(cols(4) order(3 "Males and Females" 2 "Males" 1 "Females" 4 "Significant at 10%") position(north) size(vsmall))
 			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
 			  5 "Crime" 6 "{&lowast}QALYs",  angle(5) noticks grid glcolor(gs14) labsize(vsmall)) 
-			  ylabel(0[2.5]10, angle(h) glcolor(gs14))
+			  ylabel(-2.5[2.5]10, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
