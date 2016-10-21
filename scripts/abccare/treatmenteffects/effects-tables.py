@@ -49,15 +49,10 @@ for sex in ['pooled', 'male', 'female']:
 	matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
 	itt_all = itt_all.loc[:,['itt_noctrl', 'itt_ctrl', 'itt_wctrl']]
-	print "Printing itt_p1"
-	print itt_p1
     
 	rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
 	rslt_p0 = pd.concat([itt_p0, matching_p0], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
-	print "printing rslt_p1"
-	print rslt_p1
-	blahblah
-	
+
 	rslt_y[sex] = pd.concat([itt_all, rslt_p1, rslt_p0], axis=1, keys=['pall', 'p1', 'p0'])
     
 rslt_y = pd.concat(rslt_y, axis=1, keys=rslt_y.keys(), names=['sex', 'type', 'coefficient'])
@@ -106,7 +101,12 @@ for agg in [0,1]:
     point_ext = pd.concat([tmp_rslt.loc[(0, slice(None), slice(None)), :] for j in range(draw_max + 1)], axis=0, keys=[k for k in range(draw_max + 1)], names=['newdraw'])
     point_ext.reset_index('draw', drop=True, inplace=True)
     point_ext.index.names = ['draw', 'ddraw','variable']
-    point_ext = point_ext.loc[null.index,:]
+    print "printing point_ext 1"
+	print point_ext
+	point_ext = point_ext.loc[null.index,:]
+	print "printing point_ext 2"
+	print point_ext
+	bcdncjdksnckcjn
     
     # two-sided test for each individual effect
     if twosided == 1:
@@ -152,10 +152,10 @@ tstat.sort_index(inplace=True)
 tstat.loc[outcomes.query('hyp == "-"').index, :] = tstat.loc[outcomes.query('hyp == "-"').index, :] * -1
 
 print "printing tstat:"
-print tstat['variable']
+
 
 print "printing null:"
-print null['variable']
+
 
 tmp_merged = pd.merge(null, tstat, how = 'outer', left_index=True, right_index=True, on = ['variable'])
 
