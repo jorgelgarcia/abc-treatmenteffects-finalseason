@@ -49,7 +49,10 @@ for sex in ['pooled', 'male', 'female']:
     matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
     itt_all = itt_all.loc[:,['itt_noctrl', 'itt_ctrl', 'itt_wctrl']]
-    rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
+	print "Printing itt_p1"
+	print itt_p1
+    blahblah
+	rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
     rslt_p0 = pd.concat([itt_p0, matching_p0], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
     
     rslt_y[sex] = pd.concat([itt_all, rslt_p1, rslt_p0], axis=1, keys=['pall', 'p1', 'p0'])
