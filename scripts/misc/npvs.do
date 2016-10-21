@@ -153,22 +153,22 @@ gen part0 = part1 - .215
 gen part2 = part1 + .215
 
 # delimit
-twoway (bar     m part0            if estimate == 1 & sex == 1 & part == 10, color(gs4) barw(.441))
-       (bar     m part2            if estimate == 1 & sex == 2 & part == 10, color(gs8) barw(.442))
+twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(.441))
+       (bar     m part2            if estimate == 1 & sex == 2, color(gs8) barw(.442))
        (bar     m part1            if estimate == 1 & sex == 3, fcolor(none) lcolor(gs0) lwidth(medthick) barw(.9))
        (scatter m part1 if sig == 1 & estimate == 1 & sex == 3, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
-       (scatter m part0 if sig == 1 & estimate == 1 & sex == 1 & part == 10, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
-       (scatter m part2 if sig == 1 & estimate == 1 & sex == 2 & part == 10, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
+       (scatter m part0 if sig == 1 & estimate == 1 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
+       (scatter m part2 if sig == 1 & estimate == 1 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
 		, 
-		legend(cols(2) order(3 "Treatment vs. Next Best" 4 "Significant at 10%") position(north) size(small))
+		legend(cols(4) order(3 "Males and Females" 2 "Males" 1 "Females" 4 "Significant at 10%") position(north) size(vsmall))
 			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
 			  5 "Crime" 6 "{&lowast}QALYs",  angle(5) noticks grid glcolor(gs14) labsize(vsmall)) 
-			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
+			  ylabel(0[2.5]10, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
-			  text(-.1 2.785 "{bf:Females}", size(vsmall))
-			  text(-.1 3.215 "{bf:Males}"  , size(vsmall))
-			  note("Per-annum Rate of Return: 12% (s.e. 5%). Benefit-cost Ratio: 5.7 (s.e. 2.3)", size(small));
+			  note("Per-annum Rate of Return: Males and Females 12% (s.e. 5%); Males 14% (s.e. 6%); Females 10% (s.e. 7%)." " "
+			       "Benefit-cost Ratio: Males and Females 5.7 (s.e. 2.3); Males 11.6 (s.e. 5.5); Females 2.6 (s.e. .98)."
+			        , size(vsmall));
 #delimit cr 
 graph export abccare_npvssumm.eps, replace
