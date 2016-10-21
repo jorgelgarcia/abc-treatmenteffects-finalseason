@@ -102,10 +102,10 @@ for agg in [0,1]:
     point_ext.reset_index('draw', drop=True, inplace=True)
     point_ext.index.names = ['draw', 'ddraw','variable']
     print "printing point_ext 1"
-	print point_ext
-	point_ext = point_ext.loc[null.index,:]
-	print "printing point_ext 2"
-	print point_ext
+    print point_ext
+    point_ext = point_ext.loc[null.index,:]
+    print "printing point_ext 2"
+    print point_ext
 	bcdncjdksnckcjn
     
     # two-sided test for each individual effect
