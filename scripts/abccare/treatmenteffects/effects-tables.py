@@ -54,7 +54,7 @@ for sex in ['pooled', 'male', 'female']:
     
 	rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
 	rslt_p0 = pd.concat([itt_p0, matching_p0], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
-    print "printing rslt_p1"
+	print "printing rslt_p1"
 	print rslt_p1
 	blahblah
 	
