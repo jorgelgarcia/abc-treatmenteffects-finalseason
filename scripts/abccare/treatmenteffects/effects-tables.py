@@ -167,21 +167,34 @@ for block in blocks:
 		tmp_tstat.sort(axis=1, ascending = False, inplace=True)	
 		tmp_tstat_list = list(tmp_tstat.index)
 
+		# make dictionaries for the step-down p-values
+		sd_pval_tmp = {} 
+		storeval = {}
+		
 		# perform step-down method
 		for i in range(0,len(tmp_tstat_list)):
 			
+			# select the max across each bootstrap
 			sd_dist = null.loc[(slice(None), ix), coef].groupby(level=0).max().dropna()
-			sd_ptest = lambda x: 1 - percentileofscore(sd_dist, x)/100
-			sd_pval_tmp = map(sd_ptest, list(tmp_tstat))
-			sd_pval_tmp = pd.DataFrame(sd_pval_tmp, index=ix)
 			
-			# update p-values as the stepdown procedure continues
-			tmp_pval.loc[ix] = sd_pval_tmp.loc[ix]
+			# count the cases where the selected max is greater than the T-statistics of our interest
+			countone = sum(1 for item in sd_dist if tmp_tstat[i] <= item)
 
+			# calculate the temporary p-value
+			sd_pval_tmp[i] = (countone+1.0)/(1.0+101.0)
+
+			# store p-value according to step-down conditions
+			if i == 0:
+				tmp_pval.loc[tmp_tstat_list[i]] = sd_pval_tmp[i]
+				storeval[i] = sd_pval_tmp[i]
+			if i != 0:
+				tmp_pval.loc[tmp_tstat_list[i]] = max(sd_pval_tmp[i], storeval[i-1])
+				storeval[i] = max(sd_pval_tmp[i], storeval[i-1])
+			
 			# consecutively drop the outcome with highest T statistics
+			ix = list(ix)
 			ix.remove(tmp_tstat_list[i])
-			tmp_tstat.drop(tmp_tstat_list[i], inplace=True)
-
+			
 			# Fill stepdown dataframe if i = len(tmp_tstat_list) 
 			if i == len(tmp_tstat_list) - 1: 
 				ix = tmp_pval.index
