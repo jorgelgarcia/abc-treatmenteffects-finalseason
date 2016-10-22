@@ -101,12 +101,7 @@ for agg in [0,1]:
     point_ext = pd.concat([tmp_rslt.loc[(0, slice(None), slice(None)), :] for j in range(draw_max + 1)], axis=0, keys=[k for k in range(draw_max + 1)], names=['newdraw'])
     point_ext.reset_index('draw', drop=True, inplace=True)
     point_ext.index.names = ['draw', 'ddraw','variable']
-    print "printing point_ext 1"
-    print point_ext
     point_ext = point_ext.loc[null.index,:]
-    print "printing point_ext 2"
-    print point_ext
-    bcdncjdksnckcjn
     
     # two-sided test for each individual effect
     if twosided == 1:
@@ -151,19 +146,6 @@ tstat = point/se
 tstat.sort_index(inplace=True)
 tstat.loc[outcomes.query('hyp == "-"').index, :] = tstat.loc[outcomes.query('hyp == "-"').index, :] * -1
 
-print "printing tstat:"
-
-
-print "printing null:"
-
-
-tmp_merged = pd.merge(null, tstat, how = 'outer', left_index=True, right_index=True, on = ['variable'])
-
-print "printing merged dataframe: "
-print tmp_merged
-		
-stappppppppppppppppppppppppp
-
 # 2. provide blocks and dictionary to estimate/store stepdown results
 stepdown = pd.DataFrame([], columns=tstat.columns, index=tstat.index)
 blocks = list(pd.Series(outcomes.block.values).unique())
@@ -172,15 +154,40 @@ blocks = list(pd.Series(outcomes.block.values).unique())
 
 for block in blocks:
 	print "Stepdown test for main tables, %s block..." % (block)
+	
 	# generate dataframe to store p-values for block of outcomes
 	ix = list(outcomes.loc[outcomes.block==block,:].index)
 	for coef in tstat.columns:
+		
 		# generate dataframe to store t-statistics
 		tmp_pval = pd.DataFrame([1 for j in range(len(ix))], index=ix)
-		
-		# Merge tstat dataframe and null dataframe
 		tmp_tstat = tstat.loc[ix, coef].copy()
 		
+		# sort t-statistics in a descending order and save the indices as a list
+		tmp_tstat.sort(axis=1, ascending = False, inplace=True)	
+		tmp_tstat_list = list(tmp_tstat.index)
+
+		# perform step-down method
+		for i in range(0,len(tmp_tstat_list)):
+			
+			sd_dist = null.loc[(slice(None), ix), coef].groupby(level=0).max().dropna()
+			sd_ptest = lambda x: 1 - percentileofscore(sd_dist, x)/100
+			sd_pval_tmp = map(sd_ptest, list(tmp_tstat))
+			sd_pval_tmp = pd.DataFrame(sd_pval_tmp, index=ix)
+			
+			# update p-values as the stepdown procedure continues
+			tmp_pval.loc[ix] = sd_pval_tmp.loc[ix]
+
+			# consecutively drop the outcome with highest T statistics
+			ix.remove(tmp_tstat_list[i])
+			tmp_tstat.drop(tmp_tstat_list[i], inplace=True)
+
+			# Fill stepdown dataframe if i = len(tmp_tstat_list) 
+			if i == len(tmp_tstat_list) - 1: 
+				ix = tmp_pval.index
+				stepdown.loc[ix, coef] = tmp_pval.values
+				
+'''		(Previous step-down algorithm: not implemented anymore)
         # perform stepdown method
         do_stepdown = 1
         while do_stepdown == 1:
@@ -211,6 +218,7 @@ for block in blocks:
                 ix = tmp_pval.index
                 stepdown.loc[ix, coef] = tmp_pval.values
                 do_stepdown = 0                    
+'''
 
 # for variables we do not perform stepdown on, fill in stepdown matrix of p-value with regular p-values
 stepdown.fillna(pval, inplace=True)
@@ -980,3 +988,5 @@ for sex in ['pooled', 'male', 'female']:
     
     # write out tables
     table.write(os.path.join(paths.maintables, 'rslt_{}_counts_pres'.format(sex)))
+
+print "successfully done!"
