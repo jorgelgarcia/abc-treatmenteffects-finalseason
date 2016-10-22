@@ -11,7 +11,7 @@ import os
 filedir = os.path.join(os.path.dirname(__file__))
 
 # declare general options for paths and table notes
-pathext = 'AppResOutput/abccare_appendix_oct16/'
+pathext = 'AppResOutput/abccare_appendix_oct21/'
 program = 'abccare'
 path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_appendix.csv')
 
