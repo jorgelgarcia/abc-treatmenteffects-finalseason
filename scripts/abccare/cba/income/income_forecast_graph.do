@@ -59,11 +59,11 @@ foreach num of numlist 0 1 {
 // prepare information boxes
 # delimit
 global box0  text( 10 45
-         "Control at t*:"
+         "Control at a*:"
 	 "Predicted, `pred0_s0' (s.e. `predse0_s0')"
 	 "Observed, `real0_s0' (s.e. `realse0_s0')"
 	 " "
-	 "Treatment at t*:"
+	 "Treatment at a*:"
          "Predicted, `pred1_s0' (s.e. `predse1_s0')"
 	 "Observed, `real1_s0' (s.e. `realse1_s0')"
          , size(small) place(c) box just(left) margin(l+1 b+1 t+1 r+1) width(35) fcolor(none)); 
@@ -72,11 +72,11 @@ global box0  text( 10 45
 // note hard code of se for treat due to rounding issue in stata
 # delimit
 global box1  text( 10 42
-         "Control at t*:"
+         "Control at a*:"
 	 "Predicted, `pred0_s1' (s.e. `predse0_s1')"
 	 "Observed, `real0_s1' (s.e. `realse0_s1')"
 	 " "
-	 "Treatment at t*:"
+	 "Treatment at a*:"
          "Predicted, `pred1_s1' (s.e. 9.53)"
 	 "Observed, `real1_s1' (s.e. `realse1_s1')"
          , size(small) place(c) box just(left) margin(l+1 b+1 t+1 r+1) width(35) fcolor(none)); 
@@ -192,7 +192,7 @@ foreach source in labor /*transfer*/ {
 	
 		local graphregion		graphregion(color(white))
 		local yaxis				ytitle("``source'_name' Income (1000s 2014 USD)") ylabel(${y`sex'}, angle(h) glcol(gs14))
-		local xaxis				xtitle("Age") xlabel(30 "Interpolation {&larr} t* {&rarr} Extrapolation" 45 "45" 55 "55" 65 "65", grid glcol(gs14))
+		local xaxis				xtitle("Age") xlabel(30 "Interpolation {&larr} a* {&rarr} Extrapolation" 45 "45" 55 "55" 65 "65", grid glcol(gs14))
 		local legend			legend(rows(2) order(1 2 3 7 9 8) label(1 "Control Predicted") label(2 "Treatment Predicted") label(3 "Prediction +/- s.e.") label(7 "Control Observed") label(8 "Observed +/- s.e.") label(9 "Treatment Observed") size(small))
 	
 		local t_mean			lcol(gs9) lwidth(1.2)
