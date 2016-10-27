@@ -308,9 +308,13 @@ Note: This figure displays the predicted labor income profile obtained when cons
 \noindent In this section, we test if the implications of Assumption~\ref{ass:summary}, together with Assumption~\ref{ass:exog}, hold. In the next section we provide tests for Assumption~\ref{ass:exog}.
 
 In the text we show that Assumption~\ref{ass:summary}, together with Assumption~\ref{ass:exog}, implies:
-\begin{equation}\label{eq:invariancetest_app}
-\mathbb{E} \left[ Y_{k,j,a}^d | \bm{X}_{k,a}^d  = \bm{x}, \bm{B}_k = \bm{b}, D = d \right] = \mathbb{E} \left[ Y_{k,j,a} | \bm{X}^d_{k,a}  = \bm{x}, \bm{B}_k = \bm{b} \right], a \in \{1,\dots,A\}.
+
+\begin{equation}\label{eq:invariancetestapp}
+\mathbb{E} \left[ Y_{k,j,a}^d | \bm{X}_{k,a}^d  = \bm{x}, \bm{B}_k = \bm{b}, D = d \right] = \mathbb{E} \left[ Y_{k,j,a} | \bm{X}^d_{k,a}  = \bm{x}, \bm{B}_k = \bm{b} \right], 
 \end{equation}
+
+\noindent for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.
+
 
 That is, a \textbf{direct} test is to use the experimental sample and ask if once we account for a set of the variables in $\bm{X}_{k,a}$, $R$ (randomization to treatment assignment in ABC/CARE) predicts the outcome of interest, conditional on $\bm{B}_k$. This tests if this specific set of $\bm{X}_{k,a}$ suffices to summarize the treatment described by $R$. The set of tests for this includes: PIAT scores at ages 5 to 7, education at age 30, and labor income at age 21. The reason why we do not use the the full set if variables in $\bm{X}_{k,a}$ is that $\bm{X}_{k,a}$ includes variables that are outcomes themselves, such as body-mass index and labor income at age 30. Note that $R = D$ in our main methodology. That is, children who are offered treatment attend it. For the three main outcomes we predict, once we condition on $\bm{B}_k, \bm{X}_{k,a}, \bm{\theta}$, the coefficient associated to $R$ is not significant. We test this with and without accounting for endogeneity, as explained in Appendix~\ref{app:endogeneity}.
 
@@ -651,8 +655,9 @@ That is, a \textbf{direct} test is to use the experimental sample and ask if onc
 \end{sidewaystable}
 
 We also show that Assumption~\ref{ass:summary}, together with Assumption~\ref{ass:exog}, implies:
-\begin{equation}\label{eq:withbetimplication_app}
-\mathbb{E} \left[ Y_{e,j,a} | \bm{X}^d_{e,a} = \bm{x}, \bm{B}_e = \bm{b} \right] = \mathbb{E} \left[ Y_{n,j,a} | \bm{X}^d_{n,a} = \bm{x}, \bm{B}_e = \bm{b} \right], \quad d \in \{0,1\}, \quad k \in \{e,n\}.
+
+\begin{equation}\label{eq:withbetimplication}
+\mathbb{E} \left[ Y_{e,j,a} | \bm{X}^d_{e,a} = \bm{x}, \bm{B}_e = \bm{b} \right] = \mathbb{E} \left[ Y_{n,j,a} | \bm{X}^d_{n,a} = \bm{x}, \bm{B}_e = \bm{b} \right], \quad d \in \{0,1\}.
 \end{equation}
 
 We ask if, when pooling the experimental and the non-experimental samples, the indicator associated with being in the experimental ($k = e$) or non-experimental ($k = n$) sample is significantly different from zero. We are able to test this at $a = a^*$, where we observe the predicted outcomes at ages 30. As we explain before, our non-experimental source at $a = a^*$ is the CNLSY. Tables~\ref{table:inv0} to \ref{table:invfin}. Once we account for our complete set of prediction variables in $\bm{B}_k, \bm{X}_{k,a}$ we do not find strong evidence against Assumption~\ref{ass:summary}. Body-mass index at age 34 is an expected exception given the noticeable outliers in the ABC/CARE sample.

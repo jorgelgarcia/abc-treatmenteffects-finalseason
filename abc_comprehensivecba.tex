@@ -270,6 +270,8 @@ Table~\ref{table:tescombined} presents the following estimates. Column (1) gives
 
 The results for girls show that ABC/CARE had effects on employment, high school graduation, years of education, and the income of the participants' parents. It reduces participant arrests. These results strengthen when we compare treatment with the alternative of staying exclusively at home.
 
+The results for boys are different. Treated subjects reported lower drug use and blood pressure. There are also effects on labor income and education. The results for employment, hypertension, and blood pressure are strengthened when comparing the treatment group to those subjects who attend alternative childcare centers. Separation from the mother and being placed in relatively low quality childcare centers have far more deleterious consequences for girls than for boys.\footnote{This is consistent with the evidence in \citet{Baker_Gruber_Milligan_2015_Noncog_Defects} and \citet{Kottelenberg-Lehrer_2014_Gender-Effects}.} The results hold under alternative definitions of take up of alternatives by control-group children (see Appendix~\ref{appendix:vsensitivity}).
+
 \newgeometry{top=.6in, bottom=.8in, left=.8in, right=.8in}
 \begin{table}[!htbp]
 \centering
@@ -286,8 +288,6 @@ Note: This table shows the treatment effects for categories outcomes that are im
 \end{table}
 \restoregeometry
 \doublespacing
-
-The results for boys are different. Treated subjects reported lower drug use and blood pressure. There are also effects on labor income and education. The results for employment, hypertension, and blood pressure are strengthened when comparing the treatment group to those subjects who attend alternative childcare centers. Separation from the mother and being placed in relatively low quality childcare centers have far more deleterious consequences for girls than for boys.\footnote{This is consistent with the evidence in \citet{Baker_Gruber_Milligan_2015_Noncog_Defects} and \citet{Kottelenberg-Lehrer_2014_Gender-Effects}.} The results hold under alternative definitions of take up of alternatives by control-group children (see Appendix~\ref{appendix:vsensitivity}).
 
 \subsection{Estimated Combining Functions}
 
@@ -505,17 +505,20 @@ For all $\bm{x}, \bm{b} \in supp(\bm{X}^d_{k,a}, \bm{B}_k)$,
 
 This assumption combined with Assumption~\ref{ass:exog} and Equation~\eqref{eq:countersystem} enables us to write:
 \begin{equation}\label{eq:invariancetest}
-\mathbb{E} \left[ Y_{k,j,a}^d | \bm{X}_{k,a}^d  = \bm{x}, \bm{B}_k = \bm{b}, D = d \right] = \mathbb{E} \left[ Y_{k,j,a} | \bm{X}^d_{k,a}  = \bm{x}, \bm{B}_k = \bm{b} \right], a \in \{1,\dots,A\}.
+\mathbb{E} \left[ Y_{k,j,a}^d | \bm{X}_{k,a}^d  = \bm{x}, \bm{B}_k = \bm{b}, D = d \right] = \mathbb{E} \left[ Y_{k,j,a} | \bm{X}^d_{k,a}  = \bm{x}, \bm{B}_k = \bm{b} \right], 
 \end{equation}
+
+\noindent for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.
 
 Equation~\eqref{eq:invariancetest} is a statement relating outcomes for $Y_{k,j,t}^d$ to treatment effects for $\bm{X}_{k,t}^d$, together with the background variables $\bm{B}_k$. It is possible to test \ref{ass:summary} within the experimental sample at ($a \leq a^*$). The test consists of asking if $\bm{X}_{e,a}^d, \bm{B}$ predicts the within experimental sample treatment effects for $Y_{e,j,t}$. Under the null hypothesis that \ref{ass:summary} is correct, a separate indicator variable for treatment status ($d$) is irrelevant when computing $\mathbb{E} \left[ Y_{e,j,a} | \bm{X}_{k,a}^d  = \bm{x}, \bm{B}_k =  \bm{b}, D = d \right]$. In Appendix~\ref{app:invariance}, we test and do not reject the null hypotheses.\footnote{This holds both when pooling males and females and when testing separately by gender (see Appendix~\ref{app:invariance}).}
 
 Exogeneity and invariance enables us to test additional assumptions. By Equation~\eqref{eq:invariancetest}, we can write:
+
 \begin{equation}\label{eq:withbetimplication}
-\mathbb{E} \left[ Y_{e,j,a} | \bm{X}^d_{e,a} = \bm{x}, \bm{B}_e = \bm{b} \right] = \mathbb{E} \left[ Y_{n,j,a} | \bm{X}^d_{n,a} = \bm{x}, \bm{B}_e = \bm{b} \right], \quad d \in \{0,1\}, \quad k \in \{e,n\}.
+\mathbb{E} \left[ Y_{e,j,a} | \bm{X}^d_{e,a} = \bm{x}, \bm{B}_e = \bm{b} \right] = \mathbb{E} \left[ Y_{n,j,a} | \bm{X}^d_{n,a} = \bm{x}, \bm{B}_e = \bm{b} \right], \quad d \in \{0,1\}.
 \end{equation}
 
-We can test relationship~\eqref{eq:withbetimplication} for $a \leq a^*$, when we observe $Y_{k,j,a}$ in both the experimental and auxiliary samples. The test is very similar to the test of Assumption~\ref{ass:summary}. We test the null hypothesis that there is no effect of sample membership on the conditional expectation computing $\mathbb{E} \left[ Y_{k,j,t} | \bm{X}^d_{k,t} = \bm{x}, \bm{B}_a = \bm{b} \right], \; d \in \{0,1\}$, pooling the experimental (treatment and control groups) and the auxiliary samples. When we do so, we do not reject the null hypothesis of no effect of conditioning on $\bm{X}_{k,a}^d$ and $\bm{B}_k, \: k \in \{e,n\}$.\footnote{This holds when pooling males and females and when testing by gender (see Appendix~\ref{app:invariance}).}
+\noindent We can test relationship~\eqref{eq:withbetimplication} for $a \leq a^*$, when we observe $Y_{k,j,a}$ in both the experimental and auxiliary samples. The test is very similar to the test of Assumption~\ref{ass:summary}. We test the null hypothesis that there is no effect of sample membership on the conditional expectation computing $\mathbb{E} \left[ Y_{k,j,t} | \bm{X}^d_{k,t} = \bm{x}, \bm{B}_a = \bm{b} \right], \; d \in \{0,1\}$, pooling the experimental (treatment and control groups) and the auxiliary samples. When we do so, we do not reject the null hypothesis of no effect of conditioning on $\bm{X}_{k,a}^d$ and $\bm{B}_k, \: k \in \{e,n\}$.\footnote{This holds when pooling males and females and when testing by gender (see Appendix~\ref{app:invariance}).}
 
 We can estimate non-parametric and semi-parametric relationships more precisely by focusing only on certain values $\left( \bm{X}^d_{k,a} \right)$ in the auxiliary samples that align with the experimental samples. We discuss this in Appendix~\ref{appendix:match}. Matching in this fashion reduces the need for parametric assumptions for the prediction models.
 
@@ -610,7 +613,7 @@ We follow four steps to estimate the costs of crime.
 
 Follow-up data on educational attainment were collected through age 30. In Appendix \ref{appendix:education}, we show that using auxiliary data sources, education up to this age is an accurate predictor of lifetime educational attainment. Therefore, we do not predict beyond age 30. To monetize the costs of education, we consider the public costs of K-12 education and the private costs of post-secondary education, including vocational programs and community college. Other costs of education include grade retention and special education.
 
-Previous analyses of ABC pay special attention to special education, arguing that savings due to a reduction in this category are substantial \citep{Barnett_Masse_2002_benefitcost,Barnett_Masse_2007_EER}.\footnote{Their analyses do not include CARE.} \textbf{[JJH: Jorge, update.]} This category is much less important in our calculation. Pooling males and females the net gain due to a reduction in special education is $\$3,633.3$ (2014 USD) (s.e. $703.7)$. For males the gain is $\$13,417.9$ (2014 USD) (s.e. $1,061.0$) and for females there is actually a loss of $6,276.5$ (2014 USD) (s.e. $\$1,018.5$).\footnote{This quantity is not discounted to ensure comparability with other analyses.} \textbf{[JJH: Please get updates from Jorge.] [JLG: These numbers are now up to date.]}
+Previous analyses of ABC pay special attention to special education, arguing that savings due to a reduction in this category are substantial \citep{Barnett_Masse_2002_benefitcost,Barnett_Masse_2007_EER}.\footnote{Their analyses do not include CARE.} \textbf{[JJH: Jorge, update.]} This category is much less important in our calculation. Pooling males and females the net gain due to a reduction in special education is $\$9,724.4$ (2014 USD) (s.e. $\$8,608.1)$. For males the gain is $\$14,694.9$ (2014 USD) (s.e. $\$11,065.4$) and for females there is actually a loss of $4,077.5$ (2014 USD) (s.e. $\$14,892.0$).\footnote{This quantity is discounted to child's birth.} \textbf{[JJH: Please get updates from Jorge.] [JLG: These numbers are now up to date.]}
 
 \section{Benefit/Cost Analysis} \label{section:cbaresults}
 
@@ -623,9 +626,6 @@ The yearly cost of the program was \$18,514 per participant in 2014 USD. We impr
 \subsection{Benefit/Cost Estimates}
 
 Table~\ref{table:bcsens} presents our baseline estimates of benefit/cost ratios, Table~\ref{table:irrsens} presents the analogous internal rates of return. Pooling males and females, the results indicate that the program is socially efficient: the internal rate of return and the benefit/cost ratio are $12.6\%$ and $5.7$. \textit{The program generates a benefit of $5.7$ dollars for every dollar spent on it}. These estimates are statistically significant, even after accounting for sampling variation, serial correlation, and prediction error in the experimental and auxiliary samples and the tax costs of financing the program. These results are important because ABC/CARE was much more expensive than other early childhood education programs---the treatment involved more services over a longer time period \citep{Elango_Hojman_etal_2016_Early-Edu}.
-
-We accompany these estimates with a set of sensitivity checks of statistical and economic interest. Our estimates are not driven by our methods for accounting for attrition and item non-response or by the conditioning variables we use when computing the net-present values. Although the internal rate of return remains relatively high when using participant outcome measures up to ages 21 or 30, the benefit/cost ratios indicate that accounting for benefits that go beyond age 30 is relevant. The return to each dollar is at most $3/1$ when considering benefits up to age 30 only (prediction span columns). The counterfactual comparisons made also matter. Males benefit the most from ABC/CARE relative to alternative preschools, while females benefit the most from ABC/CARE relative to staying at home. We explore this difference below.
-
 
 \newgeometry{top=.4in, bottom=.5in, left=.4in, right=.4in}
 \begin{sidewaystable}[!htpb]
@@ -657,6 +657,8 @@ We accompany these estimates with a set of sensitivity checks of statistical and
 \end{sidewaystable}
 \restoregeometry
 \doublespacing
+
+We accompany these estimates with a set of sensitivity checks of statistical and economic interest. Our estimates are not driven by our methods for accounting for attrition and item non-response or by the conditioning variables we use when computing the net-present values. Although the internal rate of return remains relatively high when using participant outcome measures up to ages 21 or 30, the benefit/cost ratios indicate that accounting for benefits that go beyond age 30 is relevant. The return to each dollar is at most $3/1$ when considering benefits up to age 30 only (prediction span columns). The counterfactual comparisons made also matter. Males benefit the most from ABC/CARE relative to alternative preschools, while females benefit the most from ABC/CARE relative to staying at home. We explore this difference below.
 
 Our baseline estimates account for the deadweight caused by the government by taxing individuals to budget its expenditure for all government-related activities.\footnote{When the transaction between the government and an individual is a direct transfer, we consider .5 as a cost per each transacted dollar as we do not weight the final recipient of the transaction (e.g., transfer income). When the transaction is indirect, we classify it as government spending as a whole and consider its cost as 1.5 per each dollar spend (e.g. public education).} Our baseline estimate assumes that the marginal tax rate is $50\%$. Our estimates are robust to dropping it to $0\%$ or doubling it to $100\%$ (deadweight loss columns). Our baseline estimate of benefit/cost ratios is based on a discount rate of $3\%$. Not discounting roughly doubles our benefit/cost ratios, while they remain significant under a higher discount rate of $7\%$ (discount rate columns).
 
@@ -737,6 +739,7 @@ To reach these conclusions, we confront and address a number of empirical challe
 We find that benefits differ substantially by gender. Females have more beneficial treatment effects than males, but the monetized value of the male treatment effects is greater. There are substantial effects on health and (health-related) quality of life and on crime for males. For females, the benefits are concentrated on education, employment, and minor crimes. The effects for females are stronger compared to the alternative of staying at home. The effects for males are stronger compared to the alternative of participation in alternative preschools. The program subsidizes causal effect on maternal labor income. We establish the benefits of analyzing long term multiple benefits of these programs.
 
 %References
+\pagebreak
 \singlespace
 \bibliographystyle{chicago}
 \bibliography{heckman}
