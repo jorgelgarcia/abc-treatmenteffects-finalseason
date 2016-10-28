@@ -23,7 +23,7 @@ global googledrive: env googledrive
 global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
 global data       = "$klmmexico/abccare/irr_ratios/current/"
-global specialed  = "$klmmexico/abccare/irr_ratios/current/"
+global specialed  = "$klmmexico/abccare/NPV/speccost/current/"
 
 // output
 global output     = "$projects/abc-treatmenteffects-finalseason/output/"
@@ -87,72 +87,83 @@ foreach estimate of numlist 2 5 8 {
 mat vall = vall[2...,1...]
 clear
 svmat vall, names(col)
-keep if part == 1  | part == 3 | part == 4 | part == 6 | part == 7 | part == 8 /// 
-      | part == 10 | part == 11 | part == 14
-
-gen     ind = 1  if part == 3   
-replace ind = 5  if part == 1
-replace ind = 9  if part == 10 
-replace ind = 13 if part == 11 
-replace ind = 17 if part == 4
-replace ind = 21 if part == 14
-replace ind = 25 if part == 7
-replace ind = 29 if part == 6 
-
-replace ind = ind + 1 if estimate == 2
-replace ind = ind + 2 if estimate == 3 
-
-replace pval = 1 - pval if m < 0
-gen sig = 1 if pval <= .10
-replace sig = . if estimate == 2 & part == 2
-
-replace m = m/100000
-// replace m = m/10 if ind >= 34
-
-# delimit
-global xlabel_1 2 "Program Costs" 6 "Total Benefits" 10 "Labor Income" 14 "Parental Income"
-18 "Crime" 22 "{&lowast}QALYs" 26 "Total Medical Costs" 30 "Costs of Education";
-
-global xlabel_2 2 "Program Costs" 6 "Total Benefits" 10 "Labor Income" 14 "Parental Income"
-18 "{&lowast}Crime" 22 "{&lowast}{&lowast}QALYs" 26 "Total Medical Costs" 30 "Costs of Education";
-
-global xlabel_3 2 "Program Costs" 6 "Total Benefits" 10 "Labor Income" 14 "Parental Income"
-18 "Crime" 22 "{&lowast}QALYs" 26 "Total Medical Costs" 30 "Costs of Education";
-# delimit cr
-
-cd $output
-foreach sex of numlist 1 2 3 {
-	#delimit
-	twoway (bar m ind        if estimate == 1 & sex == `sex', fcolor(white) lcolor(gs0) lwidth(medthick))
-	       (bar m ind        if estimate == 2 & sex == `sex', color(gs4))
-	       (bar m ind        if estimate == 3 & sex == `sex', color(gs8))
-	       (scatter m ind if sig == 1 & sex == `sex', msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
-		, 
-		legend(cols(2) order(1 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 3 "Treatment vs. Alternative Preschool" 
-					    4 "Significant at 10%") size(vsmall))
-			  xlabel(${xlabel_`sex'}, angle(25) noticks grid glcolor(gs14) labsize(vsmall)) 
-			  ylabel(${ylabel`sex'}, angle(h) glcolor(gs14))
-			  xtitle("", size(small)) 
-			  ytitle("100,000's (2014 USD)")
-			  graphregion(color(white)) plotregion(fcolor(white));
-			 #delimit cr 
-	graph export abccare_npvs`sex'.eps, replace
-}		
-
-// do treatment vs control only
-drop if ind == .
 keep if part == 1 | part == 3 | part == 4 | part == 6 | part == 7 | part == 10 | part == 11 | part == 14
 
 gen part1 = .
 replace part1 = 1 if part == 3
 replace part1 = 2 if part == 1 
-replace part1 = 4 if part == 10
-replace part1 = 5 if part == 11
-replace part1 = 6 if part == 4 
-replace part1 = 7 if part == 14
+replace part1 = 3 if part == 10
+replace part1 = 4 if part == 11
+replace part1 = 5 if part == 4 
+replace part1 = 6 if part == 14
+
+replace pval = 1 - pval if m < 0
+gen sig = 1 if pval <= .15
+
+replace m = m/100000
+gen part0 = part1 - .215
+gen part2 = part1 + .215
+
+
+cd $output
+# delimit
+twoway (bar     m part2            if estimate == 3 & sex == 1, color(gs4) barw(.441))
+       (bar     m part0            if estimate == 2 & sex == 1, color(gs8) barw(.442))
+       (bar     m part1            if estimate == 1 & sex == 1, fcolor(none) lcolor(gs0) lwidth(medthick) barw(.9))
+       (scatter m part2 if sig == 1 & estimate == 3 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
+       (scatter m part1 if sig == 1 & estimate == 1 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
+       (scatter m part0 if sig == 1 & estimate == 2 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
+		, 
+		legend(cols(2) order(3 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 1 "Treatment vs. Alternative Preschool" 4 "Significant at 10%") position(north) size(vsmall))
+			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
+			  5 "Crime" 6 "{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
+			  ylabel(-1[1]4, angle(h) glcolor(gs14))
+			  xtitle("", size(small)) 
+			  ytitle("100,000's (2014 USD)")
+			  graphregion(color(white)) plotregion(fcolor(white));
+#delimit cr 
+graph export abccare_npvs1.eps, replace
+
+# delimit
+twoway (bar     m part2            if estimate == 3 & sex == 2, color(gs4) barw(.441))
+       (bar     m part0            if estimate == 2 & sex == 2, color(gs8) barw(.442))
+       (bar     m part1            if estimate == 1 & sex == 2, fcolor(none) lcolor(gs0) lwidth(medthick) barw(.9))
+       (scatter m part2 if sig == 1 & estimate == 3 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
+       (scatter m part1 if sig == 1 & estimate == 1 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
+       (scatter m part0 if sig == 1 & estimate == 2 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
+		, 
+		legend(cols(2) order(3 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 1 "Treatment vs. Alternative Preschool" 4 "Significant at 10%") position(north) size(vsmall))
+			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
+			  5 "{&lowast}Crime" 6 "{&lowast}{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
+			  ylabel(-1 0[2.5]10, angle(h) glcolor(gs14))
+			  xtitle("", size(small)) 
+			  ytitle("100,000's (2014 USD)")
+			  graphregion(color(white)) plotregion(fcolor(white));
+#delimit cr 
+graph export abccare_npvs2.eps, replace
+
+/*
+cd $specialed
+insheet using npv_speccost_ts0.csv, clear
+gen     sex = 1 if gender == "pooled"
+replace sex = 2 if gender == "male"
+replace sex = 3 if gender == "female"
+
+gen part1 = 3
+gen estimate = 1
+gen sig = 1 if pval <= .10
+gen m = sum_speccost_npv/100000
+keep part1 estimate m sig sex 
+
+tempfile specialed
+save "`specialed'", replace
+
+use "`all'", clear
+append using "`specialed'"
 
 gen part0 = part1 - .215
 gen part2 = part1 + .215
+*/
 
 # delimit
 twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(.441))
@@ -163,8 +174,8 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(
        (scatter m part2 if sig == 1 & estimate == 1 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
 		, 
 		legend(cols(4) order(3 "Males and Females" 2 "Males" 1 "Females" 4 "Significant at 10%") position(north) size(vsmall))
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Special Education" 4 "Labor Income" 5 "Parental Income"
-			  6 "Crime" 7 "{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
+			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
+			  5 "Crime" 6 "{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(-1 0[2.5]10, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
