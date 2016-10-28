@@ -23,6 +23,8 @@ global googledrive: env googledrive
 global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
 global data       = "$klmmexico/abccare/irr_ratios/current/"
+global specialed  = "$klmmexico/abccare/irr_ratios/current/"
+
 // output
 global output     = "$projects/abc-treatmenteffects-finalseason/output/"
 
@@ -144,10 +146,10 @@ keep if part == 1 | part == 3 | part == 4 | part == 6 | part == 7 | part == 10 |
 gen part1 = .
 replace part1 = 1 if part == 3
 replace part1 = 2 if part == 1 
-replace part1 = 3 if part == 10
-replace part1 = 4 if part == 11
-replace part1 = 5 if part == 4 
-replace part1 = 6 if part == 14
+replace part1 = 4 if part == 10
+replace part1 = 5 if part == 11
+replace part1 = 6 if part == 4 
+replace part1 = 7 if part == 14
 
 gen part0 = part1 - .215
 gen part2 = part1 + .215
@@ -161,8 +163,8 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(
        (scatter m part2 if sig == 1 & estimate == 1 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
 		, 
 		legend(cols(4) order(3 "Males and Females" 2 "Males" 1 "Females" 4 "Significant at 10%") position(north) size(vsmall))
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
-			  5 "Crime" 6 "{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
+			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Special Education" 4 "Labor Income" 5 "Parental Income"
+			  6 "Crime" 7 "{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(-1 0[2.5]10, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
