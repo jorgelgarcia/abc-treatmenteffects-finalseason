@@ -166,6 +166,8 @@ for block in blocks:
 		# sort t-statistics in a descending order and save the indices as a list
 		tmp_tstat.sort(axis=1, ascending = False, inplace=True)	
 		tmp_tstat_list = list(tmp_tstat.index)
+		print "printing tmp_tstat_list"
+		print tmp_tstat_list
 
 		# make dictionaries for the step-down p-values
 		sd_pval_tmp = {} 
@@ -178,7 +180,7 @@ for block in blocks:
 			print "printing coef"
 			print coef
 			print "printing point estimate"
-			print point
+			print point.loc[ix, coef]
 			
 			dcskcjnskdjcnsc
 			
