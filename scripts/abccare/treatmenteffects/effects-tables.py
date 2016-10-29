@@ -185,6 +185,9 @@ for block in blocks:
 			# calculate the temporary p-value
 			sd_pval_tmp[i] = (countone+1.0)/(1.0+101.0)
 
+			print "printing point"
+			print point.loc[ix]
+			
 			# store p-value according to step-down conditions
 			if i == 0:
 				tmp_pval.loc[tmp_tstat_list[i]] = sd_pval_tmp[i]
@@ -192,7 +195,7 @@ for block in blocks:
 			if i != 0:
 				tmp_pval.loc[tmp_tstat_list[i]] = max(sd_pval_tmp[i], storeval[i-1])
 				storeval[i] = max(sd_pval_tmp[i], storeval[i-1])
-			if point.loc[ix, coef][tmp_tstat_list[i]].isnull():
+			if point.loc[ix, coef][tmp_tstat_list[i]] == None:
 				storeval[i] = np.nan
 			
 			# consecutively drop the outcome with highest T statistics
