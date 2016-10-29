@@ -175,6 +175,13 @@ for block in blocks:
 		for i in range(0,len(tmp_tstat_list)):
 			
 			# select the max across each bootstrap
+			print "printing coef"
+			print coef
+			print "printing point estimate"
+			print point.loc[(slice(None), ix), coef]
+			
+			dcskcjnskdjcnsc
+			
 			sd_dist = null.loc[(slice(None), ix), coef].groupby(level=0).max().dropna()
 			
 			# count the cases where the selected max is greater than the T-statistics of our interest
