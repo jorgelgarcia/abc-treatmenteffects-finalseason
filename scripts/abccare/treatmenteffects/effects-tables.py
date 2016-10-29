@@ -196,6 +196,7 @@ for block in blocks:
 			if np.isnan(point.loc[ix, coef][tmp_tstat_list[i]]):
 				print "Printing if NA"
 				print np.isnan(point.loc[ix, coef][tmp_tstat_list[i]])
+				tmp_pval.loc[tmp_tstat_list[i]] = np.nan
 				storeval[i] = np.nan
 			
 			# consecutively drop the outcome with highest T statistics
