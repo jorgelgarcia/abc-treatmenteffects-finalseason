@@ -184,9 +184,6 @@ for block in blocks:
 
 			# calculate the temporary p-value
 			sd_pval_tmp[i] = (countone+1.0)/(1.0+101.0)
-
-			print "printing point"
-			print point.loc[ix]
 			
 			# store p-value according to step-down conditions
 			if i == 0:
