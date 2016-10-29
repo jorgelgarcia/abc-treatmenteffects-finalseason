@@ -180,7 +180,7 @@ for block in blocks:
 			print "printing coef"
 			print coef
 			print "printing point estimate"
-			print point.loc[ix, coef]
+			print point.loc[ix, coef][tmp_tstat_list[i]]
 			
 			dcskcjnskdjcnsc
 			
