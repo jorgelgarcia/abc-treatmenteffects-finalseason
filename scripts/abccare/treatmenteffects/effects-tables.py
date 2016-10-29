@@ -178,7 +178,7 @@ for block in blocks:
 			print "printing coef"
 			print coef
 			print "printing point estimate"
-			print point.loc[(slice(None), ix), coef]
+			print point
 			
 			dcskcjnskdjcnsc
 			
