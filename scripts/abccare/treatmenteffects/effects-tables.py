@@ -178,7 +178,7 @@ for block in blocks:
 		for i in range(0,len(tmp_tstat_list)):
 			
 			# select the max across each bootstrap
-			sd_dist = null.loc[(slice(None), ix), coef].groupby(level=0).max().dropna()
+			sd_dist = null.loc[(slice(None), ix), coef].groupby(level=0).max()
 			
 			# count the cases where the selected max is greater than the T-statistics of our interest
 			countone = sum(1 for item in sd_dist if tmp_tstat[i] <= item)
