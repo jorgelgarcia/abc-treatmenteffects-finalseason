@@ -192,8 +192,8 @@ for block in blocks:
 			if i != 0:
 				tmp_pval.loc[tmp_tstat_list[i]] = max(sd_pval_tmp[i], storeval[i-1])
 				storeval[i] = max(sd_pval_tmp[i], storeval[i-1])
-			if point.loc[ix, coef][tmp_tstat_list[i]] == NaN:
-				storeval[i] = NaN
+			if point.loc[ix, coef][tmp_tstat_list[i]].isnull():
+				storeval[i] = np.nan
 			
 			# consecutively drop the outcome with highest T statistics
 			ix = list(ix)
