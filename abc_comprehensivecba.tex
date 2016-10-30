@@ -102,7 +102,7 @@ We account for sampling uncertainty arising from combining data, estimating para
 
 Our analysis accounts for control group substitution.\footnote{See \cite{Heckman_1992_randomization}, \cite{Heckman_Hohmann_etal_2000_QJE}, and \cite{Kline_Walters_2016_QJE}.} Roughly 75\% of the control-group children in ABC/CARE enroll in some form of lower quality alternative childcare outside of the home.\footnote{We refer to alternatives as alternative childcare or alternative preschool centers. See Appendix~\ref{appendix:background} for a precise description of these alternatives.} We define and estimate parameters accounting for the choices taken by the control groups in our study.
 
-We find pronounced gender differences in treatment effects comparing high quality treatment with lower quality alternatives. Males benefit much less from alternative market childcare arrangements compared to females, a result consistent with the literature on the vulnerability of male children when removed from their mothers, even for short periods.\footnote{See \citet{Kottelenberg-Lehrer_2014_Gender-Effects,Baker_Gruber_Milligan_2015_Noncog_Defects}.}
+We find pronounced gender differences in treatment effects comparing high quality treatment with lower quality alternatives. Males benefit much less from alternative market childcare arrangements compared to females, a result consistent with the literature on the vulnerability of male children when removed from their mothers, even for short periods.\footnote{See \citet{Kottelenberg-Lehrer_2014_Gender-Effects} and \citet{Baker_Gruber_Milligan_2015_Noncog_Defects}.}
 
 We contribute to the literature on the effectiveness of early childhood programs by considering their long-term benefits on health. We estimate the savings in life-cycle medical costs and improvements in the quality of life.\footnote{\cite{Campbell_Conti_etal_2014_EarlyChildhoodInvestments} show the substantial adult (age 34) health benefits of ABC but do not present a cost/benefit analysis of their results.} We find substantial childcare benefits that promote work by the mothers of participants, and additional benefits for participants in terms of reduced crime, gains in life-cycle labor income, reduced special education costs and enhanced educational attainment.
 
@@ -115,7 +115,7 @@ Figure~\ref{figure:main} summarizes the main findings of this paper. It displays
 \floatfoot{
 \footnotesize
 Note: This figure displays the life-cycle net present values per program participant of the main components of the cost/benefit analysis of ABC/CARE from birth to predicted death, discounted to birth at a rate of 3\%.  By ``net" we mean that each component represents the total value for the treatment group minus the total value for the control group. Program costs: the total cost of ABC/CARE, including the welfare cost of taxes to finance it. Total net benefits: are for \textit{all} of the components we consider. These include labor income: total individual labor income from ages 20 to the retirement of program participants (assumed to be age 67). Parental income: total parental labor income of the parents of the participants from when the participants were ages 1.5 to 21. Crime: the total cost of crime (judicial and victimization costs). To simplify the display , the following components are not shown in the figure: (i) cost of alternative preschool paid by the control group children parents; (ii) the social welfare costs of transfer income from the government; (iii) disability benefits and social security claims; (iv) costs of increased individual and maternal education (including special education and grade retention); (v) total medical public and private costs. Inference is based on non-parametric, one-sided $p$-values from the empirical bootstrap distribution. We indicate point estimates significant at the $10\%$ level.\\
-*QALYs refers to the quality-adjusted life years. Any gain corresponds to better health conditions until predicted death, with $\$150,000$ (2014 USD) as base value for a year of life. \textbf{[Typist: No loner a slant in category titles]}\\}
+*QALYs refers to the quality-adjusted life years. Any gain corresponds to better health conditions until predicted death, with $\$150,000$ (2014 USD) as base value for a year of life.\\}
 \end{sidewaysfigure}
 
 The rest of the paper justifies and interprets these estimates. We proceed in the following way. Section~\ref{section:background} discusses the ABC/CARE intervention. Section~\ref{section:methodsquestions} presents our notation and the definitions of the treatment effects estimated in this paper. Section~\ref{section:methodology} discusses our approaches to inference for vectors of treatment effects. We use combining functions that summarize the \emph{number} of beneficial outcomes, as well as the number of statistically significant beneficial outcomes.
@@ -329,11 +329,10 @@ Note: Panel (a) percentage of outcomes displaying a positive treatment effect, c
 
 The major goal of this paper is to summarize the multiple benefits of ABC/CARE using benefit/cost and rate of return analyses. We rely on auxiliary data to predict the costs and benefits of the program over the life cycle after the measurement phase of the study ends.
 
-We construct synthetic treatment and control cohorts.\footnote{See, e.g., \citet{Mincer_1974_schooling} and the survey in \citet{Heckman_Lochner_ea_2006_HEE}.} Outcomes of ``comparable'' older cohorts in auxiliary samples who are not exposed to the program are used to construct virtual treatment and control groups. A major problem is finding counterparts to the treatment group in the auxiliary samples. Who among those samples would have received treatment if the program had been available to them? In addition, older cohorts may have received different endowments and experienced different environments. An assumption of stationarity in life cycle profiles across cohorts may be grossly at odds with the data.
+We construct synthetic treatment and control cohorts.\footnote{See, e.g., \citet{Mincer_1974_schooling} and the survey in \citet{Heckman_Lochner_ea_2006_HEE}.} The problem here is finding counterparts to the treatment group in the auxiliary samples. Outcomes of ``comparable'' older cohorts in auxiliary samples who are not exposed to the program are used to construct virtual treatment and control groups. Who among those samples would have received treatment if the program had been available to them? In addition, older cohorts may have received different endowments and experienced different environments. An assumption of stationarity in life cycle profiles across cohorts may be grossly at odds with the data.
 
 This section explains our strategy for constructing out-of-sample treatment effects. Our approach starts from and extends the analysis of \citet{Heckman_Pinto_etal_2013_PerryFactor}, who show, in a setting similar to ours, that the effect of treatment on outcomes operates through its effects on inputs in a stable production function rather than through shifts in the production function.
-
-We interpolate components not observed due to intermittent data collection and construct counterfactual components not yet observed. Table~\ref{table:sources} presents the outcomes for which we conduct these analyses and the data sources used. We initially focus on labor income to illustrate our approach, but a similar methodology is used to predict the other outcomes.
+Table~\ref{table:sources} presents the outcomes for which we conduct these analyses and the data sources used. We initially focus on labor income to illustrate our approach, but a similar methodology is used to predict the other outcomes.
 
 \begin{table}[!htbp]
 \begin{threeparttable}
@@ -398,19 +397,28 @@ Note: Panel (a) displays the predicted labor income for males in the auxiliary s
 
 \subsection{Constructing Out-of-Sample Counterfactuals}\label{section:just}
 
-We now present our analytical framework and its underlying assumptions. 
- 
-Our analysis is based on a structural causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the control sample:
+We now present our analytical framework and its underlying assumptions. Our analysis is based on a structural causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the control sample:
 \begin{equation}\label{eq:outcome}
-Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a}.
+Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a}, \quad j \in \mathcal{J}_a.
 \end{equation}
-$\phi^d_{k,j,a}$ is an invariant structural production relationship mapping inputs $\bm{X}^d_{k,a}, \bm{B}_k$ into output $Y^d_{k,j,a}$ holding error term $\varepsilon^d_{k,j,a}$ fixed.\footnote{Fixing and conditioning are fundamentally different concepts. See \citet{Heckman_Pinto_2015_EconometTheory} for a discussion. Our analysis applies to the methodology in that paper.} For specificity we normalize $\varepsilon^d_{k,i,j}$ to have mean zero. Among the $\bm{X}^d_{k,a}$ are variables caused by treatment, including lagged dependent variables. The relationships between the dependent and independent variables in \eqref{eq:outcome} do not necessarily coincide across the samples. 
+$\phi^d_{k,j,a}\left( \cdot, \cdot \right)$ is an invariant structural production relationship mapping inputs $\bm{X}^d_{k,a}, \bm{B}_k$ into output $Y^d_{k,j,a}$ holding error term $\varepsilon^d_{k,j,a}$ fixed.\footnote{Fixing and conditioning are fundamentally different concepts. See \cite{Haavelmo_1943_Econometrica} and \citet{Heckman_Pinto_2015_EconometTheory} for a discussion. Our analysis applies to the methodology in that paper.} For specificity we normalize $\varepsilon^d_{k,i,j}$ to have mean zero. Among the $\bm{X}^d_{k,a}$ are variables caused by treatment, including lagged dependent variables. The relationships between the dependent and independent variables in \eqref{eq:outcome} do not necessarily coincide across the samples.
 
-Let $\bm{Y}_k^d$ denote the vector of all outcomes at all ages for $k \in \{e, n \}$, when treatment status is fixed to $d$. Similarly, $\bm{X}_k^d$ is the vector of all causal predictors of $\bm{Y}_k^d$ at all ages. Both $\bm{Y}_k^d$ and $\bm{X}_k^d$ include the full set of outcomes over the life cycle, even though they are not sampled after age $a^*$. The background variables may have different distributions in the two samples. We denote the joint distribution of these vectors conditional on $\bm{B}_k = \bm{b}$ by $F_{\bm{Y}_k^d, \bm{X}_k^d} | \bm{B}_k = \bm{b}$.
+Let $\bm{Y}_k^d$ denote the vector of all outcomes at all ages for $k \in \{e, n \}$, when treatment status is fixed to $d$. Similarly, $\bm{X}_k^d$ is the vector of all causal predictors of $\bm{Y}_k^d$ at all ages. Both $\bm{Y}_k^d$ and $\bm{X}_k^d$ include the full set of outcomes over the life cycle, even though they are not sampled after age $a^*$. The background variables may have different distributions in the two samples. We denote the joint distribution of these vectors conditional on $\bm{B}_k = \bm{b}$ by $F_{\bm{Y}_k^d, \bm{X}_k^d | \bm{B}_k = \bm{b}}(\cdot,\cdot)$.
 
-The auxiliary data $(n)$ come from older cohorts for which we observe more complete segments of their life cycles, i.e., we observe $a \in \{1, \ldots, A\}$. We do not observe what treatment status $d$ would have been in the auxiliary data. Even if we did, we do not know if cohort ($c$) or time ($t$) effects make the experiences of the auxiliary-sample individuals different from the experiences of the individuals in the experimental sample.
+In the experimental sample, parents of eligible children ($\bm{B}_e \in \mathcal{B}_{0}$), always agree to participate in the program ($W_e = 1$) and accept treatment ($R_e = D_e$).\footnote{Thus, it is always true that $\bm{B}_e \in \mathcal{B}_{0}$ implies $W = 1$. Afterward, there are cases of attrition that could be interpreted as $R_e \neq D_e$, but this was not the case at the beginning of treatment. We distinguish attrition from non-compliance.} We assume that this condition holds in the virtual auxiliary sample. Given this condition, we can use $D_e$ and $R_e$ interchangeably and apply a standard \citet{Quandt_1972_JASA} switching regression model to write experimental outputs and inputs as
+\begin{spacing}{1}
+\begin{align}\label{eq:countersystem}
+Y_{k,j,a} =& \left( 1 - D_k \right) Y_{k,j,a}^0 + \left( D_k \right) Y_{k,j,a}^1, \\
+&&j \in \mathcal{J}_a, a \in \{1,\dots,a^*\}, \quad k \in \{e,n\} \nonumber \\
+\bm{X}_{k,a} =& \left( 1 - D_k \right) \bm{X}_{k,a}^0 + \left( D_k \right) \bm{X}_{k,a}^1. \nonumber
+\end{align}
+\end{spacing}
 
-To formalize this problem, and our solution to it, let $Y_{j,k,a,c,t}^d$ be outcome $j$ for sample $k$ at age $a$ for birth cohort $c$ at time $t$ when treatment is fixed to $d$. We make the following assumption, and henceforth drop the ``$c$'' and ``$t$'' sub-indices. It amounts to assuming away the problem by saying cohort and time effects operate identically across samples in the following sense: 
+\noindent The fact that $D_e = R_e$ allows us to use experimental data to compute the distribution of $Y_{e,j,a}^d$ (i.e., $Y_{k,j,a}^d$ when fixing treatment status ($d$)).
+
+The auxiliary data $(n)$ come from older cohorts for which we observe more complete segments of their life cycles. We do not observe what treatment status $d$ would have been in the auxiliary data. Even if we did, we do not know if cohort ($c$) or time ($t$) effects make the experiences of the auxiliary-sample individuals different from the experiences of the individuals in the experimental sample.
+
+To formalize this problem, and our solution to it, let $Y_{j,k,a,c,t}^d$ be outcome $j$ for sample $k$ at age $a$ for birth cohort $c$ at time $t$ when treatment is fixed to $d$. We make the following assumption. It amounts to avoiding the problem by saying cohort and time effects operate identically across the $e$ and $n$ samples in the following sense:
 
 \onehalfspacing
 \begin{assumption}\label{ass:alignment} \textbf{Alignment of Cohort and Time Effects}\\
@@ -422,9 +430,9 @@ for $d \in \{ 0, 1\}$, $a \geq a^*$, where $t_{e}, t_{n}$ are the years cohorts 
 \end{assumption}
 \doublespacing
 
-This assumption rules out any differences in cohort and time effects across the indicated values. The future year effect for the experimental sample is assumed to be the same as for the auxiliary sample counterpart measured at year $t_n$. We can weaken Assumption~\ref{ass:alignment} if we have prior knowledge about year and/or cohort effects or if we can parameterize estimable functions of $c$ and $t$.\footnote{See \cite{Heckman_Robb_1985_JE}.}
+This assumption rules out any differences in cohort and time effects across the indicated values. We henceforth drop the ``$c$'' and ``$t$'' sub-indices. The future year effect for the experimental sample is assumed to be the same as for the auxiliary sample counterpart measured at year $t_n$. We can weaken Assumption~\ref{ass:alignment} if we have prior knowledge about year and/or cohort effects or if we can parameterize estimable functions of $c$ and $t$.\footnote{See \cite{Heckman_Robb_1985_JE}.}
 
-We further require that the support of the auxiliary sample contains the support of the experimental sample. This assumption allows us to find counterpart values in the control and experimental samples. 
+In addition, we further require that the support of the auxiliary sample contains the support of the experimental sample. This assumption allows us to find counterpart values in the control and experimental samples.
 
 \onehalfspacing
 \begin{assumption} \label{ass:contain} \textbf{Support Conditions} \\
@@ -441,12 +449,12 @@ A strong sufficient condition for identifying the life-cycle profiles of individ
 \onehalfspacing
 \begin{condition} \textbf{Equality in Distributions Across the Experimental and Auxiliary Samples \label{cond:cond1}}
 \begin{equation}
-F_{\bm{Y}_e^d, \bm{X}_e^d} | \bm{B}_e = \bm{b} \left( \cdot, \cdot \right) = F_{\bm{Y}_n^d, \bm{X}_n^d} | \bm{B}_n = \bm{b} \left( \cdot, \cdot \right), \quad d \in \{0,1\}
+F_{\bm{Y}_e^d, \bm{X}_e^d | \bm{B}_e = \bm{b}} \left( \cdot, \cdot \right) = F_{\bm{Y}_n^d, \bm{X}_n^d | \bm{B}_n = \bm{b}} \left( \cdot, \cdot \right), \quad d \in \{0,1\}
 \end{equation}
 \noindent for $\bm{Y}_e^d, \bm{X}^d_e | \bm{B}_e = \bm{b}$ and $\bm{Y}_n^d, \bm{X}^d_n | \bm{B}_n = \bm{b}$ contained the support of the experimental sample $supp\left(\bm{Y}^d_{e,a}, \bm{X}^d_{e,a}, \bm{B}\right)$.
 \end{condition}
 \doublespacing
-It turns out that we are only interested in means for cost-benefit analysis. Thus, we can get by with Condition~\ref{cond:cond2}.
+It turns out that we are only interested in means for cost-benefit analysis. Thus, we can get by with Condition~\ref{cond:cond2}. It has testable implications, as we show below. 
 
 \onehalfspacing
 \begin{condition} \textbf{Equality in Conditional Expectations Across the Experimental and Auxiliary Samples \label{cond:cond2}}
@@ -468,7 +476,7 @@ over $supp\left(\bm{Y}^d_{e,a}, \bm{B}_e\right)$.
 \end{condition}
 \doublespacing
 
-Condition~\ref{cond:cond3} does not rule out cohort or time effects. It assumes that they are equalized in experimental and auxiliary samples. These conditions do not require that we take a position on the exogeneity of $\bm{X}^d_k, \: k \in \{e,n\}$. However, using economic theory to generate and interpret treatment effects and to test the validity of our synthetic control groups is easier under exogeneity assumptions, as we explain next. To facilitate testing, we assume:
+These conditions do not require that we take a position on the exogeneity of $\bm{X}^d_k, \: k \in \{e,n\}$. However, using economic theory to generate and interpret treatment effects and to test the validity of our synthetic control groups is easier under exogeneity assumptions, as we explain next. To facilitate testing, we assume:
 
 \onehalfspacing
 \begin{assumption}\label{ass:exog} \textbf{Exogeneity}\\
@@ -480,17 +488,6 @@ for all $\bm{b}$ in the support of $\bm{B}_k, \: k \in \{e,n\}$, for all outcome
 \end{assumption}
 \doublespacing
 
-Adapting previous notation to account for sample membership, in the experimental sample, parents of eligible children ($\bm{B}_e \in \mathcal{B}_{0}$), always agree to participate in the program ($W_e = 1$) and accept treatment ($R_e = D_e$).\footnote{Thus, it is always true that $\bm{B}_e \in \mathcal{B}_{0}$ implies $W = 1$. Afterward, there are cases of attrition that could be interpreted as $R_e \neq D_e$, but this was not the case at the beginning of treatment. We distinguish attrition from non-compliance.} We assume that this condition holds in the virtual auxiliary sample. Given this condition, we can use $D_e$ and $R_e$ interchangeably and apply a standard \citet{Quandt_1972_JASA} switching regression model to write experimental outputs and inputs as
-\begin{spacing}{1}
-\begin{align}\label{eq:countersystem}
-Y_{k,j,a} =& \left( 1 - D_k \right) Y_{k,j,a}^0 + \left( D_k \right) Y_{k,j,a}^1, \\
-&&j \in \mathcal{J}_a, a \in \{1,\dots,a^*\}, \quad k \in \{e,n\} \nonumber \\
-\bm{X}_{k,a} =& \left( 1 - D_k \right) \bm{X}_{k,a}^0 + \left( D_k \right) \bm{X}_{k,a}^1. \nonumber
-\end{align}
-\end{spacing}
-
-\noindent The fact that $D_e = R_e$ allows us to use experimental data to compute the distribution of $Y_{e,j,a}^d$ (i.e., $Y_{k,j,a}^d$ when fixing treatment status ($d$)).
-
 We assume that the variables $\bm{X}_{k,a}^d$ fully summarize treatment. Any effect that treatment has on outcomes operates through the inputs $\bm{X}_{k,a}^d$ and not through shifts in the production function relating inputs to outputs (see \citealp{Heckman_Pinto_etal_2013_PerryFactor}). Assumption~\ref{ass:summary} formalizes this.
 
 \onehalfspacing
@@ -500,16 +497,15 @@ For all $\bm{x}, \bm{b} \in supp(\bm{X}^d_{e,a}, \bm{B}_e), k \in \{e,n\}$
 \phi_{k,j,a}^0 \left( \bm{x}, \bm{b} \right) &= \phi_{k,j,a}^1 (\bm{x}, \bm{b}) \\   \nonumber
                                                                      &=: \phi_{j,a} (\bm{x}, \bm{b}),
 \end{align}
-\noindent $\phi^d_{k,j,a}(\bm{x})$ is the function generating the causal effect of setting $\bm{X}^d_{k,a}=\bm{x}$ holding $\varepsilon^d_{k,j}$ fixed for $a \in \{1,\dots,A\}$ for any outcome $j \in \mathcal{J}_{a}$. This assumption says two things: (i) the structural functions evaluated for the same arguments of the function are identical for treatment and control groups. It also says (ii) that the structural relationships are identical in the experimental and auxiliary samples. $\square$
+$\phi^d_{k,j,a}(\bm{x})$ is the function generating the causal effect of setting $\bm{X}^d_{k,a}=\bm{x}$ holding $\varepsilon^d_{k,j}$ fixed for $a \in \{1,\dots,A\}$ for any outcome $j \in \mathcal{J}_{a}$. $\square$
 \end{assumption}
 \doublespacing
 
-Assumption~\ref{ass:summary} combined with Assumption~\ref{ass:exog}, Equations~\eqref{eq:countersystem}, and the assumption of a zero mean for the errors $(E(\bm{\varepsilon}^d_{k,j,a}))=0$ for all $a \in \{1,\dots,A\}, d \in \{0,1\}$ and $k \in \{e,n\}$ enable us to write:
+This assumption says two things: (i) the structural functions evaluated for the same arguments of the function are identical for treatment and control groups. It also says (ii) that the structural relationships are identical in the experimental and auxiliary samples. Assumption~\ref{ass:summary} combined with Assumption~\ref{ass:exog}, Equations~\eqref{eq:countersystem}, and the assumption of a zero mean for the errors $(\mathbb{E}(\varepsilon^d_{k,j,a})=0)$ for all $a \in \{1,\dots,A\}, d \in \{0,1\}$ and $k \in \{e,n\}$ enable us to write:
 \begin{equation}\label{eq:invariancetest}
 \mathbb{E} \left[ Y_{k,j,a}^d | \bm{X}_{k,a}^d  = \bm{x}, \bm{B}_k = \bm{b}, D = d \right] = \mathbb{E} \left[ Y_{k,j,a} | \bm{X}^d_{k,a}  = \bm{x}, \bm{B}_k = \bm{b} \right],
 \end{equation}
-
-\noindent for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.
+for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.
 
 Equation~\eqref{eq:invariancetest} relates outcomes for $Y_{k,j,a}^d$ to treatment effects for $\bm{X}_{k,a}^d$, together with the background variables $\bm{B}_k$. It is possible to test \ref{ass:summary} within the experimental sample ($a \leq a^*$). The test consists of asking if $\bm{X}_{e,a}^d, \bm{B}$ predicts the within experimental sample treatment effects for $Y_{e,j,t}$. Under the null hypothesis that \ref{ass:summary} is correct, a separate indicator variable for treatment status ($d$) is irrelevant when computing $\mathbb{E} \left[ Y_{e,j,a} | \bm{X}_{k,a}^d  = \bm{x}, \bm{B}_k =  \bm{b}, D = d \right]$. In Appendix~\ref{app:invariance}, we test and do not reject the null hypotheses.\footnote{This holds both when pooling males and females and when testing separately by gender (see Appendix~\ref{app:invariance}).}
 
@@ -519,16 +515,17 @@ Exogeneity and invariance enables us to test additional assumptions. By Equation
 \end{equation}
 Relationship~\eqref{eq:withbetimplication} is testable for $a \leq a^*$, when $Y_{k,j,a}$ is observed in both the experimental and auxiliary samples. We do not reject the null hypothesis of no differences in the conditional mean functions in the experimental and auxiliary samples conditioning on $\bm{X}_{k,a}^d$ and $\bm{B}_k, \: k \in \{e,n\}$.\footnote{This holds when pooling males and females and when testing by gender (see Appendix~\ref{app:invariance}).}
 
-We note that under exogeneity assumption~\ref{ass:exog} and invariance condition~\ref{ass:summary} we can use matching to construct counterparts to treatment and control groups in the auxiliary sample.\footnote{\citet{Heckman_Ichimura_etal_1998_Econometrica} use this procedure.} We discuss this approach in Appendix~\ref{appendix:match}. Matching is one way to non-parametrically estimate the conditional mean functions. \textbf{[JJH: Jorge - do we still have the straight matching estimates? They are a test of the exogeneity assumption.] [JLG: please see Appendix C, where we do have these results and mention them as a test. We also analyze results under different forms of matching.]}
+We note that under exogeneity assumption~\ref{ass:exog} and invariance condition~\ref{ass:summary} we can use matching to construct counterparts to treatment and control groups in the auxiliary sample.\footnote{\citet{Heckman_Ichimura_etal_1998_Econometrica} use this procedure.} We discuss this approach in Appendix~\ref{appendix:match}. Matching is one way to non-parametrically estimate the conditional mean functions.
 
 %%30b
 
 Collecting results, under exogeneity we obtain the following theorem:
 
 \onehalfspacing
-\setcounter{theorem}{0}
+\setcounter{theorem}{0}'
 \begin{theorem}\label{theorem:main} \textbf{Valid Out-of-Sample Forecasts} \\
-Under Assumptions~\ref{ass:alignment}-\ref{ass:summary}, Condition~\ref{cond:cond2} holds for any value of $\left( \bm{X}^d_{k,a}, \bm{B}_k \right)$. This is an immediate consequence of the cited assumptions. $\Box$
+Under Assumptions~\ref{ass:alignment}-\ref{ass:summary}, Condition~\ref{cond:cond2} holds for any value of $\left( \bm{X}^d_{k,a}, \bm{B}_k \right)$. $\Box$ \\
+This is an immediate consequence of the cited assumptions.
 \end{theorem}
 
 \doublespacing
@@ -605,9 +602,7 @@ We follow four steps to estimate the costs of crime.
 
 \subsection{Education}
 
-Follow-up data on educational attainment were collected through age 30. In Appendix \ref{appendix:education}, we show that using auxiliary data sources, education up to this age is an accurate predictor of lifetime educational attainment. Therefore, we do not predict beyond age 30. To monetize the costs of education, we consider the public costs of K-12 education and the private costs of post-secondary education, including vocational programs and community college. Other costs of education include grade retention and special education.
-
-Previous analyses of ABC pay special attention to special education, arguing that savings due to a reduction in this category are substantial \citep{Barnett_Masse_2002_benefitcost,Barnett_Masse_2007_EER}.\footnote{Their analyses do not include CARE.} This category is much less important in our calculation. Pooling males and females the net gain due to a reduction in special education is $\$9,724.4$ (2014 USD) (s.e. $\$8,608.1)$. For males the gain is $\$14,694.9$ (2014 USD) (s.e. $\$11,065.4$) and for females it is $4,077.5$ (2014 USD) (s.e. $\$14,892.0$).\footnote{This quantity is discounted to child's birth.}
+Follow-up data on educational attainment were collected through age 30. In Appendix \ref{appendix:education}, we show that using auxiliary data sources, education up to this age is an accurate predictor of lifetime educational attainment. Therefore, we do not predict beyond age 30. To monetize the costs of education, we consider the public costs of K-12 education and the private costs of post-secondary education, including vocational programs and community college. Other costs of education include grade retention and special education. Previous analyses of ABC pay special attention to special education, arguing that savings due to a reduction in this category are substantial \citep{Barnett_Masse_2002_benefitcost,Barnett_Masse_2007_EER}.\footnote{Their analyses do not include CARE.} This category is much less important in our calculation.\footnote{Pooling males and females the net gain due to a reduction in special education is $\$9,724.4$ (2014 USD) (s.e. $\$8,608.1)$. For males the gain is $\$14,694.9$ (2014 USD) (s.e. $\$11,065.4$) and for females it is $4,077.5$ (2014 USD) (s.e. $\$14,892.0$). This quantity is discounted to child's birth.}
 
 \section{Benefit/Cost Analysis} \label{section:cbaresults}
 
@@ -615,7 +610,7 @@ This section reports cost/benefit and rate of return analyses underlying Figure~
 
 \subsection{Program Costs} \label{section:programscosts}
 
-The yearly cost of the program was \$18,514 per participant in 2014 USD. We improve on previous cost estimates using primary-source documents.\footnote{Our calculations are based on progress reports written by the principal investigators and related documentation recovered in the archives of the research center where the program was implemented. We display these sources in Appendix \ref{app:programcosts}. The main component is staff costs. Other costs arise from nutrition and services that the subjects receive when they were sick, diapers during the first 15 months of their lives, and transportation to the center. The control-group children also receive diapers during approximately 15 months, and iron-fortified formula. The costs are based on sources describing ABC treatment for $52$ children. We use the same costs estimates for CARE, for which there is less information available. The costs exclude any expenses related to research or policy analysis. A separate calculation by the implementers of the program indicates almost an identical amount (see Appendix~\ref{app:programcosts}). \textbf{[Typist: Jorge has updated this footnote]}} 
+The yearly cost of the program was \$18,514 per participant in 2014 USD. We improve on previous cost estimates using primary-source documents.\footnote{Our calculations are based on progress reports written by the principal investigators and related documentation recovered in the archives of the research center where the program was implemented. We display these sources in Appendix \ref{app:programcosts}. The main component is staff costs. Other costs arise from nutrition and services that the subjects receive when they were sick, diapers during the first 15 months of their lives, and transportation to the center. The control-group children also receive diapers during approximately 15 months, and iron-fortified formula. The costs are based on sources describing ABC treatment for $52$ children. We use the same costs estimates for CARE, for which there is less information available. The costs exclude any expenses related to research or policy analysis. A separate calculation by the implementers of the program indicates almost an identical amount (see Appendix~\ref{app:programcosts}).}
 
 \subsection{Benefit/Cost Estimates}
 
@@ -668,7 +663,7 @@ The estimates are robust when we conduct a drastic sensitivity analysis by remov
 
 \textit{Our sensitivity analyses indicate that no single category of outcomes drives the social efficiency of the program. It is the life-cycle benefits across multiple dimensions of human development.}
 
-In Appendix~\ref{appendix:bcaestimates} we use our analysis to examine the empirical foundations of recent cost-benefit studies of early childhood programs that use short term estimates of experimental test score gains coupled with auxiliary estimates of the impact of test scores on earnings (see, e.g., work by Kline and Walters). We show that this approach applied to the ABC data greatly understates the true benefit-cost ratio because (a) earnings are only forecast through a young age (27) and (b) benefits extend beyond earnings. The difference is sizable. Applying the Kline and Walters method to the ABC/CARE experiment, we would find a cost-benefit ratio of 1.4 compared to our estimate of 5.7. 
+In Appendix~\ref{appendix:bcaestimates} we use our analysis to examine the empirical foundations of recent cost-benefit studies of early childhood programs that use short term estimates of experimental test score gains coupled with auxiliary estimates of the impact of test scores on earnings (see, e.g., work by Kline and Walters). We show that this approach applied to the ABC data greatly understates the true benefit-cost ratio because (a) earnings are only forecast through a young age (27) and (b) benefits extend beyond earnings. The difference is sizable. Applying the Kline and Walters method to the ABC/CARE experiment, we would find a cost-benefit ratio of 1.4 compared to our estimate of 5.7.
 
 \begin{table}[!htbp]
 \centering
@@ -694,7 +689,7 @@ Males are much more likely to commit crimes that are more costly to the victims 
 
 For health, there are also substantial gender differences. Both males and females have substantial gains: males on more standard measures of physical health, while females on a set of mental health measures (see Appendix~\ref{appendix:results}). We quantify both components (see Section~\ref{section:health} and Appendix~\ref{appendix:health}).
 
-When analyzing different counterfactuals, there is a substantial difference between males and females. The difference is driven by one of the counterfactuals: treatment vs. alternative preschools. The estimates for both males and females generate a similar estimated ABC/CARE treatment effect compared to staying at home. Males benefit much more from treatment relative to alternative preschools compared to their benefits from treatment relative to staying at home. This result is consistent with findings noted elsewhere: (i) stark gender differences resulting from attending low quality childcare \citep{Kottelenberg-Lehrer_2014_Gender-Effects,Baker_Gruber_Milligan_2015_Noncog_Defects}; and (ii) females are less sensitive to uncertain environments \citep{Autor-etal_2015_Family-Disadvantage}. The program substantially reduced the costs of special education for boys. It raises the cost of education for girls because more of them attend school. \textbf{[JJH: But special education costs? Bizarre!] [JLG: this has been clarified.]}
+When analyzing different counterfactuals, there is a substantial difference between males and females. The difference is driven by one of the counterfactuals: treatment vs. alternative preschools. The estimates for both males and females generate a similar estimated ABC/CARE treatment effect compared to staying at home. Males benefit much more from treatment relative to alternative preschools compared to their benefits from treatment relative to staying at home. This result is consistent with findings noted elsewhere: (i) stark gender differences resulting from attending low quality childcare \citep{Kottelenberg-Lehrer_2014_Gender-Effects,Baker_Gruber_Milligan_2015_Noncog_Defects}; and (ii) females are less sensitive to uncertain environments \citep{Autor-etal_2015_Family-Disadvantage}. The program substantially reduced the costs of special education for boys. 
 
 Our evidence does not indicate that the program has no benefit for females. In fact it does. When compared to staying at home, the gain for females indicates that there is a gain of $4.81$ dollars per each dollar invested. In fact, when we decompose the net-present value for each of the components that we monetize, we see substantial benefits for females across a variety of categories, including health and crime. For males, the magnitudes are noticeably reinforced when comparing treatment to alternative preschool (see Figures ~\ref{figure:npvsf} and \ref{figure:npvsm}).
 
