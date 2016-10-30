@@ -110,8 +110,8 @@ cd $output
 twoway (bar     m part2            if estimate == 3 & sex == 1, color(gs4) barw(.441))
        (bar     m part0            if estimate == 2 & sex == 1, color(gs8) barw(.442))
        (bar     m part1            if estimate == 1 & sex == 1, fcolor(none) lcolor(gs0) lwidth(medthick) barw(.9))
-       (scatter m part2 if sig == 1 & estimate == 3 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
-       (scatter m part1 if sig == 1 & estimate == 1 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
+       (scatter m part2 if sig == 1 & estimate == 3 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
+       (scatter m part1 if sig == 1 & estimate == 1 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
        (scatter m part0 if sig == 1 & estimate == 2 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
 		, 
 		legend(cols(2) order(3 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 1 "Treatment vs. Alternative Preschool" 4 "Significant at 10%") position(north) size(vsmall))
@@ -128,8 +128,8 @@ graph export abccare_npvs1.eps, replace
 twoway (bar     m part2            if estimate == 3 & sex == 2, color(gs4) barw(.441))
        (bar     m part0            if estimate == 2 & sex == 2, color(gs8) barw(.442))
        (bar     m part1            if estimate == 1 & sex == 2, fcolor(none) lcolor(gs0) lwidth(medthick) barw(.9))
-       (scatter m part2 if sig == 1 & estimate == 3 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
-       (scatter m part1 if sig == 1 & estimate == 1 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
+       (scatter m part2 if sig == 1 & estimate == 3 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
+       (scatter m part1 if sig == 1 & estimate == 1 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
        (scatter m part0 if sig == 1 & estimate == 2 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
 		, 
 		legend(cols(2) order(3 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 1 "Treatment vs. Alternative Preschool" 4 "Significant at 10%") position(north) size(vsmall))

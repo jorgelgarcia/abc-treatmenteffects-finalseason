@@ -15,6 +15,7 @@ inference on those counts.
 import os
 import collections
 import pandas as pd
+import math
 import numpy as np
 import pytabular as pytab
 from scipy.stats import percentileofscore
@@ -164,8 +165,10 @@ for block in blocks:
 		tmp_tstat = tstat.loc[ix, coef].copy()
 		
 		# sort t-statistics in a descending order and save the indices as a list
-		tmp_tstat.sort(axis=1, ascending = False, inplace=True)	
+		tmp_tstat.sort(axis=1, ascending = False, inplace=True)
 		tmp_tstat_list = list(tmp_tstat.index)
+		print "printing tmp_tstat_list"
+		print tmp_tstat_list
 
 		# make dictionaries for the step-down p-values
 		sd_pval_tmp = {} 
@@ -175,14 +178,14 @@ for block in blocks:
 		for i in range(0,len(tmp_tstat_list)):
 			
 			# select the max across each bootstrap
-			sd_dist = null.loc[(slice(None), ix), coef].groupby(level=0).max().dropna()
+			sd_dist = null.loc[(slice(None), ix), coef].groupby(level=0).max()
 			
 			# count the cases where the selected max is greater than the T-statistics of our interest
 			countone = sum(1 for item in sd_dist if tmp_tstat[i] <= item)
 
 			# calculate the temporary p-value
 			sd_pval_tmp[i] = (countone+1.0)/(1.0+101.0)
-
+			
 			# store p-value according to step-down conditions
 			if i == 0:
 				tmp_pval.loc[tmp_tstat_list[i]] = sd_pval_tmp[i]
@@ -190,6 +193,10 @@ for block in blocks:
 			if i != 0:
 				tmp_pval.loc[tmp_tstat_list[i]] = max(sd_pval_tmp[i], storeval[i-1])
 				storeval[i] = max(sd_pval_tmp[i], storeval[i-1])
+			if np.isnan(point.loc[ix, coef][tmp_tstat_list[i]]):
+				print "Printing if NA"
+				print np.isnan(point.loc[ix, coef][tmp_tstat_list[i]])
+				tmp_pval.loc[tmp_tstat_list[i]] = np.nan
 			
 			# consecutively drop the outcome with highest T statistics
 			ix = list(ix)
