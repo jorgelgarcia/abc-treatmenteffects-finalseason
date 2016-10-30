@@ -22,11 +22,15 @@ global googledrive: env googledrive
 // do files
 global scripts     = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global dataqalys   = "$klmmexico/abccare/NPV/current"
-global datapsid    = "$klmshare/Data_Central/data-repos/psid/extensions/abc-match/"
-global datafam     = "$klmmexico/abccare/health_plots"
+global datafam     = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/fam-merge/mergefiles/current"
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
+
+cd $datafam
+use health_projections_combined.dta, clear
+
+
+/*
 
 // bring weights from psid file
 cd $datapsid
@@ -47,12 +51,12 @@ merge 1:1 id year using "`psids'"
 keep if _merge == 3
 drop _merge
 
-merge m:1 id using "`weights'"
+merge m:1 id using "`weights'"`
 keep if _merge != 2
 drop _merge
 
 keep if black == 1
-keep if age >=34 & age <= 108
+keep if age >=35 & age <=75
 replace qaly = qaly*.150
 
 matrix est = J(1,2,.)
@@ -128,7 +132,7 @@ twoway (bar qaly sample if sample == 1, color(gs0) barw(.98))
        (rcap maxqaly minqaly sample, lcolor(gs0)),
        legend(cols(3) size(vsmall) order(1 "PSID, Disadvantaged" 2 "Control (Predicted)" 3 "Treatment (Predicted)" 7 "+/- s.e."))
 		  xlabel(2 "Males" 6 " Females", labsize(small) noticks grid glcolor(white)) 
-		  ylabel(5[.1]5.4, angle(h) glcolor(gs14))
+		  ylabel(4.8[.1]5.1, angle(h) glcolor(gs14))
 		  xtitle(" ", size(small)) 
 		  ytitle("QALYs (100,000s 2014 USD)", size(small))
 		  graphregion(color(white)) plotregion(fcolor(white));
