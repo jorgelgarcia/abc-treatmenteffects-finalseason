@@ -36,7 +36,7 @@ global collapseprj  = "$klmmexico/abccare/income_projections/"
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 // bootstraps 
-global bootstraps 3
+global bootstraps 100
 set seed 0
 
 // ABC

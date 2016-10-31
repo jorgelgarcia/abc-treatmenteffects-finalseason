@@ -28,7 +28,7 @@ global datanlsyw    = "$klmshare/Data_Central/data-repos/nlsy/extensions/abc-mat
 global datacnlsyw   = "$klmshare/Data_Central/data-repos/nlsy/extensions/abc-match-cnlsy/"
 global dataabccare  = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
 global dataabcres   = "$klmmexico/abccare/income_projections"
-global dataweights  = "$klmmexico/abccare/as_weights/"
+global dataweights  = "$klmmexico/abccare/as_weights/current"
 global nlsyother    = "$klmmexico/BPSeason2"
 global collapseprj  = "$klmmexico/abccare/income_projections/"
 
