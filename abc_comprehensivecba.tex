@@ -430,7 +430,6 @@ The auxiliary data $(n)$ come from older cohorts not exposed to the program for 
 
 To formalize this problem, and our solution to it, let $Y_{j,k,a,c,t}^d$ be outcome $j$ for sample $k$ at age $a$ for birth cohort $c$ at time $t$ when treatment is fixed to $d$. We make the following assumption. It amounts to avoiding the problem by saying cohort and time effects operate identically across the $e$ and $n$ samples in the following sense:
 
-
 \onehalfspacing
 \begin{assumption}\label{ass:alignment} \textbf{Alignment of Cohort and Time Effects}\\
 For experimental sample cohort $c_{e}$ and auxiliary sample cohort $c_{n}$:
@@ -441,7 +440,9 @@ for $d \in \{ 0, 1\}$, $a \geq a^*$, where $t_{e}, t_{n}$ are the years cohorts 
 \end{assumption}
 \doublespacing
 
-Notice that $Y^d_{n,a,{c_n},{t_n}}$ is the virtual outcome for treatment status $d$ in the auxiliary sample. This assumption does not rule out cohort or period effects. However, it rules out any \emph{differences} in cohort and time effects across the indicated values. We henceforth drop the ``$c$'' and ``$t$'' sub-indices. The future year effect for the experimental sample is assumed to be the same as for the auxiliary sample counterpart measured at year $t_n$. We can weaken Assumption~\ref{ass:alignment} if there is prior knowledge about year and/or cohort effects or if we can parameterize estimable functions of $c$ and $t$.\footnote{See \cite{Heckman_Robb_1985_JE}.}
+Notice that $Y^d_{n,a,{c_n},{t_n}}$ is the virtual outcome for treatment status $d$ in the auxiliary sample. This assumption does not rule out cohort or period effects. However, it rules out any \emph{differences} in cohort and time effects for the auxiliary group counterparts and the experimental groups when they reach the age of the auxiliary group. 
+
+We henceforth drop the ``$c$'' and ``$t$'' sub-indices. The future year effect for the experimental sample is assumed to be the same as for the auxiliary sample counterpart measured at year $t_n$. We can weaken Assumption~\ref{ass:alignment} if there is prior knowledge about year and/or cohort effects or if we can parameterize estimable functions of $c$ and $t$.\footnote{See \cite{Heckman_Robb_1985_JE}.}
 
 \subsubsection{Support Conditions}
 
@@ -493,7 +494,7 @@ over $supp\left(\bm{Y}^d_{e,a}, \bm{B}_e\right)$.
 
 \subsubsection{Exogeneity}
 
-These conditions do not require that we take a position on the exogeneity of $\bm{X}^d_k, \: k \in \{e,n\}$. However, using economic theory to generate and interpret treatment effects and to test the validity of our synthetic control groups is easier under exogeneity assumptions, as we explain next. To facilitate testing, we assume:
+Conditions~\ref{cond:cond1}--\ref{cond:cond3} do not require that we take a position on the exogeneity of $\bm{X}^d_k, \: k \in \{e,n\}$. However, using economic theory to generate and interpret treatment effects, to test the validity of our synthetic control groups, and to use matching to find auxiliary sample counterparts to treatments and controls is easier under exogeneity assumptions. For these purposes, we assume:
 
 \onehalfspacing
 \begin{assumption}\label{ass:exog} \textbf{Exogeneity}\\
@@ -507,7 +508,7 @@ for all $\bm{b}$ in the support of $\bm{B}_k, \: k \in \{e,n\}$, for all outcome
 
 \subsubsection{Structural Invariance}
 
-We assume that the variables $\bm{X}_{k,a}^d$ fully summarize treatment. Any effect that treatment has on outcomes operates through the inputs $\bm{X}_{k,a}^d$ and not through shifts in the production function relating inputs to outputs (see \citealp{Heckman_Pinto_etal_2013_PerryFactor}). Assumption~\ref{ass:summary} formalizes this.
+We assume that the variables $\bm{X}_{k,a}^d$ fully summarize treatment in the sense that any effect that treatment has on outcomes operates through the inputs $\bm{X}_{k,a}^d$ and not through shifts in the production function relating inputs to outputs (see \citealp{Heckman_Pinto_etal_2013_PerryFactor}). Assumption~\ref{ass:summary} formalizes this.
 
 \onehalfspacing
 \begin{assumption} \label{ass:summary} \textbf{Structural Invariance}\\
@@ -520,7 +521,7 @@ $\phi^d_{k,j,a}(\bm{x})$ is the function generating the causal effect of setting
 \end{assumption}
 \doublespacing
 
-This assumption says two things: (i) the structural functions evaluated for the same arguments of the function have identical values for treatment and control groups. It also says (ii) that the structural relationships are identical in the experimental and auxiliary samples. Assumption~\ref{ass:summary} combined with Assumption~\ref{ass:exog}, Equations~\eqref{eq:countersystem}, and the assumption of a zero mean for the errors $(\mathbb{E}(\varepsilon^d_{k,j,a})=0)$ for all $a \in \{1,\dots,A\}, d \in \{0,1\}$ and $k \in \{e,n\}$ enable us to write:
+This assumption has two messages that are helpful to distinguish: (i) the structural functions evaluated at the same arguments have identical values for treatment and control groups. It also says (ii) that the structural relationships are identical in the experimental and auxiliary samples. As previously noted, exogeneity is not needed to satisfy any of Conditions~\ref{cond:cond1} through \ref{cond:cond3}. But in the absence of exogeneity, the relationship between the $\bm{X}^d_{k,a}$ and the errors $\varepsilon^d_{k,a}$ likely differs across samples because the randomization imparts a source of exogenous variation not found in the non-experimental sample. Assumption~\ref{ass:summary} combined with Assumption~\ref{ass:exog}, Equations~\eqref{eq:countersystem}, and the assumption of a zero mean for the errors $(\mathbb{E}(\varepsilon^d_{k,j,a})=0)$ for all $a \in \{1,\dots,A\}, d \in \{0,1\}$ and $k \in \{e,n\}$ enable us to write:
 \begin{equation}\label{eq:invariancetest}
 \mathbb{E} \left[ Y_{k,j,a}^d | \bm{X}_{k,a}^d  = \bm{x}, \bm{B}_k = \bm{b}, D = d \right] = \mathbb{E} \left[ Y_{k,j,a} | \bm{X}^d_{k,a}  = \bm{x}, \bm{B}_k = \bm{b} \right],
 \end{equation}
@@ -536,13 +537,6 @@ Exogeneity and invariance enable us to test additional assumptions. By Equation~
 \end{equation}
 Relationship~\eqref{eq:withbetimplication} is testable for $a \leq a^*$, when $Y_{k,j,a}$ is observed in both the experimental and auxiliary samples. We do not reject the null hypothesis of no differences in the conditional mean functions in the experimental and auxiliary samples conditioning on $\bm{X}_{k,a}^d$ and $\bm{B}_k, \: k \in \{e,n\}$.\footnote{This holds when pooling males and females and when testing by gender (see Appendix~\ref{app:invariance}).}
 
-\subsubsection{Using Matching to Construct Virtual Treatment and Comparison Groups}
-
-We note that under exogeneity assumption~\ref{ass:exog} and invariance condition~\ref{ass:summary} we can use matching to construct counterparts to treatment and control groups in the auxiliary sample.\footnote{\citet{Heckman_Ichimura_etal_1998_Econometrica} use this procedure.} We discuss this approach in Appendix~\ref{appendix:match}. Matching is one way to non-parametrically estimate the conditional mean functions.
-
-\subsubsection{Testing for Endogeneity}\label{section:accendog}
-
-In Appendix~\ref{app:endogeneity}, we investigate the question of endogeneity in the experimental and auxiliary samples. We follow \citet{Heckman_Pinto_etal_2013_PerryFactor} and assume that the $\varepsilon_{k,j,a}^d$ obey a factor structure, $k \in \{e,n\}$. We develop that framework and provide evidence supporting exogeneity in both samples.
 
 \subsubsection{Summarizing}
 
@@ -550,12 +544,20 @@ Collecting results, under exogeneity we obtain the following theorem:
 
 \onehalfspacing
 \setcounter{theorem}{0}
-\begin{theorem}\label{theorem:main} \textbf{Valid Out-of-Sample Forecasts} \\
+\begin{theorem}\label{theorem:main} \textbf{Valid Out-of-Sample Forecasts for Condition} \\
 Under Assumptions~\ref{ass:alignment}-\ref{ass:summary}, Condition~\ref{cond:cond2} holds for any value of $\left( \bm{X}^d_{k,a}, \bm{B}_k \right)$. $\Box$ \\
 This is an immediate consequence of the cited assumptions.
 \end{theorem}
 
 \doublespacing
+
+\subsubsection{Using Matching to Construct Virtual Treatment and Comparison Groups}
+
+Under exogeneity assumption~\ref{ass:exog} and invariance condition~\ref{ass:summary} we can use matching to construct counterparts to treatment and control groups in the auxiliary sample.\footnote{\citet{Heckman_Ichimura_etal_1998_Econometrica} use this procedure.} We discuss this approach in Appendix~\ref{appendix:match}. Matching is one way to non-parametrically estimate the conditional mean functions.
+
+\subsubsection{Testing for Endogeneity}\label{section:accendog}
+
+In Appendix~\ref{app:endogeneity}, we investigate the question of endogeneity in the experimental and auxiliary samples. We follow \citet{Heckman_Pinto_etal_2013_PerryFactor} and assume that the $\varepsilon_{k,j,a}^d$ obey a factor structure, $k \in \{e,n\}$. We develop that framework and provide evidence supporting exogeneity in both samples.
 
 \subsection{Predicting Parental Income} \label{section:pincome}
 
