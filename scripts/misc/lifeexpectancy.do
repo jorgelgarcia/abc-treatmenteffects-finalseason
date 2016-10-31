@@ -23,11 +23,44 @@ global googledrive: env googledrive
 global scripts     = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
 global datafam     = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/fam-merge/mergefiles/current"
+global dataabccare = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 cd $datafam
 use health_projections_combined.dta, clear
+keep id died* year*
+
+gen diedage = 0
+foreach num of numlist 32(1)122 {
+	replace diedage = `num' if died`num' == 1
+}
+
+keep id diedage
+tempfile diedage
+save "`diedage'", replace
+
+cd $dataabccare
+use append-abccare_iv.dta, clear 
+keep id D male
+tempfile treat
+save "`treat'", replace
+
+use "`diedage'", clear
+merge m:1 id using "`treat'"
+keep if _merge !=  2
+drop if D == .
+
+// drop if diedage <= 50
+collapse (mean) diedage (semean) sediedage = diedage, by(D male)
+mkmat *, matrix(abccare)
+
+
+// black in the usa
+local males   = 60
+local females = 74
+
+
 
 
 /*

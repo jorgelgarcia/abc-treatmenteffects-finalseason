@@ -49,32 +49,8 @@ merge 1:1 id using "`psid'"
 keep if _merge == 3
 drop _merge
 
-reg si30y_inc_labor male black [aw=wtabc_allids_c3_control], robust
-est sto psidZc
-
-reg si30y_inc_labor male black [aw=wtabc_allids_c3_treat], robust
-est sto psidZt
-
-reg si30y_inc_labor male black years_30y [aw=wtabc_allids_c3_control], robust
-est sto psidZXc
-
-reg si30y_inc_labor male black years_30y [aw=wtabc_allids_c3_treat], robust
-est sto psidZXt
-
-reg si30y_inc_labor male black years_30y inc_labor21 [aw=wtabc_allids_c3_control], robust
-est sto psidZLc
-
-reg si30y_inc_labor male black years_30y inc_labor21 [aw=wtabc_allids_c3_treat], robust
-est sto psidZLt
-
-reg si30y_inc_labor male black years_30y inc_labor28 [aw=wtabc_allids_c3_control], robust
-est sto psidZL1c
-
-reg si30y_inc_labor male black years_30y inc_labor28 [aw=wtabc_allids_c3_treat], robust
-est sto psidZL1t
-
-cd $output
-outreg2 [psidZc psidZt psidZXc psidZXt psidZLc psidZLt psidZL1c psidZL1t] using psid_predict, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(2) par(se) r2 nonotes
+gen psid = 1
+save "`psid'", replace
 
 // NLSY79
 cd $dataweights
@@ -90,33 +66,8 @@ merge 1:1 id using "`nlsy'"
 keep if _merge == 3
 drop _merge
 
-reg si30y_inc_labor male black [aw=wtabc_allids_c3_control], robust
-est sto nlsyZc
-
-reg si30y_inc_labor male black [aw=wtabc_allids_c3_treat], robust
-est sto nlsyZt
-
-reg si30y_inc_labor male black years_30y [aw=wtabc_allids_c3_control], robust
-est sto nlsyZXc
-
-reg si30y_inc_labor male black years_30y [aw=wtabc_allids_c3_treat], robust
-est sto nlsyZXt
-
-reg si30y_inc_labor male black years_30y inc_labor21 [aw=wtabc_allids_c3_control], robust
-est sto nlsyZLc
-
-reg si30y_inc_labor male black years_30y inc_labor21 [aw=wtabc_allids_c3_treat], robust
-est sto nlsyZLt
-
-reg si30y_inc_labor male black years_30y inc_labor28 [aw=wtabc_allids_c3_control], robust
-est sto nlsyZL1c
-
-reg si30y_inc_labor male black years_30y inc_labor28 [aw=wtabc_allids_c3_treat], robust
-est sto nlsyZL1t
-
-cd $output
-outreg2 [nlsyZc nlsyZt nlsyZXc nlsyZXt nlsyZLc nlsyZLt nlsyZL1c nlsyZL1t] using nlsy_predict, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(2) par(se) r2 nonotes
-
+gen nlsy = 1
+save "`nlsy'", replace
 
 // CLSY
 cd $dataweights
@@ -132,24 +83,43 @@ merge 1:1 id using "`cnlsy'"
 keep if _merge == 3
 drop _merge
 
-reg si30y_inc_labor male black m_ed0y [aw=wtabc_allids_c3_control], robust
-est sto cnlsyZc
+gen cnlsy = 1
+save "`cnlsy'", replace
 
-reg si30y_inc_labor male black m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi [aw=wtabc_allids_c3_control], robust
-est sto cnlsyZXc
+append using "`psid'"
+append using "`nlsy'"
 
-reg si30y_inc_labor male black m_ed0y piatmath years_30y si34y_bmi inc_labor28 [aw=wtabc_allids_c3_control], robust
-est sto cnlsyZLc
+egen  laggedincome = rowmean(inc_labor21 inc_labor22)
+egen llaggedincome = rowmean(inc_labor27 inc_labor28)
 
-reg si30y_inc_labor male black m_ed0y [aw=wtabc_allids_c3_treat], robust
-est sto cnlsyZt
+egen  laggedtransfer = rowmean(inc_trans_pub21 inc_trans_pub22)
+egen llaggedtransfer = rowmean(inc_trans_pub27 inc_trans_pub28)
 
-reg si30y_inc_labor male black m_ed0y piatmath years_30y si21y_inc_labor si34y_bmi [aw=wtabc_allids_c3_treat], robust
-est sto cnlsyZXt
+replace piatmath = 1 if nlsy == 1 | psid == 1
 
-reg si30y_inc_labor male black m_ed0y piatmath years_30y si34y_bmi inc_labor28 [aw=wtabc_allids_c3_treat], robust
-est sto cnlsyZLt
+foreach sample in psid nlsy cnlsy {
 
+reg si30y_inc_labor male black piatmath years_30y     laggedincome llaggedincome [aw=wtabc_allids_c1_control] if `sample' == 1, robust
+est sto `sample'incomet
+
+reg si30y_inc_labor male black piatmath years_30y     laggedincome llaggedincome [aw=wtabc_allids_c1_treat]   if `sample' == 1, robust
+est sto `sample'incomec
+
+reg si30y_inc_trans_pub male black piatmath years_30y laggedtransfer llaggedtransfer [aw=wtabc_allids_c1_control] if `sample' == 1, robust
+est sto `sample'transfert
+
+reg si30y_inc_trans_pub male black piatmath years_30y laggedtransfer llaggedtransfer [aw=wtabc_allids_c1_treat]   if `sample' == 1, robust
+est sto `sample'transferc
+
+capture reg si34y_bmi male black piatmath years_30y laggedtransfer llaggedtransfer [aw=wtabc_allids_c1_control] if `sample' == 1, robust
+capture est sto `sample'bmit
+
+capture reg si34y_bmi male black piatmath years_30y laggedtransfer llaggedtransfer [aw=wtabc_allids_c1_treat]   if `sample' == 1, robust
+capture est sto `sample'bmic
+
+}
 
 cd $output
-outreg2 [cnlsyZc cnlsyZt cnlsyZXc cnlsyZXt cnlsyZLc cnlsyZLt] using cnlsy_predict, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(2) par(se) r2 nonotes
+outreg2 [cnlsyincomec cnlsyincomet nlsyincomec nlsyincomet psidincomec psidincomet] using combined_predict, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(2) par(se) drop(o.piatmath) r2 nonotes
+outreg2 [nlsytransferc nlsytransfert psidtransferc psidtransfert] using combined_predict_ti, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(2) par(se) drop(o.piatmath) r2 nonotes
+
