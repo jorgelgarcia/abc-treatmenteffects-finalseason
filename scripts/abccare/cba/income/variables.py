@@ -26,7 +26,7 @@ cols.interp.keep = cols.interp.predictors + cols.interp.black
 # Extrapolation --------------------------------------------------------------
 
 cols.extrap.black = ['black']
-cols.extrap.background = ['male']
+cols.extrap.background = ['male', 'm_ed0y']
 cols.extrap.outcomes = ['years_30y']
 cols.extrap.weight = ['wtabc_allids']
 cols.extrap.predictors = cols.extrap.outcomes #cols.interp.background +
