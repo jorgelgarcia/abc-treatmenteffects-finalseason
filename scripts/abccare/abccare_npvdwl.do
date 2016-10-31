@@ -45,7 +45,6 @@ rename v1 sex
 rename mean dwl0mean
 rename se dwl0se
 
-
 // merge together
 merge 1:1 sex using `ratio', nogen
 merge 1:1 sex using `npv', nogen
