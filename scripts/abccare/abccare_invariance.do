@@ -52,14 +52,14 @@ replace piatmath = piatcare if program == "care"
 global cog    iq2y iq3y iq4y iq5y iq7y iq8y
 global ncog   bsi_tsom bsi_thos bsi_tdep bsi_tgsi
 
-global treat   if D == 1
-global cont if D == 0
-global pool 
+global male   if male == 1
+global female if male == 0
+global pooled 
 
-foreach treat in treat cont pool {
-	foreach varyy of varlist si30y_inc_labor si30y_inc_trans_pub si34y_bmi {
-		matrix allests`varyy' = J(12,1,.)
-		matrix rownames allests`varyy' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
+foreach sex in male female pooled {
+	foreach varyy of varlist hs30 si30y_works_job si30y_inc_labor si30y_inc_trans_pub si34y_bmi {
+		matrix allests`varyy' = J(11,1,.)
+		matrix rownames allests`varyy' = R m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
 		foreach b of numlist 1(1)$bootstraps {
 			preserve
 			bsample
@@ -74,46 +74,34 @@ foreach treat in treat cont pool {
 			predict noncogfactor
 			
 			// treatment regressions with factor
-			reg `varyy' m_ed0y cogfactor noncogfactor ${`treat'}, robust
+			reg `varyy' R m_ed0y cogfactor noncogfactor ${`sex'}, robust
 			matrix t1f = e(b)
-			matrix   F = e(F)
-			matrix  r2 = e(r2)
-			matrix   N = e(N)
-			test cogfactor + noncogfactor = 0
-			matrix  DW = r(F)
-			matrix pDW = r(p)
-			matrix t1fcomplete`b' = [t1f[1,1..1],J(1,3,.),t1f[1,2...],F[1,1],r2[1,1],N[1,1],DW[1,1],pDW[1,1]]'
-			matrix rownames t1fcomplete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
+			matrix t1fcomplete`b' = [t1f[1,1..2],J(1,3,.),t1f[1,3...],e(F),e(r2),e(N)]'
+			matrix rownames t1fcomplete`b' = R m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
 			matrix colnames t1fcomplete`b' = t1fcomplete`b'
 			mat_capp allests`varyy' : allests`varyy' t1fcomplete`b'
 
 			
-			reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor ${`treat'}, robust
+			reg `varyy' R m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor ${`sex'}, robust
 			matrix t2f = e(b)
-			matrix   F = e(F)
-			matrix  r2 = e(r2)
-			matrix   N = e(N)
-			test cogfactor + noncogfactor = 0
-			matrix  DW = r(F)
-			matrix t2fcomplete`b' = [t2f[1,1...],e(F),e(r2),e(N),DW[1,1],pDW[1,1]]'
-			
-			matrix rownames t2fcomplete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
+			matrix t2fcomplete`b' = [t2f[1,1...],e(F),e(r2),e(N)]'
+			matrix rownames t2fcomplete`b' = R m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
 			matrix colnames t2fcomplete`b' = t2fcomplete`b'
 			mat_capp allests`varyy' : allests`varyy' t2fcomplete`b'
 
 			
 			// treatment regressions with no factor
-			reg `varyy' m_ed0y ${`treat'}, robust
+			reg `varyy' R m_ed0y ${`sex'}, robust
 			matrix t1 = e(b)
-			matrix t1complete`b' = [t1[1,1..1],J(1,5,.),t1[1,2],e(F),e(r2),e(N),.,.]'
-			matrix rownames t1complete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
+			matrix t1complete`b' = [t1[1,1..2],J(1,5,.),t1[1,3],e(F),e(r2),e(N)]'
+			matrix rownames t1complete`b' = R m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
 			matrix colnames t1complete`b' = t1complete`b'
 			mat_capp allests`varyy' : allests`varyy' t1complete`b'
 			
-			reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor ${`treat'}, robust
+			reg `varyy' R m_ed0y piatmath years_30y si21y_inc_labor ${`sex'}, robust
 			matrix t2 = e(b)
-			matrix t2complete`b' = [t2[1,1..4],J(1,2,.),t2[1,5],e(F),e(r2),e(N),.,.]'
-			matrix rownames t2complete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
+			matrix t2complete`b' = [t2[1,1..5],J(1,2,.),t2[1,6],e(F),e(r2),e(N)]'
+			matrix rownames t2complete`b' = R m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N
 			matrix colnames t2complete`b' = t2complete`b'
 			mat_capp allests`varyy' : allests`varyy' t2complete`b'
 			restore
@@ -163,16 +151,16 @@ foreach treat in treat cont pool {
 		      t2completemean t2completepvalue t2fcompletemean t2fcompletepvalue;
 		# delimit cr
 
-		mkmat *, matrix(all`varyy'_s`treat')
+		mkmat *, matrix(all`varyy'_s`sex')
 		
-		matrix all`varyy'_s`treat'p1 = all`varyy'_s`treat'[1..7,1...]
-		matrix all`varyy'_s`treat'p2 = [[all`varyy'_s`treat'[8..9,1] \ round(all`varyy'_s`treat'[10,1],1) \ [all`varyy'_s`treat'[11..12,1]]], J(5,1,.),[all`varyy'_s`treat'[8..9,3] \ round(all`varyy'_s`treat'[10,3],1) \ [all`varyy'_s`treat'[11..12,3]]], J(5,1,.),[all`varyy'_s`treat'[8..9,5] \ round(all`varyy'_s`treat'[10,1],5) \ [all`varyy'_s`treat'[11..12,5]]], J(5,1,.),[all`varyy'_s`treat'[8..9,7] \ round(all`varyy'_s`treat'[10,1],7) \ [all`varyy'_s`treat'[11..12,7]]], J(5,1,.)]
+		matrix all`varyy'_s`sex'p1 = all`varyy'_s`sex'[1..8,1...]
+		matrix all`varyy'_s`sex'p2 = [[all`varyy'_s`sex'[9..10,1] \ round(all`varyy'_s`sex'[11,1],1)], J(3,1,.),[all`varyy'_s`sex'[9..10,3] \ round(all`varyy'_s`sex'[11,3],1)], J(3,1,.),[all`varyy'_s`sex'[9..10,5] \ round(all`varyy'_s`sex'[11,1],5)], J(3,1,.),[all`varyy'_s`sex'[9..10,7] \ round(all`varyy'_s`sex'[11,1],7)], J(3,1,.)]
 		
-		matrix all`varyy'_s`treat' = [all`varyy'_s`treat'p1 \ all`varyy'_s`treat'p2]		
-		matrix rownames all`varyy'_s`treat' = "Mother'sEducation" "PIAT(5-7)" "Education(30)" "LaborIncome(21)" Cognitive NonCognitive Constant "F-stat" "R2" Observations "DWH" "pDWH"
+		matrix all`varyy'_s`sex' = [all`varyy'_s`sex'p1 \ all`varyy'_s`sex'p2]		
+		matrix rownames all`varyy'_s`sex' = R "Mother'sEducation" "PIAT(5-7)" "Education(30)" "LaborIncome(21)" Cognitive NonCognitive Constant "F-stat" "R2" Observations
 
 		cd $output
-		outtable using abccare_endogdurb_`varyy'_s`treat', mat(all`varyy'_s`treat') replace nobox center f(%12.2fc)
+		outtable using abccare_endog_`varyy'_s`sex', mat(all`varyy'_s`sex') replace nobox center f(%9.3f)
 		restore 
 	}
 }
