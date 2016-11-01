@@ -52,11 +52,11 @@ replace piatmath = piatcare if program == "care"
 global cog    iq2y iq3y iq4y iq5y iq7y iq8y
 global ncog   bsi_tsom bsi_thos bsi_tdep bsi_tgsi
 
-global treatment   if D == 1
-global control     if D == 0
-global pooled 
+global treat   if D == 1
+global cont if D == 0
+global pool 
 
-foreach sex in male female pooled {
+foreach treat in treat cont pool {
 	foreach varyy of varlist si30y_inc_labor si30y_inc_trans_pub si34y_bmi {
 		matrix allests`varyy' = J(12,1,.)
 		matrix rownames allests`varyy' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
@@ -74,7 +74,7 @@ foreach sex in male female pooled {
 			predict noncogfactor
 			
 			// treatment regressions with factor
-			reg `varyy' m_ed0y cogfactor noncogfactor ${`sex'}, robust
+			reg `varyy' m_ed0y cogfactor noncogfactor ${`treat'}, robust
 			matrix t1f = e(b)
 			matrix   F = e(F)
 			matrix  r2 = e(r2)
@@ -88,7 +88,7 @@ foreach sex in male female pooled {
 			mat_capp allests`varyy' : allests`varyy' t1fcomplete`b'
 
 			
-			reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor ${`sex'}, robust
+			reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor ${`treat'}, robust
 			matrix t2f = e(b)
 			matrix   F = e(F)
 			matrix  r2 = e(r2)
@@ -103,14 +103,14 @@ foreach sex in male female pooled {
 
 			
 			// treatment regressions with no factor
-			reg `varyy' m_ed0y ${`sex'}, robust
+			reg `varyy' m_ed0y ${`treat'}, robust
 			matrix t1 = e(b)
 			matrix t1complete`b' = [t1[1,1..1],J(1,5,.),t1[1,2],e(F),e(r2),e(N),.,.]'
 			matrix rownames t1complete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
 			matrix colnames t1complete`b' = t1complete`b'
 			mat_capp allests`varyy' : allests`varyy' t1complete`b'
 			
-			reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor ${`sex'}, robust
+			reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor ${`treat'}, robust
 			matrix t2 = e(b)
 			matrix t2complete`b' = [t2[1,1..4],J(1,2,.),t2[1,5],e(F),e(r2),e(N),.,.]'
 			matrix rownames t2complete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
@@ -163,16 +163,16 @@ foreach sex in male female pooled {
 		      t2completemean t2completepvalue t2fcompletemean t2fcompletepvalue;
 		# delimit cr
 
-		mkmat *, matrix(all`varyy'_s`sex')
+		mkmat *, matrix(all`varyy'_s`treat')
 		
-		matrix all`varyy'_s`sex'p1 = all`varyy'_s`sex'[1..7,1...]
-		matrix all`varyy'_s`sex'p2 = [[all`varyy'_s`sex'[8..9,1] \ round(all`varyy'_s`sex'[10,1],1) \ [all`varyy'_s`sex'[11..12,1]]], J(5,1,.),[all`varyy'_s`sex'[8..9,3] \ round(all`varyy'_s`sex'[10,3],1) \ [all`varyy'_s`sex'[11..12,3]]], J(5,1,.),[all`varyy'_s`sex'[8..9,5] \ round(all`varyy'_s`sex'[10,1],5) \ [all`varyy'_s`sex'[11..12,5]]], J(5,1,.),[all`varyy'_s`sex'[8..9,7] \ round(all`varyy'_s`sex'[10,1],7) \ [all`varyy'_s`sex'[11..12,7]]], J(5,1,.)]
+		matrix all`varyy'_s`treat'p1 = all`varyy'_s`treat'[1..7,1...]
+		matrix all`varyy'_s`treat'p2 = [[all`varyy'_s`treat'[8..9,1] \ round(all`varyy'_s`treat'[10,1],1) \ [all`varyy'_s`treat'[11..12,1]]], J(5,1,.),[all`varyy'_s`treat'[8..9,3] \ round(all`varyy'_s`treat'[10,3],1) \ [all`varyy'_s`treat'[11..12,3]]], J(5,1,.),[all`varyy'_s`treat'[8..9,5] \ round(all`varyy'_s`treat'[10,1],5) \ [all`varyy'_s`treat'[11..12,5]]], J(5,1,.),[all`varyy'_s`treat'[8..9,7] \ round(all`varyy'_s`treat'[10,1],7) \ [all`varyy'_s`treat'[11..12,7]]], J(5,1,.)]
 		
-		matrix all`varyy'_s`sex' = [all`varyy'_s`sex'p1 \ all`varyy'_s`sex'p2]		
-		matrix rownames all`varyy'_s`sex' = "Mother'sEducation" "PIAT(5-7)" "Education(30)" "LaborIncome(21)" Cognitive NonCognitive Constant "F-stat" "R2" Observations "DWH" "pDWH"
+		matrix all`varyy'_s`treat' = [all`varyy'_s`treat'p1 \ all`varyy'_s`treat'p2]		
+		matrix rownames all`varyy'_s`treat' = "Mother'sEducation" "PIAT(5-7)" "Education(30)" "LaborIncome(21)" Cognitive NonCognitive Constant "F-stat" "R2" Observations "DWH" "pDWH"
 
 		cd $output
-		outtable using abccare_endogdurb_`varyy'_s`sex', mat(all`varyy'_s`sex') replace nobox center f(%12.2fc)
+		outtable using abccare_endogdurb_`varyy'_s`treat', mat(all`varyy'_s`treat') replace nobox center f(%12.2fc)
 		restore 
 	}
 }
