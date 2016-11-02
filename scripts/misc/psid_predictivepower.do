@@ -86,8 +86,26 @@ drop _merge
 gen cnlsy = 1
 save "`cnlsy'", replace
 
+// abc care
+cd $dataabccare
+use append-abccare_iv, clear
+drop if random == 3
+gen wtabc_allids_c1_control = 1 if D == 0
+gen wtabc_allids_c1_treat   = 1 if D == 1
+
+egen piatmathabc  = rowmean(piat5y6m piat6y piat6y6m piat7y)          if program == "abc"
+egen piatmathcare = rowmean(wj_mathas5y6m wj_mathas6y wj_mathgl7y6m)  if program == "care"
+egen piatmath     = rowtotal(piatmathabc piatmathcare), missing
+
+keep male years_30y  si30y_inc_labor si21y_inc_labor si30y_inc_trans_pub si21y_inc_trans_pub piatmath wtabc_allids_c1_*
+
+gen abc = 1
+tempfile abc
+save "`abc'", replace
+
 append using "`psid'"
 append using "`nlsy'"
+append using "`cnlsy'"
 
 egen  laggedincome = rowmean(inc_labor21 inc_labor22)
 egen llaggedincome = rowmean(inc_labor27 inc_labor28)
@@ -95,9 +113,17 @@ egen llaggedincome = rowmean(inc_labor27 inc_labor28)
 egen  laggedtransfer = rowmean(inc_trans_pub21 inc_trans_pub22)
 egen llaggedtransfer = rowmean(inc_trans_pub27 inc_trans_pub28)
 
+replace llaggedincome    = si21y_inc_labor      if abc == 1
+replace llaggedtransfer  = si21y_inc_trans_pub  if abc == 1
+
+replace laggedincome   = 1 if abc == 1
+replace laggedtransfer = 1 if abc == 1
+
+replace black = 1 if abc == 1
+
 replace piatmath = 1 if nlsy == 1 | psid == 1
 
-foreach sample in psid nlsy cnlsy {
+foreach sample in psid nlsy cnlsy abc {
 
 reg si30y_inc_labor male black piatmath years_30y     laggedincome llaggedincome [aw=wtabc_allids_c1_control] if `sample' == 1, robust
 est sto `sample'incomet
@@ -111,15 +137,9 @@ est sto `sample'transfert
 reg si30y_inc_trans_pub male black piatmath years_30y laggedtransfer llaggedtransfer [aw=wtabc_allids_c1_treat]   if `sample' == 1, robust
 est sto `sample'transferc
 
-capture reg si34y_bmi male black piatmath years_30y laggedtransfer llaggedtransfer [aw=wtabc_allids_c1_control] if `sample' == 1, robust
-capture est sto `sample'bmit
-
-capture reg si34y_bmi male black piatmath years_30y laggedtransfer llaggedtransfer [aw=wtabc_allids_c1_treat]   if `sample' == 1, robust
-capture est sto `sample'bmic
-
 }
 
 cd $output
-outreg2 [cnlsyincomec cnlsyincomet nlsyincomec nlsyincomet psidincomec psidincomet] using combined_predict, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(2) par(se) drop(o.piatmath) r2 nonotes
-outreg2 [nlsytransferc nlsytransfert psidtransferc psidtransfert] using combined_predict_ti, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(2) par(se) drop(o.piatmath) r2 nonotes
+outreg2 [cnlsyincomec cnlsyincomet nlsyincomec nlsyincomet psidincomec psidincomet abcincomec abcincomet] using combined_predict, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(2) par(se) drop(o.piatmath o.black o.laggedincome) r2 nonotes
+outreg2 [nlsytransferc nlsytransfert psidtransferc psidtransfert abctransferc abctransfert] using combined_predict_ti, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(2) par(se) drop(o.piatmath o.black o.laggedincome) r2 nonotes
 
