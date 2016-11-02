@@ -369,15 +369,15 @@ We preview the outputs of this approach. Figure~\ref{fig:labor-income-profiles} 
 
 \begin{sidewaysfigure}[!htbp]
 \centering
-\caption{Predicted Labor Income Profiles}\label{fig:labor-income-profiles}
+\caption{Predicted Labor Income Profiles for ABC/CARE Participants}\label{fig:labor-income-profiles}
 \begin{subfigure}[h]{0.5\textwidth}
 		\centering
-		\caption{Prediction for ABC/CARE Males} \label{fig:labor-income-profilesc}
+		\caption{Males} \label{fig:labor-income-profilesc}
 		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_male.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.5\textwidth}
 		\centering
-		\caption{Prediction for ABC/CARE Females} \label{fig:labor-income-profilesa}
+		\caption{Females} \label{fig:labor-income-profilesa}
 		\includegraphics[width=\textwidth]{output/labor_25-65_pset1_mset3_female.eps}
 \end{subfigure}
 \footnotesize \justify
@@ -705,6 +705,25 @@ The estimates are robust when we conduct a drastic sensitivity analysis by remov
 
 In Appendix~\ref{appendix:bcaestimates} we use our analysis to examine the empirical foundations of recent cost-benefit studies of early childhood programs that use short term estimates of experimental test score gains coupled with auxiliary estimates of the impact of test scores on earnings (see, e.g., work by \citealp{Kline_Walters_2016_QJE}). We show that this approach applied to the ABC data greatly understates the true benefit-cost ratio because (a) earnings are only forecast through a young age (27) and (b) benefits extend beyond earnings. The difference is sizable. Applying the Kline and Walters method to the ABC/CARE experiment, we would find a cost-benefit ratio of 1.4 compared to our estimate of 5.7.
 
+\begin{sidewaysfigure}[!htbp]
+\centering
+\caption{Life-cycle Net Present Value of Main Components of the CBA}\label{fig:npvsgender}
+\begin{subfigure}[h]{0.5\textwidth}
+		\centering
+		\caption{Males}
+		\includegraphics[width=\textwidth]{output/abccare_npvs2.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.5\textwidth}
+		\centering
+		\caption{Females} 
+		\includegraphics[width=\textwidth]{output/abccare_npvs1.eps}
+\end{subfigure}
+\footnotesize \justify
+Note: This figure displays the life-cycle net present values of the main components of the cost/benefit analysis of ABC/CARE from birth to predicted death, discounted to birth at a rate of 3\%. ``Treatment vs. Control'': compares the treatment to the control group. ``Treatment vs. Stay at Home'': compares the treatment group to those subjects who stayed at home. ``Treatment vs. Alternative Preschool'': compares the treatment group to those subjects who attended alternative preschools. The latter two are based on matching estimators that account for selection on observable variables. By ``net" we mean that each component represents the total value for the treatment group minus the total value for the control group. Program costs: the total cost of ABC/CARE, including the welfare cost of taxes to finance it. Total net benefits: are for \textit{all} of the components we consider. These include labor income: total individual labor income from ages 20 to the retirement of program participants (assumed to be age 67). Parental income: total parental labor income of the parents of the participants from when the participants were ages 1.5 to 21. Crime: the total cost of crime (judicial and victimization costs). To simplify the display , the following components are not shown in the figure: (i) cost of alternative preschool paid by the control group children parents; (ii) the social welfare costs of transfer income from the government; (iii) disability benefits and social security claims; (iv) costs of increased individual and maternal education (including special education and grade retention); (v) total medical public and private costs. Inference is based on non-parametric, one-sided $p$-values from the empirical bootstrap distribution. We indicate point estimates significant at the $10\%$ level.\\
+*The treatment vs. stay at home net present value is sizable and negative (-\$91,476.3); its standard error is \$86,657.3.\\
+**QALYs refers to the quality-adjusted life years. Any gain corresponds to better health conditions until predicted death, with $\$150,000$ (2014 USD) as base value for a year of life.\\
+\end{sidewaysfigure}
+
 \subsection{Possible Explanations for Gender Differences}
 
 The benefit/cost ratio and internal rate of return calculations both indicate that males and females benefit \emph{differently} from the program compared to the alternatives ``$H$'' and ``$C$''. There are two complementary stories that explain this difference. First, we explore reasons why the differences could exist if we focus on the outcomes we are monetizing, and not on the counterfactual we are studying. Males have relatively high benefits from outcomes that we are able to monetize: labor income and crime are two examples of this. Historically, females are less likely to supply labor than males. While all males supply labor in our sample at age 30, not all females supply labor. We are not able to quantify household production benefits to the treated males and females. This is an important omission for females who decide to stay at home instead of work.
@@ -715,33 +734,7 @@ For health, there are also substantial gender differences. Both males and female
 
 When analyzing different counterfactuals, there is a substantial difference between males and females. The difference is driven by one of the counterfactuals: treatment vs. alternative preschools. The estimates for both males and females generate a similar estimated ABC/CARE treatment effect compared to staying at home. Males benefit much more from treatment relative to alternative preschools compared to their benefits from treatment relative to staying at home. This result is consistent with findings noted elsewhere: (i) stark gender differences resulting from attending low quality childcare \citep{Kottelenberg-Lehrer_2014_Gender-Effects,Baker_Gruber_Milligan_2015_Noncog_Defects}; and (ii) females are less sensitive to uncertain environments \citep{Autor-etal_2015_Family-Disadvantage}. The program substantially reduced the costs of special education for boys.
 
-Our evidence does not indicate that the program has no benefit for females. In fact it does. When compared to staying at home, the gain for females indicates that there is a gain of $4.81$ dollars per each dollar invested. In fact, when we decompose the net-present value for each of the components that we monetize, we see substantial benefits for females across a variety of categories, including health and crime. For males, the magnitudes are noticeably increased when comparing treatment to alternative preschool (see Figures ~\ref{figure:npvsf} and \ref{figure:npvsm}).
-
-\begin{sidewaysfigure}[!htbp]
-\caption{Life-cycle Net Present Value of Main Components of the CBA, Males}
-\label{figure:npvsm}
-\centering
-\includegraphics[width=.7\columnwidth]{output/abccare_npvs2.eps}
-\floatfoot{
-\footnotesize
-Note: This figure displays the life-cycle net present values of the main components of the cost/benefit analysis of ABC/CARE from birth to predicted death, discounted to birth at a rate of 3\%. ``Treatment vs. Control'': compares the treatment to the control group. ``Treatment vs. Stay at Home'': compares the treatment group to those subjects who stayed at home. ``Treatment vs. Alternative Preschool'': compares the treatment group to those subjects who attended alternative preschools. The latter two are based on matching estimators that account for selection on observable variables. By ``net" we mean that each component represents the total value for the treatment group minus the total value for the control group. Program costs: the total cost of ABC/CARE, including the welfare cost of taxes to finance it. Total net benefits: are for \textit{all} of the components we consider. These include labor income: total individual labor income from ages 20 to the retirement of program participants (assumed to be age 67). Parental income: total parental labor income of the parents of the participants from when the participants were ages 1.5 to 21. Crime: the total cost of crime (judicial and victimization costs). To simplify the display , the following components are not shown in the figure: (i) cost of alternative preschool paid by the control group children parents; (ii) the social welfare costs of transfer income from the government; (iii) disability benefits and social security claims; (iv) costs of increased individual and maternal education (including special education and grade retention); (v) total medical public and private costs. Inference is based on non-parametric, one-sided $p$-values from the empirical bootstrap distribution. We indicate point estimates significant at the $10\%$ level.\\
-*The treatment vs. stay at home net present value is sizable and negative (-\$91,476.3); its standard error is \$86,657.3.\\
-**QALYs refers to the quality-adjusted life years. Any gain corresponds to better health conditions until predicted death, with $\$150,000$ (2014 USD) as base value for a year of life.\\
-}
-\end{sidewaysfigure}
-
-\begin{sidewaysfigure}[!htbp]
-\caption{Life-cycle Net Present Value of Main Components of the CBA, Females}
-\label{figure:npvsf}
-\centering
-\includegraphics[width=.7\columnwidth]{output/abccare_npvs1.eps}
-\floatfoot{
-\footnotesize
-Note: This figure displays the life-cycle net present values of the main components of the cost/benefit analysis of ABC/CARE from birth to predicted death, discounted to birth at a rate of 3\%. ``Treatment vs. Control'': compares the treatment to the control group. ``Treatment vs. Stay at Home'': compares the treatment group to those subjects who stayed at home. ``Treatment vs. Alternative Preschool'': compares the treatment group to those subjects who attended alternative preschools. The latter two are based on matching estimators that account for selection on observable variables. By ``net" we mean that each component represents the total value for the treatment group minus the total value for the control group. Program costs: the total cost of ABC/CARE, including the welfare cost of taxes to finance it. Total net benefits: are for \textit{all} of the components we consider. These include labor income: total individual labor income from ages 20 to the retirement of program participants (assumed to be age 67). Parental income: total parental labor income of the parents of the participants from when the participants were ages 1.5 to 21. Crime: the total cost of crime (judicial and victimization costs). To simplify the display , the following components are not shown in the figure: (i) cost of alternative preschool paid by the control group children parents; (ii) the social welfare costs of transfer income from the government; (iii) disability benefits and social security claims; (iv) costs of increased individual and maternal education (including special education and grade retention); (v) total medical public and private costs. Inference is based on non-parametric, one-sided $p$-values from the empirical bootstrap distribution. We indicate point estimates significant at the $10\%$ level.\\
-*QALYs refers to the quality-adjusted life years. Any gain corresponds to better health conditions until predicted death, with $\$150,000$ (2014 USD) as base value for a year of life.\\
-}
-\end{sidewaysfigure}
-
+Our evidence does not indicate that the program has no benefit for females. In fact it does. When compared to staying at home, the gain for females indicates that there is a gain of $4.81$ dollars per each dollar invested. In fact, when we decompose the net-present value for each of the components that we monetize, we see substantial benefits for females across a variety of categories, including health and crime. For males, the magnitudes are noticeably increased when comparing treatment to alternative preschool (see Figure~\ref{fig:npvsgender}).
 
 \section{Summary} \label{section:conclusion}
 
@@ -752,7 +745,6 @@ To reach these conclusions, we confront and address a number of empirical challe
 Benefits differ substantially by gender. Females have more beneficial treatment effects than males, but the monetized value of the male treatment effects is greater. There are substantial effects on health and (health-related) quality of life and on crime for males. For females, the benefits are concentrated on education, employment, and minor crimes. The effects for females are stronger compared to the alternative of staying at home. The effects for males are stronger compared to the alternative of participation in alternative childcare arrangements. The program subsidizes maternal employment and has a strong causal effect on maternal labor income. We establish the benefits of analyzing long term multiple benefits of these programs.
 
 %References
-\pagebreak
 \singlespace
 \bibliographystyle{chicago}
 \bibliography{heckman}
