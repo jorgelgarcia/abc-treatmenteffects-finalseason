@@ -79,7 +79,7 @@ foreach treat in treat cont pool {
 			matrix   F = e(F)
 			matrix  r2 = e(r2)
 			matrix   N = e(N)
-			test cogfactor + noncogfactor = 0
+			test (cogfactor = 0) (noncogfactor = 0)
 			matrix  DW = r(F)
 			matrix pDW = r(p)
 			matrix t1fcomplete`b' = [t1f[1,1..1],J(1,3,.),t1f[1,2...],F[1,1],r2[1,1],N[1,1],DW[1,1],pDW[1,1]]'
@@ -93,7 +93,7 @@ foreach treat in treat cont pool {
 			matrix   F = e(F)
 			matrix  r2 = e(r2)
 			matrix   N = e(N)
-			test cogfactor + noncogfactor = 0
+			test (cogfactor = 0) (noncogfactor = 0)
 			matrix  DW = r(F)
 			matrix t2fcomplete`b' = [t2f[1,1...],e(F),e(r2),e(N),DW[1,1],pDW[1,1]]'
 			
