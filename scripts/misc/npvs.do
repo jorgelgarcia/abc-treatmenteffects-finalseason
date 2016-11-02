@@ -116,7 +116,7 @@ twoway (bar     m part2            if estimate == 3 & sex == 1, color(gs4) barw(
 		, 
 		legend(cols(2) order(3 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 1 "Treatment vs. Alternative Preschool" 4 "Significant at 10%") position(north) size(vsmall))
 			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
-			  5 "Crime" 6 "{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
+			  5 "Crime" 6 "{&lowast}{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(-1[1]4, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
@@ -141,6 +141,8 @@ twoway (bar     m part2            if estimate == 3 & sex == 2, color(gs4) barw(
 			  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr 
 graph export abccare_npvs2.eps, replace
+
+/*
 
 /*
 cd $specialed
