@@ -98,6 +98,7 @@ foreach sex in male female pool {
 			matrix   N = e(N)
 			test (cogfactor = 0) (noncogfactor = 0)
 			matrix  DW = r(F)
+			matrix pDW = r(p)
 			matrix t2fcomplete`b' = [t2f[1,1...],e(F),e(r2),e(N),DW[1,1],pDW[1,1]]'
 			
 			matrix rownames t2fcomplete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
