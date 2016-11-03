@@ -15,7 +15,7 @@ from scipy.stats import percentileofscore, zscore
 from math import sqrt
 from cba_N import N
 
-'''
+'''+
 1: "ITT", no controls
 2: ITT, with controls and weights
 3: P=0, "ITT" no controls
@@ -31,8 +31,8 @@ from cba_N import N
 #----------------------------------------
 
 # Bootstrap samples
-draws = 99
-adraws = 99
+draws = 100
+adraws = 100
 
 # Paths
 filedir = os.path.join(os.path.dirname(__file__))
@@ -46,6 +46,7 @@ flows = {
     # Income and Education
     'inc_labor':{'m':'labor_m.csv', 'f':'labor_f.csv', 'p':'labor_p.csv'},
     'inc_parent':{'m':'ip_p_inc_m.csv', 'f':'ip_p_inc_f.csv', 'p':'ip_p_inc_p.csv'},
+    #'inc_parent_ext':{'m':'p_inc_m.csv', 'f':'p_inc_f.csv', 'p':'p_inc_p.csv'},
     'inc_trans_pub':{'m':'transfer_m.csv', 'f':'transfer_f.csv', 'p':'transfer_p.csv'},
     'edu':{'m':'educost_m.csv', 'f':'educost_f.csv', 'p':'educost_p.csv'},
 	'm_ed':{'m':'m_educost_m.csv', 'f':'m_educost_f.csv', 'p':'m_educost_p.csv'},
@@ -92,11 +93,11 @@ def makeflows(etype):
     diclaim_tmp.set_index('sex', inplace=True)
     
     diclaim = pd.DataFrame(0., index=pd.Index(['p', 'm', 'f'], name='sex'), 
-    	columns=['c{}'.format(i) for i in xrange(80)])
+    	columns=['c{}'.format(i) for i in xrange(109)])
     
     diclaim.loc[diclaim_tmp.index, diclaim_tmp.columns] = diclaim_tmp
 
-    diclaim.to_csv(os.path.join(tables,'diclaim_test.cslv'), index=True)
+    diclaim.to_csv(os.path.join(tables,'diclaim_test.csv'), index=True)
 
     filled = OrderedDict()
 
@@ -122,7 +123,7 @@ def makeflows(etype):
             if key in ['health_private', 'health_public', 'inc_labor', 'inc_trans_pub', 'qaly', 'diclaim', 'ssclaim', 'ssiclaim']: 
                 df = pd.read_csv(os.path.join(flowscsv, file_[sex]), index_col=['adraw','draw'])
                 full = pd.DataFrame(0., index=pd.MultiIndex.from_product([range(adraws), range(draws)], names=['adraw','draw']), 
-                                    columns=['c{}'.format(i) for i in xrange(80)])
+                                    columns=['c{}'.format(i) for i in xrange(109)])
 		
                 full.loc[full.index, full.columns] = df.loc[full.index, full.columns]
                 full['sex'] = sex
@@ -188,20 +189,19 @@ def robust_npv(values, rate=0.03):
 def bcflows(filled, components=flows.keys()):
     benefits= pd.DataFrame(0., 
                            index=pd.MultiIndex.from_product([['m', 'f', 'p'], [i for i in range(adraws)], [j for j in range(draws)]], names=['sex', 'adraw', 'draw']), \
-                           columns=['c{}'.format(i) for i in xrange(80)])
+                           columns=['c{}'.format(i) for i in xrange(109)])
     benefits.sort_index(inplace=True)
-
     costs= pd.DataFrame(0., 
                         index=pd.MultiIndex.from_product([['m', 'f', 'p'], [i for i in range(adraws)], [j for j in range(draws)]], names=['sex', 'adraw', 'draw']), \
-                        columns=['c{}'.format(i) for i in xrange(80)])
+                        columns=['c{}'.format(i) for i in xrange(109)])
     costs.sort_index(inplace=True)
 
-    for sex in ['m', 'f', 'p']:
+    for sex in ['m','f','p']:
         # Benefits, for B/C ratio
         for key in [c for c in components if c!= 'costs']:
             benefits.loc[(sex, slice(None), slice(None)), :] = benefits.loc[(sex, slice(None), slice(None)), :] + filled['{}_{}'.format(key, sex)]
+
             print 'Summed {} for sex {} in benefits dataframe...'.format(key, sex)
-            
         # Costs, for B/C ratio        
         for key in ['costs']:
             costs.loc[(sex, slice(None), slice(None)), :] = costs.loc[(sex, slice(None), slice(None)), :] + filled['{}_{}'.format(key, sex)]
@@ -214,14 +214,14 @@ def bcflows(filled, components=flows.keys()):
 def irrflows(filled, components=flows.keys()):
     total = pd.DataFrame(0., 
                          index=pd.MultiIndex.from_product([['m', 'f', 'p'], [i for i in range(adraws)], [j for j in range(draws)]], names=['sex', 'adraw', 'draw']), \
-                         columns=['c{}'.format(i) for i in xrange(80)])
+                         columns=['c{}'.format(i) for i in xrange(109)])
     total.sort_index(inplace=True)
 
     for sex in ['m', 'f', 'p']:
         # Total, for IRR
         for key in components:
             total.loc[(sex, slice(None), slice(None)), :] = total.loc[(sex, slice(None), slice(None)), :] + filled['{}_{}'.format(key, sex)]
-            print 'Summed {} for sex {} in IRR dataframe...'.format(key, sex)
+            #print 'Summed {} for sex {} in IRR dataframe...'.format(key, sex)
 
         print '\nCompleted IRR data frame for sex {}.\n'.format(sex)
         

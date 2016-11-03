@@ -3,7 +3,7 @@ Created on Mon Oct 05 12:06:42 2015
 
 Setup module for ABC labor income imputations
 
-Author: Jake C. Torcasso, Joshua Shea, Anna Ziff
+Authors: Jake C. Torcasso, Joshua Shea, Anna Ziff
 
 Description: This file projects earnings of ABC subjects.
 
@@ -263,7 +263,7 @@ if __name__ == '__main__':
 
 	np.random.seed(1234)
 
-	aux_draw = 3
+	aux_draw = 100
 
 	# Bring in auxiliary data
 	interp_index = pd.read_csv(paths.cnlsy_bsid)
