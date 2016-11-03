@@ -6,16 +6,13 @@ Created on Tue Oct 06 17:02:19 2015
 Description: this script estimates the labor income for ABC subjects
 for multiple bootstraps of the auxiliary data.
 
-B: Pre-treatment
-X: Post-treatment
-
-(1): lag, B, X
-(2): B, X 
-(3): lag, X
-(4): X 
-(5): B 
-(6): lag, B 
-(7): lag, B, X with no 30 for extrapolation 
+lag, X, W (1)
+X, W (2)
+lag, W (3)
+W (4)
+X (5)
+lag, X (6)
+lag, X, W with no 30 for extrapolation (7)
 '''
 
 import os
@@ -34,7 +31,7 @@ from paths import paths
 #----------------------------------------------------------------
 
 seed = 1234
-aux_draw = 100 # need to use more than 1
+aux_draw = 99 # need to use more than 1
 pset_type = 6
 
 #----------------------------------------------------------------
@@ -116,7 +113,7 @@ def boot_predict_aux(weight, controls, interp, extrap, adraw):
 
 #----------------------------------------------------------------
 weights = ['treat','control']
-control_sets = ['1']
+control_sets = ['3']
 sexes = ['male', 'female', 'pooled']
 
 params_interp = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}

@@ -31,7 +31,7 @@ Select estimation type ('etype')
 #----------------------------------------
 # Generate the matrices of flows
 #----------------------------------------
-etype = 1
+etype = 8
 filled = makeflows(etype=etype)
 benefits, costs = bcflows(filled=filled)
 total = irrflows(filled=filled)
@@ -67,9 +67,9 @@ def robust_irr_roots(values):
 
 print 'Calculating IRR...'
 irr_ages = {}
-for age in [5, 8, 15, 21, 30, 79, 108]: 
-#for age in [108]:
-    if age == 108:
+for age in [5, 8, 15, 21, 30, 79]: 
+#for age in [79]:
+    if age == 79:
         roots = []
         irr = total.loc[:, slice('c{}'.format(age))].apply(robust_irr_roots, axis=1) 
 
@@ -122,7 +122,7 @@ for age in [5, 8, 15, 21, 30, 79, 108]:
     irr_ages[age] = table
     print 'Estimated IRR for ages 0--{}'.format(age)
     
-    if age == 108:
+    if age == 79:
         irr.to_csv(os.path.join(tables, 'all_irr_type{}.csv'.format(etype)), index=True)
         irr_pnt.to_csv(os.path.join(tables, 'irr_pnt.csv'), index=True, header=False)
         irr_p.to_csv(os.path.join(tables, 'irr_pval.csv'), index=True, header=False)
@@ -142,8 +142,8 @@ irr_ages.to_csv(os.path.join(sensitivity, 'irr_age_type{}.csv'.format(etype)), i
 
 print 'Calculating B/C ratios...'
 bcr_ages = {}
-for age in [5, 8, 15, 21, 30, 79, 108]:
-#for age in [108]:
+for age in [5, 8, 15, 21, 30, 79]:
+#for age in [79]:
     costs_age = costs.loc[:, slice('c{}'.format(age))].apply(robust_npv, axis=1)
     benefits_age = benefits.loc[:, slice('c{}'.format(age))].apply(robust_npv, axis=1)
     ratio = -benefits_age/costs_age
@@ -188,7 +188,7 @@ for age in [5, 8, 15, 21, 30, 79, 108]:
     bcr_ages[age] = table
     print 'Estimated B/C ratio for ages 0--{}'.format(age)
 
-    if age == 108:    
+    if age == 79:    
         ratio.to_csv(os.path.join(tables, 'all_ratios_type{}.csv'.format(etype)), index=True)
         ratio_pnt.to_csv(os.path.join(tables, 'ratio_pnt.csv'), index=True, header=False)
         ratio_p.to_csv(os.path.join(tables, 'ratio_pval.csv'), index=True, header=False) 

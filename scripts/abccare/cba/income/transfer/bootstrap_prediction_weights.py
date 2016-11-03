@@ -107,7 +107,7 @@ def boot_predict_aux(weight, controls, interp, extrap, adraw):
 
 #----------------------------------------------------------------
 weights = ['treat','control']
-control_sets = ['1']
+control_sets = ['3']
 sexes = ['male', 'female', 'pooled']
 
 params_interp = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
