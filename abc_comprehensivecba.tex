@@ -16,6 +16,7 @@
 \newcommand{\notindep}{\notorth}
 
 \externaldocument{abc_comprehensivecba_appendix-pub}
+\externaldocument{abc_comprehensivecba_appendix-priv}
 \pagenumbering{roman}
 
 \begin{document}
@@ -47,7 +48,7 @@ University of Southern California}
 
 \singlespacing
 \begin{abstract}
-\noindent This paper estimates the large array of long-run benefits of an influential early childhood program targeted to disadvantaged children and their families. It is evaluated by random assignment and follows participants through their mid-30s. The program is a prototype for numerous interventions currently in place around the world. It has substantial beneficial effects on (a) health and the quality of life, (b) the labor incomes of participants, (c) crime, (d) education, and (e) the earnings of the mothers of the participants through subsidizing their childcare. There are substantially greater monetized benefits for males. The overall rate of return is a statistically significant 12.6\% per annum with an associated benefit/cost ratio of 5.7. These estimates account for the welfare costs of taxation to finance the program. They survive a variety of sensitivity analyses. Accounting for substitutes to treatment available to families randomized out of treatment shows that boys benefit much less than girls from low quality alternative childcare arrangements.
+\noindent This paper estimates the large array of long-run benefits of an influential early childhood program targeted to disadvantaged children and their families. It is evaluated by random assignment and follows participants through their mid-30s. The program is a prototype for numerous interventions currently in place around the world. It has substantial beneficial impacts on (a) health and the quality of life, (b) the labor incomes of participants, (c) crime, (d) education, and (e) the earnings of the mothers of the participants through subsidizing their childcare. There are substantially greater monetized benefits for males. The overall rate of return is a statistically significant 12.6\% per annum with an associated benefit/cost ratio of 5.7. These estimates account for the welfare costs of taxation to finance the program. They survive a variety of sensitivity analyses. Accounting for substitutes to treatment available to families randomized out of treatment shows that boys benefit much less than girls from low quality alternative childcare arrangements.
 \end{abstract}
 
 \noindent \textbf{Keywords}: Childcare, early childhood education, gender differences in responses to programs, health, long-term predictions, quality of life, randomized trials, substitution bias \\
@@ -203,7 +204,7 @@ Children in the control group who are enrolled in alternative early childcare pr
 
 Most of the alternative childcare centers received federal subsidies and were subject to the federal regulations of the era.\footnote{Appendix~\ref{appendix:tetanus} discusses the federal standards of that day. See \citet{Department-of-Health_1968_DayCareRequirements,NCGA_1971_House-Bill-100,Ramey-et-al_1977_Intro-to-ABC,Ramey_Campbell_1979_SR,Ramey_McGinness_etal_1982_Abecedarianapproach, Burchinal_Campbell_etal_1997_CD}.} They had relatively low quality compared to ABC/CARE.\footnote{When we compare ABC/CARE treatment to these alternatives, ABC/CARE has substantial treatment effects. Further, as we argue below, parents perceived that ABC/CARE was superior to the alternatives.} The access of control-group children to alternative programs affects the interpretation of estimated treatment effects, as we discuss next.
 
-\section{The Parameters Studied in This Paper} \label{section:methodsquestions}
+\section{The Parameters Estimated in This Paper} \label{section:methodsquestions}
 
 Random assignment to treatment does not guarantee that conventional treatment effects answer policy-relevant questions. In this paper, we define and estimate three parameters that address different policy questions.
 
@@ -241,7 +242,7 @@ It is also useful to assess the average effectiveness of a program relative to a
 \bm{\Delta}_a \left( V =1 \right) : =   \mathbb{E} \left[ \bm{Y}^1_a - \bm{Y}^0_a | V = 1, W = 1 \right] := \mathbb{E} \left[\bm{Y}^1_a - \bm{Y}^0_{a,C} | V = 1, \bm{B} \in \mathcal{B}_0 \right].
 \end{equation}
 
-Random assignment to treatment does not directly identify \eqref{eq:influenza} or \eqref{eq:smallpox}. Econometric methods are required to identify these parameters. We characterize the determinants of choices and our strategy for controlling for selection into ``$H$'' and ``$C$'' below.\footnote{Appendix~\ref{appendix:vsensitivity} displays results with alternative definitions of $V$ (i.e., different thresholds define if a child attended alternative preschool). The results are robust to the various definitions. What matters is whether $V>0$, not the specific value of $V$.}
+Random assignment to treatment does not directly identify \eqref{eq:influenza} or \eqref{eq:smallpox}. Econometric methods are required to identify these parameters. We characterize the determinants of choices and our strategy for controlling for selection into ``$H$'' and ``$C$'' below.\footnote{Appendix~\ref{appendix:vsensitivity} displays results with alternative definitions of $V$ (i.e., different thresholds define if a child attended alternative preschool). The results are robust to the various definitions. What matters is whether any out-of-home child care is being used ($V>0$), and not the specific value of $V$.}
 
 \section{Summarizing Multiple Treatment Effects} \label{section:methodology}
 
@@ -522,7 +523,7 @@ $\phi^d_{k,j,a}(\bm{x})$ is the function generating the causal effect of setting
 \end{assumption}
 \doublespacing
 
-This assumption has two messages that are helpful to distinguish: (i) the structural functions evaluated at the same arguments have identical values for treatment and control groups in the experimental sample. It also says (ii) that the structural relationships are identical in the experimental and auxiliary samples. As previously noted, exogeneity is not needed to satisfy any of Conditions~\ref{cond:cond1} through \ref{cond:cond3}. But in the absence of exogeneity, the relationship between the $\bm{X}^d_{k,a}$ and the errors $\varepsilon^d_{k,a}$ likely differs across samples because the randomization imparts a source of exogenous variation to the $\bm{X}^d_a$ not found in the non-experimental sample. Assumption~\ref{ass:summary} combined with Assumption~\ref{ass:exog}, Equations~\eqref{eq:countersystem}, and the assumption of a zero mean for the errors $(\mathbb{E}(\varepsilon^d_{k,j,a})=0)$ for all $a \in \{1,\dots,A\}, d \in \{0,1\}$ and $k \in \{e,n\}$ enable us to write:
+This assumption has two messages that are helpful to distinguish: (i) the structural functions evaluated at the same arguments have identical values for treatment and control groups in the experimental sample. It also says (ii) that the structural relationships are identical in the experimental and auxiliary samples. As previously noted, exogeneity is not needed to satisfy any of Conditions~\ref{cond:cond1} through \ref{cond:cond3}. But in the absence of exogeneity, the relationship between the $\bm{X}^d_{k,a}$ and the errors $\varepsilon^d_{k,a}$ likely differs across samples because the randomization imparts a source of exogenous variation to the $\bm{X}^d_{e,a}$ not found in the non-experimental sample. Assumption~\ref{ass:summary} combined with Assumption~\ref{ass:exog}, Equations~\eqref{eq:countersystem}, and the assumption of a zero mean for the errors $(\mathbb{E}(\varepsilon^d_{k,j,a})=0)$ for all $a \in \{1,\dots,A\}, d \in \{0,1\}$ and $k \in \{e,n\}$ enable us to write:
 \begin{equation}\label{eq:invariancetest}
 \mathbb{E} \left[ Y_{k,j,a}^d | \bm{X}_{k,a}^d  = \bm{x}, \bm{B}_k = \bm{b}, D = d \right] = \mathbb{E} \left[ Y_{k,j,a} | \bm{X}^d_{k,a}  = \bm{x}, \bm{B}_k = \bm{b} \right],
 \end{equation}
@@ -541,13 +542,13 @@ Relationship~\eqref{eq:withbetimplication} is testable for $a \leq a^*$, when $Y
 
 \subsubsection{Summarizing the Implications of Exogeneity and Structural Invariance}
 
-Collecting results, under exogeneity we obtain the following theorem:
+Collecting results, under exogeneity and structural invariance we obtain the following theorem:
 
 \onehalfspacing
 \setcounter{theorem}{0}
 \begin{theorem}\label{theorem:main} \textbf{Valid Out-of-Sample Forecasts for Condition} \\
-Under Assumptions~\ref{ass:alignment}-\ref{ass:summary}, Condition~\ref{cond:cond2} holds for any value of $\left( \bm{X}^d_{k,a}, \bm{B}_k \right)$. $\Box$\\
-\emph{This is an immediate consequence of the cited assumptions.}
+Under Assumptions~\ref{ass:alignment}-\ref{ass:summary}, Condition~\ref{cond:cond2} holds for any value of $\left( \bm{X}^d_{k,a}, \bm{B}_k \right)$. \\
+\emph{This is an immediate consequence of the cited assumptions.} $\Box$
 \end{theorem}
 \doublespacing
 
@@ -715,7 +716,7 @@ In Appendix~\ref{appendix:bcaestimates} we use our analysis to examine the empir
 \end{subfigure}%
 \begin{subfigure}[h]{0.5\textwidth}
 		\centering
-		\caption{Females} 
+		\caption{Females}
 		\includegraphics[width=\textwidth]{output/abccare_npvs1.eps}
 \end{subfigure}
 \footnotesize \justify
