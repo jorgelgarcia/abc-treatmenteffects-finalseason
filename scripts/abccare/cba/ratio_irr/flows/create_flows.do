@@ -23,13 +23,14 @@ local sitt10 _P10
 local sitt0 _P0 
 local sitt1 _P1
 
-/*
+
 *---------------------------------
 * Income
 *---------------------------------
-
-foreach component in labor transfer {
+/*
+foreach component in /*labor transfer*/ p_inc {
 	foreach sex in male female pooled {
+		/*
 		foreach pre in 0 1 {
 			* matching
 			converter, csvin(${income}/matching/`component'_`sex'_P`pre') csvout(${output}/p`pre'_match/`component'_`s`sex'') ename(epan_ipw) prefix(c)
@@ -38,46 +39,43 @@ foreach component in labor transfer {
 			converter, csvin(${income}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(c) 			
 			converter, csvin(${income}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(c) 			
 		}
+		*/
 		* ITT
-		converter, csvin(${income}/itt/`component'_`sex'_P10) csvout(${output}/ncc_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(c) 
-		converter, csvin(${income}/itt/`component'_`sex'_P10) csvout(${output}/ncc_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(c) 			
+		//converter, csvin(${income}/itt/`component'_`sex'_P10) csvout(${output}/ncc_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(c) 
+		//converter, csvin(${income}/itt/`component'_`sex'_P10) csvout(${output}/ncc_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(c) 			
 		converter, csvin(${income}/itt/`component'_`sex'_P10) csvout(${output}/ncc_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(c) 
 	}
 }
-
-
+*/
 
 *---------------------------------
 * Health
 *---------------------------------
-
 foreach component in diclaim ssiclaim ssclaim qaly health_private health_public { /* */
 	foreach sex in male female pooled {
-	
+		
 		foreach pre in 0 1 {
 			* matching
-			converter, csvin(${health}/matching/`component'_`sex'_P`pre') csvout(${output}/p`pre'_match/`component'_`s`sex'') ename(epan_ipw) prefix(`component')
+			converter, csvin(${health}/matching/`component'_surv_`sex'_P`pre') csvout(${output}/p`pre'_match/`component'_`s`sex'') ename(epan_ipw) prefix(`component')
 			* conditional ITT
-			converter, csvin(${health}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(`component') 
-			converter, csvin(${health}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
-			converter, csvin(${health}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component')			
+			converter, csvin(${health}/itt/`component'_surv_`sex'_P`pre') csvout(${output}/p`pre'_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(`component') 
+			converter, csvin(${health}/itt/`component'_surv_`sex'_P`pre') csvout(${output}/p`pre'_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
+			converter, csvin(${health}/itt/`component'_surv_`sex'_P`pre') csvout(${output}/p`pre'_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component')			
 		}
 	
 		* ITT
-		converter, csvin(${health}/itt/`component'_`sex'_P10) csvout(${output}/ncc_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(`component') 
-		converter, csvin(${health}/itt/`component'_`sex'_P10) csvout(${output}/ncc_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
-		converter, csvin(${health}/itt/`component'_`sex'_P10) csvout(${output}/ncc_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component')
+		converter, csvin(${health}/itt/`component'_surv_`sex'_P10) csvout(${output}/ncc_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(`component') 
+		converter, csvin(${health}/itt/`component'_surv_`sex'_P10) csvout(${output}/ncc_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
+		converter, csvin(${health}/itt/`component'_surv_`sex'_P10) csvout(${output}/ncc_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component')
 	}
 }
 
-
-*/
 *---------------------------------
 * Batch
 *---------------------------------
-/*
+
 foreach component in private_crime public_crime ip_p_inc m_educost educost progcost cccostprivate cccostpublic { 
-	foreach sex in /*male*/ female /*pooled*/ {
+	foreach sex in male female pooled {
 		foreach pre in 0 1 {
 			* matching
 			converter, csvin(${batch}/matching/`component'_`sex'_P`pre') csvout(${output}/p`pre'_match/`component'_`s`sex'') ename(epan_ipw) prefix(`component') 
@@ -86,6 +84,7 @@ foreach component in private_crime public_crime ip_p_inc m_educost educost progc
 			converter, csvin(${batch}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
 			converter, csvin(${batch}/itt/`component'_`sex'_P`pre') csvout(${output}/p`pre'_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component') 						
 		}
+		
 		* ITT
 		converter, csvin(${batch}/itt/`component'_`sex'_P10) csvout(${output}/ncc_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(`component') 
 		converter, csvin(${batch}/itt/`component'_`sex'_P10) csvout(${output}/ncc_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
@@ -95,10 +94,11 @@ foreach component in private_crime public_crime ip_p_inc m_educost educost progc
 }
 
 
-*/
+/*
 * special crimes, without murder
 foreach component in private_crime public_crime {
 	foreach sex in male female pooled {
+		/*
 		foreach pre in 0 1 {
 			* matching
 			converter, csvin(${batch}/matching/`component'_`sex'_P`pre'nm) csvout(${output}/p`pre'_match/`component'_`s`sex'') ename(epan_ipw) prefix(`component') 
@@ -107,19 +107,20 @@ foreach component in private_crime public_crime {
 			converter, csvin(${batch}/itt/`component'_`sex'_P`pre'nm) csvout(${output}/p`pre'_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
 			converter, csvin(${batch}/itt/`component'_`sex'_P`pre'nm) csvout(${output}/p`pre'_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component') 						
 		}
+		*/
 		* ITT
-		converter, csvin(${batch}/itt/`component'_`sex'_P10nm) csvout(${output}/ncc_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(`component') 
-		converter, csvin(${batch}/itt/`component'_`sex'_P10nm) csvout(${output}/ncc_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
-		//converter, csvin(${batch}/itt/`component'_`sex'_P10nm) csvout(${output}/ncc_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component') 		
+		//converter, csvin(${batch}/itt/`component'_`sex'_P10nm) csvout(${output}/ncc_noctrl/`component'_`s`sex'') ename(itt_noctrl) prefix(`component') 
+		//converter, csvin(${batch}/itt/`component'_`sex'_P10nm) csvout(${output}/ncc_ctrl/`component'_`s`sex'') ename(itt_ctrl) prefix(`component') 			
+		converter, csvin(${batch}/itt/`component'_`sex'_P10nm) csvout(${output}/ncc_wctrl/`component'_`s`sex'') ename(itt_wctrl) prefix(`component') 		
 		
 	}
 }
 
-/*
+*/
 *---------------------------------
 * Parent Income
 *---------------------------------
-
+/*
 
 foreach sex in male female pooled {
 	foreach pre in ncc p0 p1 {
