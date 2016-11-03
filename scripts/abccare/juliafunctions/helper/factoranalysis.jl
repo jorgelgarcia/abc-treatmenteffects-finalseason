@@ -69,9 +69,10 @@ function diagonalfac(sampledata, tofactordata, factorn)
     N = datasize[1]     # number of rows
     K = datasize[2]     # number of columns
 
-    # Delete rows with NA values and create an array of tofactordata
+    # Delete rows with NA values and standardize each measure
     nonadata = tofactordata[:,:]
     for k in range(1, K)
+        nonadata[:,k] = (nonadata[:,k] - mean(nonadata[!isna(nonadata[:,k]),k]))/std(nonadata[!isna(nonadata[:,k]),k])
         nonadata = nonadata[!isna(nonadata[:,k]), :]
     end
 
@@ -111,8 +112,8 @@ function diagonalfac(sampledata, tofactordata, factorn)
     end
 
     # compute the factor score ("*" acts like a dot product here)
-    arnondata = Array(nonadata)
-    fscores = arnonadata * floads
+    arnonadata = Array(nonadata)
+    fscores = -1 * arnonadata * floads
 
     # ------------------------------- #
     # Add factor score to sample data #
@@ -140,8 +141,9 @@ function diagonalfac(sampledata, tofactordata, factorn)
     end
 
     # Create new_id for the factor score
-    fscoresize = size(fscore)[1]
-    fscoreframe = DataFrame(new_id = 1:fscoresize, factor = fscore)
+    fscoresize = size(fscores)[1]
+    fscoresv = vec(fscores)
+    fscoreframe = DataFrame(new_id = 1:fscoresize, factor = fscoresv)
 
     # Merge factorscore using new_id
     mergedata = join(sampledata, fscoreframe, on = [:new_id], kind = :outer)

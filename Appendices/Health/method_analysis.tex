@@ -17,7 +17,7 @@ This question is not included in the ABC/CARE interviews, but because preliminar
 This information is not available in the ABC/CARE data, but it is assumed that none of the ABC/CARE subjects are Hispanic.\footnote{Census data on Hispanics in North Carolina were not available for 1970 and 1980, but Hispanic migration into this state is more recent than in other regions, and as late as 1990, only 2\% of the North Carolina poor were Hispanic \citep{Johnson_2003_Changing-Poverty}.} \\
 
 \noindent Most FAM models depend on smoking status. Employment status affects FAM transitions in marital status, childbearing, claiming of disability insurance (DI) and supplemental security income (SSI), and type of health insurance.
-One male in the ABC control group was missing smoking status and, although known to be not working, was also missing specific employment status (unemployed or out of the labor force).
+One male in the ABC control group is missing smoking status and, although known to be not working, is also missing specific employment status (unemployed or out of the labor force).
  We use a multinomial logit model to jointly estimate the probability of each combined smoking and employment category among 25- to 35-year-olds in the PSID who were not working. At the beginning of each simulation repetition, we use a Monte Carlo random draw generated from this distribution to assign this subject's smoking and employment statuses. This same subject is also missing information about binge drinking.  A separate binary Probit binge drinking model was estimated using the age 25--35 PSID data. A Monte Carlo random draw is taken according the Probit probability to predict binge drinking behavior at the beginning of the simulation. \\
  
 \noindent BMI affects FAM transitions in health, functional status, employment, and smoking.
@@ -27,16 +27,16 @@ This poses two challenges.
 First, self-reported BMI can be biased by factors such as actual height and weight, gender, and race.\footnote{\citet{Cawley_2004_JHR}.}
 Second, it is possible that BMI could increase or decrease systematically in the years between the age-30 subject interview and the age-34 health interview. \\
 
-\noindent To address the first BMI imputation challenge, we used a variation on the method of \citet*{Courtemanche_etal_2015_Adjusting-Body-Mass} to impute measured BMI in the PSID.
+\noindent To address the first BMI imputation challenge, we use a variation on the method of \citet*{Courtemanche_etal_2015_Adjusting-Body-Mass} to impute measured BMI in the PSID.
 While the method in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} works with height and weight, we apply the specification to directly model BMI. Using respondents aged 30 to 40 in the 2002-2010 NHANES waves, we predict measured BMI from percentile ranks of self-reported BMI using the model specification in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass}. Three variations 
-on the spline interactions of \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} were also considered.  After estimating this model using NHANES data, covariate values from the PSID 
-age 30--34 data in years 2002--2013 were used to impute measured BMI values for PSID respondents. A Kolmogorov-Sminov (K-S) test and a visual inspection of smoothed histograms were used to compare the distribution of PSID imputed values to the distribution of observed values in the NHANES estimation sample.  The model specification selected for imputation had the smallest K-S distance between the two distributions.  The smoothed histogram of the distributions for the entire samples and the black subgroup in each data set appeared reasonably close.  \\
+on the spline interactions of \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} are also considered.  After estimating these models using NHANES data, covariate values from the PSID 
+age 30--34 data in years 2002--2013 are used to impute measured BMI values for PSID respondents. A Kolmogorov-Sminov (K-S) test and a visual inspection of smoothed histograms are used to compare the distribution of PSID imputed values to the distribution of observed values in the NHANES estimation sample.  The model specification used for imputation has the smallest K-S distance between the two distributions.  The smoothed histogram of the distributions for the entire samples and the black subgroup in each data set appears reasonably close.  \\
 
-\noindent After imputing values of measured BMI for PSID respondents age 30--34, we turned to the second problem: accounting for systematic trends in BMI from the age 30 interview to the health interview.  The goal was to have a model that could map from measured BMI at the health interview around age 34 to self-reported BMI at the age 30 interview.  Employing the longitudinal structure of PSID, we matched each respondent's first interview between age 30--32 with their imputed measured BMI at between ages 33--40.  We then estimated a model using self-reported BMI between ages 30--32 as the response variable and imputed measured BMI at ages 33--40, the age when BMI is measured, along with other variables observed at age 30 as explanatory variables. This imputation model was applied to any ABC/CARE subject who has their health interview at least one year after their age 30 interview.\\
+\noindent After imputing values of measured BMI for PSID respondents age 30--34, we turn to the second problem: accounting for systematic trends in BMI from the age 30 interview to the health interview.  The goal is to have a model that maps from measured BMI at the health interview around age 34 to self-reported BMI at the age 30 interview.  Employing the longitudinal structure of PSID, we match each respondent's first interview between age 30--32 with their imputed measured BMI between ages 33--40.  We then estimate a model using self-reported BMI between ages 30--32 as the response variable and imputed measured BMI at ages 33--40, the age when BMI is actually measured, along with other variables observed at age 30 as explanatory variables. This imputation model is applied to any ABC/CARE subject who has their health interview at least one year after their age 30 interview.\\
 
-\noindent For ABC/CARE subjects who have their health interview within one year of the age 30 interview, we assumed that any systematic time trends in BMI are too small to have any practical significance.  However, we still needed to convert the imputed measured BMI to a self-reported value for compatibility with other transition models estimated in PSID.  This model was estimated on ages 30--32 in the PSID and uses covariates from the age 30 interview along with imputed measured BMI to predict self-reported BMI. \\
+\noindent For ABC/CARE subjects who have their health interview within one year of the age 30 interview, we assume that any systematic time trends in BMI are too small to have any practical significance.  However, we still need to convert the imputed measured BMI to a self-reported value for compatibility with other transition models estimated in PSID.  This model is estimated on ages 30--32 in the PSID and uses covariates from the age 30 interview along with imputed measured BMI to predict self-reported BMI. \\
 
-\noindent At the beginning of each simulation repetition, we chose the appropriate model to impute self-reported BMI for each ABC/CARE subject based on the time between their age 30 interview and their health interview. Their expected BMI was estimated from this model. A Monte Carlo Normal random draw was generated using the subject's expected BMI and the estimated variance from the model. This Monte Carlo draw was then assigned to be the subject's initial self-reported BMI in the simulation. Using BMI from the health interview limited the ABC/CARE subjects simulated in FAM to only those who had height and weight measured in the health interview. \\
+\noindent At the beginning of each simulation repetition, we choose the appropriate model to impute self-reported BMI for each ABC/CARE subject based on the time between their age 30 interview and their health interview. Their expected BMI is estimated from this model. A Monte Carlo Normal random draw is generated using the subject's expected BMI and the estimated variance from the model. This Monte Carlo draw is then assigned to be the subject's initial self-reported BMI in the simulation. Using BMI from the health interview limits the ABC/CARE subjects simulated in FAM to only those who have height and weight measurements in the health interview. \\
 
 \noindent Subjects' health insurance coverage affects their medical costs.
 FAM uses three categories of health insurance: none, public only, and some private.
@@ -213,7 +213,7 @@ Note: This table illustrates how health outcomes at age $a$ predict health outco
 %\end{sidewaystable}
 
 
-\noindent We have five other types of outcomes: \\
+\noindent We have four other types of outcomes: \\
 \begin{enumerate}
 \item Binary outcomes that are not absorbing states, such as starting to smoke. We specify latent
 indices as in Equation~\ref{eqn:transition_hzd_latent} for these outcomes as well but where
@@ -222,11 +222,6 @@ the lag-dependent outcome also appears as an independent variable. This allows f
 \item Ordered outcomes, which are also modeled as in Equation~\ref{eqn:transition_hzd_latent} recognizing that the observation rule is
 a function of unknown thresholds $\varsigma_m$. Similar to binary outcomes, we allow for state-dependence by including the lagged outcome
 on the right-hand side.
-
-\item Censored outcomes, such as capital income, are considered. For capital income,
-there are a non-negligible number of observations with zero capital income. For these observations, we consider
-two-part models where the latent variable is specified as in Equation~\ref{eqn:transition_hzd_latent} but models
-probabilities only when censoring does not occur.
 
 \item Continuous outcomes are modeled with linear models. An example continuous outcome is the
 transitions in log(BMI). We allow for state-dependence by including the lagged outcome on the right-hand side.
@@ -357,8 +352,7 @@ The normal retirement age is assumed to be 67 for all ABC/CARE subjects. \\
 \noindent The FAM mortality model is assumed to represent mortality in 2009.
 The estimated mortality probabilities are reduced in simulated future years to represent improvements in mortality from sources such as medical innovation that are not included in the model.
 There are different adjustment factors for the populations under and over the age of 65.
-The mortality reduction factors are taken from the intermediate cost mortality projections in the 2013 Social Security Trustee's Report.
-The medical cost growth assumptions are derived from several underlying assumptions about growth in GDP and the labor force. \\
+The mortality reduction factors are taken from the intermediate cost mortality projections in the 2013 Social Security Trustee's Report. \\
 
 %% Not using NWI growth in this project
 %\begin{figure}
@@ -371,7 +365,8 @@ The medical cost growth assumptions are derived from several underlying assumpti
 %}
 %\end{figure}
 
-\noindent The real medical cost growth factor in each year is calculated by first finding the minimum of (i) the year-over-year GDP growth plus year-over-year excess medical cost growth or (ii) the Affordable Care Act cap on year-over-year medical cost growth. In order to obtain the medical cost adjustment factor for the current year of the simulation, FAM takes the cumulative product of the yearly growth factors since 2004 and then divides it by the relative growth in the labor force since 2004.\footnote{The medical cost growth assumptions come from Congressional Budget Office and SSA assumptions.
+\noindent Medical cost growth assumptions are derived from several underlying assumptions about growth in GDP and the labor force.
+The real medical cost growth factor in each year is calculated by first finding the minimum of (i) the year-over-year GDP growth plus year-over-year excess medical cost growth or (ii) the Affordable Care Act cap on year-over-year medical cost growth. In order to obtain the medical cost adjustment factor for the current year of the simulation, FAM takes the cumulative product of the yearly growth factors since 2004 and then divides it by the relative growth in the labor force since 2004.\footnote{The medical cost growth assumptions come from Congressional Budget Office and SSA assumptions.
 The year-over-year growth assumptions for medical costs are shown in Figure \ref{figure:medgrowth_yearly}.
 The 2010-2019 GDP assumptions are based on CBO's analysis of the President's Budget, March 2009.
 GDP assumptions for 2020-2100 are based on the 2008 OASDI Trustee's Report long-term projection of 2.1\% real GDP growth.} \\
@@ -428,7 +423,7 @@ Education        & $\times$ & $\times$ & $\times$ & \checkmark \\
 Asthma Diagnoses & \checkmark & \checkmark & \checkmark & \checkmark \\
 Hospital stays & if $\geq$ 1 week & any stay & any stay & $\times$ \\
 Births & $\times$ & $\times$ & \checkmark & \checkmark \\
-Mother present & $\times$ & \checkmark & \checkmark & $\times$ \\
+Mother present & $\times$ & \checkmark & $\times$ & $\times$ \\
 Father present & \checkmark & \checkmark & $\times$ & $\times$ \\
 Number of siblings & \checkmark & \checkmark & $\times$ & $\times$ \\
 Foodstamps & \checkmark & \checkmark & \checkmark & \checkmark \\

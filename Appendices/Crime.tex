@@ -94,16 +94,16 @@
 
 \subsubsection{Construct Predictions}
 
-\noindent The data available describe the ABC/CARE subjects' crimes committed up to age 34. However, we believe that the effect of the programs on crime does not stop at that age. To predict the number of crimes that the study participants commit beyond age 34, we use data from the North Carolina Department of Public Safety (NCDPS). Because the crime data are obtained from the same state in which ABC/CARE were implemented, the prediction model is appropriate for the ABC/CARE samples. To the best of our knowledge, no study of the effects of an early childhood education program has ever used microdata to estimate a predictive model for future crimes. The estimations in \cite{Heckman_Moon_etal_2010_RateofReturn} are based on national age ratios (crimes of a certain category committed by older people over crimes of the same category committed by younger people at a specific time), rather than on microdata. However, age ratios only consider the same category of crime as an input to the estimation model and the results can reflect demographic transitions. \\
+\noindent The data available describe the ABC/CARE subjects' crimes committed up to age 34. However, we believe that the effect of the programs on crime does not stop at that age. To predict the number of crimes that the study participants commit beyond age 34, we use data from the North Carolina Department of Public Safety (NCDPS). Because the crime data are obtained from the same state in which ABC/CARE were implemented, the prediction model is appropriate for the ABC/CARE samples. To the best of our knowledge, no study of the effects of an early childhood education program has ever used microdata to estimate a predictive model for future crimes. The estimations in \cite{Heckman_Moon_etal_2010_RateofReturn} are based on national age ratios (crimes of a certain category committed by older people over crimes of the same category committed by younger people at a specific time), rather than on microdata. However, age ratios only consider the same category of crime as an input to the estimation model and the results can reflect demographic transitions.
 
-\noindent It would be ideal to use prediction models estimated from the same cohorts as the ABC/CARE subjects. However, it is not possible to predict crimes committed until older ages because the ABC/CARE subjects are currently about 46 years old. To predict crimes at older ages, it is necessary to use earlier cohorts. The data are available from 1972 (44 years ago as of 2016), and thus they do not contain a complete criminal history for any cohort of individuals. 
+It would be ideal to use prediction models estimated from the same cohorts as the ABC/CARE subjects. However, it is not possible to predict crimes committed until older ages because the ABC/CARE subjects are currently about 46 years old. To predict crimes at older ages, it is necessary to use earlier cohorts. The data are available from 1972 (44 years ago as of 2016), and thus they do not contain a complete criminal history for any cohort of individuals.
 %Given that, we have to choose specific cohorts for the estimations, such that they are old enough to cover the ages we need to predict, and young enough to have their entire crime life covered in the dataset, in the same way as the entire crime life of ABC individuals in covered in our data. In particular,
 We assume that few crimes are committed after the age of 50. \\
 %, and that crime life does not start until age 16.
  We separately estimate predictions from ages 35-40, 40-45, and 45-50. We have plentiful observations to estimate crimes in all the age ranges. %\footnote{As an example, to predict crimes at ages 45-50 we need individuals aged 50+. To have enough birth year cohorts, we consider individuals aged 50-59 in 2015. The oldest of these individuals were aged 16 in 1972, so we can reasonably expect them to having committed few crimes before that year. Finding observations for crime predictions at earlier ages is even easier.}
 %Age 5 in 2015-->Age 12 in 1972.            Age 50 in 2015-->Age 16 in 1972.
 %Age 55 in 2015-->Age 12 in 1972.            Age 59 in 2015-->Age 16 in 1972.
-We calculate our predictions using a five-step procedure: \\
+We calculate our predictions using a five-step procedure:
 \begin{enumerate}
 \item Find individuals that are at least 40 years old as of 2016 in the NCDPS dataset.
 \item Regress the number of crimes of each type at ages 35--40 on those at ages 16--34.
@@ -112,7 +112,6 @@ We calculate our predictions using a five-step procedure: \\
 \item For individuals with no criminal histories before age 34, assume that they commit no crimes after 34.
 \end{enumerate}
 
-\noindent We perform the previous process separately for males and females. We use linear predictions, but replace negative predicted values of crime by zero. Table~\ref{tab:reg1f} through Table~\ref{tab:reg3m} show the estimated models. As expected, generally the most important prediction factor for a crime is the number of occurrences of the same crime type in a previous period. The coefficients in some cases are substantial, which implies that considering predicted crimes is an important part of an assessment of the crime benefits of the program. \\
 %include more tables if ages 55 are covered, not just 50
 \begin{sidewaystable}[H]
 \caption{NCDPS Regressions of Ages 35--40 on Ages 16--35, Females} \label{tab:reg1f}
@@ -209,6 +208,7 @@ We calculate our predictions using a five-step procedure: \\
 %\end{threeparttable}
 %\end{sidewaystable}
 
+\noindent We perform the previous process separately for males and females. We use linear predictions, but replace negative predicted values of crime by zero. Table~\ref{tab:reg1f} through Table~\ref{tab:reg3m} show the estimated models. As expected, generally the most important prediction factor for a crime is the number of occurrences of the same crime type in a previous period. The coefficients in some cases are substantial,which implies that considering predicted crimes is an important part of an assessment of the crime benefits of the program.\\
 
 \noindent This procedure gives a prediction of the number of sentences that the ABC/CARE subjects will receive after age 34. From the predicted number of sentences, we predict the number of arrests up to age 50. Figure \ref{fig:predictions} shows the effect of our prediction methodology. The effect is quantitatively much larger for arrests than for sentences. For both arrests and sentences, including the predicted crimes, this effect adds 30-50\% more crimes to our previous totals. The predictions are roughly proportional to the previous crimes, as discussed before. \\
 
@@ -231,7 +231,7 @@ We calculate our predictions using a five-step procedure: \\
 \subsubsection{Construction of the Total Number of Arrests in the U.S.}
 \noindent The denominator of the VI ratio is an estimate of the total number of arrests of a certain type committed in the U.S. We have data from the ``National Arrests Analysis Tool'' of the National Bureau of Justice Statistics. These data are available from 1980 to 2012, which spans the years of all crimes that we observe in the ABC data. There is one problem with this dataset that we consider relatively minor: not all law enforcement agencies report the number of crimes (there are dozens of agencies that can legally arrest in the U.S.). However, as a large majority of them report the numbers of crimes, and because we are using national estimates, this should not greatly affect our calculations. We use these data to create $\overline{A_{j,t}}$, the total number of arrests in the country for type of crime $j$ in year $t$. \\
 
-\subsubsection{Victimization Inflation Factors} 
+\subsubsection{Victimization Inflation Factors}
 
 \noindent Figure~\ref{fig:victim1} and Figure~\ref{fig:victim2} show the VI factors calculated by year. The ratios in the charts are constructed as $r_{j,t}=\frac{\overline{V_{j,t}}}{\overline{A_{j,t}}}$. In practice, we use an average of all the yearly measures in our calculations given that this exercise imputes unobserved crimes that do not have a clearly defined date. This average of all the yearly measures is given by $r_j=\Sigma_{t=t_0}^{T}r_{j,t}/T$, and has more precise estimates of the ratio. The VI factors we use for sentences are equal to the factors used for arrests, multiplied by the arrest-sentence ratios discussed above. Below, we will discuss combining these different estimates as per our arrest-based and sentence-based methodology. For sentences, we have data from the National Judicial Reporting Program (NJRP). These data are available from 1986 onwards. Using this dataset, we construct $\overline{S_{j,t}}$, the total number of sentences in the country for type of crime $j$ in year $t$. \\
 

@@ -81,13 +81,23 @@ for item in discretized
   end
 end
 
+# List factor scores
+factorscores = [:factor_iq5y, :factor_iq12y, :factor_iq21y, :factor_ach12y, :factor_ach21y, :factor_home, :factor_pinc, :factor_mwork,
+								:factor_fhome, :factor_educ, :factor_emp, :factor_crime, :factor_tad, :factor_shealth, :factor_hyper, :factor_chol,
+								:factor_diabetes, :factor_obese, :factor_bsi]
+
 # Use a subset of data to reduce the running time
 keepvar = [:id, :family, :R, :RV, :P, :cohort_group1, :cohort_group2, :cohort_group3, :cohort_group4, :cohort_group5, :cohort_group6]
 keepvar = append!(keepvar, controls_all)
 keepvar = append!(keepvar, outcome_list)
 keepvar = append!(keepvar, ipw_varlist)
-abccare = abccare[:, keepvar]
 
+# Delete the factor score from the keepvar because they do not exist in the original data
+for var in factorscores
+    keepvar = deleteat!(keepvar, findin(keepvar, [var]))
+end
+
+abccare = abccare[:, keepvar]
 
 # ------------------------------------------ #
 # Limit the ABC-CARE data and fix weird ID's #

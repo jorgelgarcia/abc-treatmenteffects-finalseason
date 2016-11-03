@@ -2,7 +2,7 @@
 """
 Created on Fri Mar 11 15:17:41 2016
 
-@author: jkcshea
+@author: jkcshea, jessicayk
 
 Description: this file takes the estimates in .csv files and produces a series of
 tables displaying various ITT estimates. Regular and step down p-values are estimated.
@@ -15,6 +15,7 @@ inference on those counts.
 import os
 import collections
 import pandas as pd
+import math
 import numpy as np
 import pytabular as pytab
 from scipy.stats import percentileofscore
@@ -23,12 +24,8 @@ from paths import paths
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
 
-# YK cross this out to generate the p_inc table
-#path_results = os.path.join(filedir, 'rslts-jun25/abccare_ate/')
-#path_outcomes = os.path.join(filedir, 'outcomes_cba_merged.csv')
-
-path_results = os.path.join(filedir, 'rslt/')
-path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_p_inc.csv')
+path_results = os.path.join(filedir, 'rslt-appendix/')
+path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_appendix.csv')
 
 # provide option for two sided tests
 twosided = 0
@@ -45,37 +42,24 @@ outcomes = pd.read_csv(path_outcomes, index_col='variable')
 rslt_y = {}
 
 for sex in ['pooled', 'male', 'female']:
-    itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])
-    itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])    
-    itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])
+	itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+	itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+	itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
-    matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])    
-    matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0.csv'.format(sex)), index_col=['rowme', 'draw', 'ddraw'])
+	matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+	matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
-    itt_all = itt_all.loc[:,['itt_noctrl', 'itt_ctrl', 'itt_wctrl']]
-    rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
-    rslt_p0 = pd.concat([itt_p0, matching_p0], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
+	itt_all = itt_all.loc[:,['itt_noctrl', 'itt_ctrl', 'itt_wctrl']]
     
-    rslt_y[sex] = pd.concat([itt_all, rslt_p1, rslt_p0], axis=1, keys=['pall', 'p1', 'p0'])
+	rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
+	rslt_p0 = pd.concat([itt_p0, matching_p0], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
+
+	rslt_y[sex] = pd.concat([itt_all, rslt_p1, rslt_p0], axis=1, keys=['pall', 'p1', 'p0'])
     
 rslt_y = pd.concat(rslt_y, axis=1, keys=rslt_y.keys(), names=['sex', 'type', 'coefficient'])
-rslt_y = rslt_y.reorder_levels(['draw', 'ddraw', 'rowme'])
+rslt_y = rslt_y.reorder_levels(['draw', 'ddraw', 'rowname'])
 rslt_y.index.names = ['draw', 'ddraw', 'variable']
 rslt_y.sort_index(inplace=True)
-
-# drop factors
-factors = ['factor_iq5','factor_iq12','factor_iq21','factor_achv12','factor_achv21','factor_home',
-'factor_pinc','factor_mwork','factor_meduc','factor_fhome','factor_educ','factor_emp',
-'factor_crime','factor_tad','factor_shealth','factor_hyper','factor_chol','factor_diabetes',
-'factor_obese','factor_bsi','factor_ext_p','factor_ext_e','factor_ext_t','factor_agr_p',
-'factor_agr_e','factor_agr_t','factor_nrt_p','factor_nrt_e','factor_cns_p','factor_cns_e',
-'factor_cns_t','factor_opn_e','factor_opn_t','factor_act_p']
-
-for dvar in factors:
-    try:
-        rslt_y.drop(dvar, axis=0, level=2, inplace=True)
-    except:
-        pass
 
 ind_rslt_y = rslt_y.index.get_level_values(2).unique()
 ind_outcomes = [i for i in outcomes.index if i in ind_rslt_y]
@@ -166,16 +150,64 @@ tstat.loc[outcomes.query('hyp == "-"').index, :] = tstat.loc[outcomes.query('hyp
 # 2. provide blocks and dictionary to estimate/store stepdown results
 stepdown = pd.DataFrame([], columns=tstat.columns, index=tstat.index)
 blocks = list(pd.Series(outcomes.block.values).unique())
+
 #blocks.remove(np.nan)
 
 for block in blocks:
-    print "Stepdown test for main tables, %s block..." % (block)
-    # generate dataframe to store p-values for block of outcomes
-    ix = list(outcomes.loc[outcomes.block==block,:].index)
-    for coef in tstat.columns:
-        # genreate dataframe to store t-statistics
-        tmp_pval = pd.DataFrame([1 for j in range(len(ix))], index=ix)
-        tmp_tstat = tstat.loc[ix, coef].copy()
+	print "Stepdown test for main tables, %s block..." % (block)
+	
+	# generate dataframe to store p-values for block of outcomes
+	ix = list(outcomes.loc[outcomes.block==block,:].index)
+	for coef in tstat.columns:
+		
+		# generate dataframe to store t-statistics
+		tmp_pval = pd.DataFrame([1 for j in range(len(ix))], index=ix)
+		tmp_tstat = tstat.loc[ix, coef].copy()
+		
+		# sort t-statistics in a descending order and save the indices as a list
+		tmp_tstat.sort(axis=1, ascending = False, inplace=True)
+		tmp_tstat_list = list(tmp_tstat.index)
+		print "printing tmp_tstat_list"
+		print tmp_tstat_list
+
+		# make dictionaries for the step-down p-values
+		sd_pval_tmp = {} 
+		storeval = {}
+		
+		# perform step-down method
+		for i in range(0,len(tmp_tstat_list)):
+			
+			# select the max across each bootstrap
+			sd_dist = null.loc[(slice(None), ix), coef].groupby(level=0).max()
+			
+			# count the cases where the selected max is greater than the T-statistics of our interest
+			countone = sum(1 for item in sd_dist if tmp_tstat[i] <= item)
+
+			# calculate the temporary p-value
+			sd_pval_tmp[i] = (countone+1.0)/(1.0+101.0)
+			
+			# store p-value according to step-down conditions
+			if i == 0:
+				tmp_pval.loc[tmp_tstat_list[i]] = sd_pval_tmp[i]
+				storeval[i] = sd_pval_tmp[i]
+			if i != 0:
+				tmp_pval.loc[tmp_tstat_list[i]] = max(sd_pval_tmp[i], storeval[i-1])
+				storeval[i] = max(sd_pval_tmp[i], storeval[i-1])
+			if np.isnan(point.loc[ix, coef][tmp_tstat_list[i]]):
+				print "Printing if NA"
+				print np.isnan(point.loc[ix, coef][tmp_tstat_list[i]])
+				tmp_pval.loc[tmp_tstat_list[i]] = np.nan
+			
+			# consecutively drop the outcome with highest T statistics
+			ix = list(ix)
+			ix.remove(tmp_tstat_list[i])
+			
+			# Fill stepdown dataframe if i = len(tmp_tstat_list) 
+			if i == len(tmp_tstat_list) - 1: 
+				ix = tmp_pval.index
+				stepdown.loc[ix, coef] = tmp_pval.values
+				
+'''		(Previous step-down algorithm: not implemented anymore)
         # perform stepdown method
         do_stepdown = 1
         while do_stepdown == 1:
@@ -206,6 +238,7 @@ for block in blocks:
                 ix = tmp_pval.index
                 stepdown.loc[ix, coef] = tmp_pval.values
                 do_stepdown = 0                    
+'''
 
 # for variables we do not perform stepdown on, fill in stepdown matrix of p-value with regular p-values
 stepdown.fillna(pval, inplace=True)
@@ -726,11 +759,14 @@ for sex in ['pooled', 'male', 'female']:
 
 # 500 category version
 
+categories_order = ["Cognitive Skills", "Childhood Household Environment", "Mother's Employment, Education, and Income",
+					"Education, Employment, Income", "Crime", "Drugs and Alcohol", "Adult Health", "Mental Health"]					
+					
+'''
 categories_order = ["Cognitive Skills", "Noncognitive Skills", "Mother's Employment, Education, and Income",
                     "Childhood Household Environment", "Adult Household Environment", "Education, Employment, Income",
                     "Crime", "Childhood Health", "Adult Health", "Mental Health", "Drugs and Alcohol"]
-'''
-
+					
 categories_order = ["IQ Scores","Achievement Scores","HOME Scores","Parent Income",
                     "Mother's Employment","Mother's Education","Father at Home",
                     "Adoption","Education","Employment and Income","Crime","Tobacco, Drugs, Alcohol",
@@ -972,3 +1008,5 @@ for sex in ['pooled', 'male', 'female']:
     
     # write out tables
     table.write(os.path.join(paths.maintables, 'rslt_{}_counts_pres'.format(sex)))
+
+print "successfully done!"

@@ -22,13 +22,17 @@ function ITTestimator(sampledata, outcomes, outcome_list, controls, draw, ddraw,
   end
 
   # Define ITT data
-  ITTdata = sampledata
+  ITTdata = sampledata[:,:]
 
   # Bootstrap resample if necessary
   if bootsample == "yes"
     if ddraw != 0
       ITTdata = bsample(ITTdata, :male, :family)
     end
+  end
+
+  if factorswitch == 1
+    ITTdata = factors(ITTdata)
   end
 
   # Generate IPW weight for the bootstrapped sample

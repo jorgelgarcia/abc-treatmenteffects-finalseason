@@ -22,7 +22,7 @@ global googledrive: env googledrive
 // do files
 global scripts     = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global dataqalys   = "$klmmexico/abccare/NPV"
+global dataqalys   = "$klmmexico/abccare/NPV/current"
 global datapsid    = "$klmshare/Data_Central/data-repos/psid/extensions/abc-match/"
 global datafam     = "$klmmexico/abccare/health_plots"
 // output
@@ -52,7 +52,7 @@ keep if _merge != 2
 drop _merge
 
 keep if black == 1
-keep if age >=35 & age <=75
+keep if age >=34 & age <= 108
 replace qaly = qaly*.150
 
 matrix est = J(1,2,.)
@@ -99,39 +99,38 @@ clear
 svmat qalys, names(col)
 sort sample
 gen maxqalys = qaly + qalyse 
-gen minqalys = qaly - qalyse 
+gen minqalys = qaly - qalyse
+gsort -sample
+drop sample
+gen sample = _n
+replace sample = sample + 1 if sample > 3 
+
+gen sample0 = .
+replace sample0 = 1 if sample == 3
+replace sample0 = 2 if sample == 2
+replace sample0 = 3 if sample == 1
+
+replace sample0 = 7 if sample == 5
+replace sample0 = 6 if sample == 6
+replace sample0 = 5 if sample == 7
+
+drop sample
+rename sample0 sample
 
 cd $output
 # delimit
 twoway (bar qaly sample if sample == 1, color(gs0) barw(.98))
        (bar qaly sample if sample == 2, color(gs4) barw(.98))
        (bar qaly sample if sample == 3, color(gs8) barw(.98))
-       (rcap maxqaly minqaly sample if sample <= 3, lcolor(gs0)),
-       legend(rows(2) cols(2) order(1 "PSID, Disadvantaged" 2 "Control" 3 "Treatment" 4 "+/- s.e."))
-		  xlabel(1 " " 2 " " 3 " ", angle(45) noticks grid glcolor(white)) 
-		  ylabel(4.5[.1]5.1, angle(h) glcolor(gs14))
+       (bar qaly sample if sample == 5, color(black) barw(.98))
+       (bar qaly sample if sample == 6, color(gs4) barw(.98))
+       (bar qaly sample if sample == 7, color(gs8) barw(.98))
+       (rcap maxqaly minqaly sample, lcolor(gs0)),
+       legend(cols(3) size(vsmall) order(1 "PSID, Disadvantaged" 2 "Control (Predicted)" 3 "Treatment (Predicted)" 7 "+/- s.e."))
+		  xlabel(2 "Males" 6 " Females", labsize(small) noticks grid glcolor(white)) 
+		  ylabel(5[.1]5.4, angle(h) glcolor(gs14))
 		  xtitle(" ", size(small)) 
 		  ytitle("QALYs (100,000s 2014 USD)", size(small))
 		  graphregion(color(white)) plotregion(fcolor(white));
 # delimit cr
-graph export qalyexppsid_0.eps, replace
-
-# delimit
-twoway (bar qaly sample if sample == 4, color(black) barw(.98))
-       (bar qaly sample if sample == 5, color(gs4) barw(.98))
-       (bar qaly sample if sample == 6, color(gs8) barw(.98))
-       (rcap maxqaly minqaly sample if sample >=4, lcolor(gs0)),
-       legend(rows(2) cols(2) order(1 "PSID, Disadvantaged" 2 "Control" 3 "Treatment" 4 "+/- s.e."))
-		  xlabel(4 " " 5 " " 6 " ", angle(45) noticks grid glcolor(white)) 
-		  ylabel(4.5[.1]5.1, angle(h) glcolor(gs14))
-		  xtitle("", size(small)) 
-		  ytitle("QALYs (100,000s 2014 USD)", size(small))
-		  graphregion(color(white)) plotregion(fcolor(white));
-# delimit cr
-graph export qalyexppsid_1.eps, replace
-
-
-
-
-
-
+graph export qalyexppsid.eps, replace

@@ -23,7 +23,7 @@ global areps = 99 	# remember to subtract 1, i.e. 50 becomes 49
 global controls = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male, :abc]
 global ipwvars_all = [:apgar1, :apgar5, :prem_birth]
 global component = "diclaim_surv"
-global factors = 0
+global factorswitch = 0
 global deaths = 1
 
 # Include helper files

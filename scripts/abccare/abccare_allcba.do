@@ -186,6 +186,7 @@ matrix lincome         = [[`bc_mean_incgrowth7_f' \ `bc_se_incgrowth7_f' \ `bc_p
 matrix crime           = [[`ratio_mean_type2_nm_f' \ `ratio_se_type2_nm_f' \ `ratio_pval_type2_nm_f'], [`bc_mean_crimhalf_f' \ `bc_se_crimhalf_f' \ `bc_pval_crimhalf_f'], [`ratio_mean_type2_nm_m' \ `ratio_se_type2_nm_m' \ `ratio_pval_type2_nm_m'], [`bc_mean_crimhalf_m' \ `bc_se_crimhalf_m' \ `bc_pval_crimhalf_m'], [`ratio_mean_type2_nm_p' \ `ratio_se_type2_nm_p' \  `ratio_pval_type2_nm_p'], [`bc_mean_crimhalf_p' \ `bc_se_crimhalf_p' \ `bc_pval_crimhalf_p']]
 matrix health          = [[`bc_mean_valife0_f' \ `bc_se_valife0_f' \ `bc_pval_valife0_f'], [`bc_mean_valife2_f' \ `bc_se_valife2_f' \ `bc_pval_valife2_f'], [`bc_mean_valife0_m' \ `bc_se_valife0_m' \ `bc_pval_valife0_m'], [`bc_mean_valife2_m' \ `bc_se_valife2_m' \ `bc_pval_valife2_m'], [`bc_mean_valife0_p' \ `bc_se_valife0_p' \ `bc_pval_valife0_p'], [`bc_mean_valife2_p' \ `bc_se_valife2_p' \ `bc_pval_valife2_p']]
 
+/*
 matrix allbc = [baselinebc \ specification \ predictiontime \ counterfactual \ dwl \ discount \ parental \ lincome \ crime \ health]
 matrix rownames allbc = baseline specification "." "." predictiontime "." "." counterfactual "." "." dwl "." "." discount "." "." parental "." "." lincome "." "." crime "." "." health "." "."
 matrix allbc = [allbc[1...,5..6],allbc[1...,3..4],allbc[1...,1..2]]

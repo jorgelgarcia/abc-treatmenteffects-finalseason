@@ -11,9 +11,9 @@ import os
 filedir = os.path.join(os.path.dirname(__file__))
 
 # declare general options for paths and table notes
-pathext = 'AppResOutput/abccare/'
+pathext = 'AppResOutput/abccare_appendix_oct29/'
 program = 'abccare'
-path_outcomes = os.path.join(filedir, 'outcomes_cba.csv')
+path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_appendix.csv')
 
 # bring in .csv with all labels and step-down groupings
 outcomes = pd.read_csv(path_outcomes, index_col='variable')
@@ -33,7 +33,7 @@ command_counts = '''
 	\\begin{{table}}[H]
      \\caption{{Combining Functions, {} Sample}} 
      \\label{{table:{}_rslt_{}_counts}}
-	\\input{{{}rslt_{}_counts_all}}
+	\\input{{{}rslt_{}_counts}}
 	\\end{{table}}  
 '''
 
@@ -42,7 +42,7 @@ command_counts_cat = '''
 	\\begin{{table}}[H]
      \\caption{{Combining Functions by Category{}, {} Sample}} 
      \\label{{table:{}_rslt_{}_counts_n{}a{}}}
-	\\input{{{}rslt_{}_counts_n{}a{}_all}}
+	\\input{{{}rslt_{}_counts_n{}a{}}}
 	\\end{{table}}   
 '''
 
@@ -55,7 +55,7 @@ command_main = '''
 '''
 """
 
-f = open(os.path.join(paths.apptables, '..', '1_abccare.tex'), 'w')
+f = open(os.path.join(paths.apptables, '..', '1_abccare_appendix.tex'), 'w')
 
 head = '''
 \\input{Preamble} \n

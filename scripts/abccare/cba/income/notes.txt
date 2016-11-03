@@ -1,0 +1,25 @@
+Weights for Matching (mset)
+
+1: Baseline controls only (B)			"Pre-treatment"
+2: Non-baseline controls only (X)		"Post-treatment"
+3: Full set of controls (B,X)			"Pre- and Post-treatment"
+
+
+Weights for Projections (pset)
+1: lag, W, X
+2: X, W
+3: lag, W
+4: W
+5: X
+6: lag, X
+
+Baseline:
+mset = 3
+pset = 1
+
+10/31/16 
+Taking out income (30) and BMI (34) from W for both labor and transfer
+Baseline changed to mset = 1; pset = 1 with this new set of W!
+
+Produce:
+Baseline pset1_mset1
