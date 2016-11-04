@@ -35,111 +35,196 @@ global collapseprj  = "$klmmexico/abccare/income_projections/"
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
-// PSID
+// CNLSY
 cd $dataweights
-use psid-weights-finaldata.dta, clear
-keep if draw == 0
-tempfile psid
-save "`psid'", replace
-
-cd $datapsidw
-use psid-abc-match.dta, clear
-drop if si30y_inc_labor > 300000
-merge 1:1 id using "`psid'"
-keep if _merge == 3
-drop _merge
-
-gen psid = 1
-save "`psid'", replace
-
-// NLSY79
-cd $dataweights
-use nlsy-weights-finaldata.dta, clear
-keep if draw == 0
-tempfile nlsy
-save "`nlsy'", replace
-
-cd $datanlsyw
-use nlsy-abc-match.dta, clear
-drop if si30y_inc_labor > 300000
-merge 1:1 id using "`nlsy'"
-keep if _merge == 3
-drop _merge
-
-gen nlsy = 1
-save "`nlsy'", replace
-
-// CLSY
-cd $dataweights
+// get one match per individual in abc
 use cnlsy-weights-finaldata.dta, clear
 keep if draw == 0
-tempfile cnlsy
-save "`cnlsy'", replace
+
+keep id wtabc_id68_c3_treat-wtabc_id152_c3_treat wtabc_id78_c3_control-wtabc_id985_c3_control
+
+foreach num of numlist 64(1)985 {
+	capture rename  wtabc_id`num'_c3_treat    wtabc_id_treat`num'
+	capture rename  wtabc_id`num'_c3_control  wtabc_id_control`num'
+}
+
+reshape long wtabc_id_treat wtabc_id_control, i(id) j(abcid)
+replace wtabc_id_treat     = 1/wtabc_id_treat   if wtabc_id_treat != 0
+replace wtabc_id_control   = 1/wtabc_id_control if wtabc_id_treat != 0
+replace wtabc_id_treat     = 1 if wtabc_id_treat == 0
+replace wtabc_id_control   = 1 if wtabc_id_control == 0
+
+foreach group in treat control {
+	preserve
+	drop if wtabc_id_`group' == .
+	bysort  abcid : egen `group' = min(wtabc_id_`group')
+	replace wtabc_id_`group' = round(wtabc_id_`group',1)
+	replace `group'      = round(`group',1)
+	gen `group'ind = 1 if `group' == wtabc_id_`group'
+	keep if `group'ind == 1
+	keep id abcid
+	tempfile `group'
+	save "``group''"
+	restore
+}
+use "`treat'", clear
+append using "`control'"
+// duplicates drop abcid, force
+rename id cnlsyid 
+rename abcid id
+
+cd $dataabccare
+merge m:1 id using append-abccare_iv, keepusing(D random male)
+keep if _merge == 3
+drop if random == 3
+drop _merge
+drop random
+
+drop id 
+rename cnlsyid id
+tempfile matches
+save   "`matches'", replace
 
 cd $datacnlsyw
 use cnlsy-abc-match.dta, clear
-drop if si30y_inc_labor > 300000
-merge 1:1 id using "`cnlsy'"
+drop if black !=1 
+merge m:m id using "`matches'"
 keep if _merge == 3
-drop _merge
+drop    _merge
 
-gen cnlsy = 1
-save "`cnlsy'", replace
+keep male D inc_labor20-inc_labor30
+tempfile cnlsy
+save   "`cnlsy'", replace
 
-// abc care
-cd $dataabccare
-use append-abccare_iv, clear
-drop if random == 3
-gen wtabc_allids_c1_control = 1 if D == 0
-gen wtabc_allids_c1_treat   = 1 if D == 1
+// PSOD
+cd $dataweights
+// get one match per individual in abc
+use psid-weights-finaldata.dta, clear
+keep if draw == 0
 
-egen piatmathabc  = rowmean(piat5y6m piat6y piat6y6m piat7y)          if program == "abc"
-egen piatmathcare = rowmean(wj_mathas5y6m wj_mathas6y wj_mathgl7y6m)  if program == "care"
-egen piatmath     = rowtotal(piatmathabc piatmathcare), missing
+keep id wtabc_id68_c3_treat-wtabc_id152_c3_treat wtabc_id78_c3_control-wtabc_id985_c3_control
 
-keep male years_30y  si30y_inc_labor si21y_inc_labor si30y_inc_trans_pub si21y_inc_trans_pub piatmath wtabc_allids_c1_*
-
-gen abc = 1
-tempfile abc
-save "`abc'", replace
-
-append using "`psid'"
-append using "`nlsy'"
-append using "`cnlsy'"
-
-egen  laggedincome = rowmean(inc_labor21 inc_labor22)
-egen llaggedincome = rowmean(inc_labor27 inc_labor28)
-
-egen  laggedtransfer = rowmean(inc_trans_pub21 inc_trans_pub22)
-egen llaggedtransfer = rowmean(inc_trans_pub27 inc_trans_pub28)
-
-replace llaggedincome    = si21y_inc_labor      if abc == 1
-replace llaggedtransfer  = si21y_inc_trans_pub  if abc == 1
-
-replace laggedincome   = 1 if abc == 1
-replace laggedtransfer = 1 if abc == 1
-
-replace black = 1 if abc == 1
-
-replace piatmath = 1 if nlsy == 1 | psid == 1
-
-foreach sample in psid nlsy cnlsy abc {
-
-reg si30y_inc_labor male black piatmath years_30y     laggedincome llaggedincome [aw=wtabc_allids_c1_control] if `sample' == 1, robust
-est sto `sample'incomet
-
-reg si30y_inc_labor male black piatmath years_30y     laggedincome llaggedincome [aw=wtabc_allids_c1_treat]   if `sample' == 1, robust
-est sto `sample'incomec
-
-reg si30y_inc_trans_pub male black piatmath years_30y laggedtransfer llaggedtransfer [aw=wtabc_allids_c1_control] if `sample' == 1, robust
-est sto `sample'transfert
-
-reg si30y_inc_trans_pub male black piatmath years_30y laggedtransfer llaggedtransfer [aw=wtabc_allids_c1_treat]   if `sample' == 1, robust
-est sto `sample'transferc
-
+foreach num of numlist 64(1)985 {
+	capture rename  wtabc_id`num'_c3_treat    wtabc_id_treat`num'
+	capture rename  wtabc_id`num'_c3_control  wtabc_id_control`num'
 }
 
-cd $output
-outreg2 [cnlsyincomec cnlsyincomet nlsyincomec nlsyincomet psidincomec psidincomet abcincomec abcincomet] using combined_predict, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(2) par(se) drop(o.piatmath o.black o.laggedincome) r2 nonotes
-outreg2 [nlsytransferc nlsytransfert psidtransferc psidtransfert abctransferc abctransfert] using combined_predict_ti, replace tex(frag) alpha(.01, .05, .10) sym (***, **, *) dec(2) par(se) drop(o.piatmath o.black o.laggedincome) r2 nonotes
+reshape long wtabc_id_treat wtabc_id_control, i(id) j(abcid)
+replace wtabc_id_treat     = 1/wtabc_id_treat   if wtabc_id_treat != 0
+replace wtabc_id_control   = 1/wtabc_id_control if wtabc_id_treat != 0
+replace wtabc_id_treat     = 1 if wtabc_id_treat == 0
+replace wtabc_id_control   = 1 if wtabc_id_control == 0
 
+foreach group in treat control {
+	preserve
+	drop if wtabc_id_`group' == .
+	bysort  abcid : egen `group' = min(wtabc_id_`group')
+	replace wtabc_id_`group' = round(wtabc_id_`group',1)
+	replace `group'      = round(`group',1)
+	gen `group'ind = 1 if `group' == wtabc_id_`group'
+	keep if `group'ind == 1
+	keep id abcid
+	tempfile `group'
+	save "``group''"
+	restore
+}
+use "`treat'", clear
+append using "`control'"
+// duplicates drop abcid, force
+rename id psidid 
+rename abcid id
+
+cd $dataabccare
+merge m:1 id using append-abccare_iv, keepusing(D random male)
+keep if _merge == 3
+drop if random == 3
+drop _merge
+drop random
+
+drop id 
+rename psidid id
+tempfile matches
+save   "`matches'", replace
+
+cd $datapsidw
+use psid-abc-match.dta, clear
+drop if black !=1 
+merge m:m id using "`matches'"
+keep if _merge == 3
+drop    _merge
+
+keep male D inc_labor30-inc_labor67
+tempfile psid
+save   "`psid'", replace
+
+// NLSY
+cd $dataweights
+// get one match per individual in abc
+use nlsy-weights-finaldata.dta, clear
+keep if draw == 0
+
+keep id wtabc_id68_c3_treat-wtabc_id152_c3_treat wtabc_id78_c3_control-wtabc_id985_c3_control
+
+foreach num of numlist 64(1)985 {
+	capture rename  wtabc_id`num'_c3_treat    wtabc_id_treat`num'
+	capture rename  wtabc_id`num'_c3_control  wtabc_id_control`num'
+}
+
+reshape long wtabc_id_treat wtabc_id_control, i(id) j(abcid)
+replace wtabc_id_treat     = 1/wtabc_id_treat   if wtabc_id_treat != 0
+replace wtabc_id_control   = 1/wtabc_id_control if wtabc_id_treat != 0
+replace wtabc_id_treat     = 1 if wtabc_id_treat == 0
+replace wtabc_id_control   = 1 if wtabc_id_control == 0
+
+foreach group in treat control {
+	preserve
+	drop if wtabc_id_`group' == .
+	bysort  abcid : egen `group' = min(wtabc_id_`group')
+	replace wtabc_id_`group' = round(wtabc_id_`group',1)
+	replace `group'      = round(`group',1)
+	gen `group'ind = 1 if `group' == wtabc_id_`group'
+	keep if `group'ind == 1
+	keep id abcid
+	tempfile `group'
+	save "``group''"
+	restore
+}
+use "`treat'", clear
+append using "`control'"
+// duplicates drop abcid, force
+rename id nlsyid 
+rename abcid id
+
+cd $dataabccare
+merge m:1 id using append-abccare_iv, keepusing(D random male)
+keep if _merge == 3
+drop if random == 3
+drop _merge
+drop random
+
+drop id 
+rename nlsyid id
+tempfile matches
+save   "`matches'", replace
+
+cd $datanlsyw
+use nlsy-abc-match.dta, clear
+drop if black != 1
+merge m:m id using "`matches'"
+keep if _merge == 3
+drop    _merge
+
+keep male D inc_labor30-inc_labor55
+tempfile nlsy
+save   "`nlsy'", replace
+
+append using "`cnlsy'"
+append using "`psid'"
+
+foreach num of numlist 22(1)67 {
+	replace inc_labor`num' = . if inc_labor`num' > 300000
+	// replace inc_labor`num' = . if inc_labor`num' == 0
+	// replace inc_labor`num' = (inc_labor`num')/(1 + .03)^`num'
+}
+
+egen inc_labor = rowtotal(inc_labor*), missing
