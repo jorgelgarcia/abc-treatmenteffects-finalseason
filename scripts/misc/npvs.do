@@ -143,8 +143,6 @@ twoway (bar     m part2            if estimate == 3 & sex == 2, color(gs4) barw(
 graph export abccare_npvs2.eps, replace
 
 /*
-
-/*
 cd $specialed
 insheet using npv_speccost_ts0.csv, clear
 gen     sex = 1 if gender == "pooled"
@@ -183,7 +181,7 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
 			  note("Per-annum Rate of Return: Males and Females 12% (s.e. 5%); Males 14% (s.e. 6%); Females 10% (s.e. 7%)." " "
-			       "Benefit-cost Ratio: Males and Females 5.7 (s.e. 2.3); Males 11.6 (s.e. 5.5); Females 2.6 (s.e. .98)."
+			       "Benefit-cost Ratio: Males and Females 5.7 (s.e. 2.4); Males 11.4 (s.e. 5.6); Females 2.7 (s.e. .99)."
 			        , size(vsmall));
 #delimit cr 
 graph export abccare_npvssumm.eps, replace

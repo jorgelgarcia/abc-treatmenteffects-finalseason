@@ -92,7 +92,16 @@ merge m:m id using "`matches'"
 keep if _merge == 3
 drop    _merge
 
-keep male D inc_labor20-inc_labor30
+replace D = . if years_30y >= 10  & D == 0 & male == 0
+replace D = . if years_30y <= 12  & D == 1 & male == 0
+
+replace D = . if years_30y >= 9  & D == 0 & male == 1
+replace D = . if years_30y <= 16  & D == 1 & male == 1
+
+replace D = . if si30y_inc_labor >= 10000  & D == 0 & male == 1
+replace D = . if si30y_inc_labor <  60000  & D == 1 & male == 1
+
+keep male D inc_labor22-inc_labor30
 tempfile cnlsy
 save   "`cnlsy'", replace
 
@@ -152,6 +161,15 @@ drop if black !=1
 merge m:m id using "`matches'"
 keep if _merge == 3
 drop    _merge
+
+replace D = . if years_30y >= 9  & D == 0 & male == 0
+replace D = . if years_30y <= 12  & D == 1 & male == 0
+
+replace D = . if years_30y >= 10  & D == 0 & male == 1
+replace D = . if years_30y <= 16  & D == 1 & male == 1
+
+replace D = . if si30y_inc_labor >= 10000  & D == 0 & male == 1
+replace D = . if si30y_inc_labor <  60000  & D == 1 & male == 1
 
 keep male D inc_labor30-inc_labor67
 tempfile psid
@@ -214,6 +232,15 @@ merge m:m id using "`matches'"
 keep if _merge == 3
 drop    _merge
 
+replace D = . if years_30y >= 9  & D == 0 & male == 0
+replace D = . if years_30y <= 12  & D == 1 & male == 0
+
+replace D = . if years_30y >= 10  & D == 0 & male == 1
+replace D = . if years_30y <= 16  & D == 1 & male == 1
+
+replace D = . if si30y_inc_labor >= 10000  & D == 0 & male == 1
+replace D = . if si30y_inc_labor <  60000  & D == 1 & male == 1
+
 keep male D inc_labor30-inc_labor55
 tempfile nlsy
 save   "`nlsy'", replace
@@ -224,7 +251,9 @@ append using "`psid'"
 foreach num of numlist 22(1)67 {
 	replace inc_labor`num' = . if inc_labor`num' > 300000
 	// replace inc_labor`num' = . if inc_labor`num' == 0
-	// replace inc_labor`num' = (inc_labor`num')/(1 + .03)^`num'
+replace inc_labor`num' = (inc_labor`num')/(1 + .03)^`num'
 }
 
 egen inc_labor = rowtotal(inc_labor*), missing
+
+

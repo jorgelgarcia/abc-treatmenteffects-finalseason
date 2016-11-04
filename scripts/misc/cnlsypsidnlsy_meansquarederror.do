@@ -89,10 +89,12 @@ save "`cnlsy'", replace
 append using "`psid'"
 append using "`nlsy'"
 
+tempfile  all
+save    "`all'", replace
 
+// Males
 matrix rmsepreds = J(1,7,.)
 matrix colnames rmsepreds =  mset1control mset1treat mset2control mset2treat mset3control mset3treat mset4 
-
 // cnlsy predictions
 foreach num of numlist 22(1)30 {
 	matrix age`num' = [.]
@@ -100,12 +102,12 @@ foreach num of numlist 22(1)30 {
 	// weights by treatment and control
 	foreach set in 1 2 3 {
 		foreach group in control treat {
-			reg inc_labor`num' male black piatmath years_30y inc_labor`numl' [aw=wtabc_allids_c`set'_`group'] if cnlsy == 1
+			reg inc_labor`num' black piatmath years_30y inc_labor`numl' [aw=wtabc_allids_c`set'_`group'] if cnlsy == 1 & male == 1
 			matrix age`num' = [age`num',e(rmse)]
 		}
 	}
 	// no weights
-	reg inc_labor`num' male black piatmath years_30y inc_labor`numl' if cnlsy == 1
+	reg inc_labor`num' black piatmath years_30y inc_labor`numl' if cnlsy == 1 & male == 1
 	matrix age`num' = [age`num', e(rmse)]
 	matrix age`num' = age`num'[1,2...]
 	matrix colnames age`num' = mset1control mset1treat mset2control mset2treat mset3control mset3treat mset4 
@@ -119,12 +121,12 @@ foreach num of numlist 31(1)65 {
 	// weights by treatment and control
 	foreach set in 1 2 3 {
 		foreach group in control treat {
-			reg inc_labor`num' male black years_30y inc_labor`numl' [aw=wtabc_allids_c`set'_`group'] if nlsy == 1 | psid == 1
+			reg inc_labor`num' male black years_30y inc_labor`numl' [aw=wtabc_allids_c`set'_`group'] if (nlsy == 1 | psid == 1) & male == 1
 			matrix age`num' = [age`num',e(rmse)]
 		}
 	}
 	// no weights
-	reg inc_labor`num' male black years_30y inc_labor`numl' if nlsy | psid == 1
+	reg inc_labor`num' male black years_30y inc_labor`numl' if (nlsy | psid == 1) & male == 1
 	matrix age`num' = [age`num', e(rmse)]
 	matrix age`num' = age`num'[1,2...]
 	matrix colnames age`num' = mset1control mset1treat mset2control mset2treat mset3control mset3treat mset4 
@@ -148,4 +150,68 @@ gen     label = "mean"   if num == 1
 replace label = "semean" if num == 2
 
 cd $output
-outsheet using rmse.csv, replace
+outsheet using rmse_male.csv, replace
+
+use "`all'", clear
+// Females
+matrix rmsepreds = J(1,7,.)
+matrix colnames rmsepreds =  mset1control mset1treat mset2control mset2treat mset3control mset3treat mset4 
+// cnlsy predictions
+foreach num of numlist 22(1)30 {
+	matrix age`num' = [.]
+	local numl = `num' - 2
+	// weights by treatment and control
+	foreach set in 1 2 3 {
+		foreach group in control treat {
+			reg inc_labor`num' black piatmath years_30y inc_labor`numl' [aw=wtabc_allids_c`set'_`group'] if cnlsy == 1 & male == 0
+			matrix age`num' = [age`num',e(rmse)]
+		}
+	}
+	// no weights
+	reg inc_labor`num' black piatmath years_30y inc_labor`numl' if cnlsy == 1 & male == 0
+	matrix age`num' = [age`num', e(rmse)]
+	matrix age`num' = age`num'[1,2...]
+	matrix colnames age`num' = mset1control mset1treat mset2control mset2treat mset3control mset3treat mset4 
+	mat_rapp rmsepreds : rmsepreds age`num'
+}	
+
+// nlsy and psid
+foreach num of numlist 31(1)65 {
+	matrix age`num' = [.]
+	local numl = `num' - 2
+	// weights by treatment and control
+	foreach set in 1 2 3 {
+		foreach group in control treat {
+			reg inc_labor`num' male black years_30y inc_labor`numl' [aw=wtabc_allids_c`set'_`group'] if (nlsy == 1 | psid == 1) & male == 0
+			matrix age`num' = [age`num',e(rmse)]
+		}
+	}
+	// no weights
+	reg inc_labor`num' male black years_30y inc_labor`numl' if (nlsy | psid == 1) & male == 0
+	matrix age`num' = [age`num', e(rmse)]
+	matrix age`num' = age`num'[1,2...]
+	matrix colnames age`num' = mset1control mset1treat mset2control mset2treat mset3control mset3treat mset4 
+	mat_rapp rmsepreds : rmsepreds age`num'
+}
+matrix rmsepreds = rmsepreds[2...,1...]
+
+// compute mean and standard error
+clear
+svmat rmsepreds, names(col)
+preserve
+collapse (semean) *
+tempfile semean
+save "`semean'", replace
+restore
+
+collapse (mean) *
+append using "`semean'"
+gen num = _n
+gen     label = "mean"   if num == 1
+replace label = "semean" if num == 2
+
+cd $output
+outsheet using rmse_female.csv, replace
+
+
+
