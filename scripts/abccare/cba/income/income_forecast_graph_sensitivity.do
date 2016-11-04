@@ -40,6 +40,8 @@ global data_dir      = "${projects}/abc-treatmenteffects-finalseason/scripts/abc
 global incomeresults = "${klmmexico}/abccare/income_projections/current/`file_specs'"
 global output        = "${projects}/abc-treatmenteffects-finalseason/output/"
 
+local add_box = 1 // set to 0 if figures are wanted without box for MSE
+
 // prepare data for graphing
 
 cd $dataabccare
@@ -134,7 +136,7 @@ foreach source in labor /*transfer*/ {
 		
 		cd $incomeresults
 		save `source'_income_collapsed_`file_specs', replace
-		
+	asd	
 	// graph
 	cd $output
 	global y0  0[10]50
@@ -168,7 +170,7 @@ foreach source in labor /*transfer*/ {
 				`xaxis'
 				`yaxis'
 				`legend';
-		graph export "`source'_20-65_`file_specs'_`name`sex''_sensitivity.eps", replace;
+		//graph export "`source'_20-65_`file_specs'_`name`sex''_sensitivity.eps", replace;
 		# delimit cr
 		
 	restore

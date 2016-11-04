@@ -1,25 +1,65 @@
 Weights for Matching (mset)
 
-1: Baseline controls only (B)			"Pre-treatment"
-2: Non-baseline controls only (X)		"Post-treatment"
-3: Full set of controls (B,X)			"Pre- and Post-treatment"
+1: Baseline controls only (B’)			"Pre-treatment"
+2: Non-baseline controls only (X’)		"Post-treatment"
+3: Full set of controls (B’,X’)			"Pre- and Post-treatment"
+4: No weights 
+
+Specification of Projections (pset)
+1: lag, B, X
+2: B, X
+3: lag, X
+4: X
+5: B
+6: lag, B
+7:
+8: No weights, lag, B, X
+
+Instructions on how to run pset types 1, 3, and 6
+
+1. Navigate to filepath:
+abccare-cba/scripts/abccare/cba/income
+
+2. Change variables to reflect desired pset
+
+For type 1:
+cols.interp.predictors = cols.interp.outcomes + cols.interp.background
+cols.extrap.predictors = cols.extrap.outcomes + cols.extrap.background
+
+For type 3:
+cols.interp.predictors = cols.interp.outcomes
+cols.extrap.predictors = cols.extrap.outcomes
+
+For type 6:
+cols.interp.predictors = cols.interp.background
+cols.extrap.predictors = cols.extrap.background
+
+3. Navigate to filepath:
+abccare-cba/scripts/abccare/cba/income/labor
+
+3. Create a .h5 file with the prepared data 
+$python2.7 setup_data_weights.py
+
+4. Load .h5 file
+$python2.7 load_data.py
+
+5. Set other parameters
+
+Bootstraps to some number N greater than 1
+aux_draw = N 
+
+For the t pset type in {1,3,6}
+pset_type = t
+
+control_sets = ['1','2','3','4'] 
+or any subset of the mset numbers
+
+6. Get predictions
+qsub py_bootstrap_submit.sh
 
 
-Weights for Projections (pset)
-1: lag, W, X
-2: X, W
-3: lag, W
-4: W
-5: X
-6: lag, X
 
-Baseline:
-mset = 3
-pset = 1
 
-10/31/16 
-Taking out income (30) and BMI (34) from W for both labor and transfer
-Baseline changed to mset = 1; pset = 1 with this new set of W!
 
-Produce:
-Baseline pset1_mset1
+
+
