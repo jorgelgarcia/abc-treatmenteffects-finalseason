@@ -177,7 +177,7 @@ For individual $i$ in experimental sample ($k=e$), an individual $i''$ in the au
 \end{algorithm}
 \doublespacing
 
-\noindent Using these synthetic control and treatment groups, we construct the dynamic relationships between outcomes and predictors in the auxiliary samples and use them to form predictions in the non-experimental sample. Then, we construct treatment effects for each outcome at each age. In our main estimation, we match both on $\bm{B}_k$ and $\bm{X}^d_{k}$. We next examine the sensitivity to the use of different matching variables next. We find little sensitivity. \textbf{[JJH: How can this be? If we don't match, what do we find?]}
+\noindent Using these synthetic control and treatment groups, we construct the dynamic relationships between outcomes and predictors in the auxiliary samples and use them to form predictions in the non-experimental sample. Then, we construct treatment effects for each outcome at each age. In our main estimation, we match both on $\bm{B}_k$ and $\bm{X}^d_{k}$. We next examine the sensitivity to the use of different matching variables next. We find little sensitivity. \textbf{[JJH: How can this be? If we don't match, what do we find?] [JLG: this means that the dynamic relationship is invariant to the sample that we use to estimate it. I have added no matching to Figure~\ref{fig:matchvariables}]}
 
 \noindent A semi-parametric alternative to this procedure is to find a match (or a set of matches) $i''$ in the auxiliary sample for each individual $i$ in the experimental sample and impute the  dynamic trajectories of individual(s) $i''$ to individual $i$, using Algorithm~\ref{alg:match}. We present this alternative in Appendix~\ref{appendix:nonpar}.\\
 
@@ -197,9 +197,9 @@ When using Algorithm~\ref{alg:match} to find synthetic control and treatment gro
 
 \noindent \textbf{[JJH: these are not baseline variables.] [JLG: There was a mistake in the wording. Please see below.]}
 
-\noindent To study the sensitivity of our labor income predictions to the choice of different matching variables, we predict income using the following different sets of variables: (a) pre-treatment variables only (male and Black indicators and year of birth); (b) post-treatment variables only (years of education at age 30 and labor income at age 30); and (c) pre-treatment and post-treatment variables (male and Black indicators, year of birth, years of education at age 30, and labor income at age 30). Figure~\ref{fig:matchvariables} displays the results of this exercise. The top row represents the exercise for females and the bottom row for males. The predictions exhibit little sensitivity to the choice of matching variables within the set of variables used. The average root-mean squared error for the prediction across ages 22 to 67 is very similar when varying the sets of matching variables.\\
+\noindent To study the sensitivity of our labor income predictions to the choice of different matching variables, we predict income using the following different sets of variables: (a) no matching variables (i.e., each individual in the auxiliary sample has the sam weight); (b) pre-treatment variables only (male and Black indicators and year of birth); (c) post-treatment variables only (years of education at age 30 and labor income at age 30); and (c) pre-treatment and post-treatment variables (male and Black indicators, year of birth, years of education at age 30, and labor income at age 30). Figure~\ref{fig:matchvariables} displays the results of this exercise. The top row represents the exercise for females and the bottom row for males. The predictions exhibit little sensitivity to the choice of matching variables within the set of variables used. The average root-mean squared error for the prediction across ages 22 to 67 is very similar when varying the sets of matching variables.\\
 
-\noindent One interpretation of the lack of sensitivity is that the variables in $\bm{X}^d_{k}$ effectively satisfy Assumption~\ref{ass:exog}, which is in line to our formal tests in Appendix~\ref{app:endogeneity}.
+\noindent The lack of sensitivity implies that the dynamic relationship that we fit in the auxiliary sample is invariant to the sample that we use to estimate it, which favors Assumption~\ref{ass:summary}. This does not mean that the prediction is the same for the synthetic and control groups. It means that the parameterization is in agreement, but not the level of the predictors. 
 
 \begin{sidewaysfigure}[H]
 \centering
@@ -207,7 +207,7 @@ When using Algorithm~\ref{alg:match} to find synthetic control and treatment gro
 \begin{subfigure}[h]{0.25\textwidth}
 		\centering
 		\caption{No Matching, Females}
-		\includegraphics[width=\textwidth]{output/labor_20-65_pset1_mset1_female_sensitivity.eps}
+		\includegraphics[width=\textwidth]{output/labor_20-65_pset8_mset4_female_sensitivity.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.25\textwidth}
 		\centering
@@ -227,7 +227,7 @@ When using Algorithm~\ref{alg:match} to find synthetic control and treatment gro
 \begin{subfigure}[h]{0.25\textwidth}
 		\centering
 		\caption{No Matching, Males}
-		\includegraphics[width=\textwidth]{output/labor_20-65_pset1_mset1_male_sensitivity.eps}
+		\includegraphics[width=\textwidth]{output/labor_20-65_pset8_mset4_male_sensitivity.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.25\textwidth}
 		\centering
@@ -245,7 +245,7 @@ When using Algorithm~\ref{alg:match} to find synthetic control and treatment gro
 		\includegraphics[width=\textwidth]{output/labor_20-65_pset1_mset3_male_sensitivity.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: This figure displays the predicted labor income profile obtained when constructing control- and treatment-group matches according to the procedure in Section~\ref{sec:usingaux}. We use data from the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79) (ages 22 to 29) and the National Longitudinal Survey of Youth 1979 (NLSY79) and the Panel Study of Income Dynamics (PSID) (ages 29 to 67). We vary the matching variables across the different panels, for both males and females. Pre-treatment variables: male and Black indicators and year of birth. Post-treatment variables: years of education at age 30 and labor income at age 30. Each panel shows the average root-mean squared error (and its corresponding standard error) of the prediction in the auxiliary datasets. The average is across ages 22 to 67. When we do not weight (match) the samples, the average root-mean squared error is the same across the treatment and control groups by construction (no synthetic groups are created when there is no weighting. We use the same parameterizations of the predictions for males and females. \textbf{[JJH: what does this show? Can you do goodness of fitness tests?] [JLG: Yes, I have added this to the figures.]}
+Note: This figure displays the predicted labor income profile obtained when constructing control- and treatment-group matches according to the procedure in Section~\ref{sec:usingaux}. We use data from the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79) (ages 22 to 29) and the National Longitudinal Survey of Youth 1979 (NLSY79) and the Panel Study of Income Dynamics (PSID) (ages 29 to 67). We vary the matching variables across the different panels, for both males and females. Pre-treatment variables: male and Black indicators and year of birth. Post-treatment variables: years of education at age 30 and labor income at age 30. Each panel shows the average root-mean squared error (and its corresponding standard error) of the prediction in the auxiliary datasets. The average is across ages 22 to 67. When we do not weight (match) the samples, the average root-mean squared error is the same across the treatment and control groups by construction (no synthetic groups are created when there is no weighting. \textbf{[JJH: what does this show? Can you do goodness of fitness tests?] [JLG: Yes, I have added this to the figures.]}
 \end{sidewaysfigure}
 
 \subsubsection{Variables Used to Predict} \label{appendix:pred}
@@ -310,7 +310,30 @@ We base our predictions of a generic outcome, $Y_{k,j,a}$ on background (pre-tre
 
 \paragraph{Semi-Parametric Predictions} \label{appendix:nonpar}
 
+\noindent An alternative to the predication strategy that we use throughout the main text and the appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using Algorithm~\ref{alg:match}; and (ii) use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a semi-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and use it to form out-of-sample predictions, we simply match individuals using Algorithm~\ref{alg:match} to impute labor income profiles.\\ 
 
+\noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the semi-parametric approach that we introduce in this section. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). An individual $i''$ in the auxiliary sample is a match for individual $i$ in the experimental sample if the left-hand side of \eqref{eq:ingrownnail} is the minimal value across all individuals in the auxiliary sample. We present the discounted net present value (treatment - control) for labor income in 2014 dollars. The approaches are in rough alignment.\\
+
+\begin{table}[H]
+\begin{threeparttable}
+\caption{Net Present Value of Labor Income: Parametric and Semi-Parametric Approaches}
+\label{table:nvpli}
+\centering
+\begin{tabular}{ccc} \toprule
+Pooled & Male & Female \\ \hline
+\multicolumn{3}{c}{\textbf{Parametric (Main Paper)}} \\ \midrule
+71,345 & 300,896 & 50,390 \\
+(86,343) & (241,588) & (63,060) \\ \midrule
+\multicolumn{3}{c}{\textbf{Semi-Parametric (This Section)}} \\ \midrule
+62,080 & 289,471 & 59,163 \\
+(75,030) & (232,414) & (74,039) \\ \bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item Note: this table compares the net-present value of labor income (treatment - control) using the parametric approach of the main text and the approach that we use in this section. All values are discounted to birth and reported in 2014 dollars.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
 
 \subsubsection{Testing Assumption~\ref{ass:contain}: Support Conditions}\label{app:containsupport}
 
