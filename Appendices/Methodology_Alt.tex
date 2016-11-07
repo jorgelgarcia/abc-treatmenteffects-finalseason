@@ -312,25 +312,27 @@ We base our predictions of a generic outcome, $Y_{k,j,a}$ on background (pre-tre
 
 \noindent An alternative to the predication strategy that we use throughout the main text and the appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using Algorithm~\ref{alg:match}; and (ii) use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a semi-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and use it to form out-of-sample predictions, we simply match individuals using Algorithm~\ref{alg:match} to impute labor income profiles.\\ 
 
-\noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the semi-parametric approach that we introduce in this section. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). An individual $i''$ in the auxiliary sample is a match for individual $i$ in the experimental sample if the left-hand side of \eqref{eq:ingrownnail} is the minimal value across all individuals in the auxiliary sample. We present the discounted net present value (treatment - control) for labor income in 2014 dollars. The approaches are in rough alignment.\\
+\noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the semi-parametric approach that we introduce in this section. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). An individual $i''$ in the auxiliary sample is a match for individual $i$ in the experimental sample if the left-hand side of \eqref{eq:ingrownnail} is the minimal value across all individuals in the auxiliary sample. We present the discounted net present value (treatment - control) for labor and transfer income in 2014 dollars. The approaches are in rough alignment.\\
 
 \begin{table}[H]
 \begin{threeparttable}
 \caption{Net Present Value of Labor Income: Parametric and Semi-Parametric Approaches}
 \label{table:nvpli}
 \centering
-\begin{tabular}{ccc} \toprule
-Pooled & Male & Female \\ \hline
-\multicolumn{3}{c}{\textbf{Parametric (Main Paper)}} \\ \midrule
-71,345 & 300,896 & 50,390 \\
-(86,343) & (241,588) & (63,060) \\ \midrule
-\multicolumn{3}{c}{\textbf{Semi-Parametric (This Section)}} \\ \midrule
-62,080 & 289,471 & 59,163 \\
-(75,030) & (232,414) & (74,039) \\ \bottomrule
+\begin{tabular}{cccccc} \toprule
+Pooled & Male & Female & Pooled & Male & Female  \\ \midrule
+\multicolumn{6}{l}{\textbf{a. Parametric (Main Paper)}} \\
+\multicolumn{3}{c}{\underline{Labor Income}} & \multicolumn{3}{c}{\underline{Transfer Income}} \\ 
+71,345 & 300,896 & 50,390 & -3,047.05 & -6,462.79 & 2,355.674  \\
+(86,343) & (241,588) & (63,060) & (7,480.68) & (6,306.029) & (11,918.17) \\
+\multicolumn{6}{l}{\textbf{b. Semi-Parametric (This Section)}} \\
+\multicolumn{3}{c}{\underline{Labor Income}}  &\multicolumn{3}{c}{\underline{Transfer Income}} \\ 
+62,080 & 289,471 & 59,163 & -3,344.40 & 414.44 & -5,586.00 \\
+(75,030) & (232,414) & (74,039) & (8,210.69) & (403.96) & (28,261.51) \\ \bottomrule
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: this table compares the net-present value of labor income (treatment - control) using the parametric approach of the main text and the approach that we use in this section. All values are discounted to birth and reported in 2014 dollars.
+\item Note: this table compares the net-present value of labor and transfer income (treatment - control) using the parametric approach of the main text and the approach that we use in this section. All values are discounted to birth and reported in 2014 dollars.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
