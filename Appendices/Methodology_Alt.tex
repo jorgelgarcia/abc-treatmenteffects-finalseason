@@ -45,7 +45,7 @@ When we do not observe data on an outcome within the experiment for more than 10
 
 \noindent Partially observed outcomes can occur at any age $a \leq a^*$.\footnote{After $a^*$, we have incomplete data and do not observe any outcome. We explain the details for constructing predictions in Appendix~\ref{appendix:incomplete}.} We construct the IPW using both pre-treatment and post-treatment variables, within the age period  $a \leq a^*$.\\
 
-\noindent We construct the IPW using the same algorithm, independently of the age within $a \leq a^*$ in which an outcome is partially complete. For notational simplicity, we derive the IPW scheme without indexing the outcomes by age. We come back to the notation used throughout the text in the next appendix.\\
+\noindent We construct the IPW using the same algorithm, independently of the age within $a \leq a^*$ in which an outcome is partially complete. For notational simplicity, we derive the IPW scheme without indexing the outcomes by age. We restore to the notation used throughout the text in the next appendix.\\
 
 \noindent We use a standard inverse probability weighting (IPW) scheme\footnote{\citet{Horvitz_Thompson_1952_JASA}.} Formally, recall that $R = 1$ if the child is randomized to treatment, and $R = 0$ otherwise.\footnote{We are able to use $R$ (randomization into treatment) and $D$ (participation in treatment) exchangeably as we argue in Section~\ref{section:cbamethodology}.}. Similarly, let $A = 1$ denote the case where we observe a generic outcome $Y$, and $A = 0$ otherwise. As in the main text, $\bm{B}$ represents background (pre-treatment) variables and $\bm{X}$ variables that could be affected by treatment and that we use to predict $Y$.\\
 
@@ -99,11 +99,9 @@ and
 \subsection{Incomplete Data: Predicting and Monetizing Life-Cycle and Costs and Benefits} \label{appendix:incomplete}
 \label{app:method_noobs}
 
-\noindent \textbf{[JLG: all subindices have been aligned with the order used in thepaper.]}\\
+\noindent We do not observe post-$a^*$ life-cycle profiles for outcomes that are crucial for estimating the lifetime benefits of ABC/CARE. The main examples are parental income, subject labor income, public-transfer income, and health-related outcome variables. The importance of the first outcome variable is that ABC/CARE provided full-day childcare. It relaxed the time constraints of the mothers of the treated children, who were able to work more. Potentially, it could shift the life-cycle profile of the mothers, either by allowing them to take more schooling or more work experience. We estimate these profiles. Similarly, a comprehensive evaluation accounts for the effect on the life-cycle profiles of subject labor income and public-transfer income. We follow the strategy outlined in Section~\ref{section:cbamethodology} and implemented in Section~\ref{section:cbaresults} to identify and estimate these profiles, i.e., to produce predictions.\footnote{In this section, attrition or partial observations is not an issue: the predictors that we use to construct out-of-sample predictions are classified as complete data (see Appendices~\ref{app:method_fullobs} and \ref{app:method_partialobs}}.\\
 
-\noindent We do not observe life-cycle profiles for outcomes that are crucial for estimating the life-cycle benefits of ABC/CARE. The main examples are parental income, subject labor income, public-transfer income, and health-related outcome variables. The importance of the first outcome variable is that ABC/CARE provided full-day childcare. It relaxed the time constraints of the mothers of the treated children, who therefore were able to work more. Potentially, it could shift the life-cycle profile of the mothers, either by allowing them to have more schooling or more work experience. We estimate these profiles. Similarly, a comprehensive evaluation accounts for the effect on the life-cycle profiles of subject labor income and public-transfer income. We follow the strategy outlined in Section~\ref{section:cbamethodology} and implemented in Section~\ref{section:cbaresults} to identify and estimate these profiles, i.e., to produce predictions.\footnote{In this section, attrition or partial observations is not an issue: the predictors that we use to construct out-of-sample predictions are classified as complete data (see Appendices~\ref{app:method_fullobs} and \ref{app:method_partialobs}}.\\
-
-\noindent This appendix documents how we implement this strategy and provides complementary evidence supporting it, cited throughout the main text. We proceed as follows. Appendix~\ref{app:datasets} describes the auxiliary datasets that we use to predict out of sample. Appendix~\ref{appendix:match} provides details on the matching strategy to construct the synthetic or virtual treatment and controls groups. Appendix~\ref{appendix:pred} details the variables that use to make predictions. The next three appendices provide tests for the key assumptions listed in Section~\ref{section:cbamethodology}: Appendix~\ref{app:containsupport} provides tests of Assumption~\ref{ass:contain}, Appendix~\ref{app:endogeneity} provides tests for Assumption~\ref{ass:exog}, and Appendix~\ref{app:invariance} provides tests for Assumption~\ref{ass:summary}.\footnote{We provide tests for Assumption~\ref{ass:alignment} in the main text} As in the main text, our prediction strategy for subject's transfer and labor income are treated jointly because we follow the same strategy---although we provide some separate details when necessary. For parental income we provide three different strategies and document them in Appendix~\ref{app:parentalincome}.\\ 
+\noindent This appendix documents how we implement this strategy and provides complementary evidence supporting it, cited throughout the main text. We proceed as follows. Appendix~\ref{app:datasets} describes the auxiliary datasets that we use to predict out of sample. Appendix~\ref{appendix:match} provides details on the matching strategy used to construct the synthetic or virtual treatment and controls groups. Appendix~\ref{appendix:pred} details the variables that use to make predictions. The next three appendices provide tests for the key assumptions listed in Section~\ref{section:cbamethodology}: Appendix~\ref{app:containsupport} provides tests of Assumption~\ref{ass:contain}, Appendix~\ref{app:endogeneity} provides tests for Assumption~\ref{ass:exog}, and Appendix~\ref{app:invariance} provides tests for Assumption~\ref{ass:summary}.\footnote{We provide tests for Assumption~\ref{ass:alignment} in the main text} As in the main text, our prediction strategy for subject's transfer and labor income are treated jointly because we follow the same strategy---although we provide some separate details when necessary. For parental income we provide three different strategies and document them in Appendix~\ref{app:parentalincome}.\\ 
 
 \noindent We devote separate appendices for crime and health predictions in Appendix~\ref{appendix:crime} and Appendix~\ref{appendix:health}, respectively.\\
 
@@ -115,7 +113,7 @@ and
 
 \noindent The NLSY79 collected data on labor market participation, education, family background, family life, health, assets and income, government program participation, and measures of cognitive skills.\\
 
-\noindent We restrict the NLSY79 sample to Blacks with labor incomes less than \$300,000 (2014 USD) at any given year to avoid estimating our predictions with outliers in the auxiliary sample \textbf{[JJH: This seems like a huge range.] [JLG: Yes, but we then weight for the synthetic groups. This is only getting rid of a few outliers. Otherwise at some years the samples get to thin due to the variables that we require and the biennial nature of the surveys.]}.\footnote{For details on how we match the individuals in the experimental sample to the individuals in the non-experimental sample, see Appendix~\ref{appendix:match}.} With the mean labor income (2014 USD) in the ABC/CARE sample being \$32,782 at age 30, and the maximum reported being \$189,938, the cut-off we impose on the auxiliary data is high enough so that the labor income support at age 30 in ABC/CARE is contained in the support of labor income at age 30 in the NLSY79.\footnote{For labor income at age 21, we use the CNLSY.}\\
+\noindent We restrict the NLSY79 sample to Blacks with labor incomes less than \$300,000 (2014 USD) at any given year to avoid estimating our predictions with outliers in the auxiliary sample.\footnote{For details on how we match the individuals in the experimental sample to the individuals in the non-experimental sample, see Appendix~\ref{appendix:match}.} With the mean labor income (2014 USD) in the ABC/CARE sample being \$32,782 at age 30, and the maximum reported being \$189,938, the cut-off we impose on the auxiliary data is high enough so that the labor income support at age 30 in ABC/CARE is contained in the support of labor income at age 30 in the NLSY79.\footnote{For labor income at age 21, we use the CNLSY.}\\
 
 \noindent We do not impose a restriction on the birth year for the NLSY79 as all respondents are between 47 and 55 years of age at the time of the last interview (conducted in 2012). This age range is within the 31--67 range for which we extrapolate the income of the ABC/CARE subjects.\\
 
@@ -131,6 +129,10 @@ and
 
 \noindent We restrict the PSID to Blacks born between 1945 and 1981. Because the data extend to 2013, we use the most recent subsample of individuals aged 30 to 67. We also exclude all individuals with labor income exceeding \$300,000 (2014 USD) in any given year for the same reasons. Finally, given the biennial nature of the survey, we perform a linear interpolation on the variables that enter into our prediction model. This allows us to use as much of the PSID data as possible at every age to interpolate subject income.\\
 
+\noindent Before summarizing, note that in general: (i) \textbf{we use the CNLSY to predict from ages 21 to 29}; and (ii) we use the NLSY79 and PSID to predict from ages 29 to 79. Whenever using the NLSY79 and PSID together, we combine them and use them as a joint sample. Put differently, we pool the three data sets to obtain information across the time span of our interest \textit{without placing specific weights in either of the samples}. This allows us to satisfy support conditions (see Appendix~\ref{app:containsupport}) over the predicted variables and the predictors that we use. An alternative to this is to to weight each of the observations in these samples according to the inverse of their variance in a set of observed characteristics. We do not do this, and instead use the unweighted observations to then construct synthetic treatment and controls groups as we explain in Appendix~\ref{appendix:match}.\\
+
+\noindent \textbf{[JJH: I am sorry ---you still do not say which how each sample is used. We just form unweighted averages across groups? Please let's finish this.] [JLG: Adding a paragraph before.]}\\
+
 \noindent \textbf{Summary: Initial Restrictions Placed on the Auxiliary Samples}\\
 When predicting transfer and labor income, we place the following restrictions \textit{at any age of prediction}. Additional restrictions are placed when predicting the other outcomes, as we explain below.
 \begin{enumerate}
@@ -145,8 +147,7 @@ We use the following samples to predict labor and transfer income. Different sam
 \item \textbf{Labor Income:} 
 \begin{enumerate}
 \item \textbf{Ages 21 to 29:} CNLSY.
-\item \textbf{Ages 29 to 67 (assumed age of retirement):} NLSY79 and PSID.$^{*}$\\ 
-\noindent $^{*}$ Whenever using the NLSY79 and PSID together, we combine them and use them as a joint sample. This allows us to satisfy support conditions (see Appendix~\ref{app:containsupport}) over the predicted variables and the predictors that we use.\footnote{An alternative to this is to to weight each of the observations in these samples according to the inverse of their variance in a set of observed characteristics. We do not do this, and instead use the unweighted observations to then construct synthetic treatment and controls groups as we explain in Appendix~\ref{appendix:match}.}
+\item \textbf{Ages 29 to 67 (assumed age of retirement):} NLSY79 and PSID.
 \end{enumerate}
 \item \textbf{Transfer Income:}
 \begin{enumerate}
@@ -159,7 +160,7 @@ We use the following samples to predict labor and transfer income. Different sam
 
 \noindent The first principle for finding non-experimental synthetic treatment or controls group members is that they be eligible for the program, i.e. $\bm{B}_n \in \mathcal{B}_{0}$. The harder challenge is finding counterparts to the treated and the controlled in the non-experimental samples where no one directly receives treatment.\\
 
-\noindent Consider outcome $Y^d_{k,j,a}$ generated by $\bm{B}_k, \bm{X}^d_{k,j,a}$ (defined as the relevant predictor variables for $Y_{k,j,a}$) and $\varepsilon^d_{k,j,a}$. Under exogeneity (Assumption~\ref{ass:exog}), we can match on both variables $\bm{B}_k$ and $\bm{X}^d_{k,j,a}$. This assumption allows us to  use variables $\bm{X}^d_{k,j,a}$ that are caused by treatment and that predict outcome $j$ and are invariant after $a^\ast$ (e.g., ability). If exogeneity is not satisfied, matching on $\bm{X}^d_{k,j,a}$ becomes problematic. Note that we can match on $\bm{B}_k$ within the the set of individuals in the auxiliary samples such that $\bm{B}_k \in \mathcal{B}_{0}$. This is preferable in scenarios in which Assumption~\ref{ass:exog} could be violated. Below, we show that there is little sensitivity of our estimates for whether we match on $\bm{B}_k$, to match on $\bm{X}^d_{k,j,a}$, or on both $\bm{B}_k$ and $\bm{X}^d_{k,j,a}$.\\
+\noindent Consider outcome $Y^d_{k,j,a}$ generated by $\bm{B}_k, \bm{X}^d_{k,j,a}$ (defined as the relevant predictor variables for $Y_{k,j,a}$) and $\varepsilon^d_{k,j,a}$. Under exogeneity (Assumption~\ref{ass:exog}), we can match on both $\bm{B}_k$ and $\bm{X}^d_{k,j,a}$. This assumption allows us to  use variables $\bm{X}^d_{k,j,a}$ that are caused by treatment and that predict outcome $j$ and are invariant after $a^\ast$ (e.g., ability). If exogeneity is not satisfied, matching on $\bm{X}^d_{k,j,a}$ becomes problematic. Note that we can match on $\bm{B}_k$ within the the set of individuals in the auxiliary samples such that $\bm{B}_k \in \mathcal{B}_{0}$. This is preferable in scenarios in which Assumption~\ref{ass:exog} is violated. Below, we show that there is little sensitivity of our estimates for whether we match on $\bm{B}_k$, to match on $\bm{X}^d_{k,j,a}$, or on both $\bm{B}_k$ and $\bm{X}^d_{k,j,a}$.\\
 
 \noindent For the moment, simplify notation and assume that $\bm{B}_k$ is absorbed into $\bm{X}^d_{k,j,a}$. We relax this assumption below. For each treatment group member $i$ in treatment status $d$, we find counterparts following the analysis of \citet{Heckman_Ichimura_etal_1998_REStud}. We do not find different synthetic treatment and control groups for each age and for each outcome that we predict. We find one synthetic treatment and one synthetic control group in each auxiliary sample and use them to predict each outcomes at each age. We explain in Appendix~\ref{app:datasets} what auxiliary samples we use to predict at each age. That is, we use the same synthetic treatment and control groups to predict all of the outcomes. For this reason, we drop the age and outcome subindices for the rest of this section.\\
 
@@ -177,11 +178,15 @@ For individual $i$ in experimental sample ($k=e$), an individual $i''$ in the au
 \end{algorithm}
 \doublespacing
 
-\noindent Using these synthetic control and treatment groups, we construct the dynamic relationships between outcomes and predictors in the auxiliary samples and use them to form predictions in the non-experimental sample. Then, we construct treatment effects for each outcome at each age. In our main estimation, we match both on $\bm{B}_k$ and $\bm{X}^d_{k}$. We next examine the sensitivity to the use of different matching variables next. We find little sensitivity. \textbf{[JJH: How can this be? If we don't match, what do we find?] [JLG: this means that the dynamic relationship is invariant to the sample that we use to estimate it. I have added no matching to Figure~\ref{fig:matchvariables}]}
+\noindent Using these synthetic control and treatment groups, we construct the dynamic relationships between outcomes and predictors in the auxiliary samples and use them to form predictions in the non-experimental sample. Then, we construct treatment effects for each outcome at each age. In our main estimation, we match both on $\bm{B}_k$ and $\bm{X}^d_{k}$. We next examine the sensitivity to the use of different matching variables next. We find little sensitivity.\\
 
-\noindent A semi-parametric alternative to this procedure is to find a match (or a set of matches) $i''$ in the auxiliary sample for each individual $i$ in the experimental sample and impute the  dynamic trajectories of individual(s) $i''$ to individual $i$, using Algorithm~\ref{alg:match}. We present this alternative in Appendix~\ref{appendix:nonpar}.\\
+\noindent \textbf{[JJH: We surely match on $\bm{B}$. (Be clear here).] [JLG: Yes. On $\bm{B}$ and $\bm{X}$ although there is little sensitivity. See next paragraph.] [JLG: The coefficients characterizing the dynamic relationship remain roughly the same when estimated across the different versions of synthetic treatment and control groups we use. That does not mean that we do not use the predictors. We use them, as stated and summarized next. It is the case, however, that the version of the auxiliary samples that we use to fit the dynamic relationship gives us very similar parameterizations. That is, there is little sensitivity. This is a version of invariance and it's something we were hoping to be true. Otherwise different samples would give different parameterizations. This is a statement about the production functions, not about the levels of the predictors in the synthetic treatment/control groups.]}\\
 
-\noindent \textbf{[JJH: Logically, we should find which X have have treatment effects.] [JLG: Yes. But when studying the variables available across datasets, we are basically down to PIAT, Education, and lagged income. This have treatment effects and we have no other option than relying on them.]}\\
+\noindent The lack of sensitivity implies that the dynamic relationship that we fit in the auxiliary sample is invariant to the sample that we use to estimate it, which favors Assumption~\ref{ass:summary}. This does not mean that the prediction is the same for the synthetic and control groups. It means that the parameterization is in agreement, but not the level of the predictors.\\
+
+\noindent A non-parametric alternative to this procedure is to find a match (or a set of matches) $i''$ in the auxiliary sample for each individual $i$ in the experimental sample and impute the  dynamic trajectories of individual(s) $i''$ to individual $i$, using Algorithm~\ref{alg:match}. We present this alternative in Appendix~\ref{appendix:nonpar}.\\
+
+\noindent \textbf{[JJH: Logically, we should find which X have have treatment effects.] [JLG: Yes. But when studying the variables available across datasets, we are basically down to PIAT, Education, and lagged income. This have treatment effects and we have no other option than relying on them.] [JLG: Yes. I agree. I have added this when describing the predictor variables.]}\\
 
 \noindent \textbf{Summary: Variables Used to Match to Construct Synthetic Control and Treatment Groups}\\
 When using Algorithm~\ref{alg:match} to find synthetic control and treatment groups we use each of the following variables, \textit{for all the outcomes at all ages}. The criterion for selecting these variables is availability across all auxiliary sources. We construct one synthetic control group and one synthetic treatment group in each auxiliary sample (and not one group for each age). We explain how we use the synthetic groups for predicting each outcome in Appendix~\ref{app:datasets}.
@@ -191,15 +196,9 @@ When using Algorithm~\ref{alg:match} to find synthetic control and treatment gro
 \item \textbf{CNLSY:} male, birth year, years of education at age 30, labor income at age 30.
 \end{enumerate}
 
-\textbf{[JJH: Jorge, please show us the constructed counterfactuals. Where are the tests for exogeneity by age ($a$), outcome $j$, for treatment status $d$?] [JLG: With the roadmap I provided, it should be clear now that this come below. I understand how this could have been confusing before, but we are building here each step.] [JJH: How do you combine these samples?] [JLG: this should now be clarified in Appendix~\ref{app:datasets}.]}
-
 \paragraph{Sensitivity Analysis to Variables Used to Match}
 
-\noindent \textbf{[JJH: these are not baseline variables.] [JLG: There was a mistake in the wording. Please see below.]}
-
-\noindent To study the sensitivity of our labor income predictions to the choice of different matching variables, we predict income using the following different sets of variables: (a) no matching variables (i.e., each individual in the auxiliary sample has the sam weight); (b) pre-treatment variables only (male and Black indicators and year of birth); (c) post-treatment variables only (years of education at age 30 and labor income at age 30); and (c) pre-treatment and post-treatment variables (male and Black indicators, year of birth, years of education at age 30, and labor income at age 30). Figure~\ref{fig:matchvariables} displays the results of this exercise. The top row represents the exercise for females and the bottom row for males. The predictions exhibit little sensitivity to the choice of matching variables within the set of variables used. The average root-mean squared error for the prediction across ages 22 to 67 is very similar when varying the sets of matching variables.\\
-
-\noindent The lack of sensitivity implies that the dynamic relationship that we fit in the auxiliary sample is invariant to the sample that we use to estimate it, which favors Assumption~\ref{ass:summary}. This does not mean that the prediction is the same for the synthetic and control groups. It means that the parameterization is in agreement, but not the level of the predictors. 
+\noindent To study the sensitivity of our labor income predictions to the choice of different matching variables, we predict income using the following different sets of variables: (a) no matching variables (i.e., each individual in the auxiliary sample has the same weight); (b) pre-treatment variables only (male and Black indicators and year of birth); (c) post-treatment variables only (years of education at age 30 and labor income at age 30); and (c) pre-treatment and post-treatment variables (male and Black indicators, year of birth, years of education at age 30, and labor income at age 30). Figure~\ref{fig:matchvariables} displays the results of this exercise. The top row represents the exercise for females and the bottom row for males. The predictions exhibit little sensitivity to the choice of matching variables within the set of variables used. The average root-mean squared error for the prediction across ages 22 to 67 is very similar when varying the sets of matching variables.\\
 
 \begin{sidewaysfigure}[H]
 \centering
@@ -245,27 +244,25 @@ When using Algorithm~\ref{alg:match} to find synthetic control and treatment gro
 		\includegraphics[width=\textwidth]{output/labor_20-65_pset1_mset3_male_sensitivity.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: This figure displays the predicted labor income profile obtained when constructing control- and treatment-group matches according to the procedure in Section~\ref{sec:usingaux}. We use data from the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79) (ages 22 to 29) and the National Longitudinal Survey of Youth 1979 (NLSY79) and the Panel Study of Income Dynamics (PSID) (ages 29 to 67). We vary the matching variables across the different panels, for both males and females. Pre-treatment variables: male and Black indicators and year of birth. Post-treatment variables: years of education at age 30 and labor income at age 30. Each panel shows the average root-mean squared error (and its corresponding standard error) of the prediction in the auxiliary datasets. The average is across ages 22 to 67. When we do not weight (match) the samples, the average root-mean squared error is the same across the treatment and control groups by construction (no synthetic groups are created when there is no weighting. \textbf{[JJH: what does this show? Can you do goodness of fitness tests?] [JLG: Yes, I have added this to the figures.]}
+Note: This figure displays the predicted labor income profile obtained when constructing control- and treatment-group matches according to the procedure in Section~\ref{sec:usingaux}. We use data from the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79) (ages 22 to 29) and the National Longitudinal Survey of Youth 1979 (NLSY79) and the Panel Study of Income Dynamics (PSID) (ages 29 to 67). We vary the matching variables across the different panels, for both males and females. Pre-treatment variables: male and Black indicators and year of birth. Post-treatment variables: years of education at age 30 and labor income at age 30. Each panel shows the average root-mean squared error (and its corresponding standard error) of the prediction in the auxiliary datasets. The average is across ages 22 to 67. When we do not weight (match) the samples, the average root-mean squared error is the same across the treatment and control groups by construction (no synthetic groups are created when there is no weighting. \textbf{[JJH: what does this show? Can you do goodness of fitness tests?] [JLG: Yes, I have added this to the figures.] [JJH: You mean no matching even in $\bm{B}$? (This seems peculiar). [JLG: Yes, I mean that. $\bm{B}$ is pre-treatment and it comes in the second exercise. It is not peculiar, if invariance of the production functions holds across the different constructions of the synthetic treatment and control groups.]}
 \end{sidewaysfigure}
 
 \subsubsection{Variables Used to Predict} \label{appendix:pred}
 
-We base our predictions of a generic outcome, $Y_{k,j,a}$ on background (pre-treatment) variables, $\bm{B}_k$, and variables that could have been affected by treatment $\bm{X}_{k,j,a}$. $\bm{X}_{k,j,a}$ can contain lagged values of $Y_{k,j,a}$.\\
+We base our predictions of a generic outcome, $Y_{k,j,a}$ on background (pre-treatment) variables, $\bm{B}_k$, and variables that could have been affected by treatment $\bm{X}_{k,j,a}$. $\bm{X}_{k,j,a}$ can contain lagged values of $Y_{k,j,a}$. \textbf{[JJH: But we don't! You say it doesn't matter! I am confused!] [JLG: The coefficients characterizing the dynamic relationship remain roughly the same when estimated across the different versions of synthetic treatment and control groups we use. That does not mean that we do not use the predictors. We use them, as stated and summarized next. It is the case, however, that the version of the auxiliary samples that we use to fit the dynamic relationship gives us very similar parameterizations. That is, there is little sensitivity. This is a version of invariance and it's something we were hoping to be true. Otherwise different samples would give different parameterizations. This is a statement about the production functions, not about the levels of the predictors in the synthetic treatment/control groups.]}\\
 
 \noindent Our predictions are based on identifying and estimating relationships between the outcomes we seek to predict at age $a$, $Y_{k,j,a}$, in the experimental samples and using the fitted relationships in the auxiliary samples. We produce predictions for each outcome at each age.\\
 
 \noindent \textbf{Criteria for Candidate Variables Used to Predict}\\
-\noindent To be considered a prediction variable, the variable must satisfy three conditions: (i) it has to be available in the experimental and non-experimental samples; (ii) it has to have predictive power for the predicted outcome. Our criterion for inclusion is that all the coefficients of a regression of the predicted variable on \textit{all} the prediction variables are chosen to be statistically significant at the 1\% level.\footnote{In a few cases, we decide to keep some variables nearly above this threshold because we consider them economically relevant.} It also needs to satisfy Assumption~\ref{ass:contain}, which we document below in Appendix~\ref{app:containsupport}.\\
+\noindent To be considered a predictor variable, a variable must satisfy three conditions: (i) it has to be available in the experimental and non-experimental samples; (ii) it has to have predictive power for the predicted outcome. Our criterion for inclusion is that all the coefficients of a regression of the predicted variable on \textit{all} the prediction variables are chosen to be statistically significant at the 1\% level.\footnote{In a few cases, we decide to keep some variables nearly above this threshold because we consider them economically relevant.}; and (iii) it also needs to satisfy Assumption~\ref{ass:contain}, which we document below in Appendix~\ref{app:containsupport}.\footnote{A more logical way to proceed would be to use a sub-sample of predictors satisfying this criteria and also being affected by treatment, so that we are able to predict treatment effects. This is impossible due to data limitations. Most of the post-treatment predictors we use, however, display sizable treatment effects. See Appendix~\ref{appendix:results}.}\\
 
 \noindent For a variable to satisfy restrictions (i) and (ii), it needs to be the case not only that the variable is available in the non-experimental sample but also that the survey question for it was introduced far enough back in time for us to observe it in a range that is common to the range in which we observe the variables in the experimental sample. To illustrate this, consider the case of body-mass index in the PSID. Survey questions for this variable were introduced in the late 1990s. The sample for which the question was introduced, however, does not span enough observations for its support to cover the support of the experimental sample.\\
 
 \noindent To lessen this problem we pool diverse auxiliary datasets to maximize the available predictor variables.\\
 
-\noindent We present evidence on the predictive power of the predictor variables, in both the control and treatment synthetic groups we construct in the PSID, NLSY79, and CNLSY. Tables~\ref{table:predlaborincome} and \ref{table:predtransferincome} show that, in each of the auxiliary samples that we use, the prediction variables $\bm{X}_{a}, \bm{B}_k$ are strong predictors of labor and transfer  income at age 30. We present this evidence at age 30 both for brevity and to compare the predictive power of $\bm{X}_{a},\bm{B}_k$ on the outcomes we consider in the ABC/CARE sample.\\
+\noindent We present evidence on the predictive power of the predictor variables, in both the control and treatment synthetic groups we construct in the PSID, NLSY79, and CNLSY. Tables~\ref{table:predlaborincome} and \ref{table:predtransferincome} show that, in each of the auxiliary samples that we use, the prediction variables $\bm{X}_{a}, \bm{B}_k$ are strong predictors of labor and transfer  income at age 30. We present this evidence at age 30 both for brevity and compare the predictive power of $\bm{X}_{a},\bm{B}_k$ on the outcomes we consider in the ABC/CARE sample.\\
 
-\textbf{[JJH: Wait, isn't this circular? Labor income at 30 is a predictor variable. Need to be careful, this looks wrong.] [JLG: Please see the next summary. Labor Income at age 30 does not predict labor income at age 30. See next.] [That's not what you said earlier - it's called ``pre-treatment''.] [JLG: this was a mistake and the description in Figure C.1 has been corrected.]}\\
-
-\noindent \textbf{Summary: Variables Used to Predict}\\
+\noindent \textbf{Summary: Predictor Variables}\\
 \noindent We use the following variables to predict labor and transfer income. Different variables are used to predict the rest of the outcomes, as we explain below.
 \begin{enumerate}
 \item \textbf{Labor Income:}
@@ -289,7 +286,7 @@ We base our predictions of a generic outcome, $Y_{k,j,a}$ on background (pre-tre
 \input{output/combined_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measured as years of education. Robust standard errors are in parentheses. We weigh the individuals in the auxiliary samples to match them on observed characteristics to the individuals using the procedure in Appendix~\ref{appendix:match}. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$. \textbf{[JJH: How do we pool these? How to weight?] [JLG: we don't weight.]}
+\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The parentheses next to the variable indicates the age of measurement. Education is measured as years of education. Robust standard errors are in parentheses. We weigh the individuals in the auxiliary samples to match them on observed characteristics to the individuals using the procedure in Appendix~\ref{appendix:match}. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$. \textbf{[JJH: How do we pool these? How to weight?] [JJH: so which sample are we using? How are we combining samples?] [JLG: It depends on the age at which we predict. This is stated above.]}
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -308,15 +305,15 @@ We base our predictions of a generic outcome, $Y_{k,j,a}$ on background (pre-tre
 \end{threeparttable}
 \end{table}
 
-\paragraph{Semi-Parametric Predictions} \label{appendix:nonpar}
+\paragraph{Non-Parametric Predictions} \label{appendix:nonpar}
 
-\noindent An alternative to the predication strategy that we use throughout the main text and the appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using Algorithm~\ref{alg:match}; and (ii) use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a semi-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and use it to form out-of-sample predictions, we simply match individuals using Algorithm~\ref{alg:match} to impute labor income profiles.\\ 
+\noindent An alternative to the predication strategy that we use throughout the main text and the appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using Algorithm~\ref{alg:match}; and (ii) use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and use it to form out-of-sample predictions, we simply match individuals using Algorithm~\ref{alg:match} to impute labor income profiles.\\ 
 
-\noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the semi-parametric approach that we introduce in this section. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). An individual $i''$ in the auxiliary sample is a match for individual $i$ in the experimental sample if the left-hand side of \eqref{eq:ingrownnail} is the minimal value across all individuals in the auxiliary sample. We present the discounted net present value (treatment - control) for labor and transfer income in 2014 dollars. The approaches are in rough alignment.\\
+\noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the non-parametric approach that we introduce in this section. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). An individual $i''$ in the auxiliary sample is a match for individual $i$ in the experimental sample if the left-hand side of \eqref{eq:ingrownnail} is the minimal value across all individuals in the auxiliary sample. We present the discounted net present value (treatment - control) for labor and transfer income in 2014 dollars. The approaches are in rough agreement.\\
 
 \begin{table}[H]
 \begin{threeparttable}
-\caption{Net Present Value of Labor Income: Parametric and Semi-Parametric Approaches}
+\caption{Net Present Value of Labor Income: Parametric and Non-Parametric Approaches}
 \label{table:nvpli}
 \centering
 \begin{tabular}{cccccc} \toprule
@@ -325,7 +322,7 @@ Pooled & Male & Female & Pooled & Male & Female  \\ \midrule
 \multicolumn{3}{c}{\underline{Labor Income}} & \multicolumn{3}{c}{\underline{Transfer Income}} \\ 
 71,345 & 300,896 & 50,390 & -3,047.05 & -6,462.79 & 2,355.674  \\
 (86,343) & (241,588) & (63,060) & (7,480.68) & (6,306.029) & (11,918.17) \\
-\multicolumn{6}{l}{\textbf{b. Semi-Parametric (This Section)}} \\
+\multicolumn{6}{l}{\textbf{b. Non-Parametric (This Section)}} \\
 \multicolumn{3}{c}{\underline{Labor Income}}  &\multicolumn{3}{c}{\underline{Transfer Income}} \\ 
 62,080 & 289,471 & 59,163 & -3,344.40 & 414.44 & -5,586.00 \\
 (75,030) & (232,414) & (74,039) & (8,210.69) & (403.96) & (28,261.51) \\ \bottomrule
@@ -341,7 +338,7 @@ Pooled & Male & Female & Pooled & Male & Female  \\ \midrule
 
 Assumption~\ref{ass:contain} requires that the support of the auxiliary data contain the support of the experimental data. This can be checked for $a \leq a^\ast$. Figure~\ref{fig:support} validates this assumption by displaying the overlapping support sets of ABC/CARE and our auxiliary data (which we restrict as we explain in Appendix~\ref{app:datasets}) for the variables used to interpolate and extrapolate earnings.\footnote{For the male and Black indicators, we do not provide evidence of containing support. All three non-experimental samples have vast numbers of males, females, and Blacks to cover the support in the experimental samples.}\\ 
 
-\noindent \textbf{[JJH: How do we pool?] [JLG: This should be clear in this current version from what we say above.]}\\
+\noindent \textbf{[JJH: How do we pool?] [JLG: This should be clear in this current version from what we say above.] [JJH: It's not to me. We have three samples ---how are the observations for each used.] [This is stated in ``\textbf{Summary: Auxiliary Samples Used to Predict by Age}''. I wrote a bullet for each sample, together with the ages in which each of the samples are used.]}\\
 
 \begin{figure}[H]
 		\caption{Support of ABC/CARE and Auxiliary Data} \label{fig:support}
@@ -401,12 +398,12 @@ Assumption~\ref{ass:contain} requires that the support of the auxiliary data con
 
 \subsubsection{Testing Assumption~\ref{ass:exog}: Exogeneity} \label{app:endogeneity}
 
-\noindent The following framework help us to test both Assumptions~\ref{ass:exog} and \ref{ass:summary}. We provide this framework and test Assumption~\ref{ass:exog} in this appendix, and test Assumption~\ref{ass:summary} in the next.\\
+\noindent The following framework help us to test both Assumptions~\ref{ass:exog} and \ref{ass:summary}. We provide this framework and test Assumption~\ref{ass:exog} in this section of the appendix, and test Assumption~\ref{ass:summary} in the next section.\\
 
 \noindent Define an outcome vector as 
 
 \begin{align}
-\bm{Y}_{k,a} &= \bm{X}^d_{k,a} \gamma + \bm{\varepsilon}^d_a  &(a) \nonumber
+\bm{Y}_{k,a} &= \bm{X}^d_{k,a} \bm{\gamma} + \bm{\varepsilon}^d_a  &(a) \nonumber
 \end{align}
 
 \noindent with an associated measurement system 
@@ -417,8 +414,7 @@ Assumption~\ref{ass:contain} requires that the support of the auxiliary data con
 \end{align}
 
 
-\noindent where $\bm{\theta}^d \independent \bm{\upsilon}_{a}^d, \bm{\omega}_{a}^d$ and $\bm{\upsilon}_{a}^d \independent \bm{\omega}_{a}^d$ for all $a \in \{0, \ldots, A \}, \; d \in \{0,1\}$.\\
-
+\noindent where $\bm{\theta}^d \independent \bm{\upsilon}_{a}^d, \bm{\omega}_{a}^d$ and $\bm{\upsilon}_{a}^d \independent \bm{\omega}_{a}^d$ for all $a \in \{0, \ldots, A \}, \; d \in \{0,1\}$. We use predictors in these equations. For sake of simplicity, we omit an explicit representation of them here.\\
 
 \noindent When the auxiliary measurement system $\bm{M}_{a}^d $ consists of at least three measures, we are able to identify the vectors of coefficients characterizing this system, $\bm{\lambda}^d, \bm{\beta}^d$, as well as the respective covariance matrices, $\bm{\Sigma}_{\bm{\theta}_{a}^d}, \bm{\Sigma}_{\bm{\upsilon}_{a}^d}, \bm{\Sigma}_{\bm{\omega}_{a}^d}$, and use the method of \citet{Bartlett_1938_Nature} to obtain an estimate of $\bm{\theta}_{a}^d$ \citep{Heckman_Pinto_etal_2013_PerryFactor}. Identifying and estimating the elements in System \eqref{eq:sa-msystemmain} helps two purposes: (i) propose a test of Assumption~\ref{ass:exog}; and (ii) use estimates of $\bm{\theta}_{a}^d$ as control functions when testing Assumption~\ref{ass:summary} in the next appendix, i.e. use these estimates to ``control'' for endogeneity.\\
 
@@ -445,7 +441,12 @@ Note: Panel (a) displays a factor score estimated based on the measurement syste
 
 \noindent We can also estimates $\bm{\theta}_{a}^d$ in the auxiliary sample. For want of data to approximate $\bm{\theta}_{c}, \bm{\theta}_{n}$ in PSID and NLSY79, we use the CNLSY in this appendix. Our measurement system for $\bm{\theta}_{c}$ consists of reading and comprehension PIAT scores as well as by the Peabody Picture Vocabulary Test (PPVT). Our measurement system for $\bm{\theta}_{n}$ is based on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior).\\
 
-\noindent Once these estimates are available, we can test Assumption~\ref{ass:exog} in the experimental and auxiliary samples. The test consists of the following. Let $\bm{\gamma}^E$ be the parameter associated to $\bm{X}^d_{k,a}$ in Equation (a) in System~\eqref{eq:sa-msystemmain} when not accounting for $\bm{\theta}_{a}^d$. Similarly, let $\bm{\gamma}^I$ be the parameter associated to $\bm{X}^d_{k,a}$ in Equation (a) in System~\eqref{eq:sa-msystemmain} when accounting for $\bm{\theta}_{a}^d$. Under the null hypotheses, Assumption~\ref{ass:exog} holds and $\bm{\theta}_{a}^d$ is an irrelevant predictor in Equation (a) in System~\eqref{eq:sa-msystemmain}, which makes the OLS estimate of $\bm{\gamma}^E$ efficient and the OLS estimate of $\bm{\gamma}^I$ inefficient. If the null hypotheses are false, $\bm{X}^d_{k,a}$ and $\varepsilon_{a}^d$ are not independent. Thus, $\bm{\gamma}^I$ is consistent and $\bm{\gamma}^E$ is not. We test the null hypothesis by asking if the elements in $\bm{\theta}_{a}^d$ are relevant predictors of a set of outcomes at age 30, so that we can perform the tests both the experimental and the auxiliary samples. We contrast specifications with and without including estimates of $\bm{\theta}_{a}^d$, and report the $F$-statistic corresponding to this comparison. This is a version of a Du-Wu-Hausman test \citep[see][]{Durbin_1954_RISI,Wu_1973_Econometrica,Hausman_1978_Econometrica}. Tables~\ref{table:endoginc} to \ref{table:trincome} present the results. In most cases, we are not able to reject the null hypothesis that Assumption~\ref{ass:exog} holds. 
+\noindent Once these estimates are available, we can test Assumption~\ref{ass:exog} in the experimental and auxiliary samples. The test consists of the following. Let $\bm{\gamma}^E$ be the parameter associated to $\bm{X}^d_{k,a}$ in Equation (a) in System~\eqref{eq:sa-msystemmain} when not accounting for $\bm{\theta}_{a}^d$. Similarly, let $\bm{\gamma}^I$ be the parameter associated with $\bm{X}^d_{k,a}$ in Equation (a) in System~\eqref{eq:sa-msystemmain} when accounting for $\bm{\theta}_{a}^d$. Under the null hypotheses, Assumption~\ref{ass:exog} holds and $\bm{\theta}_{a}^d$ is an irrelevant predictor in Equation (a) in System~\eqref{eq:sa-msystemmain}. This makes the OLS estimate of $\bm{\gamma}^E$ inconsistent. If the null hypotheses are false, $\bm{X}^d_{k,a}$ and $\varepsilon_{a}^d$ are not independent, $\bm{\gamma}^I$ is consistent and $\bm{\gamma}^E$ is not. We test the null hypothesis by asking if the elements in $\bm{\theta}_{a}^d$ are relevant predictors of a set of outcomes at age 30, so that we can perform the tests both the experimental and the auxiliary samples. We contrast specifications with and without including estimates of $\bm{\theta}_{a}^d$, and report the $F$-statistic corresponding to this comparison. This is a version of a Du-Wu-Hausman test \citep[see][]{Durbin_1954_RISI,Wu_1973_Econometrica,Hausman_1978_Econometrica}. Tables~\ref{table:endoginc} to \ref{table:trincome} present the results. In most cases, we are not able to reject the null hypothesis that Assumption~\ref{ass:exog} holds. 
+
+\pagebreak
+\noindent \textbf{[JJH: What if we do by gender?][JLG: By gender we loose all predicting power and the $R^2$'s drop. We can add them, but it doesn't look good at all.]}\\
+
+\noindent \textbf{[JLG: Education (30) and Labor Income (21) predict labor income. We have trouble with transfer income; but it's what we have to predict. Treatment effects on transfer income are very minor.]} 
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
@@ -588,7 +589,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of High School Graduation at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Females Sample, ABC/CARE}
+\caption{Prediction of High School Graduation at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
@@ -602,7 +603,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of High School Graduation at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Males Sample, ABC/CARE}
+\caption{Prediction of High School Graduation at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
@@ -631,7 +632,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Employment at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Females Sample, ABC/CARE}
+\caption{Prediction of Employment at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
@@ -645,7 +646,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Employment at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Males Sample, ABC/CARE}
+\caption{Prediction of Employment at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
@@ -673,7 +674,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Females Sample, ABC/CARE}
+\caption{Prediction of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
@@ -687,7 +688,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Males Sample, ABC/CARE}
+\caption{Prediction of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
@@ -715,7 +716,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Transfer Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Females Sample, ABC/CARE}
+\caption{Prediction of Transfer Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE}
 \label{table:end3}
 \centering
 \scriptsize
@@ -729,7 +730,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Transfer Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Males Sample, ABC/CARE}
+\caption{Prediction of Transfer Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE}
 \centering
 \scriptsize
 \input{output/abccare_endog_si30y_inc_trans_pub_smale_ready.tex}
@@ -755,7 +756,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Females Sample, ABC/CARE}
+\caption{Prediction of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE}
 \centering
 \scriptsize
 \input{output/abccare_endog_si34y_bmi_sfemale_ready.tex}
@@ -768,7 +769,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Males Sample, ABC/CARE}
+\caption{Prediction of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE}
 \label{table:end3}
 \centering
 \scriptsize
@@ -780,6 +781,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 \end{threeparttable}
 \end{sidewaystable}
 
+\begin{comment}
 \noindent\textbf{Additional Tests Using the Perry Preschool Project}\\
 \noindent We complement the evidence for ABC/CARE using data from another randomized controlled trial, the Perry Preschool Project. For details on this program see \citet{Heckman_Pinto_etal_2013_PerryFactor}. We test the same hypothesis and choose predictors that are as similar as possible to our predictors. We use three dimensions for $\bm{\theta}$ because \citet{Heckman_Pinto_etal_2013_PerryFactor} extensively analyze multiple items designed to measure skills and behavior and find that three factors best describe the data. The three factors are measures of cognitive skills, externalizing behavior, and academic motivation. We use the same method as \citet{Heckman_Pinto_etal_2013_PerryFactor} to construct $\bm{\theta}$. We fail to reject that the null hypothesis that the inputs explain treatment effects for labor income and idleness at age 40. We also fail to reject this hypothesis for high school graduation at age 40 for samples broken down by gender.
 
@@ -799,7 +801,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of High School Graduation at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Females Sample, Perry Preschool Project}
+\caption{Prediction of High School Graduation at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, Perry Preschool Project}
 \label{table:perry1}
 \centering
 \scriptsize
@@ -813,7 +815,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of High School Graduation at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Males Sample, Perry Preschool Project}
+\caption{Prediction of High School Graduation at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, Perry Preschool Project}
 \label{table:perry1}
 \centering
 \scriptsize
@@ -842,7 +844,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Idleness at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Females Sample, Perry Preschool Project}
+\caption{Prediction of Idleness at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, Perry Preschool Project}
 \label{table:perry2}
 \centering
 \scriptsize
@@ -856,7 +858,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Idleness at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Males Sample, Perry Preschool Project}
+\caption{Prediction of Idleness at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, Perry Preschool Project}
 \label{table:perry2}
 \centering
 \scriptsize
@@ -884,7 +886,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Females Sample, Perry Preschool Project}
+\caption{Prediction of Labor Income at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ FeFemale Sample, Perry Preschool Project}
 \label{table:perry3}
 \centering
 \scriptsize
@@ -898,7 +900,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Males Sample, Perry Preschool Project}
+\caption{Prediction of Labor Income at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, Perry Preschool Project}
 \label{table:perry3}
 \centering
 \scriptsize
@@ -926,7 +928,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Reports Very Good Health at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Females Sample, Perry Preschool Project}
+\caption{Prediction of Reports Very Good Health at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, Perry Preschool Project}
 \label{table:perry3}
 \centering
 \scriptsize
@@ -940,7 +942,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Reports Very Good Health at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Males Sample, Perry Preschool Project}
+\caption{Prediction of Reports Very Good Health at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, Perry Preschool Project}
 \label{table:perry3}
 \centering
 \scriptsize
@@ -951,6 +953,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
+\end{comment}
 
 \noindent In the main text, we show that Assumption~\ref{ass:summary}, together with Assumption~\ref{ass:exog}, implies equality of conditional expectations in the experimental and auxiliary samples.
 
@@ -1050,7 +1053,7 @@ Note: Prediction of body-mass index at age 34 based on the variables listed in t
 
 \subsubsection{Parental Income}\label{app:parentalincome}
 
-\noindent A substantial fraction of the ABC/CARE benefits come from parental income. The program operated as a childcare center. The parents were, in essence,  mothers: only $27\%$ of the mothers lived with a partner at baseline and there is little change in this status after enrollment. ABC/CARE relaxed the time constraint of the mothers, enabling them to educate themselves more and/or work more. The program had treatment effects on (i) maternal education; (ii) maternal labor supply; and (iii) maternal income.\footnote{See Appendix~\ref{appendix:results}.} Quantifying the effect of ABC/CARE on parental income requires quantifying its effects beyond age 5, after the subjects entered school. The program could have shifted the labor income profile through education or work experience. To test this, we need to quantify the effect that the program had from when it started until the mothers retired.\\
+\noindent A substantial fraction of the ABC/CARE benefits come from parental income. The program operated as a childcare center, as well as a child development center. The parents were, in essence,  mothers: only $27\%$ of the mothers lived with a partner at baseline and there is little change in this status after enrollment. ABC/CARE relaxed the time constraint of the mothers, enabling them to educate themselves more and/or work more. The program had treatment effects on (i) maternal education; (ii) maternal labor supply; and (iii) maternal income.\footnote{See Appendix~\ref{appendix:results}.} Quantifying the effect of ABC/CARE on parental income requires quantifying its effects beyond age 5, after the subjects entered school. The program could have shifted the labor income profile through education or work experience. To test this, we need to quantify the effect that the program had from when it started until the mothers retired.\\
 
 \noindent There are three options for monetizing parental income. (i) A conservative approach that we follow in the main text uses the available information and calculates the treatment effect of the program on labor income from ages 0 to 21. We observe parental income at ages 0, 1.5, 3.5, 4.5, 8, 12, 15, and 21. We interpolate between the ages that we observe and stop at age 21. The average age of the mothers at baseline was 21. On average, then, we omit 19 years of labor income if the mothers decide to retire at 60, 24 if they retire at 65, etc. (ii) A second approach is to use the available data together with an auxiliary sample to parameterize parental labor income when the subjects are older than 21. (iii) A third approach is to follow a similar methodology as the one we use for the subjects' labor and transfer income, making some adaptations given data limitations. Option (i) is straightforward. We explain options (ii) and (iii) next.\\
 
@@ -1073,7 +1076,7 @@ Note: Prediction of body-mass index at age 34 based on the variables listed in t
 Note: Panel (a) displays the net-present value (treatment less control) of parental income of parents of children with and without siblings at baseline. Panel (b) displays the average parental income of parents of children with young siblings (younger than 5 years old) and children with older siblings (5 years old or older) at baseline. Panel (b) drops children without siblings at baseline. Parental income is in 2014 USD discounted to child's participant age 0 using a 3\% rate. We use the baseline ``conservative'' measure of parental income in Section~\ref{section:pincome}. Results using our alternative parental income measures are similar (see Appendix~\ref{app:parentalincome}).
 \end{figure}
 
-\paragraph{Mincer Parameterization of Parental Income} \label{appendix:mincerpar}
+\paragraph{Using Mincer Functions to Forecast Parental Income} \label{appendix:mincerpar}
 
 \noindent This approach fits Mincer regressions for parental income.\footnote{See \citet{Mincer_1974_schooling} for the original source and \citet{Heckman_Lochner_ea_2006_HEE} for a extended discussion of the Mincer equation, its implications, and several extensions.} We specify how we deal with the presence of a spouse below. The parameterization used is as follows:
 
@@ -1096,7 +1099,7 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 \input{output/abccarepsid_mincerests_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table presents estimates of \eqref{eq:mincer} for ABC/CARE mothers and a subsample of disadvantaged mothers in the PSID. We define disadvantaged as follows: Black, not married, labor income, education (at age 5 of child's participant), age and number of children (at age 5 of child's participant) in the same ranges as the ABC/CARE mothers, labor income below percentile 75. Robust standard errors are in parentheses. $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$. \textbf{[JJH: Did we say this?] [JLG: Yes, it is stated before (giving 1 dollar of income to mothers with no income. Footnote 81.]}
+\item Note: This table presents estimates of \eqref{eq:mincer} for ABC/CARE mothers and a subsample of disadvantaged mothers in the PSID. We define disadvantaged as follows: Black, not married, labor income, education (at age 5 of child's participant), age and number of children (at age 5 of child's participant) in the same ranges as the ABC/CARE mothers, labor income below percentile 75. Robust standard errors are in parentheses. $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -1120,9 +1123,7 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 
 \paragraph{Life-cycle Prediction of Parental Income} \label{appendix:lcyclepincome}
 
-\noindent The third approach is to predict parental income as in Section~\ref{section:cbamethodology}. For want of maternal characteristics enabling us to construct synthetic treatment and control groups, we skip the matching procedure and directly implement the prediction. That is, we do not construct a synthetic control and treatment groups to fit the dynamic relationships in the auxiliary samples. Instead, we assume that all parental income is earned by the mother and limit the sample to Black females whose labor income at each age is below the in-sample 90th percentile (we calculate this for the PSID and NLSY79 separately before using them jointly as one sample). \textbf{[JJH: What does this mean?] [JLG: I have rephrased.]} As with labor income (of program participants) after age 30, we use the PSID and NLSY79 as one sample. For the same lack of data, we use a single predictor: lagged parental income. We initialize the prediction with the last observed measure of maternal income and extrapolate until the mother is 65 years old. Figure~\ref{figure:pincomeapp} displays our estimate of parental income in a format similar to Figure~\ref{figure:pincome}.\\
-
-\noindent \textbf{[JJH: What does appending mean?] [JLG: this terminology, dropped.]}
+\noindent The third approach is to predict parental income as in Section~\ref{section:cbamethodology}. For want of maternal characteristics enabling us to construct synthetic treatment and control groups, we skip the matching procedure and directly implement the prediction. That is, we do not construct a synthetic control and treatment groups to fit the dynamic relationships in the auxiliary samples. Instead, we assume that all parental income is earned by the mother and limit the sample to Black females whose labor income at each age is below the in-sample 90th percentile (we calculate this for the PSID and NLSY79 separately before using them jointly as one sample). As with labor income (of program participants) after age 30, we use the PSID and NLSY79 as one sample. \textbf{[JJH: Let's have a clear, earlier discussion of how we use pooled data!] [JLG: I have added this at the end of Appendix 3.1.]} For the same lack of data, we use a single predictor: lagged parental income. We initialize the prediction with the last observed measure of maternal income and extrapolate until the mother is 65 years old. Figure~\ref{figure:pincomeapp} displays our estimate of parental income in a format similar to Figure~\ref{figure:pincome}.\\
 
 \begin{figure}[!htbp]
 \centering
@@ -1144,7 +1145,7 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 \noindent \textbf{Summary: Prediction of Parental Labor Income}\\
 \noindent Any prediction of parental income starts at the last observation of parental income, which varies by individual due to attrition. For prediction, we assume that parental income is equal to maternal income (only 27\% of mothers in ABC/CARE report leaving with a couple.
 \begin{enumerate}
-\item \textbf{Mincer Parameterization}
+\item \textbf{Mincer Model}
 \begin{enumerate}
 \item \textbf{Auxiliary Sample Used to Predict:} PSID.
 \item \textbf{Initial Restrictions Placed on the Auxilliary Sample:} Black; female; unmarried; education and number of children at ages 5 in the ranges of ABC/CARE participants, labor income at each age is below the 75th percentile.
@@ -1383,30 +1384,28 @@ Note: Panel (a) displays the empirical bootstrap distribution for the estimate o
 
 \noindent This section provides the precise steps for constructing the bootstrap distribution and for computing the standard errors for three of the main estimates in our paper. For the rest of the estimates, the procedures are analogous.
 
-\subsubsection{Predictions}
+\subsubsection{Predictions} \label{appendix:bootstrapspreds}
 
-\noindent These are the steps to compute the empirical bootstrap distribution and the standard error when predicting outcomes out of sample combing experimental and auxiliary datasets.
+\noindent We execute the following steps to compute the empirical bootstrap distribution and the standard error when predicting outcomes out of sample combing experimental and auxiliary datasets.
 
 \begin{enumerate}
-\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Information on the whole story about each individual is obtained in each re-sample.\footnote{We re-sample individuals independently of their treatment status.} Call this resampled sample $(e,s)$. Separate this sample by treatment and control group into $(e,s,1)$ and $(e,s,0)$, respectively.
+\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Information on the entire history of each individual is obtained in each re-sample.\footnote{We re-sample individuals independently of their treatment status.} Call this resampled sample $(e,s)$. Separate this sample by treatment and control group into $(e,s,1)$ and $(e,s,0)$, respectively.
 
 \item Perform the same resampling procedure on the auxiliary sample. Call this sample $(n,s')$.
 
-\item Form synthetic treatment and control groups by using Algorithm~\ref{alg:match} to weight the individuals in sample $(n,s')$. We do not do this age by age due to data availability. We use the algorithm once to match $(e,s)$ to the CNLSY and once to match $(e,s)$ to the PSID and NLSY79. We use the synthetic groups obtained from each of these samples to form predictions at different ages, as we explain in Appendix~\ref{app:datasets}.\\
-
-\noindent We call the synthetic control and treatment groups $(n,s',0)$ and $(n,s',1)$, respectively. That is, $(n,s',d)$ for $d = {0,1}$. 
+\item Form synthetic treatment and control groups by using Algorithm~\ref{alg:match} to weight the individuals in sample $(n,s')$. We do not do this age by age due to problems of data availability. We use the algorithm once to match $(e,s)$ to the CNLSY and once to match $(e,s)$ to the PSID and NLSY79. We use the synthetic groups obtained from each of these samples to form predictions at different ages, as we explain in Appendix~\ref{app:datasets}. We identify synthetic control and treatment groups $(n,s',0)$ and $(n,s',1)$, respectively. That is, $(n,s',d)$ for $d = {0,1}$. 
 
 \item Fit the dynamic relationship in Equation~\eqref{eq:outcome}, using predictors as detailed in Appendix~\ref{appendix:pred}. We fit two parameterizations of the dynamic relationships. One for the synthetic treatment, and one for the synthetic control. When providing estimates by gender, we also produce different predictions by gender.
 
 \item Use the parameterization in Step 4. to fit out of sample in $(e,s,1)$ and $(e,s,0)$, respectively. This gives us an age-by-age prediction \textit{without forecasting error} for our treatment and control groups. Store the predictions at all ages for individual $i$ in this sample in a vector $\bm{Y}_{i,e,s}^d$, where $\bm{Y}_{i,e,s}^d$ is the vector of predictions for individual $i$ in the experimental bootstrap sample $s$, experimental group $d$.
 
-\item In step 4., we compute an individual-level vector of residuals in each of the samples $(n,s',0)$ and $(n,s',1)$. That is, each individual has a vector containing the residuals of each of her predicted variable (for example, labor income). Call this vector of residuals $\bm{E}_{i',n,s'}^d$: the vector of residuals for individual $i'$ in the auxiliary bootstrap sample $s'$, in the synthetic group $d$. 
+\item In step 4., we compute an individual-level vector of residuals in each of the samples $(n,s',0)$ and $(n,s',1)$. That is, each individual has a vector containing the residuals of each of her predicted variable (for example, labor income). Call this vector of residuals $\bm{\mathcal{E}}_{i',n,s'}^d$: the vector of residuals for individual $i'$ in the auxiliary bootstrap sample $s'$, in the synthetic group $d$. 
 
-\item Randomly pair individual $i'$ in $s'$ with individual $i$ in $s$. The prediction accounting for forecasting error is $\bm{Y}_{i,e,s}^d + \bm{E}_{i',n,s'}^d$. 
+\item Randomly pair individual $i'$ in $s'$ with individual $i$ in $s$. The prediction accounting for forecasting error is $\bm{Y}_{i,e,s}^d + \bm{\mathcal{E}}_{i',n,s'}^d$. 
 
-\item Repeat this for all pairs of samples $(n,s'), (e,s)$. We resample the experimental sample and auxiliary sample 100 times each. This gives us our total set of bootstrap samples of size 100*100.
+\item Repeat this for all pairs of samples $(n,s'), (e,s)$. We resample the experimental sample and auxiliary sample 100 times each. This gives us the empirical bootstrap distribution, with 100*100 points.
 
-\item Compute the standard error as the sample standard deviation of the 100*100 re-samples.
+\item Compute the standard error as the sample standard deviation of the 100*100 re-samples. Compute the $p$-value's as the proportion of times that we reject the null hypothesis, after centering the empirical bootstrap distribution according to the null hypothesis.
 
 \end{enumerate}
 
@@ -1416,15 +1415,17 @@ Note: Panel (a) displays the empirical bootstrap distribution for the estimate o
 
 \item Resample the experimental sample with replacement at the individual level. This gives us a new (re-samples)panel dataset. Information on the whole story about each individual is obtained in each re-sample. 
 
-\item For a partially complete outcome $Y_{j}$, run $K$ regressions of $Y_{j}$ on the set of explanatory variables $k = 1,..., K$.\footnote{We perform this procedure at any age, and re-sample individuals independently of their treatment status so we drop the respective indices.} $K$ is determined by the number of possible control sets we can construct with 1, 2 and, 3 baseline variables. We detail this procedure and describe the possible control sets in Appendix~\ref{appendix:bvariables}.
+\item For a partially complete outcome $Y_{j}$, run $K$ regressions of $Y_{j}$ on the set of explanatory variables $k = 1,..., K$.\footnote{We perform this procedure at any age, and re-sample individuals independently of their treatment status so we drop the respective indices.} $K$ is determined by the number of possible control sets we can construct with 1, 2 and, 3 baseline variables. We document this procedure and describe the possible control sets in Appendix~\ref{appendix:bvariables}.
 
 \item Choose the control set that best predicts $Y_{j}$, as we describe in Appendix~\ref{appendix:bvariables}. Call this control set $k^*_{j}$. There is one control set per each of the partially complete outcomes $Y_{j}$. 
 
 \item Construct the IPW using the inverse of the prediction of  a logistic regression of an indicator of ``observed or not" on control set $k^*_{j}$. 
 
-\item If we estimate our parameter of interest using  matching (treatment vs. stay at home or treatment vs. alternative preschool ---see Section~\ref{section:methodsquestions}), we follow Algorithm~\ref{alg:match} to weight the treatment group as to make it comparable in observed characteristics to the control group individuals who either stay at home or attend alternative preschools. We used the procedure in 3. to choose the variables used to weight.
+\item For an incomplete outcome (an outcome after age $a^*$), we construct a prediction for treatment- and control-group individuals following the steps in Appendix~\ref{appendix:bootstrapspreds}. \textbf{[JJH: The weighting part of Algorithm~\ref{alg:match} has been dropped. Restore!] [JLG: Yes, I omitted this part, which is part of our construction of the empirical bootstrap distribution.]}
 
-\item Repeat this procedure 100 times and compute the standard error as the sample standard deviation of these resamples. 
+\item If we estimate our parameter of interest using  matching (treatment vs. stay at home or treatment vs. alternative preschool ---see Section~\ref{section:methodsquestions}), we follow Algorithm~\ref{alg:match} to weight the treatment group as to make it comparable in observed characteristics to the control group individuals who either stay at home or attend alternative preschools. We use the procedure in 3. to choose the variables used to weight.
+
+\item Repeat this procedure 1,000 times to obtain the empirical bootstrap distribution. Compute the standard error as the sample standard deviation of these resamples. Compute the $p$-value's as the proportion of times that we reject the null hypothesis, after centering the empirical bootstrap distribution according to the null hypothesis.
 
 \end{enumerate}
 
@@ -1436,11 +1437,8 @@ Note: Panel (a) displays the empirical bootstrap distribution for the estimate o
 \item Discount the predictions to age of birth. 
 \item Compute cost-benefit ratios and internal rates of return.
 \item Discard internal rate of returns not satisfying the single crossing property (see Appendix~\ref{app:method_irr}). 
-\item Compute standard errors as before. 
+\item Compute standard errors and $p$-value's as before. 
 
 \end{enumerate}
 
-
-
-
-
+\noindent \textbf{[JJH: This is good -But how do we pool the different samples? Just add them back in?] [JLG: Yes, I'm clarifying this in an additional summary at the end of Appendix C.3.1.]}
