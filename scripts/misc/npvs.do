@@ -100,6 +100,7 @@ replace part1 = 6 if part == 14
 replace pval = 1 - pval if m < 0
 gen sig = 1 if pval <= .15
 
+/*
 replace m = m/100000
 gen part0 = part1 - .215
 gen part2 = part1 + .215

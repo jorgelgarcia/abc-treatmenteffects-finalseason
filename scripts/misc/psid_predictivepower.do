@@ -101,11 +101,11 @@ replace D = . if years_30y <= 16  & D == 1 & male == 1
 replace D = . if si30y_inc_labor >= 10000  & D == 0 & male == 1
 replace D = . if si30y_inc_labor <  60000  & D == 1 & male == 1
 
-keep male D inc_labor22-inc_labor30
+keep male D inc_labor22-inc_labor30 inc_trans_pub22-inc_trans_pub30
 tempfile cnlsy
 save   "`cnlsy'", replace
 
-// PSOD
+// PSID
 cd $dataweights
 // get one match per individual in abc
 use psid-weights-finaldata.dta, clear
@@ -171,7 +171,7 @@ replace D = . if years_30y <= 16  & D == 1 & male == 1
 replace D = . if si30y_inc_labor >= 10000  & D == 0 & male == 1
 replace D = . if si30y_inc_labor <  60000  & D == 1 & male == 1
 
-keep male D inc_labor30-inc_labor67
+keep male D inc_labor30-inc_labor67 inc_trans_pub30-inc_trans_pub67
 tempfile psid
 save   "`psid'", replace
 
@@ -241,7 +241,7 @@ replace D = . if years_30y <= 16  & D == 1 & male == 1
 replace D = . if si30y_inc_labor >= 10000  & D == 0 & male == 1
 replace D = . if si30y_inc_labor <  60000  & D == 1 & male == 1
 
-keep male D inc_labor30-inc_labor55
+keep male D inc_labor30-inc_labor55 inc_trans_pub30-inc_trans_pub55
 tempfile nlsy
 save   "`nlsy'", replace
 
@@ -254,6 +254,18 @@ foreach num of numlist 22(1)67 {
 replace inc_labor`num' = (inc_labor`num')/(1 + .03)^`num'
 }
 
-egen inc_labor = rowtotal(inc_labor*), missing
+egen inc_labor     = rowtotal(inc_labor*), missing
+egen inc_trans_pub = rowtotal(inc_trans_pub*), missing 
+
+// labor income
+reg inc_labor D if male == 0
+reg inc_labor D if male == 1
+reg inc_labor D
+
+// transfer income
+qreg inc_trans_pub D if male == 0
+qreg inc_trans_pub D if male == 1
+qreg inc_trans_pub D
+
 
 
