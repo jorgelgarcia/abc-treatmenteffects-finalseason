@@ -27,7 +27,7 @@ for sex in ['m', 'f', 'p']:
     filled['all_{}'.format(sex)] = filled['inc_labor_{}'.format(sex)] + filled['inc_parent_{}'.format(sex)] + filled['transfer_{}'.format(sex)] + filled['edu_{}'.format(sex)] + filled['crime_{}'.format(sex)] + filled['cc_{}'.format(sex)] + filled['health_{}'.format(sex)] + filled['qaly_{}'.format(sex)] + filled['costs_{}'.format(sex)] + filled['m_ed_{}'.format(sex)]
 
 components = ['inc_labor', 'inc_parent', 'transfer', 'edu', 'crime', 'costs', 'cc', 'health', 'qaly',
-              'health_public', 'health_private', 'inc_trans_pub','diclaim', 'ssclaim', 'ssiclaim', 'm_ed', 'all'] #
+              'health_public', 'health_private', 'inc_trans_pub','diclaim', 'ssclaim', 'ssiclaim', 'm_ed', 'all', 'crimepublic'] #
 
 output = pd.DataFrame([])
 for part in components:
@@ -39,7 +39,7 @@ for part in components:
 	for sex in ['m', 'f', 'p']:
 		tmp.loc[(sex, slice(None), slice(None)), :] = filled['{}_{}'.format(part, sex)]
 
-	npv = tmp.apply(robust_npv, rate=0.03, axis=1)
+	npv = tmp.apply(robust_npv, rate=0, axis=1)
 
         npvf = npv.loc['f'].dropna()
         npvm = npv.loc['m'].dropna()
@@ -98,5 +98,5 @@ for part in components:
   	print 'Completed NPV calculation for {}...'.format(part)
 
 output.sort_index(inplace=True)
-output.to_csv(os.path.join(tables, 'npv_type{}.csv'.format(etype)), index=True)
-npv.to_csv(os.path.join(tables, 'all_npvs_type{}.csv'.format(etype)), index=True)
+output.to_csv(os.path.join(tables, 'npv_type{}_ped.csv'.format(etype)), index=True)
+npv.to_csv(os.path.join(tables, 'all_npvs_type{}_ped.csv'.format(etype)), index=True)

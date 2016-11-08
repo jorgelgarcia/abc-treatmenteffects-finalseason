@@ -135,22 +135,25 @@ def makeflows(etype):
                 print 'Prepared {} for sex {}...'.format(key, sex)
 
         # Cost adjustments, including DWL
-        filled['inc_trans_pub_{}'.format(sex)] = -0.5*filled['inc_trans_pub_{}'.format(sex)]
-        filled['costs_{}'.format(sex)] = -1.5*filled['costs_{}'.format(sex)]
-        filled['edu_{}'.format(sex)] = -filled['edu_{}'.format(sex)]
-        filled['edu_{}'.format(sex)].iloc[:, :19] = 1.5*filled['edu_{}'.format(sex)].iloc[:, :19]
-	filled['m_ed_{}'.format(sex)] = -filled['m_ed_{}'.format(sex)]
-        filled['m_ed_{}'.format(sex)].iloc[:, :19] = 1.5*filled['m_ed_{}'.format(sex)].iloc[:, :19]
-        filled['crimepublic_{}'.format(sex)] = -1.5*filled['crimepublic_{}'.format(sex)]
+        filled['inc_trans_pub_{}'.format(sex)] = 0*filled['inc_trans_pub_{}'.format(sex)]
+        filled['costs_{}'.format(sex)] = -1*filled['costs_{}'.format(sex)]
+
+        filled['edu_{}'.format(sex)].iloc[:, 20:] = 0*filled['edu_{}'.format(sex)].iloc[:, 20:]
+        filled['edu_{}'.format(sex)].iloc[:, :19] = -1*filled['edu_{}'.format(sex)].iloc[:, :19]
+
+	filled['m_ed_{}'.format(sex)].iloc[:, 20:] = 0*filled['m_ed_{}'.format(sex)].iloc[:, 20:]
+        filled['m_ed_{}'.format(sex)].iloc[:, :19] = -1*filled['m_ed_{}'.format(sex)].iloc[:, :19]
+
+        filled['crimepublic_{}'.format(sex)] = -1*filled['crimepublic_{}'.format(sex)]
         filled['crimeprivate_{}'.format(sex)] = -filled['crimeprivate_{}'.format(sex)]
-        filled['ccpublic_{}'.format(sex)] = -1.5*filled['ccpublic_{}'.format(sex)]
+        filled['ccpublic_{}'.format(sex)] = -1*filled['ccpublic_{}'.format(sex)]
         filled['ccprivate_{}'.format(sex)] = -filled['ccprivate_{}'.format(sex)]
         filled['health_private_{}'.format(sex)] = -filled['health_private_{}'.format(sex)] * 1.1 
-        filled['health_public_{}'.format(sex)] = -1.5*filled['health_public_{}'.format(sex)] * 1.1
+        filled['health_public_{}'.format(sex)] = -1*filled['health_public_{}'.format(sex)] * 1.1
         filled['qaly_{}'.format(sex)] = 150000*filled['qaly_{}'.format(sex)]
-        filled['diclaim_{}'.format(sex)] = -0.5*filled['diclaim_{}'.format(sex)]
-        filled['ssiclaim_{}'.format(sex)] = -0.5*filled['ssiclaim_{}'.format(sex)] * 1.02 * 12 * 901.5 # averaged beween single and married
-        filled['ssclaim_{}'.format(sex)] = -0.5*filled['ssclaim_{}'.format(sex)]  * 1.02 * 12 * 1228 # averaged between retired, widowed, disabled
+        filled['diclaim_{}'.format(sex)] = 0*filled['diclaim_{}'.format(sex)]
+        filled['ssiclaim_{}'.format(sex)] = 0*filled['ssiclaim_{}'.format(sex)] * 1.02 * 12 * 901.5 # averaged beween single and married
+        filled['ssclaim_{}'.format(sex)] = 0*filled['ssclaim_{}'.format(sex)]  * 1.02 * 12 * 1228 # averaged between retired, widowed, disabled
         
     print "Prepared general matrix of all flows"
     return filled
