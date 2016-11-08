@@ -138,11 +138,11 @@ def makeflows(etype):
         filled['inc_trans_pub_{}'.format(sex)] = 0*filled['inc_trans_pub_{}'.format(sex)]
         filled['costs_{}'.format(sex)] = -1*filled['costs_{}'.format(sex)]
 
-        filled['edu_{}'.format(sex)].iloc[:, 20:] = 0*filled['edu_{}'.format(sex)].iloc[:, 20:]
-        filled['edu_{}'.format(sex)].iloc[:, :19] = -1*filled['edu_{}'.format(sex)].iloc[:, :19]
+        filled['edu_{}'.format(sex)] = -filled['edu_{}'.format(sex)]
+        #filled['edu_{}'.format(sex)].iloc[:, :19] = -1*filled['edu_{}'.format(sex)].iloc[:, :19]
 
-	filled['m_ed_{}'.format(sex)].iloc[:, 20:] = 0*filled['m_ed_{}'.format(sex)].iloc[:, 20:]
-        filled['m_ed_{}'.format(sex)].iloc[:, :19] = -1*filled['m_ed_{}'.format(sex)].iloc[:, :19]
+	filled['m_ed_{}'.format(sex)] = -filled['m_ed_{}'.format(sex)]
+       # filled['m_ed_{}'.format(sex)].iloc[:, :19] = -1*filled['m_ed_{}'.format(sex)].iloc[:, :19]
 
         filled['crimepublic_{}'.format(sex)] = -1*filled['crimepublic_{}'.format(sex)]
         filled['crimeprivate_{}'.format(sex)] = -filled['crimeprivate_{}'.format(sex)]

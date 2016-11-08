@@ -2,9 +2,11 @@
 Calculate the NPV of the DWL
 */
 
+foreach t in 2 5 8 {
+
 global projects			: env projects
 global klmMexico		: env klmMexico
-global results 			= "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/ratio_irr/rslt/tables/current/type2"
+global results 			= "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/ratio_irr/rslt/tables/type`t'"
 global sensitivity		= "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/ratio_irr/rslt/sensitivity/"
 global output			= "${klmMexico}/abccare/DWL/current"
 cd $results
@@ -25,7 +27,7 @@ save	`ratio'
 
 // bring in npv
 // value`s' --> NPV with DWL of 0.5
-import delim using "npv_type2.csv", clear
+import delim using "npv_type`t'.csv", clear
 keep if type == "mean" | type == "se"
 keep if part == "all"
 
@@ -68,4 +70,6 @@ foreach s in mean se {
 }
 
 cd $output
-save NPV-DWL, replace
+save NPV-DWL`t', replace
+
+}

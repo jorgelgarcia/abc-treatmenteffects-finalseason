@@ -14,7 +14,7 @@ if not os.path.exists(tables):
 
 from cba_setup import robust_npv, makeflows, adraws, draws
 
-etype = 8
+etype = 2
 filled = makeflows(etype=etype)
 
 # aggregate certain componenets together
@@ -98,5 +98,5 @@ for part in components:
   	print 'Completed NPV calculation for {}...'.format(part)
 
 output.sort_index(inplace=True)
-output.to_csv(os.path.join(tables, 'npv_type{}_ped.csv'.format(etype)), index=True)
-npv.to_csv(os.path.join(tables, 'all_npvs_type{}_ped.csv'.format(etype)), index=True)
+output.to_csv(os.path.join(tables, 'npv_type{}_dwl0_dr0.csv'.format(etype)), index=True)
+npv.to_csv(os.path.join(tables, 'all_npvs_type{}_dwl0_dr0.csv'.format(etype)), index=True)
