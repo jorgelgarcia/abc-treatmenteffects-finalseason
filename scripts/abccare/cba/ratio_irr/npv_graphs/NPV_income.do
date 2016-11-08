@@ -1,14 +1,14 @@
 
+
 // macros
 global klmshare		: env klmshare
 global klmMexico 	: env klmMexico
 global projects 	: env projects
 
-// for income 
-local file_specs	pset1_mset3
+local dr = 0 						// discount rate 
+local file_specs	pset1_mset3 	// for income
 
 global flows		= "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/ratio_irr/flows"
-
 global save_data 	= "${klmMexico}/abccare/NPV/current"
 global income_data 	= "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/rslt/projections"
 global abc_data		= "${projects}/abc-treatmenteffects-finalseason/data/abccare/extensions/fam-merge"
@@ -16,7 +16,7 @@ global ate_data		= "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extension
 global proj_dir 	= "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/ratio_irr/npv_graphs"
 
 // produce point estimate and vector of NPV
-foreach loop in /*point*/ vector {
+foreach loop in point /*vector*/ {
 
 	// income
 
@@ -55,7 +55,7 @@ foreach loop in /*point*/ vector {
 		if "`type'" == "transfer" {
 			forvalues a = 22/79 {
 				cap rename `type'_c`a'		raw_`type'_c`a'
-				cap gen `type'_c`a' =		raw_`type'_c`a' * 0.5 * -1
+				cap gen `type'_c`a' =		raw_`type'_c`a' * `dr' * -1 
 			
 			}
 		}
@@ -91,16 +91,16 @@ foreach loop in /*point*/ vector {
 
 	forvalues a = 8/108 {
 		rename ssclaim`a' 			raw_ssclaim`a'
-		gen ssclaim`a' = 			raw_ssclaim`a' * 1.02 * 12 * 1228 * 0.5 * -1
+		gen ssclaim`a' = 			raw_ssclaim`a' * 1.02 * 12 * 1228 * `dr' * -1
 	
 		rename ssiclaim`a' 			raw_ssiclaim`a'
-		gen ssiclaim`a' = 			raw_ssiclaim`a' * 1.02 * 12 * 901.5 * 0.5 * -1
+		gen ssiclaim`a' = 			raw_ssiclaim`a' * 1.02 * 12 * 901.5 * `dr' * -1
 	
 		rename health_private`a' 	raw_health_private`a'
 		gen health_private`a' = 	raw_health_private`a' * 1.1 * -1
 	
 		rename health_public`a'		raw_health_public`a'
-		gen health_public`a' =		raw_health_public`a' * 1.1 * 1.5 * -1
+		gen health_public`a' =		raw_health_public`a' * 1.1 * (1 + `dr') * -1
 	
 		rename qaly`a' 				raw_qaly`a'
 		gen qaly`a' =				raw_qaly`a' * 150000
@@ -144,7 +144,7 @@ foreach loop in /*point*/ vector {
 		gen cccostprivate`a' =		raw_cccostprivate`a' * -1
 	
 		rename cccostpublic`a'		raw_cccostpublic`a'
-		gen cccostpublic`a'	=		raw_cccostpublic`a' * 1.5 * -1
+		gen cccostpublic`a'	=		raw_cccostpublic`a' * (1 + `dr') * -1
 	}
 
 	forvalues a = 0/26 {
@@ -152,7 +152,7 @@ foreach loop in /*point*/ vector {
 		gen educost`a' =			raw_educost`a' * -1
 	
 		if `a' <= 18 {
-			replace educost`a' = educost`a' * 1.5
+			replace educost`a' = educost`a' * (1 + `dr')
 		}
 	}
 
@@ -161,7 +161,7 @@ foreach loop in /*point*/ vector {
 		gen private_crime`a' = 		raw_private_crime`a' * -1
 	
 		rename public_crime`a'		raw_public_crime`a'
-		gen public_crime`a' = 		raw_public_crime`a' * 1.5 * -1
+		gen public_crime`a' = 		raw_public_crime`a' * (1 + `dr') * -1
 	}
 	
 	if "`loop'" == "point" {
