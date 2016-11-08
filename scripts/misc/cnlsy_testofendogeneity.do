@@ -61,8 +61,8 @@ global pool
 
 foreach sex in male female pool {
 	foreach varyy of varlist si30y_inc_labor si30y_inc_trans_pub {
-		matrix allests`varyy' = J(12,1,.)
-		matrix rownames allests`varyy' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
+		matrix allests`varyy' = J(13,1,.)
+		matrix rownames allests`varyy' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F pF R2 N FF pFF
 		foreach b of numlist 1(1)$bootstraps {
 			preserve
 			bsample
@@ -82,11 +82,13 @@ foreach sex in male female pool {
 			matrix   F = e(F)
 			matrix  r2 = e(r2)
 			matrix   N = e(N)
+			test (m_ed0y = 0) (cogfactor = 0) (noncogfactor = 0)
+			matrix  pF = r(p)
 			test (cogfactor = 0) (noncogfactor = 0)
 			matrix  DW = r(F)
 			matrix pDW = r(p)
-			matrix t1fcomplete`b' = [t1f[1,1..1],J(1,3,.),t1f[1,2...],F[1,1],r2[1,1],N[1,1],DW[1,1],pDW[1,1]]'
-			matrix rownames t1fcomplete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
+			matrix t1fcomplete`b' = [t1f[1,1..1],J(1,3,.),t1f[1,2...],F[1,1],pF[1,1],r2[1,1],N[1,1],DW[1,1],pDW[1,1]]'
+			matrix rownames t1fcomplete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F pF R2 N FF pFF
 			matrix colnames t1fcomplete`b' = t1fcomplete`b'
 			mat_capp allests`varyy' : allests`varyy' t1fcomplete`b'
 
@@ -96,12 +98,14 @@ foreach sex in male female pool {
 			matrix   F = e(F)
 			matrix  r2 = e(r2)
 			matrix   N = e(N)
+			test (m_ed0y = 0) (piatmath = 0) (years_30y = 0) (si21y_inc_labor = 0) (cogfactor = 0) (noncogfactor = 0)
+			matrix  pF = r(p)
 			test (cogfactor = 0) (noncogfactor = 0)
 			matrix  DW = r(F)
 			matrix pDW = r(p)
-			matrix t2fcomplete`b' = [t2f[1,1...],e(F),e(r2),e(N),DW[1,1],pDW[1,1]]'
+			matrix t2fcomplete`b' = [t2f[1,1...],e(F),pF[1,1],e(r2),e(N),DW[1,1],pDW[1,1]]'
 			
-			matrix rownames t2fcomplete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
+			matrix rownames t2fcomplete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F pF R2 N FF pFF
 			matrix colnames t2fcomplete`b' = t2fcomplete`b'
 			mat_capp allests`varyy' : allests`varyy' t2fcomplete`b'
 
@@ -109,15 +113,19 @@ foreach sex in male female pool {
 			// treatment regressions with no factor
 			reg `varyy' m_ed0y ${`sex'}, robust
 			matrix t1 = e(b)
-			matrix t1complete`b' = [t1[1,1..1],J(1,5,.),t1[1,2],e(F),e(r2),e(N),.,.]'
-			matrix rownames t1complete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
+			test m_ed0y = 0
+			matrix  pF = r(p)
+			matrix t1complete`b' = [t1[1,1..1],J(1,5,.),t1[1,2],e(F),pF[1,1],e(r2),e(N),.,.]'
+			matrix rownames t1complete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F pF R2 N FF pFF
 			matrix colnames t1complete`b' = t1complete`b'
 			mat_capp allests`varyy' : allests`varyy' t1complete`b'
 			
 			reg `varyy' m_ed0y piatmath years_30y si21y_inc_labor ${`sex'}, robust
 			matrix t2 = e(b)
-			matrix t2complete`b' = [t2[1,1..4],J(1,2,.),t2[1,5],e(F),e(r2),e(N),.,.]'
-			matrix rownames t2complete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F R2 N FF pFF
+			test (m_ed0y = 0) (piatmath = 0) (years_30y = 0) (si21y_inc_labor = 0)
+			matrix  pF = r(p)
+			matrix t2complete`b' = [t2[1,1..4],J(1,2,.),t2[1,5],e(F),pF[1,1],e(r2),e(N),.,.]'
+			matrix rownames t2complete`b' = m_ed0y piatmath years_30y si21y_inc_labor cogfactor noncogfactor cons F pF R2 N FF pFF
 			matrix colnames t2complete`b' = t2complete`b'
 			mat_capp allests`varyy' : allests`varyy' t2complete`b'
 			restore
@@ -170,10 +178,10 @@ foreach sex in male female pool {
 		mkmat *, matrix(all`varyy'_s`sex')
 		
 		matrix all`varyy'_s`sex'p1 = all`varyy'_s`sex'[1..7,1...]
-		matrix all`varyy'_s`sex'p2 = [[all`varyy'_s`sex'[8..9,1] \ round(all`varyy'_s`sex'[10,1],1) \ [all`varyy'_s`sex'[11..12,1]]], J(5,1,.),[all`varyy'_s`sex'[8..9,3] \ round(all`varyy'_s`sex'[10,3],1) \ [all`varyy'_s`sex'[11..12,3]]], J(5,1,.),[all`varyy'_s`sex'[8..9,5] \ round(all`varyy'_s`sex'[10,1],5) \ [all`varyy'_s`sex'[11..12,5]]], J(5,1,.),[all`varyy'_s`sex'[8..9,7] \ round(all`varyy'_s`sex'[10,1],7) \ [all`varyy'_s`sex'[11..12,7]]], J(5,1,.)]
+		matrix all`varyy'_s`sex'p2 = [[all`varyy'_s`sex'[8..10,1] \ round(all`varyy'_s`sex'[11,1],1) \ [all`varyy'_s`sex'[12..13,1]]], J(6,1,.),[all`varyy'_s`sex'[8..10,3] \ round(all`varyy'_s`sex'[11,3],1) \ [all`varyy'_s`sex'[12..13,3]]], J(6,1,.),[all`varyy'_s`sex'[8..10,5] \ round(all`varyy'_s`sex'[11,1],5) \ [all`varyy'_s`sex'[12..13,5]]], J(6,1,.),[all`varyy'_s`sex'[8..10,7] \ round(all`varyy'_s`sex'[11,1],7) \ [all`varyy'_s`sex'[12..13,7]]], J(6,1,.)]
 		
 		matrix all`varyy'_s`sex' = [all`varyy'_s`sex'p1 \ all`varyy'_s`sex'p2]		
-		matrix rownames all`varyy'_s`sex' = "Mother'sEducation" "PIAT(5-7)" "Education(30)" "LaborIncome(21)" Cognitive NonCognitive Constant "F-stat" "R2" Observations "DWH" "pDWH"
+		matrix rownames all`varyy'_s`sex' = "Mother'sEducation" "PIAT(5-7)" "Education(30)" "LaborIncome(21)" Cognitive NonCognitive Constant "F-stat" "p" "R2" Observations "DWH" "pDWH"
 
 		cd $output
 		outtable using cnlsy_endogdurb_`varyy'_s`sex', mat(all`varyy'_s`sex') replace nobox center f(%12.2fc)
