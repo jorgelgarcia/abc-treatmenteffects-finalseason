@@ -35,67 +35,86 @@ Note: The last column indicates whether the public cost is a transfer (\checkmar
 
 The baseline estimates in \citet{Garcia_etal_2016_Comp_CBA_Unpublished} are calculated assuming that every dollar of public spending generates 50 cents of DWL. In this analysis we show the amount of government investment without DWL. We present the non-discounted value.
 
-Tables~\ref{tab:dwl-npv-rslts2} through~\ref{tab:dwl-npv-rslts5} present the values of the different public components, per person of the government investment under a marginal tax rate of 0. 
+Tables~\ref{tab:dwl-npv-rslts2} through~\ref{tab:dwl-npv-rslts8} present the values of the different public components, per person of the government investment under a marginal tax rate of 0. 
 
 \begin{table}[htbp]
 \centering
 \footnotesize
 \begin{threeparttable}
 \caption{Government Investment per Individual, Treatment vs. Next Best}\label{tab:dwl-npv-rslts2}
-\begin{tabular}{lccccccc}
+\begin{tabular}{lcccccccc}
 \toprule
-Sample	&	\mc{1}{c}{Alternative }	&	Treatment	&	Crime	&	\mc{1}{c}{Subject's}	&	\mc{1}{c}{Mother's}	&	Health	&	Total	Value\\
-		& 	\mc{1}{c}{Preschool}		&			&			&	\mc{1}{c}{Education}		&	\mc{1}{c}{Education}	&			&	of ABC/CARE	\\
-\midruleFemale	&	14,717	&	-67,805	&	14,508	&	9,064	&	1,033	&	-40,310	&	434,208	\\		&	(1,799)	&	(3,377)	&	(7,636)	&	(6,562)	&	(1,101)	&	(106,815)	&	(342,657)	\\Male		&	13,059	&	-67,805	&	10,025	&	6,219	&	-3		&	-68,555	&	3,076,272	\\		&	(1,589)	&	(3,377)	&	(16,796)	&	(4,729)	&	(1,260)	&	(183,345)	&	(1,514,641)	\\Pooled	&	13,581	&	-67,805	&	14,010	&	4,833	&	704		&	-68,359	&	1,352,969	\\		&	(1,213)	&	(3,377)	&	(8,937)	&	(4,529)	&	(734)		&	(108,850)	&	(645,803)	\\
-\bottomrule
-\end{tabular}
-\begin{tablenotes}
-\raggedright
-Note: This table shows the non-discounted value of government investment by component. The Crime and Health components only include public costs. The Subject's Education and Mother's Education components only include education costs up to age 18, after which costs are considered private. The Total Value of ABC/CARE is the total non-discounted value of ABC/CARE assuming a marginal tax rate of 0. This total includes private costs and transfers. These estimates compare those in treatment with those in the next best option.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
-
-
-\begin{table}[htbp]
-\centering
-\footnotesize
-\begin{threeparttable}
-\caption{Government Investment per Individual, Treatment vs. Next Best, no IPW}\label{tab:dwl-npv-rslts9}
-\begin{tabular}{lccccccc}
-\toprule
-Sample	&	\mc{1}{c}{Alternative }	&	Treatment	&	Crime	&	\mc{1}{c}{Subject's}&	\mc{1}{c}{Mother's}	&	Health	&	Total	\\
-		& 	\mc{1}{c}{Preschool}		&			&			&	\mc{1}{c}{Education}		&	\mc{1}{c}{Education}	&			&		\\
+Sample	&	Treatment	&	\mc{1}{c}{Alternative }	&	Crime	&	\mc{1}{c}{Subject's}&	\mc{1}{c}{Mother's}	&	Health	&	DWL &	Total	\\
+		& 		&	\mc{1}{c}{Preschool}			&			&	\mc{1}{c}{Education}		&	\mc{1}{c}{Education}	&		&  &	\\
 \midrule
-Female	&	14,717	&	-67,805	&	14,508	&	9,064	&	1,033	&	-35,061	&	432,811	\\		&	(1,799)	&	(3,377)	&	(7,636)	&	(6,562)	&	(1,101)	&	(112,446)	&	(328,459)	\\Male		&	13,059	&	-67,805	&	13,341	&	6,219	&	-3		&	-67,802	&	2,759,132	\\		&	(1,589)	&	(3,377)	&	(15,536)	&	(4,729)	&	(1,260)	&	(186,042)	&	(1,401,760)	\\Pooled	&	13,581	&	-67,805	&	14,047	&	4,833	&	704		&	-63,985	&	1,359,551	\\		&	(1,213)	&	(3,377)	&	(9,052)	&	(4,529)	&	(734)		&	(109,833)	&	(630,924)	\\
+Female	&	-67,805	&	14,717	&	32,288	&	12,669	&	1,663	&	-40,310	&	63,721	&	2,227	\\
+		&	(3,377)	&	(1,799)	&	(19,432)	&	(9,310)	&	(1,772)	&	(106,815)	&	(40,793)	&	(181,500)	\\
+Male		&	-67,805	&	13,059	&	19,285	&	8,126	&	33		&	-68,555	&	488,858	&	379,941	\\
+		&	(3,377)	&	(1,589)	&	(36,224)	&	(6,585)	&	(2,033)	&	(183,345)	&	(261,197)	&	(492,761)	\\
+Pooled	&	-67,805	&	13,581	&	26,955	&	6,312	&	1,155	&	-68,359	&	214,167	&	112,425	\\
+		&	(3,377)	&	(1,213)	&	(21,858)	&	(6,479)	&	(1,190)	&	(108,850)	&	(108,365)	&	(250,119)	\\
+
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
 \raggedright
-Note: This table shows the non-discounted value of government investment by component. The Crime and Health components only include public costs. The Subject's Education and Mother's Education components only include education costs up to age 18, after which costs are considered private. The Total Value of ABC/CARE is the total non-discounted value of ABC/CARE assuming a marginal tax rate of 0. This total includes private costs and transfers. These estimates compare those in treatment with those in the next best option, without IPW.
+Note: This table shows the non-discounted value of government investment by component. The Crime and Health components only include public costs. The Subject's Education and Mother's Education components only include education costs up to age 18, after which costs are considered private. The DWL column presents just the DWL of public expenditures (including transfers), assuming a marginal tax rate of 0.5. The Total is the sum of all the previous columns. These estimates compare those in treatment with those in the next best option.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
 
 \begin{table}[htbp]
 \centering
 \footnotesize
 \begin{threeparttable}
 \caption{Government Investment per Individual, Treatment vs. Stay at Home}\label{tab:dwl-npv-rslts5}
-\begin{tabular}{lccccccc}
+\begin{tabular}{lcccccccc}
 \toprule
-Sample	&	\mc{1}{c}{Alternative }	&	Treatment	&	Crime	&	\mc{1}{c}{Subject's}	&	\mc{1}{c}{Mother's}	&	Health	&	Total	\\
-		& 	\mc{1}{c}{Preschool}		&			&			&	\mc{1}{c}{Education}		&	\mc{1}{c}{Education}	&			&		\\
+Sample	&	Treatment	&	\mc{1}{c}{Alternative }	&	Crime	&	\mc{1}{c}{Subject's}&	\mc{1}{c}{Mother's}	&	Health	&	DWL &	Total	\\
+		& 		&	\mc{1}{c}{Preschool}			&			&	\mc{1}{c}{Education}		&	\mc{1}{c}{Education}	&		&  &	\\
 \midrule
-Female	&	286	&	-72,436	&	36,581	&	-13,844	&	2,368	&	13,192	&	1,297,493	\\		&	(122)	&	(4,060)	&	(26,838)	&	(4,504)	&	(1,545)	&	(156,345)	&	(533,732)	\\Male		&	.	&	-72,436	&	4,337	&	792		&	-874		&	-152,816	&	1,865,859	\\		&	.	&	(4,060)	&	(21,877)	&	(8,687)	&	(1,740)	&	(240,772)	&	(1,296,416)	\\Pooled	&	149	&	-72,436	&	19,663	&	-6,566	&	1,000	&	-51,179	&	1,490,507	\\		&	(68)	&	(4,060)	&	(16,782)	&	(5,293)	&	(1,167)	&	(167,140)	&	(631,785)	\\
+Female	&	-72,436	&	286	&	78,696	&	-20,173	&	3,914	&	13,192	&	-89,084	&	-85,891	\\
+		&	(4,060)	&	(122)	&	(62,421)	&	(6,339)	&	(2,489)	&	(156,345)	&	(-6,508)	&	(225,145)	\\
+Male		&	-72,436	&		&	1,899	&	1,239	&	-1,257	&	-152,816	&	995,420	&	772,048	\\
+		&	(4,060)	&		&	(46,069)	&	(11,222)	&	(2,847)	&	(240,772)	&	(531,980)	&	(836,949)	\\
+Pooled	&	-72,436	&	149	&	38,273	&	-9,495	&	1,744	&	-51,179	&	311,073	&	217,981	\\
+		&	(4,060)	&	(68)	&	(36,950)	&	(7,286)	&	(1,891)	&	(167,140)	&	(183,566)	&	(400,892)	\\
+
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
 \raggedright
-Note: This table shows the non-discounted value of government investment by component. The Crime and Health components only include public costs. The Subject's Education and Mother's Education components only include education costs up to age 18, after which costs are considered private. The Total Value of ABC/CARE is the total non-discounted value of ABC/CARE assuming a marginal tax rate of 0. This total includes private costs and transfers. These estimates compare those in treatment with those who stay at home.
+Note: This table shows the non-discounted value of government investment by component. The Crime and Health components only include public costs. The Subject's Education and Mother's Education components only include education costs up to age 18, after which costs are considered private. The DWL column presents just the DWL of public expenditures (including transfers), assuming a marginal tax rate of 0.5. The Total is the sum of all the previous columns. These estimates compare those in treatment with those who stayed at home.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\begin{threeparttable}
+\caption{Government Investment per Individual, Treatment vs. Alternative Preschool}\label{tab:dwl-npv-rslts8}
+\begin{tabular}{lcccccccc}
+\toprule
+Sample	&	Treatment	&	\mc{1}{c}{Alternative }	&	Crime	&	\mc{1}{c}{Subject's}&	\mc{1}{c}{Mother's}	&	Health	&	DWL &	Total	\\
+		& 		&	\mc{1}{c}{Preschool}			&			&	\mc{1}{c}{Education}		&	\mc{1}{c}{Education}	&		&  &	\\
+\midrule
+Female	&	-73,433		&	19,120	&	7,515		&	14,172	&	1,597		&	-80,906	&	82,284	&	-48,772	\\
+		&	(3,875)		&	(1,802)		&	(14,262)	&	(8,547)		&	(1,732)		&	(107,216)	&	(48,933)	&	(184,565)	\\
+Male		&	-73,433		&	17,075	&	24,076	&	3,968		&	-218		&	-68		&	593,366	&	547,692	\\
+		&	(3,875)		&	(1,861)		&	(35,016)	&	(6,964)		&	(2,560)		&	(169,226)	&	(423,316)	&	(640,957)	\\
+Pooled	&	-73,433		&	18,196	&	7,794		&	6,773		&	597		&	-56,001	&	165,491	&	51,222	\\
+		&	(3,875)		&	(1,351)		&	(20,801)	&	(5,838)		&	(1,726)		&	(109,984)	&	(141,411)	&	(283,636)	\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\raggedright
+Note: This table shows the non-discounted value of government investment by component. The Crime and Health components only include public costs. The Subject's Education and Mother's Education components only include education costs up to age 18, after which costs are considered private. The DWL column presents just the DWL of public expenditures (including transfers), assuming a marginal tax rate of 0.5. The Total is the sum of all the previous columns. These estimates compare those in treatment with those who attended alternative preschool.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
 
 \pagebreak
 \singlespace
