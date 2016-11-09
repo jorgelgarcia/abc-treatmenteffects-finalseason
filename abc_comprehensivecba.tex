@@ -334,7 +334,7 @@ The major goal of this paper is to summarize the multiple benefits of ABC/CARE u
 
 We construct synthetic treatment and control cohorts.\footnote{See, e.g., \citet{Mincer_1974_schooling} and the survey in \citet{Heckman_Lochner_ea_2006_HEE}.} The problem in doing so comes in creating counterparts to the treatment and control groups in auxiliary samples. Outcomes of ``comparable'' older cohorts in auxiliary samples who are not exposed to the program are used to construct virtual treatment and control groups. We address the problem of finding who among the auxiliary samples would have received treatment if the program had been available to them.
 
-In addition, older cohorts may have received different endowments and experienced different environments. An assumption of stationarity in life cycle profiles across cohorts may be grossly at odds with the data.
+In addition, older cohorts may have received different endowments and experienced different environments. An assumption of stationary life-cycle profiles across cohorts may be grossly at odds with the data.
 
 This section explains our strategy for constructing out-of-sample treatment effects. Our approach starts from and extends the analysis of \citet{Heckman_Pinto_etal_2013_PerryFactor}, who show, in a setting similar to ours, that the effect of treatment on outcomes operates through its effects on inputs in a stable production function rather than through shifts in the production function.
 Table~\ref{table:sources} presents the outcomes for which we conduct these analyses and the data sources used. We initially focus on labor income to illustrate our approach, but a similar methodology is used to predict the other outcomes.
@@ -364,9 +364,9 @@ Nonetheless, in this paper we focus on making valid predictions of separate trea
 
 Comparisons between the experimental control group and the synthetic control group are particularly compelling. By design, neither group receives treatment. In our data, all persons offered treatment accept it, so it is straightforward to construct synthetic control groups in auxiliary samples using only eligibility criteria.
 
-We construct counterfactual profiles using a three-step procedure. In step 1, we use the experimental sample to conduct a dynamic mediation analysis relating the vector of outcomes at age $a$ ($\bm{Y}^{d}_{i,a}$) for $a\leq a^*$ to predictor variables (and interactions) that are affected by treatment ($\bm{X}^{d}_{i,a}$), as well as background variables ($\bm{B}$). It turns out that we accurately predict within-sample treatment effects as well as levels of treatment and control profiles using this approach. In step 2, we construct counterparts to treatment- and control-group members in the auxiliary samples. We compare these constructed counterparts to the actual samples for ages $a \leq a^\ast$. In step 3, we use the estimated dynamic relationships fit on the constructed samples to predict the post-$a^{\ast}$ outcomes.
+There are two distinct stages in our analysis. In Stage I, we construct samples of comparison group members with the same or similar characteristics as the experimental group members. In Stage II, we build models in these samples to forecast out-of-sample treatment effects. Specifically, we adopt a three-step procedure. In Step 1, we use the experimental sample to conduct dynamic mediation analyses relating the vector of outcomes at age $a$ for person $i$ ($\bm{Y}^{d}_{i,a}$) for $a\leq a^*$ to predictor variables (and interactions) that are affected by treatment ($\bm{X}^{d}_{i,a}$), as well as background variables ($\bm{B}_i$). It turns out that we accurately predict within-sample treatment effects as well as levels of treatment and control profiles using this approach. In Step 2, we construct counterparts to treatment- and control-group members in the auxiliary samples. We compare these constructed counterparts to the actual samples for ages $a \leq a^\ast$. In Step 3, we use the estimated dynamic relationships fit on the constructed samples to predict the post-$a^{\ast}$ outcomes. To avoid notational clutter, we suppress individual $i$ subscripts.
 
-We preview the outputs of this approach. Figure~\ref{fig:labor-income-profiles} displays the life-cycle labor income profiles predicted by our procedure for the treatment and control groups. It also compares the realized labor income to the model-predicted labor income at $a^*$. There is close agreement of the constructed profiles within sample. The pattern of life-cycle labor income we generate is typical for low-skilled workers \citep{Blundell-etal_2015_J-Pub-E,Gladden_Taber_2000_WageProgression,Sanders-Taber_2012_AR,Lagakos_Moll_etal_2016_LifeCycle_NBER}.\footnote{The prediction of labor (transfer) income is based on indicator variables of being male and being Black, mother's education, average PIAT scores from ages 5 to 7, years of education at age 30, income at age 21 and 30, and one-period lagged labor (transfer) income. We use labor income at age 21 to initialize this process. A justification for the use of these variables is in Appendix~\ref{appendix:methodology}.}
+We preview the outputs from this approach. Figure~\ref{fig:labor-income-profiles} displays the life-cycle labor income profiles predicted by our procedure for the treatment and control groups. It also compares the realized labor income to the model-predicted labor income at $a^*$. There is close agreement of the constructed profiles within sample. The pattern of life-cycle labor income we generate is typical for low-skilled workers \citep{Blundell-etal_2015_J-Pub-E,Gladden_Taber_2000_WageProgression,Sanders-Taber_2012_AR,Lagakos_Moll_etal_2016_LifeCycle_NBER}.\footnote{The prediction of labor (transfer) income is based on indicator variables of being male and being Black, mother's education, average PIAT scores from ages 5 to 7, years of education at age 30, income at age 21 and 30, and one-period lagged labor (transfer) income. We use labor income at age 21 to initialize this process. A justification for the use of these variables is in Appendix~\ref{appendix:methodology}.}
 
 \begin{sidewaysfigure}[!htbp]
 \centering
@@ -406,7 +406,7 @@ Note: Panel (a) displays the predicted labor income for males in the auxiliary s
 
 \subsection{Constructing Out-of-Sample Counterfactuals}\label{section:just}
 
-We now present our analytical framework and its underlying assumptions. Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the control sample:
+We now present our analytical framework and its underlying assumptions for the Stage II forecasting analysis. Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the control sample:
 \begin{equation}\label{eq:outcome}
 Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a}, \quad j \in \mathcal{J}_a.
 \end{equation}
@@ -437,7 +437,7 @@ For experimental sample cohort $c_{e}$ and auxiliary sample cohort $c_{n}$:
 \begin{equation}
 Y_{e,a,c_{e},t_{e}}^d = Y_{n,a,c_{n},t_{n}}^d
 \end{equation}
-for $d \in \{ 0, 1\}$, $a \geq a^*$, where $t_{e}, t_{n}$ are the years for which cohorts $c_{e}, c_{n}$ are observed, where $t_e = t_n + c_e - c_n$, and $t_n$ is the year the age $a$ outcome is observed for cohort $n$ ($t_n = a + c_n$). $\square$
+for $d \in \{ 0, 1\}$, $a \geq a^*$, where $t_{e}, t_{n}$ are the years for which cohorts $c_{e}, c_{n}$ are observed, where $t_e = t_n + c_e - c_n$, and $t_n$ is the year the age $a$ outcome is observed for cohort $n$ ($t_n = a + c_n$).$\square$
 \end{assumption}
 \doublespacing
 
@@ -558,9 +558,13 @@ Under Assumptions~\ref{ass:alignment}-\ref{ass:summary}, Condition~\ref{cond:con
 
 In Appendix~\ref{app:endogeneity}, we investigate the question of endogeneity in the experimental and auxiliary samples. We follow \citet{Heckman_Pinto_etal_2013_PerryFactor} and assume that the $\varepsilon_{k,j,a}^d$ obey a factor structure, $k \in \{e,n\}$. We develop that framework and provide evidence supporting exogeneity in both samples for the variables used in our empirical analysis.
 
-\subsubsection{Using Matching to Construct Virtual Treatment and Comparison Groups}
+\subsubsection{Using Matching to Construct Virtual Treatment and Comparison Groups}\label{usingmatching}
 
-Under exogeneity assumption~\ref{ass:exog} and invariance condition~\ref{ass:summary} we can use matching to construct counterparts to treatment and control groups in the auxiliary sample.\footnote{\citet{Heckman_Ichimura_etal_1998_Econometrica} use this procedure.} We discuss this approach in Appendix~\ref{appendix:match}. Matching is one way to non-parametrically estimate the conditional mean functions. There is close agreement between non-parametric estimates based on matching and more parametric approaches (see Appendix~\ref{appendix:nonpar}).
+Under exogeneity assumption~\ref{ass:exog} and invariance condition~\ref{ass:summary} we can use matching to construct counterparts to treatment and control groups in the auxiliary sample.\footnote{\citet{Heckman_Ichimura_etal_1998_Econometrica} use this procedure.} Doing so compresses the two stages of constructing a comparison group and creating forecasts into one stage. We discuss this approach in Appendix~\ref{appendix:match}. Matching is one way to non-parametrically estimate the conditional mean functions. There is close agreement between non-parametric estimates based on matching and more parametric model-based approaches (see Appendix~\ref{appendix:nonpar}).
+
+\subsubsection{Summarizing Our Approach and What We Do in Practice}
+
+Using the data sources listed in Table~\ref{table:sources}, we execute our analysis in two stages. In Stage I, we construct comparison samples of group members using different criteria: (a) barebones eligibility criteria ($\bm{B}_n \in \mathcal{B}$); (b) using $\bm{X}^d_k$ (variables affected by treatment); (c) using both (a) and (b). In constructing comparison groups using $\bm{X}^d_k$, we are limited to variables common to both experimental and comparison group samples. In Stage II, we use the samples so constructed to create post-$a^\ast$ forecasting models. The non-parametric estimates described in Section~\ref{usingmatching} combine the two stages. In Appendix~\ref{appendix:match}, we report sensitivity analyses based on different choices of $\bm{B}$ and $\bm{X}^d$. We find that, in our samples, our estimates are robust to alternative choices of matching criteria in constructing comparison samples in Stage I.
 
 \subsection{Predicting Parental Income} \label{section:pincome}
 
