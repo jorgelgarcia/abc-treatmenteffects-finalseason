@@ -29,18 +29,12 @@ foreach t in 2 5 8 {
 				
 		drop if part == "all" |
 				part == "crime" |
-				part == "crimepublic" |
-				part == "diclaim" |
+				part == "crimeprivate" |
 				part == "health" |
 				part == "health_private" |
 				part == "inc_labor" |
 				part == "inc_parent" |
-				part == "inc_trans_pub" |
-				part == "m_ed" |
 				part == "qaly" |
-				part == "ssclaim" |
-				part == "ssiclaim" |
-				part == "ssclaim" |
 				part == "transfer";
 	# delimit cr
 
@@ -51,11 +45,12 @@ foreach t in 2 5 8 {
 				sxpose, clear force
 				
 				drop if _var1 == "`sex'" | _var1 == "`stat'"
-				forval i = 1/4 {
+				forval i = 1/10 {
 					rename _var`i' `= _var`i'[1]'
 				}
-				drop if health_public == "health_public"
 				
+				drop if health_public == "health_public"
+
 				gen stat = "`stat'"
 				gen sex = "`sex'"
 				
@@ -78,84 +73,38 @@ foreach t in 2 5 8 {
 	tempfile part`t'
 	save `part`t''
 	
-	import delim using "npv_type`t'_ped.csv", clear
-	# delimit ;
-		keep if type == "mean" | 
-				type == "se";
-				
-		keep if part == "crimepublic" |
-				part == "edu" |
-				part == "m_ed"; 
-	# delimit cr
-	
-		foreach sex in f m p {
-		foreach stat in mean se {
-			preserve
-				keep if sex == "`sex'" & type == "`stat'"
-				sxpose, clear force
-				
-				drop if _var1 == "`sex'" | _var1 == "`stat'"
-				forval i = 1/3 {
-					rename _var`i' `= _var`i'[1]'
-				}
-				drop if crimepublic == "crimepublic"
-				
-				gen stat = "`stat'"
-				gen sex = "`sex'"
-				
-				tempfile `sex'`stat'
-				save ``sex'`stat''
-				
-			restore
-		}
-	}
-	
-	use `fmean', clear
-	append using `fse'
-	append using `mmean'
-	append using `mse'
-	append using `pmean'
-	append using `pse'
-	
-	order stat sex, first
-	
-	merge 1:1 sex stat using `part`t'', nogen
-	aorder
-	order stat sex, first
-	
-	drop stat
-	forvalues i = 1/8 {
+	forvalues i = 1/13 {
 		gen v`i' = "&"
 	}
-	gen v9 = "\\"
+	gen v14 = "\\"
+	bysort sex: gen N = _n
 	
-	foreach var in costs cc crimepublic edu m_ed health_public {
+	foreach var in costs cc crimepublic edu m_ed health_public diclaim inc_trans_pub ssclaim ssiclaim{
 		destring(`var'), replace
 		format `var' %9.0fc
 	}
-	bysort sex: gen stat = _n
-	tempfile components`t'
-	save `components`t''
-	
-	cd $dwl5
-	use NPV-DWL`t', clear
-	keep sex npv_dwl_*
-	rename npv_dwl_mean npv_dwl_1
-	rename npv_dwl_se npv_dwl_2
-	reshape long npv_dwl_, i(sex) j(stat)
-	
-	merge 1:1 sex stat using `components`t'', nogen
 	
 	replace sex = "Female" 	if sex == "f"
 	replace sex = "Male" 	if sex == "m"
 	replace sex = "Pooled" 	if sex == "p"
-	rename npv_dwl_ DWL
+	replace sex = ""		if stat == "se"
 	
-	local to_sum costs crimepublic edu m_ed health_public DWL
-	egen Total = rowtotal(`to_sum')
-	format Total %9.0fc
-	format DWL %9.0fc
-	order sex v1 costs v2 cc v3 crimepublic v4 edu v5 m_ed v6 health_public v7 DWL v8 Total v9
+	local subtotal costs cc crimepublic edu m_ed health_public diclaim inc_trans_pub ssclaim ssiclaim
+	egen subtotal = rowtotal(`subtotal')
+	
+	gen dwl = subtotal/2
+	
+	local total subtotal dwl
+	egen total = rowtotal(`total')
+	
+	foreach var in subtotal dwl total {
+		replace `var' = . if N ==2
+	}
+	
+	format subtotal %9.0fc
+	format total %9.0fc
+	format dwl %9.0fc
+	order sex v1 costs v2 cc v3 crimepublic v4 edu v5 m_ed v6 health_public v7 inc_trans_pub v8 diclaim v9 ssclaim v10 ssiclaim v11 subtotal v12 dwl v13 total v14
 	drop stat
 	
 	save tmp_dwl`t', replace

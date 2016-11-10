@@ -21,9 +21,9 @@ Education & Public education costs  &\\
 & Public education costs of the mother &\\
 Crime & Public costs of crime &\\
 Health & Public costs of health &\\
-&Disability insurance payout & \checkmark\\
-&Social security payout & \checkmark\\
-&Social security income & \checkmark\\
+&Disability insurance (DI) & \checkmark\\
+&Social security (SS) & \checkmark\\
+&Supplemental security income (SSI) & \checkmark\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -39,21 +39,15 @@ Tables~\ref{tab:dwl-npv-rslts2} through~\ref{tab:dwl-npv-rslts8} present the val
 
 \begin{table}[htbp]
 \centering
-\footnotesize
+\begin{adjustbox}{width=1.2\textwidth,center}
 \begin{threeparttable}
 \caption{Government Investment per Individual, Treatment vs. Next Best}\label{tab:dwl-npv-rslts2}
-\begin{tabular}{lcccccccc}
+\begin{tabular}{lccccccccccccc}
 \toprule
-Sample	&	Treatment	&	\mc{1}{c}{Alternative }	&	Crime	&	\mc{1}{c}{Subject's}&	\mc{1}{c}{Mother's}	&	Health	&	DWL &	Total	\\
-		& 		&	\mc{1}{c}{Preschool}			&			&	\mc{1}{c}{Education}		&	\mc{1}{c}{Education}	&		&  &	\\
+Sample	&	Treatment	&	\mc{1}{c}{Alternative }	&	Crime	&	\mc{1}{c}{Subject's}&	\mc{1}{c}{Mother's}	&	Health	&\mc{1}{c}{Transfer} & DI Claim & SSI Claim & SS Claim & Subtotal & DWL &	Total	\\
+		& 		&	\mc{1}{c}{Preschool}			&			&	\mc{1}{c}{Education}		&	\mc{1}{c}{Education}	&		&  \mc{1}{c}{Income} &		&	&		&		&		& 	\\
 \midrule
-Female	&	-67,805	&	14,717	&	32,288	&	12,669	&	1,663	&	-40,310	&	63,721	&	2,227	\\
-		&	(3,377)	&	(1,799)	&	(19,432)	&	(9,310)	&	(1,772)	&	(106,815)	&	(40,793)	&	(181,500)	\\
-Male		&	-67,805	&	13,059	&	19,285	&	8,126	&	33		&	-68,555	&	488,858	&	379,941	\\
-		&	(3,377)	&	(1,589)	&	(36,224)	&	(6,585)	&	(2,033)	&	(183,345)	&	(261,197)	&	(492,761)	\\
-Pooled	&	-67,805	&	13,581	&	26,955	&	6,312	&	1,155	&	-68,359	&	214,167	&	112,425	\\
-		&	(3,377)	&	(1,213)	&	(21,858)	&	(6,479)	&	(1,190)	&	(108,850)	&	(108,365)	&	(250,119)	\\
-
+Female	&		-67,805		&		14,717		&		32,288		&		12,669		&		1,663		&		-40,310		&		10,441		&		-423		&		-1,195		&		-156		&	-38,110	&	-19,055	&	-57,165	\\	&	$(	3,377	)$	&	$(	1,799	)$	&	$(	19,432	)$	&	$(	9,310	)$	&	$(	1,772	)$	&	$(	106,815	)$	&	$(	56,979	)$	&	$(	824	)$	&	$(	23,645	)$	&	$(	9,963	)$	&		&		&		\\Male	&		-67,805		&		13,059		&		19,285		&		8,126		&		33		&		-68,555		&		-21,803		&		559		&		-28,376		&		6,955		&	-138,522	&	-69,261	&	-207,783	\\	&	$(	3,377	)$	&	$(	1,589	)$	&	$(	36,224	)$	&	$(	6,585	)$	&	$(	2,033	)$	&	$(	183,345	)$	&	$(	21,887	)$	&	$(	1,901	)$	&	$(	45,085	)$	&	$(	14,852	)$	&		&		&		\\Pooled	&		-67,805		&		13,581		&		26,955		&		6,312		&		1,155		&		-68,359		&		-9,041		&		26		&		-19,903		&		5,466		&	-111,614	&	-55,807	&	-167,421	\\	&	$(	3,377	)$	&	$(	1,213	)$	&	$(	21,858	)$	&	$(	6,479	)$	&	$(	1,190	)$	&	$(	108,850	)$	&	$(	32,703	)$	&	$(	996	)$	&	$(	25,851	)$	&	$(	10,343	)$	&		&		&		\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -61,26 +55,22 @@ Pooled	&	-67,805	&	13,581	&	26,955	&	6,312	&	1,155	&	-68,359	&	214,167	&	112,425
 Note: This table shows the non-discounted value of government investment by component. The Crime and Health components only include public costs. The Subject's Education and Mother's Education components only include education costs up to age 18, after which costs are considered private. The DWL column presents just the DWL of public expenditures (including transfers), assuming a marginal tax rate of 0.5. The Total is the sum of all the previous columns. These estimates compare those in treatment with those in the next best option.
 \end{tablenotes}
 \end{threeparttable}
+\end{adjustbox}
 \end{table}
 
 
 \begin{table}[htbp]
 \centering
 \footnotesize
+\begin{adjustbox}{width=1.2\textwidth,center}
 \begin{threeparttable}
 \caption{Government Investment per Individual, Treatment vs. Stay at Home}\label{tab:dwl-npv-rslts5}
-\begin{tabular}{lcccccccc}
+\begin{tabular}{lccccccccccccc}
 \toprule
-Sample	&	Treatment	&	\mc{1}{c}{Alternative }	&	Crime	&	\mc{1}{c}{Subject's}&	\mc{1}{c}{Mother's}	&	Health	&	DWL &	Total	\\
-		& 		&	\mc{1}{c}{Preschool}			&			&	\mc{1}{c}{Education}		&	\mc{1}{c}{Education}	&		&  &	\\
+Sample	&	Treatment	&	\mc{1}{c}{Alternative }	&	Crime	&	\mc{1}{c}{Subject's}&	\mc{1}{c}{Mother's}	&	Health	&\mc{1}{c}{Transfer} & DI Claim & SSI Claim & SS Claim & Subtotal & DWL &	Total	\\
+		& 		&	\mc{1}{c}{Preschool}			&			&	\mc{1}{c}{Education}		&	\mc{1}{c}{Education}	&		&  \mc{1}{c}{Income} &		&	&		&		&		& 	\\
 \midrule
-Female	&	-72,436	&	286	&	78,696	&	-20,173	&	3,914	&	13,192	&	-89,084	&	-85,891	\\
-		&	(4,060)	&	(122)	&	(62,421)	&	(6,339)	&	(2,489)	&	(156,345)	&	(-6,508)	&	(225,145)	\\
-Male		&	-72,436	&		&	1,899	&	1,239	&	-1,257	&	-152,816	&	995,420	&	772,048	\\
-		&	(4,060)	&		&	(46,069)	&	(11,222)	&	(2,847)	&	(240,772)	&	(531,980)	&	(836,949)	\\
-Pooled	&	-72,436	&	149	&	38,273	&	-9,495	&	1,744	&	-51,179	&	311,073	&	217,981	\\
-		&	(4,060)	&	(68)	&	(36,950)	&	(7,286)	&	(1,891)	&	(167,140)	&	(183,566)	&	(400,892)	\\
-
+Female	&		-72,436		&		286		&		78,696		&		-20,173		&		3,914		&		13,192		&		4,038		&		867		&		-19,703		&		17,043		&	5,725	&	2,862	&	8,587	\\	&	$(	4,060	)$	&	$(	122	)$	&	$(	62,421	)$	&	$(	6,339	)$	&	$(	2,489	)$	&	$(	156,345	)$	&	$(	68,235	)$	&	$(	1,445	)$	&	$(	34,889	)$	&	$(	18,863	)$	&		&		&		\\Male	&		-72,436		&				&		1,899		&		1,239		&		-1,257		&		-152,816		&		-34,963		&		-168		&		-51,759		&		3,308		&	-306,954	&	-153,477	&	-460,431	\\	&	$(	4,060	)$	&				&	$(	46,069	)$	&	$(	11,222	)$	&	$(	2,847	)$	&	$(	240,772	)$	&	$(	25,359	)$	&	$(	2,500	)$	&	$(	57,368	)$	&	$(	18,202	)$	&		&		&		\\Pooled	&		-72,436		&		149		&		38,273		&		-9,495		&		1,744		&		-51,179		&		-26,458		&		593		&		-38,808		&		16,337		&	-141,278	&	-70,639	&	-211,917	\\	&	$(	4,060	)$	&	$(	68	)$	&	$(	36,950	)$	&	$(	7,286	)$	&	$(	1,891	)$	&	$(	167,140	)$	&	$(	50,614	)$	&	$(	1,807	)$	&	$(	36,634	)$	&	$(	21,184	)$	&		&		&		\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -88,24 +78,21 @@ Pooled	&	-72,436	&	149	&	38,273	&	-9,495	&	1,744	&	-51,179	&	311,073	&	217,981	\
 Note: This table shows the non-discounted value of government investment by component. The Crime and Health components only include public costs. The Subject's Education and Mother's Education components only include education costs up to age 18, after which costs are considered private. The DWL column presents just the DWL of public expenditures (including transfers), assuming a marginal tax rate of 0.5. The Total is the sum of all the previous columns. These estimates compare those in treatment with those who stayed at home.
 \end{tablenotes}
 \end{threeparttable}
+\end{adjustbox}
 \end{table}
 
 \begin{table}[htbp]
 \centering
 \footnotesize
+\begin{adjustbox}{width=1.2\textwidth,center}
 \begin{threeparttable}
 \caption{Government Investment per Individual, Treatment vs. Alternative Preschool}\label{tab:dwl-npv-rslts8}
-\begin{tabular}{lcccccccc}
+\begin{tabular}{lccccccccccccc}
 \toprule
-Sample	&	Treatment	&	\mc{1}{c}{Alternative }	&	Crime	&	\mc{1}{c}{Subject's}&	\mc{1}{c}{Mother's}	&	Health	&	DWL &	Total	\\
-		& 		&	\mc{1}{c}{Preschool}			&			&	\mc{1}{c}{Education}		&	\mc{1}{c}{Education}	&		&  &	\\
+Sample	&	Treatment	&	\mc{1}{c}{Alternative }	&	Crime	&	\mc{1}{c}{Subject's}&	\mc{1}{c}{Mother's}	&	Health	&\mc{1}{c}{Transfer} & DI Claim & SSI Claim & SS Claim & Subtotal & DWL &	Total	\\
+		& 		&	\mc{1}{c}{Preschool}			&			&	\mc{1}{c}{Education}		&	\mc{1}{c}{Education}	&		&  \mc{1}{c}{Income} &		&	&		&		&		& 	\\
 \midrule
-Female	&	-73,433		&	19,120	&	7,515		&	14,172	&	1,597		&	-80,906	&	82,284	&	-48,772	\\
-		&	(3,875)		&	(1,802)		&	(14,262)	&	(8,547)		&	(1,732)		&	(107,216)	&	(48,933)	&	(184,565)	\\
-Male		&	-73,433		&	17,075	&	24,076	&	3,968		&	-218		&	-68		&	593,366	&	547,692	\\
-		&	(3,875)		&	(1,861)		&	(35,016)	&	(6,964)		&	(2,560)		&	(169,226)	&	(423,316)	&	(640,957)	\\
-Pooled	&	-73,433		&	18,196	&	7,794		&	6,773		&	597		&	-56,001	&	165,491	&	51,222	\\
-		&	(3,875)		&	(1,351)		&	(20,801)	&	(5,838)		&	(1,726)		&	(109,984)	&	(141,411)	&	(283,636)	\\
+Female	&		-36,716		&		13,568		&		3,757		&		7,640		&		1,088		&		-40,453		&		10,462		&		-193		&		-3,969		&		-251		&	-45,066	&	-22,533	&	-67,599	\\	&	$(	1,938	)$	&	$(	1,358	)$	&	$(	7,131	)$	&	$(	4,377	)$	&	$(	887	)$	&	$(	53,608	)$	&	$(	24,884	)$	&	$(	404	)$	&	$(	12,269	)$	&	$(	5,445	)$	&		&		&		\\Male	&		-36,716		&		13,320		&		12,038		&		2,603		&		-259		&		-34		&		-7,553		&		124		&		-7,857		&		1,675		&	-22,660	&	-11,330	&	-33,990	\\	&	$(	1,938	)$	&	$(	1,418	)$	&	$(	17,508	)$	&	$(	3,511	)$	&	$(	1,181	)$	&	$(	84,613	)$	&	$(	10,017	)$	&	$(	849	)$	&	$(	21,221	)$	&	$(	6,199	)$	&		&		&		\\Pooled	&		-36,716		&		13,593		&		3,897		&		3,924		&		418		&		-28,001		&		-1,444		&		-49		&		-5,825		&		2,114		&	-48,090	&	-24,045	&	-72,134	\\	&	$(	1,938	)$	&	$(	1,020	)$	&	$(	10,401	)$	&	$(	3,087	)$	&	$(	803	)$	&	$(	54,992	)$	&	$(	16,572	)$	&	$(	487	)$	&	$(	13,881	)$	&	$(	4,920	)$	&		&		&		\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -113,6 +100,7 @@ Pooled	&	-73,433		&	18,196	&	7,794		&	6,773		&	597		&	-56,001	&	165,491	&	51,222
 Note: This table shows the non-discounted value of government investment by component. The Crime and Health components only include public costs. The Subject's Education and Mother's Education components only include education costs up to age 18, after which costs are considered private. The DWL column presents just the DWL of public expenditures (including transfers), assuming a marginal tax rate of 0.5. The Total is the sum of all the previous columns. These estimates compare those in treatment with those who attended alternative preschool.
 \end{tablenotes}
 \end{threeparttable}
+\end{adjustbox}
 \end{table}
 
 
