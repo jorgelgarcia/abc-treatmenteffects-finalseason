@@ -187,17 +187,20 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(
 graph export abccare_npvssumm.eps, replace
 
 # delimit
-twoway (bar     m part1            if estimate == 1 & sex == 3, fcolor(gs8) lcolor(gs0) lwidth(medthick) barw(.9)),	
-		legend(cols(4) order(3 "Males and Females" 2 "Males" 1 "Females" 4 "Significant at 10%") position(north) size(vsmall))
+twoway (bar     m part1            if estimate == 1 & sex == 3 & part1 <= 2, color(black) lwidth(medthick) barw(.9))
+       (bar     m part1            if estimate == 1 & sex == 3 & part1 >  2, color(gs8) lwidth(medthick) barw(.9))
+,	
+		legend(off)
 			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
 			  5 "Crime" 6 "Health",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
-			  ylabel(-1 0[1]5, angle(h) glcolor(gs14))
+			  ylabel(-1 0[1.5]4.5, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
-			  ytitle("100,000's (2014 USD)")
+			  ytitle("100,000's (2014 USD)", size(medium))
 			  graphregion(color(white)) plotregion(fcolor(white))
 			  note("Per-annum Rate of Return: Males and Females 12% (s.e. 5%)."
 			       "Benefit-cost Ratio: Males and Females 5.7 (s.e. 2.4)."
-			        , size(vsmall));
+			        , size(small))
+			text(-.3 4.5 "{&larr}{&hellip} Components of Total Benefits {&hellip}{&rarr}", size(medium));
 #delimit cr 
 graph export abccare_npvssummredux.eps, replace
 
