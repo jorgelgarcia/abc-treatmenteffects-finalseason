@@ -85,38 +85,6 @@ Email: dleaf@healthpolicy.usc.edu                     & Email: prados@usc.edu \\
 \setcounter{page}{0}
 \pagenumbering{arabic}
 
-\begin{center}
-Note for file on CBA\\
-11/9/16\\
-(For private discussion with Jorge)
-\end{center}
-We have two distinct approaches.
-\begin{enumerate}[(1)]
-\item Structural approach
-    \begin{enumerate}[(A)]
-    \item Find people ``in the ballpark''
-    \item Write out model/assumption
-    \item Structural invariance role
-    \item Don't need exogeneity -- we can correct for it
-    \item How we use it to make out-of-sample comparisons for treatment and controls
-    \item How to deal with future values of $\bm{X}^d_{k,a}$ $a>a^{\ast}$. How to predict those? How exactly do we do this?
-    \item Also how do we forecast future $\bm{X}^d_{k,a}$ if it lags? And how to correct the standard errors?
-    \end{enumerate}
-\item Matching
-    \begin{enumerate}[(A)]
-    \item Same step as 1
-    \item Assume exogeneity and find counterparts; we don't need exogeneity in levels -- just in differences. $(Y^1 - Y^0 = \bm{\mu}^1 - \bm{\mu}^0 + \varepsilon^1_0 - \varepsilon^0)$, need $E(\varepsilon^1 - \varepsilon^0 | \bm{X}) = 0$
-    \item Do we need structural invariance? (Not necessarily.) We can assume that there is a break in the \textbf{[Typist: Sentence ends]}. But need invariance as to levels
-    \item These are counterparts to future $\bm{X}$ question -- how to match?
-    \end{enumerate}
-\end{enumerate}
-
-\noindent Issues
-\begin{enumerate}[(a)]
-\item Exogeneity? Only in differences
-\item How to deal with future $\bm{X}^d_a$ not predicted by current information set
-\end{enumerate}
-
 \section{Introduction}
 
 This paper estimates the large array of life-cycle benefits of an influential early childhood program targeted to disadvantaged children. The program has substantial impacts on the lives of participants. Monetizing benefits and costs across multiple domains, we estimate a rate of return of 12.3\% per annum and a benefit/cost ratio of 5.7. There are substantial differences across genders favoring males.
@@ -200,7 +168,7 @@ Randomization for ABC/CARE was conducted on child pairs matched on family backgr
 
 \subsection{Control Group Substitution}
 
-In ABC/CARE, many control group members (but no family offered treatment) attended alternative (to home) childcare or preschool centers.\footnote{See \cite{Heckman_Hohmann_etal_2000_QJE} on the issue of substitution bias in social experiments.} The figure is \treatsubsabc\ for ABC and \treatsubscarec\ for CARE. Figure~\ref{fig:salmonella} shows enrollment by age and the average months of enrollment by age for the control-group children who enrolled in program alternatives. Enrollment increases with the age of children.
+In ABC/CARE, many control group members (but no children from families offered treatment) attended alternative (to home) childcare or preschool centers.\footnote{See \cite{Heckman_Hohmann_etal_2000_QJE} on the issue of substitution bias in social experiments.} The figure is \treatsubsabc\ for ABC and \treatsubscarec\ for CARE. Figure~\ref{fig:salmonella} shows enrollment by age and the average months of enrollment by age for the control-group children who enrolled in program alternatives. Enrollment increases with the age of children.
 
 \begin{sidewaysfigure}[!htbp]
 \centering
@@ -240,7 +208,7 @@ Most of the alternative childcare centers received federal subsidies and were su
 
 Random assignment to treatment does not guarantee that conventional treatment effects answer policy-relevant questions. In this paper, we define and estimate three parameters that address different policy questions.
 
-We assume that life cycles consist of $A$ discrete periods. The treatment phase is the first $\bar{a}$ periods of life $\left[1,\dots,\bar{a}\right]$. We have data through age $a^{*}>\bar{a}$. We lack follow-up data on the remainder of life $(\bar{a},\dots,A]$. We define $W=1$ to indicate that parents wish to participate in the program.\footnote{Individual subscripts are omitted to improve clarity.} We define $R \in \{0,1\}$, where $R=1$ indicates that a child is randomized into eligibility to participate in the program. $D$ indicates participation in the program.
+We assume that life cycles consist of $A$ discrete periods. The treatment phase is the first $\bar{a}$ periods of life $\left[1,\dots,\bar{a}\right]$. We have data through age $a^{*}>\bar{a}$. We lack follow-up data on the remainder of life $(a^*,\dots,A]$. We define $W=1$ to indicate that parents wish to participate in the program.\footnote{Individual subscripts are omitted to improve clarity.} We define $R \in \{0,1\}$, where $R=1$ indicates that a child is randomized into eligibility to participate in the program. $D$ indicates participation in the program.
 
 Individuals are eligible to participate in the program if baseline background variables $\bm{B}\in\mathcal{B}_0$. $\mathcal{B}_0$ is the set of scores on a risk index required to be eligible, as previously discussed. As it turns out, in the ABC/CARE study, all of the eligible persons given the option to participate choose to do so $(W=1\text{, and } D=R)$.\footnote{There are no cases of non-compliance for people offered treatment, although there is a small amount of attrition. See Appendix~\ref{appendix:background} for details.} There are very few dropouts. \emph{Ex ante}, parents perceived that ABC/CARE was superior to other childcare alternatives. Thus, we can safely interpret the treatment effects generated by the experiment as average treatment effects for the population for which $\bm{B}\in\mathcal{B}_0$ and not just treatment effects for the treated (\textbf{TOT}).
 
@@ -364,10 +332,6 @@ Note: Panel (a) percentage of outcomes displaying a positive treatment effect, c
 
 The major goal of this paper is to summarize the multiple benefits of ABC/CARE using benefit/cost and rate of return analyses. We rely on auxiliary data to predict the costs and benefits of the program over the life cycle after the measurement phase of the study ends.
 
-We use two approaches to construct synthetic treatment and control cohorts.\footnote{See, e.g., \citet{Mincer_1974_schooling} and the survey in \citet{Heckman_Lochner_ea_2006_HEE}.} One approach uses matching methods to create counterparts for treatment and control group members in the auxiliary samples. The validity of this approach rests critically on the assumption of exogeneity of the matching variables. A second approach relies on structural invariance of the underlying economic model. It can be applied even if exogeneity fails, provided that there is access to instruments. Outcomes of ``comparable'' older cohorts in auxiliary samples who are not exposed to the program are used to construct virtual treatment and control groups effectively in both approaches. We thus use two different methods to address the problem of finding who among the auxiliary samples would have received treatment if the program had been available to them. Under exogeneity, the two approaches agree.
-
-In addition, older cohorts may have received different endowments and experienced different environments. An assumption of stationary life-cycle profiles across cohorts may be grossly at odds with the data.
-
 This section explains our strategy for constructing out-of-sample treatment effects. Our more structural approach starts from and extends the analysis of \citet{Heckman_Pinto_etal_2013_PerryFactor}, who show, in a setting similar to ours, that the effect of treatment on outcomes operates through its effects on inputs in a stable production function rather than through shifts in the production function. Table~\ref{table:sources} presents the outcomes for which we conduct these analyses and the data sources used. We initially focus on labor income to illustrate our approach, but a similar methodology is used to predict the other outcomes.
 
 \begin{table}[!htbp]
@@ -391,15 +355,17 @@ We have data on control- and treatment-group members through age $a^{\ast}$. We 
 
 Making valid predictions of out-of-sample treatment effects does not require making valid predictions of separate out-of-sample treatment and control profiles. Only valid predictions of their difference is required.
 
-Nonetheless, in this paper we focus on making valid predictions of separate treatment and control post-$a^*$ profiles. Doing so allows us to test the validity of our methodology by comparing (within the support of the experimental sample) outcomes for the experimental control and treatment groups with those from the synthetic control and treatment groups we generate.
+Nonetheless, in this paper we focus on making valid predictions of separate treatment and control post-$a^*$ profiles. Doing so allows us to test the validity of our methodology by comparing (within the support of the experimental sample) outcomes by treatment status for the experimental control and treatment groups with those from the synthetic control and treatment groups we generate.
 
 Comparisons between the experimental control group and the synthetic control group are particularly compelling. By design, neither group receives treatment. In our data, all persons offered treatment accept it, so it is straightforward to construct synthetic control groups in auxiliary samples using only eligibility criteria.
 
-There are two distinct stages in our structural analysis. In Stage I, we construct samples of comparison group members with the same or similar characteristics as the experimental group members. The minimal set of characteristics includes the background variables $\bm{B} \in \mathcal{B}$. In Stage II, we build models in these samples to forecast out-of-sample treatment effects. 
+There are two distinct stages in our analysis. In Stage I, we construct samples of comparison group members in the auxiliary samples with the same or similar characteristics as the experimental group members. The minimal set of characteristics includes the background variables $\bm{B} \in \mathcal{B}_0$. We use a coarse form of matching based on Algorithm~\ref{alg:match} in Web Appendix~\ref{appendix:match}. In Stage II, we build models in these samples to forecast out-of-sample outcomes separately for the outcomes of the treated and the controls.
 
-Specifically, we adopt a three-step procedure. In Step 1, we use the experimental sample to conduct dynamic mediation analyses relating the vector of outcomes at age $a$ for person $i$ ($\bm{Y}^{d}_{i,a}$) for $a\leq a^*$ to predictor variables (and interactions) that are affected by treatment ($\bm{X}^{d}_{i,a}$), as well as background variables ($\bm{B}_i$). To avoid notational clutter, we henceforth suppress individual $i$ subscripts. It turns out that we accurately predict within-sample treatment effects as well as levels of treatment and control profiles using this approach. In Step 2, we construct counterparts to treatment- and control-group members in the auxiliary samples. We compare these constructed counterparts to the actual samples for ages $a \leq a^\ast$. In Step 3, we use the estimated dynamic relationships fit on the constructed samples to predict the post-$a^{\ast}$ outcomes. Under exogeneity of the predictor variables, the two stages can be compressed into a single, one-stage matching procedure.
+Specifically, we adopt a three-step procedure. In Step 1, we use the experimental sample to conduct dynamic mediation analyses relating the vector of outcomes at age $a$ for person $i$ ($\bm{Y}^{d}_{i,a}$) for $a\leq a^*$ to predictor variables (and interactions) that are affected by treatment ($\bm{X}^{d}_{i,a}$), as well as background variables ($\bm{B}_i$).\footnote{To avoid notational clutter, we henceforth suppress individual $i$ subscripts.} It turns out that we accurately predict within-sample treatment effects as well as levels of treatment and control profiles using this approach. In Step 2, we construct counterpart forecasts of treatment and control outcomes using the auxiliary samples. We compare these constructed counterparts to the actual samples for ages $a \leq a^\ast$. In Step 3, we use the estimated dynamic relationships fit on the constructed samples to predict the post-$a^{\ast}$ outcomes. 
 
-We preview the outputs from the structural approach. Figure~\ref{fig:labor-income-profiles} displays the life-cycle labor income profiles predicted by our procedure for the treatment and control groups. It also compares the realized labor income to the model-predicted labor income at $a^*$. There is close agreement of the constructed profiles within sample. The pattern of life-cycle labor income we generate is typical for low-skilled workers \citep{Blundell-etal_2015_J-Pub-E,Gladden_Taber_2000_WageProgression,Sanders-Taber_2012_AR,Lagakos_Moll_etal_2016_LifeCycle_NBER}.\footnote{The prediction of labor (transfer) income is based on indicator variables of being male and being Black, mother's education, average PIAT scores from ages 5 to 7, years of education at age 30, income at age 21 and 30, and one-period lagged labor (transfer) income. We use labor income at age 21 to initialize this process. A justification for the use of these variables is in Appendix~\ref{appendix:methodology}.}
+Under exogeneity of the predictor variables and structural invariance (defined below), the two stages can be compressed into a single, one-stage matching procedure. We compare the matching---the performance-based estimators---to those from our main approach, and find close agreement. 
+
+We preview the outputs from our approach. Figure~\ref{fig:labor-income-profiles} displays the life-cycle labor income profiles predicted by our procedure for the treatment and control groups. It also compares the realized labor income to the model-predicted labor income at $a^*$. There is close agreement of the constructed profiles within sample. The pattern of life-cycle labor income we generate is typical for low-skilled workers \citep{Blundell-etal_2015_J-Pub-E,Gladden_Taber_2000_WageProgression,Sanders-Taber_2012_AR,Lagakos_Moll_etal_2016_LifeCycle_NBER}.\footnote{The prediction of labor (transfer) income is based on indicator variables of being male and being Black, mother's education, average PIAT scores from ages 5 to 7, years of education at age 30, income at age 21 and 30, and one-period lagged labor (transfer) income. We use labor income at age 21 to initialize this process. A justification for the use of these variables is in Appendix~\ref{appendix:methodology}.} One approach (based on \citealp{Heckman_Ichimura_etal_1998_Econometrica}) would be to use matching directly. The validity of this approach rests on making implicit exogeneity and structural invariance assumptions. Our approach makes these assumptions explicit and tests them. 
 
 \begin{sidewaysfigure}[!htbp]
 \centering
@@ -439,7 +405,7 @@ Note: Panel (a) displays the predicted labor income for males in the auxiliary s
 
 \subsection{Constructing Out-of-Sample Counterfactuals}\label{section:just}
 
-We now present our analytical framework and its underlying assumptions for the structural Stage II forecasting analysis. Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the auxiliary sample:
+We now present our analytical framework and its underlying assumptions. Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the auxiliary sample:
 \begin{equation}\label{eq:outcome}
 Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a}, \quad j \in \mathcal{J}_a.
 \end{equation}
@@ -480,7 +446,7 @@ We henceforth drop the ``$c$'' and ``$t$'' sub-indices. The out-of-sample year e
 
 \subsubsection{Support Conditions}
 
-In addition, we further require that the support of the auxiliary sample contains the support of the experimental sample. This assumption allows us to find counterpart values in the control and experimental samples.
+We require that the support of the auxiliary sample contains the support of the experimental sample. This assumption allows us to find counterpart values of $\bm{X}^d_{k,a}$, $\bm{B}$, and $\bm{Y}_{k,a}$ in the control and experimental samples.
 
 \onehalfspacing
 \begin{assumption} \label{ass:contain} \textbf{Support Conditions} \\
@@ -494,18 +460,18 @@ This assumption is straightforward to test for ages $a\leq a^\ast$. It is satisf
 
 \subsubsection{Conditions for Valid Out-of-Sample Forecasts}
 
-A strong sufficient condition for identifying the life-cycle profiles of individuals in the experimental sample using individuals in the auxiliary samples is Condition~\ref{cond:cond1}:
+A strong sufficient condition for identifying the distribution of life-cycle profiles of individuals in the experimental sample using individuals in the auxiliary samples is Condition~\ref{cond:cond1}:
 
 \onehalfspacing
 \begin{condition} \textbf{Equality of Distributions Across the Experimental and Auxiliary Samples \label{cond:cond1}}
 \begin{equation}
 F_{\bm{Y}_e^d, \bm{X}_e^d | \bm{B}_e = \bm{b}} \left( \cdot, \cdot \right) = F_{\bm{Y}_n^d, \bm{X}_n^d | \bm{B}_n = \bm{b}} \left( \cdot, \cdot \right), \quad d \in \{0,1\}
 \end{equation}
-\noindent for $\bm{Y}_e^d, \bm{X}^d_e | \bm{B}_e = \bm{b}$ and $\bm{Y}_n^d, \bm{X}^d_n | \bm{B}_n = \bm{b}$ contained the support of the experimental sample $supp\left(\bm{Y}^d_{e,a}, \bm{X}^d_{e,a}, \bm{B}\right)$.
+\noindent for $\bm{Y}_e^d, \bm{X}^d_e | \bm{B}_e = \bm{b}$ and $\bm{Y}_n^d, \bm{X}^d_n | \bm{B}_n = \bm{b}$ contained the support of the experimental sample $supp\left(\bm{Y}^d_{e}, \bm{X}^d_{e}, \bm{B}\right)$.
 \end{condition}
 \doublespacing
 
-We are only interested in means for cost-benefit analysis. Thus, we can get by with Condition~\ref{cond:cond2}. It has testable implications, as we show below.
+Since we are only interested in means for cost-benefit analysis, we can get by with Condition~\ref{cond:cond2}. It has testable implications, as we show below.
 
 \onehalfspacing
 \begin{condition} \textbf{Equality in Conditional Expectations Across the Experimental and Auxiliary Samples \label{cond:cond2}}
@@ -526,10 +492,11 @@ Since we are primarily interested in treatment effects, we can get by with an ev
 over $supp\left(\bm{Y}^d_{e,a}, \bm{B}_e\right)$.
 \end{condition}
 \doublespacing
+We could simply invoke Condition~\ref{cond:cond2} or \ref{cond:cond3} and be done. Our approach is to examine and test (when possible) assumptions that justify them. 
 
 \subsubsection{Exogeneity}
 
-Conditions~\ref{cond:cond1}--\ref{cond:cond3} do not require that we take a position on the exogeneity of $\bm{X}^d_k, \: k \in \{e,n\}$. However, under exogeneity assumptions it is easier to use economic theory to generate and interpret treatment effects, to test the validity of our synthetic control groups, and to use matching to find auxiliary sample counterparts to treatments and controls. For these purposes, we assume:
+Conditions~\ref{cond:cond1}--\ref{cond:cond3} do not require that we take a position on the exogeneity of $\bm{X}^d_k, \: k \in \{e,n\}$. However, exogeneity facilitates the use of economic theory to generate and interpret treatment effects, to test the validity of our synthetic control groups, and to use matching to find auxiliary sample counterparts to treatments and controls.\footnote{See \cite{Heckman_Navarro_2004_REStat}.} For these purposes, we assume:
 
 \onehalfspacing
 \begin{assumption}\label{ass:exog} \textbf{Exogeneity}\\
@@ -545,7 +512,7 @@ for all $\bm{b}$ in the support of $\bm{B}_k, \: k \in \{e,n\}$, for all outcome
 
 \subsubsection{Structural Invariance}
 
-We assume that the variables $\bm{X}_{k,a}^d$ fully summarize treatment in the sense that any effect that treatment has on outcomes operates through the inputs $\bm{X}_{k,a}^d$ and not through shifts in the production function relating inputs to outputs (see \citealp{Heckman_Pinto_etal_2013_PerryFactor}). Assumption~\ref{ass:summary} formalizes this.
+We assume that the variables $\bm{X}_{k,a}^d$ fully summarize treatment in the sense that any effect that treatment has on outcomes operates through the inputs $\bm{X}_{k,a}^d$ and not through shifts in the production function relating inputs to outputs (see \citealp{Heckman_Pinto_etal_2013_PerryFactor}). Assumption~\ref{ass:summary} formalizes this statement.
 
 \onehalfspacing
 \begin{assumption} \label{ass:summary} \textbf{Structural Invariance}\\
@@ -558,7 +525,7 @@ $\phi^d_{k,j,a}(\bm{x})$ is the function generating the causal effect of setting
 \end{assumption}
 \doublespacing
 
-This assumption has two messages that are fruitful to distinguish: (i) the structural functions evaluated at the same arguments have identical values for treatment and control groups in the experimental sample. It also says (ii) that the structural relationships are identical in the experimental and auxiliary samples. As previously noted, exogeneity is not needed to satisfy any of Conditions~\ref{cond:cond1} through \ref{cond:cond3}. But in the absence of exogeneity, the relationship between the $\bm{X}^d_{k,a}$ and the errors $\varepsilon^d_{k,a}$ likely differs across samples because the randomization imparts a source of exogenous variation to the $\bm{X}^d_{e,a}$ not present in the non-experimental sample. Assumption~\ref{ass:summary} combined with Assumption~\ref{ass:exog}, Equations~\eqref{eq:countersystem}, and the assumption of a zero mean for the errors $(\mathbb{E}(\varepsilon^d_{k,j,a})=0)$ for all $a \in \{1,\dots,A\}, d \in \{0,1\}$ and $k \in \{e,n\}$ enable us to write:
+This assumption has two messages that fruitfully distinguish: (i) the structural functions evaluated at the same arguments have identical values for treatment and control groups in the experimental sample. It also says (ii) that the structural relationships are identical in the experimental and auxiliary samples. As previously noted, exogeneity is not needed to satisfy any of Conditions~\ref{cond:cond1} through \ref{cond:cond3}. But in the absence of exogeneity, the relationship between the $\bm{X}^d_{k,a}$ and the errors $\bm{\varepsilon}^d_{k,a}$ likely differs across samples because the randomization imparts a source of exogenous variation to the $\bm{X}^d_{e,a}$ not present in the non-experimental sample. Assumption~\ref{ass:summary} combined with Assumption~\ref{ass:exog}, Equations~\eqref{eq:countersystem}, and the assumption of a zero mean for the errors $(\mathbb{E}(\varepsilon^d_{k,j,a})=0)$ for all $a \in \{1,\dots,A\}, d \in \{0,1\}$ and $k \in \{e,n\}$ enable us to write:
 \begin{equation}\label{eq:invariancetest}
 \mathbb{E} \left[ Y_{k,j,a}^d | \bm{X}_{k,a}^d  = \bm{x}, \bm{B}_k = \bm{b}, D = d \right] = \mathbb{E} \left[ Y_{k,j,a} | \bm{X}^d_{k,a}  = \bm{x}, \bm{B}_k = \bm{b} \right],
 \end{equation}
@@ -582,22 +549,28 @@ Collecting results, under exogeneity and structural invariance we obtain the fol
 \onehalfspacing
 \setcounter{theorem}{0}
 \begin{theorem}\label{theorem:main} \textbf{Valid Out-of-Sample Forecasts for Condition} \\
-Under Assumptions~\ref{ass:alignment}-\ref{ass:summary}, Condition~\ref{cond:cond2} holds for any value of $\left( \bm{X}^d_{k,a}, \bm{B}_k \right)$. \\
+Under Assumptions~\ref{ass:alignment}-\ref{ass:summary}, Conditions~\ref{cond:cond1} through \ref{cond:cond3} hold for any value of $\left( \bm{X}^d_{k,a}, \bm{B}_k \right)$. \\
 \emph{This is an immediate consequence of the cited assumptions.} $\Box$
 \end{theorem}
 \doublespacing
 
 \subsubsection{Testing for Endogeneity}\label{section:accendog}
 
-In Appendix~\ref{app:endogeneity}, we investigate the question of endogeneity in the experimental and auxiliary samples. We follow \citet{Heckman_Pinto_etal_2013_PerryFactor} and assume that the $\varepsilon_{k,j,a}^d$ obey a factor structure, $k \in \{e,n\}$. We develop that framework and provide evidence supporting exogeneity in both samples for the predictor variables used in our empirical analyses.
+In Appendix~\ref{app:endogeneity}, we test for endogeneity in the experimental and auxiliary samples used in this paper. We follow \citet{Heckman_Pinto_etal_2013_PerryFactor} and assume that the $\varepsilon_{k,j,a}^d$ obey a factor structure, $k \in \{e,n\}$. We develop that framework and provide evidence supporting exogeneity in both samples for the predictor variables used in our empirical analyses.
 
 \subsubsection{Using Matching to Construct Virtual Treatment and Comparison Groups}\label{usingmatching}
 
-Under exogeneity assumption~\ref{ass:exog} and invariance condition~\ref{ass:summary} we can use matching to construct counterparts to treatment and control groups in the auxiliary sample.\footnote{\citet{Heckman_Ichimura_etal_1998_Econometrica} use this procedure.} Doing so compresses the two stages of constructing a comparison group and creating forecasts into one stage. We discuss this approach in Appendix~\ref{appendix:match}. Matching is one way to non-parametrically estimate the conditional mean functions. There is close agreement between non-parametric estimates based on matching and more parametric model-based approaches (see Appendix~\ref{appendix:nonpar}).
+Under exogeneity assumption~\ref{ass:exog} and invariance condition~\ref{ass:summary} we can use matching to construct counterparts to treatment and control groups in the auxiliary sample.\footnote{\citet{Heckman_Ichimura_etal_1998_Econometrica} use this procedure.} Doing so compresses the two stages of constructing a comparison group and creating forecasts into one stage. Matching in this fashion creates direct auxiliary counterparts for each member of the experimental samples. It is an intuitively appealing estimator. 
+
+We discuss this approach in Appendix~\ref{appendix:match}. Matching is one way to non-parametrically estimate the conditional mean functions. There is close agreement between non-parametric estimates based on matching and more parametric model-based approaches (see Appendix~\ref{appendix:nonpar}).
 
 \subsubsection{Summarizing Our Approach and What We Do in This Paper}
 
-Using the data sources listed in Table~\ref{table:sources}, we execute our analysis in two stages. In Stage I, we construct comparison samples of group members using different criteria: (a) barebones eligibility criteria ($\bm{B}_n \in \mathcal{B}$); (b) using $\bm{X}^d_k$ (variables affected by treatment); (c) using both (a) and (b). In constructing comparison groups using $\bm{X}^d_k$, we are limited to variables common to both experimental and comparison group samples. In Stage II, we use the samples so constructed to create post-$a^\ast$ forecasting models. The non-parametric approach described in Section~\ref{usingmatching} combines the two stages. The estimates reported in the text of this paper are based on the structural approach outlined here. We report estimates from the non-parametric approach for selected outcomes in Appendix~\ref{appendix:nonpar}. In Appendix~\ref{appendix:match}, we report sensitivity analyses for our structural estimates based on different choices of $\bm{B}$ and $\bm{X}^d_k$. We find that, in our samples, our estimates are robust to alternative choices of matching criteria in constructing comparison samples in Stage I.
+Using the data sources listed in Table~\ref{table:sources}, we execute our analysis in two stages. In Stage I, we construct comparison samples using barebones eligibility criteria ($\bm{B}_n \in \mathcal{B}$). In Stage II, we use the samples so constructed to create post-$a^\ast$ forecasting models based on $\bm{B}$ and $\bm{X}^d_e$. We repeat that the structural invariance and exogeneity assumptions discussed in this section are \emph{sufficient} conditions for justifying \ref{cond:cond1}--\ref{cond:cond3}. We can clearly weaken these assumptions. For example, creating mean difference counterfactuals only requires exogeneity and structural invariance of the mean difference versions of Equation~\eqref{eq:withbetimplication}. The conditions stated here for level equations by treatment status have the advantage of being testable on certain subsamples of the data.
+
+Under these assumptions, matching can be used to provide valid nonparametric out-of-sample forecasts for treatment effects.  
+
+We report estimates from the non-parametric approach for selected outcomes in Appendix~\ref{appendix:nonpar}. In Appendix~\ref{appendix:match}, we report sensitivity analyses for our structural estimates based on different choices of $\bm{B}$ and $\bm{X}^d_k$. We find that, in our samples, our estimates are robust to alternative choices of matching criteria in constructing comparison samples in Stage I.
 
 \subsection{Predicting Parental Income} \label{section:pincome}
 
@@ -633,6 +606,12 @@ At each age, once we obtain the transition probability for each health outcome, 
 
 The same procedure is applied to calculate quality-adjusted life years (QALYs).\footnote{A quality-adjusted life year (QALY) reweighs a year of life according to its quality given the burden of disease. Suppose we assign a value of $\$150,000$ (2014 USD) to each year of life. A QALY of $\$150,000$ denotes a year of life in the absence of disease (perfect health). The value of QALY for an individual in a given year is smaller than $\$150,000$ when there is positive burden of disease, as worse health conditions imply lower QALYs. When an individual dies, her QALY equals zero. There are extreme combinations of disease and disability that may generate negative QALYs, although this is unusual.} We compute a QALY model based on a widely-used health-related Quality-of-life (HRQoL) measure (EQ-5D), available in MEPS.\footnote{For a definition and explanation of this instrument, see \citet{Dolan_1997_Modeling_MC,Shaw_etal_2005_EQ5D_MC}.} We then estimate this model using the PSID.
 
+We estimate three models of medical spending: (i) Medicare spending (annual medical spending paid by parts A, B, and D of Medicare); (ii) out-of-pocket spending (medical spending paid directly by the individual); and (ii) all public spending other than Medicare. Each medical spending model includes the variables we use to predict labor and transfer income, together with current health, risk factors, and functional status as explanatory variables.
+
+We also calculate medical expenditure before age 30. The ABC/CARE interviews at ages 12, 15, 21 and 30 have information related to hospitalizations at different ages and number of births before age 30. We combine this retrospective information and individual and family demographic variables with medical spending models estimates using MEPS to predict medical spending for each age.
+
+QALYs are crucial for our benefit-cost analysis because they monetize the health of an individual at each age. Figure~\ref{fig:qalys} shows our estimation of QALYs together with a PSID comparison, in an exercise analogous to that used to produce Figure~\ref{fig:labor-income-profiles}.\footnote{In our baseline estimation, we assume that each year of life is worth  $\$150,000$ (2014 USD). Our estimates are robust to substantial variation in this assumption, as we show in Appendix~\ref{appendix:sensitivity}.} Although there is not a clear age-by-age treatment effect on QALYs, there is a significant difference in the accumulated present value of the QALYs between the treatment and the control groups. The QALYs for individuals in the control group match the QALYs of disadvantaged individuals in the PSID.\footnote{In Appendix~\ref{appendix:health} we further discuss and justify the parameterizations required to obtain estimates of QALYs. \citet{Goldman_etal_2015_Future-America-Model} examine the sensitivity to these parameterizations and discuss alternative micro-simulations monetizing health condition.}
+
 \begin{figure}[!htbp]
 \caption{Quality Adjusted Life Years, Predictions and Comparison to PSID}\label{fig:qalys}
 \centering
@@ -641,12 +620,6 @@ The same procedure is applied to calculate quality-adjusted life years (QALYs).\
 \footnotesize
 Note:  This figure displays the life-cycle net-present value of predicted quality-adjusted life years (QALYs) for ABC/CARE males and females, respectively, by treatment status. The predictions are based on combining data from the Panel Study of Income Dynamics (PSID), the Health Retirement Study, and the Medical Expenditure Panel Survey (MEPS). For each gender, we display a comparison to disadvantaged males and females in the Panel Study of Income Dynamics (PSID), where disadvantaged is defined as being Black and having 12 years of education or less. QALYs are the quality-adjusted life years gain due to better health conditions. Standard errors are based on the empirical bootstrap distribution.}
 \end{figure}
-
-We estimate three models of medical spending: (i) Medicare spending (annual medical spending paid by parts A, B, and D of Medicare); (ii) out-of-pocket spending (medical spending paid directly by the individual); and (ii) all public spending other than Medicare. Each medical spending model includes the variables we use to predict labor and transfer income, together with current health, risk factors, and functional status as explanatory variables.
-
-We also calculate medical expenditure before age 30. The ABC/CARE interviews at ages 12, 15, 21 and 30 have information related to hospitalizations at different ages and number of births before age 30. We combine this retrospective information and individual and family demographic variables with medical spending models estimates using MEPS to predict medical spending for each age.
-
-QALYs are crucial for our benefit-cost analysis because they monetize the health of an individual at each age. Figure~\ref{fig:qalys} shows our estimation of QALYs together with a PSID comparison, in an exercise analogous to that used to produce Figure~\ref{fig:labor-income-profiles}.\footnote{In our baseline estimation, we assume that each year of life is worth  $\$150,000$ (2014 USD). Our estimates are robust to substantial variation in this assumption, as we show in Appendix~\ref{appendix:sensitivity}.} Although there is not a clear age-by-age treatment effect on QALYs, there is a significant difference in the accumulated present value of the QALYs between the treatment and the control groups. The QALYs for individuals in the control group match the QALYs of disadvantaged individuals in the PSID.\footnote{In Appendix~\ref{appendix:health} we further discuss and justify the parameterizations required to obtain estimates of QALYs. \citet{Goldman_etal_2015_Future-America-Model} examine the sensitivity to these parameterizations and discuss alternative micro-simulations monetizing health condition.}
 
 \subsection{Crime\footnote{The input of Andr\'{e}s Hojman was essential for this component of our analysis.}}\label{sec:crime}
 
@@ -678,7 +651,7 @@ The yearly cost of the program was \$18,514 per participant in 2014 USD. We impr
 
 \subsection{Benefit/Cost Estimates}
 
-Table~\ref{table:bcsens} presents our baseline estimates of benefit/cost ratios, Table~\ref{table:irrsens} presents the analogous internal rates of return. Pooling males and females, the results indicate that the program is socially efficient: the internal rate of return and the benefit/cost ratio are $12.3\%$ and $5.7$. \textit{The program generates a benefit of $5.7$ dollars for every dollar spent on it}. These estimates are statistically significant, even after accounting for sampling variation, serial correlation, and prediction error in the experimental and auxiliary samples and the tax costs of financing the program.\footnote{We obtain the reported standard errors bootstrapping all steps of our empirical procedure, including variable selection, imputation, and model selection steps (see Appendix~\ref{appendix:bootstrap}).} These benefits arise despite the fact that ABC/CARE was much more expensive than other early childhood education programs---the treatment involved more services over a longer time period \citep{Elango_Hojman_etal_2016_Early-Edu}.
+Table~\ref{table:bcsens} presents our baseline estimates of benefit/cost ratios, Table~\ref{table:irrsens} presents the analogous internal rates of return. Pooling males and females, the results indicate that the program is socially efficient: the internal rate of return and the benefit/cost ratio are $12.3\%$ and $5.7$. \textit{The program generates a benefit of $5.7$ dollars for every dollar spent on it}. These estimates are statistically significant, even after accounting for sampling variation, serial correlation, and prediction error in the experimental and auxiliary samples and the tax costs of financing the program.\footnote{We obtain the reported standard errors bootstrapping \emph{all} steps of our empirical procedure, including variable selection, imputation, and model selection steps (see Appendix~\ref{appendix:bootstrap}).} These benefits arise despite the fact that ABC/CARE was much more expensive than other early childhood education programs---the treatment involved more services over a longer time period \citep{Elango_Hojman_etal_2016_Early-Edu}.
 
 \newgeometry{top=.4in, bottom=.5in, left=.4in, right=.4in}
 \begin{sidewaystable}[!htpb]
@@ -704,7 +677,7 @@ Table~\ref{table:bcsens} presents our baseline estimates of benefit/cost ratios,
 \input{output/allirr_sens}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table displays sensitivity analysis of our baseline internal rate of return calculation to the perturbations indexed in the different rows. The characteristics of the \textit{baseline} calculation are in the table header. IPW: adjusts for attrition and item non-response (see Appendix~\ref{app:method_partialobs} for details). Control variables: Apgar scores at ages 1 and 5 and a high-risk index (see Appendix~\ref{appendix:results} for details on how we choose these controls). When predicting up to ages 21 and 30, we consider all benefits and costs up to these ages, respectively. Counterfactuals: we consider treatment vs. next best (baseline), treatment vs. stay at home, and treatment vs. alternative preschools (see Section~\ref{section:methodsquestions} for a discussion). Deadweight loss is the loss implied by any public expenditure (0\% is no loss and 100\% is one dollar loss per each dollar spent). Parental income: see Appendix~\ref{app:parentalincome} for details on the two alternative predictions (Mincer and Life-cycle). Labor Income: .5\ annual growth is an annual wage growth due to cohort effects; only benefit assumes labor income is the only benefit of the program. Crime: major crimes are rape and murder; half costs takes half of victimization and judiciary costs. Health (QALYs): drop all sets the value of life equal to zero. N/A: Standard errors obtained from the empirical bootstrap distribution are in parentheses. Bolded $p$-values are significant at 10\%. For details on the null hypothesis see Table~\ref{table:cba}. \textbf{[JLG: Professor, some of the point estimates are not bold because they are not significant even though they would look that way if following standard rules of thumb. This happens because we are computing the $p$-values non-parametrically, as we explain in Appendix~\ref{appendix:bootstrap}.]}
+\item Note: This table displays sensitivity analysis of our baseline internal rate of return calculation to the perturbations indexed in the different rows. The characteristics of the \textit{baseline} calculation are in the table header. IPW: adjusts for attrition and item non-response (see Appendix~\ref{app:method_partialobs} for details). Control variables: Apgar scores at ages 1 and 5 and a high-risk index (see Appendix~\ref{appendix:results} for details on how we choose these controls). When predicting up to ages 21 and 30, we consider all benefits and costs up to these ages, respectively. Counterfactuals: we consider treatment vs. next best (baseline), treatment vs. stay at home, and treatment vs. alternative preschools (see Section~\ref{section:methodsquestions} for a discussion). Deadweight loss is the loss implied by any public expenditure (0\% is no loss and 100\% is one dollar loss per each dollar spent). Parental income: see Appendix~\ref{app:parentalincome} for details on the two alternative predictions (Mincer and Life-cycle). Labor Income: .5\ annual growth is an annual wage growth due to cohort effects; only benefit assumes labor income is the only benefit of the program. Crime: major crimes are rape and murder; half costs takes half of victimization and judiciary costs. Health (QALYs): drop all sets the value of life equal to zero. N/A: Standard errors obtained from the empirical bootstrap distribution are in parentheses. Bolded $p$-values are significant at 10\%. For details on the null hypothesis see Table~\ref{table:cba}. 
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -772,7 +745,7 @@ For health, there are also substantial gender differences. Both males and female
 
 When analyzing different counterfactuals, there is a substantial difference between males and females. The difference is driven by one of the counterfactuals: treatment vs. alternative preschools. The estimates for both males and females generate a similar estimated ABC/CARE treatment effect compared to staying at home. Males benefit much more from treatment relative to alternative preschools compared to their benefits from treatment relative to staying at home. This result is consistent with findings noted elsewhere: (i) stark gender differences resulting from attending low quality childcare \citep{Kottelenberg-Lehrer_2014_Gender-Effects,Baker_Gruber_Milligan_2015_Noncog_Defects}; and (ii) females are less sensitive to uncertain environments \citep{Autor-etal_2015_Family-Disadvantage}. The program substantially reduced the costs of special education for boys.
 
-Our evidence does not indicate that the program has no benefit for females. In fact it does. When compared to staying at home, there is a gain of $4.81$ dollars per each dollar invested. When we decompose the net-present value for each of the components that we monetize, we find substantial benefits for females across a variety of categories, including health and crime. For males, the magnitudes are noticeably increased when comparing treatment to alternative preschool (see Figure~\ref{fig:npvsgender}).
+Our evidence does not indicate that the program has no benefit for females. In fact it has no substantial benefits for them. When compared to staying at home, there is a gain of $4.81$ dollars per each dollar invested. When we decompose the net-present value for each of the components that we monetize, we find substantial benefits for females across a variety of categories, including health and crime. For males, the magnitudes are noticeably increased when comparing treatment to alternative preschool (see Figure~\ref{fig:npvsgender}).
 
 \section{Summary} \label{section:conclusion}
 
