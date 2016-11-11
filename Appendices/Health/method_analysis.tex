@@ -19,7 +19,7 @@ This information is not available in the ABC/CARE data, but it is assumed that n
 \noindent Most FAM models depend on smoking status. Employment status affects FAM transitions in marital status, childbearing, claiming of disability insurance (DI) and supplemental security income (SSI), and type of health insurance.
 One male in the ABC control group is missing smoking status and, although known to be not working, is also missing specific employment status (unemployed or out of the labor force).
  We use a multinomial logit model to jointly estimate the probability of each combined smoking and employment category among 25- to 35-year-olds in the PSID who were not working. At the beginning of each simulation repetition, we use a Monte Carlo random draw generated from this distribution to assign this subject's smoking and employment statuses. This same subject is also missing information about binge drinking. A separate binary Probit binge drinking model was estimated using the age 25--35 PSID data. A Monte Carlo random draw is taken according the Probit probability to predict binge drinking behavior at the beginning of the simulation. \\
- 
+
 \noindent BMI affects FAM transitions in health, functional status, employment, and smoking.
 The FAM transition models are estimated with BMI computed from self-reported height and weight in the PSID.
 The only BMI data in ABC/CARE come from height and weight measured during the health interview. This interview took place at roughly age 30 for CARE subjects, and at age 34 for ABC subjects.
@@ -28,8 +28,8 @@ First, self-reported BMI can be biased by factors such as actual height and weig
 Second, it is possible that BMI could increase or decrease systematically in the years between the age-30 subject interview and the age-34 health interview. \\
 
 \noindent To address the first BMI imputation challenge, we use a variation on the method of \citet*{Courtemanche_etal_2015_Adjusting-Body-Mass} to impute measured BMI in the PSID.
-While the method in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} works with height and weight, we apply the specification to directly model BMI. Using respondents aged 30 to 40 in the 2002-2010 NHANES waves, we predict measured BMI from percentile ranks of self-reported BMI using the model specification in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass}. Three variations 
-on the spline interactions of \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} are also considered. After estimating these models using NHANES data, covariate values from the PSID 
+While the method in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} works with height and weight, we apply the specification to directly model BMI. Using respondents aged 30 to 40 in the 2002-2010 NHANES waves, we predict measured BMI from percentile ranks of self-reported BMI using the model specification in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass}. Three variations
+on the spline interactions of \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} are also considered. After estimating these models using NHANES data, covariate values from the PSID
 age 30--34 data in years 2002--2013 are used to impute measured BMI values for PSID respondents. A Kolmogorov-Sminov (K-S) test and a visual inspection of smoothed histograms are used to compare the distribution of PSID imputed values to the distribution of observed values in the NHANES estimation sample. The model specification used for imputation has the smallest K-S distance between the two distributions. The smoothed histogram of the distributions for the entire samples and the black subgroup in each data set appears reasonably close.  \\
 
 \noindent After imputing values of measured BMI for PSID respondents age 30--34, we turn to the second problem: accounting for systematic trends in BMI from the age 30 interview to the health interview. The goal is to have a model that maps from measured BMI at the health interview around age 34 to self-reported BMI at the age 30 interview. Employing the longitudinal structure of PSID, we match each respondent's first interview between age 30--32 with their imputed measured BMI between ages 33--40. We then estimate a model using self-reported BMI between ages 30--32 as the response variable and imputed measured BMI at ages 33--40, the age when BMI is actually measured, along with other variables observed at age 30 as explanatory variables. This imputation model is applied to any ABC/CARE subject who has their health interview at least one year after their age 30 interview.\\
@@ -84,8 +84,8 @@ We consider three racial and ethnic groups (black non-Hispanic, white non-Hispan
 
 \noindent The health transition models estimate the probability that a person transitions between health states, e.g. obesity or heart disease, as a function of current health status, demographic characteristics (including race, gender, age, and education), and risk factors (including weight, smoking status, physical activity, asthma, and number of births if female for BMI transitions), enabling us to age the cohorts. This mechanism to model health transitions accounts for the fact that certain health conditions increase the likelihood of comorbidities.
 We estimate a transition model for each of the following health conditions: heart disease, blood pressure, stroke, lung disease, diabetes, and cancer. Each disease model includes gender, race and ethnicity, and educational group as covariates.
-We select conditions that are prevalent in the U.S. and are characterized by significant disparities in outcomes across education, race and ethnicity, and income. 
-The reason for this is that the incidence and progression of these conditions can potentially be reduced by preventive services, education policies, and modifications in health behaviors. 
+We select conditions that are prevalent in the U.S. and are characterized by significant disparities in outcomes across education, race and ethnicity, and income.
+The reason for this is that the incidence and progression of these conditions can potentially be reduced by preventive services, education policies, and modifications in health behaviors.
 These chronic conditions are treated as absorbing states, i.e., once the individual transitions into a chronic condition, the condition persists until death. \\
 
 \noindent Additionally, we allow individuals to transition in and out of risk factors, such as smoking, binge drinking, and BMI. These transitions are estimated as a function of demographics, past health, and risk factors.
@@ -216,10 +216,10 @@ Note: This table illustrates how health outcomes at age $a$ predict health outco
 \noindent We have four other types of outcomes: \\
 \begin{enumerate}
 \item Binary outcomes that are not absorbing states, such as starting to smoke. We specify latent
-indices as in Equation~\ref{eqn:transition_hzd_latent} for these outcomes as well but where
+indices as in Equation~\eqref{eqn:transition_hzd_latent} for these outcomes as well but where
 the lag-dependent outcome also appears as an independent variable. This allows for state-dependence.
 
-\item Ordered outcomes, which are also modeled as in Equation~\ref{eqn:transition_hzd_latent} recognizing that the observation rule is
+\item Ordered outcomes, which are also modeled as in Equation~\eqref{eqn:transition_hzd_latent} recognizing that the observation rule is
 a function of unknown thresholds $\varsigma_m$. Similar to binary outcomes, we allow for state-dependence by including the lagged outcome
 on the right-hand side.
 
@@ -327,7 +327,7 @@ births in a two-year period to be appropriate. \\
 \subsubsection{FAM simulation}
 
 \noindent A simulation of the model starts by loading the entering cohort, generated from the ABC/CARE data. Missing values are imputed with the imputation models described in section \ref{section:FAM_ABC_impute}. To this entering cohort, the model applies the transition models for mortality, health, working status, family structure, wealth, and benefit claiming, estimated from PSID, with Monte Carlo decisions to calculate the new states of the population.
-%The simulation is performed 5,000 times and the simulated distributions of key outcomes are summarized over repetitions. 
+%The simulation is performed 5,000 times and the simulated distributions of key outcomes are summarized over repetitions.
 The simulated financial outcomes are in 2014 USD. \\
 
 

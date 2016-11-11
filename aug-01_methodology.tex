@@ -1,0 +1,256 @@
+% This version of the methodology was found at:
+% https://github.com/jorgelgarcia/abc-treatmenteffects-finalseason/blob/d82ff69458e9e77b76fc439a64caaea8e5cf9599/abc_comprehensivecba.tex
+
+
+\input{preamble}
+
+\begin{document}
+
+\section{Old Methodology} \label{section:methodology}
+
+\subsection{Parameters of Interest and Policy Questions} \label{section:methodsquestions}
+
+\noindent Random assignment to treatment alone does not guarantee that conventional treatment-effect estimates commonly used in the literature are able to answer policy-relevant questions. For an estimator to be useful in policy design, it should relate to a relevant parameter by clearly stating the counterfactual scenario to which the evaluated program is being compared. We define three parameters and link them to different policy questions.\\ 
+
+\noindent Let $\Omega$ be a set with $\sigma$-algebra $\sigma \left( \Omega \right)$ characterizing the program's subjects, with generic element $\omega \in \Omega$. Let $Y$ denote an outcome of interest. $D$ indicates whether or not the parents of the subject agree to participate of the program and $R | D = 1$ denotes randomization to either treatment or control status; $T$ denotes the number of periods during the first phase of treatment---5 years.\footnote{We define parameters that are conditional on the parents agreeing to participate of the program. That is, conditional on $D = 1$. We find little sensitivity to the few cases of non-compliance in Appendix~\ref{appendix:assessingcc} and adjust our estimates for the cases of attrition as we explain in Appendix~\ref{appendix:attrition}.} We think of two counterfactuals under control status: 
+
+\begin{eqnarray}
+Y_H^0 \left( t, \omega \right) &:& \textbf{ Outcome under control status; subject stays at home in period $t$} \nonumber \\ 
+Y_C^0 \left( t, \omega \right) &:& \textbf{ Outcome under control status; subject attends preschool in period $t$}  \nonumber
+\end{eqnarray}
+
+\noindent We define the proportion of months in alternative preschool as 
+
+\begin{equation}
+V \left ( \omega \right) : = \frac{\# \{ t: Y_H^0 \left( t, \omega \right) - Y_C^0 \left( t, \omega \right) \leq 0 \} }{T}.
+\end{equation}
+
+\noindent Describing the dynamic choices underlying $V \left ( \omega \right)$ is of interest but goes beyond the scope of this paper. We simplify the analysis by assuming that 
+
+\begin{align}
+Y_H^0 \left( t, \omega \right) &= Y_H^0 \left( \omega \right) \nonumber \\
+Y_C^0 \left( t, \omega \right) &= Y_C^0 \left( \omega \right).
+\end{align}
+
+\noindent We write the counterfactual outcome when the child is fixed to control status as 
+
+\begin{equation}
+Y^0 \left( \omega \right) : = \left[ 1 - V \left( \omega \right) \right] Y_H^0 \left( \omega \right) + \left[ V \left( \omega \right) \right] Y_C^0 \left( \omega \right), 
+\end{equation}
+
+\noindent and make explicit its dependence on $V \left( \omega \right)$, allowing us to answer policy-relevant questions. Likewise, we write the outcome when the child is fixed to treatment status as $Y^1 \left( \omega \right)$.\\
+
+\noindent There are two possible approaches. One approach is to treat $V \left( \omega \right)$ as binary, where $V \left( \omega \right) = 0$ or $V \left( \omega \right)  > 0$. The other approach is to allow for multiple values of $V$ and let $V$ to be continuous in the limit. The latter approach is ideal, because it would allow us to construct the counterfactual $Y_C^0 \left( v,  \omega \right) $ for $v \in [0 , 1]$ denoting a realization of $V$. This approach, however, is problematic in the context of the small number of observations in our experimental datasets. While the former approach limits the cases to either $V \left( \omega \right) = 0$ or $V \left( \omega \right)  > 0$, it still allows for the definition of policy-relevant parameters. Under this approach, we can frame the parental decision in a standard Roy-type setting noting that 
+
+\begin{equation}
+\Pr \left[ Y^1 \left( \omega \right) \geq \max \left(  Y_{H}^0 \left( \omega \right) ,  Y_{C}^0 \left( \omega \right)   \right) \right] = 1, \label{eq:noutility}
+\end{equation}
+
+\noindent where we could also frame the problem in terms of parental utility function $U \left( \cdot \right) $ over the outcome $Y$. We present estimates for different versions of this Roy model in Appendix~\ref{appendix:amethodology}.\\ 
+
+\noindent We focus on simpler parameters that we can directly use in the cost-benefit analysis. The estimates of these parameters and the Roy-model equivalents are qualitatively similar. The first parameter of interest relates to the following question: what is the effect of the program as implemented? That is, what is the effect of the program without fixing the parental decision of whether or not to enroll the subject in alternative preschool? Importantly, this parameter does not speak to the effectiveness of the program by itself. Instead, it speaks to the effectiveness of the program relative to the supply of alternatives preschools that was in place when the program was implemented. The parameter is: 
+
+\begin{equation}
+\Delta := \mathbb{E}_{\Omega} \left[ Y^1 \left( \omega \right) -  \max \left(  Y_{H}^0 \left( \omega \right) ,  Y_{C}^0 \left( \omega \right)  \right) | D =1 \right]. \label{eq:mainest}
+\end{equation}
+
+\noindent Random assignment to either the treatment or control group allows us to identify this parameter.\\ 
+
+\noindent It is perhaps more policy-relevant to inquire on the efficiency of a program with respect to a clearly stated counterfactual. For example, if we ask: what is the effectiveness of the program with respect to a counterfactual in which the child stays at home? A parameter associated with that question is: 
+
+\begin{equation}
+\Delta \left( v = 0 \right) : =   \mathbb{E}_{\Omega} \left[ Y^1 \left( v, \omega \right) - Y^0 \left( v, \omega \right) | V = 0, D = 1 \right]. \label{eq:par0}
+\end{equation}
+
+\noindent Random assignment to the treatment group does not identify this parameter.\footnote{We abuse notation to index the realization of $V \left( \omega \right)$. Differently from the definition above, the first argument in $Y^r \left( \cdot, \cdot \right)$ represents the proportion of time in preschool alternatives and not a time period. We do this to avoid further complicating the indices of the counterfactual outcomes.} We can approximate it with the following estimator: 
+
+\begin{equation}
+\widehat{\Delta} \left( v = 0 \right) : = \widehat{\mathbf{E}} \left[ Y | R = 1, V \in \left[ 0 , \eta \right], D = 1 \right] - \widehat{\mathbf{E}} \left[ Y | R = 0, V \in \left[ 0 , \eta \right], D = 1 \right] \label{eq:estimates0}
+\end{equation}
+
+\noindent with $\eta \rightarrow 0$ and where $\widehat{\mathbf{E}}[\cdot]$ represents an estimate of $\mathbb{E}[\cdot]$. That is, we compare the subjects randomly assigned to treatment with the subjects randomly assigned to control in a neighborhood where subjects do not take preschool alternatives. Various matching estimators allow us to estimate how likely subjects are to take preschool alternatives, based on observed characteristics \citep{Heckman_Ichimura_etal_1997_REStud,Heckman_Ichimura_etal_1998_REStud}. We provide different versions of these estimators below.\\
+
+\noindent Similarly, we define a parameter that allows us to compare the effectiveness of the program relative to the preschool alternatives: 
+
+\begin{equation}
+\Delta \left( v > 0 \right) : =   \mathbb{E}_{\Omega} \left[ Y^1 \left( v, \omega \right) - Y^0 \left( v, \omega \right) | V > 0, D = 1 \right] \label{eq:par1}
+\end{equation}
+
+\noindent and provide an estimate analogous to \eqref{eq:estimates0}. The parameters in \eqref{eq:par0} and \eqref{eq:par1} address control substitution, in the sense that they fix the counterfactual comparison accounting for the decisions that the parents make to enroll children in alternative preschools.
+
+\subsection{Testing Multiple Hypotheses}  \label{section:counts}
+
+\noindent We are interested in the effects that the program has on multiple dimensions of human development. We have measures of outcomes from very early in life to the mid-30s. This generates a multiple hypothesis testing problem. Two approaches are: (i) adjust the inference to account for the correlation of the outcomes using a step-down procedure \citep{Lehman_Romano_2005_AnnStat,Romano_Shaikh_2006_AnnStat}; and (ii) monetize the outcomes to produce a cost-benefit analysis. We adjust the inference when estimating the parameters in Section~\ref{section:methodsquestions} as in \citet{Lehman_Romano_2005_AnnStat} and \citet{Romano_Shaikh_2006_AnnStat} and provide a cost-benefit analysis below. In this section, we provide an intermediate alternative that informs on the relative importance of different outcomes in the cost-benefit analysis.\\
+
+\noindent Let $\mathcal{G}$ be the index set for different groups of outcomes and let $\mathcal{O}_{g}$ be a group of outcomes, with $g \in \mathcal{G}$. Let $F_{j,g}^R \left( y_{j,g}^R \right) $ be the marginal distribution of outcome $j$ in group $g$ when randomized into treatment $R = 1$ or control $R = 0$. Assume that we want to perform inference on estimates of parameters of the type \eqref{eq:mainest} across multiple outcomes. That is, inference on 
+
+\begin{equation}
+\Delta_{j,g} := \mathbb{E}_{\Omega} \left[ Y_{j,g}^1 \left( \omega \right) -  \max \left(  Y_{j,g,H}^0 \left( \omega \right) ,  Y_{j,g,C}^0 \left( \omega \right)  \right) | D =1 \right]. 
+\end{equation}
+
+\noindent for the group of outcomes in $\mathcal{O}_{g}$. We want to test the null hypothesis 
+
+
+\begin{equation}
+H_{0} : F_{j,g}^0 = F_{j,g}^1, \ \forall \ j \in \mathcal{O}_{g}. 
+\end{equation}
+
+\noindent In practice, we test the hypothesis  
+
+\begin{equation}
+H_{0} : \Delta_{j,g} = 0, \ \forall \ j \in \mathcal{O}_{g}. 
+\end{equation}
+
+\noindent We use the following statistic to test this hypothesis: 
+
+\begin{equation}
+T_{g} = \sum _{j=1}^{\# \mathcal{O}_g} \mathbf{1} \left[ \widehat{\Delta}_{j}^{g} > 0\right]. \label{eq:count}
+\end{equation} 
+
+\noindent For inference purposes, we bootstrap this procedure and construct a null distribution. The $p$-value for the number of socially positive treatment effects in group $g$ is $1 - \widehat{F}_{g} \left( T_{g} \right)$, where $ \widehat{F}_{g}$ is the empirical bootstrap distribution of group $g$.\footnote{For the case where we count the number of positive and significant outcomes, we use a ``double bootstrap'' to produce an inference on the count. We resample $B_{0}$ times to obtain the $p$-value for testing the hypothesis of interest for each individual outcome. This allows us to compute the number of positive and significant treatment effects, for example. We repeat this procedure $B_{1}$ times to obtain a distribution for this count. Thus, the double bootstrap consists of $B_{0} \times B_{1}$ data resamplings.}\\
+
+\noindent A particular case is to count the positive treatment effects in the outcomes across all the groups indexed in the set $\mathcal{G}$. This allows us to avoid (i) arbitrarily picking outcomes that have statistically significant effects---``cherry picking''; or (ii) arbitrarily blocking sets of outcomes to correct the $p$-values when accounting for multiple hypothesis testing.\\
+
+\noindent We provide inference on this count and on a count of treatment effects that are both positive and significant for which the inference is analogous. We also provide counts for the parameters that account for control substitution.
+
+\subsection{Forecasting and Monetizing Life-cycle Costs and Benefits} \label{section:cbamethodology}
+
+\noindent In this section, we explain our strategy to interpolate and extrapolate the life-cycle costs and benefits of labor income, crime, and health. The methodology for doing this exercise for parental and public-transfer income is analogous to that of labor income so we suppress it for brevity. More methodological and practical details are in Appendix~\ref{appendix:methodology}, in which we also explain a solution for cases of attrition when producing interpolations and extrapolations. Based on our forecasts, we estimate the parameters in Section~\ref{section:methodsquestions} to perform the cost-benefit analysis of the program with and without accounting for control substitution.
+
+\subsubsection{Labor Income}
+
+\noindent We observe labor income at ages 21 and 30. To construct a life-cycle profile, we interpolate between ages 21 and 30 and extrapolate from ages 31 to 67, in which we assume that the subjects retire. For simplicity, we suppress $D$ and drop individual and time subscripts. Recall that $R$ indicates whether the subject was randomized to the treatment group ($R=1$) or to the control group ($R=0$), conditional on having agreed to participate in the program ($D = 1$). $Y$ is the outcome for which we want to produce a forecast---interpolation or extrapolation. In this case, the outcome is labor income. $X$ is a vector of observed characteristics, possibly affected by the treatment---e.g. lagged values of $Y$; $W$ is a vector of baseline characteristics---e.g. race and gender; $S$ indicates whether we observe $Y$ in the experimental sample ($S=1$) or an auxiliary, non-experimental data source ($S=0$).\\
+
+\noindent Our objective is to recover a forecast for $Y$ of the type
+
+\begin{equation}
+\widehat{Y} = \widehat{\phi} \left( R, X, W, S = 1 \right) + \widehat{\varepsilon},   \label{eq:additive}
+\end{equation}
+
+\noindent where $\phi \left( R, X, W, S \right) : = \mathbb{E} \left[ Y | R = r, X = x, W = w, S = s \right] $ and $\widehat{\varepsilon}$ is a forecasting error. That is, we assume that the outcome of interest is an additively separable function of the known objects $R, X, W, S$ and an unobserved component $\varepsilon$: 
+
+\begin{assumption} (Additive Separability of the Outcome) \label{ass:additive}
+\begin{equation}
+Y = \phi \left( R, X, W, S \right) + \varepsilon. 
+\end{equation}
+\end{assumption}
+
+\noindent Identifying $\phi \left( R, X, W, S \right)$ requires three assumptions. First, the forecast is based on observed characteristics, $X$. Thus, we require the auxiliary datasets to share the support on observed characteristics with the experimental dataset: 
+
+\begin{assumption} \label{ass:support} (Common Support Between the Experimental and Auxiliary Datasets)
+\begin{equation}
+\sup \left( X | S = 1 \right) \subseteq \sup \left( X | S = 0 \right).
+\end{equation}
+\end{assumption}
+
+\noindent Second, we assume that we are able to summarize the impacts that the treatment has on the outcomes with observed characteristics, given that we are not able to observe $R$ in the auxiliary dataset. Similarly, we need to be able to summarize the difference between the individuals in the experimental datasets and those in the auxiliary datasets based on observed characteristics. This is the third assumption. The second and third  assumptions are related, as they establish the requirements for being able to ``link'' the individuals in the auxiliary and experimental datasets when producing the forecasts. Formally, let $^{*}$ denote variables we do not observe. In the auxiliary dataset we have: $\left( S = 0, Y, X, W, R^* \right)$. In the experimental dataset we have: $\left( S = 1, Y^*, X, W, R \right)$. The second and third assumptions are:  
+
+\begin{assumption} (Conditional Independence and Sufficiency of $S, X, W$ to Describe Treatment)
+\begin{equation}
+\mathbb{E} \left[ Y | R = r, X = x, W = w, S = s\right] =  \mathbb{E} \left[ Y | X = x^r, W = w, S = s\right]
+\end{equation}
+
+\noindent where $x^r$ is a draw from the distribution of $X | R = r$. 
+\end{assumption}
+
+\begin{assumption} (Conditional Independence and Sufficiency of $X, W, R$ to Describe Presence in a Dataset)
+\begin{equation}
+\mathbb{E} \left[ Y^* | R = r, X = x, W = w, S = 1 \right] = \mathbb{E} \left[ Y | R^* = r , X = x, W = w, S = 0\right]. 
+\end{equation}
+\end{assumption}
+
+\noindent These three assumptions imply that 
+
+\begin{equation}
+\phi \left( R, X, W, S = 1 \right) = \mathbb{E} \left[ Y | X = x^r, W = w, S = 0 \right]  
+\end{equation}
+
+\noindent where $\mathbb{E} \left[ Y | X = x^r, W = w, S = 0 \right]$ is a moment in the auxiliary dataset. The estimation of $\mathbb{E} \left[ Y | X = x^r, W = w, S = 0 \right]$ produces a residual of the form $\widehat{\varepsilon} : = Y - \widehat{Y}$ for each individual. The forecast for each  individual outcome consists of $\widehat{\phi} \left( \cdot \right)$ and a draw from the empirical distribution of $\widehat{\varepsilon}$, which we call forecast error. We account for it when interpolating and extrapolating the crime and health outcomes in addition to income.
+
+\subsubsection{Crime}  \label{sec:crime}
+
+\noindent In this section, we explain how we quantify the benefits of the program from reductions in the subject's criminal activity. Two previous studies consider the impacts of ABC on crime: \citet{Clarke_Campbell_1998_ABC_Comparison_ECRQ} use administrative crime records up to age 21, and find no significant differences between the treatment and the control groups. \cite{Barnett_Masse_2007_EER} mention crime in their cost-benefit analysis, but they cite the previous study to claim that there are no savings coming from a reduction in crime. We consider richer data than the previous studies, which allows us to consider crime with a comprehensive life-cycle perspective: we gather various data sources, including administrative data on individual criminal records up to age 34, and project crimes until age 50 using prediction models based on local microdata. \\
+
+\noindent We consider the following types of crime: arson, assault, burglary, fraud, larceny, miscellaneous (which includes traffic and non-violent drug crimes), murder, vehicle theft, rape, robbery, and vandalism. We use data from: (i) administrative youth arrests datasets, gathered for the age-21 follow-up; (ii) administrative adult arrests datasets, gathered around age 34; (iii) administrative sentences datasets, gathered around age 34; and (iv) self-reported adult crimes datasets, gathered in the age-21 and age-30 subject interviews. Because none of these data sources capture all criminal activity, it is necessary to combine them to more completely approximate the crimes the subjects committed. These datasets are discussed more extensively in Appendix \ref{appendix:crime}. The data are comprehensive and cover the full potential criminal career of subjects up to age 34, including details on the types of crimes and their timing, as well as projected and effective sentences. \\
+
+\noindent We use several auxiliary datasets to construct national arrests-to-sentences and victims-to-arrests ratios: (i) the National Crime Victimization Survey (NCVS) to estimate the number of victims of crime; (ii) the National Judicial Reporting Program (NJRP) to estimate the number of sentences; and (iii) the Uniform Crime Reporting Statistics (UCRS) to estimate the number of arrests. Finally, we use microdata from the North Carolina Department of Public Safety (NCDPS) to estimate a prediction model for future crimes. This dataset contains information since 1972 on every individual who was convicted of a crime and entered the state prison system. \\
+
+\noindent We follow four steps to estimate the costs of crime. We summarize the steps here and present a broader discussion in
+Appendix \ref{appendix:crime}. \\
+
+\begin{enumerate}
+\item \textit{Count arrests and sentences.} We start by counting the total number of sentences for each individual
+and type of crime (robbery, larceny, etc.) up to age 34. Then, we match the data on adult arrests, juvenile arrests, and self-reported crimes, to construct the total number of  arrests for each individual and type of crime up to that age.\footnote{In practice, we count all offenses (an arrest might include multiple offenses). This gives the correct number of victims for our estimations. The youth data have coarser categories than the rest of the data, so we assume that all property crimes were larcenies and that all violent crimes are assaults. In our sample, assault is the most common type of violent crime, and larceny/theft is the most common property crime.} About 10\% of the ABC and CARE samples have missing arrest data. For these cases, we impute the number of arrests by multiplying the number of sentences for each type of crime by the  national arrests-to-sentences ratio for the respective crime.
+
+\item \textit{Construct predictions.} Based on the sentences observed before age 34, we predict the sentences
+that the ABC and CARE subjects will have after that age. The NCDPS data provide lifetime sentences of individuals in North Carolina, the same state in which the program was implemented. In that dataset, we estimate linear prediction models for each type of crime in which sentences after age 34 are the outcomes, and sentences up to age 34 are the regressors. Then, we apply these models to the ABC and CARE data. The outcome for each crime type is the number of future sentences for each subject, up to age 50. We assume that individuals with no criminal records before age 34 commit no crimes after age 34. We then add these estimates to the original number of sentences, getting an estimate of the lifetime sentences. To the best of our knowledge, no prior study on the benefits and costs of an educational program has used microdata to estimate a predictive model for future crimes. The predictions are an important component of total crime, as adding them increases the total count of crimes by 30\%--50\%. The prediction models we estimate and the results in terms of additional crimes are presented in Appendix \ref{appendix:crime}.
+
+\item \textit{Estimate number of victims of crimes.} We observe crimes that resulted in consequences in the judicial system (i.e. crimes that resulted in arrests, sentences, or both). However, it is possible that for any subject for whom we observe to have committed a crime, he committed more crimes that we do not observe. Victimization inflation (VI) is a method to capture benefits of crime reduction for crimes without consequences in the judicial system that are unobserved in the ABC and CARE data. Previous papers using this method include \citet{Belfield_Nores_etal_2006_JHR} and \cite{Heckman_Moon_etal_2010_RateofReturn}. We start by constructing a VI ratio, which is the national ratio of victims-to-arrests for each type of crime.\footnote{We assume that each crime with victims is counted separately in the national reports on arrests, even for arrests that might have been motivated by more than one crime.} Then, we estimate the number of victims for each type of crime committed by ABC and CARE subjects as their total arrests multiplied by the VI ratio. Additionally, we can calculate an analogous estimate of the number of crime victims using sentences, based on the VI ratio and the national arrests-to-sentences ratio. Both estimates are very similar, as shown in Appendix \ref{appendix:crime}. To improve precision, the estimates in the rest of our paper are based on the average of the two.
+
+\item \textit{Find total costs of crimes.} We use the estimates of the cost of crimes for victims from \cite{McCollister_etal_2010_DAD} to impute the total victimization costs (see Appendix \ref{appendix:crime} for details on the costs we use). For crimes having arrests, sentences, or both, we consider judicial system costs as well, such as police costs.\footnote{To be able to assign costs to each type of crime, we assume that the cost of the justice system depends on the number of offenses of each type, rather than on the number of arrests. While this could very slightly overestimate justice system costs, the costs only represent about 5\% of the total crime costs.} Finally, we construct the total costs of incarceration for each subject using the total prison time and the cost of a day in prison.
+\end{enumerate}
+
+\subsubsection{Health} \label{section:health}
+
+\noindent We use an alternative methodology for health-related outcomes. There are three main reasons for this: (i) health outcomes such as diabetes or heart disease are absorbing states; (ii) health outcomes are highly interdependent within and across time; and (iii) there is no evident time period available to finish accounting for benefits and costs. For example, for income we extrapolate up to the retirement age of 67. However, for health, we need to predict an age of death for each individual. Thus, using the notation so far, it is not sufficient to condition on $W, Z, X$ to recover a credible estimate of the treatment effect. Instead, we use an adaptation of the Future America Model (FAM) that projects health outcomes from the subjects' early- to mid-30s up to their projected death \citep{Goldman_etal_2015_Future-Elderly-Model-Report}.\footnote{The simulation starts at the age in which we observe the subject's age-34 health follow-up. On average this happened at age 34 for both males and females, but there is variation ranging from age 30 to age 37.}\\
+
+\noindent We provide a brief description of the model in this subsection. Appendix~\ref{appendix:health} provides a thorough discussion. The methodology has six steps: (i) estimate the age-by-age health state transition probabilities using the Panel Study of Income Dynamics (PSID); (ii) match these transition probabilities to the ABC and CARE individuals based on observed characteristics; (iii) estimate quality-adjusted life year (QALY) models using the Medical Expenditure Panel Survey (MEPS) and the PSID; (iv) estimate medical cost models using the MEPS and the Medicare Current Beneficiary Survey (MCBS), allowing estimates to differ by health state and observed characteristics; and (v) predict the medical expenditure and QALYs that correspond to the simulated individual health trajectories.\footnote{As an intermediate step between (i) and (ii), we impute some of the variables used to initialize the FAM models (see Appendix~\ref{appendix:health}}.\\
+
+\noindent Our microsimulation model starts the health predictions at age 30, with the information on observed characteristics available at this age. We restrict it to the individuals for whom we have information from the age-34 health follow-up. This allows us to account for components that are crucial for predicting health outcomes, such as the body mass index (BMI). The models predict the probability of being in any of the states in the horizontal axis of Table~\ref{table:transition} at age $a+1$ based on the state at age $a$, which is described by the vertical axis of the table. The crosses indicate if being in a health a state at age $a$ is relevant for the estimation of the probability of being in a health state at age $a + 1$.\footnote{In practice, the predictions are based on two-year lags, due to data limitations in the auxiliary sources we use to simulate the FAM. For example, if the individual is 30 (31) years old in the age-30 interview, we simulate the trajectory of her health status at ages 30 (31), 32 (33), 34 (35), and so on until her projected dead.} Absorbing states are an exception. For example, heart disease at age $a$ does not enter in the estimation of transitions for heart disease at age $a+1$ because it is an absorbing state: once a person has heart disease, she carries it through the rest of her life. The same is true for chronic or permanent conditions such as hypertension, having a stroke, etc.\\
+
+\noindent At each age, once we obtain the transition probability for each health outcome, we draw a Monte-Carlo simulations for each subject. Thus, each simulation depends on each individual's health history and on their particular characteristics. For every simulated trajectory of health outcomes, we predict the lifetime medical expenditure using the models estimated from the MEPS and the MCBS. We then obtain an estimate of the expected lifetime medical expenditure by taking the mean of each individual's simulated lifetime medical expenditure. The same procedure is applied to QALYs.\\
+
+\noindent A quality-adjusted life year (QALY) reweighs a year of life according to its quality given the burden of disease. A QALY of 1 denotes a year of life in the absence of disease (perfect health). The value of QALY for an individual in a given year is smaller than 1 when there is positive burden of disease, as worse health conditions imply lower QALYs.\footnote{When an individual dies, her QALY equals zero. It is worth noting that there are extreme combinations of disease and disability that may generate negative QALYs, although this case is unusual.} We compute a QALY model based on the EQ-5D instrument, a widely-used Health-related Quality-of-life (HRQoL) measure, available in MEPS. We then estimate this model from the PSID. Appendix~\ref{appendix:health} provides more details on this estimation strategy. \\
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Health State Transitions, Age $a$ as Predictor of Age $a+1$}\label{table:transition}
+\scriptsize
+\input{AppOutput/Methodology/transitiontable}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table illustrates how health outcomes at age $a$ predict health outcomes at age $a+1$. The crosses indicate if we use the age $a$ outcome to predict the age $a+1$ outcome. DI Claim: disability insurance claim; SS Claim: social security claim; DB Claim: disability benefits claim; SSI Claim: supplemental security income claim. The age $a$ states that do not predict themselves at age $a+1$ are absorbing states by construction.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\noindent We estimate three models of medical spending: (i) Medicare spending (annual medical spending paid by parts A, B, and D of Medicare); (ii) out-of-pocket spending (medical spending paid directly by the individual); and (ii) all public spending other than Medicare. Each medical spending model is estimated through pooled weighted least squares regressions that include a person??s demographics, economic status, current health, risk factors, and functional status as explanatory variables. The MCBS-based medical spending models also include lagged health because of the length of time for which MCBS subjects are observed.\\ 
+
+\noindent \textbf{Medical Expenditure before Age 30}
+
+\noindent We combine the MEPS and retrospective information in the ABC and CARE interviews at ages 21 and 30 related to hospitalizations at ages 12 and 15 and births at age 15. In addition to this retrospective information, we use use individual and family demographics to predict medical expenditure models for each age, as summarized in Table~\ref{table:pre30}.\\
+
+\begin{table}[H]
+\begin{threeparttable}
+\caption{Health Expenditure Models by Age Group, before Age 30}\label{table:pre30}
+\begin{tabular}{lcccc} \toprule
+Explanatory variable & \multicolumn{4}{c}{Age Group} \\
+& 8-11 & 12-14 & 15-20 & 21-30 \\
+\midrule
+Race/ethnicity & \checkmark & \checkmark & \checkmark & \checkmark \\
+Education        & $\times$ & $\times$ & $\times$ & \checkmark \\
+Asthma Diagnoses & \checkmark & \checkmark & \checkmark & \checkmark \\
+Hospital stays & if $\geq$ 1 week & any stay & any stay & $\times$ \\
+Births & $\times$ & $\times$ & \checkmark & \checkmark \\
+Mother present & $\times$ & \checkmark & \checkmark & $\times$ \\
+Father present & \checkmark & \checkmark & $\times$ & $\times$ \\
+Number of siblings & \checkmark & \checkmark & $\times$ & $\times$ \\
+Foodstamps & \checkmark & \checkmark & \checkmark & \checkmark \\
+Living arrangements & $\times$ & $\times$ & \checkmark & \checkmark \\
+Working, if working age & $\times$ & $\times$ & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table summarizes the explanatory variables included in the models we use to predict medical expenditure for each age group. Possible living arrangements are: living with parents, away at college, married, or other.\\
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\noindent The first level of each model predicts the likelihood that the subject incurred any medical expenditure in the period. The second level predicts the medical expenditure for those with positive expenditures.
+
+\bibliography{heckman}
+\bibliographystyle{chicago}
+
+
+\end{document}
