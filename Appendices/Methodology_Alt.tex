@@ -188,67 +188,17 @@ For individual $i$ in experimental sample ($k=e$), an individual $l(i)$ in the a
 
 
 \noindent \textbf{Summary: Variables Used to Match to Construct Synthetic Control and Treatment Groups}\\
-In our analyses (across both stages), we use each of the following variables, \textit{for all the outcomes at all ages}. The criterion for selecting these variables is availability across all auxiliary sources. We construct one synthetic control group and one synthetic treatment group in each auxiliary sample (and not one group for each age). We explain how we use the synthetic groups for predicting each outcome in Appendix~\ref{app:datasets}.
+When constructing synthetic control and treatment groups we use each of the following variables, \textit{for all the outcomes at all ages}. The criterion for selecting these variables is availability across all auxiliary sources. We construct one synthetic control group and one synthetic treatment group in each auxiliary sample (and not one group for each age). We explain how we use the synthetic groups for predicting each outcome in Appendix~\ref{app:datasets}.
 \begin{enumerate}
-\item \textbf{NLSY79:} male, birth year, years of education at age 30, labor income at age 30.
-\item \textbf{PSID:} male, birth year, years of education at age 30, labor income at age 30.
-\item \textbf{CNLSY:} male, birth year, years of education at age 30, labor income at age 30.
+
+\item \textbf{NLSY79:} male and birth year. 
+\item \textbf{PSID:} male and birth year.
+\item \textbf{CNLSY:} male and birth year.
+
+\noindent In addition, recall that we place initial restrictions on the auxiliary sample. See Appendix~\ref{app:datasets}.\footnote{We experimented with other variables to construct the synthetic treatment and control groups and found little sensitivity in our estimates. Results using various other sets of variables to construct the synthetic groups are available from the authors upon request.}
 \end{enumerate}
 
-\paragraph{Sensitivity Analysis to Variables Used to Match}
-
-\noindent To study the sensitivity of our labor income predictions to the choice of different matching variables, we predict income using the following different sets of variables: (a) no matching variables (i.e., each individual in the auxiliary sample has the same weight); (b) pre-treatment variables only (male and Black indicators and year of birth, but using matching or model-based estimates); (c) post-treatment variables only (years of education at age 30 and labor income at age 30); and (c) pre-treatment and post-treatment variables (male and Black indicators, year of birth, years of education at age 30, and labor income at age 30). Figure~\ref{fig:matchvariables} displays the results of this exercise. The top row represents the exercise for females and the bottom row for males. The predictions exhibit little sensitivity to the choice of matching variables within the set of variables used. The average root-mean squared error for the prediction across ages 22 to 67 is very similar when varying the sets of matching variables.\\
-
 \textbf{[JJH: My god I am going to go insane. How does this relate to the previous section? Where are results when we match on $B$? (This is ``no matching.'') Please explain how each profile is constructed!] [JJH: Jorge, this repeats the same error -- we match on $B$ not $X^d_k$. Please, I keep making the same comment. Keep getting same error.] [JLG: I have modified this, based on our discussion.]}
-
-\begin{sidewaysfigure}[H]
-\centering
-\caption{Predicted Labor Income Profiles, Varying the Matching Variables}\label{fig:matchvariables}
-\begin{subfigure}[h]{0.25\textwidth}
-		\centering
-		\caption{No Matching, Females}
-		\includegraphics[width=\textwidth]{output/labor_20-65_pset8_mset4_female_sensitivity.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.25\textwidth}
-		\centering
-		\caption{Pre-treatment Variables, Females}
-		\includegraphics[width=\textwidth]{output/labor_20-65_pset1_mset1_female_sensitivity.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.25\textwidth}
-	\centering
-	\caption{Post-treatment Variables, Females}
-		\includegraphics[width=\textwidth]{output/labor_20-65_pset1_mset2_female_sensitivity.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.25\textwidth}
-	\centering
-	\caption{Pre- and Post-treatment Variables,\\ Females}
-		\includegraphics[width=\textwidth]{output/labor_20-65_pset1_mset3_female_sensitivity.eps}
-\end{subfigure}
-\begin{subfigure}[h]{0.25\textwidth}
-		\centering
-		\caption{No Matching, Males}
-		\includegraphics[width=\textwidth]{output/labor_20-65_pset8_mset4_male_sensitivity.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.25\textwidth}
-		\centering
-		\caption{Pre-treatment Variables, Males}
-		\includegraphics[width=\textwidth]{output/labor_20-65_pset1_mset1_male_sensitivity.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.25\textwidth}
-	\centering
-	\caption{Post-treatment Variables, Males}
-		\includegraphics[width=\textwidth]{output/labor_20-65_pset1_mset2_male_sensitivity.eps}
-\end{subfigure}%
-\begin{subfigure}[h]{0.25\textwidth}
-	\centering
-	\caption{Pre- and Post-treatment Variables, Males}
-		\includegraphics[width=\textwidth]{output/labor_20-65_pset1_mset3_male_sensitivity.eps}
-\end{subfigure}
-\footnotesize \justify
-Note: This figure displays the predicted labor income profile obtained when constructing control- and treatment-group matches according to the procedure in Section~\ref{sec:usingaux}. We use data from the Children of the National Longitudinal Survey of Youth 1979 (CNLSY79) (ages 22 to 29) and the National Longitudinal Survey of Youth 1979 (NLSY79) and the Panel Study of Income Dynamics (PSID) (ages 29 to 67). We vary the matching variables across the different panels, for both males and females. Pre-treatment variables: male and Black indicators and year of birth. Post-treatment variables: years of education at age 30 and labor income at age 30. Each panel shows the average root-mean squared error (and its corresponding standard error) of the prediction in the auxiliary datasets. The average is across ages 22 to 67. When we do not weight (match) the samples, the average root-mean squared error is the same across the treatment and control groups by construction (no synthetic groups are created when there is no weighting.
-\end{sidewaysfigure}
-
-\textbf{[JJH: I do not understand this -- The reader will not --Sit down and read the paper then write it up using the paper?]}
 
 \subsubsection{Variables Used to Predict Out-of-Sample Outcomes} \label{appendix:pred}
 
