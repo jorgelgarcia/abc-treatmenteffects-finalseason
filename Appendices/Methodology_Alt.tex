@@ -107,13 +107,13 @@ and
 
 \subsubsection{Overview of Our Approach and A Summary of Findings}
 
-\noindent As noted in the text, the principal empirical strategy used in this paper is developed and implemented in two stages. In Stage I, we find comparison groups that are ``comparable.'' This can be thought of as a type of coarse matching on $B \in \mathcal{B}_0$. Stage II uses the constructed samples to build models to make out of (experimental) sample forecasts, assuming structural invariance (Assumption~\ref{ass:summary}). \\
+\noindent As noted in the text, the principal empirical strategy used in this paper is developed and implemented in two stages. In Stage I, we find comparison groups that are ``comparable.'' This can be thought of as a type of coarse matching on $B \in \mathcal{B}_0$. Stage II uses the constructed samples to build models to make out of (experimental) sample predictions, assuming structural invariance (Assumption~\ref{ass:summary}). \\
 
-\noindent We rely primarily on parametric model-based approach that estimates Equation~\eqref{eq:outcome} in the main text in the experimental and comparison samples and extrapolates using the comparison samples. As noted in the text, under exogeneity and structural invariance, which we test for and do not reject, we can combine the two stages in a single stage matching procedure that finds counterparts to the experimental samples and controls in our auxiliary samples. We report an agreement between the main estimates reported in the paper and matching estimates. We find a surprising robustness across approaches in our estimates that inspires confidence in the benefit/cost estimates reported in the text.\\
+\noindent We rely primarily on parametric model-based approach that estimates Equation~\eqref{eq:outcome} in the main text in the experimental and comparison samples and extrapolates using the comparison samples. As noted in the text, under exogeneity and structural invariance, which we test for and do not reject, we can combine the two stages in a single stage matching procedure that finds counterparts to the experimental samples and controls in our auxiliary samples. We report agreement between the main estimates reported in the paper and the matching estimates. We find a surprising robustness across approaches in our estimates that inspires confidence in the benefit/cost estimates reported in the text.\\
 
 \subsubsection{Auxiliary Datasets} \label{app:datasets}
 
-\noindent We rely on the following datasets to estimate transfer and labor income life-cycle earnings profiles.\footnote{At age 21, public-transfer income includes Aid to Families with Dependent Children (AFDC) subsidies, food stamps, survivor benefits, disability benefits, social security, rent subsidies, and fuel subsidies. At age 30, public-transfer income includes food stamps, welfare, housing assistance, workman's compensation, disability, social security, supplemental security income, unemployment benefits, worker's compensation insurance, fuel subsidies, educational and aid grants, and other forms of welfare. For all other ages, we produce a prediction. We explain and justify the variables we use to predict below.} We use some of these same and other complementary sources to predict the rest of the outcomes, as we explain below.\\
+\noindent We rely on the following datasets to estimate transfer and labor income life-cycle labor income profiles.\footnote{At age 21, public-transfer income includes Aid to Families with Dependent Children (AFDC) subsidies, food stamps, survivor benefits, disability benefits, social security, rent subsidies, and fuel subsidies. At age 30, public-transfer income includes food stamps, welfare, housing assistance, workman's compensation, disability, social security, supplemental security income, unemployment benefits, worker's compensation insurance, fuel subsidies, educational and aid grants, and other forms of welfare. For all other ages, we produce a prediction. We explain and justify the variables we use to predict below.} We use some of these same and other complementary sources to predict the rest of the outcomes, as we explain below.\\
 
 \noindent\textbf{The National Longitudinal Survey of Youth (NLSY79)} is a longitudinal survey beginning in 1979 that follows individuals born between 1957 and 1964. The initial interview included 12,686 respondents aged 14 to 22. The survey was designed to include 6,111 individuals representing the non-institutionalized civilian population, a supplemental sample of 5,295 civilian Hispanics, Latinos, Blacks, non-Blacks/non-Hispanics, and economically disadvantaged youth, and a sample of 1,280 who served in the military as of September 30, 1978. When appropriately weighted, the NLSY79 is nationally representative of the youth living in the U.S. on January 1, 1979. We include individuals from all three subsamples in our analysis.\\
 
@@ -123,7 +123,7 @@ and
 
 \noindent We do not impose a restriction on the birth year for the NLSY79 as all respondents are between 47 and 55 years of age at the time of the last interview (conducted in 2012). This age range is within the 31--67 range for which we extrapolate the income of the ABC/CARE subjects.\\
 
-\noindent Given the biennial nature of the NLSY79, we only observe each subject at either odd or even ages. Not only does this reduce the size of the sample on which we fit our forecasting model at each age, but it can introduce biases associated with the odd-aged and even-aged cohorts. To address this issue, we linearly interpolate the variables in the NLSY79 data that are used in our prediction model. This allows us to estimate our model on all subjects of the NLSY79 satisfying the eligibility conditions $\bm{B}\in\mathcal{B}_0$ at every age.\\
+\noindent Given the biennial nature of the NLSY79, we only observe each subject at either odd or even ages. Not only does this reduce the size of the sample on which we fit our prediction model at each age, but it can introduce biases associated with the odd-aged and even-aged cohorts. To address this issue, we linearly interpolate the variables in the NLSY79 data that are used in our prediction model. This allows us to estimate our model on all subjects of the NLSY79 satisfying the eligibility conditions $\bm{B}\in\mathcal{B}_0$ at every age.\\
 
 \noindent\textbf{The Children of the National Longitudinal Survey of Youth (CNLSY)} is a survey of the children of the mothers from the NLSY79, beginning in 1986. At the time of the initial interview, the ages of the children surveyed ranged from 0 to 23. As of 2010, the CNLSY sample includes 11,504 children born to NLSY79 mothers. With appropriate weights, the CNLSY may be considered nationally representative of children born to women who were age 14 to 22 during 1979. Interviews were conducted annually between 1986 and 1994, and biennially thereafter.\\
 
@@ -162,7 +162,7 @@ We use the following samples to predict labor and transfer income. Different sam
 
 \subsubsection{Constructing Synthetic Treatment and Controls Groups}\label{appendix:match}
 
-\noindent The first principle for constructing non-experimental synthetic treatment or control groups is that they be eligible for the program, i.e., $\bm{B}_n \in \mathcal{B}_{0}$. To implement this condition, we require that the $\bm{B}$ variables be present in both experimental and control samples. An additional, harder challenge is to use these variables to find counterparts to the treated and the controlled in the non-experimental samples where no one directly receives treatment.\\
+\noindent The first principle for constructing non-experimental synthetic treatment or control groups is that potential counterparts be eligible for the program, i.e., $\bm{B}_n \in \mathcal{B}_{0}$. To implement this condition, we require that the $\bm{B}$ variables be present in both experimental and control samples. An additional, harder challenge is to use these variables to find counterparts to the treated and the controlled in the non-experimental samples where no one directly receives treatment.\\
 
 \noindent Our principal approach constructs counterpart experimental and control groups matching on $\mathcal{B}_n \in B_0$. However, under exogeneity and structural invariance, we also construct individual matches for members of the experimental group and use them to construct out-of-sample treatment effects. Notice that these are two different matching procedures. We summarize both in this subsection in a succinct notation, but the two should be carefully distinguished by the reader. Since the second set of matches is more inclusive and traditional, we develop that case here.\\
 
@@ -170,7 +170,7 @@ We use the following samples to predict labor and transfer income. Different sam
 
 \noindent For the moment, simplify notation and assume that $\bm{B}_k$ is absorbed into $\bm{X}^d_{k,j,a}$. We relax this assumption below and stress that in our main analysis reported in this paper, we only match on $\bm{B}$. For each treatment group member $i$ in treatment status $d$, we find counterparts following the analysis of \citet{Heckman_Ichimura_etal_1998_REStud}. We do not construct different synthetic treatment and control groups for each age and for each outcome that we predict. We find one synthetic treatment and one synthetic control group in each auxiliary sample and use these samples to predict each outcome at each age. We explain in Appendix~\ref{app:datasets} what auxiliary samples are used to predict outcomes at each age. That is, we use the same synthetic treatment and control groups to predict all of the outcomes. For this reason, we drop the age and outcome subindices for the rest of this section.\\
 
-\noindent Matched samples can be constructed in many ways using the various criteria listed at the end of Section~\ref{app:datasets}. One method that combines Stage I (sample construction) and Stage II (estimation) is the following. This provides a nonparametric approach to forecasting. It is conditional on a common value of $\bm{B}$ in both samples. Match an individual $l(i)$ in the auxiliary sample to person $i$ in the treatment samples to find synthetic treatment and control groups by following Algorithm~\ref{alg:match}.\\
+\noindent Matched samples can be constructed in many ways using the various criteria listed at the end of Section~\ref{app:datasets}. One method that combines Stage I (sample construction) and Stage II (estimation) is the following. This provides a non-parametric approach to predicting. It is conditional on a common value of $\bm{B}$ in both samples. Match an individual $l(i)$ in the auxiliary sample to person $i$ in the treatment samples to find synthetic treatment and control groups by following Algorithm~\ref{alg:match}.\\
 
 \onehalfspacing
 \begin{algorithm} \label{alg:match}
@@ -261,11 +261,9 @@ We base our model-based predictions for a generic outcome, $Y_{k,j,a}$ on backgr
 \begin{tabular}{ccc} \toprule
 Pooled & Male & Female   \\ \midrule
 \multicolumn{3}{l}{\textbf{a. Parametric (Main Paper)}} \\
-\multicolumn{3}{c}{\underline{Labor Income}} \\
 71,345 & 300,896 & 50,390 \\
 (86,343) & (241,588) & (63,060)\\
 \multicolumn{3}{l}{\textbf{b. Non-Parametric (This Section)}} \\
-\multicolumn{3}{c}{\underline{Labor Income}} \\
 62,080 & 289,471 & 59,163 \\
 (75,030) & (232,414) & (74,039) \\ \bottomrule
 \end{tabular}
@@ -278,7 +276,7 @@ Pooled & Male & Female   \\ \midrule
 
 \subsubsection{Testing Assumption~\ref{ass:contain}: Support Conditions}\label{app:containsupport}
 
-Assumption~\ref{ass:contain} requires that the support of the auxiliary data contain the support of the experimental data. This can be checked for $a \leq a^\ast$. Figure~\ref{fig:support} validates this assumption by displaying the overlapping support sets of ABC/CARE and our auxiliary data (which we restrict as we explain in Appendix~\ref{app:datasets}) for the variables used to interpolate and extrapolate earnings.\footnote{For the male and Black indicators, we do not provide evidence of containing support. All three non-experimental samples have vast numbers of males, females, and Blacks to cover the support in the experimental samples.}
+Assumption~\ref{ass:contain} requires that the support of the auxiliary data contain the support of the experimental data. This can be checked for $a \leq a^\ast$. Figure~\ref{fig:support} validates this assumption by displaying the overlapping support sets of ABC/CARE and our auxiliary data (which we restrict as we explain in Appendix~\ref{app:datasets}) for the variables used to interpolate and extrapolate labor income.\footnote{For the male and Black indicators, we do not provide evidence of containing support. All three non-experimental samples have vast numbers of males, females, and Blacks to cover the support in the experimental samples.}
 
 
 \begin{figure}[H]
@@ -298,7 +296,7 @@ Assumption~\ref{ass:contain} requires that the support of the auxiliary data con
 	\floatfoot{
 	\footnotesize
 	\noindent Note: These graphs display the support of ABC, PSID, NLSY79, and CNLSY
-	for variables we use to project future earnings. PIAT math
+	for variables we use to project future labor income. PIAT math
 	scores are averaged over ages 5--7.
 	}
 \end{figure}
@@ -946,7 +944,7 @@ Note: Prediction of body-mass index at age 34 based on the variables listed in t
 Note: Panel (a) displays the net-present value (treatment less control) of parental income of parents of children with and without siblings at baseline. Panel (b) displays the average parental income of parents of children with young siblings (younger than 5 years old) and children with older siblings (5 years old or older) at baseline. Panel (b) drops children without siblings at baseline. Parental income is in 2014 USD discounted to child's participant age 0 using a 3\% rate. We use the baseline ``conservative'' measure of parental income in Section~\ref{section:pincome}. Results using our alternative parental income measures are similar (see Appendix~\ref{app:parentalincome}).
 \end{figure}
 
-\paragraph{Using Mincer Equations to Forecast Parental Income} \label{appendix:mincerpar}
+\paragraph{Using Mincer Equations to Predict Parental Income} \label{appendix:mincerpar}
 
 \noindent This approach fits Mincer regressions for parental income.\footnote{See \citet{Mincer_1974_schooling} for the original source and \citet{Heckman_Lochner_ea_2006_HEE} for a extended discussion of the Mincer equation, its implications, and several extensions.} We specify how we deal with the presence of a spouse below. The parameterization used is as follows:
 
@@ -958,7 +956,7 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 
 \noindent In principle, there is no reason why the parameters characterizing the profile should differ across the treatment and control groups in ABC/CARE. Given the small sample in ABC/CARE, we assume that the profile is common across the control and treatment groups. This assumption is analogous to Assumption~\ref{ass:summary}, which we fail to reject in Appendix~\ref{app:invariance}.\\
 
-\noindent We estimate the coefficients in \eqref{eq:mincer} using the sample of mothers in ABC/CARE. We pool the longitudinal information and estimate the coefficients using ordinary least squares. We use a standard Mincer measure of experience (age - education - 6). We assign one dollar to mothers with no earnings. For mothers living with a working partner, we allocate $1/2$ of total parental income as $Y_{a}$. To validate our estimates within ABC/CARE, we estimate the coefficients \eqref{eq:mincer} using a sub-sample of disadvantaged mothers in the PSID.\footnote{We define disadvantaged as follows: Black, not married, labor income, education (at age 5 of child's participant), age and number of children (at age 5 of child's participant) in the same ranges as the ABC/CARE mothers, labor income below percentile 75.} The coefficients characterizing \eqref{eq:mincer} in ABC/CARE and PSID for different combinations of control sets are in agreement. We display them in Table~\ref{table:mincerpsid}.\\
+\noindent We estimate the coefficients in \eqref{eq:mincer} using the sample of mothers in ABC/CARE. We pool the longitudinal information and estimate the coefficients using ordinary least squares. We use a standard Mincer measure of experience (age - education - 6). We assign one dollar to mothers with no labor income. For mothers living with a working partner, we allocate $1/2$ of total parental income as $Y_{a}$. To validate our estimates within ABC/CARE, we estimate the coefficients \eqref{eq:mincer} using a sub-sample of disadvantaged mothers in the PSID.\footnote{We define disadvantaged as follows: Black, not married, labor income, education (at age 5 of child's participant), age and number of children (at age 5 of child's participant) in the same ranges as the ABC/CARE mothers, labor income below percentile 75.} The coefficients characterizing \eqref{eq:mincer} in ABC/CARE and PSID for different combinations of control sets are in agreement. We display them in Table~\ref{table:mincerpsid}.\\
 
 \begin{table}[H]
 \begin{threeparttable}
@@ -1267,11 +1265,11 @@ Note: Panel (a) displays the empirical bootstrap distribution for the estimate o
 
 \item Fit the dynamic relationship in Equation~\eqref{eq:outcome}, using predictors as detailed in Appendix~\ref{appendix:pred}. We fit two parameterizations of the dynamic relationships. One for the synthetic treatment, and one for the synthetic control. When providing estimates by gender, we also produce different predictions by gender.
 
-\item Use the parameterization in Step 4. to fit out of sample in $(e,s,1)$ and $(e,s,0)$, respectively. This gives us an age-by-age prediction \textit{without forecasting error} for our treatment and control groups. Store the predictions at all ages for individual $i$ in this sample in a vector $\bm{Y}_{i,e,s}^d$, where $\bm{Y}_{i,e,s}^d$ is the vector of predictions for individual $i$ in the experimental bootstrap sample $s$, experimental group $d$.
+\item Use the parameterization in Step 4. to fit out of sample in $(e,s,1)$ and $(e,s,0)$, respectively. This gives us an age-by-age prediction \textit{without prediction error} for our treatment and control groups. Store the predictions at all ages for individual $i$ in this sample in a vector $\bm{Y}_{i,e,s}^d$, where $\bm{Y}_{i,e,s}^d$ is the vector of predictions for individual $i$ in the experimental bootstrap sample $s$, experimental group $d$.
 
 \item In step 4., we compute an individual-level vector of residuals in each of the samples $(n,s',0)$ and $(n,s',1)$. That is, each individual has a vector containing the residuals of each of her predicted variable (for example, labor income). Call this vector of residuals $\bm{\mathcal{E}}_{i',n,s'}^d$: the vector of residuals for individual $i'$ in the auxiliary bootstrap sample $s'$, in the synthetic group $d$.
 
-\item Randomly pair individual $i'$ in $s'$ with individual $i$ in $s$. The prediction accounting for forecasting error is $\bm{Y}_{i,e,s}^d + \bm{\mathcal{E}}_{i',e,s'}^d$.
+\item Randomly pair individual $i'$ in $s'$ with individual $i$ in $s$. The prediction accounting for prediction error is $\bm{Y}_{i,e,s}^d + \bm{\mathcal{E}}_{i',e,s'}^d$.
 
 \item Repeat this for all pairs of samples $(n,s'), (e,s)$. We resample the experimental sample and auxiliary sample 100 times each. This gives us the empirical bootstrap distribution, with 100*100 points.
 
@@ -1301,12 +1299,12 @@ Note: Panel (a) displays the empirical bootstrap distribution for the estimate o
 
 \subsubsection{Combining Functions}
 
-\begin{itemize}
+\begin{enumerate}
 \item Use the same procedure as before to re-sample the experimental data.
 \item Calculate treatment effects as described in Appendix~\ref{little-TE}.
 \item If counting the number of positive effects, compute this number and generate standard errors and $p$-value's as before.
 \item If counting the number of positive and at significant treatment effects, compute the number of positive and significant treatment effects (at the desired significance level). Re-sample the non-experimental sample a second time. The second re-sample creates an empirical bootstrap distribution for this count. Generate standard errors and $p$-value's as before.
-\end{itemize}
+\end{enumerate}
 
 \subsubsection{Cost-benefit ratio or Internal Rate of Return.}
 
