@@ -1,0 +1,91 @@
+%Input preamble
+\input{preamble}
+\input{output/mainstatistics}
+
+\usepackage[stable]{footmisc}
+
+\newcommand*\leftright[2]{%
+  \leavevmode
+  \rlap{#1}%
+  \hspace{0.5\linewidth}%
+  #2}
+
+\newcommand{\orth}{\ensuremath{\perp\!\!\!\perp}}%
+\newcommand{\indep}{\orth}%
+\newcommand{\notorth}{\ensuremath{\perp\!\!\!\!\!\!\diagup\!\!\!\!\!\!\perp}}%
+\newcommand{\notindep}{\notorth}
+
+\externaldocument{abc_comprehensivecba}
+\pagenumbering{roman}
+
+\begin{document}
+
+
+\doublespacing
+\section*{Data Combination Estimator in GMM Framework} \label{section:datacomb}
+
+\noindent Recall that our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the auxiliary sample:\\
+
+\begin{equation}\label{eq:outcome}
+Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a}, \quad j \in \mathcal{J}_a.
+\end{equation}
+
+\noindent $\phi^d_{k,j,a}\left( \cdot, \cdot \right)$ is an invariant structural production relationship mapping inputs $\bm{X}^d_{k,a}, \bm{B}_k$ into output $Y^d_{k,j,a}$ holding error term $\varepsilon^d_{k,j,a}$ fixed.\\
+
+\noindent We show in the main text that $\phi^d_{n,j,a} (\cdot, \cdot)$ is a consistent predictor of $Y_{e,j,a}^d$. This holds at any age, although we are specifically interested in $a > a^*$, given that we do not observe $Y_{e,j,a}^d$ after $a^*$.\\
+
+\noindent We want to take a step back and frame the estimation of $\phi^d_{n,j,a} (\cdot, \cdot)$ in the generalized method of moments (GMM) framework. This helps us illustrate how our prediction theory in the main text provides theoretical conditions for the combination of multiple datasets.\\
+
+\noindent First, note that Assumption~\ref{ass:exog} (Exogeneity) implies
+
+\begin{eqnarray}
+\mathbb{E} \left[ Y_{e,j,a}^d | \bm{X}_{e}^d, \bm{B}_{e} \right] =  \phi^d_{e,j,a}\left( \bm{X}_{e}^d, \bm{B}_{e} \right). \label{eq:main}
+\end{eqnarray}
+
+\noindent By Assumption~\ref{ass:contain} (Support Conditions), the support of the auxiliary sample contains the support of the experimental sample. Thus, Equation~\eqref{eq:main} is valid for any $\bm{X}^d_{k,a}$, $\bm{B}$, and $\bm{Y}_{k,a}$, with $k \in \{ e, n\}$. We then can write: 
+
+\begin{eqnarray}
+\mathbb{E} \left[ Y_{n,j,a}^d | \bm{X}_{n}^d, \bm{B}_{n} \right] =  \phi^d_{e,j,a}\left( \bm{X}_{n}^d, \bm{B}_{n} \right).
+\end{eqnarray}
+
+\noindent By Assumption~\ref{ass:summary} (Invariance), we can write this as: 
+
+\begin{eqnarray}
+\mathbb{E} \left[ Y_{n,j,a}^d | \bm{X}_{n}^d, \bm{B}_{n} \right] &=&  \phi^d_{e,j,a}\left( \bm{X}_{n}^d, \bm{B}_{n} \right) \nonumber \\ 
+ &=&  \phi^d_{n,j,a}\left( \bm{X}_{n}^d, \bm{B}_{n} \right) \nonumber \\
+ &=&  \phi_{j,a}\left( \bm{X}_{n}^d, \bm{B}_{n} \right). \label{eq:mainpred}
+\end{eqnarray}
+
+\noindent Equation~\eqref{eq:main} is key in framing the data combination approach we use in the GMM framework. Its states that the prediction function $\phi_{j,a} \left( \cdot, \cdot \right) $ is invariance across (i) the auxiliary and experimental datasets; and (ii) the control and treatment groups. Thus, it enables to predict (identify and estimate) the $Y_{e,j,a}^d$ for $d \in \{0, 1\}$ based on the data moment $\mathbb{E} \left[ Y_{n,j,a}^d | \bm{X}_{n}^d, \bm{B}_{n} \right] $.\\
+
+\noindent Let $\bm{\theta}_{j,a}$ be the set of parameters characterizing $\phi_{j,a}\left( \cdot, \cdot \right)$. It is useful to consider a standard estimation approach: non-linear least squares (NLS). That is, 
+
+\begin{equation}
+ \bm{\theta}_{j,a}^{\text{NLS}} := \argmin_{\bm{\theta}_{j,a}} \sum \limits _{i \in \mathcal{I}} {\left( Y^d_{n,j,a}  - \phi_{j,a} (\cdot , \cdot); \bm{\theta}_{j,a} \right)}^2, 
+\end{equation}
+
+\noindent where $\mathcal{I}$ indexes the individuals in the sample. The conditions provided in the main text grant identification of  $\bm{\theta}_{j,a}^{\text{NLS}}$ (see Theorem~\ref{theorem:main}). The first order condition for the NLS estimator is: 
+
+\begin{eqnarray} 
+\sum \limits _{i \in \mathcal{I}}  \psi \left( \cdot , \cdot); \bm{\theta}_{j,a} \right) \left( Y^d_{n,j,a}  - \phi_{j,a} (\cdot , \cdot; \bm{\theta}_{j,a} \right) = 0, \label{eq:nlsfoc}
+\end{eqnarray}
+
+\noindent where $\psi \left( \cdot , \cdot; \bm{\theta}_{j,a} \right) := \frac{ \phi_{j,a} \left( \cdot , \cdot; \bm{\theta}_{j,a} \right)}{\partial \bm{\theta}_{j,a}}$.\\
+
+\noindent Equation~\eqref{eq:main} provides a ``natural'' moment condition for framing the problem in the GMM framework. That is, the moment condition allowing us to identify (and estimate) the post-$a^*$ prediction for the experimental sample as a function of observed data in the auxiliary sample: 
+
+\begin{equation}
+\mathbb{E} \left[\psi \left( \cdot , \cdot; \bm{\theta}_{j,a} \right) \left( Y^d_{n,j,a}  - \phi_{j,a} (\cdot , \cdot; \bm{\theta}_{j,a} \right) \right]  = 0.
+\end{equation}
+
+
+
+%References
+\pagebreak
+\singlespace
+\bibliographystyle{chicago}
+\bibliography{heckman}
+
+\end{document}
+
+
