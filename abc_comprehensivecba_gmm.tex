@@ -36,7 +36,7 @@ Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a},
 
 \noindent We want to take a step back and frame the estimation of $\phi^d_{n,j,a} (\cdot, \cdot)$ in the generalized method of moments (GMM) framework. This helps us illustrate how our prediction theory in the main text provides theoretical conditions for the combination of multiple datasets.\\
 
-\noindent First, note that Assumption~\ref{ass:exog} (Exogeneity) implies the following holds in the \textit{experimental sample}: 
+\noindent First, note that Assumption ~\ref{ass:exog} (Exogeneity) implies the following holds in the \textit{experimental sample}: 
 
 \begin{eqnarray}
 \mathbb{E} \left[ Y_{e,j,a}^d | \bm{X}_{e,a}^d, \bm{B}_{e} \right] =  \phi^d_{e,j,a}\left( \bm{X}_{e,a}^d, \bm{B}_{e} \right). \label{eq:main}
@@ -52,13 +52,13 @@ Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a},
 
 \noindent By Assumption~\ref{ass:summary} (Invariance), we can write this as: 
 
-\begin{eqnarray}
+\begin{eqnarray}\label{eq:momentlink}
 \mathbb{E} \left[ Y_{n,j,a}^d | \bm{X}_{n,a}^d, \bm{B}_{n} \right] &=&  \phi^d_{e,j,a}\left( \bm{X}_{n,a}^d, \bm{B}_{n} \right) \nonumber \\ 
  &=&  \phi^d_{n,j,a}\left( \bm{X}_{n,a}^d, \bm{B}_{n} \right) \nonumber \\
  &=&  \phi_{j,a}\left( \bm{X}_{n,a}^d, \bm{B}_{n} \right). \label{eq:mainpred}
 \end{eqnarray}
 
-\noindent Equation~\eqref{eq:main} directly states relationship between the a moment observed in the auxiliary sample, the left-hand side, and the function that we use to construct the predictions. Our objective is to estimate the parameters characterizing this function, $\bm{\theta}_{j,a}$.\\ 
+\noindent Equation~\eqref{eq:momentlink} directly states the relationship between the moment observed in the auxiliary sample, the left-hand side, and the function that we use to construct the predictions. Our objective is to estimate the parameters characterizing this function, $\bm{\theta}_{j,a}$.\\ 
 
 \noindent The key moment condition implied by Assumption~\ref{ass:exog} (Exogeneity) is 
 
@@ -70,7 +70,7 @@ Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a},
 
 \begin{enumerate}
 \item \textbf{Initializing the dynamic prediction.} 
-\noindent For the time being, assume that we do not place specific weights to the different moments implied by \eqref{eq:moment}. We come back to this issue below. Then, a valid estimation approach is to minimize the following quadratic loss function: 
+\noindent For the time being, assume that we do not place specific weights on the different moments implied by \eqref{eq:moment}. We come back to this issue below. Then, a valid estimation approach is to minimize the following quadratic loss function: 
 
 \begin{equation}
 q :=  {\bm{m} \left( \bm{\theta}_{j,a} \right)}^{'}{\bm{m} \left( \bm{\theta}_{j,a} \right)}, \label{eq:loss}
@@ -80,7 +80,7 @@ q :=  {\bm{m} \left( \bm{\theta}_{j,a} \right)}^{'}{\bm{m} \left( \bm{\theta}_{j
 
 \noindent $\bm{X}_{n,a}^d$ contains a one-period lagged value of $Y_{n,j,a}^d$. To construct our predictions, we do not require an estimate of $\phi_{j,a}$ at age $a^*$. We observe $Y_{e,j,a}$ at $a^*$. We need an estimate of $\phi_{j,a}$ for $a > a^*$.\\ 
 
-\noindent To illustrate how we use the estimates to form the predictions dynamically, suppose there are two periods after $a^*$. We can stack the moment conditions for each of this ages and write: 
+\noindent To illustrate how we use the estimates to form the predictions dynamically, suppose there are two periods after $a^*$. We can stack the moment conditions for each of these ages and write: 
 
 \begin{equation}
 \mathbb{E} \left[  \left[ \bm{m} \left( \bm{\theta}_{j,a^* + 1}  \right)   , \bm{m} \left( \bm{\theta}_{j,a^* + 2} \right)  \right]'  \right] = \bm{0}, 
@@ -89,9 +89,9 @@ q :=  {\bm{m} \left( \bm{\theta}_{j,a} \right)}^{'}{\bm{m} \left( \bm{\theta}_{j
 \noindent and write a corresponding loss function. Once the estimates of $\bm{\theta}_{j,a^* + 1}, \bm{\theta}_{j,a^* + 2}$ are available, we form the predictions as follows: 
 
 \begin{enumerate}
-\item Form the prediction of $Y_{e,j,a}$ at $a^* + 1$. This is feasible because we can evaluate $ \hat{\phi}_{j,a^*+1}\left( \bm{X}_{n,a}^d, \bm{B}_{n} \right)$ in the experimental sample given that we observe $Y_{e,j,a^*}$.
+\item Form the prediction of $Y_{e,j,a}$ at $a^* + 1$. This is feasible because we can evaluate $ \hat{\phi}_{j,a}\left( \bm{X}_{n,a^*+1}^d, \bm{B}_{n} \right)$ in the experimental sample given that we observe $Y_{e,j,a^*}$.
 
-\item Form the prediction of $Y_{e,j,a}$ at $a^* + 2$. This is feasible because we can evaluate $ \hat{\phi}_{j,a}\left( \bm{X}_{n,a^*+2}^d, \bm{B}_{n} \right)$ in the experimental sample given that we have a prediction of $Y_{e,j,a^*1}$ from the previous step (this is the value at which we evaluate). The rest of the variables in $\bm{X}_{n,a}^d$ are post-treatment variables that we observe in the experimental sample at any age $a \leq a^*$.
+\item Form the prediction of $Y_{e,j,a}$ at $a^* + 2$. This is feasible because we can evaluate $ \hat{\phi}_{j,a}\left( \bm{X}_{n,a^*+2}^d, \bm{B}_{n} \right)$ in the experimental sample given that we have a prediction of $Y_{e,j,a^*+1}$ from the previous step (this is the value at which we evaluate). The rest of the variables in $\bm{X}_{n,a}^d$ are post-treatment variables that we observe in the experimental sample at any age $a \leq a^*$.
 \end{enumerate}
 
 \item \textbf{Pooling information from different datasets.} Minimizing the loss function in \eqref{eq:loss} provides a consistent estimate of $\bm{\theta}_{j,a}$, but we can do better. We can minimize a weighted loss of the form 
