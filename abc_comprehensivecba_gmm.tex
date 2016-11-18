@@ -36,7 +36,7 @@ Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a},
 
 \noindent We want to take a step back and frame the estimation of $\phi^d_{n,j,a} (\cdot, \cdot)$ in the generalized method of moments (GMM) framework. This helps us illustrate how our prediction theory in the main text provides theoretical conditions for the combination of multiple datasets.\\
 
-\noindent First, note that Assumption~\ref{ass:exog} (Exogeneity) implies
+\noindent First, note that Assumption~\ref{ass:exog} (Exogeneity) implies the following holds in the \textit{experimental sample}: 
 
 \begin{eqnarray}
 \mathbb{E} \left[ Y_{e,j,a}^d | \bm{X}_{e,a}^d, \bm{B}_{e} \right] =  \phi^d_{e,j,a}\left( \bm{X}_{e,a}^d, \bm{B}_{e} \right). \label{eq:main}
@@ -48,6 +48,8 @@ Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a},
 \mathbb{E} \left[ Y_{n,j,a}^d | \bm{X}_{n,a}^d, \bm{B}_{n} \right] =  \phi^d_{e,j,a}\left( \bm{X}_{n,a}^d, \bm{B}_{n} \right).
 \end{eqnarray}
 
+\noindent This relates the moment $\mathbb{E} \left[ Y_{n,j,a}^d | \bm{X}_{n,a}^d, \bm{B}_{n} \right]$ in the auxiliary sample to the function  $\phi^d_{e,j,a}\left( \cdot, \cdot \right)$ in the experimental sample.\\
+
 \noindent By Assumption~\ref{ass:summary} (Invariance), we can write this as: 
 
 \begin{eqnarray}
@@ -56,27 +58,67 @@ Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a},
  &=&  \phi_{j,a}\left( \bm{X}_{n,a}^d, \bm{B}_{n} \right). \label{eq:mainpred}
 \end{eqnarray}
 
-\noindent Equation~\eqref{eq:main} is key in framing the data combination approach we use in the GMM framework. It states that the prediction function $\phi_{j,a} \left( \cdot, \cdot \right) $ is invariant across (i) the auxiliary and experimental datasets; and (ii) the control and treatment groups. Thus, it enables us to predict (identify and estimate) $Y_{e,j,a}^d$ for $d \in \{0, 1\}$ based on the data moment $\mathbb{E} \left[ Y_{n,j,a}^d | \bm{X}_{n,a}^d, \bm{B}_{n} \right] $.\\
+\noindent Equation~\eqref{eq:main} directly states relationship between the a moment observed in the auxiliary sample, the left-hand side, and the function that we use to construct the predictions. Our objective is to estimate the parameters characterizing this function, $\bm{\theta}_{j,a}$.\\ 
 
-\noindent Let $\bm{\theta}_{j,a}$ be the set of parameters characterizing $\phi_{j,a}\left( \cdot, \cdot \right)$. It is useful to consider a standard estimation approach: non-linear least squares (NLS). That is, 
-
-\begin{equation}
- \bm{\theta}_{j,a}^{\text{NLS}} := \argmin_{\bm{\theta}_{j,a}} \sum \limits _{i \in \mathcal{I}} {\left( Y^d_{n,j,a}  - \phi_{j,a} (\cdot , \cdot; \bm{\theta}_{j,a} )\right)}^2, 
-\end{equation}
-
-\noindent where $\mathcal{I}$ indexes the individuals in the sample. The conditions provided in the main text grant identification of  $\bm{\theta}_{j,a}^{\text{NLS}}$ (see Theorem~\ref{theorem:main}). The first order condition for the NLS estimator is: 
-
-\begin{eqnarray} 
-\sum \limits _{i \in \mathcal{I}}  \psi \left( \cdot , \cdot; \bm{\theta}_{j,a} \right) \left( Y^d_{n,j,a}  - \phi_{j,a} (\cdot , \cdot; \bm{\theta}_{j,a} )\right) = 0, \label{eq:nlsfoc}
-\end{eqnarray}
-
-\noindent where $\psi \left( \cdot , \cdot; \bm{\theta}_{j,a} \right) := \frac{\partial \phi_{j,a} \left( \cdot , \cdot; \bm{\theta}_{j,a} \right)}{\partial \bm{\theta}_{j,a}}$.\\
-
-\noindent Equation~\eqref{eq:main} provides a ``natural'' moment condition for framing the problem in the GMM framework. That is, the moment condition allowing us to identify (and estimate) the post-$a^*$ prediction for the experimental sample as a function of observed data in the auxiliary sample: 
+\noindent The key moment condition implied by Assumption~\ref{ass:exog} (Exogeneity) is 
 
 \begin{equation}
-\mathbb{E} \left[\psi \left( \cdot , \cdot; \bm{\theta}_{j,a} \right) \left( Y^d_{n,j,a}  - \phi_{j,a} (\cdot , \cdot; \bm{\theta}_{j,a} )\right) \right]  = 0.
+\mathbb{E} \left[ \bm{m} \left( \bm{\theta}_{j,a} \right) \right] = 0, \label{eq:moment}
 \end{equation}
+
+\noindent where $\bm{m} \left( \bm{\theta}_{j,a} \right) := {\bm{X_{n,a}^d}}^{'} \left( Y_{n,j,a}^d -   \phi^d_{j,a} \left( \bm{X}_{n,a}^d, \bm{B}_{n} \right) \right)$. This condition enables us to discuss three issues: 
+
+\begin{enumerate}
+\item \textbf{Initializing the dynamic prediction.} 
+\noindent For the time being, assume that we do not place specific weights to the different moments implied by \eqref{eq:moment}. We come back to this issue below. Then, a valid estimation approach is to minimize the following quadratic loss function: 
+
+\begin{equation}
+q :=  {\bm{m} \left( \bm{\theta}_{j,a} \right)}^{'}{\bm{m} \left( \bm{\theta}_{j,a} \right)}, \label{eq:loss}
+\end{equation}
+
+\noindent which provides us with a standard non-linear least square estimator of $\bm{\theta}_{j,a}$.\\
+
+\noindent $\bm{X}_{n,a}^d$ contains a one-period lagged value of $Y_{n,j,a}^d$. To construct our predictions, we do not require an estimate of $\phi_{j,a}$ at age $a^*$. We observe $Y_{e,j,a}$ at $a^*$. We need an estimate of $\phi_{j,a}$ for $a > a^*$.\\ 
+
+\noindent To illustrate how we use the estimates to form the predictions dynamically, suppose there are two periods after $a^*$. We can stack the moment conditions for each of this ages and write: 
+
+\begin{equation}
+\mathbb{E} \left[  \left[ \bm{m} \left( \bm{\theta}_{j,a^* + 1}  \right)   , \bm{m} \left( \bm{\theta}_{j,a^* + 2} \right)  \right]'  \right] = \bm{0}, 
+\end{equation}
+
+\noindent and write a corresponding loss function. Once the estimates of $\bm{\theta}_{j,a^* + 1}, \bm{\theta}_{j,a^* + 2}$ are available, we form the predictions as follows: 
+
+\begin{enumerate}
+\item Form the prediction of $Y_{e,j,a}$ at $a^* + 1$. This is feasible because we can evaluate $ \hat{\phi}_{j,a^*+1}\left( \bm{X}_{n,a}^d, \bm{B}_{n} \right)$ in the experimental sample given that we observe $Y_{e,j,a^*}$.
+
+\item Form the prediction of $Y_{e,j,a}$ at $a^* + 2$. This is feasible because we can evaluate $ \hat{\phi}_{j,a}\left( \bm{X}_{n,a^*+2}^d, \bm{B}_{n} \right)$ in the experimental sample given that we have a prediction of $Y_{e,j,a^*1}$ from the previous step (this is the value at which we evaluate). The rest of the variables in $\bm{X}_{n,a}^d$ are post-treatment variables that we observe in the experimental sample at any age $a \leq a^*$.
+\end{enumerate}
+
+\item \textbf{Pooling information from different datasets.} Minimizing the loss function in \eqref{eq:loss} provides a consistent estimate of $\bm{\theta}_{j,a}$, but we can do better. We can minimize a weighted loss of the form 
+
+\begin{equation}
+q :=  {\bm{m} \left( \bm{\theta}_{j,a} \right)}^{'} W_{j,a}^{-1} {\bm{m} \left( \bm{\theta}_{j,a} \right)}, \label{eq:wloss},
+\end{equation}
+
+\noindent where $W_{j,a}^{-1}$ is the inverse of the variance of the set of moments in $\bm{m} \left( \bm{\theta}_{j,a} \right)$. More generally, we can stack the moments as we do before and think of the problem as 
+
+\begin{equation}
+q :=  {\bm{m} \left( \bm{\theta}_{j} \right)}^{'} W ^{-1} {\bm{m} \left( \bm{\theta}_{j}\right)}, \label{eq:wloss}
+\end{equation}
+
+\noindent where $\bm{m} \left( \bm{\theta}_{j} \right)$ and  $\bm{\theta}_{j}$  stack the moment conditions and parameters of at all ages $a > a^*$.\\
+
+\noindent It is of specific interest for us to weight the variance of the moments in \eqref{eq:wloss} because, in order to satisfy Assumption~\ref{ass:contain} (Support Conditions), we pool different auxiliary data sources (CNLSY, PSID and NLSY79), as we explain in the main text. $W ^{-1} $ is not restricted to be diagonal so that these moments are allowed to correlate. Iterated, feasible procedures to obtain an estimate of $W ^{-1}$ jointly with the parameters of interest guarantee efficiency and are straightforward to implement \citep{Hansen_1982_Econometrica,Amemiya_1985_advanced}.
+
+\item \textbf{Serial correlation.} Assumption~\ref{ass:exog} (Exogeneity) does not rule out serial correlation of $\varepsilon^d_{n,j,a}$. To account for this, it is possible to bootstrap the two steps described before to obtain the standard errors of the estimates of $ \bm{\theta}_{j,a}$. To do that, we resample the auxiliary sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset in each bootstrapped sample. Information on the entire history of each individual is obtained in each re-sample. Thus, criterion in \eqref{eq:wloss} is minimized with observations that are all allow to serially correlate at the individual level. The bootstrap procedure in the experimental sample is analogous.
+
+\end{enumerate}
+
+
+
+
+
+
 
 
 
