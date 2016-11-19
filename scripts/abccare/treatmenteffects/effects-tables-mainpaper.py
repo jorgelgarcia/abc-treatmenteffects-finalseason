@@ -24,7 +24,7 @@ from paths import paths
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
 
-path_results = os.path.join(filedir, 'rslt-mainpaper/')
+path_results = os.path.join(filedir, 'rslt-appendix/')
 path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_mainpaper.csv')
 
 # provide option for two sided tests
