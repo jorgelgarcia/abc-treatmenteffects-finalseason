@@ -298,76 +298,113 @@ def format_sdpvalue(x):
 
 
 #======================================
-# Presentation tables: Males and Female Results
+# Main tables
 #======================================
 
-# we reduce the number of estimates shown in the slides
+uniform_categories = ['IQ Scores', 'HOME Scores', 'Parent Income', \
+    '''Mother's Education''', 'Father at Home', '''Mother's Employment''', \
+    'Adoption', 'Vitamin D Deficiency', 'Self-Reported Health']
+uniform_categories = []
+
+
 header = [['Variable', 'Age', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)']]
 
-for t in [1,2]: # t is for stepdown
-    # prepare table for pytabular
+#=========================================
+# Make Appendix Tables of results
+#=========================================
+
+
+for t in [1,2]:
+    # prepare table for pytabular (t=1 regular p-values, t=2 stepdown)
     if t == 1:
         data_app = data.loc[(slice(None), ['point', 'pval']),:]
     if t == 2:
         data_app = data.loc[(slice(None), ['point', 'sdpval']),:]
        
+    # set the index of the dataframes according to outcomes.csv
     data_app.index = outcomes.loc[data_app.reset_index(level=1).index, ['label', 'age', 'category']].set_index(['label', 'age', 'category']).index
     
-    for sex in ['male', 'female']:
+    # now make tables looping throuh sex and outcome categories
+    for sex in ['pooled', 'male', 'female']:
+        for i, cat in enumerate(outcomes.category.drop_duplicates().tolist()):
             
-        rslt_columns = [(sex, 'pall', 'itt_noctrl'), (sex, 'pall', 'itt_wctrl'),
-                        (sex, 'p0', 'itt_wctrl'), (sex, 'p0', 'epan_ipw'),
-                        (sex, 'p1', 'itt_wctrl'), (sex, 'p1', 'epan_ipw')]
+            # select the columns of results that you want
+            rslt_columns = [(sex, 'pall', 'itt_noctrl'), (sex, 'pall', 'itt_wctrl'),
+                            (sex, 'p0', 'itt_wctrl'), (sex, 'p0', 'epan_ipw'),
+                           (sex, 'p1', 'itt_wctrl'), (sex, 'p1', 'epan_ipw')]
+    
+            ix = outcomes.set_index(['label', 'age']).query('category=="{}"'.format(cat))
+            ix = ix.set_index(['category'], append=True).drop(ix.set_index(['category'], append=True).index.difference(data_app.index)).index # TO ACCOUNT FOR CASES WHERE EFFECT COULD NTO BE ESTIMATED
 
-        ix = outcomes.loc[main[sex],:].set_index(['label', 'age'])
-        ix = ix.set_index(['category'], append=True).drop(ix.set_index(['category'], append=True).index.difference(data_app.index)).index # TO ACCOUNT FOR CASES WHERE EFFECT COULD NOT BE ESTIMATED
-        
-        tab = data_app.loc[ix, rslt_columns].reset_index()
-        tab.drop(['category'], axis=1, level=0, inplace=True)
-        
-        # create blank spaces for ages
-        row = 1
-        while row < tab.shape[0]:
-            tab.iloc[row,1] = ''
-            row += 2
-
-        # prepare to create blank spaces for labels 
-        row = 0
-        vname = ''
-        while row < tab.shape[0]:
-            if tab.iloc[row,0] == vname:
-                tab.iloc[row,0] = ''
-            else:
-                vname = tab.iloc[row,0]
-            row += 1                     
-
-        # set headers
-        tab = header + tab.values.tolist()
+            tab = data_app.loc[ix, rslt_columns].reset_index()
+            tab.drop(['category'], axis=1, level=0, inplace=True)
             
-        table = pytab.Table(tab)
-        table.set_fontsize('scriptsize')
-
-        # Set lines and alignment
-        table[0].set_lines(1)
-        table[1:, 0].set_alignment('l')
-        table[1:, 1:].set_alignment('c')  
-        table[1:, 1].set_formatter(format_int)
+            # append the combining functions to the table
+            '''
+            if t == 1:
+                add_count_order = [('n50a100',cat,'point'), ('n50a100',cat,'pval'),
+                                   ('n10a10',cat,'point'), ('n10a10',cat,'pval')]
+                add_counts = allcounts.loc[add_count_order, tab.columns].reset_index(drop=True)
+                tab = tab.append(add_counts)
+            '''
+            # create blank spaces for ages
+            row = 1
+            while row < tab.shape[0]:
+                tab.iloc[row,1] = ''
+                row += 2
+    
+            # prepare to create blank spaces for labels 
+            row = 0
+            vname = ''
+            while row < tab.shape[0]:
+                if tab.iloc[row,0] == vname:
+                    tab.iloc[row,0] = ''
+                else:
+                    vname = tab.iloc[row,0]
+                row += 1                     
+    
+            # set headers
+            tab = header + tab.values.tolist()
                 
-        # format point estimates and p-values
-        row = 1
-        while row < table.shape[0]:
-            table[row,2:].set_formatter(format_float) # format point estimate
-            row += 1
-            table[row,2:].set_formatter(format_pvalue) # format p-value
-            row += 1
+            table = pytab.Table(tab)
+            table.set_fontsize('scriptsize')                      
+    
+            # Set lines and alignment
+            table[0].set_lines(1)
+            table[1:, 0].set_alignment('l')
+            table[1:, 1:].set_alignment('c')  
+            table[1:, 1].set_formatter(format_int)
 
-        table.tabular = 1
+            # only set line for combining functions if we are not doing stepdown            
+            '''
+            if t == 1:            
+                table[-5].set_lines(1)
+                table[-4,0:2].merge()
+                table[-2,0:2].merge()
+            '''
+            
+            # format point estimates and p-values
+            row = 1
+            while row < table.shape[0]:
+                table[row,2:].set_formatter(format_float) # format point estimate
+                row += 1
+                table[row,2:].set_formatter(format_pvalue) # format p-value
+                row += 1
         
-        # write out tables
-        if t == 1:
-            table.write(os.path.join(paths.maintables, 'rslt_{}_pres'.format(sex)))
-        if t == 2:
-            table.write(os.path.join(paths.maintables, 'rslt_{}_pres_sd'.format(sex)))
+            # format combining function results if we are not using stepdown
+            '''            
+            if t == 1:        
+                table[-4,2:].set_formatter(format_int)    
+                table[-2,2:].set_formatter(format_int)    
+            '''
+    
+            table.tabular = 1
+            
+            # write out tables
+            if t == 1:
+                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}'.format(sex, i)))
+            if t == 2:
+                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}_sd'.format(sex, i)))      
 
 
 print "successfully done!"
