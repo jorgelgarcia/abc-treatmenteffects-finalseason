@@ -22,19 +22,21 @@
 
 
 \doublespacing
-\section*{Data Combination Estimator in GMM Framework} \label{section:datacomb}
+\subsection{Data Combination Estimator in GMM Framework} \label{section:gmm}
 
-\noindent Recall that our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the auxiliary sample:\\
+\noindent Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the auxiliary sample:\\
 
 \begin{equation}\label{eq:outcome}
-Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a}, \quad j \in \mathcal{J}_a.
+Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a}, \quad k \in \{n,e\}, \quad j \in \mathcal{J}_a, \quad d \in \{0, 1\}. 
 \end{equation}
 
 \noindent $\phi^d_{k,j,a}\left( \cdot, \cdot \right)$ is an invariant structural production relationship mapping inputs $\bm{X}^d_{k,a}, \bm{B}_k$ into output $Y^d_{k,j,a}$ holding error term $\varepsilon^d_{k,j,a}$ fixed.\\
 
-\noindent We show in the main text that $\phi^d_{n,j,a} (\cdot, \cdot)$ is a consistent predictor of $Y_{e,j,a}^d$. This holds at any age, although we are specifically interested in $a > a^*$, given that we do not observe $Y_{e,j,a}^d$ after $a^*$.\\
+\noindent Note that Assumption ~\ref{ass:exog} (Exogeneity) implies no serial correlation in $ \varepsilon^d_{k,j,a}$.\\
 
-\noindent We want to take a step back and frame the estimation of $\phi^d_{n,j,a} (\cdot, \cdot)$ in the generalized method of moments (GMM) framework. This helps us illustrate how our prediction theory in the main text provides theoretical conditions for the combination of multiple datasets.\\
+\noindent We show in the main text that $\phi^d_{n,j,a} (\cdot, \cdot)$ is an unbiased predictor of $Y_{e,j,a}^d$. This holds for any age, although we are specifically interested in $a > a^*$, given that we do not observe $Y_{e,j,a}^d$ after $a^*$.\\
+
+\noindent We frame the estimation of $\phi^d_{n,j,a} (\cdot, \cdot)$ in the generalized method of moments (GMM) framework. This helps us illustrate how our prediction theory in the main text provides theoretical conditions for the combination of multiple datasets.\\
 
 \noindent First, note that Assumption ~\ref{ass:exog} (Exogeneity) implies the following holds in the \textit{experimental sample}: 
 
@@ -63,58 +65,65 @@ Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a},
 \noindent The key moment condition implied by Assumption~\ref{ass:exog} (Exogeneity) is 
 
 \begin{equation}
-\mathbb{E} \left[ \bm{m} \left( \bm{\theta}_{j,a} \right) \right] = 0, \label{eq:moment}
+\mathbb{E} \left[ \bm{m}_{j,a} \left( \bm{X}_{n,a}^d, \bm{B}_{n}; \bm{\theta}_{j,a} \right) \right] = 0, \label{eq:moment}
 \end{equation}
 
-\noindent where $\bm{m} \left( \bm{\theta}_{j,a} \right) := {\bm{X_{n,a}^d}}^{'} \left( Y_{n,j,a}^d -   \phi^d_{j,a} \left( \bm{X}_{n,a}^d, \bm{B}_{n} \right) \right)$. This condition enables us to discuss three issues: 
+\noindent where $\bm{m}_{j,a} \left( \bm{X}_{n,a}^d, \bm{B}_{n} ; \bm{\theta}_{j,a} \right) := {\bm{X_{n,a}^d}}^{'} \left( Y_{n,j,a}^d -   \phi^d_{j,a} \left( \bm{X}_{n,a}^d, \bm{B}_{n} \right) \right)$ and for $a \in [0, \ldots A]$.\\
+
+\noindent This allows is to discuss our data combination estimator as a generalized method of moments estimator.\\
+
+\noindent First, suppose that we are interested in estimating $\phi_{j,a} \left( \cdot \right)$ for a single outcome $j \in \mathcal{J}_{a}$, but across all ages of interest, e.g. labor income. For the time being, assume that we do not place specific weights on the different moments implied by \eqref{eq:moment} (we come back to this issue below) and that that there are two age periods after age $a^*$. In our auxiliary sample, the following moments identify $\bm{\theta}_{j,a^*+1}, \bm{\theta}_{j,a^*+2}$: 
+
+\begin{equation}
+\mathbb{E}
+\begin{bmatrix}
+\bm{m} \left( \bm{X}_{n,a^*+1}^d, \bm{B}_{n}; \bm{\theta}_{j,a^*1} \right) \\ \bm{m} \left( \bm{X}_{n,a^*2}^d, \bm{B}_{n}; \bm{\theta}_{j,a^*+2} \right) 
+\end{bmatrix}
+= \bm{0}
+\end{equation}\\
+
+\noindent An estimation approach leading to consistent estimates is to minimize
+
+\begin{equation}
+q : = 
+{\begin{bmatrix}
+\bm{m}_{j,a^*1} \left( \bm{X}_{n,a^*+1}^d, \bm{B}_{n}; \bm{\theta}_{j,a^*1} \right) \\ \bm{m}_{j,a^*2} \left( \bm{X}_{n,a^*2}^d, \bm{B}_{n}; \bm{\theta}_{j,a^*+2} \right) 
+\end{bmatrix}}^{'}
+\begin{bmatrix}
+\bm{m}_{j,a^*1} \left( \bm{X}_{n,a^*+1}^d, \bm{B}_{n}; \bm{\theta}_{j,a^*1} \right) \\ \bm{m}_{j,a^*2} \left( \bm{X}_{n,a^*2}^d, \bm{B}_{n}; \bm{\theta}_{j,a^*+2} \right) 
+\end{bmatrix}. 
+\end{equation}\\
+
+\noindent Once these estimates are available, we can use them in the experimental sample to construct the predictions of interest: $\hat{Y}_{e,j,a^*+1}$ and $\hat{Y}_{e,j,a^*+2}$ . In this same two-period setting, we would do the following: 
 
 \begin{enumerate}
-\item \textbf{Initializing the dynamic prediction.} 
-\noindent For the time being, assume that we do not place specific weights on the different moments implied by \eqref{eq:moment}. We come back to this issue below. Then, a valid estimation approach is to minimize the following quadratic loss function: 
+\item Evaluate $\hat{\phi}_{j,a^*+1} \left( \cdot \right)$ at  $\bm{X}_{e,a^*+1}^d, \bm{B}_{e}$ and obtain the the prediction $\hat{Y}_{e,j,a^*+1}$. In our empirical application, $\bm{X}_{e,a^*+1}^d$ contains a one-period lagged value of $Y_{e,j,a^*+1}$. It is possible to construct the prediction at $a^*+1$ because we observe $Y_{e,j,a^*}$.
 
-\begin{equation}
-q :=  {\bm{m} \left( \bm{\theta}_{j,a} \right)}^{'}{\bm{m} \left( \bm{\theta}_{j,a} \right)}, \label{eq:loss}
-\end{equation}
-
-\noindent which provides us with a standard non-linear least square estimator of $\bm{\theta}_{j,a}$.\\
-
-\noindent $\bm{X}_{n,a}^d$ contains a one-period lagged value of $Y_{n,j,a}^d$. To construct our predictions, we do not require an estimate of $\phi_{j,a}$ at age $a^*$. We observe $Y_{e,j,a}$ at $a^*$. We need an estimate of $\phi_{j,a}$ for $a > a^*$.\\ 
-
-\noindent To illustrate how we use the estimates to form the predictions dynamically, suppose there are two periods after $a^*$. We can stack the moment conditions for each of these ages and write: 
-
-\begin{equation}
-\mathbb{E} \left[  \left[ \bm{m} \left( \bm{\theta}_{j,a^* + 1}  \right)   , \bm{m} \left( \bm{\theta}_{j,a^* + 2} \right)  \right]'  \right] = \bm{0}, 
-\end{equation}
-
-\noindent and write a corresponding loss function. Once the estimates of $\bm{\theta}_{j,a^* + 1}, \bm{\theta}_{j,a^* + 2}$ are available, we form the predictions as follows: 
-
-\begin{enumerate}
-\item Form the prediction of $Y_{e,j,a}$ at $a^* + 1$. This is feasible because we can evaluate $ \hat{\phi}_{j,a}\left( \bm{X}_{n,a^*+1}^d, \bm{B}_{n} \right)$ in the experimental sample given that we observe $Y_{e,j,a^*}$.
-
-\item Form the prediction of $Y_{e,j,a}$ at $a^* + 2$. This is feasible because we can evaluate $ \hat{\phi}_{j,a}\left( \bm{X}_{n,a^*+2}^d, \bm{B}_{n} \right)$ in the experimental sample given that we have a prediction of $Y_{e,j,a^*+1}$ from the previous step (this is the value at which we evaluate). The rest of the variables in $\bm{X}_{n,a}^d$ are post-treatment variables that we observe in the experimental sample at any age $a \leq a^*$.
+\item $\hat{\phi}_{j,a^*+2} \left( \cdot \right)$ at  $\bm{X}_{e,a^*+2}^d, \bm{B}_{e}$ and obtain the the prediction $\hat{Y}_{e,j,a^*+2}$. In our empirical application, $\bm{X}_{e,a^*+2}^d$ contains a one-period lagged value of $Y_{e,j,a^*+2}$. It is possible to construct the prediction at $a^*+2$ because we use $\hat{Y}_{e,j,a^*+1}$ (as an estimate of $Y_{e,j,a^*+1}$) to evaluate $\hat{\phi}_{j,a^*+2}$ at  $\bm{X}_{e,a^*+2}^d, \bm{B}_{e}$.
 \end{enumerate}
 
-\item \textbf{Pooling information from different datasets.} Minimizing the loss function in \eqref{eq:loss} provides a consistent estimate of $\bm{\theta}_{j,a}$, but we can do better. We can minimize a weighted loss of the form 
+\noindent Extending this to multiple age periods is straightforward. Observing the outcome at age $a^*$ enable us to construct the prediction at $a^*+1$ and go forward up to age $A$. The estimator discussed so far, however, misses some important aspects: (i) we can set-up an estimator that jointly consider the moments of all outcomes $j \in \mathcal{J}_{a}$ for $a \in [a^*+1, \ldots, A]$; (ii) we can minimize a weighted loss, that weighs the moment in \eqref{eq:moment} for each outcome and at each age. It is of specific interest for us to weight the variance of the moments in \eqref{eq:moment} because, in order to satisfy Assumption~\ref{ass:contain} (Support Conditions), we pool different auxiliary data sources (CNLSY, PSID and NLSY79), as we explain in the main text.\\ 
+
+\noindent The joint moment condition for identifying the parameters associated to labor income, $\bm{\theta}_{j} : =  \begin{bmatrix} \bm{\theta}_{j,a^*+1} \\ \vdots \\ \bm{\theta}_{j,A} \end{bmatrix}$, and transfer income, $\bm{\theta}_{j'}  : =  \begin{bmatrix} \ \bm{\theta}_{j',a^*+1} \\ \vdots \\ \bm{\theta}_{j',A}\end{bmatrix}$, is \\
+
+\begin{eqnarray}
+\bm{m} \left( \bm{X}_{n,a^*+1}^d, \ldots,  \bm{X}_{n,A}^d, \bm{B}_{n} \right) &:=& \mathbb{E}
+\begin{bmatrix}
+\bm{m}_{j,a^*1} \left( \bm{X}_{n,a^*+1}^d, \bm{B}_{n}; \bm{\theta}_{j,a^*1} \right) \\ \vdots \\  \bm{m}_{j,A} \left( \bm{X}_{n,A}^d, \bm{B}_{n}; \bm{\theta}_{j,A} \right) \\ \bm{m}_{j,a^*1} \left( \bm{X}_{n,a^*+1}^d, \bm{B}_{n}; \bm{\theta}_{j',a^*1} \right) \\ \vdots \\  \bm{m}_{j,A} \left( \bm{X}_{n,A}^d, \bm{B}_{n}; \bm{\theta}_{j',A} \right)
+\end{bmatrix}  \\ \nonumber
+&=& \bm{0}.
+\end{eqnarray}
+
+\noindent Let $\bm{W}$ be a positive definite matrix. A consistent estimation approach for $\bm{\theta}_{j}$, $\bm{\theta}_{j'}$ is to minimize 
 
 \begin{equation}
-q :=  {\bm{m} \left( \bm{\theta}_{j,a} \right)}^{'} W_{j,a}^{-1} {\bm{m} \left( \bm{\theta}_{j,a} \right)}, \label{eq:wloss},
+Q :=  {\bm{m} \left( \bm{X}_{n,a^*+1}^d, \ldots,  \bm{X}_{n,A}^d, \bm{B}_{n} \right)}^{'} \bm{W} ^{-1} {\bm{m} \left( \bm{X}_{n,a^*+1}^d, \ldots,  \bm{X}_{n,A}^d, \bm{B}_{n} \right)^{'}}. \label{eq:wloss}
 \end{equation}
 
-\noindent where $W_{j,a}^{-1}$ is the inverse of the variance of the set of moments in $\bm{m} \left( \bm{\theta}_{j,a} \right)$. More generally, we can stack the moments as we do before and think of the problem as 
+\noindent In practice, we use the CNLSY to construct the moments from ages 22 to 29 and then use the PSID and the NLSY79 as a single, joint sample to construct the moments from ages 30 up to 67 (assumed retirement) for labor income and 79 for transfer income (no data on this is available afterward). This loss function weighs the moments coming from different datasets. $\bm{W}$ is not restricted to be diagonal so that these moments are allowed to correlate. Iterated, feasible procedures to obtain an estimate of $\bm{W}$ jointly with the parameters of interest guarantee efficiency and are straightforward to implement \citep{Hansen_1982_Econometrica,Amemiya_1985_advanced}.\footnote{\citet{Altonji_Segal_1996_JoBaES} show that GMM presents downwards bias in absolute value in small-sample size setting, which could be a concern in our setting.} 
 
-\begin{equation}
-q :=  {\bm{m} \left( \bm{\theta}_{j} \right)}^{'} W ^{-1} {\bm{m} \left( \bm{\theta}_{j}\right)}, \label{eq:wloss}
-\end{equation}
 
-\noindent where $\bm{m} \left( \bm{\theta}_{j} \right)$ and  $\bm{\theta}_{j}$  stack the moment conditions and parameters of at all ages $a > a^*$.\\
 
-\noindent It is of specific interest for us to weight the variance of the moments in \eqref{eq:wloss} because, in order to satisfy Assumption~\ref{ass:contain} (Support Conditions), we pool different auxiliary data sources (CNLSY, PSID and NLSY79), as we explain in the main text. $W ^{-1} $ is not restricted to be diagonal so that these moments are allowed to correlate. Iterated, feasible procedures to obtain an estimate of $W ^{-1}$ jointly with the parameters of interest guarantee efficiency and are straightforward to implement \citep{Hansen_1982_Econometrica,Amemiya_1985_advanced}.
-
-\item \textbf{Serial correlation.} Assumption~\ref{ass:exog} (Exogeneity) does not rule out serial correlation of $\varepsilon^d_{n,j,a}$. To account for this, it is possible to bootstrap the two steps described before to obtain the standard errors of the estimates of $ \bm{\theta}_{j,a}$. To do that, we resample the auxiliary sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset in each bootstrapped sample. Information on the entire history of each individual is obtained in each re-sample. Thus, criterion in \eqref{eq:wloss} is minimized with observations that are all allowed to serially correlate at the individual level.\\
-
-\noindent The bootstrap procedure in the experimental sample is analogous.
-
-\end{enumerate}
 
 
 
@@ -125,7 +134,6 @@ q :=  {\bm{m} \left( \bm{\theta}_{j} \right)}^{'} W ^{-1} {\bm{m} \left( \bm{\th
 
 
 %References
-\pagebreak
 \singlespace
 \bibliographystyle{chicago}
 \bibliography{heckman}
