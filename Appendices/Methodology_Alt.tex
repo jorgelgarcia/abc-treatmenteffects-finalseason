@@ -1340,7 +1340,7 @@ $\bm{\theta}_{j'} : =  \begin{bmatrix} \bm{\theta}_{j',a^*+1} \\ \vdots \\ \bm{\
 \begin{eqnarray}
 \mathbb{E} \left[ \bm{m} \left( \bm{X}_{n,a^*+1}^d, \ldots,  \bm{X}_{n,A}^d, \bm{B}_{n}; \bm{\theta}_{j'}, \bm{\theta}_{j''} \right) \right] &:=& \mathbb{E}
 \begin{bmatrix}
-\bm{m}_{j',a^*+1} \left( \bm{X}_{n,a^*+1}^d, \bm{B}_{n}; \bm{\theta}_{j',a^*+1} \right) \\ \vdots \\  \bm{m}_{j',A} \left( \bm{X}_{n,A}^d, \bm{B}_{n}; \bm{\theta}_{j',A} \right) \\ \bm{m}_{j'',a^*+1} \left( \bm{X}_{n,a^*+1}^d, \bm{B}_{n}; \bm{\theta}_{j'',a^*+1} \right) \\ \vdots \\  \bm{m}_{j'',A} \left( \bm{X}_{n,A}^d, \bm{B}_{n}; \bm{\theta}_{j'',A} \right) \\ \label{eq:LOSS}
+\bm{m}_{j',a^*+1} \left( \bm{X}_{n,a^*+1}^d, \bm{B}_{n}; \bm{\theta}_{j',a^*+1} \right) \\ \vdots \\  \bm{m}_{j',A} \left( \bm{X}_{n,A}^d, \bm{B}_{n}; \bm{\theta}_{j',A} \right) \\ \bm{m}_{j'',a^*+1} \left( \bm{X}_{n,a^*+1}^d, \bm{B}_{n}; \bm{\theta}_{j'',a^*+1} \right) \\ \vdots \\  \bm{m}_{j'',A} \left( \bm{X}_{n,A}^d, \bm{B}_{n}; \bm{\theta}_{j'',A} \right) \\ \label{eq:loss}
 \end{bmatrix}  \\ \nonumber
 &=& \bm{0}.
 \end{eqnarray}
@@ -1353,7 +1353,7 @@ Q :=  {\bm{\bar{m}} \left( \bm{X}_{n,a^*+1}^d, \ldots,  \bm{X}_{n,A}^d, \bm{B}_{
 
 \noindent In practice, we use the CNLSY to construct the moments from ages 22 to 29 and then use the PSID and the NLSY79 as a single, joint sample to construct the moments from ages 31 up to 67 (assumed retirement) for labor income and 79 for transfer income (no data on this is available afterwards). That is, we use the the CNLSY to compute the empirical counterpart of $\bm{m}_{j,a} \left(  \cdot \right)$ for $a = 22, \ldots, 29$. Then, we use the NLSY79 and the PSID jointly to compute  the empirical counterpart of $\bm{m}_{j,a} \left(  \cdot \right)$ for $a = 31, \ldots, 67 (79)$. We initialize the predictions in the experimental sample using the \textit{observed} values at ages 21 and 30, as explained above.\\
 
-\noindent The loss function in \eqref{eq:LOSS} weighs the moments coming from different datasets. $\bm{W}$ is not restricted to be diagonal so that these moments are allowed to correlate. Iterated, feasible procedures to obtain an estimate of $\bm{W}$ jointly with the parameters of interest guarantee efficiency and are straightforward to implement \citep{Hansen_1982_Econometrica,Amemiya_1985_advanced}.\footnote{\citet{Altonji_Segal_1996_JoBaES} show that GMM presents downwards bias in absolute value in small-sample size setting, which could be a concern in our setting.} 
+\noindent The loss function in \eqref{eq:wloss} weighs the moments coming from different datasets. $\bm{W}$ is not restricted to be diagonal so that these moments are allowed to correlate. Iterated, feasible procedures to obtain an estimate of $\bm{W}$ jointly with the parameters of interest guarantee efficiency and are straightforward to implement \citep{Hansen_1982_Econometrica,Amemiya_1985_advanced}.\footnote{\citet{Altonji_Segal_1996_JoBaES} show that GMM presents downwards bias in absolute value in small-sample size setting, which could be a concern in our setting.} 
 
 \subsection{Inference} \label{appendix:bootstrap}
 
