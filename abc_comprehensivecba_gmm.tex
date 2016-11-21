@@ -121,9 +121,9 @@ q : =
 
 \noindent This is the case for all of the outcomes, except for health.\\
 
-\item We do not observe $Y_{n,j,a}$ at $a = a^*$. This happens for some health outcomes. At $a^*$, we do not observe health outcomes as cancer or heart disease. We observe biomarkers.  We use these biomarkers to predict the health outcomes at $a^*$. Once a prediction is available, we can a step analogous to step $2.$ below to compute the empirical counterpart of $\bm{\bar{m}}_{j,a} \left( \bm{X}_{n,a}^d, \bm{B}_{n} \right)$. We form a prediction of the health outcome at $a^*$ and then we go forward as in (a), replacing the observed outcome at $a = a^*$ with the prediction.\\
+\item We do not observe $Y_{n,j,a}$ at $a = a^*$. This happens for some health outcomes. At $a^*$, we do not observe health outcomes as cancer or heart disease. We observe biomarkers.  We use these biomarkers to predict the health outcomes at $a^*$. Once a prediction is available, we can take a step analogous to step $2.$ below to compute the empirical counterpart of $\bm{\bar{m}}_{j,a} \left( \bm{X}_{n,a}^d, \bm{B}_{n} \right)$. We form a prediction of the health outcome at $a^*$ and then we go forward as in (a), replacing the observed outcome at $a = a^*$ with the prediction.\\
 
-\noindent The prediction of the health outcomes at age $a^*$, is based on probabilist models that are identified through standard moment conditions (see Appendix~\ref{appendix:health}). For further reference, we define this additional set of moments as: 
+\noindent The prediction of the health outcomes at age $a^*$, is based on probabilistic models that are identified through standard moment conditions (see Appendix~\ref{appendix:health}). For further reference, we define this additional set of moments as: 
 
 \begin{equation}
 \mathbb{E} \left[ \mathbf{h} \left(  \bm{X}_{n,a^*}^d, \bm{B}_{n}; \bm{\theta}_{h}  \right) \right] = \mathbf{0}.
@@ -131,7 +131,7 @@ q : =
 \end{enumerate}
 
 \item \textbf{How do we use the estimates of $\bm{\theta}_{j,a^*+1}, \bm{\theta}_{j,a^*+2}$ to construct the predictions in the experimental sample?}\\ 
-\noindent Based on the estimates of $\bm{\theta}_{j,a^*+1}, \bm{\theta}_{j,a^*+2}$, we can recover estimates of the functions that we use to predict: $\hat{\phi}_{j,a^*+1}, \hat{\phi}_{j,a^*2}$. We use these functions in the experimental sample to construct the predictions of interest: $\hat{Y}_{e,j,a^*+1}$ and $\hat{Y}_{e,j,a^*+2}$. In a two-period setting, we would do the following: 
+\noindent Based on the estimates of $\bm{\theta}_{j,a^*+1}, \bm{\theta}_{j,a^*+2}$, we can recover estimates of the functions that we use to predict: $\hat{\phi}_{j,a^*+1}, \hat{\phi}_{j,a^*+2}$. We use these functions in the experimental sample to construct the predictions of interest: $\hat{Y}_{e,j,a^*+1}$ and $\hat{Y}_{e,j,a^*+2}$. In a two-period setting, we would do the following: 
 
 \begin{enumerate}
 \item Evaluate $\hat{\phi}_{j,a^*+1} \left( \cdot \right)$ at  $\bm{X}_{e,a^*+1}^d, \bm{B}_{e}$ and obtain the the prediction $\hat{Y}_{e,j,a^*+1}$. In our empirical analysis, $\bm{X}_{e,a^*+1}^d$ contains a one-period lagged value of $Y_{e,j,a^*+1}$. It is possible to construct the prediction at $a^*+1$ because we observe $Y_{e,j,a^*}$.
@@ -148,7 +148,7 @@ q : =
 \item We can minimize a weighted loss function, that weighs the moment in \eqref{eq:moment} for each outcome and at each age. It is of specific interest for us to weight the variance of the moments in \eqref{eq:moment} because, in order to satisfy Assumption~\ref{ass:contain} (Support Conditions), we pool different auxiliary data sources, as we explain in the main text.
 \end{enumerate}
 
-\noindent Taking these aspects into consideration, the joint moment condition for identifying the parameters associated all of our outcomes, $\bm{\theta}$ is 
+\noindent Taking these aspects into consideration, the joint moment condition for identifying the parameters associated with all of our outcomes, $\bm{\theta}$ is 
 
 
 
