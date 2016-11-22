@@ -105,7 +105,7 @@ cd $output
 // output regressions
 #delimit
 outreg2 [lag0cnlsy lag1cnlsy lag2cnlsy] using auto_cnlsy, replace
-		alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2;
+		alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 tex(frag);
 #delimit cr
 
 // output rho and information
