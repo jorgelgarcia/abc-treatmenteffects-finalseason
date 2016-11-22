@@ -69,6 +69,7 @@ newey2 dinc_labor ldinc_labor, lag(0) force nocons
 est sto model3
 matrix b2 = [e(b)]
 
+cd $output
 #delimit
 outreg2 [model1 model2 model3] using auto_nlsy, replace
 		alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 tex(frag);

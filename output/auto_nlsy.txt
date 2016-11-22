@@ -1,16 +1,18 @@
 	(1)	(2)	(3)
-	lag0nlsy	lag1nlsy	lag2nlsy
-VARIABLES	inc_labor	inc_labor	inc_labor
+	model1	model2	model3
+VARIABLES	inc_labor	inc_labor	dinc_labor
 			
-linc_labor	1.074***	1.074***	1.074***
-	(0.004)	(0.005)	(0.006)
-male	-370.858***	-370.858***	-370.858***
-	(76.066)	(92.094)	(99.714)
-years_30y	-181.320***	-181.320***	-181.320***
-	(26.596)	(33.433)	(37.423)
-Constant	1,429.612***	1,429.612***	1,429.612***
-	(311.144)	(385.565)	(425.092)
+linc_labor	1.056***	1.058***	
+	(0.004)	(0.004)	
+male		-326.840***	
+		(75.057)	
+years_30y		-114.964***	
+		(27.062)	
+ldinc_labor			0.503***
+			(0.030)
+Constant	-733.328***	874.394***	
+	(89.734)	(306.410)	
 			
-Observations	70,224	70,224	70,224
+Observations	70,015	70,015	67,189
 Robust standard errors in parentheses			
 *** p<0.01, ** p<0.05, * p<0.10			
