@@ -51,10 +51,12 @@ foreach age of numlist 21(1)30 {
 	// replace inc_labor = . if inc_labor == 0 & age == `age'
 }
 
-gen   linc_labor = l.inc_labor
+gen   dinc_labor = inc_labor - l.inc_labor
+gen  ldinc_labor = l.dinc_labor
+drop inc_labor
 
 // autocorrelation 
-xtgls inc_labor linc_labor male m_ed0y piatmath years_30y, corr(ar1) force igls rhotype(tscorr)  
+xtgls dinc_labor ldinc_labor, corr(ar1) force igls rhotype(tscorr) nocons
 estimates store ar1cnlsy
 
 // compute correlation
@@ -75,7 +77,7 @@ duplicates drop idage, force
 destring id , replace
 destring age, replace
 
-xtgls inc_labor linc_labor male m_ed0y piatmath years_30y, corr(ar1) force igls rhotype(tscorr)
+xtgls dinc_labor ldinc_labor, corr(ar1) force igls rhotype(tscorr) nocons
 gen      rhoest = e(rho)
 destring rhoest, replace 
 summ     rhoest
@@ -97,16 +99,16 @@ restore
 
 // newey set-up
 foreach num of numlist 0 1 2 {
-	newey2 inc_labor linc_labor male m_ed0y piatmath years_30y, lag(`num') force
+	newey2 dinc_labor ldinc_labor, lag(`num') force nocons
 	estimates store lag`num'cnlsy
 }
 
 cd $output
 // output regressions
 #delimit
-outreg2 [lag0cnlsy lag1cnlsy lag2cnlsy] using auto_cnlsy, replace
+outreg2 [lag0cnlsy lag1cnlsy lag2cnlsy] using auto_dcnlsy, replace
 		alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2;
 #delimit cr
 
 // output rho and information
-outtable using auto_rhocnlsy, mat(cnlsy) replace nobox center f(%9.3f)
+outtable using auto_drhocnlsy, mat(cnlsy) replace nobox center f(%9.3f)
