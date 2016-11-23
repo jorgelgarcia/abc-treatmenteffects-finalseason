@@ -1,0 +1,113 @@
+%Input preamble
+\input{preamble}
+\input{output/mainstatistics}
+
+\usepackage[stable]{footmisc}
+
+\newcommand*\leftright[2]{%
+  \leavevmode
+  \rlap{#1}%
+  \hspace{0.5\linewidth}%
+  #2}
+
+\newcommand{\orth}{\ensuremath{\perp\!\!\!\perp}}%
+\newcommand{\indep}{\orth}%
+\newcommand{\notorth}{\ensuremath{\perp\!\!\!\!\!\!\diagup\!\!\!\!\!\!\perp}}%
+\newcommand{\notindep}{\notorth}
+
+\externaldocument{abc_comprehensivecba}
+\externaldocument{abc_comprehensivecba_appendix}
+
+\begin{document}
+
+
+\doublespacing
+
+\subsection{Time Series Models Estimates} \label{appendix:tseries}
+
+\noindent To explore the autocorrelation structure of the outcomes that we study, consider a simplified version of the model that we base our predictions on:
+
+\begin{equation}
+Y_{i,a} = \gamma_{0} + \gamma_{1} Y_{i,a-1} + \mu_{i} + u_{i,a}, \label{eq:outcome}
+\end{equation}
+
+\noindent where  $\mu_{i}$ is a fixed effect. $\mu_{i}$ contains any variable that is fixed over time at the individual level. This simplifies the exposition of what we do in the main paper, estimating \eqref{eq:outcome} at each age.\\
+
+
+\noindent We explore and test the implications of the following structure: 
+
+\begin{eqnarray}
+u_{i,a}        &=& u_{i,a-1} + \varepsilon_{i,a} \label{eq:error}
+\end{eqnarray}
+
+\noindent where $\varepsilon_{a,i}$ is i.i.d. This is consistent with permanent-transitory shocks in labor income (e.g. Meguir and Pistafferri, 2004).\\
+
+\noindent OLS estimates for the coefficients in \eqref{eq:outcome} are in columns (1) and (2) of Table~\ref{eq:outcome}. It is likely the case these estimates are not consistent because $\cov \left( Y_{i,a-1}, u_{i,a} \right) = \cov \left( Y_{i,a-1}, u_{i,a-1} \right) \neq 0$.\\
+
+\noindent In this setting, it is possible to obtain a consistent estimate of $\gamma_{1}$ by estimating the ``differenced'' version of \eqref{eq:outcome}: 
+
+\begin{equation}
+\Delta Y_{i,a} = \gamma_{1} \Delta Y_{i,a-1} + \Delta u_{i,a}. \label{eq:doutcome}
+\end{equation}
+
+\noindent OLS estimates are consistent by construction because $\cov \left( \Delta Y_{i,a-1}, \Delta u_{i,a} \right) = 0$. We display them in column (3) of Table~\ref{eq:outcome}. 
+
+\noindent An alternative is to specify $u_{i,a}$ as follows: 
+
+\begin{eqnarray}
+u_{i,a} &=& \phi + \omega_{i,a} \\ \nonumber
+\omega_{i,a} &=& \rho \omega_{i,a-1} + \varepsilon_{i,a} 
+\end{eqnarray}
+
+\noindent \textbf{[JLG: Is $\phi$ a constant? Do you also want estimates for this model?]}\\
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Labor Income Models, Auxiliary Sample Estimates}
+\label{table:outcome}
+\centering 
+\input{output/auto_nlsy.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: Model estimated using NLSY and PSID as a single sample. Newey-West standard errors in parentheses.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\noindent \textbf{Questions:}
+
+\begin{enumerate}
+\item \textbf{JJH}: Suppose that we fit \eqref{eq:doutcome}. We need to \underline{join} the data sets. At $a^*$ we fit \eqref{eq:doutcome} in sample $e$. Take $i(e)$ observation $i$ in $e$. $i(e)$ does not appear in $n$. How do we form \eqref{eq:doutcome} in $n$?\\ \\
+\noindent \textbf{JLG}: We do no fit \eqref{eq:doutcome} in the experimental sample ($e$). We only observe labor and transfer (and for that matter the rest of the variables) at ages 21 and 30 ($a^*$). Why would we fit the process in the experimental sample? \\ \\
+\noindent \textbf{JLG}: if you mean to say that we fit the models in the auxiliary sample $n$ and then you want to know how do we predict. I think I have stated this. But we use the coefficients estimated in from the auxiliary sample and use them to predict given the values in the experimental sample. So far, we estimate the model in \eqref{eq:outcome} in the auxiliary sample and use them to construct the predictions. Constructing these predictions if we want to do it based on the estimates of \eqref{eq:doutcome} is possible too. We can first residualize $Y_{i,a}$ of the fixed effects and then predict the residual.\\ 
+
+\item \textbf{JJH}: How do we combine the datasets?\\ \\ 
+\textbf{JLG:} So far the combination consists of using the moments in the experimental and auxiliary samples using the procedure that I describe before. It is possible to construct the empirical moments in the experimental sample by iterating forward the prediction procedure. The empirical moments in the auxiliary sample can also be constructed in an analogous way when we need to predict at $a^*$. This happens only in health. 
+
+\begin{enumerate}
+\item \textbf{JJH}: We observe $Y_{i,a^*}, Y_{i,a^*-1}, X_{i,a^*}$. Can we forecast $Y_{i,a*+1}$ and use this forward? \\ \\
+\noindent \textbf{JLG}: I assume that you mean when we estimate model \eqref{eq:doutcome}. When we estimate \eqref{eq:outcome} that is precisely what we do. When we estimate \eqref{eq:doutcome} the trouble is that we do not observe $Y_{i,a*-1}$ in the experimental sample, only $Y_{i,a*}$. But we can go forward with the estimate of $\gamma_{1}$ from \eqref{eq:outcome} if we residualize the fixed effects before estimating. Put differently, if we formulate \eqref{eq:outcome} in terms of residualized $Y_{i,a}$.\\
+
+\item \textbf{JJH}: A second way would be to use matching on the $X$ to create samples corresponding to $d = 0$ and $d = 1$. Just average over the samples to create a forecast for each value of $X$.\\ \\
+\noindent \textbf{JLG}: This possibility is discussed in the paper and is presented for labor income under the label ``non-parametric'' estimates. They align with the estimates that we use in the main text.\\ \\
+
+\item \textbf{JJH}:  We can say for some $a \in [a^* - \Delta, a^*]$ that we observe \eqref{eq:outcome} in both samples $e$ and $n$ and identify model in overlap.\\ \\ 
+\noindent \textbf{JLG}: This is an interesting possibility, that partly we have not explored because we only observe at ages 21 and 30 in the experimental sample. And partly because of the reason you list next.\\ \\
+
+\noindent \textbf{JJH}: But how do we form non-expermental treatment and control counterparts? (really hard because if $X_{i,a}$ is invariant it's differenced out). \textbf{[JLG: And it's indeed invariant after $a^*$.]} \\ \\
+
+\noindent \textbf{JJH}: So we can take a fitted model in $e$ ($a \leq a^*$) and then forecast with it?\\ \\ 
+\noindent \textbf{JLG}: Do you want to do this with two observations? I thought avoiding this was the whole purpose of using auxiliary datasets.\\  \\
+\noindent \textbf{JJH}: How do we use the realizations after $a^*$ in $n$. \\
+
+\end{enumerate}
+\end{enumerate}
+
+%References
+\singlespace
+\bibliographystyle{chicago}
+\bibliography{heckman}
+
+\end{document}
+
+
