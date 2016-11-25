@@ -121,39 +121,24 @@ for agg in [0,1]:
     
     # obtain p-values
     less = (null <= point_ext); less[point_ext.isnull()] = np.nan
-    print "printing less"
-    print less
     less = less.mean(axis=0, level=['ddraw', 'variable'])
-    print "printing less ver2"
-    print less 
 	
     pval_tmp = (null >= point_ext); pval_tmp[point_ext.isnull()] = np.nan
-    print "printing pval_tmp"
-    print pval_tmp
     pval_tmp = pval_tmp.mean(axis=0, level=['ddraw', 'variable'])
-    print "printing pval_tmp ver2"
-    print pval_tmp
 	
     if twosided == 0:
         for coef in tmp_rslt.columns:	
             pval_tmp.loc[(slice(None), invoutcomes['{}'.format(coef)]), coef] = less.loc[(slice(None), invoutcomes['{}'.format(coef)]), coef]
     
-	print "printing pval_tmp minus"
-    print pval_tmp
     pval_tmp.sortlevel(axis=1, inplace = True)
     pval_tmp.sort_index(inplace=True)
-    print "printing pval_tmp final"
-    print pval_tmp
-    dddddd
-	
+
     # obtain point estimates, standard errors, and the regular p-values for the ATE tables
     if agg == 0:   
         point = rslt_y.sort_index().loc[(0,0,slice(None)), :]
         point.sortlevel(axis=1, inplace=True)
         point.reset_index(level=[0,1], drop=True, inplace=True)
         pval = pval_tmp.loc[(0, slice(None))]
-        print "printing real p value"
-        print pval 
         se = tmp_rslt.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True).std(level='variable') 
     
     # obtain the p-values to determine significance for the combining functino (hence, "_cf")    

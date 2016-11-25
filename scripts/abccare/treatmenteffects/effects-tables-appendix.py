@@ -139,8 +139,6 @@ for agg in [0,1]:
         point.sortlevel(axis=1, inplace=True)
         point.reset_index(level=[0,1], drop=True, inplace=True)
         pval = pval_tmp.loc[(0, slice(None))]
-        print "printing real p value"
-        print pval 
         se = tmp_rslt.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True).std(level='variable') 
     
     # obtain the p-values to determine significance for the combining functino (hence, "_cf")    
