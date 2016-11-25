@@ -44,7 +44,7 @@ include("$current/data.jl")
 # Implement options
 # ================================================================ #
 # Define the gender loop
-global genderloop = ["male","female","pooled"]
+global genderloop = ["pooled","male","female"]
 
 MatchInitial = Dict()
 bsid_orig = Dict()
