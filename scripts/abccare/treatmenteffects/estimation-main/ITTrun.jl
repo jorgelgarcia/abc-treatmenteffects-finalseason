@@ -43,7 +43,7 @@ global quietly = 1
 # Implement options
 # ================================================================ #
 # Define the gender loop
-global genderloop = ["male", "female", "pooled"]
+global genderloop = ["pooled", "male", "female"]
 
 # ================================================================ #
 # Bring in data
