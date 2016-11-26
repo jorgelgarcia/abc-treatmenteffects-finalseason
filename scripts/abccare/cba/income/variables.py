@@ -16,7 +16,7 @@ cols = TreeDict()
 
 cols.interp.black = ['black']
 cols.interp.background = ['male', 'm_ed0y']
-cols.interp.outcomes = ['si21y_inc_labor', 'si30y_inc_labor', 'si34y_bmi', 'years_30y', 'piatmath']
+cols.interp.outcomes = ['si21y_inc_labor', 'years_30y', 'piatmath']
 cols.interp.weight = ['wtabc_allids']
 cols.interp.predictors =  cols.interp.outcomes + cols.interp.background #
 cols.interp.keep = cols.interp.predictors + cols.interp.black

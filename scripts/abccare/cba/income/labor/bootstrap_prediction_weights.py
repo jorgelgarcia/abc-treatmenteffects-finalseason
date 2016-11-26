@@ -31,7 +31,7 @@ from paths import paths
 #----------------------------------------------------------------
 
 seed = 1234
-aux_draw = 99 # need to use more than 1
+aux_draw = 2 # need to use more than 1
 pset_type = 6
 
 #----------------------------------------------------------------
@@ -113,7 +113,7 @@ def boot_predict_aux(weight, controls, interp, extrap, adraw):
 
 #----------------------------------------------------------------
 weights = ['treat','control']
-control_sets = ['3']
+control_sets = ['1']
 sexes = ['male', 'female', 'pooled']
 
 params_interp = {'full':{'1':{},'2':{},'3':{}}, 'treat':{'1':{},'2':{},'3':{}}, 'control':{'1':{},'2':{},'3':{}}}
