@@ -50,8 +50,7 @@ cwide.columns = ['{}{}'.format('inc_labor', a) for a in cwide.columns]
 cnlsy[cwide.columns] = cwide
 
 # Dropping
-cnlsy = cnlsy.loc[:, cols.interp.keep + inc.columns.tolist() + wtabc.columns.tolist()].dropna(
-    subset=cols.interp.keep, axis=0)
+cnlsy = cnlsy.loc[:, cols.interp.keep + inc.columns.tolist() + wtabc.columns.tolist()].dropna(subset=cols.interp.keep, axis=0)
 
 cnlsy = cnlsy.reset_index()
 cnlsy['id'] = cnlsy['id'].astype(int)
@@ -81,9 +80,8 @@ pwide.columns = ['{}{}'.format('inc_labor', a) for a in pwide.columns]
 psid[pwide.columns] = pwide
 
 # Dropping
-psid = psid.loc[:, cols.extrap.keep + inc.columns.tolist() + wtabc.columns.tolist()].dropna(
-	subset=cols.extrap.keep, axis=0)
-
+psid = psid.loc[:, cols.extrap.keep + inc.columns.tolist() + wtabc.columns.tolist()]#.dropna(subset=cols.extrap.keep, axis=0)
+print psid['inc_labor48']
 psid = psid.reset_index()
 psid['id'] = psid['id'].astype(int)
 psid = psid.set_index('id', drop=True)
@@ -112,8 +110,7 @@ nwide.columns = ['{}{}'.format('inc_labor', a) for a in nwide.columns]
 nlsy[nwide.columns] = nwide
 
 # Dropping
-nlsy = nlsy.loc[:, cols.extrap.keep + inc.columns.tolist() + wtabc.columns.tolist()].dropna(
-	subset=cols.extrap.keep, axis=0)
+nlsy = nlsy.loc[:, cols.extrap.keep + inc.columns.tolist() + wtabc.columns.tolist()]#.dropna(subset=cols.extrap.keep, axis=0)
 
 nlsy = nlsy.reset_index()
 nlsy['id'] = nlsy['id'].astype(int)

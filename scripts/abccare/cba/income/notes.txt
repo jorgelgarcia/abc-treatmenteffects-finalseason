@@ -58,7 +58,36 @@ or any subset of the mset numbers
 qsub py_bootstrap_submit.sh
 
 
+Instructions on how to run pset type 8
 
+1. Navigate to filepath
+abccare-cba/scripts/abccare/cba/income
+
+2. Make sure B and X variables are included in variables.py
+cols.interp.predictors = cols.interp.outcomes + cols.interp.background
+cols.extrap.predictors = cols.extrap.outcomes + cols.extrap.background
+
+3. Navigate to filepath:
+abccare-cba/scripts/abccare/cba/income/labor
+
+4. Create a .h5 file with the prepared data (with no weights)
+$python2.7 setup_data.py
+
+this file is saved in
+abccare-cba/scripts/abccare/cba/income/hdf5
+
+5. Load .h5 file
+$python2.7 load_data.py
+
+6. Set other parameters
+
+aux_draw = N
+
+7. Get predictions
+qsub py_bootstrap_submit_lag.sh
+
+These save projections to
+abccare-cba/scripts/abccare/cba/income/rslt/projections
 
 
 
