@@ -34,7 +34,7 @@ global dbootstraps = 99
 # declare other options
 global linear_ipw = 1
 global bygender = 1
-global factors = 1
+global factorswitch = 0
 global quietly = 1
 
 # ================================================================ #
