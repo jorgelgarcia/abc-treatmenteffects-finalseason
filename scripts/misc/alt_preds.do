@@ -35,45 +35,84 @@ global collapseprj  = "$klmmexico/abccare/income_projections/"
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
-// NLSY
-cd $datanlsyw
-use nlsy-abc-match.dta, clear
+// cnlsy
+cd $datacnlsyw
+use cnlsy-abc-match.dta, clear
 drop if black !=1 
-keep id male years_30y inc_labor30-inc_labor55
+keep id male m_ed0y piatmath si21y_inc_labor years_30y inc_labor22-inc_labor30
 reshape long inc_labor, i(id) j(age)
 xtset id age
 bysort id: ipolate inc_labor age, gen(inc_labori) epolate
 drop   inc_labor
 rename inc_labori inc_labor
 
-foreach age of numlist 30(1)55 {
+foreach age of numlist 22(1)30 {
 	replace inc_labor = . if inc_labor > 300000 & age == `age'
 	// replace inc_labor = . if inc_labor == 0 & age == `age'
 }
+
 gen   linc_labor = l.inc_labor
 
-// first : predict based on ar1 assumption
-newey2 inc_labor linc_labor, lag(0) force
-est sto model1
+// autocorrelation 
+xtgls inc_labor male m_ed0y piatmath years_30y si21y_inc_labor linc_labor, corr(ar1) force igls rhotype(dw) 
+matrix b1 = e(b)
 
-newey2 inc_labor linc_labor male years_30y, lag(0) force
-est sto model2
-matrix b1 = [e(b)] 
-
-// second: based on differences model
-// model in differences
-gen  dinc_labor = d.inc_labor
-gen ldinc_labor = l.dinc_labor
-
-newey2 dinc_labor ldinc_labor, lag(0) force nocons
-est sto model3
-matrix b2 = [e(b)]
+// compute correlation
+gen      rho = e(rho)
+destring rho, replace 
+summ     rho
+matrix   cnlsyrho = [r(mean)]
 
 cd $output
-#delimit
-outreg2 [model1 model2 model3] using auto_nlsy, replace
-		alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 tex(frag);
-#delimit cr
+outtable using cnlsyrho, mat(cnlsyrho) replace nobox center f(%9.3f)
+
+
+// nlsy
+cd $datanlsyw
+use nlsy-abc-match.dta, clear
+drop if black !=1 
+keep id male si30y_inc_labor years_30y inc_labor31-inc_labor55
+reshape long inc_labor, i(id) j(age)
+xtset id age
+bysort id: ipolate inc_labor age, gen(inc_labori) epolate
+drop   inc_labor
+rename inc_labori inc_labor
+
+foreach age of numlist 31(1)55 {
+	replace inc_labor = . if inc_labor > 300000 & age == `age'
+	// replace inc_labor = . if inc_labor == 0 & age == `age'
+}
+
+tempfile nlsy
+save "`nlsy'", replace
+
+// psid
+cd $datapsidw
+use psid-abc-match.dta, clear
+tostring id, replace
+replace  id = id + "1000"
+destring id, replace
+drop if black !=1 
+keep id male si30y_inc_labor years_30y inc_labor31-inc_labor67
+reshape long inc_labor, i(id) j(age)
+xtset id age
+bysort id: ipolate inc_labor age, gen(inc_labori) epolate
+drop   inc_labor
+rename inc_labori inc_labor
+
+foreach age of numlist 31(1)67 {
+	replace inc_labor = . if inc_labor > 300000 & age == `age'
+	// replace inc_labor = . if inc_labor == 0 & age == `age'
+}
+
+append using "`nlsy'"
+
+xtset id age
+gen   linc_labor = l.inc_labor
+
+// autocorrelation 
+xtgls inc_labor male years_30y si30y_inc_labor linc_labor, corr(ar1) force igls rhotype(dw) 
+matrix b2 = [e(b)]
 
 // based on this, construct abc/care prediction
 cd $dataabccare
@@ -86,17 +125,17 @@ gen inc_labor21 = si21y_inc_labor
 
 foreach num of numlist 22(1)29 {
 	local numm1 = `num' - 1
-	gen inc_labor`num' = b1[1,1]*inc_labor`numm1' + b1[1,2]*male + /// 
-	                     b1[1,3]*years_30y + b1[1,4]
+	gen inc_labor`num' = b[1,1]*male + b[1,2]*m_ed0y + b[1,3]*piatmath + years_30y*b[1,4] /// 
+	                   + si21y_inc_labor*b1[1,5] + b[1,6]*inc_labor`numm1' + b[1,7]
 }
 
 foreach num of numlist 31(1)67 {
 	local numm1 = `num' - 1
-	gen inc_labor`num' = b1[1,1]*inc_labor`numm1' + b1[1,2]*male + /// 
-	                     b1[1,3]*years_30y + b1[1,4]
+	gen inc_labor`num' = b1[1,1]*male + /// 
+	                     b1[1,2]*years_30y + b1[1,3]*inc_labor`numm1'  + b1[1,4]
 }
 
-keep R male inc_labor30-inc_labor67 years_30y si30y_inc_labor si21y_inc_labor
+keep R male m_ed0y piatmath years_30y si21y_inc_labor inc_labor21-inc_labor67
 aorder
 
 foreach num of numlist 21(1)67 {

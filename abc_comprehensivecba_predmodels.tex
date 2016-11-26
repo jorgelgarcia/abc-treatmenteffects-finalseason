@@ -1,0 +1,213 @@
+%Input preamble
+\input{preamble}
+\input{output/mainstatistics}
+
+\usepackage[stable]{footmisc}
+
+\newcommand*\leftright[2]{%
+  \leavevmode
+  \rlap{#1}%
+  \hspace{0.5\linewidth}%
+  #2}
+
+\newcommand{\orth}{\ensuremath{\perp\!\!\!\perp}}%
+\newcommand{\indep}{\orth}%
+\newcommand{\notorth}{\ensuremath{\perp\!\!\!\!\!\!\diagup\!\!\!\!\!\!\perp}}%
+\newcommand{\notindep}{\notorth}
+
+\externaldocument{abc_comprehensivecba}
+\externaldocument{abc_comprehensivecba_appendix-pub}
+\pagenumbering{roman}
+
+\begin{document}
+
+
+\doublespacing
+
+\subsection{Investigating Different Prediction Models} \label{appendix:predmodels}
+
+\noindent Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the auxiliary sample:\\
+
+\begin{equation}\label{eq:outcome}
+Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a}, \quad k \in \{n,e\}, \quad j \in \mathcal{J}_a, \quad d \in \{0, 1\}.
+\end{equation}
+
+\noindent $\phi^d_{k,j,a}\left( \cdot, \cdot \right)$ is an invariant structural production relationship mapping inputs $\bm{X}^d_{k,a}, \bm{B}_k$ into output $Y^d_{k,j,a}$ holding error term $\varepsilon^d_{k,j,a}$ fixed.\\ 
+
+\noindent In this document, we investigate the empirical implications of different assumptions on the structure of both $\phi_{k,j,a}^d \left( \cdot, \cdot \right)$ and $\varepsilon_{k,j,a}^d$.\\ 
+
+\noindent To make framework more explicit, we write: 
+
+\begin{equation}
+\varepsilon^d_{k,j,a} = \rho \varepsilon^d_{k,j,{a-1}} + \eta_{k,j,{a}} \label{eq:error}
+\end{equation}
+
+\noindent where $\eta_{k,j,{a}}$ is i.i.d. and satisfies Assumption ~\ref{ass:exog} (Exogeneity).\\ 
+
+\noindent In the auxiliary sample, we observe the outcome $Y_{n,j,a}$ for $a \in [a^*, \ldots, A]$. In the experimental sample, we observe the outcome $Y_{e,j,a}$ at most at two ages, depending on the outcome. For the time being, suppose that we observe the outcome at one age ($a = a^*$). We come back to this below. By out-of-sample predictions we mean using the information in in the auxiliary sample at  $a \in [a^*, \ldots, A]$ to form predictions in the experimental sample, where we do not observe the outcome of interest during this age periods. We produce out-of-sample predictions and calculate the net present value of labor income (treatment - control) under different structures.\\ 
+
+\subsubsection{Lagged Component in $\phi_{j,a}$ and No Serial Correlation}
+
+\noindent In this scenario, we assume that (i)  $Y_{k,j,a}$ is one of the elements in $\bm{X}_{k,a}$; and (ii) $\rho = 0$ in Equation~\eqref{eq:error}, and therefore Assumption ~\ref{ass:exog} (Exogeneity) holds.\\
+
+\noindent \textbf{[JLG: comments before proceeding:]}
+
+\begin{enumerate}
+ 
+\item This is the case where the current calculations of the paper currently are.
+\item Appealing features:
+
+\begin{enumerate}
+\item The predictions across the paper are constructed under this framework: labor and transfer income, crime, and health. 
+\item Our comparison between realizations and predictions work quite well, as displayed in the Figure 6 of the main text. 
+\item Additional tests show that: we fail to reject: invariance across the treatment and the control groups, invariance across the experimental and auxiliary samples, and we fail to reject exogeneity both in the experimental and the auxiliary samples.  The tests are at $a = a^*$.
+
+\end{enumerate}
+\item Unappealing features: no serial correlation seems like an odd assumption. More on this, below.
+\end{enumerate}
+
+\noindent Before explaining the estimation procedure, note that Assumption~\ref{ass:summary} (Invariance) implies that $\phi_{k,j,a}^d \left (\cdot, \cdot \right) = \phi_{k,j,a}  \left (\cdot, \cdot \right) = \phi_{j,a}  \left (\cdot, \cdot \right)$. That is, invariance holds across the treatment and the control groups and invariance holds across the experimental and the auxiliary samples. It is important to note that invariance across the treatment and the control groups implies that the variables $\bm{X}_{k,a}^d$ summarize the effect of the treatment on the outcome. Given this and Assumption ~\ref{ass:exog} (Exogeneity), the distribution of $\varepsilon_{k,j,a}^d$ is the same across the treatment and the control groups. We then drop the superindex in $\varepsilon_{k,j,a}^d$.\\ 
+
+\noindent We test invariance across the treatment and the control groups and invariance across the experimental and the auxiliary samples  in Appendix~\ref{app:invariance}.\\
+
+\noindent In Appendix~\ref{app:containsupport}, we also document that the support of $Y_{n,j,a}^d, \bm{X}_{n,a}^d, \bm{B}_{n}$ covers the support of $Y_{e,j,a}^d, \bm{X}_{e,a}, \bm{B}_{e}$ for $d \in \{0, 1\}$. So we drop the $d$ superindex in $Y_{n,j,a}^d, \bm{X}_{n,a}^d$ given that we estimate an invariant model. We write:
+
+\begin{equation}\label{eq:routcome}
+Y_{k,j,a} = \phi_{j,a} (\bm{X}_{k,a}, \bm{B}_k) + \varepsilon_{k,j,a}, \quad k \in \{n,e\}, \quad j \in \mathcal{J}_a.
+\end{equation}\\
+
+\noindent \textbf{In this scenario, the results are the following:}\\
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Net Present Value of Predicted Labor (Treatment - Control) for ABC/CARE}
+\label{table:yourlabel}
+\centering 
+\begin{tabular}{lcc} \toprule
+Pooled & 71,345 & (s.e. 86,343) \\
+Males & 300,896 & (s.e. 241,588) \\ 
+Females & 50,390 & (s.e. 63,060) \\ \bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{table}
+\begin{spacing}{1}
+\begin{footnotesize}
+\noindent Note: Net present value of predicted labor (treatment - control) for ABC/CARE estimating the system in Equations~\eqref{eq:outcome} and \eqref{eq:error} in the auxiliary samples and using these estimates to form predictions in the experimental sample.\\ 
+\noindent Specification: Lagged component in $\phi_{j,a}$ and no serial correlation in $\varepsilon_{k,j,a}$. 
+\end{footnotesize}
+\end{spacing}
+
+
+\subsubsection{No Lagged Component in $\phi_{j,a}$ and Serial Correlation}
+
+\noindent In this scenario, we assume that (i)  $Y_{k,j,a}$ is not one of the elements in $\bm{X}_{k,a}$; and (ii) we do not restrict $\rho$ in Equation~\eqref{eq:error}.\\
+
+\noindent \textbf{[JLG: comments before proceeding:]}
+
+\begin{enumerate}
+
+\item Given that $Y_{k,j,a}$ is not one of the elements in $\bm{X}_{k,a}$, Assumption ~\ref{ass:exog} (Exogeneity) holds even when we do not restrict $\rho$ in Equation~\eqref{eq:error}. 
+
+\item It is straightforward to account for serial correlation in this case: serial correlation is a particular case of arbitrary heteroskedasticity. We do not even need to take a stand on the functional form in Equation~\eqref{eq:error}. We can simply invoke the assumption of $Y_{k,j,a}$ not being one of the elements in $\bm{X}_{k,a}$ and proceed to account for arbitrary forms of heteroskedasticity. 
+
+\item The predictions in the paper are extremely similar in this case. That is, the lag does not help the predictions. This is more evidence in favor of $\bm{X}_{k,a}$ summarizing the treatment effects.
+
+\item The framework for our testable implications holds as well in this scenario. That is, it is straightforward to show that in this scenario we can write Equation~\ref{eq:outcome} as Equation~\ref{eq:routcome}, which is the basis of our testable implications (of invariance). \textbf{The testable implications still hold empirically.} This scenario is actually where we began to test them.
+
+\item Why did we include the lag to begin with, then? To ``match'' what we are doing with what the FAM model does. 
+
+\end{enumerate}
+
+\noindent \textbf{In this scenario, the results are the following:}\\
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Net Present Value of Predicted Labor (Treatment - Control) for ABC/CARE}
+\label{table:yourlabel}
+\centering 
+\begin{tabular}{lcc} \toprule
+Pooled & 436,534 & (s.e. ) \\
+Males & 971,099 & (s.e. ) \\ 
+Females & 157,725 & (s.e. ) \\ \bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{table}
+\begin{spacing}{1}
+\begin{footnotesize}
+\noindent Note: Net present value of predicted labor (treatment - control) for ABC/CARE estimating the system in Equations~\eqref{eq:outcome} and \eqref{eq:error} in the auxiliary samples and using these estimates to form predictions in the experimental sample.\\ 
+\noindent Specification: No lagged component in $\phi_{j,a}$ and arbitrary serial correlation in $\varepsilon_{k,j,a}$. 
+\end{footnotesize}
+\end{spacing}
+
+
+
+\subsubsection{Lagged Component in $\phi_{j,a}$ and Serial Correlation} 
+
+\noindent In this scenario, we assume that (i)  $Y_{k,j,a}$ is not one of the elements in $\bm{X}_{k,a}$; and (ii) we do not restrict $\rho$ in Equation~\eqref{eq:error}.\\
+
+\noindent The first question to ask is: is serial correlation present in the data?\\ 
+
+\noindent To test this, we proceed as follows: we assume that $\phi_{k,j,a} \left( \cdot, \cdot \right)$ in Equation~\eqref{eq:routcome} is linear and drop the $j$ index that $\phi_{k,j,a} = \phi_{k,j,a'} \quad \forall a \in [a^*, \ldots, A]$ ad drop the $a$ index. The system of interest becomes
+
+\begin{eqnarray}
+Y_{k,a} &=&\gamma_{0} + \bm{\gamma}_{X,a} \bm{X}_{k} + \varepsilon_{a}. \label{eq:linear1} \\
+\varepsilon_{a} &=& \rho \varepsilon_{a-1} + \eta_{a}, \label{eq:linear2}
+\end{eqnarray}
+
+\noindent where $\eta_{a}$ is i.i.d. and satisfies Assumption ~\ref{ass:exog} (Exogeneity). Standard estimation methods provide inconsistent estimates of $\bm{\gamma} : = [\gamma_{0}, \bm{\gamma}_{X}]$.\\
+
+\noindent We can $\rho$-transform the system of interest and write: 
+
+
+\begin{equation}
+Y_{k,a} - \rho Y_{k,a-1} = \gamma_{0} \left( 1 - \rho \right) + \bm{\gamma}_{X} \left( \bm{X}_{a} - \bm{X}_{a-1} \right) + \eta_{a}
+\end{equation}
+
+\noindent If $\rho$ is known, it is straightforward to recover consistent estimates of $\bm{\gamma}$.\\
+
+\noindent If $\rho$ is unknown, there are various alternatives. We estimate $\rho$ by the Durbin Watson method: (i) estimate Equation~\eqref{eq:linear1} by OLS and compute the residuals, $\varepsilon_{a}$ for $a \in [a^*, \ldots, A]$; (ii) estimate $\rho$ as  $\corr \left( \hat{\varepsilon}_{a}, \hat{\varepsilon}_{a-1} \right)$.\\ 
+
+\noindent Once an estimate of $\rho$ is available, we can consistently estimate $\bm{\gamma}$. We iterate this procedure until an arbitrary degree of convergence is achieved. This is a standard feasible GLS method.\\ 
+
+\noindent 
+
+
+
+\subsubsection{Non-Parametric Predictions}
+
+\noindent An alternative to any of these scenarios is to form non-parametric predictions. That is: (i) for each individual $i$ in the experimental sample (e) find an individual(s) $l(i)$ in the non-experimental sample ($n$) using Algorithm~\ref{alg:match} in Appendix~\ref{appendix:match}; (ii) impute the post-$a^*$ trajectory of $Y_{k,j,a}$ of individual(s) $l(i)$ in the non-experimental sample ($n$) to individual $i$ in the experimental sample ($e$).\\
+
+\noindent \textbf{In this scenario, the results are the following:}\\
+
+\begin{table}[H] 
+\begin{threeparttable}
+\caption{Net Present Value of Predicted Labor (Treatment - Control) for ABC/CARE}
+\label{table:yourlabel}
+\centering 
+\begin{tabular}{lcc} \toprule
+Pooled & 62,080 & (s.e. 75,030) \\
+Males & 289,471 & (s.e. 232,471) \\ 
+Females & 59,163 & (s.e. 74,039) \\ \bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{table}
+\begin{spacing}{1}
+\begin{footnotesize}
+\noindent Note: Net present value of predicted labor (treatment - control) for ABC/CARE estimating the system in Equations~\eqref{eq:outcome} and \eqref{eq:error} in the auxiliary samples and using these estimates to form predictions in the experimental sample.\\ 
+\noindent Specification: Non-parametric. 
+\end{footnotesize}
+\end{spacing}
+
+
+
+
+
+
+%References
+\singlespace
+\bibliographystyle{chicago}
+\bibliography{heckman}
+
+\end{document}
+
+
