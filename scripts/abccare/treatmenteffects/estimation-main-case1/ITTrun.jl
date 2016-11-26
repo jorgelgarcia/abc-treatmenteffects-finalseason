@@ -13,7 +13,7 @@ using Distances
 # Set globals and directories
 global current = pwd()
 global data = "$current/../../../../data/abccare/extensions/cba-iv"
-global output = "$current/../rslt"
+global output = "$current/../rslt-case1"
 global scripts = "$current/../../juliafunctions"
 
 # Include helper files
