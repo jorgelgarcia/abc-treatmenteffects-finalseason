@@ -35,11 +35,11 @@ global collapseprj  = "$klmmexico/abccare/income_projections/"
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
-// nlsy
-cd $datanlsyw
-use nlsy-abc-match.dta, clear
+// CNLSY
+cd $datacnlsyw
+use cnlsy-abc-match.dta, clear
 drop if black !=1 
-keep id male years_30y inc_labor30-inc_labor55
+keep id male m_ed0y piatmath years_30y inc_labor21-inc_labor30
 reshape long inc_labor, i(id) j(age)
 xtset id age
 bysort id: ipolate inc_labor age, gen(inc_labori) epolate
@@ -51,17 +51,19 @@ foreach age of numlist 21(1)30 {
 	// replace inc_labor = . if inc_labor == 0 & age == `age'
 }
 
-gen   linc_labor = l.inc_labor
+gen   dinc_labor = inc_labor - l.inc_labor
+gen  ldinc_labor = l.dinc_labor
+drop inc_labor
 
 // autocorrelation 
-xtgls inc_labor linc_labor male years_30y, corr(ar1) force igls rhotype(tscorr)  
-estimates store ar1nlsy
+xtgls dinc_labor ldinc_labor, corr(ar1) force igls rhotype(tscorr) nocons
+estimates store ar1cnlsy
 
 // compute correlation
 gen      rho = e(rho)
 destring rho, replace 
 summ     rho
-matrix   nlsy = [r(mean)]
+matrix   cnlsy = [r(mean)]
 
 // bootstrap for standard error of rho
 matrix rho = [.]
@@ -75,7 +77,7 @@ duplicates drop idage, force
 destring id , replace
 destring age, replace
 
-xtgls inc_labor linc_labor male years_30y, corr(ar1) force igls rhotype(tscorr)
+xtgls dinc_labor ldinc_labor, corr(ar1) force igls rhotype(tscorr) nocons
 gen      rhoest = e(rho)
 destring rhoest, replace 
 summ     rhoest
@@ -90,23 +92,23 @@ drop if rho == .
 summ    rho 
 replace rho = (rho - r(mean)) - .5
 gen     ind = 0
-replace ind = 1 if abs(rho) > abs(nlsy[1,1])
+replace ind = 1 if abs(rho) > abs(cnlsy[1,1])
 summ ind
-matrix nlsy = [nlsy,r(mean)]
+matrix cnlsy = [cnlsy,r(mean)]
 restore
 
 // newey set-up
 foreach num of numlist 0 1 2 {
-	newey2 inc_labor linc_labor male years_30y, lag(`num') force
-	estimates store lag`num'nlsy
+	newey2 dinc_labor ldinc_labor, lag(`num') force nocons
+	estimates store lag`num'cnlsy
 }
 
 cd $output
 // output regressions
 #delimit
-outreg2 [lag0nlsy lag1nlsy lag2nlsy] using auto_nlsy, replace
-		alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 tex(frag);
+outreg2 [lag0cnlsy lag1cnlsy lag2cnlsy] using auto_dcnlsy, replace
+		alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 tex(frag)u;
 #delimit cr
 
 // output rho and information
-outtable using auto_rhonlsy, mat(nlsy) replace nobox center f(%9.3f)
+outtable using auto_drhocnlsy, mat(cnlsy) replace nobox center f(%9.3f)

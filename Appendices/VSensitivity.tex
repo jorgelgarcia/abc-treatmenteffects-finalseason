@@ -1,4 +1,6 @@
-\section{Sensitivity of Treatment Effects to the Definition of Control Substitution} \label{appendix:vsensitivity}
+\section{Alternative Definitions of Control Substitution and Two-Sided Statistical Tests} \label{appendix:vsensitivity}
+
+\subsection{Alternative Definitions of Control Substitution}
 
 \noindent In the main paper, we let $V$ be a dummy variable indicating whether or not the child attended alternative childcare arrangements. As we discuss in Section~\ref{section:background}, this dummy variable is a summary of a more complex reality in which children attend alternatives different months between ages 0 to 5. In this appendix, we explore three different alternative definitions of $V$: we let $V$ indicate if children attend alternatives (i) $2/5$ of the time between ages 0 to 5; (ii) $3/5$ of the time between ages 0 to 5; and (iii) $4/5$ of the time between ages 0 to 5. For each of these cases, we present a summary table of treatment effects analogous to Table~\ref{table:tescombined} in the main paper.\\
 
@@ -46,6 +48,41 @@ Note: This table shows the treatment effects for categories outcomes that are im
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+\doublespacing
+
+\subsection{Two-Sided Statistical Tests}
+
+\noindent In the main paper, we classify the outcomes of interest as ``beneficial'' (see Appendix~\ref{appendix:results} our classification) and perform one-sided tests. The next table presents two-sided inferences for the main table of treatment-effect estimates in the main paper, Table~\ref{table:tescombined}. The main treatment effects survive two-sided testing. A full replication of the results throughout the main text using two-sided statistical tests is available under request. As is evident from the standard errors, our combining functions and cost-benefit analysis results generally survive two-sided testing.
+
+\newgeometry{top=.6in, bottom=.8in, left=.8in, right=.8in}
+\begin{table}[!htbp]
+\centering
+\begin{threeparttable}
+\caption{Treatment Effects on Selected Outcomes, Two-Sided Inference}\label{table:tescombinedtwo}
+\begin{scriptsize}
+\input{output/select_rslt_combined_ts1.tex}
+\end{scriptsize}
+\begin{tablenotes}
+\tiny
+Note: This table shows the treatment effects for categories outcomes that are important for our benefit/cost analysis. Systolic and diastolic blood pressure are measured in terms of mm Hg. Each column present estimates for the following parameters: \textbf{(1)} $\mathbb{E} \big[ \bm{Y}^1 - \bm{Y}^0 | W = 1]$; {\textbf{(2)} $\mathbb{E} \big[ \bm{Y}^1 - \bm{Y}^0 | \bm{B} \big]$}; {\textbf{(3)} $\mathbb{E} \big[ \bm{Y}^1 | \bm{B}, D=1 \big] - \mathbb{E} \big[ \bm{Y}^0 | \bm{B}, V=0, D=0 \big]$}; {\textbf{(4)} $\mathbb{E} \big[ \bm{Y}^1 - \bm{Y}^0 | \bm{B}, V=0 \big] $}; {\textbf{(5)} $\mathbb{E} \big[ \bm{Y}^1 | \bm{B}, D=1 \big] - \mathbb{E} \big[ \bm{Y}^0 | \bm{B}, V=1, D = 0 \big]$}; {\textbf{(6)} $\mathbb{E} \big[ \bm{Y}^1 - \bm{Y}^0 | \bm{B}, V=1 \big]$}. We account for the following background variables ($\bm{B}$): Apgar scores at minutes 1 and 5 and the high-risk index. We define the high-risk index in Appendix~\ref{appendix:background} and explain how we choose the control variables in Appendix~\ref{appendix:bvariables}. Inference is based on non-parametric, two-sided $p$-values from the empirical bootstrap distribution. We highlight point estimates significant at the $10\%$ level.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\restoregeometry
+\doublespacing
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \restoregeometry
 \doublespacing

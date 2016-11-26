@@ -1,0 +1,18 @@
+	(1)	(2)	(3)
+	model1	model2	model3
+VARIABLES	inc_labor	inc_labor	dinc_labor
+			
+linc_labor	1.056***	1.058***	
+	(0.004)	(0.004)	
+male		-326.840***	
+		(75.057)	
+years_30y		-114.964***	
+		(27.062)	
+ldinc_labor			0.503***
+			(0.030)
+Constant	-733.328***	874.394***	
+	(89.734)	(306.410)	
+			
+Observations	70,015	70,015	67,189
+Robust standard errors in parentheses			
+*** p<0.01, ** p<0.05, * p<0.10			
