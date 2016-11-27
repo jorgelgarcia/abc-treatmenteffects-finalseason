@@ -113,12 +113,22 @@ for agg in [0,1]:
     
     mean = tmp_rslt.groupby(level=['variable', 'ddraw']).transform(lambda x: x.mean())
     null = tmp_rslt - mean
-    
+
+   
+    # Select the negative outcomes   
+    invoutcomes = {}
+    for coef in tmp_rslt.columns:
+        # generate dataframe to store t-statistics
+        tmp_rslt_coef = tmp_rslt.loc[(0, 0, slice(None)), coef]
+        neg_index = tmp_rslt_coef < 0
+        tmp_rslt_neg = tmp_rslt_coef[neg_index]
+        invoutcomes['{}'.format(coef)] = tmp_rslt_neg.index.get_level_values(2).unique()
+
     # prepare to obtain p-values by expanding point estimate
     draw_max = int(tmp_rslt.index.get_level_values(0).unique().max())
     point_ext = pd.concat([tmp_rslt.loc[(0, slice(None), slice(None)), :] for j in range(draw_max + 1)], axis=0, keys=[k for k in range(draw_max + 1)], names=['newdraw'])
     point_ext.reset_index('draw', drop=True, inplace=True)
-    point_ext.index.names = ['draw', 'ddraw', 'variable']
+    point_ext.index.names = ['draw', 'ddraw','variable']
     point_ext = point_ext.loc[null.index,:]
     
     # two-sided test for each individual effect
@@ -129,10 +139,14 @@ for agg in [0,1]:
     # obtain p-values
     less = (null <= point_ext); less[point_ext.isnull()] = np.nan
     less = less.mean(axis=0, level=['ddraw', 'variable'])
-    
+	
     pval_tmp = (null >= point_ext); pval_tmp[point_ext.isnull()] = np.nan
     pval_tmp = pval_tmp.mean(axis=0, level=['ddraw', 'variable'])
-    pval_tmp.loc[(slice(None), outcomes.query('hyp == "-"').index), :] = less.loc[(slice(None), outcomes.query('hyp == "-"').index), :]
+	
+    if twosided == 0:
+        for coef in tmp_rslt.columns:	
+            pval_tmp.loc[(slice(None), invoutcomes['{}'.format(coef)]), coef] = less.loc[(slice(None), invoutcomes['{}'.format(coef)]), coef]
+    
     pval_tmp.sortlevel(axis=1, inplace = True)
     pval_tmp.sort_index(inplace=True)
 
@@ -162,21 +176,70 @@ null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] = null.loc[(slice
 
 tstat = point/se
 tstat.sort_index(inplace=True)
-tstat.loc[outcomes.query('hyp == "-"').index, :] = tstat.loc[outcomes.query('hyp == "-"').index, :] * -1
+for coef in tmp_rslt.columns:	
+    tstat.loc[invoutcomes['{}'.format(coef)], coef] = tstat.loc[invoutcomes['{}'.format(coef)], coef] * -1   
 
 # 2. provide blocks and dictionary to estimate/store stepdown results
 stepdown = pd.DataFrame([], columns=tstat.columns, index=tstat.index)
 blocks = list(pd.Series(outcomes.block.values).unique())
+
 #blocks.remove(np.nan)
 
 for block in blocks:
-    print "Stepdown test for main tables, %s block..." % (block)
-    # generate dataframe to store p-values for block of outcomes
-    ix = list(outcomes.loc[outcomes.block==block,:].index)
-    for coef in tstat.columns:
-        # genreate dataframe to store t-statistics
-        tmp_pval = pd.DataFrame([1 for j in range(len(ix))], index=ix)
-        tmp_tstat = tstat.loc[ix, coef].copy()
+	print "Stepdown test for main tables, %s block..." % (block)
+	
+	# generate dataframe to store p-values for block of outcomes
+	ix = list(outcomes.loc[outcomes.block==block,:].index)
+	for coef in tstat.columns:
+		
+		# generate dataframe to store t-statistics
+		tmp_pval = pd.DataFrame([1 for j in range(len(ix))], index=ix)
+		tmp_tstat = tstat.loc[ix, coef].copy()
+		
+		# sort t-statistics in a descending order and save the indices as a list
+		tmp_tstat.sort(axis=1, ascending = False, inplace=True)
+		tmp_tstat_list = list(tmp_tstat.index)
+		print "printing tmp_tstat_list"
+		print tmp_tstat_list
+
+		# make dictionaries for the step-down p-values
+		sd_pval_tmp = {} 
+		storeval = {}
+		
+		# perform step-down method
+		for i in range(0,len(tmp_tstat_list)):
+			
+			# select the max across each bootstrap
+			sd_dist = null.loc[(slice(None), ix), coef].groupby(level=0).max()
+			
+			# count the cases where the selected max is greater than the T-statistics of our interest
+			countone = sum(1 for item in sd_dist if tmp_tstat[i] <= item)
+
+			# calculate the temporary p-value
+			sd_pval_tmp[i] = (countone+1.0)/(1.0+101.0)
+			
+			# store p-value according to step-down conditions
+			if i == 0:
+				tmp_pval.loc[tmp_tstat_list[i]] = sd_pval_tmp[i]
+				storeval[i] = sd_pval_tmp[i]
+			if i != 0:
+				tmp_pval.loc[tmp_tstat_list[i]] = max(sd_pval_tmp[i], storeval[i-1])
+				storeval[i] = max(sd_pval_tmp[i], storeval[i-1])
+			if np.isnan(point.loc[ix, coef][tmp_tstat_list[i]]):
+				print "Printing if NA"
+				print np.isnan(point.loc[ix, coef][tmp_tstat_list[i]])
+				tmp_pval.loc[tmp_tstat_list[i]] = np.nan
+			
+			# consecutively drop the outcome with highest T statistics
+			ix = list(ix)
+			ix.remove(tmp_tstat_list[i])
+			
+			# Fill stepdown dataframe if i = len(tmp_tstat_list) 
+			if i == len(tmp_tstat_list) - 1: 
+				ix = tmp_pval.index
+				stepdown.loc[ix, coef] = tmp_pval.values
+				
+'''		(Previous step-down algorithm: not implemented anymore)
         # perform stepdown method
         do_stepdown = 1
         while do_stepdown == 1:
@@ -207,10 +270,10 @@ for block in blocks:
                 ix = tmp_pval.index
                 stepdown.loc[ix, coef] = tmp_pval.values
                 do_stepdown = 0                    
+'''
 
 # for variables we do not perform stepdown on, fill in stepdown matrix of p-value with regular p-values
 stepdown.fillna(pval, inplace=True)
-
 
 #=========================================
 # combine point estimate and p-value tables (this dataframe is for making the tables)
