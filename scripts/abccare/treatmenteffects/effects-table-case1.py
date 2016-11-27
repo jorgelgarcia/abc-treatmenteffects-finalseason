@@ -2,7 +2,7 @@
 """
 Created on Fri Mar 11 15:17:41 2016
 
-@author: jkcshea, jessicayk
+@author: jkcshea
 
 Description: this file takes the estimates in .csv files and produces a series of
 tables displaying various ITT estimates. Regular and step down p-values are estimated.
@@ -15,17 +15,20 @@ inference on those counts.
 import os
 import collections
 import pandas as pd
-import math
 import numpy as np
 import pytabular as pytab
 from scipy.stats import percentileofscore
-from pathsmainpaper import paths 
+from pathcase1 import paths 
 
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
 
-path_results = os.path.join(filedir, 'rslt-appendix/')
-path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_mainpaper.csv')
+# YK cross this out to generate the p_inc table
+#path_results = os.path.join(filedir, 'rslts-jun25/abccare_ate/')
+#path_outcomes = os.path.join(filedir, 'outcomes_cba_merged.csv')
+
+path_results = os.path.join(filedir, '..','rslt-case1/')
+path_outcomes = os.path.join(filedir, '..','../outcomes/outcomes_cba_mainpaper.csv')
 
 # provide option for two sided tests
 twosided = 0
@@ -42,24 +45,37 @@ outcomes = pd.read_csv(path_outcomes, index_col='variable')
 rslt_y = {}
 
 for sex in ['pooled', 'male', 'female']:
-	itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
-	itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
-	itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10_case1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1_case1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+    itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0_case1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
-	matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
-	matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1_case1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+    matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0_case1.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
-	itt_all = itt_all.loc[:,['itt_noctrl', 'itt_ctrl', 'itt_wctrl']]
+    itt_all = itt_all.loc[:,['itt_noctrl', 'itt_ctrl', 'itt_wctrl']]
+    rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
+    rslt_p0 = pd.concat([itt_p0, matching_p0], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
     
-	rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
-	rslt_p0 = pd.concat([itt_p0, matching_p0], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
-
-	rslt_y[sex] = pd.concat([itt_all, rslt_p1, rslt_p0], axis=1, keys=['pall', 'p1', 'p0'])
+    rslt_y[sex] = pd.concat([itt_all, rslt_p1, rslt_p0], axis=1, keys=['pall', 'p1', 'p0'])
     
 rslt_y = pd.concat(rslt_y, axis=1, keys=rslt_y.keys(), names=['sex', 'type', 'coefficient'])
 rslt_y = rslt_y.reorder_levels(['draw', 'ddraw', 'rowname'])
 rslt_y.index.names = ['draw', 'ddraw', 'variable']
 rslt_y.sort_index(inplace=True)
+
+# drop factors
+factors = ['factor_iq5','factor_iq12','factor_iq21','factor_achv12','factor_achv21','factor_home',
+'factor_pinc','factor_mwork','factor_meduc','factor_fhome','factor_educ','factor_emp',
+'factor_crime','factor_tad','factor_shealth','factor_hyper','factor_chol','factor_diabetes',
+'factor_obese','factor_bsi','factor_ext_p','factor_ext_e','factor_ext_t','factor_agr_p',
+'factor_agr_e','factor_agr_t','factor_nrt_p','factor_nrt_e','factor_cns_p','factor_cns_e',
+'factor_cns_t','factor_opn_e','factor_opn_t','factor_act_p']
+
+for dvar in factors:
+    try:
+        rslt_y.drop(dvar, axis=0, level=2, inplace=True)
+    except:
+        pass
 
 ind_rslt_y = rslt_y.index.get_level_values(2).unique()
 ind_outcomes = [i for i in outcomes.index if i in ind_rslt_y]
@@ -311,24 +327,12 @@ def format_sdpvalue(x):
         return '[{}]'.format(x)      
 
 
-
-#======================================
-# Main tables
-#======================================
-
-uniform_categories = ['IQ Scores', 'HOME Scores', 'Parent Income', \
-    '''Mother's Education''', 'Father at Home', '''Mother's Employment''', \
-    'Adoption', 'Vitamin D Deficiency', 'Self-Reported Health']
-uniform_categories = []
-
-
-header = [['Variable', 'Age', '(1)', '(2)', '(3)', '(4)', '(5)', '(6)']]
-
+    
 #=========================================
 # Make Appendix Tables of results
 #=========================================
 
-
+header = [['Variable', 'Age', '(1)', '(2)', '(4)', '(5)', '(7)', '(8)']]
 for t in [1,2]:
     # prepare table for pytabular (t=1 regular p-values, t=2 stepdown)
     if t == 1:
@@ -346,7 +350,7 @@ for t in [1,2]:
             # select the columns of results that you want
             rslt_columns = [(sex, 'pall', 'itt_noctrl'), (sex, 'pall', 'itt_wctrl'),
                             (sex, 'p0', 'itt_wctrl'), (sex, 'p0', 'epan_ipw'),
-                           (sex, 'p1', 'itt_wctrl'), (sex, 'p1', 'epan_ipw')]
+                            (sex, 'p1', 'itt_wctrl'), (sex, 'p1', 'epan_ipw')]
     
             ix = outcomes.set_index(['label', 'age']).query('category=="{}"'.format(cat))
             ix = ix.set_index(['category'], append=True).drop(ix.set_index(['category'], append=True).index.difference(data_app.index)).index # TO ACCOUNT FOR CASES WHERE EFFECT COULD NTO BE ESTIMATED
@@ -419,7 +423,4 @@ for t in [1,2]:
             if t == 1:
                 table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}'.format(sex, i)))
             if t == 2:
-                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}_sd'.format(sex, i)))      
-
-
-print "successfully done!"
+                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}_sd'.format(sex, i)))     

@@ -21,7 +21,7 @@ addprocs_pbs(procs)
 # Define "to parallelize process"
 require("$thisdir/matchingrun.jl")
 B = 25 # number of workers being used
-b = 4  # number of work each worker does
+b = 40  # number of work each worker does
 
 Matchboot = pmap(matchingrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 

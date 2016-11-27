@@ -19,9 +19,9 @@ procs = 25
 addprocs_pbs(procs)
 
 # Define "to parallelize process"
-require("$thisdir/ITTrun.jl")
+require("$thisdir/ITTrun2.jl")
 B = 25 # number of workers being used
-b = 40  # number of work each worker does
+b = 4  # number of work each worker does
 
 ITTboot = pmap(ITTrun, [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b])
 
@@ -63,7 +63,7 @@ for gender in genderloop
 			ResultOutput["itt_$(gender)_P$(P_switch)"] = ITTfinal[:, colnames]
 			delete!(ITTfinal, colnames)
 		end
-		writetable("$(output)/itt/itt_$(gender)_P$(P_switch)_case2.csv", ResultOutput["itt_$(gender)_P$(P_switch)"])
+		writetable("$(output)/itt3/itt_$(gender)_P$(P_switch).csv", ResultOutput["itt_$(gender)_P$(P_switch)"])
 		n = n + 1
   end
 end
