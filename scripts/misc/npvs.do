@@ -219,7 +219,7 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
-			  note("          Per-annum Rate of Return: 12% (s.e. 5%)."
+			  note("              Annual Rate of Return: 12% (s.e. 5%)."
 			        , size(large));
 #delimit cr 
 graph export abccare_npvlarge.eps, replace
