@@ -19,7 +19,7 @@ import math
 import numpy as np
 import pytabular as pytab
 from scipy.stats import percentileofscore
-from pathsmainpaper import paths 
+from pathsmainpaperts import paths 
 
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
