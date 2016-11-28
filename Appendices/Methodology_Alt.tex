@@ -249,7 +249,7 @@ We base our model-based predictions for a generic outcome, $Y_{k,j,a}$ on backgr
 
 \paragraph{Non-Parametric Predictions} \label{appendix:nonpar}
 
-\noindent An alternative to the predication strategy that we use throughout the main text and the preceding appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using Algorithm~\ref{alg:match}; and (ii) use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and use it to form out-of-sample predictions, we simply match individuals using Algorithm~\ref{alg:match} to impute labor income profiles.\\
+\noindent An alternative to the prediction strategy that we use throughout the main text and the preceding appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using Algorithm~\ref{alg:match}; and (ii) use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and use it to form out-of-sample predictions, we simply match individuals using Algorithm~\ref{alg:match} to impute labor income profiles.\\
 
 \noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the non-parametric approach that we introduce in this section. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). An individual $l(i)$ in the auxiliary sample is a match for individual $i$ in the experimental sample if it is in the neighborhood defined by the left-hand side of \eqref{eq:ingrownnail} across all individuals in the auxiliary sample. We present the discounted net present value (treatment - control) for labor income in 2014 dollars. The approaches are in rough agreement. (Analogous results for other variables are available upon request from the authors.)\\
 
@@ -949,10 +949,10 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 \noindent This approach fits Mincer regressions for parental income.\footnote{See \citet{Mincer_1974_schooling} for the original source and \citet{Heckman_Lochner_ea_2006_HEE} for a extended discussion of the Mincer equation, its implications, and several extensions.} We specify how we deal with the presence of a spouse below. The parameterization used is as follows:
 
 \begin{equation}
-\ln Y_{a} = \alpha + \beta \cdot \text{school}_{a} + \gamma_{1}  \cdot \text{experience}_{a} + \gamma_{2} \cdot {\text{experience}_{a}}^2 + \bm{\phi} \mathbf{X}_{a} + \eta_{a}, \label{eq:mincer}
+\ln Y_{a} = \alpha + \beta \cdot \text{school}_{a} + \gamma_{1}  \cdot \text{experience}_{a} + \gamma_{2} \cdot {\text{experience}_{a}}^2 + \bm{\psi} \mathbf{X}_{a} + \eta_{a}, \label{eq:mincer}
 \end{equation}
 
-\noindent where variables are indexed by mother's age, $\ln Y_a$ is log-labor income at age $a$, experience and schooling are measured in years, $ \mathbf{X}_{a}$ are observed characteristics, and $\eta_{a}$ is an unobserved component. $\alpha, \beta, \gamma_{1}, \gamma_{2}, \bm{\phi}$ are coefficients and summarize the parameterization of the labor income profile.\footnote{We assign one dollar of income when parental income is reported to be zero.}\\
+\noindent where variables are indexed by mother's age, $\ln Y_a$ is log-labor income at age $a$, experience and schooling are measured in years, $ \mathbf{X}_{a}$ are observed characteristics, and $\eta_{a}$ is an unobserved component. $\alpha, \beta, \gamma_{1}, \gamma_{2}, \bm{\psi}$ are coefficients and summarize the parameterization of the labor income profile.\footnote{We assign one dollar of income when parental income is reported to be zero.}\\
 
 \noindent In principle, there is no reason why the parameters characterizing the profile should differ across the treatment and control groups in ABC/CARE. Given the small sample in ABC/CARE, we assume that the profile is common across the control and treatment groups. This assumption is analogous to Assumption~\ref{ass:summary}, which we fail to reject in Appendix~\ref{app:invariance}.\\
 
@@ -1011,12 +1011,12 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 \end{figure}
 
 \noindent \textbf{Summary: Prediction of Parental Labor Income}\\
-\noindent Any prediction of parental income starts at the last observation of parental income, which varies by individual due to attrition. For prediction, we assume that parental income is equal to maternal income (only 27\% of mothers in ABC/CARE report leaving with a couple.
+\noindent Any prediction of parental income starts at the last observation of parental income, which varies by individual due to attrition. For prediction, we assume that parental income is equal to maternal income (only 27\% of mothers in ABC/CARE report leaving with a couple).
 \begin{enumerate}
 \item \textbf{Mincer Model}
 \begin{enumerate}
 \item \textbf{Auxiliary Sample Used to Predict:} PSID.
-\item \textbf{Initial Restrictions Placed on the Auxilliary Sample:} Black; female; unmarried; education and number of children at ages 5 in the ranges of ABC/CARE participants, labor income at each age is below the 75th percentile.
+\item \textbf{Initial Restrictions Placed on the Auxiliary Sample:} Black; female; unmarried; education and number of children at ages 5 in the ranges of ABC/CARE participants, labor income at each age is below the 75th percentile.
 \item \textbf{Variables Used to Construct Synthetic Control and Treatment Groups:} we pool PSID/NLSY79 restricted sample, and do not construct synthetic experimental groups due to lack of variables to do so.
 \item \textbf{Variables Used to Predict:} education, second order polynomial in experience, birth year, number of children.
 \item \textbf{Assumed Retirement:} after 40 years of labor force participation.
@@ -1100,7 +1100,7 @@ where we let $A = 79$, define $B_a$ and $C_a$ to be the (discounted) total benef
 		\includegraphics[width=\textwidth]{output/irr_8_sexm.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: Panel (a) displays the empirical bootstrap distribution for the estimate of the treatment vs. next parameter in the pooled sample. The reminder panels show an analogous distribution varying the parameter and the gender. See Section~\ref{section:methodology} for the definition of the parameters. We discard negative internal rates of returns. Each panel displays the point estimate with the standard error in parentheses and the $p$-value in brackets in the left corner and the percentage of positive internal rates of return out of the initial set of bootstrap resamples in the right corner.
+Note: Panel (a) displays the empirical bootstrap distribution for the estimate of the treatment vs. next parameter in the pooled sample. The reminder panels show an analogous distribution varying the parameter and the gender. See Section~\ref{section:methodsquestions} for the definition of the parameters. We discard negative internal rates of returns. Each panel displays the point estimate with the standard error in parentheses and the $p$-value in brackets in the left corner and the percentage of positive internal rates of return out of the initial set of bootstrap resamples in the right corner.
 \end{sidewaysfigure}
 \restoregeometry
 \doublespacing
@@ -1242,18 +1242,10 @@ of the treatment effect. *Only education costs up until age 18 are multiplied by
 		\includegraphics[width=\textwidth]{output/ratios_8_sexm.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: Panel (a) displays the empirical bootstrap distribution for the estimate of the treatment vs. next parameter in the pooled sample. The reminder panels show an analogous distribution varying the parameter and the gender. See Section~\ref{section:methodology} for the definition of the parameters. Each panel displays the point estimate with the standard error in parentheses and the $p$-value in brackets in the left corner.
+Note: Panel (a) displays the empirical bootstrap distribution for the estimate of the treatment vs. next parameter in the pooled sample. The reminder panels show an analogous distribution varying the parameter and the gender. See Section~\ref{section:methodsquestions} for the definition of the parameters. Each panel displays the point estimate with the standard error in parentheses and the $p$-value in brackets in the left corner.
 \end{sidewaysfigure}
 \restoregeometry
 \doublespacing
-
-\subsection{Data Combination Estimator in the GMM Framework} \label{appendix:gmm}
-
-\noindent \textbf{[JJH: Conceptually just use $Y_t = \alpha + \beta X_t + \phi + \varepsilon_t \quad \varepsilon_t = \rho \varepsilon_{t-1} + \eta_t$. We then form moments. Please do this.]}
-
-\noindent \textbf{[JLG: This is the updated estimation procedure and framing in GMM. It's based on our discussion of this afternoon.]} \\
-\noindent \textbf{[JLG: Next steps are (i) estimate the model using 21 and 30, to have a comparison; (ii) matching. I'm hoping to get this before the week ends.]}\\
-\noindent \textbf{[JLG: This does not account yet for correlation. I'm waiting for our meeting so we can agree on how to deal with this and then I'll update it right the way.]}
 
 \subsection{Estimation Procedure and Data Combination Estimator in the GMM Framework} \label{appendix:gmm}
 
@@ -1345,8 +1337,6 @@ Q :=  {\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\theta} \right) }  \\ {\
 \noindent $\bm{W}$ is not restricted to be diagonal so that these moments are allowed to correlate. Iterated, feasible procedures to obtain an estimate of $\bm{W}$ jointly with the parameters of interest guarantee efficiency and are straightforward to implement \citep{Hansen_1982_Econometrica,Amemiya_1985_advanced}.\footnote{\citet{Altonji_Segal_1996_JoBaES} show that GMM presents downwards bias in absolute value in small-sample size setting, which could be a concern in our setting.}\\
 
 \noindent We explain the samples used to construct each empirical counterpart and the procedure to obtain standard errors on the predictions in Appendix~\ref{app:method_noobs} and Appendix~\ref{appendix:bootstrap}, respectively.
-
-\textbf{[JJH: We have to account for serial correlation.]}
 
 \subsection{Inference} \label{appendix:bootstrap}
 
