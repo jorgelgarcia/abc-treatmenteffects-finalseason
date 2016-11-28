@@ -47,7 +47,7 @@ drop   inc_labor
 rename inc_labori inc_labor
 
 foreach age of numlist 22(1)30 {
-	replace inc_labor = . if inc_labor > 300000 & age == `age'
+	replace inc_labor = . if inc_labor > 75000 & age == `age'
 	// replace inc_labor = . if inc_labor == 0 & age == `age'
 }
 
@@ -57,7 +57,7 @@ gen   linc_labor = l.inc_labor
 xtgls inc_labor male m_ed0y piatmath years_30y si21y_inc_labor linc_labor, corr(ar1) force igls rhotype(dw) 
 estimates store ar1cnlsy
 cd $output
-outreg2 [ar1cnlsy] using auto_cnlsy, replace alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 tex(frag)
+outreg2 [ar1cnlsy] using auto_cnlsy_lowinc, replace alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 tex(frag)
 
 // compute correlation
 gen      rho = e(rho)
@@ -66,7 +66,7 @@ summ     rho
 matrix   cnlsyrho = [r(mean)]
 
 cd $output
-outtable using cnlsyrho, mat(cnlsyrho) replace nobox center f(%9.3f)
+outtable using cnlsyrho_lowinc, mat(cnlsyrho) replace nobox center f(%9.3f)
 
 
 // nlsy
@@ -81,7 +81,7 @@ drop   inc_labor
 rename inc_labori inc_labor
 
 foreach age of numlist 31(1)55 {
-	replace inc_labor = . if inc_labor > 300000 & age == `age'
+	replace inc_labor = . if inc_labor > 75000 & age == `age'
 	// replace inc_labor = . if inc_labor == 0 & age == `age'
 }
 
@@ -103,7 +103,7 @@ drop   inc_labor
 rename inc_labori inc_labor
 
 foreach age of numlist 31(1)67 {
-	replace inc_labor = . if inc_labor > 300000 & age == `age'
+	replace inc_labor = . if inc_labor > 75000 & age == `age'
 	// replace inc_labor = . if inc_labor == 0 & age == `age'
 }
 
@@ -117,7 +117,7 @@ xtgls inc_labor male years_30y si30y_inc_labor linc_labor, corr(ar1) force igls 
 estimates store ar1psidnlsy
 
 cd $output
-outreg2 [ar1psidnlsy] using auto_cnlsy, replace alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 tex(frag)
+outreg2 [ar1psidnlsy] using auto_nlsypsid_lowinc, replace alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 tex(frag)
 
 // compute correlation
 gen      rho = e(rho)
@@ -126,8 +126,4 @@ summ     rho
 matrix   nlsypsidrho = [r(mean)]
 
 cd $output
-outtable using nlsypsidrho, mat(nlsypsidrho) replace nobox center f(%9.3f)
-
-
-
-
+outtable using nlsypsidrho_lowinc, mat(nlsypsidrho) replace nobox center f(%9.3f)

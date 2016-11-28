@@ -127,7 +127,3 @@ matrix   nlsypsidrho = [r(mean)]
 
 cd $output
 outtable using nlsypsidrho, mat(nlsypsidrho) replace nobox center f(%9.3f)
-
-
-
-

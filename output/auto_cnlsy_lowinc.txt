@@ -1,0 +1,23 @@
+	(1)
+	ar1cnlsy
+VARIABLES	inc_labor
+	
+male	699.035
+	(478.078)
+m_ed0y	468.219***
+	(147.208)
+piatmath	9.166
+	(24.405)
+years_30y	602.732***
+	(129.965)
+si21y_inc_labor	0.061***
+	(0.023)
+linc_labor	0.804***
+	(0.010)
+Constant	-10,336.819***
+	(2,505.670)
+	
+Observations	5,054
+Number of id	647
+Standard errors in parentheses	
+*** p<0.01, ** p<0.05, * p<0.10	

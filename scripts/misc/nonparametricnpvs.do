@@ -178,3 +178,4 @@ cd $output
 outtable using nonparametric_inc_labor_stats, mat(inc_labor_stats) replace nobox center f(%9.3f)
 
 
+ 

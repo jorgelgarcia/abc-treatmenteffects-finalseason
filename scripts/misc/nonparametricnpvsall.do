@@ -202,5 +202,5 @@ matrix colnames inc_labor_stats = estimate se pvalue
 
 cd $output
 outtable using nonparametric_inc_labor_stats_all, mat(inc_labor_stats) replace nobox center f(%9.3f)
-
+ 
 
