@@ -5,18 +5,18 @@ global klmshare		: env klmshare
 global klmMexico 	: env klmMexico
 global projects 	: env projects
 
-local dr = 0 						// discount rate 
+local dr = 0.03 					// discount rate 
 local file_specs	pset1_mset3 	// for income
 
 global flows		= "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/ratio_irr/flows"
 global save_data 	= "${klmMexico}/abccare/NPV/current"
 global income_data 	= "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/rslt/projections"
-global abc_data		= "${projects}/abc-treatmenteffects-finalseason/data/abccare/extensions/fam-merge"
+global abc_data		= "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/fam-merge"
 global ate_data		= "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/outcomes_ate"
 global proj_dir 	= "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/ratio_irr/npv_graphs"
 
 // produce point estimate and vector of NPV
-foreach loop in point /*vector*/ {
+foreach loop in /*point*/ vector {
 
 	// income
 
@@ -26,13 +26,17 @@ foreach loop in point /*vector*/ {
 	local transfer_max_age	79
 	local labor_max_age		67
 
-	cd "$income_data/`file_specs'"
-	foreach type in labor transfer {
-		if "`type'" == "transfer" {
-			cd "../transfer_`file_specs'"
-		}
-		insheet using "`type'_proj_combined_`file_specs'_pooled.csv", clear 
-		
+	// This is when using weights/lags
+	// cd "$income_data/`file_specs'"
+	cd $income_data
+	foreach type in labor /*transfer*/ {
+		// Commenting out when using no weights/no lags
+		//if "`type'" == "transfer" {
+		//	cd "../transfer_`file_specs'"
+		//}
+		// File name for weights/lags
+		//insheet using "`type'_proj_combined_`file_specs'_pooled.csv", clear 
+		insheet using "labor_proj_pooled.csv", clear
 		if "`loop'" == "point" {
 			keep if adraw == 0
 		}
@@ -71,8 +75,6 @@ foreach loop in point /*vector*/ {
 	}
 
 	// health
-
-	
 	
 	if "`loop'" == "point" {
 		cd $proj_dir
@@ -194,16 +196,16 @@ foreach loop in point /*vector*/ {
 	if "`loop'" == "point" {
 		merge 1:1 id using `save_raw_health_`loop'', nogen
 		merge 1:1 id using `save_labor_`loop'', nogen
-		merge 1:1 id using `save_transfer_`loop'', nogen
+		//merge 1:1 id using `save_transfer_`loop'', nogen
 	}
 	else {
 		merge m:m id adraw using `save_raw_health_`loop'', nogen
 		merge m:m id adraw using `save_labor_`loop'', nogen
-		merge m:m id adraw using `save_transfer_`loop'', nogen
+		//merge m:m id adraw using `save_transfer_`loop'', nogen
 	}
 
 	// discount
-	local components 	labor_c transfer_c ///
+	local components 	labor_c /*transfer_c*/ ///
 					health_private health_public qaly ssiclaim ssclaim /* diclaim */ ///
 					cccostprivate cccostpublic educost /*private_crime public_crime*/ ip_p_inc
 
@@ -272,7 +274,6 @@ foreach loop in point /*vector*/ {
 		keep id r male adraw qaly*
 	
 		collapse qaly*, by(r male adraw)
-	
 		save qaly_r-male-draw, replace
 	
 	restore

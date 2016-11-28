@@ -8,7 +8,7 @@ Original date:	August 29, 2016
 */
 
 // macros
-local file_specs	pset1_mset3
+local file_specs	pset1_mset1
 /*
 Matching control sets (mset)
 	1. Baseline controls only (W)
