@@ -417,9 +417,9 @@ for t in [1,2]:
             
             # write out tables
             if t == 1:
-                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}'.format(sex, i)))
+                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}_ts'.format(sex, i)))
             if t == 2:
-                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}_sd'.format(sex, i)))      
+                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}_ts_sd'.format(sex, i)))      
 
 
 print "successfully done!"
