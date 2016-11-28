@@ -87,4 +87,4 @@ xtgls inc_labor R male m_ed0y piatmath years_30y l.inc_labor, corr(ar1) force ig
 est sto groups
 
 cd $output
-outreg2 [samples groups] using rhotransform_testable, replace alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 tex(frag)
+outreg2 [samples groups] using rhotransform_testable, replace alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 tex(frag) sortvar(K R male m_ed0y piatmath years_30y l.inc_labor)

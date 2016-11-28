@@ -111,17 +111,17 @@ foreach draw of numlist 0(1)100 {
 		foreach var of varlist c* {
 			local  num  = `num'  + 1
 			local  numy = `numy' + 1 
-			rename c`num' c`numy'
+			rename c`num' a`numy'
 		}
 		
 		foreach num of numlist 30(1)67 {
-			replace c`num' = c`num' / ((1 + .03)^`num')
+			replace a`num' = a`num' / ((1 + .03)^`num')
 		}
 		
-		egen c = rowtotal(c*), missing
-		keep id c
-		collapse (mean) c
-		mkmat c, matrix(inc_labor_npv_`group'_`gender'_`draw')
+		egen a = rowtotal(a*), missing
+		keep id a
+		collapse (mean) a
+		mkmat a, matrix(inc_labor_npv_`group'_`gender'_`draw')
 		restore
 		}
 	}

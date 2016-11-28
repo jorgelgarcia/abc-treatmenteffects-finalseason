@@ -1,0 +1,19 @@
+	(1)
+	psar1psidnlsy
+VARIABLES	inc_labor
+	
+male	-53.960
+	(53.371)
+years_30y	53.349***
+	(12.748)
+si30y_inc_labor	-0.050***
+	(0.001)
+linc_labor	1.041***
+	(0.000)
+Constant	-499.774***
+	(154.730)
+	
+Observations	205,999
+Number of id	6,772
+Standard errors in parentheses	
+*** p<0.01, ** p<0.05, * p<0.10	
