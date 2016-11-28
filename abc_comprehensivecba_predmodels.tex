@@ -169,7 +169,7 @@ Y_{k,a} - \rho Y_{k,a-1} = \gamma_{0} \left( 1 - \rho \right) + \bm{\gamma}_{X} 
 
 \noindent If $\rho$ is known, it is straightforward to recover consistent estimates of $\bm{\gamma}$.\\
 
-\noindent If $\rho$ is unknown, there are various alternatives. Importantly, note that it is not identified \underline{unless} $bm{X}_{a} \neq \rho \bm{X}_{a-1}$ for at least one element different from the lag of $Y_{k,a} $. We are able to identify it because we observe education at ages 21 and 30. We estimate $\rho$ by the Durbin Watson method: (i) estimate Equation~\eqref{eq:linear1} by OLS and compute the residuals, $\varepsilon_{a}$ for $a \in [a^*, \ldots, A]$; (ii) estimate $\rho$ as  $\corr \left( \hat{\varepsilon}_{a}, \hat{\varepsilon}_{a-1} \right)$.\\ 
+\noindent If $\rho$ is unknown, there are various alternatives. Importantly, note that it is not identified \underline{unless} $bm{X}_{a} \neq \rho \bm{X}_{a-1}$ for at least one element different from the lag of $Y_{k,a} $. We are able to identify it because we observe education at ages 21 and 30.\footnote{An alternative is to estimate $\rho$ by the Durbin Watson method: (i) estimate Equation~\eqref{eq:linear1} by OLS and compute the residuals, $\varepsilon_{a}$ for $a \in [a^*, \ldots, A]$; (ii) estimate $\rho$ as  $\corr \left( \hat{\varepsilon}_{a}, \hat{\varepsilon}_{a-1} \right)$. This last equation provides the additional degree of freedom to identify $\rho$.}\\ 
 
 \noindent Once an estimate of $\rho$ is available, we can consistently estimate $\bm{\gamma}$. We iterate this procedure until an arbitrary degree of convergence is achieved. This is a standard feasible GLS method.\\ 
 
