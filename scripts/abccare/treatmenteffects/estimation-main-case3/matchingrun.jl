@@ -13,7 +13,7 @@ using Distances
 # Set globals and directories
 global current = pwd()
 global data = "$current/../../../../data/abccare/extensions/cba-iv"
-global output = "$current/../rslt"
+global output = "$current/../rslt-case3"
 global scripts = "$current/../../juliafunctions"
 
 # Include helper files
@@ -35,7 +35,7 @@ global dbootstraps = 99
 # declare other options
 global linear_ipw = 1
 global bygender = 1
-global factors = 1
+global factorswitch = 0
 global quietly = 1
 
 # ================================================================ #

@@ -43,7 +43,7 @@ global quietly = 1
 # Implement options
 # ================================================================ #
 # Define the gender loop
-global genderloop = ["pooled", "male", "female"]
+global genderloop = ["male", "female", "pooled"]
 
 # ================================================================ #
 # Bring in data
@@ -66,7 +66,7 @@ d_index = 1
 
 ITTini = Dict()
 
-for data in ("abccare", "abc", "care")
+for data in ("abccare", "abc")
 	if data == "abccare"
 		datainuse = abccare_data
 		controlset = conDict["controls_abccare"]
@@ -107,7 +107,7 @@ function ITTrun(boots)
 
 	d_index = 1
 
-	for data in ("abccare", "abc", "care")
+	for data in ("abccare", "abc")
 		if data == "abccare"
 			datainuse = abccare_data
 			controlset = conDict["controls_abccare"]
