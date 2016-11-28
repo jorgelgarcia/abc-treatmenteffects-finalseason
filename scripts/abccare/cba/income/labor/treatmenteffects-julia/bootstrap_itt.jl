@@ -59,7 +59,7 @@ for gender in genderloop
 	elseif gender == "female"
 		datainuse["$(gender)"] = abccare[abccare[:male] .== 0, :]
 		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :abc]
-		datainuse["$(gender)"][:male] = 1 # bsample does not work for [:male] == 0
+		datainuse["$(gender)"][:male] = 2 # bsample does not work for [:male] == 0
 	elseif gender == "pooled"
 		datainuse["$(gender)"] = abccare
 		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male, :abc]
