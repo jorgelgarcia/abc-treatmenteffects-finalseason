@@ -25,7 +25,7 @@
 
 \subsection{Investigating Different Prediction Models} \label{appendix:predmodels}
 
-\noindent Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the auxiliary sample:\\
+\noindent Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the auxiliary sample:
 
 \begin{equation}\label{eq:outcome}
 Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a}, \quad k \in \{n,e\}, \quad j \in \mathcal{J}_a, \quad d \in \{0, 1\}.
@@ -43,9 +43,9 @@ Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a},
 
 \noindent where $\eta_{k,j,{a}}$ is i.i.d. and satisfies Assumption ~\ref{ass:exog} (Exogeneity).\\
 
-\noindent It is also possible to extend the process in Equation~\eqref{eq:error} to account for an individual fixed. Given the limitations in our data, we decide to explore implications within this context.\\
+\noindent It is also possible to extend the process in Equation~\eqref{eq:error} to account for an individual fixed effect. Given the limitations in our data, we decide to explore implications within this context.\\
 
-\noindent Table~\ref{table:predsens} summarizes the results from this exploration through two statistics: (i) the net present value (discounted to birth treatment - control) of predicted labor income under different assumptions; and (ii) the overall cost-benefit ratio when the predictions are done based on the different proposed alternatives. The results indicate that there is little sensitivity to the deviations that we propose on the model that we base our predictions on in the main text.\\
+\noindent Table~\ref{table:predsens} summarizes the results from this exploration through two statistics: (i) the net present value (discounted to birth treatment - control) of predicted labor income under different assumptions; and (ii) the overall cost-benefit ratio when the predictions are done based on the different proposed alternatives. The results indicate that the model that we base our predictions on in the main text has little sensitivity to the deviations that we propose.
 
 \begin{table}[H] 
 \begin{threeparttable}
@@ -54,7 +54,7 @@ Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a},
 \centering 
 \footnotesize
 \begin{tabular}{cccc} \toprule
-\multicolumn{4}{l}{ \textbf{Specification 1:  Lagged outcome in $\bm{X}_{k,a}$; set to $\rho = 0$}} \\
+\multicolumn{4}{l}{ \textbf{Specification 1:  Lagged outcome in $\bm{X}_{k,a}$; set $\rho = 0$}} \\
 & NPV Labor Income & IRR & B/C \\
 Pooled  & 71,345 & 0.13  & 6.29 \\ 
              & (86,343) & (.05) & (2.11) \\ \\  
@@ -89,12 +89,12 @@ Females & 59,163 &  0.11 & 2.69 \\
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table displays the net present value of labor income in 2014 USD (treatment - control) using the four different specifications for predicting that are explained below. Specification 1 is what we present in the main text. It also presents the calculation of the internal rate of return and the benefit-cost ratio of the program using these different net present values.
+\item Note: This table displays the net present value of labor income in 2014 USD (treatment - control) using the four different specifications for prediction that are explained below. Specification 1 is what we present in the main text. It also presents the calculation of the internal rate of return and the benefit-cost ratio of the program using these different net present values.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
-\noindent In the auxiliary sample, we observe the outcome $Y_{n,j,a}$ for $a \in [a^*, \ldots, A]$. In the experimental sample, we observe the outcome $Y_{e,j,a}$ for at most two ages, depending on the outcome. For the time being, suppose that we observe the outcome at one age ($a = a^*$). We come back to this below. By out-of-sample predictions we mean using the information in in the auxiliary sample at  $a \in [a^*, \ldots, A]$ to form interpolations in the experimental sample, where we do not observe the outcome of interest during this age periods. We produce out-of-sample predictions and calculate the net present value of labor income (treatment - control) under different structures.\\ 
+\noindent In the auxiliary sample, we observe the outcome $Y_{n,j,a}$ for $a \in [a^*, \ldots, A]$. In the experimental sample, we observe the outcome $Y_{e,j,a}$ for at most two ages, depending on the outcome. For the time being, suppose that we observe the outcome at one age ($a = a^*$). We come back to this below. By out-of-sample predictions we mean using the information in the auxiliary sample at  $a \in [a^*, \ldots, A]$ to form extrapolations in the experimental sample, where we do not observe the outcome of interest during this age periods. We produce out-of-sample predictions and calculate the net present value of labor income (treatment - control) under different structures.\\ 
 
 \subsubsection{Specification 1: Lagged Component in $\phi_{j,a}$ and No Serial Correlation}
 
@@ -105,7 +105,7 @@ Females & 59,163 &  0.11 & 2.69 \\
 \begin{enumerate}
  
 \item The predictions across the paper are constructed under this framework: labor and transfer income, crime, and health. 
-\item Our comparison between realizations and predictions work quite well, as displayed in the Figure 6 of the main text. 
+\item Our comparison between realizations and predictions work quite well, as displayed in Figure 6 of the main text. 
 \item Additional tests show the following. We fail to reject: invariance across the treatment and the control groups, invariance across the experimental and auxiliary samples, and we fail to reject exogeneity both in the experimental and the auxiliary samples.  The tests are at $a = a^*$.
 \item No serial correlation is an odd assumption in this context.
 \end{enumerate}
@@ -122,13 +122,13 @@ Y_{k,j,a} = \phi_{j,a} (\bm{X}_{k,a}, \bm{B}_k) + \varepsilon_{k,j,a}, \quad k \
 
 \subsubsection{Specification 2: No Lagged Component in $\phi_{j,a}$ and Serial Correlation}
 
-\noindent In this scenario, we assume that (i)  $Y_{k,j,a}$ is not one of the elements in $\bm{X}_{k,a}$; and (ii) we do not restrict $\rho$ in Equation~\eqref{eq:error}.\\
+\noindent In this scenario, we assume that (i)  $Y_{k,j,a-1}$ is not one of the elements in $\bm{X}_{k,a}$; and (ii) we do not restrict $\rho$ in Equation~\eqref{eq:error}.\\
 
 \noindent \textbf{We note the following on this specification:}
 
 \begin{enumerate}
 
-\item Given that $Y_{k,j,a}$ is not one of the elements in $\bm{X}_{k,a}$, Assumption ~\ref{ass:exog} (Exogeneity) holds even when we do not restrict $\rho$ in Equation~\eqref{eq:error}. 
+\item Given that $Y_{k,j,a-1}$ is not one of the elements in $\bm{X}_{k,a}$, Assumption ~\ref{ass:exog} (Exogeneity) holds even when we do not restrict $\rho$ in Equation~\eqref{eq:error}. 
 
 \item It is straightforward to account for serial correlation in this case: serial correlation is a particular case of arbitrary heteroskedasticity. We do not even need to take a stand on the functional form in Equation~\eqref{eq:error}. We can simply invoke the assumption of $Y_{k,j,a}$ not being one of the elements in $\bm{X}_{k,a}$ and proceed to account for arbitrary forms of heteroskedasticity. 
 
@@ -140,18 +140,18 @@ Y_{k,j,a} = \phi_{j,a} (\bm{X}_{k,a}, \bm{B}_k) + \varepsilon_{k,j,a}, \quad k \
 
 \subsubsection{Specification 3: Lagged Component in $\phi_{j,a}$ and Serial Correlation} \label{section:laggedserial}
 
-\noindent In this scenario, we assume that (i)  $Y_{k,j,a}$ is one of the elements in $\bm{X}_{k,a}$; and (ii) we do not restrict $\rho$ in Equation~\eqref{eq:error}.\\
+\noindent In this scenario, we assume that (i)  $Y_{k,j,a-1}$ is one of the elements in $\bm{X}_{k,a}$; and (ii) we do not restrict $\rho$ in Equation~\eqref{eq:error}.\\
 
 \noindent \textbf{We note the following on this specification:}
 
 \begin{enumerate}
 
-\item The first question to ask is: is serial correlation present in the data? The estimates indicate that there is. From ages 21 to 30 we estimate the model in the CNLSY and the estimate for $\rho$ is $.7465$. From ages 30 to 67 (assumed retirement) we estimate the model in the NLSY79/PSID and the estimate for $\rho$ is $.5426$. When we restrict the sample to people who earn 75,000 at each of these ages, the analogous estimates of $\rho$ are $.7370$ and $.4645$. These estimates are significant at the 1\% level. We could invoke more formal tests, but with the size of the point estimates and their precision, we will never fail to reject the null of no autocorrelation. Details on this estimation come below.\\
+\item The first question to ask is: is serial correlation present in the data? The estimates indicate that it is. From ages 21 to 30 we estimate the model in the CNLSY and the estimate for $\rho$ is $.7465$. From ages 30 to 67 (assumed retirement) we estimate the model in the NLSY79/PSID and the estimate for $\rho$ is $.5426$. When we restrict the sample to people who earn 75,000 at each of these ages, the analogous estimates of $\rho$ are $.7370$ and $.4645$. These estimates are significant at the 1\% level. We could invoke more formal tests, but with the size of the point estimates and their precision, we will never fail to reject the null of no autocorrelation. Details on this estimation come below.\\
 
 \item The second question to ask is: is do the testable still implications hold?  It is possible to derive the implications for the $\rho$-transformed model that we explain below, and it is possible to test them.
 \end{enumerate}
 
-\noindent To obtain estimates in this context, we proceed as follows: we assume that $\phi_{k,j,a} \left( \cdot, \cdot \right)$ in Equation~\eqref{eq:routcome} is linear and drop the $j$ index that $\phi_{k,j,a} = \phi_{k,j,a'} \ \forall a \in [a^*, \ldots, A]$ and drop the $a$ index. The system of interest becomes
+\noindent To obtain estimates in this context, we proceed as follows: (i) we assume that $\phi_{k,j,a} \left( \cdot, \cdot \right)$ in Equation~\eqref{eq:routcome} is linear and drop the $j$ index so that $\phi_{k,a} = \phi_{k,a'} \ \forall a \in [a^*, \ldots, A]$, and (ii) we drop the $a$ index. The system of interest becomes
 
 \begin{eqnarray}
 Y_{k,a} &=&\gamma_{0} + \bm{\gamma}_{X,a} \bm{X}_{k} + \varepsilon_{a}. \label{eq:linear1} \\
@@ -169,15 +169,15 @@ Y_{k,a} - \rho Y_{k,a-1} = \gamma_{0} \left( 1 - \rho \right) + \bm{\gamma}_{X} 
 
 \noindent If $\rho$ is known, it is straightforward to recover consistent estimates of $\bm{\gamma}$.\\
 
-\noindent If $\rho$ is unknown, there are various alternatives. Importantly, note that it is not identified \underline{unless} $bm{X}_{a} \neq \rho \bm{X}_{a-1}$ for at least one element different from the lag of $Y_{k,a} $. We are able to identify it because we observe education at ages 21 and 30.\footnote{An alternative is to estimate $\rho$ by the Durbin Watson method: (i) estimate Equation~\eqref{eq:linear1} by OLS and compute the residuals, $\varepsilon_{a}$ for $a \in [a^*, \ldots, A]$; (ii) estimate $\rho$ as  $\corr \left( \hat{\varepsilon}_{a}, \hat{\varepsilon}_{a-1} \right)$. This last equation provides the additional degree of freedom to identify $\rho$.}\\ 
+\noindent If $\rho$ is unknown, there are various alternatives. Importantly, note that it is not identified \underline{unless} $\bm{X}_{a} \neq \rho \bm{X}_{a-1}$ for at least one element different from the lag of $Y_{k,a} $. We are able to identify it because we observe education at ages 21 and 30.\footnote{An alternative is to estimate $\rho$ by the Durbin Watson method: (i) estimate Equation~\eqref{eq:linear1} by OLS and compute the residuals, $\varepsilon_{a}$ for $a \in [a^*, \ldots, A]$; (ii) estimate $\rho$ as  $\corr \left( \hat{\varepsilon}_{a}, \hat{\varepsilon}_{a-1} \right)$. This last equation provides the additional degree of freedom to identify $\rho$.}\\ 
 
 \noindent Once an estimate of $\rho$ is available, we can consistently estimate $\bm{\gamma}$. We iterate this procedure until an arbitrary degree of convergence is achieved. This is a standard feasible GLS method.\\ 
 
-\noindent As mentioned at the beginning of this section, it is also possible to implement that tests of Assumption~\ref{ass:summary} (Invariance)  that we develop in the main text in this context. Table~\ref{table:invariance} displays these tests. As in the main text they consist of: (1) asking if a ``auxiliary sample'' indicator remains significant when predicting labor income (after accounting for $\bm{X}_{a}$ and $\bm{B}$ pooling the auxiliary and the experimental samples; and (2) asking if a ``treatment'' indicator remains significant when predicting labor income (after accounting for $\bm{X}_{a}$ and $\bm{B}$ within the experimental sample. We are able to test this at age 30, using age 21 as lagged income given that these are the two points that we observe in the experimental sample. We implement this test based on the $\rho$-transformed model. We fail to reject the two forms of invariance.\\
+\noindent As mentioned at the beginning of this section, it is also possible to implement that tests of Assumption~\ref{ass:summary} (Invariance)  that we develop in the main text in this context. Table~\ref{table:invariance} displays these tests. As in the main text they consist of: (1) asking if a ``auxiliary sample'' indicator remains significant when predicting labor income (after accounting for $\bm{X}_{a}$ and $\bm{B}$ in the pooled auxiliary and the experimental samples); and (2) asking if a ``treatment'' indicator remains significant when predicting labor income (after accounting for $\bm{X}_{a}$ and $\bm{B}$ within the experimental sample). We are able to test this at age 30, using age 21 as lagged income given that these are the two points that we observe in the experimental sample. We implement this test based on the $\rho$-transformed model. We fail to reject the two forms of invariance.\\
 
 \begin{table}[H] 
 \begin{threeparttable}
-\caption{Tests of Assumption~\ref{ass:summary} (Invariance) at Age 30, $\rho$-Transform Prediction Model}
+\caption{Tests of Assumption~\ref{ass:summary} (Invariance) at Age 30, $\rho$-Transformed Prediction Model}
 \label{table:invariance}
 \centering 
 \input{output/rhotransform_testable_ready}
@@ -194,7 +194,7 @@ Y_{k,a} - \rho Y_{k,a-1} = \gamma_{0} \left( 1 - \rho \right) + \bm{\gamma}_{X} 
 
 \subsubsection{Specification 4: Non-Parametric Predictions}
 
-\noindent An alternative to any of these scenarios is to form non-parametric predictions. That is: (i) for each individual $i$ in the experimental sample (e) find an individual(s) $l(i)$ in the non-experimental sample ($n$) using Algorithm~\ref{alg:match} in Appendix~\ref{appendix:match}; (ii) impute the post-$a^*$ trajectory of $Y_{k,j,a}$ of individual(s) $l(i)$ in the non-experimental sample ($n$) to individual $i$ in the experimental sample ($e$).\\ 
+\noindent An alternative to any of these scenarios is to form non-parametric predictions. That is: (i) for each individual $i$ in the experimental sample, $e$, find an individual(s) $l(i)$ in the non-experimental sample, $n$, using Algorithm~\ref{alg:match} in Appendix~\ref{appendix:match}; (ii) impute the post-$a^*$ trajectory of $Y_{k,j,a}$ of individual(s) $l(i)$ in the non-experimental sample, $n$, to individual $i$ in the experimental sample, $e$.\\ 
 
 \noindent We perform step (i) at age $a^*$, using variables in $\bm{X}_{j,a*}$. This includes labor income and education at age $a^*$ but not beyond (given that labor income (and education) is not observed in the experimental sample).\footnote{We use both pre- and post-treatment variables to perform step (i). The variables that we use are: years of birth, gender, number of siblings (pre-treatment); years of education, number of children, overall health self-report, and labor income all at age 30 (post-treatment).} In that sense, these estimates do not account for lagged labor income. They account for arbitrary serial correlation because, in both the experimental and the auxiliary samples, we sample the entire histories of individials ($i$ and $l(i)$) when bootstrapping. Thus, we do not restrict the serial correlation structure of the outcomes.\\
 
