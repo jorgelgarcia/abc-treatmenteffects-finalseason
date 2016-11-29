@@ -4,14 +4,14 @@ Created on Wed Mar 16 09:27:24 2016
 
 @author: jkcshea
 """
-from paths import paths
+from pathsappendix import paths
 import pandas as pd
 import os
 
 filedir = os.path.join(os.path.dirname(__file__))
 
 # declare general options for paths and table notes
-pathext = 'AppResOutput/abccare_appendix_oct29/'
+pathext = 'AppResOutput/abccare_appendix/current/'
 program = 'abccare'
 path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_appendix.csv')
 

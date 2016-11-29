@@ -22,7 +22,7 @@ global googledrive: env googledrive
 // do files
 global scripts      = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global collapseprj  = "$klmmexico/abccare/income_projections/"
+global collapseprj  = "$klmmexico/abccare/income_projections/current"
 global dataabccare  = "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
 global datacnlsyw   = "$klmshare/Data_Central/data-repos/nlsy/extensions/abc-match-cnlsy/"
 global datacnlsyp   = "$klmshare/Data_Central/data-repos/nlsy/primary/cnlsy/base"
@@ -34,8 +34,8 @@ global output       = "$projects/abc-treatmenteffects-finalseason/output/"
 // ABC/CARE
 // predicted at age 30
 cd $collapseprj
-use  labor_income_collapsed_pset1_mset3.dta, clear
-keep if age >= 26 & age <= 34
+use  labor_income_collapsed_pset1_mset1.dta, clear
+keep if age >= 25 & age <= 35
 
 collapse (mean) mean_age semean_age, by(R male)
 keep R mean_age semean_age male
@@ -96,7 +96,6 @@ gen age = 30
 cd $output
 save realpredwide.dta, replace
 
-/*
 reshape long real realse pred predse, i(male) j(R)
 gen realplus  = real + realse
 gen realminus = real - realse

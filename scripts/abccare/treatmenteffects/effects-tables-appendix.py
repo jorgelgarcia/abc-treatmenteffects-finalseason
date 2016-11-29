@@ -19,7 +19,7 @@ import math
 import numpy as np
 import pytabular as pytab
 from scipy.stats import percentileofscore
-from paths import paths 
+from pathsappendix import paths 
 
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
@@ -199,7 +199,7 @@ for block in blocks:
 			countone = sum(1 for item in sd_dist if tmp_tstat[i] <= item)
 
 			# calculate the temporary p-value
-			sd_pval_tmp[i] = (countone+1.0)/(1.0+101.0)
+			sd_pval_tmp[i] = (countone+1.0)/(1.0+1001.0)
 			
 			# store p-value according to step-down conditions
 			if i == 0:

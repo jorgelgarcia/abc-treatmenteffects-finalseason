@@ -74,15 +74,15 @@ foreach type of numlist 2 5 8  {
 		drop if ratios`type' < r(p5) | ratios`type' > r(p95)
 	
 		summ  ratios`type'
-		local point    = round(r(mean),.001)
+		local point    = round(r(mean),.01)
 		local pointnr  = r(mean)
-		local pointse  = round(r(sd),.001)
+		local pointse  = round(r(sd),.01)
 		
 		replace ratios`type' = ratios`type' - `pointnr' + 1
 		gen     ratios`type'`sex'ind = 0
 		replace ratios`type'`sex'ind = 1 if ratios`type' > `pointnr'
 		summ    ratios`type'`sex'ind
-		local pointp = round(r(mean),.001)
+		local pointp = round(r(mean),.01)
 		restore 
 		
 		// plot
@@ -122,15 +122,15 @@ foreach type of numlist 2 5 8  {
 		local perc = round(`perc',.01)
 		
 		summ  irr`type'
-		local point    = round(r(mean),.001)
+		local point    = round(r(mean),.01)
 		local pointnr  = r(mean)
-		local pointse  = round(r(sd),.001)
+		local pointse  = round(r(sd),.01)
 		
 		replace irr`type' = irr`type' - `pointnr' + .03
 		gen     irr`type'`sex'ind = 0
 		replace irr`type'`sex'ind = 1 if irr`type' > `pointnr'
 		summ    irr`type'`sex'ind
-		local pointp = round(r(mean),.001)
+		local pointp = round(r(mean),.01)
 		restore 
 		
 		// plot
@@ -147,7 +147,7 @@ foreach type of numlist 2 5 8  {
 				  note("Point Estimate: `point'(`pointse')[`pointp']. Percentage > 0: `perc'");
 		#delimit cr 
 		graph export irr_`type'_sex`sex'.eps, replace
-		di in r "Enter after seeing Figure" _request(Hello)
+		// di in r "Enter after seeing Figure" _request(Hello)
 		restore
 	}
 }

@@ -28,7 +28,7 @@ global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 
 // get all baseline types
-foreach num of numlist 1(1)9 {
+foreach num of numlist 1 2 5 8 9 {
 	foreach par in irr ratio {
 		cd $allresults/type`num'
 		foreach stat in mean se pval {
