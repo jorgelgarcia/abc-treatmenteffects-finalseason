@@ -184,7 +184,7 @@ foreach source in labor /*transfer*/ {
 	global y1  0[10]60
 	local bwidth1 = .65
 	local bwidth0 = .65  
-	foreach sex of numlist  0 1 {
+	foreach sex of numlist  0 {
 	
 	preserve
 
@@ -201,13 +201,9 @@ foreach source in labor /*transfer*/ {
 		local c_se				lcol(black) lpattern(dash)
 		
 		// scale of smoothing is strange, but see box for real real values.
-		replace real      = real - 4      if `sex' == 0 & R == 0
-		replace realplus  = realplus  - 4 if `sex' == 0 & R == 0
-		replace realminus = realminus - 4 if `sex' == 0 & R == 0
-		
-		replace real      = real - 4      if `sex' == 1 & R == 1
-		replace realplus  = realplus  - 4 if `sex' == 1 & R == 1
-		replace realminus = realminus - 4 if `sex' == 1 & R == 1
+		replace real      = real - 3      if `sex' == 0 & R == 0
+		replace realplus  = realplus  - 3 if `sex' == 0 & R == 0
+		replace realminus = realminus - 3 if `sex' == 0 & R == 0
 		
 		
 		# delimit ; 

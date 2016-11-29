@@ -87,7 +87,8 @@ foreach group in treat control {
 			matrix inc_labor_`group'_`gender'_`draw'_`num' = [.] 
 			
 			foreach age of numlist 30(1)67 {
-				summ   inc_labor`age' [iw =  wtabc_id`num'_c3_`group'] if draw == `draw' ${`gender'} &  wtabc_id`num'_c3_`group' >= .74
+				summ  wtabc_id`num'_c3_`group'
+				summ   inc_labor`age' [iw =  wtabc_id`num'_c3_`group'] if draw == `draw' ${`gender'} &  wtabc_id`num'_c3_`group' == r(max)
 				matrix inc_labor_`group'_`gender'_`draw'_`num' = [inc_labor_`group'_`gender'_`draw'_`num',r(mean)] 
 			}
 			matrix inc_labor_`group'_`gender'_`draw'_`num'   = [`num',inc_labor_`group'_`gender'_`draw'_`num'[1,2...]]
