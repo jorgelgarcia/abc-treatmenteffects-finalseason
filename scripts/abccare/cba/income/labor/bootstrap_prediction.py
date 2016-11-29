@@ -14,7 +14,7 @@ import pandas as pd
 from pandas.io.stata import StataReader
 from math import isnan
 
-from setup_prediction_lag import predict_abc
+from setup_prediction import predict_abc
 from load_data import interp, extrap, abcd
 
 sys.path.extend([os.path.join(os.path.dirname(__file__), '..')])
@@ -23,7 +23,7 @@ from paths import paths
 #----------------------------------------------------------------
 
 seed = 1234
-aux_draw = 1000
+aux_draw = 3
 
 #----------------------------------------------------------------
 

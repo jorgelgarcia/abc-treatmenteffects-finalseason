@@ -14,7 +14,7 @@ if not os.path.exists(tables):
 
 from cba_setup import robust_npv, makeflows, adraws, draws
 
-etype = 2
+etype = 8
 filled = makeflows(etype=etype)
 
 # aggregate certain componenets together
@@ -33,7 +33,7 @@ output = pd.DataFrame([])
 for part in components:
 	tmp = pd.DataFrame(0.,
 		index=pd.MultiIndex.from_product([['m', 'f', 'p'], [i for i in range(adraws)], [j for j in range(draws)]], names=['sex', 'adraw', 'draw']),
-		columns=['c{}'.format(i) for i in xrange(80)])
+		columns=['c{}'.format(i) for i in xrange(109)])
 	tmp.sort_index(inplace=True)
 
 	for sex in ['m', 'f', 'p']:

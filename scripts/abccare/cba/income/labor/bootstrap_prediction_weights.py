@@ -32,7 +32,7 @@ from paths import paths
 
 seed = 1234
 aux_draw = 2 # need to use more than 1
-pset_type = 6
+pset_type = 1
 
 #----------------------------------------------------------------
 
