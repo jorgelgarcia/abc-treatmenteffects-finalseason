@@ -107,22 +107,15 @@ if deaths == 1
 	idage["id943age"] = 40
 
 	for id_n in [74, 9999, 914, 99, 909, 87, 920, 951, 117, 947, 943]
-    mean_male = mean(abccare[abccare[:id] .== id_n, :male])
-		if mean_male == 1
-      sex = :male
-		elseif mean_male == 0
-      sex = :female
-    end
 
 		for age in [21:67]
 			if age > idage["id$(id_n)age"]
 				if (age == 21) | (age == 30)
 					println("Dealing with deaths: $(id_n) at age $(age)")
-          abccare[abccare[:id] .== id_n, parse("c$(age)")] = 0
+          abccare[abccare[:id] .== id_n, parse("tax$(age)")] = 0
 				else
 				  println("Dealing with deaths: $(id_n) at age $(age)")
-          abccare[abccare[:id] .== id_n, parse("c$(age)_$(sex)")] = 0
-          abccare[abccare[:id] .== id_n, parse("c$(age)_pooled")] = 0
+          abccare[abccare[:id] .== id_n, parse("tax$(age)")] = 0
 				end
 			end
 		end
