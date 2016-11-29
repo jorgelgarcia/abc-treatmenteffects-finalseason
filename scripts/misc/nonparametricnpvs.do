@@ -78,8 +78,8 @@ global pooled
 
 // one data set per treatment group, per gender, and per draw
 foreach group in treat control {
-	foreach gender in male female pooled {
-		foreach draw of numlist 0(1)100 {
+	foreach gender in male {
+		foreach draw of numlist 0(1)2 {
 		matrix inc_labor_`group'_`gender'_`draw' = J(1,39,.)
 		
 		
@@ -87,7 +87,8 @@ foreach group in treat control {
 			matrix inc_labor_`group'_`gender'_`draw'_`num' = [.] 
 			
 			foreach age of numlist 30(1)67 {
-				summ   inc_labor`age' [iw =  wtabc_id`num'_c3_`group'] if draw == `draw' ${`gender'} &  wtabc_id`num'_c3_`group' >= .6
+				summ  wtabc_id`num'_c3_`group'
+				summ   inc_labor`age' [iw =  wtabc_id`num'_c3_`group'] if draw == `draw' ${`gender'} &  wtabc_id`num'_c3_`group' == r(max)
 				matrix inc_labor_`group'_`gender'_`draw'_`num' = [inc_labor_`group'_`gender'_`draw'_`num',r(mean)] 
 			}
 			matrix inc_labor_`group'_`gender'_`draw'_`num'   = [`num',inc_labor_`group'_`gender'_`draw'_`num'[1,2...]]
@@ -99,9 +100,9 @@ foreach group in treat control {
 }
 
 // calculate NPVs (point estimates)
-foreach draw of numlist 0(1)100 {
+foreach draw of numlist 0(1)2 {
 	foreach group in treat control {
-		foreach gender in male female pooled {
+		foreach gender in male {
 		preserve
 		clear 
 		svmat inc_labor_`group'_`gender'_`draw', names(col)
@@ -129,9 +130,9 @@ foreach draw of numlist 0(1)100 {
 
 // stack point estimates and bootstraps 
 foreach group in treat control {
-	foreach gender in male female pooled {
+	foreach gender in male {
 		matrix inc_labor_dist_`group'_`gender' = [.]
-		foreach draw of numlist 0(1)100 {
+		foreach draw of numlist 0(1)2 {
 			matrix inc_labor_dist_`group'_`gender' = [inc_labor_dist_`group'_`gender',inc_labor_npv_`group'_`gender'_`draw']
 		}
 	matrix inc_labor_dist_`group'_`gender' = [inc_labor_dist_`group'_`gender'[1,2...]]'
@@ -139,7 +140,7 @@ foreach group in treat control {
 }
 
 // compute npv
-foreach gender in male female pooled {
+foreach gender in male {
 	preserve
 	clear
 	svmat inc_labor_dist_control_`gender', names(col)
@@ -169,6 +170,7 @@ foreach gender in male female pooled {
 	restore
 }
 
+/*
 // matrix output
 matrix inc_labor_stats = [inc_labor_stats_pooled \ inc_labor_stats_male \ inc_labor_stats_female]
 matrix rownames inc_labor_stats = pooled male female
