@@ -142,29 +142,6 @@ twoway (bar     m part2            if estimate == 3 & sex == 2, color(gs4) barw(
 #delimit cr 
 graph export abccare_npvs2.eps, replace
 
-/*
-cd $specialed
-insheet using npv_speccost_ts0.csv, clear
-gen     sex = 1 if gender == "pooled"
-replace sex = 2 if gender == "male"
-replace sex = 3 if gender == "female"
-
-gen part1 = 3
-gen estimate = 1
-gen sig = 1 if pval <= .10
-gen m = sum_speccost_npv/100000
-keep part1 estimate m sig sex 
-
-tempfile specialed
-save "`specialed'", replace
-
-use "`all'", clear
-append using "`specialed'"
-
-gen part0 = part1 - .215
-gen part2 = part1 + .215
-*/
-
 # delimit
 twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(.441))
        (bar     m part2            if estimate == 1 & sex == 2, color(gs8) barw(.442))
@@ -205,6 +182,24 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(
 			        , size(large));
 #delimit cr 
 graph export abccare_npvlarge.eps, replace
+
+# delimit
+twoway (bar     m part1            if estimate == 1 & sex == 3 & part1 <= 2, color(black) lwidth(medthick) barw(.9))
+       (bar     m part1            if estimate == 1 & sex == 3 & part1 >  2, color(gs8) lwidth(medthick) barw(.9))
+,	
+		legend(off)
+			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
+			  5 "Crime" 6 "Health",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
+			  ylabel(-1 0[1.5]4.5, angle(h) glcolor(gs14))
+			  xtitle("", size(small)) 
+			  ytitle("100,000's (2014 USD)", size(medium))
+			  graphregion(color(white)) plotregion(fcolor(white))
+			  note("Per-annum Rate of Return: Males and Females 13% (s.e. 5%)."
+			       "Benefit-cost Ratio: Males and Females 6.3 (s.e. 2.1)."
+			        , size(small))
+			text(-.3 4.5 "{&larr}{&hellip} Components of Total Benefits {&hellip}{&rarr}", size(medium));
+#delimit cr 
+graph export abccare_npvssummredux.eps, replace
 
 
 
