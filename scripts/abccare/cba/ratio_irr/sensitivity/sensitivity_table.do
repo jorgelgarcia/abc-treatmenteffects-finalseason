@@ -121,7 +121,7 @@ foreach stat in mean se pval {
 	save `discount', replace
 
 	// npv
-	insheet using ../tables/type2/npv_type2.csv, names clear
+	insheet using ../tables/current/type2/npv_type2.csv, names clear
 	gen sig_tmp = value < 0.10 & type == "pval"
 	bysort sex part: egen sig = max(sig_tmp)
 	drop sig_tmp
