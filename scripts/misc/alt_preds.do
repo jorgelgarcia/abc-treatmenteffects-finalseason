@@ -35,6 +35,8 @@ global collapseprj  = "$klmmexico/abccare/income_projections/"
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
+set seed 0
+
 // cnlsy
 cd $datacnlsyw
 use cnlsy-abc-match.dta, clear

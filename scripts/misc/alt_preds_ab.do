@@ -34,6 +34,7 @@ global collapseprj  = "$klmmexico/abccare/income_projections/"
 
 // output
 global output      = "$projects/abc-treatmenteffects-finalseason/output/"
+set seed 0
 
 // cnlsy
 cd $datacnlsyw
@@ -86,7 +87,7 @@ save   "`cnlsynlsy'", replace
 
 
 matrix ball = [.,.,.]
-foreach b of numlist 1(1)1000 {
+foreach b of numlist 1(1)100 {
 
 	use "`cnlsynlsy'", clear
 	keep id age inc_labor
@@ -111,23 +112,24 @@ foreach b of numlist 1(1)1000 {
 	gen id = _n
 	xtset id age
 
-	// inconsistent
 	gen inc_labor30 = si30y_inc_labor
-	gen inc_labor29 = si21y_inc_labor
+	gen inc_labor21 = si21y_inc_labor
 	
-	keep id male R inc_labor29 inc_labor30
+	keep id male R inc_labor21 inc_labor30
 	reshape long inc_labor, i(id) j(age)
+	tsfill
 	
-	gen dlinc_labor = inc_labor - l.inc_labor
-	reg dlinc_labor
-	predict resid, resid
-	drop dlinc_labor
+	bysort id : ipolate inc_labor age, gen(iinc_labor) epolate
+	xtabond iinc_labor, robust
+	predict xb, xb
+	gen resid = iinc_labor - xb
 	
+	keep id age R male inc_labor resid
+	keep if age == 21 | age == 30
 	reshape wide inc_labor resid, i(id) j(age)
-	
-	rename inc_labor29 inc_labor21
+	drop   resid21
 	rename resid30 resid
-	drop resid29
+	
 	
 	
 	foreach num of numlist 22(1)29 31(1)67 {
