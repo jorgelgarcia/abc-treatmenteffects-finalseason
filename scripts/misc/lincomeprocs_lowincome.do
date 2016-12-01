@@ -81,7 +81,7 @@ drop   inc_labor
 rename inc_labori inc_labor
 
 foreach age of numlist 31(1)55 {
-	replace inc_labor = . if inc_labor > 75000 & age == `age'
+	replace inc_labor = . if inc_labor > 30000 & age == `age'
 	// replace inc_labor = . if inc_labor == 0 & age == `age'
 }
 
@@ -103,7 +103,7 @@ drop   inc_labor
 rename inc_labori inc_labor
 
 foreach age of numlist 31(1)67 {
-	replace inc_labor = . if inc_labor > 75000 & age == `age'
+	replace inc_labor = . if inc_labor > 30000 & age == `age'
 	// replace inc_labor = . if inc_labor == 0 & age == `age'
 }
 

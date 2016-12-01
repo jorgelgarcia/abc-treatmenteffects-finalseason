@@ -78,13 +78,29 @@ replace inc_labor = 0 if inc_labor < 0
 
 sort id age
 
+// specification 1: lagged component; no serial correlation 
+reg inc_labor K male m_ed0y piatmath years_30y l.inc_labor, robust
+est sto samples_spec1 
+
+reg inc_labor R male m_ed0y piatmath years_30y l.inc_labor, robust
+est sto  groups_spec1
+
+// specification 2: no lagged component; serial correlation
+reg inc_labor K male m_ed0y piatmath years_30y, robust
+est sto samples_spec2
+
+reg inc_labor R male m_ed0y piatmath years_30y, robust
+est sto  groups_spec2
+
+// specification 3: lagged component; serial correlation
+
 // invariance: across samples
 xtgls inc_labor K male m_ed0y piatmath years_30y l.inc_labor, corr(ar1) force igls rhotype(dw) 
-est sto samples
+est sto samples_spec3
 
 // invariance: across treatment groups
 xtgls inc_labor R male m_ed0y piatmath years_30y l.inc_labor, corr(ar1) force igls rhotype(dw) 
-est sto groups
+est sto  groups_spec3
 
 cd $output
-outreg2 [samples groups] using rhotransform_testable, replace alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 tex(frag) sortvar(K R male m_ed0y piatmath years_30y l.inc_labor)
+outreg2 [samples_spec1 groups_spec1 samples_spec2 groups_spec2 samples_spec3 groups_spec3] using multiplespecs_testable, replace alpha(.01, .05, .10) sym (***, **, *) dec(3) par(se) r2 tex(frag) sortvar(K R male m_ed0y piatmath years_30y l.inc_labor _cons)

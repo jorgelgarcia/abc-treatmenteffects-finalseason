@@ -43,7 +43,7 @@ levelsof id if R == 1, local(idstreat)
 cd $datapsidw
 use psid-abc-match.dta, clear
 keep if black == 1
-keep id male inc_labor30-inc_labor67
+keep id male years_30y inc_labor30-inc_labor67
 reshape long inc_labor, i(id) j(age)
 xtset id age
 bysort id: ipolate inc_labor age, gen(inc_labori) epolate
@@ -51,7 +51,7 @@ drop   inc_labor
 rename inc_labori inc_labor
 replace inc_labor = . if inc_labor < 0 | inc_labor > 300000
 reshape wide inc_labor, i(id) j(age)
-keep id male inc_labor30-inc_labor67
+keep id male years_30y inc_labor30-inc_labor67
 tempfile psid 
 save   "`psid'", replace 
 
@@ -77,6 +77,10 @@ global male & male == 1
 global pooled
 
 // one data set per treatment group, per gender, and per draw
+
+global controledset & years_30y <=  12
+global treatedset & years_30y   >  12
+
 foreach group in treat control {
 	foreach gender in male {
 		foreach draw of numlist 0(1)2 {
@@ -87,8 +91,8 @@ foreach group in treat control {
 			matrix inc_labor_`group'_`gender'_`draw'_`num' = [.] 
 			
 			foreach age of numlist 30(1)67 {
-				summ  wtabc_id`num'_c3_`group'
-				summ   inc_labor`age' [iw =  wtabc_id`num'_c3_`group'] if draw == `draw' ${`gender'} &  wtabc_id`num'_c3_`group' >= .735
+				// summ  wtabc_id`num'_c3_`group'
+				summ   inc_labor`age' [iw =  wtabc_id`num'_c3_`group'] if draw == `draw' ${`gender'} &  wtabc_id`num'_c3_`group' >= .735 ${`group'edset}
 				matrix inc_labor_`group'_`gender'_`draw'_`num' = [inc_labor_`group'_`gender'_`draw'_`num',r(mean)] 
 			}
 			matrix inc_labor_`group'_`gender'_`draw'_`num'   = [`num',inc_labor_`group'_`gender'_`draw'_`num'[1,2...]]

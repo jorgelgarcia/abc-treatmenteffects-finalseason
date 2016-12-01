@@ -43,11 +43,11 @@ global cnlsyinc inc_labor21-inc_labor29
 global  psidinc inc_labor30-inc_labor67
 global  nlsyinc inc_labor30-inc_labor55
 
-foreach data in cnlsy psid nlsy {
+foreach data in cnlsy psid {
 	cd ${data`data'w}
 	use `data'-abc-match.dta, clear
 	keep if black == 1
-	keep id male ${`data'inc}
+	keep id male years_30y ${`data'inc}
 	reshape long inc_labor, i(id) j(age)
 	xtset id age
 	bysort id: ipolate inc_labor age, gen(inc_labori) epolate
@@ -55,7 +55,7 @@ foreach data in cnlsy psid nlsy {
 	rename inc_labori inc_labor
 	replace inc_labor = . if inc_labor < 0 | inc_labor > 300000
 	reshape wide inc_labor, i(id) j(age)
-	keep id male ${`data'inc}
+	keep id male years_30y ${`data'inc}
 	tempfile `data' 
 	save   "``data''", replace 
 
@@ -81,26 +81,26 @@ foreach data in cnlsy psid nlsy {
 }
 
 use "`rcnlsy'", clear
-append using "`rnlsy'"
 append using "`rpsid'"
 
-/*
-// normalize weights so CHARLS and CFPS summ up to 1/2 (each)
-foreach group in treat control {
-	foreach num of numlist `ids`group'' {
-		foreach survey in psid nlsy {
-			summ    wtabc_id`num'_c3_`group'                                       if `survey' == 1
-			replace wtabc_id`num'_c3_`group' = (wtabc_id`num'_c3_`group'/r(sum))/2 if `survey' == 1
-		}
-	summ    wtabc_id`num'_c3_`group'                                       if cnlsy == 1
-	replace wtabc_id`num'_c3_`group' = (wtabc_id`num'_c3_`group'/r(sum))/2 if cnlsy == 1
-	}
-}
-*/
-
 global female & male == 0
-global male & male == 1
+global male   & male == 1
 global pooled
+
+// gender specific weights
+foreach group in treat {
+	foreach num of numlist `ids`group'' {
+		replace wtabc_id`num'_c3_`group' = . if wtabc_id`num'_c3_`group' <= .6   & male == 0
+		replace wtabc_id`num'_c3_`group' = . if wtabc_id`num'_c3_`group' <= .735 & male == 1 ${`group'edset}
+	}
+	
+}
+
+// drop non-weighted individuals
+egen allcont  = rowtotal(wtabc_id78_c3_control-wtabc_id985_c3_control), missing
+egen alltreat = rowtotal(wtabc_id68_c3_treat-wtabc_id152_c3_treat), missing 
+
+drop if allcont == . & alltreat == .
 
 // one data set per treatment group, per gender, and per draw
 foreach group in treat control {
@@ -113,7 +113,7 @@ foreach group in treat control {
 			matrix inc_labor_`group'_`gender'_`draw'_`num' = [.] 
 			
 			foreach age of numlist 21(1)67 {
-				summ   inc_labor`age' [iw =  wtabc_id`num'_c3_`group'] if draw == `draw' ${`gender'} &  wtabc_id`num'_c3_`group' >= .6
+				summ   inc_labor`age' [iw =  wtabc_id`num'_c3_`group'] if draw == `draw' ${`gender'}
 				matrix inc_labor_`group'_`gender'_`draw'_`num' = [inc_labor_`group'_`gender'_`draw'_`num',r(mean)] 
 			}
 			matrix inc_labor_`group'_`gender'_`draw'_`num'   = [`num',inc_labor_`group'_`gender'_`draw'_`num'[1,2...]]
