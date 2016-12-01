@@ -155,7 +155,8 @@ mean = rslt_y.groupby(level=['variable', 'ddraw']).transform(lambda x: x.mean())
 null = rslt_y - mean
 null = null.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True)/se
 null.sort_index(inplace=True)
-null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] = null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] * -1
+for coef in tmp_rslt.columns:	
+    null.loc[invoutcomes['{}'.format(coef)], coef] = null.loc[invoutcomes['{}'.format(coef)], coef] * -1 
 
 tstat = point/se
 tstat.sort_index(inplace=True)
