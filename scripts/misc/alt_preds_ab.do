@@ -51,10 +51,11 @@ foreach age of numlist 22(1)30 {
 	// replace inc_labor = . if inc_labor == 0 & age == `age'
 }
 
+gen cnlsy = 1 
 tempfile cnlsy
 save "`cnlsy'", replace
 
-// psid
+// nlsy
 cd $datanlsyw
 use nlsy-abc-match.dta, clear
 drop if black !=1 
@@ -72,7 +73,7 @@ foreach age of numlist 31(1)55 {
 	replace inc_labor = . if inc_labor > 300000 & age == `age'
 	// replace inc_labor = . if inc_labor == 0 & age == `age'
 }
-
+gen nlsy = 1
 append using "`cnlsy'"
 
 tset id age
@@ -82,77 +83,59 @@ gen  llinc_labor = l.linc_labor
 tempfile cnlsynlsy
 save   "`cnlsynlsy'", replace
 
+
+
 matrix ball = [.,.,.]
 foreach b of numlist 1(1)1000 {
 
 	use "`cnlsynlsy'", clear
+	keep id age inc_labor
+	reshape wide inc_labor, i(id) j(age)
+	
 	bsample
+	drop id 
+	gen id = _n
+	reshape long inc_labor, i(id) j(age)
+	xtset id age
 
 	// parameterization 
-	reg inc_labor male m_ed0y piatmath years_30y si21y_inc_labor linc_labor llinc_labor, robust 
+	xtabond inc_labor, robust
 	matrix b1 = e(b)
-	// save vector of residuals to a matrix
-	predict resid1, resid
-
-	// parameterization
-	reg inc_labor male years_30y si30y_inc_labor linc_labor llinc_labor, robust 
-	matrix b2 = [e(b)]
-	// save vector of residuals to a matrix 
-	predict resid2, resid 
-
-	summ resid1 if male == 1
-	local var1male   = r(sd)
-	summ resid1 if male == 0
-	local var1female = r(sd)
-
-	summ resid2 if male == 1
-	local var2male   = r(sd)
-	summ resid2 if male == 0
-	local var2female = r(sd)
 
 	// based on this, construct abc/care prediction
 	cd $dataabccare
 	use append-abccare_iv.dta, clear
 	drop if random == 3
 	bsample
-
-	egen piatmath    = rowmean(piat_math5y6m piat_math6y piat_math6y6m) if program == "abc"
-	egen piatmachcare = rowmean(wj_math5y6m wj_math6y wj_math7y6m)      if program == "care"
-	replace piatmath = piatmachcare  if program == "care" 
+	drop id
+	gen id = _n
+	xtset id age
 
 	// inconsistent
 	gen inc_labor30 = si30y_inc_labor
-	gen inc_labor21 = si21y_inc_labor
-	gen inc_labor20 = si21y_inc_labor
-
-	foreach num of numlist 22(1)29 {
+	gen inc_labor29 = si21y_inc_labor
+	
+	keep id male R inc_labor29 inc_labor30
+	reshape long inc_labor, i(id) j(age)
+	
+	gen dlinc_labor = inc_labor - l.inc_labor
+	reg dlinc_labor
+	predict resid, resid
+	drop dlinc_labor
+	
+	reshape wide inc_labor resid, i(id) j(age)
+	
+	rename inc_labor29 inc_labor21
+	rename resid30 resid
+	drop resid29
+	
+	
+	foreach num of numlist 22(1)29 31(1)67 {
 		local numm1 = `num' - 1
-		local numm2 = `num' - 2
-		gen inc_labor`num' = b1[1,1]*male + b1[1,2]*m_ed0y + b1[1,3]*piatmath + years_30y*b1[1,4] /// 
-				   + si21y_inc_labor*b1[1,5] + b1[1,6]*inc_labor`numm1' + b1[1,7]*inc_labor`numm2' + b1[1,8] 
-		
-		gen draw`num'male       =  rnormal(0,`var1male')
-		replace  inc_labor`num' =  inc_labor`num' + draw`num'male   if male == 1
-		
-		gen draw`num'female     =  rnormal(0,`var1female')
-		replace  inc_labor`num' =  inc_labor`num' + draw`num'female if male == 0
+		gen inc_labor`num' = b1[1,2] + b1[1,1]*inc_labor`numm1' + resid
 	}
 
-	foreach num of numlist 31(1)67 {
-		local numm1 = `num' - 1
-		local numm2 = `num' - 2
-		gen inc_labor`num' = b2[1,1]*male + /// 
-				     b2[1,2]*years_30y + b2[1,3]*si30y_inc_labor +  b2[1,4]*inc_labor`numm1'  ///
-				   + b2[1,5]*inc_labor`numm2' + b2[1,6] 
-		
-		gen draw`num'male       =  rnormal(0,`var2male')
-		replace  inc_labor`num' =  inc_labor`num' + draw`num'male   if male == 1
-		
-		gen draw`num'female     =  rnormal(0,`var2female')
-		replace  inc_labor`num' =  inc_labor`num' + draw`num'female if male == 0
-	}
-
-	keep R male m_ed0y piatmath years_30y si21y_inc_labor inc_labor21-inc_labor67 inc_labor30
+	keep R male inc_labor21-inc_labor67 inc_labor30
 	aorder
 
 	foreach num of numlist 21(1)67 {
@@ -189,4 +172,4 @@ foreach var of varlist pooled male female {
 matrix mat = [pooled \ male \ female]
 
 cd $output
-outtable using auto_npvmat, mat(mat) replace nobox center f(%9.3f)
+outtable using auto_npvmat_ab, mat(mat) replace nobox center f(%9.3f)
