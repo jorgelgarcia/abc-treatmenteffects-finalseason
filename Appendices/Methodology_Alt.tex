@@ -1423,7 +1423,7 @@ Y_{k,a} &=&\gamma_{0} + \gamma_{y} Y_{k,a-1} + \gamma_{\tilde{X}} \tilde{\bm{X}}
 
 \subsection{Estimation Procedure and Data Combination Estimator in the GMM Framework} \label{appendix:gmm}
 
-\noindent \textbf{[JLG: I'm worked on your requests on this section.]}\\
+\noindent \textbf{[JLG: I worked on your requests on this section.]}\\
 
 \noindent Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the auxiliary sample:\\
 
@@ -1431,11 +1431,11 @@ Y_{k,a} &=&\gamma_{0} + \gamma_{y} Y_{k,a-1} + \gamma_{\tilde{X}} \tilde{\bm{X}}
 Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a}, \quad k \in \{n,e\}, \quad j \in \mathcal{J}_a, \quad d \in \{0, 1\}.
 \end{equation}
 
-\noindent $\phi^d_{k,j,a}\left( \cdot, \cdot \right)$ is an invariant structural production relationship mapping inputs $\bm{X}^d_{k,a}, \bm{B}_k$ into output $Y^d_{k,j,a}$ holding error term $\varepsilon^d_{k,j,a}$ fixed. For simplicity, we initially let Assumption ~\ref{ass:exog} (Exogeneity) hold. That is, once we condition on $\bm{X}^d_{k,a}, \bm{B}_k$, $ \varepsilon^d_{k,j,a}$ is not serially correlated. We relax this below. \textbf{[JJH: we never do ---we should.] [JLG: we do now; below.]}\\
+\noindent $\phi^d_{k,j,a}\left( \cdot, \cdot \right)$ is an invariant structural production relationship mapping inputs $\bm{X}^d_{k,a}, \bm{B}_k$ into output $Y^d_{k,j,a}$ holding error term $\varepsilon^d_{k,j,a}$ fixed. For simplicity, we initially let Assumption ~\ref{ass:exog} (Exogeneity) hold. That is, once we condition on $\bm{X}^d_{k,a}$ and $\bm{B}_k$, $ \varepsilon^d_{k,j,a}$ is not serially correlated. We relax this below. \textbf{[JJH: we never do ---we should.] [JLG: we do now; below.]}\\
 
 \noindent In this section, we: (i) explain the procedure that we follow to form out-of-sample predictions; and (ii) formulate the estimation procedure in a generalized method of moments (GMM) framework.\\
 
-\noindent In the auxiliary sample, we observe the outcome $Y_{n,j,a}$ for $a \in [a^*, \ldots, A]$. In the experimental sample, we observe the outcome $Y_{e,j,a}$ for at most at two ages, depending on the outcome. We initially assume that we observe the outcomes at one age ($a^*$). We relax this assumption below.\\
+\noindent In the auxiliary sample, we observe the outcome $Y_{n,j,a}$ for $a \in [a^*, \ldots, A]$. In the experimental sample, we observe the outcome $Y_{e,j,a}$ for at most two ages, depending on the outcome. We initially assume that we observe the outcomes at one age ($a^*$). We relax this assumption below.\\
 
 \noindent Before explaining our estimation procedure, note that Assumption~\ref{ass:summary} (Invariance) implies that $\phi_{k,j,a}^d \left (\cdot, \cdot \right) = \phi_{k,j,a}  \left (\cdot, \cdot \right) = \phi_{j,a}  \left (\cdot, \cdot \right)$. That is, invariance holds across the treatment and the control groups and invariance holds across the experimental and the auxiliary samples. Invariance across the treatment and the control groups implies that the variables $\bm{X}_{k,a}^d$ summarize the effect of the treatment on the outcome. Given Assumption~\ref{ass:summary} (Invariance)  and Assumption ~\ref{ass:exog} (Exogeneity), the distribution of $\varepsilon_{k,j,a}^d$ is the same across the treatment and the control groups. This allows us to drop the superscript in $\varepsilon_{k,j,a}^d$.\\
 
@@ -1551,7 +1551,7 @@ Y_{n,j,a} -  \hat{\phi}_{j,a} (\bm{X}_{k,a}, \bm{B}_k) : = \hat{\varepsilon}_{n,
 \noindent In practice, we randomly sample a vector of residuals from an individual $j$ in the auxiliary sample ($n$) and pair it with the vector $\hat{\bm{Y}}_{e,j}$ of individual $i$ in the experimental sample ($e$) to form the prediction $\tilde{\bm{Y}}_{e,j}$ for individual $i$ in the experimental sample. That is, the pairing of individual $j$ in the auxiliary sample ($n$) with individual $i$ in the experimental sample ($e$) is random. Random pairing is valid under invariance and exogeneity, i.e. under this assumption the vector of residuals from any individual $j$ in the auxiliary sample is a valid estimate for the vector of residuals of any individual $i$ in the experimental sample. We form the pairing one time for the main point estimates, and then bootstrap this pairing when producing inference. See Appendix~\ref{appendix:bootstrap} for more details on our inference procedures.
 \end{enumerate}
 
-\noindent In this specification, there is no ``initialization'' of the prediction out of sample. Thus, we the GMM estimate consists of minimizing 
+\noindent In this specification, there is no ``initialization'' of the prediction out of sample. Thus, the GMM estimate consists of minimizing 
 
 \begin{equation}
 Q :=  {\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\theta} \right) }  \end{bmatrix}}^{'}
