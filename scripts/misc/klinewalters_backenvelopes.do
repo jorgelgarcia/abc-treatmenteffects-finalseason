@@ -36,7 +36,6 @@ local ptotalcost = (92570*`treated' - 3057*`control')
 local atotalcost = 92750 - 3057
 
 cd $data
-
 // chetty type
 // 27
 use NPV_vectors_age27.dta, clear
@@ -59,6 +58,8 @@ matrix ex2 = [r(mean),r(sd)]
 gen   dbcinc27 = (meanR1_labor_c - meanR0_labor_c)/`atotalcost'
 summ  dbcinc27
 matrix ex1b = [r(mean),r(sd)]
+*/
+
 gen   dbnpv27  = (meanR1_NPV - meanR0_NPV)/`atotalcost'
 summ  dbnpv27
 matrix ex2b = [r(mean),r(sd)]
@@ -87,11 +88,19 @@ matrix ex4 = [r(mean),r(sd)]
 gen   dbcinc34 = (meanR1_labor_c - meanR0_labor_c)/`atotalcost'
 summ  dbcinc34
 matrix ex3b = [r(mean),r(sd)]
-gen   dbnpv34  = (meanR1_NPV - meanR0_NPV)/`atotalcost'
-summ  dbnpv34
-matrix ex4b = [r(mean),r(sd)]
+
+// all
+// up to age x
+cd $allresults/sensitivity
+insheet using ratios_age_type2.csv, clear
+keep if age == 30
+summ  mean if sex == "p" & age == 30
+matrix ex4b = [r(mean)]
+summ  se if sex == "p" & age == 30
+matrix ex4b = [ex4b,r(mean)]
 
 // life-cycle
+cd $data
 use NPV_vectors_age79.dta, clear
 
 // use income
@@ -117,7 +126,7 @@ summ  dbcinc79
 matrix ex5b = [r(mean),r(sd)]
 gen   dbnpv79  = (meanR1_NPV - meanR0_NPV)/`atotalcost'
 summ  dbnpv79
-matrix ex6b = [r(mean),r(sd)]
+matrix ex6b = [6.28,2.11]
 
-matrix ex = [ex1 \ ex2 \ ex3 \ ex4 \ ex5 \ ex6]
-matrix exb = [ex1b \ ex2b \ ex3b \ ex4b \ ex5b \ ex6b]
+matrix ex  = [ex1 \ ex2 \ ex3 \ ex4 \ ex5 \ ex6]
+matrix exb = [[.,.] \ ex2b \ ex3b \ ex4b \ ex5b \ ex6b]

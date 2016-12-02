@@ -127,27 +127,27 @@ foreach group in treat control {
 // calculate NPVs (point estimates)
 foreach draw of numlist 0(1)100 {
 	foreach group in treat control {
-		foreach gender in male female pooled {
+		foreach gender in male pooled female {
 		preserve
 		clear 
 		svmat inc_labor_`group'_`gender'_`draw', names(col)
 		rename c1 id
 		local num  = 1
-		local numy = 29
+		local numy = 20
 		foreach var of varlist c* {
 			local  num  = `num'  + 1
 			local  numy = `numy' + 1 
-			rename c`num' c`numy'
+			rename c`num' a`numy'
 		}
 		
 		foreach num of numlist 21(1)67 {
-			replace c`num' = c`num' / ((1 + .03)^`num')
+			replace a`num' = a`num' / ((1 + .03)^`num')
 		}
 		
-		egen c = rowtotal(c*), missing
-		keep id c
-		collapse (mean) c
-		mkmat c, matrix(inc_labor_npv_`group'_`gender'_`draw')
+		egen a = rowtotal(a*), missing
+		keep id a
+		collapse (mean) a
+		mkmat a, matrix(inc_labor_npv_`group'_`gender'_`draw')
 		restore
 		}
 	}
@@ -155,7 +155,7 @@ foreach draw of numlist 0(1)100 {
 
 // stack point estimates and bootstraps 
 foreach group in treat control {
-	foreach gender in male female pooled {
+	foreach gender in male pooled female {
 		matrix inc_labor_dist_`group'_`gender' = [.]
 		foreach draw of numlist 0(1)100 {
 			matrix inc_labor_dist_`group'_`gender' = [inc_labor_dist_`group'_`gender',inc_labor_npv_`group'_`gender'_`draw']
@@ -165,7 +165,7 @@ foreach group in treat control {
 }
 
 // compute npv
-foreach gender in male female pooled {
+foreach gender in male pooled female {
 	preserve
 	clear
 	svmat inc_labor_dist_control_`gender', names(col)
