@@ -125,12 +125,13 @@ foreach t in frate srate ficar {
 	gen `t'_paid = (`t'/100) * pwages
 }
 
+// drop negative income. Not applicable here.
+drop if pwages < 0
 
 gen tax = frate_paid + srate_paid + ficar_paid if frate_paid < . & srate_paid < . & frate_paid < .
 keep tax age adraw id
 
-// drop negative income. Not applicable here.
-drop if pwages < 0
+
 
 sort id adraw
 gen N = _n
@@ -139,5 +140,5 @@ reshape wide tax, i(N) j(age)
 drop N 
 order adraw id, first
 
-cd $output
-export delim using "tax_proj_pooled.csv", replace
+//cd $output
+//export delim using "tax_proj_pooled.csv", replace
