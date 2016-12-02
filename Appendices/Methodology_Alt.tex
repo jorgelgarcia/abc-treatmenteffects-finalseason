@@ -1342,7 +1342,7 @@ Females & 31,303 & 0.05 & 1.29 & &34,590 & 0.06 & 1.43 \\
  
 \item The predictions across the paper are constructed under this framework: labor and transfer income, crime, and health. 
 \item Our comparison between realizations and predictions work quite well, as displayed in Figure~\ref{fig:labor-income-profiles} of the main text. 
-\item Additional tests show the following. We fail to reject: invariance across the treatment and the control groups, invariance across the experimental and auxiliary samples, and we fail to reject exogeneity both in the experimental and the auxiliary samples.  The tests are at $a = a^*$. See Appendix~\ref{superscriptapp:invariance}
+\item Additional tests show the following. We fail to reject: invariance across the treatment and the control groups, invariance across the experimental and auxiliary samples, and we fail to reject exogeneity both in the experimental and the auxiliary samples.  The tests are at $a = a^*$. See Appendix~\ref{app:invariance}
 \item No serial correlation is an odd assumption in this context.
 \end{enumerate}
 
@@ -1625,7 +1625,7 @@ Y_{k,a} &=& \gamma_{0} + \gamma_{y} Y_{k,a-1} + \varepsilon_{a}\label{eq:linear1
 
 \item In step 4., we compute an individual-level vector of residuals in each of the samples $(n,s',0)$ and $(n,s',1)$. That is, each individual has a vector containing the residuals of each of her predicted variable (for example, labor income). Call this vector of residuals $\bm{\mathcal{E}}_{i',n,s'}^d$: the vector of residuals for individual $i'$ in the auxiliary bootstrap sample $s'$, in the synthetic group $d$.
 
-\item Randomly pair individual $i'$ in $s'$ with individual $i$ in $s$. The prediction accounting for prediction error is $\bm{Y}_{i,e,s}^d + \bm{\mathcal{E}}_{i',e,s'}^d$. As described in Appendix~\ref{app:gmm}, this step changes. We estimate the prediction error from the experimental sample (and we account for this when bootstrapping as well).
+\item Randomly pair individual $i'$ in $s'$ with individual $i$ in $s$. The prediction accounting for prediction error is $\bm{Y}_{i,e,s}^d + \bm{\mathcal{E}}_{i',e,s'}^d$. As described in Appendix~\ref{appendix:gmm}, this step changes. We estimate the prediction error from the experimental sample (and we account for this when bootstrapping as well).
 
 \item Repeat this for all pairs of samples $(n,s'), (e,s)$. We resample the experimental sample and auxiliary sample 100 times each. This gives us the empirical bootstrap distribution, with 100*100 points.
 
