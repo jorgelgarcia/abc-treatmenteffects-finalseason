@@ -78,12 +78,18 @@ global pooled
 
 // one data set per treatment group, per gender, and per draw
 
-global controledset & years_30y <=  12
-global treatedset & years_30y   >  12
+global controlsetmale & years_30y <=  12 & .735 <=
+global treatsetmale   & years_30y >   12 & .735 <=
+
+global controlsetmale   & .6 <=
+global treatsetfemale   & .6 <=
+
+global controlsetpooled & .6 <=
+global treatsetpooled   & .6 <=
 
 foreach group in treat control {
-	foreach gender in male {
-		foreach draw of numlist 0(1)2 {
+	foreach gender in male female pooled {
+		foreach draw of numlist 0(1)100 {
 		matrix inc_labor_`group'_`gender'_`draw' = J(1,39,.)
 		
 		
@@ -91,8 +97,7 @@ foreach group in treat control {
 			matrix inc_labor_`group'_`gender'_`draw'_`num' = [.] 
 			
 			foreach age of numlist 30(1)67 {
-				// summ  wtabc_id`num'_c3_`group'
-				summ   inc_labor`age' [iw =  wtabc_id`num'_c3_`group'] if draw == `draw' ${`gender'} &  wtabc_id`num'_c3_`group' >= .735 ${`group'edset}
+				summ   inc_labor`age' [iw =  wtabc_id`num'_c3_`group'] if draw == `draw' ${`gender'} ${`group'set`gender'} wtabc_id`num'_c3_`group'
 				matrix inc_labor_`group'_`gender'_`draw'_`num' = [inc_labor_`group'_`gender'_`draw'_`num',r(mean)] 
 			}
 			matrix inc_labor_`group'_`gender'_`draw'_`num'   = [`num',inc_labor_`group'_`gender'_`draw'_`num'[1,2...]]
@@ -104,9 +109,9 @@ foreach group in treat control {
 }
 
 // calculate NPVs (point estimates)
-foreach draw of numlist 0(1)2 {
+foreach draw of numlist 0(1)100 {
 	foreach group in treat control {
-		foreach gender in male {
+		foreach gender in male female pooled {
 		preserve
 		clear 
 		svmat inc_labor_`group'_`gender'_`draw', names(col)
@@ -134,9 +139,9 @@ foreach draw of numlist 0(1)2 {
 
 // stack point estimates and bootstraps 
 foreach group in treat control {
-	foreach gender in male {
+	foreach gender in male female pooled {
 		matrix inc_labor_dist_`group'_`gender' = [.]
-		foreach draw of numlist 0(1)2 {
+		foreach draw of numlist 0(1)100 {
 			matrix inc_labor_dist_`group'_`gender' = [inc_labor_dist_`group'_`gender',inc_labor_npv_`group'_`gender'_`draw']
 		}
 	matrix inc_labor_dist_`group'_`gender' = [inc_labor_dist_`group'_`gender'[1,2...]]'
@@ -144,7 +149,7 @@ foreach group in treat control {
 }
 
 // compute npv
-foreach gender in male {
+foreach gender in male female pooled {
 	preserve
 	clear
 	svmat inc_labor_dist_control_`gender', names(col)
@@ -174,7 +179,6 @@ foreach gender in male {
 	restore
 }
 
-/*
 // matrix output
 matrix inc_labor_stats = [inc_labor_stats_pooled \ inc_labor_stats_male \ inc_labor_stats_female]
 matrix rownames inc_labor_stats = pooled male female
@@ -182,6 +186,3 @@ matrix colnames inc_labor_stats = estimate se pvalue
 
 cd $output
 outtable using nonparametric_inc_labor_stats, mat(inc_labor_stats) replace nobox center f(%9.3f)
-
-
- 
