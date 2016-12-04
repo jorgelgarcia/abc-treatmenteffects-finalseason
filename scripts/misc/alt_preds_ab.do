@@ -84,8 +84,6 @@ gen  llinc_labor = l.linc_labor
 tempfile cnlsynlsy
 save   "`cnlsynlsy'", replace
 
-
-
 matrix ball = [.,.,.]
 foreach b of numlist 1(1)100 {
 
