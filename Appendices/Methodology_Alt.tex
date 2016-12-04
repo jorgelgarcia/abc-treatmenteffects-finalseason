@@ -1276,53 +1276,7 @@ Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a},
 \label{table:predsens}
 \centering 
 \footnotesize
-\begin{tabular}{L{2cm} *7{C{1.5cm}}} \toprule
-& \multicolumn{3}{c}{ \textbf{Specification 1:}} & & \multicolumn{3}{c}{ \textbf{Specification 2:}}\\
-& \multicolumn{3}{c}{Lagged component in $\bm{\phi}_{j,a}$} & & \multicolumn{3}{c}{No lagged component in $\bm{\phi}_{j,a}$} \\
-& \multicolumn{3}{c}{ set $\bm{\rho} = 0$} & & \multicolumn{3}{c}{Unrestricted $\bm{\rho}$} \\[10pt]
- 
-& NPV & IRR & B/C & & NPV & IRR & B/C \\
- 
-\hline \\
-Pooled & 71,345 & 0.13 & 6.29 & & 154,547 & 0.26 & 12.39 \\ 
-& (86,343) & (.05) & (2.11) & & (187,036) & (0.11) & (5.16) \\ \\
- 
-Males & 300,896 & 0.13 & 11.1 & & 200,509 & 0.09 & 7.62 \\ 
-& (241,588) & (0.06) & (6.35) & & (160,988) & (0.04) & (3.73) \\ \\
- 
-Females & 59,390 & 0.10 & 2.45 & & 79,441 & 0.15 & 3.61 \\ 
-& (63,060) & (0.07) & (0.79) & & (99,416) & (0.11) & (1.56) \\ \\ \\
- 
-\midrule
-& \multicolumn{3}{c}{ \textbf{Specification 3:}} & & \multicolumn{3}{c}{ \textbf{Specification 4:}}\\
-& \multicolumn{3}{c}{Lagged component in $\bm{\phi}_{j,a}$} & & \multicolumn{3}{c}{Lagged component in $\bm{\phi}_{j,a}$; Permanent} \\
-& \multicolumn{3}{c}{Unrestricted $\bm{\rho}$} & & \multicolumn{3}{c}{Transitory unobserved components} \\[10pt]
- 
-& NPV & IRR & B/C & & NPV & IRR & B/C \\
- 
-\hline \\
-Pooled & 268,179 & 0.49 & 23.64 & & 144,012 & 0.26 & 12.7 \\
-& (211,089) & (0.12) & (5.16) & & (70,566) & (0.04) & (1.72) \\ \\
- 
-Males &456,078 & 0.2 & 16.82 & &240,921 & 0.1 & 8.89 \\ 
-& (358,534) & (0.09) & (9.42) & &(124,129) & (0.03) & (3.26) \\ \\
- 
-Females & 31,303 & 0.05 & 1.29 & &34,590 & 0.06 & 1.43 \\ 
-& (168,160) & (0.19) & (2.11) & &(53,611) & (0.06) & (0.67) \\ \\ \\
- 
- 
-\midrule
-& & & \multicolumn{3}{c}{\textbf{Specification 5:}} \\
-& & & \multicolumn{3}{c}{ Fully Non-Parametric} \\[10pt]
-& & & NPV & IRR & B/C \\
-\hline \\
-& & Pooled & 62,080 & 0.10 & 4.98 \\ 
-& & & (75,030) & (0.03) & (2.07) \\ \\ 
-& & Males & 289,471 & 0.13 & 11.01 \\ 
-& & & (232,471) & (0.06) & (5.39) \\ \\ 
-& & Females & 59,163 & 0.11 & 2.69 \\ 
-& & & (74,039) & (0.08) & (1.16) \\ \bottomrule
-\end{tabular}
+\input{output/alternative_specifications}
 \begin{tablenotes}
 \footnotesize
 \item Note: This table displays the net present value of labor income in 2014 USD (treatment - control) using the four different specifications for prediction that are explained below. Specification 1 is what we present in the main text. It also presents the calculation of the internal rate of return and the benefit-cost ratio of the program using these different net present values.
@@ -1578,7 +1532,7 @@ Y_{k,a} &=& \gamma_{0} + \gamma_{y} Y_{k,a-1} + \varepsilon_{a}\label{eq:linear1
 \noindent where $\mathbb{E}[\eta_{a}] = \mathbb{E}[\eta_{a}, \eta_{a'}] = 0$. We follow \citet{Arellano_1991_Some-Tests} and note that two-lagged age values of $Y_{k,a}$ are valid instruments in the first-difference version of Equation~\ref{eq:linear2bb}. This allow us to estimate obtain consistent estimates of $\gamma_{0}, \gamma_{y}$ by minimizing a weighted function (as in the previous specifications) of the empirical counterparts of the following set of moments: 
 
 \begin{equation}
-\mathbb{E} \left[ \left( \Delta Y_{k,a} -  \gamma_{y} \Delta Y_{k,a} \right)   Y_{k,a - j} \right] \quad j = 2, \ldots, a - 1; a = a^*+ 2, \ldots, A. \label{eq:abmoment}
+\mathbb{E} \left[ \left( \Delta Y_{k,a} -  \gamma_{y} \Delta Y_{k,a-1} \right)   Y_{k,a - j} \right] \quad j = 2, \ldots, a - 1; a = a^*+ 2, \ldots, A. \label{eq:abmoment}
 \end{equation}
 
 \noindent Once this estimates are available, we follow these steps to form the prediction:
@@ -1600,7 +1554,8 @@ Y_{k,a} &=& \gamma_{0} + \gamma_{y} Y_{k,a-1} + \varepsilon_{a}\label{eq:linear1
 \end{equation}
 
 \item Iterate this procedure of to age $A$ and stack the vector of predictions (without accounting for prediction error) as $\hat{\bm{Y}}_{e} : = \left[ \hat{Y}_{e,a^*+1}, \ldots,  \hat{Y}_{e,A} \right]$.
-\item To account for prediction error we need an individual level estimate of $ \phi + \eta_{a}$. We proceed as follows: (i) we observe labor income at two ages, 21 and 30. We linearly interpolate labor income from ages 21 to 30 and estimate the model in \eqref{eq:linear1bb}. This allows us to obtain an estimate for $\phi + \eta_{a}$. At each age, we add this estimate to the $\hat{\bm{Y}}_{e}$. 
+
+\item To account for prediction error we need an individual level estimate of $ \phi + \eta_{a}$. We proceed as follows: (i) we observe labor income at two ages, 21 and 30. We use the estimates of the coefficients characterizing Equation~\eqref{eq:linear1bb} from the auxiliary sample (n) to predict labor income from ages 22 to 29. Then, we estimate the coefficients in Equation~\eqref{eq:linear1bb} in the experimental sample (e). This allows us to recover an estimate for $\phi + \eta_{a}$. In fact, we recover one estimate of $\phi + \eta_{a}$ for each $a \in \left[22, \ldots, 30 \right]$. Each of these estimates is a valid estimate for $\phi + \eta_{a}$ because $\eta_{a}$ is i.i.d. To form our prediction error, at each age, we randomly draw one element out of these available estimates. We add it to  $\hat{Y}_{e,a}$ for $a \geq a^* + 1$ to form a prediction that accounts for error. 
 \end{enumerate}
 
 \subsection{Inference} \label{appendix:bootstrap}
