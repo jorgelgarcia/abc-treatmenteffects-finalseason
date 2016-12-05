@@ -1,47 +1,22 @@
-\begin{tabular}{L{2cm} *7{C{1.5cm}}} \toprule
-& \multicolumn{3}{c}{ \textbf{Specification 1:}} & & \multicolumn{3}{c}{ \textbf{Specification 2:}}\\
-& \multicolumn{3}{c}{Lagged component in $\bm{\phi}_{j,a}$} & & \multicolumn{3}{c}{No lagged component in $\bm{\phi}_{j,a}$} \\
-& \multicolumn{3}{c}{ set $\bm{\rho} = 0$} & & \multicolumn{3}{c}{Unrestricted $\bm{\rho}$} \\[10pt]
+\begin{tabular}{L{2cm} *{21}{c}}
+& \multicolumn{3}{c}{ \textbf{Specification 1:}} & & \multicolumn{3}{c}{ \textbf{Specification 2:}}& & \multicolumn{3}{c}{ \textbf{Specification 3:}}& & \multicolumn{3}{c}{ \textbf{Specification 4:}}& & \multicolumn{3}{c}{ \textbf{Specification 5:}}\\
 
-& NPV & IRR & B/C & & NPV & IRR & B/C \\
+& & $\bm{\lambda_1} \neq 0$ & & & & $\bm{\lambda_1} = 0$ & & & & $\bm{\lambda_1} \neq 0$ & & & & $\bm{\lambda_1} \neq 0$ & & & \multicolumn{3}{c}{Non-parametric} \\
 
-\hline \\
-Pooled & 71,345 & 0.13 & 6.29 & & 154,547 & 0.26 & 12.39 \\ 
-& (86,343) & (.05) & (2.11) & & (187,036) & (0.11) & (5.16) \\ \\
+& & $\bm{\bm{\rho}} = 0$ & & & & $\bm{\bm{\rho}} \neq 0$ & & & & $\bm{\bm{\rho}} \neq 0$ & & & & $\bm{\bm{\rho}} = 0$ \\
 
-Males & 300,896 & 0.13 & 11.1 & & 200,509 & 0.09 & 7.62 \\ 
-& (241,588) & (0.06) & (6.35) & & (160,988) & (0.04) & (3.73) \\ \\ 
+& & $\bm{\bm{f}} = 0$ & & & & $\bm{\bm{f}} = 0$ & & & & $\bm{\bm{f}} = 0$ & & & & $\bm{\bm{f}} \neq 0$   \\  \bottomrule \\[5pt]
 
-Females & 59,390 & 0.10 & 2.45 & & 79,441 & 0.15 & 3.61 \\ 
-& (63,060) & (0.07) & (0.79) & & (99,416) & (0.11) & (1.56) \\ \\ \\
 
-\midrule
-& \multicolumn{3}{c}{ \textbf{Specification 3:}} & & \multicolumn{3}{c}{ \textbf{Specification 4:}}\\
-& \multicolumn{3}{c}{Lagged component in $\bm{\phi}_{j,a}$} & & \multicolumn{3}{c}{Lagged component in $\bm{\phi}_{j,a}$; Permanent} \\
-& \multicolumn{3}{c}{Unrestricted $\bm{\rho}$} & & \multicolumn{3}{c}{Transitory unobserved components} \\[10pt]
-
-& NPV & IRR & B/C & & NPV & IRR & B/C \\
+& NPV & IRR & B/C & & NPV & IRR & B/C & & NPV & IRR & B/C & & NPV & IRR & B/C & & NPV & IRR & B/C\\
 
 \hline \\
-Pooled & 268,179 & 0.49 & 23.64 & & 46,953 & 0.09 & 4.14 \\ 
-& (211,089) & (0.12) & (5.16) & & (25,323) & (0.01) & (0.62) \\ \\
+Pooled & 71,345 & 0.13 & 6.29 & & 154,547 & 0.26 & 12.39 & & 268,179 & 0.49 & 23.64 & & 46,953 & 0.09 & 4.14 && 62,080 & 0.10 & 4.98\\
+& (86,343) & (.05) & (2.11) & & (187,036) & (0.11) & (5.16) && (211,089) & (0.12) & (5.16) & & (25,323) & (0.01) & (0.62) & & (75,030) & (0.03) & (2.07)\\ \\
 
-Males &456,078 & 0.2 & 16.82 & & 74,775 & 0.03 & 2.76 \\ 
-& (358,534) & (0.09) & (9.42) & & (54,752) & (0.01) & (1.44)  \\ \\ 
+Males & 300,896 & 0.13 & 11.1 & & 200,509 & 0.09 & 7.62 &&456,078 & 0.2 & 16.82 & & 74,775 & 0.03 & 2.76 && 289,471 & 0.13 & 11.01 \\ 
+& (241,588) & (0.06) & (6.35) & & (160,988) & (0.04) & (3.73)&& (358,534) & (0.09) & (9.42) & & (54,752) & (0.01) & (1.44) & & (232,471) & (0.06) & (5.39)\\ \\ 
 
-Females & 31,303 & 0.05 & 1.29 & & 19,959 & 0.03 & 0.82 \\ 
-& (168,160) & (0.19) & (2.11) & & (34,142) & (0.04) & (0.43) \\ \\ \\
-
-
-\midrule
-& & & \multicolumn{3}{c}{\textbf{Specification 5:}} \\
-& & & \multicolumn{3}{c}{ Fully Non-Parametric} \\[10pt]
-& & & NPV & IRR & B/C \\
-\hline \\
-& & Pooled & 62,080 & 0.10 & 4.98 \\ 
-& & & (75,030) & (0.03) & (2.07) \\ \\ 
-& & Males & 289,471 & 0.13 & 11.01 \\ 
-& & & (232,471) & (0.06) & (5.39) \\ \\ 
-& & Females & 59,163 & 0.11 & 2.69 \\ 
-& & & (74,039) & (0.08) & (1.16) \\ \bottomrule
+Females & 59,390 & 0.10 & 2.45 & & 79,441 & 0.15 & 3.61 & & 31,303 & 0.05 & 1.29 & & 19,959 & 0.03 & 0.82 & & 59,163 & 0.11 & 2.69  \\ 
+& (63,060) & (0.07) & (0.79) & & (99,416) & (0.11) & (1.56) && (168,160) & (0.19) & (2.11) & & (34,142) & (0.04) & (0.43)  & &  (74,039) & (0.08) & (1.16) \\ \\ \\ \bottomrule
 \end{tabular}
