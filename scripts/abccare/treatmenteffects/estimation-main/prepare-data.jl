@@ -11,9 +11,9 @@
 conDict = Dict()
 
 #conDict["controls_abccare"] = [:male, :hrabc_index, :apgar1, :apgar5, :f_home0y, :grandma_county]
-conDict["controls_abccare"] = [:male, :abc, :hrabc_index, :apgar1, :apgar5, :f_home0y, :grandma_county]
-conDict["controls_abc"] = [:male, :hrabc_index, :apgar1, :apgar5, :m_teen0y, :hh_sibs0y, :grandma_county]
-conDict["controls_care"] = [:male, :apgar1, :m_married0y, :f_home0y, :cohort]
+conDict["controls_abccare"] = [:male, :hrabc_index, :apgar1, :apgar5]
+conDict["controls_abc"] = [:male, :hrabc_index, :apgar1, :apgar5]
+conDict["controls_care"] = [:male, :hrabc_index, :apgar1, :apgar5]
 
 # Declare outcome list for each data
 outcome_col = outcomes[:variable]
@@ -147,7 +147,7 @@ abccare[isna(abccare[:id]), :id] = 9999
 # -------------------------------------------------------------------------------- #
 # Convert discrete variables to binary (= 1 if greater than median, = 0 otherwise) #
 # -------------------------------------------------------------------------------- #
-global discretized = ["m_iq0y", "m_ed0y", "m_age0y", "hrabc_index", "apgar1", "apgar5", "prem_birth", "m_married0y", "m_teen0y", "has_relatives", "male", "f_home0y", "hh_sibs0y"]
+global discretized = ["m_iq0y", "m_ed0y", "m_age0y", "hrabc_index", "apgar1", "apgar5", "prem_birth", "m_married0y", "m_teen0y", "has_relatives", "f_home0y", "hh_sibs0y"]
 
 for dvar in discretized
   dvar_p = parse(dvar) # Making "d_var" to :d_var
