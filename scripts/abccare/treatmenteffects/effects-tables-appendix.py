@@ -125,6 +125,9 @@ for agg in [0,1]:
 	
     pval_tmp = (null >= point_ext); pval_tmp[point_ext.isnull()] = np.nan
     pval_tmp = pval_tmp.mean(axis=0, level=['ddraw', 'variable'])
+
+    print "PRINTING PVAL_TMP"
+    print pval_tmp	
 	
     if twosided == 0:
         for coef in tmp_rslt.columns:	
