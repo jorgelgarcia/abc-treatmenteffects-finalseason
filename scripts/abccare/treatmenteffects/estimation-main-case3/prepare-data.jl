@@ -83,7 +83,7 @@ for item in discretized
 end
 
 # Use a subset of data to reduce the running time
-keepvar = [:id, :family, :R, :RV, :Q, :cohort_group1, :cohort_group2, :cohort_group3, :cohort_group4, :cohort_group5, :cohort_group6]
+keepvar = [:id, :family, :abc, :R, :RV, :Q, :cohort_group1, :cohort_group2, :cohort_group3, :cohort_group4, :cohort_group5, :cohort_group6]
 keepvar = append!(keepvar, controls_all)
 keepvar = append!(keepvar, outcome_list)
 keepvar = append!(keepvar, ipw_varlist)
