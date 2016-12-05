@@ -19,12 +19,12 @@ import math
 import numpy as np
 import pytabular as pytab
 from scipy.stats import percentileofscore
-from pathsappendix import paths 
+from paths import paths 
 
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
 
-path_results = os.path.join(filedir, 'rslt-appendix/')
+path_results = os.path.join(filedir, 'rslt-YKKtest/')
 path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_appendix.csv')
 
 # provide option for two sided tests
@@ -95,24 +95,40 @@ for agg in [0,1]:
         tmp_rslt.sort_index(inplace=True)
     
     mean = tmp_rslt.groupby(level=['variable', 'ddraw']).transform(lambda x: x.mean())
+    print "printing tmp_rslt"
+    print tmp_rslt
+    print "printing mean"
+    print mean
     null = tmp_rslt - mean
-
+    print "printing null"
+    print null
    
     # Select the negative outcomes   
     invoutcomes = {}
     for coef in tmp_rslt.columns:
         # generate dataframe to store t-statistics
+        print "printing tstatadddddddddddddddddddd"
         tmp_rslt_coef = tmp_rslt.loc[(0, 0, slice(None)), coef]
-        neg_index = tmp_rslt_coef < 0
-        tmp_rslt_neg = tmp_rslt_coef[neg_index]
-        invoutcomes['{}'.format(coef)] = tmp_rslt_neg.index.get_level_values(2).unique()
-
+        print tmp_rslt.loc[(0, 0, slice(None)), coef]
+        invoutcomes['coef'] = list(tmp_rslt.loc[(0, 0, slice(None)), coef].index) 
+        print "printing invoutcomes"
+        print invoutcomes['coef']
+        ddddddddd
+        print "printing ind_rslt_y"
+        print rslt_y.index.get_level_values(2).unique()
+	
     # prepare to obtain p-values by expanding point estimate
     draw_max = int(tmp_rslt.index.get_level_values(0).unique().max())
+    print "printing draw_max"
+    print draw_max
     point_ext = pd.concat([tmp_rslt.loc[(0, slice(None), slice(None)), :] for j in range(draw_max + 1)], axis=0, keys=[k for k in range(draw_max + 1)], names=['newdraw'])
+    print "printing point_ext"
+    print point_ext
     point_ext.reset_index('draw', drop=True, inplace=True)
     point_ext.index.names = ['draw', 'ddraw','variable']
     point_ext = point_ext.loc[null.index,:]
+    print "printing point_ext ver2"
+    print point_ext
     
     # two-sided test for each individual effect
     if twosided == 1:
@@ -121,17 +137,25 @@ for agg in [0,1]:
     
     # obtain p-values
     less = (null <= point_ext); less[point_ext.isnull()] = np.nan
+    print "printing less"
+    print less
     less = less.mean(axis=0, level=['ddraw', 'variable'])
+    print "printing less ver2"
+    print less 
 	
     pval_tmp = (null >= point_ext); pval_tmp[point_ext.isnull()] = np.nan
+    print "printing pval_tmp"
+    print pval_tmp
     pval_tmp = pval_tmp.mean(axis=0, level=['ddraw', 'variable'])
-	
-    if twosided == 0:
-        for coef in tmp_rslt.columns:	
-            pval_tmp.loc[(slice(None), invoutcomes['{}'.format(coef)]), coef] = less.loc[(slice(None), invoutcomes['{}'.format(coef)]), coef]
-    
+    print "printing pval_tmp ver2"
+    print pval_tmp
+    pval_tmp.loc[(slice(None), outcomes.query('hyp == "-"').index), :] = less.loc[(slice(None), outcomes.query('hyp == "-"').index), :]
+    print "printing pval_tmp minus"
+    print pval_tmp
     pval_tmp.sortlevel(axis=1, inplace = True)
     pval_tmp.sort_index(inplace=True)
+    print "printing pval_tmp final"
+    print pval_tmp
 
     # obtain point estimates, standard errors, and the regular p-values for the ATE tables
     if agg == 0:   
@@ -139,6 +163,8 @@ for agg in [0,1]:
         point.sortlevel(axis=1, inplace=True)
         point.reset_index(level=[0,1], drop=True, inplace=True)
         pval = pval_tmp.loc[(0, slice(None))]
+        print "printing real p value"
+        print pval 
         se = tmp_rslt.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True).std(level='variable') 
     
     # obtain the p-values to determine significance for the combining functino (hence, "_cf")    
@@ -153,22 +179,14 @@ for agg in [0,1]:
 # 1. Convert distribution of results to t-Statistics
 mean = rslt_y.groupby(level=['variable', 'ddraw']).transform(lambda x: x.mean())
 null = rslt_y - mean
-#for coef in tmp_rslt.columns:	
-#    null.loc[invoutcomes['{}'.format(coef)], coef] = null.loc[invoutcomes['{}'.format(coef)], coef] * -1 
 null = null.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True)/se
 null.sort_index(inplace=True)
-
+null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] = null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] * -1
 
 tstat = point/se
 tstat.sort_index(inplace=True)
-for coef in tmp_rslt.columns:	
-    tstat.loc[invoutcomes['{}'.format(coef)], coef] = tstat.loc[invoutcomes['{}'.format(coef)], coef] * -1   
+tstat.loc[outcomes.query('hyp == "-"').index, :] = tstat.loc[outcomes.query('hyp == "-"').index, :] * -1
 
-print "printing null"
-print null
-print "printing tstat"
-print tstat	
-	
 # 2. provide blocks and dictionary to estimate/store stepdown results
 stepdown = pd.DataFrame([], columns=tstat.columns, index=tstat.index)
 blocks = list(pd.Series(outcomes.block.values).unique())
@@ -206,7 +224,7 @@ for block in blocks:
 			countone = sum(1 for item in sd_dist if tmp_tstat[i] <= item)
 
 			# calculate the temporary p-value
-			sd_pval_tmp[i] = (countone+1.0)/(1.0+1001.0)
+			sd_pval_tmp[i] = (countone+1.0)/(1.0+101.0)
 			
 			# store p-value according to step-down conditions
 			if i == 0:
