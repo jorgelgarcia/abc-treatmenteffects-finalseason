@@ -125,9 +125,6 @@ for agg in [0,1]:
 	
     pval_tmp = (null >= point_ext); pval_tmp[point_ext.isnull()] = np.nan
     pval_tmp = pval_tmp.mean(axis=0, level=['ddraw', 'variable'])
-
-    print "PRINTING PVAL_TMP"
-    print pval_tmp	
 	
     if twosided == 0:
         for coef in tmp_rslt.columns:	
@@ -167,10 +164,6 @@ tstat.sort_index(inplace=True)
 for coef in tmp_rslt.columns:	
     tstat.loc[invoutcomes['{}'.format(coef)], coef] = tstat.loc[invoutcomes['{}'.format(coef)], coef] * -1   
 
-print "printing null"
-print null
-print "printing tstat"
-print tstat	
 	
 # 2. provide blocks and dictionary to estimate/store stepdown results
 stepdown = pd.DataFrame([], columns=tstat.columns, index=tstat.index)
