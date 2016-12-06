@@ -149,7 +149,7 @@ if deaths == 1
       sex = :female
     end
 
-		for age in [21:67]
+		for age in [21:79]
 			if age > idage["id$(id_n)age"]
 				if (age == 21) | (age == 30)
 					println("Dealing with deaths: $(id_n) at age $(age)")
