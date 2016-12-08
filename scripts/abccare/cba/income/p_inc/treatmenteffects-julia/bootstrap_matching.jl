@@ -93,6 +93,7 @@ for gender in genderloop
 			if (append_switch == 1)
 				MatchInitial["$(gender)"] = append!(MatchInitial["$(gender)"], MatchInitial_add)
 			end
+    end
 	end
 	MatchInitial["$(gender)"] = sort(MatchInitial["$(gender)"], cols = [:draw, :ddraw])
 end
