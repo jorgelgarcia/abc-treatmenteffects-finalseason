@@ -88,9 +88,11 @@ for gender in genderloop
 		if arep == 0
 		  MatchInitial["$(gender)"] = mestimate(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
 	  else
+			global append_switch = 1
 		  MatchInitial_add = mestimate(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
-		  MatchInitial["$(gender)"] = append!(MatchInitial["$(gender)"], MatchInitial_add)
-		end
+			if (append_switch == 1)
+				MatchInitial["$(gender)"] = append!(MatchInitial["$(gender)"], MatchInitial_add)
+			end
 	end
 	MatchInitial["$(gender)"] = sort(MatchInitial["$(gender)"], cols = [:draw, :ddraw])
 end
