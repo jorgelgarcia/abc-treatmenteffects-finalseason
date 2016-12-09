@@ -27,7 +27,7 @@ global controls = [:hrabc_index, :apgar1, :apgar5, :male]
 global ipwvars_all = [:m_iq0y, :m_ed0y, :m_age0y, :hrabc_index, :p_inc0y, :apgar1, :apgar5, :prem_birth, :m_married0y, :m_teen0y, :f_home0y, :hh_sibs0y, :cohort, :m_work0y]
 global component = "private_crime"
 global factorswitch = 0
-global nomurder = 0
+global nomurder = 1
 global deaths = 1
 
 # Include helper files
