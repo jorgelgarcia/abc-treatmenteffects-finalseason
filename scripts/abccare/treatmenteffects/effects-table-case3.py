@@ -170,9 +170,10 @@ for agg in [0,1]:
 # 1. Convert distribution of results to t-Statistics
 mean = rslt_y.groupby(level=['variable', 'ddraw']).transform(lambda x: x.mean())
 null = rslt_y - mean
+for coef in tmp_rslt.columns:	
+    null.loc[(slice(None), 0, invoutcomes['{}'.format(coef)]), coef] = null.loc[(slice(None), 0, invoutcomes['{}'.format(coef)]), coef] * -1 
 null = null.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True)/se
 null.sort_index(inplace=True)
-null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] = null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] * -1
 
 tstat = point/se
 tstat.sort_index(inplace=True)
