@@ -18,7 +18,7 @@ import pandas as pd
 import numpy as np
 import pytabular as pytab
 from scipy.stats import percentileofscore
-from pathcase1 import paths 
+from pathcase2 import paths 
 
 # declare certain paths that you will need
 filedir = os.path.join(os.path.dirname(__file__))
@@ -86,6 +86,7 @@ outcomes = outcomes.loc[ind_outcomes,:]
 rslt_y.sortlevel(axis=1, inplace=True)
 rslt_cols = ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw']
 rslt_y.loc[:, (slice(None), slice(None), rslt_cols)] = rslt_y.loc[:, (slice(None), slice(None), rslt_cols)].replace(0, np.nan)
+
 
 #=========================================
 # single-hypothesis tests
@@ -173,7 +174,6 @@ for coef in tmp_rslt.columns:
     null.loc[(slice(None), 0, invoutcomes['{}'.format(coef)]), coef] = null.loc[(slice(None), 0, invoutcomes['{}'.format(coef)]), coef] * -1 
 null = null.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True)/se
 null.sort_index(inplace=True)
-
 
 tstat = point/se
 tstat.sort_index(inplace=True)
@@ -276,7 +276,6 @@ for block in blocks:
 # for variables we do not perform stepdown on, fill in stepdown matrix of p-value with regular p-values
 stepdown.fillna(pval, inplace=True)
 
-
 #=========================================
 # combine point estimate and p-value tables (this dataframe is for making the tables)
 #=========================================
@@ -329,7 +328,7 @@ def format_sdpvalue(x):
         return '[{}]'.format(x)      
 
 
-    
+     
 #=========================================
 # Make Appendix Tables of results
 #=========================================
