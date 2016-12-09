@@ -67,7 +67,7 @@ for gender in genderloop
 	elseif gender == "pooled"
 		datainuse["$(gender)"] = outcomesate
 		controlset = [:hrabc_index, :apgar1, :apgar5, :male]
-
+	end
   # ==================== #
 	# Bootstrap esstimates #
 	# ==================== #
