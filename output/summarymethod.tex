@@ -1,0 +1,58 @@
+\begin{tabular}{llllll} \toprule
+    \textbf{Component} & \textbf{Subject's Age} & \textbf{Baseline Prediction Method} & \textbf{Variables Used to Construct}     & \textbf{Variables Used to Predict} & \textbf{Auxiliary Samples} \\ 
+                    &   \textbf{at Prediction} &                                              & \textbf{Synthetic Experimental Groups}  &                                          & \textbf{Used}                         \\ \midrule 
+Program Costs             & 0 to 5      & Observed (source documents)      & N/A & N/A & N/A \\ \midrule
+Alternative Preschools & 0 to 5      & Imputed from  & N/A & N/A & N/A \\  
+Costs                           &                & Location \& Time & & & \\
+                                    &                & Relevant Documents & & & \\ \midrule
+Education Costs                       & up to 30  & Level is Observed                        & N/A & N/A & N/A \\ 
+(includes special education     &                & (Per Level Cost taken             &       &        &        \\
+and grade retention)                & & from NCES) & & & \\ \midrule 
+
+Labor Income       & 21 to 30 & Based on Prediction Model     & Birth-year; Gender;   & Gender; Mother's Education; & CNLSY \\
+or                          &               & in the Auxiliary Sample            & Siblings at Birth     & at Birth; PIAT Math (5 to 7);   &              \\  
+Transfer Income   &               &                                                  &                             & Education (30)                       &              \\ 
+                       &               &                                                  &                                   & Labor Income (21)                 &              \\                        
+                       &               &                                                  &                                   & Lagged Outcome            &              \\ \midrule
+
+Labor Income     & 30 to 67 & Based on Prediction Model      & Birth-year; Gender;    & Gender; Education (30);        & Pooled NLSY79  \\
+or                        &               & in the Auxiliary Sample             & Siblings at Birth          & Labor Income (30);                & and PSID  \\  
+Transfer Income &               &                                                  &                                    & Lagged Outcome            &                   \\  \midrule    
+
+Parental Labor & 0 to 21  & Linear Interpolation       &   N/A & N/A & N/A  \\
+     Income       &               & (Observed Values at     &   &       &   \\  
+                        &               & Ages 1.5, 2.5, 3.5, 8,    &   &       &    \\
+                        &               & 12, 15, 21)                     &    &      &    \\  \midrule
+                        
+Crime              & up to Mid-30's &  Observed$^*$                   &   N/A & N/A & N/A   \\ 
+(Arrests and    &                       & (Combines Administrative & & & \\ 
+ Sentences)    &                        &   and Self-reported Data)  & & & \\ \midrule
+                       
+Crime              & Mid-30's to 50  & Based on Prediction Model      & Use Full Auxiliary     & Lagged Crime Outcomes & NCDPS \\ 
+(Arrests and    &                       & in the Auxiliary Sample             & Sample  to Predict   &   (all outcomes listed in Table~\ref{tab:crime_cat}) & \\   
+ Sentences)    &                        & (One Prediction per Arrest       & Control and Treat- & & \\ 
+                       &                        & or Sentence)                            & ment Outcomes& & \\  \midrule
+
+Victimization   & up to Age 50  &  Impute national          & Use Full Auxiliary & N/A & NCVS; NJRP; UCRS \\ 
+Inflation          &                        &  victims-arrests ratio   & Samples to Impute              &        & (vary by crime)   \\ \midrule
+
+Health Costs  & before Age 30 & Based on Prediction Model & Use Full Auxiliary          & Age-specific (four follow-ups  & MEPS \\      
+                        &                       & in the Auxiliary Sample        & Sample  to Predict        & available) detailed                 & \\  
+                        &                       &                                             &                                       & in Table~\ref{table:pre30}            & \\  \midrule
+
+Health Transitions   & 30 to Death & Based on Prediction Model & Use Full Auxiliary    & Gender; Education (30);     & PSID and        \\
+(includes disability   &                   & in the Auxiliary Sample         & Samples to Predict & Lagged Health Outcomes   & HRS (only for \\
+claims)                     &                   &                                               &                                & as indicated in Table~\ref{table:transition}  & mortality) \\ \midrule
+                              
+Health Costs         & 30 to Death       & Based on Prediction Model & Use Full Auxiliary    & Age; Gender; Race;        & MEPS        \\
+                              &                           & in the Auxiliary Sample       & Samples to Predict & Education (30); Marital    & MCBS (if Medicaid \\
+                              &                           &                                             &                                & Status (30); Disease       & eligible)        \\
+                              &                           &                                             &                                & Conditions; Labor Income (30) \\ \midrule 
+QALYs                  & 30 to Death       & Based on Prediction Model & Use Full Auxiliary    & ADL and IADL counts; & PSID  \\ 
+                              &                          & in the Auxiliary Sample        & Samples to Predict & Disease Conditions & and MEPS \\ \midrule                      
+Deadweight-loss   & 0 to Death         &  .50 cents per each  &   N/A        & N/A & N/A  \\                               
+                             &                           & government-spent dollar      & & & \\  \bottomrule
+                       \end{tabular}
+                       
+                       
+                       
