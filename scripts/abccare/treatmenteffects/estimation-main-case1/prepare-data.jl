@@ -11,9 +11,10 @@
 conDict = Dict()
 
 #conDict["controls_abccare"] = [:male, :hrabc_index, :apgar1, :apgar5, :f_home0y, :grandma_county]
-conDict["controls_abccare"] = [:male, :abc, :hrabc_index, :apgar1, :apgar5, :f_home0y, :grandma_county]
-conDict["controls_abc"] = [:male, :hrabc_index, :apgar1, :apgar5, :m_teen0y, :hh_sibs0y, :grandma_county]
-conDict["controls_care"] = [:male, :apgar1, :m_married0y, :f_home0y, :cohort]
+conDict["controls_abccare"] = [:male, :hrabc_index, :apgar1, :apgar5]
+conDict["controls_abc"] = [:male, :hrabc_index, :apgar1, :apgar5]
+conDict["controls_care"] = [:male, :hrabc_index, :apgar1, :apgar5]
+
 
 # Declare outcome list for each data
 outcome_col = outcomes[:variable]
@@ -82,7 +83,7 @@ for item in discretized
 end
 
 # Use a subset of data to reduce the running time
-keepvar = [:id, :family, :R, :RV, :Q, :cohort_group1, :cohort_group2, :cohort_group3, :cohort_group4, :cohort_group5, :cohort_group6]
+keepvar = [:id, :family, :abc, :R, :RV, :Q, :cohort_group1, :cohort_group2, :cohort_group3, :cohort_group4, :cohort_group5, :cohort_group6]
 keepvar = append!(keepvar, controls_all)
 keepvar = append!(keepvar, outcome_list)
 keepvar = append!(keepvar, ipw_varlist)

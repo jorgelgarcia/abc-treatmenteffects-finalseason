@@ -27,9 +27,15 @@
 
 \noindent There are various approaches to rank the the likelihood of each model. Examples include rankings based on Bayesian Information Criterion (Schwarz), the Hannan-Quinn Information Criterion (HWIC), and the Akaike Information Criterion (AIC). We use the first approach because it has appealing consistency properties \citep{Diebold_2007_Forecasting}. This criterion minimizes the following loss function: $2 \log [\Pr( \text{Data} | m)]$. We follow an specific approximation developed by \citet{Claeskens-Hjort_2008_Model-Selection}, which assumes uniform priors and simplifies the computation of the loss function.\\
 
-\noindent This procedure allows us to choose one control set per outcomes of interest. To gain consistency across all specifications, we sum the BIC across all outcomes and choose the background variables with lower average across models. These background variables form our control set across all estimations and appear bold in Table~\ref{tab:pselectvars}.\\ 
+\noindent This procedure allows us to choose one control set per outcomes of interest. To gain consistency across all specifications, we sum the BIC across all outcomes and choose the background variables with lower average across models. These background variables form our control set across all estimations and appear bold in Table~\ref{tab:pselectvars}.\\
 
-\noindent We follow the samr procedure to elect the ``matching'' variables for the estimates of ``treatment vs. stay at home'' and ``treatment vs. alternative preschools parameters'' (see Section~\ref{section:methodsquestions}. We analyze sensitivity to the choice of these controls next.
+\subsubsection{Matching Variables}\label{app:matching-is-fun}
+
+\noindent We use matching estimators for different versions of the ``treatment vs. stay at home'' and ``treatment vs. alternative preschools'' parameters. For treatment vs. stay at home, we construct the Mahalanobis distance between the individuals in the treatment group and the control group who stay at home and use an Epanechnikov metric to construct an individual-level weight---giving a relatively high weight to individuals in the treatment group who would have been likely to stay at home if randomized to the control group. We proceed analogously when estimating the treatment vs. alternative preschool parameters.\\
+
+\noindent We proceed in an analogous way as when we elect background variables to choose the variables for calculating the Mahalanobis distance. The variables that this procedure yields are: male indicator; high-risk indices; 5 minute Apgar score; father at home; and an indicator of the grandmother living in the same county.\\
+
+\noindent Other forms of matching estimates such as propensity score matching and nearest neighbor(s) give very similar results and are available upon request. We analyze sensitivity to the choice of controls and matching variables next.\\
 
 \subsubsection{Sensitivity Analysis} \label{app:senscontrols}
 
