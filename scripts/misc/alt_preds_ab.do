@@ -94,6 +94,7 @@ foreach b of numlist 1(1)100 {
 	bsample
 	drop id 
 	gen id = _n
+	
 	reshape long inc_labor, i(id) j(age)
 	xtset id age
 
@@ -113,29 +114,37 @@ foreach b of numlist 1(1)100 {
 	gen inc_labor30 = si30y_inc_labor
 	gen inc_labor21 = si21y_inc_labor
 	
-	keep id male R inc_labor21 inc_labor30
+	foreach num of numlist 22(1)29 {
+		local numm1 = `num' - 1
+		gen inc_labor`num' = b1[1,2] + b1[1,1]*inc_labor`numm1'
+	}
+	
+	keep id male R inc_labor*
 	reshape long inc_labor, i(id) j(age)
 	tsfill
-	
-	bysort id : ipolate inc_labor age, gen(iinc_labor) epolate
-	xtabond iinc_labor, robust
+
+	xtabond inc_labor, robust
 	predict xb, xb
-	gen resid = iinc_labor - xb
+	gen resid = inc_labor - xb
 	
 	keep id age R male inc_labor resid
-	keep if age == 21 | age == 30
 	reshape wide inc_labor resid, i(id) j(age)
-	drop   resid21
-	rename resid30 resid
 	
-	
+	keep id male R resid* inc_labor21 inc_labor30
+	drop resid21
 	
 	foreach num of numlist 22(1)29 31(1)67 {
+		generate ui = floor((29-22+1)*runiform() + 22)
+		summ     ui if id == 1
+		local age = r(mean) 
+		
 		local numm1 = `num' - 1
-		gen inc_labor`num' = b1[1,2] + b1[1,1]*inc_labor`numm1' + resid
+		gen inc_labor`num' = b1[1,2] + b1[1,1]*inc_labor`numm1' + resid`age'
+		
+		drop ui
 	}
 
-	keep R male inc_labor21-inc_labor67 inc_labor30
+	keep R male inc_labor21 inc_labor22-inc_labor67 inc_labor30
 	aorder
 
 	foreach num of numlist 21(1)67 {

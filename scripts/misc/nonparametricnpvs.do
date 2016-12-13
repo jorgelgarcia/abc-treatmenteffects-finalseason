@@ -81,7 +81,7 @@ global pooled
 global controlsetmale & years_30y <=  12 & .735 <=
 global treatsetmale   & years_30y >   12 & .735 <=
 
-global controlsetmale   & .6 <=
+global controlsetfemale   & .6 <=
 global treatsetfemale   & .6 <=
 
 global controlsetpooled & .6 <=
@@ -108,6 +108,7 @@ foreach group in treat control {
 	}
 }
 
+/*
 // calculate NPVs (point estimates)
 foreach draw of numlist 0(1)100 {
 	foreach group in treat control {

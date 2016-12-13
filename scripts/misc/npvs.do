@@ -157,8 +157,8 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
-			  note("Per-annum Rate of Return: Males and Females 13% (s.e. 5%); Males 13% (s.e. 6%); Females 10% (s.e. 8%)." " "
-			       "Benefit-cost Ratio: Males and Females 6.3 (s.e. 2.1); Males 11.1 (s.e. 6.3); Females 2.5 (s.e. .79)."
+			  note("Per-annum Rate of Return: Males and Females 13.7% (s.e. 3%); Males 14.6% (s.e. 4%); Females 10% (s.e. 8%)." " "
+			       "Benefit-cost Ratio: Males and Females 7.3 (s.e. 1.8); Males 10.2 (s.e. 2.9); Females 2.6 (s.e. .73)."
 			        , size(vsmall));
 #delimit cr 
 graph export abccare_npvssumm.eps, replace
@@ -178,7 +178,7 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
-			  note("              Annual Rate of Return: 13% (s.e. 5%)."
+			  note("              Annual Rate of Return: 14% (s.e. 3%)."
 			        , size(large));
 #delimit cr 
 graph export abccare_npvlarge.eps, replace
@@ -194,8 +194,8 @@ twoway (bar     m part1            if estimate == 1 & sex == 3 & part1 <= 2, col
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)", size(medium))
 			  graphregion(color(white)) plotregion(fcolor(white))
-			  note("Per-annum Rate of Return: Males and Females 13% (s.e. 5%)."
-			       "Benefit-cost Ratio: Males and Females 6.3 (s.e. 2.1)."
+			  note("Per-annum Rate of Return: Males and Females 13.7% (s.e. 3%)."
+			       "Benefit-cost Ratio: Males and Females 7.3 (s.e. 1.8)."
 			        , size(small))
 			text(-.3 4.5 "{&larr}{&hellip} Components of Total Benefits {&hellip}{&rarr}", size(medium));
 #delimit cr 
