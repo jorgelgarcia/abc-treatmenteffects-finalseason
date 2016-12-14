@@ -20,11 +20,12 @@ global googledrive: env googledrive
 
 // set general locations
 // do files
-global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
+global scripts     = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
-global data       = "$klmmexico/abccare/NPV/current"
+global data        = "$klmmexico/abccare/NPV/current"
+global allresults  = "$klmmexico/abccare/irr_ratios/current"
 // output
-global output     = "$projects/abc-treatmenteffects-finalseason/output/"
+global output      = "$projects/abc-treatmenteffects-finalseason/output/"
 
 // parameters
 local treated    = 65
@@ -126,7 +127,7 @@ summ  dbcinc79
 matrix ex5b = [r(mean),r(sd)]
 gen   dbnpv79  = (meanR1_NPV - meanR0_NPV)/`atotalcost'
 summ  dbnpv79
-matrix ex6b = [6.28,2.11]
+matrix ex6b = [7.33,1.84]
 
 matrix ex  = [ex1 \ ex2 \ ex3 \ ex4 \ ex5 \ ex6]
 matrix exb = [[.,.] \ ex2b \ ex3b \ ex4b \ ex5b \ ex6b]
