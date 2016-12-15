@@ -50,7 +50,7 @@ bysort id: ipolate inc_labor age, gen(inc_labori) epolate
 drop   inc_labor
 rename inc_labori inc_labor
 replace inc_labor = . if inc_labor < 0 | inc_labor > 300000
-replace inc_labor = . if inc_labor > 100000 & male == 0
+replace inc_labor = . if inc_labor > 70000 & male == 0
 reshape wide inc_labor, i(id) j(age)
 keep id male years_30y inc_labor30-inc_labor67
 tempfile psid 
@@ -76,18 +76,6 @@ drop _merge
 global female & male == 0
 global male & male == 1
 global pooled
-
-global controledset & years_30y <=  12
-global treatedset   & years_30y  >  12
-
-/*
-// weights
-foreach group in treat control {
-	foreach num of numlist `ids`group'' {
-		replace wtabc_id`num'_c3_`group' = . if wtabc_id`num'_c3_`group' <= .55 & male == 0
-	}
-}
-*/
 
 keep id-wtabc_allids_c3_treat inc_labor* male
 drop wtabc_allids_c3_treat wtabc_allids_c3_control
