@@ -94,7 +94,7 @@ and
 \end{align*}
 \noindent with $\pi_r(x) := P(R=r|\bm{B}=b)$ and $\alpha(r,x,b) := P(A=1|R=r,\bm{X}=x,\bm{B}=b)$. The weight $\pi_r$ corrects for selection into treatment based on pre-program variables $\bm{B}$. The weight $\alpha_{i}$ corrects for item non-response based on $R, \bm{X}, \bm{B}$.\\
 
-\noindent For each of the estimates presented in this paper, we allow the reader to assess the sensitivity of the estimate to adjusting by the IPW. In Table~\ref{table:tescombined} of the main text (our main treatment-effects estimates table) we present estimates for the first counterfactual of interest (``Treatment vs. Next Best'') without adjusting by IPW in column (1). In column (2), we present estimates accounting for IPW. The rest of the columns report similar exercises for the other counterfactuals considered. Appendix~\ref{appendix:results} presents the same information for outcomes that do not appear in Table~\ref{table:tescombined}.\footnote{We only account for IPW for the list of variables listed here, or any calculation involving them.} In Tables~\ref{table:bcsens} and \ref{table:irrsens} and, we also present estimates of the internal rate of return and the benefit cost-ratio with and without adjusting by IPW. There is little sensitivity of our estimates to these adjustments.
+\noindent For each of the estimates presented in this paper, we allow the reader to assess the sensitivity of the estimate to adjusting by the IPW. In Tables~\ref{table:tescombinedmales} and \ref{table:tescombinedfemales} of the main text (our main treatment-effects estimates table) we present estimates for the first counterfactual of interest (``Treatment vs. Next Best'') without adjusting by IPW in column (1). In column (2), we present estimates accounting for IPW. The rest of the columns report similar exercises for the other counterfactuals considered. Appendix~\ref{appendix:results} presents the same information for outcomes that do not appear in Tables~\ref{table:tescombinedmales} and \ref{table:tescombinedfemales}.\footnote{We only account for IPW for the list of variables listed here, or any calculation involving them.} In Tables~\ref{table:bcsens} and \ref{table:irrsens} and, we also present estimates of the internal rate of return and the benefit cost-ratio with and without adjusting by IPW. There is little sensitivity of our estimates to these adjustments.
 
 \subsection{Incomplete Data: Predicting and Monetizing Life-Cycle and Costs and Benefits} \label{appendix:incomplete}
 \label{app:method_noobs}
@@ -251,21 +251,22 @@ We base our model-based predictions for a generic outcome, $Y_{k,j,a}$ on backgr
 
 \noindent An alternative to the prediction strategy that we use throughout the main text and the preceding appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using Algorithm~\ref{alg:match}; and (ii) use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and use it to form out-of-sample predictions, we simply match individuals using Algorithm~\ref{alg:match} to impute labor income profiles.\\
 
-\noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the non-parametric approach that we introduce in this section. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). An individual $l(i)$ in the auxiliary sample is a match for individual $i$ in the experimental sample if it is in the neighborhood defined by the left-hand side of \eqref{eq:ingrownnail} across all individuals in the auxiliary sample. We present the discounted net present value (treatment - control) for labor income in 2014 dollars. The approaches are in rough agreement. (Analogous results for other variables are available upon request from the authors.)\\
+\noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the non-parametric approach that we introduce in this section. We present results for labor income and for Quality-adjusted life years (see Appendix~\ref{appendix:health} for details). We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). An individual $l(i)$ in the auxiliary sample is a match for individual $i$ in the experimental sample if it is in the neighborhood defined by the left-hand side of \eqref{eq:ingrownnail} across all individuals in the auxiliary sample. We present the discounted net present value (treatment - control) for labor income in 2014 dollars. The approaches are in rough agreement. (Analogous results for other variables are available upon request from the authors.)\\
 
 \begin{table}[H]
 \begin{threeparttable}
 \caption{Net Present Value of Labor Income: Parametric and Non-Parametric Approaches}
 \label{table:nvpli}
 \centering
-\begin{tabular}{ccc} \toprule
-Pooled & Male & Female   \\ \midrule
-\multicolumn{3}{l}{\textbf{a. Parametric (Main Paper)}} \\
-71,345 & 300,896 & 50,390 \\
-(86,343) & (241,588) & (63,060)\\
-\multicolumn{3}{l}{\textbf{b. Non-Parametric (This Section)}} \\
-62,080 & 289,471 & 59,163 \\
-(75,030) & (232,414) & (74,039) \\ \bottomrule
+\begin{tabular}{ccc|ccc} \toprule
+\multicolumn{3}{c}{Labor Income} & \multicolumn{3}{c}{QALYs} \\
+Pooled & Male & Female & Pooled & Male & Female   \\ \midrule
+\multicolumn{6}{l}{\textbf{a. Parametric (Main Paper)}} \\
+133,032 & 238,105 & 41,908 & 87,181 & 106,218 & 42,102\\
+(76,634) & (185,375) & (24,606) & (66,529) & (103,984) & (50,734)\\
+\multicolumn{6}{l}{\textbf{b. Non-Parametric (This Section)}} \\
+132,924 & 195,530 & 69,317 & 87,110 & 87,672 & 69,638  \\
+(11,253) & (20,210) & (4,350) & (9,769) & (11,332) & (8,970) \\ \bottomrule
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
