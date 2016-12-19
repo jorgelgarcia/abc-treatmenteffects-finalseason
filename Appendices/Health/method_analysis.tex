@@ -252,125 +252,108 @@ The likelihood is a product of $M$ terms with the $m$th term containing only
 $(\beta_m, \gamma_m, \psi_m, \varsigma_m)$. This allows the estimation
 to be done separately for each outcome. \\
 
-\paragraph{Specification Tests} \label{section:firstorder}
+\paragraph{Specification Tests for the First-order Markov Assumption in FAM} \label{section:firstorder}
 
-\noindent Our adaptation of the FAM model is based on a first-order Markov process assumption. To make this clear, take the example of heart disease. As we explain before and state in Table~\ref{table:transition}, we predict ``heart disease'' at age $a+1$ based on hypertension and diabetes at age $a$, as well as other risk factors and health behaviors (smoking, BMI, and physical activity).\footnote{The diseases that help predicting each other are based on research and advice of clinicians, as explained and justified in \citet{Goldman_etal_2015_Future-Elderly-Model-Report}.} Importantly, in this model, heart disease is a an absorbing state by assumption. That is, if an individual suffers heart disease at age $a$, her probability of having heart disease at age $a+1$ equals one.\\
+\noindent The FAM model assumes a vector first-order Markov process. To make this clear, take the example of heart disease. As previously explained and stated in Table~\ref{table:transition}, we predict ``heart disease'' at age $a+1$ based on hypertension and diabetes at age $a$, as well as other risk factors and health behaviors (smoking, BMI, and physical activity).\footnote{The diseases that help predicting each other are based on research and advice of clinicians, as explained and justified in \citet{Goldman_etal_2015_Future-Elderly-Model-Report}.} In this model, heart disease is assumed to be an absorbing state. That is, if an individual suffers heart disease at age $a$, her probability of having heart disease at age $a+1$ equals one.\\
 
-\noindent In our empirical analysis, we estimate the transition probabilities for each disease using a Probit model, and the variables indicated in Table~\ref{table:transition} as well as background characteristics (not affected by treatment). We test the first-order Markov process assumption using a likelihood test ratio comparing: (i) a model based on first-order lags (first-order Markov process) to predict the disease of interest (null) and a model based on second-order lags (second-order Markov process); analogous tests to compare (ii) second- and third-order Markov processes; (iii) third- and fourth- order Markov processes; (iv) fourth- and fifth-order Markov processes; and (v) fifth- and sixth-order Markov processes. Table~\ref{table:lrtests} show the results from these tests.\\
+\noindent In our empirical analysis, we estimate the transition probabilities for each disease using a Probit model, and the variables indicated in Table~\ref{table:transition} as well as background characteristics not affected by treatment. We test the first-order Markov process assumption using a likelihood test ratio comparing: (i) a model based on first-order lags (a first-order Markov process) to predict the disease of interest (null) and a model based on second-order lags (second-order Markov process). Table~\ref{table:lrtests} show the results from these tests. \textbf{[JJH: Jorge, excess detail harms the main message]}\\
 
-\begin{table}[H] 
+\begin{table}[H]
 \begin{threeparttable}
-\caption{Likelihood Ratios for Tests Comparing Different Markov Orders for Disease Transition Specifications} \label{table:lrtests}
-\centering 
-\scriptsize
-\begin{tabular}{lcccccc} \toprule
-Markov Order Compared	                   & 1st vs. 2nd & 2nd vs. 3rd & 3rd vs. 4th& 4th vs. 5th & 5th vs. 6th& Degrees of Freedom \\ \midrule
-Heart Disease    & 2.18  & 0.49 & 9.54   & 5.8    & 4.01 & 2 \\  
-Hypertention      & 0.05  & 0.06 & 0.41    & 1.96 & 2.46 & 1 \\  
-Stroke                & 3.94 & \textbf{12.74} & \textbf{16.86} & 6.27 & .66 & 4 \\ \bottomrule
+\caption{Tests Comparing Different First and Second Markov Processes for Disease Transition Specifications} \label{table:lrtests}
+\centering
+\footnotesize
+\begin{tabular}{lccc} 
+\toprule
+Statistic & LR Statistic & Degrees of Freedom & $p$-value \\ 
+\midrule \\
+Desease & \\
+Heart Disease & 2.18 & 2 & 0.71 \\
+Hypertension   & 0.05 & 1 & 0.83 \\
+Stroke              & 3.94 & 4 & 0.14 \\ 
+\bottomrule
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table presents likelihood ratios comparing different orders of Markov processes to predict diseases at age $a+1$, based on diseases and other health and demographic conditions at age $a$. We highlight the likelihood ratios for tests that are significant at the 10\%.
+\item Note: This table presents likelihood ratios comparing first- and second-order Markov processes to predict diseases at age $a+1$, based on diseases and other health and demographic conditions at age $a$. The null hypotheses is the first-order Markov process, and the alternative is the second order.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
-\noindent The interpretation of the results in Table~\ref{table:lrtests} is the following. The heart disease of Column ``1st vs. 2nd'' tests the null that first-order lags suffice to construct the transition of heart disease from age $a$ to age $a+1$. We test the first-order Markov assumption with respect to other diseases. Limited support on smoking, BMI, and physical activity does not allow us to test the first-order Markov assumption with respect to these variables.\footnote{We lack observations in the auxiliary sample for which information is available for this conditions and the diseases of interest for multiple lags.} We cannot reject that a 1st-order Markov model is enough to predict heart disease at age $a+1$, if compared to a second-order Markov model. This test has two degrees of freedom because we add second-order lags for hypertension and diabetes in the alternative model (see Table~\ref{table:transition}). As we go across the columns, we find that higher order Markov processes are not better to predict heart disease at age $a+1$, relative to a first-order Markov model. The results are similar for hypertension. For stroke, we find mixed evidence: first-order Markov model is a better model than second-order Markov model, although third-order Markov model and fourth-order Markov model are better models than second- and third-order Markov models, respectively.\\ 
+\noindent The interpretation of the results in Table~\ref{table:lrtests} is the following. The heart disease of Column ``1st vs. 2nd'' tests the null that first-order lags suffice to construct the transition of heart disease from age $a$ to age $a+1$. We test the first-order Markov assumption with respect to other diseases. Limited support on smoking, BMI, and physical activity does not allow us to test the first-order Markov assumption with respect to these variables.\footnote{We lack observations in the auxiliary sample for which information is available for this conditions and the diseases of interest for multiple lags.} We cannot reject that a 1st-order Markov model is enough to predict heart disease at age $a+1$, if compared to a second-order Markov model. This test has two degrees of freedom because we add second-order lags for hypertension and diabetes in the alternative model (see Table~\ref{table:transition}).\footnote{In work available on request, we find that higher order Markov processes better predictors of heart disease at age $a+1$, relative to a first-order Markov model, for most outcomes. However, for stroke, there is some evidence of higher order dependence.}\\
 
-\noindent Unfortunately, limited support on the rest of the transition models that we estimate does not allow us to make credible tests, as we would need to drop thousands of observations in the auxiliary samples and perform the tests using very selected samples.\\
+\noindent Unfortunately, limited support for the other components of the transition models do not allow us to make credible tests.\footnote{We would need to drop thousands of observations in the auxiliary samples and perform the tests using very selected samples.}\\
 
-\noindent An alternative (less parametric) test for the first-order Markov process is the following: (i) use a linear probability model and the variables in Table~\ref{table:transition} to predict the disease of interest (consider multiple versions with different numbers of lags); (ii) calculate the correlation of the residual of these predictions with higher order lags than what the prediction of interest considers. Tables~\ref{table:1storderresidsheart} to \ref{table:1storderresidstroke}  show these correlations. The results of these tests very strongly support the first-order Markov assumption.\\
+\noindent An alternative test for a first-order Markov process is the following: (i) use a linear probability model approximation to a first-order Markov process and the variables in Table~\ref{table:transition} to predict the disease of interest using multiple versions of the prediction models; (ii) calculate the correlation of the residuals with higher order lags. Tables~\ref{table:1storderresidsheart} to \ref{table:1storderresidstroke}  show these correlations. The results of these tests very strongly support the first-order Markov assumption.\\
 
-\noindent To illustrate how to reads this tests consider Table~\ref{table:1storderresidsheart}. This table is a correlation matrix. Each column denotes the residuals from predicting heart disease at age $a+1$ based on different orders of lags, for the diseases listed in Table~\ref{table:transition} (for heart disease, these are hypertension and diabetes). Then, the rows denote different order of lagged predictors. For example, if a first-order Markov model is a correct specification, the residuals from the first-order prediction and the second-order lagged levels for diabetes and hypertension should have low correlation (as the table shows to be the case).
+\noindent To illustrate how to read these tests consider Table~\ref{table:1storderresidsheart}. This table reports simple first-order Pearson correlations with the indicated variable. The row presents the residuals from predicting heart disease at age $a+1$ using different orders of lags, for the diseases listed in Table~\ref{table:transition} (for heart disease, these are hypertension and diabetes). Correlations are low.
 
-\begin{table}[H] 
+\clearpage
+
+\begin{sidewaystable}[H]
 \begin{threeparttable}
 \caption{Tests for Linear Probability Predictions of Heart Disease at $a+1$} \label{table:1storderresidsheart}
-\centering 
 \scriptsize
-\begin{tabular}{lccccc} \toprule
-\multicolumn{6}{c}{Residuals of Prediction of Heart Disease at age $a+1$} \\
-Lags in Prediction	&	1	&	2	&	3	&	4	&	5	\\ \midrule \\
-Predictor       
-Diabetes at $a - 2$	&	-0.002	&		&		&		&		\\
-Hypertension at $a - 2$	&	-0.006	&		&		&		&		\\
-Diabetes at $a - 3$	&	-0.004	&	-0.002	&		&		&		\\
-Hypertension at $a - 3$	&	-0.009	&	-0.004	&		&		&		\\
-Diabetes at $a - 4$	&	-0.017	&	-0.015	&	-0.013	&		&		\\
-Hypertension at $a - 4$	&	-0.020	&	-0.014	&	-0.010	&		&		\\
-Diabetes at $a - 5$	&	-0.015	&	-0.014	&	-0.011	&	-0.000	&		\\
-Hypertension at $a - 5$	&	-0.017	&	-0.012	&	-0.008	&	0.001	&		\\
-Diabetes at $a - 6$	&	-0.009	&	-0.007	&	-0.005	&	0.005	&	0.005	\\
-Hypertension at $a - 6$	&	0.004	&	0.009	&	0.012	&	0.020	&	0.019	\\ \bottomrule
+\centering
+\begin{tabular}{lcccccccccc} \toprule
+& \multicolumn{10}{c}{Residuals of Prediction of Heart Disease at age $a+1$} \\
+Correlations with	&	Predictor Diabetes &	Hypertension &	Diabetes &	Hypertension &	Diabetes	&	Hypertension &	Diabetes & Hypertension & Diabetes & Hypertension \\
+                    &	at $a - 2$ &	at $a - 2$		&	at $a - 3$ & at $a - 3$		& at $a - 4$		& at $a - 4$		& at $a - 5$	& at $a - 5$	& at $a - 6$	& at $a - 6$	\\
+
+\midrule \\
+&	-0.002	&	-0.006	&	-0.004	& -0.009 &	-0.017	& -0.020	&	-0.015	&	-0.017 &-0.009	&	0.004	\\
+\bottomrule
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table presents the correlation matrix of the residuals from predicting heart disease with as many lags as indicated in the row ``Lags of Prediction'' and the predictors indicated in the first column. 
+\item Note: This table presents the correlation between the residuals from predicting heart disease at age $a+1$ and the predictors indicated in each column.
 \end{tablenotes}
 \end{threeparttable}
-\end{table}
+\end{sidewaystable}
 
-\begin{table}[H] 
+\clearpage
+
+\begin{table}[H]
 \begin{threeparttable}
 \caption{Tests for Linear Probability Predictions of Hypertension at $a+1$} \label{table:1storderresidshyper}
-\centering 
+\centering
 \scriptsize
 \begin{tabular}{lccccc} \toprule
-\multicolumn{6}{c}{Residuals of Prediction of Heart Disease at age $a+1$} \\
-Lags in Prediction	&	1	&	2	&	3	&	4	&	5	\\ \midrule \\
-Predictor       
-Diabetes at $a - 2$	&	0.003	&		&		&		&		\\
-Diabetes at $a - 3$	&	0.009	&	0.006	&		&		&		\\
-Diabetes at $a - 4$	&	0.012	&	0.009	&	0.004	&		&		\\
-Diabetes at $a - 5$	&	0.008	&	0.006	&	0.001	&	-0.002	&		\\
-Diabetes at $a - 6$	&	0.001	&	-0.001	&	-0.005	&	-0.008	&	-0.007	\\ \bottomrule
+& \multicolumn{5}{c}{Residuals of Prediction of Hypertension at age $a+1$} \\
+Correlations with	&	Predictor Diabetes & Diabetes & Diabetes & Diabetes & Diabetes 	\\
+                    & at $a - 2$	& at $a - 3$	& at $a - 4$	& at $a - 5$	& at $a - 6$	\\
+\midrule
+&	0.003	& 0.009	&	0.012	&	0.008	&	0.001	\\
+\bottomrule
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table presents the correlation matrix of the residuals from predicting hypertension with as many lags as indicated in the row ``Lags of Prediction'' and the predictors indicated in the first column. 
+\item Note: This table presents the correlation between the residuals from predicting hypertension at age $a+1$ and the predictors indicated in each column.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 
-\begin{table}[H] 
+\begin{sidewaystable}[H]
 \begin{threeparttable}
 \caption{Tests for Linear Probability Predictions of Stroke at $a+1$} \label{table:1storderresidstroke}
-\centering 
-\scriptsize
-\begin{tabular}{lccccc} \toprule
-\multicolumn{6}{c}{Residuals of Prediction of Heart Disease at age $a+1$} \\
-Lags in Prediction	&	1	&	2	&	3	&	4	&	5	\\ \midrule \\
-Predictor       
-Cancer at $a-2$	&	0.004	&		&		&		&		\\
-Diabetes at $a - 2$	&	0.008	&		&		&		&		\\
-Heart Disease at $a - 2$	&	0.001	&		&		&		&		\\
-Hypertension at $a - 2$	&	0.001	&		&		&		&		\\
-Cancer at $a-3$	&	-0.002	&	-0.006	&		&		&		\\
-Diabetes at $a - 3$	&	0.017	&	0.010	&		&		&		\\
-Heart Disease at $a - 3$	&	-0.004	&	-0.004	&		&		&		\\
-Hypertension at $a - 3$	&	-0.001	&	-0.002	&		&		&		\\
-Cancer at $a-4$	&	-0.018	&	-0.021	&	-0.016	&		&		\\
-Diabetes at $a - 4$	&	0.016	&	0.010	&	0.002	&		&		\\
-Heart Disease at $a - 4$	&	0.011	&	0.011	&	0.014	&		&		\\
-Hypertension at $a - 4$	&	0.002	&	0.002	&	0.003	&		&		\\
-Cancer at $a-5$	&	-0.009	&	-0.011	&	-0.007	&	0.007	&		\\
-Diabetes at $a - 5$	&	0.028	&	0.023	&	0.016	&	0.014	&		\\
-Heart Disease at $a - 5$	&	0.008	&	0.007	&	0.011	&	-0.001	&		\\
-Hypertension at $a - 6$	&	0.016	&	0.015	&	0.016	&	0.013	&		\\
-Cancer at $a-6$	&	-0.010	&	-0.012	&	-0.008	&	0.004	&	-0.002	\\
-Diabetes at $a - 6$	&	0.028	&	0.023	&	0.017	&	0.016	&	0.003	\\
-Heart Disease at $a - 6$	&	0.009	&	0.009	&	0.012	&	0.001	&	0.003	\\
-Hypertension at $a - 6$	&	0.023	&	0.022	&	0.022	&	0.020	&	0.008	\\ \bottomrule
+\centering
+\footnotesize
+\begin{tabular}{l *{8}{c}}
+\toprule
+& \multicolumn{8}{c}{Residuals of Prediction of Stroke at age $a+1$} \\
+Correlations with	&	Predictor Cancer &	Diabetes & Heart Disease &	Hypertension &	Cancer	& Diabetes & Heart Disease & Hypertension  \\
+                    &	at $a-2$	&	at $a - 2$ & at $a - 2$	& at $a - 2$	& at $a-3$	& at $a - 3$	& at $a - 3$	& at $a - 3$ \\
+\midrule \\
+&	0.004 &	0.008	&	0.001	&	0.001	&	-0.002	&	0.017 &	-0.004 &	-0.001	\\
+\bottomrule
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table presents the correlation matrix of the residuals from predicting stroke with as many lags as indicated in the row ``Lags of Prediction'' and the predictors indicated in the first column. 
+\item Note: This table presents the correlation between the residuals from predicting stroke at age $a+1$ and the predictors indicated in each column.
 \end{tablenotes}
 \end{threeparttable}
-\end{table}
-
+\end{sidewaystable}
 
 \paragraph{Further Details on Specific Transition Models}
 \noindent This section describes the modeling strategy for particular outcomes. \\
