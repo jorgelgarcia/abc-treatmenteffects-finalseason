@@ -126,6 +126,14 @@ foreach b of numlist 1(1)1000 {
 	gen inc_labor30 = si30y_inc_labor
 	gen inc_labor21 = si21y_inc_labor
 	gen inc_labor20 = si21y_inc_labor
+	
+	foreach num of numlist 22(1)29 {
+		gen draw`num'maley         =  rnormal(0,`var2male')
+		gen draw`num'femaley       =  rnormal(0,`var2female')
+	}
+	egen drawmaley   = rowtotal(draw22male-draw29male)
+	egen drawfemaley = rowtotal(draw22female-draw29female)
+	
 
 	foreach num of numlist 22(1)29 {
 		local numm1 = `num' - 1
@@ -134,11 +142,19 @@ foreach b of numlist 1(1)1000 {
 				   + si21y_inc_labor*b1[1,5] + b1[1,6]*inc_labor`numm1' + b1[1,7]*inc_labor`numm2' + b1[1,8] 
 		
 		gen draw`num'male       =  rnormal(0,`var1male')
-		replace  inc_labor`num' =  inc_labor`num' + draw`num'male   if male == 1
+		replace  inc_labor`num' =  inc_labor`num' + drawmaley   if male == 1
 		
 		gen draw`num'female     =  rnormal(0,`var1female')
-		replace  inc_labor`num' =  inc_labor`num' + draw`num'female if male == 0
+		replace  inc_labor`num' =  inc_labor`num' + drawfemaley if male == 0
 	}
+
+	foreach num of numlist 31(1)67 {
+		gen draw`num'male         =  rnormal(0,`var2male')
+		gen draw`num'female       =  rnormal(0,`var2female')
+	}
+	egen draw drawmale = rowtotal(draw31male-draw67male)
+	egen draw drawfemale = rowtotal(draw31female-draw67female)
+	
 
 	foreach num of numlist 31(1)67 {
 		local numm1 = `num' - 1
@@ -148,10 +164,9 @@ foreach b of numlist 1(1)1000 {
 				   + b2[1,5]*inc_labor`numm2' + b2[1,6] 
 		
 		gen draw`num'male       =  rnormal(0,`var2male')
-		replace  inc_labor`num' =  inc_labor`num' + draw`num'male   if male == 1
+		replace  inc_labor`num' =  inc_labor`num' + drawmale   if male == 1
 		
-		gen draw`num'female     =  rnormal(0,`var2female')
-		replace  inc_labor`num' =  inc_labor`num' + draw`num'female if male == 0
+		replace  inc_labor`num' =  inc_labor`num' + drawfemale if male == 0
 	}
 
 	keep R male m_ed0y piatmath years_30y si21y_inc_labor inc_labor21-inc_labor67 inc_labor30
