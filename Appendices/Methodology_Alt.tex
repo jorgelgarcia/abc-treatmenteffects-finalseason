@@ -251,26 +251,26 @@ We base our model-based predictions for a generic outcome, $Y_{k,j,a}$ on backgr
 
 \noindent An alternative to the prediction strategy that we use throughout the main text and the preceding appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using Algorithm~\ref{alg:match}; and (ii) use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and use it to form out-of-sample predictions, we simply match individuals using Algorithm~\ref{alg:match} to impute labor income profiles.\\
 
-\noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the non-parametric approach that we introduce in this section. We present results for labor income and for Quality-adjusted life years (see Appendix~\ref{appendix:health} for details). We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). An individual $l(i)$ in the auxiliary sample is a match for individual $i$ in the experimental sample if it is in the neighborhood defined by the left-hand side of \eqref{eq:ingrownnail} across all individuals in the auxiliary sample. We present the discounted net present value (treatment - control) for labor income in 2014 dollars. The approaches are in rough agreement. (Analogous results for other variables are available upon request from the authors.)\\
+\noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the non-parametric approach that we introduce in this section. We present results for labor income. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). An individual $l(i)$ in the auxiliary sample is a match for individual $i$ in the experimental sample if it is in the neighborhood defined by the left-hand side of \eqref{eq:ingrownnail} across all individuals in the auxiliary sample. We present the discounted net present value (treatment - control) for labor income in 2014 dollars. The approaches are in close agreement. (Analogous results for other variables are available upon request from the authors.)\\
 
 \begin{table}[H]
 \begin{threeparttable}
 \caption{Net Present Value of Labor Income: Parametric and Non-Parametric Approaches}
 \label{table:nvpli}
 \centering
-\begin{tabular}{ccc|ccc} \toprule
-\multicolumn{3}{c}{Labor Income} & \multicolumn{3}{c}{QALYs} \\
-Pooled & Male & Female & Pooled & Male & Female   \\ \midrule
-\multicolumn{6}{l}{\textbf{a. Parametric (Main Paper)}} \\
-133,032 & 238,105 & 41,908 & 87,181 & 106,218 & 42,102\\
-(76,634) & (185,375) & (24,606) & (66,529) & (103,984) & (50,734)\\
-\multicolumn{6}{l}{\textbf{b. Non-Parametric (This Section)}} \\
-132,924 & 195,530 & 69,317 & 87,110 & 87,672 & 69,638  \\
-(11,253) & (20,210) & (4,350) & (9,769) & (11,332) & (8,970) \\ \bottomrule
+\begin{tabular}{ccc} \toprule
+\multicolumn{3}{c}{Labor Income} \\
+Pooled & Male & Female \\ \midrule
+\multicolumn{3}{c}{\textbf{a. Parametric (Main Paper)}} \\
+133,032 & 238,105 & 41,908 \\
+(76,634) & (185,375) & (24,606) \\
+\multicolumn{3}{c}{\textbf{b. Non-Parametric (This Section)}} \\
+132,924 & 195,530 & 69,317 \\
+(11,253) & (20,210) & (4,350) \\ \bottomrule
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: this table compares the net-present value of labor and transfer income (treatment - control) using the parametric approach of the main text and the approach that we use in this section. All values are discounted to birth and reported in 2014 dollars.
+\item Note: this table compares the net-present value of labor income (treatment - control) using the parametric approach of the main text and the approach that we use in this section. All values are discounted to birth and reported in 2014 dollars.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -340,7 +340,7 @@ Assumption~\ref{ass:contain} requires that the support of the auxiliary data con
 
 \noindent The following framework helps us to test both Assumptions~\ref{ass:exog} and \ref{ass:summary}. We discuss this framework and test Assumption~\ref{ass:exog} in this section of the appendix. We test Assumption~\ref{ass:summary} in the next section.\\
 
-\noindent Define an outcome vector as
+\noindent Define an outcome vector for treatment status $d$, in sample $k$ at age $a$ as
 
 \begin{align}
 \bm{Y}^d_{k,a} &= \bm{X}^d_{k,a} \bm{\gamma} + \bm{\varepsilon}^d_a  &(a) \nonumber
@@ -354,7 +354,7 @@ Assumption~\ref{ass:contain} requires that the support of the auxiliary data con
 \end{align}
 
 
-\noindent where $\bm{\theta}^d \independent \bm{\upsilon}_{a}^d, \bm{\omega}_{a}^d$ and $\bm{\upsilon}_{a}^d \independent \bm{\omega}_{a}^d$ for all $a \in \{0, \ldots, A \}, \; d \in \{0,1\}$. We use additional conditioning variables in these equations. To simplify the notation, we keep them implicit.\\
+\noindent where $\bm{\theta}^d \independent \bm{\upsilon}_{a}^d, \bm{\omega}_{a}^d$ and $\bm{\upsilon}_{a}^d \independent \bm{\omega}_{a}^d$. We use additional conditioning variables in these equations. To simplify the notation, we keep them implicit.\\
 
 \noindent When the auxiliary measurement system $\bm{M}_{a}^d $ consists of at least three measures, we are able to identify the vectors of coefficients characterizing this system, $\bm{\lambda}^d, \bm{\beta}^d$, as well as the respective covariance matrices, $\bm{\Sigma}_{\bm{\theta}_{a}^d}, \bm{\Sigma}_{\bm{\upsilon}_{a}^d}, \bm{\Sigma}_{\bm{\omega}_{a}^d}$, we use the method of \citet{Bartlett_1938_Nature} to obtain an estimate of $\bm{\theta}_{a}^d$ \citep{Heckman_Pinto_etal_2013_PerryFactor}. Identifying and estimating the elements in system \eqref{eq:sa-msystemmain} serves two purposes: (i) it facilitates a test of Assumption~\ref{ass:exog}; and (ii) it enables us to use estimates of $\bm{\theta}_{a}^d$ as control functions when testing Assumption~\ref{ass:summary} in the next appendix, i.e. to use these estimates to control for endogeneity.\\
 
@@ -858,7 +858,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 \mathbb{E} \left[ Y_{e,j,a} | \bm{X}^d_{e,a} = \bm{x}, \bm{B}_e = \bm{b} \right] = \mathbb{E} \left[ Y_{n,j,a} | \bm{X}^d_{n,a} = \bm{x}, \bm{B}_e = \bm{b} \right], \quad d \in \{0,1\}, \quad j \in \mathcal{J}_a.
 \end{equation}
 
-\noindent We test this hypothesis at $a = a^*$, where $a^*=30$. Our non-experimental source at $a = a^*$ is the CNLSY. The test is analogous to the one that we perform before. Under the null hypothesis, an indicator of sample membership (experimental or auxiliary) is statistically equal to zero. Results are reported in Tables~\ref{table:inv0} to \ref{table:invfin}. Using the full set of prediction variables in $\bm{B}_k, \bm{X}_{k,a}$, we do not reject the null of equality in Equation~\ref{eq:withbetimplication}.
+\noindent We test this hypothesis at $a = a^*$, where $a^*=30$. Our non-experimental data source at $a = a^*$ is the CNLSY. The test is analogous to the one that we perform before. Under the null hypothesis, an indicator of sample membership (experimental or auxiliary) is statistically equal to zero. Results are reported in Tables~\ref{table:inv0} to \ref{table:invfin}. Using the full set of conditioning variables in $\bm{B}_k, \bm{X}_{k,a}$, we do not reject the null of equality in Equation~\eqref{eq:withbetimplication}.
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
@@ -992,9 +992,8 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 
 \paragraph{Life-cycle Prediction of Parental Labor Income} \label{appendix:lcyclepincome}
 
-\noindent A third approach assumes that all parental labor income is earned by the mother and limits the non-experimental samples to Black females whose labor income at each age is below the in-sample 90th percentile (we calculate this for the PSID and NLSY79 separately before using them jointly as one sample). As with labor income (of program participants) after age 30, we use the PSID and NLSY79 as one sample. For lack of data on other relevant predictors, we use only one predictor: lagged parental labor income. We initialize the prediction with the last observed measure of maternal income in the experiment and extrapolate until the mother is 67 years old. Figure~\ref{figure:pincomeapp} displays our estimate of parental labor income in a format similar to Figure~\ref{figure:pincome}.\\
+\noindent A third approach assumes that all parental labor income is earned by the mother and limits the non-experimental samples to Black females whose labor income at each age is below the in-sample 90th percentile (we calculate this for the PSID and NLSY79 separately before using them jointly as one sample). As for the labor incomes of program participants after age 30, we pool data from the PSID and NLSY79. For lack of data on other relevant predictors, we use only one predictor: lagged parental labor income. We initialize the prediction with the last observed measure of maternal income in the experiment and extrapolate until the mother is 67 years old. Figure~\ref{figure:pincomeapp} displays our estimate of parental labor income in a format similar to that of Figure~\ref{figure:pincome}.\\
 
-\textbf{[JJH: But Jorge, they are not in such close agreement!] [JLG: please note the following. The interpolated up to age 21 and the Mincer-based up to age 21 are in very close agreement in Table C.31. At age 21, the mothers have around 45 years old in average. Now, when we take the Mincer prediction up to retirement, the estimates differ. But they need to, because we are adding 20 years of parental income on average. The IRR and B/C ratios are in the main paper and are consistent with these magnitudes.]}
 
 \begin{figure}[!htbp]
 \centering
@@ -1020,15 +1019,15 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 \begin{enumerate}
 \item \textbf{Auxiliary Sample Used to Predict:} PSID.
 \item \textbf{Initial Restrictions Placed on the Auxiliary Sample:} Black; female; unmarried; education and number of children at ages 5 in the ranges of ABC/CARE participants. Labor income at each age is below the 75th percentile.
-\item \textbf{Variables Used to Construct Synthetic Control and Treatment Groups:} we pool PSID/NLSY79 restricted samples, and do not construct synthetic experimental groups due to lack of data on the treatment effects found in the experiments.
+\item \textbf{Variables Used to Construct Synthetic Control and Treatment Groups:} we pool PSID/NLSY79 restricted samples.
 \item \textbf{Variables Used to Predict:} education, second order polynomial in experience, birth year, number of children.
-\item \textbf{Assumed Retirement:} after 40 years of labor force participation. \textbf{[JJH: Jorge, do we not use these data in other methods? This seems incomplete] [JLG: please note that this does not mean that we do not use any of the variables in the other methods to predict; it only means that we do not weight the samples to construct the synthetic cohorts. I decided to do this, because we are already placing a lot of initial restrictions in the auxiliary data we use to produce this predictions as we state here. This is so we can match the control level and given how disadvantaged the mothers are. But as we have noted many times, weighting does not really have a lot of effect in the prediction, the real deal is the variables that we use to predict. Lastly, note that the predictions up to age 21 match very well the interpolated values based on the observed data up to age 21.]}
+\item \textbf{Assumed Retirement:} after 40 years of labor force participation.
 \end{enumerate}
 \item \textbf{Life-cycle Prediction}
 \begin{enumerate}
 \item \textbf{Auxiliary Sample Used to Predict:} PSID and NLSY79.
 \item \textbf{Initial Restrictions Placed on the Auxilliary Sample:} Black; female; labor income at each age is below the 90th percentile.
-\item \textbf{Variables Used to Construct Synthetic Control and Treatment Groups:} we pool the PSID restricted sample, and do not construct synthetic experimental groups due to lack of data on the treatment effect predictors. \textbf{[JJH: Jorge, same comment, this sounds weak] [JLG: please see my previous comment.]}
+\item \textbf{Variables Used to Construct Synthetic Control and Treatment Groups:} we pool the PSID restricted sample, and do not construct synthetic experimental groups due to lack of data on the treatment effect predictors.
 \item \textbf{Variables Used to Predict:} lagged labor income.
 \item \textbf{Assumed Retirement:} 67 years old.
 \end{enumerate}
@@ -1288,7 +1287,7 @@ Y_{k,j,a}                   &=& \lambda_{0} + \lambda_{1} Y_{k,j,a-1} + \lambda_
 
 \noindent Table~\ref{table:predsens} summarizes the results from our exploration through two statistics: (i) the predicted net present value (discounted to birth [treatment - control]) of labor income under different assumptions; and (ii) the overall cost-benefit ratio when the predictions are done based on the different proposed alternatives. Estimates from the model that we use in the text of the paper are not sensitive to the departures from serial independence that we analyze in this appendix.\\
 
-\noindent In the auxiliary samples, we observe outcome $Y_{n,j,a}$ for $a \in [a^*, \ldots, A]$. In the experimental sample, we observe the outcome $Y_{e,j,a}$ for at most two ages, depending on the outcome. We initially assume that we observe the outcome at one age ($a = a^*$). We later relax this assumption. We thus use the information in the auxiliary sample at  $a \in [a^*, \ldots, A]$ to form extrapolations for the experimental sample, where we do not observe the outcome of interest during this age interval. We produce out-of-sample predictions and calculate the net present value of labor income (treatment - control) under different assumptions.\\
+\noindent In the auxiliary samples, we observe outcomes $Y_{n,j,a}$ for $a \in [a^*, \ldots, A]$. In the experimental sample, we observe the outcome $Y_{e,j,a}$ for at most two ages, depending on the outcome. We initially assume that we observe the outcome at one age ($a = a^*$). We later relax this assumption. We thus use the information in the auxiliary sample at  $a \in [a^*, \ldots, A]$ to form extrapolations for the experimental sample, where we do not observe the outcome of interest during this age interval. We produce out-of-sample predictions and calculate the net present value of labor income (treatment - control) under different assumptions.\\
 
 \subsubsection{Specification 1: Lagged Component ($\lambda_{1} \neq 0$); No Serial Correlation ($\rho = 0$); and No Fixed Effect ($f = 0$)} \label{app:spec1}
 
@@ -1336,8 +1335,7 @@ Y_{k,j,a}                   &=& \lambda_{0} + \lambda_{1} Y_{k,j,a-1} + \lambda_
 \noindent \textbf{We note the following features about this specification:}
 
 \begin{enumerate}
-
-\item Is serial correlation present in the data? The estimates indicate that it is. From ages 21 to 30, we estimate the model in the CNLSY. The estimate for $\rho$ is $.7465$. From ages 30 to 67 (assumed retirement) we estimate the model on the NLSY79/PSID \textbf{[JJH: Jorge, we sometimes use 65; sometimes 67] [JLG: you are correct, in our estimates it is always 67 this is now stated throughout the paper.]}. The estimate for $\rho$ is $.5426$. When we restrict the sample to people who earn \$30,000 (2014) at each of these ages, the analogous estimates of $\rho$ are $.7370$ and $.5316$. These estimates are statistically significant at the 1\% level.\\
+\item Is serial correlation present in the data? The estimates indicate that it is. From ages 21 to 30, we estimate the model in the CNLSY. The estimate for $\rho$ is $.7465$. From ages 30 to 67 (assumed retirement) we estimate the model on the NLSY79/PSID. The estimate for $\rho$ is $.5426$. When we restrict the sample to people who earn \$30,000 (2014) at each of these ages, the analogous estimates of $\rho$ are $.7370$ and $.5316$. These estimates are statistically significant at the 1\% level.\\
 \end{enumerate}
 
 \noindent We can $\rho$-transform the system of interest to obtain consistent estimates. Drop the $j$ index for simplicity and write:
@@ -1354,9 +1352,9 @@ Y_{k,a} = \lambda_{0} \left( 1 - \rho \right) + \left( \lambda_{1} + \rho \right
 
 \subsubsection{Specification 5: Non-Parametric Predictions}
 
-\noindent An alternative to any of these scenarios is to make predictions using a non-parametric matching algorithm. Specifically, (i) for each individual $i$ in the experimental sample, $e$, find an individual(s) $l(i)$ in the non-experimental sample, $n$, using Algorithm~\ref{alg:match} in Appendix~\ref{appendix:match}; (ii) we impute the post-$a^*$ trajectory of $Y_{k,j,a}$ of individual(s) $l(i)$ in the non-experimental sample, $n$, to individual $i$ in the experimental sample, $e$.\\
+\noindent An alternative to any of these scenarios is to make predictions using a non-parametric matching algorithm. Specifically, (i) for each individual $i$ in the experimental sample, $e$, find individual(s) $l(i)$ in the non-experimental sample, $n$, using Algorithm~\ref{alg:match} in Appendix~\ref{appendix:match}; (ii) we impute the post-$a^*$ trajectory of $Y_{k,j,a}$ of individual(s) $l(i)$ in the non-experimental sample, $n$, to individual $i$ in the experimental sample, $e$.\\
 
-\noindent A sufficient condition for the validity of this procedure is Assumption ~\ref{ass:exog} (Exogeneity). Without exogeneity, the joint distributions of $\bm{X}_{j,a*}, \varepsilon_{j,a^*}$ do not necessarily coincide across the experimental and the auxiliary samples. For example, in the experimental sample, individuals in the treatment group have relatively high levels of education due to in part the exogenous boost generated by randomization into treatment. In the auxiliary sample, the usual form of ability bias may be at work: individuals with relatively high levels of education might have better motivation, better parents, etc. Thus, the empirical relationships between education and labor income may differ across experimental and auxiliary samples. Exogeneity avoids this problem, but clearly a weaker condition is required.\\
+\noindent A sufficient condition for the validity of this procedure is Assumption ~\ref{ass:exog} (Exogeneity). Without exogeneity, the joint distributions of $\bm{X}_{j,a*}, \varepsilon_{j,a^*}$ do not necessarily coincide across the experimental and the auxiliary samples. For example, in the experimental sample, individuals in the treatment group have relatively high levels of education due to in part the exogenous boost generated by randomization into treatment. In the auxiliary sample, the usual form of ability bias may be at work: individuals with relatively high levels of education might have better motivation, better parents, etc. Thus, the empirical relationships between education and labor income may differ across experimental and auxiliary samples. Exogeneity avoids this problem, but clearly only a weaker assumption is required.\\
 
 
 \subsection{Estimation Procedure and Data Combination Estimator in the GMM Framework} \label{appendix:gmm}
@@ -1425,7 +1423,7 @@ For outcome $j$, we form the vector of residuals $\hat{\bm{\varepsilon}}_{n,j} :
 \noindent We randomly sample a vector of residuals from an individual $j$ in the auxiliary sample ($n$) and pair it with the vector $\hat{\bm{Y}}_{e,j}$ of individual $i$ in the experimental sample ($e$) to form the prediction $\tilde{\bm{Y}}_{e,j}$ for individual $i$ in the experimental sample. That is, the pairing of individual $j$ in the auxiliary sample ($n$) with individual $i$ in the experimental sample ($e$) is random. Random pairing is valid under invariance and exogeneity, i.e. under this assumption the vector of residuals from any individual $j$ in the auxiliary sample is a valid estimate for the vector of residuals of any individual $i$ in the experimental sample. We form the pairing one time for the main point estimates, and then bootstrap this pairing when producing inference. See Appendix~\ref{appendix:bootstrap} for more details on our inference procedures.
 \end{enumerate}
 
-\noindent Second, we formulate our estimation strategy in terms of the GMM framework \citep{Hansen_1982_Econometrica}. To this end, note that Assumption ~\ref{ass:exog} (Exogeneity) and Assumption~\ref{ass:summary} (Invariance) imply the following moment condition:
+\noindent Second, we formulate our estimation strategy in terms of GMM \citep{Hansen_1982_Econometrica}. To this end, note that Assumption ~\ref{ass:exog} (Exogeneity) and Assumption~\ref{ass:summary} (Invariance) imply the following moment condition:
 
 \begin{equation}
 \mathbb{E} \left[ \bm{m}_{j,a} \left( \bm{X}_{n,a}^d, \bm{B}_{n}; \bm{\theta}_{j,a} \right) \right] = 0,  \quad k \in \{n,e\}, \quad j \in \mathcal{J}_a \label{eq:moment}
@@ -1452,10 +1450,7 @@ Q :=  {\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\theta} \right) }  \\ {\
 
 \noindent We explain the samples used to construct each empirical counterpart and the procedure to obtain standard errors on the predictions in Appendix~\ref{app:method_noobs} and Appendix~\ref{appendix:bootstrap}, respectively.\\
 
-\noindent Now, we adapt the procedure and the GMM framework to the rest of the specifications.\\
-
-\noindent \textbf{Specification 2} is simpler because it does not depend on lagged outcomes. The steps are the following:
-
+\noindent We next adapt the procedure and the GMM framework to the rest of the specifications. \textbf{Specification 2} is simpler because it does not depend on lagged outcomes. The steps are the following:
 
 \begin{enumerate}
 \item Use the auxiliary sample ($n$) to estimate the the coefficients characterizing $\phi_{j,a} \left( \cdot , \cdot \right)$.\footnote{In practice, we use a weighted version of the auxiliary samples. The weights give relatively high importance to the individuals in the auxiliary sample whose characteristics $\bm{B}_k$ are close to the those of the individuals in the experimental sample. See Appendix~\ref{appendix:match}.}
@@ -1482,7 +1477,7 @@ Y_{n,j,a} -  \hat{\phi}_{j,a} (\bm{X}_{k,a}, \bm{B}_k) : = \hat{\varepsilon}_{n,
 \tilde{\bm{Y}}_{e,j} = \hat{\bm{Y}}_{e,j} + \hat{\bm{\varepsilon}}_{n,j}.
 \end{equation}
 
-\noindent In practice, we randomly sample a vector of residuals from an individual $j$ in the auxiliary sample ($n$) and pair it with the vector $\hat{\bm{Y}}_{e,j}$ of individual $i$ in the experimental sample ($e$) to form the prediction $\tilde{\bm{Y}}_{e,j}$ for individual $i$ in the experimental sample. That is, the pairing of individual $j$ in the auxiliary sample ($n$) with individual $i$ in the experimental sample ($e$) is random. Random pairing is valid under invariance and exogeneity, i.e. under this assumption the distribution of the residuals for individuals $j$ in the auxiliary sample is a valid estimate for the vector of residuals for individuals $i$ in the experimental sample. We form the pairing one time for the main point estimates, and then bootstrap this pairing when producing inference. See Appendix~\ref{appendix:bootstrap} for more details on our inference procedures.
+\noindent In practice, we randomly sample a vector of residuals from an individual $j$ in the auxiliary sample ($n$) and pair it with the vector $\hat{\bm{Y}}_{e,j}$ of individual $i$ in the experimental sample ($e$) to form the prediction $\tilde{\bm{Y}}_{e,j}$ for individual $i$ in the experimental sample. That is, the pairing of individual $j$ in the auxiliary sample ($n$) with individual $i$ in the experimental sample ($e$) is random. Random pairing is valid under invariance and exogeneity, i.e. under this assumption the distribution of the residuals for individuals $j$ in the auxiliary sample is a valid estimate for the vector of residuals for individuals $i$ in the experimental sample. We form the pairing one time to obtain our estimates, and then bootstrap this pairing when producing inference. See Appendix~\ref{appendix:bootstrap} for more details on our inference procedures.
 \end{enumerate}
 
 \noindent In this specification, there is no ``initialization'' of the prediction out of sample. Thus, the GMM estimate consists of minimizing
@@ -1500,7 +1495,7 @@ Q :=  {\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\theta} \right) }  \end{
 Y_{k,a} = \lambda_{0} \left( 1 - \rho \right) + \left( \lambda_{1} + \rho \right) Y_{k,a-1} - \lambda_{1} \rho Y_{k,a-2} + \lambda_{2} \left( \bm{X}_{k,a} - \rho \bm{X}_{k,a-1}  \right) + U_{k,a} \label{eq:rhotransform}
 \end{equation}
 
-\noindent This is a model with two lags and no serial correlation. The estimation procedure and the GMM framework are analogous to those of \textbf{Specification 1}. The two lags are not an issue for estimation in the auxiliary sample because we observe labor income for the full range of relevant ages, thus we estimate the prediction function. To initialize the procedure in the experimental sample, however, we face an issue: we do not observe labor income at $a^* - 1$. We assume that labor income at age $a^*$ is the same as at age $a^* - 1$ and then proceed in an identical way as in \textbf{Specification 1}, the estimation procedure and the GMM framework remain the same.\\
+\noindent This is a model with two lags and no serial correlation. The estimation procedure and the GMM framework are analogous to those of \textbf{Specification 1}. The two lags are not an issue for estimation in the auxiliary sample because we observe labor income for the full range of relevant ages, thus we estimate the prediction function. To initialize the procedure in the experimental sample, however, we face an issue: we do not observe labor income at $a^* - 1$. We assume that labor income at age $a^*$ is the same as at age $a^* - 1$ and then proceed in a similar way as in \textbf{Specification 1}, the estimation procedure and the GMM framework remain the same.\\
 
 \noindent Now, we explore \textbf{Specification 4}. We drop the exogenous regressors for expostional simplicity, as they do not bring in interesting features to the problem. We write:
 
@@ -1535,7 +1530,7 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 
 \item Iterate this procedure of to age $A$ and stack the vector of predictions (without accounting for prediction error) as $\hat{\bm{Y}}_{e} : = \left[ \hat{Y}_{e,a^*+1}, \ldots,  \hat{Y}_{e,A} \right]$.
 
-\item To account for prediction error we need an individual level estimate of $f + u_{a}$. We proceed as follows: (i) we observe labor income at two ages, 21 and 30. We use the estimates of the coefficients characterizing Equation~\eqref{eq:linear1bb} from the auxiliary sample (n) to predict labor income from ages 22 to 29. Then, we estimate the coefficients in Equation~\eqref{eq:linear1bb} in the experimental sample (e). This allows us to recover an estimate for $f + u_{a}$. In fact, we recover one estimate of $f + u_{a}$ for each $a \in \left[22, \ldots, 30 \right]$. Each of these estimates is a valid estimate for $f + u_{a}$ because $u_{a}$ is i.i.d. To form our prediction error, at each age, we take the average of these available estimates.. We add it to  $\hat{Y}_{e,a}$ for $a \geq a^* + 1$ to form a prediction that accounts for error. \textbf{[JJH: Why not average? It reduces measurement error for $\hat{f} U_a$?] [JLG: yes, I'm sorry. We spoke about this before and it was implemented but the text not corrected. I checked it.]}
+\item To account for prediction error we need an individual level estimate of $f + u_{a}$. We proceed as follows: (i) we observe labor income at two ages, 21 and 30. We use the estimates of the coefficients characterizing Equation~\eqref{eq:linear1bb} from the auxiliary sample (n) to predict labor income from ages 22 to 29. Then, we estimate the coefficients in Equation~\eqref{eq:linear1bb} in the experimental sample (e). This allows us to recover an estimate for $f + u_{a}$. In fact, we recover one estimate of $f + u_{a}$ for each $a \in \left[22, \ldots, 30 \right]$. Each of these estimates is a valid estimate for $f + u_{a}$ because $u_{a}$ is i.i.d. To form our prediction error, at each age, we take the average of these available estimates.. We add it to  $\hat{Y}_{e,a}$ for $a \geq a^* + 1$ to form a prediction that accounts for error.
 \end{enumerate}
 
 
