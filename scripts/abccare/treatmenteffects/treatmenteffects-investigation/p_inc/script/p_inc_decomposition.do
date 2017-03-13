@@ -109,3 +109,78 @@ summ p_inc12y  if apgar1 < . & apgar5 < . & hrabc_index < . & R == 0 & m_work12y
 di " control, mom works, p_inc21y"
 summ p_inc21y  if apgar1 < . & apgar5 < . & hrabc_index < . & R == 0 & m_work21y == 0
 
+
+
+
+
+
+* --------------------------- *
+* Investigation on occupation *
+* --------------------------- *
+/* mocc42: occupation of mother in age 3.5
+   riocc7: occupation of mother in age 12
+   
+   * Hollingshead
+    1 =Farm laborer
+	2 =Unskilled
+	3 =Semiskilled worker
+	4 =Skilled manual
+	5 =Clerical/sales
+	6 =Technician
+	7 =Small business manager
+	8 =Administrator
+	9 =Executive
+
+*/
+
+* For working moms age 3.5
+di "For treatment, working moms age 3.5"
+tab mocc42 if R == 1 & apgar1 < . & apgar5 < . & hrabc_index < . & m_work3y6m == 1
+
+di "For control, working moms age 3.5"
+tab mocc42 if R == 0 & apgar1 < . & apgar5 < . & hrabc_index < . & m_work3y6m == 1
+
+
+* For working moms age 12
+di "For treatment, working moms age 12"
+tab riocc7 if R == 1 & apgar1 < . & apgar5 < . & hrabc_index < . & m_work12y == 1
+
+di "For control, working moms age 12"
+tab riocc7 if R == 0 & apgar1 < . & apgar5 < . & hrabc_index < . & m_work12y == 1
+
+
+
+* --------------------------- *
+* Investigation on education *
+* --------------------------- *
+/* mocc42: occupation of mother in age 3.5
+   riocc7: occupation of mother in age 12
+   
+   * Hollingshead
+    1 =Farm laborer
+	2 =Unskilled
+	3 =Semiskilled worker
+	4 =Skilled manual
+	5 =Clerical/sales
+	6 =Technician
+	7 =Small business manager
+	8 =Administrator
+	9 =Executive
+
+*/
+
+* For working moms age 3.5
+di "For treatment, moms age 3.5"
+summ m_ed3y6m if R == 1 & apgar1 < . & apgar5 < . & hrabc_index < . & m_work3y6m == 1
+
+di "For control, moms age 3.5"
+summ m_ed3y6m if R == 0 & apgar1 < . & apgar5 < . & hrabc_index < . & m_work3y6m == 1
+
+
+* For working moms age 12
+di "For treatment, moms age 12"
+summ m_ed12y if R == 1 & apgar1 < . & apgar5 < . & hrabc_index < . & m_work12y == 1
+
+di "For control, moms age 12"
+summ m_ed12y if R == 0 & apgar1 < . & apgar5 < . & hrabc_index < . & m_work12y == 1 
+
