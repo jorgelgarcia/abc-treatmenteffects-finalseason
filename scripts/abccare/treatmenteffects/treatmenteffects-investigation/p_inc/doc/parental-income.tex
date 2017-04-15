@@ -1,0 +1,243 @@
+%Input preamble
+%Style
+\documentclass[12pt]{article}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\parindent 22pt
+\usepackage{fancyhdr}
+
+%Packages
+\usepackage{adjustbox}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage[table]{xcolor}
+\usepackage{tabu}
+\usepackage{color,soul}
+\usepackage{makecell}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage[normalem]{ulem}
+\usepackage{etoolbox}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{fixltx2e}
+\usepackage[para, flushleft]{threeparttablex}
+\usepackage[capposition=top,objectset=centering]{floatrow}
+\usepackage{subcaption}
+\usepackage{pdfpages}
+\usepackage{pdflscape}
+\usepackage{natbib}
+\usepackage{bibunits}
+\definecolor{maroon}{HTML}{990012}
+\usepackage[colorlinks=true,linkcolor=maroon,citecolor=maroon,urlcolor=maroon,anchorcolor=maroon]{hyperref}
+\usepackage{marvosym}
+\usepackage{makeidx}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usepackage{setspace}
+\usepackage{enumerate}
+\usepackage{rotating}
+\usepackage{epstopdf}
+\usepackage[titletoc]{appendix}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{xr}
+\usepackage{titlesec}
+\usepackage{footnote}
+\usepackage{longtable}
+\newlength{\tablewidth}
+\setlength{\tablewidth}{9.3in}
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\makeatletter
+\pretocmd\start@align
+{%
+  \let\everycr\CT@everycr
+  \CT@start
+}{}{}
+\apptocmd{\endalign}{\CT@end}{}{}
+\makeatother
+%Watermark
+\usepackage[printwatermark]{xwatermark}
+\usepackage{lipsum}
+\definecolor{lightgray}{RGB}{220,220,220}
+%\newwatermark[allpages,color=lightgray,angle=45,scale=3,xpos=0,ypos=0]{Preliminary Draft}
+
+%Further subsection level
+\usepackage{titlesec}
+\setcounter{secnumdepth}{4}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\setcounter{secnumdepth}{5}
+\titleformat{\subparagraph}
+{\normalfont\normalsize\bfseries}{\thesubparagraph}{1em}{}
+\titlespacing*{\subparagraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+%Functions
+\DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\corr}{Corr}
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\plim}{plim}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+%Math Environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}{Claim}
+\newtheorem{condition}{Condition}
+\renewcommand\thecondition{C--\arabic{condition}}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{assumption}{Assumption}
+\renewcommand\theassumption{A--\arabic{assumption}}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\newtheorem{property}[theorem]{Property}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{result}[theorem]{Result}
+\newenvironment{proof}{\textbf{Proof:}}{$\bullet$}
+
+%Commands
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand{\equald}{\ensuremath{\overset{d}{=}}}
+\captionsetup[table]{skip=10pt}
+%\makeindex
+
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+
+%Logo
+%\AddToShipoutPictureBG{%
+%  \AtPageUpperLeft{\raisebox{-\height}{\includegraphics[width=1.5cm]{uchicago.png}}}
+%}
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\newcommand{\mr}{\multirow}
+\newcommand{\mc}{\multicolumn}
+
+%\newcommand{\comment}[1]{}
+
+
+\pagenumbering{roman}
+
+\doublespacing
+
+\begin{document}
+\section{Parental Income}
+
+This document investigates the treatment effects on parental income in the ABC/CARE study. Specifically, we analyze if the increase in means of parental income is due to increase labor force participation or earnings. Let $R$ be the treatment indicator and $W$ be the indicator for whether mother works. We decompose the mean parental income of treated subjects as follows:
+\begin{equation} \label{eq:decomp-treat}
+E[Y|R=1] = E[Y|R=1,W=1]Pr(R=1,W=1) + E[Y|R=1,W=0]Pr(R=1,W=0)
+\end{equation}
+
+\noindent Equation \ref{eq:decomp-treat} decomposes the parental labor income mean into the means for the working and non-working subjects in the treatment group, respectively, and the probability of working and not working. Analogous decomposition applies to control subjects ($R=0$). 
+
+Table \ref{tab:treat-p_inc} and \ref{tab:control-p_inc} presents the parental income decomposition for the treatment group and control group, respectively. Note that the mean parental income for mothers who do not work is non-zero, because parental income includes father's income as well. At ages 3.5 and 12, the difference between mean parental income of treatment and control groups are driven mostly by the labor force participation. Treatment group has higher rates of mother's employment for these ages. At age 21, sample size decreases significantly due to attrition. Based on the available information, the difference between mean parental income of treatment and control groups is driven by difference in earnings. While non-attrited control subjects has higher rates of employment than non-attrited treatment subjects, mean income among those who work is much higher in the treatment group than the control group at age 21.
+
+
+\begin{threeparttable}[H] \caption{Decomposition of Parental Income, Treatment Group} \label{tab:treat-p_inc}	
+\begin{scriptsize}
+\centering
+	\begin{tabular}{lccccccc}
+	\toprule
+	Variable & Age & Obs. & $E[Y|R=1]$ & $E[Y|R=1,W=1]$ & $Pr(R=1,W=1)$ & $E[Y|R=1,W=0]$ & $Pr(R=1,W=0)$ \\ \midrule
+	Parental Income & 3.5 & 43 & 14842.59  & 15865.94 & 0.88 & 6486.67 & 0.12 \\
+	& & & (13126.57) & (13339.73) & & (1455.716)  \\
+						& 12 & 48 & 33744.03  & 36335.88 & 0.86 & 10883.63 & 0.14 \\
+	& & & (27254.32) & (27302.7) & & (11726.21)   \\					
+						& 21 & 32 & 30032.48 & 33416.64 & 0.71 & 11758 & 0.29 \\
+	& & & (18475.98) &  (17210.91) & & (15013.46) \\					 \bottomrule
+	\end{tabular}
+	\begin{tablenotes}
+\underline{Note:} The means and number of observations are conditional on observing the APGAR 1 min. and 5 min. scores and High Risk Index (HRI). Standard errors are reported in parentheses.
+\end{tablenotes}
+\end{scriptsize}
+\end{threeparttable}
+
+\hspace{1cm}
+
+\begin{threeparttable}[H] \caption{Decomposition of Parental Income, Control Group}	\label{tab:control-p_inc}
+\begin{scriptsize}
+\centering
+	\begin{tabular}{lccccccc}
+	\toprule
+	Variable & Age & Obs. & $E[Y|R=0]$ & $E[Y|R=0,W=1]$ & $Pr(R=0,W=1)$ & $E[Y|R=0,W=0]$ & $Pr(R=0,W=0)$ \\ \midrule
+	Parental Income & 3.5 & 57 & 12574.43  & 14853.33  & 0.76 & 5266.367 & 0.24 \\
+	& & & (12339.76) & (13078.01) & & (3632.069)  \\
+						& 12 & 52 & 22449.5  & 33763.27 & 0.61 & 4413.63  & 0.39 \\
+	& & & (23616.17) & (23553.82) & & (9836.786)   \\					
+						& 21 & 33 & 21182.4 & 24983.6  & 0.76 &  4077  & 0.24 \\
+	& & & (112916.29) &  (10882.95) & & (14763.96) \\					 \bottomrule
+	\end{tabular}
+	\begin{tablenotes}
+\underline{Note:} The means and number of observations are conditional on observing the APGAR 1 min. and 5 min. scores and High Risk Index (HRI). Standard errors are reported in parentheses.
+\end{tablenotes}
+\end{scriptsize}
+\end{threeparttable}
+
+\subsection{Investigation on Income Jump from Age 3.5 to Age 12}
+
+Tables \ref{tab:treat-p_inc} and \ref{tab:control-p_inc} show that there is a large jump in income level from age 3.5 to age 12 for most specifications. This jump may be due to (i) returns to education or work experience or (ii) change in part-time or full-time working status of parents. Since most mothers were in their early to mid-20's when their children are 3.5 years old, it is possible that many of them might not have worked full-time at that age.  
+
+Unfortunately, ABC/CARE parent interview questionnaires do not contain variable that indicates part-time/full-time working status or work hours of parents. Hence, we explore mother's occupation category variables and education variables, which are the most informative variables that helps us investigate the income jump. The occupation category variables in ABC/CARE are recorded in Hollingshead scale that ranges from 1 to 9. Table \ref{tab:occ-distribution} shows the list of Hollingshead categories and distribution in each category for working mothers in treatment and control group for child's ages 3.5 and 12. Table \ref{tab:occ-distribution} shows that the proportion of low skilled laborers (Occupation 1-3) are much lower at age 12 than at age 3.5. This trend is more evident for the treatment group. Hence, one explanation of the parental income gap between age 3.5 and age 12 can be the increase in high-skill laborers among working mothers.
+
+\begin{table}[H] \caption{Distribution of Mother's Occupation At Ages 3.5 and 12} \label{tab:occ-distribution}
+	\begin{tabular}{lrrrr}
+	\toprule
+	& \multicolumn{2}{c}{Treatment} & \multicolumn{2}{c}{Control}  \\\cmidrule(lr){2-3} \cmidrule(lr){4-5} 
+ Occupation & Age 3.5 & Age 12 & Age 3.5 & Age 12 \\
+\midrule
+	 1. Farm laborer & 34.2\% & 7\%  &  28.6\% 	& 16.13\% 		\\
+	 2. Unskilled laborer & 7.3\% & 9.3\% 	& 25.7\% & 12.9\%	 \\
+	 3. Semiskilled worker & 17.1\%	& 11.6\% & 11.4\%& 22.6\%	\\
+	 4. Skilled manual laborer 	 & 4.9\%	& 20.9\% & 14.3\% & 16.13\%	\\
+	 5. Clerical/sales & 9.8\%		& 14.0\% & 3.6\%& 16.13\% 	\\
+	 6. Technician 	& 2.4\%	& 25.6\% & 0\%	& 12.9\% 			\\
+	 7. Small business manager & 9.8\%	& 9.3\%	& 5.7\%	& 3.2\% \\
+	 8. Administrator & 14.6\% 	& 0\%	& 5.7\%	& 0\% 			\\
+	 9. Executive 	& 0\%		& 2.3\%		& 0\% & 0\%			\\
+	\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\noindent Table \ref{tab:education-mean} shows the mean years of education for working mothers in treatment and control group at child's ages 3.5 and 12. The mean years of education for both treated and control working mothers has risen from age 3.5 to age 12. This also supports that working mothers at age 12 may have higher skills and higher earnings than working mothers at age 3.5.
+
+
+\begin{table}[H] \caption{Mean Mother's Years of Education at Each Age} \label{tab:education-mean}
+\centering
+	\begin{tabular}{cccc}
+	\toprule
+	\multicolumn{2}{c}{Treatment} & \multicolumn{2}{c}{Control}  \\\cmidrule(lr){1-2} \cmidrule(lr){3-4} 
+ Age 3.5 & Age 12 & Age 3.5 & Age 12 \\
+\midrule
+11.3 & 14.8 & 11.3 & 13.4 \\ 
+(1.5) & (2.2) & (1.9) & (2.1) \\
+	\bottomrule
+	\end{tabular}
+\\ [1ex]
+\footnotesize\raggedright\underline{Note:} The means and number of observations are conditional on observing the APGAR 1 min. and 5 min. scores and High Risk Index (HRI). Standard errors are reported in parentheses.
+\end{table}
+
+
+\end{document}

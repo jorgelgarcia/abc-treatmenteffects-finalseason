@@ -1,0 +1,29 @@
+
+\mode<presentation>
+
+
+%% These are the options that are fed in through the driver file
+%% Some of them get passed on to the other theme files
+\DeclareOptionBeamer{bullet}{\PassOptionsToPackage{bullet=#1}{beamerinnerthemeFlip}}
+\DeclareOptionBeamer{bigpagenumber}{\PassOptionsToPackage{bigpagenumber}{beamerouterthemeFlip}}
+\global\DeclareOptionBeamer{handoutmode}{\PassOptionsToPackage{handoutmode}{beamerouterthemeFlip}}
+\DeclareOptionBeamer{topline}[true]{\PassOptionsToPackage{topline=#1}{beamerouterthemeFlip}}
+\DeclareOptionBeamer{shadow}[false]{\PassOptionsToPackage{shadow=#1}{beamerinnerthemeFlip}}
+\DeclareOptionBeamer{watermark}{\PassOptionsToPackage{watermark=#1}{beamerouterthemeFlip}}
+
+\ProcessOptionsBeamer
+
+\useinnertheme{Flip}	% Calls beamerinnerthemeFlip.sty
+\useoutertheme{Flip}	% Calls beamerouterthemeFlip.sty
+\usecolortheme{Flip}	% Calls beamercolorthemeFlip.sty
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Navigation  symbols %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamertemplate{navigation symbols}{} 	% Turns off PDF navigation symbols
+
+\mode<all>
+\endinput

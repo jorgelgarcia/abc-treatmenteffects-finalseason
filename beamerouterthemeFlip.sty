@@ -1,0 +1,154 @@
+%HCEO Beamer Template, Modified from BEAMER FLIP THEME 212 (Copyright 2012 by Flip Tanedo)
+
+
+\mode<presentation>
+
+% Watermark
+\DeclareOptionBeamer{watermark}{\def\beamer@Flip@watermark{#1}}
+\ExecuteOptionsBeamer{watermark=} % Default value is empty
+
+
+\newif\ifbeamer@Flip@bigpagenumber
+\beamer@Flip@bigpagenumberfalse
+\DeclareOptionBeamer{bigpagenumber}{\beamer@Flip@bigpagenumbertrue}
+
+%Presentation vs Handout Variable
+\global\newif\ifbeamer@Flip@handoutmode
+\global\beamer@Flip@handoutmodefalse
+\global\DeclareOptionBeamer{handoutmode}{\beamer@Flip@handoutmodetrue}
+
+
+\def\beamer@Flip@truetext{true} % Kludge for true/false so I can use ifx
+
+\DeclareOptionBeamer{topline}[true]{\def\beamer@Flip@topline{#1}}
+\ExecuteOptionsBeamer{topline=false} % Default
+
+
+\ProcessOptionsBeamer
+
+
+\RequirePackage{tikz}	% For fancy decorations
+
+
+\setbeamercolor{section in head/foot}{parent=footerlike}
+\setbeamercolor{subsection in head/foot}{parent=footerlike}
+\setbeamercolor{author in head/foot}{parent=footerlike}
+\setbeamercolor{title in head/foot}{parent=footerlike}
+
+
+\setbeamercolor{topbar}{parent=crimsontown}
+
+
+
+
+\usesectionheadtemplate
+  {\hfill\insertsectionhead}
+  {\hfill\color{fg!50!bg}\insertsectionhead}
+
+
+
+%%%%% The footer bar %%%%%
+
+\defbeamertemplate*{footline}{Flip theme}
+{%
+  \leavevmode%
+
+\hbox{%
+\begin{beamercolorbox}[wd=.2\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm, rightskip=.3cm plus1fil]{author in head/foot}%
+	\usebeamerfont{author in head/foot}\insertshortauthor  \end{beamercolorbox}%
+%
+\begin{beamercolorbox}[wd=.8\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+    \usebeamerfont{title in head/foot}{\textit \insertshorttitle}%
+    \hskip2ex plus1fill%
+		% \insertpagenumber\,/\,\insertpresentationendpage %% Want FRAME, not SLIDE number
+		\ifbeamer@Flip@handoutmode
+			\currenttime { } \today{    }\insertframenumber/\inserttotalframenumber
+		\fi
+ \end{beamercolorbox}%
+}%
+
+%%%%%Faint White Line Fix%%%%%
+\begin{tikzpicture}[overlay]
+	\usebeamercolor[bg]{author in head/foot}
+	\draw[thick] (0,3.625ex) -- (\paperwidth,3.625ex);
+	\draw (.4\paperwidth,0) -- (.4\paperwidth,3.625ex);
+	\draw[thick] (0,0) -- (\paperwidth,0);
+\end{tikzpicture}
+
+
+
+\ifbeamer@Flip@bigpagenumber
+	\begin{tikzpicture}[overlay]
+	\usebeamercolor[bg]{author in head/foot}
+	\draw[fill] (\paperwidth-5ex,3.625ex) circle (6ex);
+	\usebeamercolor[fg]{author in head/foot}
+	\draw[fill] (\paperwidth-5ex,3.625ex) circle (5ex);
+	\usebeamercolor[bg]{author in head/foot}
+	\node at (\paperwidth-5ex,4ex) {\footnotesize$^\text{\insertframenumber}/_\text{\inserttotalframenumber}$};
+	\end{tikzpicture}
+\fi
+}
+
+
+
+\defbeamertemplate*{frametitle}{Flip theme}[1][left]
+{
+\@tempdima=.9\textwidth%
+\advance\@tempdima by\beamer@leftmargin%
+%\advance\@tempdima by\beamer@rightmargin%
+
+\vbox{}\vskip-3.5ex%
+%
+\begin{beamercolorbox}[sep=0.3cm,#1,wd=\the\@tempdima]{titlelike}
+	\usebeamerfont{frametitle}%
+	\vbox{}\vskip3mm%
+	\if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+	\strut{\insertframetitle}\strut\par%
+	{%
+  		\ifx\insertframesubtitle\@empty%
+  		\else
+			{\usebeamerfont{framesubtitle}
+			 \usebeamercolor[fg]{framesubtitle}
+			\insertframesubtitle\strut\par}%
+  		\fi
+ 	}%
+	%
+  	\vskip-1ex%
+  	\if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox
+\end{beamercolorbox}%
+%%
+
+}
+
+
+
+
+%%%%%% Sidebar right is important: anything placed here will be%%%%%
+\defbeamertemplate*{sidebar right}{Flip theme}
+{
+%% Top Line
+\ifx\beamer@Flip@topline\beamer@Flip@truetext
+	\begin{tikzpicture}[overlay]
+	\usebeamercolor[fg]{topbarlike}	% alternately, topbarlike would be a good beamercolor
+	\draw[fill] (-\paperwidth,0) rectangle (0,-6pt);
+	\end{tikzpicture}
+\fi
+%
+%
+  \vskip.0\beamer@leftmargin%
+  \llap{\insertlogo\hskip.5\beamer@leftmargin}%
+  \vfill%
+  \if \beamer@Flip@watermark\@empty
+	% This is kind of a kludge since if I put anything in here, I automatically get errors
+	% Somehow LaTeX wants to read the \else part!
+	\else%
+	\llap{\includegraphics[width=\paperwidth,height=\paperheight]{\beamer@Flip@watermark}}
+  \fi
+}
+
+
+
+\mode<all>
+\endinput
+
+
