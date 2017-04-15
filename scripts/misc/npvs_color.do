@@ -90,12 +90,12 @@ svmat vall, names(col)
 keep if part == 1 | part == 3 | part == 4 | part == 6 | part == 7 | part == 10 | part == 11 | part == 14
 
 gen part1 = .
-replace part1 = 1 if part == 3
-replace part1 = 2 if part == 1 
-replace part1 = 3 if part == 10
-replace part1 = 4 if part == 11
-replace part1 = 5 if part == 4 
-replace part1 = 6 if part == 14
+// replace part1 = 1 if part == 3
+replace part1 = 1 if part == 3 
+replace part1 = 2 if part == 10
+replace part1 = 3 if part == 11
+replace part1 = 4 if part == 4 
+replace part1 = 5 if part == 14
 
 replace pval = 1 - pval if m < 0
 gen sig = 1 if pval <= .15
@@ -104,56 +104,32 @@ replace m = m/100000
 gen part0 = part1 - .215
 gen part2 = part1 + .215
 
+gen part00 = part0 - .1
+gen part11 = part1 - .1 
+gen part22 = part2 - .1
+
+gen mm = m
+format %9.1f mm
+
 
 cd $output
 # delimit
-twoway (bar     m part2            if estimate == 3 & sex == 1, color(dkorange) barw(.441))
-       (bar     m part0            if estimate == 2 & sex == 1, color(emerald) barw(.442))
-       (bar     m part1            if estimate == 1 & sex == 1, fcolor(none) lcolor(gs0) lwidth(medthick) barw(.9))
-       (scatter m part2 if sig == 1 & estimate == 3 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
-       (scatter m part1 if sig == 1 & estimate == 1 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
-       (scatter m part0 if sig == 1 & estimate == 2 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
-		, 
-		legend(cols(2) order(3 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 1 "Treatment vs. Alternative Preschool" 4 "Significant at 10%") position(north) size(vsmall))
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
-			  5 "Crime" 6 "{&lowast}{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
-			  ylabel(-1[1]4, angle(h) glcolor(gs14))
-			  xtitle("", size(small)) 
-			  ytitle("100,000's (2014 USD)")
-			  graphregion(color(white)) plotregion(fcolor(white));
-#delimit cr 
-graph export abccare_npvs1.eps, replace
-
-# delimit
-twoway (bar     m part2            if estimate == 3 & sex == 2, color(dkorange) barw(.441))
-       (bar     m part0            if estimate == 2 & sex == 2, color(emerald) barw(.442))
-       (bar     m part1            if estimate == 1 & sex == 2, fcolor(none) lcolor(gs0) lwidth(medthick) barw(.9))
-       (scatter m part2 if sig == 1 & estimate == 3 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
-       (scatter m part1 if sig == 1 & estimate == 1 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
-       (scatter m part0 if sig == 1 & estimate == 2 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
-		, 
-		legend(cols(2) order(3 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 1 "Treatment vs. Alternative Preschool" 4 "Significant at 10%") position(north) size(vsmall))
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
-			  5 "{&lowast}Crime" 6 "{&lowast}{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
-			  ylabel(-1 0[2.5]10, angle(h) glcolor(gs14))
-			  xtitle("", size(small)) 
-			  ytitle("100,000's (2014 USD)")
-			  graphregion(color(white)) plotregion(fcolor(white));
-#delimit cr 
-graph export abccare_npvs2.eps, replace
-
-# delimit
-twoway (bar     m part0            if estimate == 1 & sex == 1, color(dkorange) barw(.441))
-       (bar     m part2            if estimate == 1 & sex == 2, color(emerald) barw(.442))
-       (bar     m part1            if estimate == 1 & sex == 3, fcolor(none) lcolor(gs0) lwidth(medthick) barw(.9))
-       (scatter m part1 if sig == 1 & estimate == 1 & sex == 3, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
+twoway 
+       (bar     m part0            if estimate == 1 & sex == 1, color(dkorange) barw(.2))
+       (bar     m part1            if estimate == 1 & sex == 3, fcolor(none) lcolor(gs0) lwidth(medthick) barw(.21))
+       (bar     m part2            if estimate == 1 & sex == 2, color(emerald) barw(.2))
+       (scatter m part1 if sig == 1 & estimate == 1 & sex == 3, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
        (scatter m part0 if sig == 1 & estimate == 1 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
        (scatter m part2 if sig == 1 & estimate == 1 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
+       
+       (scatter mm part00 if estimate == 1 & sex == 1, msym(none) mlab(mm) mlabcol(black) mlabpos(1) mlabsize(vsmall))
+       (scatter mm part11 if estimate == 1 & sex == 3, msym(none) mlab(mm) mlabcol(black) mlabpos(1) mlabsize(vsmall))
+       (scatter mm part22 if estimate == 1 & sex == 2, msym(none) mlab(mm) mlabcol(black) mlabpos(1) mlabsize(vsmall))
 		, 
-		legend(cols(4) order(3 "Males and Females" 2 "Males" 1 "Females" 4 "Significant at 10%") position(north) size(vsmall))
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
-			  5 "Crime" 6 "{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
-			  ylabel(-1 0[2.5]10, angle(h) glcolor(gs14))
+		legend(cols(4) order(1 "Females" 2 "Females and Males" 3 "Males" 4 "Significant at 10%") position(north) size(vsmall))
+			  xlabel(1 "Program Costs" 2 "Labor Income" 3 "Parental Labor Income"
+			  4 "Crime" 5 "{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
+			  ylabel(-1 0[2.5]7.5, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
@@ -163,40 +139,54 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(dkorange) 
 #delimit cr 
 graph export abccare_npvssumm.eps, replace
 
+drop part0* part1* part2* 
+
+gen part1 = .
+// replace part1 = 1 if part == 3
+replace part1 = 1 if part == 3 
+replace part1 = 2 if part == 10
+replace part1 = 3 if part == 11
+replace part1 = 4 if part == 4 
+replace part1 = 5 if part == 14
+replace part1 = 6 if part == 1
+
+gen part0 = part1 - .215
+gen part2 = part1 + .215
+
+gen part00 = part0 - .12
+gen part11 = part1 - .12 
+gen part22 = part2 - .12
+
+cd $output
 # delimit
-twoway (bar     m part0            if estimate == 1 & sex == 1, color(dkorange) barw(.441))
-       (bar     m part2            if estimate == 1 & sex == 2, color(emerald) barw(.442))
-       (bar     m part1            if estimate == 1 & sex == 3, fcolor(none) lcolor(gs0) lwidth(medthick) barw(.9))
-       (scatter m part1 if sig == 1 & estimate == 1 & sex == 3, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
+twoway 
+       (bar     m part0            if estimate == 1 & sex == 1, color(dkorange) barw(.2))
+       (bar     m part1            if estimate == 1 & sex == 3, fcolor(none) lcolor(gs0) lwidth(medthick) barw(.21))
+       (bar     m part2            if estimate == 1 & sex == 2, color(emerald) barw(.2))
+       (scatter m part1 if sig == 1 & estimate == 1 & sex == 3, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
        (scatter m part0 if sig == 1 & estimate == 1 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
        (scatter m part2 if sig == 1 & estimate == 1 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
+       
+       (scatter mm part00 if estimate == 1 & sex == 1, msym(none) mlab(mm) mlabcol(black) mlabpos(1) mlabsize(vsmall))
+       (scatter mm part11 if estimate == 1 & sex == 3, msym(none) mlab(mm) mlabcol(black) mlabpos(1) mlabsize(vsmall))
+       (scatter mm part22 if estimate == 1 & sex == 2, msym(none) mlab(mm) mlabcol(black) mlabpos(1) mlabsize(vsmall))
 		, 
-		legend(cols(4) order(3 "Males and Females" 2 "Males" 1 "Females" 4 "Significant at 10%") position(north) size(vsmall))
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
-			  5 "Crime" 6 "{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
+		legend(cols(4) order(1 "Females" 2 "Females and Males" 3 "Males" 4 "Significant at 10%") position(north) size(vsmall))
+			  xlabel(1 "Program Costs" 2 "Labor Income" 3 "Parental Labor Income"
+			  4 "Crime" 5 "{&lowast}QALYs" 6 "Total Benefits",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(-1 0[2.5]10, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
-			  note("              Annual Rate of Return: 14% (s.e. 3%)."
-			        , size(large));
+			  note("Per-annum Rate of Return: Males and Females 13.7% (s.e. 3%); Males 14.6% (s.e. 4%); Females 10% (s.e. 8%)." " "
+			       "Benefit-cost Ratio: Males and Females 7.3 (s.e. 1.8); Males 10.2 (s.e. 2.9); Females 2.6 (s.e. .73)."
+			        , size(vsmall));
 #delimit cr 
-graph export abccare_npvlarge.eps, replace
+graph export abccare_npvssumm_alt.eps, replace
 
-# delimit
-twoway (bar     m part1            if estimate == 1 & sex == 3 & part1 <= 2, color(dkorange) lwidth(medthick) barw(.9))
-       (bar     m part1            if estimate == 1 & sex == 3 & part1 >  2, color(emerald) lwidth(medthick) barw(.9))
-,	
-		legend(off)
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
-			  5 "Crime" 6 "Health",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
-			  ylabel(-1 0[1.5]4.5, angle(h) glcolor(gs14))
-			  xtitle("", size(small)) 
-			  ytitle("100,000's (2014 USD)", size(medium))
-			  graphregion(color(white)) plotregion(fcolor(white))
-			  note("Per-annum Rate of Return: Males and Females 13.7% (s.e. 3%)."
-			       "Benefit-cost Ratio: Males and Females 7.3 (s.e. 1.8)."
-			        , size(small))
-			text(-.3 4.5 "{&larr}{&hellip} Components of Total Benefits {&hellip}{&rarr}", size(medium));
-#delimit cr 
-graph export abccare_npvssummredux.eps, replace
+
+
+
+
+
+
