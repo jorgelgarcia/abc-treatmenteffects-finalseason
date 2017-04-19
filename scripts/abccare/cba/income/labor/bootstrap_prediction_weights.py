@@ -151,4 +151,4 @@ for cs in control_sets:
 		combined = pd.concat([df_treat, df_control])
 		combined.dropna(axis=0,how='all',inplace=True)
 
-		combined.to_csv(os.path.join(paths.rslts, 'labor_proj_combined_pset{}_mset{}_{}.csv'.format(pset_type,cs,sex)))
+		combined.to_csv(os.path.join(paths.rslts, 'labor_proj_combined_pset{}_mset{}_{}_achievement.csv'.format(pset_type,cs,sex)))
