@@ -27,8 +27,8 @@ filedir = os.path.join(os.path.dirname(__file__))
 #path_results = os.path.join(filedir, 'rslts-jun25/abccare_ate/')
 #path_outcomes = os.path.join(filedir, 'outcomes_cba_merged.csv')
 
-path_results = os.path.join(filedir, '..','rslt-case3/')
-path_outcomes = os.path.join(filedir, '..','../outcomes/outcomes_cba_mainpaper.csv')
+path_results = os.path.join(filedir, 'rslt-case3/')
+path_outcomes = os.path.join(filedir, '../outcomes/outcomes_cba_mainpaper.csv')
 
 # provide option for two sided tests
 twosided = 0
@@ -45,12 +45,12 @@ outcomes = pd.read_csv(path_outcomes, index_col='variable')
 rslt_y = {}
 
 for sex in ['pooled', 'male', 'female']:
-    itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10_case3_.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
-    itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1_case3_.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
-    itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0_case3_.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    itt_all = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P10_case3.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    itt_p1 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P1_case3.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+    itt_p0 = pd.read_csv(os.path.join(path_results, 'itt', 'itt_{}_P0_case3.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
-    matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1_case3_.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
-    matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0_case3_.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
+    matching_p1 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P1_case3.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])    
+    matching_p0 = pd.read_csv(os.path.join(path_results, 'matching', 'matching_{}_P0_case3.csv'.format(sex)), index_col=['rowname', 'draw', 'ddraw'])
     
     itt_all = itt_all.loc[:,['itt_noctrl', 'itt_ctrl', 'itt_wctrl']]
     rslt_p1 = pd.concat([itt_p1, matching_p1], axis=1).loc[:, ['itt_noctrl', 'itt_ctrl', 'itt_wctrl', 'epan_ipw', 'epan_N']]
@@ -170,9 +170,10 @@ for agg in [0,1]:
 # 1. Convert distribution of results to t-Statistics
 mean = rslt_y.groupby(level=['variable', 'ddraw']).transform(lambda x: x.mean())
 null = rslt_y - mean
+for coef in tmp_rslt.columns:	
+    null.loc[(slice(None), 0, invoutcomes['{}'.format(coef)]), coef] = null.loc[(slice(None), 0, invoutcomes['{}'.format(coef)]), coef] * -1 
 null = null.loc[(slice(None), 0, slice(None)),:].reset_index('ddraw', drop=True)/se
 null.sort_index(inplace=True)
-null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] = null.loc[(slice(None), outcomes.query('hyp == "-"').index), :] * -1
 
 tstat = point/se
 tstat.sort_index(inplace=True)
@@ -421,6 +422,6 @@ for t in [1,2]:
             
             # write out tables
             if t == 1:
-                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}'.format(sex, i)))
+                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}_case3'.format(sex, i)))
             if t == 2:
-                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}_sd'.format(sex, i)))     
+                table.write(os.path.join(paths.apptables, 'rslt_{}_cat{}_case3_sd'.format(sex, i)))     

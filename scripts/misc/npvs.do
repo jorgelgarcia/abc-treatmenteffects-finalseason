@@ -115,7 +115,7 @@ twoway (bar     m part2            if estimate == 3 & sex == 1, color(gs4) barw(
        (scatter m part0 if sig == 1 & estimate == 2 & sex == 1, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
 		, 
 		legend(cols(2) order(3 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 1 "Treatment vs. Alternative Preschool" 4 "Significant at 10%") position(north) size(vsmall))
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
+			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
 			  5 "Crime" 6 "{&lowast}{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(-1[1]4, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
@@ -133,7 +133,7 @@ twoway (bar     m part2            if estimate == 3 & sex == 2, color(gs4) barw(
        (scatter m part0 if sig == 1 & estimate == 2 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
 		, 
 		legend(cols(2) order(3 "Treatment vs. Next Best" 2 "Treatment vs. Stay at Home" 1 "Treatment vs. Alternative Preschool" 4 "Significant at 10%") position(north) size(vsmall))
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
+			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
 			  5 "{&lowast}Crime" 6 "{&lowast}{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(-1 0[2.5]10, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
@@ -151,14 +151,14 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(
        (scatter m part2 if sig == 1 & estimate == 1 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
 		, 
 		legend(cols(4) order(3 "Males and Females" 2 "Males" 1 "Females" 4 "Significant at 10%") position(north) size(vsmall))
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
+			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
 			  5 "Crime" 6 "{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(-1 0[2.5]10, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
-			  note("Per-annum Rate of Return: Males and Females 13% (s.e. 5%); Males 13% (s.e. 6%); Females 10% (s.e. 8%)." " "
-			       "Benefit-cost Ratio: Males and Females 6.3 (s.e. 2.1); Males 11.1 (s.e. 6.3); Females 2.5 (s.e. .79)."
+			  note("Per-annum Rate of Return: Males and Females 13.7% (s.e. 3%); Males 14.6% (s.e. 4%); Females 10% (s.e. 8%)." " "
+			       "Benefit-cost Ratio: Males and Females 7.3 (s.e. 1.8); Males 10.2 (s.e. 2.9); Females 2.6 (s.e. .73)."
 			        , size(vsmall));
 #delimit cr 
 graph export abccare_npvssumm.eps, replace
@@ -172,13 +172,13 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(
        (scatter m part2 if sig == 1 & estimate == 1 & sex == 2, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(small))
 		, 
 		legend(cols(4) order(3 "Males and Females" 2 "Males" 1 "Females" 4 "Significant at 10%") position(north) size(vsmall))
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
+			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
 			  5 "Crime" 6 "{&lowast}QALYs",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(-1 0[2.5]10, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)")
 			  graphregion(color(white)) plotregion(fcolor(white))
-			  note("              Annual Rate of Return: 13% (s.e. 5%)."
+			  note("              Annual Rate of Return: 14% (s.e. 3%)."
 			        , size(large));
 #delimit cr 
 graph export abccare_npvlarge.eps, replace
@@ -188,14 +188,14 @@ twoway (bar     m part1            if estimate == 1 & sex == 3 & part1 <= 2, col
        (bar     m part1            if estimate == 1 & sex == 3 & part1 >  2, color(gs8) lwidth(medthick) barw(.9))
 ,	
 		legend(off)
-			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Income"
+			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
 			  5 "Crime" 6 "Health",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(-1 0[1.5]4.5, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)", size(medium))
 			  graphregion(color(white)) plotregion(fcolor(white))
-			  note("Per-annum Rate of Return: Males and Females 13% (s.e. 5%)."
-			       "Benefit-cost Ratio: Males and Females 6.3 (s.e. 2.1)."
+			  note("Per-annum Rate of Return: Males and Females 13.7% (s.e. 3%)."
+			       "Benefit-cost Ratio: Males and Females 7.3 (s.e. 1.8)."
 			        , size(small))
 			text(-.3 4.5 "{&larr}{&hellip} Components of Total Benefits {&hellip}{&rarr}", size(medium));
 #delimit cr 

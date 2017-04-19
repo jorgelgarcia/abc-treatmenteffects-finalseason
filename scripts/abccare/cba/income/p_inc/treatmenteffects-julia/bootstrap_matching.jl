@@ -22,9 +22,9 @@ global atecode = "$current/../../../../juliafunctions"
 global itt = 0			# matching estimator is the default
 global breps = 98 		# remember to subtract 1, i.e. 50 becomes 49
 global areps = 98 	# remember to subtract 1, i.e. 50 becomes 49
-global controls = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male, :abc]
+global controls = [:hrabc_index, :apgar1, :apgar5, :male]
 global ipwvars_all = [:m_iq0y, :m_ed0y, :m_age0y, :hrabc_index, :p_inc0y, :apgar1, :apgar5, :prem_birth, :m_married0y, :m_teen0y, :f_home0y, :hh_sibs0y, :cohort, :m_work0y, :has_relatives]
-global factors = 0
+global factorswitch = 0
 global deaths = 1
 
 # Include helper files
@@ -55,14 +55,14 @@ for gender in genderloop
 
 	if gender == "male"
 		datainuse["$(gender)"] = abccare[abccare[:male] .== 1, :]
-		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :abc]
+		controlset = [:hrabc_index, :apgar1, :apgar5]
 	elseif gender == "female"
 		datainuse["$(gender)"] = abccare[abccare[:male] .== 0, :]
-		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :abc]
+		controlset = [:hrabc_index, :apgar1, :apgar5]
 		datainuse["$(gender)"][:male] = 1 # bsample does not work for [:male] == 0
 	elseif gender == "pooled"
-		datainuse["$(gender)"] = abccare
-		controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male, :abc]
+		datainuse["$(gender)"] = abccare[:,:]
+		controlset = [:hrabc_index, :apgar1, :apgar5, :male]
 	end
 
 	# Drop "_$(gender)" from column names
@@ -88,9 +88,12 @@ for gender in genderloop
 		if arep == 0
 		  MatchInitial["$(gender)"] = mestimate(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
 	  else
+			global append_switch = 1
 		  MatchInitial_add = mestimate(datainuse_arepz, outcomes, outcomelist, controlset, 0, arep, "no", 0)
-		  MatchInitial["$(gender)"] = append!(MatchInitial["$(gender)"], MatchInitial_add)
-		end
+			if (append_switch == 1)
+				MatchInitial["$(gender)"] = append!(MatchInitial["$(gender)"], MatchInitial_add)
+			end
+    end
 	end
 	MatchInitial["$(gender)"] = sort(MatchInitial["$(gender)"], cols = [:draw, :ddraw])
 end
@@ -107,11 +110,11 @@ function matchingrun(boots)
 		global new_switch = 1
 
 		if gender == "male"
-			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :abc]
+			controlset = [:hrabc_index, :apgar1, :apgar5]
 		elseif gender == "female"
-			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :abc]
+			controlset = [:hrabc_index, :apgar1, :apgar5]
 		elseif gender == "pooled"
-			controlset = [:hrabc_index, :apgar1, :apgar5, :hh_sibs0y, :grandma_county, :has_relatives, :male, :abc]
+			controlset = [:hrabc_index, :apgar1, :apgar5, :male]
 		end
 
 		# Keep the IDs of the original sample to perform ABC boostraps

@@ -9,6 +9,8 @@
 outcomes = readtable("$(base)/outcomes_tax.csv")
 outcomes_col = outcomes[:variable]
 
+println("Outcomes defined!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
 # Collect names of the outcomes and put them into an array so that we can use in the estimation
 outcomelist = []
 for outcome in outcomes_col
@@ -31,13 +33,15 @@ colnames = deleteat!(colnames, findin(colnames, [:adraw]))
 # Define "projection" data to merge in gender-specific projections
 projections = transfer_proj_p
 
-
+println("Tax projections defined!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 # ------------------------------------------------------------------------------ #
 # ----------------------------- #
 # Merge in age 21 and 30 income #
 # ----------------------------- #
 abccare = readtable("$data/append-abccare_iv.csv")
+
+println("ABCCARE defined!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 # Drop home-visit only kids
 abccare = abccare[!((abccare[:R] .== 0) & (abccare[:RV] .== 1)), :]

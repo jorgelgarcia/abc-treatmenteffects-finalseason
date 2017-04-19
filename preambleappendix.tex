@@ -1,0 +1,137 @@
+%Style
+\documentclass[12pt]{article}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\parindent 22pt
+\usepackage{fancyhdr}
+
+%Packages
+\usepackage{adjustbox}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage[table]{xcolor}
+\usepackage{tabu}
+\usepackage{color,soul}
+\usepackage{makecell}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage[normalem]{ulem}
+\usepackage{etoolbox}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{fixltx2e}
+\usepackage[para, flushleft]{threeparttablex}
+\usepackage[capposition=top,objectset=centering]{floatrow}
+\usepackage{subcaption}
+\usepackage{pdfpages}
+\usepackage{pdflscape}
+\usepackage{natbib}
+\usepackage{bibunits}
+\definecolor{maroon}{HTML}{990012}
+\usepackage[colorlinks=true,linkcolor=maroon,citecolor=maroon,urlcolor=maroon,anchorcolor=maroon]{hyperref}
+\usepackage{marvosym}
+\usepackage{makeidx}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usepackage{setspace}
+\usepackage{enumerate}
+\usepackage{rotating}
+\usepackage{epstopdf}
+\usepackage[titletoc]{appendix}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{xr}
+\usepackage{titlesec}
+\usepackage{footnote}
+\usepackage{longtable}
+\newlength{\tablewidth}
+\setlength{\tablewidth}{9.3in}
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\makeatletter
+\pretocmd\start@align
+{%
+  \let\everycr\CT@everycr
+  \CT@start
+}{}{}
+\apptocmd{\endalign}{\CT@end}{}{}
+\makeatother
+%Watermark
+\usepackage[printwatermark]{xwatermark}
+\usepackage{lipsum}
+\definecolor{lightgray}{RGB}{220,220,220}
+%\newwatermark[allpages,color=lightgray,angle=45,scale=3,xpos=0,ypos=0]{Preliminary Draft}
+
+%Further subsection level
+\usepackage{titlesec}
+\setcounter{secnumdepth}{4}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\setcounter{secnumdepth}{5}
+\titleformat{\subparagraph}
+{\normalfont\normalsize\bfseries}{\thesubparagraph}{1em}{}
+\titlespacing*{\subparagraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+%Functions
+\DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\corr}{Corr}
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\plim}{plim}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+%Math Environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}{Claim}
+\newtheorem{condition}{Condition}
+\renewcommand\thecondition{C--\arabic{condition}}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{assumption}{Assumption}
+\renewcommand\theassumption{A--\arabic{assumption}}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\newtheorem{property}[theorem]{Property}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{result}[theorem]{Result}
+\newenvironment{proof}{\textbf{Proof:}}{$\bullet$}
+
+%Commands
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand{\equald}{\ensuremath{\overset{d}{=}}}
+\captionsetup[table]{skip=10pt}
+%\makeindex
+
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+
+%Logo
+%\AddToShipoutPictureBG{%
+%  \AtPageUpperLeft{\raisebox{-\height}{\includegraphics[width=1.5cm]{uchicago.png}}}
+%}
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\newcommand{\mr}{\multirow}
+\newcommand{\mc}{\multicolumn}
+
+%\newcommand{\comment}[1]{}

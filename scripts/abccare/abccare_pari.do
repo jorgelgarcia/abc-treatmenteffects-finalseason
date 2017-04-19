@@ -50,8 +50,8 @@ foreach var of varlist pari_auth pari_demo {
 			local   p`num'  = round((1 - normal(abs(`b`num''/`se`num''))),.0001)
 		
 		#delimit
-		twoway (kdensity `var' if R == 0 & male == `num', lwidth(medthick) lpattern(solid) lcolor(gs0))
-		       (kdensity `var' if R == 1 & male == `num', lwidth(medthick) lpattern(solid) lcolor(gs8))
+		twoway (kdensity `var' if R == 0 & male == `num', lwidth(medthick) lpattern(solid) lcolor(dkorange))
+		       (kdensity `var' if R == 1 & male == `num', lwidth(medthick) lpattern(solid) lcolor(emerald))
 			, 
 				  legend(label(1 Control) label(2 Treatment))
 				  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))

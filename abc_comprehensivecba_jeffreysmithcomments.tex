@@ -1,0 +1,90 @@
+%Input preamble
+\input{preamble}
+\input{output/mainstatistics}
+
+\usepackage[stable]{footmisc}
+
+\newcommand*\leftright[2]{%
+  \leavevmode
+  \rlap{#1}%
+  \hspace{0.5\linewidth}%
+  #2}
+
+\newcommand{\orth}{\ensuremath{\perp\!\!\!\perp}}%
+\newcommand{\indep}{\orth}%
+\newcommand{\notorth}{\ensuremath{\perp\!\!\!\!\!\!\diagup\!\!\!\!\!\!\perp}}%
+\newcommand{\notindep}{\notorth}
+
+\externaldocument{abc_comprehensivecba}
+\externaldocument{abc_comprehensivecba_appendix-pub}
+
+\begin{document}
+\doublespacing
+
+\noindent \textbf{Jeffrey Smith's Comments - 12/03/2016}
+
+\begin{enumerate}
+
+\item 
+
+\noindent \textbf{Comment.} The text and notation suggest that the participants represent a random subsample of the population of those eligible and willing to participate. How does this fit in with the referral mechanism mentioned on page 6? Do impacts on families that get referred by providers generalize to all eligible families willing to participate in the program? \\
+
+\noindent \textbf{Answer.} I have added the following to assess his comment. We further argue in favor of the validity of this interpretation as follows. All providers of health care and social services (referral agencies) in the area of the ABC/CARE implementation were informed of the programs. They referred mothers who they considered disadvantaged. Eligibility was corroborated before randomization. Our conversations with the program implementers indicate that the encouragement from the referral agencies was such that most referred mothers attended and agreed to initial randomization (Ramey et al., 2012). I believe this is the most we can say with respect to the issue. This is in footnote 33.\\
+
+\item
+\noindent \textbf{Comment.} I understand that the samples are of necessity rather small. At the same time, I think there would be substantive and rhetorical value to making the default (in the broader literature) choices in regard to statistical testing, the discount rate, and so on, and then describing how inferences and results change when these choices are changed. More specifically, I would have a five percent significance level and two-sided tests as the base case, with the current regime of 10 percent significance and one-sided tests as a second analysis motivated by the small sample sizes and, in the case of the one-sided tests, by an explicitly justified prior that negative impacts are very unlikely. An alternative, less drastic change would simply indicate, perhaps in a couple of footnotes, which estimates remain statistically significant when subject to a two-sided test at the five percent significance level.\\
+
+\noindent \textbf{Answer.} This is much more of a concern when we compute the $p$-values on the treatment effects than when we compute the $p$-values of the combining functions and the IRR and B/C ratios (where we report standard errors and they are quite tight so they speak for themselves). I have added a note to Table~\ref{table:tescombined} stating that we report two-sided $p$-values in Appendix~\ref{appendix:vsensitivity}. I'm not sure if you have seen this, but we have the analogous of Table~\ref{table:tescombined}, but with two-sided $p$-values in Appendix~\ref{appendix:vsensitivity}. I'm adding this to the discussion of the treatment effects in Table~\ref{table:tescombined}.\\
+
+\item
+\noindent \textbf{Comment.} In regard to the discount rates, other analyses, such as the one in Heckman, LaLonde and Smith (1999), use larger values, such as 0.05 and 0.10. What is the case for making 0.03 the baseline value here? \\
+
+\noindent \textbf{Answer.} In my opinion, the baseline discount rate is an arbitrary decision. I would note that: (i) the 13\% number won't change if these changes; and (ii) we perform intensive analysis on this in Table~\ref{table:bcsens} and Table~\ref{table:cba}. This evidence is cited throughout the paper, although I have added a summary of the sensitivity to different discount rates in the first paragraph of page 4 (footnote 15), so we can have it in the introduction.\\
+
+\item
+\noindent \textbf{Comment.} Given the importance of the parental earnings results to the cost-benefit calculation, the discussion of how to value parental leisure in footnote 84 is a bit unsatisfying. First of all, there are intermediate places between Walrasian labor markets and involuntary unemployment. A search model or even a model without frictions but with fixed costs of participation could drive a wedge between the wage and the value of home time. Second, the claim that the value of home time is zero in a world with involuntary unemployment strikes me as just wrong.\\ 
+
+\noindent \textbf{Answer.} This is now being discussed in footnote 50, and I think the argument is more concise. I also think that Table~\ref{table:summsend} makes it less of a concern that everything relies on parental income.\\
+
+\item
+\noindent \textbf{Comment.} I found the end of the paper rather disappointing. While I can see the value in a short summary, I think the ending would be stronger if it also touched on broader issues of external validity across time and over space and also of scalability of the interventions studied. Like Perry, ABC/CARE was a boutique program with heavy academic input and a research orientation; any scaled up version would likely differ in important ways even if the scale of resources devoted to it remained the same.\\ 
+
+\noindent \textbf{Answer.} I'm not sure what is your take on this. Maybe we can discuss a way to edit it?\\
+
+\item
+\noindent \textbf{Comment.} While the finding that boys appear to benefit less from alternative childcare arrangements is interesting, not much is done in the text to justify the selection on observed variables identification strategy that generates the underlying estimates. Given the space constraints, I would think about dropping this aspect of the analysis from the current paper and putting it in a separate note. If it is kept, I would add a couple of sentences justifying the conditional independence assumption given the available conditioning variables to the text.\\ 
+
+\noindent \textbf{Answer.} I think the finding should remain in the paper; yet, his point is correct. We make a very thorough analysis to these variables and document the process of their choice. I'm summarizing this after Table~\ref{table:tescombined}, and referring to Appendix~\ref{appendix:bvariables}.\\
+
+\item
+\noindent \textbf{Comment.} I was puzzled as to why the public subsidies to post-secondary education were not included in the cost-benefit calculation.\\
+
+\noindent \textbf{Answer.} We do consider these costs (and actually the total costs of post-secondary education to individuals and to society. This is clear in Appendix~\ref{appendix:education}, and the text refers to it and mentions the time-span of costs considered.
+
+\item 
+\noindent \textbf{Comment.} I realized when reading the draft that I do not know as much about the calculation of the dollar value of QALYs as I should. I would add a footnote to reassure the reader that QALYs do not include any aspect related to earnings. If they do, then there is double counting of benefits.\\
+\noindent \textbf{Answer.}\\
+
+\item 
+\noindent \textbf{Comment.} I realized when reading the draft that I do not know as much about the calculation of the dollar value of QALYs as I should. I would add a footnote to reassure the reader that QALYs do not include any aspect related to earnings. If they do, then there is double counting of benefits.\\
+
+\noindent \textbf{Answer.} This is clarified in the paper (added after the discussion with him). See footnote 69.\\
+
+\item 
+\noindent \textbf{Comment.} My last comment is a stylistic one. I would use ``parental earnings'' in place of ``parental labor income'' as the latter sometimes is shortened in the text to just ?parental income? which is not what is meant as it presumably excludes transfers.\\ 
+
+\noindent \textbf{Answer.} I will write parental labor income (to avoid any confusion), because this is really what it is (it is not earnings).\\
+
+\end{enumerate}
+
+
+
+
+%References
+\singlespace
+\bibliographystyle{chicago}
+\bibliography{heckman}
+
+\end{document}
+
+

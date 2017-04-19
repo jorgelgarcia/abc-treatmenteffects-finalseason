@@ -53,7 +53,7 @@ drop _merge
 
 keep if black == 1
 keep if age >=34 & age <= 108
-replace qaly = qaly*.150
+replace qaly = qaly*150000
 
 matrix est = J(1,2,.)
 matrix colnames est = female male
@@ -117,6 +117,7 @@ replace sample0 = 5 if sample == 7
 drop sample
 rename sample0 sample
 
+/*
 cd $output
 # delimit
 twoway (bar qaly sample if sample == 1, color(gs0) barw(.98))

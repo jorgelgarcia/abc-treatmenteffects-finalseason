@@ -16,7 +16,7 @@ global relpath ../../../../../AppOutput/Sensitivity
 *---------------------------------------
 
 // Bring in data
-insheet using "../rslt/sensitivity/irr_age_type2.csv", names clear
+insheet using "../rslt/sensitivity/current/irr_age_type2.csv", names clear
 
 gen stat = mean
 
@@ -48,7 +48,7 @@ graph export "$relpath/irr_age.eps", replace
 *---------------------------------------
 
 // Bring in data
-insheet using "../rslt/sensitivity/ratios_age_type2.csv", names clear
+insheet using "../rslt/sensitivity/current/ratios_age_type2.csv", names clear
 
 gen stat = mean
 
