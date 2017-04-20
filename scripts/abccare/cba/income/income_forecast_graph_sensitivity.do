@@ -6,7 +6,7 @@ Original date:	August 29, 2016
 */
 
 // macros
-local mset = 4
+local mset = 1
 local pset = 8
 
 local file_specs	pset`pset'_mset`mset'
@@ -40,10 +40,11 @@ global klmmexico: env klmMexico
 
 global dataabccare   = "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
 global data_dir      = "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/rslt/projections/`file_specs'"
-global incomeresults = "${klmmexico}/abccare/income_projections/current/`file_specs'"
+global incomeresults = "${klmmexico}/abccare/income_projections/"
 global output        = "${projects}/abc-treatmenteffects-finalseason/output/"
 
 local add_box = 1 // set to 0 if figures are wanted without box for MSE
+local boxtype "NPV"
 
 // prepare box
 if `add_box' == 1 {	
@@ -101,13 +102,10 @@ keep id R male si30y_inc_labor
 tempfile abccare_data
 save `abccare_data'
 
-
 foreach source in labor /*transfer*/ {
-
-	
 	forvalues sex = 0/1 {
 		cd $incomeresults
-		insheet using "`source'_proj_combined_`file_specs'_`name`sex''.csv", clear
+		insheet using "`source'_proj_`name`sex''_achievement.csv", clear
 
 		local varlist
 		local ages
@@ -137,8 +135,42 @@ foreach source in labor /*transfer*/ {
 	
 		sort id adraw
 		levelsof id, local(ids)
-	
+		levelsof adraw, local(adraws)
+		
+		// calculate NPVs
+		forvalues a = 22/67 {
+			cap gen age_dis`a' = age`a'/(1+0.03)^`a'
+		}
+		forvalues r = 0/1 {
+			gen npv`r'_all = .
+			foreach adraw in `adraws' {
+				egen npv`r'_`adraw' = rowtotal(age_dis*) if R == `r' & adraw == `adraw'
+				replace npv`r'_all = npv`r'_`adraw' if R == `r' & adraw == `adraw' & npv`r'_`adraw' != .
+			}
+			
+			sum npv`r'_all
+			local npv`r'mean = r(mean)/1000
+			local npv`r'sd = r(sd)/1000
+			local npv`r'mean = string(`npv`r'mean', "%3.2f")
+			local npv`r'sd = string(`npv`r'sd', "%3.2f")
+		
+			
+		}
+		
+		if "`boxtype'" == "NPV" {
+		
+			# delimit
+				global box  text( 10 45
+				"Cumulative NPV:"
+				"Treatment, `npv1mean' (s.e. `npv1sd')"
+				"     Control, `npv0mean' (s.e. `npv0sd')"
+				, size(small) place(c) box just(left) margin(l+1 b+2.5 t+2.5 r+8) width(35) fcolor(none)); 
+			# delimit cr
+		}
+		
 
+		
+		// average across bootstraps
 		foreach id in `ids' {
 			foreach age in `ages' {
 				qui sum age`age' if id == `id'
@@ -147,14 +179,14 @@ foreach source in labor /*transfer*/ {
 				qui replace mean_age`age' = `age`age'id`id'' if id == `id'
 			}
 		}
-
+	
 		drop age*
 		drop if adraw > 0
 	
 		//merge 1:1 id using `abccare_data', nogen
 		drop if id == 9999
 		drop adraw si30y_inc_labor
-	
+		
 			foreach stat in mean semean {
 				preserve
 					collapse (`stat') `varlist', by(R male)
@@ -189,9 +221,11 @@ foreach source in labor /*transfer*/ {
 		// graph
 		cd $output
 		global y0  0[10]50
-		global y1 10[10]80
+		global y1 -10[10]80
+		global y2 0[10]50
 		local bwidth1 = .65
 		local bwidth0 = .65  
+		local bwidth2 = .65
 	
 	
 		local graphregion		graphregion(color(white))
@@ -215,8 +249,8 @@ foreach source in labor /*transfer*/ {
 				`xaxis'
 				`yaxis'
 				`legend'
-				${box`name`sex''};
-		graph export "`source'_20-65_`file_specs'_`name`sex''_sensitivity.eps", replace;
+				${box};
+		graph export "`source'_20-65_`file_specs'_`name`sex''_sensitivity_achievement.eps", replace;
 		# delimit cr
 	}
 }
