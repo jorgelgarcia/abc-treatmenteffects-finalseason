@@ -184,8 +184,7 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(
 graph export abccare_npvlarge.eps, replace
 
 # delimit
-twoway (bar     m part1            if estimate == 1 & sex == 3 & part1 <= 2, color(black) lwidth(medthick) barw(.9))
-       (bar     m part1            if estimate == 1 & sex == 3 & part1 >  2, color(gs8) lwidth(medthick) barw(.9))
+twoway (bar     m part1            if estimate == 1 & sex == 3 & part1 >  2, color(gs8) lwidth(medthick) barw(.9))
 ,	
 		legend(off)
 			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
