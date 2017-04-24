@@ -8,7 +8,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 5
+global bootstraps 100
 global quantiles 30
 
 // macros
@@ -23,18 +23,51 @@ global output      	= "$projects/abccare-cba/output/"
 
 // variables
 # delimit ;
-global home		home0y6m home1y6m home2y6m home3y6m home4y6m home8y;
-global cog		iq2y iq3y iq5y iq8y;
-global ncog		ibr_sociab0y6m ibr_sociab1y ibr_sociab1y6m ibr_task0y6m ibr_task1y ibr_task1y6m cbi_ta6y cbi_ta8y;
-global ach		math5y6m math8y math12y 	
-			read5y6m read8y read12y;
+global earlyhome		home0y6m home1y6m home2y6m;
+global laterhome		home3y6m home4y6m home8y;
+global homeabs			home_abspun2y6m home_abspun1y6m home_abspun0y6m
+				home_abspun4y6m home_abspun3y6m;
+global homephy			home_orgenv2y6m home_orgenv1y6m home_orgenv0y6m 
+				home_toys2y6m home_toys1y6m home_toys0y6m
+				home_orgenv8y home_phyenv8y home_toys8y;
+global homemom			home_minvol2y6m home_minvol1y6m home_minvol0y6m;
+global pari			new_pari_auth1y6m new_pari_demo1y6m 
+				new_pari_hostl1y6m;
+global parenting		earlyhome laterhome homeabs homephy homemom;
+global parenting_labels		Discipline Environment Warmth Early School-age;
 
-global varstofactor	home cog ncog ach;
-global varstocompare	homefactor cogfactor ncogfactor achfactor;
-global allvars		$home $cog $ncog $ach ;
+global earlycog			vrb2y vrb3y; 
+global schoolcog  		vrb5y vrb8y;
+global adultcog			vrb21y prf21y;
+global cog			earlycog schoolcog adultcog;
+global cog_labels		Early School-age Adult;
 
-local numcats : word count $varstocompare ;
-local numvars : word count $allvars ;
+global readschool		math5y6m math8y math12y ;	
+global mathschool		read5y6m read8y read12y;
+global adultach			math21y read21y;
+global ach			readschool mathschool adultach;
+global ach_labels		Reading Math Adult;
+
+global earlysociab		ibr_sociab0y6m ibr_sociab1y ibr_sociab1y6m;
+global earlytask		ibr_task0y6m ibr_task1y ibr_task1y6m;
+global schooltask		cbi_ta6y cbi_ta8y;
+global schoolsociab		new_cbi_ho6y new_cbi_ho8y;
+global ncog			earlysociab earlytask schoolsociab scholtask;
+global ncog_labels		Early-sociability Early-task School-sociability School-task;
+
+global income			si30y_inc_labor si30y_works_job;
+global education		hs21y hs30y years_30y;
+global health			si34y_sys_bp si34y_dia_bp si34y_prehyper si34y_drugs
+				FRiskScore smoker;
+global crime			totfel totmis;
+global adult			income education health crime;
+global adult_labels		Income Education Heatlh Crime;
+
+global varstofactor		$parenting $cog $ach $ncog $adult;
+global categories		parenting cog ach ncog adult;
+
+local numcats : word count $categories ;	// number of categories
+local numvars : word count $varstofactor ; 	// number of factors
 
 # delimit cr
 
@@ -43,6 +76,40 @@ cd $data
 use append-abccare_iv, clear
 
 drop if R == 0 & RV == 1
+
+local ages 5y6m 5y9m 6y 6y6m 7y 7y6m 8y 12y
+
+foreach a in `ages' {
+	gen new_cbi_ho`a' = 6*3 - cbi_ho`a'
+	copydesc cbi_ho`a' new_cbi_ho`a'
+	gen new_cbi_de`a' = 6*3 - cbi_de`a'
+	copydesc cbi_de`a' new_cbi_de`a'
+	gen new_cbi_di`a' = 6*3 - cbi_di`a'
+	copydesc cbi_di`a' new_cbi_di`a'
+	gen new_cbi_iv`a' = 6*3 - cbi_iv`a'
+	copydesc cbi_iv`a' new_cbi_iv`a'
+}
+
+/*
+egen new_pari_auth0y6m = rowtotal(pari_dpnd0y6m pari_scls0y6m pari_noaggr0y6m pari_isltd0y6m pari_supsex0y6m)
+replace new_pari_auth0y6m=. if new_pari_auth0y6m==0
+label var new_pari_auth0y6m "Appropriate sum of subscales for authority factor, 0y6m"
+egen new_pari_hostl0y6m = rowtotal(pari_maritl0y6m pari_nohome0y6m pari_rage0y6m)
+replace new_pari_hostl0y6m=. if new_pari_hostl0y6m==0
+label var new_pari_hostl0y6m "Appropriate sum of subscales for hostility factor, 0y6m"
+egen new_pari_demo0y6m = rowtotal(pari_verb0y6m pari_egal0y6m pari_comrde0y6m)
+replace new_pari_demo0y6m=. if new_pari_demo0y6m==0
+label var new_pari_demo0y6m "Appropriate sum of subscales for democratic factor, 0y6m"
+*/
+egen new_pari_auth1y6m = rowtotal(pari_dpnd1y6m pari_scls1y6m pari_noaggr1y6m pari_isltd1y6m pari_supsex1y6m)
+replace new_pari_auth1y6m=. if new_pari_auth1y6m ==0
+label var new_pari_auth1y6m "Appropriate sum of subscales for authority factor, 1y6m"
+egen new_pari_hostl1y6m = rowtotal(pari_maritl1y6m pari_nohome1y6m pari_rage1y6m)
+replace new_pari_hostl1y6m=. if new_pari_hostl1y6m==0
+label var new_pari_hostl1y6m "Appropriate sum of subscales for hostility factor, 1y6m"
+egen new_pari_demo1y6m = rowtotal(pari_verb1y6m pari_egal1y6m pari_comrde1y6m)
+replace new_pari_demo1y6m=. if new_pari_demo1y6m==0
+label var new_pari_demo1y6m "Appropriate sum of subscales for democratic factor, 1y6m"
 
 // bootstrap
 forvalues b = 0/$bootstraps {
@@ -62,6 +129,7 @@ forvalues b = 0/$bootstraps {
 			xtile `c'factor = `c'factor_tmp, nquantiles($quantiles)
 			qui drop `c'factor_tmp
 			
+			/*
 			// standardized variables
 			foreach v in ${`c'} {
 				qui sum `v'
@@ -70,13 +138,14 @@ forvalues b = 0/$bootstraps {
 				xtile `v' = `v'_tmp, nquantiles($quantiles)
 				qui drop `v'_tmp
 			}
+			*/
 		}
 		
-		// calculate gender differences
-		foreach c in $varstofactor {
-			foreach v in ${`c'} `c'factor {
+		// calculate means by gender
+		foreach c in $categories {
+			foreach v in ${`c'} {
 				forvalues s = 0/1 {
-					qui sum `v' if male == `s'
+					qui sum `v'factor if male == `s'
 					matrix `v'`s'_`b' = r(mean)
 				
 					matrix `v'`s' = (nullmat(`v'`s') \ `v'`s'_`b')
@@ -93,13 +162,12 @@ local mattoappend
 local i = 0
 
 forvalues s = 0/1 {
-	foreach c in $varstofactor {
-		foreach v in ${`c'} `c'factor {
-			di "`v'"
+	foreach c in $categories {
+		foreach v in ${`c'} {
 		
 			local i = `i' + 1
 		
-			if `i' < 2 * `numvars' + 2 * `numcats' {
+			if `i' < 2 * `numvars' {
 				local mattoappend `mattoappend' `v'`s',
 			}
 			else {	
@@ -119,21 +187,26 @@ qui gen b = _n
 local baroptions0 barwidth(0.2) bcol(white) blcol(black) lwidth(thick)
 local baroptions1 barwidth(0.2) bcol(gs8) blcol(gs8) lwidth(thick)
 
-
-foreach c in $varstofactor {
+foreach c in $categories {
 	
-	local `c'graph
+	//local `c'graph
 	local j = 0
 	
 	local numx : word count ${`c'}
-	local numx = `numx' + 1
+	//local numx = `numx' + 1
 	forvalues i = 1/`numx' {
 		gen n`i'_0 = `i' - 0.125
 		gen n`i'_1 = `i' + 0.125
 	}
 	
-	foreach v in ${`c'} `c'factor {
+	local n = 0
+	foreach l in ${`c'_labels} {
+		local n = `n' + 1
+		local `c'axis ``c'axis' `n' "`l'"
+	}
 	
+	foreach v in ${`c'} {
+
 		local j = `j' + 1
 		
 		forvalues s = 0/1 {
@@ -186,6 +259,7 @@ foreach c in $varstofactor {
 		twoway 	``c'graph'
 			,
 		ylabel(0(2)16, angle(0) glcol(gs13))
+		xlabel(``c'axis', labsize(vsmall))
 		graphregion(color(white))
 		legend(rows(1) order(1 4 2 3) size(small) label(1 "Female") label(4 "Male") label(2 "+/- s.e.") label(3 "p-value {&le} 0.10"))
 		name(`c', replace)
@@ -195,23 +269,3 @@ foreach c in $varstofactor {
 	
 	drop n?_0 n?_1
 }
-
-
-/*
-# delimit ;
-		twoway 	(bar mhomefactor0 n1_0, barwidth(0.2) bcol(white) blcol(black) lwidth(thick))
-			(bar mhomefactor1 n1_1, barwidth(0.2) bcol(gs8) blcol(gs8) lwidth(thick))
-			(bar mcogfactor0 n2_0, barwidth(0.2) bcol(white) blcol(black) lwidth(thick))
-			(bar mcogfactor1 n2_1, barwidth(0.2) bcol(gs8) blcol(gs8) lwidth(thick))
-			(bar mncogfactor0 n3_0, barwidth(0.2) bcol(white) blcol(black) lwidth(thick))
-			(bar mncogfactor1 n3_1, barwidth(0.2) bcol(gs8) blcol(gs8) lwidth(thick))
-			(bar machfactor0 n4_0, barwidth(0.2) bcol(white) blcol(black) lwidth(thick))
-			(bar machfactor1 n4_1, barwidth(0.2) bcol(gs8) blcol(gs8) lwidth(thick))
-			,
-			
-			xlabel(1 "Parenting" 2 "Cognitive" 3 "Non-cognitive" 4 "Achievement")
-			ylabel(0(2)16, angle(0) glcol(gs13))
-			graphregion(color(white))
-			legend(rows(1) order(1 2) label(1 "Female") label(2 "Male"))
-		;
-	# delimit cr
