@@ -68,8 +68,8 @@ global crime			totfel totmis;
 global adult			income education health crime;
 global adult_labels		Income Education Heatlh Crime;
 
-global varstofactor		$adult;
-global categories		adult;
+global varstofactor		$cog $ncog $parenting $ach $adult;
+global categories		cog ncog parenting ach adult;
 
 local numcats : word count $categories ;	// number of categories
 local numvars : word count $varstofactor ; 	// number of factors
@@ -222,7 +222,7 @@ foreach c in $categories {
 		forvalues s = 0/1 {
 			local `c'graph ``c'graph' (bar m`v'`s' n`j'_`s', `baroptions`s'')
 			local `c'graph ``c'graph' (rcap u`v'`s' l`v'`s' n`j'_`s', lcol(black))
-			local `c'graph ``c'graph' (scatter m`v'`s' n`j'_`s' if pupper`v' <= 0.1 | plower`v' <= 0.1, mcol(black))
+			local `c'graph ``c'graph' (scatter m`v'`s' n`j'_`s' if ptwo`v' <= 0.1, mcol(black))
 		
 			// point estimate
 			qui sum `v'`s' if b == 1
