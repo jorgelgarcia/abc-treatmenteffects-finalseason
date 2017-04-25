@@ -8,7 +8,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 100
+global bootstraps 200
 global quantiles 30
 
 // macros
@@ -36,14 +36,17 @@ global pari			new_pari_auth1y6m new_pari_demo1y6m
 global parenting		earlyhome laterhome homeabs homephy homemom;
 global parenting_labels		Discipline Environment Warmth Early School-age;
 
-global earlycog			vrb2y vrb3y; 
-global schoolcog  		vrb5y vrb8y;
-global adultcog			vrb21y prf21y;
-global cog			earlycog schoolcog adultcog;
-global cog_labels		Early School-age Adult;
 
-global readschool		math5y6m math8y math12y ;	
-global mathschool		read5y6m read8y read12y;
+global iq3			sb2y sb3y mc3y6m;
+global iq4			sb4y mc4y6m;
+global iq5			sb5y wppsi5y;
+global iq6			sb6y wis6y6m;
+global iq8			mc7y wis8y;
+global cog			iq3 iq4 iq5 iq8;
+global cog_labels		3-years 4-years 5-years 8-years;
+
+global readschool		math6y math7y6m math8y math8y6m math9y math12y ;	
+global mathschool		read6y read7y6m read8y read8y6m read9y read12y;
 global adultach			math21y read21y;
 global ach			readschool mathschool adultach;
 global ach_labels		Reading Math Adult;
@@ -55,10 +58,12 @@ global schoolsociab		new_cbi_ho6y new_cbi_ho8y;
 global ncog			earlysociab earlytask schoolsociab scholtask;
 global ncog_labels		Early-sociability Early-task School-sociability School-task;
 
-global income			si30y_inc_labor si30y_works_job;
-global education		hs21y hs30y years_30y;
-global health			si34y_sys_bp si34y_dia_bp si34y_prehyper si34y_drugs
-				FRiskScore smoker;
+global income			si30y_inc_labor si30y_works_job si21y_inc_labor;
+global education		hs21y si30y_univ_comp years_30y never_ret never_sped;
+
+global health			si34y_drugs FRiskScore smoker si34y_obese 
+				si34y_sev_obese si34y_hemoglobin 
+				si34y_prehyper si34y_hyper;
 global crime			totfel totmis;
 global adult			income education health crime;
 global adult_labels		Income Education Heatlh Crime;
@@ -110,6 +115,11 @@ label var new_pari_hostl1y6m "Appropriate sum of subscales for hostility factor,
 egen new_pari_demo1y6m = rowtotal(pari_verb1y6m pari_egal1y6m pari_comrde1y6m)
 replace new_pari_demo1y6m=. if new_pari_demo1y6m==0
 label var new_pari_demo1y6m "Appropriate sum of subscales for democratic factor, 1y6m"
+
+foreach v in sped ret {
+	gen never_`v' = ever_`v'
+	recode never_`v' (1=0) (0=1)
+}
 
 // bootstrap
 forvalues b = 0/$bootstraps {
@@ -258,14 +268,14 @@ foreach c in $categories {
 	# delimit ;
 		twoway 	``c'graph'
 			,
-		ylabel(0(2)16, angle(0) glcol(gs13))
+		ylabel(0(3)18, angle(0) glcol(gs13))
 		xlabel(``c'axis', labsize(vsmall))
 		graphregion(color(white))
 		legend(rows(1) order(1 4 2 3) size(small) label(1 "Female") label(4 "Male") label(2 "+/- s.e.") label(3 "p-value {&le} 0.10"))
 		name(`c', replace)
 		;
 	# delimit cr
-	graph export "${results}/abccare-gdiff-`c'.eps", replace
+	graph export "${output}/abccare-gdiff-`c'.eps", replace
 	
 	drop n?_0 n?_1
 }
