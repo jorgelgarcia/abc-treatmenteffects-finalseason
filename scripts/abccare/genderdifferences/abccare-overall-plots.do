@@ -59,7 +59,7 @@ global ncog			earlysociab earlytask schoolsociab scholtask;
 global ncog_labels		Early-sociability Early-task School-sociability School-task;
 
 global income			si30y_inc_labor si30y_works_job si21y_inc_labor;
-global education		hs21y si30y_univ_comp years_30y never_ret never_sped;
+global education		years_30y si30y_univ_comp hs21y;
 
 global health			si34y_drugs FRiskScore smoker si34y_obese 
 				si34y_sev_obese si34y_hemoglobin 
@@ -68,8 +68,8 @@ global crime			totfel totmis;
 global adult			income education health crime;
 global adult_labels		Income Education Heatlh Crime;
 
-global varstofactor		$parenting $cog $ach $ncog $adult;
-global categories		parenting cog ach ncog adult;
+global varstofactor		$adult;
+global categories		adult;
 
 local numcats : word count $categories ;	// number of categories
 local numvars : word count $varstofactor ; 	// number of factors
