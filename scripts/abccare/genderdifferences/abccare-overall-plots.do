@@ -76,9 +76,9 @@ global crime			totfel totmis;
 global adult			income education health crime;
 global adult_labels		Income Education Heatlh Crime;
 
-global si30y_inc_labor		si30y_inc_labor;
+global income			income;
 global years_30y		years_30y;
-global crime			totfel totmis;
+global crime			crime;
 global si34y_bmi		si34y_bmi;
 global adultsimp		si30y_inc_labor years_30y si34y_bmi crime;
 global adultsimp_labels		Income Education Health Crime;
