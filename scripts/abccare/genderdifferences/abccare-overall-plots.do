@@ -8,7 +8,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 200
+global bootstraps 10
 global quantiles 30
 
 // macros
@@ -34,7 +34,7 @@ global homemom			home_minvol2y6m home_minvol1y6m home_minvol0y6m;
 global pari			new_pari_auth1y6m new_pari_demo1y6m 
 				new_pari_hostl1y6m;
 global parenting		earlyhome laterhome homeabs homephy homemom;
-global parenting_labels		Discipline Environment Warmth Early School-age;
+global parenting_labels		Early School-age Discipline Environment Warmth;
 
 
 global iq3			sb2y sb3y mc3y6m;
@@ -58,6 +58,14 @@ global schoolsociab		new_cbi_ho6y new_cbi_ho8y;
 global ncog			earlysociab earlytask schoolsociab scholtask;
 global ncog_labels		Early-sociability Early-task School-sociability School-task;
 
+global earlyiq			iq2y iq3y iq4y iq5y;
+global earlyse			ibr_sociab0y6m ibr_sociab1y ibr_sociab1y6m;
+global home			home_abspun2y6m home_abspun1y6m home_abspun0y6m
+				home_abspun4y6m home_abspun3y6m;
+global ach			math6y read6y math8y read8y read12y math12y;
+global skills			earlyse home earlyiq ach;
+global skills_labels		Social-emotional Parenting IQ Achievement;
+
 global income			si30y_inc_labor si30y_works_job si21y_inc_labor;
 global education		years_30y si30y_univ_comp hs21y;
 
@@ -68,8 +76,15 @@ global crime			totfel totmis;
 global adult			income education health crime;
 global adult_labels		Income Education Heatlh Crime;
 
-global varstofactor		$cog $ncog $parenting $ach $adult;
-global categories		cog ncog parenting ach adult;
+global si30y_inc_labor		si30y_inc_labor;
+global years_30y		years_30y;
+global crime			totfel totmis;
+global si34y_bmi		si34y_bmi;
+global adultsimp		si30y_inc_labor years_30y si34y_bmi crime;
+global adultsimp_labels		Income Education Health Crime;
+
+global varstofactor		$skills $adultsimp;
+global categories		skills adultsimp;
 
 local numcats : word count $categories ;	// number of categories
 local numvars : word count $varstofactor ; 	// number of factors
@@ -77,11 +92,21 @@ local numvars : word count $varstofactor ; 	// number of factors
 # delimit cr
 
 // data
+cd $scripts
+cd abccare/genderdifferences
+include abccare-npv
+
 cd $data
-use append-abccare_iv, clear
+merge m:1 id using append-abccare_iv 
+keep if _merge == 3
+drop _merge 
 
 drop if R == 0 & RV == 1
 
+tempfile npv
+save   "`npv'", replace
+
+// change some variables
 local ages 5y6m 5y9m 6y 6y6m 7y 7y6m 8y 12y
 
 foreach a in `ages' {
@@ -122,18 +147,35 @@ foreach v in sped ret {
 }
 
 // bootstrap
-forvalues b = 0/$bootstraps {
-
+local j = 0
+forvalues b1 = 1/$bootstraps {
+	forvalues b2 = 1/$bootstraps {
+	
+	local j = `j' + 1 
 	preserve
 	
-		if `b' > 0 {
+		if `b1' > 1 & `b2' > 1  {
 			bsample
 		}
 		
 		// create factors 
 		foreach c in $varstofactor { 
-			qui factor  ${`c'} 
-			qui predict `c'factor_tmp 
+		
+			if "`c'" != "income" {
+				qui keep if adraw == 0
+			}
+			else {
+				qui keep if adraw == `b1'
+			}
+		
+			local numx : word count ${`c'}
+			if `numx' > 1 {
+				qui factor  ${`c'} 
+				qui predict `c'factor_tmp 
+			}
+			else {
+				gen `c'factor_tmp = `c'
+			}
 			qui sum `c'factor_tmp 
 			qui replace `c'factor_tmp = (`c'factor_tmp - r(mean))/r(sd) 
 			xtile `c'factor = `c'factor_tmp, nquantiles($quantiles)
@@ -156,15 +198,16 @@ forvalues b = 0/$bootstraps {
 			foreach v in ${`c'} {
 				forvalues s = 0/1 {
 					qui sum `v'factor if male == `s'
-					matrix `v'`s'_`b' = r(mean)
+					matrix `v'`s'_`j' = r(mean)
 				
-					matrix `v'`s' = (nullmat(`v'`s') \ `v'`s'_`b')
+					matrix `v'`s' = (nullmat(`v'`s') \ `v'`s'_`j')
 					matrix colnames `v'`s' = `v'`s'
 				}
 			}
 		}
 	
 	restore
+	}
 }
 
 // bring to data
