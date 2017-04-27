@@ -1,0 +1,129 @@
+\section{Identification and Estimation of Life-Cycle Treatment Effects} \label{appendix:methodology}
+
+This appendix presents our approach to identifying and estimating life-cycle treatment effects. Differences in the approach for each outcome are based on different scenarios of data availability. We proceed as follows. Appendix~\ref{app:method_fullobs} focuses on outcomes that are fully observed over the course of the experiment with little attrition. Appendix~\ref{app:method_partialobs} focuses on outcomes that are partially observed over the course of the experiment with a substantial rate of attrition. Finally, Appendix~\ref{appendix:bootstrap} provides the precise steps for constructing our statistical inferences.
+
+\subsection{Complete Data}\label{app:method_fullobs}
+
+We classify a variable as complete data when we observe the data for at least 85\% of the individuals in the sample. Table~\ref{table:nonipw} lists the variables that are completely observed. For these outcomes, we estimate the standard errors of our estimates by resampling the ABC/CARE data. We estimate non-parametric $p$-values based on the bootstrap distribution. We perform inference in this same way throughout the paper.
+
+\begin{table}[H]
+\begin{threeparttable}
+\caption{Variables Estimated without IPW Adjustment}
+\label{table:nonipw}
+\centering
+\input{AppOutput/Methodology/nonipw_vars.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: The table above lists the variables for which we observe completely for the full sample.
+treatment effects.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{Partially Complete Data}
+\label{app:method_partialobs}
+
+When we do not observe data on an outcome within the experiment for more than 10\% of the individuals in the sample, we consider the outcome to be partially complete. These outcomes include: parental labor income at ages 1.5, 2.5, 3.5, 8, 12, 15, and 21, for which we observe no more than 112 subjects at any given age; and items in the health survey at age 34, for which we observe no more than 93 subjects. Table~\ref{table:attpooled} lists the variables that we classify as partially complete.\\
+
+\noindent For partially complete outcomes, we correct for attrition using an inverse probability scheme (IPW) as in  \citet{Horvitz_Thompson_1952_JASA}. For each of the partially observed outcomes, we construct a IPW scheme. The scheme is based on a set of variables that we observe for the complete sample. We use this set of complete variables to estimate the propensity of an outcome to be classified as partially complete. That is, the scheme is based on a logistic regression of ``being partially complete'' on a set of variables that we do observe for the full sample. The control set of variables is chosen among many possible control sets,  as documented in Appendix~\ref{appendix:bvariables}. For each of the outcomes that we partially observe, we list the variables that we use to produce the IPW scheme in Table~\ref{table:attpooled}.
+
+\newgeometry{top=.1in, bottom=.1in, left=.1in, right=.1in}
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Variables Used to Create IPW Scheme}
+\label{table:attpooled}
+\centering
+\input{AppOutput/Methodology/model_select_pooled.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table provides a list of the variables that we partially observe and the variables that we use to construct the IPW scheme to account for attrition when calculating treatment effects pooling females and males. The procedure to select these variables is described in Appendix~\ref{appendix:bvariables}. We construct the IPW using a common model across males and females.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+\restoregeometry
+\doublespacing
+
+\noindent Partially observed outcomes can occur at any age $a \leq a^*$. We construct the IPW using both pre-treatment and post-treatment variables, within the age period  $a \leq a^*$.\\
+
+\noindent We construct the IPW using the same algorithm, independently of the age within $a \leq a^*$ in which an outcome is partially complete. For notational simplicity, we derive the IPW scheme without indexing the outcomes by age. We restore the notation used throughout the text in the next appendix.\\
+
+\noindent We use a standard inverse probability weighting (IPW) scheme\footnote{\citet{Horvitz_Thompson_1952_JASA}.} Formally, recall that $R = 1$ if the child is randomized to treatment, and $R = 0$ otherwise.\footnote{We are able to use $R$ (randomization into treatment) and $D$ (participation in treatment) exchangeably.} Similarly, let $A = 1$ denote the case where we observe a generic scalar outcome $Y$, and $A = 0$ otherwise. As in the main text, $\bm{B}$ represents background (pre-treatment) variables and $\bm{X}$ variables that could be affected by treatment and that predict $Y$.\\
+
+\noindent We assume $A$ is independent of $Y$ conditional on $\bm{X}$ and $\bm{B}$. More formally, we invoke
+
+\begin{assumption} \label{ass:attr}
+	\begin{align*}
+		A \independent Y | \bm{X}, \bm{B}, R.
+	\end{align*}
+\end{assumption}
+
+\noindent Let $Y^{r}$ represent outcome $Y$ when $R$ is fixed to take the value $r$. Based on Assumption~\ref{ass:attr}, we use IPW to identify $\mathbb{E}[Y^r]$ as follows:
+
+\begin{align} \label{eq:case2}
+\mathbb{E}[Y^r] & = \int \int y f_{ Y_ r| \bm{B} } (y) f_{\bm{B}} (b) dydb \\ \nonumber
+	           & = \int \int y f_{Y| \bm{B}, R=r}(y) f_{\bm{B}} (b) dydb \\ \nonumber
+	           & = \int \int \int y f_{Y|R=r,\bm{X}, \bm{B}} (y) f_{\bm{X} | R=r} (x) f_{\bm{B}} (b) dydxdb \\ \nonumber
+				& = \int \int \int y f_{Y|R=r,\bm{X}, \bm{B}, A=1} (y) f_{\bm{X} | R=r, \bm{B} }(x) f_{\bm{B}} (b) dydxdb
+\end{align}
+
+\noindent where each component of the last expression in \eqref{eq:case2} is straightforward to recover from the data. Using Bayes' Theorem, we can write an equivalent expression to make the IPW scheme explicit. That is, we apply Bayes' Theorem to $f_{\bm{X} | R=r, \bm{B} }(x)$ and $f_{\bm{B}} (b)$ to obtain
+
+\begin{equation*}
+f_{\bm{X}|R=r,\bm{B}}(x) = \frac{f_{\bm{X}|R=r,\bm{B},A=1}(x) P(A=1|R=r,\bm{B})}{P(A=1|R=r,\bm{X},\bm{B})}
+\end{equation*}
+and
+\begin{equation*}
+	f_{\bm{B}} (b) = \frac{f_{\bm{B}|R=r,A=1} (x) P(R=r,A=1)}{P(R=r,A=1|\bm{B})}.
+\end{equation*}
+\noindent Substituting these expressions into \eqref{eq:case2}, we obtain
+
+\begin{align*} \label{eq:case2ipw}
+\mathbb{E}[Y_r] & = \int \int \int y f_{Y,\bm{X},\bm{B}|R=r,A=1}(y,x,b) \frac{P(R=r,A=1) P(A=1|R=r,\bm{B})}{P(R=r,A=1|\bm{B}) P(A=1|R=r,\bm{X},\bm{B})} dydxdb \\
+	            & = \int \int  \int y f_{Y,\bm{X},\bm{B}|R=r,A=1}(y,x,b) \frac{P(R=r,A=1)}{P(R=r|\bm{B}) P(A=1|R=r,\bm{X},\bm{B})} dydxdb. \\
+\end{align*}
+
+\noindent Assumption \ref{ass:attr} generalizes the matching assumption of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}. It conditions not only on pre-program variables but on fully observed post-treatment variables, $\bm{X}$, that predict $Y$. The corresponding sample estimator for $\mathbb{E}[Y^r]$ is
+
+\begin{align*}
+\sum_{i \in \mathcal{I}} y \alpha_{i} \beta_{i,r} \mathbf{1}(r_i = r)
+\end{align*}
+\noindent where $\mathcal{I}$ indexes the individuals in the sample, $\alpha_i$ indicates whether we observe $Y$ for individual $i$, and
+
+\begin{align*}
+	\beta_{i,r} = \frac{1}{\pi_r(x_i) \alpha(r_i,x_i,b_i)} \frac{1}{\sum_k{\frac{\mathbf{1}(r_i = r) \mathbf{1}(\alpha_i = 1)}{\pi_r(x_k)\alpha(r_k,x_k,b_k)}}},
+\end{align*}
+\noindent with $\pi_r(x) := P(R=r|\bm{B}=b)$ and $\alpha(r,x,b) := P(A=1|R=r,\bm{X}=x,\bm{B}=b)$. The weight $\pi_r$ corrects for selection into treatment based on pre-program variables $\bm{B}$. The weight $\alpha_{i}$ corrects for item non-response based on $R, \bm{X}, \bm{B}$.\\
+
+\noindent For each of the estimates presented in this paper, we allow the reader to assess the sensitivity of the estimate to adjusting by the IPW. In Tables~\ref{table:tescombinedmales} and \ref{table:tescombinedfemales} of the main text (our main treatment-effects estimates table) we present estimates for the first counterfactual of interest (``Treatment vs. Next Best'') without adjusting by IPW in column (1). In column (2), we present estimates accounting for IPW. The rest of the columns report similar exercises for the other counterfactuals considered. Appendix~\ref{appendix:results} presents the same information for outcomes that do not appear in Tables~\ref{table:tescombinedmales} and \ref{table:tescombinedfemales}.\footnote{We only account for IPW for the list of variables listed here, or any calculation involving them.}
+
+\subsection{Inference} \label{appendix:bootstrap}
+
+\noindent This section provides the precise steps for constructing the bootstrap distribution and for computing the standard errors for three of the main estimates in our paper.
+
+\subsubsection{Treatment Effects}\label{little-TE}
+
+\begin{enumerate}
+
+\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-samples)panel dataset. Information on the whole story about each individual is obtained in each re-sample.
+
+\item For a partially complete outcome $Y_{j}$, run $K$ regressions of $Y_{j}$ on the set of explanatory variables $k = 1,..., K$.\footnote{We perform this procedure at any age, and re-sample individuals independently of their treatment status so we drop the respective indices.} $K$ is determined by the number of possible control sets we can construct with 1, 2 and, 3 baseline variables. We document this procedure and describe the possible control sets in Appendix~\ref{appendix:bvariables}.
+
+\item Choose the control set that best predicts $Y_{j}$, as we describe in Appendix~\ref{appendix:bvariables}. Call this control set $k^*_{j}$. There is one control set per each of the partially complete outcomes $Y_{j}$.
+
+\item Construct the IPW using the inverse of the prediction of  a logistic regression of an indicator of ``observed or not" on control set $k^*_{j}$.
+
+\item If we estimate our parameter of interest using  matching (treatment vs. stay at home or treatment vs. alternative preschool ---see Section~\ref{sec:parameters}), we weight the treatment group as to make it comparable in observed characteristics to the control group individuals who either stay at home or attend alternative preschools. We use the procedure in 3. to choose the variables used to weight.
+
+\item Repeat this procedure 1,000 times to obtain the empirical bootstrap distribution. Compute the standard error as the sample standard deviation of these resamples. Compute the $p$-value's as the proportion of times that we reject the null hypothesis, after centering the empirical bootstrap distribution according to the null hypothesis.
+
+\end{enumerate}
+
+\subsubsection{Combining Functions}
+
+\begin{enumerate}
+\item Use the same procedure as before to re-sample the experimental data.
+\item Calculate treatment effects as described in Appendix~\ref{little-TE}.
+\item If counting the number of positive effects, compute this number and generate standard errors and $p$-value's as before.
+\item If counting the number of positive and at significant treatment effects, compute the number of positive and significant treatment effects (at the desired significance level). Re-sample the non-experimental sample a second time. The second re-sample creates an empirical bootstrap distribution for this count. Generate standard errors and $p$-value's as before.
+\end{enumerate}
+

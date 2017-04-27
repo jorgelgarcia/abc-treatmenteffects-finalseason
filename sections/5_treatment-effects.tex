@@ -1,0 +1,79 @@
+\subsection{Estimated Treatment Effects}
+
+Tables~\ref{table:tescombinedmales} and \ref{table:tescombinedfemales} present the estimates of selected treatment effects for males and females respectively. Column (1) gives sample mean differences in outcomes between treatment and control groups. \textbf{[JJH: The full list is in the appendix?]} Column (2) adjusts the differences for attrition and controls for background variables. Both are estimates of the parameter defined in equation~\eqref{eq:effect}. Column (3) shows the mean difference between the full treatment-group and the control-group subjects who did not attend alternative preschools. Column (4) gives standard matching estimates for the parameter defined in equation~\eqref{eq:influenza}.\footnote{In Appendix~\ref{app:matching-is-fun}, we provide details on: (i) the kernel matching estimator that we use; (ii) the matching variables that we use; and (iii) a sensitivity analysis to these matching variables.} Column (5) gives mean differences between the full treatment-group and control-group children who attended alternatives. Column (6) gives matching estimates for the parameter of equation~\eqref{eq:smallpox}.
+
+The results for females show that ABC/CARE has substantial effects on education when comparing outcomes of the treatment-group subjects to those from the next best alternative. High school graduation increases between 13 and 25 percentage points, depending on the estimate that we consider; college graduation increases 13 percentage points; and the average years of schooling increase between 2.1 and 1.8 years. Employment at age 30 increases between 13 and 8 percentage points. ABC/CARE has substantial impacts on human capital accumulation and employment. The results strengthen when we compare treatment with the option of staying at home.
+
+\begin{sidewaystable}[!htbp]
+\centering
+\begin{threeparttable}
+\caption{Treatment Effects on Selected Outcomes, Males}\label{table:tescombinedmales}
+\begin{scriptsize}
+\input{output/select_rslt_combined_males.tex}
+\end{scriptsize}
+\begin{tablenotes}
+\scriptsize
+Note: This table shows the treatment effects for categories outcomes that are important for \citet{Garcia_Heckman_Leaf_etal_2017_Comp_CBA_Unpublished}. Systolic and diastolic blood pressure are measured in terms of mm Hg. Each column present estimates for the following parameters: (1) $\mathbb{E} \left [ \bm{Y}^1 -  \bm{Y}^0 | \bm{B} \in \mathcal{B}_{0} \right]$ (no controls); (2) $\mathbb{E} \left [ \bm{Y}^1 -  \bm{Y}^0 | \bm{B} \in \mathcal{B}_{0} \right]$ (controls); (3) $\mathbb{E} \left [ \bm{Y}^1 | R = 1 \right] -  \mathbb{E} \left [ \bm{Y}^0 | R = 0,V = 0  \right]$ (no controls); (4) $\mathbb{E} \left [ \bm{Y}^1 -  \bm{Y}_H^0 | \bm{B} \in \mathcal{B}_{0} \right]$ (controls); (5) $\mathbb{E} \left [ \bm{Y}^1 | R = 1 \right] -  \mathbb{E} \left [ \bm{Y}^0 | R = 0,V = 1 \right]$ (no controls); (6) $\mathbb{E} \left [ \bm{Y}^1 -  \bm{Y}_C^0 | \bm{B} \in \mathcal{B}_{0} \right]$ (controls). We account for the following background variables ($\bm{B}$): ABC/CARE indicator; Apgar scores at minutes 1 and 5, and the high-risk index. We define the high-risk index in Appendix~\ref{appendix:background} and explain how we choose the control variables in Appendix~\ref{appendix:bvariables}. Columns (2), (4), and (6) correct for item non-response and attrition using inverse probability weighting as we explain in Appendix~\ref{app:method_partialobs}. Inference is based on non-parametric, one-sided $p$-values from the empirical bootstrap distribution. We highlight point estimates significant at the $10\%$ level. See Appendix~\ref{appendix:vsensitivity} for two-sided $p$-values.\\
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+\doublespacing
+
+\begin{sidewaystable}[!htbp]
+\centering
+\begin{threeparttable}
+\caption{Treatment Effects on Selected Outcomes, Females$^*$}\label{table:tescombinedfemales}
+\begin{scriptsize}
+\input{output/select_rslt_combined_females.tex}
+\end{scriptsize}
+\begin{tablenotes}
+\scriptsize
+Note: This table shows the treatment effects for categories outcomes that are important for \citet{Garcia_Heckman_Leaf_etal_2017_Comp_CBA_Unpublished}. Systolic and diastolic blood pressure are measured in terms of mm Hg. Each column present estimates for the following parameters: (1) $\mathbb{E} \left [ \bm{Y}^1 -  \bm{Y}^0 | \bm{B} \in \mathcal{B}_{0} \right]$ (no controls); (2) $\mathbb{E} \left [ \bm{Y}^1 -  \bm{Y}^0 | \bm{B} \in \mathcal{B}_{0} \right]$ (controls); (3) $\mathbb{E} \left [ \bm{Y}^1 | R = 1 \right] -  \mathbb{E} \left [ \bm{Y}^0 | R = 0,V = 0  \right]$ (no controls); (4) $\mathbb{E} \left [ \bm{Y}^1 -  \bm{Y}_H^0 | \bm{B} \in \mathcal{B}_{0} \right]$ (controls); (5) $\mathbb{E} \left [ \bm{Y}^1 | R = 1 \right] -  \mathbb{E} \left [ \bm{Y}^0 | R = 0,V = 1 \right]$ (no controls); (6) $\mathbb{E} \left [ \bm{Y}^1 -  \bm{Y}_C^0 | \bm{B} \in \mathcal{B}_{0} \right]$ (controls). We account for the following background variables ($\bm{B}$): ABC/CARE indicator; Apgar scores at minutes 1 and 5, and the high-risk index. We define the high-risk index in Appendix~\ref{appendix:background} and explain how we choose the control variables in Appendix~\ref{appendix:bvariables}. Columns (2), (4), and (6) correct for item non-response and attrition using inverse probability weighting as we explain in Appendix~\ref{app:method_partialobs}. Inference is based on non-parametric, one-sided $p$-values from the empirical bootstrap distribution. We highlight point estimates significant at the $10\%$ level. See Appendix~\ref{appendix:vsensitivity} for two-sided $p$-values.\\
+$^*$For females, we do not report graduation from a four-years college because we lack of common support to compute estimates for some parameters.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+\doublespacing
+
+
+The results for males are somewhat different from those for females. Treatment has substantial effects when compared to the next best alternative. The effects are positive for a variety of health indicators, including drug use and hypertension. The effects on employment and labor income are also substantial. The increase in employment at age 30 ranges from 11 to 19 percentage points. Labor income at age 30 increases between 19 and 24 thousand of 2014 USD after treatment. The effects strengthen when comparing treatment to alternative preschool. Separation from the mother and being placed in relatively low quality childcare centers have more deleterious consequences for males than for females.\footnote{This is consistent with the evidence in \citet{Baker_Gruber_Milligan_2015_Noncog_Defects} and \citet{Kottelenberg-Lehrer_2014_Gender-Effects}.}
+
+The results hold when using other definitions of control substitution (see Appendix~\ref{appendix:vsensitivity}). They remain statistically significant or are borderline statistically insignificant when computing two-tailed $p$-values (see Appendix~\ref{appendix:vsensitivity}).
+
+The estimates contrasting the effects for females and males in (3) and (5) are not based on matching; the estimates in (4) and (6) are. For the matching estimates, we rely on observed, baseline characteristics. In Appendix~\ref{appendix:bvariables}, we explain our choice of these variables and we make a thorough analysis to conclude that there is little sensitivity to the choice of these variables.\footnote{We also present this sensitivity analysis changing the variables used to condition while estimating treatment effects and changing the variables used to construct the weights to account for attrition.}
+
+\subsection{Estimated Combining Functions}
+
+We next report estimates of the proportion of beneficial effects by outcome category and overall.\footnote{We consider a total of 95 outcomes that we classify in Appendix~\ref{appendix:results}. These are the outcomes that most clearly relate to the treatment offered by the program.} The analysis is based on treatment effect \eqref{eq:effect}. Figure~\ref{fig:ppositive} displays the results from this analysis: ABC/CARE positively impacted a large percentage of the outcomes. We show the counts for treatment compared to the next best alternative chosen by parents in Figure~\ref{fig:ppositivenb}. Proportionately more outcomes are beneficial for females, but the proportions are high for both groups and well above the benchmark of 1/2. In Tables~\ref{table:abccare_rslt_pooled_counts} to \ref{table:abccare_rslt_female_counts_n10a10} of Appendix~\ref{appendix:results}, we document a large and precisely determined fraction of beneficial treatment effects well above 1/2 for both genders for categories of outcomes spanning the life cycle through the mid 30's.
+
+Using an $\alpha$-level of significance, one would expect to find that $\alpha\%$ of the treatment effects are ``statistically significant,'' even if the null hypothesis of no effect of the program is true simply by chance. At a 10\% level of significance, $46\%$ are statistically significant for females and $28\%$ for males (see Figure~\ref{fig:ppositive10}).
+
+Figures~\ref{fig:ppositivehome} and Figure~\ref{fig:ppositivealternative} adjust the count in Figure~\ref{fig:ppositivenb} to analyze more clearly defined counterfactuals: treatment compared to staying at home and treatment compared to alternative preschool. These comparisons indicate that males and females benefit differently from alternatives to high quality treatment. Compared across all categories, females benefit more from treatment when compared to staying at home (as opposed to attending alternative preschools), while males benefit more from treatment when compared to attending an alternative childcare arrangement (as opposed to staying at home).
+
+\begin{sidewaysfigure}[!htbp]
+\centering
+\caption{Positively Impacted Outcomes, ABC/CARE Males and Females}\label{fig:ppositive}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{Treatment vs. Next Best} \label{fig:ppositivenb}
+		\includegraphics[width=\textwidth]{output/itt_noctrl_all.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{Treatment vs. Next Best, Significant at 10\% Level} \label{fig:ppositive10}
+		\includegraphics[width=\textwidth]{output/itt_noctrl_all_sig10.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.4\textwidth}
+		\centering
+		\caption{ Treatment vs. Stay at Home} \label{fig:ppositivehome}
+		\includegraphics[width=\textwidth]{output/epan_ipw_p0_all.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{Treatment vs. Alternative Preschool} \label{fig:ppositivealternative}
+		\includegraphics[width=\textwidth]{output/epan_ipw_p1_all.eps}
+\end{subfigure}
+\scriptsize \justify
+Note: Panel (a) percentage of outcomes displaying a positive treatment effect, comparing treatment to next best. Panel (b) percentage of outcomes displaying a positive and statistically significant treatment effect (10\% significance level). Panel (c) displays the percentage of outcomes with a positive treatment effect, comparing treatment to staying at home. Panel (d) displays the percentage of outcomes with a positive treatment effect, comparing treatment to alternative childcare arrangements. Standard errors are based on the empirical bootstrap distribution. For Panel (b) we perform a ``double bootstrap'' procedure to first determine significant treatment effects at $10\%$ level and then calculate the standard error of the count.\\
+\end{sidewaysfigure}
+
