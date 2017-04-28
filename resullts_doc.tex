@@ -1,0 +1,81 @@
+%Input preamble
+\input{preambleappendix}
+\input{output/mainstatistics}
+
+\usepackage[stable]{footmisc}
+
+\newcommand*\leftright[2]{%
+  \leavevmode
+  \rlap{#1}%
+  \hspace{0.5\linewidth}%
+  #2}
+
+\newcommand{\orth}{\ensuremath{\perp\!\!\!\perp}}%
+\newcommand{\indep}{\orth}%
+\newcommand{\notorth}{\ensuremath{\perp\!\!\!\!\!\!\diagup\!\!\!\!\!\!\perp}}%
+\newcommand{\notindep}{\notorth}
+
+
+\begin{document}
+
+\begin{titlepage}
+\newgeometry{top=.8in, bottom=.8in, left=.8in, right=.8in}
+
+\title{\Large \textbf{Gender Differences in the Benefits of a Prototypical Early Childhood Program: \\ Large Graphs of Gender Gaps}}
+
+\author{
+Jorge Luis Garc\'{i}a\\
+Department of Economics\\
+The University of Chicago \and
+James J. Heckman \\
+American Bar Foundation \\
+Department of Economics\\
+The University of Chicago \and
+Anna L. Ziff \\
+Center for the Economics of \\
+Human Development \\
+The University of Chicago}
+\date{First Draft: January 5, 2016\\ This Draft: \today}
+
+\maketitle
+\restoregeometry
+\end{titlepage}
+
+\begin{sidewaysfigure}[H]
+\centering
+\caption{Proportion of Outcomes Males $>$ Females, Full Control Group}
+\includegraphics[width=\textwidth]{output/gendergaps-fullcontrol}
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}[H]
+\centering
+\caption{Proportion of Outcomes Males $>$ Females, Treatment Group}
+\includegraphics[width=\textwidth]{output/gendergaps-treatment}
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}[H]
+\centering
+\caption{Proportion of Outcomes Males $>$ Females, Control Group Divided by Alternative Setting}
+\includegraphics[width=\textwidth]{output/gendergaps-control-moderated-altpre}
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}[H]
+\centering
+\caption{Proportion of Outcomes Males $>$ Females, Control Group Divided by Father Present}
+\includegraphics[width=\textwidth]{output/gendergaps-control-moderated-fhome}
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}[H]
+\centering
+\caption{Proportion of Outcomes Males $>$ Females, Treatment Group Divided by Father Present}
+\includegraphics[width=\textwidth]{output/gendergaps-treatment-moderated-fhome}
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}[H]
+\centering
+\caption{Proportion of Outcomes Males $>$ Females, Control Group Divided by Father Present and Alternative Setting}
+\includegraphics[width=\textwidth]{output/gendergaps-control-moderated-altpre-fhome}
+\end{sidewaysfigure}
+
+
+\end{document}
