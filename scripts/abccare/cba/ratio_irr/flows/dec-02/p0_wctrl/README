@@ -1,0 +1,19 @@
+Author	Joshua Shea
+Date	July 5, 2016
+
+This folder contains the flows for each component. We have many
+diferent estimates, so each folder is for a specific estimate.
+
+1. ncc_noctrl:	ITT, without controls, not accounting for control contamination, no IPW weights
+2. ncc_ctrl:	ITT, with controls, not accounting for control contamination, no IPW weights
+3. ncc_wctrl:	ITT, with controls, not accounting for control contamination, with IPW weights
+
+4. p0_noctrl:	regression on R conditional on P=0, without controls, no IPW weights 
+5. p0_ctrl:	regression on R conditional on P=0, with controls, no IPW weights 
+6. p0_wctrl:	regression on R conditional on P=0, with controls, with IPW weights 
+7. p0_match:	matching estimate fixing P=0, with IPW weights 
+
+8. p1_noctrl:	regression on R conditional on P=1, without controls, no IPW weights 
+9. p1_ctrl:	regression on R conditional on P=1, with controls, no IPW weights 
+10. p1_wctrl:	regression on R conditional on P=1, with controls, with IPW weights 
+11. p1_match:	matching estimate fixing P=1, with IPW weights 
