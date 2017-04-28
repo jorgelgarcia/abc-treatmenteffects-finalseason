@@ -78,7 +78,9 @@ local crime ad34_fel ad34_mis si30y_adlt_totinc si30y_juv_fel ncharges narrests 
 //	replace `v' = -1 * `v'
 //}
 
-local outcome_categories iq ach home se ed emp parent health crime
+local all `iq' `ach' `home' `se' `ed' `emp' `parent' `health' `crime' 
+
+local outcome_categories iq ach home se ed emp parent health crime all
 
 local iq_name 		IQ
 local ach_name 		Achievement
@@ -89,3 +91,4 @@ local emp_name		Employment
 local parent_name 	Parental income
 local health_name 	Health
 local crime_name 	Crime
+local all_name		All

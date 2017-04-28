@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 100
+global bootstraps 2
 global quantiles 30
 
 // macros
@@ -35,7 +35,7 @@ include abccare-reverse
 include abccare-outcomes
 
 forvalues b = 0/$bootstraps {
-	
+	di "`b'"
 	preserve
 	
 	if `b' > 0 {
@@ -49,10 +49,12 @@ forvalues b = 0/$bootstraps {
 		foreach v in ``c'' {
 			
 			forvalues s = 0/1 {
-				qui reg `v' R /*apgar1 apgar5 hrabc abc*/ if male == `s' 
-				matrix b`v'`s'`b' = e(b)
-
-				local b`v'`s'`b'_R0 = b`v'`s'`b'[1,2]
+				//qui reg `v' R /*apgar1 apgar5 hrabc abc*/ if male == `s' 
+				//matrix b`v'`s'`b' = e(b)
+				//local b`v'`s'`b'_R0 = b`v'`s'`b'[1,2]
+				
+				qui sum `v' if male == `s' & R == 0
+				local b`v'`s'`b'_R0 = r(mean)
 			}
 			
 			if `b`v'1`b'_R0' - `b`v'0`b'_R0' > 0 {
@@ -140,12 +142,13 @@ twoway 	`forgraph'
 	xlabel(`forlabel', labsize(small) angle(45))
 	ylabel(0(0.25)1, angle(0))
 	
-	legend(order(1 2 3) rows(3) label(1 "Proportion Control Males > Control Females") label(2 "+/- s.e.") label(3 "p-value {&le} 0.10"))
+	legend(order(1 2 3) rows(3) label(1 "{bf:Proportion Control Males > Control Females}") 
+	label(2 "+/- s.e.") label(3 "p-value {&le} 0.10") size(small))
 ;
 # delimit cr
 
 cd $output
-//graph export "control-simple-overview.eps", replace
+graph export "gendergaps-fullcontrol.eps", replace
 
 
 /*

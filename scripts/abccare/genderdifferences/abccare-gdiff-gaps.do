@@ -35,7 +35,7 @@ include abccare-reverse
 include abccare-outcomes
 
 forvalues b = 0/$bootstraps {
-	
+	di "`b'"
 	preserve
 	
 	if `b' > 0 {
@@ -49,13 +49,17 @@ forvalues b = 0/$bootstraps {
 		foreach v in ``c'' {
 			
 			forvalues s = 0/1 {
-				qui reg `v' R /*apgar1 apgar5 hrabc abc*/ if male == `s' 
-				matrix b`v'`s'`b' = e(b)
-
-				local b`v'`s'`b'_R0 = b`v'`s'`b'[1,2]
+				//qui reg `v' R /*apgar1 apgar5 hrabc abc*/ if male == `s' 
+				//matrix b`v'`s'`b' = e(b)
+				//local b`v'`s'`b'_R0 = b`v'`s'`b'[1,2]
+				//local b`v'`s'`b'_R1 = b`v'`s'`b'[1,1] + b`v'`s'`b'[1,2]
+				
+				qui sum `v' if male == `s' & R == 1
+				local b`v'`s'`b'_R1 = r(mean)
+				
 			}
 			
-			if `b`v'1`b'_R0' - `b`v'0`b'_R0' > 0 {
+			if `b`v'1`b'_R1' - `b`v'0`b'_R1' > 0 {
 				local counter = `counter' + 1
 			}
 		}
@@ -140,12 +144,13 @@ twoway 	`forgraph'
 	xlabel(`forlabel', labsize(small) angle(45))
 	ylabel(0(0.25)1, angle(0))
 	
-	legend(order(1 2 3) rows(3) label(1 "Proportion Control Males > Control Females") label(2 "+/- s.e.") label(3 "p-value {&le} 0.10"))
+	legend(order(1 2 3) rows(3) label(1 "{bf:Proportion Treatment Males > Treatment Females}") 
+	label(2 "+/- s.e.") label(3 "p-value {&le} 0.10") size(small))
 ;
 # delimit cr
 
 cd $output
-//graph export "control-simple-overview.eps", replace
+graph export "gendergaps-treatment.eps", replace
 
 
 /*
