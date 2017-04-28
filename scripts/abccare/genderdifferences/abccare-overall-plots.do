@@ -76,15 +76,15 @@ global crime			totfel totmis;
 global adult			income education health crime;
 global adult_labels		Income Education Heatlh Crime;
 
-global income			income;
+global income			si30y_inc_labor;
 global years_30y		years_30y;
 global crime			crime;
 global si34y_bmi		si34y_bmi;
 global adultsimp		si30y_inc_labor years_30y si34y_bmi crime;
 global adultsimp_labels		Income Education Health Crime;
 
-global varstofactor		$skills $adultsimp;
-global categories		skills adultsimp;
+global varstofactor		$adultsimp;
+global categories		adultsimp;
 
 local numcats : word count $categories ;	// number of categories
 local numvars : word count $varstofactor ; 	// number of factors
@@ -318,7 +318,7 @@ foreach c in $categories {
 		name(`c', replace)
 		;
 	# delimit cr
-	graph export "${output}/abccare-gdiff-`c'.eps", replace
+	//graph export "${output}/abccare-gdiff-`c'.eps", replace
 	
 	drop n?_0 n?_1
 }
