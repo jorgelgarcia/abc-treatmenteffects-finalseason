@@ -1,0 +1,64 @@
+%Input preamble
+\input{preambleappendix}
+\input{output/mainstatistics}
+
+\usepackage[stable]{footmisc}
+
+\newcommand*\leftright[2]{%
+  \leavevmode
+  \rlap{#1}%
+  \hspace{0.5\linewidth}%
+  #2}
+
+\newcommand{\orth}{\ensuremath{\perp\!\!\!\perp}}%
+\newcommand{\indep}{\orth}%
+\newcommand{\notorth}{\ensuremath{\perp\!\!\!\!\!\!\diagup\!\!\!\!\!\!\perp}}%
+\newcommand{\notindep}{\notorth}
+
+\externaldocument{abc_treatmenteffects_appendix}
+\pagenumbering{roman}
+
+\begin{document}
+
+\begin{titlepage}
+\newgeometry{top=.8in, bottom=.8in, left=.8in, right=.8in}
+
+\title{\Large \textbf{Gender Differences in the Benefits of a Prototypical Early Childhood Program: \\ Holding Tank}}
+
+\author{
+Jorge Luis Garc\'{i}a\\
+Department of Economics\\
+The University of Chicago \and
+James J. Heckman \\
+American Bar Foundation \\
+Department of Economics\\
+The University of Chicago \and
+Anna L. Ziff \\
+Center for the Economics of \\
+Human Development \\
+The University of Chicago}
+\date{First Draft: January 5, 2016\\ This Draft: \today}
+
+\maketitle
+\restoregeometry
+\end{titlepage}
+
+\clearpage
+
+\restoregeometry
+\doublespacing
+
+\setcounter{page}{0}
+\pagenumbering{arabic}
+
+
+
+This seemingly contradictory result is explained by the types of treatment effects by gender and specific gender differences. For example, although the treatment reduced crime for both males and females, males tend to commit more costly crimes (e.g. violent crimes that have large costs to the victim).\footnote{\citet{Cohen-Bowles_2010_Estimating-Cost-Crime,Gregg_etal_2015_SocialRealities_BOOK}.} We explain the treatment effects in detail to help explain the gender differences present in these aggregate estimates.
+
+
+\clearpage
+\singlespacing
+\bibliography{heckman}
+\bibliographystyle{chicago}
+
+\end{document}
