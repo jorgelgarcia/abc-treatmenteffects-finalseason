@@ -13,24 +13,25 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 10
+global bootstraps 50
 global quantiles 30
 
 // macros
-global projects		= "~/Desktop/CEHD/Projects/"
-//global projects		: env projects
+global projects		: env projects
 global klmshare		: env klmshare
 global klmmexico	: env klmMexico
 
 // filepaths
-//global abccare_output 		= "${klmmexico}/klmPFL/abccare"
-global abccare_output		= "~/Desktop/CEHD/Projects/ABCCARE/"
+global abccare_output 		= "${klmmexico}/klmPFL/abccare"
 global scripts    			= "$projects/abccare-cba/scripts/"
 global output      			= "$projects/abccare-cba/output/"
 
 // data
 cd $abccare_output
 use abccare-mediation-extended.dta, clear
+
+// looking only at control group
+drop if R==1
 
 cd $scripts/abccare/genderdifferences
 //include abccare-old-factors
@@ -138,7 +139,7 @@ foreach c in $categories {
 		
 		forvalues s = 0/1 {
 			// point estimate
-			qui sum `v'`s' if b == 1
+			qui sum `v'`s' if b == 1 & R==0
 			qui gen point`v'`s' = r(mean)
 			local point`v'`s'= string(r(mean), "%9.3f")
 		
@@ -172,7 +173,7 @@ foreach c in $categories {
 		local ptwo`v' = string(r(mean), "%9.3f")
 		
 		if `ptwo`v'' <= 0.1 {
-			file write tabfile "`v' & `point`v'1' & `se`v'1' &  `point`v'0' & `se`v'0' & \textbf{`ptwo`v''} \\" _n
+			file write tabfile "`v' &  \textbf{`point`v'1'} & `se`v'1' &   \textbf{`point`v'0'} & `se`v'0' &`ptwo`v'' \\" _n
 		}
 		else {
 			file write tabfile "`v' & `point`v'1' & `se`v'1' &  `point`v'0' & `se`v'0' & `ptwo`v'' \\" _n
