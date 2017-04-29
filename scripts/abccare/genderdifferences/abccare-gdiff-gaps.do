@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 100
+global bootstraps 200
 global quantiles 30
 
 // macros
@@ -43,30 +43,31 @@ forvalues b = 0/$bootstraps {
 	}
 	
 	foreach c in `outcome_categories' {
-		local counter = 0			// use to keep track of number Y_m - Y_f > 0
+		local counter0 = 0			// use to keep track of number Y_m - Y_f > 0
+		local counter1 = 0
 		local numvars : word count ``c'' 	// number of variables
 	
 		foreach v in ``c'' {
 			
 			forvalues s = 0/1 {
-				//qui reg `v' R /*apgar1 apgar5 hrabc abc*/ if male == `s' 
-				//matrix b`v'`s'`b' = e(b)
-				//local b`v'`s'`b'_R0 = b`v'`s'`b'[1,2]
-				//local b`v'`s'`b'_R1 = b`v'`s'`b'[1,1] + b`v'`s'`b'[1,2]
-				
+				qui sum `v' if male == `s' & R == 0
+				local b`v'`s'`b'_R0 = r(mean)
 				qui sum `v' if male == `s' & R == 1
 				local b`v'`s'`b'_R1 = r(mean)
 				
 			}
-			
+			if `b`v'1`b'_R0' - `b`v'0`b'_R0' > 0 {
+				local counter0 = `counter0' + 1
+			}
 			if `b`v'1`b'_R1' - `b`v'0`b'_R1' > 0 {
-				local counter = `counter' + 1
+				local counter1 = `counter1' + 1
 			}
 		}
-		matrix `c'_prop`b' = `counter' / `numvars'
-		//di "`c' prop `b': `counter'/`numvars'"
-		matrix `c'_prop = (nullmat(`c'_prop) \ `c'_prop`b')
-		matrix colnames `c'_prop = `c'
+		forvalues r = 0/1 {
+			matrix `c'_prop`r'`b' = `counter`r'' / `numvars'
+			matrix `c'_prop`r' = (nullmat(`c'_prop`r') \ `c'_prop`r'`b')
+			matrix colnames `c'_prop`r' = `c'`r'
+		}
 	}
 	
 	restore
@@ -77,12 +78,14 @@ local n = 0
 local numcats : word count `outcome_categories'
 
 foreach c in `outcome_categories' {
-	local n = `n' + 1
-	if `n' < `numcats'  {
-		local formatrix `formatrix' `c'_prop, 
-	}
-	else {
-		local formatrix `formatrix' `c'_prop
+	forvalues r = 0/1 {
+		local n = `n' + 1
+		if `n' < 2 * `numcats'  {
+			local formatrix `formatrix' `c'_prop`r', 
+		}
+		else {
+			local formatrix `formatrix' `c'_prop`r'
+		}
 	}
 }
 matrix all = `formatrix'
@@ -95,30 +98,40 @@ gen draw = _n
 
 // inference
 foreach c in `outcome_categories' {
+	forvalues r = 0/1 {
+		// point estimate
+		qui sum `c'`r' if draw == 1
+		qui gen point_`c'`r' = r(mean)
 	
-	// point estimate
-	qui sum `c' if draw == 1
-	qui gen point_`c' = r(mean)
+		// empirical mean
+		qui sum `c'`r' if draw > 1
+		qui gen emp_`c'`r' = r(mean)
 	
-	// empirical mean
-	qui sum `c' if draw > 1
-	qui gen emp_`c' = r(mean)
+		// se
+		qui gen se_`c'`r' = r(sd)
+		qui gen u_`c'`r' = point_`c'`r' + se_`c'`r'
+		qui gen l_`c'`r' = point_`c'`r' - se_`c'`r'
 	
-	// se
-	qui gen se_`c' = r(sd)
-	qui gen u_`c' = point_`c' + se_`c'
-	qui gen l_`c' = point_`c' - se_`c'
+		// pvalue if different from 1/2
+		qui gen dm_`c'`r' = `c'`r' - emp_`c'`r' + 0.50 if draw > 1
+		qui gen diff_`c'`r' = (dm_`c'`r' > point_`c'`r') if draw > 1
+		qui sum diff_`c'`r'
+		qui gen p_`c'`r' = r(mean)
 	
-	// pvalue
-	qui gen dm_`c' = `c' - emp_`c' + 0.50 if draw > 1
-	qui gen diff_`c' = (dm_`c' > point_`c') if draw > 1
-	qui sum diff_`c'
-	qui gen p_`c' = r(mean)
-	
-	qui gen diffl_`c' = (dm_`c' < point_`c') if draw > 1
-	qui sum diffl_`c'
-	qui gen pl_`c' = r(mean)
-	
+		qui gen diffl_`c'`r' = (dm_`c'`r' < point_`c'`r') if draw > 1
+		qui sum diffl_`c'`r'
+		qui gen pl_`c'`r' = r(mean)
+	}
+	// pvalue if different from each other
+	qui gen `c'_0_1 = `c'1 - `c'0
+	qui sum `c'_0_1 if draw == 1
+	qui gen po_`c'_0_1 = r(mean)
+	qui sum `c'_0_1 if draw > 1
+	qui gen emp_`c'_0_1 = r(mean)
+	qui gen dm_`c'_0_1 = `c'_0_1 - emp_`c'_0_1 if draw > 1
+	qui gen diff3_`c'_0_1 = (abs(dm_`c'_0_1) > abs(po_`c'_0_1))
+	qui sum diff3_`c'_0_1 if draw > 1
+	qui gen p3_`c'_0_1 = r(mean)
 }
 
 
@@ -126,35 +139,46 @@ foreach c in `outcome_categories' {
 // graph
 
 qui gen y0 = 0
+qui gen y1 = 1
 local i = 1
 foreach c in `outcome_categories' {
 	
-	qui gen n`i' = `i'
+	qui gen n`c' = `i'
 	
+	local forgraph `forgraph' (bar point_`c'0 n`c', barwidth(0.5) bfcol(gs9) blcol(gs9) blwidth(thick))
+	local forgraph `forgraph' (bar point_`c'1 n`c', barwidth(0.5) bfcol("54 83 91") blcol("54 83 91") blwidth(thick))
+	if "`c'" == "health" {
+		local forgraph `forgraph' (bar point_health0 nhealth, barwidth(0.5) bfcol(gs9) blcol(gs9) blwidth(thick))
+	}
 	
-	local forgraph `forgraph' (bar point_`c' n`i', barwidth(0.5) bfcol(gs8) blcol(gs8) blwidth(thick))
-	local forgraph `forgraph' (rcap l_`c' u_`c' n`i', lcol(black))
-	local forgraph `forgraph' (scatter point_`c' n`i' if p_`c' <= 0.101 | pl_`c' <= 0.101, mcol(black) msize(large) yline(0.5, lcol(black) lwidth(thin)))
+	//local forgraph `forgraph' (rcap l_`c'0 u_`c'0 n`c', lcol(black))
+	local forgraph `forgraph' (scatter point_`c'0 n`c' if p_`c'0 <= 0.101 | pl_`c'0 <= 0.101, msymb(square) mlcol(black) mcol(none) msize(large) yline(0.5, lcol(black) lwidth(thin)))
+	local forgraph `forgraph' (scatter point_`c'1 n`c' if p_`c'1 <= 0.101 | pl_`c'1 <= 0.101, mlcol(black) mcol(none) msize(large) yline(0.5, lcol(black) lwidth(thin)))	
+	local forgraph `forgraph' (scatter y1 n`c', msymb(none) mlab(p3_`c'_0_1) mlabcolor(black) mlabpos(0))
 	local forlabel `forlabel' `i' "``c'_name'"
 	
 	local i = `i' + 1
 }
 
 
+
 # delimit ;
 twoway 	`forgraph'
-,
+,	
+	text(1.05 1 "p-value: treatment {&ne} control", placement(es) size(vsmall))
 	graphregion(color(white))
 	xlabel(`forlabel', labsize(small) angle(45))
 	ylabel(0(0.25)1, angle(0))
 	
-	legend(order(1 2 3) rows(3) label(1 "{bf:Proportion Treatment Males > Treatment Females}") 
-	label(2 "+/- s.e.") label(3 "p-value {&le} 0.10") size(small))
+	legend(order(- "{bf:Proportion Males > Females}" - 1 3 2 4) rows(3) label(1 "Control") label(2 "Treatment")
+	label(3 "Reject: control proportion {&ne} 0.5")
+	label(4 "Reject: treatment proportion {&ne} 0.5") 
+	size(small))
 ;
 # delimit cr
 
 cd $output
-graph export "gendergaps-treatment.eps", replace
+graph export "gendergaps-treat-vs-fullcontrol.eps", replace
 
 
 /*

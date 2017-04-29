@@ -74,9 +74,9 @@ local health `reverse' //`positive' //`risk' `mental' //`child_health'
 
 
 local crime ad34_fel ad34_mis si30y_adlt_totinc si30y_juv_fel ncharges narrests nfel nmis nviol nprop ndrug nothr
-//foreach v in `crime' {
-//	replace `v' = -1 * `v'
-//}
+foreach v in `crime' {
+	replace `v' = -1 * `v'
+}
 
 local all `iq' `ach' `home' `se' `ed' `emp' `parent' `health' `crime' 
 
