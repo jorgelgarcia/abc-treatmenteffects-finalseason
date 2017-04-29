@@ -146,7 +146,7 @@ foreach c in $categories {
 		restore
 		
 		if `p_sex' <= 0.1 {
-			file write tabfile "\texttt{\detokenize{`var_list'}} & `mean`var_list'1' & `se`var_list'1' &  `mean`var_list'0' & `se`var_list'0' & \textbf{`p_sex'} \\" _n
+			file write tabfile "\texttt{\detokenize{`var_list'}} & \textbf{`mean`var_list'1'} & `se`var_list'1' &  \textbf{`mean`var_list'0'} & `se`var_list'0' & `p_sex' \\" _n
 		}
 		else {
 			file write tabfile "\texttt{\detokenize{`var_list'}} & `mean`var_list'1' & `se`var_list'1' &  `mean`var_list'0' & `se`var_list'0' & `p_sex' \\" _n
