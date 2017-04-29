@@ -129,6 +129,10 @@ foreach c in `outcome_categories' {
 		qui gen diff_`c'`a' = (dm_`c'`a' > point_`c'`a') if draw > 1
 		qui sum diff_`c'`a'
 		qui gen p_`c'`a' = r(mean)
+		
+		qui gen diffl_`c'`a' = (dm_`c'`a' < point_`c'`a') if draw > 1
+		qui sum diffl_`c'`a'
+		qui gen pl_`c'`a' = r(mean)
 	}
 	
 }
@@ -150,7 +154,7 @@ foreach c in `outcome_categories' {
 	
 		local forgraph `forgraph' (bar point_`c'`a' n`i', `barlook`a'')
 		local forgraph `forgraph' (rcap l_`c'`a' u_`c'`a' n`i', lcol(black) lwidth(vthin))
-		local forgraph `forgraph' (scatter point_`c'`a' n`i' if p_`c'`a' <= 0.10, mcol(black) msize(small) yline(0.5, lcol(black) lwidth(thin)))
+		local forgraph `forgraph' (scatter point_`c'`a' n`i' if p_`c'`a' <= 0.101 | pl_`c'`a' <= 0.101, mcol(black) msize(small) yline(0.5, lcol(black) lwidth(thin)))
 		
 		if "`a'" == "h" {
 			local forlabel `forlabel' `i' "``c'_name'"

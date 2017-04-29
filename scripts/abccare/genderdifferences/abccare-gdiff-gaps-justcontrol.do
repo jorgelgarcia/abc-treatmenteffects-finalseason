@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 2
+global bootstraps 100
 global quantiles 30
 
 // macros
@@ -113,6 +113,10 @@ foreach c in `outcome_categories' {
 	qui sum diff_`c'
 	qui gen p_`c' = r(mean)
 	
+	qui gen diffl_`c' = (dm_`c' < point_`c') if draw > 1
+	qui sum diffl_`c'
+	qui gen pl_`c' = r(mean)
+	
 }
 
 
@@ -128,7 +132,7 @@ foreach c in `outcome_categories' {
 	
 	local forgraph `forgraph' (bar point_`c' n`i', barwidth(0.5) bfcol(gs8) blcol(gs8) blwidth(thick))
 	local forgraph `forgraph' (rcap l_`c' u_`c' n`i', lcol(black))
-	local forgraph `forgraph' (scatter point_`c' n`i' if p_`c' <= 0.10, mcol(black) msize(large) yline(0.5, lcol(black) lwidth(thin)))
+	local forgraph `forgraph' (scatter point_`c' n`i' if p_`c' <= 0.101 | pl_`c' <= 0.101, mcol(black) msize(large) yline(0.5, lcol(black) lwidth(thin)))
 	local forlabel `forlabel' `i' "``c'_name'"
 	
 	local i = `i' + 1
