@@ -44,7 +44,7 @@ local parent	`p_inc' `p_edu'
 			si34y_hprob_chol  si34y_hprob_heartatt si34y_hprob_othheart
 			si34y_hprob_cancer  si34y_hprob_memory si34y_hprob_sickle si34y_hprob_sickle_p  si34y_hprob_stroke
 */
-local reverse sint30_078	sint30_023	poorhlth	physhlth	PE_NUT	PE_POST	PE_PULS	PE_RESP	PE_TEMP	PE_CARDIO	PE_CHGEN	PE_HEAD	PE_JOINT	PE_SKIN	PE_AUD PE_EYEBALL	PE_FUNDI	PE_LOWTEETH	PE_UPTEETH PE_REFL	si30y_subj_health si34y_subj_health	si34y_vitd_def	si34y_obese_whr	si34y_fram_p1	si34y_bmi	si34y_obese	si34y_sev_obese	si34y_whr	si34y_hprob_othheart_p	HAVARTH2	si34y_hprob_orthop_p	si34y_hprob_asthma_p	si34y_hprob_cancer_p	si34y_hprob_diabetes_p	si34y_hprob_heartatt_p	si34y_hprob_bloodpr_p	si34y_hprob_chol_p	PREDIAB1_R	si34y_hprob_stroke_p	PSH_APPEN	PSH_CHOLEC	PSH_ECT	PSH_HYST	PSH_ORTHO	si34y_hprob_orthop	si34y_hprob_asthma	si34y_hprob_diabetes	si34y_hprob_bloodpr	si34y_diab	si34y_hemoglobin	si34y_prediab	si34y_dia_bp	si34y_sys_bp	si34y_prehyper	si34y_hyper	PAINACT2	si34y_dyslipid	sint30_078	sint30_023	poorhlth	physhlth
+local reverse /*sint30_078	sint30_023	poorhlth	physhlth	PE_NUT	PE_POST	PE_PULS	PE_RESP	PE_TEMP	PE_CARDIO	PE_CHGEN	PE_HEAD	PE_JOINT	PE_SKIN	PE_AUD PE_EYEBALL	PE_FUNDI	PE_LOWTEETH	PE_UPTEETH PE_REFL	si30y_subj_health si34y_subj_health	si34y_vitd_def	si34y_obese_whr	si34y_fram_p1*/	si34y_bmi	si34y_obese	/*si34y_sev_obese	si34y_whr	si34y_hprob_othheart_p	HAVARTH2	si34y_hprob_orthop_p	si34y_hprob_asthma_p	si34y_hprob_cancer_p	si34y_hprob_diabetes_p	si34y_hprob_heartatt_p	si34y_hprob_bloodpr_p	si34y_hprob_chol_p	PREDIAB1_R	si34y_hprob_stroke_p	PSH_APPEN	PSH_CHOLEC	PSH_ECT	PSH_HYST	PSH_ORTHO	si34y_hprob_orthop	si34y_hprob_asthma	si34y_hprob_diabetes	si34y_hprob_bloodpr*/	si34y_diab	si34y_hemoglobin	si34y_prediab	si34y_dia_bp	si34y_sys_bp	si34y_prehyper	si34y_hyper	/*PAINACT2	si34y_dyslipid	sint30_078	sint30_023	poorhlth	physhlth*/
 local child_health bmi0y bmi0y3m bmi0y6m bmi0y9m bmi1y bmi1y6m bmi2y bmi2y6m bmi3y bmi4y bmi5y bmi8y hospitl7 chsick7
 
 // Removed: si21y_risk32 
@@ -68,9 +68,9 @@ foreach v in `mental' {
 	replace `v' = -1 * `v'
 }
 
-local positive si21y_phys_days	si34y_phys_days	modpact	modpatimhrs	modpaday vigpact vigpatimhrs	vigpaday	jobactiv	CMP_ALT	CMP_AST	CMP_ALB	CMP_ALB_GLOB	CMP_ALKPHOS	CMP_BILI	CMP_CA	CMP_CO2	CMP_CL	CMP_CREAT	CMP_GLOB	CMP_GLUCOSE	CMP_K	CMP_PROT	CMP_NA	CMP_UREA	CBC_BASO	CBC_EOSINO	CBC_HCT	CBC_HEMOG	CBC_LYMPHO	CBC_MCV	CBC_MCHC	CBC_MCH	CBC_MONO	CBC_NEUTRO	CBC_PLATELET	CBC_RDW	CBC_RED	CBC_WHITE	si34y_chol_hdl	QLHLTH2	si21y_hlthins	si30y_hlthins	si34y_hlthins
+local positive si21y_phys_days	si34y_phys_days	modpact	modpatimhrs	modpaday vigpact vigpatimhrs	vigpaday	jobactiv	 //CMP_ALT	CMP_AST	CMP_ALB	CMP_ALB_GLOB	CMP_ALKPHOS	CMP_BILI	CMP_CA	CMP_CO2	CMP_CL	CMP_CREAT	CMP_GLOB	CMP_GLUCOSE	CMP_K	CMP_PROT	CMP_NA	CMP_UREA	CBC_BASO	CBC_EOSINO	CBC_HCT	CBC_HEMOG	CBC_LYMPHO	CBC_MCV	CBC_MCHC	CBC_MCH	CBC_MONO	CBC_NEUTRO	CBC_PLATELET	CBC_RDW	CBC_RED	CBC_WHITE	si34y_chol_hdl	QLHLTH2	si21y_hlthins	si30y_hlthins	si34y_hlthins*/
 
-local health `reverse' `positive' //`risk' `mental' //`child_health' 
+local health `reverse' //`positive' //`risk' `mental' //`child_health' 
 
 
 local crime ad34_fel ad34_mis si30y_adlt_totinc si30y_juv_fel ncharges narrests nfel nmis nviol nprop ndrug nothr
