@@ -4,7 +4,7 @@ Tables~\ref{table:tescombinedmales} and \ref{table:tescombinedfemales} present t
 
 The results for females show that ABC/CARE has substantial effects on education when comparing outcomes of the treatment-group subjects to those from the next best alternative. High school graduation increases between 13 and 25 percentage points, depending on the estimate that we consider; college graduation increases 13 percentage points; and the average years of schooling increase between 2.1 and 1.8 years. Employment at age 30 increases between 13 and 8 percentage points. ABC/CARE has substantial impacts on human capital accumulation and employment. The results strengthen when we compare treatment with the option of staying at home.
 
-\textbf{[JJH: By category -- Report stepdown by blocks: health, earnings, crime, etc.]}
+\textbf{[JJH: By category -- Report stepdown by blocks: health, earnings, crime, etc.][We report these in Appendix~\ref{appendix:results}. We added a summary below of the stepdown results.]}
 
 \begin{sidewaystable}[!htbp]
 \centering
@@ -37,10 +37,9 @@ $^*$For females, we do not report graduation from a four-years college because w
 \end{sidewaystable}
 \doublespacing
 
-
 The results for males are somewhat different from those for females. Treatment has substantial effects when compared to the next best alternative. The effects are positive for a variety of health indicators, including drug use and hypertension. The effects on employment and labor income are also substantial. The increase in employment at age 30 ranges from 11 to 19 percentage points. Labor income at age 30 increases between 19 and 24 thousand of 2014 USD after treatment. The effects strengthen when comparing treatment to alternative preschool. Separation from the mother and being placed in relatively low quality childcare centers have more deleterious consequences for males than for females.\footnote{This is consistent with the evidence in \citet{Baker_Gruber_Milligan_2015_Noncog_Defects} and \citet{Kottelenberg-Lehrer_2014_Gender-Effects}.}
 
-The results hold when using other definitions of control substitution (see Appendix~\ref{appendix:vsensitivity}). They remain statistically significant or are borderline statistically insignificant when computing two-tailed $p$-values (see Appendix~\ref{appendix:vsensitivity}).
+The results hold when using other definitions of control substitution (see Appendix~\ref{appendix:vsensitivity}). They remain statistically significant or are borderline statistically insignificant when computing two-tailed $p$-values (see Appendix~\ref{appendix:vsensitivity}). \textbf{[Stepdown summary here.]} When using stepdown $p$-values (see Appendix~\ref{appendix:results}), the health results remain statistically significant for males, when comparing to the full control group and when fixing to alternative preschool. The education results remain statistically significant for females, when comparing to the full control group and when fixing to staying at home.
 
 The estimates contrasting the effects for females and males in (3) and (5) are not based on matching; the estimates in (4) and (6) are. For the matching estimates, we rely on observed, baseline characteristics. In Appendix~\ref{appendix:bvariables}, we explain our choice of these variables and we make a thorough analysis to conclude that there is little sensitivity to the choice of these variables.\footnote{We also present this sensitivity analysis changing the variables used to condition while estimating treatment effects and changing the variables used to construct the weights to account for attrition.}
 
@@ -79,3 +78,22 @@ Figures~\ref{fig:ppositivehome} and Figure~\ref{fig:ppositivealternative} adjust
 Note: Panel (a) percentage of outcomes displaying a positive treatment effect, comparing treatment to next best. Panel (b) percentage of outcomes displaying a positive and statistically significant treatment effect (10\% significance level). Panel (c) displays the percentage of outcomes with a positive treatment effect, comparing treatment to staying at home. Panel (d) displays the percentage of outcomes with a positive treatment effect, comparing treatment to alternative childcare arrangements. Standard errors are based on the empirical bootstrap distribution. For Panel (b) we perform a ``double bootstrap'' procedure to first determine significant treatment effects at $10\%$ level and then calculate the standard error of the count.\\
 \end{sidewaysfigure}
 
+Finally, we present the estimates of the combining functions by outcome category. Figure~\ref{fig:cats-positive-significant} shows the estimated proportions that are significantly positive at the 10\% level. Consistent with the treatment effects above, control-group females tend to do better in alternative preschools than at home. This is especially true for parenting measures, IQ, education, and employment. Control-group males, on the other hand, do better at home, with more positive treatment effects in comparison to alternative preschool. The treatment effects on IQ and achievement scores, education, and employment are larger when fixing the control group to the alternative preschool.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Positively Impacted Outcomes by Category, ABC/CARE Males and Females}\label{fig:cats-positive-significant}
+\begin{subfigure}[h]{0.7\textwidth}
+	\centering
+	\caption{Treatment vs. Stay at Home, Significant at 10\% Level} 
+		\includegraphics[width=\textwidth]{output/epan_ipw_p0_cats1_sig10.eps}
+\end{subfigure}
+
+\begin{subfigure}[h]{0.7\textwidth}
+	\centering
+	\caption{Treatment vs. Alternative Preschool, Significant at 10\% Level}
+		\includegraphics[width=\textwidth]{output/epan_ipw_p1_cats1_sig10.eps}
+\end{subfigure}
+\scriptsize \justify
+Note: Panel (a) percentage of outcomes displaying a positive treatment effect, comparing treatment to next best. Panel (b) percentage of outcomes displaying a positive and statistically significant treatment effect (10\% significance level). Panel (c) displays the percentage of outcomes with a positive treatment effect, comparing treatment to staying at home. Panel (d) displays the percentage of outcomes with a positive treatment effect, comparing treatment to alternative childcare arrangements. Standard errors are based on the empirical bootstrap distribution. For Panel (b) we perform a ``double bootstrap'' procedure to first determine significant treatment effects at $10\%$ level and then calculate the standard error of the count.\\
+\end{figure}

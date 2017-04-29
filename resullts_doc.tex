@@ -41,41 +41,90 @@ The University of Chicago}
 \restoregeometry
 \end{titlepage}
 
+Table~\ref{tab:proportion-table} summarizes Figures~\ref{fig1} through~\ref{fig3}. A \checkmark indicates that more than $\frac{1}{2}$ of the variables for that outcome category have positive male-female gaps (in which males do better than females). A \checkmark* indicates that the proportion is significantly larger than $\frac{1}{2}$ (at the 10\% level). The $\times$ and $\times$* are analogous for fewer than $\frac{1}{2}$ of the variables for that outcome category having positive male-female gaps. 
+
+\begin{table}[H]
+\centering
+\caption{Summary of Proportion of Outcomes Males $>$ Females}
+\label{tab:proportion-table}
+\begin{threeparttable}
+\input{output/abccare-gendergaps-summarizingtable}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table summarizes comparison of gender gaps across outcome categories by different groups. A checkmark indicates that the proportion of outcomes in the corresponding category is larger than $\frac{1}{2}$, meaning that males outperform females. A checkmark with an asterisk indicates that the proportion is significantly larger than $\frac{1}{2}$. Column (1) is the difference between males and females in the full control group.  Column (2) is the difference between males and females in the control group only considering those who stayed at home. Column (3) is the difference between males and females in the control group only considering those who attended alternative preschools. Column (4) is the difference between males and females in the treatment group.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
 \begin{sidewaysfigure}[H]
 \centering
-\caption{Proportion of Outcomes Males $>$ Females, Full Control Group}
+\caption{Proportion of Outcomes Males $>$ Females, Full Control Group}\label{fig1}
 \includegraphics[width=\textwidth]{output/gendergaps-fullcontrol}
 \end{sidewaysfigure}
 
 \begin{sidewaysfigure}[H]
 \centering
-\caption{Proportion of Outcomes Males $>$ Females, Treatment Group}
+\caption{Proportion of Outcomes Males $>$ Females, Treatment Group}\label{fig2}
 \includegraphics[width=\textwidth]{output/gendergaps-treatment}
 \end{sidewaysfigure}
 
 \begin{sidewaysfigure}[H]
 \centering
-\caption{Proportion of Outcomes Males $>$ Females, Control Group Divided by Alternative Setting}
+\caption{Proportion of Outcomes Males $>$ Females, Control Group Divided by Alternative Setting}\label{fig3}
 \includegraphics[width=\textwidth]{output/gendergaps-control-moderated-altpre}
 \end{sidewaysfigure}
 
+The following plots show the proportion value-added of the treatment. Let $Y_j$ be the $j$ outcome in category $J$. Then, we calculate:
+
+\begin{equation}
+	\delta = \frac{\big(\mathbb{E}[Y_j|Male, T] -\mathbb{E}[Y_j|Female, T] \big) - \big(\mathbb{E}[Y_j|Male, C] -\mathbb{E}[Y_j|Female, C] \big)}{\mathbb{E}[Y_j|Male, C] -\mathbb{E}[Y_j|Female, C]}
+\end{equation}
+
+\noindent where $T$ is treatment and $C$ is control. We then calculate the following proportion for some outcome category $J$.
+
+\begin{equation}
+	\frac{1}{|J|}\sum_j 1 \big( \delta > 0 \big).
+\end{equation}
+
+When $\delta > 0$, that means that male-female gap widens with treatment. If $\delta >0$ is present for more variables in an outcome category, than the male-female gap is widening for more of the variables. Note that for health variables, there are several variables for which the treatment has a negative effect on females. 
+
+Figure~\ref{fig4} considers the full control group. Figure~\ref{fig5} considers those in the control group who stayed at home. Figure~\ref{fig6} considers those in the control group who attended preschool alternatives.
+
 \begin{sidewaysfigure}[H]
 \centering
-\caption{Proportion of Outcomes Males $>$ Females, Control Group Divided by Father Present}
-\includegraphics[width=\textwidth]{output/gendergaps-control-moderated-fhome}
+\caption{Proportion of Value-added Proportions $>$ 0, Full Control Group}\label{fig4}
+\includegraphics[width=\textwidth]{output/gendergaps-valueadded-proportion}
 \end{sidewaysfigure}
 
 \begin{sidewaysfigure}[H]
 \centering
-\caption{Proportion of Outcomes Males $>$ Females, Treatment Group Divided by Father Present}
-\includegraphics[width=\textwidth]{output/gendergaps-treatment-moderated-fhome}
+\caption{Proportion of Value-added Proportions $>$ 0, Relative to Staying at Home}\label{fig5}
+\includegraphics[width=\textwidth]{output/gendergaps-valueadded-proportion-home}
 \end{sidewaysfigure}
 
 \begin{sidewaysfigure}[H]
 \centering
-\caption{Proportion of Outcomes Males $>$ Females, Control Group Divided by Father Present and Alternative Setting}
-\includegraphics[width=\textwidth]{output/gendergaps-control-moderated-altpre-fhome}
+\caption{Proportion of Value-added Proportions $>$ 0, Relative to Alternative Preschool}\label{fig6}
+\includegraphics[width=\textwidth]{output/gendergaps-valueadded-proportion-alt}
 \end{sidewaysfigure}
+
+%\begin{sidewaysfigure}[H]
+%\centering
+%\caption{Proportion of Outcomes Males $>$ Females, Control Group Divided by Father Present}
+%\includegraphics[width=\textwidth]{output/gendergaps-control-moderated-fhome}
+%\end{sidewaysfigure}
+%
+%\begin{sidewaysfigure}[H]
+%\centering
+%\caption{Proportion of Outcomes Males $>$ Females, Treatment Group Divided by Father Present}
+%\includegraphics[width=\textwidth]{output/gendergaps-treatment-moderated-fhome}
+%\end{sidewaysfigure}
+%
+%\begin{sidewaysfigure}[H]
+%\centering
+%\caption{Proportion of Outcomes Males $>$ Females, Control Group Divided by Father Present and Alternative Setting}
+%\includegraphics[width=\textwidth]{output/gendergaps-control-moderated-altpre-fhome}
+%\end{sidewaysfigure}
 
 
 \end{document}
