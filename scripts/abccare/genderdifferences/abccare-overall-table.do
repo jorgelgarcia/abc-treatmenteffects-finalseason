@@ -34,72 +34,70 @@ use abccare-mediation-extended.dta, clear
 drop if R==1
 
 cd $scripts/abccare/genderdifferences
-//include abccare-old-factors
-include abccare-new-factors
+include abccare-old-factors
+//include abccare-new-factors
 
 // bootstrap
 local j = 0
 forvalues b1 = 1/$bootstraps {
-	forvalues b2 = 1/$bootstraps {
 	
 	local j = `j' + 1 
 	preserve
 	
-		if `b1' > 1 & `b2' > 1  {
-			bsample
+	if `b1' > 1 {
+		bsample
+	}
+	
+	// create factors 
+	foreach c in $varstofactor { 
+		/*
+		if "`c'" != "income" {
+			qui keep if adraw == 0
 		}
+		else {
+			qui keep if adraw == `b1'
+		}
+		*/
 		
-		// create factors 
-		foreach c in $varstofactor { 
-			/*
-			if "`c'" != "income" {
-				qui keep if adraw == 0
-			}
-			else {
-				qui keep if adraw == `b1'
-			}
-			*/
-			
-			local numx : word count ${`c'}
-			if `numx' > 1 {
-				qui factor  ${`c'} 
-				qui predict `c'factor_tmp 
-			}
-			else {
-				gen `c'factor_tmp = `c'
-			}
-			qui sum `c'factor_tmp 
-			qui replace `c'factor_tmp = (`c'factor_tmp - r(mean))/r(sd) 
-			xtile `c'factor = `c'factor_tmp, nquantiles($quantiles)
-			qui drop `c'factor_tmp
-			
-			/*
-			// standardized variables
-			foreach v in ${`c'} {
-				qui sum `v'
-				qui gen `v'_tmp = (`v' - r(mean))/r(sd)
-				drop `v'
-				xtile `v' = `v'_tmp, nquantiles($quantiles)
-				qui drop `v'_tmp
-			}
-			*/
+		local numx : word count ${`c'}
+		if `numx' > 1 {
+			qui factor  ${`c'} 
+			qui predict `c'factor_tmp 
 		}
+		else {
+			gen `c'factor_tmp = `c'
+		}
+		qui sum `c'factor_tmp 
+		qui replace `c'factor_tmp = (`c'factor_tmp - r(mean))/r(sd) 
+		xtile `c'factor = `c'factor_tmp, nquantiles($quantiles)
+		qui drop `c'factor_tmp
 		
-		// calculate means by gender
-		foreach c in $categories {
-			foreach v in ${`c'} {
-				forvalues s = 0/1 {
-					qui sum `v'factor if male == `s'
-					matrix `v'`s'_`j' = r(mean)
-				
-					matrix `v'`s' = (nullmat(`v'`s') \ `v'`s'_`j')
-					matrix colnames `v'`s' = `v'`s'
-				}
+		/*
+		// standardized variables
+		foreach v in ${`c'} {
+			qui sum `v'
+			qui gen `v'_tmp = (`v' - r(mean))/r(sd)
+			drop `v'
+			xtile `v' = `v'_tmp, nquantiles($quantiles)
+			qui drop `v'_tmp
+		}
+		*/
+	}
+	
+	// calculate means by gender
+	foreach c in $categories {
+		foreach v in ${`c'} {
+			forvalues s = 0/1 {
+				qui sum `v'factor if male == `s'
+				matrix `v'`s'_`j' = r(mean)
+			
+				matrix `v'`s' = (nullmat(`v'`s') \ `v'`s'_`j')
+				matrix colnames `v'`s' = `v'`s'
 			}
 		}
+	}
 	
 	restore
-	}
 }
 
 // bring to data
@@ -129,7 +127,7 @@ qui gen b = _n
 
 foreach c in $categories {
 	
-	file open tabfile using "${output}/abccare-new-fac-`c'.tex", replace write
+	file open tabfile using "${output}/abccare-old-fac-`c'.tex", replace write
 	file write tabfile "\begin{longtable}{c c c c c c}" _n
 	file write tabfile "\toprule" _n
 	file write tabfile "\textbf{Factor} & \textbf{Male} & \textbf{Male S.E.}  & \textbf{Female} & \textbf{Female S.E.} & \textbf{P-value} \\" _n
@@ -139,7 +137,7 @@ foreach c in $categories {
 		
 		forvalues s = 0/1 {
 			// point estimate
-			qui sum `v'`s' if b == 1 & R==0
+			qui sum `v'`s' if b == 1
 			qui gen point`v'`s' = r(mean)
 			local point`v'`s'= string(r(mean), "%9.3f")
 		
