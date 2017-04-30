@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 200
+global bootstraps 100
 global quantiles 30
 
 // macros
@@ -50,7 +50,7 @@ forvalues b = 0/$bootstraps {
 		foreach v in ``c'' {
 			
 			forvalues s = 0/1 {
-				qui sum `v' if male == `s' & R == 0
+				qui sum `v' if male == `s' & R == 0 //& dc_mo_pre > 0 & dc_mo_pre != . //dc_mo_pre == 0 // 
 				local b`v'`s'`b'_R0 = r(mean)
 				qui sum `v' if male == `s' & R == 1
 				local b`v'`s'`b'_R1 = r(mean)
@@ -139,7 +139,7 @@ foreach c in `outcome_categories' {
 // graph
 
 qui gen y0 = 0
-qui gen y1 = 1
+qui gen y1 = 1.125
 local i = 1
 foreach c in `outcome_categories' {
 	
@@ -147,8 +147,8 @@ foreach c in `outcome_categories' {
 	
 	local forgraph `forgraph' (bar point_`c'0 n`c', barwidth(0.5) bfcol(gs9) blcol(gs9) blwidth(thick))
 	local forgraph `forgraph' (bar point_`c'1 n`c', barwidth(0.5) bfcol("54 83 91") blcol("54 83 91") blwidth(thick))
-	if "`c'" == "health" {
-		local forgraph `forgraph' (bar point_health0 nhealth, barwidth(0.5) bfcol(gs9) blcol(gs9) blwidth(thick))
+	if point_`c'0 < point_`c'1  {
+		local forgraph `forgraph' (bar point_`c'0 n`c', barwidth(0.5) bfcol(gs9) blcol(gs9) blwidth(thick))
 	}
 	
 	//local forgraph `forgraph' (rcap l_`c'0 u_`c'0 n`c', lcol(black))
@@ -165,10 +165,11 @@ foreach c in `outcome_categories' {
 # delimit ;
 twoway 	`forgraph'
 ,	
-	text(1.05 1 "p-value: treatment {&ne} control", placement(es) size(vsmall))
+	text(1.25 2.55 "{bf:H{subscript:0}: treatment {&ne} control (p-value)}", size(small))
 	graphregion(color(white))
 	xlabel(`forlabel', labsize(small) angle(45))
 	ylabel(0(0.25)1, angle(0))
+	ymtick(1.25, noticks)
 	
 	legend(order(- "{bf:Proportion Males > Females}" - 1 3 2 4) rows(3) label(1 "Control") label(2 "Treatment")
 	label(3 "Reject: control proportion {&ne} 0.5")
