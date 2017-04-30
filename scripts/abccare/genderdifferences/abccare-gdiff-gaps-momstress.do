@@ -29,6 +29,11 @@ use append-abccare_iv, clear
 
 drop if R == 0 & RV == 1
 
+factor rotter6 rotter18
+predict rotterfactor
+sum rotter18
+gen rotter = (rotter18 <= r(mean))
+
 // variables
 cd ${scripts}/abccare/genderdifferences
 include abccare-reverse
@@ -59,10 +64,10 @@ forvalues b = 0/$bootstraps {
 				qui sum `v' if male == `s' & R == 0 // full
 				local `v'`s'`b'_R1_f = r(mean)
 				
-				qui sum `v' if male == `s' & R == 0 & f_home0y == 1 // home
+				qui sum `v' if male == `s' & R == 0 & rotter == 1 // internal
 				local `v'`s'`b'_R1_h = r(mean)
 				
-				qui sum `v' if male == `s' & R == 0 & f_home0y == 0 // absent
+				qui sum `v' if male == `s' & R == 0 & rotter == 0 // external
 				local `v'`s'`b'_R1_g = r(mean)
 			}
 			
@@ -176,14 +181,14 @@ twoway 	`forgraph'
 	ylabel(0(0.25)1, angle(0))
 	
 	legend(order(- "{bf:Proportion Males > Females}" - 1 2 4 3 7) rows(4) label(1 "Full Treatment Group") 
-	label(4 "Father Home")
-	label(7 "Father Absent")
+	label(4 "Mother Internal Locus of Control")
+	label(7 "Mother External Locus of Control")
 	label(2 "+/- s.e.") label(3 "p-value {&le} 0.10") size(vsmall))
 ;
 # delimit cr
 
 cd $output
-graph export "gendergaps-control-moderated-fhome.eps", replace
+graph export "gendergaps-control-moderated-mlocus.eps", replace
 
 
 /*
