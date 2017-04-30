@@ -61,13 +61,13 @@ forvalues b = 0/$bootstraps {
 				//local b`v'`s'`b'_R0 = b`v'`s'`b'[1,2]
 				//local b`v'`s'`b'_R1 = b`v'`s'`b'[1,1] + b`v'`s'`b'[1,2]
 				
-				qui sum `v' if male == `s' & R == 1 // full
+				qui sum `v' if male == `s' & R == 0 // full
 				local `v'`s'`b'_R1_f = r(mean)
 				
-				qui sum `v' if male == `s' & R == 1 & rotter == 1 // internal
+				qui sum `v' if male == `s' & R == 0 & rotter == 1 // internal
 				local `v'`s'`b'_R1_h = r(mean)
 				
-				qui sum `v' if male == `s' & R == 1 & rotter == 0 // external
+				qui sum `v' if male == `s' & R == 0 & rotter == 0 // external
 				local `v'`s'`b'_R1_g = r(mean)
 			}
 			
@@ -180,7 +180,7 @@ twoway 	`forgraph'
 	xlabel(`forlabel', labsize(small) angle(45))
 	ylabel(0(0.25)1, angle(0))
 	
-	legend(order(- "{bf:Proportion Males > Females}" - 1 2 4 3 7) rows(4) label(1 "Full Treatment Group") 
+	legend(order(- "{bf:Proportion Males > Females}" - 1 2 4 3 7) rows(4) label(1 "Full Control Group") 
 	label(4 "Mother Internal Locus of Control")
 	label(7 "Mother External Locus of Control")
 	label(2 "+/- s.e.") label(3 "p-value {&le} 0.10") size(vsmall))

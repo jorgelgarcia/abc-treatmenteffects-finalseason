@@ -175,7 +175,7 @@ twoway 	`forgraph'
 	xlabel(`forlabel', labsize(small) angle(45))
 	ylabel(0(0.25)1, angle(0))
 	
-	legend(order(- "{bf:Proportion Males > Females}" - 1 2 4 3 7) rows(4) label(1 "Full Treatment Group") 
+	legend(order(- "{bf:Proportion Males > Females}" - 1 2 4 3 7) rows(4) label(1 "Full Control Group") 
 	label(4 "Father Home")
 	label(7 "Father Absent")
 	label(2 "+/- s.e.") label(3 "p-value {&le} 0.10") size(vsmall))
