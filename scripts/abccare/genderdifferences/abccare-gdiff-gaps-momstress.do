@@ -61,13 +61,13 @@ forvalues b = 0/$bootstraps {
 				//local b`v'`s'`b'_R0 = b`v'`s'`b'[1,2]
 				//local b`v'`s'`b'_R1 = b`v'`s'`b'[1,1] + b`v'`s'`b'[1,2]
 				
-				qui sum `v' if male == `s' & R == 0 // full
+				qui sum `v' if male == `s' & R == 1 // full
 				local `v'`s'`b'_R1_f = r(mean)
 				
-				qui sum `v' if male == `s' & R == 0 & rotter == 1 // internal
+				qui sum `v' if male == `s' & R == 1 & rotter == 1 // internal
 				local `v'`s'`b'_R1_h = r(mean)
 				
-				qui sum `v' if male == `s' & R == 0 & rotter == 0 // external
+				qui sum `v' if male == `s' & R == 1 & rotter == 0 // external
 				local `v'`s'`b'_R1_g = r(mean)
 			}
 			
@@ -188,7 +188,7 @@ twoway 	`forgraph'
 # delimit cr
 
 cd $output
-graph export "gendergaps-control-moderated-mlocus.eps", replace
+graph export "gendergaps-treatment-moderated-mlocus.eps", replace
 
 
 /*
