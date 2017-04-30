@@ -34,8 +34,8 @@ use abccare-mediation-extended.dta, clear
 drop if R==1
 
 cd $scripts/abccare/genderdifferences
-include abccare-old-factors
-//include abccare-new-factors
+//include abccare-old-factors
+include abccare-new-factors
 
 // bootstrap
 local j = 0
@@ -127,10 +127,10 @@ qui gen b = _n
 
 foreach c in $categories {
 	
-	file open tabfile using "${output}/abccare-old-fac-`c'.tex", replace write
+	file open tabfile using "${output}/abccare-new-fac-`c'.tex", replace write
 	file write tabfile "\begin{longtable}{c c c c c c}" _n
 	file write tabfile "\toprule" _n
-	file write tabfile "\textbf{Factor} & \textbf{Male} & \textbf{Male S.E.}  & \textbf{Female} & \textbf{Female S.E.} & \textbf{P-value} \\" _n
+	file write tabfile "\textbf{Factor} & \textbf{Male} & \textbf{Male S.E.}  & \textbf{Female} & \textbf{Female S.E.} & \textbf{$ p $-value} \\" _n
 	file write tabfile "\midrule" _n
 	
 	foreach v in ${`c'} {
@@ -163,9 +163,7 @@ foreach c in $categories {
 		// demean
 		qui gen dgd`v' = gd`v' - mgd`v' if b > 1
 		
-		// p-values
-		//qui gen dlower`v' = (dgd`v' < gdpoint`v') 		if !missing(dgd`v')
-		//qui gen dupper`v' = (dgd`v' > gdpoint`v') 		if !missing(dgd`v')
+		// two-sided p-values
 		qui gen dtwo`v'   = (abs(dgd`v') >= abs(gdpoint`v')) 	if !missing(dgd`v')
 		qui sum dtwo`v'
 		local ptwo`v' = string(r(mean), "%9.3f")
