@@ -7,6 +7,8 @@ local late	Rrlatemathrfullearly Rrlatemathrfullmed Rrlatemathrfullteen Rrlatemat
 local teen	Rrteenmathrfullearly Rrteenmathrfullmed Rrteenmathrfullteen Rrteenmathrprfearly Rrteenmathrprfmed Rrteenmathrprfteen Rrteenmathrvrbearly Rrteenmathrvrbmed Rrteenmathrvrbteen
 
 local home	home_affect0y6m home_abspun0y6m home_orgenv0y6m home_toys0y6m home_orgenv8y home_devstm8y home_leng8y home_absrst8y home_exper4y6m home_mature4y6m home_phyenv4y6m home_abspun4y6m home_affect4y6m home_masc4y6m home_indep4y6m home4y6m home_exper3y6m home_mature3y6m home_phyenv3y6m home_abspun3y6m home_affect3y6m home_masc3y6m home_indep3y6m home3y6m home_affect2y6m home_abspun2y6m home_orgenv2y6m home_toys2y6m home_minvol2y6m home_oppvar2y6m home2y6m home_affect1y6m home_abspun1y6m home_orgenv1y6m home_toys1y6m home_minvol1y6m home_oppvar1y6m home1y6m home_indep8y home_emotin8y home_oppvar8y home_phyenv8y home_toys8y home8y home_oppvar0y6m home0y6m home_minvol0y6m
+local pari	new_pari_auth0y6m new_pari_auth1y6m new_pari_hostl0y6m new_pari_hostl1y6m new_pari_demo0y6m new_pari_demo1y6m
+local parenting	`home' `pari'
 
 local cbi	new_cbi_ho5y6m new_cbi_de5y6m new_cbi_di5y6m new_cbi_iv5y6m new_cbi_ho5y9m new_cbi_de5y9m new_cbi_di5y9m new_cbi_iv5y9m new_cbi_ho6y new_cbi_de6y new_cbi_di6y new_cbi_iv6y new_cbi_ho6y6m new_cbi_de6y6m new_cbi_di6y6m new_cbi_iv6y6m new_cbi_ho7y new_cbi_de7y new_cbi_di7y new_cbi_iv7y new_cbi_ho7y6m new_cbi_de7y6m new_cbi_di7y6m new_cbi_iv7y6m new_cbi_ho8y new_cbi_de8y new_cbi_di8y new_cbi_iv8y new_cbi_ho12y new_cbi_de12y new_cbi_di12y new_cbi_iv12y
 local walker	new_wlkr_act8y new_wlkr_withd8y new_wlkr_dst8y new_wlkr_peer8y new_wlkr_immt8y wlkr_tot
@@ -80,11 +82,11 @@ foreach v in `crime' {
 
 local all `iq' `ach' `home' `se' `ed' `emp' `parent' `health' `crime' 
 
-local outcome_categories iq ach home se ed emp parent health crime all
+local outcome_categories iq ach parenting se ed emp parent health crime all
 
 local iq_name 		IQ
 local ach_name 		Achievement
-local home_name 	Parenting
+local parenting_name 	Parenting
 local se_name 		Social-emotional
 local ed_name 		Education
 local emp_name		Employment
