@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 100
+global bootstraps 1000
 global quantiles 30
 
 // macros
@@ -50,7 +50,7 @@ forvalues b = 0/$bootstraps {
 		foreach v in ``c'' {
 			
 			forvalues s = 0/1 {
-				qui sum `v' if male == `s' & R == 0 //& dc_mo_pre > 0 & dc_mo_pre != . //dc_mo_pre == 0 // 
+				qui sum `v' if male == `s' & R == 0 & dc_mo_pre > 0 & dc_mo_pre != . //dc_mo_pre == 0 // 
 				local b`v'`s'`b'_R0 = r(mean)
 				qui sum `v' if male == `s' & R == 1
 				local b`v'`s'`b'_R1 = r(mean)
@@ -179,7 +179,7 @@ twoway 	`forgraph'
 # delimit cr
 
 cd $output
-graph export "gendergaps-treat-vs-fullcontrol.eps", replace
+graph export "gendergaps-treat-vs-alt.eps", replace
 
 
 /*

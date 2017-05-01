@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 1000
+global bootstraps 1
 global quantiles 30
 
 // macros
@@ -107,7 +107,7 @@ forvalues b1 = 0/$bootstraps {
 		
 		// by gender
 		forvalues s = 0/1 {
-			qui reg `v' R $controls if male == `s' //& apgar1 < . & apgar5 < . & hrabc_index < .
+			reg `v' R if male == `s' //& apgar1 < . & apgar5 < . & hrabc_index < .
 				
 			matrix `v'tab`s' = e(b)
 			matrix b`v'`s' = `v'tab`s'[1,1]
@@ -147,11 +147,13 @@ foreach v in `vars' {
 	
 	// difference between male and female
 	gen `v' = male`v' - female`v'
+	local `v'control = `m`v'male' - `m`v'female'
 	
 	// point estimate of difference
 	sum `v' if n == 1
 	gen point_`v' = r(mean)
 	local point_`v' = r(mean)
+	
 	// empirical mean of difference
 	sum `v' if n > 1
 	gen emp_`v' = r(mean)
@@ -176,15 +178,17 @@ foreach v in `vars' {
 // make table
 
 file open tabfile using "${output}/abccare-gdiff-treatmenteffects-1.tex", replace write
-file write tabfile "\begin{tabular}{l l c c c c c c c}" _n
+file write tabfile "\begin{tabular}{l l c c c c c c c c c}" _n
 file write tabfile "\toprule" _n
-file write tabfile "\mc{1}{c}{Category} & \mc{1}{c}{Variable} & \mc{1}{c}{Age} \mc{1}{c}{Female, $\overbar{Y}_C$} & \mc{1}{c}{Male, $\overbar{Y}_C$} & \mc{1}{c}{Female, Treatment Effect} & \mc{1}{c}{Male, Treatment Effect} & Difference & $ p $ -value \\" _n
+file write tabfile "\mc{1}{c}{Category} & \mc{1}{c}{Variable} & \mc{1}{c}{Age} & \mc{2}{c}{Female} & \mc{2}{c}{Male} & \mc{2}{c}{Difference} & \mc{2}{c}{Rank Sign Test} \\" _n
+file write tabfile "\cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9} \cmidrule(lr){10-11}" _n
+file write tabfile "			&			&		& $\overbar{Y}_C$ & Effect & $\overbar{Y}_C$ & Effect & $\overbar{Y}_C$ & Effect & $\overbar{Y}_C$ & Effect \\" _n
 file write tabfile "\midrule" _n	
 
 foreach v in `vars' {
 	
 
-	file write tabfile "${cat_`v'} & ${name_`v'} & ${age_`v'} & `m`v'female' & `m`v'male' & `te_female`v'' & `te_male`v'' & `point_`v'' & `p2_`v'' \\" _n
+	file write tabfile "${cat_`v'} & ${name_`v'} & ${age_`v'} & `m`v'female' & `te_female`v'' & `m`v'male' & `te_male`v'' & diff control & diff treatment & pvalue control & pvalue treatment \\" _n
 }
 		
 file write tabfile "\bottomrule" _n
