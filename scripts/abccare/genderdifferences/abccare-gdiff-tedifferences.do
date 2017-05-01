@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 1
+global bootstraps 100
 global quantiles 30
 
 // macros
@@ -83,17 +83,6 @@ use append-abccare_iv, clear
 
 drop if R == 0 & RV == 1
 
-// calculate control means 
-foreach v in `vars' {	
-	forvalues s = 0/1 {
-		qui sum `v' if male == `s' & R == 0 & apgar1 < . & apgar5 < . & hrabc_index < .
-		local m`v'`name`s'' = r(mean)
-		local m`v'`name`s'' = string(`m`v'`name`s''', "%9.3f")
-	}
-}
-
-
-
 // treatment effects
 forvalues b1 = 0/$bootstraps {
 	di "`b1'"
@@ -107,12 +96,17 @@ forvalues b1 = 0/$bootstraps {
 		
 		// by gender
 		forvalues s = 0/1 {
-			reg `v' R if male == `s' //& apgar1 < . & apgar5 < . & hrabc_index < .
+			qui sum `v' if male == `s' & R == 0 & apgar1 < . & apgar5 < . & hrabc_index < .
+			matrix `v'cmean`s'`b1' = r(mean)
+			matrix `name`s''`v'cmean = (nullmat(`name`s''`v'cmean) \ `v'cmean`s'`b1')
+			matrix colnames `name`s''`v'cmean = `name`s''`v'cmean
+			
+			qui reg `v' R if male == `s' 
 				
 			matrix `v'tab`s' = e(b)
-			matrix b`v'`s' = `v'tab`s'[1,1]
-			matrix `name`s''`v' = (nullmat(`name`s''`v') \ b`v'`s')
-			matrix colnames `name`s''`v' = `name`s''`v'
+			matrix `v'te`s'`b1' = `v'tab`s'[1,1]
+			matrix `name`s''`v'te = (nullmat(`name`s''`v'te) \ `v'te`s'`b1')
+			matrix colnames `name`s''`v'te = `name`s''`v'te
 		}
 	}
 	restore
@@ -124,10 +118,10 @@ local n = 0
 foreach v in `vars' {
 	local n = `n' + 1
 	if `n' < `numvars' {
-		local formatrix `formatrix' male`v', female`v',
+		local formatrix `formatrix' male`v'cmean, female`v'cmean, male`v'te, female`v'te,
 	}
 	else {
-		local formatrix `formatrix' male`v', female`v'
+		local formatrix `formatrix' male`v'cmean, female`v'cmean, male`v'te, female`v'te
 	}
 }
 
@@ -136,59 +130,44 @@ clear
 svmat all, names(col)
 qui gen n = _n
 
-// inference
 foreach v in `vars' {
+	foreach t in cmean te {
 	
-	// locals for treatment effects
-	sum male`v' if n == 1
-	local te_male`v' = r(mean)
-	sum female`v' if n == 1
-	local te_female`v' = r(mean)
-	
-	// difference between male and female
-	gen `v' = male`v' - female`v'
-	local `v'control = `m`v'male' - `m`v'female'
-	
-	// point estimate of difference
-	sum `v' if n == 1
-	gen point_`v' = r(mean)
-	local point_`v' = r(mean)
-	
-	// empirical mean of difference
-	sum `v' if n > 1
-	gen emp_`v' = r(mean)
-	local emp_`v' = r(mean)
-	// demean
-	gen dm_`v' = `v' - emp_`v' if n > 1
-	
-	// compare with point
-	gen diff_`v' = (abs(dm_`v') >= abs(point_`v')) if n > 1
-	sum diff_`v'
-	gen p2_`v' = r(mean)
-	local p2_`v' = r(mean)
-}
-
-// prepare for table
-foreach v in `vars' {
-	foreach j in te_male`v' te_female`v' m`v'male m`v'female emp_`v' point_`v' p2_`v' {
-		local `j' = string(``j'', "%12.3fc")
+		// rank sum p-values
+		signrank male`v'`t' = female`v'`t'
+		local p`v'`t' = 2 * normprob(-abs(r(z)))
+		local p`v'`t' = string(`p`v'`t'', "%9.3f")
+		
+		// difference
+		gen diff_`t'`v' = male`v'`t' - female`v'`t' if n == 1
+		sum diff_`t'`v'
+		local diff_`t'`v' = string(r(mean), "%9.3f")
+		
+		// point estimates
+		forvalues s = 0/1 {
+			sum `name`s''`v'`t' if n == 1
+			local po_`t'`v'`name`s'' = string(r(mean), "%9.3f")
+		}
 	}
 }
+
+
+
 
 // make table
 
 file open tabfile using "${output}/abccare-gdiff-treatmenteffects-1.tex", replace write
 file write tabfile "\begin{tabular}{l l c c c c c c c c c}" _n
 file write tabfile "\toprule" _n
-file write tabfile "\mc{1}{c}{Category} & \mc{1}{c}{Variable} & \mc{1}{c}{Age} & \mc{2}{c}{Female} & \mc{2}{c}{Male} & \mc{2}{c}{Difference} & \mc{2}{c}{Rank Sign Test} \\" _n
-file write tabfile "\cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9} \cmidrule(lr){10-11}" _n
-file write tabfile "			&			&		& $\overbar{Y}_C$ & Effect & $\overbar{Y}_C$ & Effect & $\overbar{Y}_C$ & Effect & $\overbar{Y}_C$ & Effect \\" _n
+file write tabfile "\mc{1}{c}{Category} & \mc{1}{c}{Variable} & \mc{1}{c}{Age} & \mc{4}{c}{Control mean} & \mc{4}{c}{Treatment Effect} \\" _n
+file write tabfile "\cmidrule(lr){4-7} \cmidrule(lr){8-11}" _n
+file write tabfile "&	& & Female & Male & Difference & $ p $ -value & Female & Male & Difference & $ p $ -value \\" _n
 file write tabfile "\midrule" _n	
 
 foreach v in `vars' {
 	
 
-	file write tabfile "${cat_`v'} & ${name_`v'} & ${age_`v'} & `m`v'female' & `te_female`v'' & `m`v'male' & `te_male`v'' & diff control & diff treatment & pvalue control & pvalue treatment \\" _n
+	file write tabfile "${cat_`v'} & ${name_`v'} & ${age_`v'} & `po_cmean`v'female' & `po_cmean`v'male' & `diff_cmean`v'' & `p`v'cmean' & `po_te`v'female' & `po_te`v'male' & `diff_te`v'' & `p`v'te' \\" _n
 }
 		
 file write tabfile "\bottomrule" _n
