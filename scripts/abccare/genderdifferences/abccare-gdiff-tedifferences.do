@@ -136,17 +136,20 @@ foreach v in `vars' {
 		// rank sum p-values
 		signrank male`v'`t' = female`v'`t'
 		local p`v'`t' = 2 * normprob(-abs(r(z)))
-		local p`v'`t' = string(`p`v'`t'', "%9.3f")
+		local p`v'`t' = string(`p`v'`t'', "%9.3fc")
+		if "`p`v'`t''" == "0.000" {
+			local p`v'`t' "$ < $ 0.001"
+		}
 		
 		// difference
 		gen diff_`t'`v' = male`v'`t' - female`v'`t' if n == 1
 		sum diff_`t'`v'
-		local diff_`t'`v' = string(r(mean), "%9.3f")
+		local diff_`t'`v' = string(r(mean), "%9.3fc")
 		
 		// point estimates
 		forvalues s = 0/1 {
 			sum `name`s''`v'`t' if n == 1
-			local po_`t'`v'`name`s'' = string(r(mean), "%9.3f")
+			local po_`t'`v'`name`s'' = string(r(mean), "%9.3fc")
 		}
 	}
 }
@@ -159,7 +162,7 @@ foreach v in `vars' {
 file open tabfile using "${output}/abccare-gdiff-treatmenteffects-1.tex", replace write
 file write tabfile "\begin{tabular}{l l c c c c c c c c c}" _n
 file write tabfile "\toprule" _n
-file write tabfile "\mc{1}{c}{Category} & \mc{1}{c}{Variable} & \mc{1}{c}{Age} & \mc{4}{c}{Control mean} & \mc{4}{c}{Treatment Effect} \\" _n
+file write tabfile "\mc{1}{c}{Category} & \mc{1}{c}{Variable} & \mc{1}{c}{Age} & \mc{4}{c}{\textbf{Control Mean}} & \mc{4}{c}{\textbf{Treatment Effect}} \\" _n
 file write tabfile "\cmidrule(lr){4-7} \cmidrule(lr){8-11}" _n
 file write tabfile "&	& & Female & Male & Difference & $ p $ -value & Female & Male & Difference & $ p $ -value \\" _n
 file write tabfile "\midrule" _n	
@@ -167,7 +170,7 @@ file write tabfile "\midrule" _n
 foreach v in `vars' {
 	
 
-	file write tabfile "${cat_`v'} & ${name_`v'} & ${age_`v'} & `po_cmean`v'female' & `po_cmean`v'male' & `diff_cmean`v'' & `p`v'cmean' & `po_te`v'female' & `po_te`v'male' & `diff_te`v'' & `p`v'te' \\" _n
+	file write tabfile "${cat_`v'} & ${name_`v'} & ${age_`v'} & `po_cmean`v'male' & `po_cmean`v'female' & `diff_cmean`v'' & `p`v'cmean' & `po_te`v'male' & `po_te`v'female' & `diff_te`v'' & `p`v'te' \\" _n
 }
 		
 file write tabfile "\bottomrule" _n
