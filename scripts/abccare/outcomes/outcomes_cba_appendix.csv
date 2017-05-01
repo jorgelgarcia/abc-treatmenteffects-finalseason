@@ -1,0 +1,113 @@
+variable,cf_category,category,age,label,block,hyp,ipw_var,ipw_pooled1,ipw_pooled2,ipw_pooled3,ipw_pooled4,only_abc,only_care,N_total,N_var,percentage
+iq2y,Cognitive Skills,IQ Scores,2,Std. IQ Test,iq,+,,,,,,0,0,155,142,0.92
+iq3y,Cognitive Skills,IQ Scores,3,Std. IQ Test,iq,+,,,,,,0,0,155,140,0.9
+iq3y6m,Cognitive Skills,IQ Scores,3.5,Std. IQ Test,iq,+,,,,,,0,0,155,139,0.9
+iq4y,Cognitive Skills,IQ Scores,4,Std. IQ Test,iq,+,,,,,,0,0,155,139,0.9
+iq4y6m,Cognitive Skills,IQ Scores,4.5,Std. IQ Test,iq,+,,,,,,0,0,155,136,0.88
+iq5y,Cognitive Skills,IQ Scores,5,Std. IQ Test,iq,+,,,,,,0,0,155,137,0.88
+iq6y6m,Cognitive Skills,IQ Scores,6.6,Std. IQ Test,iq,+,iq6y6m,hrabc_index,apgar1,cohort,,0,0,155,126,0.81
+iq7y,Cognitive Skills,IQ Scores,7,Std. IQ Test,iq,+,iq7y,hrabc_index,apgar5,cohort,,0,0,155,118,0.76
+iq8y,Cognitive Skills,IQ Scores,8,Std. IQ Test,iq,+,iq8y,hrabc_index,apgar1,cohort,,0,0,155,125,0.81
+iq12y,Cognitive Skills,IQ Scores,12,Std. IQ Test,iq,+,,,,,,0,0,155,134,0.86
+iq15y,Cognitive Skills,IQ Scores,15,Std. IQ Test,iq,+,,,,,,1,0,116,104,0.9
+iq21y,Cognitive Skills,IQ Scores,21,Std. IQ Test,iq,+,,,,,,1,0,116,104,0.9
+factor_iq5y,Cognitive Skills,IQ Scores,2 to 5,IQ Factor,iq,+,,,,,,0,0,155,,0
+factor_iq12y,Cognitive Skills,IQ Scores,6 to 12,IQ Factor,iq,+,,,,,,0,0,155,,0
+factor_iq21y,Cognitive Skills,IQ Scores,15 to 21,IQ Factor,iq,+,,,,,,1,0,116,,0
+ach5y6m,Cognitive Skills,Achievement Scores,5.5,Std. Achv.  Test,achievement,+,ach5y6m,hrabc_index,apgar1,cohort,,0,0,155,105,0.68
+ach6y,Cognitive Skills,Achievement Scores,6,Std. Achv.  Test,achievement,+,ach6y,hrabc_index,apgar1,cohort,,0,0,155,124,0.8
+ach6y6m,Cognitive Skills,Achievement Scores,6.5,Std. Achv.  Test,achievement,+,ach6y6m,hrabc_index,apgar1,cohort,,1,0,116,89,0.77
+ach7y,Cognitive Skills,Achievement Scores,7,Std. Achv.  Test,achievement,+,ach7y,hrabc_index,apgar1,cohort,,1,0,116,90,0.78
+ach7y6m,Cognitive Skills,Achievement Scores,7.5,Std. Achv.  Test,achievement,+,ach7y6m,hrabc_index,apgar1,cohort,,0,0,155,121,0.78
+ach8y,Cognitive Skills,Achievement Scores,8,Std. Achv.  Test,achievement,+,ach8y,hrabc_index,apgar1,cohort,,0,0,155,123,0.79
+ach8y6m,Cognitive Skills,Achievement Scores,8.5,Std. Achv.  Test,achievement,+,ach8y6m,hrabc_index,apgar5,cohort,,0,0,155,122,0.79
+ach15y,Cognitive Skills,Achievement Scores,15,Std. Achv.  Test,achievement,+,,,,,,1,0,116,104,0.9
+ach21y,Cognitive Skills,Achievement Scores,21,Std. Achv.  Test,achievement,+,,,,,,1,0,116,104,0.9
+factor_ach12y,Cognitive Skills,Achievement Scores,5.5 to 12,Achievement Factor,achievement,+,,,,,,0,0,155,,0
+factor_ach21y,Cognitive Skills,Achievement Scores,15 to 21,Achievement Factor,achievement,+,,,,,,1,0,116,,0
+home0y6m,Childhood Household Environment,HOME Scores,0.5,HOME Score,home,+,,,,,,0,0,155,147,0.95
+home1y6m,Childhood Household Environment,HOME Scores,1.5,HOME Score,home,+,,,,,,0,0,155,142,0.92
+home2y6m,Childhood Household Environment,HOME Scores,2.5,HOME Score,home,+,,,,,,0,0,155,140,0.9
+home3y6m,Childhood Household Environment,HOME Scores,3.5,HOME Score,home,+,,,,,,0,0,155,137,0.88
+home4y6m,Childhood Household Environment,HOME Scores,4.5,HOME Score,home,+,,,,,,0,0,155,131,0.85
+home8y,Childhood Household Environment,HOME Scores,8,HOME Score,home,+,home8y,hrabc_index,apgar1,cohort,,0,0,155,100,0.65
+factor_home,Childhood Household Environment,HOME Scores,0.5 to 8,HOME Factor,home,+,,,,,,0,0,155,,0
+p_inc1y6m,"Mother's Employment, Education, and Income",Parental Labor Income,1.5,Parental Labor Income,parent_income,+,p_inc1y6m,m_age0y,apgar1,cohort,,0,0,155,112,0.72
+p_inc2y6m,"Mother's Employment, Education, and Income",Parental Labor Income,2.5,Parental Labor Income,parent_income,+,p_inc2y6m,m_age0y,apgar1,cohort,,0,0,155,112,0.72
+p_inc3y6m,"Mother's Employment, Education, and Income",Parental Labor Income,3.5,Parental Labor Income,parent_income,+,p_inc3y6m,m_age0y,apgar1,cohort,,0,0,155,110,0.71
+p_inc4y6m,"Mother's Employment, Education, and Income",Parental Labor Income,4.5,Parental Labor Income,parent_income,+,,,,,,0,0,155,131,0.85
+p_inc8y,"Mother's Employment, Education, and Income",Parental Labor Income,8,Parental Labor Income,parent_income,+,p_inc8y,hrabc_index,apgar1,cohort,,1,0,116,87,0.75
+p_inc12y,"Mother's Employment, Education, and Income",Parental Labor Income,12,Parental Labor Income,parent_income,+,p_inc12y,hrabc_index,apgar1,cohort,,0,0,155,108,0.7
+p_inc15y,"Mother's Employment, Education, and Income",Parental Labor Income,15,Parental Labor Income,parent_income,+,p_inc15y,apgar5,prem_birth,hh_sibs0y,,1,0,116,92,0.79
+p_inc21y,"Mother's Employment, Education, and Income",Parental Labor Income,21,Parental Labor Income,parent_income,+,p_inc21y,hrabc_index,apgar1,cohort,,1,0,116,73,0.63
+factor_pinc,"Mother's Employment, Education, and Income",Parental Labor Income,1.5 to 21,Parental Income Factor,parent_income,+,,,,,,0,0,155,,0
+m_work1y6m,"Mother's Employment, Education, and Income",Mother's Employment,2,Mother Works,mother_works,+,,,,,,0,0,155,143,0.92
+m_work2y6m,"Mother's Employment, Education, and Income",Mother's Employment,3,Mother Works,mother_works,+,,,,,,0,0,155,138,0.89
+m_work3y6m,"Mother's Employment, Education, and Income",Mother's Employment,4,Mother Works,mother_works,+,,,,,,0,0,155,139,0.9
+m_work4y6m,"Mother's Employment, Education, and Income",Mother's Employment,5,Mother Works,mother_works,+,,,,,,0,0,155,134,0.86
+m_work21y,"Mother's Employment, Education, and Income",Mother's Employment,21,Mother Works,mother_works,+,,,,,,1,0,116,102,0.88
+factor_mwork,"Mother's Employment, Education, and Income",Mother's Employment,2 to 21,Mother Works Factor,mother_works,+,,,,,,0,0,155,,0
+f_home1y6m,Childhood Household Environment,Father at Home,2,Father at Home,father_home,+,,,,,,0,0,155,142,0.92
+f_home2y6m,Childhood Household Environment,Father at Home,3,Father at Home,father_home,+,,,,,,0,0,155,140,0.9
+f_home3y6m,Childhood Household Environment,Father at Home,4,Father at Home,father_home,+,,,,,,0,0,155,139,0.9
+f_home4y6m,Childhood Household Environment,Father at Home,5,Father at Home,father_home,+,,,,,,0,0,155,136,0.88
+f_home8y,Childhood Household Environment,Father at Home,8,Father at Home,father_home,+,f_home8y,hrabc_index,apgar1,cohort,,0,0,155,116,0.75
+factor_fhome,Childhood Household Environment,Father at Home,2 to 8,Father at Home Factor,father_home,+,,,,,,0,0,155,,0
+sch_hs30y,"Education, Employment, Income",Education,30,Graduated High School,education,+,,,,,,0,0,155,133,0.86
+si30y_techcc_att,"Education, Employment, Income",Education,30,Attended Voc./Tech./Com. College,education,+,,,,,,0,0,155,133,0.86
+si30y_univ_comp,"Education, Employment, Income",Education,30,Graduated 4-year College,education,+,si30y_univ_comp,apgar1,apgar5,cohort,,0,0,155,115,0.74
+years_30y,"Education, Employment, Income",Education,30,Years of Edu.,education,+,,,,,,0,0,155,133,0.86
+ever_sped,"Education, Employment, Income",Education,21,Ever Had Special Education by Grade 5,education,-,,,,,,0,0,155,137,0.88
+tot_sped,"Education, Employment, Income",Education,21,Total Number of Special Education by Grade 5,education,-,,,,,,0,0,155,137,0.88
+ever_ret,"Education, Employment, Income",Education,21,Ever Retained by Grade 5,education,-,,,,,,0,0,155,137,0.88
+tot_ret,"Education, Employment, Income",Education,21,Total Number of Retention by Grade 5,education,-,,,,,,0,0,155,137,0.88
+factor_educ,"Education, Employment, Income",Education,21 to 30,Education Factor,education,+,,,,,,0,0,155,,0
+si30y_works_job,"Education, Employment, Income",Subject Employment and Income,30,Employed,employment,+,,,,,,0,0,155,133,0.86
+si21y_inc_labor,"Education, Employment, Income",Subject Employment and Income,21,Labor Income,employment,+,,,,,,0,0,155,131,0.85
+si30y_inc_labor,"Education, Employment, Income",Subject Employment and Income,30,Labor Income,employment,+,,,,,,0,0,155,132,0.85
+si21y_inc_trans_pub,"Education, Employment, Income",Subject Employment and Income,21,Public-Transfer Income,employment,-,si21y_inc_trans_pub,hrabc_index,apgar1,cohort,,0,0,155,105,0.68
+si30y_inc_trans_pub,"Education, Employment, Income",Subject Employment and Income,30,Public-Transfer Income,employment,-,,,,,,0,0,155,133,0.86
+factor_emp,"Education, Employment, Income",Subject Employment and Income,21 to 30,Employment Factor,employment,+,,,,,,0,0,155,,0
+si30y_mar,Marriage,Subject Marriage,30,Married,marriage,+,,,,,,0,0,155,133,0.86
+ad34_fel,Crime,Crime,Mid-30s,Total Felony Arrests,crime,-,ad34_fel,apgar1,apgar5,cohort,,0,0,155,115,0.74
+ad34_mis,Crime,Crime,Mid-30s,Total Misdemeanor Arrests,crime,-,ad34_mis,apgar1,apgar5,cohort,,0,0,155,115,0.74
+si30y_adlt_totinc,Crime,Crime,30,Total Years Incarcerated,crime,-,,,,,,0,0,155,155,1
+factor_crime,Crime,Crime,30 to Mid-30s,Crime Factor,crime,-,,,,,,0,0,155,,0
+si30y_cig_num,Drugs and Alcohol,"Tobacco, Drugs, Alcohol",30,Cig. Smoked per day last month,risk_adult,-,,,,,,0,0,155,132,0.85
+drink_days,Drugs and Alcohol,"Tobacco, Drugs, Alcohol",30,Days drank alcohol last month,risk_adult,-,,,,,,0,0,155,132,0.85
+drink_binge_days,Drugs and Alcohol,"Tobacco, Drugs, Alcohol",30,Days binge drank alcohol last month,risk_adult,-,,,,,,0,0,155,132,0.85
+si34y_drugs,Drugs and Alcohol,"Tobacco, Drugs, Alcohol",Mid-30s,Self-reported drug user,risk_adult,-,si34y_drugs,apgar1,apgar5,prem_birth,,0,0,155,89,0.57
+factor_tad,Drugs and Alcohol,"Tobacco, Drugs, Alcohol",30 to Mid-30s,Substance Use Factor,risk_adult,-,,,,,,0,0,155,,0
+si30y_subj_health,Adult Health,Self-Reported Health,30,Self-reported Health,selfhealth,-,,,,,,0,0,155,133,0.86
+si34y_subj_health,Adult Health,Self-Reported Health,Mid-30s,Self-reported Health,selfhealth,-,si34y_subj_health,apgar1,apgar5,prem_birth,,0,0,155,92,0.59
+factor_shealth,Adult Health,Self-Reported Health,30 to Mid-30s,Self-reported Health Factor,selfhealth,-,,,,,,0,0,155,,0
+si34y_sys_bp,Adult Health,Hypertension,Mid-30s,Systolic Blood Pressure (mm Hg),hypertension,-,si34y_sys_bp,apgar1,prem_birth,hh_sibs0y,,0,0,155,90,0.58
+si34y_dia_bp,Adult Health,Hypertension,Mid-30s,Diastolic Blood Pressure (mm Hg),hypertension,-,si34y_dia_bp,apgar1,prem_birth,hh_sibs0y,,0,0,155,90,0.58
+si34y_prehyper,Adult Health,Hypertension,Mid-30s,Prehypertension,hypertension,-,si34y_prehyper,apgar1,prem_birth,hh_sibs0y,,0,0,155,90,0.58
+si34y_hyper,Adult Health,Hypertension,Mid-30s,Hypertension,hypertension,-,si34y_hyper,apgar1,prem_birth,hh_sibs0y,,0,0,155,90,0.58
+factor_hyper,Adult Health,Hypertension,Mid-30s,Hypertension Factor,hypertension,-,,,,,,0,0,155,,0
+si34y_chol_hdl,Adult Health,Cholesterol,Mid-30s,High-Density Lipoprotein Chol. (mg/dL),cholesterol,+,si34y_chol_hdl,apgar1,prem_birth,hh_sibs0y,,0,0,155,93,0.6
+si34y_dyslipid,Adult Health,Cholesterol,Mid-30s,Dyslipidemia,cholesterol,-,si34y_dyslipid,apgar1,prem_birth,hh_sibs0y,,0,0,155,93,0.6
+factor_chol,Adult Health,Cholesterol,Mid-30s,Cholesterol Factor,cholesterol,-,,,,,,0,0,155,,0
+si34y_hemoglobin,Adult Health,Diabetes,Mid-30s,Hemoglobin Level (\%),diabetes,-,si34y_hemoglobin,apgar1,prem_birth,hh_sibs0y,,0,0,155,92,0.59
+si34y_prediab,Adult Health,Diabetes,Mid-30s,Prediabetes,diabetes,-,si34y_prediab,apgar1,prem_birth,hh_sibs0y,,0,0,155,92,0.59
+si34y_diab,Adult Health,Diabetes,Mid-30s,Diabetes,diabetes,-,si34y_diab,apgar1,prem_birth,hh_sibs0y,,0,0,155,92,0.59
+factor_diabetes,Adult Health,Diabetes,Mid-30s,Diabetes Factor,diabetes,-,,,,,,0,0,155,,0
+si34y_bmi,Adult Health,Obesity,Mid-30s,Measured BMI,obesity,-,si34y_bmi,apgar1,apgar5,prem_birth,,0,0,155,88,0.57
+si34y_obese,Adult Health,Obesity,Mid-30s,Obesity,obesity,-,si34y_obese,apgar1,apgar5,prem_birth,,0,0,155,90,0.58
+si34y_sev_obese,Adult Health,Obesity,Mid-30s,Severe Obesity,obesity,-,si34y_sev_obese,apgar1,apgar5,prem_birth,,0,0,155,91,0.59
+si34y_whr,Adult Health,Obesity,Mid-30s,Waist-hip Ratio,obesity,-,si34y_whr,apgar1,prem_birth,hh_sibs0y,,0,0,155,84,0.54
+si34y_obese_whr,Adult Health,Obesity,Mid-30s,Abdominal Obesity,obesity,-,si34y_obese_whr,apgar1,prem_birth,hh_sibs0y,,0,0,155,84,0.54
+si34y_fram_p1,Adult Health,Obesity,Mid-30s,Framingham Risk Score,obesity,-,si34y_fram_p1,apgar1,apgar5,prem_birth,,0,0,155,88,0.57
+factor_obese,Adult Health,Obesity,Mid-30s,Obesity Factor,obesity,-,,,,,,0,0,155,,0
+bsi_tsom,Mental Health,Mental Health $t$-Score,21,Somatization $t$-Score,mental_bsi1821_t,-,,,,,,0,0,155,133,0.86
+BSISom_T,Mental Health,Mental Health $t$-Score,Mid-30s,Somatization $t$-Score,mental_bsi1821_t,-,BSISom_T,apgar1,apgar5,prem_birth,,0,0,155,92,0.59
+bsi_tdep,Mental Health,Mental Health $t$-Score,21,Depression $t$-Score,mental_bsi1821_t,-,,,,,,0,0,155,131,0.85
+BSIDep_T,Mental Health,Mental Health $t$-Score,Mid-30s,Depression $t$-Score,mental_bsi1821_t,-,BSIDep_T,apgar1,apgar5,prem_birth,,0,0,155,92,0.59
+bsi_tanx,Mental Health,Mental Health $t$-Score,21,Anxiety $t$-Score,mental_bsi1821_t,-,,,,,,0,0,155,133,0.86
+BSIAnx_T,Mental Health,Mental Health $t$-Score,Mid-30s,Anxiety $t$-Score,mental_bsi1821_t,-,BSIAnx_T,apgar1,apgar5,prem_birth,,0,0,155,92,0.59
+bsi_thos,Mental Health,Mental Health $t$-Score,21,Hostility $t$-Score,mental_bsi1821_t,-,,,,,,0,0,155,131,0.85
+BSIHos_T,Mental Health,Mental Health $t$-Score,Mid-30s,Hostility $t$-Score,mental_bsi1821_t,-,BSIHos_T,apgar1,apgar5,prem_birth,,0,0,155,92,0.59
+bsi_tgsi,Mental Health,Mental Health $t$-Score,21,Global Severity Index $t$-Score,mental_bsi1821_t,-,bsi_tgsi,hrabc_index,apgar1,prem_birth,,0,0,155,130,0.84
+B18GSI_T,Mental Health,Mental Health $t$-Score,Mid-30s,Global Severity Index $t$-Score (BSI 18),mental_bsi18,-,B18GSI_T,apgar1,apgar5,prem_birth,,0,0,155,92,0.59
+factor_bsi,Mental Health,Mental Health $t$-Score,21 to Mid-30s,BSI Factor,mental_bsi18,-,,,,,,0,0,155,,0
