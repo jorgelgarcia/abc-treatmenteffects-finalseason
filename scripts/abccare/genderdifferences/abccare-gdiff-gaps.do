@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 1000
+global bootstraps 100
 global quantiles 30
 
 // macros
@@ -33,6 +33,44 @@ drop if R == 0 & RV == 1
 cd ${scripts}/abccare/genderdifferences
 include abccare-reverse
 include abccare-outcomes
+include abccare-112-outcomes
+
+local outcome_categories
+local all
+foreach c in `categories' {
+	if "`c'" != "married" & "`c'" != "fhome" {
+		local outcome_categories `outcome_categories' `c'
+		local all `all' ``c''
+	}
+}
+local outcome_categories `outcome_categories' all
+
+foreach c in `categories' {
+	foreach v in ``c'' {
+		if substr("`v'",1,6) == "factor" {
+			gen `v' = .
+		}
+		
+		forvalues s = 0/1 {
+			local tofactor
+			if substr("`v'",1,6) == "factor" {
+				foreach v2 in ``v'' {
+					sum `v2'
+					gen std`v2'`s' = (`v2' - r(mean))/r(sd)
+					local tofactor `tofactor' std`v2'`s'
+				}
+				cap factor `tofactor'
+				if !_rc {
+					cap predict `v'`s'
+					if _rc {
+						gen `v'`s' = .
+					}
+				}
+				replace `v' = `v'`s' if male == `s'
+			}
+		}
+	}
+}
 
 forvalues b = 0/$bootstraps {
 	di "`b'"
@@ -50,7 +88,7 @@ forvalues b = 0/$bootstraps {
 		foreach v in ``c'' {
 			
 			forvalues s = 0/1 {
-				qui sum `v' if male == `s' & R == 0 & dc_mo_pre > 0 & dc_mo_pre != . //dc_mo_pre == 0 // 
+				qui sum `v' if male == `s' & R == 0 //& dc_mo_pre > 0 & dc_mo_pre != . //dc_mo_pre == 0 // 
 				local b`v'`s'`b'_R0 = r(mean)
 				qui sum `v' if male == `s' & R == 1
 				local b`v'`s'`b'_R1 = r(mean)
@@ -88,6 +126,7 @@ foreach c in `outcome_categories' {
 		}
 	}
 }
+
 matrix all = `formatrix'
 
 
@@ -179,7 +218,7 @@ twoway 	`forgraph'
 # delimit cr
 
 cd $output
-graph export "gendergaps-treat-vs-alt.eps", replace
+graph export "gendergaps-treat-vs-fullcontrol.eps", replace
 
 
 /*

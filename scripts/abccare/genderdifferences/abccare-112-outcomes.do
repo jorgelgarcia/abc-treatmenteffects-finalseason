@@ -1,12 +1,12 @@
 
 
-local categories iq ach parenting mlabor fhome education employment crime risk health married mentalhealth
+local categories iq ach se parenting mlabor fhome education employment crime risk health married mentalhealth 
 
 local iq_name 			IQ
 local ach_name 			Achievement
 local parenting_name 		Parenting
-local mlabor_name 		Mother: Education \& Employment
-local fhome_name 		Father: Present
+local mlabor_name 		Parental Income
+local fhome_name 		Father Present
 local education_name 		Education
 local employment_name 		Employment
 local crime_name 		Crime
@@ -14,6 +14,7 @@ local risk_name 		Risky Behavior
 local health_name 		Health
 local married_name 		Married
 local mentalhealth_name 	Mental Health
+local all_name			All
 
 # delimit ;
 local iq 
@@ -168,16 +169,12 @@ local employment
 si30y_works_job
 si21y_inc_labor
 si30y_inc_labor
-si21y_inc_trans_pub
-si30y_inc_trans_pub
 factor_emp;
 
 local factor_emp
 si30y_works_job
 si21y_inc_labor
-si30y_inc_labor
-si21y_inc_trans_pub
-si30y_inc_trans_pub;
+si30y_inc_labor;
 
 local married
 si30y_mar;
