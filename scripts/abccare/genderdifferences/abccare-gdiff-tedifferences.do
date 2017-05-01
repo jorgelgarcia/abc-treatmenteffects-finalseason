@@ -160,7 +160,7 @@ foreach v in `vars' {
 // make table
 
 file open tabfile using "${output}/abccare-gdiff-treatmenteffects-1.tex", replace write
-file write tabfile "\begin{tabular}{l l c c c r c c c c r}" _n
+file write tabfile "\begin{tabular}{l l c c c c r c c c r}" _n
 file write tabfile "\toprule" _n
 file write tabfile "\mc{1}{c}{Category} & \mc{1}{c}{Variable} & \mc{1}{c}{Age} & \mc{4}{c}{\textbf{Control Mean}} & \mc{4}{c}{\textbf{Treatment Effect}} \\" _n
 file write tabfile "\cmidrule(lr){4-7} \cmidrule(lr){8-11}" _n

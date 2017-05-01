@@ -165,15 +165,15 @@ foreach c in `outcome_categories' {
 # delimit ;
 twoway 	`forgraph'
 ,	
-	text(1.25 2.55 "{bf:H{subscript:0}: treatment {&ne} control (p-value)}", size(small))
+	text(1.25 2.55 "{bf:H{subscript:0}: treatment = control (p-value)}", size(small))
 	graphregion(color(white))
 	xlabel(`forlabel', labsize(small) angle(45))
 	ylabel(0(0.25)1, angle(0))
 	ymtick(1.25, noticks)
 	
 	legend(order(- "{bf:Proportion Males > Females}" - 1 3 2 4) rows(3) label(1 "Control") label(2 "Treatment")
-	label(3 "Reject: control proportion {&ne} 0.5")
-	label(4 "Reject: treatment proportion {&ne} 0.5") 
+	label(3 "Reject: control proportion = 0.5")
+	label(4 "Reject: treatment proportion = 0.5") 
 	size(small))
 ;
 # delimit cr
