@@ -1,6 +1,6 @@
 // macros
-//global projects		: env projects
-global projects = "~/Desktop/CEHD/Projects"
+global projects		: env projects
+
 global scripts    			= "$projects/abccare-cba/scripts/"
 global output      			= "$projects/abccare-cba/output/"
 
@@ -12,7 +12,7 @@ global iq	`iq'
 
 global ach	`ach'
 
-global home	`home'
+global parenting	`parenting'
 
 global se	`se'
 
@@ -26,4 +26,4 @@ global health	`health'
 
 global crime	`crime'
 
-global categories iq ach home se ed emp parent health crime
+global categories iq ach parenting se ed emp parent health crime
