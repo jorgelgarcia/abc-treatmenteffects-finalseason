@@ -1,6 +1,7 @@
 
 
-local categories iq ach se parenting mlabor fhome education employment crime risk health married mentalhealth 
+local categories iq ach se parenting mlabor education employment crime risk health mentalhealth all
+local all `iq' `ach' `se' `parenting'` mlabor' `education' `employment' `crime' `risk' `health' `mentalhealth'
 
 local iq_name 			IQ
 local ach_name 			Achievement

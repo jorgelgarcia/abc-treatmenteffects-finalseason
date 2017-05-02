@@ -33,6 +33,34 @@ drop if R == 0 & RV == 1
 cd ${scripts}/abccare/genderdifferences
 include abccare-reverse
 include abccare-outcomes
+include abccare-112-outcomes
+
+foreach c in `categories' {
+	foreach v in ``c'' {
+		if substr("`v'",1,6) == "factor" {
+			gen `v' = .
+		}
+		
+		forvalues s = 0/1 {
+			local tofactor
+			if substr("`v'",1,6) == "factor" {
+				foreach v2 in ``v'' {
+					sum `v2'
+					gen std`v2'`s' = (`v2' - r(mean))/r(sd)
+					local tofactor `tofactor' std`v2'`s'
+				}
+				cap factor `tofactor'
+				if !_rc {
+					cap predict `v'`s'
+					if _rc {
+						gen `v'`s' = .
+					}
+				}
+				replace `v' = `v'`s' if male == `s'
+			}
+		}
+	}
+}
 
 forvalues b = 0/$bootstraps {
 	di "`b'"
@@ -42,7 +70,7 @@ forvalues b = 0/$bootstraps {
 		bsample
 	}
 	
-	foreach c in `outcome_categories' {
+	foreach c in `categories' {
 		foreach a in f h g { // full, present, gone
 			local counter`a' = 0			// use to keep track of number Y_m - Y_f > 0
 		}
@@ -56,13 +84,13 @@ forvalues b = 0/$bootstraps {
 				//local b`v'`s'`b'_R0 = b`v'`s'`b'[1,2]
 				//local b`v'`s'`b'_R1 = b`v'`s'`b'[1,1] + b`v'`s'`b'[1,2]
 				
-				qui sum `v' if male == `s' & R == 0 // full
+				qui sum `v' if male == `s' & R == 1 // full
 				local `v'`s'`b'_R1_f = r(mean)
 				
-				qui sum `v' if male == `s' & R == 0 & f_home0y == 1 // home
+				qui sum `v' if male == `s' & R == 1 & f_home0y == 1 // home
 				local `v'`s'`b'_R1_h = r(mean)
 				
-				qui sum `v' if male == `s' & R == 0 & f_home0y == 0 // absent
+				qui sum `v' if male == `s' & R == 1 & f_home0y == 0 // absent
 				local `v'`s'`b'_R1_g = r(mean)
 			}
 			
@@ -86,9 +114,9 @@ forvalues b = 0/$bootstraps {
 
 // bring to data
 local n = 0
-local numcats : word count `outcome_categories'
+local numcats : word count `categories'
 
-foreach c in `outcome_categories' {
+foreach c in `categories' {
 	foreach a in f h g {
 		local n = `n' + 1
 		if `n' < `numcats' * 3  {
@@ -108,7 +136,7 @@ gen draw = _n
 
 
 // inference
-foreach c in `outcome_categories' {
+foreach c in `categories' {
 	
 	foreach a in f h g {
 		// point estimate
@@ -147,7 +175,7 @@ local barlookg	barwidth(0.9) bfcol(gs4) blcol(gs4) blwidth(thin)
 
 qui gen y0 = 0
 local i = 1
-foreach c in `outcome_categories' {
+foreach c in `categories' {
 	foreach a in f h g {
 	
 		qui gen n`i' = `i'
@@ -175,7 +203,7 @@ twoway 	`forgraph'
 	xlabel(`forlabel', labsize(small) angle(45))
 	ylabel(0(0.25)1, angle(0))
 	
-	legend(order(- "{bf:Proportion Males > Females}" - 1 2 4 3 7) rows(4) label(1 "Full Control Group") 
+	legend(order(- "{bf:Proportion Males > Females}" - 1 2 4 3 7) rows(4) label(1 "Full Treatment Group") 
 	label(4 "Father Home")
 	label(7 "Father Absent")
 	label(2 "+/- s.e.") label(3 "p-value {&le} 0.10") size(vsmall))
@@ -183,7 +211,7 @@ twoway 	`forgraph'
 # delimit cr
 
 cd $output
-graph export "gendergaps-control-moderated-fhome.eps", replace
+graph export "gendergaps-treatment-moderated-fhome.eps", replace
 
 
 /*
