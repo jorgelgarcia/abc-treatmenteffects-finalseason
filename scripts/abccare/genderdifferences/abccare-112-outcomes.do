@@ -1,7 +1,7 @@
 
 
 local categories iq ach se parenting mlabor education employment crime risk health mentalhealth all
-local all `iq' `ach' `se' `parenting'` mlabor' `education' `employment' `crime' `risk' `health' `mentalhealth'
+
 
 local iq_name 			IQ
 local ach_name 			Achievement
@@ -16,6 +16,7 @@ local health_name 		Health
 local married_name 		Married
 local mentalhealth_name 	Mental Health
 local all_name			All
+local se_name			Social-emotional
 
 # delimit ;
 local iq 
@@ -302,3 +303,4 @@ ibr_sociab2y;
 
 
 # delimit cr
+local all `iq' `ach' `se' `parenting' `mlabor' `education' `employment' `crime' `risk' `health' `mentalhealth'

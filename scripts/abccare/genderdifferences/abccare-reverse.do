@@ -1,3 +1,52 @@
+// outcomes
+# delimit ;
+local reverse
+ever_sped
+tot_sped
+ever_ret
+tot_ret
+ad34_fel
+ad34_mis
+si30y_adlt_totinc
+si30y_cig_num
+drink_days
+drink_binge_days
+si34y_drugs
+si30y_subj_health
+si34y_subj_health
+si34y_sys_bp
+si34y_dia_bp
+si34y_prehyper
+si34y_hyper
+si34y_chol_hdl
+si34y_dyslipid
+si34y_hemoglobin
+si34y_prediab
+si34y_diab
+si34y_bmi
+si34y_obese
+si34y_sev_obese
+si34y_whr
+si34y_obese_whr
+si34y_fram_p1
+bsi_tsom
+BSISom_T
+bsi_tdep
+BSIDep_T
+bsi_tanx
+BSIAnx_T
+bsi_thos
+BSIHos_T
+bsi_tgsi
+B18GSI_T;
+
+# delimit cr
+
+foreach v in `reverse' {
+	replace `v' = -1 * `v'
+}
+
+
 // rename some variables
 foreach v in auth hostl demo dpnd scls noaggr isltd supsex maritl nohome rage verb egal comrde {
 	rename pari_`v' pari_`v'0y6m

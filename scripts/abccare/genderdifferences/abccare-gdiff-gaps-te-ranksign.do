@@ -74,30 +74,28 @@ forvalues b = 0/$bootstraps {
 	}
 	
 	foreach c in `categories' {
-		local counter0 = 0			// use to keep track of number Y_m - Y_f > 0
-		local counter1 = 0
+		local counter0 = 0			// females
+		local counter1 = 0			// males
 		local numvars : word count ``c'' 	// number of variables
 	
 		foreach v in ``c'' {
 			
 			forvalues s = 0/1 {
-				qui sum `v' if male == `s' & R == 0  & dc_mo_pre == 0 //dc_mo_pre > 0 & dc_mo_pre != . //
-				local b`v'`s'`b'_R0 = r(mean)
+				qui sum `v' if male == `s' & R == 0  //& dc_mo_pre > 0 & dc_mo_pre != . //& dc_mo_pre == 0
+				local `v'`s'`b'_R0 = r(mean)
 				qui sum `v' if male == `s' & R == 1
-				local b`v'`s'`b'_R1 = r(mean)
+				local `v'`s'`b'_R1 = r(mean)
+				
+				if ``v'`s'`b'_R1' > ``v'`s'`b'_R0' {
+					local counter`s' = `counter`s'' + 1
+				}
 				
 			}
-			if `b`v'1`b'_R0' - `b`v'0`b'_R0' > 0 {
-				local counter0 = `counter0' + 1
-			}
-			if `b`v'1`b'_R1' - `b`v'0`b'_R1' > 0 {
-				local counter1 = `counter1' + 1
-			}
 		}
-		forvalues r = 0/1 {
-			matrix `c'_prop`r'`b' = `counter`r'' / `numvars'
-			matrix `c'_prop`r' = (nullmat(`c'_prop`r') \ `c'_prop`r'`b')
-			matrix colnames `c'_prop`r' = `c'`r'
+		forvalues s = 0/1 {
+			matrix `c'_prop`s'`b' = `counter`s'' / `numvars'
+			matrix `c'_prop`s' = (nullmat(`c'_prop`s') \ `c'_prop`s'`b')
+			matrix colnames `c'_prop`s' = `c'`s'
 		}
 	}
 	
@@ -109,13 +107,13 @@ local n = 0
 local numcats : word count `categories'
 
 foreach c in `categories' {
-	forvalues r = 0/1 {
+	forvalues s = 0/1 {
 		local n = `n' + 1
 		if `n' < 2 * `numcats'  {
-			local formatrix `formatrix' `c'_prop`r', 
+			local formatrix `formatrix' `c'_prop`s', 
 		}
 		else {
-			local formatrix `formatrix' `c'_prop`r'
+			local formatrix `formatrix' `c'_prop`s'
 		}
 	}
 }
@@ -150,44 +148,44 @@ foreach c in `categories' {
 	}
 	
 	// test if =50
-	forvalues r = 0/1 {
-		sum `c'`r' if draw == 1
-		gen point`c'`r' = r(mean)
+	forvalues s = 0/1 {
+		sum `c'`s' if draw == 1
+		gen point`c'`s' = r(mean)
 		
-		sum `c'`r' if draw > 1
-		gen emp`c'`r' = r(mean)
+		sum `c'`s' if draw > 1
+		gen emp`c'`s' = r(mean)
 		
-		gen dm`c'`r' = `c'`r' - emp`c'`r' + 0.5
+		gen dm`c'`s' = `c'`s' - emp`c'`s' + 0.5
 		
-		gen diff1`c'`r' = (dm`c'`r' < point`c'`r') if draw > 1
-		gen diff2`c'`r' = (dm`c'`r' > point`c'`r') if draw > 1
-		sum diff1`c'`r'
-		local p1`c'`r' = r(mean)
-		sum diff2`c'`r'
-		local p2`c'`r' = r(mean)
+		gen diff1`c'`s' = (dm`c'`s' < point`c'`s') if draw > 1
+		gen diff2`c'`s' = (dm`c'`s' > point`c'`s') if draw > 1
+		sum diff1`c'`s'
+		local p1`c'`s' = r(mean)
+		sum diff2`c'`s'
+		local p2`c'`s' = r(mean)
 	
-		sum `c'`r' if draw == 1
-		local `c'`r' = r(mean)
-		if `p1`c'`r'' <= 0.101 | `p2`c'`r'' <= 0.101 {
+		sum `c'`s' if draw == 1
+		local `c'`s' = r(mean)
+		if `p1`c'`s'' <= 0.101 | `p2`c'`s'' <= 0.101 {
 			local sig50 = 1
 		}
 		else {
 			local sig50 = 0
 		}
-		local `c'`r' = string(``c'`r'', "%9.3f")
+		local `c'`s' = string(``c'`s'', "%9.3f")
 		if `sig50' == 1 {
-			local `c'`r' "\textbf{``c'`r''}"
+			local `c'`s' "\textbf{``c'`s''}"
 		}
 	}
 	
 }
 
-file open tabfile using "${output}/abccare-proportion-summary-home.tex", replace write
+file open tabfile using "${output}/abccare-proportion-across-exp-full.tex", replace write
 file write tabfile "\begin{tabular}{l c c c c}" _n
 file write tabfile "\toprule" _n
 file write tabfile "Category & \# Outcomes & \mc{2}{c}{Proportion} & Difference \\" _n
 file write tabfile "\cmidrule(lr){3-4} \cmidrule(lr){5-5}" _n
-file write tabfile "		&			& Control & Treatment & Treatment $- $ Control \\" _n
+file write tabfile "		&			& Male & Female & Male $ - $ Female \\" _n
 file write tabfile "\midrule" _n	
 
 foreach c in `categories' {
@@ -196,7 +194,7 @@ foreach c in `categories' {
 	if "`c'" == "all" {
 		file write tabfile "\midrule" _n
 	}
-	file write tabfile "``c'_name' & ``c'_N' & ``c'0' & ``c'1' & ``c'_0_1' \\" _n
+	file write tabfile "``c'_name' & ``c'_N' & ``c'1' & ``c'0' & ``c'_0_1' \\" _n
 }
 
 file write tabfile "\bottomrule" _n
