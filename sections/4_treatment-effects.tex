@@ -1,13 +1,13 @@
-This section reports estimates of treatment effects by outcome by gender, tests of equality of effects by outcome, gender, and \textbf{[Typist: This sentence ends abruptly and may need to be reorganized.]}
+This section reports estimates of treatment effects for the main outcomes by gender, tests of equality of effects by outcome, and the estimated combining functions. All these estimates show that the treatment effects are strong for both males and females, the treatment effects depend on the counterfactual setting, and they sharply differ by gender.
 
 \subsection{Estimated Treatment Effects}
 
-Tables~\ref{table:tescombinedmales} and \ref{table:tescombinedfemales} present the estimates of selected treatment effects for males and females respectively. \textbf{[JJH: Why these selected?]} The complete set of treatment effects are listed in Appendix~\ref{appendix:results}. Column (1) gives sample mean differences in outcomes between treatment and control groups. Column (2) adjusts the differences for attrition and controls for background variables. Both are estimates of the parameter defined in equation~\eqref{eq:effect}. Column (3) shows the mean difference between the full treatment-group and the control-group subjects who did not attend alternative preschools. Column (4) gives standard matching estimates for the parameter defined in equation~\eqref{eq:influenza}.\footnote{In Appendix~\ref{app:matching-is-fun}, we provide details on: (i) the kernel matching estimator that we use; (ii) the matching variables that we use; and (iii) a sensitivity analysis to these matching variables.} Column (5) gives mean differences between the full treatment-group and control-group children who attended alternatives. Column (6) gives matching estimates for the parameter of equation~\eqref{eq:smallpox}.
+Tables~\ref{table:tescombinedmales} and \ref{table:tescombinedfemales} present the estimates of selected treatment effects for males and females respectively. \textbf{[JJH: Why these selected?][These were selected because they are illustrative of the general trends and they include the life-cycle outcomes of interest. We report the full list in the Appendix.]} The complete set of treatment effects are listed in Appendix~\ref{appendix:results}. Column (1) gives sample mean differences in outcomes between treatment and control groups. Column (2) adjusts the differences for attrition and controls for background variables. Both are estimates of the parameter defined in equation~\eqref{eq:effect}. Column (3) shows the mean difference between the full treatment-group and the control-group subjects who did not attend alternative preschools. Column (4) gives standard matching estimates for the parameter defined in equation~\eqref{eq:influenza}.\footnote{In Appendix~\ref{app:matching-is-fun}, we provide details on: (i) the kernel matching estimator that we use; (ii) the matching variables that we use; and (iii) a sensitivity analysis to these matching variables.} Column (5) gives mean differences between the full treatment-group and control-group children who attended alternatives. Column (6) gives matching estimates for the parameter of equation~\eqref{eq:smallpox}.
 
 The results for females show that ABC/CARE has substantial effects on education when comparing outcomes of the treatment-group subjects to those from the next best alternative. High school graduation increases between 13 and 25 percentage points, depending on the estimate that we consider; college graduation increases 13 percentage points; and the average years of schooling increase between 2.1 and 1.8 years. Employment at age 30 increases between 13 and 8 percentage points. ABC/CARE has substantial impacts on human capital accumulation and employment. The results strengthen when we compare treatment with the option of staying at home.
 
 \begin{sidewaystable}[!htbp]
-\textbf{[JJH: Why these 7?]}
+\textbf{[JJH: Why these 7?][See above, we thought these were illustrative.]}
 \centering
 \begin{threeparttable}
 \caption{Treatment Effects on Selected Outcomes, Males}\label{table:tescombinedmales}
@@ -23,7 +23,7 @@ Note: This table shows the treatment effects for categories outcomes that are im
 \doublespacing
 
 \begin{sidewaystable}[!htbp]
-\textbf{[JJH: Why these?]}
+\textbf{[JJH: Why these?][See above, we thought these were illustrative.]}
 \centering
 \begin{threeparttable}
 \caption{Treatment Effects on Selected Outcomes, Females$^*$}\label{table:tescombinedfemales}
@@ -45,26 +45,26 @@ The results hold when using other definitions of control substitution (see Appen
 
 The estimates contrasting the effects for females and males in Columns (3) and (5) are not based on matching; the estimates in (4) and (6) are. For the matching estimates, we rely on observed, baseline characteristics. In Appendix~\ref{appendix:bvariables}, we explain our choice of these variables and we make a thorough analysis to conclude that there is little sensitivity to the choice of these variables.\footnote{We also present this sensitivity analysis changing the variables used to condition while estimating treatment effects and changing the variables used to construct the weights to account for attrition.}
 
-Finally, we test whether estimated treatment effects are equal across genders. Table~\ref{table:genderdifference-tes} reports the two-sided $p$-values testing if the estimates in (1) of Tables~\ref{table:tescombinedmales} and~\ref{table:tescombinedfemales} are equal. Males have larger treatment effects on parental income at age 21, labor income, drug use, and on the measures of blood pressure. The treatment effects are significantly different for years of education, diastolic blood pressure, and hypertension. \textbf{[JJH: What happens for full 95?]}
+Finally, we test whether estimated treatment effects are equal across genders. Table~\ref{table:genderdifference-tes} reports the two-sided $p$-values testing if the estimates in (1) of Tables~\ref{table:tescombinedmales} and~\ref{table:tescombinedfemales} are equal. Males have larger treatment effects on parental income at age 21, labor income, drug use, and on the measures of blood pressure. The treatment effects are significantly different for most outcomes. \textbf{[JJH: What happens for full 95?][We report these in Appendix E. Please note they have expanded to 126. We edited the text accordingly.]}
 
 \begin{sidewaystable}[!htbp]
-\textbf{[JJH: There are few gender differences! I thought we found more. The paper collapses with this table. Do a rank sign test.]}
+\textbf{[JJH: There are few gender differences! I thought we found more. The paper collapses with this table. Do a rank sign test.][We implemented this test, and it substantially helped. Please see the new results below.]}
 \centering
 \begin{threeparttable}
 \caption{Gender Differences of Treatment Effects}\label{table:genderdifference-tes}
 \begin{scriptsize}
-\input{output/select_rslt_combined_gdiff.tex}
+\input{output/abccare-gdiff-treatmenteffects-1}
 \end{scriptsize}
 \begin{tablenotes}
 \scriptsize
-Note: This table reproduces the control-group means and estimates reported in (1) in Tables~\ref{table:tescombinedmales} and~\ref{table:tescombinedfemales} (Effect). The Difference column reports the difference between the male and female treatment effects. The two-sided $p$-value tests whether that difference is equal to 0. The $p$-values are calculated using 1,000 bootstraps.
+Note: This table reproduces the control-group means and estimated treatment effects reported in (1) in Tables~\ref{table:tescombinedmales} and~\ref{table:tescombinedfemales}. The difference columns show the difference between the control mean and treatment effect of males and females. The $p$-value corresponding to each difference is from a sign rank test that compares the empirical distributions over 100 bootstrapped resamples. We report the analogous estimates for all the outcomes in Appendix~\ref{appendix:gdiff-tes}.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \subsection{Estimated Combining Functions}
 
-We consider a total of 95 outcomes that we classify in Appendix~\ref{appendix:results}. Frequent measures of cognitive, social-emotional, and parenting skills were collected during the intervention and while the subjects were in school. The researchers collected information on the subjects' academics including grade retention and special education. The adult surveys (at ages 21 and 30) cover items related to employment, post-secondary education, health, criminal activity, and family structure. When the subjects were in their mid 30s, the researchers collected administrative crime data and data from a full medical survey.
+We consider a total of 126 outcomes that we classify in Appendix~\ref{appendix:gdiff-tes}. Frequent measures of cognitive, social-emotional, and parenting skills were collected during the intervention and while the subjects were in school. The researchers collected information on the subjects' academics including grade retention and special education. The adult surveys (at ages 21 and 30) cover items related to employment, post-secondary education, health, criminal activity, and family structure. When the subjects were in their mid 30s, the researchers collected administrative crime data and data from a full medical survey.
 
 Given the large number of available variables from the numerous follow-ups, summarizing all treatment effects can overwhelm the reader. In a companion paper, \citet{Garcia_Heckman_Leaf_etal_2017_Comp_CBA_Unpublished} aggregate the treatment effects by conducting a cost/benefit analysis. They show that the benefits from ABC/CARE are largely driven by its effects on males. The benefit/cost ratio is 10.19 for males and 2.61 for females. In this section, we report treatment effects by category and the proportion of statistically significant effects. We use combining functions, which count the number of positive (and significant) treatment effects by gender. They indicate that females benefit more from the program than do males.
 
