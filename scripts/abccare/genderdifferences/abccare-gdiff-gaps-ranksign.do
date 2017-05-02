@@ -94,7 +94,7 @@ forvalues b = 0/$bootstraps {
 		foreach v in ``c'' {
 			
 			forvalues s = 0/1 {
-				qui sum `v' if male == `s' & R == 0 //& dc_mo_pre > 0 & dc_mo_pre != . //dc_mo_pre == 0 // 
+				qui sum `v' if male == `s' & R == 0 & dc_mo_pre == 0 // & dc_mo_pre > 0 & dc_mo_pre != .
 				local b`v'`s'`b'_R0 = r(mean)
 				qui sum `v' if male == `s' & R == 1
 				local b`v'`s'`b'_R1 = r(mean)
@@ -194,7 +194,7 @@ foreach c in `outcome_categories' {
 	
 }
 
-file open tabfile using "${output}/abccare-proportion-summary-full.tex", replace write
+file open tabfile using "${output}/abccare-proportion-summary-home.tex", replace write
 file write tabfile "\begin{tabular}{l c c c c}" _n
 file write tabfile "\toprule" _n
 file write tabfile "Category & \# Outcomes & \mc{2}{c}{Proportion} & Difference \\" _n
