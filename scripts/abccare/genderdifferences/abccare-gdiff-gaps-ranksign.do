@@ -204,7 +204,10 @@ file write tabfile "\midrule" _n
 
 foreach c in `outcome_categories' {
 	local `c'_N : word count ``c''
-
+	
+	if "`c'" == "all" {
+		file write tabfile "\midrule" _n
+	}
 	file write tabfile "``c'_name' & ``c'_N' & ``c'0' & ``c'1' & ``c'_0_1' \\" _n
 }
 
