@@ -38,48 +38,51 @@ The University of Chicago}
 \date{First Draft: January 5, 2016\\ This Draft: \today}
 
 \maketitle
+
+\textbf{[We replaced the main plots with tables. We think they more clearly show the accounting exercise by explicitly listing the difference between the proportions of the treatment and control groups.]}
+
 \restoregeometry
 \end{titlepage}
 
-\textbf{[JJH: These categories are never defined.][We now define them in Appendix C.]}
-
-
-\textbf{[JJH: No difference [between IQ, achievement, parenting, social-emotional for controls]?][None of those are statistically different than 1/2.]}
-
-\textbf{[JJH: Report p-values for each column.][We report the p-values testing if the control proportion is equal to the treatment proportion.]}
-
-\textbf{[JJH: Report after treatment on control plot.][This is implemented. We replaced the previous figures (control and treatment separate) with Figure~\ref{fig:proportion}.]}
-
-\textbf{[We no longer report the proportion value-added as the plots you suggested are much clearer.]}
-
-\textbf{[We added a moderator of mother's locus of control (Figure~\ref{mlocus}). It shows that boys are hurt (relative to girls) when mothers have external loci of control. This is the case for all outcomes except health.}]
-
-\begin{sidewaysfigure}[!htbp]
+\begin{table}[H]
 \centering
-\caption{Proportion of Outcomes Males $>$ Females, by Outcome Category}
-\label{fig:proportion}
-	\includegraphics[width=\textwidth]{output/gendergaps-treat-vs-fullcontrol}
-\footnotesize \justify
-Note: These plots show the proportion of outcomes, by outcome category, for which the males' mean is larger than the females' mean. The standard errors and the $p$-values are computed using 100 bootstraps. The $p$-values are one-sided and test the null hypothesis that the proportion of outcomes is greater than $\frac{1}{2}$. All the variables are coded such that higher values correspond to socially desirable outcomes. The variables for each outcome category are listed in Appendix C.
-\end{sidewaysfigure}
+\caption{Summary of Proportion of Outcomes Males $>$ Females}
+\label{tab:proportion-table}
+\begin{threeparttable}
+\input{output/abccare-proportion-summary-full}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table summarizes comparison of gender gaps across outcome categories by different groups. A bold proportion for the treatment or control group indicates that the proportion is statistically different than 50\%. A bold difference between treatment and control indicates that the rank sign test over 100 bootstraps yields a $p$-value less than or equal to 0.10. 
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
 
-\begin{sidewaysfigure}[!htbp]
+\begin{table}[H]
 \centering
-\caption{Proportion of Outcomes Males $>$ Females, by Outcome Category, Alternative Preschool}
-\label{fig:proportion-alt}
-	\includegraphics[width=\textwidth]{output/gendergaps-treat-vs-alt}
-\footnotesize \justify
-Note: These plots show the proportion of outcomes, by outcome category, for which the males' mean is larger than the females' mean. The standard errors and the $p$-values are computed using 100 bootstraps. The $p$-values are one-sided and test the null hypothesis that the proportion of outcomes is greater than $\frac{1}{2}$. All the variables are coded such that higher values correspond to socially desirable outcomes. The variables for each outcome category are listed in Appendix C.
-\end{sidewaysfigure}
+\caption{Summary of Proportion of Outcomes Males $>$ Females, Stay at Home}
+\label{tab:proportion-table}
+\begin{threeparttable}
+\input{output/abccare-proportion-summary-home}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table summarizes comparison of gender gaps across outcome categories by different groups. A bold proportion for the treatment or control group indicates that the proportion is statistically different than 50\%. A bold difference between treatment and control indicates that the rank sign test over 100 bootstraps yields a $p$-value less than or equal to 0.10. 
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
 
-\begin{sidewaysfigure}[!htbp]
+\begin{table}[H]
 \centering
-\caption{Proportion of Outcomes Males $>$ Females, by Outcome Category, Stay at Home}
-\label{fig:proportion-home}
-	\includegraphics[width=\textwidth]{output/gendergaps-treat-vs-home}
-\footnotesize \justify
-Note: These plots show the proportion of outcomes, by outcome category, for which the males' mean is larger than the females' mean. The standard errors and the $p$-values are computed using 100 bootstraps. The $p$-values are one-sided and test the null hypothesis that the proportion of outcomes is greater than $\frac{1}{2}$. All the variables are coded such that higher values correspond to socially desirable outcomes. The variables for each outcome category are listed in Appendix C.
-\end{sidewaysfigure}
+\caption{Summary of Proportion of Outcomes Males $>$ Females, Alternative Preschool}
+\label{tab:proportion-table}
+\begin{threeparttable}
+\input{output/abccare-proportion-summary-alt}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table summarizes comparison of gender gaps across outcome categories by different groups. A bold proportion for the treatment or control group indicates that the proportion is statistically different than 50\%. A bold difference between treatment and control indicates that the rank sign test over 100 bootstraps yields a $p$-value less than or equal to 0.10. 
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
 
 \begin{sidewaysfigure}[H]
 \centering
