@@ -276,4 +276,29 @@ BSIHos_T
 bsi_tgsi
 B18GSI_T;
 
+local se
+ibr_task2y 
+ibr_actv2y 
+ibr_coop2y 
+ibr_task1y6m 
+ibr_actv1y6m 
+ibr_coop1y6m 
+ibr_sociab1y6m 
+ibr_task1y 
+ibr_actv1y 
+ibr_coop1y 
+ibr_sociab1y 
+ibr_task0y6m 
+ibr_actv0y6m 
+ibr_coop0y6m 
+ibr_sociab0y6m 
+ibr_task0y3m 
+ibr_actv0y3m 
+ibr_sociab0y3m 
+ibr_task0y9m 
+ibr_actv0y9m 
+ibr_sociab0y9m 
+ibr_sociab2y;
+
+
 # delimit cr

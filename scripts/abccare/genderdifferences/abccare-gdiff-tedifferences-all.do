@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 2
+global bootstraps 1
 global quantiles 30
 
 // macros
@@ -34,8 +34,9 @@ use append-abccare_iv, clear
 drop if R == 0 & RV == 1
 
 cd ${scripts}/abccare/genderdifferences
-include abccare-outcomes
+//include abccare-outcomes
 include abccare-112-outcomes
+include abccare-112-outcomes-label
 
 // factors
 foreach c in `categories' {
@@ -96,17 +97,12 @@ forvalues b1 = 0/$bootstraps {
 }
 
 // bring to data
+di "`all'"
 local numvars : word count `all'
 local n = 0
 foreach c in `categories' {
 	foreach v in ``c'' {
-		local n = `n' + 1
-		if `n' < `numvars' {
-			matrix all = (nullmat(all) , male`v'cmean, female`v'cmean, male`v'te, female`v'te)
-		}
-		//else {
-		//	local formatrix `formatrix' male`v'cmean, female`v'cmean, male`v'te, female`v'te
-		//}
+		matrix all = (nullmat(all) , male`v'cmean, female`v'cmean, male`v'te, female`v'te)
 	}
 }
 
