@@ -46,13 +46,13 @@ foreach c in `categories' {
 		local all `all' ``c''
 	}
 }
-local outcome_categories `outcome_categories' all
-
-local test : word count `all'
-di "`test'"
+local outcome_categories `outcome_categories' 
 
 foreach c in `categories' {
+	if "`c'" != "all" {
 	foreach v in ``c'' {
+	
+		
 		if substr("`v'",1,6) == "factor" {
 			gen `v' = .
 		}
@@ -76,6 +76,7 @@ foreach c in `categories' {
 			}
 		}
 	}
+	}
 }
 
 forvalues b = 0/$bootstraps {
@@ -94,7 +95,7 @@ forvalues b = 0/$bootstraps {
 		foreach v in ``c'' {
 			
 			forvalues s = 0/1 {
-				qui sum `v' if male == `s' & R == 0 & dc_mo_pre == 0 // & dc_mo_pre > 0 & dc_mo_pre != .
+				qui sum `v' if male == `s' & R == 0  //& dc_mo_pre > 0 & dc_mo_pre != . //& dc_mo_pre == 0
 				local b`v'`s'`b'_R0 = r(mean)
 				qui sum `v' if male == `s' & R == 1
 				local b`v'`s'`b'_R1 = r(mean)
@@ -145,7 +146,7 @@ gen draw = _n
 foreach c in `outcome_categories' {
 	signrank `c'1 = `c'0
 	local p`c' = 2 * normprob(-abs(r(z)))
-	if `p`c'' <= 0.10 {
+	if `p`c'' <= 0.101 {
 		local sig = 1
 	}
 	else {
@@ -176,11 +177,12 @@ foreach c in `outcome_categories' {
 		gen diff2`c'`r' = (dm`c'`r' > point`c'`r') if draw > 1
 		sum diff1`c'`r'
 		local p1`c'`r' = r(mean)
+		sum diff2`c'`r'
 		local p2`c'`r' = r(mean)
 	
 		sum `c'`r' if draw == 1
 		local `c'`r' = r(mean)
-		if `p1`c'`r'' <= 0.1 | `p2`c'`r'' <= 0.1 {
+		if `p1`c'`r'' <= 0.101 | `p2`c'`r'' <= 0.101 {
 			local sig50 = 1
 		}
 		else {
@@ -194,7 +196,7 @@ foreach c in `outcome_categories' {
 	
 }
 
-file open tabfile using "${output}/abccare-proportion-summary-home.tex", replace write
+file open tabfile using "${output}/abccare-proportion-summary-full.tex", replace write
 file write tabfile "\begin{tabular}{l c c c c}" _n
 file write tabfile "\toprule" _n
 file write tabfile "Category & \# Outcomes & \mc{2}{c}{Proportion} & Difference \\" _n
