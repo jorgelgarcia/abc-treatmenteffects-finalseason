@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 10
+global bootstraps 100
 global quantiles 30
 
 // macros
