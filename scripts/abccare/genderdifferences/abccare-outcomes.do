@@ -14,7 +14,7 @@ local cbi	new_cbi_ho5y6m new_cbi_de5y6m new_cbi_di5y6m new_cbi_iv5y6m new_cbi_ho
 local walker	new_wlkr_act8y new_wlkr_withd8y new_wlkr_dst8y new_wlkr_peer8y new_wlkr_immt8y wlkr_tot
 local kr	new_kr_withd2y new_kr_dst2y new_kr_withd2y6m new_kr_dst2y6m new_kr_withd3y new_kr_dst3y new_kr_withd4y new_kr_dst4y new_kr_withd5y new_kr_dst5y new_kr_withd6y6m new_kr_dst6y6m new_kr_withd7y new_kr_dst7y
 local ibr	ibr_task2y ibr_actv2y ibr_coop2y ibr_task1y6m ibr_actv1y6m ibr_coop1y6m ibr_sociab1y6m ibr_task1y ibr_actv1y ibr_coop1y ibr_sociab1y ibr_task0y6m ibr_actv0y6m ibr_coop0y6m ibr_sociab0y6m ibr_task0y3m ibr_actv0y3m ibr_sociab0y3m ibr_task0y9m ibr_actv0y9m ibr_sociab0y9m ibr_sociab2y
-local se	`cbi' `walker' `kr' `ibr'
+local se	`ibr' //`walker' `kr' `cbi'
 
 local school	si30y_techcc_att si30y_univ_comp sch_hs30y years_30y
 local jobatt	J_WorkWell J_Lose J_StayAway J_Stress J_Trouble J_Boss J_Worry J_Satisfied J_Others
