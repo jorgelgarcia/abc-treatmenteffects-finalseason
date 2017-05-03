@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 100
+global bootstraps 50
 global quantiles 30
 
 // macros
@@ -185,7 +185,7 @@ foreach c in `categories' {
 			qui sum diff`t' if variable == "`v'"
 			local pb_`v' = r(mean)
 			
-			if `pb_`v'' == 1 {
+			if `pb_`v'' == 0 {
 				di "HERE"
 				di "SHOULD BE A *"
 				di "`v'"
