@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 10
+global bootstraps 100
 global quantiles 30
 
 // macros
@@ -199,7 +199,7 @@ foreach c in `categories' {
 
 // make table
 foreach c in `categories' {
-	file open tabfile using "${output}/abccare-gdiff-treatmenteffects-`c'.tex", replace write
+	file open tabfile using "${output}/abccare-gdiff-treatmenteffects100-`c'.tex", replace write
 	file write tabfile "\begin{tabular}{l c c c r c c c r}" _n
 	file write tabfile "\toprule" _n
 	file write tabfile " \mc{1}{c}{Variable} & \mc{4}{c}{\textbf{Control Mean}} & \mc{4}{c}{\textbf{Treatment Effect}} \\" _n
