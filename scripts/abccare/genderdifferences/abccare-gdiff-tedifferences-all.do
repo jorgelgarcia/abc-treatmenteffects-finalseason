@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 50
+global bootstraps 1
 global quantiles 30
 
 // macros
@@ -34,7 +34,6 @@ use append-abccare_iv, clear
 drop if R == 0 & RV == 1
 
 cd ${scripts}/abccare/genderdifferences
-//include abccare-outcomes
 include abccare-112-outcomes
 include abccare-112-outcomes-label
 
@@ -120,17 +119,28 @@ foreach c in `categories' {
 	file write tabfile "\cmidrule(lr){2-5} \cmidrule(lr){6-9}" _n
 	file write tabfile "& Male & Female & Difference & $ p $ -value & Male & Female & Difference & $ p $ -value \\" _n
 	file write tabfile "\midrule" _n
-
+	
 	foreach v in ``c'' {
 		foreach t in cmean te {
-	
+			local rowname`c' `rowname`c'' `v'`t'
 			// rank sum p-values
 			signrank male`v'`t' = female`v'`t'
 			local p`v'`t' = 2 * normprob(-abs(r(z)))
+			
+			matrix bonf`c'`t' = (nullmat(bonf`c'`t') \ `p`v'`t'')
+		
 			local p`v'`t' = string(`p`v'`t'', "%9.3fc")
 			if "`p`v'`t''" == "0.000" {
 				local p`v'`t' "$ < $ 0.001"
 			}
+		}
+	}
+	
+	matrix rownames bonf`c'cmean = ``c''
+	matrix rownames bonf`c'te = ``c''
+
+	foreach v in ``c'' {
+		foreach t in cmean te {
 		
 			// difference
 			gen diff_`t'`v' = male`v'`t' - female`v'`t' if n == 1

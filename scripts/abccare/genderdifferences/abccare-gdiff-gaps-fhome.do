@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 100
+global bootstraps 1000
 global quantiles 30
 
 // macros
@@ -32,10 +32,10 @@ drop if R == 0 & RV == 1
 // variables
 cd ${scripts}/abccare/genderdifferences
 include abccare-reverse
-include abccare-outcomes
 include abccare-112-outcomes
 
 foreach c in `categories' {
+	if "`c'" != "all" {
 	foreach v in ``c'' {
 		if substr("`v'",1,6) == "factor" {
 			gen `v' = .
@@ -59,6 +59,7 @@ foreach c in `categories' {
 				replace `v' = `v'`s' if male == `s'
 			}
 		}
+	}
 	}
 }
 
@@ -84,13 +85,13 @@ forvalues b = 0/$bootstraps {
 				//local b`v'`s'`b'_R0 = b`v'`s'`b'[1,2]
 				//local b`v'`s'`b'_R1 = b`v'`s'`b'[1,1] + b`v'`s'`b'[1,2]
 				
-				qui sum `v' if male == `s' & R == 1 // full
+				qui sum `v' if male == `s' & R == 0 // full
 				local `v'`s'`b'_R1_f = r(mean)
 				
-				qui sum `v' if male == `s' & R == 1 & f_home0y == 1 // home
+				qui sum `v' if male == `s' & R == 0 & f_home0y == 1 // home
 				local `v'`s'`b'_R1_h = r(mean)
 				
-				qui sum `v' if male == `s' & R == 1 & f_home0y == 0 // absent
+				qui sum `v' if male == `s' & R == 0 & f_home0y == 0 // absent
 				local `v'`s'`b'_R1_g = r(mean)
 			}
 			
@@ -203,7 +204,7 @@ twoway 	`forgraph'
 	xlabel(`forlabel', labsize(small) angle(45))
 	ylabel(0(0.25)1, angle(0))
 	
-	legend(order(- "{bf:Proportion Males > Females}" - 1 2 4 3 7) rows(4) label(1 "Full Treatment Group") 
+	legend(order(- "{bf:Proportion Males > Females}" - 1 2 4 3 7) rows(4) label(1 "Full Control Group") 
 	label(4 "Father Home")
 	label(7 "Father Absent")
 	label(2 "+/- s.e.") label(3 "p-value {&le} 0.10") size(vsmall))
@@ -211,7 +212,7 @@ twoway 	`forgraph'
 # delimit cr
 
 cd $output
-graph export "gendergaps-treatment-moderated-fhome.eps", replace
+graph export "gendergaps-control-moderated-fhome.eps", replace
 
 
 /*

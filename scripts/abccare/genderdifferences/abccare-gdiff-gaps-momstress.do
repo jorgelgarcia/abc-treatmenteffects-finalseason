@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 100
+global bootstraps 1000
 global quantiles 30
 
 // macros
@@ -37,10 +37,10 @@ gen rotter = (rotter18 <= r(mean))
 // variables
 cd ${scripts}/abccare/genderdifferences
 include abccare-reverse
-include abccare-outcomes
 include abccare-112-outcomes
 
 foreach c in `categories' {
+	if "`c'" != "all" {
 	foreach v in ``c'' {
 		if substr("`v'",1,6) == "factor" {
 			gen `v' = .
@@ -64,6 +64,7 @@ foreach c in `categories' {
 				replace `v' = `v'`s' if male == `s'
 			}
 		}
+	}
 	}
 }
 

@@ -25,10 +25,18 @@ global output      	= "$projects/abccare-cba/output/"
 
 local name0 female
 local name1 male
-local vars 	p_inc3y6m p_inc12y p_inc15y p_inc21 hs30y si30y_univ_comp 	///
+local vars 	iq5y iq8y ach8y achy12y ibr_task1y ibr_task1y6m ibr_sociab1y ibr_sociab1y6m p_inc3y6m p_inc12y p_inc15y p_inc21 hs30y si30y_univ_comp 	///
 		years_30y si30y_works_job si30y_inc_labor ad34_fel ad34_mis 	///
 		si34y_drugs si34y_sys_bp si34y_dia_bp si34y_hyper	
-	
+
+global name_iq5y IQ
+global name_iq8y 
+global name_ach8y Achievement
+global name_achy12y 
+global name_ibr_task1y Task orientation
+global name_ibr_sociab1y Sociability
+global name_ibr_task1y6m
+global name_ibr_sociab1y6m	
 global name_p_inc3y6m Parental Labor Income
 global name_p_inc12y 
 global name_p_inc15y 
@@ -45,6 +53,14 @@ global name_si34y_sys_bp Systolic Blood Pressure (mm Hg)
 global name_si34y_dia_bp Diastolic Blood Pressure (mm Hg)
 global name_si34y_hyper	Hypertension
 
+global age_iq5y 5
+global age_iq8y 8
+global age_ach8y 8
+global age_achy12y 12
+global age_ibr_task1y 1
+global age_ibr_sociab1y 1
+global age_ibr_task1y6m 1.5
+global age_ibr_sociab1y6m 1.5
 global age_p_inc3y6m 3.5
 global age_p_inc12y 12
 global age_p_inc15y 15
@@ -61,6 +77,8 @@ global age_si34y_sys_bp Mid-30s
 global age_si34y_dia_bp Mid-30s
 global age_si34y_hyper	Mid-30s
 
+global cat_iq5y Cognitive
+global cat_ibr_task1y Social-emotional
 global cat_p_inc3y6m Parental Income
 global cat_p_inc12y 
 global cat_p_inc15y 

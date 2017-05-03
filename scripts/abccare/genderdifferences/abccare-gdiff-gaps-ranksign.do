@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 25
+global bootstraps 1000
 global quantiles 30
 
 // macros
@@ -31,6 +31,7 @@ drop if R == 0 & RV == 1
 
 // variables
 cd ${scripts}/abccare/genderdifferences
+include abccare-outcomes
 include abccare-reverse
 include abccare-112-outcomes
 
@@ -181,7 +182,7 @@ foreach c in `categories' {
 	}
 	
 }
-/*
+
 file open tabfile using "${output}/abccare-proportion-summary-full.tex", replace write
 file write tabfile "\begin{tabular}{l c c c c}" _n
 file write tabfile "\toprule" _n
