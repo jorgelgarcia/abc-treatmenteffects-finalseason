@@ -162,12 +162,21 @@ foreach v in `vars' {
 		// difference
 		gen diff_`t'`v' = male`v'`t' - female`v'`t' if n == 1
 		sum diff_`t'`v'
-		local diff_`t'`v' = string(r(mean), "%9.3fc")
-		
+		if r(mean) < 1000 {
+			local diff_`t'`v' = string(r(mean), "%9.3fc")
+		}
+		else {
+			local diff_`t'`v' = string(r(mean), "%9.0fc")
+		}
 		// point estimates
 		forvalues s = 0/1 {
 			sum `name`s''`v'`t' if n == 1
-			local po_`t'`v'`name`s'' = string(r(mean), "%9.3fc")
+			if r(mean) < 1000 {
+				local po_`t'`v'`name`s'' = string(r(mean), "%9.3fc")
+			}
+			else {
+				local po_`t'`v'`name`s'' = string(r(mean), "%9.0fc")
+			}
 		}
 	}
 }
