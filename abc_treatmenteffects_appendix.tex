@@ -19,12 +19,13 @@
 
 %\clearpage
 %\pagebreak
-
+\begin{footnotesize}
 \tableofcontents
 \listoffigures
 \listoftables
-\doublespacing
+\end{footnotesize}
 
+\doublespacing
 
 %Input Appendices
 \pagenumbering{arabic}
@@ -40,15 +41,17 @@
 
 \setcounter{figure}{0}  \renewcommand{\thefigure}{C.\arabic{figure}}
 \setcounter{table}{0}   \renewcommand{\thetable}{C.\arabic{table}}
-\input{Appendices/Results_treatmenteffects}
+\input{Appendices/Genderdifferences}
 
 \setcounter{figure}{0}  \renewcommand{\thefigure}{D.\arabic{figure}}
 \setcounter{table}{0}   \renewcommand{\thetable}{D.\arabic{table}}
-\input{Appendices/VSensitivity_treatmenteffects}
+\input{Appendices/Results_treatmenteffects}
 
 \setcounter{figure}{0}  \renewcommand{\thefigure}{E.\arabic{figure}}
 \setcounter{table}{0}   \renewcommand{\thetable}{E.\arabic{table}}
-\input{Appendices/Genderdifferences}
+\input{Appendices/AlternativeMethodologies_treatmenteffects}
+
+
 
 \end{appendices}
 

@@ -181,3 +181,54 @@ Note: This table reproduces the control-group means and estimated treatment effe
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
+\subsection{Proportion of Outcomes Males $>$ Females}
+\label{appendix:propmales-females}
+
+Tables~\ref{tab:proportion-table-home} and~\ref{tab:proportion-table-alt} show the analogue of Table~\ref{tab:proportion-table} but comparing to subjects in the the control group that stays at home and attend alternative preschool, respectively. Table~\ref{fig:proportion-fhome} partitions the data by whether the father is present.
+
+
+\begin{table}[H]
+\centering
+\caption{Summary of Proportion of Outcomes Males $>$ Females, Stay at Home}
+\label{tab:proportion-table-home}
+\begin{threeparttable}
+\input{output/abccare-proportion-summary-home}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table summarizes comparison of gender gaps across outcome categories by different groups. A bold proportion for the treatment or control group indicates that the proportion is statistically different than 50\%. A bold difference between treatment and control indicates that the rank sign test over 100 bootstraps yields a $p$-value less than or equal to 0.10. 
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Summary of Proportion of Outcomes Males $>$ Females, Alternative Preschool}
+\label{tab:proportion-table-alt}
+\begin{threeparttable}
+\input{output/abccare-proportion-summary-alt}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table summarizes comparison of gender gaps across outcome categories by different groups. A bold proportion for the treatment or control group indicates that the proportion is statistically different than 50\%. A bold difference between treatment and control indicates that the rank sign test over 100 bootstraps yields a $p$-value less than or equal to 0.10. 
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{figure}[!htbp]
+\centering
+\caption{Proportion of Outcomes Males $>$ Females, by Outcome Category, Partitioning by Whether or Not the Father is Present}
+\label{fig:proportion-fhome}
+\begin{subfigure}[h]{0.7\textwidth}
+	\centering
+	\caption{Control Group}
+	\includegraphics[width=\textwidth]{output/gendergaps-control-moderated-fhome}
+	\end{subfigure}
+	
+\begin{subfigure}[h]{0.7\textwidth}
+	\centering
+	\caption{Treatment Group}
+	\includegraphics[width=\textwidth]{output/gendergaps-treatment-moderated-fhome}
+	\end{subfigure}
+\footnotesize \justify
+Note: These plots show the proportion of outcomes, by outcome category, for which the males' mean is larger than the females' mean. The standard errors and the $p$-values are computed using 100 bootstraps. The $p$-values are one-sided and test the null hypothesis that the proportion of outcomes is greater than $\frac{1}{2}$ The crime outcomes are all coded so that a higher value indicates more criminal activity. All other outcome categories have higher values corresponding to socially desirable outcomes.
+\end{figure}
