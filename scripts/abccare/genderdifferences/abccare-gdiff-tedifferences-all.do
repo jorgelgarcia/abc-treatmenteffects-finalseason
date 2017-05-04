@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 50
+global bootstraps 100
 global quantiles 30
 
 // macros
@@ -162,7 +162,7 @@ foreach c in `categories' {
 
 // step down adjustment
 foreach c in `categories' {
-	preserve
+	//preserve
 		
 	clear
 	matrix fordata = bonf`c'cmean, bonf`c'te
@@ -180,21 +180,42 @@ foreach c in `categories' {
 		gen k_`t' = _n
 		gen bonf`t' = 0.1/($N + 1 - k_`t')
 		gen diff`t' = (`c'`t' > bonf`t')
-
+		
+		local mink = $N + 1
 		foreach v in ``c'' {
 			qui sum diff`t' if variable == "`v'"
-			local pb_`v' = r(mean)
-			
-			if `pb_`v'' == 0 {
-				di "HERE"
-				di "SHOULD BE A *"
-				di "`v'"
+			if r(mean) == 1 {
+				qui sum k_`t' if variable == "`v'" 
+				if r(mean) < `mink' {
+					local mink = r(mean)
+				}
+			}
+		}
+		if `mink' == 1 {
+			foreach v in ``c'' {
+				local pb_`v' = 0
+			}
+		}
+		else if `mink' > $N {
+			foreach v in ``c'' {
+				local pb_`v' = 1
+			}
+		}
+		else {
+			gen reject`t' = (k_`t' < `mink')
+			foreach v in ``c'' {
+				qui sum reject`t' if variable == "`v'"
+				local pb_`v' = r(mean)
+			}
+		}
+		foreach v in ``c'' {
+			if `pb_`v'' == 1 {
 				local p`v'`t' "`p`v'`t'' *"
 			}
 		}
 	}
 		
-	restore
+	//restore
 }
 
 // make table
