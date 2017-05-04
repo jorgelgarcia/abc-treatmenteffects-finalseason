@@ -20,11 +20,11 @@ global googledrive: env googledrive
 
 // set general locations
 // do files
-global scripts     = "$projects/abc-treatmenteffects-finalseason/scripts/"
+global scripts     = "$projects/abccare-cba/scripts/"
 // ready data
-global dataresults = "$klmmexico/abccare/outputfiles/jun-24"
+global dataresults = "$klmmexico/abccare/outputfiles/current"
 // output
-global output      = "$projects/abc-treatmenteffects-finalseason/output/"
+global output      = "$projects/abccare-cba/output/"
 
 cd $dataresults/abccare/csv
 
@@ -65,21 +65,20 @@ save "``program'_all'", replace
 
 // creat category index
 gen catindex = .
-replace catindex = 0  if category == "Parent Income" 
-replace catindex = 1  if category == "HOME Scores"
-replace catindex = 3  if category == "Achievement Scores" 
-replace catindex = 2  if category == "IQ Scores" 
-replace catindex = 4  if category == "Mental Health"
-replace catindex = 5  if category == "Education" 
-replace catindex = 6  if category == "Employment and Income"
-replace catindex = 7  if category == "Crime"
-replace catindex = 8  if category == "Mean Health"
-replace catindex = 9  if category == "Cholesterol"
-replace catindex = 10 if category == "Diabetes"
-replace catindex = 11 if category == "Hypertension"
-replace catindex = 12 if category == "Self-Reported Health"
-replace catindex = 13 if category == "Tobacco, Drugs, Alcohol"
-replace catindex = 14 if category == "Obesity"
+replace catindex = 0  if category == "Cognitive Skills" 
+replace catindex = 1  if category == "Childhood Household Environment"
+replace catindex = 2  if category == "Mother's Employment, Education, and Income" 
+replace catindex = 3  if category == "Education, Employment, Income" 
+replace catindex = 4  if category == "Drugs and Alcohol"
+replace catindex = 5  if category == "Crime"
+replace catindex = 6  if category == "Mental Health"
+replace catindex = 7  if category == "Adult Health"
+
+//replace catindex = 14 if category == "Obesity"
+//replace catindex = 9  if category == "Cholesterol"
+//replace catindex = 10 if category == "Diabetes"
+//replace catindex = 11 if category == "Hypertension"
+//replace catindex = 12 if category == "Self-Reported Health"
 
 sort catindex male
 drop if catindex == .
@@ -89,10 +88,10 @@ gen catfemale = catindex*3 - 1
 gen catmale   =  catfemale + 1
 
 # delimit
-global xlabels1 -.5 "Parents' Income" 2.5 "HOME Scores" 5.5 "IQ Scores"
-		  8.5 "Achievement Scores" 11.5 "Mental Health"
-		  14.5 "Education" 17.5 "Employment and Income" 
-		  20.5 "Crime";
+global xlabels1 -.5 "Cognitive Skills" 2.5 "Parenting" 5.5 "Parental Income"
+				8.5 "Education, Employment, Income" 11.5 "Risky Behavior"
+				14.5 "Crime"
+				17.5 "Mental Health" 20.5 "Adult Health";
 
 global xlabels2  26.5 "Cholesterol" 29.5 "Diabetes" 32.5 "Hypertension" 
 		 35.5 "Self-Reported Health" 38.5 "Tobacco, Drugs, Alcohol"
@@ -115,7 +114,8 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 			  ylabel(0[20]100, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("% of Outcomes with Positive TE (adjusted), significant at 10\%", size(vsmall))
-			  graphregion(color(white)) plotregion(fcolor(white));
+			  graphregion(color(white)) plotregion(fcolor(white))
+			  name(`var', replace);
 	# delimit cr
 	graph export `var'_cats1_sig10.eps, replace
 	
@@ -131,7 +131,8 @@ foreach var in itt_noctrl epan_ipw_p0 epan_ipw_p1 {
 			  ylabel(0[20]100, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("% of Outcomes with Positive TE (adjusted), significant at 10\%", size(vsmall))
-			  graphregion(color(white)) plotregion(fcolor(white));
+			  graphregion(color(white)) plotregion(fcolor(white))
+			  name(`var'2, replace);
 	# delimit cr
-	graph export `var'_cats2_sig10.eps, replace
+	//graph export `var'_cats2_sig10.eps, replace
 }
