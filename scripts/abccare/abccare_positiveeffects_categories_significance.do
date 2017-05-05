@@ -69,11 +69,10 @@ replace catindex = 0  if category == "Cognitive Skills"
 replace catindex = 1  if category == "Childhood Household Environment"
 replace catindex = 2  if category == "Mother's Employment, Education, and Income" 
 replace catindex = 3  if category == "Education, Employment, Income" 
-replace catindex = 4  if category == "Drugs and Alcohol"
-replace catindex = 5  if category == "Crime"
-replace catindex = 6  if category == "Mental Health"
-replace catindex = 7  if category == "Adult Health"
-
+replace catindex = 4  if category == "Crime"
+replace catindex = 5  if category == "Drugs and Alcohol"
+replace catindex = 6  if category == "Adult Health"
+replace catindex = 7  if category == "Mental Health"
 //replace catindex = 14 if category == "Obesity"
 //replace catindex = 9  if category == "Cholesterol"
 //replace catindex = 10 if category == "Diabetes"
@@ -89,9 +88,9 @@ gen catmale   =  catfemale + 1
 
 # delimit
 global xlabels1 -.5 "Cognitive Skills" 2.5 "Parenting" 5.5 "Parental Income"
-				8.5 "Education, Employment, Income" 11.5 "Risky Behavior"
-				14.5 "Crime"
-				17.5 "Mental Health" 20.5 "Adult Health";
+				8.5 "Education, Employment, Income" 11.5 "Crime"
+				14.5 "Risky Behavior"
+				17.5 "Health" 20.5 "Mental Health";
 
 global xlabels2  26.5 "Cholesterol" 29.5 "Diabetes" 32.5 "Hypertension" 
 		 35.5 "Self-Reported Health" 38.5 "Tobacco, Drugs, Alcohol"
