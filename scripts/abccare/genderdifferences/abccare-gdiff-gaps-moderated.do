@@ -205,7 +205,7 @@ twoway 	`forgraph'
 	
 	legend(order(- "{bf:Proportion Males > Females}" - 1 2 4 3 7) rows(4) label(1 "Full Control Group") 
 	label(4 "Stay at Home")
-	label(7 "Alternative Preschool")
+	label(7 "Alternative Childcare")
 	label(2 "+/- s.e.") label(3 "p-value {&le} 0.10") size(vsmall))
 ;
 # delimit cr
