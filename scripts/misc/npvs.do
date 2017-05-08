@@ -184,9 +184,11 @@ twoway (bar     m part0            if estimate == 1 & sex == 1, color(gs4) barw(
 graph export abccare_npvlarge.eps, replace
 
 # delimit
-twoway (bar     m part1            if estimate == 1 & sex == 3 & part1 >  2, color(gs8) lwidth(medthick) barw(.9))
+twoway (bar     m part1            if estimate == 1 & sex == 3, color(gs8) lwidth(medthick) barw(.9))
+       (scatter m part1 if sig == 1 & estimate == 1 & sex == 3, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
+ 
 ,	
-		legend(off)
+		legend(order(1 2) label(1 "Net Present Value") label(2 "Significant at 10%") cols(2))
 			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
 			  5 "Crime" 6 "Health",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(-1 0[1.5]4.5, angle(h) glcolor(gs14))

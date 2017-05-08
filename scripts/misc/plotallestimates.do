@@ -39,20 +39,22 @@ global baseBCRatioPooled 7.33
 global baseBCRatioMale   10.19
 global baseBCRatioFemale 2.61
 
-global baseIRRPooled .137
-global baseIRRMale   .147
-global baseIRRFemale .101
+global baseIRRPooled 13.7
+global baseIRRMale   14.7
+global baseIRRFemale 10.1
+
+replace IRR = IRR*100 
 
 foreach stat in BCRatio IRR {
 
 	# delimit
-	twoway (kdensity `stat' if Sample == "Pooled" & BCRatio <= 16,  lcolor(gs10)  lpattern(dash) lwidth(medthick)    xline(${base`stat'Pooled}, lcolor(gs10) lpattern(dash)))
-	       (kdensity `stat' if Sample == "Female" & BCRatio <= 16, lcolor(gs0)  lpattern(solid) lwidth(medthick)    xline(${base`stat'Female}, lcolor(gs0) lpattern(solid)))
-	       (kdensity `stat' if Sample == "Male"   & BCRatio <= 16,   lcolor(gs0) lpattern(".") lwidth(medthick) xline(${base`stat'Male}, lcolor(gs0) lpattern("."))),
-		   legend(order(1 2 3) label(1 "Females and Males") label(2 "Females") label(3 "Males") row(3))
+	twoway (kdensity `stat' if Sample == "Pooled" & BCRatio <= 16,   lcolor(gs10)  lpattern(dash) lwidth(vthick)    xline(${base`stat'Pooled}, lwidth(vthick) lcolor(gs10) lpattern(dash)))
+	       (kdensity `stat' if Sample == "Female" & BCRatio <= 16,   lcolor(gs0)  lpattern(solid) lwidth(vthick)    xline(${base`stat'Female}, lwidth(vthick) lcolor(gs0) lpattern(solid)))
+	       (kdensity `stat' if Sample == "Male"   & BCRatio <= 16,   lcolor(gs0) lpattern(".") lwidth(vthick)       xline(${base`stat'Male}, lwidth(vthick) lcolor(gs0) lpattern("."))),
+		   legend(order(1 2 3) label(1 "Pooled") label(2 "Females") label(3 "Males") row(1))
 		   xtitle(" ") ytitle(Density)
 		   graphregion(color(white)) plotregion(fcolor(white))
-		   note("The vertical line plots the baseline estimate.");
+		   note("The vertical line represents the baseline estimate.");
 	#delimit cr
 	graph export overalldist_`stat'.eps, replace
 	
