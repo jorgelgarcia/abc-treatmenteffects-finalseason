@@ -1249,6 +1249,85 @@ Note: Panel (a) displays the empirical bootstrap distribution for the estimate o
 \restoregeometry
 \doublespacing
 
+\subsection{Exploring the Impact of Other Prediction Models} \label{appendix:predsensitivity}
+
+Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$. We explore a range of standard panel data specifications for the error terms:
+
+\begin{eqnarray}
+\varepsilon^d_{k,j,a} &=& f^d + \omega^d_{k,j,a} \nonumber \\
+\omega^d_{k,j,a}      &=& \rho \omega^d_{k,j,a-1} + U^d_{k,j,a},
+\end{eqnarray}
+
+\noindent where $U^d_{k,j,a} \independent \bm{X}^d_{k,a}$.
+
+Here, we present different structures for $\phi_{k,j,a}^d \left( \cdot, \cdot \right)$ and $\varepsilon_{k,j,a}^d$ and investigate the robustness of our estimates to different assumptions about the structure of both these elements. We do this exercise for labor income.\footnote{In Appendix~\ref{appendix:gmm}, we describe the precise steps that we follow to construct out-of-sample predictions based on these different structures and frame our estimation strategy in a GMM framework \citep{Hansen_1982_Econometrica}.}
+
+Note that Assumption~\ref{ass:summary} (Invariance) implies that $\phi_{k,j,a}^d \left (\cdot, \cdot \right) = \phi_{k,j,a}  \left (\cdot, \cdot \right) = \phi_{j,a}  \left (\cdot, \cdot \right)$. That is, invariance holds across the treatment and the control groups and invariance holds across the experimental and the auxiliary samples. It is important to note that invariance across the treatment and the control groups implies that the variables $\bm{X}_{k,a}^d$ summarize the effect of the treatment on the outcome. Given this and Assumption~\ref{ass:exog} (Exogeneity), the distribution of $\varepsilon_{k,j,a}^d$ is the same across the treatment and the control groups. We then drop the superscript in $\varepsilon_{k,j,a}^d$.\footnote{We test invariance across the treatment and the control groups and invariance across the experimental and the auxiliary samples  in Appendix~\ref{app:invariance}.}
+
+In Appendix~\ref{app:containsupport}, we also document that the support of $Y_{n,j,a}^d, \bm{X}_{n,a}^d, \bm{B}_{n}$ covers the support of $Y_{e,j,a}^d, \bm{X}_{e,a}, \bm{B}_{e}$ for $d \in \{0, 1\}$. This allows us to drop the $d$ superscript in $Y_{n,j,a}^d, \bm{X}_{n,a}^d$ given that we estimate an invariant model.
+
+We use linear specifications of $\phi_{j,a}$. We explore different alternatives. The system of interest is:
+
+\begin{eqnarray}
+Y_{k,j,a}                   &=& \lambda_{0} + \lambda_{1} Y_{k,j,a-1} + \lambda_{2}  \bm{X}_{k,a} + \varepsilon_{k,j,a} \nonumber \\
+\varepsilon_{k,j,a} &=& \underbrace{f}_{\text{Fixed Effect}} + \underbrace{\omega_{k,j,a}}_{\text{Potentially Serially Correlated Component}} \nonumber \\
+\omega_{k,j,a}      &=& \rho \omega_{k,j,a-1} + \underbrace{U_{k,j,a}}_{\text{Independent Innovation}},
+\end{eqnarray}
+
+\noindent where $U_{k,j,a} \independent \bm{X}_{k,a}$.
+
+Table~\ref{table:predsens} summarizes the results from our exploration through two statistics: (i) the predicted net present value of labor income under different assumptions; and (ii) the overall benefit/cost ratio when the predictions are done based on the different proposed alternatives. Estimates from the model that we use in our baseline estimations are not sensitive to the departures from serial independence that we analyze here.
+
+In the auxiliary samples, we observe outcomes $Y_{n,j,a}$ for $a \in [a^*, \ldots, A]$. In the experimental sample, we observe the outcome $Y_{e,j,a}$ for at most two ages, depending on the outcome. We initially assume that we observe the outcome at one age ($a = a^*$). We later relax this assumption. We thus use the information in the auxiliary sample at  $a \in [a^*, \ldots, A]$ to form extrapolations for the experimental sample, where we do not observe the outcome of interest during this age interval. We produce out-of-sample predictions and calculate the net present value of labor income under different specifications that have different assumptions. Table~\ref{table:predsens} summarizes the five specifications that we implement.
+
+\paragraph{Specification 1: Lagged Component ($\lambda_{1} \neq 0$); No Serial Correlation ($\rho = 0$); and No Fixed Effect ($f = 0$)} \label{app:spec1}
+
+Our baseline estimations are constructed using this framework for labor and transfer income, crime, and health. The realized values and predictions are close, as displayed in Figure~\ref{fig:labor-income-profiles}, to the baseline specification. We test and fail to reject the nulls of invariance across the treatment and the control groups, invariance across the experimental and auxiliary samples, and exogeneity in both the experimental and the auxiliary samples.  The tests are conducted at $a = a^*$ (see Appendix~\ref{app:invariance}).
+
+\paragraph{Specification 2: No Lagged Component ($\lambda_{1} = 0$); Serial Correlation ($\rho \neq 0$); and No Fixed Effect ($f = 0$)} \label{app:spec2}
+
+Given that $Y_{k,j,a-1}$ is not one of the elements in $\bm{X}_{k,a}$, it is plausible that Assumption~\ref{ass:exog} (Exogeneity) holds even when we do not restrict $\rho$. In this case, it is straightforward to account for serial correlation.\footnote{Serial correlation can be accounted for in a general way using the Newey-West approach \citep{Newey-West_1986_Simple-Pos}.}
+
+The predictions reported in the baseline estimates are extremely similar to the ones generated in this case. That is, the lag does not help in generating predictions as much as one might think it would. This is more evidence in favor of $\bm{X}_{k,a}$ summarizing the treatment effects.
+
+\paragraph{Specification 3: Lagged Component ($\lambda_{1} \neq 0$); Serial Correlation ($\rho \neq 0$); and No Fixed Effect ($f = 0$)} \label{section:laggedserial}
+
+These estimates indicate that serial correlation is present in the data. From ages 21 to 30, we estimate the model in the CNLSY. The estimate for $\rho$ is $0.7465$. From ages 30 to 67 (assumed retirement) we estimate the model on the NLSY79/PSID. The estimate for $\rho$ is $0.5426$. When we restrict the sample to people who earn \$30,000 (2014) at each of these ages, the analogous estimates of $\rho$ are $0.7370$ and $0.5316$. These estimates are statistically significant at the 1\% level.
+
+We can $\rho$-transform the system of interest to obtain consistent estimates. Drop the $j$ index for simplicity and write:
+
+\begin{equation}
+Y_{k,a} = \lambda_{0} \left( 1 - \rho \right) + \left( \lambda_{1} + \rho \right) Y_{k,a-1} - \lambda_{1} \rho Y_{k,a-2} + \lambda_{2} \left( \bm{X}_{k,a} - \rho \bm{X}_{k,a-1}  \right) + U_{k,a}. \label{eq:rhotransform}
+\end{equation}
+
+OLS produces consistent estimates of the coefficients in Equation~\eqref{eq:rhotransform}. This enables us to construct predictions, as explained in Appendix~\ref{appendix:gmm}. This model generates predictions close to the baseline estimates.
+
+\paragraph{Specification 4: Permanent-Transitory Decomposition of Unobserved Components ($\lambda_{1} \neq 0$; $\rho = 0$; $f \neq 0$)} \label{app:permtrans}
+
+This framework allows for serial dependence due to the lagged dependent variable but does not allow for serial correlation in $\eta_{a}$. We explain our estimation strategy for this specification in Appendix~\ref{appendix:gmm}. Estimates from it are very similar to those from the other procedures.
+
+\paragraph{Specification 5: Non-Parametric Predictions}
+
+An alternative to any of these scenarios is to make predictions using a non-parametric matching algorithm. Specifically, (i) for each individual $i$ in the experimental sample, $e$, find individual(s) $l(i)$ in the non-experimental sample, $n$, using Algorithm~\ref{alg:match} in Appendix~\ref{appendix:match}; (ii) we impute the post-$a^*$ trajectory of $Y_{k,j,a}$ of individual(s) $l(i)$ in the non-experimental sample, $n$, to individual $i$ in the experimental sample, $e$.
+
+A sufficient condition for the validity of this procedure is Assumption~\ref{ass:exog} (Exogeneity). Without exogeneity, the joint distributions of $\bm{X}_{j,a*}, \varepsilon_{j,a^*}$ do not necessarily coincide across the experimental and the auxiliary samples. For example, in the experimental sample, individuals in the treatment group have relatively high levels of education due to in part the exogenous boost generated by randomization into treatment. In the auxiliary sample, the usual form of ability bias may be at work: individuals with relatively high levels of education might have better motivation, better parents, etc. Thus, the empirical relationships between education and labor income may differ across experimental and auxiliary samples. Exogeneity avoids this problem, but clearly only a weaker assumption is required.
+
+\begin{sidewaystable}[H]
+\resizebox{\columnwidth}{!}{%
+\begin{threeparttable}
+\caption{Net Present Value of Labor Income and Cost/Benefit Analysis Under Different Specifications for Labor Income Predictions}
+\label{table:predsens}
+\centering
+\footnotesize
+\input{output/alternative_specifications}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table displays the net present value of labor income in 2014 USD (treatment - control) using the five different specifications for prediction that are explained below. Specification 1 is what we present in the main text. It also presents the calculation of the internal rate of return and the benefit/cost ratio of the program using these different net present values. Specification 1: prediction based on lagged outcome; no serial autocorrelation; and no fixed effect. Specification 2: prediction based on lagged outcome; arbitrary serial autocorrelation; and no fixed effect. Specification 3: prediction based on lagged outcome; first-order serial autocorrelation; and no fixed effects. Specification 4: prediction based on lagged outcome; no serial autocorrelation; and fixed effect.
+\end{tablenotes}
+\end{threeparttable}
+}
+\end{sidewaystable}
+
 \subsection{Estimation Procedure and Data Combination Estimator in the GMM Framework} \label{appendix:gmm}
 
 \noindent Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the auxiliary sample:\\
