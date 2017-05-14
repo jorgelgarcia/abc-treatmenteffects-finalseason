@@ -46,6 +46,14 @@ global baseIRRFemale 10.1
 replace IRR = IRR*100 
 
 foreach stat in BCRatio IRR {
+	
+	foreach sample in Pooled Male Female {
+		summ if Sample == "`sample'", det
+		local a`Sample' = r(mean)
+		local a`Sample' = string(a`Sample', "%3.2f")
+		local m`Sample' = r(p50)
+		local m`Sample' = string(m`Sample', "%3.2f")
+	}
 
 	# delimit
 	twoway (kdensity `stat' if Sample == "Pooled" & BCRatio <= 16,   lcolor(gs10)  lpattern(dash) lwidth(vthick)    xline(${base`stat'Pooled}, lwidth(vthick) lcolor(gs10) lpattern(dash)))
@@ -54,7 +62,9 @@ foreach stat in BCRatio IRR {
 		   legend(order(1 2 3) label(1 "Pooled") label(2 "Females") label(3 "Males") row(1))
 		   xtitle(" ") ytitle(Density)
 		   graphregion(color(white)) plotregion(fcolor(white))
-		   note("The vertical line represents the baseline estimate.");
+		   note("The vertical line represents the baseline estimate."
+		        "Average. Pooled: `aPooled'. Females: `aFemale'. Males: `aMale'."
+			"Median. Pooled: `mPooled'. Females: `mFemale'. Males: `mMale'.");
 	#delimit cr
 	graph export overalldist_`stat'.eps, replace
 	
