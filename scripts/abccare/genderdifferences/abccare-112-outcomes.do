@@ -1,6 +1,6 @@
 
 
-local categories iq ach se parenting mlabor education employment crime risk health mentalhealth //all
+local categories iq ach se parenting mlabor education employment crime risk health mentalhealth all
 
 
 local iq_name 			IQ
