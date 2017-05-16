@@ -1,6 +1,6 @@
 \section{Identification and Estimation of Life-Cycle Treatment Effects} \label{appendix:methodology}
 
-This appendix presents our approach to identifying and estimating life-cycle treatment effects. Differences in the approach for each outcome are based on different scenarios of data availability. We proceed as follows. Appendix~\ref{app:method_fullobs} focuses on outcomes that are fully observed over the course of the experiment with little attrition. Appendix~\ref{app:method_partialobs} focuses on outcomes that are partially observed over the course of the experiment with a substantial rate of attrition. Appendix~\ref{app:method_noobs}  focuses on outcomes that we do not observe, and thus we need to predict out of sample. Appendices~\ref{app:method_irr} and ~\ref{app:method_cbratio} provide some technical details on the computations of the internal rate of return and the cost-benefit ratios, respectively. Appendix~\ref{appendix:gmm} frames our data combination problem in the Generalized Method of Moments framework. Finally, Appendix~\ref{appendix:bootstrap} provides the precise steps for constructing our statistical inferences.
+This appendix presents our approach to identifying and estimating life-cycle treatment effects. Differences in the approach for each outcome are based on different scenarios of data availability. We proceed as follows. Appendix~\ref{app:method_fullobs} focuses on outcomes that are fully observed over the course of the experiment with little attrition. Appendix~\ref{app:method_partialobs} focuses on outcomes that are partially observed over the course of the experiment with a substantial rate of attrition. Appendix~\ref{app:method_noobs}  focuses on outcomes that we do not observe, and thus we need to forecast out of sample. Appendices~\ref{app:method_irr} and ~\ref{app:method_cbratio} provide some technical details on the computations of the internal rate of return and the cost-benefit ratios, respectively. Appendix~\ref{appendix:gmm} frames our data combination problem in the Generalized Method of Moments framework. Finally, Appendix~\ref{appendix:bootstrap} provides the precise steps for constructing our statistical inferences.
 
 \subsection{Complete Data}\label{app:method_fullobs}
 
@@ -96,57 +96,57 @@ and
 
 \noindent For each of the estimates presented in the paper, we allow the reader to assess the sensitivity of the estimate to adjusting by the IPW, in Tables~\ref{table:bcsens} and \ref{table:irrsens}.\footnote{We only account for IPW for the list of variables listed here, or any calculation involving them.} In Tables~\ref{table:bcsens} and \ref{table:irrsens} and, we also present estimates of the internal rate of return and the benefit cost-ratio with and without adjusting by IPW. There is little sensitivity of our estimates to these adjustments.
 
-\subsection{Incomplete Data: Predicting and Monetizing Life-Cycle and Costs and Benefits} \label{appendix:incomplete}
+\subsection{Incomplete Data: Forecasting and Monetizing Life-Cycle and Costs and Benefits} \label{appendix:incomplete}
 \label{app:method_noobs}
 
-\noindent We do not observe post-$a^*$ life-cycle profiles for outcomes that are important for estimating the lifetime benefits of ABC/CARE. The main examples are parental labor income, subject labor income, public-transfer income, and health-related outcome variables. ABC/CARE provided full-day childcare. It relaxed the time constraints of the mothers of the treated children, who were able to work more. Potentially, it might shift the life-cycle profiles of the mothers, either by allowing them to take more schooling or obtain more work experience. We estimate these profiles. Similarly, a comprehensive evaluation accounts for the effect on the life-cycle profiles of subject labor income and public-transfer income. We follow the strategy outlined in Section~\ref{section:cbamethodology} and implemented in Section~\ref{section:cbaresults} to identify and estimate these profiles and predict post-$a^\ast$ outcomes.\footnote{In this section, attrition or partial observations is not an issue: the predictors that we use to construct out-of-sample predictions are classified as complete data (see Appendices~\ref{app:method_fullobs} and \ref{app:method_partialobs}}.\\
+\noindent We do not observe post-$a^*$ life-cycle profiles for outcomes that are important for estimating the lifetime benefits of ABC/CARE. The main examples are parental labor income, subject labor income, public-transfer income, and health-related outcome variables. ABC/CARE provided full-day childcare. It relaxed the time constraints of the mothers of the treated children, who were able to work more. Potentially, it might shift the life-cycle profiles of the mothers, either by allowing them to take more schooling or obtain more work experience. We estimate these profiles. Similarly, a comprehensive evaluation accounts for the effect on the life-cycle profiles of subject labor income and public-transfer income. We follow the strategy outlined in Section~\ref{section:cbamethodology} and implemented in Section~\ref{section:cbaresults} to identify and estimate these profiles and forecast post-$a^\ast$ outcomes.\footnote{In this section, attrition or partial observations is not an issue: the predictors that we use to construct out-of-sample forecasts are classified as complete data (see Appendices~\ref{app:method_fullobs} and \ref{app:method_partialobs}}.\\
 
-\noindent This appendix documents how we implement this strategy and provides complementary evidence supporting it, cited throughout the main text. We proceed as follows. Appendix~\ref{app:datasets} describes the auxiliary datasets that we use to predict out of sample. Appendix~\ref{appendix:match} provides details on the matching strategy used to construct the synthetic or virtual treatment and controls groups. Appendix~\ref{appendix:pred} documents the variables that use to make predictions. The next three appendices provide tests for the key assumptions listed in Section~\ref{section:cbamethodology}: Appendix~\ref{app:containsupport} provides tests of Assumption~\ref{ass:contain}, Appendix~\ref{app:endogeneity} provides tests for Assumption~\ref{ass:exog}, and Appendix~\ref{app:invariance} provides tests for Assumption~\ref{ass:summary}.\footnote{We provide tests for Assumption~\ref{ass:alignment} in the main text} As in the main text, our prediction strategy for subject's transfer and labor income are treated jointly because we follow the same strategy---although we provide some separate details when necessary. For parental labor income we provide three different prediction strategies and document them in Appendix~\ref{app:parentalincome}.\\
+\noindent This appendix documents how we implement this strategy and provides complementary evidence supporting it, cited throughout the main text. We proceed as follows. Appendix~\ref{app:datasets} describes the auxiliary datasets that we use to forecast out of sample. Appendix~\ref{appendix:match} provides details on the matching strategy used to construct the synthetic or virtual treatment and controls groups. Appendix~\ref{appendix:pred} documents the variables that use to make forecasts. The next three appendices provide tests for the key assumptions listed in Section~\ref{section:cbamethodology}: Appendix~\ref{app:containsupport} provides tests of Assumption~\ref{ass:contain}, Appendix~\ref{app:endogeneity} provides tests for Assumption~\ref{ass:exog}, and Appendix~\ref{app:invariance} provides tests for Assumption~\ref{ass:summary}.\footnote{We provide tests for Assumption~\ref{ass:alignment} in the main text} As in the main text, our forecasting strategy for subject's transfer and labor income are treated jointly because we follow the same strategy---although we provide some separate details when necessary. For parental labor income we provide three different forecasting strategies and document them in Appendix~\ref{app:parentalincome}.\\
 
-\noindent We devote separate appendices for crime and health predictions in Appendix~\ref{appendix:crime} and Appendix~\ref{appendix:health}, respectively.
+\noindent We devote separate appendices for crime and health forecasts in Appendix~\ref{appendix:crime} and Appendix~\ref{appendix:health}, respectively.
 
 \subsubsection{Overview of Our Approach and A Summary of Findings}
 
-\noindent As noted in the text, the principal empirical strategy used in this paper is developed and implemented in two stages. In Stage I, we find comparison groups that are ``comparable.'' This can be thought of as a type of coarse matching on $B \in \mathcal{B}_0$. Stage II uses the constructed samples to build models to make out of (experimental) sample predictions, assuming structural invariance (Assumption~\ref{ass:summary}). \\
+\noindent As noted in the text, the principal empirical strategy used in this paper is developed and implemented in two stages. In Stage I, we find comparison groups that are ``comparable.'' This can be thought of as a type of coarse matching on $B \in \mathcal{B}_0$. Stage II uses the constructed samples to build models to make out of (experimental) sample forecasts, assuming structural invariance (Assumption~\ref{ass:summary}). \\
 
 \noindent We rely primarily on parametric model-based approach that estimates Equation~\eqref{eq:outcome} in the main text in the experimental and comparison samples and extrapolates using the comparison samples. As noted in the text, under exogeneity and structural invariance, which we test for and do not reject, we can combine the two stages in a single stage matching procedure that finds counterparts to the experimental samples and controls in our auxiliary samples. We report agreement between the main estimates reported in the paper and the matching estimates. We find a surprising robustness across approaches in our estimates that inspires confidence in the benefit/cost estimates reported in the text.\\
 
 \subsubsection{Auxiliary Datasets} \label{app:datasets}
 
-\noindent We rely on the following datasets to estimate transfer and labor income life-cycle labor income profiles.\footnote{At age 21, public-transfer income includes Aid to Families with Dependent Children (AFDC) subsidies, food stamps, survivor benefits, disability benefits, social security, rent subsidies, and fuel subsidies. At age 30, public-transfer income includes food stamps, welfare, housing assistance, workman's compensation, disability, social security, supplemental security income, unemployment benefits, worker's compensation insurance, fuel subsidies, educational and aid grants, and other forms of welfare. For all other ages, we produce a prediction. We explain and justify the variables we use to predict below.} We use some of these same and other complementary sources to predict the rest of the outcomes, as we explain below.\\
+\noindent We rely on the following datasets to estimate transfer and labor income life-cycle labor income profiles.\footnote{At age 21, public-transfer income includes Aid to Families with Dependent Children (AFDC) subsidies, food stamps, survivor benefits, disability benefits, social security, rent subsidies, and fuel subsidies. At age 30, public-transfer income includes food stamps, welfare, housing assistance, workman's compensation, disability, social security, supplemental security income, unemployment benefits, worker's compensation insurance, fuel subsidies, educational and aid grants, and other forms of welfare. For all other ages, we produce a forecast. We explain and justify the variables we use to forecast below.} We use some of these same and other complementary sources to forecast the rest of the outcomes, as we explain below.\\
 
 \noindent\textbf{The National Longitudinal Survey of Youth (NLSY79)} is a longitudinal survey beginning in 1979 that follows individuals born between 1957 and 1964. The initial interview included 12,686 respondents aged 14 to 22. The survey was designed to include 6,111 individuals representing the non-institutionalized civilian population, a supplemental sample of 5,295 civilian Hispanics, Latinos, Blacks, non-Blacks/non-Hispanics, and economically disadvantaged youth, and a sample of 1,280 who served in the military as of September 30, 1978. When appropriately weighted, the NLSY79 is nationally representative of the youth living in the U.S. on January 1, 1979. We include individuals from all three subsamples in our analysis.\\
 
 \noindent The NLSY79 collected data on labor market participation, education, family background, family life, health, assets and income, government program participation, and measures of cognitive skills.\\
 
-\noindent We restrict the NLSY79 sample to Blacks with labor incomes less than \$300,000 (2014 USD) at any given year to avoid estimating our predictions with outliers in the auxiliary sample.\footnote{For details on how we match the individuals in the experimental sample to the individuals in the non-experimental sample, see Appendix~\ref{appendix:match}.} With the mean labor income (2014 USD) in the ABC/CARE sample being \$32,782 at age 30, and the maximum reported being \$189,938, the cut-off we impose on the auxiliary data is high enough so that the labor income support at age 30 in ABC/CARE is contained in the support of labor income at age 30 in the NLSY79.\footnote{For labor income at age 21, we use the CNLSY.}\\
+\noindent We restrict the NLSY79 sample to Blacks with labor incomes less than \$300,000 (2014 USD) at any given year to avoid estimating our forecasts with outliers in the auxiliary sample.\footnote{For details on how we match the individuals in the experimental sample to the individuals in the non-experimental sample, see Appendix~\ref{appendix:match}.} With the mean labor income (2014 USD) in the ABC/CARE sample being \$32,782 at age 30, and the maximum reported being \$189,938, the cut-off we impose on the auxiliary data is high enough so that the labor income support at age 30 in ABC/CARE is contained in the support of labor income at age 30 in the NLSY79.\footnote{For labor income at age 21, we use the CNLSY.}\\
 
 \noindent We do not impose a restriction on the birth year for the NLSY79 as all respondents are between 47 and 55 years of age at the time of the last interview (conducted in 2012). This age range is within the 31--67 range for which we extrapolate the income of the ABC/CARE subjects.\\
 
-\noindent Given the biennial nature of the NLSY79, we only observe each subject at either odd or even ages. Not only does this reduce the size of the sample on which we fit our prediction model at each age, but it can introduce biases associated with the odd-aged and even-aged cohorts. To address this issue, we linearly interpolate the variables in the NLSY79 data that are used in our prediction model. This allows us to estimate our model on all subjects of the NLSY79 satisfying the eligibility conditions $\bm{B}\in\mathcal{B}_0$ at every age.\\
+\noindent Given the biennial nature of the NLSY79, we only observe each subject at either odd or even ages. Not only does this reduce the size of the sample on which we fit our forecasting model at each age, but it can introduce biases associated with the odd-aged and even-aged cohorts. To address this issue, we linearly interpolate the variables in the NLSY79 data that are used in our forecasting model. This allows us to estimate our model on all subjects of the NLSY79 satisfying the eligibility conditions $\bm{B}\in\mathcal{B}_0$ at every age.\\
 
 \noindent\textbf{The Children of the National Longitudinal Survey of Youth (CNLSY)} is a survey of the children of the mothers from the NLSY79, beginning in 1986. At the time of the initial interview, the ages of the children surveyed ranged from 0 to 23. As of 2010, the CNLSY sample includes 11,504 children born to NLSY79 mothers. With appropriate weights, the CNLSY may be considered nationally representative of children born to women who were age 14 to 22 during 1979. Interviews were conducted annually between 1986 and 1994, and biennially thereafter.\\
 
 \noindent Similar to the NLSY79, the CNLSY collected data on cognitive ability, motor and social development, home environment, health information, education, attitudes, employment, income, family decisions, and more.\\
 
-\noindent As we did with the NLSY79 and for the same reasons, we restrict the CNLSY sample to Black individuals with labor income less than \$300,000 (2014 USD) at any given year. In addition to this, we limit the sample to subjects born between 1978 and 1983. Because the CNLSY data extends to 2012, this implies that we use the most recent data from the CNLSY in which individuals are aged 29 to 34. Finally, given the biennial nature of the survey, we perform a linear interpolation on the variables that enter into our prediction model. This allows us to use as much of the CNLSY data as possible at every age when interpolating subject income.\\
+\noindent As we did with the NLSY79 and for the same reasons, we restrict the CNLSY sample to Black individuals with labor income less than \$300,000 (2014 USD) at any given year. In addition to this, we limit the sample to subjects born between 1978 and 1983. Because the CNLSY data extends to 2012, this implies that we use the most recent data from the CNLSY in which individuals are aged 29 to 34. Finally, given the biennial nature of the survey, we perform a linear interpolation on the variables that enter into our forecasting model. This allows us to use as much of the CNLSY data as possible at every age when interpolating subject income.\\
 
 \noindent\textbf{The Panel Survey of Income Dynamics (PSID)} is a longitudinal household survey containing between 5,000 and 8,500 families in each wave. It began as a yearly survey in 1968 and has been fielded biennially since 1996. When appropriately weighted, the PSID is designed to be representative of U.S. households. The PSID provides extensive information concerning demographics, economic outcomes, health outcomes, marriage and fertility, and more.\\
 
-\noindent We restrict the PSID to Blacks born between 1945 and 1981. Because the data extend to 2013, we use the most recent subsample of individuals aged 30 to 67. We also exclude all individuals with labor income exceeding \$300,000 (2014 USD) in any given year for the same reasons. Finally, given the biennial nature of the survey, we perform a linear interpolation on the variables that enter into our prediction model. This allows us to use as much of the PSID data as possible at every age to interpolate subject income.\\
+\noindent We restrict the PSID to Blacks born between 1945 and 1981. Because the data extend to 2013, we use the most recent subsample of individuals aged 30 to 67. We also exclude all individuals with labor income exceeding \$300,000 (2014 USD) in any given year for the same reasons. Finally, given the biennial nature of the survey, we perform a linear interpolation on the variables that enter into our forecasting model. This allows us to use as much of the PSID data as possible at every age to interpolate subject income.\\
 
-\noindent Before summarizing, note that in general: (i) \textbf{we use the CNLSY to predict from ages 21 to 29}; and (ii) we use the NLSY79 and PSID to predict from ages 29 to 79. Whenever using the NLSY79 and PSID together, we combine them and use them as a joint sample. Put differently, we use the three data sets to obtain information across the time span of our interest \textit{without placing specific weights in any particular samples}. This allows us to satisfy support conditions (see Appendix~\ref{app:containsupport}) over the predicted variables and the predictors that we use. An alternative to this is to to weight each of the observations in these samples according to the inverse of their variance in a set of observed characteristics. We do not do this, and instead use the unweighted observations to then construct synthetic treatment and controls groups as we explain in Appendix~\ref{appendix:match}.\\
+\noindent Before summarizing, note that in general: (i) \textbf{we use the CNLSY to predict from ages 21 to 29}; and (ii) we use the NLSY79 and PSID to forecast from ages 29 to 79. Whenever using the NLSY79 and PSID together, we combine them and use them as a joint sample. Put differently, we use the three data sets to obtain information across the time span of our interest \textit{without placing specific weights in any particular samples}. This allows us to satisfy support conditions (see Appendix~\ref{app:containsupport}) over the forecasted variables and the predictors that we use. An alternative to this is to to weight each of the observations in these samples according to the inverse of their variance in a set of observed characteristics. We do not do this, and instead use the unweighted observations to then construct synthetic treatment and controls groups as we explain in Appendix~\ref{appendix:match}.\\
 
 \noindent \textbf{Summary: Initial Restrictions Placed on the Auxiliary Samples}\\
-When constructing the samples used to predict transfer and labor income, we place the following restrictions on admissible samples \textit{for all ages}. Additional restrictions are placed when predicting the other outcomes, as we explain below.
+When constructing the samples used to forecast transfer and labor income, we place the following restrictions on admissible samples \textit{for all ages}. Additional restrictions are placed when forecasting the other outcomes, as we explain below.
 \begin{enumerate}
 \item \textbf{NLSY79:} Black, labor income less than \$300,000 (2014 USD) at any given year; subjects born between 1957 and 1965.
 \item \textbf{PSID:} Black; birth year between 1945 and 1981.
 \item \textbf{CNLSY:} Black, labor income less than \$300,000 (2014 USD) at any given year; subjects born between 1978 and 1983.
 \end{enumerate}
 
-\noindent \textbf{Summary: Auxiliary Samples Used to Predict by Age}\\
-We use the following samples to predict labor and transfer income. Different samples are used to predict the rest of the outcomes, as we explain below.
+\noindent \textbf{Summary: Auxiliary Samples Used to Forecast by Age}\\
+We use the following samples to forecast labor and transfer income. Different samples are used to forecast the rest of the outcomes, as we explain below.
 \begin{enumerate}
 \item \textbf{Labor Income:}
 \begin{enumerate}
@@ -166,11 +166,11 @@ We use the following samples to predict labor and transfer income. Different sam
 
 \noindent Our principal approach constructs counterpart experimental and control groups matching on $\mathcal{B}_n \in B_0$. However, under exogeneity and structural invariance, we also construct individual matches for members of the experimental group and use them to construct out-of-sample treatment effects. Notice that these are two different matching procedures. We summarize both in this subsection in a succinct notation, but the two should be carefully distinguished by the reader. Since the second set of matches is more inclusive and traditional, we develop that case here.\\
 
-\noindent Consider outcome $Y^d_{k,j,a}$ generated by $\bm{B}_k, \bm{X}^d_{k,j,a}$ (defined as the relevant predictor variables for $Y_{k,j,a}$) and also generated by $\varepsilon^d_{k,j,a}$. Under exogeneity (Assumption~\ref{ass:exog}), we can match on both $\bm{B}_k$ and $\bm{X}^d_{k,j,a}$. This assumption allows us to  use variables $\bm{X}^d_{k,j,a}$ that are caused by treatment and that predict outcome $j$ and are invariant after $a^\ast$ (e.g., ability). If exogeneity is not satisfied, matching on $\bm{X}^d_{k,j,a}$ becomes problematic (see \citealp{Heckman_Navarro_2004_REStat}). Note that we can match on $\bm{B}_k$ in the set of individuals in the auxiliary samples with $\bm{B}_k \in \mathcal{B}_{0}$. Note that $\bm{B}_k$ need not be exogenous. Our analysis is conditional on $\bm{B}_k \in \mathcal{B}, k \in \{e,n\}$. Below, we show that our estimates are not sensitive to whether we match on $\bm{B}_k$, match on $\bm{X}^d_{k,j,a}$ alone, or match on both $\bm{B}_k$ and $\bm{X}^d_{k,j,a}$.\\
+\noindent Consider outcome $Y^d_{k,j,a}$ generated by $\bm{B}_k, \bm{X}^d_{k,j,a}$ (defined as the relevant predictor variables for $Y_{k,j,a}$) and also generated by $\varepsilon^d_{k,j,a}$. Under exogeneity (Assumption~\ref{ass:exog}), we can match on both $\bm{B}_k$ and $\bm{X}^d_{k,j,a}$. This assumption allows us to  use variables $\bm{X}^d_{k,j,a}$ that are caused by treatment and that forecast outcome $j$ and are invariant after $a^\ast$ (e.g., ability). If exogeneity is not satisfied, matching on $\bm{X}^d_{k,j,a}$ becomes problematic (see \citealp{Heckman_Navarro_2004_REStat}). Note that we can match on $\bm{B}_k$ in the set of individuals in the auxiliary samples with $\bm{B}_k \in \mathcal{B}_{0}$. Note that $\bm{B}_k$ need not be exogenous. Our analysis is conditional on $\bm{B}_k \in \mathcal{B}, k \in \{e,n\}$. Below, we show that our estimates are not sensitive to whether we match on $\bm{B}_k$, match on $\bm{X}^d_{k,j,a}$ alone, or match on both $\bm{B}_k$ and $\bm{X}^d_{k,j,a}$.\\
 
-\noindent For the moment, simplify notation and assume that $\bm{B}_k$ is absorbed into $\bm{X}^d_{k,j,a}$. We relax this assumption below and stress that in our main analysis reported in this paper, we only match on $\bm{B}$. For each treatment group member $i$ in treatment status $d$, we find counterparts following the analysis of \citet{Heckman_Ichimura_etal_1998_REStud}. We do not construct different synthetic treatment and control groups for each age and for each outcome that we predict. We find one synthetic treatment and one synthetic control group in each auxiliary sample and use these samples to predict each outcome at each age. We explain in Appendix~\ref{app:datasets} what auxiliary samples are used to predict outcomes at each age. That is, we use the same synthetic treatment and control groups to predict all of the outcomes. For this reason, we drop the age and outcome subindices for the rest of this section.\\
+\noindent For the moment, simplify notation and assume that $\bm{B}_k$ is absorbed into $\bm{X}^d_{k,j,a}$. We relax this assumption below and stress that in our main analysis reported in this paper, we only match on $\bm{B}$. For each treatment group member $i$ in treatment status $d$, we find counterparts following the analysis of \citet{Heckman_Ichimura_etal_1998_REStud}. We do not construct different synthetic treatment and control groups for each age and for each outcome that we forecast. We find one synthetic treatment and one synthetic control group in each auxiliary sample and use these samples to forecast each outcome at each age. We explain in Appendix~\ref{app:datasets} what auxiliary samples are used to forecast outcomes at each age. That is, we use the same synthetic treatment and control groups to forecast all of the outcomes. For this reason, we drop the age and outcome subindices for the rest of this section.\\
 
-\noindent Matched samples can be constructed in many ways using the various criteria listed at the end of Section~\ref{app:datasets}. One method that combines Stage I (sample construction) and Stage II (estimation) is the following. This provides a non-parametric approach to predicting. It is conditional on a common value of $\bm{B}$ in both samples. Match an individual $l(i)$ in the auxiliary sample to person $i$ in the treatment samples to find synthetic treatment and control groups by following Algorithm~\ref{alg:match}.\\
+\noindent Matched samples can be constructed in many ways using the various criteria listed at the end of Section~\ref{app:datasets}. One method that combines Stage I (sample construction) and Stage II (estimation) is the following. This provides a non-parametric approach to forecasting. It is conditional on a common value of $\bm{B}$ in both samples. Match an individual $l(i)$ in the auxiliary sample to person $i$ in the treatment samples to find synthetic treatment and control groups by following Algorithm~\ref{alg:match}.\\
 
 \onehalfspacing
 \begin{algorithm} \label{alg:match}
@@ -184,28 +184,28 @@ For individual $i$ in experimental sample ($k=e$), an individual $l(i)$ in the a
 \end{algorithm}
 \doublespacing
 
-\noindent We primarily use synthetic control and treatment groups matching solely on $\bm{B}$ to estimate dynamic relationships between outcomes and predictors in the auxiliary samples and use the estimated relationships to generate predictions in the non-experimental samples. In this model-based approach, we construct treatment effects for each outcome at each age. In our main approach to estimation, we match on $\bm{B}_k$. We next examine the sensitivity of our estimates to the use of different matching variables. We find little sensitivity to choices of matching variables and to using parametric or non-parametric approaches. The lack of sensitivity suggests that the dynamic relationship that we fit in the auxiliary sample is invariant to the sample used to estimate it, which supports exogeneity Assumption~\ref{ass:summary}.\\
+\noindent We primarily use synthetic control and treatment groups matching solely on $\bm{B}$ to estimate dynamic relationships between outcomes and predictors in the auxiliary samples and use the estimated relationships to generate forecasts in the non-experimental samples. In this model-based approach, we construct treatment effects for each outcome at each age. In our main approach to estimation, we match on $\bm{B}_k$. We next examine the sensitivity of our estimates to the use of different matching variables. We find little sensitivity to choices of matching variables and to using parametric or non-parametric approaches. The lack of sensitivity suggests that the dynamic relationship that we fit in the auxiliary sample is invariant to the sample used to estimate it, which supports exogeneity Assumption~\ref{ass:summary}.\\
 
 
 \noindent \textbf{Summary: Variables Used to Match to Construct Synthetic Control and Treatment Groups}\\
-When constructing synthetic control and treatment groups we use each of the following variables, \textit{for all the outcomes at all ages}: year of birth, gender, number of siblings at baseline. The criterion for selecting these variables is availability across all auxiliary sources. We construct one synthetic control group and one synthetic treatment group in each auxiliary sample (and not one group for each age). We explain how we use the synthetic groups for predicting each outcome in Appendix~\ref{app:datasets}.
+When constructing synthetic control and treatment groups we use each of the following variables, \textit{for all the outcomes at all ages}: year of birth, gender, number of siblings at baseline. The criterion for selecting these variables is availability across all auxiliary sources. We construct one synthetic control group and one synthetic treatment group in each auxiliary sample (and not one group for each age). We explain how we use the synthetic groups for forecasting each outcome in Appendix~\ref{app:datasets}.
 
 
-\subsubsection{Variables Used to Predict Out-of-Sample Outcomes} \label{appendix:pred}
+\subsubsection{Variables Used to Forecast Out-of-Sample Outcomes} \label{appendix:pred}
 
-We base our model-based predictions for a generic outcome, $Y_{k,j,a}$ on background (pre-treatment) variables, $\bm{B}_k$, and variables that could have been affected by treatment $\bm{X}_{k,j,a}$. $\bm{X}_{k,j,a}$ can contain lagged values of $Y_{k,j,a}$.\\
+We base our model-based forecasts for a generic outcome, $Y_{k,j,a}$ on background (pre-treatment) variables, $\bm{B}_k$, and variables that could have been affected by treatment $\bm{X}_{k,j,a}$. $\bm{X}_{k,j,a}$ can contain lagged values of $Y_{k,j,a}$.\\
 
-\noindent Our predictions are based on identifying and estimating relationships between the outcomes we seek to predict at age $a$, $Y_{k,j,a}$, in the experimental samples and using the fitted relationships in the auxiliary samples. We produce predictions for each outcome at each age.\\
+\noindent Our forecasts are based on identifying and estimating relationships between the outcomes we seek to predict at age $a$, $Y_{k,j,a}$, in the experimental samples and using the fitted relationships in the auxiliary samples. We produce forecasts for each outcome at each age.\\
 
 \noindent \textbf{Criteria for Candidate Predictor Variables}\\
 \noindent To be considered a predictor variable, a variable must satisfy three conditions: (i) it has to be available in the experimental and non-experimental samples; (ii) it has to have predictive power for the predicted outcome. Our criterion for inclusion is that all the coefficients of a regression of the predicted variable on \textit{all} the prediction variables are chosen to be statistically significant at the 1\% level.\footnote{In a few cases, we decide to keep some variables nearly above this threshold because we consider them economically relevant.}; and (iii) it also needs to satisfy Assumption~\ref{ass:contain}, which we document below in Appendix~\ref{app:containsupport}.\footnote{A more logical way to proceed would be to use a sub-sample of predictors satisfying this criteria and also being affected by treatment, so that we are able to predict treatment effects. This is impossible due to data limitations. Most of the post-treatment predictors we use, however, display sizable treatment effects. See Appendix~\ref{appendix:results}.}\\
 
 \noindent For a variable to satisfy restrictions (i) and (ii), it needs to be the case not only that the variable is available in the non-experimental sample but also that the survey question for it was introduced far enough back in time for us to observe it in a range that is common to the range in which we observe the variables in the experimental sample. To illustrate this, consider the case of body-mass index in the PSID. Survey questions for this variable were introduced in the late 1990s. The sample for which the question was introduced, however, does not span enough observations for its support to cover the support of the experimental sample. To lessen this problem we pool the auxiliary datasets to maximize the available predictor variables.\\
 
-\noindent We present evidence on the predictive power of the predictor variables, in both the control and treatment synthetic groups we construct in the PSID, NLSY79, and CNLSY. Tables~\ref{table:predlaborincome} and \ref{table:predtransferincome} show that, in each of the auxiliary samples that we use, the prediction variables $\bm{X}_{a}, \bm{B}_k$ are strong predictors of labor and transfer  income at age 30. We present this evidence at age 30 both for brevity and compare the predictive power of $\bm{X}_{a},\bm{B}_k$ on the outcomes we consider in the ABC/CARE sample.\\
+\noindent We present evidence on the predictive power of the predictor variables, in both the control and treatment synthetic groups we construct in the PSID, NLSY79, and CNLSY. Tables~\ref{table:predlaborincome} and \ref{table:predtransferincome} show that, in each of the auxiliary samples that we use, the prediction variables $\bm{X}_{a}, \bm{B}_k$ are strong predictors of labor and transfer income at age 30. We present this evidence at age 30 both for brevity and compare the predictive power of $\bm{X}_{a},\bm{B}_k$ on the outcomes we consider in the ABC/CARE sample.\\
 
 \noindent \textbf{Summary: Predictor Variables}\\
-\noindent We use the following variables to predict labor and transfer income. Different variables are used to predict the rest of the outcomes, as we explain below.
+\noindent We use the following variables to forecast labor and transfer income. Different variables are used to forecast the rest of the outcomes, as we explain below.
 \begin{enumerate}
 \item \textbf{Labor Income:}
 \begin{enumerate}
@@ -247,9 +247,9 @@ We base our model-based predictions for a generic outcome, $Y_{k,j,a}$ on backgr
 \end{threeparttable}
 \end{table}
 
-\paragraph{Non-Parametric Predictions} \label{appendix:nonpar}
+\paragraph{Non-Parametric Forecasts} \label{appendix:nonpar}
 
-\noindent An alternative to the prediction strategy that we use throughout the main text and the preceding appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using Algorithm~\ref{alg:match}; and (ii) use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and use it to form out-of-sample predictions, we simply match individuals using Algorithm~\ref{alg:match} to impute labor income profiles.\\
+\noindent An alternative to the forecasting strategy that we use throughout the main text and the preceding appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using Algorithm~\ref{alg:match}; and (ii) use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and use it to form out-of-sample forecasts, we simply match individuals using Algorithm~\ref{alg:match} to impute labor income profiles.\\
 
 \noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the non-parametric approach that we introduce in this section. We present results for labor income. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). An individual $l(i)$ in the auxiliary sample is a match for individual $i$ in the experimental sample if it is in the neighborhood defined by the left-hand side of \eqref{eq:ingrownnail} across all individuals in the auxiliary sample. We present the discounted net present value (treatment - control) for labor income in 2014 dollars. The approaches are in close agreement. (Analogous results for other variables are available upon request from the authors.)\\
 
@@ -386,7 +386,7 @@ Note: Panel (a) displays a factor score estimated based on the measurement syste
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control Group}
+\caption{Forecast of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control Group}
 \label{table:endoginc}
 \centering
 \footnotesize
@@ -394,56 +394,56 @@ Note: Panel (a) displays a factor score estimated based on the measurement syste
 \begin{tablenotes}
 \footnotesize
 \item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Treatment Group}
+\caption{Forecast of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Treatment Group}
 \centering
 \footnotesize
 \input{output/abccare_endogdurb_si30y_inc_labor_streat_ready.tex}
 \begin{tablenotes}
 \footnotesize
 \item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control and Treatment Groups}
+\caption{Forecast of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control and Treatment Groups}
 \centering
 \footnotesize
 \input{output/abccare_endogdurb_si30y_inc_labor_spool_ready.tex}
 \begin{tablenotes}
 \footnotesize
 \item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, CNLSY}
+\caption{Forecast of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, CNLSY}
 \centering
 \footnotesize
 \input{output/cnlsy_endogdurb_si30y_inc_labor_spool_ready.tex}
 \begin{tablenotes}
 \footnotesize
 \item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of reading and comprehension of the PIAT, as weel as the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of reading and comprehension of the PIAT, as weel as the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Transfer Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control Group}
+\caption{Forecast of Transfer Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control Group}
 \label{table:endoginc}
 \centering
 \footnotesize
@@ -451,49 +451,49 @@ Note: Panel (a) displays a factor score estimated based on the measurement syste
 \begin{tablenotes}
 \footnotesize
 \item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Prediction of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Transfer Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Treatment Group}
+\caption{Forecast of Transfer Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Treatment Group}
 \centering
 \footnotesize
 \input{output/abccare_endogdurb_si30y_inc_trans_pub_streat_ready.tex}
 \begin{tablenotes}
 \footnotesize
 \item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Prediction of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Transfer Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control and Treatment Groups}
+\caption{Forecast of Transfer Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control and Treatment Groups}
 \centering
 \footnotesize
 \input{output/abccare_endogdurb_si30y_inc_trans_pub_spool_ready.tex}
 \begin{tablenotes}
 \footnotesize
 \item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Prediction of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Transfer Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, CNLSY} \label{table:trincome}
+\caption{Forecast of Transfer Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, CNLSY} \label{table:trincome}
 \centering
 \footnotesize
 \input{output/cnlsy_endogdurb_si30y_inc_trans_pub_spool_ready.tex}
 \begin{tablenotes}
 \footnotesize
 \item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Prediction of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference.$\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of reading and comprehension of the PIAT, as weel as the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) (non-cognitive skill).  Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of transfer income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value for the treatment and control groups and a test for the treatment-control difference.$\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of reading and comprehension of the PIAT, as well as the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) (non-cognitive skill).  Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -507,46 +507,46 @@ This appendix uses the framework presented in Appendix~\ref{app:endogeneity} to 
 \end{equation}
 for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
-\noindent A direct test of this hypothesis uses the experimental sample and asks if, once we account for a set of the variables in $\bm{X}_{k,a}$, $R$ (randomization to treatment assignment in ABC/CARE, which, as discussed in text, is equivalent to $D$) predicts the outcome of interest, conditional on $\bm{B}_k$. This tests if this specific set of $\bm{X}_{k,a}$ suffices to summarize the treatment generated by $R$. Under the null hypothesis, the coefficient associated to $R$ when predicting based on $\bm{B}_k$ and $\bm{X}_{k,a}$ is zero. We test this using the following predictors. Average Mathematics PIAT scores at ages 5 to 7, education at age 30, and labor income at age 21. That is, children who are offered treatment attend it. For a set of outcomes of interest, even beyond those that we predict, once we condition on $\bm{B}_k, \bm{X}_{k,a}, \bm{\theta}$, the coefficient associated with $R$ is not significant. We test this with and without accounting for endogeneity, as explained in Appendix~\ref{app:endogeneity}.\\
+\noindent A direct test of this hypothesis uses the experimental sample and asks if, once we account for a set of the variables in $\bm{X}_{k,a}$, $R$ (randomization to treatment assignment in ABC/CARE, which, as discussed in text, is equivalent to $D$)  predicts the outcome of interest, conditional on $\bm{B}_k$. This tests if this specific set of $\bm{X}_{k,a}$ suffices to summarize the treatment generated by $R$. Under the null hypothesis, the coefficient associated to $R$ when forecasting based on $\bm{B}_k$ and $\bm{X}_{k,a}$ is zero. We test this using the following predictors. Average Mathematics PIAT scores at ages 5 to 7, education at age 30, and labor income at age 21. That is, children who are offered treatment attend it. For a set of outcomes of interest, even beyond those that we forecast, once we condition on $\bm{B}_k, \bm{X}_{k,a}, \bm{\theta}$, the coefficient associated with $R$ is not significant. We test this with and without accounting for endogeneity, as explained in Appendix~\ref{app:endogeneity}.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of High School Graduation at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, ABC/CARE}
+\caption{Forecast of High School Graduation at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
 \input{output/abccare_endog_hs30_spooled_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of high school graduation at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of high school graduation at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of High School Graduation at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE}
+\caption{Forecast of High School Graduation at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
 \input{output/abccare_endog_hs30_sfemale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of high school graduation at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of high school graduation at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of High School Graduation at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE}
+\caption{Forecast of High School Graduation at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
 \input{output/abccare_endog_hs30_smale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of high school graduation at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of high school graduation at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -554,84 +554,84 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Employment at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, ABC/CARE}
+\caption{Forecast of Employment at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
 \input{output/abccare_endog_si30y_works_job_spooled_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of employment at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of employment at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Employment at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE}
+\caption{Forecast of Employment at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
 \input{output/abccare_endog_si30y_works_job_sfemale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of employment at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Note: Forecast of employment at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Employment at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE}
+\caption{Forecast of Employment at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
 \input{output/abccare_endog_si30y_works_job_smale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of employment at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of employment at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, ABC/CARE}
+\caption{Forecast of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
 \input{output/abccare_endog_si30y_inc_labor_spooled_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE}
+\caption{Forecast of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
 \input{output/abccare_endog_si30y_inc_labor_sfemale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE}
+\caption{Forecast of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE}
 \label{table:end2}
 \centering
 \scriptsize
 \input{output/abccare_endog_si30y_inc_labor_smale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of labor income at age 30 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -640,40 +640,40 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, ABC/CARE}
+\caption{Forecast of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, ABC/CARE}
 \centering
 \scriptsize
 \input{output/abccare_endog_si34y_bmi_spooled_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of body-mass index at age 34 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of body-mass index at age 34 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE}
+\caption{Forecast of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE}
 \centering
 \scriptsize
 \input{output/abccare_endog_si34y_bmi_sfemale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of body-mass index at age 34 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Note: Forecast of body-mass index at age 34 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE}
+\caption{Forecast of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE}
 \label{table:end3}
 \centering
 \scriptsize
 \input{output/abccare_endog_si34y_bmi_smale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of body-mass index at age 34 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of body-mass index at age 34 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -684,42 +684,42 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of High School Graduation at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, Perry Preschool Project}
+\caption{Forecast of High School Graduation at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, Perry Preschool Project}
 \label{table:perry1}
 \centering
 \scriptsize
 \input{output/perry_endog_hs40_spooled_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of high school graduation at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of high school graduation at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of High School Graduation at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, Perry Preschool Project}
+\caption{Forecast of High School Graduation at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, Perry Preschool Project}
 \label{table:perry1}
 \centering
 \scriptsize
 \input{output/perry_endog_hs40_sfemale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of high school graduation at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of high school graduation at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of High School Graduation at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, Perry Preschool Project}
+\caption{Forecast of High School Graduation at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, Perry Preschool Project}
 \label{table:perry1}
 \centering
 \scriptsize
 \input{output/perry_endog_hs40_smale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of high school graduation at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of high school graduation at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -727,126 +727,126 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Idleness at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, Perry Preschool Project}
+\caption{Forecast of Idleness at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, Perry Preschool Project}
 \label{table:perry2}
 \centering
 \scriptsize
 \input{output/perry_endog_idle40_spooled_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of high school graduation at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of idleness at age 40 is based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Idleness at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, Perry Preschool Project}
+\caption{Forecast of Idleness at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, Perry Preschool Project}
 \label{table:perry2}
 \centering
 \scriptsize
 \input{output/perry_endog_idle40_sfemale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of high school graduation at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of idleness at age 40 is based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Idleness at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, Perry Preschool Project}
+\caption{Forecast of Idleness at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, Perry Preschool Project}
 \label{table:perry2}
 \centering
 \scriptsize
 \input{output/perry_endog_idle40_smale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of high school graduation at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of idleness at age 40 is based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, Perry Preschool Project}
+\caption{Forecast of Labor Income at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, Perry Preschool Project}
 \label{table:perry3}
 \centering
 \scriptsize
 \input{output/perry_endog_inc40_spooled_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of high school graduation at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of labor income at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ FeFemale Sample, Perry Preschool Project}
+\caption{Forecast of Labor Income at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ FeFemale Sample, Perry Preschool Project}
 \label{table:perry3}
 \centering
 \scriptsize
 \input{output/perry_endog_inc40_sfemale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of high school graduation at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of labor income at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, Perry Preschool Project}
+\caption{Forecast of Labor Income at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, Perry Preschool Project}
 \label{table:perry3}
 \centering
 \scriptsize
 \input{output/perry_endog_inc40_smale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of high school graduation at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of labor income at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Reports Very Good Health at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, Perry Preschool Project}
+\caption{Forecast of Reports Very Good Health at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Pooled Sample, Perry Preschool Project}
 \label{table:perry3}
 \centering
 \scriptsize
 \input{output/perry_endog_healthy40_spooled_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of reports very good health at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of reports very good health at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Reports Very Good Health at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, Perry Preschool Project}
+\caption{Forecast of Reports Very Good Health at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, Perry Preschool Project}
 \label{table:perry3}
 \centering
 \scriptsize
 \input{output/perry_endog_healthy40_sfemale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of reports very good health at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of reports very good health at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Reports Very Good Health at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, Perry Preschool Project}
+\caption{Forecast of Reports Very Good Health at Age 40 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, Perry Preschool Project}
 \label{table:perry3}
 \centering
 \scriptsize
 \input{output/perry_endog_healthy40_smale_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: Prediction of reports very good health at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+\item Note: Forecast of reports very good health at age 40 based on the variables listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. Cognitive, Externalizing, and Academic are factor scores estimated based on a system as the one in \eqref{eq:sa-msystemmain} and using the measures of cognitive skills, externalizing behavior, and academic motivation between ages 6 and 9 used in \citet{Heckman_Pinto_etal_2013_PerryFactor}. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -862,7 +862,7 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE and CNLSY}
+\caption{Forecast of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE and CNLSY}
 \label{table:inv0}
 \centering
 \scriptsize
@@ -870,14 +870,14 @@ for $a \in \{1,\dots,A\}$, $k \in \{e,n\}$, and $d \in \{0,1\}$.\\
 \begin{tablenotes}
 \footnotesize
 \item $^\ast$ $K=1$ if $k=e$; $K=0$ if $k=n$.\\
-Note: Prediction of labor income at age 30 based on the variables listed in the row using the ABC/CARE and the CNLSY sample constructed according to the procedure in Appendix~\ref{appendix:match}. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) in CNLSY and IQ at ages 2, 3, 4, 5, 7, and 8 in ABC/CARE (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) in CNLSY and measures of somatization, hostility, depression, and a global mental health index at age 21 in ABC/CARE (non-cognitive skill). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+Note: Forecast of labor income at age 30 based on the variables listed in the row using the ABC/CARE and the CNLSY sample constructed according to the procedure in Appendix~\ref{appendix:match}. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) in CNLSY and IQ at ages 2, 3, 4, 5, 7, and 8 in ABC/CARE (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) in CNLSY and measures of somatization, hostility, depression, and a global mental health index at age 21 in ABC/CARE (non-cognitive skill). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE and CNLSY}
+\caption{Forecast of Labor Income at Age 30 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE and CNLSY}
 \label{table:end2}
 \centering
 \scriptsize
@@ -885,7 +885,7 @@ Note: Prediction of labor income at age 30 based on the variables listed in the 
 \begin{tablenotes}
 \footnotesize
 \item $^\ast$ $K=1$ if $k=e$; $K=0$ if $k=n$.\\
-Note: Prediction of labor income at age 30 based on the variables listed in the row using the ABC/CARE and the CNLSY sample constructed according to the procedure in Section~\ref{appendix:match}. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) in CNLSY and IQ at ages 2, 3, 4, 5, 7, and 8 in ABC/CARE (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) in CNLSY and measures of somatization, hostility, depression, and a global mental health index at age 21 in ABC/CARE (non-cognitive skill). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+Note: Note: Forecast of labor income at age 30 based on the variables listed in the row using the ABC/CARE and the CNLSY sample constructed according to the procedure in Appendix~\ref{appendix:match}. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) in CNLSY and IQ at ages 2, 3, 4, 5, 7, and 8 in ABC/CARE (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) in CNLSY and measures of somatization, hostility, depression, and a global mental health index at age 21 in ABC/CARE (non-cognitive skill). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -893,21 +893,21 @@ Note: Prediction of labor income at age 30 based on the variables listed in the 
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE and CNLSY}
+\caption{Forecast of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Female Sample, ABC/CARE and CNLSY}
 \centering
 \scriptsize
 \input{output/abccarecnlsy_invariance_si34y_bmi_sfemale.tex}
 \begin{tablenotes}
 \footnotesize
 \item $^\ast$ $K=1$ if $k=e$; $K=0$ if $k=n$.\\
-Note: Prediction of body-mass index at age 34 based on the variables listed in the row using the ABC/CARE and the CNLSY sample constructed according to the procedure in Section~\ref{appendix:match}. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) in CNLSY and IQ at ages 2, 3, 4, 5, 7, and 8 in ABC/CARE (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) in CNLSY and measures of somatization, hostility, depression, and a global mental health index at age 21 in ABC/CARE (non-cognitive skill). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+Note: Forecast of body-mass index at age 34 based on the variables listed in the row using the ABC/CARE and the CNLSY sample constructed according to the procedure in Section~\ref{appendix:match}. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) in CNLSY and IQ at ages 2, 3, 4, 5, 7, and 8 in ABC/CARE (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) in CNLSY and measures of somatization, hostility, depression, and a global mental health index at age 21 in ABC/CARE (non-cognitive skill). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Prediction of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE and CNLSY}
+\caption{Forecast of Body-Mass Index at Age 34 Accounting for $R, \bm{B}_k, \bm{\theta},$ and $\bm{X}_{k,a}$ Male Sample, ABC/CARE and CNLSY}
 \label{table:invfin}
 \centering
 \scriptsize
@@ -915,7 +915,7 @@ Note: Prediction of body-mass index at age 34 based on the variables listed in t
 \begin{tablenotes}
 \footnotesize
 \item $^\ast$ $K=1$ if $k=e$; $K=0$ if $k=n$.\\
-Note: Prediction of body-mass index at age 34 based on the variables listed in the row using the ABC/CARE and the CNLSY sample constructed accordinto the procedure in Section~\ref{appendix:match}. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to predict (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) in CNLSY and IQ at ages 2, 3, 4, 5, 7, and 8 in ABC/CARE (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) in CNLSY and measures of somatization, hostility, depression, and a global mental health index at age 21 in ABC/CARE (non-cognitive skill). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
+Note: Forecast of body-mass index at age 34 based on the variables listed in the row using the ABC/CARE and the CNLSY sample constructed according to the procedure in Section~\ref{appendix:match}. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide point estimate and $p$-value. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and PIAT sections that we do not use to forecast (reading and comprehension) as well as by the Peabody Picture Vocabulary Test (PPVT) in CNLSY and IQ at ages 2, 3, 4, 5, 7, and 8 in ABC/CARE (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) in CNLSY and measures of somatization, hostility, depression, and a global mental health index at age 21 in ABC/CARE (non-cognitive skill). Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -945,7 +945,7 @@ Note: Prediction of body-mass index at age 34 based on the variables listed in t
 Note: Panel (a) displays the net-present value (treatment less control) of parental labor income of parents of children with and without siblings at baseline. Panel (b) displays the average parental labor income of parents of children with young siblings (younger than 5 years old) and children with older siblings (5 years old or older) at baseline. Panel (b) drops children without siblings at baseline. Parental income is in 2014 USD discounted to child's participant age 0 using a 3\% rate. We use the baseline ``conservative'' measure of parental labor income in Section~\ref{section:pincome}. Results using our alternative parental labor income measures are similar (see Appendix~\ref{app:parentalincome}).
 \end{figure}
 
-\paragraph{Using Mincer Equations to Predict Parental Labor Income} \label{appendix:mincerpar}
+\paragraph{Using Mincer Equations to Forecast Parental Labor Income} \label{appendix:mincerpar}
 
 \noindent This approach fits Mincer regressions for parental labor income.\footnote{See \citet{Mincer_1974_schooling} for the original source and \citet{Heckman_Lochner_ea_2006_HEE} for a extended discussion of the Mincer equation.} We specify how we deal with the presence of a spouse below. The parameterization used is as follows:
 
@@ -973,9 +973,9 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 \end{threeparttable}
 \end{table}
 
-\noindent Based on the estimates in Table~\ref{table:mincerpsid}, we can ask two questions: (i) what is the predicted net present value of parental labor income (treatment - control) using a prediction based on the estimate of \eqref{eq:mincer} and how does it differ from the method that linearly interpolates income from child's age 0 to 21?; and (ii) what would be the predicted net present value of parental labor income if we go beyond the child's age 21 and predict all the way up to 40 years of experience?\\
+\noindent Based on the estimates in Table~\ref{table:mincerpsid}, we can ask two questions: (i) what is the predicted net present value of parental labor income (treatment - control) using a forecast based on the estimate of \eqref{eq:mincer} and how does it differ from the method that linearly interpolates income from child's age 0 to 21?; and (ii) what would be the predicted net present value of parental labor income if we go beyond the child's age 21 and forecast all the way up to 40 years of experience?\\
 
-\noindent Table~\ref{table:psens} display results that answer these two questions. Precise estimates for \eqref{eq:mincer} are obtained. From it we can measure (treatment - control) when the subjects are 21 years old. When using these same equations to predict parental labor income such that mothers work for 40 years in their life times, we find that we add $\$30,000$ (2014 USD) to the estimate reported in the main paper.
+\noindent Table~\ref{table:psens} display results that answer these two questions. Precise estimates for \eqref{eq:mincer} are obtained. From it we can measure (treatment - control) when the subjects are 21 years old. When using these same equations to forecast parental labor income such that mothers work for 40 years in their life times, we find that we add $\$30,000$ (2014 USD) to the estimate reported in the main paper.
 
 \begin{table}[H]
 \begin{threeparttable}
@@ -985,14 +985,14 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 \input{output/abccarepsid_pincmincer_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note:  Interpolated up to Age 21: linearly interpolated parental labor income from (child's) age 0 to 21. Mincer-based up to Age 21: prediction from (child's) age 0 to 21 based on estimates coefficients of \eqref{eq:mincer} (full control set). Mincer-based up to Retirement: prediction from (child's) age 0 to mother's retirement (40 years of labor force participation assumed) based on estimates coefficients of \eqref{eq:mincer} (full control set). All values are in 2014 USD discounted to child's age 0. Standard errors in parentheses are based on the empirical bootstrap distribution.
+\item Note:  Interpolated up to Age 21: linearly interpolated parental labor income from (child's) age 0 to 21. Mincer-based up to Age 21: prediction from (child's) age 0 to 21 based on estimates coefficients of \eqref{eq:mincer} (full control set). Mincer-based up to Retirement: forecast from (child's) age 0 to mother's retirement (40 years of labor force participation assumed) based on estimates coefficients of \eqref{eq:mincer} (full control set). All values are in 2014 USD discounted to child's age 0. Standard errors in parentheses are based on the empirical bootstrap distribution.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
-\paragraph{Life-cycle Prediction of Parental Labor Income} \label{appendix:lcyclepincome}
+\paragraph{Life-cycle Forecasts of Parental Labor Income} \label{appendix:lcyclepincome}
 
-\noindent A third approach assumes that all parental labor income is earned by the mother and limits the non-experimental samples to Black females whose labor income at each age is below the in-sample 90th percentile (we calculate this for the PSID and NLSY79 separately before using them jointly as one sample). As for the labor incomes of program participants after age 30, we pool data from the PSID and NLSY79. For lack of data on other relevant predictors, we use only one predictor: lagged parental labor income. We initialize the prediction with the last observed measure of maternal income in the experiment and extrapolate until the mother is 67 years old. Figure~\ref{figure:pincomeapp} displays our estimate of parental labor income in a format similar to that of Figure~\ref{figure:pincome}.\\
+\noindent A third approach assumes that all parental labor income is earned by the mother and limits the non-experimental samples to Black females whose labor income at each age is below the in-sample 90th percentile (we calculate this for the PSID and NLSY79 separately before using them jointly as one sample). As for the labor incomes of program participants after age 30, we pool data from the PSID and NLSY79. For lack of data on other relevant predictors, we use only one predictor: lagged parental labor income. We initialize the forecast with the last observed measure of maternal income in the experiment and extrapolate until the mother is 67 years old. Figure~\ref{figure:pincomeapp} displays our estimate of parental labor income in a format similar to that of Figure~\ref{figure:pincome}.\\
 
 
 \begin{figure}[!htbp]
@@ -1012,23 +1012,23 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 Note: Panel (a) displays the net-present value (treatment less control) of parental labor income of parents of children with and without siblings at baseline. Panel (b) displays the average parental labor income of parents of children with young siblings (younger than 5 years old) and children with older siblings (5 years old or older) at baseline. Panel (b) drops children without siblings at baseline. Parental income is in 2014 USD discounted to child's participant age 0 using a 3\% rate.  We use the measure of parental labor income in Section~\ref{section:pincome}.
 \end{figure}
 
-\noindent \textbf{Summary: Prediction of Parental Labor Income}\\
-\noindent Any prediction of parental labor income starts at the last observation of parental labor income, which varies by individual due to sample attrition. We assume that parental labor income is equal to maternal income (only 27\% of mothers in ABC/CARE report living in a two-parent home).
+\noindent \textbf{Summary: Forecasts of Parental Labor Income}\\
+\noindent Any forecast of parental labor income starts at the last observation of parental labor income, which varies by individual due to sample attrition. We assume that parental labor income is equal to maternal income (only 27\% of mothers in ABC/CARE report living in a two-parent home).
 \begin{enumerate}
 \item \textbf{Mincer Model}
 \begin{enumerate}
-\item \textbf{Auxiliary Sample Used to Predict:} PSID.
+\item \textbf{Auxiliary Sample Used to Forecast:} PSID.
 \item \textbf{Initial Restrictions Placed on the Auxiliary Sample:} Black; female; unmarried; education and number of children at ages 5 in the ranges of ABC/CARE participants. Labor income at each age is below the 75th percentile.
 \item \textbf{Variables Used to Construct Synthetic Control and Treatment Groups:} we pool PSID/NLSY79 restricted samples.
-\item \textbf{Variables Used to Predict:} education, second order polynomial in experience, birth year, number of children.
+\item \textbf{Variables Used to Forecast:} education, second order polynomial in experience, birth year, number of children.
 \item \textbf{Assumed Retirement:} after 40 years of labor force participation.
 \end{enumerate}
-\item \textbf{Life-cycle Prediction}
+\item \textbf{Life-cycle Forecast}
 \begin{enumerate}
-\item \textbf{Auxiliary Sample Used to Predict:} PSID and NLSY79.
+\item \textbf{Auxiliary Sample Used to Forecast:} PSID and NLSY79.
 \item \textbf{Initial Restrictions Placed on the Auxilliary Sample:} Black; female; labor income at each age is below the 90th percentile.
 \item \textbf{Variables Used to Construct Synthetic Control and Treatment Groups:} we pool the PSID restricted sample, and do not construct synthetic experimental groups due to lack of data on the treatment effect predictors.
-\item \textbf{Variables Used to Predict:} lagged labor income.
+\item \textbf{Variables Used to Forecast:} lagged labor income.
 \item \textbf{Assumed Retirement:} 67 years old.
 \end{enumerate}
 \end{enumerate}
@@ -1249,7 +1249,7 @@ Note: Panel (a) displays the empirical bootstrap distribution for the estimate o
 \restoregeometry
 \doublespacing
 
-\subsection{Exploring the Impact of Other Prediction Models} \label{appendix:predsensitivity}
+\subsection{Exploring the Impact of Other Forecasting Models} \label{appendix:predsensitivity}
 
 Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$. We explore a range of standard panel data specifications for the error terms:
 
@@ -1260,7 +1260,7 @@ Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$
 
 \noindent where $U^d_{k,j,a} \independent \bm{X}^d_{k,a}$.
 
-Here, we present different structures for $\phi_{k,j,a}^d \left( \cdot, \cdot \right)$ and $\varepsilon_{k,j,a}^d$ and investigate the robustness of our estimates to different assumptions about the structure of both these elements. We do this exercise for labor income.\footnote{In Appendix~\ref{appendix:gmm}, we describe the precise steps that we follow to construct out-of-sample predictions based on these different structures and frame our estimation strategy in a GMM framework \citep{Hansen_1982_Econometrica}.}
+Here, we present different structures for $\phi_{k,j,a}^d \left( \cdot, \cdot \right)$ and $\varepsilon_{k,j,a}^d$ and investigate the robustness of our estimates to different assumptions about the structure of both these elements. We do this exercise for labor income.\footnote{In Appendix~\ref{appendix:gmm}, we describe the precise steps that we follow to construct out-of-sample forecasts based on these different structures and frame our estimation strategy in a GMM framework \citep{Hansen_1982_Econometrica}.}
 
 Note that Assumption~\ref{ass:summary} (Invariance) implies that $\phi_{k,j,a}^d \left (\cdot, \cdot \right) = \phi_{k,j,a}  \left (\cdot, \cdot \right) = \phi_{j,a}  \left (\cdot, \cdot \right)$. That is, invariance holds across the treatment and the control groups and invariance holds across the experimental and the auxiliary samples. It is important to note that invariance across the treatment and the control groups implies that the variables $\bm{X}_{k,a}^d$ summarize the effect of the treatment on the outcome. Given this and Assumption~\ref{ass:exog} (Exogeneity), the distribution of $\varepsilon_{k,j,a}^d$ is the same across the treatment and the control groups. We then drop the superscript in $\varepsilon_{k,j,a}^d$.\footnote{We test invariance across the treatment and the control groups and invariance across the experimental and the auxiliary samples  in Appendix~\ref{app:invariance}.}
 
@@ -1276,13 +1276,13 @@ Y_{k,j,a}                   &=& \lambda_{0} + \lambda_{1} Y_{k,j,a-1} + \lambda_
 
 \noindent where $U_{k,j,a} \independent \bm{X}_{k,a}$.
 
-Table~\ref{table:predsens} summarizes the results from our exploration through two statistics: (i) the predicted net present value of labor income under different assumptions; and (ii) the overall benefit/cost ratio when the predictions are done based on the different proposed alternatives. Estimates from the model that we use in our baseline estimations are not sensitive to the departures from serial independence that we analyze here.
+Table~\ref{table:predsens} summarizes the results from our exploration through two statistics: (i) the predicted net present value of labor income under different assumptions; and (ii) the overall benefit/cost ratio when the forecasts are done based on the different proposed alternatives. Estimates from the model that we use in our baseline estimations are not sensitive to the departures from serial independence that we analyze here.
 
-In the auxiliary samples, we observe outcomes $Y_{n,j,a}$ for $a \in [a^*, \ldots, A]$. In the experimental sample, we observe the outcome $Y_{e,j,a}$ for at most two ages, depending on the outcome. We initially assume that we observe the outcome at one age ($a = a^*$). We later relax this assumption. We thus use the information in the auxiliary sample at  $a \in [a^*, \ldots, A]$ to form extrapolations for the experimental sample, where we do not observe the outcome of interest during this age interval. We produce out-of-sample predictions and calculate the net present value of labor income under different specifications that have different assumptions. Table~\ref{table:predsens} summarizes the five specifications that we implement.
+In the auxiliary samples, we observe outcomes $Y_{n,j,a}$ for $a \in [a^*, \ldots, A]$. In the experimental sample, we observe the outcome $Y_{e,j,a}$ for at most two ages, depending on the outcome. We initially assume that we observe the outcome at one age ($a = a^*$). We later relax this assumption. We thus use the information in the auxiliary sample at  $a \in [a^*, \ldots, A]$ to form extrapolations for the experimental sample, where we do not observe the outcome of interest during this age interval. We produce out-of-sample forecasts and calculate the net present value of labor income under different specifications that have different assumptions. Table~\ref{table:predsens} summarizes the five specifications that we implement.
 
 \paragraph{Specification 1: Lagged Component ($\lambda_{1} \neq 0$); No Serial Correlation ($\rho = 0$); and No Fixed Effect ($f = 0$)} \label{app:spec1}
 
-Our baseline estimations are constructed using this framework for labor and transfer income, crime, and health. The realized values and predictions are close, as displayed in Figure~\ref{fig:labor-income-profiles}, to the baseline specification. We test and fail to reject the nulls of invariance across the treatment and the control groups, invariance across the experimental and auxiliary samples, and exogeneity in both the experimental and the auxiliary samples.  The tests are conducted at $a = a^*$ (see Appendix~\ref{app:invariance}).
+Our baseline estimations are constructed using this framework for labor and transfer income, crime, and health. The realized values and forecasts are close, as displayed in Figure~\ref{fig:labor-income-profiles}, to the baseline specification. We test and fail to reject the nulls of invariance across the treatment and the control groups, invariance across the experimental and auxiliary samples, and exogeneity in both the experimental and the auxiliary samples.  The tests are conducted at $a = a^*$ (see Appendix~\ref{app:invariance}).
 
 \paragraph{Specification 2: No Lagged Component ($\lambda_{1} = 0$); Serial Correlation ($\rho \neq 0$); and No Fixed Effect ($f = 0$)} \label{app:spec2}
 
@@ -1300,7 +1300,7 @@ We can $\rho$-transform the system of interest to obtain consistent estimates. D
 Y_{k,a} = \lambda_{0} \left( 1 - \rho \right) + \left( \lambda_{1} + \rho \right) Y_{k,a-1} - \lambda_{1} \rho Y_{k,a-2} + \lambda_{2} \left( \bm{X}_{k,a} - \rho \bm{X}_{k,a-1}  \right) + U_{k,a}. \label{eq:rhotransform}
 \end{equation}
 
-OLS produces consistent estimates of the coefficients in Equation~\eqref{eq:rhotransform}. This enables us to construct predictions, as explained in Appendix~\ref{appendix:gmm}. This model generates predictions close to the baseline estimates.
+OLS produces consistent estimates of the coefficients in Equation~\eqref{eq:rhotransform}. This enables us to construct forecasts, as explained in Appendix~\ref{appendix:gmm}. This model generates forecasts close to the baseline estimates.
 
 \paragraph{Specification 4: Permanent-Transitory Decomposition of Unobserved Components ($\lambda_{1} \neq 0$; $\rho = 0$; $f \neq 0$)} \label{app:permtrans}
 
@@ -1308,21 +1308,21 @@ This framework allows for serial dependence due to the lagged dependent variable
 
 \paragraph{Specification 5: Non-Parametric Predictions}
 
-An alternative to any of these scenarios is to make predictions using a non-parametric matching algorithm. Specifically, (i) for each individual $i$ in the experimental sample, $e$, find individual(s) $l(i)$ in the non-experimental sample, $n$, using Algorithm~\ref{alg:match} in Appendix~\ref{appendix:match}; (ii) we impute the post-$a^*$ trajectory of $Y_{k,j,a}$ of individual(s) $l(i)$ in the non-experimental sample, $n$, to individual $i$ in the experimental sample, $e$.
+An alternative to any of these scenarios is to make forecasts using a non-parametric matching algorithm. Specifically, (i) for each individual $i$ in the experimental sample, $e$, find individual(s) $l(i)$ in the non-experimental sample, $n$, using Algorithm~\ref{alg:match} in Appendix~\ref{appendix:match}; (ii) we impute the post-$a^*$ trajectory of $Y_{k,j,a}$ of individual(s) $l(i)$ in the non-experimental sample, $n$, to individual $i$ in the experimental sample, $e$.
 
 A sufficient condition for the validity of this procedure is Assumption~\ref{ass:exog} (Exogeneity). Without exogeneity, the joint distributions of $\bm{X}_{j,a*}, \varepsilon_{j,a^*}$ do not necessarily coincide across the experimental and the auxiliary samples. For example, in the experimental sample, individuals in the treatment group have relatively high levels of education due to in part the exogenous boost generated by randomization into treatment. In the auxiliary sample, the usual form of ability bias may be at work: individuals with relatively high levels of education might have better motivation, better parents, etc. Thus, the empirical relationships between education and labor income may differ across experimental and auxiliary samples. Exogeneity avoids this problem, but clearly only a weaker assumption is required.
 
 \begin{sidewaystable}[H]
 \resizebox{\columnwidth}{!}{%
 \begin{threeparttable}
-\caption{Net Present Value of Labor Income and Cost/Benefit Analysis Under Different Specifications for Labor Income Predictions}
+\caption{Net Present Value of Labor Income and Cost/Benefit Analysis Under Different Specifications for Labor Income Forecasts}
 \label{table:predsens}
 \centering
 \footnotesize
 \input{output/alternative_specifications}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table displays the net present value of labor income in 2014 USD (treatment - control) using the five different specifications for prediction that are explained below. Specification 1 is what we present in the main text. It also presents the calculation of the internal rate of return and the benefit/cost ratio of the program using these different net present values. Specification 1: prediction based on lagged outcome; no serial autocorrelation; and no fixed effect. Specification 2: prediction based on lagged outcome; arbitrary serial autocorrelation; and no fixed effect. Specification 3: prediction based on lagged outcome; first-order serial autocorrelation; and no fixed effects. Specification 4: prediction based on lagged outcome; no serial autocorrelation; and fixed effect.
+\item Note: This table displays the net present value of labor income in 2014 USD (treatment - control) using the five different specifications for forecasting that are explained below. Specification 1 is what we present in the main text. It also presents the calculation of the internal rate of return and the benefit/cost ratio of the program using these different net present values. Specification 1: forecast based on lagged outcome; no serial autocorrelation; and no fixed effect. Specification 2: forecast based on lagged outcome; arbitrary serial autocorrelation; and no fixed effect. Specification 3: forecast based on lagged outcome; first-order serial autocorrelation; and no fixed effects. Specification 4: forecast based on lagged outcome; no serial autocorrelation; and fixed effect.
 \end{tablenotes}
 \end{threeparttable}
 }
@@ -1338,7 +1338,7 @@ Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a},
 
 \noindent $\phi^d_{k,j,a}\left( \cdot, \cdot \right)$ is an invariant structural production relationship mapping inputs $\bm{X}^d_{k,a}, \bm{B}_k$ into output $Y^d_{k,j,a}$ holding error term $\varepsilon^d_{k,j,a}$ fixed. For simplicity, we initially assume \ref{ass:exog} (Exogeneity) holds. We relax this below.\\
 
-\noindent In this section, we: (i) explain the procedure that we follow to form out-of-sample predictions; and (ii) formulate the estimation procedure in a generalized method of moments (GMM) framework \citep{Hansen_1982_Econometrica}.\\
+\noindent In this section, we: (i) explain the procedure that we follow to form out-of-sample forecasts; and (ii) formulate the estimation procedure in a generalized method of moments (GMM) framework \citep{Hansen_1982_Econometrica}.\\
 
 \noindent In the auxiliary sample, we observe the outcome $Y_{n,j,a}$ for $a \in [a^*, \ldots, A]$. In the experimental sample, we observe the outcome $Y_{e,j,a}$ for at most two ages, depending on the outcome. We initially assume that we observe the outcomes at one age ($a^*$). We relax this assumption below.\\
 
@@ -1354,7 +1354,7 @@ Y_{k,j,a} = \phi_{j,a} (\bm{X}_{k,a}, \bm{B}_k) + \varepsilon_{k,j,a}, \quad k \
 
 \noindent As we note in Appendix~\ref{appendix:predsensitivity}, we work with a linear specification of $\phi_{j,a}$ in our empirical analysis. We explain our estimation procedure and the GMM framework for a general specification of $\phi_{j,a}$.\\
 
-\noindent First, we explain our estimation and prediction procedure using \textbf{Specification 1} in Appendix~\ref{appendix:predsensitivity}. This is the specification that we follow in the main text. It is as follows.
+\noindent First, we explain our estimation and forecasting procedure using \textbf{Specification 1} in Appendix~\ref{appendix:predsensitivity}. This is the specification that we follow in the main text. It is as follows.
 
 \begin{enumerate}
 \item Use the auxiliary sample ($n$) to estimate the the coefficients characterizing $\phi_{j,a} \left( \cdot , \cdot \right)$.\footnote{In practice, we use a weighted version of the auxiliary samples. The weights give relatively high importance to the individuals in the auxiliary sample whose characteristics $\bm{B}_k$ are close to the those of the individuals in the experimental sample. See Appendix~\ref{appendix:match}.}
@@ -1367,7 +1367,7 @@ Y_{n,j,a} -  \hat{\phi}_{j,a} (\bm{X}_{k,a}, \bm{B}_k) : = \hat{\varepsilon}_{n,
 
 For outcome $j$, we form the vector of residuals $\hat{\bm{\varepsilon}}_{n,j} : = \left[ \hat{\varepsilon_{n,j,a^*+1}}, \ldots, \hat{\varepsilon_{n,j,A}} \right]$.
 
-\item At age $a^*+1$, we construct the predicted outcome for the experimental sample (e) for each individual as follows:
+\item At age $a^*+1$, we construct the forecasted outcome for the experimental sample (e) for each individual as follows:
 
 \begin{equation}
 \hat{Y}_{e,j,a^*+1} = \hat{\phi}_{j,a^*+1} \left( \bm{X}_{e,a^*+1}, \bm{B}_e \right).
@@ -1375,23 +1375,23 @@ For outcome $j$, we form the vector of residuals $\hat{\bm{\varepsilon}}_{n,j} :
 
 \noindent We are able to evaluate $\hat{\phi}_{j,a^*+1}$ at $ \bm{X}_{e,a^*+1}, \bm{B}_e $ even when $\bm{X}_{e,a^*+1}$ contains a one-period lag of $Y_{e,j,a^*+1}$ because we observe $Y_{e,j,a^*}$. This prediction does not account for estimation error. We discuss estimation error below.
 
-\item At age $a^*+2$, we construct the predicted outcome in the experimental sample (e) as follows:
+\item At age $a^*+2$, we construct the forecasted outcome in the experimental sample (e) as follows:
 
 \begin{equation}
 \hat{Y}_{e,j,a^*+2} = \hat{\phi}_{j,a^*+1} \left( \bm{X}_{e,a^*+1}, \bm{B}_e \right).
 \end{equation}
 
-\noindent We are able to evaluate $\hat{\phi}_{j,a^*+2}$ at $ \bm{X}_{e,a^*+2}, \bm{B}_e $ even when $\bm{X}_{e,a^*+2}$ contains a one-period lag of $Y_{e,j,a^*+2}$ because we can predict $Y_{e,j,a^*+1}$ from the previous step.
+\noindent We are able to evaluate $\hat{\phi}_{j,a^*+2}$ at $ \bm{X}_{e,a^*+2}, \bm{B}_e $ even when $\bm{X}_{e,a^*+2}$ contains a one-period lag of $Y_{e,j,a^*+2}$ because we can forecast $Y_{e,j,a^*+1}$ from the previous step.
 
-\item We iterate this procedure up to age $A$. For outcome $j$, we form the vector of predictions $\hat{\bm{Y}}_{e,j} : = \left[ \hat{Y}_{e,j,a^*+1}, \ldots,  \hat{Y}_{e,j,A} \right]$.
+\item We iterate this procedure up to age $A$. For outcome $j$, we form the vector of forecasts $\hat{\bm{Y}}_{e,j} : = \left[ \hat{Y}_{e,j,a^*+1}, \ldots,  \hat{Y}_{e,j,A} \right]$.
 
-\item Under Assumption~\ref{ass:summary} (Invariance), the distribution of $\hat{\bm{\varepsilon}}_{n,j}$ is a consistent estimator of the distribution of $\hat{\bm{\varepsilon}}_{e,j}$. We form a prediction that accounts for prediction error as follows:
+\item Under Assumption~\ref{ass:summary} (Invariance), the distribution of $\hat{\bm{\varepsilon}}_{n,j}$ is a consistent estimator of the distribution of $\hat{\bm{\varepsilon}}_{e,j}$. We form a forecast that accounts for forecasting error as follows:
 
 \begin{equation}
 \tilde{\bm{Y}}_{e,j} = \hat{\bm{Y}}_{e,j} + \hat{\bm{\varepsilon}}_{n,j}.
 \end{equation}
 
-\noindent We randomly sample a vector of residuals from an individual $j$ in the auxiliary sample ($n$) and pair it with the vector $\hat{\bm{Y}}_{e,j}$ of individual $i$ in the experimental sample ($e$) to form the prediction $\tilde{\bm{Y}}_{e,j}$ for individual $i$ in the experimental sample. That is, the pairing of individual $j$ in the auxiliary sample ($n$) with individual $i$ in the experimental sample ($e$) is random. Random pairing is valid under invariance and exogeneity, i.e. under this assumption the vector of residuals from any individual $j$ in the auxiliary sample is a valid estimate for the vector of residuals of any individual $i$ in the experimental sample. We form the pairing one time for the main point estimates, and then bootstrap this pairing when producing inference. See Appendix~\ref{appendix:bootstrap} for more details on our inference procedures.
+\noindent We randomly sample a vector of residuals from an individual $j$ in the auxiliary sample ($n$) and pair it with the vector $\hat{\bm{Y}}_{e,j}$ of individual $i$ in the experimental sample ($e$) to form the forecast $\tilde{\bm{Y}}_{e,j}$ for individual $i$ in the experimental sample. That is, the pairing of individual $j$ in the auxiliary sample ($n$) with individual $i$ in the experimental sample ($e$) is random. Random pairing is valid under invariance and exogeneity, i.e. under this assumption the vector of residuals from any individual $j$ in the auxiliary sample is a valid estimate for the vector of residuals of any individual $i$ in the experimental sample. We form the pairing one time for the main point estimates, and then bootstrap this pairing when producing inference. See Appendix~\ref{appendix:bootstrap} for more details on our inference procedures.
 \end{enumerate}
 
 \noindent Second, we formulate our estimation strategy in terms of GMM \citep{Hansen_1982_Econometrica}. To this end, note that Assumption ~\ref{ass:exog} (Exogeneity) and Assumption~\ref{ass:summary} (Invariance) imply the following moment condition:
@@ -1404,9 +1404,9 @@ For outcome $j$, we form the vector of residuals $\hat{\bm{\varepsilon}}_{n,j} :
 
 \noindent We use the auxiliary sample ($n$) to estimate the vector of coefficients. Let $\bm{m} \left ( \cdot, \bm{\theta} \right)$, stack the function $\bm{m}_{j,a} \left( \bm{X}_{n,a}, \bm{B}_{n} ; \bm{\theta}_{j,a} \right)$  for all $j \in \mathcal{J}_a$, all $a \in [0, \ldots A]$, and $k = n$.\\
 
-\noindent Observing the outcomes at age $a^*$ provides us with additional moment conditions. To see this, note that, in our analysis,  $\bm{X}_{k,a^*+1}$ contains a lagged variable of the outcome to predict and define the moment: $h_{j,a^*+1}  \left( \bm{X}_{e,a^*+1}, \bm{B}_{n} ; \bm{\theta}_{j,a^*+1} \right) =:  {\bm{X}_{e,a^*+1}}^{'} \left( \hat{Y}_{e,j,a^*+1} - \phi_{j,a^*+1} \left ( \bm{X}_{e,a^*+1}, \bm{B}_{e} \right) \right)$, where $\hat{Y}_{e,j,a^*+1}$ is defined as before. Although this moment uses information in the auxilliary sample (through the construction of $\hat{Y}_{e,j,a^*+1}$), it provides additional information (not in \eqref{eq:moment}) through $\bm{X}_{e,a^*+1}$. It is a key moment, because it initializes the out-of-sample predictions.\\
+\noindent Observing the outcomes at age $a^*$ provides us with additional moment conditions. To see this, note that, in our analysis,  $\bm{X}_{k,a^*+1}$ contains a lagged variable of the outcome to forecast and define the moment: $h_{j,a^*+1}  \left( \bm{X}_{e,a^*+1}, \bm{B}_{n} ; \bm{\theta}_{j,a^*+1} \right) =:  {\bm{X}_{e,a^*+1}}^{'} \left( \hat{Y}_{e,j,a^*+1} - \phi_{j,a^*+1} \left ( \bm{X}_{e,a^*+1}, \bm{B}_{e} \right) \right)$, where $\hat{Y}_{e,j,a^*+1}$ is defined as before. Although this moment uses information in the auxilliary sample (through the construction of $\hat{Y}_{e,j,a^*+1}$), it provides additional information (not in \eqref{eq:moment}) through $\bm{X}_{e,a^*+1}$. It is a key moment, because it initializes the out-of-sample forecasts.\\
 
-\noindent For some outcomes, there are gaps in the experimental sample. For example, we observe labor and transfer income at ages 21 and 30. In this case, we have two additional moments, not only one. Stack these set of additional moments and denote them by $\bm{h} \left ( \cdot, \bm{\theta} \right)$ (and helps us initialize the out-of-sample predictions). These additional set of moments overidentify the parameter vector of interest, $\bm{\theta}$. Standard procedures allow us to use these set of additional moments to improve efficiency.\\
+\noindent For some outcomes, there are gaps in the experimental sample. For example, we observe labor and transfer income at ages 21 and 30. In this case, we have two additional moments, not only one. Stack these set of additional moments and denote them by $\bm{h} \left ( \cdot, \bm{\theta} \right)$ (and helps us initialize the out-of-sample forecasts). These additional set of moments overidentify the parameter vector of interest, $\bm{\theta}$. Standard procedures allow us to use these set of additional moments to improve efficiency.\\
 
 \noindent Let $\bm{W}$ be a positive definite matrix. We estimate $\bm{\theta}$ by minimizing
 
@@ -1434,24 +1434,24 @@ Y_{n,j,a} -  \hat{\phi}_{j,a} (\bm{X}_{k,a}, \bm{B}_k) : = \hat{\varepsilon}_{n,
 
 \noindent For outcome $j$, we form the vector of residuals $\hat{\bm{\varepsilon}}_{n,j} : = \left[ \hat{\varepsilon}_{n,j,a^*+1}, \ldots, \hat{\varepsilon}_{n,j,A} \right]$.
 
-\item At age $a \geq a^*+1$, we construct the predicted outcome for the experimental sample (e) for each individual as follows:
+\item At age $a \geq a^*+1$, we construct the forecasted outcome for the experimental sample (e) for each individual as follows:
 
 \begin{equation}
 \hat{Y}_{e,j,a} = \hat{\phi}_{j,a} \left( \bm{X}_{e,a}, \bm{B}_e \right).
 \end{equation}
 
-\noindent We are able to evaluate $\hat{\phi}_{j,a^*+1}$ at $ \bm{X}_{e,a^*+1}, \bm{B}_e $ because $\bm{X}_{e,a^*+1}$ is fully observed in the experimental data. We stack the predictions across ages in the following vector $\hat{\bm{Y}}_{e,j} : = \left[ \hat{Y}_{e,j,a^*+1}, \ldots,  \hat{Y}_{e,j,A} \right]$. These predictions do not account for estimation error. We discuss estimation error below.
+\noindent We are able to evaluate $\hat{\phi}_{j,a^*+1}$ at $ \bm{X}_{e,a^*+1}, \bm{B}_e $ because $\bm{X}_{e,a^*+1}$ is fully observed in the experimental data. We stack the forecasts across ages in the following vector $\hat{\bm{Y}}_{e,j} : = \left[ \hat{Y}_{e,j,a^*+1}, \ldots,  \hat{Y}_{e,j,A} \right]$. These forecasts do not account for estimation error. We discuss estimation error below.
 
-\item Under Assumption~\ref{ass:summary} (Invariance), the distribution of $\hat{\bm{\varepsilon}}_{n,j}$ is a consistent estimator of the distribution of $\hat{\bm{\varepsilon}}_{e,j}$. We form a prediction that accounts for prediction error as follows:
+\item Under Assumption~\ref{ass:summary} (Invariance), the distribution of $\hat{\bm{\varepsilon}}_{n,j}$ is a consistent estimator of the distribution of $\hat{\bm{\varepsilon}}_{e,j}$. We form a forecast that accounts for forecasting error as follows:
 
 \begin{equation}
 \tilde{\bm{Y}}_{e,j} = \hat{\bm{Y}}_{e,j} + \hat{\bm{\varepsilon}}_{n,j}.
 \end{equation}
 
-\noindent In practice, we randomly sample a vector of residuals from an individual $j$ in the auxiliary sample ($n$) and pair it with the vector $\hat{\bm{Y}}_{e,j}$ of individual $i$ in the experimental sample ($e$) to form the prediction $\tilde{\bm{Y}}_{e,j}$ for individual $i$ in the experimental sample. That is, the pairing of individual $j$ in the auxiliary sample ($n$) with individual $i$ in the experimental sample ($e$) is random. Random pairing is valid under invariance and exogeneity, i.e. under this assumption the distribution of the residuals for individuals $j$ in the auxiliary sample is a valid estimate for the vector of residuals for individuals $i$ in the experimental sample. We form the pairing one time to obtain our estimates, and then bootstrap this pairing when producing inference. See Appendix~\ref{appendix:bootstrap} for more details on our inference procedures.
+\noindent In practice, we randomly sample a vector of residuals from an individual $j$ in the auxiliary sample ($n$) and pair it with the vector $\hat{\bm{Y}}_{e,j}$ of individual $i$ in the experimental sample ($e$) to form the forecast $\tilde{\bm{Y}}_{e,j}$ for individual $i$ in the experimental sample. That is, the pairing of individual $j$ in the auxiliary sample ($n$) with individual $i$ in the experimental sample ($e$) is random. Random pairing is valid under invariance and exogeneity, i.e. under this assumption the distribution of the residuals for individuals $j$ in the auxiliary sample is a valid estimate for the vector of residuals for individuals $i$ in the experimental sample. We form the pairing one time to obtain our estimates, and then bootstrap this pairing when producing inference. See Appendix~\ref{appendix:bootstrap} for more details on our inference procedures.
 \end{enumerate}
 
-\noindent In this specification, there is no ``initialization'' of the prediction out of sample. Thus, the GMM estimate consists of minimizing
+\noindent In this specification, there is no ``initialization'' of the forecast out of sample. Thus, the GMM estimate consists of minimizing
 
 \begin{equation}
 Q :=  {\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\theta} \right) }  \end{bmatrix}}^{'}
@@ -1460,7 +1460,7 @@ Q :=  {\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\theta} \right) }  \end{
 
 \noindent where $\bm{m}_{j,a} \left( \bm{X}_{n,a}, \bm{B}_{n} ; \bm{\theta}_{j,a} \right) := {\bm{X_{n,a}}}^{'} \left( Y_{n,j,a}^d -   \phi_{j,a} \left( \bm{X}_{n,a}^d, \bm{B}_{n} \right) \right)$ for $a \in [0, \ldots A]$ and  $\bm{X}_{n,a}$ contains no lags of $Y_{n,j,a}^d$.\\
 
-\noindent  To explain the prediction steps for \textbf{Specification 3}, recall that we $\rho$-transform the model and write:
+\noindent  To explain the forecasting steps for \textbf{Specification 3}, recall that we $\rho$-transform the model and write:
 
 \begin{equation}
 Y_{k,a} = \lambda_{0} \left( 1 - \rho \right) + \left( \lambda_{1} + \rho \right) Y_{k,a-1} - \lambda_{1} \rho Y_{k,a-2} + \lambda_{2} \left( \bm{X}_{k,a} - \rho \bm{X}_{k,a-1}  \right) + U_{k,a} \label{eq:rhotransform}
@@ -1481,11 +1481,11 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 \mathbb{E} \left[ \left( \Delta Y_{k,a} -  \lambda_{1} \Delta Y_{k,a-1} \right)   Y_{k,a - j} \right] \quad j = 2, \ldots, a - 1; a = a^*+ 2, \ldots, A. \label{eq:abmoment}
 \end{equation}
 
-\noindent Using estimates from this procedure, we form the prediction in the following steps:
+\noindent Using estimates from this procedure, we form the forecast in the following steps:
 
 \begin{enumerate}
 \item Use the auxiliary sample (n) to estimate the coefficients in Equation~\eqref{eq:linear1bb} based on the set of moments in \eqref{eq:abmoment}.
-\item At age $a^*+1$, use these coefficients to form the (out-of-sample) prediction in the experimental sample (e):
+\item At age $a^*+1$, use these coefficients to form the (out-of-sample) forecast in the experimental sample (e):
 
 \begin{equation}
 \hat{Y}_{e,a^* + 1} = \hat{\lambda}_{0} + \hat{\lambda}_{1} Y_{e,a^*},
@@ -1493,15 +1493,15 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 
 \noindent noting that we observe $Y_{k,a^*}$.
 
-\item At age $a^*+2$, use the same coefficients to form the (out-of-sample) prediction, based on the $a^*+1$ prediction. That is:
+\item At age $a^*+2$, use the same coefficients to form the (out-of-sample) forecast, based on the $a^*+1$ forecast. That is:
 
 \begin{equation}
 \hat{Y}_{e,a^* + 2} = \hat{\lambda}_{0} + \hat{\lambda}_{1} \hat{Y}_{e,a^*+1}.
 \end{equation}
 
-\item Iterate this procedure of to age $A$ and stack the vector of predictions (without accounting for prediction error) as $\hat{\bm{Y}}_{e} : = \left[ \hat{Y}_{e,a^*+1}, \ldots,  \hat{Y}_{e,A} \right]$.
+\item Iterate this procedure of to age $A$ and stack the vector of forecasts (without accounting for forecasting error) as $\hat{\bm{Y}}_{e} : = \left[ \hat{Y}_{e,a^*+1}, \ldots,  \hat{Y}_{e,A} \right]$.
 
-\item To account for prediction error we need an individual level estimate of $f + u_{a}$. We proceed as follows: (i) we observe labor income at two ages, 21 and 30. We use the estimates of the coefficients characterizing Equation~\eqref{eq:linear1bb} from the auxiliary sample (n) to predict labor income from ages 22 to 29. Then, we estimate the coefficients in Equation~\eqref{eq:linear1bb} in the experimental sample (e). This allows us to recover an estimate for $f + u_{a}$. In fact, we recover one estimate of $f + u_{a}$ for each $a \in \left[22, \ldots, 30 \right]$. Each of these estimates is a valid estimate for $f + u_{a}$ because $u_{a}$ is i.i.d. To form our prediction error, at each age, we take the average of these available estimates.. We add it to  $\hat{Y}_{e,a}$ for $a \geq a^* + 1$ to form a prediction that accounts for error.
+\item To account for forecasting error we need an individual level estimate of $f + u_{a}$. We proceed as follows: (i) we observe labor income at two ages, 21 and 30. We use the estimates of the coefficients characterizing Equation~\eqref{eq:linear1bb} from the auxiliary sample (n) to forecast labor income from ages 22 to 29. Then, we estimate the coefficients in Equation~\eqref{eq:linear1bb} in the experimental sample (e). This allows us to recover an estimate for $f + u_{a}$. In fact, we recover one estimate of $f + u_{a}$ for each $a \in \left[22, \ldots, 30 \right]$. Each of these estimates is a valid estimate for $f + u_{a}$ because $u_{a}$ is i.i.d. To form our forecasting error, at each age, we take the average of these available estimates.. We add it to  $\hat{Y}_{e,a}$ for $a \geq a^* + 1$ to form a prediction that accounts for error.
 \end{enumerate}
 
 
@@ -1509,9 +1509,9 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 
 \noindent This section provides the precise steps for constructing the bootstrap distribution and for computing the standard errors for three of the main estimates in our paper.
 
-\subsubsection{Predictions} \label{appendix:bootstrapspreds}
+\subsubsection{Forecasts} \label{appendix:bootstrapspreds}
 
-\noindent We execute the following steps to compute the empirical bootstrap distribution and the standard error when predicting outcomes out of sample combing experimental and auxiliary datasets.
+\noindent We execute the following steps to compute the empirical bootstrap distribution and the standard error when forecasting outcomes out of sample combing experimental and auxiliary datasets.
 
 \begin{enumerate}
 \item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Information on the entire history of each individual is obtained in each re-sample.\footnote{We re-sample individuals independently of their treatment status.} Call this resampled sample $(e,s)$. Separate this sample by treatment and control group into $(e,s,1)$ and $(e,s,0)$, respectively.
@@ -1522,11 +1522,11 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 
 \item Fit the dynamic relationship in Equation~\eqref{eq:outcome}, using predictors as detailed in Appendix~\ref{appendix:pred}. We fit two parameterizations of the dynamic relationships. One for the synthetic treatment, and one for the synthetic control. When providing estimates by gender, we also produce different predictions by gender.
 
-\item Use the parameterization in Step 4. to fit out of sample in $(e,s,1)$ and $(e,s,0)$, respectively. This gives us an age-by-age prediction \textit{without prediction error} for our treatment and control groups. Store the predictions at all ages for individual $i$ in this sample in a vector $\bm{Y}_{i,e,s}^d$, where $\bm{Y}_{i,e,s}^d$ is the vector of predictions for individual $i$ in the experimental bootstrap sample $s$, experimental group $d$.
+\item Use the parameterization in Step 4. to fit out of sample in $(e,s,1)$ and $(e,s,0)$, respectively. This gives us an age-by-age forecast \textit{without forecasting error} for our treatment and control groups. Store the predictions at all ages for individual $i$ in this sample in a vector $\bm{Y}_{i,e,s}^d$, where $\bm{Y}_{i,e,s}^d$ is the vector of forecasts for individual $i$ in the experimental bootstrap sample $s$, experimental group $d$.
 
 \item In step 4., we compute an individual-level vector of residuals in each of the samples $(n,s',0)$ and $(n,s',1)$. That is, each individual has a vector containing the residuals of each of her predicted variable (for example, labor income). Call this vector of residuals $\bm{\mathcal{E}}_{i',n,s'}^d$: the vector of residuals for individual $i'$ in the auxiliary bootstrap sample $s'$, in the synthetic group $d$.
 
-\item Randomly pair individual $i'$ in $s'$ with individual $i$ in $s$. The prediction accounting for prediction error is $\bm{Y}_{i,e,s}^d + \bm{\mathcal{E}}_{i',e,s'}^d$. As described in Appendix~\ref{appendix:gmm}, this step changes. We estimate the prediction error from the experimental sample (and we account for this when bootstrapping as well).
+\item Randomly pair individual $i'$ in $s'$ with individual $i$ in $s$. The forecast accounting for forecasting error is $\bm{Y}_{i,e,s}^d + \bm{\mathcal{E}}_{i',e,s'}^d$. As described in Appendix~\ref{appendix:gmm}, this step changes. We estimate the forecasting error from the experimental sample (and we account for this when bootstrapping as well).
 
 \item Repeat this for all pairs of samples $(n,s'), (e,s)$. We resample the experimental sample and auxiliary sample 100 times each. This gives us the empirical bootstrap distribution, with 100*100 points.
 
@@ -1567,8 +1567,8 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 
 \begin{enumerate}
 
-\item Use the same sampling procedure as when computing the standard error for the predictions. In this case, compute the predictions for all outcomes.
-\item Discount the predictions to age of birth.
+\item Use the same sampling procedure as when computing the standard error for the forecasts. In this case, compute the predictions for all outcomes.
+\item Discount the forecasts to age of birth.
 \item Compute cost-benefit ratios and internal rates of return.
 \item Discard internal rate of returns not satisfying the single crossing property (see Appendix~\ref{app:method_irr}).
 \item Compute standard errors and $p$-value's as before.

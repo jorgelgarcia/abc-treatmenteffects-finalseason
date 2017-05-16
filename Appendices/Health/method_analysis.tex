@@ -18,7 +18,7 @@ This information is not available in the ABC/CARE data, but it is assumed that n
 
 \noindent Most FAM models depend on smoking status. Employment status affects FAM transitions in marital status, childbearing, claiming of disability insurance (DI) and supplemental security income (SSI), and type of health insurance.
 One male in the ABC control group is missing smoking status and, although known to be not working, is also missing specific employment status (unemployed or out of the labor force).
- We use a multinomial logit model to jointly estimate the probability of each combined smoking and employment category among 25- to 35-year-olds in the PSID who were not working. At the beginning of each simulation repetition, we use a Monte Carlo random draw generated from this distribution to assign this subject's smoking and employment statuses. This same subject is also missing information about binge drinking. A separate binary Probit binge drinking model was estimated using the age 25--35 PSID data. A Monte Carlo random draw is taken according the Probit probability to predict binge drinking behavior at the beginning of the simulation. \\
+ We use a multinomial logit model to jointly estimate the probability of each combined smoking and employment category among 25- to 35-year-olds in the PSID who were not working. At the beginning of each simulation repetition, we use a Monte Carlo random draw generated from this distribution to assign this subject's smoking and employment statuses. This same subject is also missing information about binge drinking. A separate binary Probit binge drinking model was estimated using the age 25--35 PSID data. A Monte Carlo random draw is taken according the Probit probability to forecast binge drinking behavior at the beginning of the simulation. \\
 
 \noindent BMI affects FAM transitions in health, functional status, employment, and smoking.
 The FAM transition models are estimated with BMI computed from self-reported height and weight in the PSID.
@@ -28,13 +28,13 @@ First, self-reported BMI can be biased by factors such as actual height and weig
 Second, it is possible that BMI could increase or decrease systematically in the years between the age-30 subject interview and the age-34 health interview. \\
 
 \noindent To address the first BMI imputation challenge, we use a variation on the method of \citet*{Courtemanche_etal_2015_Adjusting-Body-Mass} to impute measured BMI in the PSID.
-While the method in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} works with height and weight, we apply the specification to directly model BMI. Using respondents aged 30 to 40 in the 2002-2010 NHANES waves, we predict measured BMI from percentile ranks of self-reported BMI using the model specification in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass}. Three variations
+While the method in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} works with height and weight, we apply the specification to directly model BMI. Using respondents aged 30 to 40 in the 2002-2010 NHANES waves, we forecast measured BMI from percentile ranks of self-reported BMI using the model specification in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass}. Three variations
 on the spline interactions of \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} are also considered. After estimating these models using NHANES data, covariate values from the PSID
 age 30--34 data in years 2002--2013 are used to impute measured BMI values for PSID respondents. A Kolmogorov-Sminov (K-S) test and a visual inspection of smoothed histograms are used to compare the distribution of PSID imputed values to the distribution of observed values in the NHANES estimation sample. The model specification used for imputation has the smallest K-S distance between the two distributions. The smoothed histogram of the distributions for the entire samples and the black subgroup in each data set appears reasonably close.  \\
 
 \noindent After imputing values of measured BMI for PSID respondents age 30--34, we turn to the second problem: accounting for systematic trends in BMI from the age 30 interview to the health interview. The goal is to have a model that maps from measured BMI at the health interview around age 34 to self-reported BMI at the age 30 interview. Employing the longitudinal structure of PSID, we match each respondent's first interview between age 30--32 with their imputed measured BMI between ages 33--40. We then estimate a model using self-reported BMI between ages 30--32 as the response variable and imputed measured BMI at ages 33--40, the age when BMI is actually measured, along with other variables observed at age 30 as explanatory variables. This imputation model is applied to any ABC/CARE subject who has their health interview at least one year after their age 30 interview.\\
 
-\noindent For ABC/CARE subjects who have their health interview within one year of the age 30 interview, we assume that any systematic time trends in BMI are too small to have any practical significance. However, we still need to convert the imputed measured BMI to a self-reported value for compatibility with other transition models estimated in PSID. This model is estimated on ages 30--32 in the PSID and uses covariates from the age 30 interview along with imputed measured BMI to predict self-reported BMI. \\
+\noindent For ABC/CARE subjects who have their health interview within one year of the age 30 interview, we assume that any systematic time trends in BMI are too small to have any practical significance. However, we still need to convert the imputed measured BMI to a self-reported value for compatibility with other transition models estimated in PSID. This model is estimated on ages 30--32 in the PSID and uses covariates from the age 30 interview along with imputed measured BMI to forecast self-reported BMI. \\
 
 \noindent At the beginning of each simulation repetition, we choose the appropriate model to impute self-reported BMI for each ABC/CARE subject based on the time between their age 30 interview and their health interview. Their expected BMI is estimated from this model. A Monte Carlo Normal random draw is generated using the subject's expected BMI and the estimated variance from the model. This Monte Carlo draw is then assigned to be the subject's initial self-reported BMI in the simulation. Using BMI from the health interview limits the ABC/CARE subjects simulated in FAM to only those who have height and weight measurements in the health interview. \\
 
@@ -50,7 +50,7 @@ If the outcome is positive, the subject is assigned to have some private insuran
 
 \noindent FAM uses six Activities of Daily Living (ADLs) about which there is data in PSID: walking, dressing, eating, bathing or showering, getting in and out of bed or a chair, and using the toilet, including getting to the toilet.
 FAM simulates the number of these ADLs in which the subject has difficulty.
-ADL difficulties predict FAM transitions in benefits claiming, mortality, employment status, insurance category, and nursing home residency.
+ADL difficulties forecast FAM transitions in benefits claiming, mortality, employment status, insurance category, and nursing home residency.
 FAM also transitions the count of difficulties among six Instrumental Activities of Daily Living (IADLs) from PSID: preparing one's own meals; shopping for personal toilet items or medicines; managing one's own money, such as keeping track of expenses or paying bills; using the phone; doing heavy housework, like scrubbing floors or washing windows; and doing light housework, like doing dishes, straightening up, or light housecleaning.
 Both ADLs and IADLs are components of FAM's model for quality-adjusted life years (QALYs).
 The ABC/CARE age-30 subject interview does not ask about ADLs or IADLs, but it does ask if the subject has a physical or nervous condition that keeps them from working.
@@ -122,7 +122,7 @@ The scoring system for EQ-5D was first developed using a U.K. sample.\footnote{\
 a U.S. sample was generated.\footnote{\citet{Shaw_etal_2005_EQ5D_MC}.} The PSID does not ask the appropriate questions for computing EQ-5D, but the MEPS does. \\
 
 % review this:
-\noindent We predict EQ-5D scores from the MEPS onto the PSID data using common measures between the MEPS and PSID.\footnote{The main variables in this prediction are self-reported health and requiring help with ADLs.} We then predict the EQ-5D scores for all PSID members running a linear regression using the variables that are transitioned in FAM (including ADL counts, IADL counts, and diseases). The microsimulation uses this linear regression to compute QALYs. \\
+\noindent We forecast EQ-5D scores from the MEPS onto the PSID data using common measures between the MEPS and PSID.\footnote{The main variables in this prediction are self-reported health and requiring help with ADLs.} We then forecast the EQ-5D scores for all PSID members running a linear regression using the variables that are transitioned in FAM (including ADL counts, IADL counts, and diseases). The microsimulation uses this linear regression to compute QALYs. \\
 %
 %We use a crosswalk from MEPS to compute EQ-5D scores for PSID respondents.\footnote{Section \ref{sec:model_development_qalys_eq5d}
 %describes EQ-5D in MEPS. Details of the crosswalk model development are given
@@ -186,7 +186,7 @@ The occurrence of mortality censors observation of other
 outcomes in a current year. \\
 % Mortality is recorded from exit interviews.
 
-\noindent A number of restrictions are placed on the way feedback is allowed in the model. Our microsimulation model starts the health predictions at age 30, with the information on observed characteristics available at this age. We restrict it to the individuals for whom we have information from the health follow-up. This allows us to account for components that are crucial for predicting health outcomes, such as the body mass index (BMI). In sum, the models predict the probability of being in any of the states in the horizontal axis of Table~\ref{table:transition} at age $a+1$ based on the state at age $a$, which is described by the vertical axis of the table. The crosses indicate if the estimation of the probability of being in a state at age $a+1$ considers the relevant state at age $a$. Absorbing states are an exception. For example, heart disease at age $a$ does not enter in the estimation of transitions for heart disease at age $a+1$ because it is an absorbing state: once a person has heart disease, she carries it through the rest of her life. The same is true for chronic or permanent conditions such as hypertension, having a stroke, etc. \\
+\noindent A number of restrictions are placed on the way feedback is allowed in the model. Our microsimulation model starts the health forecasts at age 30, with the information on observed characteristics available at this age. We restrict it to the individuals for whom we have information from the health follow-up. This allows us to account for components that are crucial for forecasting health outcomes, such as the body mass index (BMI). In sum, the models forecast the probability of being in any of the states in the horizontal axis of Table~\ref{table:transition} at age $a+1$ based on the state at age $a$, which is described by the vertical axis of the table. The crosses indicate if the estimation of the probability of being in a state at age $a+1$ considers the relevant state at age $a$. Absorbing states are an exception. For example, heart disease at age $a$ does not enter in the estimation of transitions for heart disease at age $a+1$ because it is an absorbing state: once a person has heart disease, she carries it through the rest of her life. The same is true for chronic or permanent conditions such as hypertension, having a stroke, etc. \\
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
@@ -194,7 +194,7 @@ outcomes in a current year. \\
 \scriptsize
 \input{AppOutput/Methodology/transitiontable}
 {\flushleft\footnotesize
-Note: This table illustrates how health outcomes at age a predict health outcomes at age $a + 1$. The crosses indicate if we use the age a outcome to predict the age $a + 1$ outcome. DI Claim: claims of benefits to individuals and their families if ``insured"---i.e., worked long enough and paid Social Security taxes; SS claim: claim of social security retirement benefits; SSI Claim: claims of stipends for low-income people who are older than 65 years old, blind, or disabled.}
+Note: This table illustrates how health outcomes at age a forecast health outcomes at age $a + 1$. The crosses indicate if we use the age a outcome to forecast the age $a + 1$ outcome. DI Claim: claims of benefits to individuals and their families if ``insured"---i.e., worked long enough and paid Social Security taxes; SS claim: claim of social security retirement benefits; SSI Claim: claims of stipends for low-income people who are older than 65 years old, blind, or disabled.}
 \end{threeparttable}
 \end{sidewaystable}
 
@@ -254,9 +254,9 @@ to be done separately for each outcome. \\
 
 \paragraph{Specification Tests for the First-order Markov Assumption in FAM} \label{section:firstorder}
 
-\noindent The FAM model assumes a vector first-order Markov process. To make this clear, take the example of heart disease. As previously explained and stated in Table~\ref{table:transition}, we predict ``heart disease'' at age $a+1$ based on hypertension and diabetes at age $a$, as well as other risk factors and health behaviors (smoking, BMI, and physical activity).\footnote{The diseases that help predicting each other are based on research and advice of clinicians, as explained and justified in \citet{Goldman_etal_2015_Future-Elderly-Model-Report}.} In this model, heart disease is assumed to be an absorbing state. That is, if an individual suffers heart disease at age $a$, her probability of having heart disease at age $a+1$ equals one.\\
+\noindent The FAM model assumes a vector first-order Markov process. To make this clear, take the example of heart disease. As previously explained and stated in Table~\ref{table:transition}, we forecast ``heart disease'' at age $a+1$ based on hypertension and diabetes at age $a$, as well as other risk factors and health behaviors (smoking, BMI, and physical activity).\footnote{The diseases that help predicting each other are based on research and advice of clinicians, as explained and justified in \citet{Goldman_etal_2015_Future-Elderly-Model-Report}.} In this model, heart disease is assumed to be an absorbing state. That is, if an individual suffers heart disease at age $a$, her probability of having heart disease at age $a+1$ equals one.\\
 
-\noindent In our empirical analysis, we estimate the transition probabilities for each disease using a Probit model, and the variables indicated in Table~\ref{table:transition} as well as background characteristics not affected by treatment. We test the first-order Markov process assumption using a likelihood test ratio comparing a model based on first-order lags (a first-order Markov process) to predict the disease of interest (null) and a model based on second-order lags (second-order Markov process). Table~\ref{table:lrtests} show the results from these tests. \\
+\noindent In our empirical analysis, we estimate the transition probabilities for each disease using a Probit model, and the variables indicated in Table~\ref{table:transition} as well as background characteristics not affected by treatment. We test the first-order Markov process assumption using a likelihood test ratio comparing a model based on first-order lags (a first-order Markov process) to forecast the disease of interest (null) and a model based on second-order lags (second-order Markov process). Table~\ref{table:lrtests} show the results from these tests. \\
 
 \begin{table}[H]
 \begin{threeparttable}
@@ -275,26 +275,26 @@ Stroke              & 3.94 & 4 & 0.14 \\
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table presents likelihood ratios comparing first- and second-order Markov processes to predict diseases at age $a+1$, based on diseases and other health and demographic conditions at age $a$. The null hypotheses is the first-order Markov process, and the alternative is the second order.
+\item Note: This table presents likelihood ratios comparing first- and second-order Markov processes to forecast diseases at age $a+1$, based on diseases and other health and demographic conditions at age $a$. The null hypotheses is the first-order Markov process, and the alternative is the second order.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
-\noindent The interpretation of the results in Table~\ref{table:lrtests} is the following. The heart disease of Column ``1st vs. 2nd'' tests the null that first-order lags suffice to construct the transition of heart disease from age $a$ to age $a+1$. We test the first-order Markov assumption with respect to other diseases. Limited support on smoking, BMI, and physical activity does not allow us to test the first-order Markov assumption with respect to these variables.\footnote{We lack observations in the auxiliary sample for which information is available for this conditions and the diseases of interest for multiple lags.} We cannot reject that a 1st-order Markov model is enough to predict heart disease at age $a+1$, if compared to a second-order Markov model. This test has two degrees of freedom because we add second-order lags for hypertension and diabetes in the alternative model (see Table~\ref{table:transition}).\footnote{In work available on request, we find that higher order Markov processes better predictors of heart disease at age $a+1$, relative to a first-order Markov model, for most outcomes. However, for stroke, there is some evidence of higher order dependence.} Unfortunately, limited support for the other components of the transition models do not allow us to make credible tests.\footnote{We would need to drop thousands of observations in the auxiliary samples and perform the tests using very selected samples.}\\
+\noindent The interpretation of the results in Table~\ref{table:lrtests} is the following. The heart disease of Column ``1st vs. 2nd'' tests the null that first-order lags suffice to construct the transition of heart disease from age $a$ to age $a+1$. We test the first-order Markov assumption with respect to other diseases. Limited support on smoking, BMI, and physical activity does not allow us to test the first-order Markov assumption with respect to these variables.\footnote{We lack observations in the auxiliary sample for which information is available for this conditions and the diseases of interest for multiple lags.} We cannot reject that a 1st-order Markov model is enough to forecast heart disease at age $a+1$, if compared to a second-order Markov model. This test has two degrees of freedom because we add second-order lags for hypertension and diabetes in the alternative model (see Table~\ref{table:transition}).\footnote{In work available on request, we find that higher order Markov processes better predictors of heart disease at age $a+1$, relative to a first-order Markov model, for most outcomes. However, for stroke, there is some evidence of higher order dependence.} Unfortunately, limited support for the other components of the transition models do not allow us to make credible tests.\footnote{We would need to drop thousands of observations in the auxiliary samples and perform the tests using very selected samples.}\\
 
-\noindent An alternative test for a first-order Markov process is the following: (i) use a linear probability model approximation to a first-order Markov process and the variables in Table~\ref{table:transition} to predict the disease of interest using multiple versions of the prediction models; (ii) calculate the correlation of the residuals with higher order lagged variables. Tables~\ref{table:1storderresidsheart} to \ref{table:1storderresidstroke} show these correlations. The results of these tests very strongly support a first-order Markov assumption.\\
+\noindent An alternative test for a first-order Markov process is the following: (i) use a linear probability model approximation to a first-order Markov process and the variables in Table~\ref{table:transition} to forecast the disease of interest using multiple versions of the forecasting models; (ii) calculate the correlation of the residuals with higher order lagged variables. Tables~\ref{table:1storderresidsheart} to \ref{table:1storderresidstroke} show these correlations. The results of these tests very strongly support a first-order Markov assumption.\\
 
-\noindent To illustrate how to read these tests consider Table~\ref{table:1storderresidsheart}. This table reports simple first-order Pearson correlations with the indicated variable. The row presents the residuals from predicting heart disease at age $a+1$ using different orders of lags, for the diseases listed in Table~\ref{table:transition} (for heart disease, these are hypertension and diabetes). The estimated correlations are low.
+\noindent To illustrate how to read these tests consider Table~\ref{table:1storderresidsheart}. This table reports simple first-order Pearson correlations with the indicated variable. The row presents the residuals from forecasting heart disease at age $a+1$ using different orders of lags, for the diseases listed in Table~\ref{table:transition} (for heart disease, these are hypertension and diabetes). The estimated correlations are low.
 
 \begin{landscape}
 
 \begin{table}[H]
 \begin{threeparttable}
-\caption{Tests for Linear Probability Predictions of Heart Disease at $a+1$} \label{table:1storderresidsheart}
+\caption{Tests for Linear Probability Forecasts of Heart Disease at $a+1$} \label{table:1storderresidsheart}
 \scriptsize
 \centering
 \begin{tabular}{lcccccccccc} \toprule
-& \multicolumn{10}{c}{Residuals of Prediction of Heart Disease at age $a+1$} \\
+& \multicolumn{10}{c}{Residuals of Forecast of Heart Disease at age $a+1$} \\
 Correlations with	&	Predictor Diabetes &	Hypertension &	Diabetes &	Hypertension &	Diabetes	&	Hypertension &	Diabetes & Hypertension & Diabetes & Hypertension \\
                     &	at $a - 2$ &	at $a - 2$		&	at $a - 3$ & at $a - 3$		& at $a - 4$		& at $a - 4$		& at $a - 5$	& at $a - 5$	& at $a - 6$	& at $a - 6$	\\
 
@@ -304,18 +304,18 @@ Correlations with	&	Predictor Diabetes &	Hypertension &	Diabetes &	Hypertension 
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table presents the correlation between the residuals from predicting heart disease at age $a+1$ and the predictors indicated in each column.
+\item Note: This table presents the correlation between the residuals from forecasting heart disease at age $a+1$ and the predictors indicated in each column.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 \begin{table}[H]
 \begin{threeparttable}
-\caption{Tests for Linear Probability Predictions of Hypertension at $a+1$} \label{table:1storderresidshyper}
+\caption{Tests for Linear Probability Forecasts of Hypertension at $a+1$} \label{table:1storderresidshyper}
 \centering
 \scriptsize
 \begin{tabular}{lccccc} \toprule
-& \multicolumn{5}{c}{Residuals of Prediction of Hypertension at age $a+1$} \\
+& \multicolumn{5}{c}{Residuals of Forecast of Hypertension at age $a+1$} \\
 Correlations with	&	Predictor Diabetes & Diabetes & Diabetes & Diabetes & Diabetes 	\\
                     & at $a - 2$	& at $a - 3$	& at $a - 4$	& at $a - 5$	& at $a - 6$	\\
 \midrule
@@ -324,19 +324,19 @@ Correlations with	&	Predictor Diabetes & Diabetes & Diabetes & Diabetes & Diabet
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table presents the correlation between the residuals from predicting hypertension at age $a+1$ and the predictors indicated in each column.
+\item Note: This table presents the correlation between the residuals from forecasting hypertension at age $a+1$ and the predictors indicated in each column.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 \begin{table}[H]
 \begin{threeparttable}
-\caption{Tests for Linear Probability Predictions of Stroke at $a+1$} \label{table:1storderresidstroke}
+\caption{Tests for Linear Probability Forecasts of Stroke at $a+1$} \label{table:1storderresidstroke}
 \centering
 \footnotesize
 \begin{tabular}{l *{8}{c}}
 \toprule
-& \multicolumn{8}{c}{Residuals of Prediction of Stroke at age $a+1$} \\
+& \multicolumn{8}{c}{Residuals of Forecast of Stroke at age $a+1$} \\
 Correlations with	&	Predictor Cancer &	Diabetes & Heart Disease &	Hypertension &	Cancer	& Diabetes & Heart Disease & Hypertension  \\
                     &	at $a-2$	&	at $a - 2$ & at $a - 2$	& at $a - 2$	& at $a-3$	& at $a - 3$	& at $a - 3$	& at $a - 3$ \\
 \midrule \\
@@ -345,7 +345,7 @@ Correlations with	&	Predictor Cancer &	Diabetes & Heart Disease &	Hypertension &
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table presents the correlation between the residuals from predicting stroke at age $a+1$ and the predictors indicated in each column.
+\item Note: This table presents the correlation between the residuals from forecasting stroke at age $a+1$ and the predictors indicated in each column.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -357,7 +357,7 @@ Correlations with	&	Predictor Cancer &	Diabetes & Heart Disease &	Hypertension &
 
 \noindent \textbf{Employment Status}\\
 \noindent Ultimately, we aim to simulate whether an individual is unemployed, out of the labor force, working part-time, or working full-time at
-time $t$. We treat the estimation of this as a two-stage process. In the first stage, we predict whether the individual is unemployed, out of
+time $t$. We treat the estimation of this as a two-stage process. In the first stage, we forecast whether the individual is unemployed, out of
 the labor force, or working for pay using a multinomial logit model. Then, conditional on working for pay, we estimate if
 the individual is working part- or full-time using a probit model. \\
 
@@ -501,15 +501,15 @@ GDP assumptions for 2020-2100 are based on the 2008 OASDI Trustee's Report long-
 
 \noindent Data on utilization of medical services is sparse before the age 30 interview. There are questions about utilization in the age 12, 15, and 21 interviews along with records of births for female subjects. We combined this with information about demographics, family structure, and parents' utilization of public services to estimate medical costs at each age from 8 to 32. Models were estimated separately for males and females. All imputation and cost models are estimated using MEPS data. \\
 
-\noindent Medical costs for ages 8 to 11 were estimated in three stages using age 12 interview data. First, we impute whether or not a subject spent a week in the hospital for those subjects who are missing this information in their age 12 interview. The imputation model predicts utilization based on race and whether or not the subject was ever diagnosed with asthma between ages 8--11. Next we separate the ABC/CARE subjects into the group that spent a week in the hospital in this age range and the group that did not. For the group that did not spend any time in the hospital, we predicted medical costs as a two stage model. The first stage predicts whether there were any medical costs at all. Then, the second stage predicts the amount of medical costs for those subjects who were predicted to have some costs. We assume the group that spent time in the hospital had some medical costs, so we skip the first stage and go directly to predicting the amount. The cost models use race, asthma diagnosis, whether or not the father was absent from the home, family use of food stamps, and number of siblings as predictors.\\
+\noindent Medical costs for ages 8 to 11 were estimated in three stages using age 12 interview data. First, we impute whether or not a subject spent a week in the hospital for those subjects who are missing this information in their age 12 interview. The imputation model forecasts utilization based on race and whether or not the subject was ever diagnosed with asthma between ages 8--11. Next we separate the ABC/CARE subjects into the group that spent a week in the hospital in this age range and the group that did not. For the group that did not spend any time in the hospital, we forecasted medical costs as a two stage model. The first stage predicts whether there were any medical costs at all. Then, the second stage forecasts the amount of medical costs for those subjects who were predicted to have some costs. We assume the group that spent time in the hospital had some medical costs, so we skip the first stage and go directly to predicting the amount. The cost models use race, asthma diagnosis, whether or not the father was absent from the home, family use of food stamps, and number of siblings as predictors.\\
 
-\noindent Medical costs for ages 12 to 14 follow a strategy similar to the age 8--11 costs. First, we impute whether or not a subject had any hospitalization for those subjects who do not report this in their age 15 interview. Imputations are based on race and presence or absence of an asthma diagnosis between ages 12--14. Again, we separated the ABC/CARE subjects into a group that had a hospitalization between age 8--11 and a group that did not. A two-stage model was used to predict medical costs for those with no hospitalization. Medical costs for the group that had a hospitalization were estimated directly from a single-stage model. These cost models use race, asthma diagnosis, whether the mother, father, or both parents were absent from the home, family use of food stamps, and number of siblings.\\
+\noindent Medical costs for ages 12 to 14 follow a strategy similar to the age 8--11 costs. First, we impute whether or not a subject had any hospitalization for those subjects who do not report this in their age 15 interview. Imputations are based on race and presence or absence of an asthma diagnosis between ages 12--14. Again, we separated the ABC/CARE subjects into a group that had a hospitalization between age 8--11 and a group that did not. A two-stage model was used to forecast medical costs for those with no hospitalization. Medical costs for the group that had a hospitalization were estimated directly from a single-stage model. These cost models use race, asthma diagnosis, whether the mother, father, or both parents were absent from the home, family use of food stamps, and number of siblings.\\
 
-\noindent To estimate medical costs for ages 15 to 20, we first impute whether or not the subject spent time in the hospital for those who are missing this information in the age 21 interview. The imputation model was based on race, asthma diagnosis between ages 15--20, and, for females, the birth of any children. The age 21 interview asks about the number of days spent in the hospital. However, it does not record the ages at which these hospital stays occurred. Considering the difficulty of assigning the hospital days to specific ages in the absence of other information, we decided to use only the indicator of whether or not there were any days spent in the hospital. Next, we separated subjects into a group that spent some time in the hospital between ages 15--20 and those who did not. As before, we used the direct model to predict costs for those who had been to the hospital and used a two-stage model for those who had not. The cost models predict costs based on race, asthma diagnosis, any births (female model only), use of food stamps, whether or not the subject was working age, work status, living at college, and living with parents, and marital status.\\
+\noindent To estimate medical costs for ages 15 to 20, we first impute whether or not the subject spent time in the hospital for those who are missing this information in the age 21 interview. The imputation model was based on race, asthma diagnosis between ages 15--20, and, for females, the birth of any children. The age 21 interview asks about the number of days spent in the hospital. However, it does not record the ages at which these hospital stays occurred. Considering the difficulty of assigning the hospital days to specific ages in the absence of other information, we decided to use only the indicator of whether or not there were any days spent in the hospital. Next, we separated subjects into a group that spent some time in the hospital between ages 15--20 and those who did not. As before, we used the direct model to forecast costs for those who had been to the hospital and used a two-stage model for those who had not. The cost models forecast costs based on race, asthma diagnosis, any births (female model only), use of food stamps, whether or not the subject was working age, work status, living at college, and living with parents, and marital status.\\
 
 \noindent Unlike the interviews at younger ages, the age 30 interview does not ask about utilization of medical services. To estimate costs for ages 21--31, we skipped the utilization imputation step and moved directly to cost models. We used two-stage cost models. The first stage predicts whether or not there were any costs based on race, asthma diagnosis between ages 21-31, education, use of food stamps, any births (female model only), whether or not the subject was working age, living at college, living with parents, and marital status.
 
-\noindent Table~\ref{table:pre30} summarizes individual and family characteristics used to predict medical expenditure models for each age.
+\noindent Table~\ref{table:pre30} summarizes individual and family characteristics used to forecast medical expenditure models for each age.
 
 \begin{table}[H]
 \begin{threeparttable}
@@ -533,7 +533,7 @@ Working, if working age & $\times$ & $\times$ & \checkmark & \checkmark \\
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table summarizes the explanatory variables included in the models we use to predict medical expenditure for each age group. Possible living arrangements are: living with parents, away at college, married, or other.\\
+\item Note: This table summarizes the explanatory variables included in the models we use to forecast medical expenditure for each age group. Possible living arrangements are: living with parents, away at college, married, or other.\\
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
