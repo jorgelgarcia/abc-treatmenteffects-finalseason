@@ -19,11 +19,11 @@ global googledrive: env googledrive
 
 // set general locations
 // do files
-global scripts     = "$projects/abc-treatmenteffects-finalseason/scripts/"
+global scripts     = "$projects/abccare-cba/scripts/"
 // ready data
 global dataresults = "$klmmexico/abccare/outputfiles/jun-24"
 // output
-global output      = "$projects/abc-treatmenteffects-finalseason/output/"
+global output      = "$projects/abccare-cba/output/"
 
 cd $dataresults/abccare/csv
 
@@ -93,7 +93,7 @@ global xlabels1 -.5 "Parents' Income" 2.5 "HOME Scores" 5.5 "IQ Scores"
 		  14.5 "Education" 17.5 "Employment and Income" 
 		  20.5 "Crime";
 
-global xlabels2  26.5 "Cholesterol" 29.5 "Diabetes" 32.5 "Hypertension" 
+global xlabels2  26.5 "Good Cholesterol" 29.5 "Diabetes" 32.5 "Hypertension" 
 		 35.5 "Self-Reported Health" 38.5 "Tobacco, Drugs, Alcohol"
 		 41.5 "Obesity"; 
 # delimit cr
