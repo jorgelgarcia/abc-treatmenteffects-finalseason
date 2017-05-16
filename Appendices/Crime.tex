@@ -1,6 +1,7 @@
 \section{Quantifying the Benefits in Crime Reduction} \label{appendix:crime}
 
 \subsection{Data Description}
+\label{appendix:crime-data-description}
 
 \noindent The crime data available in ABC/CARE come from four different sources provided by the program, which we supplement with auxiliary datasets. We summarize the ABC/CARE datasets and auxiliary datasets related to crime below. \\
 
@@ -222,6 +223,7 @@ We calculate our forecasts using a five-step procedure:
 }\end{figure}
 
 \subsection{Victimization Inflation}
+\label{appendix:crime-VI}
 \noindent Even though we have administrative data on crimes, we only observe the crimes that had justice system consequences (arrests or sentences). However, it is possible that the subjects committed more crimes than what we observe. Victimization Inflation (VI) is a method to capture benefits in crime reduction for crimes that did not result in justice system consequences.\footnote{\citet{Belfield_Nores_etal_2006_JHR,Heckman_Moon_etal_2010_RateofReturn}.} For most types of crimes in the U.S., there are many more victims than arrests or sentences. Using arrests as an example, VI assumes that those ``unpunished crimes'' were committed by the same people who were arrested for crimes of the same type, and in the same proportion. The calculation of VI uses as an input the national ratios of total number of reported crimes over the number of arrests. VI assumes that those national ratios are also valid for each individual. Under those assumptions, it is possible to find the total number of crimes committed by a subject for a given type of crime as the total number of arrests for that type of crime multiplied by the estimated national ratios for that type of crime. We estimate the total number of victims using two methods, one based on arrests and one based on sentences. Given that the ``unpunished'' crimes are by definition unobserved, it is not straightforward to use a data-driven method to allocate them between those subjects with arrests, those with sentences, and those with neither arrests nor sentences. We calculate separate estimates for arrests and sentences and use the average of those estimates as our main estimate. \\
 
 \subsubsection{Construction of the Total Number of Victims in the U.S.}
