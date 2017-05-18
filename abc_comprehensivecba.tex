@@ -279,7 +279,7 @@ Y_{k,j,a} =& \left( 1 - D_k \right) Y_{k,j,a}^0 + \left( D_k \right) Y_{k,j,a}^1
 \noindent The fact that $D_e = R_e$ allows us to use experimental data (for $a \in \{1, \dots,a^*\}$) to identify the distribution of $Y_{e,j,a}^d$ (i.e., $Y_{e,j,a}^d$ when fixing treatment status ($d$)).
 
 \subsubsection{Accounting for Age, Period, and Cohort Effects}
-
+\label{sec:accoutning-age-period-cohort}
 The auxiliary data $(n)$ come from older cohorts not exposed to the program, for whom we observe more complete segments of their life cycles. We do not observe what treatment status $d$ would have been in the auxiliary data. Even if we did, we do not know if cohort ($c$) or time ($t$) effects make the experiences of the individuals in the auxiliary sample different from the experiences of the individuals in the experimental sample.
 
 To formalize this problem, and our solution to it, let $Y_{j,k,a,c,t}^d$ be outcome $j$ for sample $k$ at age $a$ for birth cohort $c$ at time $t$ when treatment is fixed to $d$. We make the following assumption. It allows us to circumvent the problem by assuming cohort and time effects operate identically across the experimental ($e$) and non-experimental ($n$) samples in the following sense:
@@ -370,6 +370,7 @@ To clarify the trade-off in making these assumptions, consider the following exa
 In Appendix~\ref{app:endogeneity}, we test Assumption~\ref{ass:exog} for a variety of outcomes and fail to reject exogeneity. We discuss this below. In Appendix~\ref{appendix:predsensitivity}, we analyze standard panel data models for the outcome equations as well as instrumental variable approaches to account for lagged dependent variables and serial correlation. Our estimates are robust even when we allow for different failures of Assumption~\ref{ass:exog}. As discussed below, we also present a non-parametric matching estimates. Their near-coincidence with the estimates from the structural model is further support of the validity of Assumption~\ref{ass:exog}.
 
 \subsubsection{Structural Invariance}
+\label{sec:structural-invariance}
 
 We assume that the variables $\bm{X}_{k,a}^d$ fully summarize treatment in the sense that any effect that treatment has on outcomes operates through the inputs, $\bm{X}_{k,a}^d$, and not through shifts in the production function relating inputs to outputs (see \citealp{Heckman_Pinto_etal_2013_PerryFactor}). Assumption~\ref{ass:summary} formalizes this condition.
 
