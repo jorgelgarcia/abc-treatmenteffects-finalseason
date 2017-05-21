@@ -161,13 +161,11 @@ cd $output
 # delimit
 twoway (bar qaly sample if sample == 1, color(gs0) barw(.98))
        (bar qaly sample if sample == 2, color(gs4) barw(.98))
-       (bar qaly sample if sample == 3, color(gs8) barw(.98))
        (bar qaly sample if sample == 5, color(black) barw(.98))
        (bar qaly sample if sample == 6, color(gs4) barw(.98))
-       (bar qaly sample if sample == 7, color(gs8) barw(.98))
-       (scatter qaly sample if sample != 2, mcol(black) msize(large)),
-       legend(cols(3) size(vsmall) order(1 "PSID, Disadvantaged" 2 "Control (Predicted)" 3 "Treatment (Predicted)" 7 "p-value {&le} 0.10"))
-		  xlabel(2 "Males" 6 " Females", labsize(small) noticks grid glcolor(white)) 
+       (scatter qaly sample if sample != 2 & sample != 3 & sample != 7, mcol(black) msize(large)),
+       legend(cols(3) size(vsmall) order(1 "ABC/CARE Eligible (PSID)" 2 "ABC/CARE Control Group" 7 "p-value {&le} 0.10"))
+		  xlabel(1.5 "Males" 5.5 " Females", labsize(small) noticks grid glcolor(white)) 
 		  ylabel(5[.1]5.4, angle(h) glcolor(gs14))
 		  xtitle(" ", size(small)) 
 		  ytitle("QALYs (100,000s 2014 USD)", size(small))
