@@ -20,13 +20,13 @@ global googledrive: env googledrive
 
 // set general locations
 // do files
-global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
+global scripts    = "$projects/abccare-cba/scripts/"
 // ready data
 global data       = "$klmmexico/abccare/irr_ratios/current/"
 global specialed  = "$klmmexico/abccare/NPV/speccost/current/"
 
 // output
-global output     = "$projects/abc-treatmenteffects-finalseason/output/"
+global output     = "$projects/abccare-cba/output/"
 
 // rates of return
 local te3 = 13
@@ -190,7 +190,7 @@ twoway (bar     m part1            if estimate == 1 & sex == 3, color(gs8) lwidt
 ,	
 		legend(order(1 2) label(1 "Net Present Value") label(2 "Significant at 10%") cols(2))
 			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
-			  5 "Crime" 6 "Health",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
+			  5 "Crime" 6 "QALYs*",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
 			  ylabel(-1 0[1.5]4.5, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)", size(medium))
