@@ -1,6 +1,6 @@
 \section{Identification and Estimation of Life-Cycle Treatment Effects} \label{appendix:methodology}
 
-This appendix presents our approach to identifying and estimating life-cycle treatment effects. Differences in the approach for each outcome are based on different scenarios of data availability. We proceed as follows. Appendix~\ref{app:method_fullobs} focuses on outcomes that are fully observed over the course of the experiment with little attrition. Appendix~\ref{app:method_partialobs} focuses on outcomes that are partially observed over the course of the experiment with a substantial rate of attrition. Appendix~\ref{app:method_noobs}  focuses on outcomes that we do not observe, and thus need to forecast out of sample. Appendices~\ref{app:method_irr} and ~\ref{app:method_cbratio} provide some technical details on the computations of the internal rate of return and the cost-benefit ratios, respectively. Appendix~\ref{appendix:gmm} frames our data combination problem in the Generalized Method of Moments framework. Finally, Appendix~\ref{appendix:bootstrap} provides the precise steps for constructing our statistical inferences.
+This appendix presents our approach to identifying and estimating life-cycle treatment effects. Differences in the approach for each outcome are based on different scenarios of data availability. We proceed as follows. Appendix~\ref{app:method_fullobs} focuses on outcomes that are fully observed over the course of the experiment with little attrition. Appendix~\ref{app:method_partialobs} focuses on outcomes that are partially observed over the course of the experiment with a substantial rate of attrition. Appendix~\ref{app:method_noobs}  focuses on outcomes that we do not observe, and thus need to forecast out of sample. Appendices~\ref{app:method_irr} and ~\ref{app:method_cbratio} provide some technical details on the computations of the internal rate of return and the benefit/cost ratios, respectively. Appendix~\ref{appendix:gmm} frames our data combination problem in the Generalized Method of Moments framework. Finally, Appendix~\ref{appendix:bootstrap} provides the precise steps for constructing our statistical inferences.
 
 \subsection{Complete Data}\label{app:method_fullobs}
 
@@ -1506,7 +1506,7 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 
 \subsection{Inference} \label{appendix:bootstrap}
 
-\noindent This section provides the precise steps for constructing the bootstrap distribution and for computing the standard errors for three of the main estimates in our paper.
+\noindent This section provides the precise steps for constructing the bootstrap distribution and for computing the standard errors for the main estimates in our paper.
 
 \subsubsection{Forecasts} \label{appendix:bootstrapspreds}
 
@@ -1533,42 +1533,13 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 
 \end{enumerate}
 
-\subsubsection{Treatment Effects}\label{little-TE}
-
-\begin{enumerate}
-
-\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Information on the whole story about each individual is obtained in each re-sample.
-
-\item For a partially complete outcome $Y_{j}$, run $K$ regressions of $Y_{j}$ on the set of explanatory variables $k = 1,..., K$.\footnote{We perform this procedure at any age, and re-sample individuals independently of their treatment status, so we drop the respective indices.} $K$ is determined by the number of possible control sets we can construct with 1, 2 and, 3 baseline variables. We document this procedure and describe the possible control sets in Appendix~\ref{appendix:bvariables}.
-
-\item Choose the control set that best predicts $Y_{j}$, as we describe in Appendix~\ref{appendix:bvariables}. Call this control set $k^*_{j}$. There is one control set for each of the partially complete outcomes $Y_{j}$.
-
-\item Construct the IPW using the inverse of the prediction of  a logistic regression of an indicator of ``observed or not" on control set $k^*_{j}$.
-
-\item For an incomplete outcome (an outcome after age $a^*$), we construct a prediction for treatment- and control-group individuals following the steps in Appendix~\ref{appendix:bootstrapspreds}.
-
-\item If we estimate our parameter of interest using  matching (treatment vs. stay at home or treatment vs. alternative preschool ---see Section~\ref{section:methodsquestions}), we follow Algorithm~\ref{alg:match} to weight the treatment group as to make it comparable in observed characteristics to the control group individuals who either stay at home or attend alternative preschools. We use the procedure in 3. to choose the variables used to weight.
-
-\item Repeat this procedure 1,000 times to obtain the empirical bootstrap distribution. Compute the standard error as the sample standard deviation of these resamples. Compute the $p$-value's as the proportion of times that we reject the null hypothesis, after centering the empirical bootstrap distribution according to the null hypothesis.
-
-\end{enumerate}
-
-\subsubsection{Combining Functions}
-
-\begin{enumerate}
-\item Use the same procedure as before to re-sample the experimental data.
-\item Calculate treatment effects as described in Appendix~\ref{little-TE}.
-\item If counting the number of positive effects, compute this number and generate standard errors and $p$-value's as before.
-\item If counting the number of positive and at significant treatment effects, compute the number of positive and significant treatment effects (at the desired significance level). Re-sample the non-experimental sample a second time. The second re-sample creates an empirical bootstrap distribution for this count. Generate standard errors and $p$-value's as before.
-\end{enumerate}
-
-\subsubsection{Cost-benefit ratio or Internal Rate of Return.}
+\subsubsection{Benefit/cost Ratio or Internal Rate of Return}
 
 \begin{enumerate}
 
 \item Use the same sampling procedure as when computing the standard error for the forecasts. In this case, compute the predictions for all outcomes.
 \item Discount the forecasts to the age of birth.
-\item Compute cost-benefit ratios and internal rates of return.
+\item Compute benefit/cost ratios and internal rates of return.
 \item Discard internal rate of returns not satisfying the single crossing property (see Appendix~\ref{app:method_irr}).
 \item Compute standard errors and $p$-value's as before.
 
