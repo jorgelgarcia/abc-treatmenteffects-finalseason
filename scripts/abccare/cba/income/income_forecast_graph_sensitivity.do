@@ -7,7 +7,7 @@ Original date:	August 29, 2016
 
 // macros
 local mset = 1
-local pset = 8
+local pset = 1
 
 local file_specs	pset`pset'_mset`mset'
 /*
@@ -39,9 +39,9 @@ global klmshare:  env klmshare
 global klmmexico: env klmMexico
 
 global dataabccare   = "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
-global data_dir      = "${projects}/abc-treatmenteffects-finalseason/scripts/abccare/cba/income/rslt/projections/`file_specs'"
-global incomeresults = "${klmmexico}/abccare/income_projections/"
-global output        = "${projects}/abc-treatmenteffects-finalseason/output/"
+global data_dir      = "${projects}/abccare-cba/scripts/abccare/cba/income/rslt/projections/nov-04/pset1_mset1"
+global incomeresults = "${klmmexico}/abccare/income_projections/nov-04/pset1_mset1"
+global output        = "${projects}/abccare-cba/output/"
 
 local add_box = 1 // set to 0 if figures are wanted without box for MSE
 local boxtype "NPV"
@@ -105,7 +105,7 @@ save `abccare_data'
 foreach source in labor /*transfer*/ {
 	forvalues sex = 0/1 {
 		cd $incomeresults
-		insheet using "`source'_proj_`name`sex''_achievement.csv", clear
+		insheet using "`source'_proj_combined_pset1_mset1_`name`sex''.csv", clear
 
 		local varlist
 		local ages
@@ -114,15 +114,16 @@ foreach source in labor /*transfer*/ {
 		forval i = 3/47 {
 			capture confirm var v`i'
 			if !_rc {
-				local vl`i' : variable label v`i'
-				qui rename v`i' age`vl`i''
-		
-				local varlist `varlist' mean_age`vl`i''
-				local ages `ages' `vl`i''
-				local se_varlist `varlist' seage`vl`i''=mean_age`vl`i''
+				//local vl`i' : variable label v`i'
+				//qui rename v`i' age`vl`i''
+				qui rename v`i' age`i'
+				
+				local varlist `varlist' mean_age`i'
+				local ages `ages' `i'
+				local se_varlist `varlist' seage`i'=mean_age`i'
 			
 			
-				qui gen mean_age`vl`i'' = .
+				qui gen mean_age`i' = .
 			}
 		}
 	
@@ -216,7 +217,7 @@ foreach source in labor /*transfer*/ {
 			}
 		
 			cd $incomeresults
-			save `source'_income_collapsed_`file_specs'_`name`sex'', replace
+			//save `source'_income_collapsed_`file_specs'_`name`sex'', replace
 		
 		// graph
 		cd $output
@@ -250,7 +251,7 @@ foreach source in labor /*transfer*/ {
 				`yaxis'
 				`legend'
 				${box};
-		graph export "`source'_20-65_`file_specs'_`name`sex''_sensitivity_achievement.eps", replace;
+		//graph export "`source'_20-65_`file_specs'_`name`sex''_sensitivity_headstart.eps", replace;
 		# delimit cr
 	}
 }
