@@ -1,4 +1,22 @@
+# delimit ;
 
+local reverse
+overw40
+h_prob27
+cigs27
+M0298
+M0245
+charges27 
+charges40 
+felcrime
+sch_nsus
+sch_nrep
+sch_eversped;
+
+# delimit cr
+foreach v in `reverse' {
+	replace `v' = -1 * `v'
+}
 
 local categories iq ach se parenting mlabor education employment crime risk health all
 
@@ -240,22 +258,6 @@ h_prob27
 exam27
 overw40;
 
-local reverse
-overw40
-h_prob27
-cigs27
-M0298
-M0245
-charges27 
-charges40 
-felcrime
-sch_nsus
-sch_nrep
-sch_eversped;
-
 # delimit cr
-foreach v in `reverse' {
-	replace `v' = -1 * `v'
-}
 
 local all `iq' `ach' `se' `parenting' `mlabor' `education' `employment' `crime' `risk' `health' 
