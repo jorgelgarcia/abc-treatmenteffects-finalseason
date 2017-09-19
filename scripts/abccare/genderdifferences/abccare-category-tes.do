@@ -10,8 +10,9 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 10
+global bootstraps 1000
 global quantiles 30
+set matsize 11000
 
 // macros
 global projects		: env projects
@@ -31,9 +32,10 @@ drop if R == 0 & RV == 1
 
 // variables
 cd ${scripts}/abccare/genderdifferences
-include abccare-outcomes
-include abccare-reverse
-include abccare-112-outcomes
+qui {
+	include abccare-reverse
+	include abccare-112-outcomes
+
 
 foreach c in `categories' {
 	if "`c'" != "all" {
@@ -65,63 +67,99 @@ foreach c in `categories' {
 		}
 	}
 }
+
+}
+
+forvalues b = 0/$bootstraps {
 	
-foreach c in `categories' {
+	preserve
 	
-	// factor treatment effect
-	cap factor ``c''
-	if !_rc {
-		cap predict factor`c' 
-		if _rc {
-			gen factor`c' = .
-		}
-	}
-	else {
-		gen factor`c' = .
+	if `b' > 0 {
+		bsample
 	}
 	
-	forvalues s = 0/1 {
-		sum factor`c' if male == `s' & R == 1
-		local factor`s'`c'_R1 = r(mean)
-		sum factor`c' if male == `s' & R == 0
-		local factor`s'`c'_R0 = r(mean)
-		
-		local factor`s'`c' = `factor`s'`c'_R1' - `factor`s'`c'_R0'
-		local factor`s'`c' = round(`factor`s'`c'', 0.001)
-	}
+	di "`b'"
 	
-	// average treatment effect
-	foreach v in ``c'' {
+	
+	foreach c in `categories' {
 		
-		if "`c'" != "all" {
-			qui sum `v' 
-			replace `v' = (`v' - r(mean) ) / r(sd)
+		// average treatment effect
+		foreach v in ``c'' {
+		
+			if "`c'" != "all" {
+				qui sum `v' 
+				qui replace `v' = (`v' - r(mean) ) / r(sd)
 		
 		
-			forvalues s = 0/1 {
+				forvalues s = 0/1 {
 		
-				qui sum `v' if male == `s' & R == 0  //& dc_mo_pre == 0 //dc_mo_pre > 0 & dc_mo_pre != . //
-				local b`v'`s'`b'_R0 = r(mean)
-				qui sum `v' if male == `s' & R == 1
-				local b`v'`s'`b'_R1 = r(mean)
+					qui sum `v' if male == `s' & R == 0  //& dc_mo_pre == 0 //dc_mo_pre > 0 & dc_mo_pre != . //
+					local b`v'`s'`b'_R0 = r(mean)
+					qui sum `v' if male == `s' & R == 1
+					local b`v'`s'`b'_R1 = r(mean)
 				
-				// calculate treatment effect and store by category
-				matrix te`s'_`c' = (nullmat(te`s'_`c') \ `b`v'1`b'_R1' - `b`v'0`b'_R0')
-				matrix te`s'_all = (nullmat(te`s'_all) \ `b`v'1`b'_R1' - `b`v'0`b'_R0')
+					// calculate treatment effect and store by category
+					matrix te`s'_`c'`b' = (nullmat(te`s'_`c'`b') \ `b`v'1`b'_R1' - `b`v'0`b'_R0')
+					matrix te`s'_all`b' = (nullmat(te`s'_all`b') \ `b`v'1`b'_R1' - `b`v'0`b'_R0')
+				}
 			}
 		}
 		
 		forvalues s = 0/1 {
-			mat ones`s'_`c' = J(rowsof(te`s'_`c'),1,1)
-			mat sum`s'_`c' = ones`s'_`c''*te`s'_`c'
-			mat avg`s'_`c' = sum`s'_`c'/rowsof(te`s'_`c')
-			mat list avg`s'_`c'
-			local avg`s'_`c' = avg`s'_`c'[1,1]
-			local avg`s'_`c' = round(`avg`s'_`c'', 0.001)
+			mat ones`s'_`c'`b' = J(rowsof(te`s'_`c'`b'),1,1)
+			mat sum`s'_`c'`b' = ones`s'_`c'`b''*te`s'_`c'`b'
+			mat avg`s'_`c'`b' = sum`s'_`c'`b'/rowsof(te`s'_`c'`b')
+			//local avg`s'_`c' = avg`s'_`c'[1,1]
+			//local avg`s'_`c' = round(`avg`s'_`c'', 0.001)
+				
+			mat `c'`s' = (nullmat(`c'`s') \ avg`s'_`c'`b')
+			mat colnames `c'`s' = `c'`s'
 		}
+	}
+	
+	restore
+}
+
+// inference
+foreach c in `categories' {
+	mat combined = (nullmat(combined) , `c'0, `c'1)
+}
+
+clear
+svmat combined, names(col)
+gen b = _n
+
+foreach c in `categories' {
+	
+	forvalues s = 0/1 {
+	
+		// empirical mean
+		qui sum `c'`s' if b > 1
+		qui gen `c'`s'_em = r(mean)
+		
+		// point estimate
+		qui sum `c'`s' if b == 1
+		qui gen `c'`s'_pe = r(mean)
+		local `c'`s'_pe = r(mean) 
+		local `c'`s'_pe : di %9.3fc ``c'`s'_pe'
+		
+		// demean
+		qui gen `c'`s'_dm = `c'`s' - `c'`s'_em if b > 1
+		
+		// pvalue
+		qui gen `c'`s'_di = (`c'`s'_dm >= `c'`s'_pe) if b > 1
+		qui sum `c'`s'_di
+		qui gen `c'`s'_p = r(mean)
+		
+		if `c'`s'_p <= 0.1 {
+			local `c'`s'_pe "\bm{``c'`s'_pe'}"
+		}
+		
 	}
 }
 
+
+// write table
 file open tabfile using "${output}/abccare-category-tes.tex", replace write
 file write tabfile "\begin{tabular}{l c c c}" _n
 file write tabfile "\toprule" _n
@@ -136,7 +174,7 @@ foreach c in `categories' {
 	if "`c'" == "all" {
 		file write tabfile "\midrule" _n
 	}
-	file write tabfile "``c'_name' & $ ``c'_N' $ & $ `avg0_`c'' $ & $ `avg1_`c'' $ \\" _n
+	file write tabfile "``c'_name' & $ ``c'_N' $ & $ ``c'0_pe' $ & $ ``c'1_pe' $ \\" _n
 }
 
 file write tabfile "\bottomrule" _n
