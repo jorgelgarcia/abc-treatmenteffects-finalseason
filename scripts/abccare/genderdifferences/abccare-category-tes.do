@@ -10,7 +10,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 1000
+global bootstraps 54
 global quantiles 30
 set matsize 11000
 
@@ -70,6 +70,9 @@ foreach c in `categories' {
 
 }
 
+cap log close
+log using health, replace
+
 forvalues b = 0/$bootstraps {
 	
 	preserve
@@ -92,15 +95,28 @@ forvalues b = 0/$bootstraps {
 		
 		
 				forvalues s = 0/1 {
-		
-					qui sum `v' if male == `s' & R == 0  //& dc_mo_pre == 0 //dc_mo_pre > 0 & dc_mo_pre != . //
+					
+
+					sum `v' if male == `s' & R == 0  //& dc_mo_pre == 0 //dc_mo_pre > 0 & dc_mo_pre != . //
 					local b`v'`s'`b'_R0 = r(mean)
-					qui sum `v' if male == `s' & R == 1
+					
+					sum `v' if male == `s' & R == 1
 					local b`v'`s'`b'_R1 = r(mean)
+					
+					di `b`v'`s'`b'_R1' - `b`v'`s'`b'_R0'
 				
 					// calculate treatment effect and store by category
-					matrix te`s'_`c'`b' = (nullmat(te`s'_`c'`b') \ `b`v'1`b'_R1' - `b`v'0`b'_R0')
-					matrix te`s'_all`b' = (nullmat(te`s'_all`b') \ `b`v'1`b'_R1' - `b`v'0`b'_R0')
+					if (`b`v'`s'`b'_R1' != . & `b`v'`s'`b'_R0' != .) {
+						matrix te`s'_`c'`b' = (nullmat(te`s'_`c'`b') \ `b`v'`s'`b'_R1' - `b`v'`s'`b'_R0')
+						matrix te`s'_all`b' = (nullmat(te`s'_all`b') \ `b`v'`s'`b'_R1' - `b`v'`s'`b'_R0')
+					}
+					else {
+						sum `v' if male == `s' & R == 0
+						sum `v' if male == `s' & R == 1
+						
+						matrix fail`s'`c' = (nullmat(fail`s'`c') \ `b')
+						
+					}
 				}
 			}
 		}
@@ -108,10 +124,7 @@ forvalues b = 0/$bootstraps {
 		forvalues s = 0/1 {
 			mat ones`s'_`c'`b' = J(rowsof(te`s'_`c'`b'),1,1)
 			mat sum`s'_`c'`b' = ones`s'_`c'`b''*te`s'_`c'`b'
-			mat avg`s'_`c'`b' = sum`s'_`c'`b'/rowsof(te`s'_`c'`b')
-			//local avg`s'_`c' = avg`s'_`c'[1,1]
-			//local avg`s'_`c' = round(`avg`s'_`c'', 0.001)
-				
+			mat avg`s'_`c'`b' = sum`s'_`c'`b'/rowsof(te`s'_`c'`b')			
 			mat `c'`s' = (nullmat(`c'`s') \ avg`s'_`c'`b')
 			mat colnames `c'`s' = `c'`s'
 		}
@@ -119,6 +132,8 @@ forvalues b = 0/$bootstraps {
 	
 	restore
 }
+
+
 
 // inference
 foreach c in `categories' {
@@ -128,6 +143,10 @@ foreach c in `categories' {
 clear
 svmat combined, names(col)
 gen b = _n
+
+log close 
+
+/*
 
 foreach c in `categories' {
 	
@@ -158,7 +177,7 @@ foreach c in `categories' {
 	}
 }
 
-
+/*
 // write table
 file open tabfile using "${output}/abccare-category-tes.tex", replace write
 file write tabfile "\begin{tabular}{l c c c}" _n
