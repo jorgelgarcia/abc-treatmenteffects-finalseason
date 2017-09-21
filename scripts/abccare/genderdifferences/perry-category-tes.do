@@ -1,18 +1,19 @@
 /*
 Project: 	Treatment effects
-Date:		April 27, 2017
+Date:		September 13, 2017
 
-This file:	Means of control group
+This file:	abccare-gdiff-gaps-ranksign FOR PERRY
 */
 
 clear all
 set more off
+set maxvar 30000
+set matsize 11000
 
 // parameters
 set seed 1
-global bootstraps 54
-global quantiles 30
-set matsize 11000
+global bootstraps 	10
+global quantiles 	30
 
 // macros
 global projects		: env projects
@@ -20,23 +21,26 @@ global klmshare		: env klmshare
 global klmmexico	: env klmMexico
 
 // filepaths
-global data	   	= "$klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv"
+global data50 		= "$klmshare/ziff/p_temp"
+global data	   		= "$klmshare/Data_Central/data-repos-old/perry/base"
 global scripts    	= "$projects/abccare-cba/scripts/"
 global output      	= "$projects/abccare-cba/output/"
 
 // data
 cd $data
-use append-abccare_iv, clear
+use perry-base, clear
 
-drop if R == 0 & RV == 1
+cd $data50
+merge 1:1 id using p50cogncog, nogen
+merge 1:1 id using p50crime, nogen
+merge 1:1 id using p50employment, nogen
+merge 1:1 id using p50health, nogen
 
 // variables
 cd ${scripts}/abccare/genderdifferences
+qui include "perry50-112-outcomes"
+
 qui {
-	include abccare-reverse
-	include abccare-112-outcomes
-
-
 foreach c in `categories' {
 	if "`c'" != "all" {
 		foreach v in ``c'' {
@@ -70,102 +74,77 @@ foreach c in `categories' {
 
 }
 
-cap log close
-log using health, replace
-
-
-forvalues s = 0/1 {
-
-	global maxsuccess`s' = 0
-
+forvalues b = 0/$bootstraps {
+	
+	preserve
+	
+	if `b' > 0 {
+		bsample
+	}
+	
+	di "`b'"
+	
+	
 	foreach c in `categories' {
-	
-		local b = 0
-		global success`s'_`c' = 0
-	
-		while (${success`s'_`c'} <= $bootstraps) {
-	
-			preserve
-	
-			if `b' > 0 {
-				bsample
-			}
-	
-			di "sex`s' `c' `b'"
-	
-			// average treatment effect
+		
+		// average treatment effect
+		foreach v in ``c'' {
 		
 			if "`c'" != "all" {
-				foreach v in ``c'' {
-	
-					qui sum `v' 
-					qui replace `v' = (`v' - r(mean) ) / r(sd)
+				qui sum `v' 
+				qui replace `v' = (`v' - r(mean) ) / r(sd)
 		
-					qui sum `v' if male == `s' & R == 0  //& dc_mo_pre == 0 //dc_mo_pre > 0 & dc_mo_pre != . //
+		
+				forvalues s = 0/1 {
+		
+					sum `v' if male == `s' & treatment == 0  //& dc_mo_pre == 0 //dc_mo_pre > 0 & dc_mo_pre != . //
 					local b`v'`s'`b'_R0 = r(mean)
-					
-					qui sum `v' if male == `s' & R == 1
+					sum `v' if male == `s' & treatment == 1
 					local b`v'`s'`b'_R1 = r(mean)
 				
 					// calculate treatment effect and store by category
-					matrix te`s'_`c'`b' = (nullmat(te`s'_`c'`b') \ `b`v'`s'`b'_R1' - `b`v'`s'`b'_R0')
-					matrix te`s'_all`b' = (nullmat(te`s'_all`b') \ `b`v'`s'`b'_R1' - `b`v'`s'`b'_R0')
-					
-					if `b`v'`s'`b'_R1' - `b`v'`s'`b'_R0' == . { // keep track if mising
-						qui sum `v' if male == `s' & R == 0
-						qui sum `v' if male == `s' & R == 1
-						
-						matrix fail`s'`c' = (nullmat(fail`s'`c') \ `b')
-						global fail`s'`c' ${fail`s'`c'} "`v'"
-						
-					}
+					matrix te`s'_`c'`b' = (nullmat(te`s'_`c'`b') \ `b`v'1`b'_R1' - `b`v'0`b'_R0')
+					matrix te`s'_all`b' = (nullmat(te`s'_all`b') \ `b`v'1`b'_R1' - `b`v'0`b'_R0')
 				}
 			}
+		}
 		
+		forvalues s = 0/1 {
 			mat ones`s'_`c'`b' = J(rowsof(te`s'_`c'`b'),1,1)
 			mat sum`s'_`c'`b' = ones`s'_`c'`b''*te`s'_`c'`b'
-			mat avg`s'_`c'`b' = sum`s'_`c'`b'/rowsof(te`s'_`c'`b')			
+			mat avg`s'_`c'`b' = sum`s'_`c'`b'/rowsof(te`s'_`c'`b')
 			mat list avg`s'_`c'`b'
 			
-			if avg`s'_`c'`b'[1,1] != . {
+			if avg`s'_`c'`b'[1,1] != . & `b' > 0 {
 				mat `c'`s' = (nullmat(`c'`s') \ avg`s'_`c'`b')
 				mat colnames `c'`s' = `c'`s'
-			
-				global success`s'_`c' = ${success`s'_`c'} + 1
-				
-				local b = `b' + 1
 			}
-			
 			else {
-				clear te`s'_`c'`b'
-				clear ones`s'_`c'`b'
-				clear sum`s'_`c'`b'
-				clear avg`s'_`c'`b'
+				mat `c'`s'_prob = (nullmat(`c'`s'_prob) \ `b')
 			}
 			
-			//if (${success`s'_`c'} > ${maxsuccess`s'}) & ("`c'" != "all") {
-			//	global maxsuccess`s' = ${success`s'_`c'}
-			//}
-	
-		restore	
 		}
 	}
+	
+	restore
 }
-
-log close 
 
 // inference
 foreach c in `categories' {
+	forvalues s = 0/1 {
+		if rowsof(`c'`s') < $bootstraps + 1 {
+			local n = $bootstraps + 1 - rowsof(`c'`s')
+			mat add = J(`n', 1,.)
+			mat `c'`s' = (`c'`s' \ add)
+		}
+	}
+
 	mat combined = (nullmat(combined) , `c'0, `c'1)
 }
 
 clear
 svmat combined, names(col)
 gen b = _n
-
-
-
-/*
 
 foreach c in `categories' {
 	
@@ -196,9 +175,9 @@ foreach c in `categories' {
 	}
 }
 
-/*
+
 // write table
-file open tabfile using "${output}/abccare-category-tes.tex", replace write
+file open tabfile using "${output}/perry-category-tes.tex", replace write
 file write tabfile "\begin{tabular}{l c c c}" _n
 file write tabfile "\toprule" _n
 file write tabfile "Category & \# Outcomes & \mc{2}{c}{Mean Treatment Effect}  \\" _n
@@ -217,5 +196,5 @@ foreach c in `categories' {
 
 file write tabfile "\bottomrule" _n
 file write tabfile "\end{tabular}" _n
-file write tabfile "% This file generated by: abccare-cba/scripts/abccare/genderdifferences/abccare-category-tes.do" _n
+file write tabfile "% This file generated by: abccare-cba/scripts/abccare/genderdifferences/perry-category-tes.do" _n
 file close tabfile

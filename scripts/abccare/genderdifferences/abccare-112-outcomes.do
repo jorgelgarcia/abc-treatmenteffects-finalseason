@@ -2,7 +2,6 @@
 
 local categories iq ach se parenting mlabor education employment crime risk health mentalhealth all
 
-
 local iq_name 			IQ
 local ach_name 			Achievement
 local parenting_name 		Parenting

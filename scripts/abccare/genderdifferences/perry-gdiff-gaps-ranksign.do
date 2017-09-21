@@ -21,7 +21,8 @@ global klmshare		: env klmshare
 global klmmexico	: env klmMexico
 
 // filepaths
-global data	   	= "$klmshare/Data_Central/data-repos-old/perry/base"
+global data50 		= "$klmshare/ziff/p_temp"
+global data	   		= "$klmshare/Data_Central/data-repos-old/perry/base"
 global scripts    	= "$projects/abccare-cba/scripts/"
 global output      	= "$projects/abccare-cba/output/"
 
@@ -29,9 +30,15 @@ global output      	= "$projects/abccare-cba/output/"
 cd $data
 use perry-base, clear
 
+cd $data50
+merge 1:1 id using p50cogncog, nogen
+merge 1:1 id using p50crime, nogen
+merge 1:1 id using p50employment, nogen
+merge 1:1 id using p50health, nogen
+
 // variables
 cd ${scripts}/abccare/genderdifferences
-qui include perry-112-outcomes
+qui include "perry50-112-outcomes"
 
 
 // create factor variables

@@ -10,6 +10,7 @@ set more off
 
 // parameters
 set seed 1
+set matsize 11000
 global bootstraps 1000
 global quantiles 30
 
@@ -31,7 +32,7 @@ drop if R == 0 & RV == 1
 
 // variables
 cd ${scripts}/abccare/genderdifferences
-include abccare-outcomes
+qui {
 include abccare-reverse
 include abccare-112-outcomes
 
@@ -182,13 +183,14 @@ foreach c in `categories' {
 	}
 	
 }
+}
 
-file open tabfile using "${output}/abccare-proportion-summary-full.tex", replace write
+file open tabfile using "${output}/abccare-proportion-summary-fullR.tex", replace write
 file write tabfile "\begin{tabular}{l c c c c}" _n
 file write tabfile "\toprule" _n
 file write tabfile "Category & \# Outcomes & \mc{2}{c}{Proportion} & Difference \\" _n
 file write tabfile "\cmidrule(lr){3-4} \cmidrule(lr){5-5}" _n
-file write tabfile "		&			& Control & Treatment & Treatment $- $ Control \\" _n
+file write tabfile "		&			& Treatment & Control & Treatment $- $ Control \\" _n
 file write tabfile "\midrule" _n	
 
 foreach c in `categories' {
@@ -197,7 +199,7 @@ foreach c in `categories' {
 	if "`c'" == "all" {
 		file write tabfile "\midrule" _n
 	}
-	file write tabfile "``c'_name' & ``c'_N' & ``c'0' & ``c'1' & ``c'_0_1' \\" _n
+	file write tabfile "``c'_name' & ``c'_N' & ``c'1' & ``c'0' & ``c'_0_1' \\" _n
 }
 
 file write tabfile "\bottomrule" _n
