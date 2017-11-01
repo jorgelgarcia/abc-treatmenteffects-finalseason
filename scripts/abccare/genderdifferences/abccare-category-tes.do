@@ -6,13 +6,15 @@ This file:	Means of control group
 */
 
 clear all
+set maxvar 30000
+set matsize 11000
 set more off
 
 // parameters
 set seed 1
-global bootstraps 54
+global bootstraps 25
+global maxtries 20
 global quantiles 30
-set matsize 11000
 
 // macros
 global projects		: env projects
@@ -76,14 +78,36 @@ log using health, replace
 
 forvalues s = 0/1 {
 
-	global maxsuccess`s' = 0
+	local noall
+	local all
 
 	foreach c in `categories' {
 	
 		local b = 0
 		global success`s'_`c' = 0
+		local tries = 0
+		
+		if "`c'" == "all" {
+			foreach l in `categories' {
+				if "`l'" != "all" {
+					local testvar = 0
+					foreach m in `noall' {
+					
+						if "`l'" == "`m'" {
+							local testvar = 1
+						}
+					}
+					if `testvar' == 0 {
+						local all `all' ``l''
+					
+					}
+				
+				}
+			
+			}
+		}
 	
-		while (${success`s'_`c'} <= $bootstraps) {
+		while (${success`s'_`c'} <= $bootstraps) & (`tries' <= $maxtries) {
 	
 			preserve
 	
@@ -94,38 +118,34 @@ forvalues s = 0/1 {
 			di "sex`s' `c' `b'"
 	
 			// average treatment effect
-		
-			if "`c'" != "all" {
-				foreach v in ``c'' {
+			
+			foreach v in ``c'' {
 	
-					qui sum `v' 
-					qui replace `v' = (`v' - r(mean) ) / r(sd)
+				qui sum `v' 
+				qui replace `v' = (`v' - r(mean) ) / r(sd)
 		
-					qui sum `v' if male == `s' & R == 0  //& dc_mo_pre == 0 //dc_mo_pre > 0 & dc_mo_pre != . //
-					local b`v'`s'`b'_R0 = r(mean)
+				qui sum `v' if male == `s' & R == 0 //& dc_mo_pre > 0 & dc_mo_pre != . // & dc_mo_pre == 0 //
+				local b`v'`s'`b'_R0 = r(mean)
 					
-					qui sum `v' if male == `s' & R == 1
-					local b`v'`s'`b'_R1 = r(mean)
+				qui sum `v' if male == `s' & R == 1
+				local b`v'`s'`b'_R1 = r(mean)
 				
-					// calculate treatment effect and store by category
-					matrix te`s'_`c'`b' = (nullmat(te`s'_`c'`b') \ `b`v'`s'`b'_R1' - `b`v'`s'`b'_R0')
-					matrix te`s'_all`b' = (nullmat(te`s'_all`b') \ `b`v'`s'`b'_R1' - `b`v'`s'`b'_R0')
-					
-					if `b`v'`s'`b'_R1' - `b`v'`s'`b'_R0' == . { // keep track if mising
-						qui sum `v' if male == `s' & R == 0
-						qui sum `v' if male == `s' & R == 1
+				// calculate treatment effect and store by category
+				matrix te`s'_`c'`b' = (nullmat(te`s'_`c'`b') \ `b`v'`s'`b'_R1' - `b`v'`s'`b'_R0')
+				
+				if (`b`v'`s'`b'_R1' - `b`v'`s'`b'_R0') == . { // keep track if mising
+					qui sum `v' if male == `s' & R == 0
+					qui sum `v' if male == `s' & R == 1
 						
-						matrix fail`s'`c' = (nullmat(fail`s'`c') \ `b')
-						global fail`s'`c' ${fail`s'`c'} "`v'"
+					matrix fail`s'`c' = (nullmat(fail`s'`c') \ `b')
+					global fail`s'`c' ${fail`s'`c'} "`v'"
 						
-					}
 				}
 			}
 		
 			mat ones`s'_`c'`b' = J(rowsof(te`s'_`c'`b'),1,1)
 			mat sum`s'_`c'`b' = ones`s'_`c'`b''*te`s'_`c'`b'
-			mat avg`s'_`c'`b' = sum`s'_`c'`b'/rowsof(te`s'_`c'`b')			
-			mat list avg`s'_`c'`b'
+			mat avg`s'_`c'`b' = sum`s'_`c'`b'/rowsof(te`s'_`c'`b')	
 			
 			if avg`s'_`c'`b'[1,1] != . {
 				mat `c'`s' = (nullmat(`c'`s') \ avg`s'_`c'`b')
@@ -134,19 +154,17 @@ forvalues s = 0/1 {
 				global success`s'_`c' = ${success`s'_`c'} + 1
 				
 				local b = `b' + 1
+				local tries = 0
 			}
 			
 			else {
-				clear te`s'_`c'`b'
-				clear ones`s'_`c'`b'
-				clear sum`s'_`c'`b'
-				clear avg`s'_`c'`b'
+				mat drop te`s'_`c'`b' 
+				local tries = `tries' + 1
+				if `tries' == $maxtries {
+					local noall `noall' `c'
+				}
 			}
-			
-			//if (${success`s'_`c'} > ${maxsuccess`s'}) & ("`c'" != "all") {
-			//	global maxsuccess`s' = ${success`s'_`c'}
-			//}
-	
+		
 		restore	
 		}
 	}
@@ -155,50 +173,55 @@ forvalues s = 0/1 {
 log close 
 
 // inference
+global finalcat
 foreach c in `categories' {
-	mat combined = (nullmat(combined) , `c'0, `c'1)
+	forvalues s = 0/1 {
+		cap confirm mat `c'`s'
+		if !_rc {
+			mat combined = (nullmat(combined) , `c'`s')
+			global finalcat $finalcat `c'`s'
+		}
+	}
 }
 
 clear
 svmat combined, names(col)
 gen b = _n
 
-
-
-/*
-
-foreach c in `categories' {
+foreach c in $finalcat {
 	
-	forvalues s = 0/1 {
+	//forvalues s = 0/1 {
 	
 		// empirical mean
-		qui sum `c'`s' if b > 1
-		qui gen `c'`s'_em = r(mean)
+		qui sum `c' if b > 1
+		qui gen `c'_em = r(mean)
+		local `c'_em = r(mean)
+		local `c'_em : di %9.3fc ``c'_em'
 		
 		// point estimate
-		qui sum `c'`s' if b == 1
-		qui gen `c'`s'_pe = r(mean)
-		local `c'`s'_pe = r(mean) 
-		local `c'`s'_pe : di %9.3fc ``c'`s'_pe'
+		qui sum `c' if b == 1
+		qui gen `c'_pe = r(mean)
+		local `c'_pe = r(mean) 
+		local `c'_pe : di %9.3fc ``c'_pe'
 		
 		// demean
-		qui gen `c'`s'_dm = `c'`s' - `c'`s'_em if b > 1
+		qui gen `c'_dm = `c' - `c'_em if b > 1
 		
 		// pvalue
-		qui gen `c'`s'_di = (`c'`s'_dm >= `c'`s'_pe) if b > 1
-		qui sum `c'`s'_di
-		qui gen `c'`s'_p = r(mean)
+		qui gen `c'_di = (`c'_dm >= `c'_em) if b > 1
+		qui sum `c'_di
+		qui gen `c'_p = r(mean)
 		
-		if `c'`s'_p <= 0.1 {
-			local `c'`s'_pe "\bm{``c'`s'_pe'}"
+		if `c'_p <= 0.1 {
+			local `c'_em "\bm{``c'_em'}"
 		}
 		
-	}
+	//}
 }
 
-/*
+
 // write table
-file open tabfile using "${output}/abccare-category-tes.tex", replace write
+file open tabfile using "${output}/abccare-category-tes-test.tex", replace write
 file write tabfile "\begin{tabular}{l c c c}" _n
 file write tabfile "\toprule" _n
 file write tabfile "Category & \# Outcomes & \mc{2}{c}{Mean Treatment Effect}  \\" _n
@@ -212,7 +235,7 @@ foreach c in `categories' {
 	if "`c'" == "all" {
 		file write tabfile "\midrule" _n
 	}
-	file write tabfile "``c'_name' & $ ``c'_N' $ & $ ``c'0_pe' $ & $ ``c'1_pe' $ \\" _n
+	file write tabfile "``c'_name' & $ ``c'_N' $ & $ ``c'0_em' $ & $ ``c'1_em' $ \\" _n
 }
 
 file write tabfile "\bottomrule" _n
