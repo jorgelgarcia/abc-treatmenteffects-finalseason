@@ -1,7 +1,25 @@
 \section{Sensitivity Analysis} \label{appendix:sensitivity}
 
-\noindent This appendix evaluates how the estimates in the main paper vary as we alter certain
-sample selections from all of our data sources and other parameters. We first present a plot of all net present value estimations across specifications in Figure~\ref{figure:ranges-NPV}. This is analogous to Figure~\ref{figure:ranges}. We analyze sensitivity due to (i) assumptions on the values of the discount rate; (ii) assumptions on the deadweight loss to society coming from taxes raised to fund public programs; and (iii) the magnitude of the components contributing to the benefit/cost ratio and internal rate of return. \\
+\noindent Figure~\ref{figure:ranges} summarizes the range of all of the estimates that we generate in this paper. The overall benefit/cost ratio (internal rate of return) ranges from 1.52 to 17.40 (8 to 18.3) for the full sample. They range from 2.23 to 25.45 (6 to 19.4) for the males, and from 1.12 to 5.79 (4 to 18) for the females. Benefits from reductions in criminality and increased labor income are pronounced for males, contributing to their larger estimates relative to the females estimates. However, when we omit crime from our analysis, we still estimate substantial returns for males.\\
+
+\begin{sidewaysfigure}[H]
+\centering
+\caption{Distribution of Benefit/Cost and Internal Rate of Return Estimates}\label{figure:ranges}
+\begin{subfigure}[h]{0.49\textwidth}
+	\centering
+	\caption{Benefit/Cost Ratio} \label{fig:bc}
+	\includegraphics[width=\textwidth]{output/overalldist_BCRatio}
+\end{subfigure}
+\begin{subfigure}[h]{0.49\textwidth}
+	\centering
+	\caption{Internal Rate of Return} \label{fig:irr}
+	\includegraphics[width=\textwidth]{output/overalldist_IRR}
+\end{subfigure}%
+\footnotesize \justify
+Note: Panel (a) displays the distribution of estimates of the benefit/cost ratio that we estimate throughout the paper. Vertical lines indicate the baseline estimates, presented in Figure~\ref{figure:main}. Panel (b) presents the analogous figure for the internal rate of return. See Figure~\ref{figure:ranges-NPV} in Appendix~\ref{appendix:sensitivity} for the analogous plots of net present values.
+\end{sidewaysfigure}
+
+\noindent This appendix evaluates how the estimates in the main paper vary as we alter certain sample selections from all of our data sources and other parameters. We first present plot of all net present value estimations across specifications in Figure~\ref{figure:ranges-NPV}. This is analogous to Figure~\ref{figure:ranges}.\\
 
 \begin{figure}[H]
 \centering
@@ -10,6 +28,21 @@ sample selections from all of our data sources and other parameters. We first pr
 \footnotesize \justify
 Note: This figure displays the distribution of estimates of the net present value that we estimate throughout the paper. Vertical lines indicate the baseline estimates, presented in Figure~\ref{figure:main}. 
 \end{figure}
+
+\noindent We next analyze sensitivity due to (i) assumptions on the values of the discount rate; (ii) assumptions on the deadweight loss to society coming from taxes raised to fund public programs; and (iii) the magnitude of the components contributing to the benefit/cost ratio and internal rate of return. Table~\ref{table:cba} summarizes our sensitivity analysis. We conduct a rather drastic sensitivity analysis by removing components of the cost/benefit analysis entirely. Even when completely removing the gain associated with crime for males, the program is socially efficient---both the internal rate of return and the benefit/cost ratio are substantial. Parental labor income and crime are the components for which the internal rate of return and the benefit/cost ratio are the most sensitive. The reason for this sensitivity to parental labor income is that the amount is substantial and it is not heavily discounted because it accumulates during the first $21$ years of the subjects' lives. Crime occurs later in life and its benefits are discounted accordingly. The amount due to savings in crime is large, so removing it diminishes both the internal rate of return and the benefit/cost ratio (but they remain statistically significant).
+
+\begin{table}[H]
+\centering
+\caption{Cost/Benefit Analysis of ABC/CARE, Summary}\label{table:cba}
+\begin{threeparttable}
+\tiny
+\input{output/sensitivity.tex}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table presents the estimates of the net present value (NPV) for each component, and the internal rate of return (IRR) and the benefit/cost ratio (B/C) of ABC/CARE for different scenarios based on comparing the groups randomly assigned to receive center-based childcare and the groups randomly assigned as control in ABC/CARE. The first row represents the baseline estimates. The other rows present estimates for scenarios in which we remove the NPV estimates of the component listed in the first column. The category ``Alternative Preschools'' refers to the money spent in alternatives to treatment from the control-group children parents. QALYs refers to the quality-adjusted life years. Any gain corresponds to better health conditions through the age of death. The quantity listed in the NPV columns is the component we remove from NPV when computing the calculation in each row. All the money figures are in 2014 USD and are discounted to each child's birth, unless otherwise specified. For the B/C ratio we use a discount rate of $3\%$, unless otherwise specified. We test the null hypotheses $\text{IRR} = 3\%$ and $\text{B/C} = 1$---we select $3\%$ as the benchmark null because that is the discount rate we use. Inference is based on non-parametric, one-sided $p$-values from the empirical bootstrap distribution. We highlight point estimates significant at the $10\%$ level. Total cost of the program per child is \$$92,570$ (2014).
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
 
 \subsection{Varying the Discount Rate}
 \label{appendix:varying-discount-rate}
