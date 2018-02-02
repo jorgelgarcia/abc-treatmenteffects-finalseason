@@ -7,10 +7,16 @@ Original date:	February 1, 2018
 
 */
 
+// options
+cap file close
+
+
 // filepaths
-global dataabccare   = "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv/"
+global klmshare : env klmshare
+global projects : env projects
+
+global dataabccare   = "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv"
 global data_dir      = "${projects}/abccare-cba/scripts/abccare/cba/income/rslt/projections/`file_specs'"
-global incomeresults = "${klmmexico}/abccare/income_projections/current"
 global output        = "${projects}/abccare-cba/output/"
 
 // data
@@ -28,7 +34,7 @@ replace piatmath = piatmathABC 	if abc == 1
 replace piatmath = piatmathCARE if abc == 0
 
 // calculate statistics of interest
-local varlist piatmath years_30y si21y_inc_labor
+local varlist piatmath sch_hs30y si30y_univ_comp years_30y si21y_inc_labor si30y_inc_labor
 
 foreach v in `varlist' {
 	
@@ -65,11 +71,18 @@ file write tabfile "& Control & Average & Control & Average  \\" _n
 file write tabfile "& Mean & Treatment Effect & Mean & Treatment Effect  \\" _n
 file write tabfile "\midrule" _n
 file write tabfile "Math Scores & $ $piatmath_s0_cmean $  & $ $piatmath_s0_te $ & $ $piatmath_s1_cmean $ & $ $piatmath_s1_te $ \\" _n
-file write tabfile "(ages 5-7)			& 						& ($ $piatmath_s0_se $) & & ($  $piatmath_s1_se $) \\" _n
+file write tabfile "\quad (ages 5-7)			& 						& ($ $piatmath_s0_se $) & & ($  $piatmath_s1_se $) \\" _n
+
+file write tabfile "High School Graduation & $ $sch_hs30y_s0_cmean $ & $ $sch_hs30y_s0_te $ & $ $sch_hs30y_s1_cmean $ & $ $sch_hs30y_s1_te $ \\" _n
+file write tabfile "\quad (age 30)			& 						& ($ $sch_hs30y_s0_se $) & & ($ $sch_hs30y_s1_se $) \\" _n
+file write tabfile "College Graduation & $ $si30y_univ_comp_s0_cmean $ & $ $si30y_univ_comp_s0_te $ & $ $si30y_univ_comp_s1_cmean $ & $ $si30y_univ_comp_s1_te $ \\" _n
+file write tabfile "\quad (age 30)			& 						& ($ $si30y_univ_comp_s0_se $) & & ($ $si30y_univ_comp_s1_se $) \\" _n
 file write tabfile "Years of Education & $ $years_30y_s0_cmean $ & $ $years_30y_s0_te $ & $ $years_30y_s1_cmean $ & $ $years_30y_s1_te $ \\" _n
-file write tabfile "(age 30)			& 						& ($ $years_30y_s0_se $) & & ($ $years_30y_s1_se $) \\" _n
+file write tabfile "\quad (age 30)			& 						& ($ $years_30y_s0_se $) & & ($ $years_30y_s1_se $) \\" _n
 file write tabfile "Labor Income  & $ $si21y_inc_labor_s0_cmean $ & $ $si21y_inc_labor_s0_te $ & $ $si21y_inc_labor_s1_cmean $ & $ $si21y_inc_labor_s1_te $ \\" _n
-file write tabfile "(age 21)			& 						& ($ $si21y_inc_labor_s0_se $) & & ($ $si21y_inc_labor_s1_se $) \\" _n
+file write tabfile "\quad (age 21)			& 						& ($ $si21y_inc_labor_s0_se $) & & ($ $si21y_inc_labor_s1_se $) \\" _n
+file write tabfile "Labor Income  & $ $si30y_inc_labor_s0_cmean $ & $ $si30y_inc_labor_s0_te $ & $ $si30y_inc_labor_s1_cmean $ & $ $si30y_inc_labor_s1_te $ \\" _n
+file write tabfile "\quad (age 30)			& 						& ($ $si30y_inc_labor_s0_se $) & & ($ $si30y_inc_labor_s1_se $) \\" _n
 file write tabfile "\bottomrule" _n
 file write tabfile "\end{tabular}" _n
 file write tabfile "% This file produced using scripts/abccare/cba/labor/income-inputs-description.do"
