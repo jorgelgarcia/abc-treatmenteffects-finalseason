@@ -1,0 +1,218 @@
+%Input preamble
+\input{preambleappendix}
+\input{output/mainstatistics}
+
+\usepackage[stable]{footmisc}
+
+\newcommand*\leftright[2]{%
+  \leavevmode
+  \rlap{#1}%
+  \hspace{0.5\linewidth}%
+  #2}
+
+\newcommand{\orth}{\ensuremath{\perp\!\!\!\perp}}%
+\newcommand{\indep}{\orth}%
+\newcommand{\notorth}{\ensuremath{\perp\!\!\!\!\!\!\diagup\!\!\!\!\!\!\perp}}%
+\newcommand{\notindep}{\notorth}
+
+\externaldocument{abc_comprehensivecba_appendix-pub}
+\externaldocument{abc_comprehensivecba_revised}
+
+\begin{document}
+
+\section*{Comments of the Editor}
+
+\noindent \textbf{Editor. Most certainly, the next version should make it reasonably easy to get on top of it all, even for an outsider like me. The JPE owes this to its readers, in particular future graduate students.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. The key idea of the synthetic cohort should be fleshed out much more clearly in the introduction. The econometric theory portion looks like it is written by authors that are different from those that wrote the rest: nothing wrong with dividing up work, of course, but as a result, the paper feels rather disjoint.}\\ 
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. There really needs to be an appropriate literature discussion. Readers typically look for it in the introduction or in an extra section following it. I know that Jim in particular has been on the theme that ``early childhood education has remarkable returns'' for decades. There surely must be a substantial body of work by now on this, and perhaps not only by him. So, what is in short the state of the art? How does the paper at hand advance beyond the state of the art, what is truly new and substantial here? How does it relate to what has been done before?}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. I am not really sure that the econometric theory portion (most of section 3, thus) with all its abstract assumptions is all that helpful: parts of it are sloppy (see e.g. main comment 4), part of it are unclear (see e.g. main comment 4 and several minor comments), and parts of it seem to hide rather than illuminate the crucial parts of the analysis (see in particular my main comment 5 below). This should all be much more coherent. Perhaps, for the JPE, one can afford to off-shelve some of the detailed, but ultimately tangential econometric theory formulation to the technical appendix: it sometimes feels like something that got formulated, after the intuition of the general principles were understood (and those would be good to formulate) rather than the other way around. I.e., I am not sure that the formalism will be of much help to any reader, at a first pass. I shall admit, I may have been missing the crucial bit, which you might strongly feel should be part of the main text. But perhaps even then there is a solution of drastically reducing it all to that, while moving the full- fledged version to the technical appendix.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. Page 15 seems to describe a key component of your analysis. You seek to compare, say, whether labor income is different between treated and non- treated, and since you cannot observe that for the people in your sample, you use a synthetic sample for prediction. Fine. But then the key surely is to get the difference between these two groups correctly, i.e., that the two synthetic groups of the auxiliary sample differ by ideally exactly as much as they would if we were to follow the original two groups. Page 15 talks much about predicting future incomes, but we don?t care much about the level itself: we care much more about the difference between these two groups. There is little said to assure the reader that one gets the right answer for that difference. The background variables will be the same for the treated and untreated, for example. So how, exactly, does the difference in treatment show up in the synthetic groups? Just the development of labor income until the observable age? That might be fine, but then clearly say so. Something else? This needs to be a lot clearer and a lot more convincing. You may be resolving this eventually in (3). It is unclear there, however, whether you want all the characteristics of the synthetic group to be the same or just for the one specific j, which you are seeking to forecast in (1). To me, it makes more sense that they are all the
+same (if possible: is it? Comment on that!).}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. Connected to that: I found assumption A-1 on page 18 mystifying. It may actually unfortunate that you ``suppress individual i subscripts'' to ``avoid notational clutter'', as you state on p. 16. I thought that the explanation on page 15 and (3) meant, that you take each individual of your actual sample and ``match him/her'' up with someone in the auxiliary sample, who has the exact same vector of characteristics Y until age a* (which then raises a bunch of questions: what, if there are many in the artificial data that do the trick? What, if there are none?). So, you then would have an auxiliary sample, that looks like your experimental sample, but where you can observe everything until the end of their lives. If that is what you do, then A-1 is not an assumption: it is a definition of the auxiliary sample. And if that is not the definition, then exactly what is the definition? In any case, assumption A-2 on p.21 states some support condition. It would seem to me that this is a necessary condition to even construct the auxiliary sample, as defined by ``assumption'' A-1. Perhaps you mean something else, but this should all be crystal clear. Moreover, the selection of variables is really key. Suppose you include cohort information in the regressors in (1): then, assumption A-2 would be impossible to satisfy. There is too much crucial information here, swept under the rug of apparently clean formalism.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. A key concern that I do not see discussed early on and with great care is that ``different times are different''. Suppose, say, that Y contains labor income, measured in year-2000 dollars. Suppose I wanted to use your methodology to also say something about great-great-grandkids, and therefore tried to find a matching sample of people, where I have data for their next four generations. I probably would have to go back more than 100 years. But then someone with the labor income of a contemporary lower middle class person would be considered filthy rich back then! They surely wouldn?t be comparable! The issue may be less pronounced here, since the difference in birth year is perhaps just 20 or 30 years (how much, actually?), but still. You might be able to finesse this by just looking at income growth rates (since, once again, we are ultimately only interested in the difference between the treated and the non-treated groups). But still, one might need to worry about ``macro developments'' here. Crime rates may have changed. Female labor force participation, divorce rates, unemployment rates: they all changes. Perhaps, the identifying assumption here is that these affected the treated and non-treated groups the same, so that these macro effects disappear, once differencing or so. But shouldn?t that be clearly spelled out and clearly argued? You ``hide'' all that with ``Condition C-1'', but as I just described with my great-great- grandkids example, this can be a pretty ridiculous condition for certain lists of outcomes. The selection of outcomes (e.g.: level of income or growth of income or income relative to the average U.S. income?) is really key! Don?t hide that behind too much formalism, discuss this clearly and upfront. At this point, it is hard to be convinced that what you do is legit.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. Is it really true that you can get by with (6)? If you want to match individual-by-individual (as described in my main comment 4 above), might we want to condition also on outcomes up to age a*? Perhaps I am misunderstanding that condition, since you also state something about X potentially containing lagged variables. You weren?t all that clear on this before (see p. 19, top), and this now comes back to haunt me in understanding what it is you do. This needs clarification.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. The tables contain a huge amount of information, and I wonder whether that is too much for the main text. The important findings can easily get lost under the pile of numbers. I urge you to be judicious and skimpy with the portions that are meant for the main text and focus on those that are of true essence.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. Cut figure 2: TMI. This is technical appendix material. Key results ``in print'' only, please.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P.7, ``when we omit crime ... still ... substantial returns''. State how much.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P.9. Given that you make advertisement for these programs, it surely is important to understand well what these programs do, without overloading the reader with information. On page 9 you say, ``Both have two phases, the first of which lasts from birth until age 5. ... The second phase of the study consists of child academic support through home visits from ages 5 through 8. The first phase of CARE, from birth until age 5, has an additional treatment arm of home visits designed to improve home environments.'' You point to appendix A and to García et al (2017) for more information, but I feel, more ought to be said here about the substance of the program. Among the items of interest: one would like to know what ``portion'' is particularly costly, how much it costs and why.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P. 10, ``Randomization for ABC/CARE was conducted on child pairs matched on family characteristics. Siblings and twins were jointly randomized into either treatment or control groups. Randomization pairing was based on the childhood risk index, maternal education, maternal age, and gender of the subject.'' I don?t know what that means. Perhaps it is good that I am an outsider here. Was this randomization done by the programs themselves? I.e., did they sort children into pairs, so that both had similar family backgrounds, and then flipped a coin on who got admitted? What does ``joint randomization'' mean? Does it mean, either all siblings got in or they didn?t? If this is true for siblings, why is it important to then mention twins in particular? Aren?t twins siblings? I understand that siblings aren?t twins, but somehow, that sentence threw me off. Etc.. Please make sure this is all crystal clear, even to outsiders like me.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P. 11, ``Toward this end, we define three indicator variables: W = 1 indicates that the parents referred to the program participate in the randomization protocol, W = 0 indicates otherwise.'' That seems to introduce a new element not described previously, and is hard to understand as stated. So, parents got referred to these programs, see p.9. Their ``eligibility was determined by a score on a childhood risk index.'' So, does W=0 indicate getting excluded by that score? Hopefully not, but that is how it reads. The next paragraph on p. 9 simply mentions the randomization, which you capture with R. I therefore do not know what the W stands for. Ah, this seems to get clarified in the next paragraph ... but it really is confusing as stated here. You mean to say, ``W-1 indicates that the parents referred to the program participate choose to participate ...''. Since you argue in the next paragraph that all parents do, why not drop W altogether? Don?t waste notation. It is coming back on p. 19, and there too it does not seem to be of much help. Perhaps I am missing something important here, but if so, tell the reader (i.e. that silly novice graduate student reading this paper).}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. Related, in that same paragraph, you note that R tak one of two values, i.e. R = 1 or R = 0. I then don?t understand what you mean by ``D indicates attending the program, i.e., D = R implies compliance with the initial randomization protocol.'' I may have an idea what you mean: I just don?t understand it from a mathematical and notational perspective. What values can D take? Are you saying, that there are two cases implying compliance with the initial randomization protocol, namely R=1 and D=1 as well as R=0 and D=0 (so that R=D in both cases)? It confuses me.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P. 11: The first sentence of the paragraph ``Individuals ...'' should need one or several extra words at the end to make it proper English. Perhaps you mean ``... variables B satisfy B 2 B0 .''? Would it be important to say more aboutB0.''? Itshowsuplater,whenconstructingsyntheticcomparison groups (p. 15), so perhaps at least there it would be good to discuss it more.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P. 12, top. ``j'' usually means an index: could there be a better symbol instead ... ah, actually, you mean this to be an index! It is just written in a confusing way ... in particular, Jdoes not ``index the outcomes'' (that could be a large index set!), but rather, indexes the component of the outcome. What is d? How does it relate to D or R (or something else) before? What is k,e,n? Strangely, e and n are defined at the bottom of page 16, but not here. Why not give a number of components j rather than talking about the set J? Shouldn?t you tell the reader more about the list of outcomes which make up the vector Y? After all, later on, you seek to construct a synthetic cohort with similar outcomes ... so knowing what they are will be crucial latest then. This paragraph needs a dedicated rewrite.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P. 13: As a poor graduate student reading your paper, I can?t figure out what to do with table 1. Is this meant to summarize something that is elsewhere in the paper: perhaps a technical appendix? I gather that you are trying to construct life-cycle costs and benefits. The first column gives a list of items, that are rather cryptic: if it was just them, it would be better to use two paragraphs and explain them. For example, why are ``Health Costs'' listed twice? What does ``Victimization Inflation'' mean? I understand the next column, i.e. age. But the information in the remaining columns is, at best, a reference to something clarified elsewhere. It gives me at best a vague guide at how to attempt and reconstruct your numbers. It says that I should ``impute national victims-arrests ratio(s)'' and a lot of other stuff. Recommendation: I feel this table should be in the technical appendix. In the main body of the text instead provide an in-text list of the ``components'', i.e. the left-most column. Explain them briefly, where needed. Also, explain briefly the main idea or main hurdle or main innovation in calculating that component, if needed. If they are similar to your main ``intuitive'' labor income example, then say so. For each component, point to a precise location in the technical appendix, where you explain with sufficient clarity, exactly what you do, so that a graduate student can replicate your numbers exactly.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P. 14: what is a* ? If that is a number, why not state it? Something else?}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P. 14, last sentence of paragraph ``We have data ...'' was probably meant to say ``which requires us to ...'' (or something else).}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P.15:youhavenottoldthereadermuchaboutB0. Seealsomycomment 8 above.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P. 15, middle: what is ``mediation analyses''? If this is a well-known term in the literature, please supply a key reference, else explain.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor.  ``the two stages can be compressed''. Cool. But we don?t care whether this can be done: we care only whether you actually do this. Do you? And if so, exactly how? Details should be provided in the technical appendix.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P. 16, ``There is close agreement of the constructed profiles within the age group of the experimental sample.'' See my main comment 3: if the constructed profile is obtained per matching the profile within the age group of the experimental sample, isn?t this then a tautological statement? The same holds for the next paragraph. I.e., what, precisely, is used for construction, and what is the independent verification here? This is very unclear.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. . On page 20 and just above Assumption A-1, Y now suddenly has five subscripts, when it only had three before, and the common subscripts are in a different order. I find that confusing. You then get to equation (3), and now there are four subscripts. This is not a compromise: this is even more confusing.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P. 20, ``we can weaken'' ... see minor comment 15 ...}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor.  P. 24: Assumption A-4 feels a bit odd. The notation is general enough that both d and k could be components of x. If one had a phi, which did not depend on it, then one could construct a new one, which did, switching between the ``old'' values, in dependence on d and k, and proceed with that. Is Theorem 1 then still valid? Perhaps something else is meant.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. P. 27: the notes to table 2 contain a model. That really should be part of the main text or appendix (or technical appendix): it feels odd to explain it there.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Editor. Is, say, page 29 a verbal description of what you described more formally above? Something else? How do the two relate? And what do you do, exactly? For example, the paragraph ``Our methodology...'' on page 29 needs a more precise fleshingout in the technical appendix, and you should point to that in the main text.}\\
+
+\noindent Response.\\
+
+\section*{Comments of Reviewer 1}
+
+\noindent \textbf{Referee 1. First, the title is misleading. The ABC/CARE projects do not in any way represent ``prototypical" child care. The title is misleading and might suggest that one could expect comparable benefits from almost any form of child care. This was center-based child care that offered low staff to child ratios, active monitoring, used a curriculum, etc. The title should be revised to be more accurate. Similarly, the program should be referred to more accurately as a child development center form of childcare throughout the paper and its features briefly reiterated in the discussion.}\\
+
+\noindent \textbf{Referee 1. Second, this paper unduly relies on citation of the authors' own unpublished analyses and sometimes the unpublished work of others. This is not necessary in most cases. The authors fail to cite in the appropriate locations the peer-reviewed publication(s) that make(s) the same point about many foundational issues, such as the study's original design and prior seminal findings. For example, the fact that the children in the control condition were not prevented from attending center-based childcare in the community appears in major prior articles and the benefits of this intermediate, non-randomized treatment "substitute" has been effectively documented (notably, see Burchinal, Lee, and Ramey, 1989 - Type of day-care and preschool intelligence in disadvantaged children, Child Development). Why would the authors cite an unpublished source of their own (specifically, Garcia et al, 2017, unpublished) for this fact? Actually, the Garcia et al (2017) is cited so often that one wonders how much it overlaps with this paper and what is needed from that not readily available paper to understand this current paper? This strongly detracts from the current paper. Similarly, specific previously published findings about effects of the early educational intervention at age 30 and 21 should be cited more directly in the introduction and at intermittent places later so that readers can more fully appreciate the context of this new economic forecasting analysis. To the extent that the current authors notice subtle differences or include additional data can be mention, when needed, but not to the exclusion of providing readers more details about these studies and previous findings.}\\
+
+\noindent \textbf{Referee 1. Closely related is that earlier reports sometimes appear at odds with the assumptions and perhaps the data incorporated into this new, expansive economic analysis. A prime example is that there were no significant effects on earnings or crime at age 30 of the original treatment, at least as previously analyzed. This should not be ignored -and if differences occur, the authors should offer reasons for these discrepancies.}\\
+
+\noindent \textbf{Referee 1. Finally, the paper lacks a much-needed section on limits and a contextual interpretation of these two studies. The projects occurred in a small university town that had high income, high education families and a school system deemed excellent by almost all parameters. Further, the proportion of minority and low-income families was very low, as noted in many prior publications about these studies. More importantly for a lifetime analysis, most of these study participants remained nearby and the Research Triangle Park has many job opportunities, at all levels, thus increasing employment opportunities - probably for both groups of study participants. Thus, although many of these findings may generalize, they need to be contextualized for cohort and geography. Another issue is that the gender differences that favor males in one way, but females in another way warrant greater discussion. These cannot be disaggregated from complex U.S. issues around race and gender, expectations, racism, opportunities, etc. A thoughtful mention of this will much improve the contribution of this important paper.}
+
+\section*{Comments of Reviewer 3}
+
+\noindent \textbf{Referee 3. The goal of the paper is to perform a comprehensive evaluation of an early childhood program (ACB/CARE). The evaluation is comprehensive in several ways: (i) It includes a wide range of outcomes; (ii) It forecasts and monetizes the effects on these outcomes over the life-cycle, to estimate rates of returns and compare benefits to costs; and (iii) It tries to account for both the sampling error in the experimental and auxiliary samples and the forecast error due to the interpolation and extrapolation. If I understand correctly, i) is already done in a separate paper \citet{Garcia_Heckman_Ziff_2017_Gender-Diff_UNPUBLISHED}. What's new in this paper is ii) and iii), both of which are challenging tasks but potentially quite useful for program evaluation.}\\
+
+\noindent Response. That is exactly right. In our companion paper, \citet{Garcia_Heckman_Ziff_2017_Gender-Diff_UNPUBLISHED}, we provide a ``more traditional'' analysis of treatment effects on multiple outcomes, focusing on gender differences and providing some novelties in terms of, for example, use of administrative crime data at age 30. Our paper intends to maps this treatment effects into life-cycle measures of social efficiency using based on (ii) and (iii).\\
+
+\noindent \textbf{Referee 3. The paper is extraordinary long, in total 350 pages including appendices. There are numerous long footnotes. I never refereed anything like this paper. I spent several days on the manuscript and I still don't understand what exactly is being done.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Referee 3. The body of the paper is far from self-contained; it is necessary to read the many appendices (and footnotes) to understand what the authors actually do, how the various procedures perform, etc. Indeed, most of the substance is in the appendices. The body of the paper actually reads a bit like a very long introduction/summary of what the authors do and what they found.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Referee 3.  I think it would be useful to drop the long introduction and get quickly to the core of the paper: How to forecast (and aggregate) the life-cycle costs and benefits.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Referee 3. Appendix C3 is important, and much of it is necessary to understand what you actually, and the pros and cons of alternative approaches.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Referee 3. You don't really offer a new approach to monetize the outcomes. Perhaps this part of the paper can be summarized in a short subsection with a table. The details on how you monetize given your setting may be discussed in an appendix.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Throughout the paper, the authors "test and do not reject" some testable implications of the key assumptions. Failure to reject is then taken as support of the assumptions. This raises two questions:} \\ \\
+ 
+\noindent \textbf{If the paper is supposed to be a template, what should the researcher do if she rejects a given assumption, such as exogeneity or structural invariance? This seems like a likely event given the strong assumptions. Is it possible to make progress under alternative or weaker assumptions?}\\
+
+\noindent Response.\\
+
+\noindent \textbf{In the body of the paper, the authors consistently argue that they test and do not reject the assumptions they make. Looking at the appendices, this seems to be true in many but not all cases. Also, in some of the cases it is true, the sampling error is significant and one cannot say much about the testable implications. The authors should be clear about this.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Referee 3. I don't understand how the paper deals with substitution bias. Perhaps it was discussed in one of the appendices (or in Garcia et al.) but I missed it. Please clarify what assumptions and data allow you to address this issue.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Referee 3. How do you choose predictor variables? It needs to be able to predict a treatment effect, and so the predictor variable should be affected by treatment. I might be wrong but it doesn't look like you are using the subsample of predictors that are affected by treatment? Why not? Why does it make sense to include predictor variables not affected by treatment?}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Referee 3. What, if any, restrictions are there on the joint distribution of the predicted outcomes in a given period? Are, say, high earners also more likely to be healthy? What are the cross-equation restrictions in the forecasts?}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Referee 3. Please clarify why one needs a randomized experiment if one is willing to make the assumptions you invoke (such as exogeneity of the predictor variables and structural invariance)? Why not just go to observational data where we can observe long-run outcomes and have a larger set of covariates to do the matching. What economic model or assumptions would invalidate such a matching procedure (which motivates why you look at social experiments), yet still be consistent with the assumptions you invoke? The paper should be clear about this.}\\
+
+\noindent Response.\\
+
+\noindent \textbf{Referee 3. The importance of essentially heterogeneity is a key insight of other work by Heckman and coauthors. Please discuss your assumptions and approaches in light of this evidence. Does the presence of essential heterogeneity in a wide range of settings tell us something of the applicability of the methods you propose in this paper?}\\
+
+\noindent Response.\\
+
+
+
+
+
+
+%References
+\singlespace
+\bibliographystyle{chicago}
+\bibliography{heckman}
+
+\end{document} 
