@@ -75,7 +75,6 @@ foreach c in `categories' {
 cap log close
 log using health, replace
 
-
 forvalues s = 0/1 {
 
 	local noall
@@ -107,7 +106,7 @@ forvalues s = 0/1 {
 			}
 		}
 	
-		while (${success`s'_`c'} <= $bootstraps) & (`tries' <= $maxtries) {
+		while (${success`s'_`c'} <= ${bootstraps}) & (`tries' <= ${maxtries}) {
 	
 			preserve
 	

@@ -18,13 +18,13 @@ Pooling the two control groups, males have higher IQs, employment, enhanced pare
 
 \begin{table}[H]
 \centering
-\caption{Summary of Proportion of Outcomes Males $>$ Females}
+\caption{Standardized Treatment Effects by Outcome Category}
 \label{tab:proportion-table-ranksign}
 \begin{threeparttable}
-\input{output/abccare-proportion-summary-full}
+\input{output/abccare-category-stdtes-rs}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table summarizes comparison of gender gaps across outcome categories by different groups. A bold proportion for the treatment or control group indicates that the proportion is statistically different than 50\% at the 10\% level. A bold difference between treatment and control indicates that the Wilcoxon signed-rank test comparing the control and treatment proportions, over 1,000 bootstraps, yields a $p$-value less than or equal to 0.10. The variables for each outcome category are listed in Appendix~\ref{appendix:gdiff-tes}. The inference procedure is described in detail in Appendix~\ref{little-gdiff-proportions}. In summary, we bootstrap with replacement 1,000 times. For bootstrap $b \in [1, \ldots, 1,000]$ we compute the proportion of variables in each outcome category for which the males do better than the females. We do this separately for the treatment and control group, estimating the pair of proportions $(P_{T,b}, P_{C,b})$. Over the distribution of the pairs, we compute the signed-rank test. It compares the empirical distribution of the proportions in the treatment group to the empirical distribution of the proportions in the control group. We repeat this procedure for each outcome category.
+\item Note: 
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
