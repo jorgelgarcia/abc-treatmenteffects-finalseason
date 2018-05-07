@@ -24,7 +24,7 @@ local male_lab			"Male"
 local apgar1_lab 		"Apgar Score, 1 min."
 local apgar5_lab 		"Apgar Score, 5 min."
 local p_inc0y_lab		"Parental Income"
-local f_home0y_lab			"Father Present"
+local f_home0y_lab		"Father Present"
 
 
 local KEEP0				keep if male == 0
