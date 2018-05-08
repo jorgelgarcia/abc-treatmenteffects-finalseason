@@ -21,7 +21,7 @@ setwd('/share/klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv'
 getwd()
 df <- data.frame(read.dta('append-abccare_iv.dta'))
 
-#  only keep necessary variables
+#  vectors of variables
 basicvars <- c('id','R','RV','male','dc_alt','dc_mo_pre')
 iqvars <- c('iq2y','iq3y','iq3y6m','iq4y','iq4y6m','iq5y','iq6y6m','iq8y')
 achvars <- c('ach6y','ach7y6m','ach8y','ach8y6m')
@@ -41,52 +41,70 @@ healthvars <- c(healthvars,'si34y_chol_hdl','si34y_dyslipid','si34y_hemoglobin',
 healthvars <- c(healthvars,'si34y_bmi','si34y_obese','si34y_sev_obese','si34y_whr','si34y_obese_whr','si34y_fram_p1')
 mhealthvars <- c('bsi_tsom','bsi_tdep','bsi_tanx','bsi_thos','bsi_tgsi')
 
+# define function for Rosenbaum test
+rosenbaum <- function(data,varstokeep,catvar){
+  
+  # balance number of males and number of females
+  nToDrop <- abs(sum(data[,catvar]==1) - sum(data[,catvar]==0))
 
-varlists <- c(iqvars,parentvars,mworkvars,fhomevars,schvars,empvars)
-varlists <- c(varlists,sevars,mhealthvars)
+  # create distance matrix
+  # 	idcol: column with ID numbers
+  # 	missing.weight: match on missing
+  # 	ndiscard: "phantoms" to make sure the cardinality of the groups balance
+  print(rownames(subset(data, select=c('id',varstokeep))))
+  f1 <- gendistance(subset(data, select=c('id',varstokeep)), idcol=1, missing.weight=0, ndiscard=nToDrop)
+  # reformat distance matrix
 
+  f2 <- distancematrix(f1)
+ 
+  # create matches
+  #f3 <- nonbimatch(dist)
+  #f4 <- f3$halves
+
+  # make a new matrix with values of distance matrix
+  # distancematrix() outputs a matrix that cannot be altered
+  dimf2 <- dim(f2)
+  out <- matrix(NA,dimf2,dimf2)
+  for (i in 1:(dimf2[1]*dimf2[2])){
+	  out[i] <- f2[i]
+  }
+  
+  # get rid of Inf values so everything is numeric
+  
+  #out <- out[!is.finite(out)] <- NaN
+  #out <- matrix(out,dimf2,dimf2)
+  
+  # crossmatch test
+  z <- unlist(data[,catvar])
+  crossmatchtest(z,out)
+  
+}
+
+# reduce dataset to necessary variables
+varlists <- c(iqvars,parentvars,mworkvars,fhomevars,schvars,empvars,sevars,mhealthvars)
 keeps <- append(basicvars,varlists)
+
 df <- df[, keeps, drop=FALSE]
 
 # drop if R == 0 & RV == 1 and .x
 df <- df[!(df$R==0 & df$RV==1),]
-df <- df[!(df$R==0),]
 df <- df[!is.na(df$id),]
 
-# balance number of males and number of females
-nToDrop <- sum(df$male==1) - sum(df$male==0)
+# create different dataframes for each comparison
+CaBvGd = df[((df$R==1)|(df$dc_mo_pre>0 & df$R==0 & !is.na(df$dc_mo_pre))),]
+ChBvGd = df[((df$R==1)|(df$dc_mo_pre==0 & df$R==0)),]
+ChBvGd = ChBvGd[!is.na(df$dc_mo_pre),]
+rownames(ChBvGd) <- NULL
 
-# create distance matrix
-# 	idcol: column with ID numbers
-# 	missing.weight: match on missing
-# 	ndiscard: "phantoms" to make sure the cardinality of the groups balance
-f1 <- gendistance(subset(df, select=c('id',varlists)), idcol=1, missing.weight=0, ndiscard=nToDrop)
-# reformat distance matrix
-f2 <- distancematrix(f1)
-# create matches
-#f3 <- nonbimatch(dist)
-# only list pairs once
-#f4 <- f3$halves
+GTvCd = df[(df$male==0),]
+BTvCd = df[(df$male==1),]
 
-# make a new matrix with values of distance matrix
-# distancematrix() outputs a matrix that cannot be altered
-dimf2 <- dim(f2)
-out <- matrix(NA,dimf2,dimf2)
-for (i in 1:(dimf2[1]*dimf2[2])){
-	out[i] <- f2[i]
-}
+# combine dataframes in to a list
+bigdfA <- list(GTvC=GTvCd,BTvC=BTvCd)
+bigdfC <- list(ChBvG=ChBvGd)
+#CaBvG=CaBvGd),
+#,CBvG=df[(df$R==0),], TBvG=df[(df$R==1),])
+# ,
 
-# assign a matchID for each pair: the first pair is 1, etc.
-#keepers = c()
-#matchID = c()
-#for( i in 1:dim(f4)[1]) {
-#	keepers = c(keepers, f4$Group1.Row[i], f4$Group2.Row[i])
-#	matchID = c(matchID, i, i)
-#}
-# merge back into dataset sorting by pairs
-#d4 = df[keepers,]
-#d4$matchID = matchID
-
-# crossmatch test
-z <- unlist(df$male, use.names=FALSE)
-crossmatchtest(z,out)
+#outputA <- sapply(bigdfA, function(x) rosenbaum(x,iqvars,'R'))
+outputC <- sapply(bigdfC, function(x) rosenbaum(x,iqvars,'male'))
