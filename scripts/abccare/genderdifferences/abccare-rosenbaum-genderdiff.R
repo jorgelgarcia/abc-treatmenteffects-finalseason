@@ -46,12 +46,13 @@ rosenbaum <- function(data,varstokeep,catvar){
   
   # balance number of males and number of females
   nToDrop <- abs(sum(data[,catvar]==1) - sum(data[,catvar]==0))
-
+  print(sum(data[,catvar]==1))
+  print(sum(data[,catvar]==0))
   # create distance matrix
   # 	idcol: column with ID numbers
   # 	missing.weight: match on missing
   # 	ndiscard: "phantoms" to make sure the cardinality of the groups balance
-  print(rownames(subset(data, select=c('id',varstokeep))))
+
   f1 <- gendistance(subset(data, select=c('id',varstokeep)), idcol=1, missing.weight=0, ndiscard=nToDrop)
   # reformat distance matrix
 
@@ -69,10 +70,18 @@ rosenbaum <- function(data,varstokeep,catvar){
 	  out[i] <- f2[i]
   }
   
+  # if more than one phantom observation, need to make sure not dividing by 0
+  if (nToDrop > 1) {
+    #indices <- which(is.infinite(out))
+    #for (i in indices){
+    #  out[i] <- 0
+    #}
+    nToKeep = sum(data[,catvar]==1) + sum(data[,catvar]==0)
+    out <-out[1:nToKeep,1:nToKeep]
+  }
+  #print(out)
   # get rid of Inf values so everything is numeric
   
-  #out <- out[!is.finite(out)] <- NaN
-  #out <- matrix(out,dimf2,dimf2)
   
   # crossmatch test
   z <- unlist(data[,catvar])
@@ -91,20 +100,41 @@ df <- df[!(df$R==0 & df$RV==1),]
 df <- df[!is.na(df$id),]
 
 # create different dataframes for each comparison
-CaBvGd = df[((df$R==1)|(df$dc_mo_pre>0 & df$R==0 & !is.na(df$dc_mo_pre))),]
-ChBvGd = df[((df$R==1)|(df$dc_mo_pre==0 & df$R==0)),]
-ChBvGd = ChBvGd[!is.na(df$dc_mo_pre),]
-rownames(ChBvGd) <- NULL
 
-GTvCd = df[(df$male==0),]
-BTvCd = df[(df$male==1),]
+## GROUP A
+# girls, treatment vs. control
+GTvCd <- df[(df$male==0),]
+# boys, treatment vs. control
+BTvCd <- df[(df$male==1),]
+# girls, treatment vs. alternative
+GTvCad <- df[(df$male==0)&((df$dc_mo_pre>0 & df$R==0)|(df$R==1))& !is.na(df$dc_mo_pre),]
+# girls, treatment vs. home care
+GTvChd <- df[(df$male==0)&((df$dc_mo_pre==0 & df$R==0)|(df$R==1))& !is.na(df$dc_mo_pre),]
+# boys, treatment vs. alternative
+BTvCad <- df[(df$male==1)&((df$dc_mo_pre>0 & df$R==0)|(df$R==1))& !is.na(df$dc_mo_pre),]
+# boys, treatment vs. home care
+BTvChd <- df[(df$male==1)&((df$dc_mo_pre==0 & df$R==0)|(df$R==1))& !is.na(df$dc_mo_pre),]
+
+## GROUP B
+# girls, alternative vs. home care
+GCavChd <- df[df$male==0 & df$R==0 & !is.na(df$dc_mo_pre),]
+GCavChd$alt <- ifelse(GCavChd$dc_mo_pre==0,0,1)
+# boys, alternative vs. home care
+BCavChd <- df[df$male==1 & df$R==0 & !is.na(df$dc_mo_pre),]
+BCavChd$alt <- ifelse(BCavChd$dc_mo_pre==0,0,1)
+
+## GROUP C
+# alternative, boy vs. girl
+CaBvGd <- df[((df$R==1)|(df$dc_mo_pre>0 & df$R==0 & !is.na(df$dc_mo_pre))),]
+# home care, boy vs. girl
+ChBvGd <- df[((df$R==1)|(df$dc_mo_pre==0 & df$R==0 & !is.na(df$dc_mo_pre))),]
 
 # combine dataframes in to a list
-bigdfA <- list(GTvC=GTvCd,BTvC=BTvCd)
-bigdfC <- list(ChBvG=ChBvGd)
-#CaBvG=CaBvGd),
-#,CBvG=df[(df$R==0),], TBvG=df[(df$R==1),])
-# ,
+bigdfA <- list(GTvC=GTvCd,GTvCa=GTvCad,GTvCh=GTvChd,BTvC=BTvCd,BTvCa=BTvCad,BTvCh=BTvChd)
+bigdfB <- list(BCavCh=BCavChd,GCavCh=GCavChd)
+bigdfC <- list(ChBvG=ChBvGd,CaBvG=CaBvGd,CBvG=df[(df$R==0),], TBvG=df[(df$R==1),])
 
-#outputA <- sapply(bigdfA, function(x) rosenbaum(x,iqvars,'R'))
+
+outputA <- sapply(bigdfA, function(x) rosenbaum(x,iqvars,'R'))
+outputB <- sapply(bigdfB, function(x) rosenbaum(x,iqvars,'alt'))
 outputC <- sapply(bigdfC, function(x) rosenbaum(x,iqvars,'male'))
