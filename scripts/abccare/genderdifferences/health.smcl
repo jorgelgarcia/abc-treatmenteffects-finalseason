@@ -1,0 +1,217 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/home/aziff/projects/abccare-cba/scripts/abccare/genderdifferences/health.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}31 Oct 2017, 15:47:38
+{txt}
+{com}. 
+. 
+. forvalues s = 0/1 {c -(}
+{txt}  2{com}. 
+.         local noall
+{txt}  3{com}.         local all
+{txt}  4{com}. 
+.         foreach c in `categories' {c -(}
+{txt}  5{com}.         
+.                 local b = 0
+{txt}  6{com}.                 global success`s'_`c' = 0
+{txt}  7{com}.                 local tries = 0
+{txt}  8{com}.                 
+.                 if "`c'" == "all" {c -(}
+{txt}  9{com}.                         foreach l in `categories' {c -(}
+{txt} 10{com}.                                 if "`l'" != "all" {c -(}
+{txt} 11{com}.                                         local testvar = 0
+{txt} 12{com}.                                         foreach m in `noall' {c -(}
+{txt} 13{com}.                                         
+.                                                 if "`l'" == "`m'" {c -(}
+{txt} 14{com}.                                                         local testvar = 1
+{txt} 15{com}.                                                 {c )-}
+{txt} 16{com}.                                         {c )-}
+{txt} 17{com}.                                         if `testvar' == 0 {c -(}
+{txt} 18{com}.                                                 local all `all' ``l''
+{txt} 19{com}.                                         
+.                                         {c )-}
+{txt} 20{com}.                                 
+.                                 {c )-}
+{txt} 21{com}.                         
+.                         {c )-}
+{txt} 22{com}.                 {c )-}
+{txt} 23{com}.         
+.                 while (${c -(}success`s'_`c'{c )-} <= $bootstraps) & (`tries' <= $maxtries) {c -(}
+{txt} 24{com}.         
+.                         preserve
+{txt} 25{com}.         
+.                         if `b' > 0 {c -(}
+{txt} 26{com}.                                 bsample
+{txt} 27{com}.                         {c )-}
+{txt} 28{com}.         
+.                         di "sex`s' `c' `b'"
+{txt} 29{com}.         
+.                         // average treatment effect
+.                         
+.                         foreach v in ``c'' {c -(}
+{txt} 30{com}.         
+.                                 qui sum `v' 
+{txt} 31{com}.                                 qui replace `v' = (`v' - r(mean) ) / r(sd)
+{txt} 32{com}.                 
+.                                 qui sum `v' if male == `s' & R == 0 //& dc_mo_pre > 0 & dc_mo_pre != . // & dc_mo_pre == 0 //
+{txt} 33{com}.                                 local b`v'`s'`b'_R0 = r(mean)
+{txt} 34{com}.                                         
+.                                 qui sum `v' if male == `s' & R == 1
+{txt} 35{com}.                                 local b`v'`s'`b'_R1 = r(mean)
+{txt} 36{com}.                                 
+.                                 // calculate treatment effect and store by category
+.                                 matrix te`s'_`c'`b' = (nullmat(te`s'_`c'`b') \ `b`v'`s'`b'_R1' - `b`v'`s'`b'_R0')
+{txt} 37{com}.                                 
+.                                 if (`b`v'`s'`b'_R1' - `b`v'`s'`b'_R0') == . {c -(} // keep track if mising
+{txt} 38{com}.                                         qui sum `v' if male == `s' & R == 0
+{txt} 39{com}.                                         qui sum `v' if male == `s' & R == 1
+{txt} 40{com}.                                                 
+.                                         matrix fail`s'`c' = (nullmat(fail`s'`c') \ `b')
+{txt} 41{com}.                                         global fail`s'`c' ${c -(}fail`s'`c'{c )-} "`v'"
+{txt} 42{com}.                                                 
+.                                 {c )-}
+{txt} 43{com}.                         {c )-}
+{txt} 44{com}.                 
+.                         mat ones`s'_`c'`b' = J(rowsof(te`s'_`c'`b'),1,1)
+{txt} 45{com}.                         mat sum`s'_`c'`b' = ones`s'_`c'`b''*te`s'_`c'`b'
+{txt} 46{com}.                         mat avg`s'_`c'`b' = sum`s'_`c'`b'/rowsof(te`s'_`c'`b')  
+{txt} 47{com}.                         
+.                         if avg`s'_`c'`b'[1,1] != . {c -(}
+{txt} 48{com}.                                 mat `c'`s' = (nullmat(`c'`s') \ avg`s'_`c'`b')
+{txt} 49{com}.                                 mat colnames `c'`s' = `c'`s'
+{txt} 50{com}.                         
+.                                 global success`s'_`c' = ${c -(}success`s'_`c'{c )-} + 1
+{txt} 51{com}.                                 
+.                                 local b = `b' + 1
+{txt} 52{com}.                                 local tries = 0
+{txt} 53{com}.                         {c )-}
+{txt} 54{com}.                         
+.                         else {c -(}
+{txt} 55{com}.                                 mat drop te`s'_`c'`b' 
+{txt} 56{com}.                                 local tries = `tries' + 1
+{txt} 57{com}.                                 if `tries' == $maxtries {c -(}
+{txt} 58{com}.                                         local noall `noall' `c'
+{txt} 59{com}.                                 {c )-}
+{txt} 60{com}.                         {c )-}
+{txt} 61{com}.                 
+.                 restore 
+{txt} 62{com}.                 {c )-}
+{txt} 63{com}.         {c )-}
+{txt} 64{com}. {c )-}
+sex0 iq 0
+sex0 iq 1
+sex0 iq 2
+sex0 iq 3
+sex0 iq 4
+sex0 iq 5
+sex0 iq 6
+sex0 iq 7
+sex0 iq 8
+sex0 iq 9
+sex0 iq 10
+sex0 iq 11
+sex0 iq 12
+sex0 iq 13
+sex0 iq 14
+sex0 iq 15
+sex0 iq 16
+sex0 iq 17
+sex0 iq 18
+sex0 iq 19
+sex0 iq 20
+sex0 iq 21
+sex0 iq 22
+sex0 iq 23
+sex0 iq 24
+sex0 iq 25
+sex0 ach 0
+sex0 ach 1
+sex0 ach 2
+sex0 ach 3
+sex0 ach 4
+sex0 ach 5
+sex0 ach 6
+sex0 ach 7
+sex0 ach 8
+sex0 ach 9
+sex0 ach 10
+sex0 ach 11
+sex0 ach 12
+sex0 ach 13
+sex0 ach 14
+sex0 ach 15
+sex0 ach 16
+sex0 ach 17
+sex0 ach 18
+sex0 ach 19
+sex0 ach 20
+sex0 ach 21
+sex0 ach 22
+sex0 ach 23
+sex0 ach 24
+sex0 ach 25
+sex0 se 0
+sex0 se 1
+sex0 se 2
+sex0 se 3
+sex0 se 4
+sex0 se 5
+sex0 se 6
+sex0 se 7
+sex0 se 8
+sex0 se 9
+sex0 se 10
+sex0 se 11
+sex0 se 12
+sex0 se 13
+sex0 se 14
+sex0 se 15
+sex0 se 16
+sex0 se 17
+sex0 se 18
+sex0 se 19
+sex0 se 20
+sex0 se 21
+sex0 se 22
+sex0 se 23
+sex0 se 24
+sex0 se 25
+sex0 parenting 0
+sex0 parenting 1
+sex0 parenting 2
+sex0 parenting 3
+sex0 parenting 4
+sex0 parenting 5
+sex0 parenting 6
+sex0 parenting 7
+sex0 parenting 8
+sex0 parenting 9
+sex0 parenting 10
+sex0 parenting 11
+sex0 parenting 12
+sex0 parenting 13
+sex0 parenting 14
+sex0 parenting 15
+sex0 parenting 16
+sex0 parenting 17
+sex0 parenting 18
+sex0 parenting 19
+sex0 parenting 20
+sex0 parenting 21
+sex0 parenting 22
+sex0 parenting 23
+sex0 parenting 24
+sex0 parenting 25
+sex0 mlabor 0
+sex0 mlabor 1
+{err}{hline 2}Break{hline 2}
+{txt}{search r(1), local:r(1);}
+
+end of do-file
+
+{err}{hline 2}Break{hline 2}
+{txt}{search r(1), local:r(1);}
+
+{com}. 

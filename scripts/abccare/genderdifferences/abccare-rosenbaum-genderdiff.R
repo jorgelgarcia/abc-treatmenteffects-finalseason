@@ -19,7 +19,8 @@ scripts	  <- file.path(repo, 'scripts', 'abccare', 'genderdifferences')
 #setwd(datafile)
 setwd('/share/klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv')
 getwd()
-df <- data.frame(read.dta('append-abccare_iv.dta'))
+df <- data.frame(read.dta('abccare-factors-R-inputold.dta'))
+#df <- data.frame(read.dta('append-abccare_iv.dta'))
 
 #  vectors of variables
 basicvars <- c('id','R','RV','male','dc_alt','dc_mo_pre')
@@ -45,6 +46,10 @@ age5 <- c('iq2y','iq3y','iq3y6m','iq4y','iq4y6m','iq5y','ibr_task0y6m','ibr_actv
 age5 <- c(age5,'ibr_task1y6m','ibr_actv1y6m','ibr_sociab1y6m','home0y6m','home1y6m','home2y6m','home3y6m','home4y6m')
 age15 <- c('ach6y','ach7y6m','ach8y','ach8y6m','tot_sped')
 age34 <- c('sch_hs30y','si30y_univ_comp','years_30y','si30y_works_job','si30y_inc_labor','si30y_cig_num')
+#'factorage5',
+agefactors <- c('factorage5','factorage15','factorage34')
+#catfactors <- c(factoriqnew,factorachnew,factorsenew,factorparentingnew,factoreducation,factoremploymentnew,factorrisk,factormentalhealthnew)
+catfactors <- c('factoriqnew','factorachnew','factorsenew','factorparentingnew','factoreducation','factorrisk','factormentalhealthnew')
 
 
 # define function for Rosenbaum test
@@ -54,16 +59,18 @@ rosenbaum <- function(data,varstokeep,catvar){
   nToDrop <- abs(sum(data[,catvar]==1) - sum(data[,catvar]==0))
   print(sum(data[,catvar]==1))
   print(sum(data[,catvar]==0))
+  
   # create distance matrix
   # 	idcol: column with ID numbers
   # 	missing.weight: match on missing
   # 	ndiscard: "phantoms" to make sure the cardinality of the groups balance
 
-  f1 <- gendistance(subset(data, select=c('id',varstokeep)), idcol=1, missing.weight=0, ndiscard=nToDrop)
+  f1 <- gendistance(subset(data, select=c('id',varstokeep)), idcol=1, ndiscard=nToDrop)
+  #, missing.weight=0,
   # reformat distance matrix
 
   f2 <- distancematrix(f1)
- 
+
   # create matches
   #f3 <- nonbimatch(dist)
   #f4 <- f3$halves
@@ -96,15 +103,19 @@ rosenbaum <- function(data,varstokeep,catvar){
 }
 
 # reduce dataset to necessary variables
-varlists <- c(iqvars,sevars,achvars,parentvars,mworkvars,schvars,empvars,mhealthvars,crimevars,riskvars,healthvars)
+#varlists <- c(iqvars,sevars,achvars,parentvars,mworkvars,schvars,empvars,mhealthvars,crimevars,riskvars,healthvars)
 #varlists <- c(iqvars,sevars,parentvars,schvars,empvars,mhealthvars)
 #cats <- c('iqvars','achvars','sevars','parentvars','mworkvars','schvars','empvars','crimevars','riskvars','healthvars','mhealthvars','varlists')
-cats <- list(iq=iqvars,se=sevars,parent=parentvars,sch=schvars,mhealth=mhealthvars)
-agecats <- list(a5=age5,a15=age15,a34=age34)
-agecatsC <- list(a5=age5,a34=age34)
+#cats <- list(iq=iqvars,se=sevars,parent=parentvars,sch=schvars,mhealth=mhealthvars)
+#agecats <- list(a5=age5,a15=age15,a34=age34)
+#agecatsC <- list(a5=age5,a34=age34)
+
+factorcats <- list(age5='factorage5',age15='factorage15',age34='factorage34',fiq='factoriqnew',fach='factorachnew',fse='factorsenew',fmlabor='factormlabor',fedu='factoreducation',femp='factoremploymentnew',fcrime='factorcrime',frisk='factorrisk',fmhealth='factormentalhealthnew',fhealth='factorhealth')
+
+varlists <- c(agefactors,catfactors)
 keeps <- append(basicvars,varlists)
 
-df <- df[, keeps, drop=FALSE]
+#df <- df[, keeps, drop=FALSE]
 
 # drop if R == 0 & RV == 1 and .x
 df <- df[!(df$R==0 & df$RV==1),]
@@ -145,11 +156,21 @@ bigdfA <- list(GTvC=GTvCd,GTvCa=GTvCad,GTvCh=GTvChd,BTvC=BTvCd,BTvCa=BTvCad,BTvC
 bigdfB <- list(BCavCh=BCavChd,GCavCh=GCavChd)
 bigdfC <- list(ChBvG=ChBvGd,CaBvG=CaBvGd,CBvG=df[(df$R==0),], TBvG=df[(df$R==1),])
 
-outputA <- lapply(agecats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
-outputB <- lapply(agecats, function(x) sapply(bigdfB, function(y) rosenbaum(y,x,'alt')))
-outputC <- lapply(agecatsC, function(x) sapply(bigdfC, function(y) rosenbaum(y,x,'male')))
+#outputA <- lapply(cats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
+#outputB <- lapply(cats, function(x) sapply(bigdfB, function(y) rosenbaum(y,x,'alt')))
+#outputC <- lapply(cats, function(x) sapply(bigdfC, function(y) rosenbaum(y,x,'male')))
 
-combinedoutput <-data.frame(list(A=outputA,B=outputB,C=outputC)) 
+
+outputAaf <- lapply(factorcats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
+#outputBaf <- sapply(bigdfB, function(y) rosenbaum(y,agefactorcats,'alt'))
+#outputCaf <- sapply(bigdfC, function(y) rosenbaum(y,agefactorcats,'male'))
+
+#outputAcf <- sapply(bigdfA, function(y) rosenbaum(y,catfactors,'R'))
+#outputBcf <- sapply(bigdfB, function(y) rosenbaum(y,catfactors,'alt'))
+#outputCcf <- sapply(bigdfC, function(y) rosenbaum(y,catfactors,'male'))
+
+#combinedoutputaf <-data.frame(list(A=outputAaf,B=outputBaf,C=outputCaf)) 
+#combinedoutputcf <-data.frame(list(A=outputAcf,B=outputBcf,C=outputCcf)) 
 
 setwd('/home/aziff/projects/abccare-cba/output')
-cat(capture.output(print(combinedoutput),file='rosenbaum-output-agecats.txt'))
+cat(capture.output(print(combinedoutput),file='rosenbaum-output-agefactors.txt'))
