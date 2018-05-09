@@ -23,7 +23,7 @@ df <- data.frame(read.dta('append-abccare_iv.dta'))
 
 #  vectors of variables
 basicvars <- c('id','R','RV','male','dc_alt','dc_mo_pre')
-iqvars <- c('iq2y','iq3y','iq3y6m','iq4y','iq4y6m','iq5y','iq6y6m','iq8y')
+iqvars <- c('iq2y','iq3y','iq3y6m','iq4y','iq4y6m','iq5y')
 achvars <- c('ach6y','ach7y6m','ach8y','ach8y6m')
 sevars <- c('ibr_task0y6m','ibr_actv0y6m','ibr_sociab0y6m')
 sevars <- c(sevars,'ibr_task1y','ibr_actv1y','ibr_sociab1y')
@@ -43,7 +43,7 @@ mhealthvars <- c('bsi_tsom','bsi_tdep','bsi_tanx','bsi_thos','bsi_tgsi')
 
 # define function for Rosenbaum test
 rosenbaum <- function(data,varstokeep,catvar){
-  
+  print(varstokeep)
   # balance number of males and number of females
   nToDrop <- abs(sum(data[,catvar]==1) - sum(data[,catvar]==0))
   print(sum(data[,catvar]==1))
@@ -90,7 +90,9 @@ rosenbaum <- function(data,varstokeep,catvar){
 }
 
 # reduce dataset to necessary variables
-varlists <- c(iqvars,parentvars,mworkvars,fhomevars,schvars,empvars,sevars,mhealthvars)
+varlists <- c(iqvars,sevars,parentvars,schvars,empvars,mhealthvars)
+#cats <- c('iqvars','achvars','sevars','parentvars','mworkvars','schvars','empvars','crimevars','riskvars','healthvars','mhealthvars','varlists')
+cats <- list(iq=iqvars,se=sevars,parent=parentvars,sch=schvars,mhealth=mhealthvars,all=varlists)
 keeps <- append(basicvars,varlists)
 
 df <- df[, keeps, drop=FALSE]
@@ -134,7 +136,8 @@ bigdfA <- list(GTvC=GTvCd,GTvCa=GTvCad,GTvCh=GTvChd,BTvC=BTvCd,BTvCa=BTvCad,BTvC
 bigdfB <- list(BCavCh=BCavChd,GCavCh=GCavChd)
 bigdfC <- list(ChBvG=ChBvGd,CaBvG=CaBvGd,CBvG=df[(df$R==0),], TBvG=df[(df$R==1),])
 
+outputA <- lapply(cats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
 
-outputA <- sapply(bigdfA, function(x) rosenbaum(x,iqvars,'R'))
-outputB <- sapply(bigdfB, function(x) rosenbaum(x,iqvars,'alt'))
-outputC <- sapply(bigdfC, function(x) rosenbaum(x,iqvars,'male'))
+#outputA <- sapply(bigdfA, function(x) rosenbaum(x,iqvars,'R'))
+#outputB <- sapply(bigdfB, function(x) rosenbaum(x,iqvars,'alt'))
+#outputC <- sapply(bigdfC, function(x) rosenbaum(x,iqvars,'male'))
