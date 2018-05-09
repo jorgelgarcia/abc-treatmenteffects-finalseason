@@ -41,6 +41,12 @@ healthvars <- c(healthvars,'si34y_chol_hdl','si34y_dyslipid','si34y_hemoglobin',
 healthvars <- c(healthvars,'si34y_bmi','si34y_obese','si34y_sev_obese','si34y_whr','si34y_obese_whr','si34y_fram_p1')
 mhealthvars <- c('bsi_tsom','bsi_tdep','bsi_tanx','bsi_thos','bsi_tgsi')
 
+age5 <- c('iq2y','iq3y','iq3y6m','iq4y','iq4y6m','iq5y','ibr_task0y6m','ibr_actv0y6m','ibr_sociab0y6m')
+age5 <- c(age5,'ibr_task1y6m','ibr_actv1y6m','ibr_sociab1y6m','home0y6m','home1y6m','home2y6m','home3y6m','home4y6m')
+age15 <- c('ach6y','ach7y6m','ach8y','ach8y6m','tot_sped')
+age34 <- c('sch_hs30y','si30y_univ_comp','years_30y','si30y_works_job','si30y_inc_labor','si30y_cig_num')
+
+
 # define function for Rosenbaum test
 rosenbaum <- function(data,varstokeep,catvar){
   print(varstokeep)
@@ -90,9 +96,12 @@ rosenbaum <- function(data,varstokeep,catvar){
 }
 
 # reduce dataset to necessary variables
-varlists <- c(iqvars,sevars,parentvars,schvars,empvars,mhealthvars)
+varlists <- c(iqvars,sevars,achvars,parentvars,mworkvars,schvars,empvars,mhealthvars,crimevars,riskvars,healthvars)
+#varlists <- c(iqvars,sevars,parentvars,schvars,empvars,mhealthvars)
 #cats <- c('iqvars','achvars','sevars','parentvars','mworkvars','schvars','empvars','crimevars','riskvars','healthvars','mhealthvars','varlists')
-cats <- list(iq=iqvars,se=sevars,parent=parentvars,sch=schvars,mhealth=mhealthvars,all=varlists)
+cats <- list(iq=iqvars,se=sevars,parent=parentvars,sch=schvars,mhealth=mhealthvars)
+agecats <- list(a5=age5,a15=age15,a34=age34)
+agecatsC <- list(a5=age5,a34=age34)
 keeps <- append(basicvars,varlists)
 
 df <- df[, keeps, drop=FALSE]
@@ -136,8 +145,11 @@ bigdfA <- list(GTvC=GTvCd,GTvCa=GTvCad,GTvCh=GTvChd,BTvC=BTvCd,BTvCa=BTvCad,BTvC
 bigdfB <- list(BCavCh=BCavChd,GCavCh=GCavChd)
 bigdfC <- list(ChBvG=ChBvGd,CaBvG=CaBvGd,CBvG=df[(df$R==0),], TBvG=df[(df$R==1),])
 
-outputA <- lapply(cats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
+outputA <- lapply(agecats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
+outputB <- lapply(agecats, function(x) sapply(bigdfB, function(y) rosenbaum(y,x,'alt')))
+outputC <- lapply(agecatsC, function(x) sapply(bigdfC, function(y) rosenbaum(y,x,'male')))
 
-#outputA <- sapply(bigdfA, function(x) rosenbaum(x,iqvars,'R'))
-#outputB <- sapply(bigdfB, function(x) rosenbaum(x,iqvars,'alt'))
-#outputC <- sapply(bigdfC, function(x) rosenbaum(x,iqvars,'male'))
+combinedoutput <-data.frame(list(A=outputA,B=outputB,C=outputC)) 
+
+setwd('/home/aziff/projects/abccare-cba/output')
+cat(capture.output(print(combinedoutput),file='rosenbaum-output-agecats.txt'))
