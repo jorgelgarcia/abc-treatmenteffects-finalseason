@@ -35,6 +35,15 @@ factor_iq5y
 factor_iq12y
 factor_iq21y;
 
+local iqnew 
+iq2y
+iq3y
+iq3y6m
+iq4y
+iq4y6m
+iq5y
+iq12y;
+
 local factor_iq5y 
 iq2y 
 iq3y
@@ -65,6 +74,13 @@ ach21y
 factor_ach12y 
 factor_ach21y;
 
+local achnew
+ach5y6m
+ach6y
+ach7y6m
+ach8y
+ach8y6m;
+
 local factor_ach12y
 ach5y6m
 ach6y
@@ -87,6 +103,13 @@ home3y6m
 home4y6m
 home8y
 factor_home;
+
+local newparenting
+home0y6m
+home1y6m
+home2y6m
+home3y6m
+home4y6m;
 
 local factor_home
 home0y6m
@@ -171,6 +194,10 @@ si30y_works_job
 si21y_inc_labor
 si30y_inc_labor
 factor_emp;
+
+local employmentnew
+si30y_works_job
+si30y_inc_labor;
 
 local factor_emp
 si30y_works_job
@@ -264,6 +291,13 @@ bsi_tgsi
 B18GSI_T
 factor_bsi;
 
+local mentalhealthnew
+bsi_tsom
+bsi_tdep
+bsi_tanx
+bsi_thos
+bsi_tgsi;
+
 local factor_bsi
 bsi_tsom
 BSISom_T
@@ -299,6 +333,18 @@ ibr_task2y
 ibr_actv2y 
 ibr_sociab2y
 ibr_coop2y ;
+
+
+local senew
+ibr_task0y6m 
+ibr_actv0y6m 
+ibr_sociab0y6m
+ibr_task1y 
+ibr_actv1y 
+ibr_sociab1y 
+ibr_task1y6m 
+ibr_actv1y6m 
+ibr_sociab1y6m ;
 
 
 # delimit cr
