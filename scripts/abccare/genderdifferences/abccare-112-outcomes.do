@@ -485,12 +485,12 @@ bsi_tdep
 bsi_tanx
 bsi_thos
 bsi_tgsi
+si34y_sys_bp
+si34y_dia_bp
+si34y_hyper
 ad34_fel
 ad34_mis
 si30y_adlt_totinc
-si30y_cig_num
-drink_days
-drink_binge_days
 si34y_drugs
 si30y_works_job
 si30y_inc_labor
