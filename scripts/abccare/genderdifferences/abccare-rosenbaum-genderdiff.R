@@ -48,7 +48,7 @@ mhealthvars <- c('bsi_tsom','bsi_tdep','bsi_tanx','bsi_thos','bsi_tgsi')
 #age34 <- c('sch_hs30y','si30y_univ_comp','years_30y','si30y_works_job','si30y_inc_labor','si30y_cig_num')
 
 agefactors <- c('factorage5','factorage15','factorage34')
-catfactors <- c('factoriq','factorach','factorse','factormlabor','factorparent','factoredu','factoremp','factorhealth','factorrisk','factorcrime')
+catfactors <- c('factoriq','factorach','factorse','factormlabor','factorparent','factoredu','factoremp','factorhealth','factorrisk','factorcrime','factorall')
 
 # define function for Rosenbaum test
 rosenbaum <- function(data,varstokeep,catvar){
@@ -108,7 +108,7 @@ rosenbaum <- function(data,varstokeep,catvar){
 #agecats <- list(a5=age5,a15=age15,a34=age34)
 #agecatsC <- list(a5=age5,a34=age34)
 
-factorcats <- list(age5='factorage5',age15='factorage15',age34='factorage34',fiq='factoriq',fach='factorach',fse='factorse',fmlabor='factormlabor',fparent='factorparent',fedu='factoredu',femp='factoremp',fcrime='factorcrime',frisk='factorrisk',fhealth='factorhealth')
+factorcats <- list(age5='factorage5',age15='factorage15',age34='factorage34',fiq='factoriq',fach='factorach',fse='factorse',fmlabor='factormlabor',fparent='factorparent',fedu='factoredu',femp='factoremp',fcrime='factorcrime',frisk='factorrisk',fhealth='factorhealth',fall='factorall')
 
 varlists <- c(agefactors,catfactors)
 keeps <- append(basicvars,varlists)
