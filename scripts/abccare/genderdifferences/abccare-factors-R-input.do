@@ -39,13 +39,13 @@ cd ${scripts}/abccare/genderdifferences
 	include abccare-112-outcomes
 	include abccare-112-age-outcomes
 
-foreach c in age5 age15 age34 {
+foreach c in age5 age15 age34 iq ach se mlabor parent edu emp health risk crime {
 
 	gen factor`c' = .
 	
 	forvalues s = 0/1 {
 		local tofactor
-		foreach v in ``c'' {
+		foreach v in ``c'_updated' {
 			
 			// impute mean for those with missing values
 				forvalues r = 0/1 {
@@ -54,7 +54,7 @@ foreach c in age5 age15 age34 {
 				}
 			
 			qui sum `v' if male == `s'
-			gen std`v'`s' = (`v' - r(mean))/r(sd)
+			cap gen std`v'`s' = (`v' - r(mean))/r(sd)
 			local tofactor `tofactor' std`v'`s'
 		}
 		cap factor `tofactor'
@@ -65,51 +65,10 @@ foreach c in age5 age15 age34 {
 			}
 		}
 		replace factor`c' = `c'_`s' if male == `s'
+		drop `c'_`s'
 	}
 }
 
-
-foreach c in iqnew achnew senew newparenting mlabor education employmentnew crime risk health mentalhealthnew {
-
-
-	gen factor`c' = .
-	
-	forvalues s = 0/1 {
-		local tofactor
-	
-		foreach v in ``c'' {
-
-			if substr("`v'",1,6) != "factor" {
-			
-				// impute mean for those with missing values
-				forvalues r = 0/1 {
-					sum `v' if male == `s' & R == `r'
-					replace `v' = r(mean) if missing(`v') & male == `s' & R == `r'
-				}
-
-				sum `v' if male == `s'
-	
-				gen std`v'_`s' = (`v' - r(mean))/r(sd) if male == `s' 
-				local tofactor `tofactor' std`v'_`s'
-				
-			}
-			
-		}
-		cap factor `tofactor'
-		
-		if !_rc {
-		
-			cap predict `c'_`s' if male == `s'
-			
-			//if _rc {
-			//	gen `c'_`s' = . if male == `s'
-			//}
-		}
-		
-		replace factor`c' = `c'_`s' if male == `s'
-		
-	}
-}
 
 keep id R RV male dc_mo_pre factor*
 cd $data
