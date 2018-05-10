@@ -346,6 +346,180 @@ ibr_task1y6m
 ibr_actv1y6m 
 ibr_sociab1y6m ;
 
-
 # delimit cr
+
 local all `iq' `ach' `se' `parenting' `mlabor' `education' `employment' `crime' `risk' `health' `mentalhealth'
+
+
+//// The following factors constructed May 10, 2018 to update the non-parametric tests
+# delimit ;
+
+local iq_updated
+iq2y
+iq3y
+iq3y6m
+iq4y
+iq4y6m
+iq5y
+iq12y;
+
+local ach_updated
+ach5y6m
+ach6y
+ach7y6m
+ach8y
+ach8y6m;
+
+local se_updated 
+bsi_tsom
+bsi_tdep
+bsi_tanx
+bsi_thos
+bsi_tgsi
+ibr_task0y6m 
+ibr_actv0y6m 
+ibr_sociab0y6m
+ibr_task1y 
+ibr_actv1y 
+ibr_sociab1y 
+ibr_task1y6m 
+ibr_actv1y6m 
+ibr_sociab1y6m;
+
+
+local mlabor_updated 
+p_inc1y6m
+p_inc2y6m
+p_inc3y6m
+p_inc4y6m
+p_inc8y
+m_work1y6m
+m_work2y6m
+m_work3y6m
+m_work4y6m;
+
+local parent_updated 
+home0y6m
+home1y6m
+home2y6m
+home3y6m
+home4y6m;
+
+local crime_updated
+ad34_fel
+ad34_mis
+si30y_adlt_totinc;
+
+local health_updated
+si30y_subj_health
+si34y_sys_bp
+si34y_dia_bp
+si34y_prehyper
+si34y_hyper
+si34y_chol_hdl
+si34y_dyslipid
+si34y_hemoglobin
+si34y_prediab
+si34y_diab
+si34y_bmi
+si34y_obese
+si34y_sev_obese
+si34y_whr
+si34y_obese_whr
+si34y_fram_p1;
+
+local risk_updated
+si30y_cig_num
+drink_days
+drink_binge_days
+si34y_drugs;
+
+local emp_updated
+si30y_works_job
+si30y_inc_labor;
+
+local edu_updated
+sch_hs30y
+si30y_techcc_att
+si30y_univ_comp
+years_30y
+tot_sped
+tot_ret;
+
+local age5_updated
+iq2y
+iq3y
+iq3y6m
+iq4y
+iq4y6m
+iq5y
+ibr_task0y6m 
+ibr_actv0y6m 
+ibr_sociab0y6m
+ibr_task1y 
+ibr_actv1y 
+ibr_sociab1y 
+ibr_task1y6m 
+ibr_actv1y6m 
+ibr_sociab1y6m
+p_inc1y6m
+p_inc2y6m
+p_inc3y6m
+p_inc4y6m
+m_work1y6m
+m_work2y6m
+m_work3y6m
+m_work4y6m
+home0y6m
+home1y6m
+home2y6m
+home3y6m
+home4y6m;
+
+local age15_updated
+ach5y6m
+ach6y
+ach7y6m
+ach8y
+ach8y6m
+iq12y
+p_inc8y
+tot_sped
+tot_ret;
+
+local age34_updated
+bsi_tsom
+bsi_tdep
+bsi_tanx
+bsi_thos
+bsi_tgsi
+ad34_fel
+ad34_mis
+si30y_adlt_totinc
+si30y_subj_health
+si34y_sys_bp
+si34y_dia_bp
+si34y_prehyper
+si34y_hyper
+si34y_chol_hdl
+si34y_dyslipid
+si34y_hemoglobin
+si34y_prediab
+si34y_diab
+si34y_bmi
+si34y_obese
+si34y_sev_obese
+si34y_whr
+si34y_obese_whr
+si34y_fram_p1
+si30y_cig_num
+drink_days
+drink_binge_days
+si34y_drugs
+si30y_works_job
+si30y_inc_labor
+sch_hs30y
+si30y_techcc_att
+si30y_univ_comp
+years_30y;
+
