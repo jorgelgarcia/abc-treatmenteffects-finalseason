@@ -28,14 +28,19 @@ global output      	= "$projects/abccare-cba/output/"
 
 
 
+cd ${scripts}/abccare/genderdifferences
 
-local categories age5 age15 age34
+	include abccare-gdiff-raw-rosenbaum-helper
+	
+local categories age5 age15 age34 iqnew achnew senew mlabor education employmentnew crime risk health mentalhealthnew
+
 
 // OUTPUT ORDER
-local outgroups GTvC GTvGa GTvCh BTvC BTvCa BTvCh BCavCh GCavCh ChBvG CaBvG CBvG TBvG
+local outgroups GTvC GTvCa GTvCh BTvC BTvCa BTvCh BCavCh GCavCh ChBvG CaBvG CBvG TBvG
 // TABLE ORDER
-local groupnames GTvC BTvC GTvCa BTvCa GTvCh BTvCh GCavCh BCavCh ChBvG CaBvG CBvG TBvG
-
+local exp_groupnames 		GTvC BTvC GTvCa BTvCa GTvCh BTvCh GCavCh BCavCh 
+local gender_groupnames 	ChBvG CaBvG CBvG TBvG
+local cats					exp gender
 
 // import and organize Rosenbaum p-values
 cd $output
@@ -88,6 +93,17 @@ append using `A'
 append using `B'
 sort n
 
+rename fiq		iqnew
+rename fach		achnew
+rename fse		senew
+rename fmlabor	mlabor
+rename fedu		education
+rename femp		employmentnew
+rename fcrime	crime
+rename frisk	risk
+rename fmhealth	health
+rename fhealth	mentalhealthnew
+
 forvalues i = 1/12 {
 	
 	local g : word `i' of `outgroups'
@@ -95,7 +111,7 @@ forvalues i = 1/12 {
 	foreach c in `categories' {
 		
 		qui sum `c' if n == `i'
-		global pval`g' = r(mean)
+		global pval`g'`c' = r(mean)
 	}
 	
 }
@@ -113,7 +129,12 @@ cd ${scripts}/abccare/genderdifferences
 	include abccare-reverse
 	include abccare-112-outcomes
 	include abccare-112-age-outcomes
-	
+	include abccare-gdiff-raw-rosenbaum-helper
+
+local age_categories 	age5 age15 age34 
+local cats_categories 	iqnew achnew senew mlabor education employmentnew crime risk health mentalhealthnew
+local agecats_types		age cats
+
 gen alt = (dc_alt > 0 & R == 0)
 replace alt = . if dc_alt == . | R == 1
 
@@ -136,21 +157,28 @@ global GTvCa_drop 	male == 1 & dc_alt == 0
 global BTvCa_drop 	male == 0 & dc_alt == 0
 global GTvCh_drop 	male == 1 & dc_alt > 0
 global BTvCh_drop 	male == 0 & dc_alt > 0
-global GCavCh_drop 	male == 1 & R == 1
-global BCavCh_drop 	male == 0 & R == 1
-global ChBvG_drop 	dc_alt > 0 & R == 1
-global CaBvG_drop 	dc_alt == 0 & R == 1
+global GCavCh_drop 	male == 1 | R == 1
+global BCavCh_drop 	male == 0 | R == 1
+global ChBvG_drop 	dc_alt > 0 | R == 1
+global CaBvG_drop 	dc_alt == 0 | R == 1
 global CBvG_drop 	R == 1
 global TBvG_drop 	R == 0
 	
 // std. effect size (adapted from abccare-gdiff-stdtes-ranksum.do)
-foreach g in `groupnames' {
+
+foreach t in `cats' {
+foreach t2 in `agecats_types' {
+
+foreach g in ``t'_groupnames' {
 
 	preserve
 	
 	drop if ${`g'_drop}
 	
-	foreach c in `categories' {
+	
+	foreach c in ``t2'_categories' {
+	
+		di "category: `c'"
 		
 		global nvar`c' = 0
 		global tot`g' = 0
@@ -170,7 +198,7 @@ foreach g in `groupnames' {
 				global npos`g' = ${npos`g'} + 1
 					
 				// record if B > 0 & significant
-				ttest `v', by(${`g'_v2})
+				qui ttest `v', by(${`g'_v2})
 				if r(p) <= 0.1 {
 					global nsig`g' = ${nsig`g'} + 1
 				}	
@@ -182,10 +210,12 @@ foreach g in `groupnames' {
 			if ``v'sd' == 0 {
 				di "No variation, `c', `v'"
 				mat STDB`c' = (nullmat(STDB`c') \ .)
+				global nvar`c' = ${nvar`c'} - 1
 			}
 			else if ``v'sd' == . {
 				di "Missing sd, `c', `v'"
 				mat STDB`c' = (nullmat(STDB`c') \ .)
+				global nvar`c' = ${nvar`c'} - 1
 			}
 			else {
 				local `v'stdb = B`v'[1,1]/``v'sd'
@@ -195,17 +225,26 @@ foreach g in `groupnames' {
 			}
 		}
 		
-		global pos`g' = ${npos`g'}/${nvar`c'}
-		global sig`g' = ${nsig`g'}/${nvar`c'}
+		global pos`g' = (${npos`g'}/${nvar`c'}) * 100
+		global sig`g' = (${nsig`g'}/${nvar`c'}) * 100
 		global avg`c'_`g' = ${tot`g'}/${nvar`c'}
 		
-		mat COMBINE`g' = (nullmat(COMBINE`g') \ ${avg`c'_`g'} \ ${pos`g'} \ ${sig`g'})
+		global pos`g' : di ${pos`g'} %9.0f
+		global sig`g' : di ${sig`g'} %9.0f
+		global avg`c'_`g' : di ${avg`c'_`g'} %9.3f
+		global pval`g'`c' : di ${pval`g'`c'} %9.3f
+		
+		di "${pval`g'}"
+		mat COMBINE`g' = (nullmat(COMBINE`g') \ ${avg`c'_`g'} \ ${pos`g'} \ ${sig`g'} \ ${pval`g'`c'})
 		mat colnames COMBINE`g' = `g'
 	}
 	
-	mat COMBINE = (nullmat(COMBINE) , COMBINE`g')
+	mat COMBINE`t'`t2' = (nullmat(COMBINE`t'`t2') , COMBINE`g')
 
 	restore
-}
+	}
 
-	
+	cd $output
+	outtable using "raw-rosenbaum-table-`t2'-`t'", mat(COMBINE`t'`t2') replace format(%9.3f) center nobox
+	}
+}
