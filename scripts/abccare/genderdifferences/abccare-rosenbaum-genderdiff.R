@@ -22,31 +22,6 @@ getwd()
 df <- data.frame(read.dta('abccare-factors-R-inputold.dta'))
 #df <- data.frame(read.dta('append-abccare_iv.dta'))
 
-#  vectors of variables
-basicvars <- c('id','R','RV','male','dc_alt','dc_mo_pre')
-iqvars <- c('iq2y','iq3y','iq3y6m','iq4y','iq4y6m','iq5y')
-achvars <- c('ach6y','ach7y6m','ach8y','ach8y6m')
-sevars <- c('ibr_task0y6m','ibr_actv0y6m','ibr_sociab0y6m')
-sevars <- c(sevars,'ibr_task1y','ibr_actv1y','ibr_sociab1y')
-sevars <- c(sevars,'ibr_task1y6m','ibr_actv1y6m','ibr_sociab1y6m')
-parentvars <- c('home0y6m','home1y6m','home2y6m','home3y6m','home4y6m')
-pincvars		<- c('p_inc1y6m','p_inc2y6m','p_inc3y6m','p_inc4y6m')
-mworkvars	<-c('m_work1y6m','m_work2y6m','m_work3y6m','m_work4y6m')
-fhomevars <- c('f_home1y6m','f_home2y6m','f_home3y6m','f_home4y6m')
-schvars <- c('sch_hs30y','si30y_univ_comp','years_30y','tot_sped')
-empvars <- c('si30y_works_job','si30y_inc_labor')
-crimevars <- c('ad34_fel','ad34_mis','si30y_adlt_totinc')
-riskvars <- c('si30y_cig_num','drink_days','drink_binge_days')
-healthvars <- c('si34y_sys_bp','si34y_dia_bp','si34y_prehyper','si34y_hyper')
-healthvars <- c(healthvars,'si34y_chol_hdl','si34y_dyslipid','si34y_hemoglobin','si34y_prediab','si34y_diab')
-healthvars <- c(healthvars,'si34y_bmi','si34y_obese','si34y_sev_obese','si34y_whr','si34y_obese_whr','si34y_fram_p1')
-mhealthvars <- c('bsi_tsom','bsi_tdep','bsi_tanx','bsi_thos','bsi_tgsi')
-
-#age5 <- c('iq2y','iq3y','iq3y6m','iq4y','iq4y6m','iq5y','ibr_task0y6m','ibr_actv0y6m','ibr_sociab0y6m')
-#age5 <- c(age5,'ibr_task1y6m','ibr_actv1y6m','ibr_sociab1y6m','home0y6m','home1y6m','home2y6m','home3y6m','home4y6m')
-#age15 <- c('ach6y','ach7y6m','ach8y','ach8y6m','tot_sped')
-#age34 <- c('sch_hs30y','si30y_univ_comp','years_30y','si30y_works_job','si30y_inc_labor','si30y_cig_num')
-
 agefactors <- c('factorage5','factorage15','factorage34')
 catfactors <- c('factoriq','factorach','factorse','factormlabor','factorparent','factoredu','factoremp','factorhealth','factorrisk','factorcrime','factorall')
 
@@ -121,6 +96,8 @@ df <- df[!is.na(df$id),]
 
 # create different dataframes for each comparison
 
+df <- df[(df$base==1),]
+
 ## GROUP A
 # girls, treatment vs. control
 GTvCd <- df[(df$male==0),]
@@ -163,6 +140,7 @@ outputAf <- sapply(factorcats, function(x) sapply(bigdfA, function(y) rosenbaum(
 outputBf <- sapply(factorcats, function(x) sapply(bigdfB, function(y) rosenbaum(y,x,'alt')))
 outputCf <- sapply(factorcats, function(x) sapply(bigdfC, function(y) rosenbaum(y,x,'male')))
 
+
 #outputAcf <- sapply(bigdfA, function(y) rosenbaum(y,catfactors,'R'))
 #outputBcf <- sapply(bigdfB, function(y) rosenbaum(y,catfactors,'alt'))
 #outputCcf <- sapply(bigdfC, function(y) rosenbaum(y,catfactors,'male'))
@@ -171,13 +149,13 @@ outputCf <- sapply(factorcats, function(x) sapply(bigdfC, function(y) rosenbaum(
 
 setwd('/home/aziff/projects/abccare-cba/output')
 cAf <-data.frame(outputAf) 
-write.matrix(cAf,'rosenbaum-output-Afactors.txt',sep=',')
+write.matrix(cAf,'rosenbaum-output-Afactors-base1.txt',sep=',')
 #cat(capture.output(print(cAf),file='rosenbaum-output-Afactors.csv'),sep=',')
 
 cBf <-data.frame(outputBf) 
-write.matrix(cBf,'rosenbaum-output-Bfactors.txt',sep=',')
+write.matrix(cBf,'rosenbaum-output-Bfactors-base1.txt',sep=',')
 #cat(capture.output(print(cBf),file='rosenbaum-output-Bfactors.txt'))
 
 cCf <-data.frame(outputCf)
-write.matrix(cCf,'rosenbaum-output-Cfactors.txt',sep=',')
+write.matrix(cCf,'rosenbaum-output-Cfactors-base1.txt',sep=',')
 #cat(capture.output(print(cCf),file='rosenbaum-output-Cfactors.txt'))
