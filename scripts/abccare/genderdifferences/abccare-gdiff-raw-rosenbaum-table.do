@@ -30,15 +30,15 @@ global output      	= "$projects/abccare-cba/output/"
 
 cd ${scripts}/abccare/genderdifferences
 
-	include abccare-gdiff-raw-rosenbaum-helper
+	include abccare-112-outcomes
 	
-local categories age5 age15 age34 iqnew achnew senew mlabor education employmentnew crime risk health mentalhealthnew
+local categories age5 age15 age34 iq ach se mlabor parent edu emp crime risk health all
 
 
 // OUTPUT ORDER
 local outgroups GTvC GTvCa GTvCh BTvC BTvCa BTvCh BCavCh GCavCh ChBvG CaBvG CBvG TBvG
 // TABLE ORDER
-local exp_groupnames 		GTvC BTvC GTvCa BTvCa GTvCh BTvCh GCavCh BCavCh 
+local exp_groupnames 		GTvC BTvC //GTvCa BTvCa GTvCh BTvCh GCavCh BCavCh 
 local gender_groupnames 	ChBvG CaBvG CBvG TBvG
 local cats					exp gender
 
@@ -93,16 +93,17 @@ append using `A'
 append using `B'
 sort n
 
-rename fiq		iqnew
-rename fach		achnew
-rename fse		senew
+rename fiq		iq
+rename fach		ach
+rename fse		se
 rename fmlabor	mlabor
-rename fedu		education
-rename femp		employmentnew
+rename fparent	parent
+rename fedu		edu
+rename femp		emp
 rename fcrime	crime
 rename frisk	risk
-rename fmhealth	health
-rename fhealth	mentalhealthnew
+rename fhealth	health
+rename fall		all
 
 forvalues i = 1/12 {
 	
@@ -128,11 +129,10 @@ cd ${scripts}/abccare/genderdifferences
 
 	include abccare-reverse
 	include abccare-112-outcomes
-	include abccare-112-age-outcomes
-	include abccare-gdiff-raw-rosenbaum-helper
 
-local age_categories 	age5 age15 age34 
-local cats_categories 	iqnew achnew senew mlabor education employmentnew crime risk health mentalhealthnew
+local age_categories 	age5 age15 age34 all
+local cats_categories 	iq ach se mlabor parent edu emp crime risk health all
+
 local agecats_types		age cats
 
 gen alt = (dc_alt > 0 & R == 0)
@@ -185,7 +185,7 @@ foreach g in ``t'_groupnames' {
 		global npos`g' = 0
 		global nsig`g' = 0
 
-		foreach v in ``c'' {
+		foreach v in ``c'_updated' {
 			
 			global nvar`c' = ${nvar`c'} + 1
 		

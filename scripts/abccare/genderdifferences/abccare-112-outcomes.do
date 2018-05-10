@@ -388,10 +388,6 @@ ibr_sociab1y6m;
 
 
 local mlabor_updated 
-p_inc1y6m
-p_inc2y6m
-p_inc3y6m
-p_inc4y6m
 p_inc8y
 m_work1y6m
 m_work2y6m
@@ -462,10 +458,6 @@ ibr_sociab1y
 ibr_task1y6m 
 ibr_actv1y6m 
 ibr_sociab1y6m
-p_inc1y6m
-p_inc2y6m
-p_inc3y6m
-p_inc4y6m
 m_work1y6m
 m_work2y6m
 m_work3y6m
@@ -496,22 +488,6 @@ bsi_tgsi
 ad34_fel
 ad34_mis
 si30y_adlt_totinc
-si30y_subj_health
-si34y_sys_bp
-si34y_dia_bp
-si34y_prehyper
-si34y_hyper
-si34y_chol_hdl
-si34y_dyslipid
-si34y_hemoglobin
-si34y_prediab
-si34y_diab
-si34y_bmi
-si34y_obese
-si34y_sev_obese
-si34y_whr
-si34y_obese_whr
-si34y_fram_p1
 si30y_cig_num
 drink_days
 drink_binge_days
@@ -523,3 +499,7 @@ si30y_techcc_att
 si30y_univ_comp
 years_30y;
 
+local all_updated
+`age5_updated'
+`age15_updated'
+`age34_updated';
