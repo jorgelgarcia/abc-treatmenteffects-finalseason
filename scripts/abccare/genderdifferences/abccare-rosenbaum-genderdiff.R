@@ -42,15 +42,13 @@ healthvars <- c(healthvars,'si34y_chol_hdl','si34y_dyslipid','si34y_hemoglobin',
 healthvars <- c(healthvars,'si34y_bmi','si34y_obese','si34y_sev_obese','si34y_whr','si34y_obese_whr','si34y_fram_p1')
 mhealthvars <- c('bsi_tsom','bsi_tdep','bsi_tanx','bsi_thos','bsi_tgsi')
 
-age5 <- c('iq2y','iq3y','iq3y6m','iq4y','iq4y6m','iq5y','ibr_task0y6m','ibr_actv0y6m','ibr_sociab0y6m')
-age5 <- c(age5,'ibr_task1y6m','ibr_actv1y6m','ibr_sociab1y6m','home0y6m','home1y6m','home2y6m','home3y6m','home4y6m')
-age15 <- c('ach6y','ach7y6m','ach8y','ach8y6m','tot_sped')
-age34 <- c('sch_hs30y','si30y_univ_comp','years_30y','si30y_works_job','si30y_inc_labor','si30y_cig_num')
-#'factorage5',
-agefactors <- c('factorage5','factorage15','factorage34')
-#catfactors <- c(factoriqnew,factorachnew,factorsenew,factorparentingnew,factoreducation,factoremploymentnew,factorrisk,factormentalhealthnew)
-catfactors <- c('factoriqnew','factorachnew','factorsenew','factorparentingnew','factoreducation','factorrisk','factormentalhealthnew')
+#age5 <- c('iq2y','iq3y','iq3y6m','iq4y','iq4y6m','iq5y','ibr_task0y6m','ibr_actv0y6m','ibr_sociab0y6m')
+#age5 <- c(age5,'ibr_task1y6m','ibr_actv1y6m','ibr_sociab1y6m','home0y6m','home1y6m','home2y6m','home3y6m','home4y6m')
+#age15 <- c('ach6y','ach7y6m','ach8y','ach8y6m','tot_sped')
+#age34 <- c('sch_hs30y','si30y_univ_comp','years_30y','si30y_works_job','si30y_inc_labor','si30y_cig_num')
 
+agefactors <- c('factorage5','factorage15','factorage34')
+catfactors <- c('factoriq','factorach','factorse','factormlabor','factorparent','factoredu','factoremp','factorhealth','factorrisk','factorcrime')
 
 # define function for Rosenbaum test
 rosenbaum <- function(data,varstokeep,catvar){
@@ -110,7 +108,7 @@ rosenbaum <- function(data,varstokeep,catvar){
 #agecats <- list(a5=age5,a15=age15,a34=age34)
 #agecatsC <- list(a5=age5,a34=age34)
 
-factorcats <- list(age5='factorage5',age15='factorage15',age34='factorage34',fiq='factoriqnew',fach='factorachnew',fse='factorsenew',fmlabor='factormlabor',fedu='factoreducation',femp='factoremploymentnew',fcrime='factorcrime',frisk='factorrisk',fmhealth='factormentalhealthnew',fhealth='factorhealth')
+factorcats <- list(age5='factorage5',age15='factorage15',age34='factorage34',fiq='factoriq',fach='factorach',fse='factorse',fmlabor='factormlabor',fparent='factorparent',fedu='factoredu',femp='factoremp',fcrime='factorcrime',frisk='factorrisk',fhealth='factorhealth')
 
 varlists <- c(agefactors,catfactors)
 keeps <- append(basicvars,varlists)
@@ -161,16 +159,25 @@ bigdfC <- list(ChBvG=ChBvGd,CaBvG=CaBvGd,CBvG=df[(df$R==0),], TBvG=df[(df$R==1),
 #outputC <- lapply(cats, function(x) sapply(bigdfC, function(y) rosenbaum(y,x,'male')))
 
 
-outputAaf <- lapply(factorcats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
-#outputBaf <- sapply(bigdfB, function(y) rosenbaum(y,agefactorcats,'alt'))
-#outputCaf <- sapply(bigdfC, function(y) rosenbaum(y,agefactorcats,'male'))
+outputAf <- sapply(factorcats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
+outputBf <- sapply(factorcats, function(x) sapply(bigdfB, function(y) rosenbaum(y,x,'alt')))
+outputCf <- sapply(factorcats, function(x) sapply(bigdfC, function(y) rosenbaum(y,x,'male')))
 
 #outputAcf <- sapply(bigdfA, function(y) rosenbaum(y,catfactors,'R'))
 #outputBcf <- sapply(bigdfB, function(y) rosenbaum(y,catfactors,'alt'))
 #outputCcf <- sapply(bigdfC, function(y) rosenbaum(y,catfactors,'male'))
 
-#combinedoutputaf <-data.frame(list(A=outputAaf,B=outputBaf,C=outputCaf)) 
-#combinedoutputcf <-data.frame(list(A=outputAcf,B=outputBcf,C=outputCcf)) 
+#combinedoutputf <-data.frame(list(A=outputAf,B=outputBf,C=outputCf)) 
 
 setwd('/home/aziff/projects/abccare-cba/output')
-cat(capture.output(print(combinedoutput),file='rosenbaum-output-agefactors.txt'))
+cAf <-data.frame(outputAf) 
+write.matrix(cAf,'rosenbaum-output-Afactors.txt',sep=',')
+#cat(capture.output(print(cAf),file='rosenbaum-output-Afactors.csv'),sep=',')
+
+cBf <-data.frame(outputBf) 
+write.matrix(cBf,'rosenbaum-output-Bfactors.txt',sep=',')
+#cat(capture.output(print(cBf),file='rosenbaum-output-Bfactors.txt'))
+
+cCf <-data.frame(outputCf)
+write.matrix(cCf,'rosenbaum-output-Cfactors.txt',sep=',')
+#cat(capture.output(print(cCf),file='rosenbaum-output-Cfactors.txt'))
