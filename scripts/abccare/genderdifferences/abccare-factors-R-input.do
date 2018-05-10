@@ -37,9 +37,8 @@ cd ${scripts}/abccare/genderdifferences
 
 	include abccare-reverse
 	include abccare-112-outcomes
-	include abccare-112-age-outcomes
 
-foreach c in age5 age15 age34 iq ach se mlabor parent edu emp health risk crime {
+foreach c in age5 age15 age34 iq ach se mlabor parent edu emp health risk crime all {
 
 	gen factor`c' = .
 	
