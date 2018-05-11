@@ -32,22 +32,23 @@ cd ${scripts}/abccare/genderdifferences
 
 	include abccare-112-outcomes
 	
-local categories age5 age15 age34 iq ach se mlabor parent edu emp crime risk health all
+local categories age5 age15 age34 //iq ach se mlabor parent edu emp crime risk health all
 
 
 // OUTPUT ORDER
-local outgroups GTvC GTvCa GTvCh BTvC BTvCa BTvCh BCavCh GCavCh ChBvG CaBvG CBvG TBvG
+local outgroups GTvC BTvC 
+//local outgroups GTvC GTvCa GTvCh BTvC BTvCa BTvCh BCavCh GCavCh ChBvG CaBvG CBvG TBvG
 // TABLE ORDER
 local exp_groupnames 		GTvC BTvC //GTvCa BTvCa GTvCh BTvCh GCavCh BCavCh 
 local gender_groupnames 	ChBvG CaBvG CBvG TBvG
-local cats					exp gender
+local cats					exp //gender
 
 // import and organize Rosenbaum p-values
 cd $output
 
 
 // A
-import delim using "rosenbaum-output-Afactors.txt", delim(",") clear
+import delim using "rosenbaum-output-Afactors-base0.txt", delim(",") clear
 gen n = _n
 order n, first
 keep if n == 5 | n == 6 | n == 11 | n == 12 | n == 17 | n == 18 | n == 23 ///
@@ -60,9 +61,9 @@ gen n = _n
 order n, first
 tempfile A
 save	`A'
-
+/*
 // B
-import delim using "rosenbaum-output-Bfactors.txt", delim(",") clear
+import delim using "rosenbaum-output-Bfactors-Selection.txt", delim(",") clear
 gen n = _n
 order n, first
 keep if n == 5 | n == 6 | n == 11 | n == 12
@@ -76,7 +77,7 @@ tempfile B
 save	`B'
 
 // C
-import delim using "rosenbaum-output-Cfactors.txt", delim(",") clear
+import delim using "rosenbaum-output-Cfactors-base0.txt", delim(",") clear
 gen n = _n
 order n, first
 keep if n == 5 | n == 6 | n == 11 | n == 12 | n == 17 | n == 18 | n == 23 | n == 24 
@@ -104,8 +105,8 @@ rename fcrime	crime
 rename frisk	risk
 rename fhealth	health
 rename fall		all
-
-forvalues i = 1/12 {
+*/
+forvalues i = 1/2 {
 	
 	local g : word `i' of `outgroups'
 	
@@ -123,6 +124,11 @@ cd $data
 use append-abccare_iv, clear
 
 drop if R == 0 & RV == 1
+factor  m_age_base m_ed_base m_iq_base hh_sibs_base m_married_base f_home0y
+predict factorbase 
+sum factorbase, detail
+gen base = (factorbase <= r(p50))
+keep if base == 0
 
 // variables
 cd ${scripts}/abccare/genderdifferences
@@ -133,7 +139,7 @@ cd ${scripts}/abccare/genderdifferences
 local age_categories 	age5 age15 age34 all
 local cats_categories 	iq ach se mlabor parent edu emp crime risk health all
 
-local agecats_types		age cats
+local agecats_types		age // cats
 
 gen alt = (dc_alt > 0 & R == 0)
 replace alt = . if dc_alt == . | R == 1
@@ -171,12 +177,16 @@ foreach t2 in `agecats_types' {
 
 foreach g in ``t'_groupnames' {
 
+	local `t'`t2'rownames
+
 	preserve
 	
 	drop if ${`g'_drop}
 	
 	
 	foreach c in ``t2'_categories' {
+	
+		local `t'`t2'rownames ``t'`t2'rownames' `c' \quad\%Positive \quad\%Significant \quadp-value
 	
 		di "category: `c'"
 		
@@ -235,16 +245,18 @@ foreach g in ``t'_groupnames' {
 		global pval`g'`c' : di ${pval`g'`c'} %9.3f
 		
 		di "${pval`g'}"
-		mat COMBINE`g' = (nullmat(COMBINE`g') \ ${avg`c'_`g'} \ ${pos`g'} \ ${sig`g'} \ ${pval`g'`c'})
-		mat colnames COMBINE`g' = `g'
+		mat COMBINE`t'`t2'`g' = (nullmat(COMBINE`t'`t2'`g') \ ${avg`c'_`g'} \ ${pos`g'} \ ${sig`g'} \ ${pval`g'`c'})
+		mat colnames COMBINE`t'`t2'`g' = `g'
 	}
 	
-	mat COMBINE`t'`t2' = (nullmat(COMBINE`t'`t2') , COMBINE`g')
+	mat COMBINE`t'`t2' = (nullmat(COMBINE`t'`t2') , COMBINE`t'`t2'`g')
 
 	restore
 	}
+	
+	mat rownames COMBINE`t'`t2' = ``t'`t2'rownames'
 
 	cd $output
-	outtable using "raw-rosenbaum-table-`t2'-`t'", mat(COMBINE`t'`t2') replace format(%9.3f) center nobox
+	outtable using "raw-rosenbaum-table-`t2'-`t'-base0", mat(COMBINE`t'`t2') replace format(%9.3f) center nobox
 	}
 }
