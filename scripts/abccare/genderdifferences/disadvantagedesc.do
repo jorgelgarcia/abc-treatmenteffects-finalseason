@@ -68,7 +68,7 @@ foreach num of numlist 0 1 {
 twoway (histogram factorbasealtm0 ,  discrete start(1) fraction  color(gs10) barwidth(.75))
        (histogram factorbasealtm1 ,  discrete start(1) fraction fcolor(none) barwidth(.75) lcolor(black)),
 	   legend(label(1 Home) label(2 Alternative))
-	   xtitle("Percentiles in the Boys Distribution") ytitle(Fraction)
+	   xtitle("Percentiles in the Boys Distribution of (Non) Disadvantage") ytitle(Fraction)
 	   xlabel(1 "1-25" 2 "26-75" 3 "76-100", grid glcolor(gs14)) ylabel(0[.2].6, angle(h) glcolor(gs14))
 	   graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
@@ -89,7 +89,7 @@ foreach num of numlist 0 1 {
 twoway (histogram factorbasealtf0 ,  discrete start(1) fraction  color(gs10) barwidth(.75))
        (histogram factorbasealtf1 ,  discrete start(1) fraction fcolor(none) barwidth(.75) lcolor(black)),
 	   legend(label(1 Home) label(2 Alternative))
-	   xtitle("Percentiles in the Girls Distribution") ytitle(Fraction)
+	   xtitle("Percentiles in the Girls Distribution of (Non) Disadvantage") ytitle(Fraction)
 	   xlabel(1 "1-25" 2 "26-75" 3 "76-100", grid glcolor(gs14)) ylabel(0[.2].6, angle(h) glcolor(gs14))
 	   graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
@@ -116,7 +116,7 @@ twoway (line cdf_Q_pre_female    Q , lwidth(vthick) lcolor(gs0))
       , 
 		  legend(label(1 "Girls") label(2 "Boys"))
 		  xlabel(, grid glcolor(gs14)) ylabel(0[.2]1, angle(h) glcolor(gs14))
-		  xtitle("Proportion of Months in Alternative Preschools, Control Group") ytitle(Cumulative Density Function)
+		  xtitle("Proportion of Months in Alternatives, Control Group") ytitle(Cumulative Density Function)
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 cd $output
