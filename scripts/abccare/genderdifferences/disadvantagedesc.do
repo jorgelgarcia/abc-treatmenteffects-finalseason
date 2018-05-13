@@ -69,7 +69,7 @@ twoway (histogram factorbasealtm0 ,  discrete start(1) fraction  color(gs10) bar
        (histogram factorbasealtm1 ,  discrete start(1) fraction fcolor(none) barwidth(.75) lcolor(black)),
 	   legend(label(1 Home) label(2 Alternative))
 	   xtitle("Percentiles in the Boys Distribution") ytitle(Fraction)
-	   xlabel(1 "1-25" 2 "26-75" 3 "76-100", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
+	   xlabel(1 "1-25" 2 "26-75" 3 "76-100", grid glcolor(gs14)) ylabel(0[.2].6, angle(h) glcolor(gs14))
 	   graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 cd $output
@@ -90,7 +90,7 @@ twoway (histogram factorbasealtf0 ,  discrete start(1) fraction  color(gs10) bar
        (histogram factorbasealtf1 ,  discrete start(1) fraction fcolor(none) barwidth(.75) lcolor(black)),
 	   legend(label(1 Home) label(2 Alternative))
 	   xtitle("Percentiles in the Girls Distribution") ytitle(Fraction)
-	   xlabel(1 "1-25" 2 "26-75" 3 "76-100", grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
+	   xlabel(1 "1-25" 2 "26-75" 3 "76-100", grid glcolor(gs14)) ylabel(0[.2].6, angle(h) glcolor(gs14))
 	   graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 cd $output
@@ -111,15 +111,13 @@ cumul   Q if random  == 0 & male == 0, gen(cdf_Q_pre_female)
 
 
 #delimit
-twoway (line cdf_Q_pre_male    Q , lwidth(vthick) lcolor(gs0))
-       (line cdf_Q_pre_female  Q , lwidth(vthick) lpattern(dash) lcolor(gs0))
+twoway (line cdf_Q_pre_female    Q , lwidth(vthick) lcolor(gs0))
+       (line cdf_Q_pre_male  Q , lwidth(vthick) lpattern(dash) lcolor(gs0))
       , 
-		  legend(label(1 "Male") label(2 "Female") position(12))
-		  xlabel(, grid glcolor(gs14)) ylabel(0[.1]1, angle(h) glcolor(gs14))
+		  legend(label(1 "Girls") label(2 "Boys"))
+		  xlabel(, grid glcolor(gs14)) ylabel(0[.2]1, angle(h) glcolor(gs14))
 		  xtitle("Proportion of Months in Alternative Preschools, Control Group") ytitle(Cumulative Density Function)
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 cd $output
-graph export abccare_controlcontamination_boysgirls.eps, replace
-
-
+graph export factorbase_wgirlscompare.eps, replace
