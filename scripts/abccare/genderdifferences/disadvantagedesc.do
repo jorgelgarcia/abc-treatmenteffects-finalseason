@@ -86,7 +86,7 @@ foreach num of numlist 0 1 {
 }
 
 # delimit
-twoway (histogram factorbasealtf0 ,  discrete start(1) fraction  color(gs10) barwidth(.75))
+twoway (histogram factorbasealtf0 ,  discrete start(1) fraction  color(gs10) barwidth(.75) (yline .6, lcolor(gs14)))
        (histogram factorbasealtf1 ,  discrete start(1) fraction fcolor(none) barwidth(.75) lcolor(black)),
 	   legend(label(1 Home) label(2 Alternative))
 	   xtitle("Percentiles in the Girls Distribution of (Non) Disadvantage") ytitle(Fraction)
