@@ -1,29 +1,22 @@
 % matrix: COMBINE file: raw-rosenbaum-table.tex  10 May 2018 09:03:15
 
-\begin{tabular}{lcc} 
+\begin{tabular}{lcc|lcc} 
 \toprule
-& \mc{2}{c}{Treat. vs. Control}  \\
-\cmidrule(lr){2-3} 
- & Females  & Males \\
+ \textbf{(a) Early Childhood} & Females & Males & \textbf{(b) School Age}  & Females & Males \\
+ \cmidrule(lr){2-3} \cmidrule(lr){5-6}
+\quad Avg. Effect Size &     0.392 &     0.259 				&  \quad Avg. Effect Size &     0.531 &     0.297 \\  
+\quad \% Positive &    95.833 &    75.000 				&	  \quad \% Positive &   100.000 &   100.000 \\  
+\quad \% Significant &    45.833 &    29.167 			& \quad \% Significant &    55.556 &    11.111 \\  
+\quad $p$-value &     \textbf{0.086} &     \textbf{0.086} 	&  \quad $p$-value &     \textbf{0.022} &     0.147 \\  
  \midrule
-Early Childhood &     0.392 &     0.259 \\  
-\quad \% Positive &    95.833 &    75.000 \\  
-\quad \% Significant &    45.833 &    29.167 \\  
-\quad $p$-value &     \textbf{0.086} &     \textbf{0.086} \\  
- \midrule
-School Age &     0.531 &     0.297 \\  
-\quad \% Positive &   100.000 &   100.000 \\  
-\quad \% Significant &    55.556 &    11.111 \\  
-\quad $p$-value &     \textbf{0.022} &     0.147 \\  
- \midrule
-Adult &     0.291 &     0.227 \\  
-\quad \% Positive &    88.889 &    72.222 \\  
-\quad \% Significant &    33.333 &    16.667 \\  
-\quad $p$-value &     \textbf{0.010} &     \textbf{0.086} \\  
- \midrule
-All &     0.381 &     0.254 \\  
-\quad \% Positive &    94.118 &    78.431 \\  
-\quad \% Significant &    43.137 &    21.569 \\  
-\quad $p$-value &     \textbf{0.010} &     \textbf{0.086} \\  
+  \textbf{(c) Adult} &Females & Males  & \textbf{(d) All}  &Females & Males  \\
+   \cmidrule(lr){2-3} \cmidrule(lr){5-6}
+\quad Avg. Effect Size &     0.291 &     0.227 						& \quad Avg. Effect Size&     0.381 &     0.254 \\  
+\quad \% Positive &    88.889 &    72.222 				&  \quad \% Positive &    94.118 &    78.431 \\  
+\quad \% Significant &    33.333 &    16.667 			&  \quad \% Significant &    43.137 &    21.569 \\  
+\quad $p$-value &     \textbf{0.010} &     \textbf{0.086} 	&  \quad $p$-value &     \textbf{0.010} &     \textbf{0.086} \\  
 \bottomrule
 \end{tabular}
+
+
+% This table displays summaries of treatment effects by age and gender. Each of the panels contains statistics calculated using outcomes measured at the indicated ages. Early childhood includes outcomes measured before age 6, school age includes outcomes measured between age 6 and 18, and adult includes outcomes measured after 18. All (panel d), is a combination of all the outcomes in panels a-c. The average effect size is calculated by averaging over the effect size of the outcomes in the age category. The effect sizes of the individual outcomes are calculated by dividing the coefficient by the standard deviation of the control group. The $p$-values are asymptotic following \citet{Rosenbaum_2005_Distribution_JRSS}. The null hypothesis is that the control and treatment distributions, within gender, are equal. A $p$-value less than 0.1 indicates that the distributions are significantly different. 
