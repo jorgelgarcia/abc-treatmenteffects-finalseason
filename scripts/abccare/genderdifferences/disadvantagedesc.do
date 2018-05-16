@@ -30,7 +30,7 @@ use append-abccare_iv, clear
 drop if R == 0 & RV == 1
 keep if R == 0
 
-factor  m_age_base m_ed_base m_iq_base hh_sibs_base m_married_base f_home_base
+factor  m_age_base m_ed_base m_iq_base hh_sibs_base m_married_base f_home_base m_work0y
 predict factorbase
 
 // compare boys to girls
@@ -69,7 +69,7 @@ twoway (histogram factorbasealtm0 ,  discrete start(1) fraction  color(gs10) bar
        (histogram factorbasealtm1 ,  discrete start(1) fraction fcolor(none) barwidth(.75) lcolor(black)),
 	   legend(label(1 Home) label(2 Alternative))
 	   xtitle("Percentiles in the Boys Distribution of (Non) Disadvantage") ytitle(Fraction)
-	   xlabel(1 "1-25" 2 "26-75" 3 "76-100", grid glcolor(gs14)) ylabel(0[.2].6, angle(h) glcolor(gs14))
+	   xlabel(1 "1-25" 2 "26-75" 3 "76-100", grid glcolor(gs14)) ylabel(0[.25].25 .25[.2].65, angle(h) glcolor(gs14))
 	   graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 cd $output
@@ -86,11 +86,11 @@ foreach num of numlist 0 1 {
 }
 
 # delimit
-twoway (histogram factorbasealtf0 ,  discrete start(1) fraction  color(gs10) barwidth(.75) (yline .6, lcolor(gs14)))
+twoway (histogram factorbasealtf0 ,  discrete start(1) fraction  color(gs10) barwidth(.75)  yline(.65, lcolor(gs14)))
        (histogram factorbasealtf1 ,  discrete start(1) fraction fcolor(none) barwidth(.75) lcolor(black)),
 	   legend(label(1 Home) label(2 Alternative))
 	   xtitle("Percentiles in the Girls Distribution of (Non) Disadvantage") ytitle(Fraction)
-	   xlabel(1 "1-25" 2 "26-75" 3 "76-100", grid glcolor(gs14)) ylabel(0[.2].6, angle(h) glcolor(gs14))
+	   xlabel(1 "1-25" 2 "26-75" 3 "76-100", grid glcolor(gs14)) ylabel(0[.25].25 .25[.2].65, angle(h) glcolor(gs14))
 	   graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 cd $output
@@ -116,7 +116,7 @@ twoway (line cdf_Q_pre_female    Q , lwidth(vthick) lcolor(gs0))
       , 
 		  legend(label(1 "Girls") label(2 "Boys"))
 		  xlabel(, grid glcolor(gs14)) ylabel(0[.2]1, angle(h) glcolor(gs14))
-		  xtitle("Proportion of Months in Alternatives, Control Group") ytitle(Cumulative Density Function)
+		  xtitle("Proportion of Months in Alternatives") ytitle(Cumulative Density Function)
 		  graphregion(color(white)) plotregion(fcolor(white));
 #delimit cr
 cd $output

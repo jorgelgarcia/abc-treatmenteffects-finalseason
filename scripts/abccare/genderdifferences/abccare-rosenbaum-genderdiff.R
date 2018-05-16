@@ -22,8 +22,6 @@ getwd()
 df <- data.frame(read.dta('abccare-factors-R-inputold.dta'))
 #df <- data.frame(read.dta('append-abccare_iv.dta'))
 
-agefactors <- c('factorage5','factorage15','factorage34')
-catfactors <- c('factoriq','factorach','factorse','factormlabor','factorparent','factoredu','factoremp','factorhealth','factorrisk','factorcrime','factorall')
 
 # define function for Rosenbaum test
 rosenbaum <- function(data,varstokeep,catvar){
@@ -82,13 +80,18 @@ rosenbaum <- function(data,varstokeep,catvar){
 #cats <- list(iq=iqvars,se=sevars,parent=parentvars,sch=schvars,mhealth=mhealthvars)
 #agecats <- list(a5=age5,a15=age15,a34=age34)
 #agecatsC <- list(a5=age5,a34=age34)
+agefactors <- c('factorage5','factorage15','factorage34')
+catfactors <- c('factoriq','factorach','factorse','factormlabor','factorparent','factoredu','factoremp','factorhealth','factorrisk','factorcrime','factorall')
 
 factorcats <- list(age5='factorage5',age15='factorage15',age34='factorage34',fiq='factoriq',fach='factorach',fse='factorse',fmlabor='factormlabor',fparent='factorparent',fedu='factoredu',femp='factoremp',fcrime='factorcrime',frisk='factorrisk',fhealth='factorhealth',fall='factorall')
+#basevars <- c('m_ed0y','m_work0y','m_iq_base','hh_sibs_base','f_home0y','m_age_base','m_married_base','hrabc_index')
+#basevars <- c('m_age_base','m_ed_base','m_iq_base','hh_sibs_base','m_married_base','f_home_base')
+basevars <- c('factorbase')
+#basevars <- c('m_age_base','m_ed_base','m_iq_base','hh_sibs_base','hrabc_index','f_home0y')
 
-varlists <- c(agefactors,catfactors)
-keeps <- append(basicvars,varlists)
-
-#df <- df[, keeps, drop=FALSE]
+#varlists <- c(agefactors,catfactors)
+#keeps <- append(basicvars,varlists)
+#varlists <- c(basicvars,basevars)
 
 # drop if R == 0 & RV == 1 and .x
 df <- df[!(df$R==0 & df$RV==1),]
@@ -96,66 +99,64 @@ df <- df[!is.na(df$id),]
 
 # create different dataframes for each comparison
 
-df <- df[(df$base==1),]
-
 ## GROUP A
 # girls, treatment vs. control
 GTvCd <- df[(df$male==0),]
 # boys, treatment vs. control
 BTvCd <- df[(df$male==1),]
 # girls, treatment vs. alternative
-GTvCad <- df[(df$male==0)&((df$dc_mo_pre>0 & df$R==0)|(df$R==1))& !is.na(df$dc_mo_pre),]
+GTvCad <- df[(df$male==0)&((df$P==1 & df$R==0)|(df$R==1))& !is.na(df$P),]
 # girls, treatment vs. home care
-GTvChd <- df[(df$male==0)&((df$dc_mo_pre==0 & df$R==0)|(df$R==1))& !is.na(df$dc_mo_pre),]
+GTvChd <- df[(df$male==0)&((df$P==0 & df$R==0)|(df$R==1))& !is.na(df$P),]
 # boys, treatment vs. alternative
-BTvCad <- df[(df$male==1)&((df$dc_mo_pre>0 & df$R==0)|(df$R==1))& !is.na(df$dc_mo_pre),]
+BTvCad <- df[(df$male==1)&((df$P==1 & df$R==0)|(df$R==1))& !is.na(df$P),]
 # boys, treatment vs. home care
-BTvChd <- df[(df$male==1)&((df$dc_mo_pre==0 & df$R==0)|(df$R==1))& !is.na(df$dc_mo_pre),]
+BTvChd <- df[(df$male==1)&((df$P==0 & df$R==0)|(df$R==1))& !is.na(df$P),]
 
 ## GROUP B
 # girls, alternative vs. home care
-GCavChd <- df[df$male==0 & df$R==0 & !is.na(df$dc_mo_pre),]
-GCavChd$alt <- ifelse(GCavChd$dc_mo_pre==0,0,1)
+GCavChd <- df[df$male==0 & df$R==0 & !is.na(df$P),]
+
 # boys, alternative vs. home care
-BCavChd <- df[df$male==1 & df$R==0 & !is.na(df$dc_mo_pre),]
-BCavChd$alt <- ifelse(BCavChd$dc_mo_pre==0,0,1)
+BCavChd <- df[df$male==1 & df$R==0 & !is.na(df$P),]
+
 
 ## GROUP C
 # alternative, boy vs. girl
-CaBvGd <- df[((df$R==1)|(df$dc_mo_pre>0 & df$R==0 & !is.na(df$dc_mo_pre))),]
+CaBvGd <- df[((df$R==1)|(df$P==1 & df$R==0 & !is.na(df$P))),]
 # home care, boy vs. girl
-ChBvGd <- df[((df$R==1)|(df$dc_mo_pre==0 & df$R==0 & !is.na(df$dc_mo_pre))),]
+ChBvGd <- df[((df$R==1)|(df$P==0 & df$R==0 & !is.na(df$P))),]
 
 # combine dataframes in to a list
 bigdfA <- list(GTvC=GTvCd,GTvCa=GTvCad,GTvCh=GTvChd,BTvC=BTvCd,BTvCa=BTvCad,BTvCh=BTvChd)
 bigdfB <- list(BCavCh=BCavChd,GCavCh=GCavChd)
 bigdfC <- list(ChBvG=ChBvGd,CaBvG=CaBvGd,CBvG=df[(df$R==0),], TBvG=df[(df$R==1),])
 
-#outputA <- lapply(cats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
-#outputB <- lapply(cats, function(x) sapply(bigdfB, function(y) rosenbaum(y,x,'alt')))
-#outputC <- lapply(cats, function(x) sapply(bigdfC, function(y) rosenbaum(y,x,'male')))
+#outputAf <- sapply(factorcats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
+#outputBf <- sapply(factorcats, function(x) sapply(bigdfB, function(y) rosenbaum(y,x,'P')))
+#outputCf <- sapply(factorcats, function(x) sapply(bigdfC, function(y) rosenbaum(y,x,'male')))
 
+outputDisadvantage <- rosenbaum(df[(df$R==0),],basevars,'male')
+outputSelection <- sapply(bigdfB,function(x) rosenbaum(x,basevars,'P'))
 
-outputAf <- sapply(factorcats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
-outputBf <- sapply(factorcats, function(x) sapply(bigdfB, function(y) rosenbaum(y,x,'alt')))
-outputCf <- sapply(factorcats, function(x) sapply(bigdfC, function(y) rosenbaum(y,x,'male')))
+setwd('/home/aziff/projects/abccare-cba/output')
+cAf <-data.frame(outputDisadvantage) 
+write.matrix(cAf,'rosenbaum-output-Disadvantage.txt',sep=',')
 
-
-#outputAcf <- sapply(bigdfA, function(y) rosenbaum(y,catfactors,'R'))
-#outputBcf <- sapply(bigdfB, function(y) rosenbaum(y,catfactors,'alt'))
-#outputCcf <- sapply(bigdfC, function(y) rosenbaum(y,catfactors,'male'))
+cBf <-data.frame(outputSelection) 
+write.matrix(cBf,'rosenbaum-output-BSelection.txt',sep=',')
 
 #combinedoutputf <-data.frame(list(A=outputAf,B=outputBf,C=outputCf)) 
 
-setwd('/home/aziff/projects/abccare-cba/output')
-cAf <-data.frame(outputAf) 
-write.matrix(cAf,'rosenbaum-output-Afactors-base1.txt',sep=',')
+#setwd('/home/aziff/projects/abccare-cba/output')
+#cAf <-data.frame(outputAf) 
+#write.matrix(cAf,'rosenbaum-output-Afactors-base1.txt',sep=',')
 #cat(capture.output(print(cAf),file='rosenbaum-output-Afactors.csv'),sep=',')
 
-cBf <-data.frame(outputBf) 
-write.matrix(cBf,'rosenbaum-output-Bfactors-base1.txt',sep=',')
+#cBf <-data.frame(outputBf) 
+#write.matrix(cBf,'rosenbaum-output-Bfactors-base1.txt',sep=',')
 #cat(capture.output(print(cBf),file='rosenbaum-output-Bfactors.txt'))
 
-cCf <-data.frame(outputCf)
-write.matrix(cCf,'rosenbaum-output-Cfactors-base1.txt',sep=',')
+#cCf <-data.frame(outputCf)
+#write.matrix(cCf,'rosenbaum-output-Cfactors-base1.txt',sep=',')
 #cat(capture.output(print(cCf),file='rosenbaum-output-Cfactors.txt'))
