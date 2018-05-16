@@ -97,7 +97,7 @@ Note: Panel (a) displays the distribution of the treatment effect estimate of th
 
 \begin{sidewaysfigure}[!htbp]
 \centering
-\caption{Sensitiviy to Choice of Control Set, Treatment vs. Alternative Preschool}\label{fig:senstap}
+\caption{Sensitivity to Choice of Control Set, Treatment vs. Alternative Preschool}\label{fig:senstap}
 \begin{subfigure}[h]{0.4\textwidth}
 		\centering
 		\caption{Years of Education, Males}
@@ -141,20 +141,6 @@ Note: Panel (a) displays the distribution of the treatment effect estimate of th
 \noindent Beginning with Table~\ref{table:abccare_rslt_pooled_cat0}, we display treatment effects by outcome. We divide the tables by different blocks of related outcomes. able~\ref{table:treatfactors} summarizes treatment effects on the set of selected``latent'' outcomes that we estimate. We display the full set of estimates beginning with Table~\ref{table:abccare_rslt_pooled_cat0}, together with the corresponding outcomes underlying the latents that we estimate.
 
 %In each table we also present one or two factors constructed with the methodology in Appendix~\ref{app:endogeneity}. The idea behind doing this is to recover a ``latent'' outcome summarizing the outcomes in the table (e.g., latent IQ across IQ from ages 2 to 5). That is, measure the latent outcome using outcomes at various ages as measures of this latent. Testing for treatment effects on this factor it is yet another alternative to summarize treatment effects across a block of outcomes. T
-
-\begin{table}[H]
-\centering
-\begin{threeparttable}
-\caption{Treatment Effects on Selected Latent Outcomes}\label{table:treatfactors}
-\begin{scriptsize}
-\input{output/select_rslt_factors.tex}
-\end{scriptsize}
-\begin{tablenotes}
-\tiny
-Note: This table shows the treatment effects for ``latent'' outcomes, constructed from various related outcomes to the latent. Each column present estimates for the following parameters: \textbf{(1)} $\mathbb{E} \big[ \bm{Y}^1 - \bm{Y}^0 | W = 1]$; {\textbf{(2)} $\mathbb{E} \big[ \bm{Y}^1 - \bm{Y}^0 | \bm{B} \big]$}; {\textbf{(3)} $\mathbb{E} \big[ \bm{Y}^1 | \bm{B}, D=1 \big] - \mathbb{E} \big[ \bm{Y}^0 | \bm{B}, V=0, D=0 \big]$}; {\textbf{(4)} $\mathbb{E} \big[ \bm{Y}^1 - \bm{Y}^0 | \bm{B}, V=0 \big] $}; {\textbf{(5)} $\mathbb{E} \big[ \bm{Y}^1 | \bm{B}, D=1 \big] - \mathbb{E} \big[ \bm{Y}^0 | \bm{B}, V=1, D = 0 \big]$}; {\textbf{(6)} $\mathbb{E} \big[ \bm{Y}^1 - \bm{Y}^0 | \bm{B}, V=1 \big]$}. We account for the following background variables ($\bm{B}$): Apgar scores at minutes 1 and 5 and the high-risk index. We define the high-risk index in Appendix~\ref{appendix:background} and explain how we choose the control variables in Appendix~\ref{appendix:bvariables}. Inference is based on non-parametric, one-sided $p$-values from the empirical bootstrap distribution. We highlight point estimates significant at the $10\%$ level.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
 \doublespacing
 
 
