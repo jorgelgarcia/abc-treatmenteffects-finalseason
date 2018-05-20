@@ -38,7 +38,9 @@ BSIAnx_T
 bsi_thos
 BSIHos_T
 bsi_tgsi
-B18GSI_T;
+B18GSI_T
+si21y_inc_trans_pub 
+si30y_inc_trans_pub;
 
 # delimit cr
 
