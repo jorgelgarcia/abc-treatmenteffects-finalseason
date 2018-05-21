@@ -12,7 +12,7 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 10
+global bootstraps 2
 global maxtries 20
 global quantiles 30
 
@@ -46,6 +46,48 @@ global hyplatent 		si34y_sys_bp si34y_dia_bp si34y_prehyper si34y_hyper
 
 global carepinclatent 		p_inc1y6m p_inc2y6m p_inc3y6m p_inc4y6m
 global careemplatent 		si30y_works_job si30y_inc_labor si30y_inc_trans_pub
+
+
+
+# delimit ; 
+keep 	id R RV male P m_age0y	apgar1 apgar5 abc hrabc_index cohort prem_birth	
+		m_ed0y hh_sibs0y
+		$pinclatent $edulatent $emplatent $crimelatent $hyplatent ;
+
+
+local toimpute 	p_inc1y6m p_inc2y6m p_inc3y6m p_inc4y6m p_inc8y p_inc12y p_inc15y p_inc21y 
+				si30y_univ_comp 
+				si21y_inc_labor si30y_inc_labor si21y_inc_trans_pub si30y_inc_trans_pub 
+				ad34_fel ad34_mis si34y_dia_bp 
+				si34y_sys_bp si34y_prehyper si34y_hyper
+;
+# delimit cr
+
+global p_inc1y6m_impute				m_age0y	apgar1	cohort
+global p_inc2y6m_impute				m_age0y	apgar1	cohort
+global p_inc3y6m_impute				m_age0y	apgar1	cohort
+global p_inc4y6m_impute				hrabc_index	apgar1	cohort
+global p_inc8y_impute				hrabc_index	apgar1	cohort
+global p_inc12y_impute				hrabc_index	apgar1	cohort
+global p_inc15y_impute				apgar5	prem_birth	hh_sibs0y
+global p_inc21y_impute				hrabc_index	apgar1	cohort
+	
+global si30y_univ_comp_impute		apgar1	apgar5	cohort
+
+global si21y_inc_labor_impute		hrabc_index	apgar1	cohort
+global si30y_inc_labor_impute		m_ed0y	apgar5	cohort
+global si21y_inc_trans_pub_impute	hrabc_index	apgar1	cohort
+global si30y_inc_trans_pub_impute	m_ed0y	apgar5	cohort
+
+global ad34_fel_impute				apgar1	apgar5	cohort
+global ad34_mis_impute				apgar1	apgar5	cohort
+			
+global si34y_dia_bp_impute			apgar1	prem_birth	hh_sibs0y
+global si34y_sys_bp_impute			apgar1	prem_birth	hh_sibs0y
+global si34y_prehyper_impute		apgar1	prem_birth	hh_sibs0y	
+global si34y_hyper_impute			apgar1	prem_birth	hh_sibs0y
+
+
 
 
 forvalues b = 0/$bootstraps {
@@ -160,7 +202,59 @@ forvalues b = 0/$bootstraps {
 			mat colname c5`s'`c' = c5`s'`c'
 		
 		
-			// column 6: E(Y1 - Y0 | B, V=1)
+			
+			
+		
+		
+		}
+		
+		
+		
+		
+		// generate imputed variables for factors used in columns 2, 4, 6
+		mi set wide
+		mi register imputed `toimpute' P m_age0y apgar1 apgar5 abc hrabc_index cohort prem_birth
+		foreach v in `toimpute' {
+	
+		local nimpute : word count ${`v'_impute}
+		
+		if `nimpute' > 0 {
+			mi impute regress `v' ${`v'_impute}, add(10) force
+		}
+	
+		}
+		
+		// calculate imputed factor
+		qui gen `c'factorimp = .
+	
+		forvalues s = 0/1 {
+			
+			if "`c'" == "pinc" | "`c'" == "emp" {
+				
+				qui factor ${abc`c'latent} if male == `s' & abc == 1
+				qui predict abc`c'factorimp _`s' 
+				qui replace `c'factorimp  = abc`c'factorimp _`s' if male == `s' & abc == 1
+			
+				qui factor ${care`c'latent} if male == `s' & abc == 0
+				qui predict care`c'factorimp _`s' 
+				qui replace `c'factorimp  = care`c'factorimp _`s' if male == `s' & abc == 0
+				
+			}
+			else {
+				
+				qui factor ${`c'latent} if male == `s' 
+				qui predict `c'factorimp _`s' 
+				qui replace `c'factorimp  = `c'factorimp _`s' if male == `s' 
+			
+			}
+			
+	
+		}
+	
+		qui sum `c'factor
+		qui replace `c'factor = (`c'factor - r(mean))/r(sd)
+		
+		// column 6: E(Y1 - Y0 | B, V=1)
 			qui psmatch2 R male hrabc_index apgar1 apgar5 abc if (P==1 & R == 0) | R == 1, ///
 			kernel k(epan) bwidth(20) mahalanobis(male hrabc_index apgar1 apgar5 abc)
 			
@@ -174,10 +268,6 @@ forvalues b = 0/$bootstraps {
 			else {
 				mat c6`s'`c' = (nullmat(c6`s'`c') \ .)
 			}
-			
-		
-		
-		}
 		
 		
 		
