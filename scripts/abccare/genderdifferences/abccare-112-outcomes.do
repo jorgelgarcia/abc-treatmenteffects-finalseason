@@ -540,7 +540,7 @@ achy12y
 ach15y
 ach21y;
 
-local parenting_big
+local parentbig
 home0y6m
 home1y6m
 home2y6m
@@ -564,7 +564,7 @@ m_work3y6m
 m_work4y6m
 m_work21y;
 
-local education_big
+local edu_big
 sch_hs30y
 si30y_techcc_att
 si30y_univ_comp
@@ -574,7 +574,7 @@ tot_sped
 ever_ret
 tot_ret;
 
-local employment_big
+local emp_big
 si30y_works_job
 si21y_inc_labor
 si30y_inc_labor;

@@ -54,7 +54,7 @@ local all_name "All"
 // OUTPUT ORDER
 local outgroups GTvC GTvCa GTvCh BTvC BTvCa BTvCh BCavCh GCavCh ChBvG CaBvG CBvG TBvG
 // TABLE ORDER
-local exp_groupnames 		GTvC BTvC GTvCa BTvCa GTvCh BTvCh //GCavCh BCavCh 
+local exp_groupnames 		GTvC //BTvC //GTvCa BTvCa GTvCh BTvCh //GCavCh BCavCh 
 local gender_groupnames 	ChBvG CaBvG CBvG TBvG
 local cats					exp //gender
 
@@ -129,11 +129,14 @@ cd $data
 use append-abccare_iv, clear
 
 drop if R == 0 & RV == 1
+
+/*
 factor  m_age_base m_ed_base m_iq_base hh_sibs_base m_married_base f_home0y
 predict factorbase 
 qui sum factorbase, detail
 qui gen base = (factorbase <= r(p50))
 keep if base == 0
+*/
 
 // variables
 cd ${scripts}/abccare/genderdifferences
@@ -144,10 +147,10 @@ cd ${scripts}/abccare/genderdifferences
 local age_categories 	age5 age15 age34 all
 local cats_categories 	iq ach se mlabor parent edu emp crime risk health 
 
-local agecats_types		cats age
+keep id R RV P male `iq_big' `ach_big' `se_big' `mlabor_big' `parent_big' `edu_big' ///
+	`emp_big' `crime_big' `risk_big' `health_big' `age5_big' `age15_big' `age34_big' `all_big'
 
-qui gen alt = (dc_alt > 0 & R == 0)
-replace alt = . if dc_alt == . | R == 1
+local agecats_types		/*cats*/ age
 
 global GTvC_v2 		R
 global BTvC_v2 		R
@@ -164,14 +167,14 @@ global TBvG_v2 		male
 
 global GTvC_drop 	male == 1	
 global BTvC_drop 	male == 0
-global GTvCa_drop 	male == 1 & dc_alt == 0 
-global BTvCa_drop 	male == 0 & dc_alt == 0
-global GTvCh_drop 	male == 1 & dc_alt > 0
-global BTvCh_drop 	male == 0 & dc_alt > 0
+global GTvCa_drop 	male == 1 & P == 0 
+global BTvCa_drop 	male == 0 & P == 0
+global GTvCh_drop 	male == 1 & P == 1
+global BTvCh_drop 	male == 0 & P == 1
 global GCavCh_drop 	male == 1 | R == 1
 global BCavCh_drop 	male == 0 | R == 1
-global ChBvG_drop 	dc_alt > 0 | R == 1
-global CaBvG_drop 	dc_alt == 0 | R == 1
+global ChBvG_drop 	P == 1 | R == 1
+global CaBvG_drop 	P == 0 | R == 1
 global CBvG_drop 	R == 1
 global TBvG_drop 	R == 0
 	
@@ -187,6 +190,13 @@ foreach t in `cats' {
 			forvalues b = 0/${bootstraps} {
 				di "`t' `t2' `g'"
 				di "Bootstrap: `b'"
+				
+				
+				global nvarall_`b' = 0
+				global totall`g'_`b' = 0
+				global nposall`g'_`b' = 0
+				global nsigall`g'_`b' = 0
+				global nsigaall`g'_`b' = 0
 			
 				preserve
 				qui drop if ${`g'_drop}
@@ -196,10 +206,14 @@ foreach t in `cats' {
 				}
 
 				foreach c in ``t2'_categories' {
+				
+				if `b' == 0 {
+					local colnames `colnames' `g'std`c' `g'pos`c' `g'sig`c' `g'p`c'
+				}
+				
+				if "`c'" != "all" {
 					di "`c'"
-					if `b' == 0 {
-						local colnames `colnames' `g'std`c' `g'pos`c' `g'sig`c' `g'p`c'
-					}
+					
 					
 					global nvar`c'_`b' = 0
 					global tot`g'_`b' = 0
@@ -207,26 +221,27 @@ foreach t in `cats' {
 					global nsig`g'_`b' = 0
 					global nsiga`g'_`b' = 0
 					
-					foreach v in ``c'_updated' {
-					
-						
+					foreach v in ``c'_big' {
 			
 						global nvar`c'_`b' = ${nvar`c'_`b'} + 1
-		
+						global nvarall_`b' = ${nvarall_`b'} + 1
+						
 						qui reg `v' ${`g'_v2} 
 						mat B`v'_`b' = e(b)
-						mat B`c'_`b' = (nullmat(B`c'_`b') \ B`v'_`b'[1,1])
+						//mat B`c'_`b' = (nullmat(B`c'_`b') \ B`v'_`b'[1,1])
 						global B`v'_`b' = B`v'_`b'[1,1]
 						
 						// record if B > 0
 						if B`v'_`b'[1,1] > 0 {
 							global npos`g'_`b' = ${npos`g'_`b'} + 1
-					
+							global nposall`g'_`b' = ${nposall`g'_`b'} + 1
+						
 							// record if B > 0 & significant asymptotically
-							qui ttest `v', by(${`g'_v2})
-							if r(p) <= 0.1 {
-								global nsiga`g'_`b' = ${nsiga`g'_`b'} + 1
-							}	
+							//qui ttest `v', by(${`g'_v2})
+							//if r(p) <= 0.1 {
+								//global nsiga`g'_`b' = ${nsiga`g'_`b'} + 1
+								//global nsigaall`g'_`b' = ${nsigaall`g'_`b'} + 1
+							//}	
 						}	
 						
 						// determine significance of B
@@ -234,8 +249,6 @@ foreach t in `cats' {
 						global B`v'_`b'_count = 0
 						
 						forvalues b1 = 1/${dbootstraps} {
-						
-							di "Inner boostrap: `b1'"
 						
 							tempfile preserve`b'
 							qui save `preserve`b''
@@ -249,6 +262,7 @@ foreach t in `cats' {
 							global B`v'_`b'_tot = ${B`v'_`b'_tot} + ${B`v'_`b'_`b1'}
 							
 							use `preserve`b'', clear
+							erase `preserve`b''
 						
 						}
 						
@@ -266,6 +280,7 @@ foreach t in `cats' {
 						global `v'_`b'_bspval = ${B`v'_`b'_count}/${bootstraps}
 						if ${`v'_`b'_bspval} <= 0.1 {
 							global nsig`g'_`b' = ${nsig`g'_`b'} + 1
+							global nsigall`g'_`b' = ${nsigall`g'_`b'} + 1
 						}	
 		
 						// calculate effect size
@@ -275,14 +290,17 @@ foreach t in `cats' {
 						if ``v'sd' == 0 {
 							mat STDB`c'_`b' = (nullmat(STDB`c'_`b') \ .)
 							global nvar`c'_`b' = ${nvar`c'_`b'} - 1
+							global nvarall_`b' = ${nvarall_`b'} - 1
 						}
 						else if ``v'sd' == . {
 							mat STDB`c'_`b' = (nullmat(STDB`c'_`b') \ .)
 							global nvar`c'_`b' = ${nvar`c'_`b'} - 1
+							global nvarall_`b' = ${nvarall_`b'} - 1
 						}
 						else {
 							local `v'stdb_`b' = B`v'_`b'[1,1]/``v'sd'
 							global tot`g'_`b' = ${tot`g'_`b'} + ``v'stdb_`b''
+							global totall`g'_`b' = ${totall`g'_`b'} + ``v'stdb_`b''
 						}
 					}
 		
@@ -296,9 +314,24 @@ foreach t in `cats' {
 					global pval`g'`c' : di ${pval`g'`c'} %9.3f
 		
 					mat COMBINE`b' = (nullmat(COMBINE`b') , ${avg`c'_`g'_`b'} , ${pos`g'_`b'} , ${sig`g'_`b'} , ${pval`g'`c'})
-					
+
 				}
-			
+				if "`c'" == "all" {
+					di "`c'"
+					global posall`g'_`b' = (${nposall`g'_`b'}/${nvarall_`b'}) * 100
+					global sigall`g'_`b' = (${nsigall`g'_`b'}/${nvarall_`b'}) * 100
+					global avgall_`g'_`b' = ${totall`g'_`b'}/${nvarall_`b'}
+
+		
+					global posall`g'_`b' : di ${posall`g'_`b'} %9.0f
+					global sigall`g'_`b' : di ${sigall`g'_`b'} %9.0f
+					global avgall_`g'_`b' : di ${avgall_`g'_`b'} %9.3f
+					global pval`g'all : di ${pval`g'all} %9.3f
+		
+					mat COMBINE`b' = (nullmat(COMBINE`b') , ${avgall_`g'_`b'} , ${posall`g'_`b'} , ${sigall`g'_`b'} , ${pval`g'all})
+
+				}
+				}
 			
 			restore
 				
@@ -365,19 +398,20 @@ foreach t in `cats' {
 		file write tabfile "\toprule" _n
 		file write tabfile " & Average & \% $ >0 $ & \% $ >0 $ , Significant & \citet{Rosenbaum_2005_Distribution_JRSS} \\" _n
 		file write tabfile " & Effect Size & Treatment Effect & Treatment Effect & $ p $ -value \\" _n
-		file write tabfile "\midrule" _n
+
 		
 			foreach c in ``t2'_categories' {
 			
+				file write tabfile "\midrule" _n
 				file write tabfile "\textbf{``c'_name'} & & & & \\" _n
 				file write tabfile "\quad Females &  ${pointG`g1'std`c'} & ${pointG`g1'pos`c'} & ${pointG`g1'sig`c'} & ${pvalG`g1'`c'} \\" _n
 				file write tabfile "\quad Males &  ${pointB`g1'std`c'} & ${pointB`g1'pos`c'} & ${pointB`g1'sig`c'} & ${pvalB`g1'`c'} \\" _n
-				file write tabfile "\midrule" _n
+				
 			}
 			
 		file write tabfile "\bottomrule" _n
 		file write tabfile "\end{tabular}" _n
-		file write tabfile "% This file generated by: ${mediation}/scripts/abccare/genderdifferences/abccare-gdiff-raw-rosenbaum-table.do" _n
+		file write tabfile "% This file generated by: ${mediation}/scripts/abccare/genderdifferences/abccare-gdiff-raw-rosenbaum-table-big.do" _n
 		file close tabfile	
 		
 		}
