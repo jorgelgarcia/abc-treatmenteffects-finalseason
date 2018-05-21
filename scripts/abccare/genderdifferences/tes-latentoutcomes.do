@@ -45,7 +45,7 @@ global crimelatent 		ad34_fel ad34_mis si30y_adlt_totinc
 global hyplatent 		si34y_sys_bp si34y_dia_bp si34y_prehyper si34y_hyper
 
 global carepinclatent 		p_inc1y6m p_inc2y6m p_inc3y6m p_inc4y6m
-global careedulatent 		sch_hs30y si30y_techcc_att si30y_univ_comp years_30y ever_sped tot_sped ever_ret tot_ret
+global careemplatent 		si30y_works_job si30y_inc_labor si30y_inc_trans_pub
 
 
 forvalues b = 0/$bootstraps {
@@ -67,9 +67,9 @@ forvalues b = 0/$bootstraps {
 			
 			if "`c'" == "pinc" | "`c'" == "emp" {
 				
-				qui factor ${abc`c'latent} if male == `s' & abc == 1
-				qui predict abc`c'factor_`s' 
-				qui replace `c'factor = abc`c'factor_`s' if male == `s' & abc == 1
+				qui factor ${`c'latent} if male == `s' & abc == 1
+				qui predict `c'factor_`s' 
+				qui replace `c'factor = `c'factor_`s' if male == `s' & abc == 1
 			
 				qui factor ${care`c'latent} if male == `s' & abc == 0
 				qui predict care`c'factor_`s' 
