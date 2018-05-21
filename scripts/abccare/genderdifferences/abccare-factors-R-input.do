@@ -44,7 +44,7 @@ foreach c in age5 age15 age34 iq ach se mlabor parent edu emp health risk crime 
 	
 	forvalues s = 0/1 {
 		local tofactor
-		foreach v in ``c'_updated' {
+		foreach v in ``c'_big' {
 			
 			// impute mean for those with missing values
 				forvalues r = 0/1 {
