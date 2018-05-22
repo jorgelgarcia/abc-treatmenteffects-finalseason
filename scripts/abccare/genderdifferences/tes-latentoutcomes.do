@@ -72,23 +72,24 @@ global p_inc12y_impute				hrabc_index	apgar1	cohort
 global p_inc15y_impute				apgar5	prem_birth	hh_sibs0y
 global p_inc21y_impute				hrabc_index	apgar1	cohort
 	
-global si30y_univ_comp_impute		apgar1	apgar5	cohort
+global si30y_univ_comp_impute			apgar1	apgar5	cohort
 
-global si21y_inc_labor_impute		hrabc_index	apgar1	cohort
-global si30y_inc_labor_impute		m_ed0y	apgar5	cohort
-global si21y_inc_trans_pub_impute	hrabc_index	apgar1	cohort
-global si30y_inc_trans_pub_impute	m_ed0y	apgar5	cohort
+global si21y_inc_labor_impute			hrabc_index	apgar1	cohort
+global si30y_inc_labor_impute			m_ed0y	apgar5	cohort
+global si21y_inc_trans_pub_impute		hrabc_index	apgar1	cohort
+global si30y_inc_trans_pub_impute		m_ed0y	apgar5	cohort
 
 global ad34_fel_impute				apgar1	apgar5	cohort
 global ad34_mis_impute				apgar1	apgar5	cohort
 			
 global si34y_dia_bp_impute			apgar1	prem_birth	hh_sibs0y
 global si34y_sys_bp_impute			apgar1	prem_birth	hh_sibs0y
-global si34y_prehyper_impute		apgar1	prem_birth	hh_sibs0y	
+global si34y_prehyper_impute			apgar1	prem_birth	hh_sibs0y	
 global si34y_hyper_impute			apgar1	prem_birth	hh_sibs0y
 
 
-
+mi set wide
+mi register imputed `toimpute' P m_age0y apgar1 apgar5 abc hrabc_index cohort prem_birth
 
 forvalues b = 0/$bootstraps {
 	di "B: `b'"
@@ -147,18 +148,6 @@ forvalues b = 0/$bootstraps {
 			mat c1`s'`c' = (nullmat(c1`s'`c') \ `c1`c'`b'')
 			mat colname c1`s'`c' = c1`s'`c'
 			
-			// column 2: E(Y1 - Y0 | B, W=1), conditional ITT
-			qui cap teffects ipw (`c'factor) (R abc hrabc_index apgar1 apgar5) if male == `s'
-			if !_rc {
-				mat c2`c'`s'b`b' = e(b)
-				local c2`c'`b' = c2`c'`s'b`b'[1,1]
-			
-				mat c2`s'`c' = (nullmat(c2`s'`c') \ `c2`c'`b'')
-			}
-			else {
-				mat c2`s'`c' = (nullmat(c2`s'`c') \ .)
-			}
-			
 			// column 3: E(Y1|R=1) - E(Y0 |  R=0,V=0), raw vs. stay at home
 			qui reg `c'factor R if male == `s' & (R==1 | (R==0 & P==0))
 			
@@ -173,7 +162,79 @@ forvalues b = 0/$bootstraps {
 			mat c3`s'`c' = (nullmat(c3`s'`c') \ `c3`c'`b'')
 			mat colname c3`s'`c' = c3`s'`c'
 			
-			// column 4: E(Y1 - Y0 | B, V=0)
+			// column 5: E(Y1|R=1) - E(Y0 |  R=0,V=1), raw vs. alternative
+			qui sum `c'factor if R == 0 & P == 1 & male == `s'
+			local c5`c'factor`s'0 = r(mean)
+			
+			qui sum `c'factor if R == 1 & male == `s'
+			local c5`c'factor`s'1 = r(mean)
+			
+			local c5`c'`b' = `c5`c'factor`s'1' - `c5`c'factor`s'0'
+			
+			mat c5`s'`c' = (nullmat(c5`s'`c') \ `c5`c'`b'')
+			mat colname c5`s'`c' = c5`s'`c'
+		
+		}
+		
+		
+		// generate imputed variables for factors used in columns 2, 4, 6
+		
+		foreach v in `toimpute' {
+	
+			local nimpute : word count ${`v'_impute}
+		
+			if `nimpute' > 0 {
+				mi impute regress `v' ${`v'_impute}, add(10) force
+			}
+	
+		}
+		
+		
+		// calculate imputed factor
+		qui gen `c'factorimp = .
+	
+		forvalues s = 0/1 {
+			
+			if "`c'" == "pinc" | "`c'" == "emp" {
+				
+				qui factor ${`c'latent} if male == `s' & abc == 1
+				qui predict `c'factorimp_`s' 
+				qui replace `c'factorimp  = `c'factorimp_`s' if male == `s' & abc == 1
+			
+				qui factor ${care`c'latent} if male == `s' & abc == 0
+				qui predict care`c'factorimp_`s' 
+				qui replace `c'factorimp  = care`c'factorimp_`s' if male == `s' & abc == 0
+				
+			}
+			else {
+				
+				qui factor ${`c'latent} if male == `s' 
+				qui predict `c'factorimp_`s' 
+				qui replace `c'factorimp  = `c'factorimp_`s' if male == `s' 
+			
+			}
+			
+	
+		}
+		
+		qui sum `c'factor
+		qui replace `c'factor = (`c'factor - r(mean))/r(sd)
+		/*
+		
+		// column 2: E(Y1 - Y0 | B, W=1), conditional ITT
+			qui cap teffects ipw (`c'factor) (R abc hrabc_index apgar1 apgar5) if male == `s'
+			if !_rc {
+				mat c2`c'`s'b`b' = e(b)
+				local c2`c'`b' = c2`c'`s'b`b'[1,1]
+			
+				mat c2`s'`c' = (nullmat(c2`s'`c') \ `c2`c'`b'')
+			}
+			else {
+				mat c2`s'`c' = (nullmat(c2`s'`c') \ .)
+			}
+		
+		
+		// column 4: E(Y1 - Y0 | B, V=0)
 			qui psmatch2 R male hrabc_index apgar1 apgar5 abc if (P==0 & R == 0) | R == 1, ///
 			kernel k(epan) bwidth(20) mahalanobis(male hrabc_index apgar1 apgar5 abc) 
 			
@@ -187,72 +248,6 @@ forvalues b = 0/$bootstraps {
 			else {
 				mat c4`s'`c' = (nullmat(c4`s'`c') \ .)
 			}
-			
-			
-			// column 5: E(Y1|R=1) - E(Y0 |  R=0,V=1), raw vs. alternative
-			qui sum `c'factor if R == 0 & P == 1 & male == `s'
-			local c5`c'factor`s'0 = r(mean)
-			
-			qui sum `c'factor if R == 1 & male == `s'
-			local c5`c'factor`s'1 = r(mean)
-			
-			local c5`c'`b' = `c5`c'factor`s'1' - `c5`c'factor`s'0'
-			
-			mat c5`s'`c' = (nullmat(c5`s'`c') \ `c5`c'`b'')
-			mat colname c5`s'`c' = c5`s'`c'
-		
-		
-			
-			
-		
-		
-		}
-		
-		
-		
-		
-		// generate imputed variables for factors used in columns 2, 4, 6
-		mi set wide
-		mi register imputed `toimpute' P m_age0y apgar1 apgar5 abc hrabc_index cohort prem_birth
-		foreach v in `toimpute' {
-	
-		local nimpute : word count ${`v'_impute}
-		
-		if `nimpute' > 0 {
-			mi impute regress `v' ${`v'_impute}, add(10) force
-		}
-	
-		}
-		
-		// calculate imputed factor
-		qui gen `c'factorimp = .
-	
-		forvalues s = 0/1 {
-			
-			if "`c'" == "pinc" | "`c'" == "emp" {
-				
-				qui factor ${abc`c'latent} if male == `s' & abc == 1
-				qui predict abc`c'factorimp _`s' 
-				qui replace `c'factorimp  = abc`c'factorimp _`s' if male == `s' & abc == 1
-			
-				qui factor ${care`c'latent} if male == `s' & abc == 0
-				qui predict care`c'factorimp _`s' 
-				qui replace `c'factorimp  = care`c'factorimp _`s' if male == `s' & abc == 0
-				
-			}
-			else {
-				
-				qui factor ${`c'latent} if male == `s' 
-				qui predict `c'factorimp _`s' 
-				qui replace `c'factorimp  = `c'factorimp _`s' if male == `s' 
-			
-			}
-			
-	
-		}
-	
-		qui sum `c'factor
-		qui replace `c'factor = (`c'factor - r(mean))/r(sd)
 		
 		// column 6: E(Y1 - Y0 | B, V=1)
 			qui psmatch2 R male hrabc_index apgar1 apgar5 abc if (P==1 & R == 0) | R == 1, ///
@@ -269,7 +264,7 @@ forvalues b = 0/$bootstraps {
 				mat c6`s'`c' = (nullmat(c6`s'`c') \ .)
 			}
 		
-		
+		*/
 		
 	}
 	
