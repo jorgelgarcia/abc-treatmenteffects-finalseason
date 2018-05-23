@@ -12,8 +12,8 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 2
-global dbootstraps 2
+global bootstraps 10
+global dbootstraps 10
 global maxtries 20
 global quantiles 30
 
@@ -349,9 +349,9 @@ clear
 svmat COMBINE, names(col)
 qui gen b = _n - 1
 
-local std_comp = 0
-local pos_comp = 50
-local sig_comp = 10
+global std_comp = 0
+global pos_comp = 50
+global sig_comp = 10
 	
 foreach t in `cats' {
 	foreach t2 in `agecats_types' {
@@ -369,7 +369,7 @@ foreach t in `cats' {
 					qui gen mean`g'`s'`c' = r(mean)
 					
 					qui gen dmean`g'`s'`c' = `g'`s'`c' - mean`g'`s'`c' if b > 0
-					qui gen com`g'`s'`c' = (dmean`g'`s'`c' >= mean`g'`s'`c' + ``s'_comp') if b > 0
+					qui gen com`g'`s'`c' = (dmean`g'`s'`c' >= point`g'`s'`c' + ${`s'_comp}) if b > 0
 					qui sum com`g'`s'`c' if b > 0
 					
 					qui gen p`g'`s'`c' = r(mean)
@@ -392,7 +392,7 @@ foreach t in `cats' {
 	foreach t2 in `agecats_types' {
 		foreach g1 in TvC TvCa TvCh {
 		
-		file open tabfile using "${output}/raw-rosenbaum-table-`t2'-`t'-`g1'-20-10.tex", replace write
+		file open tabfile using "${output}/raw-rosenbaum-table-`t2'-`t'-`g1'-test.tex", replace write
 		file write tabfile "\begin{tabular}{l c c c c}" _n
 		file write tabfile "\toprule" _n
 		file write tabfile " & Average & \% $ >0 $ & \% $ >0 $ , Significant & \citet{Rosenbaum_2005_Distribution_JRSS} \\" _n
