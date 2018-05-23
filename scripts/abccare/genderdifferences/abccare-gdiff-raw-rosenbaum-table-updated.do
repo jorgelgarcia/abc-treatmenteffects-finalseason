@@ -63,7 +63,7 @@ cd $output
 
 
 // A
-import delim using "rosenbaum-output-Afactors.txt", delim(",") clear
+import delim using "rosenbaum-output-Afactors-updated.txt", delim(",") clear
 qui gen n = _n
 keep if n == 5 | n == 6 | n == 11 | n == 12 | n == 17 | n == 18 | n == 23 ///
 				| n == 24 | n == 29 | n == 30 | n == 35 | n == 36
@@ -75,7 +75,7 @@ tempfile A
 qui save	`A'
 
 // B
-import delim using "rosenbaum-output-Bfactors.txt", delim(",") clear
+import delim using "rosenbaum-output-Bfactors-updated.txt", delim(",") clear
 qui gen n = _n
 keep if n == 5 | n == 6 | n == 11 | n == 12
 qui gen n2 = _n
@@ -86,7 +86,7 @@ tempfile B
 qui save	`B'
 
 // C
-import delim using "rosenbaum-output-Cfactors.txt", delim(",") clear
+import delim using "rosenbaum-output-Cfactors-updated.txt", delim(",") clear
 qui gen n = _n
 keep if n == 5 | n == 6 | n == 11 | n == 12 | n == 17 | n == 18 | n == 23 | n == 24 
 qui gen n2 = _n
@@ -221,7 +221,7 @@ foreach t in `cats' {
 					global nsig`g'_`b' = 0
 					global nsiga`g'_`b' = 0
 					
-					foreach v in ``c'_big' {
+					foreach v in ``c'_updated' {
 			
 						global nvar`c'_`b' = ${nvar`c'_`b'} + 1
 						global nvarall_`b' = ${nvarall_`b'} + 1
@@ -392,7 +392,7 @@ foreach t in `cats' {
 	foreach t2 in `agecats_types' {
 		foreach g1 in TvC TvCa TvCh {
 		
-		file open tabfile using "${output}/raw-rosenbaum-table-`t2'-`t'-`g1'-big-20-10.tex", replace write
+		file open tabfile using "${output}/raw-rosenbaum-table-`t2'-`t'-`g1'-updated-20-10.tex", replace write
 		file write tabfile "\begin{tabular}{l c c c c}" _n
 		file write tabfile "\toprule" _n
 		file write tabfile " & Average & \% $ >0 $ & \% $ >0 $ , Significant & \citet{Rosenbaum_2005_Distribution_JRSS} \\" _n
