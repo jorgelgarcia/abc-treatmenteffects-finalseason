@@ -54,7 +54,7 @@ local all_name "All"
 // OUTPUT ORDER
 local outgroups GTvC GTvCa GTvCh BTvC BTvCa BTvCh BCavCh GCavCh ChBvG CaBvG CBvG TBvG
 // TABLE ORDER
-local exp_groupnames 		GTvC //BTvC //GTvCa BTvCa GTvCh BTvCh //GCavCh BCavCh 
+local exp_groupnames 		GTvC BTvC GTvCa BTvCa GTvCh BTvCh //GCavCh BCavCh 
 local gender_groupnames 	ChBvG CaBvG CBvG TBvG
 local cats					exp //gender
 
@@ -150,7 +150,7 @@ local cats_categories 	iq ach se mlabor parent edu emp crime risk health
 keep id R RV P male `iq_big' `ach_big' `se_big' `mlabor_big' `parent_big' `edu_big' ///
 	`emp_big' `crime_big' `risk_big' `health_big' `age5_big' `age15_big' `age34_big' `all_big'
 
-local agecats_types		/*cats*/ age
+local agecats_types		cats age
 
 global GTvC_v2 		R
 global BTvC_v2 		R
@@ -221,27 +221,20 @@ foreach t in `cats' {
 					global nsig`g'_`b' = 0
 					global nsiga`g'_`b' = 0
 					
-					foreach v in ``c'_big' {
+					foreach v in ``c'_updated' {
 			
 						global nvar`c'_`b' = ${nvar`c'_`b'} + 1
 						global nvarall_`b' = ${nvarall_`b'} + 1
 						
 						qui reg `v' ${`g'_v2} 
+						
 						mat B`v'_`b' = e(b)
-						//mat B`c'_`b' = (nullmat(B`c'_`b') \ B`v'_`b'[1,1])
 						global B`v'_`b' = B`v'_`b'[1,1]
 						
 						// record if B > 0
 						if B`v'_`b'[1,1] > 0 {
 							global npos`g'_`b' = ${npos`g'_`b'} + 1
 							global nposall`g'_`b' = ${nposall`g'_`b'} + 1
-						
-							// record if B > 0 & significant asymptotically
-							//qui ttest `v', by(${`g'_v2})
-							//if r(p) <= 0.1 {
-								//global nsiga`g'_`b' = ${nsiga`g'_`b'} + 1
-								//global nsigaall`g'_`b' = ${nsigaall`g'_`b'} + 1
-							//}	
 						}	
 						
 						// determine significance of B
@@ -255,12 +248,14 @@ foreach t in `cats' {
 							
 							bsample
 							
-							qui reg `v' ${`g'_v2} 
-							mat B`v'_`b' = e(b)
-							global B`v'_`b'_`b1' = B`v'_`b'[1,1]
+							cap qui reg `v' ${`g'_v2} 
+							if !_rc {
+								mat B`v'_`b' = e(b)
+								global B`v'_`b'_`b1' = B`v'_`b'[1,1]
 							
-							global B`v'_`b'_tot = ${B`v'_`b'_tot} + ${B`v'_`b'_`b1'}
-							
+								global B`v'_`b'_tot = ${B`v'_`b'_tot} + ${B`v'_`b'_`b1'}
+							}
+
 							use `preserve`b'', clear
 							erase `preserve`b''
 						
@@ -353,6 +348,10 @@ mat colnames COMBINE = `colnames'
 clear
 svmat COMBINE, names(col)
 qui gen b = _n - 1
+
+local std_comp = 0
+local pos_comp = 50
+local sig_comp = 10
 	
 foreach t in `cats' {
 	foreach t2 in `agecats_types' {
@@ -370,7 +369,7 @@ foreach t in `cats' {
 					qui gen mean`g'`s'`c' = r(mean)
 					
 					qui gen dmean`g'`s'`c' = `g'`s'`c' - mean`g'`s'`c' if b > 0
-					qui gen com`g'`s'`c' = (dmean`g'`s'`c' >= mean`g'`s'`c') if b > 0
+					qui gen com`g'`s'`c' = (dmean`g'`s'`c' >= mean`g'`s'`c' + ``s'_comp') if b > 0
 					qui sum com`g'`s'`c' if b > 0
 					
 					qui gen p`g'`s'`c' = r(mean)
@@ -393,7 +392,7 @@ foreach t in `cats' {
 	foreach t2 in `agecats_types' {
 		foreach g1 in TvC TvCa TvCh {
 		
-		file open tabfile using "${output}/raw-rosenbaum-table-`t2'-`t'-`g1'.tex", replace write
+		file open tabfile using "${output}/raw-rosenbaum-table-`t2'-`t'-`g1'-20-10.tex", replace write
 		file write tabfile "\begin{tabular}{l c c c c}" _n
 		file write tabfile "\toprule" _n
 		file write tabfile " & Average & \% $ >0 $ & \% $ >0 $ , Significant & \citet{Rosenbaum_2005_Distribution_JRSS} \\" _n
