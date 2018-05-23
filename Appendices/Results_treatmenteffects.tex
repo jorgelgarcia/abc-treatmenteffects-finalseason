@@ -33,6 +33,18 @@
 
 \noindent We use matching estimators for different versions of the ``treatment vs. stay at home'' and ``treatment vs. alternative preschools'' parameters. For treatment vs. stay at home, we construct the Mahalanobis distance between the individuals in the treatment group and the control group who stay at home and use an Epanechnikov metric to construct an individual-level weight---giving a relatively high weight to individuals in the treatment group who would have been likely to stay at home if randomized to the control group. We proceed analogously when estimating the treatment vs. alternative preschool parameters. We use the same variables to ``match'' and to ``control''.\\
 
+\noindent Table~\ref{tab:testing-matched-samples} displays the results of a test comparing the matched samples. The first three columns compare the children in the control group who attended alternative center-based care to those in the treatment group who would have attended alternative care if they were in the control group. The last three columns perform the analogous comparison for children who stayed at home. The \% Bias is the standardized mean difference between the matched samples. The corresponding $t$-scores and $p$-values are also reported, however none of the comparisons are significantly different.
+
+\begin{table}[htbp!]
+\begin{threeparttable}
+\caption{Testing Matched Samples} \label{tab:testing-matched-samples}
+\input{output/matching-baseline-test-pstest}
+\begin{tablenotes}
+\item \footnotesize Note: This table tests the difference between the matched samples for both sets of matches that are done: treatment to alternative childcare and treatment to staying at home. The \% Bias is the standardized mean difference between the matched samples. The corresponding $t$-scores and $p$-values are also reported.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
 \noindent Other forms of matching estimates such as propensity score matching and nearest neighbor(s) give very similar results and are available upon request. We analyze sensitivity to the choice of controls and matching variables next.\\
 
 \subsubsection{Sensitivity Analysis} \label{app:senscontrols}
