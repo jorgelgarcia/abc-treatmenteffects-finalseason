@@ -33,6 +33,18 @@
 
 \noindent We use matching estimators for different versions of the ``treatment vs. stay at home'' and ``treatment vs. alternative preschools'' parameters. For treatment vs. stay at home, we construct the Mahalanobis distance between the individuals in the treatment group and the control group who stay at home and use an Epanechnikov metric to construct an individual-level weight---giving a relatively high weight to individuals in the treatment group who would have been likely to stay at home if randomized to the control group. We proceed analogously when estimating the treatment vs. alternative preschool parameters. We use the same variables to ``match'' and to ``control''.\\
 
+\noindent Table~\ref{tab:testing-matched-samples} displays the results of a test comparing the matched samples. The first three columns compare the children in the control group who attended alternative center-based care to those in the treatment group who would have attended alternative care if they were in the control group. The last three columns perform the analogous comparison for children who stayed at home. The \% Bias is the standardized mean difference between the matched samples. The corresponding $t$-scores and $p$-values are also reported, however none of the comparisons are significantly different.
+
+\begin{table}[htbp!]
+\begin{threeparttable}
+\caption{Testing Matched Samples} \label{tab:testing-matched-samples}
+\input{output/matching-baseline-test-pstest}
+\begin{tablenotes}
+\item \footnotesize Note: This table tests the difference between the matched samples for both sets of matches that are done: treatment to alternative childcare and treatment to staying at home. The \% Bias is the standardized mean difference between the matched samples. The corresponding $t$-scores and $p$-values are also reported.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
 \noindent Other forms of matching estimates such as propensity score matching and nearest neighbor(s) give very similar results and are available upon request. We analyze sensitivity to the choice of controls and matching variables next.\\
 
 \subsubsection{Sensitivity Analysis} \label{app:senscontrols}
@@ -143,6 +155,75 @@ Note: Panel (a) displays the distribution of the treatment effect estimate of th
 %In each table we also present one or two factors constructed with the methodology in Appendix~\ref{app:endogeneity}. The idea behind doing this is to recover a ``latent'' outcome summarizing the outcomes in the table (e.g., latent IQ across IQ from ages 2 to 5). That is, measure the latent outcome using outcomes at various ages as measures of this latent. Testing for treatment effects on this factor it is yet another alternative to summarize treatment effects across a block of outcomes. T
 \doublespacing
 
+
+\subsection{Non-parametric Tests}\ref{app:subsection-nonparametric-tests}
+
+
+\begin{table}[h!]
+\centering
+\begin{threeparttable}
+\caption{Age Summary of Treatment-Control Comparisons by Gender, Full Set of Outcomes}\label{tab:rosenbaum-table-age-exp-TvC-big}
+\input{output/raw-rosenbaum-table-age-exp-TvC-big-20-10}
+\begin{tablenotes}
+\item Note:
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{threeparttable}
+\caption{Category Summary of Treatment-Control Comparisons by Gender, Full Set of Outcomes}\label{tab:rosenbaum-table-cats-exp-TvC-big}
+\input{output/raw-rosenbaum-table-cats-exp-TvC-big-20-10}
+\begin{tablenotes}
+\item Note:
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{threeparttable}
+\caption{Age Summary of Treatment-Control (Stay at Home) Comparisons by Gender, Full Set of Outcomes}\label{tab:rosenbaum-table-age-exp-TvCh-big}
+\input{output/raw-rosenbaum-table-age-exp-TvCh-big-20-10}
+\begin{tablenotes}
+\item Note:
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{threeparttable}
+\caption{Category Summary of Treatment-Control (Stay at Home) Comparisons by Gender, Full Set of Outcomes}\label{tab:rosenbaum-table-cats-exp-TvCh-big}
+\input{output/raw-rosenbaum-table-cats-exp-TvCh-big-20-10}
+\begin{tablenotes}
+\item Note:
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{threeparttable}
+\caption{Age Summary of Treatment-Control (Alternative Care) Comparisons by Gender, Full Set of Outcomes}\label{tab:rosenbaum-table-age-exp-TvCa-big}
+\input{output/raw-rosenbaum-table-age-exp-TvCa-big-20-10}
+\begin{tablenotes}
+\item Note:
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{threeparttable}
+\caption{Category Summary of Treatment-Control (Alternative Care) Comparisons by Gender, Full Set of Outcomes}\label{tab:rosenbaum-table-cats-exp-TvCa-big}
+\input{output/raw-rosenbaum-table-cats-exp-TvCa-big-20-10}
+\begin{tablenotes}
+\item Note:
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
 
 \input{AppResOutput/1_abccare_appendix_treatmenteffects}
 \doublespacing

@@ -1,11 +1,18 @@
 \documentclass[12pt]{article}
 
+\usepackage{booktabs}
 \usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{threeparttable}
 
+\newcommand{\mr}{\multirow}
+\newcommand{\mc}{\multicolumn}
 
-\linespread{2}
+%\linespread{2}
 
 \begin{document}
+
+\doublespacing
 
 \title{Collated Referee Reports}
 \maketitle
@@ -115,7 +122,19 @@ The argument about the inferiority of alternative care seems to stem mainly from
 
 \subsection*{Selection into Home Care and Alternative Care}
 
-Alternative care was selected by the parents and not randomly assigned. The manuscript uses matching to address the selection issues. However, it provides very little information (none in the body of the manuscript) about how much the resulting matched samples look like the treatment sample or each other. The manuscript is drawing conclusions about the impacts of alternative care but it hasn't shown that the matched alternative care sample for boys looks like either the home care or treatment samples. \textbf{This is an important point and we have added Table D.4 to Appendix D to show the balance between the groups after matching. [Note: This table is in the process of being created.]}
+Alternative care was selected by the parents and not randomly assigned. The manuscript uses matching to address the selection issues. However, it provides very little information (none in the body of the manuscript) about how much the resulting matched samples look like the treatment sample or each other. The manuscript is drawing conclusions about the impacts of alternative care but it hasn't shown that the matched alternative care sample for boys looks like either the home care or treatment samples. \textbf{This is an important point and we have added Table D.4 to Appendix D to show the balance between the groups after matching.}
+
+\singlespacing
+\begin{table}[htbp!]
+\begin{threeparttable}
+\caption{Testing Matched Samples} \label{tab:testing-matched-samples}
+\input{../../output/matching-baseline-test-pstest}
+\begin{tablenotes}
+\item \footnotesize \raggedright Note: This table tests the difference between the matched samples for both sets of matches that are done: treatment to alternative childcare and treatment to staying at home. The \% Bias is the standardized mean difference between the matched samples. The corresponding $t$-scores and $p$-values are also reported.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\doublespacing
 
 \subsection*{Generalizability}
 

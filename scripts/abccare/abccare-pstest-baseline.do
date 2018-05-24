@@ -39,16 +39,16 @@ drop if R == 0 & RV == 1
 
 gen ALT = (dc_mo_pre > 0 & dc_mo_pre != .)
 
+gen fakeR = R
+recode fakeR (0=1) (1=0)
+
 // psmatch
-
-
-psmatch2 R male hrabc_index apgar1 apgar5 abc if (dc_alt > 0 & R == 0) | R == 1, ///
+psmatch2 fakeR male hrabc_index apgar1 apgar5 abc if (P==0 & R==0) | R==1, ///
 	kernel k(epan) bwidth(20) mahalanobis(male hrabc_index apgar1 apgar5 abc)
 	
 pstest $exogvars 
 
+psmatch2 fakeR male hrabc_index apgar1 apgar5 abc if (P==1 & R==0) | R==1, ///
+kernel k(epan) bwidth(20) mahalanobis(male hrabc_index apgar1 apgar5 abc) 
 
-psmatch2 R male hrabc_index apgar1 apgar5 abc if (dc_alt == 0 & R == 0) | R == 1, ///
-	kernel k(epan) bwidth(20) mahalanobis(male hrabc_index apgar1 apgar5 abc)
-	
 pstest $exogvars   

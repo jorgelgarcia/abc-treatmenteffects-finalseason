@@ -12,7 +12,8 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 25
+global bootstraps 2
+global dbootstraps 1
 global maxtries 20
 global quantiles 30
 
@@ -32,14 +33,28 @@ cd ${scripts}/abccare/genderdifferences
 
 	include abccare-112-outcomes
 	
-local categories age5 age15 age34 //iq ach se mlabor parent edu emp crime risk health all
+local categories age5 age15 age34 iq ach se mlabor parent edu emp crime risk health all
 
+
+local age5_name	"Childhood"
+local age15_name "School Age"
+local age34_name "Adulthood"
+local iq_name "IQ"
+local ach_name "Achievement"
+local se_name "Social-emotional"
+local mlabor_name "Mother's Labor"
+local parent_name "Parenting"
+local edu_name "Education"
+local emp_name "Employment"
+local crime_name "Crime"
+local risk_name "Risky Behaviors"
+local health_name "Health"
+local all_name "All"
 
 // OUTPUT ORDER
-local outgroups GTvC BTvC 
-//local outgroups GTvC GTvCa GTvCh BTvC BTvCa BTvCh BCavCh GCavCh ChBvG CaBvG CBvG TBvG
+local outgroups GTvC GTvCa GTvCh BTvC BTvCa BTvCh BCavCh GCavCh ChBvG CaBvG CBvG TBvG
 // TABLE ORDER
-local exp_groupnames 		GTvC BTvC //GTvCa BTvCa GTvCh BTvCh GCavCh BCavCh 
+local exp_groupnames 		GTvC BTvC GTvCa BTvCa GTvCh BTvCh //GCavCh BCavCh 
 local gender_groupnames 	ChBvG CaBvG CBvG TBvG
 local cats					exp //gender
 
@@ -48,51 +63,41 @@ cd $output
 
 
 // A
-import delim using "rosenbaum-output-Afactors-base0.txt", delim(",") clear
-gen n = _n
-order n, first
+import delim using "rosenbaum-output-Afactors.txt", delim(",") clear
+qui gen n = _n
 keep if n == 5 | n == 6 | n == 11 | n == 12 | n == 17 | n == 18 | n == 23 ///
 				| n == 24 | n == 29 | n == 30 | n == 35 | n == 36
-gen n2 = _n
-order n2, first
+qui gen n2 = _n
 keep if mod(n2,2) == 0
 drop n n2
-gen n = _n
-order n, first
+qui gen n = _n
 tempfile A
-save	`A'
-/*
+qui save	`A'
+
 // B
-import delim using "rosenbaum-output-Bfactors-Selection.txt", delim(",") clear
-gen n = _n
-order n, first
+import delim using "rosenbaum-output-Bfactors.txt", delim(",") clear
+qui gen n = _n
 keep if n == 5 | n == 6 | n == 11 | n == 12
-gen n2 = _n
-order n2, first
-keep if mod(n2,2) == 0
+qui gen n2 = _n
+qui keep if mod(n2,2) == 0
 drop n n2
-gen n = _n + 6
-order n, first
+qui gen n = _n + 6
 tempfile B
-save	`B'
+qui save	`B'
 
 // C
-import delim using "rosenbaum-output-Cfactors-base0.txt", delim(",") clear
-gen n = _n
-order n, first
+import delim using "rosenbaum-output-Cfactors.txt", delim(",") clear
+qui gen n = _n
 keep if n == 5 | n == 6 | n == 11 | n == 12 | n == 17 | n == 18 | n == 23 | n == 24 
-gen n2 = _n
-order n2, first
+qui gen n2 = _n
 keep if mod(n2,2) == 0
 drop n n2
-gen n = _n + 8
-order n, first
+qui gen n = _n + 8
 tempfile C
-save	`C'
+qui save	`C'
 
 append using `A'
 append using `B'
-sort n
 
 rename fiq		iq
 rename fach		ach
@@ -105,15 +110,15 @@ rename fcrime	crime
 rename frisk	risk
 rename fhealth	health
 rename fall		all
-*/
-forvalues i = 1/2 {
+
+forvalues i = 1/12 {
 	
 	local g : word `i' of `outgroups'
 	
 	foreach c in `categories' {
-		
 		qui sum `c' if n == `i'
 		global pval`g'`c' = r(mean)
+		global pval`g'`c' : di %9.3f ${pval`g'`c'}
 	}
 	
 }
@@ -124,11 +129,14 @@ cd $data
 use append-abccare_iv, clear
 
 drop if R == 0 & RV == 1
+
+/*
 factor  m_age_base m_ed_base m_iq_base hh_sibs_base m_married_base f_home0y
 predict factorbase 
-sum factorbase, detail
-gen base = (factorbase <= r(p50))
+qui sum factorbase, detail
+qui gen base = (factorbase <= r(p50))
 keep if base == 0
+*/
 
 // variables
 cd ${scripts}/abccare/genderdifferences
@@ -137,12 +145,12 @@ cd ${scripts}/abccare/genderdifferences
 	include abccare-112-outcomes
 
 local age_categories 	age5 age15 age34 all
-local cats_categories 	iq ach se mlabor parent edu emp crime risk health all
+local cats_categories 	iq ach se mlabor parent edu emp crime risk health 
 
-local agecats_types		age // cats
+keep id R RV P male `iq_big' `ach_big' `se_big' `mlabor_big' `parent_big' `edu_big' ///
+	`emp_big' `crime_big' `risk_big' `health_big' `age5_big' `age15_big' `age34_big' `all_big'
 
-gen alt = (dc_alt > 0 & R == 0)
-replace alt = . if dc_alt == . | R == 1
+local agecats_types		cats age
 
 global GTvC_v2 		R
 global BTvC_v2 		R
@@ -159,104 +167,258 @@ global TBvG_v2 		male
 
 global GTvC_drop 	male == 1	
 global BTvC_drop 	male == 0
-global GTvCa_drop 	male == 1 & dc_alt == 0 
-global BTvCa_drop 	male == 0 & dc_alt == 0
-global GTvCh_drop 	male == 1 & dc_alt > 0
-global BTvCh_drop 	male == 0 & dc_alt > 0
+global GTvCa_drop 	male == 1 & P == 0 
+global BTvCa_drop 	male == 0 & P == 0
+global GTvCh_drop 	male == 1 & P == 1
+global BTvCh_drop 	male == 0 & P == 1
 global GCavCh_drop 	male == 1 | R == 1
 global BCavCh_drop 	male == 0 | R == 1
-global ChBvG_drop 	dc_alt > 0 | R == 1
-global CaBvG_drop 	dc_alt == 0 | R == 1
+global ChBvG_drop 	P == 1 | R == 1
+global CaBvG_drop 	P == 0 | R == 1
 global CBvG_drop 	R == 1
 global TBvG_drop 	R == 0
 	
 // std. effect size (adapted from abccare-gdiff-stdtes-ranksum.do)
 
+
+local colnames
 foreach t in `cats' {
-foreach t2 in `agecats_types' {
+	foreach t2 in `agecats_types' {
 
-foreach g in ``t'_groupnames' {
-
-	local `t'`t2'rownames
-
-	preserve
-	
-	drop if ${`g'_drop}
-	
-	
-	foreach c in ``t2'_categories' {
-	
-		local `t'`t2'rownames ``t'`t2'rownames' `c' \quad\%Positive \quad\%Significant \quadp-value
-	
-		di "category: `c'"
-		
-		global nvar`c' = 0
-		global tot`g' = 0
-		global npos`g' = 0
-		global nsig`g' = 0
-
-		foreach v in ``c'_updated' {
+		foreach g in ``t'_groupnames' {
+				
+			forvalues b = 0/${bootstraps} {
+				di "`t' `t2' `g'"
+				di "Bootstrap: `b'"
+				
+				
+				global nvarall_`b' = 0
+				global totall`g'_`b' = 0
+				global nposall`g'_`b' = 0
+				global nsigall`g'_`b' = 0
+				global nsigaall`g'_`b' = 0
 			
-			global nvar`c' = ${nvar`c'} + 1
-		
-			qui reg `v' ${`g'_v2} 
-			mat B`v' = e(b)
-			mat B`c' = (nullmat(B`c') \ B`v'[1,1])
-		
-			// record if B > 0
-			if B`v'[1,1] > 0 {
-				global npos`g' = ${npos`g'} + 1
+				preserve
+				qui drop if ${`g'_drop}
+			
+				if `b' != 0 {
+					bsample
+				}
+
+				foreach c in ``t2'_categories' {
+				
+				if `b' == 0 {
+					local colnames `colnames' `g'std`c' `g'pos`c' `g'sig`c' `g'p`c'
+				}
+				
+				if "`c'" != "all" {
+					di "`c'"
 					
-				// record if B > 0 & significant
-				qui ttest `v', by(${`g'_v2})
-				if r(p) <= 0.1 {
-					global nsig`g' = ${nsig`g'} + 1
-				}	
-			}
-		
-			qui sum `v' if ${`g'_v2} == 0
-			local `v'sd = r(sd)
+					
+					global nvar`c'_`b' = 0
+					global tot`g'_`b' = 0
+					global npos`g'_`b' = 0
+					global nsig`g'_`b' = 0
+					global nsiga`g'_`b' = 0
+					
+					foreach v in ``c'_big' {
 			
-			if ``v'sd' == 0 {
-				di "No variation, `c', `v'"
-				mat STDB`c' = (nullmat(STDB`c') \ .)
-				global nvar`c' = ${nvar`c'} - 1
-			}
-			else if ``v'sd' == . {
-				di "Missing sd, `c', `v'"
-				mat STDB`c' = (nullmat(STDB`c') \ .)
-				global nvar`c' = ${nvar`c'} - 1
-			}
-			else {
-				local `v'stdb = B`v'[1,1]/``v'sd'
-				//mat STDB`c' = (nullmat(STDB`c') \ ``v'stdb')
-				//mat colnames STDB`c' = `g'
-				global tot`g' = ${tot`g'} + ``v'stdb'
-			}
+						global nvar`c'_`b' = ${nvar`c'_`b'} + 1
+						global nvarall_`b' = ${nvarall_`b'} + 1
+						
+						qui reg `v' ${`g'_v2} 
+						
+						mat B`v'_`b' = e(b)
+						global B`v'_`b' = B`v'_`b'[1,1]
+						
+						// record if B > 0
+						if B`v'_`b'[1,1] > 0 {
+							global npos`g'_`b' = ${npos`g'_`b'} + 1
+							global nposall`g'_`b' = ${nposall`g'_`b'} + 1
+						}	
+						
+						// determine significance of B
+						global B`v'_`b'_tot = 0
+						global B`v'_`b'_count = 0
+						
+						global denom = ${dbootstraps}
+						forvalues b1 = 1/${dbootstraps} {
+						
+							tempfile preserve`b'
+							qui save `preserve`b''
+							
+							bsample
+							
+							cap qui reg `v' ${`g'_v2} 
+							if !_rc {
+								mat B`v'_`b'_`b1' = e(b)
+								global B`v'_`b'_`b1' = B`v'_`b'_`b1'[1,1]
+							
+								global B`v'_`b'_tot = ${B`v'_`b'_tot} + ${B`v'_`b'_`b1'}
+							}
+							else {
+								global denom = ${denom} - 1
+							}
+
+							use `preserve`b'', clear
+							erase `preserve`b''
+						
+						}
+						
+						global B`v'_`b'_avg = ${B`v'_`b'_tot}/${denom}
+						
+						forvalues b1 = 1/${denom} {
+							global B`v'_`b'_`b1'_dm = ${B`v'_`b'_`b1'} - ${B`v'_`b'_avg}
+							if ${B`v'_`b'_`b1'_dm } >= ${B`v'_`b'} {
+								
+								global B`v'_`b'_count = ${B`v'_`b'_count} + 1
+							}
+						
+						}
+						
+						global `v'_`b'_bspval = ${B`v'_`b'_count}/${denom}
+						if ${`v'_`b'_bspval} <= 0.1 {
+							global nsig`g'_`b' = ${nsig`g'_`b'} + 1
+							global nsigall`g'_`b' = ${nsigall`g'_`b'} + 1
+						}	
+		
+						// calculate effect size
+						qui sum `v' if ${`g'_v2} == 0
+						local `v'sd = r(sd)
+			
+						if ``v'sd' == 0 {
+							mat STDB`c'_`b' = (nullmat(STDB`c'_`b') \ .)
+							global nvar`c'_`b' = ${nvar`c'_`b'} - 1
+							global nvarall_`b' = ${nvarall_`b'} - 1
+						}
+						else if ``v'sd' == . {
+							mat STDB`c'_`b' = (nullmat(STDB`c'_`b') \ .)
+							global nvar`c'_`b' = ${nvar`c'_`b'} - 1
+							global nvarall_`b' = ${nvarall_`b'} - 1
+						}
+						else {
+							local `v'stdb_`b' = B`v'_`b'[1,1]/``v'sd'
+							global tot`g'_`b' = ${tot`g'_`b'} + ``v'stdb_`b''
+							global totall`g'_`b' = ${totall`g'_`b'} + ``v'stdb_`b''
+						}
+					}
+		
+					global pos`g'_`b' = (${npos`g'_`b'}/${nvar`c'_`b'}) * 100
+					global sig`g'_`b' = (${nsig`g'_`b'}/${nvar`c'_`b'}) * 100
+					global avg`c'_`g'_`b' = ${tot`g'_`b'}/${nvar`c'_`b'}
+		
+					global pos`g'_`b' : di ${pos`g'_`b'} %9.0f
+					global sig`g'_`b' : di ${sig`g'_`b'} %9.0f
+					global avg`c'_`g'_`b' : di ${avg`c'_`g'_`b'} %9.3f
+					global pval`g'`c' : di ${pval`g'`c'} %9.3f
+		
+					mat COMBINE`b' = (nullmat(COMBINE`b') , ${avg`c'_`g'_`b'} , ${pos`g'_`b'} , ${sig`g'_`b'} , ${pval`g'`c'})
+
+				}
+				if "`c'" == "all" {
+					di "`c'"
+					global posall`g'_`b' = (${nposall`g'_`b'}/${nvarall_`b'}) * 100
+					global sigall`g'_`b' = (${nsigall`g'_`b'}/${nvarall_`b'}) * 100
+					global avgall_`g'_`b' = ${totall`g'_`b'}/${nvarall_`b'}
+
+		
+					global posall`g'_`b' : di ${posall`g'_`b'} %9.0f
+					global sigall`g'_`b' : di ${sigall`g'_`b'} %9.0f
+					global avgall_`g'_`b' : di ${avgall_`g'_`b'} %9.3f
+					global pval`g'all : di ${pval`g'all} %9.3f
+		
+					mat COMBINE`b' = (nullmat(COMBINE`b') , ${avgall_`g'_`b'} , ${posall`g'_`b'} , ${sigall`g'_`b'} , ${pval`g'all})
+
+				}
+				}
+			
+			restore
+				
+		}
+	
 		}
 		
-		global pos`g' = (${npos`g'}/${nvar`c'}) * 100
-		global sig`g' = (${nsig`g'}/${nvar`c'}) * 100
-		global avg`c'_`g' = ${tot`g'}/${nvar`c'}
 		
-		global pos`g' : di ${pos`g'} %9.0f
-		global sig`g' : di ${sig`g'} %9.0f
-		global avg`c'_`g' : di ${avg`c'_`g'} %9.3f
-		global pval`g'`c' : di ${pval`g'`c'} %9.3f
-		
-		di "${pval`g'}"
-		mat COMBINE`t'`t2'`g' = (nullmat(COMBINE`t'`t2'`g') \ ${avg`c'_`g'} \ ${pos`g'} \ ${sig`g'} \ ${pval`g'`c'})
-		mat colnames COMBINE`t'`t2'`g' = `g'
-	}
-	
-	mat COMBINE`t'`t2' = (nullmat(COMBINE`t'`t2') , COMBINE`t'`t2'`g')
-
-	restore
-	}
-	
-	mat rownames COMBINE`t'`t2' = ``t'`t2'rownames'
-
-	cd $output
-	outtable using "raw-rosenbaum-table-`t2'-`t'-base0", mat(COMBINE`t'`t2') replace format(%9.3f) center nobox
 	}
 }
+
+// test significance
+forvalues b = 0/$bootstraps {
+	mat COMBINE = (nullmat(COMBINE) \ COMBINE`b')
+
+}
+mat colnames COMBINE = `colnames'
+
+clear
+svmat COMBINE, names(col)
+qui gen b = _n - 1
+
+global std_comp = 0
+global pos_comp = 50
+global sig_comp = 10
+	
+foreach t in `cats' {
+	foreach t2 in `agecats_types' {
+		foreach g in ``t'_groupnames' {
+			foreach c in ``t2'_categories' {
+				
+				foreach s in std pos sig {
+				
+					qui sum `g'`s'`c' if b == 0
+					qui gen point`g'`s'`c' = r(mean) 
+					global point`g'`s'`c' = r(mean)
+					global point`g'`s'`c' : di %9.3f ${point`g'`s'`c'}
+					
+					qui sum `g'`s'`c' if b > 0
+					qui gen mean`g'`s'`c' = r(mean)
+					
+					qui gen dmean`g'`s'`c' = `g'`s'`c' - mean`g'`s'`c' if b > 0
+					qui gen com`g'`s'`c' = (dmean`g'`s'`c' >= point`g'`s'`c' + ${`s'_comp}) if b > 0
+					qui sum com`g'`s'`c' if b > 0
+					
+					qui gen p`g'`s'`c' = r(mean)
+					global p`g'`s'`c' = r(mean)
+					
+					if ${p`g'`s'`c'} <= 0.1 {
+						global point`g'`s'`c' \textbf{${point`g'`s'`c'}}
+					}
+				
+				}
+					
+			}
+		}
+	}
+}
+
+
+// make table
+foreach t in `cats' {
+	foreach t2 in `agecats_types' {
+		foreach g1 in TvC TvCa TvCh {
+		
+		file open tabfile using "${output}/raw-rosenbaum-table-`t2'-`t'-`g1'-big-${bootstraps}-${dbootstraps}.tex", replace write
+		file write tabfile "\begin{tabular}{l c c c c}" _n
+		file write tabfile "\toprule" _n
+		file write tabfile " & Average & \% $ >0 $ & \% $ >0 $ , Significant & \citet{Rosenbaum_2005_Distribution_JRSS} \\" _n
+		file write tabfile " & Effect Size & Treatment Effect & Treatment Effect & $ p $ -value \\" _n
+
+		
+			foreach c in ``t2'_categories' {
+			
+				file write tabfile "\midrule" _n
+				file write tabfile "\textbf{``c'_name'} & & & & \\" _n
+				file write tabfile "\quad Females &  ${pointG`g1'std`c'} & ${pointG`g1'pos`c'} & ${pointG`g1'sig`c'} & ${pvalG`g1'`c'} \\" _n
+				file write tabfile "\quad Males &  ${pointB`g1'std`c'} & ${pointB`g1'pos`c'} & ${pointB`g1'sig`c'} & ${pvalB`g1'`c'} \\" _n
+				
+			}
+			
+		file write tabfile "\bottomrule" _n
+		file write tabfile "\end{tabular}" _n
+		file write tabfile "% This file generated by: ${mediation}/scripts/abccare/genderdifferences/abccare-gdiff-raw-rosenbaum-table-big.do" _n
+		file close tabfile	
+		
+		}
+	}
+}
+
+
