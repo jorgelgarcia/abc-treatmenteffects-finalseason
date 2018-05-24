@@ -44,7 +44,7 @@ foreach c in age5 age15 age34 iq ach se mlabor parent edu emp health risk crime 
 	
 	forvalues s = 0/1 {
 		local tofactor
-		foreach v in ``c'_big' {
+		foreach v in ``c'_updated' {
 			
 			// impute mean for those with missing values
 				forvalues r = 0/1 {
@@ -79,4 +79,4 @@ keep id R RV male P Q dc_mo_pre* base m_ed0y m_work0y m_age_base m_married_base 
 				m_iq_base f_home0y p_inc0y hrabc_index hh_sibs_base apgar5 f_home_base ///
 				m_ed_base factor*
 cd $data
-saveold abccare-factors-R-inputold, version(12) replace
+saveold abccare-factors-R-inputold-updated, version(12) replace

@@ -12,8 +12,8 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 20
-global dbootstraps 10
+global bootstraps 2
+global dbootstraps 1
 global maxtries 20
 global quantiles 30
 
@@ -241,6 +241,7 @@ foreach t in `cats' {
 						global B`v'_`b'_tot = 0
 						global B`v'_`b'_count = 0
 						
+						global denom = ${dbootstraps}
 						forvalues b1 = 1/${dbootstraps} {
 						
 							tempfile preserve`b'
@@ -250,10 +251,13 @@ foreach t in `cats' {
 							
 							cap qui reg `v' ${`g'_v2} 
 							if !_rc {
-								mat B`v'_`b' = e(b)
-								global B`v'_`b'_`b1' = B`v'_`b'[1,1]
+								mat B`v'_`b'_`b1' = e(b)
+								global B`v'_`b'_`b1' = B`v'_`b'_`b1'[1,1]
 							
 								global B`v'_`b'_tot = ${B`v'_`b'_tot} + ${B`v'_`b'_`b1'}
+							}
+							else {
+								global denom = ${denom} - 1
 							}
 
 							use `preserve`b'', clear
@@ -261,9 +265,9 @@ foreach t in `cats' {
 						
 						}
 						
-						global B`v'_`b'_avg = ${B`v'_`b'_tot}/${bootstraps}
+						global B`v'_`b'_avg = ${B`v'_`b'_tot}/${denom}
 						
-						forvalues b1 = 1/${bootstraps} {
+						forvalues b1 = 1/${denom} {
 							global B`v'_`b'_`b1'_dm = ${B`v'_`b'_`b1'} - ${B`v'_`b'_avg}
 							if ${B`v'_`b'_`b1'_dm } >= ${B`v'_`b'} {
 								
@@ -272,7 +276,7 @@ foreach t in `cats' {
 						
 						}
 						
-						global `v'_`b'_bspval = ${B`v'_`b'_count}/${bootstraps}
+						global `v'_`b'_bspval = ${B`v'_`b'_count}/${denom}
 						if ${`v'_`b'_bspval} <= 0.1 {
 							global nsig`g'_`b' = ${nsig`g'_`b'} + 1
 							global nsigall`g'_`b' = ${nsigall`g'_`b'} + 1
@@ -385,14 +389,14 @@ foreach t in `cats' {
 		}
 	}
 }
-	
+
 
 // make table
 foreach t in `cats' {
 	foreach t2 in `agecats_types' {
 		foreach g1 in TvC TvCa TvCh {
 		
-		file open tabfile using "${output}/raw-rosenbaum-table-`t2'-`t'-`g1'-big-20-10.tex", replace write
+		file open tabfile using "${output}/raw-rosenbaum-table-`t2'-`t'-`g1'-big-${bootstraps}-${dbootstraps}.tex", replace write
 		file write tabfile "\begin{tabular}{l c c c c}" _n
 		file write tabfile "\toprule" _n
 		file write tabfile " & Average & \% $ >0 $ & \% $ >0 $ , Significant & \citet{Rosenbaum_2005_Distribution_JRSS} \\" _n
