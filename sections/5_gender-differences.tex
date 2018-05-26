@@ -1,39 +1,9 @@
 
-\begin{sidewaysfigure}[!htpb]
-\centering
-\caption{Gender and Baseline Socioeconomic Disadvantage in the Control Group} \label{figure:socdis}
-\begin{subfigure}[h]{0.4\textwidth}
-	\centering
-	\caption{Take-up of Alternatives by Gender} \label{figure:altgender}
-	\includegraphics[width=\textwidth]{output/abccare_controlcontamination_boysgirls}
-\end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
-	\centering
-	\caption{Socioeconomic Disadvantage by Gender} \label{figure:disadgender}
-	\includegraphics[width=\textwidth]{output/factorbase_girlsboyscompare}
-\end{subfigure}
-\begin{subfigure}[h]{0.4\textwidth}
-	\centering
-	\caption{Disadvantage by Take-up of Alternatives, Girls} \label{figure:disadgirls}
-	\includegraphics[width=\textwidth]{output/factorbase_wgirlscompare}
-\end{subfigure}%
-\begin{subfigure}[h]{0.4\textwidth}
-	\centering
-	\caption{Disadvantage by Take-up of Alternatives, Boys} \label{figure:disadboys}
-	\includegraphics[width=\textwidth]{output/factorbase_wboyscompare}
-\end{subfigure}
-\footnotesize
-\justify
-\textbf{Note:} Panel (a) displays the cumulative distribution function of enrollment in alternatives by gender. Panel (b) displays how girls and boys separately fit into the overall (girls and boys pooled) distribution of socioeconomic disadvantage. Panel (c) displays how girls who did not enroll and girls who enrolled in alternatives fit into the overall female distribution of socioeconomic disadvantage. Panel (d) is analogous to Panel (c) for boys. Our measure of socioeconomic disadvantage is a latent of the following variables: Mother's age, education, IQ, marital status, and employment, as well as number of siblings and father's presence at home.
-\end{sidewaysfigure}
-
 A better understanding of the counterfactual scenario that children would have faced if ABC/CARE were unavailable is useful in explaining the gender differences in the treatment effects. This requires us to identify the parameter in Equation~\eqref{eq:cont1}---the comparison between treatment and staying at home---and the parameter in Equation~\eqref{eq:cont2}---the analogous comparison to children who attended alternative preschools. These parameters are not identified by randomization into the treatment or control groups. The parents of the control-group children selected either to keep their children at home or take them to alternative preschools that were available when ABC/CARE was implemented. 
 
 We rely on econometric methods for identification. In the main text, we rely on matching.\footnote{See \citet{Heckman_Ichimura_etal_1998_REStud} for a general discussion of the method, and an assessment of its practical implementation.} This method is practical in our case due to the small size of our samples. We show that the matching approach results in balanced samples (Table~\ref{tab:testing-matched-samples} in Appendix~\ref{app:matching-is-fun}). In Appendix~\ref{appendix:amethodology}, we show that instrumental-variable and control-function methods yield similar results but lack precision. In Appendix~\ref{appendix:results}, we discuss and document our choice of the matching variables, as well as other practical aspects of the implementation of this estimator.
 
-%Column (3) shows the raw difference between the treatment-group children and the control-group children who stayed at home. Column (4) implements a matching estimator to weight this difference and fix the counterfactual to ``staying at home.''  Columns (5) and (6) are analogous when fixing the counterfactual to attending an alternative preschool. A clear pattern emerges: Girls benefit more from treatment if compared to staying at home, while boys benefit more from treatment is compared to alternative preschools. For example, \textbf{[JLG: discussion on magnitudes here once Josh factors are available.]} Tables~\ref{table:massiveall1} and~\ref{table:massiveall2} corroborate this when using our different methodologies to assess treatment effects across categories. \textbf{[JLG: discussion on magnitudes here once these two tables are available.]}
-
-Tables~\ref{table:massivealt} and~\ref{table:massivehome} provide analogous estimates to Table~\ref{table:massiveall}, using the different comparison groups (alternative preschool or stay at home). In the comparison between the treatment group and those who attend alternative preschool, the  \citet{Rosenbaum_2005_Distribution_JRSS} $p$-value is significant for males more than for females. The exception to this is in education, in which the effect on females (0.332) is much larger than the effect of males (0.177). This pattern is reversed in the comparison between the treatment group and those who stayed at home. The exception to this is risky behavior, in which the effect on males (0.122) is much larger than the effect on females (0.054), even though the proportion of (significant) outcomes is the same. 
+Tables~\ref{table:massivealt} and~\ref{table:massivehome} provide analogous estimates to Table~\ref{table:massiveall}, using the different comparison groups (alternative preschool or stay at home). We argue that the $p$-values can be interpreted as magnitudes following \citet{Fisher_1935_Inference_JRSS}. In Table~\ref{table:massiveall}, with the full sample, the pattern of the $p$-values parallels that of the average effect sizes. In the comparison between the treatment group and those who attend alternative preschool, the  \citet{Rosenbaum_2005_Distribution_JRSS} $p$-value is significant for males more than for females. The exception to this is in education, in which the effect on females (0.332) is much larger than the effect of males (0.177). This pattern is reversed in the comparison between the treatment group and those who stayed at home. The exception to this is risky behavior, in which the effect on males (0.122) is much larger than the effect on females (0.054), even though the proportion of (significant) outcomes is the same. 
 
 The intergenerational effect seen on the increase in parental income is strong across comparisons and genders. The effect size is larger in the comparison between treatment and those who stay at home, which is logical given that there are fewer labor market opportunities if the children stay at home. 
 
@@ -63,11 +33,36 @@ The effects on crime highlight that females were highly impacted by ABC/CARE, es
 \end{threeparttable}
 \end{table}
 
-The difference in the comparison of treatment to staying at home and alternative preschools suggests that boys and girls faced different situations of socio-economic disadvantaged at home. Figure~\ref{figure:socdis} investigates this. We start by noting that take-up of alternatives does not differ by gender (Panel~\ref{figure:altgender}). What does differ by gender is socioeconomic disadvantage. We create a latent of socioeconomic disadvantage at baseline using the following variables: Mother's age, education, IQ, marital status, and employment, as well as number of children and father's presence at home. We assess how girls and boys fit into the overall distribution of this latent in the control group. Boys are disproportionately more advantaged than girls (Panel~\ref{figure:disadgender}).\footnote{Note that this measure is based on baseline characteristics, so this result holds for the treatment group.} Because girls' families were more resource constrained if compared to their male counterparts, girls in the control group were taken care of in a more disadvantaged environment or went to lower-quality preschools. Thus, they benefited more than boys if compared to the next best alternative as perceived by their parents, as documented in Section~\ref{sec:treatment-effects}.
+\begin{sidewaysfigure}[!htpb]
+\centering
+\caption{Gender and Baseline Socioeconomic Disadvantage in the Control Group} \label{figure:socdis}
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{Take-up of Alternatives by Gender} \label{figure:altgender}
+	\includegraphics[width=\textwidth]{output/abccare_controlcontamination_boysgirls}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{Socioeconomic Disadvantage by Gender} \label{figure:disadgender}
+	\includegraphics[width=\textwidth]{output/factorbase_girlsboyscompare}
+\end{subfigure}
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{Disadvantage by Take-up of Alternatives, Girls} \label{figure:disadgirls}
+	\includegraphics[width=\textwidth]{output/factorbase_wgirlscompare}
+\end{subfigure}%
+\begin{subfigure}[h]{0.4\textwidth}
+	\centering
+	\caption{Disadvantage by Take-up of Alternatives, Boys} \label{figure:disadboys}
+	\includegraphics[width=\textwidth]{output/factorbase_wboyscompare}
+\end{subfigure}
+\footnotesize
+\justify
+\textbf{Note:} Panel (a) displays the cumulative distribution function of enrollment in alternatives by gender. Panel (b) displays how girls and boys separately fit into the overall (girls and boys pooled) distribution of socioeconomic disadvantage. Panel (c) displays how girls who did not enroll and girls who enrolled in alternatives fit into the overall female distribution of socioeconomic disadvantage. Panel (d) is analogous to Panel (c) for boys. Our measure of socioeconomic disadvantage is a latent of the following variables: Mother's age, education, IQ, marital status, and employment, as well as number of siblings and father's presence at home.
+\end{sidewaysfigure}
 
-We formally test the difference in disadvantage across boys and girls in Table~\ref{table:disadtests}. We reject the null of a common joint distribution of the variables composing our measure of socioeconomic disadvantage across girls and boys (at baseline). In Panels~\ref{figure:disadgirls} and~\ref{figure:disadboys} of Figure~\ref{figure:socdis}, we further dissect socioeconomic disadvantage within genders, and provide the corresponding tests in Table~\ref{table:disadtests}. 
+The difference in the comparison of treatment to staying at home and alternative preschools suggests that boys and girls faced different situations of socio-economic disadvantaged at home. Figure~\ref{figure:socdis} investigates this. We start by noting that take-up of alternatives does not differ by gender (Panel~\ref{figure:altgender}). What does differ by gender is socioeconomic disadvantage. We create a latent measure of socioeconomic disadvantage at baseline using the following variables: Mother's age, education, IQ, marital status, and employment, as well as number of children and father's presence at home. We assess how girls and boys fit into the overall distribution of this latent in the control group. Boys are disproportionately more advantaged than girls (Panel~\ref{figure:disadgender}).\footnote{Note that this measure is based on baseline characteristics, so this result holds for the treatment group.} Because girls' families were more resource constrained if compared to their male counterparts, girls in the control group were taken care of in a more disadvantaged environment or went to lower-quality preschools. Thus, they benefited more than boys if compared to the next best alternative as perceived by their parents, as documented in Section~\ref{sec:treatment-effects}.
 
-Parents of more advantaged girls are more likely to send their gris to alternative preschools. Parents of more advantaged boys are also more likely to send their boys to alternative preschools. This provides an explanation why girls benefited more from treatment if compared to staying at home, which would be a more disadvantaged environment if compared to the male environments. Boys benefited more from treatment if compared to attending alternatives given that their parents plausibly sent them to lower-quality alternatives due to a lack of resources or the alternatives were worse complements to home learning environments. 
 
 \begin{table}[!htpb]
 \begin{threeparttable}
@@ -82,6 +77,12 @@ Parents of more advantaged girls are more likely to send their gris to alternati
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
+We formally test the difference in disadvantage across boys and girls in Table~\ref{table:disadtests}. We reject the null of a common joint distribution of the variables composing our measure of socioeconomic disadvantage across girls and boys (at baseline). In Panels~\ref{figure:disadgirls} and~\ref{figure:disadboys} of Figure~\ref{figure:socdis}, we further dissect socioeconomic disadvantage within genders, and provide the corresponding tests in Table~\ref{table:disadtests}. 
+
+
+Parents of more advantaged girls are more likely to send their daughters to alternative preschools. Parents of more advantaged boys are more likely to send keep their sons at home. This provides an explanation why girls benefited more from treatment if compared to staying at home, which would be a more disadvantaged environment if compared to the male environments. Boys benefited more from treatment if compared to attending alternatives given that their parents plausibly sent them to lower-quality alternatives due to a lack of resources or the alternatives were worse complements to home learning environments. 
+
 
 
 
