@@ -121,7 +121,9 @@ The scoring system for EQ-5D was first developed using a U.K. sample.\footnote{\
 a U.S. sample was generated.\footnote{\citet{Shaw_etal_2005_EQ5D_MC}.} The PSID does not ask the appropriate questions for computing EQ-5D, but the MEPS does. 
 
 % review this:
-\noindent We forecast EQ-5D scores from the MEPS onto the PSID data using common measures between the MEPS and PSID.\footnote{The main variables in this prediction are self-reported health and requiring help with ADLs.} We then forecast the EQ-5D scores for all PSID members running a linear regression using the variables that are transitioned in FAM (including ADL counts, IADL counts, and diseases). The microsimulation uses this linear regression to compute QALYs. 
+\noindent We forecast EQ-5D scores from the MEPS onto the PSID data using common measures between the MEPS and PSID.
+
+We map EQ-5D scores from the MEPS onto PSID data using common variables between the MEPS and PSID. We then run a linear regression of EQ-5D on PSID variables that are transitioned in FAM (including ADL counts, IADL counts, and diseases).\footnote{The main variables in this prediction are self-reported health and requiring help with ADLs.} The microsimulation uses this linear regression to compute QALYs. 
 %
 %We use a crosswalk from MEPS to compute EQ-5D scores for PSID respondents.\footnote{Section \ref{sec:model_development_qalys_eq5d}
 %describes EQ-5D in MEPS. Details of the crosswalk model development are given
