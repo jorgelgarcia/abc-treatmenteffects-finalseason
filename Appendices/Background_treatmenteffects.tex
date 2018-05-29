@@ -232,7 +232,7 @@ Note: Panel (a) displays the fraction of the ABC/CARE control group enrolled in 
 \caption{Baseline Characteristics and Control Substitution}\label{table:controlsubscharacteristics}
 \input{output/abccare_baseline_P}
 \begin{tablenotes}
-\item Note: This table describes baseline characteristics for the children in the control group, by gender and by their alternative preschool enrollment status. The number of subjects in these groups are listed at the top of the table. Asymptotic standard errors are in parentheses. The reported $p$-values are from two-sided tests of difference of means. The means are bolded if the difference is significant at the 10\% level.
+\item \footnotesize Note: This table describes baseline characteristics for the children in the control group, by gender and by their alternative preschool enrollment status. The number of subjects in these groups are listed at the top of the table. Asymptotic standard errors are in parentheses. The reported $p$-values are from two-sided tests of difference of means. The means are bolded if the difference is significant at the 10\% level. In Table~\ref{tab:abccare-baseline}, we jointly test for baseline differences accounting for multiple hypotheses and find that none of the $p$-values remain significant after this adjustment.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -283,7 +283,6 @@ In Table~\ref{tab:ecvars_1} through Table~\ref{tab:adultvars_2}, we summarize th
 
 \input{output/abc-care_dataavailability.tex}
 
-% AZ: commenting out until we can get the CORRECT numbers in here for both ABC and CARE
 \begin{comment}
 \begin{figure}[H]
 \caption{Attrition by Age, ABC} \label{fig:attrition}
@@ -306,31 +305,20 @@ Note: This plot shows the number of participants in ABC for whom there exists da
 
 \input{output/baseline_balance}
 
-\noindent Second, we present the same exercise for each of the four cohorts ABC served.
-
-\input{output/baseline_coh1}
-
-\input{output/baseline_coh2}
-
-\input{output/baseline_coh3}
-
-\input{output/baseline_coh4}
-
-\noindent Third, we compare the second-phase treatment and control groups on baseline characteristics.
+\noindent Second, we compare the second-phase treatment and control groups on baseline characteristics.
 
 \input{output/baseline_balance_sa}
 
-\noindent Fourth, we compare the observed, baseline characteristics of attrited and non-attrited subjects in the first-phase treatment assignment.
+\noindent Third, we compare the observed, baseline characteristics of attrited and non-attrited subjects in the first-phase treatment assignment.
 
 \input{output/attrition_balance}
 
-\noindent Fifth, we compare the observed, baseline characteristics between the subjects in the treatment and the control groups, excluding those who did not comply to treatment.
+\noindent Fourth, we compare the observed, baseline characteristics between the subjects in the treatment and the control groups, excluding those who did not comply to treatment.
 
 \input{output/postattrition_balance}
 
-% AZ: commenting out until we get the CORRECT numbers
 \begin{comment}
-\noindent Sixth, we compare the observed baseline characteristics between the subjects in the first-phase treatment, restricting the sample to those who consented to release their age-34 criminal records.
+\noindent Fifth, we compare the observed baseline characteristics between the subjects in the first-phase treatment, restricting the sample to those who consented to release their age-34 criminal records.
 
 \input{output/crime_balance}
 \end{comment}
@@ -340,26 +328,6 @@ Note: This plot shows the number of participants in ABC for whom there exists da
 \input{output/health_balance}
 
 \noindent Despite some exceptions, these tables indicate balance between the treatment and control groups from the first-phase randomization, which is the primary comparison we analyze in the main paper. The balance in observed characteristics holds for the different samples we consider, which differs from the initial sample due to various instances of item non-response. For the second-phase randomization, there is also balance in observed characteristics. \\
-
-\noindent Table \ref{tab:care_baseline2} through Table \ref{tab:health_baseline_care_t1} are the analogous tables for CARE. We compare the two treatment groups (center-based childcare and family education, and only family education) separately across the full sample and by cohort. The inference statistics are constructed using the same methods as for Table \ref{tab:abc_baseline} through Table \ref{tab:health_baseline}. \\
-
-\input{output/baseline_balance_care_2}
-
-\input{output/baseline_balance_care_1}
-
-\input{output/baseline_coh5_care_2}
-
-\input{output/baseline_coh5_care_1}
-
-\input{output/baseline_coh6_care_2}
-
-\input{output/baseline_coh6_care_1}
-
-\input{output/health_balance_care_2}
-
-\input{output/health_balance_care_1}
-
-\noindent Overall, these tables indicate a balance between the treatment and control groups, both when considering center-based childcare and family education and only family education as treatment.
 
 \subsubsection{Summary of Data Collection} \label{appendix:data-collection}
 

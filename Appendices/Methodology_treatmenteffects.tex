@@ -94,7 +94,7 @@ and
 \end{align*}
 \noindent with $\pi_r(x) := P(R=r|\bm{B}=b)$ and $\alpha(r,x,b) := P(A=1|R=r,\bm{X}=x,\bm{B}=b)$. The weight $\pi_r$ corrects for selection into treatment based on pre-program variables $\bm{B}$. The weight $\alpha_{i}$ corrects for item non-response based on $R, \bm{X}, \bm{B}$.\\
 
-\noindent For each of the estimates presented in this paper, we allow the reader to assess the sensitivity of the estimate to adjusting by the IPW. In Tables~\ref{table:tescombinedmales} and \ref{table:tescombinedfemales} of the main text (our main treatment-effects estimates table) we present estimates for the first counterfactual of interest (``Treatment vs. Next Best'') without adjusting by IPW in column (1). In column (2), we present estimates accounting for IPW. The rest of the columns report similar exercises for the other counterfactuals considered. Appendix~\ref{appendix:results} presents the same information for outcomes that do not appear in Tables~\ref{table:tescombinedmales} and \ref{table:tescombinedfemales}.\footnote{We only account for IPW for the list of variables listed here, or any calculation involving them.}
+\noindent For each of the estimates presented in this paper, we allow the reader to assess the sensitivity of the estimate to adjusting by the IPW. We present estimates for the first counterfactual of interest (``Treatment vs. Next Best'') without adjusting by IPW in column (1). In column (2), we present estimates accounting for IPW. The rest of the columns report similar exercises for the other counterfactuals considered.\footnote{We only account for IPW for the list of variables listed here, or any calculation involving them.}
 
 \subsection{Inference} \label{appendix:bootstrap}
 
@@ -125,34 +125,4 @@ and
 \item Calculate treatment effects as described in Appendix~\ref{little-TE}.
 \item If counting the number of positive effects, compute this number and generate standard errors and $p$-value's as before.
 \item If counting the number of positive and at significant treatment effects, compute the number of positive and significant treatment effects (at the desired significance level). Re-sample the non-experimental sample a second time. The second re-sample creates an empirical bootstrap distribution for this count. Generate standard errors and $p$-value's as before.
-\end{enumerate}
-
-\subsubsection{Gender Differences in Treatment Effects}\label{little-gdiff-tes}
-
-\begin{enumerate}
-\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Full information about each individual is obtained in each re-sample.
-
-\item Calculate the treatment effect of each $Y_{j}$ separately for males and females, as described in Appendix~\ref{little-TE}. 
-
-\item Repeat this procedure 1,000 times to obtain the empirical bootstrap distribution.
-
-\item Calculate a Wilcoxon signed-rank test for each variable $Y_{j}$ comparing (1) the empirical bootstrap distribution of the male treatment effects and (2) the empirical bootstrap distribution of the female treatment effects. The null hypothesis of this test is that the difference of the two distributions is a symmetric distribution centered at 0. A $p$-value less than the chosen significance level indicates that the distributions of male and female treatment effects are significantly different.
-\end{enumerate}
-
-\subsubsection{Proportion of Outcomes for which Males Outperform Females}\label{little-gdiff-proportions}
-
-\begin{enumerate}
-
-\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Full information about each individual is obtained in each re-sample.
-
-\item Calculate the mean of each variable $Y_{j}$ within a category separately for males and females.
-
-\item Compare the means across genders and calculate the number of variables within an outcome for which the mean of the males is larger than the mean of the females.
-
-\item Calculate the proportion by dividing by the number of outcomes for that category.
-
-\item Repeat this procedure 1,000 times to obtain the empirical bootstrap distribution. Follow the above steps for the treatment and control groups separately. Generate the $p$-value testing if the proportions are equal to 50\%. 
-
-\item We also compare (1) the empirical bootstrap distribution of the proportions in the treatment group and (2) the empirical bootstrap distribution of the proportions in the control group using the Wilcoxon signed-rank test. This tests if the proportions in the two groups follow the same distribution, as described in Appendix~\ref{little-gdiff-tes}.
-
 \end{enumerate}
