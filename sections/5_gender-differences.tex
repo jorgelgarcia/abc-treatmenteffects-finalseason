@@ -1,37 +1,31 @@
 
-A better understanding of the counterfactual world that children would have faced if ABC/CARE were unavailable is helpful in explaining gender differences in treatment effects. This requires us to identify the parameter in Equation~\eqref{eq:cont1}---the comparison between treatment and staying at home---and the parameter in Equation~\eqref{eq:cont2}---the analogous comparison to children who attended alternative preschools. These parameters are not identified by the randomization used in the ABC/CARE experiment. The parents of the control-group children selected either to keep their children at home or take them to alternative preschools that were available when ABC/CARE was implemented.
+Understanding the counterfactual world that children would have faced if ABC/CARE were unavailable is helpful in explaining gender differences in treatment effects. This requires us to identify the parameter in Equation~\eqref{eq:cont1}---the comparison between treatment and staying at home---and the parameter in Equation~\eqref{eq:cont2}---the analogous comparison to children who attended alternative preschools. These parameters are not identified by the randomization used in the ABC/CARE experiment. The parents of the control-group children selected either to keep their children at home or take them to alternative preschools that were available when ABC/CARE was implemented.
 
 We rely on econometric methods to identify treatment effects (3) and (4). In the main text, we rely on matching.\footnote{See \citet{Heckman_Ichimura_etal_1998_REStud} for a general discussion of the method, and an assessment of its practical implementation.} We pass balancing tests (Table~\ref{tab:testing-matched-samples} in Appendix~\ref{app:matching-is-fun}). In Appendix~\ref{appendix:amethodology}, we show that instrumental-variable and control-function methods yield similar results but are less precise. In Appendix~\ref{appendix:results}, we discuss and document our choice of the matching variables, as well as other practical aspects of the implementation of this estimator.
 
 \textbf{[JJH: Rosenbaum is being misinterpreted.][JLG: You are right, as I believe we discussed in your office. The comparison of the magnitude of the $p$-values is wrong. In that case, and given the small sample sizes, the other tests are \textit{really} going to lack power here. We have tried everything here. I propose that we present the combining functions of the proportion of positive treatment effects for the refined counterfactual comparison, as we use to do. These plots actually began to lead us into the gender differences that we detected. Once we display that pattern, we can then distill the within-boy and within-girl disadvantage.]}
 
+To summarize these treatment effects across categories of outcomes, we provide a count of the number of positive treatment effects for the different counterfactual comparisons. These are based on 126 outcomes reported in Appendix B. Due to lack of power after dividing the control group into staying at home and attending alternative childcares, we rely solely on the combining functions rather than on the exact non-parametric tests listed in Tables 1 and 4.\footnote{We adjust for dependence across outcomes and for pretesting in constructing standard errors (see Appendix B). We account for non-random selection into alternative childcare using matching, as described in Section 3.}
 
-We consider a total of 126 outcomes reported in Appendix~\ref{appendix:methodology}. Given the large number of outcomes measured in the numerous follow-ups, reporting all treatment effects would overwhelm the reader. \citet{Garcia_Heckman_Leaf_etal_2017_Comp_CBA_Unpublished}, aggregates treatment effects by monetizing benefits and constructing lifetime profiles of outcomes to conduct cost/benefit and rate of return analyses. 
+Figures~\ref{fig:ppositive} display the estimated combining functions. Under the null hypothesis, the proportion of positive treatment effects if $.50$. Men benefit more from treatment when compared to attending alternatives, as opposed to staying at home. For women the benefits are similar in both comparisons according to the combining functions. In Appendix~\ref{}, we show that women generally benefit more from treatment if compared to staying at home, as opposed to attending alternatives. We lack the power to verify statistically this pattern using combining functions. 
 
-In this section, we report treatment effects by category and the proportion of statistically significant effects. We use combining functions, which count the number of positive (and significant) treatment effects by gender. Due to lack of power after dividing by attendance of alternative childcares, we rely solely on the combining functions rather than the exact non-parametric tests listed in Tables~\ref{table:summary} and~\ref{table:massiveall}. We adjust for dependence across outcomes and for pretesting in constructing standard errors (see Appendix~\ref{appendix:methodology}). We account for non-random selection into alternative childcare using matching, as described in Section~\ref{sec:parameters}.
 
-Figures~\ref{fig:ppositivehome} and~\ref{fig:ppositivealternative} graph the estimated combining functions. We test the hypothesis that the proportions are equal to 50\%. These comparisons indicate that men and women benefit differently from alternatives to high-quality treatment. Men benefit more from treatment when compared to attending an alternative childcare arrangement (as opposed to staying at home). This is consistent with the more advantaged control-group boys staying at home. For women, Figures~\ref{fig:ppositivehome} and~\ref{fig:ppositivealternative} are similar. Although in Appendix~\ref{appendix:results}, we document that women do better compared to those who stay at home, once aggregating across all outcome categories, the comparisons do not matter. We show below that this is due to the selection into alternative childcare being different for women and not as dependent on baseline disadvantage as it is for men.
-
-\begin{figure}[!htbp]
+\begin{sidewaysfigure}[!htbp]
 \centering
 \caption{Positively Impacted Outcomes, ABC/CARE Males and Females}\label{fig:ppositive}
-\begin{subfigure}[h]{0.6\textwidth}
+\begin{subfigure}[h]{0.49\textwidth}
 		\centering
 		\caption{ Treatment vs. Stay at Home} \label{fig:ppositivehome}
 		\includegraphics[width=\textwidth]{output/epan_ipw_p0_all.eps}
-\end{subfigure}
-\begin{subfigure}[h]{0.6\textwidth}
+\end{subfigure}%
+\begin{subfigure}[h]{0.49\textwidth}
 	\centering
 	\caption{Treatment vs. Alternative Childcare} \label{fig:ppositivealternative}
 		\includegraphics[width=\textwidth]{output/epan_ipw_p1_all.eps}
 \end{subfigure}
 \footnotesize \justify
-Note: Panel (a) displays the percentage of outcomes with a positive treatment effect, comparing treatment to staying at home. Panel (b) displays the percentage of outcomes with a positive treatment effect, comparing treatment to alternative childcare arrangements. Standard errors are based on the empirical bootstrap distribution. \\
-\end{figure}
-
-
-The effects on crime highlight that females were highly impacted by ABC/CARE, especially compared to those who attended alternative care. \citet{Garcia_Heckman_Leaf_etal_2017_Comp_CBA_Unpublished} find that even though the treatment effects on the crime outcomes are larger for women than for men, the men commit more socially costly crimes. In the benefit/cost ratio that they compute, the effect of ABC/CARE on reducing individual male crimes is an important component. \citet{Garcia_etal_2019_ECE_IMHJ} discuss the crime results in more detail.
-
+\textbf{Note:} Panel (a) displays the percentage of positive treatment effects according with the parameter in Equation~\eqref{eq:cont1}---treatment vs. staying at home---by gender. Panel (b) is analogous for Equation~\eqref{eq:cont2}---treatment vs. alternative childcares. Standard errors are based on the empirical bootstrap distribution. \\
+\end{sidewaysfigure}
 
 \begin{sidewaysfigure}[!htpb]
 \centering
