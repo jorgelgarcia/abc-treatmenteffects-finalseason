@@ -1,0 +1,53 @@
+%Input preamble
+\input{preamble}
+\input{output/mainstatistics}
+
+\newcommand*\leftright[2]{%
+  \leavevmode
+  \rlap{#1}%
+  \hspace{0.5\linewidth}%
+  #2}
+
+\newcommand{\orth}{\ensuremath{\perp\!\!\!\perp}}%
+\newcommand{\indep}{\orth}%
+\newcommand{\notorth}{\ensuremath{\perp\!\!\!\!\!\!\diagup\!\!\!\!\!\!\perp}}%
+\newcommand{\notindep}{\notorth}
+
+\externaldocument{abc_treatmenteffects_appendix}
+\pagenumbering{roman}
+
+\begin{document}
+
+\begin{table}[!htpb]
+\begin{threeparttable}
+\caption{Gender and Baseline Socioeconomic Disadvantage in the Control Group, Tests} \label{table:disadtests}
+\centering
+\begin{tabularx}{16.5cm}{XcX}
+& \input{output/rosenbaum-disadvantage-gender_manual.tex} &
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item \textbf{Note:} This table presents the null of a common joint distribution of the variables composing our measure of socioeconomic disadvantage (mother's age, education, IQ, marital status, and employment, as well as number of siblings and father's presence at home) between males and females in the control group and between children who attended  alternative preschool and who stayed at home (within control-group boys or within control-group girls). The $p$-values follow \citet{Rosenbaum_2005_Distribution_JRSS}. Under the null hypothesis, the pairs with the closest distance in disadvantage would be comprised of one male and one female (for the comparison of males vs. females). Rejecting the null implies that the distributions are significantly different. Statistics significant at the $0.10$ level are bolded.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{sidewaystable}[!htbp]
+\centering
+\begin{threeparttable}
+\caption{Summary of Proportion of Outcomes Males $>$ Females}
+ \label{tab:proportion-table-ranksign}
+ \input{output/abccare-proportion-summary-full-rosenbaum}
+ \begin{tablenotes}
+ \footnotesize
+\item \textbf{Note:} This table summarizes comparison of gender gaps across outcome categories by different groups. A bold proportion for the treatment or control group indicates that the proportion is statistically different than 50\% at the 10\% level. A bold difference between treatment and control indicates that the Wilcoxon signed-rank test comparing the control and treatment proportions, over 1,000 bootstraps, yields a $p$-value less than or equal to 0.10. The variables for each outcome category are listed in Appendix~\ref{appendix:methodology}. The inference procedure is described in detail in Appendix~\ref{appendix:methodology}. In summary, we bootstrap with replacement 1,000 times. For bootstrap $b \in [1, \ldots, 1,000]$ we compute the proportion of variables in each outcome category for which the males do better than the females. We do this separately for the treatment and control group, estimating the pair of proportions $(P_{T,b}, P_{C,b})$. Over the distribution of the pairs, we compute the signed-rank test. It compares the empirical distribution of the proportions in the treatment group to the empirical distribution of the proportions in the control group. We repeat this procedure for each outcome category.\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\clearpage
+
+
+\bibliography{heckman}
+\bibliographystyle{chicago}
+
+\end{document}
