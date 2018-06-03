@@ -1,37 +1,31 @@
 
-A better understanding of the counterfactual scenario that children would have faced if ABC/CARE were unavailable is useful in explaining the gender differences in the treatment effects. This requires us to identify the parameter in Equation~\eqref{eq:cont1}---the comparison between treatment and staying at home---and the parameter in Equation~\eqref{eq:cont2}---the analogous comparison to children who attended alternative preschools. These parameters are not identified by randomization into the treatment or control groups. The parents of the control-group children selected either to keep their children at home or take them to alternative preschools that were available when ABC/CARE was implemented. 
+Understanding the counterfactual world that children would have faced if ABC/CARE were unavailable is helpful in explaining gender differences in treatment effects. This requires us to identify the parameter in Equation~\eqref{eq:cont1}---the comparison between treatment and staying at home---and the parameter in Equation~\eqref{eq:cont2}---the analogous comparison to children who attended alternative preschools. These parameters are not identified by the randomization used in the ABC/CARE experiment. The parents of the control-group children selected either to keep their children at home or take them to alternative preschools that were available when ABC/CARE was implemented.
 
-We rely on econometric methods for identification. In the main text, we rely on matching.\footnote{See \citet{Heckman_Ichimura_etal_1998_REStud} for a general discussion of the method, and an assessment of its practical implementation.} This method is practical in our case due to the small size of our samples. We show that the matching approach results in balanced samples (Table~\ref{tab:testing-matched-samples} in Appendix~\ref{app:matching-is-fun}). In Appendix~\ref{appendix:amethodology}, we show that instrumental-variable and control-function methods yield similar results but lack precision. In Appendix~\ref{appendix:results}, we discuss and document our choice of the matching variables, as well as other practical aspects of the implementation of this estimator.
+We rely on econometric methods to identify treatment effects (3) and (4). In the main text, we rely on matching.\footnote{See \citet{Heckman_Ichimura_etal_1998_REStud} for a general discussion of the method, and an assessment of its practical implementation.} We pass balancing tests (Table~\ref{tab:testing-matched-samples} in Appendix~\ref{app:matching-is-fun}). In Appendix~\ref{appendix:methodology}, we show that instrumental-variable and control-function methods yield similar results but are less precise. In Appendix~\ref{appendix:results}, we discuss and document our choice of the matching variables, as well as other practical aspects of the implementation of this estimator.
 
-Tables~\ref{table:massivealt} and~\ref{table:massivehome} provide analogous estimates to Table~\ref{table:massiveall}, using the different comparison groups (alternative preschool or stay at home). We argue that the $p$-values can be interpreted as magnitudes following \citet{Fisher_1935_Inference_JRSS}. In Table~\ref{table:massiveall}, with the full sample, the pattern of the $p$-values parallels that of the average effect sizes. In the comparison between the treatment group and those who attend alternative preschool, the  \citet{Rosenbaum_2005_Distribution_JRSS} $p$-value is significant for males more than for females. The exception to this is in education, in which the effect on females (0.332) is much larger than the effect of males (0.177). This pattern is reversed in the comparison between the treatment group and those who stayed at home. The exception to this is risky behavior, in which the effect on males (0.122) is much larger than the effect on females (0.054), even though the proportion of (significant) outcomes is the same. 
+\textbf{[JJH: Rosenbaum is being misinterpreted.][JLG: You are right, as I believe we discussed in your office. The comparison of the magnitude of the $p$-values is wrong. In that case, and given the small sample sizes, the other tests are \textit{really} going to lack power here. We have tried everything here. I propose that we present the combining functions of the proportion of positive treatment effects for the refined counterfactual comparison, as we use to do. These plots actually began to lead us into the gender differences that we detected. Once we display that pattern, we can then distill the within-boy and within-girl disadvantage.]}
 
-The intergenerational effect seen on the increase in parental income is strong across comparisons and genders. The effect size is larger in the comparison between treatment and those who stay at home, which is logical given that there are fewer labor market opportunities if the children stay at home. 
+To summarize these treatment effects across categories of outcomes, we provide a count of the number of positive treatment effects for the different counterfactual comparisons. These are based on 126 outcomes reported in Appendix~\ref{appendix:methodology}. Due to lack of power after dividing the control group into staying at home and attending alternative childcares, we rely solely on these combining functions pooling across all outcomes rather than on the tests listed in Tables~\ref{table:summary} and~\ref{table:massiveall}.\footnote{We adjust for dependence across outcomes and for pretesting in constructing standard errors (see Appendix~\ref{appendix:methodology}). We account for non-random selection into alternative childcare using matching, as described in Section~\ref{sec:parameters}.}
 
-The effects on crime highlight that females were highly impacted by ABC/CARE, especially compared to those who attended alternative care. \citet{Garcia_Heckman_Leaf_etal_2017_Comp_CBA_Unpublished} find that even though the treatment effects on the crime outcomes are larger for women than for men, the men commit more socially expensive crimes. In the benefit/cost ratio that they compute, the effect of ABC/CARE on reducing individual male crimes is an important component. \citet{Garcia_etal_2019_ECE_IMHJ} discuss the crime results in more detail.
+Figure~\ref{fig:ppositive} displays the estimated combining functions. Under the null hypothesis, the proportion of positive treatment effects is $0.50$. Men benefit more from treatment when compared to attending alternatives, as opposed to staying at home. For women the benefits are similar in both comparisons according to the combining functions. In Appendix~\ref{appendix:results}, we show that women generally benefit more from treatment compared to staying at home, as opposed to attending alternatives. We lack the power to verify statistically this pattern using combining functions. 
 
-\begin{table}[!htpb]
-\begin{threeparttable}
-\caption{Combining Functions and Non-Parametric, Exact Tests, Treatment vs. Alternative} \label{table:massivealt}
+
+\begin{sidewaysfigure}[!htbp]
 \centering
- \input{output/raw-rosenbaum-table-cats-exp-TvCa-updated-10-10.tex} 
-\begin{tablenotes}
-\footnotesize
-\item \footnotesize \textbf{Note:} This table displays summaries of treatment effects by outcome category and gender. The comparison group is the control-group children who attend alternatives. The panels contains statistics calculated using outcomes grouped by category. The average effect size is calculated by averaging over the effect size of the outcomes in the outcome category. The effect sizes of the individual outcomes are calculated by dividing the coefficient by the standard deviation of the control group. We test these three statistics bootstrapped $p$-values. For the proportion of outcomes that are positive and significant, we do a ``double bootstrap'' procedure. The null hypothesis for the effect sizes is that they are 0. The null hypothesis for the proportion of outcomes that are (significantly) positive is that they are (10\%) 50\%. Bolded statistics are significant at the 10\% level. The \citet{Rosenbaum_2005_Distribution_JRSS} $p$-value originates from a test where the null is a common joint distribution of the variables in each category. Statistics significant at the $0.10$ level are bolded.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
-
-\begin{table}[!htpb]
-\begin{threeparttable}
-\caption{Combining Functions and Non-Parametric, Exact Tests, Treatment vs. Home Care} \label{table:massivehome}
-\centering
- \input{output/raw-rosenbaum-table-cats-exp-TvCh-updated-10-10.tex} 
-\begin{tablenotes}
-\footnotesize
-\item  \footnotesize \textbf{Note:} This table displays summaries of treatment effects by outcome category and gender. The comparison group is the control-group children who stay at home.The panels contains statistics calculated using outcomes grouped by category. The average effect size is calculated by averaging over the effect size of the outcomes in the outcome category. The effect sizes of the individual outcomes are calculated by dividing the coefficient by the standard deviation of the control group. We test these three statistics bootstrapped $p$-values. For the proportion of outcomes that are positive and significant, we do a ``double bootstrap'' procedure. The null hypothesis for the effect sizes is that they are 0. The null hypothesis for the proportion of outcomes that are (significantly) positive is that they are (10\%) 50\%. Bolded statistics are significant at the 10\% level. The \citet{Rosenbaum_2005_Distribution_JRSS} $p$-value originates from a test where the null is a common joint distribution of the variables in each category. Statistics significant at the $0.10$ level are bolded.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+\caption{Positively Impacted Outcomes, ABC/CARE Males and Females}\label{fig:ppositive}
+\begin{subfigure}[h]{0.49\textwidth}
+		\centering
+		\caption{ Treatment vs. Stay at Home} \label{fig:ppositivehome}
+		\includegraphics[width=\textwidth]{output/epan_ipw_p0_all.eps}
+\end{subfigure}%
+\begin{subfigure}[h]{0.49\textwidth}
+	\centering
+	\caption{Treatment vs. Alternative Childcare} \label{fig:ppositivealternative}
+		\includegraphics[width=\textwidth]{output/epan_ipw_p1_all.eps}
+\end{subfigure}
+\footnotesize \justify
+\textbf{Note:} Panel (a) displays the percentage of positive treatment effects according with the parameter in Equation~\eqref{eq:cont1}---treatment vs. staying at home---by gender. Panel (b) is analogous for Equation~\eqref{eq:cont2}---treatment vs. alternative childcares. Standard errors are based on the empirical bootstrap distribution. \\
+\end{sidewaysfigure}
 
 \begin{sidewaysfigure}[!htpb]
 \centering
@@ -58,18 +52,31 @@ The effects on crime highlight that females were highly impacted by ABC/CARE, es
 \end{subfigure}
 \footnotesize
 \justify
-\textbf{Note:} Panel (a) displays the cumulative distribution function of enrollment in alternatives by gender. Panel (b) displays how girls and boys separately fit into the overall (girls and boys pooled) distribution of socioeconomic disadvantage. Panel (c) displays how girls who did not enroll and girls who enrolled in alternatives fit into the overall female distribution of socioeconomic disadvantage. Panel (d) is analogous to Panel (c) for boys. Our measure of socioeconomic disadvantage is a latent of the following variables: Mother's age, education, IQ, marital status, and employment, as well as number of siblings and father's presence at home.
+\textbf{Note:} Panel (a) displays the cumulative distribution function of enrollment in alternatives by gender. Panel (b) displays how girls and boys separately fit into the overall (girls and boys pooled) distribution of socioeconomic disadvantage. Panel (c) displays how girls who did not enroll and girls who enrolled in alternatives fit into the overall female distribution of socioeconomic disadvantage. Panel (d) is analogous to Panel (c) for boys. Our measure of socioeconomic disadvantage is a latent of the following variables: Maternal age, education, and IQ, as well as number of siblings and HRI score.
+\textbf{[JJH: Mother working? Income?][AZ: The factor to measure disadvantage that we use in Table~\ref{table:disadtests} is comprised of: maternal age, maternal education, maternal IQ, number of siblings, HRI score. All of these are measured at baseline. This explanation has been added.]}
 \end{sidewaysfigure}
 
-The difference in the comparison of treatment to staying at home and alternative preschools suggests that boys and girls faced different situations of socio-economic disadvantaged at home. Figure~\ref{figure:socdis} investigates this. We start by noting that take-up of alternatives does not differ by gender (Panel~\ref{figure:altgender}). What does differ by gender is socioeconomic disadvantage. We create a latent measure of socioeconomic disadvantage at baseline using the following variables: Mother's age, education, IQ, marital status, and employment, as well as number of children and father's presence at home. We assess how girls and boys fit into the overall distribution of this latent in the control group. Boys are disproportionately more advantaged than girls (Panel~\ref{figure:disadgender}).\footnote{Note that this measure is based on baseline characteristics, so this result holds for the treatment group.} Because girls' families were more resource constrained if compared to their male counterparts, girls in the control group were taken care of in a more disadvantaged environment or went to lower-quality preschools. Thus, they benefited more than boys if compared to the next best alternative as perceived by their parents, as documented in Section~\ref{sec:treatment-effects}.
+The difference in the comparison of treatment to staying at home and alternative preschools suggests that boys and girls faced different situations of socio-economic disadvantaged at home. Figure~\ref{figure:socdis} investigates this. We start by noting that take-up of alternatives does not differ by gender (Panel~\ref{figure:altgender}). What does differ by gender is socioeconomic disadvantage. We create a latent measure of socioeconomic disadvantage at baseline using the following variables: Mother's age, education, IQ, marital status, and employment, as well as number of children and father's presence at home. We assess how girls and boys fit into the overall distribution of this latent in the control group. Boys are disproportionately more advantaged than girls (Panel~\ref{figure:disadgender}).\footnote{Note that this measure is based on baseline characteristics, so this result holds for the treatment group.} Because girls' families were more resource constrained if compared to their male counterparts, girls in the control group were taken care of in a more disadvantaged environment or went to lower-quality preschools. Thus, they benefited more than boys when compared to the next best alternative as perceived by their parents, as documented in Section~\ref{sec:treatment-effects}.
+
+ \textbf{[JJH: This looks nuts --- home care effects stronger for boys.][JLG: This confusion might have came from the bad display of the previous results. Please reconsider Figure~\ref{figure:socdis} and note the following.}
+
+ \textbf{i) The take-up of alternatives is balanced between males and females. That is a fact in the data and you can see that in Figure~\ref{figure:socdis}, Panel (a).}
+
+ \textbf{ii) What really differs is the disadvantage across genders. Girls are more disadvantaged in general, Panel (b)}
+
+ \textbf{iii) Although there's a within-girl disadvantage difference in alternatives take-up Panel (c), the within-boys disadvantage difference in alternatives take-up is way starker, Panel (d). The tests in Table~\ref{table:disadtests} confirm this pattern.}
+
+ \textbf{iv) This means that the comparison of treatment to alternatives and to stay at home is similar for girls but not for boys. More advantaged boys stayed at home and thus benefitted less from ABC/CARE.}
+
+ \textbf{So while I agree that it's a mistake to interpret the magnitude of the $p$-values the way they did, I do think that Figure~\ref{figure:socdis} is informative on the observed differences in the way boys and girls benefit from treatment.] } 
 
 
 \begin{table}[!htpb]
 \begin{threeparttable}
 \caption{Gender and Baseline Socioeconomic Disadvantage in the Control Group, Tests} \label{table:disadtests}
-\centering 
+\centering
 \begin{tabularx}{16.5cm}{XcX}
-& \input{output/rosenbaum-disadvantage-gender_manual.tex} & 
+& \input{output/rosenbaum-disadvantage-gender_manual.tex} &
 \end{tabularx}
 \begin{tablenotes}
 \footnotesize
@@ -78,10 +85,10 @@ The difference in the comparison of treatment to staying at home and alternative
 \end{threeparttable}
 \end{table}
 
-We formally test the difference in disadvantage across boys and girls in Table~\ref{table:disadtests}. We reject the null of a common joint distribution of the variables composing our measure of socioeconomic disadvantage across girls and boys (at baseline). In Panels~\ref{figure:disadgirls} and~\ref{figure:disadboys} of Figure~\ref{figure:socdis}, we further dissect socioeconomic disadvantage within genders, and provide the corresponding tests in Table~\ref{table:disadtests}. 
+We formally test the difference in disadvantage across boys and girls in Table~\ref{table:disadtests}. We reject the null of a common distribution of our measure of socioeconomic disadvantage across girls and boys (at baseline). In Panels~\ref{figure:disadgirls} and~\ref{figure:disadboys} of Figure~\ref{figure:socdis}, we further dissect socioeconomic disadvantage within genders, and provide the corresponding tests in Table~\ref{table:disadtests}.
 
 
-Parents of more advantaged girls are more likely to send their daughters to alternative preschools. Parents of more advantaged boys are more likely to send keep their sons at home. This provides an explanation why girls benefited more from treatment if compared to staying at home, which would be a more disadvantaged environment if compared to the male environments. Boys benefited more from treatment if compared to attending alternatives given that their parents plausibly sent them to lower-quality alternatives due to a lack of resources or the alternatives were worse complements to home learning environments. 
+Parents of more advantaged girls are more likely to send their daughters to alternative preschools \textbf{[JJH: Do they work more?][Yes, the mothers work more for girls who attend alternative childcare. 23\% of the girls who attend alternative childcare have working mothers while no girls who stay at home have working mothers. The factor to measure disadvantage that we use in Table~\ref{table:disadtests} is comprised of: maternal age, maternal education, maternal IQ, number of siblings, HRI score. All of these are measured at baseline.]}. Parents of more advantaged boys are more likely to keep their sons at home. Thus, boys benefited more from treatment when compared to attending alternative childcare. \textbf{[JJH: The girls had lower quality environments.]} The opposite pattern holds for girls although our tests lack the power to verify that this difference is as stark as it is for boys.
 
 
 
