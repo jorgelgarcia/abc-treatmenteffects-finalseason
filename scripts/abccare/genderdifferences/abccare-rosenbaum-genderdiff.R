@@ -19,7 +19,7 @@ scripts	  <- file.path(repo, 'scripts', 'abccare', 'genderdifferences')
 #setwd(datafile)
 setwd('/share/klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv')
 getwd()
-df <- data.frame(read.dta('abccare-factors-R-inputold.dta'))
+df <- data.frame(read.dta('abccare-factors-R-inputold-updated-short.dta'))
 
 # define function for Rosenbaum test
 rosenbaum <- function(data,varstokeep,catvar){
@@ -81,7 +81,8 @@ rosenbaum <- function(data,varstokeep,catvar){
 agefactors <- c('factorage5','factorage15','factorage34')
 catfactors <- c('factoriq','factorach','factorse','factormlabor','factorparent','factoredu','factoremp','factorhealth','factorrisk','factorcrime','factorall')
 
-factorcats <- list(age5='factorage5',age15='factorage15',age34='factorage34',fiq='factoriq',fach='factorach',fse='factorse',fmlabor='factormlabor',fparent='factorparent',fedu='factoredu',femp='factoremp',fcrime='factorcrime',frisk='factorrisk',fhealth='factorhealth',fall='factorall')
+factorcats <- list(fiq='factoriq',fach='factorach',fse='factorse',fmlabor='factormlabor',fparent='factorparent',fedu='factoredu',femp='factoremp',fcrime='factorcrime',frisk='factorrisk',fhealth='factorhealth',fall='factorall',fall='factorall')
+#factorcats <- list(base='factorbase',age5='factorage5',age15='factorage15',age34='factorage34',fiq='factoriq',fach='factorach',fse='factorse',fmlabor='factormlabor',fparent='factorparent',fedu='factoredu',femp='factoremp',fcrime='factorcrime',frisk='factorrisk',fhealth='factorhealth',fall='factorall')
 #basevars <- c('factorbase')
 
 #varlists <- c(agefactors,catfactors)
@@ -121,16 +122,20 @@ BCavChd <- df[df$male==1 & df$R==0 & !is.na(df$P),]
 CaBvGd <- df[((df$R==1)|(df$P==1 & df$R==0 & !is.na(df$P))),]
 # home care, boy vs. girl
 ChBvGd <- df[((df$R==1)|(df$P==0 & df$R==0 & !is.na(df$P))),]
+CBvGd <- df[((df$R==0) & !is.na(df$factorbase)),]
+TBvGd <- df[((df$R==1) & !is.na(df$factorbase)),]
+BvGd <<- df[!is.na(df$factorbase),]
 
 # combine dataframes in to a list
-bigdfA <- list(GTvC=GTvCd,GTvCa=GTvCad,GTvCh=GTvChd,BTvC=BTvCd,BTvCa=BTvCad,BTvCh=BTvChd)
-bigdfB <- list(BCavCh=BCavChd,GCavCh=GCavChd)
-bigdfC <- list(ChBvG=ChBvGd,CaBvG=CaBvGd,CBvG=df[(df$R==0),], TBvG=df[(df$R==1),])
+#bigdfA <- list(GTvC=GTvCd,GTvCa=GTvCad,GTvCh=GTvChd,BTvC=BTvCd,BTvCa=BTvCad,BTvCh=BTvChd)
+#bigdfB <- list(BCavCh=BCavChd,GCavCh=GCavChd)
+#bigdfC <- list(ChBvG=ChBvGd,CaBvG=CaBvGd,CBvG=df[(df$R==0),], TBvG=df[(df$R==1),],BvG=df)
+smalldfC <- list(CBvG=CBvGd, TBvG=TBvGd,BvG=BvGd)
 
-outputAf <- sapply(factorcats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
-outputBf <- sapply(factorcats, function(x) sapply(bigdfB, function(y) rosenbaum(y,x,'P')))
-outputCf <- sapply(factorcats, function(x) sapply(bigdfC, function(y) rosenbaum(y,x,'male')))
-
+#outputAf <- sapply(factorcats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
+#outputBf <- sapply(factorcats, function(x) sapply(bigdfB, function(y) rosenbaum(y,x,'P')))
+#outputCf <- sapply(factorcats, function(x) sapply(bigdfC, function(y) rosenbaum(y,x,'male')))
+outputCf <- sapply(factorcats, function(x) sapply(smalldfC, function(y) rosenbaum(y,x,'male')))
 #outputDisadvantage <- rosenbaum(df[(df$R==0),],basevars,'male')
 #outputSelection <- sapply(bigdfB,function(x) rosenbaum(x,basevars,'P'))
 
@@ -143,11 +148,11 @@ outputCf <- sapply(factorcats, function(x) sapply(bigdfC, function(y) rosenbaum(
 
 
 setwd('/home/aziff/projects/abccare-cba/output')
-cAf <-data.frame(outputAf) 
-write.matrix(cAf,'rosenbaum-output-Afactors.txt',sep=',')
+#cAf <-data.frame(outputAf) 
+#write.matrix(cAf,'rosenbaum-output-Afactors-updated-short.txt',sep=',')
 
-cBf <-data.frame(outputBf) 
-write.matrix(cBf,'rosenbaum-output-Bfactors.txt',sep=',')
+#cBf <-data.frame(outputBf) 
+#write.matrix(cBf,'rosenbaum-output-Bfactors-updated-short.txt',sep=',')
 
 cCf <-data.frame(outputCf)
-write.matrix(cCf,'rosenbaum-output-Cfactors.txt',sep=',')
+write.matrix(cCf,'rosenbaum-output-Cfactors-updated-short.txt',sep=',')
