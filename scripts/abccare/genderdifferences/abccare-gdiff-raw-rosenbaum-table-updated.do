@@ -12,8 +12,8 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 1
-global dbootstraps 2
+global bootstraps 50
+global dbootstraps 25
 global maxtries 20
 global quantiles 30
 
@@ -150,7 +150,7 @@ local cats_categories 	iq ach se mlabor parent edu emp crime risk health
 keep id R RV P male `iq_big' `ach_big' `se_big' `mlabor_big' `parent_big' `edu_big' ///
 	`emp_big' `crime_big' `risk_big' `health_big' `age5_big' `age15_big' `age34_big' `all_big'
 
-local agecats_types		cats age
+local agecats_types		cats //age
 
 global GTvC_v2 		R
 global BTvC_v2 		R
@@ -264,7 +264,6 @@ foreach t in `cats' {
 						}
 						
 						global B`v'_`b'_avg = ${B`v'_`b'_tot}/${denom}
-						
 						forvalues b1 = 1/${denom} {
 							global B`v'_`b'_`b1'_dm = ${B`v'_`b'_`b1'} - ${B`v'_`b'_avg}
 							if ${B`v'_`b'_`b1'_dm } >= ${B`v'_`b'} {
