@@ -18,6 +18,21 @@
 
 \begin{document}
 
+\begin{sidewaystable}[!htbp]
+\centering
+\begin{threeparttable}
+\caption{Summary Outcomes Males $>$ Females}
+ \label{tab:proportion-table-ranksign}
+ \input{output/abccare-proportion-summary-full-rosenbaum}
+ \begin{tablenotes}
+ \footnotesize
+\item \textbf{Note:} This table summarizes the comparisons of gender gaps across outcome categories by different groups. A bold proportion for the treatment or control group indicates that the proportion is statistically different than 50\% at the 10\% level. A bold difference between treatment and control indicates that the Wilcoxon signed-rank test comparing the control and treatment proportions, over 1,000 bootstraps, yields a $p$-value less than or equal to 0.10. The variables for each outcome category are listed in Appendix~\ref{appendix:methodology}. The inference procedure is described in detail in Appendix~\ref{appendix:methodology}. In summary, we bootstrap with replacement 1,000 times. For bootstrap $b \in [1, \ldots, 1,000]$ we compute the proportion of variables in each outcome category for which the males do better than the females. We do this separately for the treatment and control group, estimating the pair of proportions $(P_{T,b}, P_{C,b})$. Over the distribution of the pairs, we compute the signed-rank test. It compares the empirical distribution of the proportions in the treatment group to the empirical distribution of the proportions in the control group. We repeat this procedure for each outcome category. The Rosenbaum $p$-value is the $p$-value from the test in  \citet{Rosenbaum_2005_Distribution_JRSS}. Under the null hypothesis, the joint distribution of outcomes for males and females is equal. Rejecting the null implies that the distributions are significantly different. Statistics significant at the $0.10$ level are bolded.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\clearpage
+
 \begin{table}[!htpb]
 \begin{threeparttable}
 \caption{Gender and Baseline Socioeconomic Disadvantage in the Control Group, Tests} \label{table:disadtests}
@@ -31,20 +46,6 @@
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
-
-\begin{sidewaystable}[!htbp]
-\centering
-\begin{threeparttable}
-\caption{Summary of Proportion of Outcomes Males $>$ Females}
- \label{tab:proportion-table-ranksign}
- \input{output/abccare-proportion-summary-full-rosenbaum}
- \begin{tablenotes}
- \footnotesize
-\item \textbf{Note:} This table summarizes comparison of gender gaps across outcome categories by different groups. A bold proportion for the treatment or control group indicates that the proportion is statistically different than 50\% at the 10\% level. A bold difference between treatment and control indicates that the Wilcoxon signed-rank test comparing the control and treatment proportions, over 1,000 bootstraps, yields a $p$-value less than or equal to 0.10. The variables for each outcome category are listed in Appendix~\ref{appendix:methodology}. The inference procedure is described in detail in Appendix~\ref{appendix:methodology}. In summary, we bootstrap with replacement 1,000 times. For bootstrap $b \in [1, \ldots, 1,000]$ we compute the proportion of variables in each outcome category for which the males do better than the females. We do this separately for the treatment and control group, estimating the pair of proportions $(P_{T,b}, P_{C,b})$. Over the distribution of the pairs, we compute the signed-rank test. It compares the empirical distribution of the proportions in the treatment group to the empirical distribution of the proportions in the control group. We repeat this procedure for each outcome category.\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
-
-\clearpage
 
 
 \bibliography{heckman}
