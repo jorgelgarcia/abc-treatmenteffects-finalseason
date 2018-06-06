@@ -9,7 +9,7 @@ Original date:		September 25, 2016
 global klmshare	:	env klmshare
 global projects	:	env projects
 global abc_dir 	= "${klmshare}/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv"
-global output	= "${projects}/abc-treatmenteffects-finalseason/output"
+global output	= "${projects}/abccare-cba/output"
 
 local vars_to_compare m_ed0y m_work0y m_age0y m_iq0y f_home0y p_inc0y hrabc_index hh_sibs0y male birthyear apgar1 apgar5
 
