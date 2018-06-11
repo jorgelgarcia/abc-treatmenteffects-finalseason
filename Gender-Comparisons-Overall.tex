@@ -18,37 +18,85 @@
 
 \begin{document}
 
-\begin{sidewaystable}[!htbp]
-\centering
-\begin{threeparttable}
-\caption{Summary Outcomes Males $>$ Females}
- \label{tab:proportion-table-ranksign}
- \input{output/abccare-proportion-summary-full-rosenbaum}
- \begin{tablenotes}
- \footnotesize
-\item \textbf{Note:} This table summarizes the comparisons of gender gaps across outcome categories by different groups. A bold proportion for the treatment or control group indicates that the proportion is statistically different than 50\% at the 10\% level. A bold difference between treatment and control indicates that the Wilcoxon signed-rank test comparing the control and treatment proportions, over 1,000 bootstraps, yields a $p$-value less than or equal to 0.10. The variables for each outcome category are listed in Appendix~\ref{appendix:methodology}. The inference procedure is described in detail in Appendix~\ref{appendix:methodology}. In summary, we bootstrap with replacement 1,000 times. For bootstrap $b \in [1, \ldots, 1,000]$ we compute the proportion of variables in each outcome category for which the males do better than the females. We do this separately for the treatment and control group, estimating the pair of proportions $(P_{T,b}, P_{C,b})$. Over the distribution of the pairs, we compute the signed-rank test. It compares the empirical distribution of the proportions in the treatment group to the empirical distribution of the proportions in the control group. We repeat this procedure for each outcome category. The Rosenbaum $p$-value is the $p$-value from the test in  \citet{Rosenbaum_2005_Distribution_JRSS}. Under the null hypothesis, the joint distribution of outcomes for males and females is equal. Rejecting the null implies that the distributions are significantly different. Statistics significant at the $0.10$ level are bolded.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
+\noindent Jorge - story line unclear still! (We will soon be booted out) \textbf{[JLG: That would be sad, but we simply seem not to be understanding each other, or maybe I'm just incompetent. But I keep explaining the same thing and you keep asking the same questions. Maybe these samples are much more limited than expected, even when we have done so much them!]}\\
 
-\clearpage
+\noindent I am still looking for a clean story. At baseline, who is more disadvantaged boys or girls? In terms of:\\
 
-\begin{table}[!htpb]
-\begin{threeparttable}
-\caption{Gender and Baseline Socioeconomic Disadvantage in the Control Group, Tests} \label{table:disadtests}
-\centering
-\begin{tabularx}{16.5cm}{XcX}
-& \input{output/rosenbaum-disadvantage-gender_manual.tex} &
-\end{tabularx}
-\begin{tablenotes}
-\footnotesize
-\item \textbf{Note:} This table presents the null of a common joint distribution of the variables composing our measure of socioeconomic disadvantage (mother's age, education, IQ, marital status, and employment, as well as number of siblings and father's presence at home) between males and females in the control group and between children who attended  alternative preschool and who stayed at home (within control-group boys or within control-group girls). The $p$-values follow \citet{Rosenbaum_2005_Distribution_JRSS}. Under the null hypothesis, the pairs with the closest distance in disadvantage would be comprised of one male and one female (for the comparison of males vs. females). Rejecting the null implies that the distributions are significantly different. Statistics significant at the $0.10$ level are bolded.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+\noindent {\bf [JLG: These are the numbers]}
 
+\begin{itemize}
+\item Education of mother
+	\begin{itemize}
+		\item Boys: 10.44 (s.e. .19)
+		\item Girls: 10.38 (s.e. .21)
+		\item Difference: 0.05 (s.e. .20)
+	\end{itemize}
+\item Education of father
+	\begin{itemize}
+		\item Boys: 10.94 (s.e. 0.24)
+		\item Girls: 10.92 (s.e. 0.16)
+		\item Difference: 0.5 (s.e. .29)
+	\end{itemize}
+\item Intact families 
+	\begin{itemize}
+		\item Boys: .28 (s.e. 0.05)
+		\item Girls: .24 (s.e. 0.04)
+		\item Difference: 0.04 (s.e. 0.07)
+	\end{itemize}
+\item Income + earnings of mother
+	\begin{itemize}
+		\item  Boys: 7,544 (s.e. 2,312) 
+		\item  Girls: 5,158 (s.e. 1,531)
+		\item Difference: 2,385 (s.e. 3,133) 
+	\end{itemize}
+\item Income + earnings of father
+\noindent {\bf [JLG: not observed at baseline, observed later at some ages.]}
+\end{itemize}
 
-\bibliography{heckman}
-\bibliographystyle{chicago}
+\noindent  {\bf [JLG: So, as we have discussed multiple times, boys seem to have advantage if we take the differences in the levels of this variables seriously, but the difference are not statistically significant. That is why we use the measure or index in Table 5. You keep saying in the text that the index in Table 5 is not at baseline, but as the note of the table clearly states, all of the measures are at baseline. You also say that the measure is arbitrary. That measure is a factor estimated from the following variables: Mother's age, mother's education, mother's IQ, mother's marital status, mother's employment, and number of siblings.}\\
+
+\noindent {\bf We estimate a factor using this variables to form the index, so the weight given to each of them is not arbitrary. The weights given in the HRI index is and it was set by the researchers at UNC.}\\
+
+\noindent {\bf If you go to row [1], you will see that we reject the null of this index being the same across genders using the Rosenbaum test. The average level in this index is greater for boys than it is for girls, so we conclude that boys are more advantaged than girls.}\\
+
+\noindent {\bf You also comment that ``everyone is disadvantaged in this sample!'' Of course, but we are obviously using the term disadvantaged as relatively disadvantaged within the experiment! Not relative to the population of the US!\\}
+
+\noindent In experiment, same question. What is the experimentally induced impact on family environment?
+
+\begin{itemize} 
+\item More fathers working? 
+\item More mothers? 
+\item Family income? 
+\end{itemize}
+
+\noindent {\bf [JLG: An item-by-item breakout is going to leave to similar results as above and it could be arbitrary. But take a look at Table 4 and there are two rows relevant to your question. 
+
+\begin{itemize} 
+\item Parental Income: this is the set of variables containing mother's income, father's income (when we observe it), mother's and father's labor supply. As you see, the impact is REALLY large in terms of combining functions and the Rosenbaum tests indicate rejection. 
+\item Parenting: this is basically the time series of the HOME scores from age 1 to age 8. Same here. 
+\end{itemize}
+
+\noindent The sharp gender differences are there in the sense that in each of the outcome categories girls benefit more from treatment than boys. Now, these are of course the treatment effects. But revisit the female-male gaps, pre- and post-treatment in Table 1 for each of the categories in Table 1. The differences are sharp. Most are significant!}\\
+
+\noindent I really do not see sharp differences in after or before effects. Before we were emphasizing greater vulnerability of boys:\\
+
+\begin{itemize}
+\item How do we know that this is not the story?
+\item How to explain to referees?
+\item Why now both? 
+\item What is the strength of the evidence on either? 
+\end{itemize}
+
+\noindent {\bf [JLG: Yes, we were. But we did not distill differences in baseline characteristics by gender to explain the differences in the treatment effects by gender to explain why the treatment effects differed depending on the counterfactual. Referee 3, the referee whose comments you praised, asked us to clarify that. That's why we explored the baseline differences in the control-group children who stayed stayed at home and the control-group children who attended alternatives.\\ 
+
+\noindent In Table 5, and please note that Table 5 is at baseline, we see sharp differences by gender by take-up of alternatives. \\
+
+\noindent Within the control-group boys, the relatively more disadvantaged are sent more to alternatives. The relatively less disadvantaged are at home. Therefore, the treatment effect is greater for boys who went to alternatives - their counterparts who stayed at home were in better environments. Instead, these children were going to preschools with less quality and which began late (age 3). 
+
+\noindent Now, for girls the opposite pattern appears. But not as strong. As a consequence, girls benefit more from treatment if compared to staying at home but the difference is not the same as in the case for boys.]\\ 
+
+\noindent Before, we adduced this to quality. A careful inspection of the data implies that baseline characteristics could be an explanation as well. \\ 
+
+\noindent Now, we discussed that it could very well be that both stories are there. But there's one bog difference. Our information in quality is not good, while we have measures at baseline with which we can perform tests! So they both could be playing a role. As we discussed in person, it's going to be impossible to separate the stories in our sample or tell what's the strength for either.]}
 
 \end{document}
