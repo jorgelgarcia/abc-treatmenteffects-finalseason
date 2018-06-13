@@ -12,8 +12,8 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 1
-global dbootstraps 1
+global bootstraps 10
+global dbootstraps 10
 global maxtries 20
 global quantiles 30
 
@@ -391,7 +391,7 @@ foreach t in `cats' {
 // make table
 foreach t in `cats' {
 	foreach t2 in `agecats_types' {
-		foreach g1 in TvC TvCa TvCh {
+		foreach g1 in TvC /*TvCa TvCh*/ {
 		
 		file open tabfile using "${output}/raw-rosenbaum-table-`t2'-`t'-`g1'-updatedpinc-${bootstraps}-${dbootstraps}.tex", replace write
 		file write tabfile "\begin{tabular}{l c c c c}" _n

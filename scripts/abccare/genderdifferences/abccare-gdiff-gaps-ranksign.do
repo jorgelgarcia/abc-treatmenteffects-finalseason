@@ -185,7 +185,7 @@ foreach c in `categories' {
 }
 }
 
-file open tabfile using "${output}/abccare-proportion-summary-fullR.tex", replace write
+file open tabfile using "${output}/abccare-proportion-summary-full-updatedpinc.tex", replace write
 file write tabfile "\begin{tabular}{l c c c c}" _n
 file write tabfile "\toprule" _n
 file write tabfile "Category & \# Outcomes & \mc{2}{c}{Proportion} & Difference \\" _n

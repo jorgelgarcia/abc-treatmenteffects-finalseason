@@ -124,33 +124,21 @@ p_inc1y6m
 p_inc2y6m
 p_inc3y6m
 p_inc4y6m
-p_inc8y
-p_inc12y
-p_inc15y
-p_inc21y
-factor_pinc
 m_work1y6m
 m_work2y6m
 m_work3y6m
-m_work4y6m
-m_work21y
-factor_mwork;
+m_work4y6m;
 
 local factor_pinc
 p_inc1y6m
 p_inc2y6m
 p_inc3y6m
-p_inc4y6m
-p_inc8y
-p_inc12y
-p_inc15y
-p_inc21y;
+p_inc4y6m;
 local factor_mwork
 m_work1y6m
 m_work2y6m
 m_work3y6m
-m_work4y6m
-m_work21y;
+m_work4y6m;
 
 local fhome
 f_home1y6m
