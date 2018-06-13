@@ -388,7 +388,10 @@ ibr_sociab1y6m;
 
 
 local mlabor_updated 
-p_inc8y
+p_inc1y6m
+p_inc2y6m
+p_inc3y6m
+p_inc4y6m
 m_work1y6m
 m_work2y6m
 m_work3y6m
@@ -563,6 +566,7 @@ m_work2y6m
 m_work3y6m
 m_work4y6m
 m_work21y;
+
 
 local edu_big
 sch_hs30y
