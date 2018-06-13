@@ -128,15 +128,15 @@ TBvGd <- df[((df$R==1) & !is.na(df$factorbase)),]
 BvGd <<- df[!is.na(df$factorbase),]
 
 # combine dataframes in to a list
-bigdfA <- list(GTvC=GTvCd,GTvCa=GTvCad,GTvCh=GTvChd,BTvC=BTvCd,BTvCa=BTvCad,BTvCh=BTvChd)
+#bigdfA <- list(GTvC=GTvCd,GTvCa=GTvCad,GTvCh=GTvChd,BTvC=BTvCd,BTvCa=BTvCad,BTvCh=BTvChd)
 #bigdfB <- list(BCavCh=BCavChd,GCavCh=GCavChd)
 #bigdfC <- list(ChBvG=ChBvGd,CaBvG=CaBvGd,CBvG=df[(df$R==0),], TBvG=df[(df$R==1),],BvG=df)
-#smalldfC <- list(CBvG=CBvGd, TBvG=TBvGd,BvG=BvGd)
+smalldfC <- list(CBvG=CBvGd, TBvG=TBvGd,BvG=BvGd)
 
-outputAf <- sapply(factorcats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
+#outputAf <- sapply(factorcats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
 #outputBf <- sapply(factorcats, function(x) sapply(bigdfB, function(y) rosenbaum(y,x,'P')))
 #outputCf <- sapply(factorcats, function(x) sapply(bigdfC, function(y) rosenbaum(y,x,'male')))
-#outputCf <- sapply(factorcats, function(x) sapply(smalldfC, function(y) rosenbaum(y,x,'male')))
+outputCf <- sapply(factorcats, function(x) sapply(smalldfC, function(y) rosenbaum(y,x,'male')))
 #outputDisadvantage <- rosenbaum(df[(df$R==0),],basevars,'male')
 #outputSelection <- sapply(bigdfB,function(x) rosenbaum(x,basevars,'P'))
 
@@ -149,11 +149,11 @@ outputAf <- sapply(factorcats, function(x) sapply(bigdfA, function(y) rosenbaum(
 
 setwd('/Users/annaziff/Desktop/work/repos/abccare-cba/output')
 #setwd('/home/aziff/projects/abccare-cba/output')
-cAf <-data.frame(outputAf) 
-write.matrix(cAf,'rosenbaum-output-Afactors-updated-short.txt',sep=',')
+#cAf <-data.frame(outputAf) 
+#write.matrix(cAf,'rosenbaum-output-Afactors-updated-short.txt',sep=',')
 
 #cBf <-data.frame(outputBf) 
 #write.matrix(cBf,'rosenbaum-output-Bfactors-updated-short.txt',sep=',')
 
-#cCf <-data.frame(outputCf)
-#write.matrix(cCf,'rosenbaum-output-Cfactors-updated-short.txt',sep=',')
+cCf <-data.frame(outputCf)
+write.matrix(cCf,'rosenbaum-output-Cfactors-updated-short.txt',sep=',')
