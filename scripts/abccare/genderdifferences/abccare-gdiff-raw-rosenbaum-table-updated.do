@@ -12,8 +12,8 @@ set more off
 
 // parameters
 set seed 1
-global bootstraps 50
-global dbootstraps 25
+global bootstraps 10
+global dbootstraps 10
 global maxtries 20
 global quantiles 30
 
@@ -54,7 +54,7 @@ local all_name "All"
 // OUTPUT ORDER
 local outgroups GTvC GTvCa GTvCh BTvC BTvCa BTvCh BCavCh GCavCh ChBvG CaBvG CBvG TBvG
 // TABLE ORDER
-local exp_groupnames 		GTvC BTvC GTvCa BTvCa GTvCh BTvCh //GCavCh BCavCh 
+local exp_groupnames 		GTvC BTvC //GTvCa BTvCa GTvCh BTvCh //GCavCh BCavCh 
 local gender_groupnames 	ChBvG CaBvG CBvG TBvG
 local cats					exp //gender
 
@@ -63,7 +63,7 @@ cd $output
 
 
 // A
-import delim using "rosenbaum-output-Afactors-updated.txt", delim(",") clear
+import delim using "rosenbaum-output-Afactors-updated-short.txt", delim(",") clear
 qui gen n = _n
 keep if n == 5 | n == 6 | n == 11 | n == 12 | n == 17 | n == 18 | n == 23 ///
 				| n == 24 | n == 29 | n == 30 | n == 35 | n == 36
@@ -391,9 +391,9 @@ foreach t in `cats' {
 // make table
 foreach t in `cats' {
 	foreach t2 in `agecats_types' {
-		foreach g1 in TvC TvCa TvCh {
+		foreach g1 in TvC /*TvCa TvCh*/ {
 		
-		file open tabfile using "${output}/raw-rosenbaum-table-`t2'-`t'-`g1'-updated-${bootstraps}-${dbootstraps}.tex", replace write
+		file open tabfile using "${output}/raw-rosenbaum-table-`t2'-`t'-`g1'-updatedpinc-${bootstraps}-${dbootstraps}.tex", replace write
 		file write tabfile "\begin{tabular}{l c c c c}" _n
 		file write tabfile "\toprule" _n
 		file write tabfile " & Average & \% $ >0 $ & \% $ >0 $ , Significant & \citet{Rosenbaum_2005_Distribution_JRSS} \\" _n

@@ -9,15 +9,16 @@ library('nbpMatching')
 set.seed(1)
 
 # environment variables and filepaths
-klmshare  <- Sys.getenv('klmshare')
-abccare	  <- file.path(klmshare,'Data_Central','Abecedarian','data','ABC-CARE')
-datafile	<- file.path(abccare,'extensions','cba-iv')
-repo	    <- file.path(projects, 'abccare-cba')
-scripts	  <- file.path(repo, 'scripts', 'abccare', 'genderdifferences')
+klmshare  	<- Sys.getenv('klmshare')
+abccare	  	<- file.path(klmshare,'Data_Central','Abecedarian','data','ABC-CARE')
+datafile		<- file.path(abccare,'extensions','cba-iv')
+repo	    		<- file.path(projects, 'abccare-cba')
+scripts	  	<- file.path(repo, 'scripts', 'abccare', 'genderdifferences')
+output 		<- file.path(projects,'abccare-cba', 'output')
 
 # load data
-#setwd(datafile)
-setwd('/share/klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv')
+setwd(datafile)
+#setwd('/share/klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv')
 getwd()
 df <- data.frame(read.dta('abccare-factors-R-inputold-updated-short.dta'))
 
@@ -146,8 +147,8 @@ outputCf <- sapply(factorcats, function(x) sapply(smalldfC, function(y) rosenbau
 #cBf <-data.frame(outputSelection) 
 #write.matrix(cBf,'rosenbaum-output-BSelection.txt',sep=',')
 
-
-setwd('/home/aziff/projects/abccare-cba/output')
+setwd('/Users/annaziff/Desktop/work/repos/abccare-cba/output')
+#setwd('/home/aziff/projects/abccare-cba/output')
 #cAf <-data.frame(outputAf) 
 #write.matrix(cAf,'rosenbaum-output-Afactors-updated-short.txt',sep=',')
 
