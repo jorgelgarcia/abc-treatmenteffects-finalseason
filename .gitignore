@@ -4,6 +4,7 @@
 *backup
 *.synctex.gz
 *#
+*.zip
 
 # LateX Auxilary Files #
 ########################
