@@ -1,6 +1,6 @@
 \section{Alternative Evaluation Methodologies} \label{appendix:amethodology}
 
-\noindent In the main paper, we develop and document the results of one methodology to account for control substitution in the first phase of ABC/CARE. The objective of each method is to estimate the average treatment effect of ABC/CARE, holding fixed take-up of alternative preschool by the control groups. We want to construct a scenario in which the subjects in the control group do not attend alternative preschool. This allows us to evaluate center-based childcare relative to a counterfactual scenario in which subjects stay at home.\\
+\noindent In the paper, we develop and document the results of one methodology to account for control substitution in the first phase of ABC/CARE. The objective of each method is to estimate the average treatment effect of ABC/CARE, holding fixed take-up of alternative preschool by the control groups. We want to construct a scenario in which the subjects in the control group do not attend alternative preschool. This allows us to evaluate center-based childcare relative to a counterfactual scenario in which subjects stay at home.\\
 
 \noindent This section presents alternative methodologies to evaluate the first-phase treatment. Throughout the rest of this section, we refer to treatment in either ABC/CARE generically as center-based childcare, as we discard the family education treatment group of CARE---as in the main paper, the control group consists of the control groups in both ABC and CARE. We refer to take-up of control substitution as enrollment into alternative preschool. As in our main methodology, we choose the control sets to account for background variables using the method in Appendix~\ref{appendix:results}.\\
 
@@ -16,9 +16,8 @@
 
 \noindent Consider the following equation for an outcome $Y$:
 
-
 \begin{equation}
-Y = \alpha^D D + \alpha^Q Q + \mathbf{X} \beta + \varepsilon,
+Y = \alpha^D D + \alpha^Q Q + \mathbf{X} \bm{\beta} + \varepsilon,
 \label{eq:ivnot}
 \end{equation}
 
@@ -76,7 +75,7 @@ Y = \alpha^D D + \alpha^Q Q + \mathbf{X} \beta + \varepsilon,
 
 \noindent Our main specification uses three instruments: randomization into center-based childcare in ABC/CARE, the presence of a grandmother in the county, and being born in the fall. We interact the latter two instrument with an indicator for being randomized into the control group ($1-R$). The endogenous variables are $D$ and $Q$.\\
 
-\noindent Figure \ref{fig:main_iv1} and Figure~\ref{fig:mainiv2} display the estimates of the coefficient of $D$. That is, the effect of attending the ABC/CARE treatment, fixing take-up of alternative preschool. The results indicate the following: (i) the effects are stronger compared to those in the main paper, even compared to those in the main paper that fix subjects to no preschool alternatives; (ii) the estimates are less stable across ages compared to those in the main paper. For example, while the effects on IQ scores from ages 0 to 5 average around 14 points in the main paper, they average 20 points using this specification of instrumental variables.
+\noindent Figure \ref{fig:main_iv1} and Figure~\ref{fig:mainiv2} display the estimates of the coefficient of $D$. That is, the effect of attending the ABC/CARE treatment, fixing take-up of alternative preschool. The results indicate the following: (i) the effects are stronger compared to those in the paper, even compared to those in the paper that fix subjects to no preschool alternatives; (ii) the estimates are less stable across ages compared to those in the paper. For example, while the effects on IQ scores from ages 0 to 5 average around 14 points in the paper, they average 20 points using this specification of instrumental variables.
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous Take-up of Alternative Preschool Using Instrumental Variables} \label{fig:main_iv1}
@@ -200,8 +199,8 @@ Y = \alpha^D D + \alpha^Q Q + \mathbf{X} \beta + \varepsilon,
 \noindent Let $Y^{0}$ be the counterfactual outcome of subject $i$ when not participating in center-based childcare. Similarly, let $Y^{1}$ be her potential outcome if she participates. We model the outcome as:
 
 \begin{eqnarray}
-Y^1 &=& \alpha^1+\mathbf{X} \mathbf{\beta}                 +\varepsilon^1 \nonumber  \\
-Y^0 &=& \alpha^0+\mathbf{X} \mathbf{\beta} + \alpha^Q Q+\varepsilon^0.  \label{eq:potout}
+Y^1 &=& \alpha^1+\mathbf{X} \bm{\beta}                +\varepsilon^1 \nonumber  \\
+Y^0 &=& \alpha^0+\mathbf{X} \bm{\beta} + \alpha^Q Q+\varepsilon^0.  \label{eq:potout}
 \end{eqnarray}
 
 \noindent The equation describing participation in center-based childcare is:
@@ -218,7 +217,7 @@ D = \left\{
 \noindent where we interpret $D^*$ as a latent continuous variable representing the household's interest in sending the subject to treatment. We write
 
 \begin{equation}
-D^{*} = \mathbf{W} \gamma^{D} + \varepsilon^{D}, \label{eq:probitD}
+D^{*} = \mathbf{W} \gamma^{D} + \bm{\varepsilon}^{D}, \label{eq:probitD}
 \end{equation}
 
 \noindent where $\mathbf{W}$ is a vector that includes $\mathbf{X}$ and $R$ and can include variables that shift the decision to enroll subjects into ABC/CARE without shifting the counterfactual outcome of interest, $Y^{d}$. \\
@@ -265,8 +264,8 @@ Q = \mathbf{W} \gamma^{Q} + \varepsilon^{Q}, \label{eq:selq}
 \noindent Third, we estimate the coefficients in the outcome equation using the proxies for the unobserved components. We rewrite \eqref{eq:potout} using conditional expectations:
 
 \begin{eqnarray}
-\mathbb{E}\left[Y^1|D=1,\mathbf{W}\right]                         &=& \alpha^1+\mathbf{X}\mathbf{\beta}              +\mathbb{E}\left[\varepsilon^1|D=1,\mathbf{W}      \right] \nonumber \\
-\mathbb{E}\left[Y^0|D=0,\mathbf{W},\varepsilon^{Q},Q=q\right] &=& \alpha^0+\mathbf{X}\mathbf{\beta} +\alpha^Q q \label{eq:condout} \\ \nonumber &+& \mathbb{E}\left[\varepsilon^0|D=0,\mathbf{W},\varepsilon^{Q},Q=q\right].
+\mathbb{E}\left[Y^1|D=1,\mathbf{W}\right]                         &=& \alpha^1+\mathbf{X}\bm{\beta}              +\mathbb{E}\left[\varepsilon^1|D=1,\mathbf{W}      \right] \nonumber \\
+\mathbb{E}\left[Y^0|D=0,\mathbf{W},\varepsilon^{Q},Q=q\right] &=& \alpha^0+\mathbf{X}\bm{\beta} +\alpha^Q q \label{eq:condout} \\ \nonumber &+& \mathbb{E}\left[\varepsilon^0|D=0,\mathbf{W},\varepsilon^{Q},Q=q\right].
 \end{eqnarray}
 
 \noindent Once we condition on the proxy for $\varepsilon^{Q}$, the error term in the outcome equations only depends on the selection into center-based childcare. The conditional error terms in \eqref{eq:condout} can be specified using control functions.\\
@@ -285,7 +284,7 @@ Q = \mathbf{W} \gamma^{Q} + \varepsilon^{Q}, \label{eq:selq}
 
 \noindent By including the control functions, we can recover consistent estimates of the parameters in \eqref{eq:potout} through a linear regression. The effect of center-based childcare is the difference of the intercepts in the two outcome equations.\\
 
-\noindent The charts below present the estimates for the parameter associated with $D$. That is, the effect of participating in center-based childcare relative to a counterfactual of receiving no preschool alternative. As before, we present results for IQ scores at different ages and for a set of relevant adult outcomes. The results are not compelling, as they present irregularities over the life cycle that differ from the rest of results we present in the main paper and throughout this appendix.
+\noindent The charts below present the estimates for the parameter associated with $D$. That is, the effect of participating in center-based childcare relative to a counterfactual of receiving no preschool alternative. As before, we present results for IQ scores at different ages and for a set of relevant adult outcomes. The results are not compelling, as they present irregularities over the life cycle that differ from the rest of results we present in the paper and throughout this appendix.
 
 \begin{figure}[H]
 		\caption{Effect of Center-based Childcare on IQ Scores, Accounting for Endogenous (log) Months of Take-up of Alternative Preschool} \label{output/appendixplots/Q_cf_te.eps}
@@ -301,4 +300,4 @@ Q = \mathbf{W} \gamma^{Q} + \varepsilon^{Q}, \label{eq:selq}
 \floatfoot{
 \footnotesize
 \noindent Note: This plot presents the parameter associated with $D$ estimated using Control Functions as described in the text. The outcomes ($Y$) are different adult outcomes labeled in the horizontal axis.  $D=1$ for subjects that participate in ABC/CARE center-based childcare, and $D=0$ for subjects who do not participate in treatment. $Q$ is the number of months attending preschool. It is coded as zero for subjects participating in ABC/CARE. $\mathbf{X}$ includes a set of controls selected from all available baseline controls to maximize explanatory power across all outcomes tested in the paper: gender of the subject, mother's IQ score, High-risk Index, and Apgar Score at 1 minute.}
-\end{figure}
+\end{figure} 
