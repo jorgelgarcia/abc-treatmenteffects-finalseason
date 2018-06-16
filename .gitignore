@@ -4,6 +4,7 @@
 *backup
 *.synctex.gz
 *#
+*.zip
 
 # LateX Auxilary Files #
 ########################
@@ -22,6 +23,7 @@
 *.snm
 *.synctex
 *.xwm
+*.tdo
 
 # Log files
 ##################################
@@ -105,4 +107,13 @@ scripts/abccare/cba/ratio_irr/flows/p1_match/*.csv
 *DS_Store
 *Rhistory
 *data_cache*
+
+# Microsoft office #
+####################
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.xls
+*.xslx
 

@@ -192,22 +192,74 @@
 \noindent {\centering \textbf{Memo: June 14, 2018}}
 \end{center}
 
-\noindent \textbf{[JJH: We want to know Why the Treatment effects are bigger for girls.] [JLG: Yes. I agree and the evidence indicates, as you pointed out yesterday, that the environments are improving more from girls than for boys. This in terms of growth.]}\\ 
+\noindent \textbf{[JJH: We want to know Why the Treatment effects are bigger for girls.] [JLG: Yes. I agree and the evidence indicates, as you pointed out yesterday, that the environments are improving more for girls than for boys. This is in terms of growth.]}\\ 
 
 \noindent \textbf{[JJH: We know at baseline Girls are in worse circumstances.] [JLG: Yes.]}\\
 
-\noindent \textbf{[JJH: What we want to know is why they IMPROVE That involves analyses BEYOND baseline.] [JLG: Yes. Please see the following table. In terms of the environment of girls and boys we have the income and labor supply of their mother and the HOME scores (which include interaction with both the mother and the father, when the father is around). This is extracted from the paper, but maybe clearer when considered separately in this table which we can display in Section 5. This two aggregates post-baseline, as described in the table. The reason why we aggregate this is because else the estimates get very noisy.]}\\
+\noindent \textbf{[JJH: What we want to know is why they IMPROVE That involves analyses BEYOND baseline.] [JLG: Yes. Please see Table~\ref{table:massiveall} in this document. In terms of the environment of girls and boys we have the income and labor supply of their mother and the HOME scores (which include interaction with both the mother and the father, when the father is around). This is extracted from the paper, but may be clearer when considered separately. These two aggregates post-baseline, as described in the table. The reason why we aggregate this is because otherwise the estimates get very noisy.]}\\
+
+\begin{sidewaystable}[H]
+\begin{threeparttable}
+\caption{Excerpt from Table 4: Combining Functions and Exact Non-Parametric Tests} \label{table:massiveall}
+\centering
+\begin{tabular}{l c c c c}
+\toprule
+ & Average & \% $ >0 $ & \% $ >0 $ , Significant & Rosenbaum \\
+ & Effect Size & Treatment Effect & Treatment Effect & $ p $ -value \\
+\midrule
+\textbf{Parental Income} & \mc{4}{c}{[Parental income (1.5, 2.5, 3.5, 4.5) and mother works (1.5, 2.5, 3.5, 4.5)]} \\
+ &      & &    & \\
+\quad Females & \textbf{    0.283} & \textbf{  100.000} & \textbf{   75.000}  & \textbf{ 0.086} \\
+\quad Males &  \textbf{    0.157} & \textbf{  100.000} & \textbf{   37.500}  & 0.147 \\
+\midrule
+\textbf{Parenting} & \mc{2}{c}{[HOME scores (0.5, 1.5, 2.5, 3.5, 4.5)]} & & \\
+ &      & &    & \\
+\quad Females &  \textbf{    0.274} & \textbf{  100.000} & \textbf{   80.000} & 0.602 \\
+\quad Males &      0.060 & \textbf{   80.000} &     0.000 & 0.147 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item \textbf{Note:} This table displays summaries of treatment effects by outcome category and gender. Each of the panels contains statistics calculated using outcomes grouped by category. The average effect size is calculated by averaging over the effect size of the outcomes in the outcome category. The effect sizes of the individual outcomes are calculated by dividing the treatment-control mean difference by the standard deviation of the control group. We present bootstrapped $p$-values. For the proportion of outcomes that are positive and significant, we do a ``double bootstrap'' procedure. The null hypothesis for the average effect sizes is that they are 0. The null hypothesis for the proportion of outcomes that are (significantly) positive is that they are (10\%) 50\%. Bolded statistics are significant at the 10\% level. The Rosenbaum $p$-value originates from a test where the null is a common joint distribution of the variables in each category. For computational simplicity, we approximate the exact $p$-values using asymptotic $p$-values. Rosenbaum (2005) presents several simulation exercises showing that the validity of this approximation. Statistics significant at the $0.10$ level are bolded.
+\end{tablenotes}
+\end{threeparttable}
+\end{sidewaystable}
+
+\noindent \textbf{[JJH: You seem bound and determined to stay at baseline and that's non-responsive to the questions of the referees and to fundamental curiosity and scientific discourse.] [JLG: No. I want to show post-baseline, as indicated in the previous Table~\ref{table:massiveall}. Now, father's income comes next.]}\\
+
+\noindent \textbf{[JJH: You are some saying 28 observations is too small It may be But please I understand samples may be small I understand you would like more So would I But please understand that a baseline only analysis is essentially unsatisfactory It does not  explain CHANGE except possibly through an interaction.] [JLG: Yes. But I think we should construct that story based on Table~\ref{table:massiveall} in this document and not on father's income, for which you can see the results next in Table~\ref{table:father} in this document. Now, one could ask why not add father income into the aggregates in Table~\ref{table:massiveall} in this document. The reason is that if we do so the number of observations drops so much and we are back in trouble.]}\\ 
+
+\begin{table}[H]
+\begin{threeparttable}
+\caption{Description of Father's Income} \label{table:father}
+\centering
+\begin{tabular}{l c c c c c c}
+\toprule
+& Age & \mc{2}{c}{$N$} & \mc{2}{c}{Mean} & $\Delta$ \\
+\cmidrule(lr){3-4} \cmidrule(lr){5-6}
+& 	& Control & Treatment & Control & Treatment & \\
+\midrule
+Males & 12 & 8 & 8 & $25,466.05$ & $25,147.62$ & -318.43 \\
+ & 21 & 0 & 4 & --- & $11,507.50$ & --- \\
+ \midrule
+Females & 12 & 7 & 5 & $26,466.40$ & $52,612.00$ & $26,145.60$ \\
+ & 21 & 0 & 0 & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item \textbf{Note:} This table describes father's income by treatment status, displaying age of measurement, number of observations in each treatment regime, control and treatment means, and average treatment effect. Both variables are only available for subjects in ABC (not CARE). All values are in 2014 USD.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\noindent \textbf{[JJH: You seem to think I do not understand that you have analyzed baseline I do understand very well now although the writing in previous drafts was exceedingly unclear.] [JLG: No. I am just trying to clarify things in response to the questions, but I mean no disrespect.]}\\ 
+
+\noindent \textbf{[JJH: But now we need more however imperfect.] [JLG: I think that the parental income and HOME scores tell the story.]}\\ 
+
+\noindent \textbf{[JJH: The story in 5 is weak and any fragments will help Read what I wrote carefully.]}
 
 
-\noindent \textbf{[JJH: You seem bound and determined to stay at baseline and that's non-responsive to the questions of the referees and to fundamental curiosity and scientific discourse.] [JLG: No. I want to show post-baseline, as indicated in the previous table. Now, father's income come next.]}\\
-
-\noindent \textbf{[JJH: You are some saying 28 obersvations is too small It may be But please I understand samples may be small I understand you would like more So would I But please understand that a baseline only analysis is essentially unsatisfactory It does not  explain CHANGE except possibly through an interaction.] [JLG: Yes. But I think we should construct that story based on the Table above and not on father's income, for which you can see the results next. Now, one could ask why not add this to the aggregates in the Table above. The reason is that if we do so the number of observations drops so much and we are back in trouble.]}\\ 
-
-\noindent \textbf{[JJH: You seem to think I do not understand that you have analyzed baseline I do understand very well now although the writing in previous drafts was exceedingly unclear.] [JLG: No. I am just trying to clarify things for you when the questions come by, but I mean no disrespect.]}\\ 
-
-\noindent \textbf{[JJH: But now we need more however imperfect.] [JLG: I think that the parental income and HOME scores tell the story. .]}\\ 
-
-\noindent \textbf{[JJH: The story in 5 is weak and any fragments will help Read what I wrote carefully.] [JLG: .]}\\ 
 
 
 
@@ -218,9 +270,7 @@
 
 
 
-
-
-
+ 
 
 
 
