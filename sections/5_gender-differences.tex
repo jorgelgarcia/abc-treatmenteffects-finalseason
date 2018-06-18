@@ -4,13 +4,13 @@ The null hypothesis  of no treatment effect is equivalent to the hypothesis that
 
 Comparing ABC/CARE to those who stay at home (Figure~\ref{fig:ppositivehome}), a greater proportion of the treatment effects is positive for women than for men. While the female proportion is statistically significantly larger than $0.500$, the male proportion is not. Figure~\ref{fig:ppositivealternative} shows a different pattern when we compare outcomes from ABC/CARE with outcomes of those who attended alternative formal childcare. Close to 75\% of the treatment effects are positive for men. For women, the proportion of positive treatment effects is similar to the proportion obtained by comparing ABC/CARE to those who stay at home. From this analysis, we conclude that ABC/CARE was effective for men compared to alternative formal childcare programs, but not when compared to staying at home. ABC/CARE was effective for women regardless of the mode of childcare used by the controls.\footnote{Disaggregating by outcomes, by category, gender, and mode of childcare for controls produces a noisy pattern that is broadly consistent in Figure~\ref{fig:ppositive}.}
 
-\begin{figure}[!htbp]
+\begin{sidewaysfigure}[!htbp]
 \centering
 \caption{Positively Impacted Outcomes, ABC/CARE Males and Females}\label{fig:ppositive}
 \begin{subfigure}[h]{0.5\textwidth}
-		\centering
-		\caption{ Treatment vs.\ Stay at Home} \label{fig:ppositivehome}
-		\includegraphics[width=\textwidth]{output/epan_ipw_p0_all.eps}
+	\centering
+	\caption{Treatment vs.\ Stay at Home} \label{fig:ppositivehome}
+	\includegraphics[width=\textwidth]{output/epan_ipw_p0_all.eps}
 \end{subfigure}%
 \begin{subfigure}[h]{0.5\textwidth}
 	\centering
@@ -18,8 +18,9 @@ Comparing ABC/CARE to those who stay at home (Figure~\ref{fig:ppositivehome}), a
 		\includegraphics[width=\textwidth]{output/epan_ipw_p1_all.eps}
 \end{subfigure}
 \footnotesize \justify
-\textbf{Note:} Panel (a) displays the percentage of positive treatment effects in accordance with the parameter in Equation~\eqref{eq:cont1}---treatment vs. staying at home---by gender. Panel (b) is analogous for Equation~\eqref{eq:cont2}---treatment vs.\ alternative formal childcare. Standard errors are based on the empirical bootstrap distribution. The null hypothesis is that the proportions of positive treatment effects are greater than 50\%. For a full list of the estimated combining functions, see Appendix~\ref{appendix:results}. \\
-\end{figure}
+\textbf{Note:} Panel (a) displays the percentage of positive treatment effects in accordance with the parameter in Equation~\eqref{eq:cont1}---treatment vs. staying at home---by gender. Panel (b) is analogous for Equation~\eqref{eq:cont2}---treatment vs.\ alternative formal childcare. Standard errors are based on the empirical bootstrap distribution. The null hypothesis is that the proportions of positive treatment effects are greater than 50\%. For a full list of the estimated combining functions, see Appendix~\ref{appendix:results}. 
+\end{sidewaysfigure}
+
 
 \begin{sidewaysfigure}[!htpb]
 \centering
