@@ -75,6 +75,11 @@ predict factorbase
 sum factorbase, detail
 gen base = (factorbase <= r(p50))
 
+factor p_inc1y6m p_inc2y6m p_inc3y6m p_inc4y6m m_work1y6m m_work2y6m m_work3y6m ///
+		m_work4y6m home0y6m home1y6m home2y6m home3y6m home4y6m
+		
+predict factorp
+
 keep id R RV male P Q dc_mo_pre* base m_ed0y m_work0y m_age_base m_married_base ///
 				m_iq_base f_home0y p_inc0y hrabc_index hh_sibs_base apgar5 f_home_base ///
 				m_ed_base factor*
