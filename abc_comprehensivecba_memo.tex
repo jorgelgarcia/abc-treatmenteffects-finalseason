@@ -1,0 +1,149 @@
+%Input preamble
+\input{preamble}
+\input{output/mainstatistics}
+
+\newcommand*\leftright[2]{%
+  \leavevmode
+  \rlap{#1}%
+  \hspace{0.5\linewidth}%
+  #2}
+
+\newcommand{\orth}{\ensuremath{\perp\!\!\!\perp}}%
+\newcommand{\indep}{\orth}%
+\newcommand{\notorth}{\ensuremath{\perp\!\!\!\!\!\!\diagup\!\!\!\!\!\!\perp}}%
+\newcommand{\notindep}{\notorth}
+
+\externaldocument{abc_comprehensivecba_appendix}
+\externaldocument{abc_comprehensivecba_appendix-pub}
+\externaldocument{abc_comprehensivecba_answerstoreferees}
+
+\begin{document}
+
+\begin{center}
+\textbf{Memo: June 19, 2018}
+\end{center}
+
+\doublespacing
+
+\noindent This memo aims to clarify Table 2 in the CBA paper and answer the questions posed by JJH in his June 19, 2018 edits. I will place the questions rose and answers as the memo goes. Note that Table 2 is at the end of this memo.\\
+
+\noindent I propose that we iterate on this before inserting this discussion of Table 2 into the paper. I don't want to frustrate you in two documents at the same time. Perhaps we can focus on this discussion in terms of Table 2 (the rest of your edits and answers to your other questions have been implemented in the paper).\\
+
+\noindent Panel (a) of Table 2 presents three tests: 
+\begin{enumerate}
+\item Tests of invariance in the technologies across treatment regimes within the experimental sample. That is, we test:
+	\begin{equation} 
+	H_0: \phi_{k,a}^0 \left( \bm{x}, \bm{b} \right) = \phi_{k,a}^1 \left( \bm{x}, \bm{b} \right)  
+	\end{equation}
+\noindent We perform this test by asking whether a treatment indicator ($R$) is significant once baseline variables or inputs have been accounted for.  In Panel (a) of Table 2, we see that the coefficients associated with the ($R$) treatment indicator are effectively zero for both employment and labor income \textbf{[JJH: This section was labor income only + now it's employment!] [JLG: I decided to put employment in as complementary because we cannot display tests within the experimental sample separating by gender - too imprecise. Employment is related to labor income and thus I decided that. We can present labor income only if that's preferred.]}. For employment, the coefficient is $0.000$ with $p$-value $0.999$. For labor income, the coefficient is $821.087$ with $p$-value $0.926$. $821.087$ is actually a low value when noting that average labor income is $26,083$. Labor income is in 2014 dollars. The evidence here indicates that we fail to reject $H_0: \phi_{k,a}^0 \left( \bm{x}, \bm{b} \right) = \phi_{k,a}^1 \left( \bm{x}, \bm{b} \right)$. 
+
+\noindent After presenting the coefficients associated with $R$ we also present the coefficients associated with the rest of the elements in the technology - mother's education (at baseline), PIAT, years of education, and labor income at 21.\\
+
+\item Test of model relevance. We present the $R^2$, number of observations and the standard $F$-test on the relevance of the model. That is, we test 
+	\begin{eqnarray} 
+	H_0&:& \text{R = 0 and Mother's education (at birth) = 0 and PIAT (5-7) = 0} \nonumber \\ 
+	      & \text{and} & \text{Years of Education = 0 and Labor income at 21 = 0}
+	\end{eqnarray}
+\noindent and present the standard $F$-stat and $p$-value. This is \textbf{not testing invariance}. This is \textbf{testing whether the inputs to the estimated technology have a trivial relationship with the outcomes} of interest. We reject this null hypothesis because, as expected, the inputs do not have a trivial relationship with the outcomes of interest. Else, our forecasts would not work out. But perhaps this is a details and we should get rid of it because it is not a test of invariance and it is causing confusion. Without the intend to generate controversy, I added this test upon your request.\\
+
+\item Test of invariance in the distributions of $\varepsilon_{k,a}^d$ across treatment regimes within the experimental sample. That is, we test:
+	\begin{equation} 
+	H_0: F_{k,a}^d \left( \cdot \right) = F_{k,a} \left( \cdot \right)
+	\end{equation}
+\end{enumerate}
+
+\noindent I prepared two tests for this. First, a test of difference in means (standard $t$-test). \textbf{[JJH: Isn't equality of means imposed in the estimation?] [JLG: No. We are testing equality of means in the outcomes residualized from mother's education, PIAT, years of education, and labor income at 21, but \textit{not} of $R$. I think that's the correct test because our proposed technology in the paper does not have $R$ as input - which is our first test. Thus the correct empirical counterparts to $\varepsilon_{k,a}^d$ are residuals net of inputs but not net of $R$ I agree that if $R$ were an input then the means should be the same by construction.]} Second, an exact, non-parametric test on difference in the whole distribution (Kolgomorov-Smirnov). The evidence here indicates that we fail to reject $H_0: F_{k,a}^d \left( \cdot \right) = F_{k,a} \left( \cdot \right)$.\\ 
+
+\noindent \textbf{Conclusion from Panel (a). \textit{Within the experiment} and at age 30 for labor income and employment: we fail to $H_0: \phi_{k,a}^0 \left( \bm{x}, \bm{b} \right) = \phi_{k,a}^1 \left( \bm{x}, \bm{b} \right)$ and $H_0: F_{k,a}^d \left( \cdot \right) = F_{k,a} \left( \cdot \right)$, i.e., we \textit{fail to reject the testable implications of Assumption A-2} in the paper with respect to treatment regimes. We fail to reject invariance across treatment regimes. We also reject that the inputs of the technologies have a trivial relationship with the outcomes (which may be a detail at this point).}
+
+\noindent Panel (b) of Table 2 presents three tests: 
+
+\begin{enumerate}
+\item Tests of invariance in the technologies across experimental and non-experimental samples. That is, we test:
+	\begin{equation} 
+	H_0: \phi_{e,a}^d \left( \bm{x}, \bm{b} \right) = \phi_{n,a}^d \left( \bm{x}, \bm{b} \right)  
+	\end{equation}
+\noindent We perform this test by asking whether a sample indicator ($K^*$) is significant once baseline variables or inputs have been accounted for \textbf{[JLG: Note that this is under the null of invariance across treatment regimes - which we have evidence in favor of in Panel (a). So here we pool treatment and control and synthetic treatment and synthetic control.] [JJH: What is the sample? Matched sample?] [JLG: No. It's our synthetic cohort pooled with the experimental ABC/CARE sample at age 30. This is what allows us to test invariance across experimental and non-experimental samples.]}. In Panel (b) of Table 2, we see that the coefficients associated with the ($K^*$) sample indicator are effectively zero for labor income for both females and males (here, our samples are larger and we can separate the tests by gender. \textbf{[JJH: What about employment?] [JLG: I can add it. Is it of interest once we are able to separate by gender? That's something we can add, no problem.]} For females, the coefficient is $-142.63$ with $p$-value $0.965$. For males, the coefficient is $1,887.575$ with $p$-value $0.654$. As reported in the paper, these coefficients are low once we take perspective on what the means of these variables are (we are talking about annual labor income). The evidence here indicates that we fail to reject $H_0: \phi_{e,a}^d \left( \bm{x}, \bm{b} \right) = \phi_{n,a}^d \left( \bm{x}, \bm{b} \right)$.\\ 
+
+\noindent After presenting the coefficients associated with $K^*$ we also present the coefficients associated with the rest of the elements in the technology - mother's education (at baseline), PIAT, years of education, and labor income at 21.\\
+
+\item Test of model relevance. We present the $R^2$, number of observations and the standard $F$-test on the relevance of the model. That is, we test 
+	\begin{eqnarray} 
+	H_0&:& \text{$K^*$ = 0 and Mother's education (at birth) = 0 and PIAT (5-7) = 0} \nonumber \\ 
+	      & \text{and} & \text{Years of Education = 0 and Labor income at 21 = 0}
+	\end{eqnarray}
+\noindent and present the standard $F$-stat and $p$-value. Analogous to Panel (a), this is \textbf{not testing invariance}. This is \textbf{testing whether the inputs to the estimated technology have a trivial relationship with the outcomes} of interest. As before, perhaps we can drop this test.\\
+
+\item Test of invariance in the distributions of $\varepsilon_{k,a}^d$ across samples (under the null of invariance across treatment regimes) \textbf{[JJH: What is being repeated here?] [JLG: I believe that there is no repetition here. Panel (a) is testing invariance across treatment regimes at 30 within the experiment. Panel (b) is testing invariance across samples pooling the experiment data and non-experimental data (and treatment and control) under the null of invariance across treatment regimes.]}. That is, we test:
+	\begin{equation} 
+	H_0: F_{e,a}^d \left( \cdot \right) = F_{n,a}^d \left( \cdot \right)
+	\end{equation}
+\end{enumerate}
+
+\noindent I prepared the same tests as in Panel (a). Analogous to Panel (a), the residuals are net of the inputs but not net of $K^*$ and that is why the means are not trivially the same for the experimental and non-experimental samples. The evidence here indicates that we fail to reject $H_0: F_{e,a}^d \left( \cdot \right) = F_{n,a}^d \left( \cdot \right)$, except for the K-S test for males - which is unfortunate. But, generally, we fail to reject invariance as well.\\
+
+\noindent \textbf{Conclusion from Panel (b). \textit{Across experimental and non-experimental samples} (using our synthetic cohort) and at age 30 for labor income for males and females, we fail to reject $H_0: \phi_{e,a}^d \left( \bm{x}, \bm{b} \right) = \phi_{n,a}^d \left( \bm{x}, \bm{b} \right)$. In 3 out of the 4 tests that we implement, we also fail to reject $H_0: F_{e,a}^d \left( \cdot \right) = F_{n,a}^d \left( \cdot \right)$. We also reject that the inputs of the technologies have a trivial relationship with the outcomes (which, again, may be a detail at this point).}\\ 
+
+\noindent \textbf{[JJH: Totally unclear!] [JLG: The table has too much information. Perhaps we can drop the second test in each panel to focus the discussion. Let me know if these explications help, please.]}\\
+
+\noindent \textbf{[JJH: This looks like a disaster. What fails + on what sample?] [JLG: In Panel (a) we definitely fail to reject invariance, and we reject that the inputs and the outcome shave a trivial relationship. For that we use the experimental data at age 30. In Panel (b) we fail to reject invariance in all cases except for one. We also reject that the inputs and the outcome shave a trivial relationship. For that we pool experimental and non-experimental data at age 30, because we want to test invariance across samples.]}\\
+
+\noindent \textbf{JJH: Describe this test in greater detail. One at the time or all? Show formula?] [JLG: The null for each test are displayed above. I believe that, with the clarifications, you would agree that the tests are standard.]}
+
+\setcounter{table}{1}
+
+\begin{table}[!htpb]
+\begin{threeparttable}
+\caption{Invariance in Technologies $ \left( \phi_{k,a}^d \left( \bm{x}, \bm{b} \right) \right) $ and Distributions of the  Error Terms $\left( F_{k,a}^d \right) $} \label{table:invariance}
+\centering
+\footnotesize
+\begin{tabular}{lcccc} \toprule
+ \multicolumn{1}{l}{\textbf{(a). Treatment Regimes}} & \multicolumn{2}{c}{Employment} &   \multicolumn{2}{c}{Labor Income} \\ \\
+ \textbf{\textit{Technologies:} $H_0: \phi_{k,a}^0 \left( \bm{x}, \bm{b} \right) = \phi_{k,a}^1 \left( \bm{x}, \bm{b} \right)$}      \\
+       			      & coefficient & $p$-value & coefficient & $p$-value \\
+$R$ &0.000 & 0.999 & 821.087 & 0.926 \\ \\
+Mother's Education (at birth) & 0.036 & 0.131 & 786.262 & 0.758 \\
+PIAT (5-7) & 0.008 & 0.054 & 83.931 & 0.854 \\
+Years of Education (30) & 0.046 & 0.012 & 8,223.641 & 0.000 \\
+Labor Income (21) & -0.000 & 0.344 & 0.130 & 0.767 \\ \\
+$R^2$ & \multicolumn{2}{c}{0.123}  & \multicolumn{2}{c}{0.164}  \\
+Observations & \multicolumn{2}{c}{111} & \multicolumn{2}{c}{110} \\ 
+$H_0$: model is null & \multicolumn{2}{c}{$F$ = 2.940} & \multicolumn{2}{c}{$F$ = 4.090} \\ 
+& \multicolumn{2}{c}{$p$-value = 0.016} & \multicolumn{2}{c}{$p$-value = 0.002} \\ \\
+ \multicolumn{5}{l}{\textbf{\textit{Unobserved Component:} $H_0:  F_{k,a}^0 \left( \cdot \right) =  F_{k,a}^1 \left( \cdot \right)$}} \\  
+Equality in means & $t$-stat & $p$-value & $t$-stat & $p$-value \\
+ & -0.002  & 0.999 & -0.092 & 0.927   \\ 
+Equality in distributions & \multicolumn{2}{c}{K-S $p$-value} &  \multicolumn{2}{c}{K-S $p$-value}  \\ 
+                                      & \multicolumn{2}{c}{0.290} &  \multicolumn{2}{c}{0.372}  \\ \midrule 
+ \multicolumn{1}{l}{\textbf{(b). Data Sources (Labor Income)}} & \multicolumn{2}{c}{Female} &   \multicolumn{2}{c}{Male} \\
+ \textbf{\textit{Technologies:} $H_0: \phi_{e,a}^d \left( \bm{x}, \bm{b} \right) = \phi_{n,a}^d \left( \bm{x}, \bm{b} \right)$}      \\
+       			      & coefficient & $p$-value & coefficient & $p$-value \\
+$K^*$ & -142.631 & 0.965 & 1,887.575 & 0.654 \\ \\
+Mother's Education (at birth) & -229.481 & 0.631 & 427.224 & 0.459 \\
+PIAT (5-7) & 266.1971 & 0.002 & 219.220 & 0.044 \\
+Years of Education (30) & 4,263.156 & 0.000 & 4,434.173 & 0.000 \\
+Labor Income (21) & 0.355 & 0.000 & 0.685 & 0.000 \\ \\
+$R^2$ & \multicolumn{2}{c}{0.221}  & \multicolumn{2}{c}{0.182}  \\
+Observations & \multicolumn{2}{c}{829} & \multicolumn{2}{c}{746} \\ 
+$H_0$: model is null & \multicolumn{2}{c}{$F$ = 46.570} & \multicolumn{2}{c}{$F$ = 32.830} \\
+& \multicolumn{2}{c}{$p$-value = 0.000} & \multicolumn{2}{c}{$p$-value = 0.000} \\ \\
+ \multicolumn{5}{l}{\textbf{\textit{Unobserved Component:} $H_0:  F_{e,a}^d \left( \cdot \right) =  F_{n,a}^d \left( \cdot \right)$}} \\  
+Equality in means & $t$-stat & $p$-value & $t$-stat & $p$-value \\
+ & 0.054  & 0.957 & -0.226 & 0.822   \\ \\
+Equality in distributions & \multicolumn{2}{c}{K-S $p$-value} &  \multicolumn{2}{c}{K-S $p$-value}  \\ 
+                                      & \multicolumn{2}{c}{0.481} &  \multicolumn{2}{c}{0.046}  \\ \bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item * $K = 1$ if $k = e$; $K = 0$ if $k = n$\\
+\item Note for Panel (a): In \textit{Technologies}, we display results from regressing, in the experimental sample, employment and labor income at age 30 on the variables listed in the left-most column. For this regression, we present the $R^2$, the number of observations, and the test on the null comparing the estimated model with a model containing a constant only. In \textit{Unobserved Component}, we test equality of means ($t$-test) and equality of distributions (Kolgomorov-Smirnov) of the outcomes net of the variables listed in \textit{Technologies} except for $R$ across treatment and control groups in the experimental sample. \\
+\item Note for Panel (b): Results are analogous to Panel (a) comparing the experimental and non-experimental for labor income at age 30 by gender.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+%References
+\singlespace
+\bibliographystyle{chicago}
+\bibliography{heckman}
+
+\end{document}
