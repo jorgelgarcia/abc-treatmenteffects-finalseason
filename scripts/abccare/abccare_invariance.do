@@ -34,8 +34,8 @@ replace piatmath = piatmathABC 	if abc == 1
 replace piatmath = piatmathCARE if abc == 0
 
 // invariance across regimes
-foreach var of varlist si30y_works_job si30y_inc_labor {
-	reg `var' R m_ed0y piatmath years_30y si21y_inc_labor
+foreach var of varlist si30y_inc_labor {
+	reg `var' R m_ed0y piatmath years_30y si21y_inc_labor if male == 0
 
 	// distributions of residuals 
 	// replace `var' = log(`var' + 1)
@@ -47,10 +47,6 @@ foreach var of varlist si30y_works_job si30y_inc_labor {
 	ksmirnov r`var', by(R)
 }
 summ si30y_inc_labor if R == 0
-
-
-
-
 
 // invariance across samples
 gen K = 1
