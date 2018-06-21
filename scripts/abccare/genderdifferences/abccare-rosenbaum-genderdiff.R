@@ -20,7 +20,7 @@ output 		<- file.path(projects,'abccare-cba', 'output')
 setwd(datafile)
 #setwd('/share/klmshare/Data_Central/Abecedarian/data/ABC-CARE/extensions/cba-iv')
 getwd()
-df <- data.frame(read.dta('abccare-factors-R-inputold-updated-short.dta'))
+df <- data.frame(read.dta('abccare-invariance-R-input.dta'))
 
 # define function for Rosenbaum test
 rosenbaum <- function(data,varstokeep,catvar){
@@ -35,7 +35,7 @@ rosenbaum <- function(data,varstokeep,catvar){
   # 	missing.weight: match on missing
   # 	ndiscard: "phantoms" to make sure the cardinality of the groups balance
 
-  f1 <- gendistance(subset(data, select=c('id',varstokeep)), idcol=1, ndiscard=nToDrop)
+  f1 <- gendistance(subset(data, select=c('id',varstokeep)), idcol=1, missing.weight=0, ndiscard=nToDrop)
   #, missing.weight=0,
   # reformat distance matrix
 
@@ -82,10 +82,12 @@ rosenbaum <- function(data,varstokeep,catvar){
 agefactors <- c('factorage5','factorage15','factorage34')
 catfactors <- c('factoriq','factorach','factorse','factormlabor','factorparent','factoredu','factoremp','factorhealth','factorrisk','factorcrime','factorall')
 
-factorcats <- list(parent='factorp')
 #factorcats <- list(fiq='factoriq',fach='factorach',fse='factorse',fmlabor='factormlabor',fparent='factorparent',fedu='factoredu',femp='factoremp',fcrime='factorcrime',frisk='factorrisk',fhealth='factorhealth',fall='factorall',fall='factorall')
 #factorcats <- list(base='factorbase',age5='factorage5',age15='factorage15',age34='factorage34',fiq='factoriq',fach='factorach',fse='factorse',fmlabor='factormlabor',fparent='factorparent',fedu='factoredu',femp='factoremp',fcrime='factorcrime',frisk='factorrisk',fhealth='factorhealth',fall='factorall')
 #basevars <- c('factorbase')
+
+# INVARIANCE
+factorcats <- list(emp='rsi30y_works_job_resid0') #,emp='rsi30y_works_job_resid0')
 
 #varlists <- c(agefactors,catfactors)
 #keeps <- append(basicvars,varlists)
@@ -99,9 +101,11 @@ df <- df[!is.na(df$id),]
 
 ## GROUP A
 # girls, treatment vs. control
-GTvCd <- df[(df$male==0),]
+GTvCd <- df[(df$male==0)& !is.na(df$rsi30y_works_job_resid0),]
 # boys, treatment vs. control
-BTvCd <- df[(df$male==1),]
+BTvCd <- df[(df$male==1)& !is.na(df$rsi30y_works_job_resid1),]
+# pooled, treatment vs. control
+TvCd <- df[!is.na(df$rsi30y_works_job_resid2),]
 # girls, treatment vs. alternative
 GTvCad <- df[(df$male==0)&((df$P==1 & df$R==0)|(df$R==1))& !is.na(df$P),]
 # girls, treatment vs. home care
@@ -129,13 +133,15 @@ TBvGd <- df[((df$R==1) & !is.na(df$factorbase)),]
 BvGd <<- df[!is.na(df$factorbase),]
 
 # combine dataframes in to a list
+invariance <- list(GTvC=GTvCd) #,BTvC=BTvCd,TvC=TvCd)
 #bigdfA <- list(GTvC=GTvCd,GTvCa=GTvCad,GTvCh=GTvChd,BTvC=BTvCd,BTvCa=BTvCad,BTvCh=BTvChd)
-bigdfB <- list(BCavCh=BCavChd,GCavCh=GCavChd)
+#bigdfB <- list(BCavCh=BCavChd,GCavCh=GCavChd)
 #bigdfC <- list(ChBvG=ChBvGd,CaBvG=CaBvGd,CBvG=df[(df$R==0),], TBvG=df[(df$R==1),],BvG=df)
 #smalldfC <- list(CBvG=CBvGd, TBvG=TBvGd,BvG=BvGd)
 
+outputinvariance <- sapply(factorcats, function(x) sapply(invariance, function(y) rosenbaum(y,x,'R')))
 #outputAf <- sapply(factorcats, function(x) sapply(bigdfA, function(y) rosenbaum(y,x,'R')))
-outputBf <- sapply(factorcats, function(x) sapply(bigdfB, function(y) rosenbaum(y,x,'P')))
+#outputBf <- sapply(factorcats, function(x) sapply(bigdfB, function(y) rosenbaum(y,x,'P')))
 #outputCf <- sapply(factorcats, function(x) sapply(bigdfC, function(y) rosenbaum(y,x,'male')))
 #outputCf <- sapply(factorcats, function(x) sapply(smalldfC, function(y) rosenbaum(y,x,'male')))
 #outputDisadvantage <- rosenbaum(df[(df$R==0),],basevars,'male')
@@ -153,8 +159,11 @@ setwd('/Users/annaziff/Desktop/work/repos/abccare-cba/output')
 #cAf <-data.frame(outputAf) 
 #write.matrix(cAf,'rosenbaum-output-Afactors-updated-short.txt',sep=',')
 
-cBf <-data.frame(outputBf) 
-write.matrix(cBf,'rosenbaum-output-Bfactors-updated-short.txt',sep=',')
+#cBf <-data.frame(outputBf) 
+#write.matrix(cBf,'rosenbaum-output-Bfactors-updated-short.txt',sep=',')
 
 #cCf <-data.frame(outputCf)
 #write.matrix(cCf,'rosenbaum-output-Cfactors-updated-short.txt',sep=',')
+
+cinvariance <- data.frame(outputinvariance)
+write.matrix(cinvariance,'rosenbaum-output-emp-female-invariance.txt',sep=',')
