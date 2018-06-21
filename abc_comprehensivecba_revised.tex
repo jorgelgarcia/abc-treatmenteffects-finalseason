@@ -110,7 +110,7 @@ The program is a prototype for many programs planned or in place today.\footnote
 
 This paper addresses a fundamental problem that arises in evaluating social programs. Few program evaluations have complete life-cycle histories of participants, for example. In our data, the oldest experimental subject is in his/her mid 30s. We forecast the full life-cycle benefits and costs of the program using non-experimental data guided by economic theory.\footnote{\citet{Ridder_Moffitt_2007_hbk_metricsdata} discuss data combination methods. These methods are related to the older ``surrogate marker'' literature in biostatistics (see e.g.,\ \citealp{Prentice_1989_Surrogate_SiM}). However, as noted below, exogeneity is an integral part of the models we estimate, although it is not considered in the statistics literature. That literature does not provide testable predictions for validation of its forecasts as we do.} We compute internal rates of return and benefit/cost ratios that encompass the large array of benefits and costs generated. In creating our estimates, we account for model estimation and forecasting error and the welfare cost of taxation required to fund the program. We subject our estimates to extensive sensitivity analyses.
 
-We construct synthetic cohorts from non-experimental samples that approximate experimental samples in post-experimental years. Economic theory guides us in formulating and estimating invariant production functions that characterize program treatment effects. The estimated production functions depend on inputs changed by treatment that are measured in both experimental and non-experimental samples. The production functions themselves are assumed to be unaffected by treatment -- a property we test and verify.\footnote{See \cite{Hurwicz_1962_structural} for the definition of policy invariance. We build on the methodology of \citet{Heckman_Pinto_etal_2013_PerryFactor}, who relate intermediate and long-term outcomes in a mediation analysis. They do not construct out of sample forecasts.} We test invariance of the production functions using non-experimental samples that overlap, in part, with the experimental sample. We forecast experimental treatment effects using estimated production functions applied to non-experimental data.
+We construct synthetic cohorts from non-experimental samples that approximate experimental samples in post-experimental years. Economic theory guides us in formulating and estimating invariant production functions that characterize program treatment effects. The estimated production functions depend on inputs changed by treatment that are measured in both experimental and non-experimental samples. The production functions themselves are assumed to be unaffected by treatment---a property we test and verify.\footnote{See \cite{Hurwicz_1962_structural} for the definition of policy invariance. We build on the methodology of \citet{Heckman_Pinto_etal_2013_PerryFactor}, who relate intermediate and long-term outcomes in a mediation analysis. They do not construct out of sample forecasts.} We test invariance of the production functions using non-experimental samples that overlap, in part, with the experimental sample. We forecast experimental treatment effects using estimated production functions applied to non-experimental data.
 
 Our analysis is a template for estimating the life-cycle gains of social experiments for which there is less than full lifetime follow-up. Supplementing experimental data with non-experimental data using economic and econometric theory enhances the forecasting power of experiments. The quest for long-run answers from short-term experiments has recently led to informal procedures for estimating long-term benefits using short-term measures of childhood test scores \citep[e.g.][]{Chetty_Friedman_etal_2011_QJoE,Kline_Walters_2016_QJE}. We show by example that these practices can be quite misleading about true program benefits.
 
@@ -209,7 +209,20 @@ Note: Panel (a) displays the forecasted labor income for males in the auxiliary 
 \begin{threeparttable}
 \caption{Summary of Treatment Effects for Intermediate Inputs of Labor Income ($\bm{X}^d_{k,a}$)} \label{table:summint}
 \centering
-\input{output/income-inputs-description.tex}
+\footnotesize
+\begin{tabularx}{16.5cm}{XcX}
+& \begin{tabular}{lcccc} \toprule
+& \mc{2}{c}{Females} & \mc{2}{c}{Males} \\
+& Control & Average & Control & Average  \\
+& Mean & Treatment Effect & Mean & Treatment Effect  \\
+\midrule
+PIAT Scores & $     95.63 $  & $      \textbf{4.92} $ & $     93.46 $ & $      \textbf{7.70} $ \\
+High School Graduation & $      0.51 $ & $     \textbf{0.25} $ & $      0.61 $ & $      0.07 $ \\
+College Graduation & $      0.08 $ & $      0.13 $ & $      0.12 $ & $      \textbf{0.17} $ \\
+Years of Education & $     11.76 $ & $      \textbf{2.14} $ & $     12.90 $ & $      \textbf{0.66} $ \\
+Labor Income at 30  & $ 23,443.42 $ & $  2,547.50 $ & $ 29,340.31 $ & $\textbf{19,809.74} $ \\ \bottomrule
+\end{tabular} & 
+\end{tabularx}
 \begin{tablenotes}
 \footnotesize
 \item Note: This table shows the control-group level and the raw mean difference between treatment and control (average treatment effects), by gender. PIAT scores have a sample mean of 100 and a standard deviation of 15. High school and college graduation are expressed in rates. Labor income is in 2016 USD. Average treatment effects are bolded when statistically significant at the 10\% level.
@@ -289,6 +302,7 @@ Note Equations~\eqref{eq:suff1} and~\eqref{eq:suff2} are sufficient conditions f
 
 At age 30, we observe labor income in the experimental sample for both the treatment and the control groups. If Condition~\eqref{eq:suff1} holds, the coefficient associated with $R$ (randomization to treatment assignment in ABC/CARE, which, as discussed, is equivalent to $D$), denoted by $\Delta$, with $R$ (the treatment indicator) is zero when estimating the following baseline linear technology: 
 \setcounter{equation}{6}
+\begin{subequations}
 \begin{equation}
 \text{Y}_{e,30}^d = \Delta \cdot R +  \bm{B}_{e,30} \cdot \bm{\gamma}_{e,30}^d +\bm{X}_{e,30}^d \cdot \bm{\beta}_{e,30}^d + \varepsilon_{e,a}^d, \label{eq:linearexp} 
 \end{equation}
@@ -304,7 +318,8 @@ Panel (a) of Table~\ref{table:invariance} displays estimates of the coefficients
 \caption{Invariance in Technologies $ \left( \bm{\phi}_{k,a}^d \left( \bm{x}, \bm{b} \right) \right)$ at Age 30} \label{table:invariance}
 \centering
 \footnotesize
-\begin{tabular}{lcccc} \toprule
+\begin{tabularx}{16.5cm}{XcX}
+& \begin{tabular}{lcccc} \toprule
  \multicolumn{5}{l}{\textbf{Panel (a). Invariance Across Treatment Regimes}} \\
 & \multicolumn{2}{c}{Employment} &   \multicolumn{2}{c}{Labor Income} \\ 
     			      & coefficient & $p$-value & coefficient & $p$-value \\ \\
@@ -319,7 +334,7 @@ $R^2:$ & \multicolumn{2}{c}{0.123}  & \multicolumn{2}{c}{0.164}  \\
 Observations: & \multicolumn{2}{c}{111} & \multicolumn{2}{c}{110} \\ \\
 \multicolumn{5}{l}{Sample: Experimental Treatment and Control Groups at Age 30} \\ \midrule
  \multicolumn{5}{l}{\textbf{Panel (b). Invariance Across Experimental and Non-Experimental Samples}} \\ 
- & \multicolumn{2}{c}{Female} &   \multicolumn{2}{c}{Male} \\
+ & \multicolumn{2}{c}{Female Labor Income} &   \multicolumn{2}{c}{Male Labor Income} \\
        			      & coefficient & $p$-value & coefficient & $p$-value \\ \\
 $K$  (treatment indicator) & -142.631 & 0.965 & 1,887.575 & 0.654 \\ \\
 \multicolumn{5}{l}{$\bm{B}_{k,30}$ (age-30 baseline variables)} \\ 
@@ -332,7 +347,8 @@ $R^2$ & \multicolumn{2}{c}{0.221}  & \multicolumn{2}{c}{0.182}  \\
 Observations & \multicolumn{2}{c}{829} & \multicolumn{2}{c}{746}  \\ \\ 
 \multicolumn{5}{l}{Sample: Experimental Treatment and Control Groups and Non-Experimental Synthetic }\\
 \multicolumn{5}{l}{Control and Treatment Groups at Age 30} \\ \bottomrule
-\end{tabular}
+\end{tabular} & 
+\end{tabularx}
 \begin{tablenotes}
 \footnotesize
 \item Note for Panel (a): Estimates of the coefficients in Equation~\eqref{eq:linearexp} for employment and labor income at age 30 as outcomes pooling males and females. $R$ denotes the treatment indicator ($R = 0$ for control-group individuals and $R = 1$ for treatment-group individuals). $\bm{B}_{e,30}$ is age-30 baseline variables not affected by treatment (mother's education at birth) and $\bm{X}_{e,30}^d$ is age-30 intermediate inputs.\\ 
@@ -344,10 +360,54 @@ Observations & \multicolumn{2}{c}{829} & \multicolumn{2}{c}{746}  \\ \\
 Under the null hypothesis of invariance across treatment regimes, we test Condition~\eqref{eq:suff2}. At age 30, we observe labor income in both the experimental sample and in our synthetic cohort created in the non-experimental sample in step 1. Invariance across treatment regimes allows us to test this implication pooling the treatment and control groups in the experimental sample \textbf{[JJH: You mean controls of experimental sample.] [JLG: No. Both the treatment and the control groups in the experimental sample because we already failed to reject invariance.]} with the synthetic controls and treatment groups. If Condition~\eqref{eq:suff2} holds, the coefficients associated with $K$ (an indicator of membership in the experimental ($K = 1$ or non-experimental sample ($K = 0$), denoted by $\Lambda$, is zero when estimating the following baseline linear technology: 
 
 \begin{equation}
-\text{Y}_{k,30} = \Lambda \cdot K +  \bm{B}_{k,30} \cdot \bm{\gamma}_{k,30}^d +\bm{X}_{k,30} \cdot \bm{\beta}_{k,30} + \varepsilon_{k,a}, \label{eq:linearnoexp} 
+\text{Y}_{k,30} = \Lambda \cdot K +  \bm{B}_{k,30} \cdot \bm{\gamma}_{k,30} +\bm{X}_{k,30} \cdot \bm{\beta}_{k,30} + \varepsilon_{k,a}, \label{eq:linearnoexp} 
 \end{equation}
+\end{subequations}
 
-Panel (b) in Table~\ref{table:invariance} displays estimates of the coefficients characterizing Equation~\eqref{eq:linearnoexp} for labor income at age 30 for males and females. Estimates by gender in this case are precise because pooling experimental and non-experimental samples generates a larger sample. The estimates of $\Lambda$ are small in magnitude and not statistically significant (the averages of labor income in the experimental and non-experimental sample for females and males are $\$24,584$ and $\$40,007$, and  $\$24,098$ and $\$32,717$ (2014 USD), respectively). We conclude that the technologies are invariant across samples.
+Panel (b) in Table~\ref{table:invariance} displays estimates of the coefficients characterizing Equation~\eqref{eq:linearnoexp} for labor income at age 30 for males and females. Estimates by gender in this case are precise because pooling experimental and non-experimental samples generates a larger sample. The estimates of $\Lambda$ are small in magnitude and not statistically significant (the averages of labor income in the experimental and non-experimental sample for females and males are $\$24,584$ and $\$40,007$, and  $\$24,098$ and $\$32,717$ (2014 USD), respectively). We conclude that the technologies are invariant across samples.\\
+
+\noindent \textbf{[JLG: I still think that 5a with exogeneity (A2) implies our testable key implications 6a and 6b and that 5b and its tests could go in the Appendix. But I may be wrong. In any event, here are the tests.]}\\
+
+\begin{table}[!htpb]
+\begin{threeparttable}
+\caption{Invariance in Distributions of the  Error Terms $\left( F_{k,a}^d \right)$, Age 30} \label{table:invarianceerrors}
+\centering
+\footnotesize
+\begin{tabularx}{16.5cm}{XcX}
+& \begin{tabular}{lcccc} \toprule
+\multicolumn{5}{l}{\textbf{Panel (a). Invariance Across Treatment Regimes}} \\ 
+& \multicolumn{2}{c}{Employment} &  \multicolumn{2}{c}{Labor Income} \\ \\
+ Equality in means & $t$-stat & $p$-value & $t$-stat & $p$-value \\ 
+ & -0.002  & 0.999 & -0.092 & 0.927   \\ \\
+Equality in distributions & \multicolumn{2}{c}{K-S $p$-value} &  \multicolumn{2}{c}{K-S $p$-value}  \\
+                                      & \multicolumn{2}{c}{0.290} &  \multicolumn{2}{c}{0.372}  \\ 
+                                      & \multicolumn{2}{c}{Rosenbaum $p$-value} &  \multicolumn{2}{c}{Rosenbaum $p$-value}  \\
+                                      & \multicolumn{2}{c}{0.000} &  \multicolumn{2}{c}{0.000}  \\ \\ 
+\multicolumn{5}{l}{Sample: Experimental Treatment and Control Groups at Age 30} \\ \midrule
+\multicolumn{5}{l}{\textbf{Panel (b). Invariance Across Experimental and }} \\ 
+\multicolumn{5}{l}{\textbf{Non-Experimental Samples}} \\ 
+& \multicolumn{2}{c}{Employment} &  \multicolumn{2}{c}{Labor Income} \\ 
+Equality in means & $t$-stat & $p$-value & $t$-stat & $p$-value \\
+ & 0.054  & 0.957 & -0.226 & 0.822   \\ \\
+Equality in distributions & \multicolumn{2}{c}{K-S $p$-value} &  \multicolumn{2}{c}{K-S $p$-value}  \\
+                                      & \multicolumn{2}{c}{0.481} &  \multicolumn{2}{c}{0.046}  \\ 
+                                      & \multicolumn{2}{c}{Rosenbaum $p$-value} &  \multicolumn{2}{c}{Rosenbaum $p$-value}  \\
+                                      & \multicolumn{2}{c}{0.000} &  \multicolumn{2}{c}{0.000}  \\ \\
+\multicolumn{5}{l}{Sample: Experimental Treatment and Control Groups and} \\ 
+\multicolumn{5}{l}{Non-Experimental Synthetic Control and Treatment Groups at Age 30 } \\ \bottomrule
+\end{tabular} & 
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Note for Panel (a): Tests for equality in distributions of residuals within the experimental sample across treatment regimes at age 30 in employment and labor income pooling males and females. Residuals are the relevant outcome net of mother's education at birth, average PIAT test from ages 5 to 7, years of education at age 30, and labor income at age 21. Residuals are adjusted for estimation error as explained in step 6 of Appendix~\ref{appendix:bootstrapspreds}. Tests are $t$-test of equality in means, Kolgomorov-Smirnov test, and  \citet{Rosenbaum_2005_Distribution_JRSS} test.\\
+Note for Panel (b): Tests for equality in distributions of residuals across the experimental and non-experimental samples pooling the experimental treatment and control groups and the synthetic cohort at age 30 for labor income by gender.  Residuals are the relevant outcome net of mother's education at birth, average PIAT test from ages 5 to 7, years of education at age 30, and labor income at age 21. Residuals are adjusted for estimation error as explained in step 6 of Appendix~\ref{appendix:bootstrapspreds}. Tests are $t$-test of equality in means, Kolgomorov-Smirnov test, and  \citet{Rosenbaum_2005_Distribution_JRSS} test.\\
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+We use the analogous steps to test Condition~\eqref{eq:crucial2}. First, we test invariance in the distributions of $\bm{\varepsilon}_{k,a}^d$ across treatment regimes within the experimental sample for labor income and employment at age 30. Under the null hypotheses of invariance across treatment regimes, we then test invariance across the experimental and non-experimental samples. To obtain the empirical counterparts to $\bm{\varepsilon}_{k,a}^d$ in Equation~\ref{eq:outcome} and perform these tests, we residualize the outcomes of interest from the baseline variables and the intermediate inputs. That is, we obtain residuals from equations analogous to Equations~\eqref{eq:linearexp} and \eqref{eq:linearnoexp}, in which $R$ and $K$ are not part o the estimation procedure---recall that we find evidence favoring this exclusions in Table~\ref{table:invariance}. \textbf{[JJH: Did you adjust for residual estimation error] [JLG: Yes. As in all of our estimations. See next for location of procedure.]} Before testing, we adjust the residuals for model estimation error as explained in step 6 of Appendix~\ref{appendix:bootstrapspreds}.
+
+With the empirical counterparts of $\bm{\varepsilon}_{k,a}^d$ in hand, we implement three tests to compare the distributions in Table~\ref{table:invarianceerrors}. The first two are standard: mean comparisons through $t$ and Kolgomorov-Smirnov tests. We also implement a non-parametric, exact test due to \citet{Rosenbaum_2005_Distribution_JRSS}. Within the experiment and at age 30, we fail to reject a common distribution of $\bm{\varepsilon}_{k,a}^d$ for both employment and labor income---Panel (a). As before, under this null hypotheses we pool the experimental treatment and control groups and the synthetic treatment and control groups to test invariance across samples by gender. In all but one of our tests we fail to reject invariance across samples---Panel (b).
 
 \textbf{Steps 4, 5, and 6.} \label{section:following} Invariance across treatment regimes and samples makes $\bm{\phi}_{a} (\cdot, \cdot)$ the basic ingredient for forecasting in the experimental sample. Appendix~\ref{appendix:gmm} formalizes our estimation and data combination procedure in a GMM framework.\footnote{As both a referee and various discussants of our paper have pointed out, our identification and estimation strategies do not impose cross-sectional restrictions. This is a consequence of a data restriction: We use different datasets to identify and estimate the  $\bm{\phi}_{a} \left( \bm{x}, \bm{b} \right)$ for each outcome (e.g., labor income, health, crime). Thus, the predictor variables that we are able to use differ across outcomes and we cannot conduct joint estimations.} Figure~\ref{fig:labor-income-profiles} displays our forecasted labor income profiles. Forecasted and actual labor income are closely aligned, which is the final check for that we propose for our procedure.\footnote{The content in Figure~\ref{fig:labor-income-profiles} is sufficient but not necessary to calculate the gain of the program due to labor income. It would be sufficient to forecast the difference between the treatment and control groups. Forecasting the levels, however, provides us with additional testable implications. It also allows us to easily account for forecasting error and to verify that the life-cycle profiles that we estimate are comparable to observed profiles for similar socio-economic groups. The pattern of life-cycle labor income we generate is typical for that of low-skilled workers \citep{Blundell-etal_2015_J-Pub-E,Gladden_Taber_2000_WageProgression,Sanders-Taber_2012_AR,Lagakos_Moll_etal_2016_LifeCycle_NBER}.} We proceed similarly with the remaining outcomes---e.g.,\ parental labor income, crime, health. Computing the net present value, the internal rate of return and benefit/cost ratios are straightforward once the age-by-age forecasts are available.\footnote{Some practical details involved in doing this are in Appendices~\ref{app:method_irr} and \ref{app:method_cbratio}.} Finally, we obtain standard errors from the empirical bootstrap distribution. Our inference accounts for each step of our estimation procedure. A step-by-step recipe for our inference is in Appendix~\ref{appendix:bootstrap}.
 
@@ -442,7 +502,7 @@ Note: This figure displays the life-cycle net present values per program partici
 
 Table~\ref{table:bcsens} provides sensitivity analysis of the estimates to alternative assumptions. Table~\ref{table:irrsens} presents the corresponding internal rates of return. Pooling males and females, the results indicate that the program is socially efficient: the internal rate of return and the benefit/cost ratio are $13.7\%$ and $7.3$. \textit{Our baseline estimates indicate that the program generates a benefit of $7.3$ dollars for every dollar spent on it}. These estimates are statistically significant, even after accounting for sampling variation, serial correlation, and forecast error in the experimental and auxiliary samples and the tax costs of financing the program.\footnote{We obtain the reported standard errors by bootstrapping \emph{all} steps of our empirical procedure, including variable selection, imputation, model selection steps, and forecast error (see  Appendix~\ref{appendix:bootstrap}).} These benefits arise despite the fact that ABC/CARE was much more expensive than other early childhood education programs because the program used more services over a longer time period.
 
-We accompany these estimates with an extensive set of sensitivity checks of statistical and economic interest. Our estimates are not driven by our methods for accounting for attrition and item non-response, by the conditioning variables, or by the functional forms of projection equations used when computing the net-present values.\footnote{See Appendix~\ref{appendix:methodology} for a detailed discussion.} Although the internal rate of return remains relatively high when using participant outcome measures only up to ages 21 or 30, the benefit/cost ratios indicate that accounting for benefits that go beyond age 30 is important. The return to each dollar is at most $3/1$ when only considering benefits up to age 30 (forecast span columns). Accounting for the treatment substitutes available to controls also matters. Males benefit the most from ABC/CARE relative to attending alternative childcare, while females benefit the most from ABC/CARE relative to staying at home. We explore this difference below.
+We accompany these estimates with an extensive set of sensitivity checks of statistical and economic interest. Our estimates are not driven by our methods for accounting for attrition and item non-response, by the conditioning variables, or by the functional forms of projection equations used when computing the net-present values.\footnote{See Appendix~\ref{appendix:methodology} for a detailed discussion.} Although the internal rate of return remains relatively high when using participant outcome measures only up to ages 21 or 30, the benefit/cost ratios indicate that accounting for benefits that go beyond age 30 is important. The return to each dollar is at most $3/1$ when only considering benefits up to age 30 (forecast span columns). Accounting for the treatment substitutes available to controls also matters. Males benefit the most from ABC/CARE relative to attending alternative childcare, while females benefit the most from ABC/CARE relative to staying at home. We explore this difference in Appendix~\ref{appendix:cbaresultscont}.
 
 \begin{sidewaystable}[!htpb]
 \begin{threeparttable}
@@ -450,10 +510,11 @@ We accompany these estimates with an extensive set of sensitivity checks of stat
 \label{table:bcsens}
 \centering
 \scriptsize
-\input{output/allbc_sens}
+\begin{tabularx}{22.5cm}{XcX}
+& \input{output/allbc_sens} & \end{tabularx}
 \begin{tablenotes}
 \scriptsize
-\item Note: This table displays sensitivity analyses of our baseline benefit/cost ratio calculation to the perturbations indexed in the different rows. The characteristics of the \textit{baseline} calculation are in the table header. IPW: adjusts for attrition and item non-response (see  Appendix~\ref{app:method_partialobs} for details). Control variables: Apgar scores at ages 1 and 5 and a high-risk index (see  Appendix~\ref{appendix:results} for details on how we choose these controls). When forecasting up to ages 21 and 30, we consider all benefits and costs up to these ages, respectively. Counterfactuals: we consider treatment vs. next best (baseline), treatment vs. stay at home, and treatment vs. alternative preschools (see Section~\ref{section:cbaresultscont} for a discussion). Deadweight loss is the loss implied by any public expenditure (0\% is no loss and 100\% is one dollar loss per dollar spent). Discount rate: rate to discount benefits to child's age 0 (in all calculations). Parental labor income: see  Appendix~\ref{app:parentalincome} for details on the two alternative forecasts (Mincer and Life-cycle). Labor Income: 0.5\ annual growth (decay) is an annual wage growth (decay) due to cohort effects. Crime: major crimes are rape and murder; half costs takes half of victimization and judiciary costs. Health (QALYs): ``drop all'' sets the value of life equal to zero. Standard errors obtained from the empirical bootstrap distribution are in parentheses. Bolded $p$-values are significant at 10\% using one-sided tests. For details on the null hypothesis see Table~\ref{table:cba}.
+\item Note: This table displays sensitivity analyses of our baseline benefit/cost ratio calculation to the perturbations indexed in the different rows. The characteristics of the \textit{baseline} calculation are in the table header. IPW: adjusts for attrition and item non-response (see  Appendix~\ref{app:method_partialobs} for details). Control variables: Apgar scores at ages 1 and 5 and a high-risk index (see  Appendix~\ref{appendix:results} for details on how we choose these controls). When forecasting up to ages 21 and 30, we consider all benefits and costs up to these ages, respectively. Counterfactuals: we consider treatment vs. next best (baseline), treatment vs. stay at home, and treatment vs. alternative preschools (see Appendix~\ref{appendix:cbaresultscont} for a discussion). Deadweight loss is the loss implied by any public expenditure (0\% is no loss and 100\% is one dollar loss per dollar spent). Discount rate: rate to discount benefits to child's age 0 (in all calculations). Parental labor income: see  Appendix~\ref{app:parentalincome} for details on the two alternative forecasts (Mincer and Life-cycle). Labor Income: 0.5\ annual growth (decay) is an annual wage growth (decay) due to cohort effects. Crime: major crimes are rape and murder; half costs takes half of victimization and judiciary costs. Health (QALYs): ``drop all'' sets the value of life equal to zero. Standard errors obtained from the empirical bootstrap distribution are in parentheses. Bolded $p$-values are significant at 10\% using one-sided tests. For details on the null hypothesis see Table~\ref{table:cba}.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -464,10 +525,11 @@ We accompany these estimates with an extensive set of sensitivity checks of stat
 \label{table:irrsens}
 \centering
 \scriptsize
-\input{output/allirr_sens}
+\begin{tabularx}{22.5cm}{XcX}
+& \input{output/allirr_sens} & \end{tabularx}
 \begin{tablenotes}
-\scriptsize
-\item Note: This table displays sensitivity analyses of our baseline internal rate of return calculation to the perturbations indexed in the different rows. The characteristics of the \textit{baseline} calculation are in the table header. IPW: adjusts for attrition and item non-response (see  Appendix~\ref{app:method_partialobs} for details). Control variables: Apgar scores at ages 1 and 5 and a high-risk index (see  Appendix~\ref{appendix:results} for details on how we choose these controls). When forecasting up to ages 21 and 30, we consider all benefits and costs up to these ages, respectively. Counterfactuals: we consider treatment vs. next best (baseline), treatment vs. stay at home, and treatment vs. alternative preschools (see Section~\ref{section:cbaresultscont} for a discussion). Deadweight loss is the loss implied by any public expenditure (0\% is no loss and 100\% is one dollar loss per dollar spent). Parental labor income: see  Appendix~\ref{app:parentalincome} for details on the two alternative forecasts (Mincer and Life-cycle). Labor Income: 0.5\ annual growth is an annual wage growth due to cohort effects; only benefit assumes labor income is the only benefit of the program. Crime: major crimes are rape and murder; half costs takes half of victimization and judiciary costs. Health (QALYs): ``drop all'' sets the value of life equal to zero. Bolded $p$-values are significant at 10\% using one-sided tests. For details on the null hypothesis see Table~\ref{table:cba}.
+\footnotesize
+\item Note: This table displays sensitivity analyses of our baseline internal rate of return calculation to the perturbations indexed in the different rows. The characteristics of the \textit{baseline} calculation are in the table header. IPW: adjusts for attrition and item non-response (see  Appendix~\ref{app:method_partialobs} for details). Control variables: Apgar scores at ages 1 and 5 and a high-risk index (see  Appendix~\ref{appendix:results} for details on how we choose these controls). When forecasting up to ages 21 and 30, we consider all benefits and costs up to these ages, respectively. Counterfactuals: we consider treatment vs. next best (baseline), treatment vs. stay at home, and treatment vs. alternative preschools (see Appendix~\ref{appendix:cbaresultscont} for a discussion). Deadweight loss is the loss implied by any public expenditure (0\% is no loss and 100\% is one dollar loss per dollar spent). Parental labor income: see  Appendix~\ref{app:parentalincome} for details on the two alternative forecasts (Mincer and Life-cycle). Labor Income: 0.5\ annual growth is an annual wage growth due to cohort effects; only benefit assumes labor income is the only benefit of the program. Crime: major crimes are rape and murder; half costs takes half of victimization and judiciary costs. Health (QALYs): ``drop all'' sets the value of life equal to zero. Bolded $p$-values are significant at 10\% using one-sided tests. For details on the null hypothesis see Table~\ref{table:cba}.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -478,6 +540,8 @@ Parental labor income effects induced by the childcare subsidy are an important 
 
 Individuals in ABC/CARE could experience positive cohort effects that might (i) make them more productive and therefore experience wage growth \citep{Lagakos_Moll_etal_2016_LifeCycle_NBER}; (ii) experience a negative shock such as an economic crisis and therefore experience a wage decline. Our estimates are robust when we vary annual growth and decay rates in labor income between $-0.5\%$ and $0.5\%$.
 
+We also examine the sensitivity of our estimates to (i) dropping the most costly crimes such as murders and rapes;\footnote{Two individuals in the treatment group were convicted of rape and one individual in the control group was convicted of murder.} and (ii) halving the costs of victimization and judiciary costs related to crime. The first sensitivity check is important because we do not want our estimates to be based on a few exceptional crimes. The second is important because victimization costs are somewhat subjective (see  Appendix~\ref{appendix:crime-VI}). Our cost/benefit estimates are robust to these adjustments, even though crime is a major component of it. We also examine the sensitivity with respect to our main health component: quality-adjusted life years. This is an important component because healthier individuals survive longer, and treatment improves health conditions. It is important to note that this component largely accumulates later in life and therefore is heavily discounted. Dropping the component or doubling the value of life does not have a major impact on our calculations.
+
 \begin{figure}[!htbp]
 \caption{Benefit/Cost Ratio and Internal Rate of Return when Accounting for Different Combinations of the Main Benefits}\label{figure:vennpooled}
 \centering
@@ -485,8 +549,6 @@ Individuals in ABC/CARE could experience positive cohort effects that might (i) 
 \footnotesize \justify
 Note: This figure presents all possible combinations of accounting for the benefits from the four major categories in our analysis. The non-overlapping areas present estimates accounting for a single category as the benefit. Where multiple categories overlap, we account for benefits from each of the overlapping categories. The other components remain constant across all calculations and are the same as in Figure~\ref{figure:main}. Health combines QALYs (quality-adjusted life years) and health expenditure. Inference is based on non-parametric, one-sided $p$-values from the empirical bootstrap distribution. We put boxes around point estimates that are statistically significant at the $10\%$ level.
 \end{figure}
-
-We also examine the sensitivity of our estimates to (i) dropping the most costly crimes such as murders and rapes;\footnote{Two individuals in the treatment group were convicted of rape and one individual in the control group was convicted of murder.} and (ii) halving the costs of victimization and judiciary costs related to crime. The first sensitivity check is important because we do not want our estimates to be based on a few exceptional crimes. The second is important because victimization costs are somewhat subjective (see  Appendix~\ref{appendix:crime-VI}). Our cost/benefit estimates are robust to these adjustments, even though crime is a major component of it. We also examine the sensitivity with respect to our main health component: quality-adjusted life years. This is an important component because healthier individuals survive longer, and treatment improves health conditions. It is important to note that this component largely accumulates later in life and therefore is heavily discounted. Dropping the component or doubling the value of life does not have a major impact on our calculations.
 
 Figure~\ref{figure:vennpooled} summarizes the results from our extensive sensitivity analyses. It shows the estimated rates of return and benefit/cost ratios when we calculate our estimates under the assumption that only one of the many streams we consider is the source of the benefit. We calculate the estimates with all possible combinations of the main benefit and cost streams. Our measures of economic efficiency remain statistically and economically significant even after eliminating the benefits from any one of the four main components that we monetize. We report estimates from a variety of specifications of regressors and functional forms. Our estimates are robust to different plausible assumptions about the values of non-market outcomes, for which conventional estimates of standard errors are not available. Overall, our sensitivity analyses indicate that no single category of outcomes drives the social efficiency of the program. Rather, it is the life-cycle benefits across multiple dimensions of human development.
 
@@ -496,13 +558,31 @@ We use our analysis to examine the empirical foundations of the approach to bene
 
 \citet{Kline_Walters_2016_QJE} use data from the Head Start Impact Study (HSIS) and report a benefit/cost ratio between $1.50$ and $1.84$.\footnote{HSIS is a one-year-long randomized evaluation of Head Start.} Their analysis proceeds in three steps: (i) calculate program treatment effects on IQ measured around age 5;\footnote{They use an index based on the Peabody Picture Vocabulary and Woodcock Johnson III Tests.} (ii) monetize this gain using the return to the IQ measured between ages 5 and 7 in terms of net present value of labor income at age 27 using the estimates of \citet{Chetty_Friedman_etal_2011_QJoE};\footnote{The \citet{Chetty_Friedman_etal_2011_QJoE} return is based on Stanford Achievement Tests.}$^,$\footnote{For this comparison exercise, we interpret the earnings estimated in \citet{Chetty_Friedman_etal_2011_QJoE} to be equivalent to labor income.}$^,$\footnote{Calculations from \citet{Chetty_Friedman_etal_2011_QJoE} indicate that a 1 standard deviation gain in IQ at age 5 implies a $13.1\%$ increase in the net present value of labor income through age 27. This is based on combining information from Project Star and administrative data at age 27.} and (iii) calculate the benefit/cost ratio based on this gain and their own calculations of the program's cost.\footnote{Their calculation assigns the net present value of labor income through age 27 of $\$385,907.17$ to the control-group participants, as estimated by  \citet{Chetty_Friedman_etal_2011_QJoE}.}$^,$\footnote{All monetary values that we provide in this section are in 2014 USD. We discount the value provided by \citet{Chetty_Friedman_etal_2011_QJoE} to the age of birth of the children in our sample (first cohort).}
 
-\begin{table}[!htbp]
+
+
+
+\begin{table}[!htpb]
 \begin{threeparttable}
 \caption{Alternative Cost/Benefit Analyses Calculations}
 \label{table:comparing}
 \centering
 \footnotesize
-\input{output/back-envelope-comparison-table.tex}
+\begin{tabularx}{16.5cm}{XcX}
+& \begin{tabular}{ccccc}
+\toprule
+(1) & (2) & (3) & (4) & (5)\\ \midrule
+Age & \mc{1}{c}{NPV Source} & Component & \citet{Kline_Walters_2016_QJE} & Authors' Method \\
+& & & Method & \\ \midrule
+\multirow{2}{*}{27} & \cite{Chetty_Friedman_etal_2011_QJoE} & Labor income & 0.58 (s.e. 0.28) &  \\
+& ABC/CARE-calculated & Labor income & 0.09 (s.e. 0.04) &  1.09 (s.e. 0.04)\\ \\
+\multirow{2}{*}{34} & ABC/CARE-calculated & Labor income & 0.37 (s.e. 0.04) & 0.15 (s.e. 0.05) \\
+& ABC/CARE-calculated & All & 1.21 (s.e. 0.05) &  3.20 (s.e. 1.04) \\ \\
+\multirow{2}{*}{Life-cycle} &  ABC/CARE-calculated & Labor income & 1.56 (s.e. 0.08) & 1.55 (s.e. 0.76) \\
+& ABC/CARE-calculated & All & 3.80 (s.e. 0.29) & 7.33 (s.e. 1.84) \\
+\bottomrule
+\end{tabular}
+& 
+\end{tabularx}
 \begin{tablenotes}
 \footnotesize
 \item Note: This table displays benefit/cost ratios based on the methodology in \citet{Kline_Walters_2016_QJE} and based on our own methodology. Age: age at which we stop calculating the net present value. NPV Source: source where we obtain the net present value. Component: item used to compute net present value (all refers to the net present value of all the components). \citet{Kline_Walters_2016_QJE} Method: estimate based on these authors' methodology. Authors' Method: estimates based on our methodology. Standard errors are based on the empirical bootstrap distribution.
