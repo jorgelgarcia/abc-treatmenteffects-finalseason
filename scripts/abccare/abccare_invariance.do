@@ -33,20 +33,30 @@ gen piatmath = .
 replace piatmath = piatmathABC 	if abc == 1
 replace piatmath = piatmathCARE if abc == 0
 
-// invariance across regimes
-foreach var of varlist si30y_inc_labor {
-	reg `var' R m_ed0y piatmath years_30y si21y_inc_labor if male == 0
+// invariance across regimes by gender
+foreach num of numlist 1 {
+summ    si30y_inc_labor if male == `num', d
+replace si30y_inc_labor =. if si30y_inc_labor > r(p90) & male == `num'
 
-	// distributions of residuals 
-	// replace `var' = log(`var' + 1)
-	reg `var' piatmath m_ed0y years_30y si21y_inc_labor 
-	predict r`var'inc_resid if e(sample) == 1, resid
-	summ    r`var'inc_resid
-	replace r`var' = (r`var' - r(mean))/r(sd)
-	ttest r`var', unequal by(R)
-	ksmirnov r`var', by(R)
+
+reg si30y_inc_labor R m_ed0y piatmath years_30y si21y_inc_labor if male == `num'
+
+// distributions of residuals 
+// replace si30y_inc_labor = log(si30y_inc_labor + 1)
+reg si30y_inc_labor m_ed0y piatmath years_30y si21y_inc_labor if male == `num'
+predict inc_resid if e(sample) == 1, resid
+summ    inc_resid
+replace inc_resid = (inc_resid - r(mean))/r(sd)
+ttest inc_resid, unequal by(R)
+ksmirnov inc_resid, by(R) exact
+
+drop    inc_resid
 }
-summ si30y_inc_labor if R == 0
+
+
+summ si30y_inc_labor if R == 0 & male == 0
+summ si30y_inc_labor if R == 0 & male == 1
+
 
 // invariance across samples
 gen K = 1
