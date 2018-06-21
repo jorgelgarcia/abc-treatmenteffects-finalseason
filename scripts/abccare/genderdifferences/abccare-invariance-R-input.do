@@ -45,13 +45,35 @@ forvalues i = 0/2 {
 	
 		reg `var' piatmath m_ed0y years_30y si21y_inc_labor `male`i''
 		predict r`var'_resid`i' if e(sample) == 1, resid
-		summ    r`var'_resid`i'
+		//summ    r`var'_resid`i'
 		//replace r`var' = (r`var' - r(mean))/r(sd)
 	}
 
 }
 
-keep id R RV male P Q dc_mo_pre* *_resid*
+// invariance across samples
+gen K = 1
+
+// bring CNLSY
+cd $datacnlsyw
+append using cnlsy-abc-match.dta
+replace K = 0 if K == .
+
+foreach num of numlist 0 1 {
+	reg si30y_inc_labor K m_ed0y piatmath years_30y si21y_inc_labor if male == `num'
+
+	// distributions of residuals 
+	// replace si30y_inc_labor = log(si30y_inc_labor + 1)
+	reg si30y_inc_labor m_ed0y piatmath years_30y si21y_inc_labor   if male == `num'
+	predict inc_resid`num' if e(sample) == 1, resid
+	
+	summ inc_resid`num'
+	replace inc_resid`num'= (inc_resid`num' - r(mean))/r(sd)
+
+}
+
+
+keep id R RV K male P Q dc_mo_pre* *_resid*
 
 cd $data
 saveold abccare-invariance-R-input, version(12) replace
