@@ -303,7 +303,7 @@ Condition~\eqref{eq:crucialres} in Assumption~\ref{ass:summary} combined with As
 
 Note Equations~\eqref{eq:suff1} and~\eqref{eq:suff2} are sufficient conditions for Equation~\eqref{eq:nec} to hold. \textbf{[JJH: Maybe we should invoke this and be done.][JLG: We did so in the previous version, and asked the reader to see Appendix C for the tests. But one referee, and I think that I agree with him/her says that the evidence in favor of invariance (and a lot of the stuff that we use to have in the Appendix) is too crucial to be tabled.]}}
 
-\noindent \textbf{[JJH: Please separate (1) invariance from (2) tests of treatment effects] [JLG: What Equation~\eqref{eq:linearexp} tests is if, once intermediate inputs are accounted for, $R$ (randomization into treatment) is still a significant determinant of the outcome of interest. If not, then the intermediate inputs in fact mediate treatment. An analogous test is presented for invariance across samples.][JJH: What analogous test?][JLG: Yes. The tests comes below.]}\\
+\noindent \textbf{[JJH: Please separate (1) invariance from (2) tests of treatment effects] [JLG: What Equation~\eqref{eq:linearexp} tests is if, once intermediate inputs are accounted for, $R$ (randomization into treatment) is still a significant determinant of the outcome of interest. If not, then the intermediate inputs in fact mediate treatment. An analogous test is presented for invariance across samples.][JJH: What analogous test?][JLG: The test asking whether, once inputs are accounted for, $K$ (experimental/non-experimental sample membership) is till a significant determinant of the outcome of interest. If not, the the second aspect of invariance is satisfied.]}\\
 
 We test these conditions at age 30, where we observe labor income in the experimental sample for both the treatment and the control groups. If Condition~\eqref{eq:suff1} holds, the coefficient associated with $R$ (randomization to treatment  in ABC/CARE, which, for our sample, is equivalent to $D$), denoted by $\Delta$, should be zero when assuming linearity. We estimate the following baseline technology: 
 \setcounter{equation}{6}
@@ -312,35 +312,40 @@ We test these conditions at age 30, where we observe labor income in the experim
 Y_{e,30}^d = \Delta \cdot R +  \bm{B}_{e,30} \cdot \bm{\gamma}_{e,30}^d +\bm{X}_{e,30}^d \cdot \bm{\beta}_{e,30}^d + \varepsilon_{e,a}^d, \label{eq:linearexp} 
 \end{equation}
 
-\noindent where $Y_{e,30}^d$ and $\varepsilon_{e,a}^d$ are scalars and $\bm{\gamma}_{e,30}^d$ and $\bm{\beta}_{e,30}^d$ are vectors of coefficients. Failing to reject the null hypothesis $H_{0}: \Delta = 0$ is equivalent to failing to reject invariance across treatment regimes.\\
+\noindent where $Y_{e,30}^d$ and $\varepsilon_{e,a}^d$ are scalars and $\bm{\gamma}_{e,30}^d$ and $\bm{\beta}_{e,30}^d$ are vectors of coefficients. Failing to reject the null hypothesis $H_{0}: \Delta = 0$ is equivalent to failing to reject invariance across treatment regimes.
 
-
-Panel (a) of Table~\ref{table:invariance} displays estimates of the coefficients characterizing Equation~\eqref{eq:linearexp} for labor income at age 30 pooling males and females to increase precision. To enhance the evidence we also display analogous estimates for employment at age 30, an outcome related to labor income. We fail to reject the null hypothesis that $H_{0}: \Delta = 0$. \textbf{[JJH: I thought that we rejected non-invariance!] [JLG: No. We fail to reject invariance. That has always been the test we implement because the way in which our implications are formulated in 5a and 5b. We operate under the null of those equalities.]} In both cases, the tests are precise, noting that after accounting for background variables and the intermediate inputs, average labor income is $\$786.262$ (2014 USD) higher in the treatment group. This value is small in the context of annual labor income at age 30 and given that the average in the control group is $\$26,083$ (2014 USD). We conclude that the technology is invariant across treatment regimes. The rest of the components in Panel (a) indicate that the outcomes are non-trivial functions of the outputs of interest (which is verified in step 2). Years of education is an especially important input in our forecast. It is a statistically and economically significant determinant of labor income and it is experimentally boosted by ABC/CARE (see Table~\ref{table:summint}).
+Panel (a) of Table~\ref{table:invariance} displays estimates of the coefficients characterizing Equation~\eqref{eq:linearexp} for labor income at age 30 by gender. For both females and males the tests are precise.\footnote{Note that after accounting for background variables and the intermediate inputs, average labor income is \$2,213 (2014 USD) higher in the treatment group for females. This value is relatively small in the context of annual labor income at age 30 and given that the average in the control group is \$23,443 (2014 USD). The same holds for the males, where the treatment-control difference is \$ 232 net of inputs is and the average for the control group is  \$29,340 (2014 USD).} We do not reject the null hypothesis that the technology is invariant across treatment regimes. Panel (b) of Table~\ref{table:invariance} reports estimates for the rest of coefficients in Equation~\eqref{eq:linearexp}. Years of education is an especially important input in our forecast. It is a statistically and economically significant determinant of labor income and it is experimentally boosted by ABC/CARE (see Table~\ref{table:summint}). \textbf{[JJH: What are the results by gender?] [JLG: I dropped employment because you are right, we need to be concise. The results are now by gender.] [JJH: Residuals?] [JLG: That comes in the next table, Table~\ref{table:invarianceerrors}.]}
 
 \begin{table}[!htpb]
 \begin{threeparttable}
-\caption{Invariance in Technologies $ \left( \bm{\phi}_{k,a}^d \left( \bm{x}, \bm{b} \right) \right)$ at Age 30} \label{table:invariance}
+\caption{Testing Invariance in Technologies $ \left( \bm{\phi}_{k,a}^d \left( \bm{x}, \bm{b} \right) \right)$ of Labor Income at Age 30} \label{table:invariance}
 \centering
 \footnotesize
 \begin{tabularx}{16.5cm}{XcX}
 & \begin{tabular}{lcccc} \toprule
+& \multicolumn{2}{c}{Females} &   \multicolumn{2}{c}{Males} \\ 
+    			      & coefficient & $p$-value & coefficient & $p$-value \\ \midrule
  \multicolumn{5}{l}{\textbf{Panel (a). Invariance Across Treatment Regimes}} \\
-& \multicolumn{2}{c}{Employment} &   \multicolumn{2}{c}{Labor Income} \\ 
-    			      & coefficient & $p$-value & coefficient & $p$-value \\ \\
- $R$ (treatment indicator) &0.000 & 0.999 & 821.087 & 0.926 \\ \\
+ $R$ (treatment indicator) & -2,212.806	 &	0.586 & 231.606 & 0.969 \\ \\
+ 
+  \multicolumn{5}{l}{\textbf{Panel (b). Precision of Estimated Coefficients of \eqref{eq:linearexp} }} \\ 
+  
 \multicolumn{5}{l}{$\bm{B}_{e,30}$ (age-30 baseline variables)} \\ 
-Mother's Education (at birth) & 0.036 & 0.131 & 786.262 & 0.758 \\ \\
+Mother's Education (at birth) & 	 -957.0972  & 0.387	 & 	1,850.201 & 0.358	 \\ \\
+
 \multicolumn{5}{l}{$\bm{X}_{e,30}^d$ (age-30 inputs)} \\
-PIAT (5-7) & 0.008 & 0.054 & 83.931 & 0.854 \\
-Years of Education (30) & 0.046 & 0.012 & 8,223.641 & 0.000 \\
-Labor Income (21) & -0.000 & 0.344 & 0.130 & 0.767 \\ \\
-$R^2:$ & \multicolumn{2}{c}{0.123}  & \multicolumn{2}{c}{0.164}  \\
-Observations: & \multicolumn{2}{c}{111} & \multicolumn{2}{c}{110} \\ \\
-\multicolumn{5}{l}{Sample: Experimental Treatment and Control Groups at Age 30} \\ \midrule
- \multicolumn{5}{l}{\textbf{Panel (b). Invariance Across Experimental and Non-Experimental Samples}} \\ 
- & \multicolumn{2}{c}{Female Labor Income} &   \multicolumn{2}{c}{Male Labor Income} \\
-       			      & coefficient & $p$-value & coefficient & $p$-value \\ \\
+PIAT (5-7) & 5.726 & 0.975	 & 327.186	 & 0.338	 \\
+Years of Education (30) & 	2,356.143 & 0.006	 & 4,474.721	 & 	0.018 \\
+Labor Income (21) & 0.218 & 0.320	 & 0.322	&	0.175  \\ \\
+$R^2$ & \multicolumn{2}{c}{0.281}  & \multicolumn{2}{c}{0.207}  \\
+Observations & \multicolumn{2}{c}{52} & \multicolumn{2}{c}{50} \\
+\multicolumn{5}{l}{Sample: Experimental Treatment and Control Groups at Age 30} \\ \\
+ \multicolumn{5}{l}{\textbf{Panel (c). Invariance Across Experimental and Non-Experimental Samples}} \\ 
 $K$  (treatment indicator) & -142.631 & 0.965 & 1,887.575 & 0.654 \\ \\
+
+ \multicolumn{5}{l}{\textbf{Panel (d). Precision of Estimated Coefficients of Counterpart to \eqref{eq:linearnoexp}}} \\
+  \multicolumn{5}{l}{\qquad \qquad \qquad \textbf{in the Non-experimental Sample}} \\ \\
+  
 \multicolumn{5}{l}{$\bm{B}_{k,30}$ (age-30 baseline variables)} \\ 
 Mother's Education (at birth) & -229.481 & 0.631 & 427.224 & 0.459 \\ \\
 \multicolumn{5}{l}{$\bm{X}_{k,30}^d$ (age-30 inputs)} \\ 
@@ -348,66 +353,69 @@ PIAT (5-7) & 266.1971 & 0.002 & 219.220 & 0.044 \\
 Years of Education (30) & 4,263.156 & 0.000 & 4,434.173 & 0.000 \\
 Labor Income (21) & 0.355 & 0.000 & 0.685 & 0.000 \\ \\
 $R^2$ & \multicolumn{2}{c}{0.221}  & \multicolumn{2}{c}{0.182}  \\
-Observations & \multicolumn{2}{c}{829} & \multicolumn{2}{c}{746}  \\ \\ 
-\multicolumn{5}{l}{Sample: Experimental Treatment and Control Groups and Non-Experimental Synthetic }\\
-\multicolumn{5}{l}{Control and Treatment Groups at Age 30} \\ \bottomrule
+Observations & \multicolumn{2}{c}{829} & \multicolumn{2}{c}{746}  \\ 
+\multicolumn{5}{l}{Sample: Experimental Treatment and Control Groups and Non-}\\
+\multicolumn{5}{l}{Experimental Synthetic Control and Treatment Groups at Age 30} \\ \bottomrule
 \end{tabular} & 
 \end{tabularx}
 \begin{tablenotes}
 \footnotesize
-\item Note for Panel (a): Estimates of the coefficients in Equation~\eqref{eq:linearexp} for employment and labor income at age 30 and outcomes pooling males and females. $R$ denotes the treatment indicator ($R = 0$ for control-group individuals and $R = 1$ for treatment-group individuals). $\bm{B}_{e,30}$ is comprised of age-30 baseline variables not affected by treatment (mother's education at birth) and $\bm{X}_{e,30}^d$ is age-30 intermediate inputs.\\ 
-\item Note for Panel (b): Estimates of the coefficients in Equation~\eqref{eq:linearnoexp} for labor income at age 30 by gender pooling the experimental treatment and control groups and the synthetic cohort at age 30. $K$ membership to the experimental or non-experimental sample ($K = 0$ synthetic cohort in the non-experimental sample and $K = 1$ experimental sample). $\bm{B}_{k,30}$ is comprised of age-30 baseline variables not affected by treatment (mother's education at birth) and $\bm{X}_{k,30}^d$ is age-30 intermediate inputs.\\ 
+\item Note for Panel (a): Estimates of the coefficients in Equation~\eqref{eq:linearexp} for labor income at age 30 by gender within the experimental sample. $R$ denotes the treatment indicator ($R = 0$ for control-group individuals and $R = 1$ for treatment-group individuals). $\bm{B}_{e,30}$ is comprised of age-30 baseline variables not affected by treatment (mother's education at birth) and $\bm{X}_{e,30}^d$ is age-30 intermediate inputs. We drop labor income observations above the 95 percentile to avoid precision issues.\\ 
+\item Note for Panel (b): Estimates of the coefficients in Equation~\eqref{eq:linearnoexp} for labor income at age 30 by gender pooling the experimental treatment and control groups and the synthetic cohort at age 30. $K$ denotes membership to the experimental or non-experimental sample ($K = 0$ synthetic cohort in the non-experimental sample and $K = 1$ experimental sample). $\bm{B}_{k,30}$ is comprised of age-30 baseline variables not affected by treatment (mother's education at birth) and $\bm{X}_{k,30}^d$ is age-30 intermediate inputs.\\ 
+\normalsize
+\item \textbf{[JJH: What if we test by gender, do we fail?] [JLG: Everything is by gender now.]}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
-Under the null hypothesis of invariance across treatment regimes, we test Condition~\eqref{eq:suff2}. At age 30, we observe labor income in both the experimental sample and in our synthetic cohort created in the non-experimental sample in step 1. Invariance across treatment regimes allows us to test this implication pooling the treatment and control groups in the experimental sample \textbf{[JJH: You mean controls of experimental sample.] [JLG: No. Both the treatment and the control groups in the experimental sample because we already failed to reject invariance.]} with the synthetic controls and treatment groups. If Condition~\eqref{eq:suff2} holds, the coefficients associated with $K$ (an indicator of membership in the experimental ($K = 1$) or non-experimental sample ($K = 0$)), denoted by $\Lambda$, is zero when estimating the following baseline linear technology: 
+To test Condition~\eqref{eq:suff2}, note that the coefficients associated with $K$ (an indicator of membership in the experimental ($K = 1$) or non-experimental sample ($K = 0$)), denoted by $\Lambda$, is zero, assuming the following baseline linear technology: 
 
 \begin{equation}
 \text{Y}_{k,30} = \Lambda \cdot K +  \bm{B}_{k,30} \cdot \bm{\gamma}_{k,30} +\bm{X}_{k,30} \cdot \bm{\beta}_{k,30} + \varepsilon_{k,a}. \label{eq:linearnoexp} 
 \end{equation}
 \end{subequations}
 
-Panel (b) in Table~\ref{table:invariance} displays estimates of the coefficients characterizing Equation~\eqref{eq:linearnoexp} for labor income at age 30 for males and females. Estimates by gender in this case are precise because pooling experimental and non-experimental samples generates a larger sample. The estimates of $\Lambda$ are small in magnitude and not statistically significant (the averages of labor income in the experimental and non-experimental sample for females and males are $\$24,584$ and $\$40,007$, and  $\$24,098$ and $\$32,717$ (2014 USD), respectively). We conclude that the technologies are invariant across samples.\\
+Panel (c) in Table~\ref{table:invariance} displays estimates of the coefficients characterizing Equation~\eqref{eq:linearnoexp} for labor income at age 30 for males and females. \textbf{[JJH: Suddenly you dissagregate by gender - Do this for Panel (a) + (b), please.] [JLG: It is there now.]} The estimates of $\Lambda$ are small in magnitude and not statistically significant (the averages of labor income in the experimental and non-experimental sample for females and males are $\$24,584$ and $\$40,007$, and  $\$24,098$ and $\$32,717$ (2014 USD), respectively). We do not reject that the technologies are invariant across samples.\\
 
-\noindent \textbf{[JLG: I still think that 5a with exogeneity (A2) implies our testable key implications 6a and 6b and that 5b and its tests could go in the Appendix. But I may be wrong. In any event, here are the tests.]}\\
+\noindent \textbf{[JJH: Suddenly, employment dropped. Jorge, Do you realize that skipping around in this disjoined way turns OFF readers aim for consistency.] [JLG: Ok. All results now are based on labor income at age 30 by gender.]}\\
 
 \begin{table}[!htpb]
 \begin{threeparttable}
-\caption{Invariance in Distributions of the  Error Terms $\left( F_{k,a}^d \right)$, Age 30} \label{table:invarianceerrors}
+\caption{Testing Invariance in Distributions of the  Error Terms $\left( F_{k,a}^d \right)$ of Labor Income at Age 30} \label{table:invarianceerrors}
 \centering
 \footnotesize
 \begin{tabularx}{16.5cm}{XcX}
 & \begin{tabular}{lcccc} \toprule
+& \multicolumn{2}{c}{Females} &   \multicolumn{2}{c}{Males} \\ \midrule
 \multicolumn{5}{l}{\textbf{Panel (a). Invariance Across Treatment Regimes}} \\ 
-& \multicolumn{2}{c}{Employment} &  \multicolumn{2}{c}{Labor Income} \\ \\
  Equality in means & $t$-stat & $p$-value & $t$-stat & $p$-value \\ 
- & -0.002  & 0.999 & -0.092 & 0.927   \\ \\
+ & 1.075 & 0.287 & -0.0390 &  0.969  \\ 
 Equality in distributions & \multicolumn{2}{c}{K-S $p$-value} &  \multicolumn{2}{c}{K-S $p$-value}  \\
-                                      & \multicolumn{2}{c}{0.290} &  \multicolumn{2}{c}{0.372}  \\ 
-\multicolumn{5}{l}{Sample: Experimental Treatment and Control Groups at Age 30} \\ \midrule
+                                      & \multicolumn{2}{c}{0.272} &  \multicolumn{2}{c}{0.632}  \\ 
+\multicolumn{5}{l}{Sample: Experimental Treatment and Control Groups at Age 30} \\ \\
 \multicolumn{5}{l}{\textbf{Panel (b). Invariance Across Experimental and }} \\ 
 \multicolumn{5}{l}{\textbf{Non-Experimental Samples}} \\ 
-& \multicolumn{2}{c}{Employment} &  \multicolumn{2}{c}{Labor Income} \\ 
 Equality in means & $t$-stat & $p$-value & $t$-stat & $p$-value \\
  & 0.054  & 0.957 & -0.226 & 0.822   \\ \\
 Equality in distributions & \multicolumn{2}{c}{K-S $p$-value} &  \multicolumn{2}{c}{K-S $p$-value}  \\
-                                      & \multicolumn{2}{c}{0.481} &  \multicolumn{2}{c}{0.046}  \\ 
+                                      & \multicolumn{2}{c}{0.481} &  \multicolumn{2}{c}{0.046}  \\                    
 \multicolumn{5}{l}{Sample: Experimental Treatment and Control Groups and} \\ 
 \multicolumn{5}{l}{Non-Experimental Synthetic Control and Treatment Groups at Age 30 } \\ \bottomrule
 \end{tabular} & 
 \end{tabularx}
 \begin{tablenotes}
 \footnotesize
-\item Note for Panel (a): Tests for equality in distributions of residuals within the experimental sample across treatment regimes at age 30 in employment and labor income pooling males and females. Residuals are the relevant outcome net of mother's education at birth, average PIAT test from ages 5 to 7, years of education at age 30, and labor income at age 21. Residuals are adjusted for estimation error as explained in step 6 of Appendix~\ref{appendix:bootstrapspreds}. Tests are $t$-test of equality in means and the Kolgomorov-Smirnov test.\\
+\item Note for Panel (a): Tests for equality in distributions of residuals within the experimental sample across treatment regimes at age 30 in labor income by gender. Residuals are the relevant outcome net of mother's education at birth, average PIAT test from ages 5 to 7, years of education at age 30, and labor income at age 21. Residuals are adjusted for estimation error as explained in step 6 of Appendix~\ref{appendix:bootstrapspreds}. Tests are $t$-test of equality in means and the Kolgomorov-Smirnov test.\\
 Note for Panel (b): Tests for equality in distributions of residuals across the experimental and non-experimental samples pooling the experimental treatment and control groups and the synthetic cohort at age 30 for labor income by gender.  Residuals are the relevant outcome net of mother's education at birth, average PIAT test from ages 5 to 7, years of education at age 30, and labor income at age 21. Residuals are adjusted for estimation error as explained in step 6 of Appendix~\ref{appendix:bootstrapspreds}. Tests are $t$-test of equality in means and the Kolgomorov-Smirnov test.\\
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
-We use the analogous steps to test Condition~\eqref{eq:crucial2}. First, we test invariance in the distributions of $\bm{\varepsilon}_{k,a}^d$ across treatment regimes within the experimental sample for labor income and employment at age 30. Under the null hypotheses of invariance across treatment regimes, we then test invariance across the experimental and non-experimental samples. To obtain the empirical counterparts to $\bm{\varepsilon}_{k,a}^d$ in Equation~\eqref{eq:outcome} and perform these tests, we residualize the outcomes of interest from the baseline variables and the intermediate inputs. That is, we obtain residuals from equations analogous to Equations~\eqref{eq:linearexp} and \eqref{eq:linearnoexp}, in which $R$ and $K$ are not part of the estimation procedure---recall that we find evidence favoring these exclusions in Table~\ref{table:invariance}. \textbf{[JJH: Did you adjust for residual estimation error] [JLG: Yes. As in all of our estimations. See next for location of procedure.]} Before testing, we adjust the residuals for model estimation error as explained in step 6 of Appendix~\ref{appendix:bootstrapspreds}.
+\noindent \textbf{[JJH: Please make format of Tables compatible.] [JLG: This table is now compatible with Table 2 and reports by gender.]}\\
 
-With the empirical counterparts of $\bm{\varepsilon}_{k,a}^d$ in hand, we implement three tests to compare the distributions in Table~\ref{table:invarianceerrors}. The first two are standard: mean comparisons through $t$ and Kolgomorov-Smirnov tests. Within the experiment and at age 30, we fail to reject a common distribution of $\bm{\varepsilon}_{k,a}^d$ for both employment and labor income---Panel (a). As before, under this null hypothesis we pool the experimental treatment and control groups and the synthetic treatment and control groups to test invariance across samples by gender. In all but one of our tests we fail to reject invariance across samples---Panel (b).
+We use the analogous steps to test Condition~\eqref{eq:crucial2}. First, we test invariance in the distributions of $\bm{\varepsilon}_{k,a}^d$ across treatment regimes within the experimental sample for labor income and employment at age 30. Then, invoking invariance across treatment regimes, we test invariance across the experimental and non-experimental residual distributions. To obtain the residuals, we our forecasting model in Equation~\ref{eq:outcome} assuming a linear technology. \textbf{[JJH: Why not test residuals with $R$ + $K$?] [JLG: (a) because our forecasting model in Equation~\eqref{eq:outcome} does not have $R$ + $K$ and we need the empirical counterpart to our model; (b) we just failed to reject the null that $R$ and $K$ belong in our model.]} Before testing, we adjust the residuals for model estimation error as explained in step 6 of Appendix~\ref{appendix:bootstrapspreds}.
+
+With the empirical counterparts of $\bm{\varepsilon}_{k,a}^d$ in hand, we implement two tests to compare the distributions in Table~\ref{table:invarianceerrors}: mean comparisons through $t$ test and Kolgomorov-Smirnov test. Within the experiment and at age 30, we do not to reject a common distribution of $\bm{\varepsilon}_{k,a}^d$ for both females and males---Panel (a). As before, under this null hypothesis we pool the experimental treatment and control groups and the synthetic treatment and control groups to test invariance across samples by gender. In all but one of our tests we do not reject invariance across samples---Panel (b).
 
 \textbf{Steps 4, 5, and 6.} \label{section:following} Invariance across treatment regimes and samples makes $\bm{\phi}_{a} (\cdot, \cdot)$ the basic ingredient for forecasting in the experimental sample. Appendix~\ref{appendix:gmm} formalizes our estimation and data combination procedure in a GMM framework.\footnote{As both a referee and various discussants of our paper have pointed out, our identification and estimation strategies do not impose cross-sectional restrictions. This is a consequence of a data restriction: We use different datasets to identify and estimate the  $\bm{\phi}_{a} \left( \bm{x}, \bm{b} \right)$ for each outcome (e.g., labor income, health, crime). Thus, the predictor variables that we are able to use differ across outcomes and we cannot conduct joint estimations.} Figure~\ref{fig:labor-income-profiles} displays our forecasted labor income profiles. Forecasted and actual labor income are closely aligned, which is the final check that we propose for our procedure.\footnote{The content in Figure~\ref{fig:labor-income-profiles} is sufficient but not necessary to calculate the gain of the program due to labor income. It would be sufficient to forecast the difference between the treatment and control groups. Forecasting the levels, however, provides us with additional testable implications. It also allows us to easily account for forecasting error and to verify that the life-cycle profiles that we estimate are comparable to observed profiles for similar socio-economic groups. The pattern of life-cycle labor income we generate is typical for that of low-skilled workers \citep{Blundell-etal_2015_J-Pub-E,Gladden_Taber_2000_WageProgression,Sanders-Taber_2012_AR,Lagakos_Moll_etal_2016_LifeCycle_NBER}.} We proceed similarly with the remaining outcomes---e.g.,\ parental labor income, crime, health. Computing the net present value, the internal rate of return and benefit/cost ratios are straightforward once the age-by-age forecasts are available.\footnote{Some practical details involved in doing this are in Appendices~\ref{app:method_irr} and \ref{app:method_cbratio}.} Finally, we obtain standard errors from the empirical bootstrap distribution. Our inference accounts for each step of our estimation procedure. A step-by-step recipe for our inference is in Appendix~\ref{appendix:bootstrap}.
 
