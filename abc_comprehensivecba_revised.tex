@@ -1,7 +1,7 @@
 %Input preamble
 \input{preamble}
 \input{output/mainstatistics}
-%\usepackage{textgreek}
+\usepackage{textgreek}
 
 %\interfootnotelinepenalty=10000
 
@@ -159,11 +159,11 @@ For all $\bm{x}, \bm{b} \in supp(\bm{X}^d_{k,a}, \bm{B}_k), k \in \{e,n\}$
 where $\bm{\phi}_{a}(\bm{x}, \bm{b})$ is the function generating the causal effect of setting $ \bm{B}_k=\bm{b}, \bm{X}^d_{k,a}=\bm{x}$ holding $\bm{\varepsilon}^d_{k,a}$ fixed for $a \in \{1,\dots,\bar{A}\}$ and
 %
 \begin{eqnarray}
-F_{k,a}^0 \left( \cdot \right) &=& F_{k,a}^1 \left( \cdot \right) \nonumber \\
-  &=&  F_{a} \left( \cdot \right) \label{eq:strucinvarianceF}
+F_{k,a}^0 \left( \cdot | \text{\textbf{ Fix }} \bm{X}_{k,a}^d = \bm{x}, \bm{B}_{k} = \bm{b} \right) &=& F_{k,a}^1 \left( \cdot  | \text{\textbf{ Fix }} \bm{X}_{k,a}^d = \bm{x}, \bm{B}_{k} = \bm{b} \right) \nonumber \\
+  &=&  F_{a} \left( \cdot  | \text{\textbf{ Fix }} \bm{X}_{k,a}^d = \bm{x}, \bm{B}_{k} = \bm{b}  \right) \label{eq:strucinvarianceF}
 \end{eqnarray}
 \end{subequations}
-for $a \in \{1,\dots,\bar{A}\}$. $\square$
+for $a \in \{1,\dots,\bar{A}\}$ and where $F_{k,a}^j \left( \bm{z} | \text{\textbf{ Fix }} \bm{\Omega} = \bm{\omega} \right)$ denotes the distribution of $\bm{z}$ for $\bm{\Omega}$ fixed at $\bm{\omega}$. $\square$
 \end{assumption}
 
 \begin{remark} \textbf{There are Two Distinct Aspects of Structural Invariance}
