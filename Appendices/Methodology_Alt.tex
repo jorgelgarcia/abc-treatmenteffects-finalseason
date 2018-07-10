@@ -100,20 +100,6 @@ and
 
 \noindent We do not observe certain post-$a^*$ life-cycle profiles for outcomes that are important for estimating the lifetime benefits of ABC/CARE. The main examples are parental labor income, subject labor income, public-transfer income, and health-related outcome variables. ABC/CARE provided full-day childcare. It relaxed the time constraints of the mothers of the treated children, who were able to work more. Potentially, it might shift the life-cycle profiles of the mothers, either by allowing them to take more schooling or obtain more work experience. We estimate these profiles. Similarly, a comprehensive evaluation accounts for the effect on the life-cycle profiles of subject labor income and public-transfer income. We follow the strategy outlined in Section~\ref{section:cbamethodology} to identify and estimate these profiles and forecast post-$a^\ast$ outcomes.\footnote{In this section, attrition or partial observations is not an issue: the predictors that we use to construct out-of-sample forecasts are classified as complete data (see Appendices~\ref{app:method_fullobs} and \ref{app:method_partialobs}).}. This appendix documents how we implement this strategy and provides complementary evidence supporting it, cited throughout the main text. We devote separate appendices to the discussion of crime and health forecasts in Appendix~\ref{appendix:crime} and Appendix~\ref{appendix:health}, respectively.
 
-\subsubsection{Support Conditions}
-
-\noindent  We require that the support of the auxiliary sample contains the support of the experimental sample. This assumption allows us to find counterpart values of $\bm{X}^d_{k,a}$, $\bm{B}$, and $\bm{Y}_{k,a}$ in the control and experimental samples.
-
-\onehalfspacing
-\begin{assumption} \label{ass:contain} \textbf{Support Conditions} \\
-For $a \in \{ 1, \ldots, A \}$, the support of $\left( \bm{Y}^d_{e,a}, \bm{X}^d_{e,a}, \bm{B}_e \right)$ in the experimental sample is contained in the support of $\left( \bm{Y}^d_{n,a}, \bm{X}^d_{n,a}, \bm{B}_n \right)$ in the auxiliary sample:
-\begin{equation}
-supp( \bm{Y}_{e,a}, \bm{X}^d_{e,a}, \bm{B}_e ) \subseteq supp( \bm{Y}_{n,a}, \bm{X}^d_{n,a}, \bm{B}_n ), \quad d \in \{0,1\}. \quad \square
-\end{equation}
-\end{assumption}
-\doublespacing
-This assumption is straightforward to test for ages $a\leq a^\ast$. It is satisfied in our samples, as shown in Appendix~\ref{app:containsupport}.
-
 \subsubsection{Conditions for Valid Out-of-Sample Forecasts}
 
 \noindent A strong sufficient condition for identifying the distribution of life-cycle profiles of individuals in the experimental sample using individuals in the auxiliary samples is Condition~\ref{cond:cond1}:
