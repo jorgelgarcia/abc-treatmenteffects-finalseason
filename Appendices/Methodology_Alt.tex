@@ -1,10 +1,10 @@
 \section{Identification and Estimation of Life-Cycle Treatment Effects} \label{appendix:methodology}
 
-This appendix presents our approach to identifying and estimating life-cycle treatment effects. Differences in the approach for each outcome are based on different scenarios of data availability. We proceed as follows. Appendix~\ref{app:method_fullobs} focuses on outcomes that are essentially fully observed over the course of the experiment with little attrition. Appendix~\ref{app:method_partialobs} focuses on outcomes that are partially observed over the course of the experiment with a substantial rate of attrition. Appendix~\ref{app:method_noobs}  focuses on outcomes that we do not observe, and thus need to forecast out of sample. Appendices~\ref{app:method_irr} and ~\ref{app:method_cbratio} provide some technical details on the computations of the internal rate of return and the benefit/cost ratios, respectively. Appendix~\ref{appendix:gmm} frames our data combination problem in the Generalized Method of Moments framework. Finally, Appendix~\ref{appendix:bootstrap} provides the precise steps for constructing our statistical inferences.
+This appendix presents our approach to identify and estimate life-cycle treatment effects. Differences in the approach for each outcome are based on different scenarios of data availability. We proceed as follows. Appendix~\ref{app:method_fullobs} focuses on outcomes that are essentially fully observed over the course of the experiment with little attrition. Appendix~\ref{app:method_partialobs} focuses on outcomes that are partially observed over the course of the experiment with a substantial rate of attrition. Appendix~\ref{app:method_noobs}  focuses on outcomes that we do not observe, and thus need to forecast out of sample. Appendices~\ref{app:method_irr} and ~\ref{app:method_cbratio} provide some technical details on the computations of the internal rate of return and the benefit/cost ratios, respectively. Appendix~\ref{appendix:gmm} frames our data combination problem in the Generalized Method of Moments framework. Finally, Appendix~\ref{appendix:bootstrap} provides the precise steps for constructing our statistical inference.
 
 \subsection{Complete Data}\label{app:method_fullobs}
 
-We classify a variable as having essentially complete data when we observe the data for at least 90\% of the individuals in the sample \textbf{[JJH: Which is it 85\% as in this page or 90\% as on next page?] [JLG: 90\%. That was definitely a mistake.]} Table~\ref{table:nonipw} lists the variables that are completely observed. For these outcomes, we estimate the standard errors of our estimates by resampling with replacement the ABC/CARE data. We estimate non-parametric $p$-values based on the bootstrap distribution.
+We classify a variable as having essentially complete data when we observe the data for at least 90\% of the individuals in the sample \textbf{[JJH: Which is it 85\% as in this page or 90\% as on next page?] [JLG: 90\%. That was definitely a mistake.]} Table~\ref{table:nonipw} lists the variables that are completely observed. For these outcomes, we estimate the standard errors of our estimates by resampling the ABC/CARE data with replacement. We estimate non-parametric $p$-values based on the bootstrap distribution.
 
 \begin{table}[H]
 \begin{threeparttable}
@@ -22,9 +22,9 @@ We classify a variable as having essentially complete data when we observe the d
 \subsection{Partially Complete Data}
 \label{app:method_partialobs}
 
-When we do not observe data on an outcome within the experiment for more than 10\% of the individuals in the sample, we consider the outcome to be partially complete. Otherwise, we consider it complete. These outcomes include: parental labor income at ages 1.5, 2.5, 3.5, 8, 12, 15, and 21, for which we observe no more than 112 subjects at any given age; and items in the health survey at age 34, for which we observe no more than 93 subjects. Table~\ref{table:attpooled} lists the variables that we classify as partially complete.
+When we do not observe data on an outcome for more than 10\% of the individuals in the sample, we consider the outcome to be partially complete. These outcomes include: parental labor income at ages 1.5, 2.5, 3.5, 8, 12, 15, and 21, for which we observe no more than 112 subjects at any given age; and items in the health survey at age 34, for which we observe no more than 93 subjects. Table~\ref{table:attpooled} lists the variables that we classify as partially complete.
 
-\noindent For partially complete outcomes, we correct for attrition using an inverse probability weighting scheme (IPW) as in  \citet{Horvitz_Thompson_1952_JASA}. For each of the partially observed outcomes, we construct an IPW scheme. The weights are based on a set of variables that we observe for the complete sample. We use the set of complete variables to estimate the propensity of observing the value of a partially complete outcome.  The probabilities are based on a logistic regression on a set of variables that we do observe for the full sample. The control set of variables is chosen among many possible control sets,  as documented in Appendix~\ref{appendix:bvariables}. For each of the outcomes that we partially observe, we list the variables that we use to produce the IPW scheme in Table~\ref{table:attpooled}. To estimate the standard errors of our estimates, we resample with replacement the ABC/CARE data as in Appendix~\ref{app:method_fullobs}. The only difference when constructing the bootstrap distribution is that, each time we resample, we reestimate the IPW weights to account for estimation error. Our standard errors thus account for sampling uncertainty and for estimation error in the computation of the IPW scheme. We estimate non-parametric $p$-values based on the bootstrap distribution.
+\noindent For partially complete outcomes, we correct for attrition using an inverse probability weighting scheme (IPW) as in  \citet{Horvitz_Thompson_1952_JASA}. For each partially observed outcome, we construct an IPW scheme. The weights are based on a set of pre-treatment variables that we observe for the complete sample. We use a set of baseline variables to estimate the propensity of observing the value of a partially complete outcome.  These probabilities are estimated using a logistic regression. The set of baseline variables is chosen among many possible control sets,  as documented in Appendix~\ref{appendix:bvariables}. For each partially observed outcome, we list the variables that we use to produce the IPW scheme in Table~\ref{table:attpooled}. To estimate the standard errors of our estimates, we resample the ABC/CARE data with replacement as in Appendix~\ref{app:method_fullobs}. Each time we resample, we reestimate the IPW weights to account for estimation error. Our standard errors thus account for sampling uncertainty and for estimation error in the computation of the IPW scheme. We estimate non-parametric $p$-values based on the bootstrap distribution.
 
 \noindent \textbf{[JJH: Jorge - The attrition analysis table should go through age 34.] [JLG: An attrition chronology with a corresponding table was added to Appendix~\ref{appendix:background}.]} 
 
@@ -37,72 +37,69 @@ When we do not observe data on an outcome within the experiment for more than 10
 \input{AppOutput/Methodology/model_select_pooled.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table provides a list of the variables that we partially observe and the variables that we use to construct the IPW scheme to account for attrition when calculating treatment effects pooling females and males. The procedure to select these variables is described in Appendix~\ref{appendix:bvariables}. We construct the IPW using a common model across males and females.
+\item Note: This table lists the partially observed variables and the variables that we use to construct the IPW scheme to account for attrition when calculating treatment effects. The procedure to select these variables is described in Appendix~\ref{appendix:bvariables}. We construct the IPW scheme using a common model across males and females.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
 \restoregeometry
 \doublespacing
 
-\noindent Partially observed outcomes can occur at any age $a \leq a^*$.\footnote{After $a^*$, we have incomplete data and do not observe any outcome. We explain the details for constructing predictions in Appendix~\ref{appendix:incomplete}.} We construct the IPW using both pre-treatment and post-treatment variables, within the age period  $a \leq a^*$.
+\noindent Partially observed outcomes can occur at any age $a \leq a^*$.\footnote{After $a^*$, we have incomplete data and do not observe any outcome. We explain the details for constructing predictions in Appendix~\ref{appendix:incomplete}.} We construct the IPW scheme using pre-treatment variables, within the age period  $a \leq a^*$.
 
-\noindent We construct the IPW using the same algorithm, independently of the age within $a \leq a^*$ in which an outcome is partially complete. For notational simplicity, we derive the IPW scheme without indexing the outcomes by age or treatment status (we estimate IPW using a common logistic regression across treatment regimes, to avoid instability in the estimates that could be a problem in our small experimental sample). We restore the notation used throughout the text in the next appendix. \\
+\noindent We construct the IPW scheme using the same algorithm, independent of the age $a$ for $a \leq a^*$ in which an outcome is partially complete. For notational simplicity, we derive the IPW scheme without indexing the outcomes by age or treatment status (we estimate IPW using a common logistic regression across treatment regimes to avoid instability in the estimates that could be a problem in our small experimental sample). We restore the notation used throughout the text in the next appendix. \\
 
-\noindent We use a standard inverse probability weighting (IPW) scheme.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} Formally, recall that $R = 1$ if the child is randomized to treatment, and $R = 0$ otherwise.\footnote{We are able to use $R$ (randomization into treatment) and $D$ (participation in treatment) exchangeably as we argue in Section~\ref{section:cbamethodology}.} Similarly, let $A = 1$ denote the case where we observe a generic scalar outcome $Y$ (which is a generic entry in the vector of outcomes that we work with in the paper), and $A = 0$ otherwise. As in the main text, $\bm{B}$ represents background (pre-treatment) variables and $\bm{X}$ variables that could be affected by treatment and that predict $Y$.
+\noindent We use a standard inverse probability weighting (IPW) scheme.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} Formally, recall that $R = 1$ if the child is randomized into treatment, and $R = 0$ otherwise.\footnote{We are able to use $R$ (randomization into treatment) and $D$ (participation in treatment) exchangeably as we argue in Section~\ref{section:cbamethodology}.} Similarly, let $A = 1$ denote the case where we observe a generic scalar outcome $Y$ (which is a generic entry in the vector of outcomes that we use in the paper), and $A = 0$ otherwise. As in the main text, $\bm{B}$ represents background (pre-treatment) variables.
 
-\noindent We assume $A$ is independent of $Y$ conditional on $\bm{X}$ and $\bm{B}$. More formally, we invoke
+\noindent We assume $A$ is independent of $Y$ conditional on $\bm{B}$. More formally, we invoke
 
 \begin{assumption} \label{ass:attr}
 	\begin{align*}
-		A \independent Y | \bm{X}, \bm{B}, R.
+		A \independent Y | \bm{B}, R.
 	\end{align*}
 \end{assumption}
 
 \noindent Let $Y^{r}$ represent outcome $Y$ when $R$ is fixed to take the value $r$. Based on Assumption~\ref{ass:attr}, we use IPW to identify $\mathbb{E}[Y^r]$ as follows:
 
 \begin{align} \label{eq:case2}
-\mathbb{E}[Y^r] & = \int \int y f_{ Y_ r| \bm{B} } (y) f_{\bm{B}} (b) dydb \\ \nonumber
+\mathbb{E}[Y^r] & = \int \int y f_{ Y^{r}| \bm{B} } (y) f_{\bm{B}} (b) dydb \\ \nonumber
 	           & = \int \int y f_{Y| \bm{B}, R=r}(y) f_{\bm{B}} (b) dydb \\ \nonumber
-	           & = \int \int \int y f_{Y|R=r,\bm{X}, \bm{B}} (y) f_{\bm{X} | R=r} (x) f_{\bm{B}} (b) dydxdb \\ \nonumber
-				& = \int \int \int y f_{Y|R=r,\bm{X}, \bm{B}, A=1} (y) f_{\bm{X} | R=r, \bm{B} }(x) f_{\bm{B}} (b) dydxdb
+		& = \int \int y f_{Y|\bm{B},R=r, A=1} (y) f_{\bm{B}} (b) dydb
 \end{align}
 
-\noindent where each component of the last expression in \eqref{eq:case2} is straightforward to recover from the data. Using Bayes' Theorem, we can write an equivalent expression to make the IPW scheme explicit. That is, we apply Bayes' Theorem to $f_{\bm{X} | R=r, \bm{B} }(x)$ and $f_{\bm{B}} (b)$ to obtain
+\noindent where each component of the last expression in \eqref{eq:case2} is straightforward to recover from the data. Using Bayes' Theorem, we can write an equivalent expression to make the IPW scheme explicit. That is, we apply Bayes' Theorem to $f_{\bm{B}} (b)$ to obtain
 
 \begin{equation*}
-f_{\bm{X}|R=r,\bm{B}}(x) = \frac{f_{\bm{X}|R=r,\bm{B},A=1}(x) P(A=1|R=r,\bm{B})}{P(A=1|R=r,\bm{X},\bm{B})}
-\end{equation*}
-and
-\begin{equation*}
-	f_{\bm{B}} (b) = \frac{f_{\bm{B}|R=r,A=1} (x) P(R=r,A=1)}{P(R=r,A=1|\bm{B})}.
+	f_{\bm{B}} (b) = \frac{f_{\bm{B}|R=r,A=1} (b) P(R=r,A=1)}{P(R=r,A=1|\bm{B})}.
 \end{equation*}
 \noindent Substituting these expressions into \eqref{eq:case2}, we obtain
 
 \begin{align*} \label{eq:case2ipw}
-\mathbb{E}[Y^r] & = \int \int \int y f_{Y,\bm{X},\bm{B}|R=r,A=1}(y,x,b) \frac{P(R=r,A=1) P(A=1|R=r,\bm{B})}{P(R=r,A=1|\bm{B}) P(A=1|R=r,\bm{X},\bm{B})} dydxdb \\
-	            & = \int \int  \int y f_{Y,\bm{X},\bm{B}|R=r,A=1}(y,x,b) \frac{P(R=r,A=1)}{P(R=r|\bm{B}) P(A=1|R=r,\bm{X},\bm{B})} dydxdb. \\
+\mathbb{E}[Y^r] & = \int \int y f_{Y,\bm{B}|R=r,A=1}(y,b) \frac{P(R=r,A=1) P(A=1|R=r,\bm{B})}{P(R=r,A=1|\bm{B}) P(A=1|R=r,\bm{B})} dydb \\
+	            & = \int \int  y f_{Y,\bm{B}|R=r,A=1}(y,b) \frac{P(R=r,A=1)}{P(R=r|\bm{B}) P(A=1|R=r,\bm{B})} dydb. \\
 \end{align*}
 
-\noindent Assumption \ref{ass:attr} generalizes the matching assumption of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}. It conditions not only on pre-program variables but also on fully observed post-treatment variables, $\bm{X}$, that predict $Y$. The corresponding sample estimator for $\mathbb{E}[Y^r]$ is
+\noindent Assumption \ref{ass:attr} generalizes \textbf{[AZ: Without $\bm{X}$, is this still true?]} the matching assumption of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}. The corresponding sample estimator for $\mathbb{E}[Y^r]$ is
 
 \begin{align*}
 \sum_{i \in \mathcal{I}} y_i \beta_{i} \bm{\mathit{1}}(r_i = r) \bm{\mathit{1}}(a_i = 1)
 \end{align*}
-\noindent where $\mathcal{I}$ indexes the individuals in the sample. As in the paper that lowercase variables $r$, $y$, $x$, and $b$ denote realizations of the random variables $R$, $Y$, $\bm{X}$, and $\bm{B}$, respectively.
+\noindent where $\mathcal{I}$ indexes the individuals in the sample. As in the paper that lowercase variables $r$, $y$, and $b$ denote realizations of the random variables $R$, $Y$, and $\bm{B}$, respectively.
 
 \begin{align*}
-	\beta_{i} = \frac{1}{\pi_r(b_i) \alpha(r_i,x_i,b_i)} \frac{1}{\sum_{k \in \mathcal{I}}{\frac{ \bm{\mathit{1}}(r_i = r)  \bm{\mathit{1}}(a_i = 1)}{\pi_r(b_k)\alpha(r_k,x_k,b_k)}}},
+	\beta_{i} = \frac{1}{\pi_r(b_i) \alpha(r_i,b_i)} \frac{1}{\sum_{k \in \mathcal{I}}{\frac{ \bm{\mathit{1}}(r_i = r)  \bm{\mathit{1}}(a_i = 1)}{\pi_r(b_k)\alpha(r_k,b_k)}}},
 \end{align*}
-\noindent with $\pi_r(b) := P(R=r|\bm{B}=b)$ and $\alpha(r,x,b) := P(A=1|R=r,\bm{X}=x,\bm{B}=b)$. The weight $\pi_r$ corrects for selection into treatment based on pre-program variables $\bm{B}$. The weight $\alpha$ corrects for item non-response based on $R, \bm{X}, \bm{B}$.
+\noindent with $\pi_r(b) := P(R=r|\bm{B}=b)$ and $\alpha(r,b) := P(A=1|R=r,\bm{B}=b)$. The weight $\pi_r$ corrects for selection into treatment based on pre-treatment variables $\bm{B}$. The weight $\alpha$ corrects for item non-response based on $R, \bm{B}$.
 
-\noindent For each of the estimates presented in the paper, we allow the reader to assess the sensitivity of the estimate to adjusting by the IPW, in Tables~\ref{table:bcsens} and \ref{table:irrsens}.\footnote{We only account for IPW for the list of variables listed here, or any calculation involving them.} In Tables~\ref{table:bcsens} and \ref{table:irrsens} and, we also present estimates of the internal rate of return and the benefit cost-ratio with and without adjusting by IPW. There is little sensitivity of our estimates to these adjustments.
+\noindent In Tables~\ref{table:bcsens} and \ref{table:irrsens}, we present estimates of the internal rate of return and the benefit cost-ratio with and without adjusting for IPW. There is little sensitivity of our estimates to these adjustments.
 
 \subsection{Incomplete Data: Forecasting and Monetizing Life-Cycle and Costs and Benefits} \label{appendix:incomplete}
 \label{app:method_noobs}
 
-\noindent We do not observe certain post-$a^*$ life-cycle profiles for outcomes that are important for estimating the lifetime benefits of ABC/CARE. The main examples are parental labor income, subject labor income, public-transfer income, and health-related outcome variables. ABC/CARE provided full-day childcare. It relaxed the time constraints of the mothers of the treated children, who were able to work more. Potentially, it might shift the life-cycle profiles of the mothers, either by allowing them to take more schooling or obtain more work experience. We estimate these profiles. Similarly, a comprehensive evaluation accounts for the effect on the life-cycle profiles of subject labor income and public-transfer income. We follow the strategy outlined in Section~\ref{section:cbamethodology} to identify and estimate these profiles and forecast post-$a^\ast$ outcomes.\footnote{In this section, attrition or partial observations is not an issue: the predictors that we use to construct out-of-sample forecasts are classified as complete data (see Appendices~\ref{app:method_fullobs} and \ref{app:method_partialobs}).}. This appendix documents how we implement this strategy and provides complementary evidence supporting it, cited throughout the main text. We devote separate appendices to the discussion of crime and health forecasts in Appendix~\ref{appendix:crime} and Appendix~\ref{appendix:health}, respectively.
+\noindent We do not observe certain post-$a^*$ life-cycle profiles for outcomes that are important for estimating the lifetime benefits of ABC/CARE. Examples include parental labor income, subject labor income, public-transfer income, and health-related outcome variables. In Section~\ref{section:cbamethodology} to identify and estimate these profiles and forecast post-$a^\ast$ outcomes.This appendix documents how we implement this strategy and provides complementary evidence supporting it, cited throughout the main text. We devote separate appendices to the discussion of crime and health forecasts in Appendix~\ref{appendix:crime} and Appendix~\ref{appendix:health}, respectively.\footnote{In this section, attrition or partial observations is not an issue: the predictors that we use to construct out-of-sample forecasts are classified as complete data (see Appendices~\ref{app:method_fullobs} and \ref{app:method_partialobs}).} 
 
 \subsubsection{Conditions for Valid Out-of-Sample Forecasts}
+
+Forecasting does not require that we take a position on the exogeneity of $\bm{X}^d_{k,a}$ for $k \in \{e,n\}$ and $a \in \{ a, \ldots \bar{A} \}$ with respect to labor income. Estimated structural models with biased parameters can still give reliable forecasts if relationships between observed and unobserved variables are the same within sample and in the forecast sample. Conditions~\ref{cond:cond1} to~\ref{cond:cond3} spell out these requirements, dropping age indexing for simplicity. In the paper, we rely on Assumptions~\ref{ass:summary} and~\ref{ass:exog} because it facilitates the use of economic theory to interpret treatment effects, to forecast outcomes in samples where inputs are manipulated differently than in the experimental sample, and to test the validity of the construction of our synthetic cohort. 
 
 \noindent A strong sufficient condition for identifying the distribution of life-cycle profiles of individuals in the experimental sample using individuals in the auxiliary samples is Condition~\ref{cond:cond1}:
 
@@ -115,7 +112,7 @@ F_{\bm{Y}_e^d, \bm{X}_e^d | \bm{B}_e = \bm{b}} \left( \cdot, \cdot \right) = F_{
 \end{condition}
 \doublespacing
 
-\noindent  Since we are only interested in means for benefit/cost analysis, we can get by with a weaker requirement for conditional means, which has testable implications, as we show below:
+\noindent  Since we are only interested in means for benefit/cost analysis, we can get by with a weaker requirement for conditional means:
 
 \onehalfspacing
 \begin{condition} \textbf{Equality in Conditional Expectations Across the Experimental and Auxiliary Samples \label{cond:cond2}}
@@ -137,7 +134,7 @@ over $supp\left(\bm{Y}^d_{e,a}, \bm{B}_e\right)$.\footnotemark
 \end{condition}
 \footnotetext{We test the difference between the observed and forecasted treatment effect, because as we describe above, an equal difference (as opposed to equal levels) is sufficient. Even though the point estimate of the difference is 2,037.08 ($-$2,256.09) for males (females, we find that this difference is not statistically different than 0 for both genders).}
 \doublespacing
-We could simply invoke Condition~\ref{cond:cond2} or \ref{cond:cond3} and be done. Our approach is to examine and test (when possible) assumptions that justify the treatment effects, and Condition~\ref{cond:cond2} is useful for doing so.
+We could simply invoke these conditions and be done. Our approach is to examine and test (when possible) assumptions that justify the treatment effects, and that is why we develop the theory in Section~\ref{section:cbamethodology} instead of simply invoking these assumptions.
 
 \subsubsection{Auxiliary Datasets} \label{app:datasets}
 
@@ -151,7 +148,7 @@ We could simply invoke Condition~\ref{cond:cond2} or \ref{cond:cond3} and be don
 
 \noindent We do not impose a restriction on the birth year for the NLSY79 as all respondents are between 47 and 55 years of age at the time of the last interview (conducted in 2012). This age range is within the 31--67 range for which we extrapolate the income of the ABC/CARE subjects.
 
-\noindent Given the biennial nature of the NLSY79, we only observe each subject at either odd or even ages. Not only does this reduce the size of the sample on which we fit our forecasting model at each age, but it can introduce biases associated with the odd-aged and even-aged cohorts. To address this issue, we linearly interpolate the variables in the NLSY79 data that are used in our forecasting model. This allows us to estimate our model on all subjects of the NLSY79 satisfying the eligibility conditions $\bm{B}\in\mathcal{B}_0$ at every age.
+\noindent Given the biennial nature of the NLSY79, we only observe each subject at either odd or even ages. Not only does this reduce the size of the sample on which we fit our forecasting model at each age, but it can introduce biases associated with the odd-aged and even-aged cohorts. To address this issue, we linearly interpolate the variables in the NLSY79 data that are used in our forecasting model. This allows us to estimate our model on all subjects of the NLSY79 satisfying the eligibility conditions $\bm{B}_n \in\mathcal{B}_0$ at every age.
 
 \noindent\textbf{The Children of the National Longitudinal Survey of Youth (CNLSY)} is a survey of the children of the mothers from the NLSY79, beginning in 1986. At the time of the initial interview, the ages of the children surveyed ranged from 0 to 23. As of 2010, the CNLSY sample includes 11,504 children born to NLSY79 mothers. With appropriate weights, the CNLSY may be considered nationally representative of children born to women who were age 14 to 22 in 1979. Interviews were conducted annually between 1986 and 1994, and biennially thereafter.
 
@@ -169,7 +166,7 @@ We could simply invoke Condition~\ref{cond:cond2} or \ref{cond:cond3} and be don
 When constructing the samples used to forecast transfer and labor income, we place the following restrictions on the admissible samples \textit{for all ages}. Additional restrictions are placed when forecasting the other outcomes, as we explain below.
 \begin{enumerate}
 \item \textbf{NLSY79:} Black, labor income less than \$300,000 (2014 USD) at any given year; subjects born between 1957 and 1965.
-\item \textbf{PSID:} Black; birth year between 1945 and 1981.
+\item \textbf{PSID:} Black;  labor income less than \$300,000 (2014 USD) at any given year; birth year between 1945 and 1981.
 \item \textbf{CNLSY:} Black, labor income less than \$300,000 (2014 USD) at any given year; subjects born between 1978 and 1983.
 \end{enumerate}
 
@@ -188,49 +185,35 @@ We use the following samples to forecast labor and transfer income. Different sa
 \end{enumerate}
 \end{enumerate}
 
-\subsubsection{Constructing Synthetic Treatment and Control Groups}\label{appendix:match}
+\subsubsection{Constructing Synthetic Cohorts}\label{appendix:match}
 
-\noindent The first principle for constructing non-experimental synthetic treatment or control groups is that potential counterparts be eligible for the program, i.e., $\bm{B}_n \in \mathcal{B}_{0}$. To implement this condition, we require that the $\bm{B}$ variables be present in both experimental and control samples. An additional, harder challenge is to use these variables to find counterparts to the treated and the controlled in the non-experimental samples where no one directly receives treatment.
-
-\noindent Our principal approach constructs counterpart experimental and control groups matching on $\bm{B}_n \in \mathcal{B}_0$. However, under exogeneity and structural invariance, we also construct individual matches for members of the experimental group and use them to construct out-of-sample treatment effects. Notice that these are two different matching procedures. We summarize both in this subsection in a succinct notation, but the two should be carefully distinguished by the reader. Since the second set of matches is more inclusive and traditional, we develop that case here.
-
-\noindent Consider outcome $Y^d_{k,j,a}$ generated by $\bm{B}_k, \bm{X}^d_{k,j,a}$ (defined as the relevant predictor variables for $Y_{k,j,a}$) and also generated by $\varepsilon^d_{k,j,a}$. Under exogeneity (Assumption~\ref{ass:exog}), we can match on both $\bm{B}_k$ and $\bm{X}^d_{k,j,a}$. This assumption allows us to  use variables $\bm{X}^d_{k,j,a}$ that are caused by treatment and that forecast outcome $j$ and are invariant after $a^\ast$ (e.g., ability). If exogeneity is not satisfied, matching on $\bm{X}^d_{k,j,a}$ becomes problematic (see \citealp{Heckman_Navarro_2004_REStat}). Note that we can match on $\bm{B}_k$ in the set of individuals in the auxiliary samples with $\bm{B}_k \in \mathcal{B}_{0}$. Note that $\bm{B}_k$ need not be exogenous. Our analysis is conditional on $\bm{B}_k \in \mathcal{B}_0, k \in \{e,n\}$. Below, we show that our estimates are not sensitive to whether we match on $\bm{B}_k$, match on $\bm{X}^d_{k,j,a}$ alone, or match on both $\bm{B}_k$ and $\bm{X}^d_{k,j,a}$.
-
-\noindent For the moment, simplify notation and assume that $\bm{B}_k$ is absorbed into $\bm{X}^d_{k,j,a}$. We relax this assumption below and stress that in the main analysis reported in this paper, we only match on $\bm{B}$. For each treatment group member $i$ in treatment status $d$, we find counterparts following the analysis of \citet{Heckman_Ichimura_etal_1998_REStud}. We do not construct different synthetic treatment and control groups for each age and for each outcome that we forecast. We find one synthetic treatment and one synthetic control group in each auxiliary sample and use these samples to forecast each outcome at each age. We explain in Appendix~\ref{app:datasets} what auxiliary samples are used to forecast outcomes at each age. That is, we use the same synthetic treatment and control groups to forecast all of the outcomes. For this reason, we drop the age and outcome subindices for the rest of this section.
-
-\noindent Matched samples can be constructed in many ways using the various criteria listed at the end of Section~\ref{app:datasets}. One method that combines Stage I (sample construction) and Stage II (estimation) is the following. This provides a non-parametric approach to forecasting. It is conditional on a common value of $\bm{B}$ in both samples. Match an individual $l(i)$ in the auxiliary sample to person $i$ in the treatment samples to find synthetic treatment and control groups by following Algorithm~\ref{alg:match}.
+\noindent Once the initial restrictions are placed on the auxiliary samples, we weight the observations in the non-experimental sample using the following algorithm: 
 
 \onehalfspacing
 \begin{algorithm} \label{alg:match}
 For individual $i$ in experimental sample ($k=e$), an individual $l(i)$ in the auxiliary sample ($k=n$) is a potential counterpart if
 
 \begin{equation}\label{eq:ingrownnail}
-\sqrt{(\bm{X}^d_{i,e} - \bm{X}^d_{i,l(i),n})^\prime (\bm{\Sigma}^d_e)^{-1} (\bm{X}^d_{i,e} - \bm{X}^d_{i,l(i),n})} \leq \epsilon
+\sqrt{(\bm{B}_{i,e} - \bm{B}_{i,l(i),n})^\prime (\bm{\Sigma}_e)^{-1} (\bm{B}_{i,e} - \bm{B}_{i,l(i),n})} \leq \epsilon
 \end{equation}
 
-\noindent where $\bm{X}^d_{i,l(i),n}$ represents the observed characteristics of the matched potential counterpart in the non-experimental sample for $d \in \{0,1\}$, where $\bm{\Sigma}^d_e$ is the covariance matrix in the experimental sample for fixed to treatment status $d$. We construct a synthetic control group ($d = 0$) and a synthetic treatment group ($d = 1$) by weighting the potential counterparts according to the inverse value of the left-hand-side of \eqref{eq:ingrownnail}.\footnote{In practice, we set $\epsilon = 1$, but we try a range of values between 0.5 and 3 finding little sensitivity. The full set of the results we produce in the paper for multiple values in the interval [0.5,3] is available on request.}
+\noindent where $\bm{B}_{i,l(i),n}$ represents the observed characteristics of the matched potential counterpart in the non-experimental sample and $\bm{\Sigma}_e$ is the covariance matrix in the experimental sample. As explained in the paper, this procedure is done based on baseline variables that do not change over the life cycle and are not affected by treatment. Thus, this procedure is \textit{not} done age by age. One synthetic cohort is constructed in each of the non-experimental samples by weighting the potential counterparts according to the inverse value of the left-hand-side of Equation~\eqref{eq:ingrownnail}.\footnote{In practice, we set $\epsilon = 1$, but we try a range of values between 0.5 and 3 finding little sensitivity. The full set of the results we produce in the paper for multiple values in the interval [0.5,3] is available on request.}
 \end{algorithm}
 \doublespacing
 
-\noindent We primarily use synthetic control and treatment groups matching solely on $\bm{B}$ to estimate dynamic relationships between outcomes and predictors in the auxiliary samples and use the estimated relationships to generate forecasts in the non-experimental samples. In this model-based approach, we construct treatment effects for each outcome at each age. In our main approach to estimation, we match on $\bm{B}_k$. We next examine the sensitivity of our estimates to the use of different matching variables. We find little sensitivity to choices of matching variables and to using parametric or non-parametric approaches. The lack of sensitivity suggests that the dynamic relationship that we fit in the auxiliary sample is invariant to the sample used to estimate it, which supports exogeneity Assumption~\ref{ass:summary}.
+\noindent We estimate dynamic relationships between outcomes and predictors in the auxiliary samples and use the estimated relationships to generate forecasts in the non-experimental samples. When producing these estimates, we use our synthetic cohort (i.e.,\ our weighted the auxiliary samples).
 
-
-\noindent \textbf{Summary: Variables Used to Match to Construct Synthetic Control and Treatment Groups}\\
-When constructing synthetic control and treatment groups we use each of the following variables, \textit{for all the outcomes at all ages}: year of birth, gender, number of siblings at baseline. The criterion for selecting these variables is availability across all auxiliary sources. We construct one synthetic control group and one synthetic treatment group in each auxiliary sample (not one group for each age). We explain how we use the synthetic groups for forecasting each outcome in Appendix~\ref{app:datasets}. \\
-
+\noindent \textbf{Summary: Variables Used to Match to Construct Synthetic Cohorts}\\
+When constructing synthetic cohorts using each of the following variables, \textit{for all the outcomes}: year of birth, gender, number of siblings at baseline. The criterion for selecting these variables is availability across all auxiliary sources. We construct one synthetic cohort in each auxiliary sample.
 
 \subsubsection{Variables Used to Forecast Out-of-Sample Outcomes} \label{appendix:pred}
-
-We base our model-based forecasts for a generic outcome, $Y_{k,j,a}$ on background (pre-treatment) variables, $\bm{B}_k$, and variables that could have been affected by treatment $\bm{X}_{k,j,a}$. $\bm{X}_{k,j,a}$ can contain lagged values of $Y_{k,j,a}$.
-
-\noindent Our forecasts are based on identifying and estimating relationships between the outcomes we seek to predict at age $a$, $Y_{k,j,a}$, in the experimental samples and using the fitted relationships in the auxiliary samples. We produce forecasts for each outcome at each age.
 
 \noindent \textbf{Criteria for Candidate Predictor Variables}\\
 \noindent To be considered a predictor variable, a variable must satisfy three conditions: (i) it has to be available in the experimental and non-experimental samples; (ii) it has to have predictive power for the predicted outcome. Our criterion for inclusion is that all the coefficients of a regression of the predicted variable on \textit{all} the prediction variables are chosen to be statistically significant at the 1\% level.\footnote{In a few cases, we decide to keep some variables nearly above this threshold because we consider them economically relevant.}; and (iii) it needs to satisfy Assumption~\ref{ass:contain}, which we document below in Appendix~\ref{app:containsupport}.\footnote{A more logical way to proceed would be to use a sub-sample of predictors satisfying this criteria and also being affected by treatment, so that we are able to predict treatment effects. This is impossible due to data limitations. Most of the post-treatment predictors we use, however, display sizable treatment effects. See Appendix~\ref{appendix:results}.}\\
 
 \noindent For a variable to satisfy restrictions (i) and (ii), it needs to be the case not only that the variable is available in the non-experimental sample but also that the survey question for it was introduced far enough back in time for us to observe it in a range that is common to the range in which we observe the variables in the experimental sample. To illustrate this, consider the case of body-mass index in the PSID. Survey questions for this variable were introduced in the late 1990s. The sample for which the question was introduced, however, does not span enough observations for its support to cover the support of the experimental sample. To lessen this problem we pool the auxiliary datasets to maximize the available predictor variables.
 
-\noindent We present evidence on the predictive power of the predictor variables, in both the control and treatment synthetic groups we construct in the PSID, NLSY79, and CNLSY. Tables~\ref{table:predlaborincome} and \ref{table:predtransferincome} show that, in each of the auxiliary samples that we use, the prediction variables $\bm{X}_{a}, \bm{B}_k$ are strong predictors of labor and transfer income at age 30. We present this evidence at age 30 both for brevity and compare the predictive power of $\bm{X}_{a},\bm{B}_k$ on the outcomes we consider in the ABC/CARE sample.
+\noindent We present evidence on the predictive power of the predictor variables in the synthetic cohorts that we constructed in the PSID, NLSY79, and CNLSY. Tables~\ref{table:predlaborincome} and \ref{table:predtransferincome} show that, in each of the auxiliary samples that we use, the prediction variables $\bm{X}_{n,a}^d, \bm{B}_n$ are strong predictors of labor and transfer income at age 30. We present this evidence at age 30 both for brevity.
 
 \noindent \textbf{Summary: Predictor Variables}\\
 \noindent We use the following variables to forecast labor and transfer income. Different variables are used to forecast the rest of the outcomes, as we explain below.
@@ -277,9 +260,22 @@ We base our model-based forecasts for a generic outcome, $Y_{k,j,a}$ on backgrou
 
 \paragraph{Non-Parametric Forecasts} \label{appendix:nonpar}
 
-\noindent An alternative to the forecasting strategy that we use throughout the main text and the preceding appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using Algorithm~\ref{alg:match}; and (ii) use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and using it to form out-of-sample forecasts, we simply match individuals using Algorithm~\ref{alg:match} to impute labor income profiles.
+\noindent An alternative to the forecasting strategy that we use throughout the main text and the preceding appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using a modified version of Algorithm~\ref{alg:match} that includes both baseline variables and variables affected by treatment. Dropping age indices, the modified algorithm is: 
 
-\noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the non-parametric approach that we introduce in this section. We present results for labor income. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). An individual $l(i)$ in the auxiliary sample is a match for individual $i$ in the experimental sample if it is in the neighborhood defined by the left-hand side of \eqref{eq:ingrownnail} across all individuals in the auxiliary sample. We present the discounted net present value (treatment - control) for labor income in 2014 dollars. The approaches are in close agreement. (Analogous results for other variables are available upon request from the authors.)\\
+\begin{algorithm} \label{alg:match}
+For individual $i$ in experimental sample ($k=e$), an individual $l(i)$ in the auxiliary sample ($k=n$) is a potential counterpart if
+
+\begin{equation}\label{eq:ingrownnail}
+\sqrt{(\bm{Z}_{i,e}^d - \bm{Z}_{i,l(i),n}^d)^\prime (\bm{\Sigma}_e)^{-1} (\bm{Z}_{i,e}^d - \bm{Z}_{i,l(i),n}^d)} \leq \epsilon
+\end{equation}
+
+\noindent where $\bm{Z}_{i,k}^d:= \left[ \bm{X}_{i,k}^d , \bm{B}_{i,k} \right]$ and $\bm{Z}_{i,l(i),k}^d: =  \left[ \bm{X}_{i,l(i), k}^d , \bm{B}_{i,l(i)k} \right]$ with $k \in \{e, k \}$ $d \in \{0, 1 \}$, and $\bm{\Sigma}_e$ is the covariance matrix in the experimental sample. We weigh the potential counterparts according to the inverse value of the left-hand-side of Equation~\eqref{eq:ingrownnail} and produce our non-parametric conditional mean functions.\footnote{In practice, we set $\epsilon = 1$, but we try a range of values between 0.5 and 3 finding little sensitivity. The full set of the results we produce in the paper for multiple values in the interval [0.5,3] is available on request.}
+\end{algorithm}
+\doublespacing
+
+\noindent (ii) Use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and using it to form out-of-sample forecasts, we construct a synthetic cohort and estimate dynamic relationships in a single, non-parametric procedure to impute labor income profiles.
+
+\noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the non-parametric approach that we introduce in this section. We present results for labor income. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). We present the discounted net present value (treatment - control) for labor income in 2014 dollars. The approaches are in close agreement.\\
 
 \begin{table}[H]
 \begin{threeparttable}
