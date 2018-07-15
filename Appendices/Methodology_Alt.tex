@@ -4,7 +4,7 @@ This appendix presents our approach to identifying and estimating life-cycle tre
 
 \subsection{Complete Data}\label{app:method_fullobs}
 
-We classify a variable as having essentially complete data when we observe the data for at least 90\% of the individuals in the sample \textbf{[JJH: Which is it 85\% as in this page or 90\% as on next page?] [JLG: 90\%. That was definitely a mistake.]} Table~\ref{table:nonipw} lists the variables that are completely observed. For these outcomes, we estimate the standard errors of our estimates by resampling the ABC/CARE data. We estimate non-parametric $p$-values based on the bootstrap distribution. We perform inference in this same way throughout the paper.
+We classify a variable as having essentially complete data when we observe the data for at least 90\% of the individuals in the sample \textbf{[JJH: Which is it 85\% as in this page or 90\% as on next page?] [JLG: 90\%. That was definitely a mistake.]} Table~\ref{table:nonipw} lists the variables that are completely observed. For these outcomes, we estimate the standard errors of our estimates by resampling with replacement the ABC/CARE data. We estimate non-parametric $p$-values based on the bootstrap distribution.
 
 \begin{table}[H]
 \begin{threeparttable}
@@ -24,7 +24,7 @@ We classify a variable as having essentially complete data when we observe the d
 
 When we do not observe data on an outcome within the experiment for more than 10\% of the individuals in the sample, we consider the outcome to be partially complete. Otherwise, we consider it complete. These outcomes include: parental labor income at ages 1.5, 2.5, 3.5, 8, 12, 15, and 21, for which we observe no more than 112 subjects at any given age; and items in the health survey at age 34, for which we observe no more than 93 subjects. Table~\ref{table:attpooled} lists the variables that we classify as partially complete.
 
-\noindent For partially complete outcomes, we correct for attrition using an inverse probability weighting scheme (IPW) as in  \citet{Horvitz_Thompson_1952_JASA}. For each of the partially observed outcomes, we construct an IPW scheme. The weights are based on a set of variables that we observe for the complete sample. We use the set of complete variables to estimate the propensity of observing the value of a partially complete outcome.  The probabilities are based on a logistic regression on a set of variables that we do observe for the full sample. The control set of variables is chosen among many possible control sets,  as documented in Appendix~\ref{appendix:bvariables}. For each of the outcomes that we partially observe, we list the variables that we use to produce the IPW scheme in Table~\ref{table:attpooled}.\\
+\noindent For partially complete outcomes, we correct for attrition using an inverse probability weighting scheme (IPW) as in  \citet{Horvitz_Thompson_1952_JASA}. For each of the partially observed outcomes, we construct an IPW scheme. The weights are based on a set of variables that we observe for the complete sample. We use the set of complete variables to estimate the propensity of observing the value of a partially complete outcome.  The probabilities are based on a logistic regression on a set of variables that we do observe for the full sample. The control set of variables is chosen among many possible control sets,  as documented in Appendix~\ref{appendix:bvariables}. For each of the outcomes that we partially observe, we list the variables that we use to produce the IPW scheme in Table~\ref{table:attpooled}. To estimate the standard errors of our estimates, we resample with replacement the ABC/CARE data as in Appendix~\ref{app:method_fullobs}. The only difference when constructing the bootstrap distribution is that, each time we resample, we reestimate the IPW weights to account for estimation error. Our standard errors thus account for sampling uncertainty and for estimation error in the computation of the IPW scheme. We estimate non-parametric $p$-values based on the bootstrap distribution.
 
 \noindent \textbf{[JJH: Jorge - The attrition analysis table should go through age 34.] [JLG: An attrition chronology with a corresponding table was added to Appendix~\ref{appendix:background}.]} 
 
@@ -46,9 +46,9 @@ When we do not observe data on an outcome within the experiment for more than 10
 
 \noindent Partially observed outcomes can occur at any age $a \leq a^*$.\footnote{After $a^*$, we have incomplete data and do not observe any outcome. We explain the details for constructing predictions in Appendix~\ref{appendix:incomplete}.} We construct the IPW using both pre-treatment and post-treatment variables, within the age period  $a \leq a^*$.
 
-\noindent We construct the IPW using the same algorithm, independently of the age within $a \leq a^*$ in which an outcome is partially complete. For notational simplicity, we derive the IPW scheme without indexing the outcomes by age. We restore the notation used throughout the text in the next appendix. \\
+\noindent We construct the IPW using the same algorithm, independently of the age within $a \leq a^*$ in which an outcome is partially complete. For notational simplicity, we derive the IPW scheme without indexing the outcomes by age or treatment status (we estimate IPW using a common logistic regression across treatment regimes, to avoid instability in the estimates that could be a problem in our small experimental sample). We restore the notation used throughout the text in the next appendix. \\
 
-\noindent We use a standard inverse probability weighting (IPW) scheme\footnote{\citet{Horvitz_Thompson_1952_JASA}.} Formally, recall that $R = 1$ if the child is randomized to treatment, and $R = 0$ otherwise.\footnote{We are able to use $R$ (randomization into treatment) and $D$ (participation in treatment) exchangeably as we argue in Section~\ref{section:cbamethodology}.} Similarly, let $A = 1$ denote the case where we observe a generic scalar outcome $Y$, and $A = 0$ otherwise. As in the main text, $\bm{B}$ represents background (pre-treatment) variables and $\bm{X}$ variables that could be affected by treatment and that predict $Y$.
+\noindent We use a standard inverse probability weighting (IPW) scheme.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} Formally, recall that $R = 1$ if the child is randomized to treatment, and $R = 0$ otherwise.\footnote{We are able to use $R$ (randomization into treatment) and $D$ (participation in treatment) exchangeably as we argue in Section~\ref{section:cbamethodology}.} Similarly, let $A = 1$ denote the case where we observe a generic scalar outcome $Y$ (which is a generic entry in the vector of outcomes that we work with in the paper), and $A = 0$ otherwise. As in the main text, $\bm{B}$ represents background (pre-treatment) variables and $\bm{X}$ variables that could be affected by treatment and that predict $Y$.
 
 \noindent We assume $A$ is independent of $Y$ conditional on $\bm{X}$ and $\bm{B}$. More formally, we invoke
 
@@ -86,14 +86,14 @@ and
 \noindent Assumption \ref{ass:attr} generalizes the matching assumption of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}. It conditions not only on pre-program variables but also on fully observed post-treatment variables, $\bm{X}$, that predict $Y$. The corresponding sample estimator for $\mathbb{E}[Y^r]$ is
 
 \begin{align*}
-\sum_{i \in \mathcal{I}} y \alpha_{i} \beta_{i,r} \mathbf{1}(r_i = r)
+\sum_{i \in \mathcal{I}} y_i \beta_{i} \bm{\mathit{1}}(r_i = r) \bm{\mathit{1}}(a_i = 1)
 \end{align*}
-\noindent where $\mathcal{I}$ indexes the individuals in the sample, $\alpha_i$ indicates whether we observe $Y$ for individual $i$, and
+\noindent where $\mathcal{I}$ indexes the individuals in the sample. As in the paper that lowercase variables $r$, $y$, $x$, and $b$ denote realizations of the random variables $R$, $Y$, $\bm{X}$, and $\bm{B}$, respectively.
 
 \begin{align*}
-	\beta_{i,r} = \frac{1}{\pi_r(x_i) \alpha(r_i,x_i,b_i)} \frac{1}{\sum_k{\frac{\mathbf{1}(r_i = r) \mathbf{1}(\alpha_i = 1)}{\pi_r(x_k)\alpha(r_k,x_k,b_k)}}},
+	\beta_{i} = \frac{1}{\pi_r(b_i) \alpha(r_i,x_i,b_i)} \frac{1}{\sum_{k \in \mathcal{I}}{\frac{ \bm{\mathit{1}}(r_i = r)  \bm{\mathit{1}}(a_i = 1)}{\pi_r(b_k)\alpha(r_k,x_k,b_k)}}},
 \end{align*}
-\noindent with $\pi_r(x) := P(R=r|\bm{B}=b)$ and $\alpha(r,x,b) := P(A=1|R=r,\bm{X}=x,\bm{B}=b)$. The weight $\pi_r$ corrects for selection into treatment based on pre-program variables $\bm{B}$. The weight $\alpha_{i}$ corrects for item non-response based on $R, \bm{X}, \bm{B}$.
+\noindent with $\pi_r(b) := P(R=r|\bm{B}=b)$ and $\alpha(r,x,b) := P(A=1|R=r,\bm{X}=x,\bm{B}=b)$. The weight $\pi_r$ corrects for selection into treatment based on pre-program variables $\bm{B}$. The weight $\alpha$ corrects for item non-response based on $R, \bm{X}, \bm{B}$.
 
 \noindent For each of the estimates presented in the paper, we allow the reader to assess the sensitivity of the estimate to adjusting by the IPW, in Tables~\ref{table:bcsens} and \ref{table:irrsens}.\footnote{We only account for IPW for the list of variables listed here, or any calculation involving them.} In Tables~\ref{table:bcsens} and \ref{table:irrsens} and, we also present estimates of the internal rate of return and the benefit cost-ratio with and without adjusting by IPW. There is little sensitivity of our estimates to these adjustments.
 
