@@ -69,16 +69,16 @@ When we do not observe data on an outcome for more than 10\% of the individuals 
 \noindent where each component of the last expression in \eqref{eq:case2} is straightforward to recover from the data. Using Bayes' Theorem, we can write an equivalent expression to make the IPW scheme explicit. That is, we apply Bayes' Theorem to $f_{\bm{B}} (b)$ to obtain
 
 \begin{equation*}
-	f_{\bm{B}} (b) = \frac{f_{\bm{B}|R=r,A=1} (b) P(R=r,A=1)}{P(R=r,A=1|\bm{B})}.
+	f_{\bm{B}} (b) = \frac{f_{\bm{B}|R=r,A=1} (b) P(R=r,A=1)}{P(R=r,A=1|\bm{B} = b)}.
 \end{equation*}
 \noindent Substituting these expressions into \eqref{eq:case2}, we obtain
 
 \begin{align*} \label{eq:case2ipw}
-\mathbb{E}[Y^r] & = \int \int y f_{Y,\bm{B}|R=r,A=1}(y,b) \frac{P(R=r,A=1) P(A=1|R=r,\bm{B})}{P(R=r,A=1|\bm{B}) P(A=1|R=r,\bm{B})} dydb \\
-	            & = \int \int  y f_{Y,\bm{B}|R=r,A=1}(y,b) \frac{P(R=r,A=1)}{P(R=r|\bm{B}) P(A=1|R=r,\bm{B})} dydb. \\
+\mathbb{E}[Y^r] & = \int \int y f_{Y,\bm{B}|R=r,A=1}(y,b) \frac{P(R=r,A=1) P(A=1|R=r,\bm{B} = b)}{P(R=r,A=1|\bm{B} = b) P(A=1|R=r,\bm{B})} dydb \\
+	            & = \int \int  y f_{Y,\bm{B}|R=r,A=1}(y,b) \frac{P(R=r,A=1)}{P(R=r|\bm{B} = b) P(A=1|R=r,\bm{B} = b)} dydb. \\
 \end{align*}
 
-\noindent Assumption \ref{ass:attr} generalizes \textbf{[AZ: Without $\bm{X}$, is this still true?]} the matching assumption of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}. The corresponding sample estimator for $\mathbb{E}[Y^r]$ is
+\noindent Assumption \ref{ass:attr} generalizes the matching assumption of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}. The corresponding sample estimator for $\mathbb{E}[Y^r]$ is
 
 \begin{align*}
 \sum_{i \in \mathcal{I}} y_i \beta_{i} \bm{\mathit{1}}(r_i = r) \bm{\mathit{1}}(a_i = 1)
@@ -362,29 +362,32 @@ Assumption~\ref{ass:contain} requires that the support of the auxiliary data con
 
 \subsubsection{Testing Assumption~\ref{ass:exog}: Exogeneity} \label{app:endogeneity}
 
-\noindent The following framework helps us to test both Assumptions~\ref{ass:exog} and \ref{ass:summary}. We discuss this framework and test Assumption~\ref{ass:exog} in this section of the appendix. We test Assumption~\ref{ass:summary} in the next section.
+\noindent We now provide a framework for testing Assumption~\ref{ass:exog}. Recall from the main paper that our forecasts are based on the vector of production functions for output $\bm{Y}^d_{k,a}$:
+\begin{equation}
+\bm{Y}^d_{k,a} = \bm{\phi}^d_{k,a} (\bm{X}^d_{k,a}, \bm{B}_k) \ + \ \bm{\varepsilon}^d_{k,a},  \label{eq:outcome2} \\
+\end{equation}
+$d \in\{0,1\},  k\in\{e,n\}, a\in\{1,\dots,\bar{A}\}$ where $\bm{\phi}^d_{k,a}\left( \cdot, \cdot \right)$ is a vector of structural production relationships mapping inputs $\bm{X}^d_{k,a}, \bm{B}_k$ into outputs holding error term $\bm{\varepsilon}^d_{k,a}$ fixed.
 
-\noindent Define an outcome vector for treatment status $d$, in sample $k$ at age $a$ as
+For notational brevity in the definitions that follow, consider the production function for one entry (one outcome) in this vector (e.g.\ labor income): 
 
-\begin{align}
-\bm{Y}^d_{k,a} &= \bm{X}^d_{k,a} \bm{\gamma} + \mathcal{E}^d_a  &(a) \nonumber
-\end{align}
+\begin{equation}
+Y^d_{k,a} =\phi^d_{k,a} (\bm{X}^d_{k,a}, \bm{B}_k) \ + \ \varepsilon^d_{k,a},  \label{eq:outcomesin} \\
+\end{equation}
 
-\noindent with an associated measurement system
+\noindent where the variables are defined analogously to Equation~\ref{eq:outcome2}. Note that the arguments of $\phi^d_{k,a}$ are still vectors in this case. Define an associated measurement system for the error term $\varepsilon^d_{k,a}$:
 
 \begin{align}  \label{eq:sa-msystemmain}
-\mathcal{E}_{a}^d &=\bm{\beta}^d \bm{\theta}_{a}^d + \bm{\omega}_{a}^d  &(b) \nonumber \\
+\varepsilon^d_{k,a} &=\bm{\beta}^d \bm{\theta}_{a}^d + \bm{\omega}_{a}^d  &(b) \nonumber \\
 \bm{M}_{a}^d &= \bm{\lambda}^d \bm{\theta}_{a}^d + \bm{\upsilon}_a^d,  &(c)
 \end{align}
 
+\noindent where $\bm{\theta}^d \independent \bm{\upsilon}_{a}^d, \bm{\omega}_{a}^d$ and $\bm{\upsilon}_{a}^d \independent \bm{\omega}_{a}^d$.
 
-\noindent where $\bm{\theta}^d \independent \bm{\upsilon}_{a}^d, \bm{\omega}_{a}^d$ and $\bm{\upsilon}_{a}^d \independent \bm{\omega}_{a}^d$. We use additional conditioning variables in these equations. To simplify the notation, we keep them implicit.
-
-\noindent When the auxiliary measurement system $\bm{M}_{a}^d $ consists of at least three measures, we are able to identify the vectors of coefficients characterizing this system, $\bm{\lambda}^d, \bm{\beta}^d$, as well as the respective covariance matrices, $\bm{\Sigma}_{\bm{\theta}_{a}^d}, \bm{\Sigma}_{\bm{\upsilon}_{a}^d}, \bm{\Sigma}_{\bm{\omega}_{a}^d}$, we use the method from \citet{Bartlett_1938_Nature} to obtain an estimate of $\bm{\theta}_{a}^d$ \citep{Heckman_Pinto_etal_2013_PerryFactor}. Identifying and estimating the elements in system \eqref{eq:sa-msystemmain} serves two purposes: (i) it facilitates a test of Assumption~\ref{ass:exog}; and (ii) it enables us to use estimates of $\bm{\theta}_{a}^d$ as control functions when testing Assumption~\ref{ass:summary} in the next appendix, i.e. to use these estimates to control for endogeneity.
+\noindent When the auxiliary measurement system $\bm{M}_{a}^d $ consists of at least three measures, we are able to identify the vectors of coefficients characterizing this system, $\bm{\lambda}^d, \bm{\beta}^d$, as well as the respective covariance matrices, $\bm{\Sigma}_{\bm{\theta}_{a}^d}, \bm{\Sigma}_{\bm{\upsilon}_{a}^d}, \bm{\Sigma}_{\bm{\omega}_{a}^d}$, we use the method from \citet{Bartlett_1938_Nature} to obtain an estimate of $\bm{\theta}_{a}^d$ \citep{Heckman_Pinto_etal_2013_PerryFactor}. Identifying and estimating the elements in system \eqref{eq:sa-msystemmain} enables us to use estimates of $\bm{\theta}_{a}^d$ as control functions when testing Assumption~\ref{ass:summary} in the next appendix, i.e. to use these estimates to control for endogeneity.
 
 \noindent We first describe the estimates for the elements in System~\eqref{eq:sa-msystemmain} in the experimental sample. We assume that $\bm{\theta}_{a}^d$ has two dimensions (one representing cognitive skill, $c$, and another representing non-cognitive skill, $nc$). We assume dedicated measures for these skills at one time period. Put simply, we have two independent systems, one to measure $\bm{\theta}_{c}^d$ and one to measure $\bm{\theta}_{nc}^d$, where $\bm{\theta}_{a}^d: = \left[ \bm{\theta}_{c}^d, \bm{\theta}_{nc}^d \right]$. Further, we assume a common measurement system for the treatment and control groups (this is a sensible assumption shown to be true in the Perry data; see \citealp{Heckman_Pinto_etal_2013_PerryFactor}). This assumption implies that $\bm{\lambda}^d, \bm{\beta}^d$, as well as $\bm{\Sigma}_{\bm{\theta}_{a}^d}, \bm{\Sigma}_{\bm{\upsilon}_{a}^d}$ are the same whether $d = 0$ or $d = 1$.
 
-\noindent We use a set of IQ measures from ages 2 to 8 to obtain an estimate of $\bm{\theta}_{c}^d$ and a set of measures of somatization, hostility, depression, and mental health all at age 21 to measure to estimate $\bm{\theta}_{nc}^d$.\footnote{For definitions and treatment effects on these variables see Appendix~\ref{appendix:results}.} Figure~\ref{figure:factorsm} shows our estimates by treatment status.
+\noindent At age 30 and in the experimental sample, we use a set of IQ measures from ages 2 to 8 to obtain an estimate of $\bm{\theta}_{c}^d$ and a set of measures of somatization, hostility, depression, and mental health all at age 21 to measure to estimate $\bm{\theta}_{nc}^d$. Figure~\ref{figure:factorsm} shows our estimates by treatment status.
 
 \begin{figure}[!htbp]
 \centering
@@ -403,39 +406,9 @@ Assumption~\ref{ass:contain} requires that the support of the auxiliary data con
 Note: Panel (a) displays a factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). Panel (b) displays an analogous set of graphs for measures of somatization, hostility, depression, and mental health at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. ``Less'' in the factor measuring non-cognitive skills is ``positive'' given the measures we rely on to construct it. The mean difference between treatment and control is displayed below each panel, with standard error in parentheses. Standard errors are based on the empirical bootstrap distribution.
 \end{figure}
 
-\noindent We can also estimate $\bm{\theta}_{a}^d$ in the auxiliary sample. For want of data to approximate $\bm{\theta}_{c}, \bm{\theta}_{nc}$ in PSID and NLSY79, we use the CNLSY in this appendix. Our measurement system for $\bm{\theta}_{c}$ consists of reading and comprehension PIAT scores as well as by the Peabody Picture Vocabulary Test (PPVT). Our measurement system for $\bm{\theta}_{nc}$ is based on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior).
+\noindent At age 30 and in the auxiliary sample, we can also estimate $\bm{\theta}_{a}^d$. For want of data to approximate $\bm{\theta}_{c}, \bm{\theta}_{nc}$ in PSID and NLSY79, we use the CNLSY in this appendix. Our measurement system for $\bm{\theta}_{c}$ consists of reading and comprehension PIAT scores as well as by the Peabody Picture Vocabulary Test (PPVT). Our measurement system for $\bm{\theta}_{nc}$ is based on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior).
 
-\noindent Once these estimates are available, we can test Assumption~\ref{ass:exog} in the experimental and auxiliary samples. The test consists of the following. Let $\bm{\gamma}^E$ be the parameter associated to $\bm{X}^d_{k,a}$ in Equation (a) in System~\eqref{eq:sa-msystemmain} when not accounting for $\bm{\theta}_{a}^d$. Similarly, let $\bm{\gamma}^I$ be the parameter associated with $\bm{X}^d_{k,a}$ in Equation (a) in System~\eqref{eq:sa-msystemmain} when accounting for $\bm{\theta}_{a}^d$. Under the null hypotheses, Assumption~\ref{ass:exog} holds and $\bm{\theta}_{a}^d$ is an irrelevant predictor in Equation (a) in System~\eqref{eq:sa-msystemmain}. This makes the OLS estimate of $\bm{\gamma}^E$ inconsistent. If the null hypotheses are false, $\bm{X}^d_{k,a}$ and $\varepsilon_{a}^d$ are not independent, $\bm{\gamma}^I$ is consistent and $\bm{\gamma}^E$ is not. We test the null hypothesis by asking if the elements in $\bm{\theta}_{a}^d$ are relevant predictors of a set of outcomes at age 30, so that we can perform the tests on both the experimental and the auxiliary samples. We contrast specifications with and without including estimates of $\bm{\theta}_{a}^d$, and report the $F$-statistic corresponding to this comparison. This is a version of a Durbin-Wu-Hausman test \citep[see][]{Durbin_1954_RISI,Wu_1973_Econometrica,Hausman_1978_Econometrica}. Tables~\ref{table:endoginc} to \ref{table:trincome} present the results. In most cases, we are not able to reject the null hypothesis that Assumption~\ref{ass:exog} holds.
-
-
-\begin{sidewaystable}[H]
-\begin{threeparttable}
-\caption{Forecast of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control Group}
-\label{table:endoginc}
-\centering
-\footnotesize
-\input{output/abccare_endogdurb_si30y_inc_labor_scont_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Forecast of labor income at age 30 is based on the variable listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide the point estimate and $p$-value for the treatment and control groups as well as a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
-
-\begin{sidewaystable}[H]
-\begin{threeparttable}
-\caption{Forecast of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Treatment Group}
-\centering
-\footnotesize
-\input{output/abccare_endogdurb_si30y_inc_labor_streat_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Forecast of labor income at age 30 is based on the variable listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide the point estimate and $p$-value for the treatment and control groups as well as a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
+\noindent Once these estimates are available, we can test Assumption~\ref{ass:exog} in the experimental and non-experimental samples.  The test consists of the following. Let $\bm{\gamma}^E$ be the parameter associated to $\bm{X}^d_{k,a}$ in Equation~\ref{eq:outcomesin} in a linear regression when not accounting for $\bm{\theta}_{a}^d$. Similarly, let $\bm{\gamma}^I$ be the parameter associated with $\bm{X}^d_{k,a}$ in Equation~\ref{eq:outcomesin} when accounting for $\bm{\theta}_{a}^d$. Under the null hypothesis that Assumption~\ref{ass:exog} holds $\bm{\gamma}^E = \bm{\gamma}^I$ and $\bm{\theta}_{a}^d$ is an irrelevant predictor in Equation~\ref{eq:outcomesin}. We test the null hypothesis by asking if the elements in $\bm{\theta}_{a}^d$ are relevant predictors of labor and transfer income. We perform this tests in the experimental sample pooling the treatment and control groups (i.e.,\ under the invariance assumption that we document in Section~\ref{section:cbamethodology}) and in the non-experimental sample using our synthetic cohort. We contrast specifications with and without including estimates of $\bm{\theta}_{a}^d$, and report the $F$-statistic corresponding to this comparison. This is a version of a Durbin-Wu-Hausman test \citep[see][]{Durbin_1954_RISI,Wu_1973_Econometrica,Hausman_1978_Econometrica}. Tables~\ref{table:endoginc} to \ref{table:trincome} present the results. In most cases, we are not able to reject the null hypothesis that Assumption~\ref{ass:exog} holds.
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
@@ -461,35 +434,6 @@ Note: Panel (a) displays a factor score estimated based on the measurement syste
 \footnotesize
 \item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
 \item Note: Forecast of labor income at age 30 is based on the variable listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide the point estimate and $p$-value for the treatment and control groups as well as a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of reading and comprehension of the PIAT, as weel as the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
-
-\begin{sidewaystable}[H]
-\begin{threeparttable}
-\caption{Forecast of Transfer Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control Group}
-\label{table:endoginc}
-\centering
-\footnotesize
-\input{output/abccare_endogdurb_si30y_inc_trans_pub_scont_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Forecast of labor income at age 30 is based on the variable listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide the point estimate and $p$-value for the treatment and control groups as well as a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
-
-\begin{sidewaystable}[H]
-\begin{threeparttable}
-\caption{Forecast of Transfer Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Treatment Group}
-\centering
-\footnotesize
-\input{output/abccare_endogdurb_si30y_inc_trans_pub_streat_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Forecast of labor income at age 30 is based on the variable listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide the point estimate and $p$-value for the treatment and control groups as well as a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
