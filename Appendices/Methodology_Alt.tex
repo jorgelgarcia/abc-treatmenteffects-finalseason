@@ -95,13 +95,13 @@ When we do not observe data on an outcome for more than 10\% of the individuals 
 \subsection{Incomplete Data: Forecasting and Monetizing Life-Cycle and Costs and Benefits} \label{appendix:incomplete}
 \label{app:method_noobs}
 
-\noindent We do not observe certain post-$a^*$ life-cycle profiles for outcomes that are important for estimating the lifetime benefits of ABC/CARE. Examples include parental labor income, subject labor income, public-transfer income, and health-related outcome variables. In Section~\ref{section:cbamethodology} to identify and estimate these profiles and forecast post-$a^\ast$ outcomes.This appendix documents how we implement this strategy and provides complementary evidence supporting it, cited throughout the main text. We devote separate appendices to the discussion of crime and health forecasts in Appendix~\ref{appendix:crime} and Appendix~\ref{appendix:health}, respectively.\footnote{In this section, attrition or partial observations is not an issue: the predictors that we use to construct out-of-sample forecasts are classified as complete data (see Appendices~\ref{app:method_fullobs} and \ref{app:method_partialobs}).} 
+\noindent We do not observe certain post-$a^*$ life-cycle profiles for outcomes that are important for estimating the lifetime benefits of ABC/CARE. Examples include parental labor income, subject labor income, public-transfer income, and health-related outcome variables. In Section~\ref{section:cbamethodology}, we discuss our strategy to to identify and estimate these profiles and forecast post-$a^\ast$ outcomes. This appendix documents how we implement this strategy and provides complementary evidence supporting it, cited throughout the main text. We devote separate appendices to the discussion of crime and health forecasts in Appendix~\ref{appendix:crime} and Appendix~\ref{appendix:health}, respectively.\footnote{In this section, attrition or partial observations is not an issue: the predictors that we use to construct out-of-sample forecasts are classified as complete data (see Appendices~\ref{app:method_fullobs} and \ref{app:method_partialobs}).} 
 
 \subsubsection{Conditions for Valid Out-of-Sample Forecasts}
 
 Forecasting does not require that we take a position on the exogeneity of $\bm{X}^d_{k,a}$ for $k \in \{e,n\}$ and $a \in \{ a, \ldots \bar{A} \}$ with respect to labor income. Estimated structural models with biased parameters can still give reliable forecasts if relationships between observed and unobserved variables are the same within sample and in the forecast sample. Conditions~\ref{cond:cond1} to~\ref{cond:cond3} spell out these requirements, dropping age indexing for simplicity. In the paper, we rely on Assumptions~\ref{ass:summary} and~\ref{ass:exog} because it facilitates the use of economic theory to interpret treatment effects, to forecast outcomes in samples where inputs are manipulated differently than in the experimental sample, and to test the validity of the construction of our synthetic cohort. 
 
-\noindent A strong sufficient condition for identifying the distribution of life-cycle profiles of individuals in the experimental sample using individuals in the auxiliary samples is Condition~\ref{cond:cond1}:
+\noindent A strong sufficient condition for identifying the distribution of life-cycle profiles of individuals in the experimental sample using individuals in the auxiliary samples is Condition~\ref{cond:cond1}.
 
 \onehalfspacing
 \begin{condition} \textbf{Equality of Distributions Across the Experimental and Auxiliary Samples \label{cond:cond1}}
@@ -112,7 +112,7 @@ F_{\bm{Y}_e^d, \bm{X}_e^d | \bm{B}_e = \bm{b}} \left( \cdot, \cdot \right) = F_{
 \end{condition}
 \doublespacing
 
-\noindent  Since we are only interested in means for benefit/cost analysis, we can get by with a weaker requirement for conditional means:
+\noindent  Since we only use means for benefit/cost analysis, we can get by with a weaker requirement for conditional means.
 
 \onehalfspacing
 \begin{condition} \textbf{Equality in Conditional Expectations Across the Experimental and Auxiliary Samples \label{cond:cond2}}
@@ -123,7 +123,7 @@ for $d \in \{0, 1 \}$ over $supp\left(\bm{Y}^d_{e,a}, \bm{X}^d_{e,a}, \bm{B}_e\r
 \end{condition}
 \doublespacing
 
-\noindent Since we are primarily interested in treatment effects, we can get by with an even weaker condition:
+\noindent This can be weakened further if we rely on treatment effects.
 
 \onehalfspacing
 \begin{condition} \textbf{Equality in Mean Treatment Effects Across the Experimental and Auxiliary Samples \label{cond:cond3}}
@@ -134,7 +134,7 @@ over $supp\left(\bm{Y}^d_{e,a}, \bm{B}_e\right)$.\footnotemark
 \end{condition}
 \footnotetext{We test the difference between the observed and forecasted treatment effect, because as we describe above, an equal difference (as opposed to equal levels) is sufficient. Even though the point estimate of the difference is 2,037.08 ($-$2,256.09) for males (females, we find that this difference is not statistically different than 0 for both genders).}
 \doublespacing
-We could simply invoke these conditions and be done. Our approach is to examine and test (when possible) assumptions that justify the treatment effects, and that is why we develop the theory in Section~\ref{section:cbamethodology} instead of simply invoking these assumptions.
+We could simply invoke these conditions and be done. Our approach is to examine and test (when possible) assumptions that justify the treatment effects, which is why we develop the theory in Section~\ref{section:cbamethodology} instead of simply invoking these assumptions.
 
 \subsubsection{Auxiliary Datasets} \label{app:datasets}
 
@@ -160,7 +160,7 @@ We could simply invoke these conditions and be done. Our approach is to examine 
 
 \noindent We restrict the PSID to Blacks born between 1945 and 1981. Because the data extend to 2013, we use the most recent subsample of individuals aged 30 to 67. We also exclude all individuals with labor income exceeding \$300,000 (2014 USD) in any given year for the same reasons. Finally, given the biennial nature of the survey, we perform a linear interpolation on the variables that enter into our forecasting model. This allows us to use as much of the PSID data as possible at every age to interpolate subject income.
 
-\noindent Before summarizing, note that in general: (i) \textbf{we use the CNLSY to predict from ages 21 to 29}; and (ii) we use the NLSY79 and PSID to forecast from ages 29 to 79. Whenever using the NLSY79 and PSID together, we combine them and use them as a joint sample. Put differently, we use the three data sets to obtain information across our time span of interest \textit{without placing specific weights in any particular samples}. This allows us to satisfy support conditions (see Appendix~\ref{app:containsupport}) over the forecasted variables and the predictors that we use. An alternative to this is to to weight each of the observations in these samples according to the inverse of their variance in a set of observed characteristics. We do not do this, and instead use the unweighted observations to then construct synthetic treatment and controls groups as we explain in Appendix~\ref{appendix:match}.
+\noindent Before summarizing, note that in general: (i) \textbf{we use the CNLSY to predict from ages 21 to 29}; and (ii) we use the NLSY79 and PSID to forecast from ages 29 to 79. Whenever using the NLSY79 and PSID together, we combine them and use them as a joint sample. Put differently, we use the three data sets to obtain information across our time span of interest \textit{without placing specific weights in any particular samples}. This allows us to satisfy support conditions (see Appendix~\ref{app:containsupport}) over the forecasted variables and the predictors that we use. An alternative to this is to to weight each of the observations in these samples according to the inverse of their variance in a set of observed characteristics. We do not do this, and instead use the unweighted observations to then construct synthetic cohorts as we explain in Appendix~\ref{appendix:match}.
 
 \noindent \textbf{Summary: Initial Restrictions Placed on the Auxiliary Samples}\\
 When constructing the samples used to forecast transfer and labor income, we place the following restrictions on the admissible samples \textit{for all ages}. Additional restrictions are placed when forecasting the other outcomes, as we explain below.
@@ -187,7 +187,7 @@ We use the following samples to forecast labor and transfer income. Different sa
 
 \subsubsection{Constructing Synthetic Cohorts}\label{appendix:match}
 
-\noindent Once the initial restrictions are placed on the auxiliary samples, we weight the observations in the non-experimental sample using the following algorithm: 
+\noindent Once the initial restrictions are placed on the auxiliary samples, we weight the observations in the non-experimental sample using the following algorithm.
 
 \onehalfspacing
 \begin{algorithm} \label{alg:match}
@@ -201,15 +201,15 @@ For individual $i$ in experimental sample ($k=e$), an individual $l(i)$ in the a
 \end{algorithm}
 \doublespacing
 
-\noindent We estimate dynamic relationships between outcomes and predictors in the auxiliary samples and use the estimated relationships to generate forecasts in the non-experimental samples. When producing these estimates, we use our synthetic cohort (i.e.,\ our weighted the auxiliary samples).
+\noindent We estimate dynamic relationships between outcomes and predictors in the auxiliary samples and use the estimated relationships to generate forecasts in the non-experimental samples. When producing these estimates, we use our synthetic cohort (i.e.,\ our weighted auxiliary samples).
 
 \noindent \textbf{Summary: Variables Used to Match to Construct Synthetic Cohorts}\\
-When constructing synthetic cohorts using each of the following variables, \textit{for all the outcomes}: year of birth, gender, number of siblings at baseline. The criterion for selecting these variables is availability across all auxiliary sources. We construct one synthetic cohort in each auxiliary sample.
+When constructing synthetic cohorts, we use each of the following variables, \textit{for all the outcomes}: year of birth, gender, number of siblings at baseline. The criterion for selecting these variables is availability across all auxiliary sources. We construct one synthetic cohort in each auxiliary sample.
 
 \subsubsection{Variables Used to Forecast Out-of-Sample Outcomes} \label{appendix:pred}
 
 \noindent \textbf{Criteria for Candidate Predictor Variables}\\
-\noindent To be considered a predictor variable, a variable must satisfy three conditions: (i) it has to be available in the experimental and non-experimental samples; (ii) it has to have predictive power for the predicted outcome. Our criterion for inclusion is that all the coefficients of a regression of the predicted variable on \textit{all} the prediction variables are chosen to be statistically significant at the 1\% level.\footnote{In a few cases, we decide to keep some variables nearly above this threshold because we consider them economically relevant.}; and (iii) it needs to satisfy Assumption~\ref{ass:contain}, which we document below in Appendix~\ref{app:containsupport}.\footnote{A more logical way to proceed would be to use a sub-sample of predictors satisfying this criteria and also being affected by treatment, so that we are able to predict treatment effects. This is impossible due to data limitations. Most of the post-treatment predictors we use, however, display sizable treatment effects. See Appendix~\ref{appendix:results}.}\\
+\noindent To be considered a predictor variable, a variable must satisfy three conditions: (i) it has to be available in the experimental and non-experimental samples; (ii) it has to have predictive power for the predicted outcome. Our criterion for inclusion is that all the coefficients of a regression of the predicted variable on \textit{all} the prediction variables are chosen to be statistically significant at the 1\% level\footnote{In a few cases, we decide to keep some variables slightly above this threshold because we consider them economically relevant.}; and (iii) it needs to satisfy Assumption~\ref{ass:contain}, which we document below in Appendix~\ref{app:containsupport}.\footnote{A more logical way to proceed would be to use a sub-sample of predictors satisfying this criteria and also being affected by treatment, so that we are able to predict treatment effects. This is impossible due to data limitations. Most of the post-treatment predictors we use, however, display sizable treatment effects. See Appendix~\ref{appendix:results}.}\\
 
 \noindent For a variable to satisfy restrictions (i) and (ii), it needs to be the case not only that the variable is available in the non-experimental sample but also that the survey question for it was introduced far enough back in time for us to observe it in a range that is common to the range in which we observe the variables in the experimental sample. To illustrate this, consider the case of body-mass index in the PSID. Survey questions for this variable were introduced in the late 1990s. The sample for which the question was introduced, however, does not span enough observations for its support to cover the support of the experimental sample. To lessen this problem we pool the auxiliary datasets to maximize the available predictor variables.
 
@@ -260,7 +260,7 @@ When constructing synthetic cohorts using each of the following variables, \text
 
 \paragraph{Non-Parametric Forecasts} \label{appendix:nonpar}
 
-\noindent An alternative to the forecasting strategy that we use throughout the main text and the preceding appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using a modified version of Algorithm~\ref{alg:match} that includes both baseline variables and variables affected by treatment. Dropping age indices, the modified algorithm is: 
+\noindent An alternative to the forecasting strategy that we use throughout the main text and the preceding appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can (i) find a match or a set of matches in the auxiliary sample ($n$) using a modified version of Algorithm~\ref{alg:match} that includes both baseline variables and variables affected by treatment. Dropping age indices, the modified algorithm is: 
 
 \begin{algorithm} \label{alg:match2}
 For individual $i$ in experimental sample ($k=e$), an individual $l(i)$ in the auxiliary sample ($k=n$) is a potential counterpart if
@@ -273,7 +273,7 @@ For individual $i$ in experimental sample ($k=e$), an individual $l(i)$ in the a
 \end{algorithm}
 \doublespacing
 
-\noindent (ii) Use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and using it to form out-of-sample forecasts, we construct a synthetic cohort and estimate dynamic relationships in a single, non-parametric procedure to impute labor income profiles.
+\noindent (ii) We can use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and using it to form out-of-sample forecasts, we construct a synthetic cohort and estimate dynamic relationships in a single, non-parametric procedure to impute labor income profiles.
 
 \noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the non-parametric approach that we introduce in this section. We present results for labor income. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). We present the discounted net present value (treatment - control) for labor income in 2014 dollars. The approaches are in close agreement.\\
 
@@ -294,14 +294,14 @@ Pooled & Male & Female \\ \midrule
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: this table compares the net-present value of labor income (treatment - control) using the parametric approach of the main text and the approach that we use in this section. All values are discounted to birth and reported in 2014 dollars.
+\item Note: This table compares the net-present value of labor income (treatment - control) using the parametric approach of the main text and the approach that we use in this section. All values are discounted to birth and reported in 2014 dollars.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 \subsubsection{Testing Assumption~\ref{ass:contain}: Support Conditions}\label{app:containsupport}
 
-Assumption~\ref{ass:contain} requires that the support of the auxiliary data contain the support of the experimental data. This can be checked for $a \leq a^\ast$. Figure~\ref{fig:support} validates this assumption by displaying the overlapping support sets of ABC/CARE and our auxiliary data (which we restrict as we explain in Appendix~\ref{app:datasets}) for the variables used to interpolate and extrapolate labor income.\footnote{For the male and Black indicators, we do not provide evidence of containing support. All three non-experimental samples have vast numbers of males, females, and Blacks to cover the support in the experimental samples.}
+Assumption~\ref{ass:contain} requires that the support of the auxiliary data contains the support of the experimental data. This can be checked for $a \leq a^\ast$. Figure~\ref{fig:support} validates this assumption by displaying the overlapping support sets of ABC/CARE and our auxiliary data (which we restrict as we explain in Appendix~\ref{app:datasets}) for the variables used to interpolate and extrapolate labor income.\footnote{For the male and Black indicators, we do not provide evidence of containing support. All three non-experimental samples have vast numbers of males, females, and Blacks to cover the support in the experimental samples.}
 
 
 \begin{figure}[H]
@@ -408,11 +408,11 @@ Note: Panel (a) displays a factor score estimated based on the measurement syste
 
 \noindent At age 30 and in the auxiliary sample, we can also estimate $\bm{\theta}_{a}^d$. For want of data to approximate $\bm{\theta}_{c}, \bm{\theta}_{nc}$ in PSID and NLSY79, we use the CNLSY in this appendix. Our measurement system for $\bm{\theta}_{c}$ consists of reading and comprehension PIAT scores as well as by the Peabody Picture Vocabulary Test (PPVT). Our measurement system for $\bm{\theta}_{nc}$ is based on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior).
 
-\noindent Once these estimates are available, we can test Assumption~\ref{ass:exog} in the experimental and non-experimental samples.  The test consists of the following. Let $\bm{\gamma}^E$ be the parameter associated to $\bm{X}^d_{k,a}$ in Equation~\ref{eq:outcomesin} in a linear regression when not accounting for $\bm{\theta}_{a}^d$. Similarly, let $\bm{\gamma}^I$ be the parameter associated with $\bm{X}^d_{k,a}$ in Equation~\ref{eq:outcomesin} when accounting for $\bm{\theta}_{a}^d$. Under the null hypothesis that Assumption~\ref{ass:exog} holds $\bm{\gamma}^E = \bm{\gamma}^I$ and $\bm{\theta}_{a}^d$ is an irrelevant predictor in Equation~\ref{eq:outcomesin}. We test the null hypothesis by asking if the elements in $\bm{\theta}_{a}^d$ are relevant predictors of labor and transfer income. We perform this tests in the experimental sample pooling the treatment and control groups (i.e.,\ under the invariance assumption that we document in Section~\ref{section:cbamethodology}) and in the non-experimental sample using our synthetic cohort. We contrast specifications with and without including estimates of $\bm{\theta}_{a}^d$, and report the $F$-statistic corresponding to this comparison. This is a version of a Durbin-Wu-Hausman test \citep[see][]{Durbin_1954_RISI,Wu_1973_Econometrica,Hausman_1978_Econometrica}. Tables~\ref{table:endoginc} to \ref{table:trincome} present the results. In most cases, we are not able to reject the null hypothesis that Assumption~\ref{ass:exog} holds.
+\noindent Once these estimates are available, we can test Assumption~\ref{ass:exog} in the experimental and non-experimental samples.  The test consists of the following. Let $\bm{\gamma}^E$ be the parameter associated to $\bm{X}^d_{k,a}$ in Equation~\ref{eq:outcomesin} in a linear regression when not accounting for $\bm{\theta}_{a}^d$. Similarly, let $\bm{\gamma}^I$ be the parameter associated with $\bm{X}^d_{k,a}$ in Equation~\ref{eq:outcomesin} when accounting for $\bm{\theta}_{a}^d$. Under the null hypothesis that Assumption~\ref{ass:exog} holds $\bm{\gamma}^E = \bm{\gamma}^I$ and $\bm{\theta}_{a}^d$ is an irrelevant predictor in Equation~\ref{eq:outcomesin}. We test the null hypothesis by asking if the elements in $\bm{\theta}_{a}^d$ are relevant predictors of labor and transfer income. We perform these tests in the experimental sample pooling the treatment and control groups (i.e.,\ under the invariance assumption that we document in Section~\ref{section:cbamethodology}) and in the non-experimental sample using our synthetic cohort. We contrast specifications with and without including estimates of $\bm{\theta}_{a}^d$, and report the $F$-statistic corresponding to this comparison. This is a version of a Durbin-Wu-Hausman test \citep[see][]{Durbin_1954_RISI,Wu_1973_Econometrica,Hausman_1978_Econometrica}. Tables~\ref{table:endoginc} to \ref{table:trincome} present the results. In most cases, we are not able to reject the null hypothesis that Assumption~\ref{ass:exog} holds.
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
-\caption{Forecast of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control and Treatment Groups}
+\caption{Forecast of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control and Treatment Groups} \label{table:endoginc}
 \centering
 \footnotesize
 \input{output/abccare_endogdurb_si30y_inc_labor_spool_ready.tex}
@@ -503,7 +503,7 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 
 \noindent The parameters characterizing the profile do not differ across the treatment and control groups in ABC/CARE. This assumption is analogous to Assumption~\ref{ass:summary}.
 
-\noindent We estimate the coefficients in \eqref{eq:mincer} using the sample of mothers in ABC/CARE. We pool the longitudinal information and estimate the coefficients using ordinary least squares. We use a standard Mincer measure of experience (age $-$ education $-$ 6). We assign one dollar to mothers with no labor income. For mothers living with a working partner, we allocate $1/2$ of total parental labor income as $Y_{a}$. To validate our estimates within ABC/CARE, we estimate the coefficients \eqref{eq:mincer} using a sub-sample of disadvantaged mothers in the PSID.\footnote{We define disadvantaged as follows: Black, not married, labor income, education (at age 5 of child's participant), age and number of children (at age 5 of child's participant) in the same ranges as the ABC/CARE mothers, labor income below the 75th percentile in the PSID sample.} The coefficients characterizing \eqref{eq:mincer} in ABC/CARE and PSID for different combinations of control sets are in close agreement. We display them in Table~\ref{table:mincerpsid}.
+\noindent We estimate the coefficients in \eqref{eq:mincer} using the sample of mothers in ABC/CARE. We pool the longitudinal information and estimate the coefficients using ordinary least squares. We use a standard Mincer measure of experience (age $-$ education $-$ 6). We assign one dollar to mothers with no labor income. For mothers living with a working partner, we allocate $1/2$ of total parental labor income as $Y_{a}$. To validate our estimates within ABC/CARE, we estimate the coefficients \eqref{eq:mincer} using a sub-sample of disadvantaged mothers in the PSID.\footnote{We define disadvantaged as follows: Black, not married, labor income, education (at age 5 of child's participant), age and number of children (at age 5 of child's participant) in the same ranges as the ABC/CARE mothers, labor income below the 75\textsuperscript{th} percentile in the PSID sample.} The coefficients characterizing \eqref{eq:mincer} in ABC/CARE and PSID for different combinations of control sets are in close agreement. We display them in Table~\ref{table:mincerpsid}.
 
 \begin{table}[H]
 \begin{threeparttable}
@@ -565,7 +565,7 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 \begin{enumerate}
 \item \textbf{Auxiliary Sample Used to Forecast:} PSID.
 \item \textbf{Initial Restrictions Placed on the Auxiliary Sample:} Black; female; unmarried; education and number of children at ages 5 in the ranges of ABC/CARE participants. Labor income at each age is below the 75th percentile.
-\item \textbf{Variables Used to Construct Synthetic Control and Treatment Groups:} we pool PSID/NLSY79 restricted samples.
+\item \textbf{Variables Used to Construct Synthetic Cohorts} we pool PSID/NLSY79 restricted samples.
 \item \textbf{Variables Used to Forecast:} education, second order polynomial in experience, birth year, number of children.
 \item \textbf{Assumed Retirement:} after 40 years of labor force participation.
 \end{enumerate}
@@ -573,7 +573,7 @@ Note: Panel (a) displays the net-present value (treatment less control) of paren
 \begin{enumerate}
 \item \textbf{Auxiliary Sample Used to Forecast:} PSID and NLSY79.
 \item \textbf{Initial Restrictions Placed on the Auxilliary Sample:} Black; female; labor income at each age is below the 90th percentile.
-\item \textbf{Variables Used to Construct Synthetic Control and Treatment Groups:} we pool the PSID restricted sample, and do not construct synthetic experimental groups due to lack of data on the treatment effect predictors.
+\item \textbf{Variables Used to Construct Synthetic Cohorts:} we pool the PSID restricted sample, and do not construct synthetic experimental groups due to lack of data on the treatment effect predictors.
 \item \textbf{Variables Used to Forecast:} lagged labor income.
 \item \textbf{Assumed Retirement:} 67 years old.
 \end{enumerate}
@@ -795,37 +795,47 @@ Note: Panel (a) displays the empirical bootstrap distribution for the estimate o
 \end{sidewaysfigure}
 \restoregeometry
 \doublespacing
-
 \subsection{Exploring the Impact of Other Forecasting Models} \label{appendix:predsensitivity}
 
-Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$. We explore a range of standard panel data specifications for the error terms:
+
+Recall from the main paper that our forecasts are based on the vector of production functions for output $\bm{Y}^d_{k,a}$:
+\begin{equation}
+\bm{Y}^d_{k,a} = \bm{\phi}^d_{k,a} (\bm{X}^d_{k,a}, \bm{B}_k) \ + \ \bm{\varepsilon}^d_{k,a},  \label{eq:outcome2} \\
+\end{equation}
+$d \in\{0,1\},  k\in\{e,n\}, a\in\{1,\dots,\bar{A}\}$ where $\bm{\phi}^d_{k,a}\left( \cdot, \cdot \right)$ is a vector of structural production relationships mapping inputs $\bm{X}^d_{k,a}, \bm{B}_k$ into outputs holding error term $\bm{\varepsilon}^d_{k,a}$ fixed.
+
+For notational brevity in the definitions that follow, consider the production function for one entry (one outcome) in this vector (e.g.\ labor income): 
+
+\begin{equation}
+Y^d_{k,a} =\phi^d_{k,a} (\bm{X}^d_{k,a}, \bm{B}_k) \ + \ \varepsilon^d_{k,a},  \label{eq:outcomesin} \\
+\end{equation}
+
+\noindent where the variables are defined analogously to Equation~\ref{eq:outcome2}. Note that the arguments of $\phi^d_{k,a}$ are still vectors in this case.
+
+In this appendix, we explore a range of standard panel data specifications for the error terms:
 
 \begin{eqnarray}
-\varepsilon^d_{k,j,a} &=& f^d + \omega^d_{k,j,a} \nonumber \\
-\omega^d_{k,j,a}      &=& \rho \omega^d_{k,j,a-1} + U^d_{k,j,a},
+\varepsilon^d_{k,a} &=& f^d + \omega^d_{k,a} \nonumber \\
+\omega^d_{k,a}      &=& \rho \omega^d_{k,a-1} + U^d_{k,a},
 \end{eqnarray}
 
-\noindent where $U^d_{k,j,a} \independent \bm{X}^d_{k,a}$.
+\noindent where $U^d_{k,a} \independent \bm{X}^d_{k,a}$.
 
-Here, we present different structures for $\phi_{k,j,a}^d \left( \cdot, \cdot \right)$ and $\varepsilon_{k,j,a}^d$ and investigate the robustness of our estimates to different assumptions about the structure of both these elements. We do this exercise for labor income.\footnote{In Appendix~\ref{appendix:gmm}, we describe the precise steps that we follow to construct out-of-sample forecasts based on these different structures and frame our estimation strategy in a GMM framework \citep{Hansen_1982_Econometrica}.}
+\noindent We present different structures for $\phi_{k,a}^d \left( \cdot, \cdot \right)$ and $\varepsilon_{k,a}^d$ and investigate the robustness of our estimates to different assumptions about the structure of both these elements. We do this exercise for labor income.\footnote{In Appendix~\ref{appendix:gmm}, we describe the precise steps that we follow to construct out-of-sample forecasts based on these different structures and frame our estimation strategy in a GMM framework \citep{Hansen_1982_Econometrica}.}
 
-Note that Assumption~\ref{ass:summary} (Invariance) implies that $\phi_{k,j,a}^d \left (\cdot, \cdot \right) = \phi_{k,j,a}  \left (\cdot, \cdot \right) = \phi_{j,a}  \left (\cdot, \cdot \right)$. That is, invariance holds across the treatment and the control groups and invariance holds across the experimental and the auxiliary samples. It is important to note that invariance across the treatment and the control groups implies that the variables $\bm{X}_{k,a}^d$ summarize the effect of the treatment on the outcome. Given this and Assumption~\ref{ass:exog} (Exogeneity), the distribution of $\varepsilon_{k,j,a}^d$ is the same across the treatment and the control groups. We then drop the superscript in $\varepsilon_{k,a}^d$.
-
-In Appendix~\ref{app:containsupport}, we also document that the support of $Y_{n,j,a}^d, \bm{X}_{n,a}^d, \bm{B}_{n}$ covers the support of $Y_{e,j,a}^d, \bm{X}_{e,a}, \bm{B}_{e}$ for $d \in \{0, 1\}$. This allows us to drop the $d$ superscript in $Y_{n,j,a}^d, \bm{X}_{n,a}^d$ given that we estimate an invariant model.
-
-We use linear specifications of $\phi_{j,a}$. We explore different alternatives. The system of interest is:
+The system of interest is:
 
 \begin{eqnarray}
-Y_{k,j,a}                   &=& \lambda_{0} + \lambda_{1} Y_{k,j,a-1} + \lambda_{2}  \bm{X}_{k,a} + \varepsilon_{k,j,a} \nonumber \\
-\varepsilon_{k,j,a} &=& \underbrace{f}_{\text{Fixed Effect}} + \underbrace{\omega_{k,j,a}}_{\text{Potentially Serially Correlated Component}} \nonumber \\
-\omega_{k,j,a}      &=& \rho \omega_{k,j,a-1} + \underbrace{U_{k,j,a}}_{\text{Independent Innovation}},
+Y_{k,a}                   &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \lambda_{2}  \bm{X}_{k,a} + \varepsilon_{k,a} \nonumber \\
+\varepsilon_{k,a} &=& \underbrace{f}_{\text{Fixed Effect}} + \underbrace{\omega_{k,a}}_{\text{Potentially Serially Correlated Component}} \nonumber \\
+\omega_{k,a}      &=& \rho \omega_{k,a-1} + \underbrace{U_{k,a}}_{\text{Independent Innovation}},
 \end{eqnarray}
 
-\noindent where $U_{k,j,a} \independent \bm{X}_{k,a}$.
+\noindent where $U_{k,a} \independent \bm{X}_{k,a}$ and we drop baseline variables and $d,k$ indices for brevity (the latter is justified by our documentation of invariance in Section~\ref{section:cbamethodology}.
 
 Table~\ref{table:predsens} summarizes the results from our exploration through two statistics: (i) the predicted net present value of labor income under different assumptions; and (ii) the overall benefit/cost ratio when the forecasts are done based on the different proposed alternatives. Estimates from the model that we use in our baseline estimations are not sensitive to the departures from serial independence that we analyze here.
 
-In the auxiliary samples, we observe outcomes $Y_{n,j,a}$ for $a \in [a^*, \ldots, A]$. In the experimental sample, we observe the outcome $Y_{e,j,a}$ for at most two ages, depending on the outcome. We initially assume that we observe the outcome at one age ($a = a^*$). We later relax this assumption. We thus use the information in the auxiliary sample at  $a \in [a^*, \ldots, A]$ to form extrapolations for the experimental sample, where we do not observe the outcome of interest during this age interval. We produce out-of-sample forecasts and calculate the net present value of labor income under different specifications that have different assumptions. Table~\ref{table:predsens} summarizes the five specifications that we implement.
+In the auxiliary samples, we observe outcomes $Y_{n,a}$ for $a \in [a^*, \ldots, \bar{A}]$. In the experimental sample, we observe the outcome $Y_{e,a}$ for at most two ages, depending on the outcome. We initially assume that we observe the outcome at one age ($a = a^*$). We later relax this assumption. We thus use the information in the auxiliary sample at  $a \in [a^*, \ldots, \bar{A}]$ to form extrapolations for the experimental sample, where we do not observe the outcome of interest during this age interval. We produce out-of-sample forecasts and calculate the net present value of labor income under different specifications that have different assumptions. Table~\ref{table:predsens} summarizes the five specifications that we implement.
 
 \subsubsection{Specification 1: Lagged Component ($\lambda_{1} \neq 0$); No Serial Correlation ($\rho = 0$); and No Fixed Effect ($f = 0$)} \label{app:spec1}
 
@@ -833,7 +843,7 @@ Our baseline estimations are constructed using this framework for labor and tran
 
 \subsubsection{Specification 2: No Lagged Component ($\lambda_{1} = 0$); Serial Correlation ($\rho \neq 0$); and No Fixed Effect ($f = 0$)} \label{app:spec2}
 
-Given that $Y_{k,j,a-1}$ is not one of the elements in $\bm{X}_{k,a}$, it is plausible that Assumption~\ref{ass:exog} (Exogeneity) holds even when we do not restrict $\rho$. In this case, it is straightforward to account for serial correlation.\footnote{Serial correlation can be accounted for in a general way using the Newey-West approach \citep{Newey-West_1986_Simple-Pos}.}
+Given that $Y_{k,a-1}$ is not one of the elements in $\bm{X}_{k,a}$, it is plausible that Assumption~\ref{ass:exog} (Exogeneity) holds even when we do not restrict $\rho$. In this case, it is straightforward to account for serial correlation.\footnote{Serial correlation can be accounted for in a general way using the Newey-West approach \citep{Newey-West_1986_Simple-Pos}.}
 
 The predictions reported in the baseline estimates are extremely similar to the ones generated in this case. That is, the lag does not help in generating predictions as much as one might think it would. This is more evidence in favor of $\bm{X}_{k,a}$ summarizing the treatment effects.
 
@@ -855,9 +865,9 @@ This framework allows for serial dependence due to the lagged dependent variable
 
 \subsubsection{Specification 5: Non-Parametric Predictions}
 
-An alternative to any of these scenarios is to make forecasts using a non-parametric matching algorithm. Specifically, (i) for each individual $i$ in the experimental sample, $e$, find individual(s) $l(i)$ in the non-experimental sample, $n$, using Algorithm~\ref{alg:match} in Appendix~\ref{appendix:match}; (ii) we impute the post-$a^*$ trajectory of $Y_{k,j,a}$ of individual(s) $l(i)$ in the non-experimental sample, $n$, to individual $i$ in the experimental sample, $e$.
+An alternative to any of these scenarios is to make forecasts using a non-parametric matching algorithm. This alternative is described in Section~\ref{appendix:nonpar}. 
 
-A sufficient condition for the validity of this procedure is Assumption~\ref{ass:exog} (Exogeneity). Without exogeneity, the joint distributions of $\bm{X}_{j,a*}, \varepsilon_{j,a^*}$ do not necessarily coincide across the experimental and the auxiliary samples. For example, in the experimental sample, individuals in the treatment group have relatively high levels of education due in part to the exogenous boost generated by randomization into treatment. In the auxiliary sample, the usual form of ability bias may be at work: individuals with relatively high levels of education might have better motivation, better parents, etc. Thus, the empirical relationships between education and labor income may differ across experimental and auxiliary samples. Exogeneity avoids this problem, but clearly only a weaker assumption is required.
+A sufficient condition for the validity of this procedure is Assumption~\ref{ass:exog} (Exogeneity). Without exogeneity, the joint distributions of $\bm{X}_{k,a*}, \varepsilon_{k,a^*}$ do not necessarily coincide across the experimental and the auxiliary samples. For example, in the experimental sample, individuals in the treatment group have relatively high levels of education due in part to the exogenous boost generated by randomization into treatment. In the auxiliary sample, the usual form of ability bias may be at work: individuals with relatively high levels of education might have better motivation, better parents, etc. Thus, the empirical relationships between education and labor income may differ across experimental and auxiliary samples. Exogeneity avoids this problem, but clearly only a weaker assumption is required.
 
 \begin{sidewaystable}[H]
 \resizebox{\columnwidth}{!}{%
@@ -1006,12 +1016,12 @@ Q :=  {\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\gamma} \right) }  \end{
 \bm{W} ^{-1}{\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\gamma} \right) }   \end{bmatrix}}, \label{eq:wlossspec2}
 \end{equation}\\
 
-\noindent where $\bm{m}_{a} \left( \bm{X}_{n,a}, \bm{B}_{n} ; \bm{\theta}_{a} \right) := {\bm{X_{n,a}}}^{'} \left( Y_{n,a}^d -   \phi_{a} \left( \bm{X}_{n,a}^d, \bm{B}_{n} \right) \right)$ for $a \in [0, \ldots \bar{A}]$ and  $\bm{X}_{n,a}$ contains no lags of $Y_{n,a}^d$.
+\noindent where $\bm{m}_{a} \left( \bm{X}_{n,a}, \bm{B}_{n} ; \bm{\gamma}_{a} \right) := {\bm{X_{n,a}}}^{'} \left( Y_{n,a}^d -   \phi_{a} \left( \bm{X}_{n,a}^d, \bm{B}_{n} \right) \right)$ for $a \in [0, \ldots \bar{A}]$ and  $\bm{X}_{n,a}$ contains no lags of $Y_{n,a}^d$.
 
 \noindent  To explain the forecasting steps for \textbf{Specification 3}, recall that we $\rho$-transform the model and write:
 
 \begin{equation}
-Y_{k,a} = \lambda_{0} \left( 1 - \rho \right) + \left( \lambda_{1} + \rho \right) Y_{k,a-1} - \lambda_{1} \rho Y_{k,a-2} + \lambda_{2} \left( \bm{X}_{k,a} - \rho \bm{X}_{k,a-1}  \right) + U_{k,a} \label{eq:rhotransform}
+Y_{k,a} = \lambda_{0} \left( 1 - \rho \right) + \left( \lambda_{1} + \rho \right) Y_{k,a-1} - \lambda_{1} \rho Y_{k,a-2} + \lambda_{2} \left( \bm{X}_{k,a} - \rho \bm{X}_{k,a-1}  \right) + U_{k,a}. \label{eq:rhotransform}
 \end{equation}
 
 \noindent This is a model with two lags and no serial correlation. The estimation procedure and the GMM framework are analogous to those of \textbf{Specification 1}. The two lags are not an issue for estimation in the auxiliary sample because we observe labor income for the full range of relevant ages, thus we estimate the prediction function. To initialize the procedure in the experimental sample, however, we face an issue: we do not observe labor income at $a^* - 1$. We assume that labor income at age $a^*$ is the same as at age $a^* - 1$ and then proceed in a similar way as in \textbf{Specification 1}, the estimation procedure and the GMM framework remain the same.
@@ -1047,7 +1057,7 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 \hat{Y}_{e,a^* + 2} = \hat{\lambda}_{0} + \hat{\lambda}_{1} \hat{Y}_{e,a^*+1}.
 \end{equation}
 
-\item Iterate this procedure of to age $A$ and stack the vector of forecasts (without accounting for forecasting error) as $\hat{\mathcal{Y}}_{e} : = \left[ \hat{Y}_{e,a^*+1}, \ldots,  \hat{Y}_{e,\bar{A}} \right]$.
+\item Iterate this procedure of to age $\bar{A}$ and stack the vector of forecasts (without accounting for forecasting error) as $\hat{\mathcal{Y}}_{e} : = \left[ \hat{Y}_{e,a^*+1}, \ldots,  \hat{Y}_{e,\bar{A}} \right]$.
 
 \item To account for forecasting error we need an individual level estimate of $f + u_{a}$. We proceed as follows: (i) we observe labor income at two ages, 21 and 30. We use the estimates of the coefficients characterizing Equation~\eqref{eq:linear1bb} from the auxiliary sample (n) to forecast labor income from ages 22 to 29. Then, we estimate the coefficients in Equation~\eqref{eq:linear1bb} in the experimental sample (e). This allows us to recover an estimate for $f + u_{a}$. In fact, we recover one estimate of $f + u_{a}$ for each $a \in \left[22, \ldots, 30 \right]$. Each of these estimates is a valid estimate for $f + u_{a}$ because $u_{a}$ is i.i.d. To form our forecasting error, at each age, we take the average of these available estimates. We add it to  $\hat{Y}_{e,a}$ for $a \geq a^* + 1$ to form a prediction that accounts for error.
 \end{enumerate}
@@ -1062,9 +1072,9 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 \noindent We execute the following steps to compute the empirical bootstrap distribution and the standard errors when forecasting outcomes out of sample by combing experimental and auxiliary datasets.
 
 \begin{enumerate}
-\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Information on the entire history of each individual is obtained in each re-sample.\footnote{We re-sample individuals independently of their treatment status.} Call this resampled sample $(e,s)$.
+\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Information on the entire history of each individual is obtained in each re-sample. We re-sample individuals independently of their treatment status. Call this resampled sample $(e,s)$.
 
-\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Information on the entire history of each individual is obtained in each re-sample.\footnote{We re-sample individuals independently of their treatment status.} Call this sample $(n,s')$.
+\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Information on the entire history of each individual is obtained in each re-sample. We re-sample individuals independently of their treatment status. Call this sample $(n,s')$.
 
 \item Place the initial restrictions on $(n,s')$ described in Appendix~\ref{app:datasets}.
 
