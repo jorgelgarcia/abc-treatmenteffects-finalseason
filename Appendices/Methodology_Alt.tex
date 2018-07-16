@@ -262,7 +262,7 @@ When constructing synthetic cohorts using each of the following variables, \text
 
 \noindent An alternative to the forecasting strategy that we use throughout the main text and the preceding appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can: (i) find a match or a set of matches in the auxiliary sample ($n$) using a modified version of Algorithm~\ref{alg:match} that includes both baseline variables and variables affected by treatment. Dropping age indices, the modified algorithm is: 
 
-\begin{algorithm} \label{alg:match}
+\begin{algorithm} \label{alg:match2}
 For individual $i$ in experimental sample ($k=e$), an individual $l(i)$ in the auxiliary sample ($k=n$) is a potential counterpart if
 
 \begin{equation}\label{eq:ingrownnail}
@@ -1059,24 +1059,26 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 
 \subsubsection{Forecasts} \label{appendix:bootstrapspreds}
 
-\noindent We execute the following steps to compute the empirical bootstrap distribution and the standard error when forecasting outcomes out of sample by combing experimental and auxiliary datasets.
+\noindent We execute the following steps to compute the empirical bootstrap distribution and the standard errors when forecasting outcomes out of sample by combing experimental and auxiliary datasets.
 
 \begin{enumerate}
-\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Information on the entire history of each individual is obtained in each re-sample.\footnote{We re-sample individuals independently of their treatment status.} Call this resampled sample $(e,s)$. Separate this sample by treatment and control group into $(e,s,1)$ and $(e,s,0)$, respectively.
+\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Information on the entire history of each individual is obtained in each re-sample.\footnote{We re-sample individuals independently of their treatment status.} Call this resampled sample $(e,s)$.
 
-\item Perform the same resampling procedure on the auxiliary sample. Call this sample $(n,s')$.
+\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Information on the entire history of each individual is obtained in each re-sample.\footnote{We re-sample individuals independently of their treatment status.} Call this sample $(n,s')$.
 
-\item Form synthetic treatment and control groups by using Algorithm~\ref{alg:match} to weight the individuals in sample $(n,s')$. We do not do this by age due to problems of data availability. We use the algorithm once to match $(e,s)$ to the CNLSY and once to match $(e,s)$ to the PSID and NLSY79. We use the synthetic groups obtained from each of these samples to form predictions at different ages, as we explain in Appendix~\ref{app:datasets}. We identify synthetic control and treatment groups $(n,s',0)$ and $(n,s',1)$, respectively. That is, $(n,s',d)$ for $d = {0,1}$.
+\item Place the initial restrictions on $(n,s')$ described in Appendix~\ref{app:datasets}.
 
-\item Fit the dynamic relationship in Equation~\eqref{eq:outcome}, using predictors as detailed in Appendix~\ref{appendix:pred}. We fit two parameterizations of the dynamic relationships. One for the synthetic treatment, and one for the synthetic control. When providing estimates by gender, we also produce different predictions by gender.
+\item Construct the synthetic cohorts by matching the samples $(e,s)$ and $(n,s')$ using Algorithm~\ref{alg:match}. Note that this matching procedure is based solely on baseline variables not affected by treatment.
 
-\item Use the parameterization in Step 4 to fit out of sample in $(e,s,1)$ and $(e,s,0)$, respectively. This gives us an age-by-age forecast \textit{without forecasting error} for our treatment and control groups. Store the predictions at all ages for individual $i$ in this sample in a vector $\mathcal{Y}_{i,e,s}^d$, where $\mathcal{Y}_{i,e,s}^d$ is the vector of forecasts for individual $i$ in the experimental bootstrap sample $s$, experimental group $d$.
+\item Fit the dynamic relationships in Equation~\eqref{eq:outcome}, using predictors as detailed in Appendix~\ref{appendix:pred}. When providing estimates by gender, we also produce different predictions by gender.
 
-\item In Step 4, we compute an individual-level vector of residuals in each of the samples $(n,s',0)$ and $(n,s',1)$. That is, each individual has a vector containing the residuals of each of her predicted variable (for example, labor income). Call this vector of residuals $\bm{\mathcal{E}}_{i',n,s'}^d$: the vector of residuals for individual $i'$ in the auxiliary bootstrap sample $s'$, in the synthetic group $d$.
+\item Use the fitted dynamic relationship to fit out of sample in $(e,s)$. This gives us an age-by-age forecast \textit{without forecasting error} for each individual in the experimental sample. Store the predictions at all ages for individual $i$ in this sample in a vector $\mathcal{Y}_{i,e,s}$, where $\mathcal{Y}_{i,e,s}$ is the vector of forecasts for individual $i$ in the experimental bootstrap sample $s$
 
-\item Randomly pair individual $i'$ in $s'$ with individual $i$ in $s$. The forecast accounting for forecasting error is $\bm{Y}_{i,e,s}^d + \bm{\mathcal{E}}_{i',e,s'}^d$. As described in Appendix~\ref{appendix:gmm}, this step changes. We estimate the forecasting error from the experimental sample (and we account for this when bootstrapping as well).
+\item When fitting the dynamic relationship in sample $(n,s',0)$ and $(n,s',1)$, each individual has a vector containing the residuals of each of her predicted variable (for example, labor income). Call this vector of residuals $\bm{\mathcal{E}}_{j,n,s'}^d$: the vector of residuals for individual $i'$ in the auxiliary bootstrap sample $s'$.
 
-\item Repeat this for all pairs of samples $(n,s'), (e,s)$. We resample the experimental sample and auxiliary sample 100 times each. This gives us the empirical bootstrap distribution, with 100*100 points.
+\item Randomly pair individual $j$ in $s'$ with individual $i$ in $s$. The forecast accounting for forecasting error is $\mathcal{Y}_{i,e,s}+ \bm{\mathcal{E}}_{j,e,s'}$.
+
+\item Repeat this for all pairs of samples $(n,s'), (e,s)$. Resample the experimental sample and auxiliary sample 100 times each. This gives us the empirical bootstrap distribution, with 100*100 points.
 
 \item Compute the standard error as the sample standard deviation of the 100*100 re-samples. Compute the $p$-value's as the proportion of times that we reject the null hypothesis, after centering the empirical bootstrap distribution according to the null hypothesis.
 
@@ -1099,7 +1101,7 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 
 \noindent In this appendix we first explain our method for selecting the background variables that we control for when estimating treatment effects.\footnote{This is a separate discussion from the selection of variables to forecast life-cycle profiles of labor income and other outcomes. For that discussion see Appendix~\ref{appendix:pred}.}
 
-\paragraph{Background Variables} \label{appendix:bvariables}
+\subsubsection{Background Variables} \label{appendix:bvariables}
 
 \noindent We select three out of fourteen potential variables that best predict the relevant outcomes of interest, i.e. the outcomes we test treatment effects for. We list the fourteen variables in Table~\ref{tab:pselectvars} and bold the three we choose. In addition to these three variables, we account for a male indicator when computing estimates pooling males and females and a ABC/CARE indicator, to account for any difference in the programs---although we extensively document throughout the paper the similarities between them.
 
@@ -1126,11 +1128,7 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 
 \noindent This procedure allows us to choose one control set per outcomes of interest. To gain consistency across all specifications, we sum the BIC across all outcomes and choose the background variables with lower average across models. These background variables form our control set across all estimations and appear bold in Table~\ref{tab:pselectvars}.
 
-\subsubsection{Matching Variables}\label{app:matching-is-fun}
-
-\noindent We use matching estimators for different versions of the ``treatment vs. stay at home'' and ``treatment vs. alternative preschools'' parameters. For treatment vs. stay at home, we construct the Mahalanobis distance between the individuals in the treatment group and the control group who stay at home and use an Epanechnikov metric to construct an individual-level weight---giving a relatively high weight to individuals in the treatment group who would have been likely to stay at home if randomized to the control group. We proceed analogously when estimating the treatment vs. alternative preschool parameters. We use the same variables to ``match'' and to ``control''.
-
-\noindent Other forms of matching estimates such as propensity score matching and nearest neighbor(s) give very similar results and are available upon request. We analyze sensitivity to the choice of controls and matching variables next.
+\noindent We perform an analogous procedure when choosing the variables to construct the IPW scheme.
 
 \subsubsection{Sensitivity Analysis} \label{app:senscontrols}
 
