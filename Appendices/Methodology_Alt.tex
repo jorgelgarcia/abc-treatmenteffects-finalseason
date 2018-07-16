@@ -69,16 +69,16 @@ When we do not observe data on an outcome for more than 10\% of the individuals 
 \noindent where each component of the last expression in \eqref{eq:case2} is straightforward to recover from the data. Using Bayes' Theorem, we can write an equivalent expression to make the IPW scheme explicit. That is, we apply Bayes' Theorem to $f_{\bm{B}} (b)$ to obtain
 
 \begin{equation*}
-	f_{\bm{B}} (b) = \frac{f_{\bm{B}|R=r,A=1} (b) P(R=r,A=1)}{P(R=r,A=1|\bm{B})}.
+	f_{\bm{B}} (b) = \frac{f_{\bm{B}|R=r,A=1} (b) P(R=r,A=1)}{P(R=r,A=1|\bm{B} = b)}.
 \end{equation*}
 \noindent Substituting these expressions into \eqref{eq:case2}, we obtain
 
 \begin{align*} \label{eq:case2ipw}
-\mathbb{E}[Y^r] & = \int \int y f_{Y,\bm{B}|R=r,A=1}(y,b) \frac{P(R=r,A=1) P(A=1|R=r,\bm{B})}{P(R=r,A=1|\bm{B}) P(A=1|R=r,\bm{B})} dydb \\
-	            & = \int \int  y f_{Y,\bm{B}|R=r,A=1}(y,b) \frac{P(R=r,A=1)}{P(R=r|\bm{B}) P(A=1|R=r,\bm{B})} dydb. \\
+\mathbb{E}[Y^r] & = \int \int y f_{Y,\bm{B}|R=r,A=1}(y,b) \frac{P(R=r,A=1) P(A=1|R=r,\bm{B} = b)}{P(R=r,A=1|\bm{B} = b) P(A=1|R=r,\bm{B})} dydb \\
+	            & = \int \int  y f_{Y,\bm{B}|R=r,A=1}(y,b) \frac{P(R=r,A=1)}{P(R=r|\bm{B} = b) P(A=1|R=r,\bm{B} = b)} dydb. \\
 \end{align*}
 
-\noindent Assumption \ref{ass:attr} generalizes \textbf{[AZ: Without $\bm{X}$, is this still true?]} the matching assumption of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}. The corresponding sample estimator for $\mathbb{E}[Y^r]$ is
+\noindent Assumption \ref{ass:attr} generalizes the matching assumption of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}. The corresponding sample estimator for $\mathbb{E}[Y^r]$ is
 
 \begin{align*}
 \sum_{i \in \mathcal{I}} y_i \beta_{i} \bm{\mathit{1}}(r_i = r) \bm{\mathit{1}}(a_i = 1)
@@ -362,29 +362,32 @@ Assumption~\ref{ass:contain} requires that the support of the auxiliary data con
 
 \subsubsection{Testing Assumption~\ref{ass:exog}: Exogeneity} \label{app:endogeneity}
 
-\noindent The following framework helps us to test both Assumptions~\ref{ass:exog} and \ref{ass:summary}. We discuss this framework and test Assumption~\ref{ass:exog} in this section of the appendix. We test Assumption~\ref{ass:summary} in the next section.
+\noindent We now provide a framework for testing Assumption~\ref{ass:exog}. Recall from the main paper that our forecasts are based on the vector of production functions for output $\bm{Y}^d_{k,a}$:
+\begin{equation}
+\bm{Y}^d_{k,a} = \bm{\phi}^d_{k,a} (\bm{X}^d_{k,a}, \bm{B}_k) \ + \ \bm{\varepsilon}^d_{k,a},  \label{eq:outcome2} \\
+\end{equation}
+$d \in\{0,1\},  k\in\{e,n\}, a\in\{1,\dots,\bar{A}\}$ where $\bm{\phi}^d_{k,a}\left( \cdot, \cdot \right)$ is a vector of structural production relationships mapping inputs $\bm{X}^d_{k,a}, \bm{B}_k$ into outputs holding error term $\bm{\varepsilon}^d_{k,a}$ fixed.
 
-\noindent Define an outcome vector for treatment status $d$, in sample $k$ at age $a$ as
+For notational brevity in the definitions that follow, consider the production function for one entry (one outcome) in this vector (e.g.\ labor income): 
 
-\begin{align}
-\bm{Y}^d_{k,a} &= \bm{X}^d_{k,a} \bm{\gamma} + \mathcal{E}^d_a  &(a) \nonumber
-\end{align}
+\begin{equation}
+Y^d_{k,a} =\phi^d_{k,a} (\bm{X}^d_{k,a}, \bm{B}_k) \ + \ \varepsilon^d_{k,a},  \label{eq:outcomesin} \\
+\end{equation}
 
-\noindent with an associated measurement system
+\noindent where the variables are defined analogously to Equation~\ref{eq:outcome2}. Note that the arguments of $\phi^d_{k,a}$ are still vectors in this case. Define an associated measurement system for the error term $\varepsilon^d_{k,a}$:
 
 \begin{align}  \label{eq:sa-msystemmain}
-\mathcal{E}_{a}^d &=\bm{\beta}^d \bm{\theta}_{a}^d + \bm{\omega}_{a}^d  &(b) \nonumber \\
+\varepsilon^d_{k,a} &=\bm{\beta}^d \bm{\theta}_{a}^d + \bm{\omega}_{a}^d  &(b) \nonumber \\
 \bm{M}_{a}^d &= \bm{\lambda}^d \bm{\theta}_{a}^d + \bm{\upsilon}_a^d,  &(c)
 \end{align}
 
+\noindent where $\bm{\theta}^d \independent \bm{\upsilon}_{a}^d, \bm{\omega}_{a}^d$ and $\bm{\upsilon}_{a}^d \independent \bm{\omega}_{a}^d$.
 
-\noindent where $\bm{\theta}^d \independent \bm{\upsilon}_{a}^d, \bm{\omega}_{a}^d$ and $\bm{\upsilon}_{a}^d \independent \bm{\omega}_{a}^d$. We use additional conditioning variables in these equations. To simplify the notation, we keep them implicit.
-
-\noindent When the auxiliary measurement system $\bm{M}_{a}^d $ consists of at least three measures, we are able to identify the vectors of coefficients characterizing this system, $\bm{\lambda}^d, \bm{\beta}^d$, as well as the respective covariance matrices, $\bm{\Sigma}_{\bm{\theta}_{a}^d}, \bm{\Sigma}_{\bm{\upsilon}_{a}^d}, \bm{\Sigma}_{\bm{\omega}_{a}^d}$, we use the method from \citet{Bartlett_1938_Nature} to obtain an estimate of $\bm{\theta}_{a}^d$ \citep{Heckman_Pinto_etal_2013_PerryFactor}. Identifying and estimating the elements in system \eqref{eq:sa-msystemmain} serves two purposes: (i) it facilitates a test of Assumption~\ref{ass:exog}; and (ii) it enables us to use estimates of $\bm{\theta}_{a}^d$ as control functions when testing Assumption~\ref{ass:summary} in the next appendix, i.e. to use these estimates to control for endogeneity.
+\noindent When the auxiliary measurement system $\bm{M}_{a}^d $ consists of at least three measures, we are able to identify the vectors of coefficients characterizing this system, $\bm{\lambda}^d, \bm{\beta}^d$, as well as the respective covariance matrices, $\bm{\Sigma}_{\bm{\theta}_{a}^d}, \bm{\Sigma}_{\bm{\upsilon}_{a}^d}, \bm{\Sigma}_{\bm{\omega}_{a}^d}$, we use the method from \citet{Bartlett_1938_Nature} to obtain an estimate of $\bm{\theta}_{a}^d$ \citep{Heckman_Pinto_etal_2013_PerryFactor}. Identifying and estimating the elements in system \eqref{eq:sa-msystemmain} enables us to use estimates of $\bm{\theta}_{a}^d$ as control functions when testing Assumption~\ref{ass:summary} in the next appendix, i.e. to use these estimates to control for endogeneity.
 
 \noindent We first describe the estimates for the elements in System~\eqref{eq:sa-msystemmain} in the experimental sample. We assume that $\bm{\theta}_{a}^d$ has two dimensions (one representing cognitive skill, $c$, and another representing non-cognitive skill, $nc$). We assume dedicated measures for these skills at one time period. Put simply, we have two independent systems, one to measure $\bm{\theta}_{c}^d$ and one to measure $\bm{\theta}_{nc}^d$, where $\bm{\theta}_{a}^d: = \left[ \bm{\theta}_{c}^d, \bm{\theta}_{nc}^d \right]$. Further, we assume a common measurement system for the treatment and control groups (this is a sensible assumption shown to be true in the Perry data; see \citealp{Heckman_Pinto_etal_2013_PerryFactor}). This assumption implies that $\bm{\lambda}^d, \bm{\beta}^d$, as well as $\bm{\Sigma}_{\bm{\theta}_{a}^d}, \bm{\Sigma}_{\bm{\upsilon}_{a}^d}$ are the same whether $d = 0$ or $d = 1$.
 
-\noindent We use a set of IQ measures from ages 2 to 8 to obtain an estimate of $\bm{\theta}_{c}^d$ and a set of measures of somatization, hostility, depression, and mental health all at age 21 to measure to estimate $\bm{\theta}_{nc}^d$.\footnote{For definitions and treatment effects on these variables see Appendix~\ref{appendix:results}.} Figure~\ref{figure:factorsm} shows our estimates by treatment status.
+\noindent At age 30 and in the experimental sample, we use a set of IQ measures from ages 2 to 8 to obtain an estimate of $\bm{\theta}_{c}^d$ and a set of measures of somatization, hostility, depression, and mental health all at age 21 to measure to estimate $\bm{\theta}_{nc}^d$. Figure~\ref{figure:factorsm} shows our estimates by treatment status.
 
 \begin{figure}[!htbp]
 \centering
@@ -403,39 +406,9 @@ Assumption~\ref{ass:contain} requires that the support of the auxiliary data con
 Note: Panel (a) displays a factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). Panel (b) displays an analogous set of graphs for measures of somatization, hostility, depression, and mental health at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. ``Less'' in the factor measuring non-cognitive skills is ``positive'' given the measures we rely on to construct it. The mean difference between treatment and control is displayed below each panel, with standard error in parentheses. Standard errors are based on the empirical bootstrap distribution.
 \end{figure}
 
-\noindent We can also estimate $\bm{\theta}_{a}^d$ in the auxiliary sample. For want of data to approximate $\bm{\theta}_{c}, \bm{\theta}_{nc}$ in PSID and NLSY79, we use the CNLSY in this appendix. Our measurement system for $\bm{\theta}_{c}$ consists of reading and comprehension PIAT scores as well as by the Peabody Picture Vocabulary Test (PPVT). Our measurement system for $\bm{\theta}_{nc}$ is based on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior).
+\noindent At age 30 and in the auxiliary sample, we can also estimate $\bm{\theta}_{a}^d$. For want of data to approximate $\bm{\theta}_{c}, \bm{\theta}_{nc}$ in PSID and NLSY79, we use the CNLSY in this appendix. Our measurement system for $\bm{\theta}_{c}$ consists of reading and comprehension PIAT scores as well as by the Peabody Picture Vocabulary Test (PPVT). Our measurement system for $\bm{\theta}_{nc}$ is based on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior).
 
-\noindent Once these estimates are available, we can test Assumption~\ref{ass:exog} in the experimental and auxiliary samples. The test consists of the following. Let $\bm{\gamma}^E$ be the parameter associated to $\bm{X}^d_{k,a}$ in Equation (a) in System~\eqref{eq:sa-msystemmain} when not accounting for $\bm{\theta}_{a}^d$. Similarly, let $\bm{\gamma}^I$ be the parameter associated with $\bm{X}^d_{k,a}$ in Equation (a) in System~\eqref{eq:sa-msystemmain} when accounting for $\bm{\theta}_{a}^d$. Under the null hypotheses, Assumption~\ref{ass:exog} holds and $\bm{\theta}_{a}^d$ is an irrelevant predictor in Equation (a) in System~\eqref{eq:sa-msystemmain}. This makes the OLS estimate of $\bm{\gamma}^E$ inconsistent. If the null hypotheses are false, $\bm{X}^d_{k,a}$ and $\varepsilon_{a}^d$ are not independent, $\bm{\gamma}^I$ is consistent and $\bm{\gamma}^E$ is not. We test the null hypothesis by asking if the elements in $\bm{\theta}_{a}^d$ are relevant predictors of a set of outcomes at age 30, so that we can perform the tests on both the experimental and the auxiliary samples. We contrast specifications with and without including estimates of $\bm{\theta}_{a}^d$, and report the $F$-statistic corresponding to this comparison. This is a version of a Durbin-Wu-Hausman test \citep[see][]{Durbin_1954_RISI,Wu_1973_Econometrica,Hausman_1978_Econometrica}. Tables~\ref{table:endoginc} to \ref{table:trincome} present the results. In most cases, we are not able to reject the null hypothesis that Assumption~\ref{ass:exog} holds.
-
-
-\begin{sidewaystable}[H]
-\begin{threeparttable}
-\caption{Forecast of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control Group}
-\label{table:endoginc}
-\centering
-\footnotesize
-\input{output/abccare_endogdurb_si30y_inc_labor_scont_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Forecast of labor income at age 30 is based on the variable listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide the point estimate and $p$-value for the treatment and control groups as well as a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
-
-\begin{sidewaystable}[H]
-\begin{threeparttable}
-\caption{Forecast of Labor Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Treatment Group}
-\centering
-\footnotesize
-\input{output/abccare_endogdurb_si30y_inc_labor_streat_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Forecast of labor income at age 30 is based on the variable listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide the point estimate and $p$-value for the treatment and control groups as well as a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
+\noindent Once these estimates are available, we can test Assumption~\ref{ass:exog} in the experimental and non-experimental samples.  The test consists of the following. Let $\bm{\gamma}^E$ be the parameter associated to $\bm{X}^d_{k,a}$ in Equation~\ref{eq:outcomesin} in a linear regression when not accounting for $\bm{\theta}_{a}^d$. Similarly, let $\bm{\gamma}^I$ be the parameter associated with $\bm{X}^d_{k,a}$ in Equation~\ref{eq:outcomesin} when accounting for $\bm{\theta}_{a}^d$. Under the null hypothesis that Assumption~\ref{ass:exog} holds $\bm{\gamma}^E = \bm{\gamma}^I$ and $\bm{\theta}_{a}^d$ is an irrelevant predictor in Equation~\ref{eq:outcomesin}. We test the null hypothesis by asking if the elements in $\bm{\theta}_{a}^d$ are relevant predictors of labor and transfer income. We perform this tests in the experimental sample pooling the treatment and control groups (i.e.,\ under the invariance assumption that we document in Section~\ref{section:cbamethodology}) and in the non-experimental sample using our synthetic cohort. We contrast specifications with and without including estimates of $\bm{\theta}_{a}^d$, and report the $F$-statistic corresponding to this comparison. This is a version of a Durbin-Wu-Hausman test \citep[see][]{Durbin_1954_RISI,Wu_1973_Econometrica,Hausman_1978_Econometrica}. Tables~\ref{table:endoginc} to \ref{table:trincome} present the results. In most cases, we are not able to reject the null hypothesis that Assumption~\ref{ass:exog} holds.
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
@@ -461,35 +434,6 @@ Note: Panel (a) displays a factor score estimated based on the measurement syste
 \footnotesize
 \item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
 \item Note: Forecast of labor income at age 30 is based on the variable listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide the point estimate and $p$-value for the treatment and control groups as well as a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of reading and comprehension of the PIAT, as weel as the Peabody Picture Vocabulary Test (PPVT) (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior) (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
-
-\begin{sidewaystable}[H]
-\begin{threeparttable}
-\caption{Forecast of Transfer Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Control Group}
-\label{table:endoginc}
-\centering
-\footnotesize
-\input{output/abccare_endogdurb_si30y_inc_trans_pub_scont_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Forecast of labor income at age 30 is based on the variable listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide the point estimate and $p$-value for the treatment and control groups as well as a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
-\end{tablenotes}
-\end{threeparttable}
-\end{sidewaystable}
-
-\begin{sidewaystable}[H]
-\begin{threeparttable}
-\caption{Forecast of Transfer Income at Age 30 Accounting for $\bm{B}_k$ and $\bm{\theta}, \bm{X}_{k,a}$, ABC/CARE Treatment Group}
-\centering
-\footnotesize
-\input{output/abccare_endogdurb_si30y_inc_trans_pub_streat_ready.tex}
-\begin{tablenotes}
-\footnotesize
-\item $F$-stat: exclude Cognitive and Non-Cognitive: $F$-statistic contrasting the specifications in columns (1) and (3) and (5) and (7), respectively.\\
-\item Note: Forecast of labor income at age 30 is based on the variable listed in the row. Empty cells indicate that the variable was not used in the prediction. For each coefficient we provide the point estimate and $p$-value for the treatment and control groups as well as a test for the treatment-control difference. $\hat{\bm{\theta}}_{c}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of IQ at ages 2, 3, 4, 5, 7, and 8 (cognitive skill). $\hat{\bm{\theta}}_{n}$: factor score estimated based on the measurement system in \eqref{eq:sa-msystemmain} and measures of somatization, hostility, depression, and a global mental health index at age 21 (non-cognitive skill). Both measures of skills are standardized to a mean of $0$ and a standard deviation of $1$. Inference is based on the empirical bootstrap distribution. If the estimates for the constant terms are in the ten or hundred thousands, we report a figure that has been rounded to the thousands.
 \end{tablenotes}
 \end{threeparttable}
 \end{sidewaystable}
@@ -865,7 +809,7 @@ Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$
 
 Here, we present different structures for $\phi_{k,j,a}^d \left( \cdot, \cdot \right)$ and $\varepsilon_{k,j,a}^d$ and investigate the robustness of our estimates to different assumptions about the structure of both these elements. We do this exercise for labor income.\footnote{In Appendix~\ref{appendix:gmm}, we describe the precise steps that we follow to construct out-of-sample forecasts based on these different structures and frame our estimation strategy in a GMM framework \citep{Hansen_1982_Econometrica}.}
 
-Note that Assumption~\ref{ass:summary} (Invariance) implies that $\phi_{k,j,a}^d \left (\cdot, \cdot \right) = \phi_{k,j,a}  \left (\cdot, \cdot \right) = \phi_{j,a}  \left (\cdot, \cdot \right)$. That is, invariance holds across the treatment and the control groups and invariance holds across the experimental and the auxiliary samples. It is important to note that invariance across the treatment and the control groups implies that the variables $\bm{X}_{k,a}^d$ summarize the effect of the treatment on the outcome. Given this and Assumption~\ref{ass:exog} (Exogeneity), the distribution of $\varepsilon_{k,j,a}^d$ is the same across the treatment and the control groups. We then drop the superscript in $\varepsilon_{k,j,a}^d$.
+Note that Assumption~\ref{ass:summary} (Invariance) implies that $\phi_{k,j,a}^d \left (\cdot, \cdot \right) = \phi_{k,j,a}  \left (\cdot, \cdot \right) = \phi_{j,a}  \left (\cdot, \cdot \right)$. That is, invariance holds across the treatment and the control groups and invariance holds across the experimental and the auxiliary samples. It is important to note that invariance across the treatment and the control groups implies that the variables $\bm{X}_{k,a}^d$ summarize the effect of the treatment on the outcome. Given this and Assumption~\ref{ass:exog} (Exogeneity), the distribution of $\varepsilon_{k,j,a}^d$ is the same across the treatment and the control groups. We then drop the superscript in $\varepsilon_{k,a}^d$.
 
 In Appendix~\ref{app:containsupport}, we also document that the support of $Y_{n,j,a}^d, \bm{X}_{n,a}^d, \bm{B}_{n}$ covers the support of $Y_{e,j,a}^d, \bm{X}_{e,a}, \bm{B}_{e}$ for $d \in \{0, 1\}$. This allows us to drop the $d$ superscript in $Y_{n,j,a}^d, \bm{X}_{n,a}^d$ given that we estimate an invariant model.
 
@@ -933,88 +877,90 @@ A sufficient condition for the validity of this procedure is Assumption~\ref{ass
 
 \subsection{Estimation Procedure and Data Combination Estimator in the GMM Framework} \label{appendix:gmm}
 
-\noindent Our analysis is based on a causal model for treatment ($d=1$) and control ($d=0$) outcomes for measure $j$ at age $a$ in sample $k \in \{e,n\}$ where $e$ denotes membership in the experimental sample and $n$ denotes membership in the auxiliary sample:\\
+Recall from the main paper that our forecasts are based on the vector of production functions for output $\bm{Y}^d_{k,a}$:
+\begin{equation}
+\bm{Y}^d_{k,a} = \bm{\phi}^d_{k,a} (\bm{X}^d_{k,a}, \bm{B}_k) \ + \ \bm{\varepsilon}^d_{k,a},  \label{eq:outcome2} \\
+\end{equation}
+$d \in\{0,1\},  k\in\{e,n\}, a\in\{1,\dots,\bar{A}\}$ where $\bm{\phi}^d_{k,a}\left( \cdot, \cdot \right)$ is a vector of structural production relationships mapping inputs $\bm{X}^d_{k,a}, \bm{B}_k$ into outputs holding error term $\bm{\varepsilon}^d_{k,a}$ fixed.
 
-\begin{equation}\label{eq:outcome}
-Y^d_{k,j,a} = \phi^d_{k,j,a} (\bm{X}^d_{k,a}, \bm{B}_k) + \varepsilon^d_{k,j,a}, \quad k \in \{n,e\}, \quad j \in \mathcal{J}_a, \quad d \in \{0, 1\}.
+For notational brevity in the definitions that follow, consider the production function for one entry (one outcome) in this vector (e.g.\ labor income): 
+
+\begin{equation}
+Y^d_{k,a} =\phi^d_{k,a} (\bm{X}^d_{k,a}, \bm{B}_k) \ + \ \varepsilon^d_{k,a},  \label{eq:outcomesin} \\
 \end{equation}
 
-\noindent $\phi^d_{k,j,a}\left( \cdot, \cdot \right)$ is an invariant structural production relationship mapping inputs $\bm{X}^d_{k,a}, \bm{B}_k$ into output $Y^d_{k,j,a}$ (in this Appendix a scalar, for illustration purposes) holding error term $\varepsilon^d_{k,j,a}$ fixed. For simplicity, we initially assume \ref{ass:exog} (Exogeneity) holds. We relax this below.
+\noindent where the variables are defined analogously to Equation~\ref{eq:outcome2}. Note that the arguments of $\phi^d_{k,a}$ are still vectors in this case.
 
 \noindent In this section, we: (i) explain the procedure that we follow to form out-of-sample forecasts; and (ii) formulate the estimation procedure in a generalized method of moments (GMM) framework \citep{Hansen_1982_Econometrica}.
 
-\noindent In the auxiliary sample, we observe the outcome $Y_{n,j,a}$ for $a \in [a^*, \ldots, A]$. In the experimental sample, we observe the outcome $Y_{e,j,a}$ for at most two ages, depending on the outcome. We initially assume that we observe the outcomes at one age ($a^*$). We relax this assumption below.
+\noindent In the auxiliary sample, we observe the outcome $Y_{n,a}$ for $a \in [a^*, \ldots, \bar{A}]$. In the experimental sample, we observe the outcome $Y_{e,a}$ for at most two ages, depending on the outcome. We initially assume that we observe the outcomes at one age ($a^*$). We relax this assumption below.
 
-\noindent Before explaining our estimation procedure, note that Assumption~\ref{ass:summary} (Invariance) implies that $\phi_{k,j,a}^d \left (\cdot, \cdot \right) = \phi_{k,j,a}  \left (\cdot, \cdot \right) = \phi_{j,a}  \left (\cdot, \cdot \right)$. That is, invariance holds across the treatment and the control groups and invariance holds across the experimental and the auxiliary samples. Invariance across the treatment and the control groups implies that the variables $\bm{X}_{k,a}^d$ summarize the effect of the treatment on the outcome. Given Assumption~\ref{ass:summary} (Invariance)  and Assumption ~\ref{ass:exog} (Exogeneity), the distribution of $\varepsilon_{k,j,a}^d$ is the same across the treatment and the control groups. This allows us to drop the superscript in $\varepsilon_{k,j,a}^d$.
-
-\noindent We test and do not reject invariance across the treatment and the control groups and invariance across the experimental and the auxiliary samples in the main paper.
-
-\noindent In Appendix~\ref{app:containsupport}, we document that the support of $Y_{n,j,a}^d, \bm{X}_{n,a}^d, \bm{B}_{n}$ covers the support of $Y_{e,j,a}^d, \bm{X}_{e,a}, \bm{B}_{e}$ for $d \in \{0, 1\}$. So we drop the $d$ superscript in $Y_{n,j,a}^d, \bm{X}_{n,a}^d$ given that we estimate an invariant model. We write:
+\noindent Before explaining our estimation procedure, note that Assumption~\ref{ass:summary} implies that $\phi_{k,a}^d \left (\cdot, \cdot \right) = \phi_{k,a}  \left (\cdot, \cdot \right) = \phi_{a}  \left (\cdot, \cdot \right)$. That is, invariance holds across the treatment and the control groups and invariance holds across the experimental and the auxiliary samples. Invariance across the treatment and the control groups implies that the variables $\bm{X}_{k,a}^d$ summarize the effect of the treatment on the outcome. Given Assumption~\ref{ass:summary} (Invariance)  and Assumption ~\ref{ass:exog} (Exogeneity), the distribution of $\varepsilon_{k,a}^d$ is the same across the treatment and the control groups. This allows us to drop the superscript in $\varepsilon_{k,a}^d$. We write:
 
 \begin{equation}\label{eq:routcome}
-Y_{k,j,a} = \phi_{j,a} (\bm{X}_{k,a}, \bm{B}_k) + \varepsilon_{k,j,a}, \quad k \in \{n,e\}, \quad j \in \mathcal{J}_a.
+Y_{k,a} = \phi_{a} (\bm{X}_{k,a}, \bm{B}_k) + \varepsilon_{k,a}, \quad k \in \{n,e\}, \quad j \in \mathcal{J}_a.
 \end{equation}
 
-\noindent As we note in Appendix~\ref{appendix:predsensitivity}, we work with a linear specification of $\phi_{j,a}$ in our empirical analysis. We explain our estimation procedure and the GMM framework for a general specification of $\phi_{j,a}$.
+\noindent As we note in Appendix~\ref{appendix:predsensitivity}, we work with a linear specification of $\phi_{a}$ in our empirical analysis. We explain our estimation procedure and the GMM framework for a general specification of $\phi_{a}$.
 
 \noindent First, we explain our estimation and forecasting procedure using \textbf{Specification 1} in Appendix~\ref{appendix:predsensitivity}. This is the specification that we follow in the main text. It is as follows.
 
 \begin{enumerate}
-\item Use the auxiliary sample ($n$) to estimate the the coefficients characterizing $\phi_{j,a} \left( \cdot , \cdot \right)$.\footnote{In practice, we use a weighted version of the auxiliary samples. The weights give relatively high importance to the individuals in the auxiliary sample whose characteristics $\bm{B}_k$ are close to the those of the individuals in the experimental sample. See Appendix~\ref{appendix:match}.}
+\item Use the auxiliary sample ($n$) to estimate the the coefficients characterizing $\phi_{a} \left( \cdot , \cdot \right)$.\footnote{In practice, we use a weighted version of the auxiliary samples. The weights give relatively high importance to the individuals in the auxiliary sample whose characteristics $\bm{B}_k$ are close to the those of the individuals in the experimental sample. See Appendix~\ref{appendix:match}.}
 
-We denote these coefficients by $\bm{\theta}_{j,a}$ and the estimate of this function as $\hat{\phi}_{j,a} \left( \cdot , \cdot \right)$. At each age, we are able to compute the residuals from this estimation procedure as follows:
+We denote these coefficients by $\bm{\gamma}_{a}$ and the estimate of this function as $\hat{\phi}_{a} \left( \cdot , \cdot \right)$. At each age, we are able to compute the residuals from this estimation procedure as follows:
 
 \begin{equation}
-Y_{n,j,a} -  \hat{\phi}_{j,a} (\bm{X}_{k,a}, \bm{B}_k) : = \hat{\varepsilon}_{n,j,a}.
+Y_{n,a} -  \hat{\phi}_{a} (\bm{X}_{k,a}, \bm{B}_k) : = \hat{\varepsilon}_{n,a}.
 \end{equation}
 
-For outcome $j$, we form the vector of residuals $\hat{\mathcal{E}}_{n,j} : = \left[ \hat{\varepsilon}_{n,j,a^*+1}, \ldots, \hat{\varepsilon}_{n,j,A} \right]$.
+\noindent We form the vector of residuals $\hat{\mathcal{E}}_{n} : = \left[ \hat{\varepsilon}_{n,a^*+1}, \ldots, \hat{\varepsilon}_{n,\bar{A}} \right]$.
 
 \item At age $a^*+1$, we construct the forecasted outcome for the experimental sample (e) for each individual as follows:
 \begin{equation}
-\hat{Y}_{e,j,a^*+1} = \hat{\phi}_{j,a^*+1} \left( \bm{X}_{e,a^*+1}, \bm{B}_e \right).
+\hat{Y}_{e,a^*+1} = \hat{\phi}_{a^*+1} \left( \bm{X}_{e,a^*+1}, \bm{B}_e \right).
 \end{equation}
 
-\noindent We are able to evaluate $\hat{\phi}_{j,a^*+1}$ at $ \bm{X}_{e,a^*+1}, \bm{B}_e $ even when $\bm{X}_{e,a^*+1}$ contains a one-period lag of $Y_{e,j,a^*+1}$ because we observe $Y_{e,j,a^*}$. This prediction does not account for estimation error. We discuss estimation error below.
+\noindent We are able to evaluate $\hat{\phi}_{a^*+1}$ at $ \bm{X}_{e,a^*+1}, \bm{B}_e $ even when $\bm{X}_{e,a^*+1}$ contains a one-period lag of $Y_{e,a^*+1}$ because we observe $Y_{e,a^*}$. This prediction does not account for estimation error. We discuss estimation error below.
 
 \item At age $a^*+2$, we construct the forecasted outcome in the experimental sample (e) as follows:
 
 \begin{equation}
-\hat{Y}_{e,j,a^*+2} = \hat{\phi}_{j,a^*+1} \left( \bm{X}_{e,a^*+1}, \bm{B}_e \right).
+\hat{Y}_{e,a^*+2} = \hat{\phi}_{a^*+1} \left( \bm{X}_{e,a^*+1}, \bm{B}_e \right).
 \end{equation}
 
-\noindent We are able to evaluate $\hat{\phi}_{j,a^*+2}$ at $ \bm{X}_{e,a^*+2}, \bm{B}_e $ even when $\bm{X}_{e,a^*+2}$ contains a one-period lag of $Y_{e,j,a^*+2}$ because we can forecast $Y_{e,j,a^*+1}$ from the previous step.
+\noindent We are able to evaluate $\hat{\phi}_{a^*+2}$ at $ \bm{X}_{e,a^*+2}, \bm{B}_e $ even when $\bm{X}_{e,a^*+2}$ contains a one-period lag of $Y_{e,a^*+2}$ because we can forecast $Y_{e,a^*+1}$ from the previous step.
 
-\item We iterate this procedure up to age $A$. For outcome $j$, we form the vector of forecasts $\hat{\mathcal{Y}}_{e,j} : = \left[ \hat{Y}_{e,j,a^*+1}, \ldots,  \hat{Y}_{e,j,A} \right]$.
+\item We iterate this procedure up to age $\bar{A}$. We form the vector of forecasts $\hat{\mathcal{Y}}_{e} : = \left[ \hat{Y}_{e,a^*+1}, \ldots,  \hat{Y}_{e,\hat{A}} \right]$.
 
-\item Under Assumption~\ref{ass:summary} (Invariance), the distribution of $\hat{\mathcal{E}}_{n,j}$ is a consistent estimator of the distribution of $\hat{\mathcal{E}}_{e,j}$. We form a forecast that accounts for forecasting error as follows:
+\item Under Assumption~\ref{ass:summary}, the distribution of $\hat{\mathcal{E}}_{n}$ is a consistent estimator of the distribution of $\hat{\mathcal{E}}_{e}$. We form a forecast that accounts for forecasting error as follows:
 
 \begin{equation}
-\tilde{\mathcal{Y}}_{e,j} = \hat{\mathcal{Y}}_{e,j} + \hat{\mathcal{E}}_{n,j}.
+\tilde{\mathcal{Y}}_{e} = \hat{\mathcal{Y}}_{e} + \hat{\mathcal{E}}_{n}.
 \end{equation}
 
-\noindent We randomly sample a vector of residuals from an individual $j$ in the auxiliary sample ($n$) and pair it with the vector $\hat{\mathcal{Y}}_{e,j}$ of individual $i$ in the experimental sample ($e$) to form the forecast $\tilde{\mathcal{Y}}_{e,j}$ for individual $i$ in the experimental sample. That is, the pairing of individual $j$ in the auxiliary sample ($n$) with individual $i$ in the experimental sample ($e$) is random. Random pairing is valid under invariance and exogeneity, i.e. under this assumption the vector of residuals from any individual $j$ in the auxiliary sample is a valid estimate for the vector of residuals of any individual $i$ in the experimental sample. We form the pairing one time for the main point estimates, and then bootstrap this pairing when producing inference. See Appendix~\ref{appendix:bootstrap} for more details on our inference procedures.
+\noindent We randomly sample a vector of residuals from an individual $j$ in the auxiliary sample ($n$) and pair it with the vector $\hat{\mathcal{Y}}_{e}$ of individual $i$ in the experimental sample ($e$) to form the forecast $\tilde{\mathcal{Y}}_{e}$ for individual $i$ in the experimental sample. That is, the pairing of individual $j$ in the auxiliary sample ($n$) with individual $i$ in the experimental sample ($e$) is random. Random pairing is valid under invariance and exogeneity, i.e. under this assumption the vector of residuals from any individual $j$ in the auxiliary sample is a valid estimate for the vector of residuals of any individual $i$ in the experimental sample. We form the pairing one time for the main point estimates, and then bootstrap this pairing when producing inference. See Appendix~\ref{appendix:bootstrap} for more details on our inference procedures.
 \end{enumerate}
 
-\noindent Second, we formulate our estimation strategy in terms of GMM \citep{Hansen_1982_Econometrica}. To this end, note that Assumption ~\ref{ass:exog} (Exogeneity) and Assumption~\ref{ass:summary} (Invariance) imply the following moment condition:
+\noindent Second, we formulate our estimation strategy in terms of GMM \citep{Hansen_1982_Econometrica}. To this end, note that Assumptions~\ref{ass:exog} and~\ref{ass:summary} imply the following moment condition:
 
 \begin{equation}
-\mathbb{E} \left[ \bm{m}_{j,a} \left( \bm{X}_{n,a}^d, \bm{B}_{n}; \bm{\theta}_{j,a} \right) \right] = 0,  \quad k \in \{n,e\}, \quad j \in \mathcal{J}_a \label{eq:moment}
+\mathbb{E} \left[ \bm{m}_{a} \left( \bm{X}_{n,a}^d, \bm{B}_{n}; \bm{\gamma}_{a} \right) \right] = 0,  \quad k \in \{n,e\} \label{eq:moment}
 \end{equation}
 
-\noindent where $\bm{m}_{j,a} \left( \bm{X}_{n,a}, \bm{B}_{n} ; \bm{\theta}_{j,a} \right) := {\bm{X_{n,a}}}^{'} \left( Y_{n,j,a}^d -   \phi_{j,a} \left( \bm{X}_{n,a}^d, \bm{B}_{n} \right) \right)$ for $a \in [0, \ldots A]$.
+\noindent where $\bm{m}_{a} \left( \bm{X}_{n,a}, \bm{B}_{n} ; \bm{\gamma}_{a} \right) := {\bm{X_{n,a}}}^{'} \left( Y_{n,a} -   \phi_{a} \left( \bm{X}_{n,a}^d, \bm{B}_{n} \right) \right)$ for $a \in [0, \ldots \bar{A}]$.
 
-\noindent We use the auxiliary sample ($n$) to estimate the vector of coefficients. Let $\bm{m} \left ( \cdot, \bm{\theta} \right)$, stack the function $\bm{m}_{j,a} \left( \bm{X}_{n,a}, \bm{B}_{n} ; \bm{\theta}_{j,a} \right)$  for all $j \in \mathcal{J}_a$, all $a \in [0, \ldots A]$, and $k = n$.
+\noindent We use the auxiliary sample ($n$) to estimate the vector of coefficients. Let $\bm{m} \left ( \cdot, \bm{\gamma} \right)$, stack the function $\bm{m}_{a} \left( \bm{X}_{n,a}, \bm{B}_{n} ; \bm{\gamma}_{a} \right)$  for all $a \in [0, \ldots \bar{A}]$ and $k = n$.
 
-\noindent Observing the outcomes at age $a^*$ provides us with additional moment conditions. To see this, note that, in our analysis,  $\bm{X}_{k,a^*+1}$ contains a lagged variable of the outcome to forecast and define the moment: $h_{j,a^*+1}  \left( \bm{X}_{e,a^*+1}, \bm{B}_{n} ; \bm{\theta}_{j,a^*+1} \right) =:  {\bm{X}_{e,a^*+1}}^{'} \left( \hat{Y}_{e,j,a^*+1} - \phi_{j,a^*+1} \left ( \bm{X}_{e,a^*+1}, \bm{B}_{e} \right) \right)$, where $\hat{Y}_{e,j,a^*+1}$ is defined as before. Although this moment uses information in the auxilliary sample (through the construction of $\hat{Y}_{e,j,a^*+1}$), it provides additional information (not in \eqref{eq:moment}) through $\bm{X}_{e,a^*+1}$. It is a key moment, because it initializes the out-of-sample forecasts.
+\noindent Observing the outcomes at age $a^*$ provides us with additional moment conditions. To see this, note that, in our analysis,  $\bm{X}_{k,a^*+1}$ contains a lagged variable of the outcome to forecast and define the moment: $h_{a^*+1}  \left( \bm{X}_{e,a^*+1}, \bm{B}_{n} ; \bm{\gamma}_{a^*+1} \right) =:  {\bm{X}_{e,a^*+1}}^{'} \left( \hat{Y}_{e,a^*+1} - \phi_{a^*+1} \left ( \bm{X}_{e,a^*+1}, \bm{B}_{e} \right) \right)$, where $\hat{Y}_{e,a^*+1}$ is defined as before. Although this moment uses information in the auxiliary sample (through the construction of $\hat{Y}_{e,a^*+1}$), it provides additional information (not in \eqref{eq:moment}) through $\bm{X}_{e,a^*+1}$. It is a key moment, because it initializes the out-of-sample forecasts.
 
-\noindent For some outcomes, there are gaps in the experimental sample. For example, we observe labor and transfer income at ages 21 and 30. In this case, we have two additional moments, not only one. Stack these set of additional moments and denote them by $\bm{h} \left ( \cdot, \bm{\theta} \right)$ (and helps us initialize the out-of-sample forecasts). These additional set of moments overidentify the parameter vector of interest, $\bm{\theta}$. Standard procedures allow us to use these set of additional moments to improve efficiency.
+\noindent For some outcomes, there are gaps in the experimental sample. For example, we observe labor and transfer income at ages 21 and 30. In this case, we have two additional moments, not only one. Stack these set of additional moments and denote them by $\bm{h} \left ( \cdot, \bm{\gamma} \right)$ (and helps us initialize the out-of-sample forecasts). These additional set of moments overidentify the parameter vector of interest, $\bm{\gamma}$. Standard procedures allow us to use these set of additional moments to improve efficiency.
 
-\noindent Let $\bm{W}$ be a positive definite matrix. We estimate $\bm{\theta}$ by minimizing
+\noindent Let $\bm{W}$ be a positive definite matrix. We estimate $\bm{\gamma}$ by minimizing
 
 \begin{equation}
-Q :=  {\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\theta} \right) }  \\ {\bm{\bar{h}} \left( \cdot ; \bm{\theta} \right) }  \end{bmatrix}}^{'}
-\bm{W} ^{-1}{\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\theta} \right) }  \\ {\bm{\bar{h}} \left( \cdot ; \bm{\theta} \right) }  \end{bmatrix}}, \label{eq:wloss}
+Q :=  {\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\gamma} \right) }  \\ {\bm{\bar{h}} \left( \cdot ; \bm{\gamma} \right) }  \end{bmatrix}}^{'}
+\bm{W} ^{-1}{\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\gamma} \right) }  \\ {\bm{\bar{h}} \left( \cdot ; \bm{\gamma} \right) }  \end{bmatrix}}, \label{eq:wloss}
 \end{equation}\\
 
 \noindent where $\bar{u}$ denotes the empirical counterpart of $u$.
@@ -1026,41 +972,41 @@ Q :=  {\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\theta} \right) }  \\ {\
 \noindent We next adapt the procedure and the GMM framework to the rest of the specifications. \textbf{Specification 2} is simpler because it does not depend on lagged outcomes. The steps are the following:
 
 \begin{enumerate}
-\item Use the auxiliary sample ($n$) to estimate the the coefficients characterizing $\phi_{j,a} \left( \cdot , \cdot \right)$.\footnote{In practice, we use a weighted version of the auxiliary samples. The weights give relatively high importance to the individuals in the auxiliary sample whose characteristics $\bm{B}_k$ are close to the those of the individuals in the experimental sample. See Appendix~\ref{appendix:match}.}
+\item Use the auxiliary sample ($n$) to estimate the the coefficients characterizing $\phi_{a} \left( \cdot , \cdot \right)$.\footnote{In practice, we use a weighted version of the auxiliary samples. The weights give relatively high importance to the individuals in the auxiliary sample whose characteristics $\bm{B}_k$ are close to the those of the individuals in the experimental sample. See Appendix~\ref{appendix:match}.}
 
-We denote these coefficients by $\bm{\theta}_{j,a}$ and the estimate of this function as $\hat{\phi}_{j,a} \left( \cdot , \cdot \right)$. At each age, we are able to compute the residuals from this estimation procedure as follows:
+We denote these coefficients by $\bm{\gamma}_{a}$ and the estimate of this function as $\hat{\phi}_{a} \left( \cdot , \cdot \right)$. At each age, we are able to compute the residuals from this estimation procedure as follows:
 
 \begin{equation}
-Y_{n,j,a} -  \hat{\phi}_{j,a} (\bm{X}_{k,a}, \bm{B}_k) : = \hat{\varepsilon}_{n,j,a}.
+Y_{n,a} -  \hat{\phi}_{a} (\bm{X}_{k,a}, \bm{B}_k) : = \hat{\varepsilon}_{n,a}.
 \end{equation}
 
-\noindent For outcome $j$, we form the vector of residuals $\hat{\mathcal{E}}_{n,j} : = \left[ \hat{\varepsilon}_{n,j,a^*+1}, \ldots, \hat{\varepsilon}_{n,j,A} \right]$.
+\noindent We form the vector of residuals $\hat{\mathcal{E}}_{n} : = \left[ \hat{\varepsilon}_{n,a^*+1}, \ldots, \hat{\varepsilon}_{n,\bar{A}} \right]$.
 
 \item At age $a \geq a^*+1$, we construct the forecasted outcome for the experimental sample (e) for each individual as follows:
 
 \begin{equation}
-\hat{Y}_{e,j,a} = \hat{\phi}_{j,a} \left( \bm{X}_{e,a}, \bm{B}_e \right).
+\hat{Y}_{e,a} = \hat{\phi}_{a} \left( \bm{X}_{e,a}, \bm{B}_e \right).
 \end{equation}
 
-\noindent We are able to evaluate $\hat{\phi}_{j,a^*+1}$ at $ \bm{X}_{e,a^*+1}, \bm{B}_e $ because $\bm{X}_{e,a^*+1}$ is fully observed in the experimental data. We stack the forecasts across ages in the following vector $\hat{\mathcal{Y}}_{e,j} : = \left[ \hat{Y}_{e,j,a^*+1}, \ldots,  \hat{Y}_{e,j,A} \right]$. These forecasts do not account for estimation error. We discuss estimation error below.
+\noindent We are able to evaluate $\hat{\phi}_{a^*+1}$ at $ \bm{X}_{e,a^*+1}, \bm{B}_e $ because $\bm{X}_{e,a^*+1}$ is fully observed in the experimental data. We stack the forecasts across ages in the following vector $\hat{\mathcal{Y}}_{e} : = \left[ \hat{Y}_{e,a^*+1}, \ldots,  \hat{Y}_{e,\bar{A}} \right]$. These forecasts do not account for estimation error. We discuss estimation error below.
 
-\item Under Assumption~\ref{ass:summary} (Invariance), the distribution of $\hat{\mathcal{E}}_{n,j}$ is a consistent estimator of the distribution of $\hat{\mathcal{E}}_{e,j}$. We form a forecast that accounts for forecasting error as follows:
+\item Under Assumption~\ref{ass:summary}, the distribution of $\hat{\mathcal{E}}_{n}$ is a consistent estimator of the distribution of $\hat{\mathcal{E}}_{e}$. We form a forecast that accounts for forecasting error as follows:
 
 \begin{equation}
-\tilde{\mathcal{Y}}_{e,j} = \hat{\mathcal{Y}}_{e,j} + \hat{\mathcal{E}}_{n,j}.
+\tilde{\mathcal{Y}}_{e} = \hat{\mathcal{Y}}_{e} + \hat{\mathcal{E}}_{n}.
 \end{equation}
 
-\noindent In practice, we randomly sample a vector of residuals from an individual $j$ in the auxiliary sample ($n$) and pair it with the vector $\hat{\mathcal{Y}}_{e,j}$ of individual $i$ in the experimental sample ($e$) to form the forecast $\tilde{\mathcal{Y}}_{e,j}$ for individual $i$ in the experimental sample. That is, the pairing of individual $j$ in the auxiliary sample ($n$) with individual $i$ in the experimental sample ($e$) is random. Random pairing is valid under invariance and exogeneity, i.e. under this assumption the distribution of the residuals for individuals $j$ in the auxiliary sample is a valid estimate for the vector of residuals for individuals $i$ in the experimental sample. We form the pairing one time to obtain our estimates, and then bootstrap this pairing when producing inference. See Appendix~\ref{appendix:bootstrap} for more details on our inference procedures.
+\noindent In practice, we randomly sample a vector of residuals from an individual $j$ in the auxiliary sample ($n$) and pair it with the vector $\hat{\mathcal{Y}}_{e}$ of individual $i$ in the experimental sample ($e$) to form the forecast $\tilde{\mathcal{Y}}_{e}$ for individual $i$ in the experimental sample. That is, the pairing of individual $j$ in the auxiliary sample ($n$) with individual $i$ in the experimental sample ($e$) is random. Random pairing is valid under invariance and exogeneity, i.e. under this assumption the distribution of the residuals for individuals $j$ in the auxiliary sample is a valid estimate for the vector of residuals for individuals $i$ in the experimental sample. We form the pairing one time to obtain our estimates, and then bootstrap this pairing when producing inference. See Appendix~\ref{appendix:bootstrap} for more details on our inference procedures.
 \end{enumerate}
 
 \noindent In this specification, there is no ``initialization'' of the forecast out of sample. Thus, the GMM estimate consists of minimizing
 
 \begin{equation}
-Q :=  {\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\theta} \right) }  \end{bmatrix}}^{'}
-\bm{W} ^{-1}{\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\theta} \right) }   \end{bmatrix}}, \label{eq:wlossspec2}
+Q :=  {\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\gamma} \right) }  \end{bmatrix}}^{'}
+\bm{W} ^{-1}{\begin{bmatrix} {\bm{\bar{m}} \left( \cdot ; \bm{\gamma} \right) }   \end{bmatrix}}, \label{eq:wlossspec2}
 \end{equation}\\
 
-\noindent where $\bm{m}_{j,a} \left( \bm{X}_{n,a}, \bm{B}_{n} ; \bm{\theta}_{j,a} \right) := {\bm{X_{n,a}}}^{'} \left( Y_{n,j,a}^d -   \phi_{j,a} \left( \bm{X}_{n,a}^d, \bm{B}_{n} \right) \right)$ for $a \in [0, \ldots A]$ and  $\bm{X}_{n,a}$ contains no lags of $Y_{n,j,a}^d$.
+\noindent where $\bm{m}_{a} \left( \bm{X}_{n,a}, \bm{B}_{n} ; \bm{\theta}_{a} \right) := {\bm{X_{n,a}}}^{'} \left( Y_{n,a}^d -   \phi_{a} \left( \bm{X}_{n,a}^d, \bm{B}_{n} \right) \right)$ for $a \in [0, \ldots \bar{A}]$ and  $\bm{X}_{n,a}$ contains no lags of $Y_{n,a}^d$.
 
 \noindent  To explain the forecasting steps for \textbf{Specification 3}, recall that we $\rho$-transform the model and write:
 
@@ -1070,7 +1016,7 @@ Y_{k,a} = \lambda_{0} \left( 1 - \rho \right) + \left( \lambda_{1} + \rho \right
 
 \noindent This is a model with two lags and no serial correlation. The estimation procedure and the GMM framework are analogous to those of \textbf{Specification 1}. The two lags are not an issue for estimation in the auxiliary sample because we observe labor income for the full range of relevant ages, thus we estimate the prediction function. To initialize the procedure in the experimental sample, however, we face an issue: we do not observe labor income at $a^* - 1$. We assume that labor income at age $a^*$ is the same as at age $a^* - 1$ and then proceed in a similar way as in \textbf{Specification 1}, the estimation procedure and the GMM framework remain the same.
 
-\noindent Now, we explore \textbf{Specification 4}. We drop the exogenous regressors for expostional simplicity, as they do not bring in interesting features to the problem. We write:
+\noindent Now, we explore \textbf{Specification 4}. We drop the exogenous regressors for expositional simplicity, as they do not bring in interesting features to the problem. We write:
 
 \begin{eqnarray}
 Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:linear1bb} \\
@@ -1080,7 +1026,7 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 \noindent where $\mathbb{E}[U_{a}] = \mathbb{E}[U_{a}, U_{a'}] = 0$. We follow \citet{Arellano_1991_Some-Tests} and note that two-lagged age values of $Y_{k,a}$ are valid instruments in the first-difference version of Equation~\eqref{eq:linear2bb}. This allows us to obtain consistent estimates of $\lambda_{0}, \lambda_{1}$ by minimizing a weighted function (as in the previous specifications) of the empirical counterparts of the following set of moments:
 
 \begin{equation}
-\mathbb{E} \left[ \left( \Delta Y_{k,a} -  \lambda_{1} \Delta Y_{k,a-1} \right)   Y_{k,a - j} \right] \quad j = 2, \ldots, a - 1; a = a^*+ 2, \ldots, A. \label{eq:abmoment}
+\mathbb{E} \left[ \left( \Delta Y_{k,a} -  \lambda_{1} \Delta Y_{k,a-1} \right)   Y_{k,a - j} \right] \quad j = 2, \ldots, a - 1; a = a^*+ 2, \ldots, \bar{A}. \label{eq:abmoment}
 \end{equation}
 
 \noindent Using estimates from this procedure, we form the forecast in the following steps:
@@ -1101,7 +1047,7 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 \hat{Y}_{e,a^* + 2} = \hat{\lambda}_{0} + \hat{\lambda}_{1} \hat{Y}_{e,a^*+1}.
 \end{equation}
 
-\item Iterate this procedure of to age $A$ and stack the vector of forecasts (without accounting for forecasting error) as $\hat{\mathcal{Y}}_{e} : = \left[ \hat{Y}_{e,a^*+1}, \ldots,  \hat{Y}_{e,A} \right]$.
+\item Iterate this procedure of to age $A$ and stack the vector of forecasts (without accounting for forecasting error) as $\hat{\mathcal{Y}}_{e} : = \left[ \hat{Y}_{e,a^*+1}, \ldots,  \hat{Y}_{e,\bar{A}} \right]$.
 
 \item To account for forecasting error we need an individual level estimate of $f + u_{a}$. We proceed as follows: (i) we observe labor income at two ages, 21 and 30. We use the estimates of the coefficients characterizing Equation~\eqref{eq:linear1bb} from the auxiliary sample (n) to forecast labor income from ages 22 to 29. Then, we estimate the coefficients in Equation~\eqref{eq:linear1bb} in the experimental sample (e). This allows us to recover an estimate for $f + u_{a}$. In fact, we recover one estimate of $f + u_{a}$ for each $a \in \left[22, \ldots, 30 \right]$. Each of these estimates is a valid estimate for $f + u_{a}$ because $u_{a}$ is i.i.d. To form our forecasting error, at each age, we take the average of these available estimates. We add it to  $\hat{Y}_{e,a}$ for $a \geq a^* + 1$ to form a prediction that accounts for error.
 \end{enumerate}
