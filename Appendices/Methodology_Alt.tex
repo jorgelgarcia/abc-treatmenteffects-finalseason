@@ -232,35 +232,35 @@ When constructing synthetic cohorts, we use each of the following variables, \te
 
 \begin{table}[H]
 \begin{threeparttable}
-\caption{Predictors of Labor Income at Age 30, Auxiliary Sources}
+\caption{Predictors of Labor Income at Age 30, Synthetic Cohorts}
 \label{table:predlaborincome}
 \centering
 \footnotesize
 \input{output/combined_predict_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The number in parentheses next to the variable indicates the age of measurement. Education is measured as years of education. Robust standard errors are in parentheses below the estimates. We weigh the individuals in the auxiliary samples to match them on observed individual characteristics using the procedure in Appendix~\ref{appendix:match}. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The number in parentheses next to the variable indicates the age of measurement. Education is measured as years of education. Robust standard errors are in parentheses below the estimates. We weigh the individuals in the auxiliary samples to match them on observed individual characteristics to the experimental sample using the procedure in Appendix~\ref{appendix:match}. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 \begin{table}[H]
 \begin{threeparttable}
-\caption{Predictors of Transfer Income at Age 30, Auxiliary Sources}
+\caption{Predictors of Transfer Income at Age 30, Synthetic Cohorts}
 \label{table:predtransferincome}
 \centering
 \footnotesize
 \input{output/combined_predict_ti_ready.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The number in parentheses next to the variable indicates the age of measurement. Education is measured as years of education. Robust standard errors are in parentheses below the estimates. We weigh the individuals in the auxiliary samples to match them on observed individual characteristics using the procedure in Appendix~\ref{appendix:match}. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
+\item Note: All columns display regressions of labor income at age 30 on the different variables listed in the rows. If the space for the coefficient appears empty, it was not included in the regression. All money figures are in 2014 USD. The number in parentheses next to the variable indicates the age of measurement. Education is measured as years of education. Robust standard errors are in parentheses below the estimates. We weigh the individuals in the auxiliary samples to match them on observed individual characteristics to the experimental sample using the procedure in Appendix~\ref{appendix:match}. $^{***}$: $p$-value $< .01$. $^{**}$: $p$-value $< .05$. $^{*}$: $p$-value $< .10$.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 \paragraph{Non-Parametric Forecasts} \label{appendix:nonpar}
 
-\noindent An alternative to the forecasting strategy that we use throughout the main text and the preceding appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can (i) find a match or a set of matches in the auxiliary sample ($n$) using a modified version of Algorithm~\ref{alg:match} that includes both baseline variables and variables affected by treatment. Dropping age indices, the modified algorithm is: 
+\noindent An alternative to the forecasting strategy that we use throughout the main text and the preceding appendix, is the following. For each individual ($i$) in the experimental sample ($e$), we can first find a match or a set of matches in the auxiliary sample using a modified version of Algorithm~\ref{alg:match} that includes both baseline variables and variables affected by treatment. Dropping age indices, the modified algorithm is: 
 
 \begin{algorithm} \label{alg:match2}
 For individual $i$ in experimental sample ($k=e$), an individual $l(i)$ in the auxiliary sample ($k=n$) is a potential counterpart if
@@ -273,7 +273,7 @@ For individual $i$ in experimental sample ($k=e$), an individual $l(i)$ in the a
 \end{algorithm}
 \doublespacing
 
-\noindent (ii) We can use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric strategy: instead of fitting a dynamic relationship in the non-experimental sample and using it to form out-of-sample forecasts, we construct a synthetic cohort and estimate dynamic relationships in a single, non-parametric procedure to impute labor income profiles.
+\noindent And, second, we can use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric, one-step strategy: instead of fitting a dynamic relationship in the non-experimental sample and using it to form out-of-sample forecasts, we construct a synthetic cohort and estimate dynamic relationships to impute labor income profiles.
 
 \noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the non-parametric approach that we introduce in this section. We present results for labor income. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). We present the discounted net present value (treatment - control) for labor income in 2014 dollars. The approaches are in close agreement.\\
 
@@ -374,7 +374,7 @@ For notational brevity in the definitions that follow, consider the production f
 Y^d_{k,a} =\phi^d_{k,a} (\bm{X}^d_{k,a}, \bm{B}_k) \ + \ \varepsilon^d_{k,a},  \label{eq:outcomesin} \\
 \end{equation}
 
-\noindent where the variables are defined analogously to Equation~\ref{eq:outcome2}. Note that the arguments of $\phi^d_{k,a}$ are still vectors in this case. Define an associated measurement system for the error term $\varepsilon^d_{k,a}$:
+\noindent where the variables are defined analogously to Equation~\eqref{eq:outcome2}. Note that the arguments of $\phi^d_{k,a}$ are still vectors in this case. Define an associated measurement system for the error term $\varepsilon^d_{k,a}$:
 
 \begin{align}  \label{eq:sa-msystemmain}
 \varepsilon^d_{k,a} &=\bm{\beta}^d \bm{\theta}_{a}^d + \bm{\omega}_{a}^d  &(b) \nonumber \\
@@ -408,7 +408,7 @@ Note: Panel (a) displays a factor score estimated based on the measurement syste
 
 \noindent At age 30 and in the auxiliary sample, we can also estimate $\bm{\theta}_{a}^d$. For want of data to approximate $\bm{\theta}_{c}, \bm{\theta}_{nc}$ in PSID and NLSY79, we use the CNLSY in this appendix. Our measurement system for $\bm{\theta}_{c}$ consists of reading and comprehension PIAT scores as well as by the Peabody Picture Vocabulary Test (PPVT). Our measurement system for $\bm{\theta}_{nc}$ is based on six scales of the Behavior Problems Index (e.g., anxiety, dependency, social behavior).
 
-\noindent Once these estimates are available, we can test Assumption~\ref{ass:exog} in the experimental and non-experimental samples.  The test consists of the following. Let $\bm{\gamma}^E$ be the parameter associated to $\bm{X}^d_{k,a}$ in Equation~\ref{eq:outcomesin} in a linear regression when not accounting for $\bm{\theta}_{a}^d$. Similarly, let $\bm{\gamma}^I$ be the parameter associated with $\bm{X}^d_{k,a}$ in Equation~\ref{eq:outcomesin} when accounting for $\bm{\theta}_{a}^d$. Under the null hypothesis that Assumption~\ref{ass:exog} holds $\bm{\gamma}^E = \bm{\gamma}^I$ and $\bm{\theta}_{a}^d$ is an irrelevant predictor in Equation~\ref{eq:outcomesin}. We test the null hypothesis by asking if the elements in $\bm{\theta}_{a}^d$ are relevant predictors of labor and transfer income. We perform these tests in the experimental sample pooling the treatment and control groups (i.e.,\ under the invariance assumption that we document in Section~\ref{section:cbamethodology}) and in the non-experimental sample using our synthetic cohort. We contrast specifications with and without including estimates of $\bm{\theta}_{a}^d$, and report the $F$-statistic corresponding to this comparison. This is a version of a Durbin-Wu-Hausman test \citep[see][]{Durbin_1954_RISI,Wu_1973_Econometrica,Hausman_1978_Econometrica}. Tables~\ref{table:endoginc} to \ref{table:trincome} present the results. In most cases, we are not able to reject the null hypothesis that Assumption~\ref{ass:exog} holds.
+\noindent Once these estimates are available, we can test Assumption~\ref{ass:exog} in the experimental and non-experimental samples.  The test consists of the following. Let $\bm{\gamma}^E$ be the parameter associated to $\bm{X}^d_{k,a}$ in Equation~\eqref{eq:outcomesin} in a linear regression when not accounting for $\bm{\theta}_{a}^d$. Similarly, let $\bm{\gamma}^I$ be the parameter associated with $\bm{X}^d_{k,a}$ in Equation~\eqref{eq:outcomesin} when accounting for $\bm{\theta}_{a}^d$. Under the null hypothesis that Assumption~\ref{ass:exog} holds $\bm{\gamma}^E = \bm{\gamma}^I$ and $\bm{\theta}_{a}^d$ is an irrelevant predictor in Equation~\eqref{eq:outcomesin}. We test the null hypothesis by asking if the elements in $\bm{\theta}_{a}^d$ are relevant predictors of labor and transfer income. We perform these tests in the experimental sample pooling the treatment and control groups (i.e.,\ under the invariance assumption that we document in Section~\ref{section:cbamethodology}) and in the non-experimental sample using our synthetic cohort. We contrast specifications with and without including estimates of $\bm{\theta}_{a}^d$, and report the $F$-statistic corresponding to this comparison. This is a version of a Durbin-Wu-Hausman test \citep[see][]{Durbin_1954_RISI,Wu_1973_Econometrica,Hausman_1978_Econometrica}. Tables~\ref{table:endoginc} to \ref{table:trincome} present the results. In most cases, we are not able to reject the null hypothesis that Assumption~\ref{ass:exog} holds.
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
@@ -810,7 +810,7 @@ For notational brevity in the definitions that follow, consider the production f
 Y^d_{k,a} =\phi^d_{k,a} (\bm{X}^d_{k,a}, \bm{B}_k) \ + \ \varepsilon^d_{k,a},  \label{eq:outcomesin} \\
 \end{equation}
 
-\noindent where the variables are defined analogously to Equation~\ref{eq:outcome2}. Note that the arguments of $\phi^d_{k,a}$ are still vectors in this case.
+\noindent where the variables are defined analogously to Equation~\eqref{eq:outcome2}. Note that the arguments of $\phi^d_{k,a}$ are still vectors in this case.
 
 In this appendix, we explore a range of standard panel data specifications for the error terms:
 
@@ -865,7 +865,7 @@ This framework allows for serial dependence due to the lagged dependent variable
 
 \subsubsection{Specification 5: Non-Parametric Predictions}
 
-An alternative to any of these scenarios is to make forecasts using a non-parametric matching algorithm. This alternative is described in Section~\ref{appendix:nonpar}. 
+An alternative to any of these scenarios is to make forecasts using a non-parametric matching algorithm. This alternative is described in Appendix~\ref{appendix:nonpar}. 
 
 A sufficient condition for the validity of this procedure is Assumption~\ref{ass:exog} (Exogeneity). Without exogeneity, the joint distributions of $\bm{X}_{k,a*}, \varepsilon_{k,a^*}$ do not necessarily coincide across the experimental and the auxiliary samples. For example, in the experimental sample, individuals in the treatment group have relatively high levels of education due in part to the exogenous boost generated by randomization into treatment. In the auxiliary sample, the usual form of ability bias may be at work: individuals with relatively high levels of education might have better motivation, better parents, etc. Thus, the empirical relationships between education and labor income may differ across experimental and auxiliary samples. Exogeneity avoids this problem, but clearly only a weaker assumption is required.
 
@@ -899,7 +899,7 @@ For notational brevity in the definitions that follow, consider the production f
 Y^d_{k,a} =\phi^d_{k,a} (\bm{X}^d_{k,a}, \bm{B}_k) \ + \ \varepsilon^d_{k,a},  \label{eq:outcomesin} \\
 \end{equation}
 
-\noindent where the variables are defined analogously to Equation~\ref{eq:outcome2}. Note that the arguments of $\phi^d_{k,a}$ are still vectors in this case.
+\noindent where the variables are defined analogously to Equation~\eqref{eq:outcome2}. Note that the arguments of $\phi^d_{k,a}$ are still vectors in this case.
 
 \noindent In this section, we: (i) explain the procedure that we follow to form out-of-sample forecasts; and (ii) formulate the estimation procedure in a generalized method of moments (GMM) framework \citep{Hansen_1982_Econometrica}.
 
@@ -1072,19 +1072,19 @@ Y_{k,a} &=& \lambda_{0} + \lambda_{1} Y_{k,a-1} + \varepsilon_{a} \label{eq:line
 \noindent We execute the following steps to compute the empirical bootstrap distribution and the standard errors when forecasting outcomes out of sample by combing experimental and auxiliary datasets.
 
 \begin{enumerate}
-\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Information on the entire history of each individual is obtained in each re-sample. We re-sample individuals independently of their treatment status. Call this resampled sample $(e,s)$.
+\item Resample the experimental sample with replacement at the individual level. We re-sample individuals independently of their treatment status. Call this sample $(e,s)$.
 
-\item Resample the experimental sample with replacement at the individual level. This gives us a new (re-sampled) panel dataset. Information on the entire history of each individual is obtained in each re-sample. We re-sample individuals independently of their treatment status. Call this sample $(n,s')$.
+\item Resample the non-experimental sample with replacement at the individual level. Call this sample $(n,s')$.
 
 \item Place the initial restrictions on $(n,s')$ described in Appendix~\ref{app:datasets}.
 
 \item Construct the synthetic cohorts by matching the samples $(e,s)$ and $(n,s')$ using Algorithm~\ref{alg:match}. Note that this matching procedure is based solely on baseline variables not affected by treatment.
 
-\item Fit the dynamic relationships in Equation~\eqref{eq:outcome}, using predictors as detailed in Appendix~\ref{appendix:pred}. When providing estimates by gender, we also produce different predictions by gender.
+\item Fit the dynamic relationships in Equation~\eqref{eq:outcome}, using predictors as detailed in Appendix~\ref{appendix:pred}. When providing estimates by gender, produce different predictions by gender.
 
-\item Use the fitted dynamic relationship to fit out of sample in $(e,s)$. This gives us an age-by-age forecast \textit{without forecasting error} for each individual in the experimental sample. Store the predictions at all ages for individual $i$ in this sample in a vector $\mathcal{Y}_{i,e,s}$, where $\mathcal{Y}_{i,e,s}$ is the vector of forecasts for individual $i$ in the experimental bootstrap sample $s$
+\item Use the fitted dynamic relationship to fit out of sample in $(e,s)$. This gives us an age-by-age forecast \textit{without forecasting error} for each individual in the experimental sample. Store the predictions at all ages for individual $i$ in this sample in a vector $\mathcal{Y}_{i,e,s}$, where $\mathcal{Y}_{i,e,s}$ is the vector of forecasts for individual $i$ in the experimental bootstrap sample $s$.
 
-\item When fitting the dynamic relationship in sample $(n,s',0)$ and $(n,s',1)$, each individual has a vector containing the residuals of each of her predicted variable (for example, labor income). Call this vector of residuals $\bm{\mathcal{E}}_{j,n,s'}^d$: the vector of residuals for individual $i'$ in the auxiliary bootstrap sample $s'$.
+\item When fitting the dynamic relationship in sample $(n,s')$, individual $j$ in the non-experimental sample has a vector containing the residuals of each of her predicted variables (for example, labor income). Call this vector of residuals $\bm{\mathcal{E}}_{j,n,s'}^d$: the vector of residuals for individual $j$ in the auxiliary bootstrap sample $s'$.
 
 \item Randomly pair individual $j$ in $s'$ with individual $i$ in $s$. The forecast accounting for forecasting error is $\mathcal{Y}_{i,e,s}+ \bm{\mathcal{E}}_{j,e,s'}$.
 
