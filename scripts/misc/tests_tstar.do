@@ -29,7 +29,7 @@ global datacnlsyp   = "$klmshare/Data_Central/data-repos/nlsy/primary/cnlsy/base
 global datapsidw    = "$klmshare/Data_Central/data-repos/psid/extensions/abc-match/"
 global weights      = "$klmmexico/abccare/as_weights"
 // output
-global output       = "$projects/abc-treatmenteffects-finalseason/output/"
+global output       = "$projects/abccare-cba/output/"
 
 // ABC/CARE
 // predicted at age 30
