@@ -1,70 +1,70 @@
 \subsection{Data Sources} \label{section:data}
-\noindent FAM uses data from ABC/CARE follow-up surveys to build the initial state of the cohort. 
-The transition model parameters are estimated from the 1997 to 2013 waves of the Panel Study of Income Dynamics (PSID). 
-We supplement the PSID with data from the Health and Retirement Study (HRS). We use the National Health and Nutrition Examination Survey (NHANES) 
+\noindent FAM uses data from ABC/CARE follow-up surveys to set the initial state of the cohort.
+The transition model parameters are estimated from the 1997 to 2013 waves of the Panel Study of Income Dynamics (PSID).
+We supplement the PSID with data from the Health and Retirement Study (HRS). We use the National Health and Nutrition Examination Survey (NHANES)
 to account for differences between measured and self-reported BMI.
-To estimate medical care costs associated with health conditions, we use the Medical Expenditures Panel Survey (MEPS) and the Medicare Current Beneficiaries Survey (MCBS). 
+To estimate medical care costs associated with health conditions, we use the Medical Expenditures Panel Survey (MEPS) and the Medicare Current Beneficiaries Survey (MCBS).
 
 
 \subsubsection{PSID}
 \label{section:data_psid}
-%The Panel Survey of Income Dynamics (PSID) is a longitudinal household survey containing between 5,000 and 8,500 families in each wave, which began yearly in 1968 and is fielded biennially since 1996. When appropriately weighted, the PSID is designed to be representative of U.S. households. The PSID provides extensive information concerning demographics, economic outcomes, health care access, health outcomes, and health behaviors (such as smoking history, alcohol consumption, and exercise habits). Health outcome variables include diagnosis of diabetes, heart disease, hypertension, lung disease, cancer, etc. 
+%The Panel Survey of Income Dynamics (PSID) is a longitudinal household survey containing between 5,000 and 8,500 families in each wave, which began yearly in 1968 and is fielded biennially since 1996. When appropriately weighted, the PSID is designed to be representative of U.S. households. The PSID provides extensive information concerning demographics, economic outcomes, health care access, health outcomes, and health behaviors (such as smoking history, alcohol consumption, and exercise habits). Health outcome variables include diagnosis of diabetes, heart disease, hypertension, lung disease, cancer, etc.
 
 \noindent The Panel Study of Income Dynamics (PSID) provides extensive information concerning demographics, economic outcomes, health care access, health outcomes, and health behaviors (such as smoking history, alcohol consumption, and exercise habits). Health outcome variables include diagnosis of diabetes, heart disease, hypertension, lung disease, and cancer, among others.
 
 \noindent We estimate the transition models using waves from 1997 to 2013. We create a dataset of respondents who have formed their own households, either
 as single heads of households, cohabiting partners, or married partners. These heads, wives, and husbands respond to the richest
-set of PSID questions, including the health questions that are critical for our purposes. We use all respondents aged 25 and older.\footnote{While we use the full sample in our main analysis, we explored using a few different subsamples to better adapt to the demographics of the ABC/CARE subjects.}  
-The length of the PSID is a significant advantage, because we can include past health behaviors as explanatory variables for current health outcomes. This dataset provides adequate sample sizes to explore health outcomes of specific groups. 
+set of PSID questions, including the health questions that are critical for our purposes. We use all respondents aged 25 and older.\footnote{While we use the full sample in our main analysis, we explored using a few different subsamples to better adapt to the demographics of the ABC/CARE subjects.}
+The length of the PSID is a significant advantage, because we can include past health behaviors as explanatory variables for current health outcomes. This dataset provides adequate sample sizes to explore health outcomes of specific groups.
 PSID does not follow individuals who are institutionalized in nursing homes or other long-term care facilities. To overcome this weakness, we pool the PSID sample with the HRS sample when
-estimating mortality models. 
+estimating mortality models.
 
 \subsubsection{HRS}
 
-\noindent The Health and Retirement Study (HRS) is a longitudinal panel that surveys a nationally representative sample of individuals over the age of 50 and their spouses every two years. When appropriately weighted, the HRS in 2010 is representative of U.S. households 
+\noindent The Health and Retirement Study (HRS) is a longitudinal panel that surveys a nationally representative sample of individuals over the age of 50 and their spouses every two years. When appropriately weighted, the HRS in 2010 is representative of U.S. households
 where at least one member is at least 51 years old.
-This study collects in-depth information about income, work, health, and medical expenditures. In our model, waves from 1998 to 2012 are pooled with the PSID for estimation of mortality and 
+This study collects in-depth information about income, work, health, and medical expenditures. In our model, waves from 1998 to 2012 are pooled with the PSID for estimation of mortality and
 widowhood models. The HRS data
-are harmonized to the PSID for all relevant variables. Because the PSID does not follow respondents into nursing homes, we also use the HRS to estimate the model for nursing home residency. We use all cohorts in the dataset created by RAND (RAND HRS, version O) as the basis 
-for our analysis. 
+are harmonized to the PSID for all relevant variables. Because the PSID does not follow respondents into nursing homes, we also use the HRS to estimate the model for nursing home residency. We use all cohorts in the dataset created by RAND (RAND HRS, version O) as the basis
+for our analysis.
 
 \subsubsection{MCBS}
-\noindent The Medicare Current Beneficiary Survey (MCBS) is a nationally representative sample of aged, disabled, 
-and institutionalized Medicare beneficiaries. The MCBS attempts to interview each respondent twelve 
-times over three years, regardless of whether he or she resides in the community, a facility, or 
-transitions between community and facility settings. The disabled (under 65 years of age) and 
-very elderly (85 years of age or older) are over-sampled. The first round of interviewing was conducted 
-in 1991. Originally, the survey was a longitudinal sample with periodic supplements and indefinite 
-periods of participation. In 1994, the MCBS switched to a rotating panel design with limited periods 
-of participation. Each fall, a new panel is introduced, with a target sample size of 12,000 respondents. Each summer, a panel is retired. Institutionalized respondents are interviewed by proxy. The MCBS 
-contains comprehensive self-reported information on the health status, health care use and 
-expenditures, health insurance coverage, and socioeconomic and demographic characteristics of the 
-entire spectrum of Medicare beneficiaries. Medicare claims data for beneficiaries enrolled in 
-fee-for-service plans are also used to provide more accurate information on health care use and 
-expenditures. MCBS data from 2007 to 2010 are used for estimating medical costs and enrollment models. 
+\noindent The Medicare Current Beneficiary Survey (MCBS) is a nationally representative sample of aged, disabled,
+and institutionalized Medicare beneficiaries. The MCBS attempts to interview each respondent twelve
+times over three years, regardless of whether he or she resides in the community, a facility, or
+transitions between community and facility settings. The disabled (under 65 years of age) and
+very elderly (85 years of age or older) are over-sampled. The first round of interviewing was conducted
+in 1991. Originally, the survey was a longitudinal sample with periodic supplements and indefinite
+periods of participation. In 1994, the MCBS switched to a rotating panel design with limited periods
+of participation. Each fall, a new panel is introduced, with a target sample size of 12,000 respondents. Each summer, a panel is retired. Institutionalized respondents are interviewed by proxy. The MCBS
+contains comprehensive self-reported information on the health status, health care use and
+expenditures, health insurance coverage, and socioeconomic and demographic characteristics of the
+entire spectrum of Medicare beneficiaries. Medicare claims data for beneficiaries enrolled in
+fee-for-service plans are also used to provide more accurate information on health care use and
+expenditures. MCBS data from 2007 to 2010 are used for estimating medical costs and enrollment models.
 
 \subsubsection{MEPS}
-\noindent The Medical Expenditure Panel Survey (MEPS), which began in 1996, is a set of large-scale surveys of families and individuals, their medical providers, and employers across the U.S. The Household Component (HC) of the MEPS provides data from 
-individual households and their members, which is supplemented by data from their medical providers. 
-The HC collects data from a representative subsample of households drawn from the 
-previous year's National Health Interview Survey (NHIS). Since NHIS does not include the 
-institutionalized population, neither does MEPS; this implies that we can only use the MEPS to 
-estimate medical costs for the non-elderly (ages 25--64) population. Information collected during household 
-interviews include: demographic characteristics, health conditions, health status, use of medical 
-services, sources of medical payments, and body weight and height. Each year the household survey 
-includes approximately 12,000 households, or 34,000 individuals. Sample size for those aged 25-64 is 
-about 15,800 in each year. MEPS has comparable measures of socioeconomic status as those in PSID, 
-including age, race and ethnicity, educational attainment, census region, and marital status. We estimate medical expenditure 
-and utilization using data from 2008 to 2010. We use waves from 2001 to 2003 to estimate models of quality-adjusted life years (QALYs), due to availability of EQ-5D instrument in these waves.\footnote{Section \ref{section:FAM_models} explains the estimation of the QALY model.} 
+\noindent The Medical Expenditure Panel Survey (MEPS), which began in 1996, is a set of large-scale surveys of families and individuals, their medical providers, and employers across the U.S. The Household Component (HC) of the MEPS provides data from
+individual households and their members, which is supplemented by data from their medical providers.
+The HC collects data from a representative subsample of households drawn from the
+previous year's National Health Interview Survey (NHIS). Since NHIS does not include the
+institutionalized population, neither does MEPS; this implies that we can only use the MEPS to
+estimate medical costs for the non-elderly (ages 25--64) population. Information collected during household
+interviews include: demographic characteristics, health conditions, health status, use of medical
+services, sources of medical payments, and body weight and height. Each year the household survey
+includes approximately 12,000 households, or 34,000 individuals. Sample size for those aged 25-64 is
+about 15,800 in each year. MEPS has comparable measures of socioeconomic status as those in PSID,
+including age, race and ethnicity, educational attainment, census region, and marital status. We estimate medical expenditure
+and utilization using data from 2008 to 2010. We use waves from 2001 to 2003 to estimate models of quality-adjusted life years (QALYs), due to availability of EQ-5D instrument in these waves.\footnote{Section \ref{section:FAM_models} explains the estimation of the QALY model.}
 
 
 \subsubsection{NHANES}
-\noindent 
+\noindent
 The National Health and Nutrition Examination Survey (NHANES) targets a nationally representative sample of approximately 5,000 individuals in each year since 1999. The data collected includes responses to interview questions about demographics, disease conditions, height, and weight, as well as physical measurement of BMI. We use NHANES years 2002 to 2010 to estimate a model for imputing measured BMI from self-reported BMI. The methodology is described in Section \ref{section:FAM_ABC_impute}.
 
 \subsubsection{ABC/CARE}
-\noindent FAM uses ABC/CARE data to initialize the state of each ABC/CARE subject when they enter into the simulation.  
-These data are taken from the the parental interviews at various subject ages from birth to age 21; age-30 subject interview; and mid-30s biomedical survey.  
-The goal is to have each subject's initial state in the simulation match their status at the age-30 subject interview. However, because several key FAM inputs are not available at the age-30 interview, we use PSID or ABC/CARE surveys corresponding to other ages to impute missing elements. These imputations are discussed in Section \ref{section:FAM_ABC_impute}. 
+\noindent FAM uses ABC/CARE data to initialize the state of each ABC/CARE subject when they enter into the simulation.
+These data are taken from the the parental interviews at various subject ages from birth to age 21; age-30 subject interview; and mid-30s biomedical survey.
+The goal is to have each subject's initial state in the simulation match their status at the age-30 subject interview. However, because several key FAM inputs are not available at the age-30 interview, we use PSID or ABC/CARE surveys corresponding to other ages to impute missing elements. These imputations are discussed in Section \ref{section:FAM_ABC_impute}.
 
 % \todo we could add a table of all the FAM input variables (rows) and three columns, as-is, rule imputed, model imputed, with checkmarks to indicate how the data were derived
