@@ -24,7 +24,7 @@ global scripts    = "$projects/abc-treatmenteffects-finalseason/scripts/"
 // ready data
 global data       = "$klmmexico/abccare/irr_ratios/current/"
 // output
-global output     = "$projects/abc-treatmenteffects-finalseason/output/"
+global output       = "$projects/abccare-cba/output/"
 
 // abc
 // open data
@@ -105,7 +105,7 @@ foreach type of numlist 2 5 8  {
 }
 
 // irr
-foreach type of numlist 2 5 8  {
+foreach type of numlist 2  {
 	foreach sex in f m p {
 		di "type `type', sex `sex'"
 		
@@ -118,7 +118,7 @@ foreach type of numlist 2 5 8  {
 		local Nc = r(N)
 		
 		local perc = `Nc'/`Nt'
-		local perc = `perc'*100
+		local perc = `perc'
 		local perc = round(`perc',.01)
 		
 		summ  irr`type'
@@ -144,7 +144,7 @@ foreach type of numlist 2 5 8  {
 				  xlabel(, grid glcolor(gs14)) ylabel(, angle(h) glcolor(gs14))
 				  xtitle(" ") ytitle(Density, size(small))
 				  graphregion(color(white)) plotregion(fcolor(white))
-				  note("Point Estimate: `point'(`pointse')[`pointp']. Percentage > 0: `perc'");
+				  note("Point Estimate: `point'(`pointse')[`pointp']. Proportion > 0: `perc'");
 		#delimit cr 
 		graph export irr_`type'_sex`sex'.eps, replace
 		// di in r "Enter after seeing Figure" _request(Hello)

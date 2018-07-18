@@ -20,14 +20,7 @@
 	xratio mul
 	/xp exch def
 	Slrgb setrgbcolor
-	newpath
-	xp yp moveto
-	xp Slw add yp
-	lineto
-	currentlinecap
-	1 setlinecap
-	stroke
-	setlinecap
+	xp yp .5 0 360 arc fill
 } def
 /Sln {
 	yratio mul
@@ -107,6 +100,7 @@
 } def
 /Srect {
 	/sfill exch def
+	/sstroke exch def
 	yratio mul
 	/y1 exch def
 	xratio mul
@@ -115,20 +109,13 @@
 	/y0 exch def
 	xratio mul
 	/x0 exch def
-	sfill 1 eq {
-		Ssrgb setrgbcolor
-		x0 y0 moveto
-		x0 y1 lineto x1 y1 lineto x1 y0 lineto x0 y0 lineto
-		fill
-	} if
-	Slw setlinewidth
-	Slrgb setrgbcolor
-	x0 y0 moveto
-	x0 y1 lineto x1 y1 lineto x1 y0 lineto x0 y0 lineto
-	stroke
+	newpath x0 y0 moveto x0 y1 lineto x1 y1 lineto x1 y0 lineto x0 y0 lineto closepath
+	sfill Sfill
+	sstroke Sstroke
 } def
 /Sellipse {
 	/sfill exch def
+	/sstroke exch def
 	yratio mul
 	/yrad exch def
 	xratio mul
@@ -137,26 +124,17 @@
 	/y exch def
 	xratio mul
 	/x exch def
-	sfill 1 eq {
-		Ssrgb setrgbcolor
-		/savematrix matrix currentmatrix def
-		x y translate
-		xrad yrad scale
-		0 0 1 0 360 arc
-		savematrix setmatrix
-		fill
-	} if
-	Slw setlinewidth
-	Slrgb setrgbcolor
-		/savematrix matrix currentmatrix def
-		x y translate
-		xrad yrad scale
-		0 0 1 0 360 arc
-		savematrix setmatrix
-	stroke
+	/savematrix matrix currentmatrix def
+	x y translate
+	xrad yrad scale
+	0 0 1 0 360 arc
+	savematrix setmatrix
+	sfill Sfill
+	sstroke Sstroke
 } def
 /Stri {
 	/sfill exch def
+	/sstroke exch def
 	xratio mul
 	/r exch def
 	yratio mul
@@ -174,13 +152,9 @@
 	/xleft exch def
 	xcen add
 	/xright exch def
-	sfill 1 eq {
-		Ssrgb setrgbcolor
-		xcen ytop moveto xright ybot lineto xleft ybot lineto xcen ytop lineto fill
-	} if
-	Slw setlinewidth
-	Slrgb setrgbcolor
-	xcen ytop moveto xright ybot lineto xleft ybot lineto xcen ytop lineto stroke
+	newpath xcen ytop moveto xright ybot lineto xleft ybot lineto xcen ytop lineto closepath
+	sfill Sfill
+	sstroke Sstroke
 } def
 /Soldtri {
 	/sfill exch def
@@ -201,16 +175,20 @@
 	/x3 x0 def
 	y0 r add
 	/y3 exch def
+	newpath x1 y1 moveto x2 y2 lineto x3 y3 lineto x1 y1 lineto closepath
 	sfill 1 eq {
 		Ssrgb setrgbcolor
-		x1 y1 moveto x2 y2 lineto x3 y3 lineto x1 y1 lineto fill
+		gsave
+		fill
+		grestore
 	} if
 	Slw setlinewidth
 	Slrgb setrgbcolor
-	x1 y1 moveto x2 y2 lineto x3 y3 lineto x1 y1 lineto stroke
+	stroke
 } def
 /Sdia {
 	/sfill exch def
+	/sstroke exch def
 	xratio mul
 	/r exch def
 	yratio mul
@@ -229,32 +207,26 @@
 	/x3 x def
 	y r add
 	/y3 exch def
-	sfill 1 eq  {
-		Ssrgb setrgbcolor
-		x0 y0 moveto x1 y1 lineto x2 y2 lineto x3 y3 lineto x0 y0 lineto fill
-	} if
-	Slw setlinewidth
-	Slrgb setrgbcolor
-	x0 y0 moveto x1 y1 lineto x2 y2 lineto x3 y3 lineto x0 y0 lineto stroke
+	newpath x0 y0 moveto x1 y1 lineto x2 y2 lineto x3 y3 lineto closepath
+	sfill Sfill
+	sstroke Sstroke
 } def
 /Scc {
 	/sfill exch def
+	/sstroke exch def
 	xratio mul
 	/r0 exch def
 	yratio mul
 	/y0 exch def
 	xratio mul
 	/x0 exch def
-	sfill 1 eq {
-		Ssrgb setrgbcolor
-		x0 y0 r0 0 360 arc fill
-	} if
-	Slw setlinewidth
-	Slrgb setrgbcolor
-	x0 y0 r0 0 360 arc stroke
+	x0 y0 r0 0 360 arc closepath
+	sfill Sfill
+	sstroke Sstroke
 } def
 /Spie {
 	/sfill exch def
+	/salign exch def
 	/a1 exch def
 	/a0 exch def
 	xratio mul
@@ -263,15 +235,40 @@
 	/y exch def
 	xratio mul
 	/x exch def
-	sfill 1 eq {
-		Ssrgb setrgbcolor
-		newpath x y moveto x y r a0 a1 arc closepath
-		fill
-	} if
-	Slw setlinewidth
+	/Pie {
+		x y moveto x y r a0 a1 arc closepath
+	} def
+	newpath Pie
+	sfill Sfill
 	Slrgb setrgbcolor
-	newpath x y moveto x y r a0 a1 arc closepath
-	stroke
+	salign 0 eq {
+		gsave
+		Slw 2 mul setlinewidth
+		clip
+		stroke
+		grestore
+	} if
+	salign 1 eq {
+		Slw setlinewidth
+		stroke
+	} if
+	salign 2 eq {
+		gsave
+		Slw 2 mul setlinewidth
+		strokepath
+		pathbbox
+		/ury exch def
+		/urx exch def
+		/lly exch def
+		/llx exch def
+		newpath llx lly moveto llx ury lineto urx ury lineto urx lly lineto closepath
+		Pie
+		eoclip
+		newpath Pie
+		stroke
+		grestore
+	} if
+	newpath
 } def
 /Splu {
 	xratio mul
@@ -338,6 +335,80 @@
 	/x exch def
 	x y PL
 } def
+/Sarr {
+	/sfill exch def
+	xratio mul
+	/r exch def
+	yratio mul
+	/y exch def
+	xratio mul
+	/x exch def
+	y r add
+	/ytop exch def
+	y r sub
+	/ybot exch def
+	gsave
+	Slrgb setrgbcolor
+	sfill 0 eq {
+		r 2 mul 3 div dup
+		x exch sub
+		/xleft exch def
+		x add
+		/xright exch def
+		newpath xleft y moveto x ytop lineto xright y lineto x ytop moveto x ybot lineto
+		Lcs
+		1 setlinejoin
+	} {
+		r 2 div dup
+		x exch sub
+		/xleft exch def
+		x add
+		/xright exch def
+		newpath xleft y moveto x ytop lineto xright y lineto x ytop closepath moveto x ybot lineto
+		gsave
+		fill
+		grestore
+	} ifelse
+	Slw setlinewidth
+	stroke
+	grestore
+} def
+/Spipe {
+	xratio mul
+	/r exch def
+	yratio mul
+	/y exch def
+	xratio mul
+	/x exch def
+	y r sub
+	/y0 exch def
+	y r add
+	/y1 exch def
+	x y0 M x y1 L
+} def
+/Sv {
+	xratio mul
+	/r exch def
+	yratio mul
+	/y0 exch def
+	xratio mul
+	/x0 exch def
+	/xcen x0 def
+	y0 r add
+	/ytop exch def
+	r 2 div
+	y0 exch sub
+	/ybot exch def
+	r 3 sqrt 2 div mul dup
+	xcen exch sub
+	/xleft exch def
+	xcen add
+	/xright exch def
+	newpath xleft ytop moveto xcen ybot lineto xright ytop lineto
+	Slw setlinewidth
+	Slrgb setrgbcolor
+	stroke
+} def
 /Lcs {
 	currentlinecap
 	1 setlinecap
@@ -351,17 +422,43 @@
 /Sep {
 	/sfill exch def
 	closepath
-	sfill 1 eq  {
-		Ssrgb setrgbcolor
+	/salign exch def
+	Lcs
+	salign 0 eq {
+		sfill Sfill
 		gsave
-		fill
+		Slw 2 mul setlinewidth
+		clip
+		Slrgb setrgbcolor
+		stroke
 		grestore
 	} if
-	Slw setlinewidth
-	Slrgb setrgbcolor
-	Lcs
-	stroke
+	salign 1 eq {
+		sfill Sfill
+		Slw setlinewidth
+		Slrgb setrgbcolor
+		stroke
+	} if
+	salign 2 eq {
+		gsave
+		Slw 2 mul setlinewidth
+		Slrgb setrgbcolor
+		stroke
+		grestore
+		sfill Sfill
+	} if
+	newpath
 	Lcr
+} def
+/Stransrot {
+	/anglep exch def
+	yratio mul
+	/y exch def
+	xratio mul
+	/x exch def
+	x y translate
+	anglep rotate
+	x neg y neg translate
 } def
 /cp {currentpoint} def 
 /M {moveto} def 
@@ -385,12 +482,32 @@
 /Slw 0.120 def
 0.918 0.949 0.953 setrgbcolor
 0 0 396.000 288.000 Sbgfill
+/Sfill {
+	/sfill exch def
+	sfill 1 eq {
+		Ssrgb setrgbcolor
+		gsave
+		fill
+		grestore
+	} if
+} def
+/Sstroke {
+	/sstroke exch def
+	sstroke 1 eq {
+		Slw setlinewidth
+		Slrgb setrgbcolor
+		stroke
+	} if
+	newpath
+} def
 /Slrgb {1.000 1.000 1.000} def
 /Strgb {1.000 1.000 1.000} def
 /Ssrgb {1.000 1.000 1.000} def
 /Slw 0.576 def
-0 0 31999 23272 1 Srect
-3602 4083 31184 22457 1 Srect
+0 0 31999 23272 0 1 Srect
+23 23 31976 23249 1 0 Srect
+3602 4083 31184 22457 0 1 Srect
+3625 4106 31161 22434 1 0 Srect
 /Slrgb {0.000 0.000 0.000} def
 /Strgb {0.000 0.000 0.000} def
 /Slw 0.864 def
@@ -400,22 +517,17 @@
 /Slrgb {0.000 0.000 0.000} def
 /Slw 0.864 def
 /Slrgb {0.878 0.878 0.878} def
-3602 8065 31184 8065 Sln
+3602 8933 31184 8933 Sln
 /Slw 0.576 def
 /Slrgb {0.000 0.000 0.000} def
 /Slw 0.864 def
 /Slrgb {0.878 0.878 0.878} def
-3602 11535 31184 11535 Sln
+3602 13270 31184 13270 Sln
 /Slw 0.576 def
 /Slrgb {0.000 0.000 0.000} def
 /Slw 0.864 def
 /Slrgb {0.878 0.878 0.878} def
-3602 15005 31184 15005 Sln
-/Slw 0.576 def
-/Slrgb {0.000 0.000 0.000} def
-/Slw 0.864 def
-/Slrgb {0.878 0.878 0.878} def
-3602 18475 31184 18475 Sln
+3602 17608 31184 17608 Sln
 /Slw 0.576 def
 /Slrgb {0.000 0.000 0.000} def
 /Slw 0.864 def
@@ -425,628 +537,628 @@
 /Slrgb {0.000 0.000 0.000} def
 /Slw 0.864 def
 /Slrgb {0.878 0.878 0.878} def
-4114 4083 4114 22457 Sln
+4811 4083 4811 22457 Sln
 /Slw 0.576 def
 /Slrgb {0.000 0.000 0.000} def
 /Slw 0.864 def
 /Slrgb {0.878 0.878 0.878} def
-10567 4083 10567 22457 Sln
+11276 4083 11276 22457 Sln
 /Slw 0.576 def
 /Slrgb {0.000 0.000 0.000} def
 /Slw 0.864 def
 /Slrgb {0.878 0.878 0.878} def
-17020 4083 17020 22457 Sln
+17742 4083 17742 22457 Sln
 /Slw 0.576 def
 /Slrgb {0.000 0.000 0.000} def
 /Slw 0.864 def
 /Slrgb {0.878 0.878 0.878} def
-23473 4083 23473 22457 Sln
+24207 4083 24207 22457 Sln
 /Slw 0.576 def
 /Slrgb {0.000 0.000 0.000} def
 /Slw 0.864 def
 /Slrgb {0.878 0.878 0.878} def
-29926 4083 29926 22457 Sln
+30673 4083 30673 22457 Sln
 /Slw 0.576 def
 /Slrgb {0.000 0.000 0.000} def
 /Slw 4.032 def
-7698 6523 Sm
-7775 6661 Sl
-7775 6661 Sm
-7852 6796 Sl
-7852 6796 Sm
-7929 6931 Sl
-7929 6931 Sm
-8006 7068 Sl
-8006 7068 Sm
-8083 7202 Sl
-8083 7202 Sm
-8159 7337 Sl
-8159 7337 Sm
-8236 7475 Sl
-8236 7475 Sm
-8313 7612 Sl
-8313 7612 Sm
-8390 7745 Sl
-8390 7745 Sm
-8467 7872 Sl
-8467 7872 Sm
-8544 7996 Sl
-8544 7996 Sm
-8620 8124 Sl
-8620 8124 Sm
-8697 8250 Sl
-8697 8250 Sm
-8774 8376 Sl
-8774 8376 Sm
-8851 8490 Sl
-8851 8490 Sm
-8928 8603 Sl
-8928 8603 Sm
-9005 8714 Sl
-9005 8714 Sm
-9081 8820 Sl
-9081 8820 Sm
-9158 8922 Sl
-9158 8922 Sm
-9235 9022 Sl
-9235 9022 Sm
-9312 9118 Sl
-9312 9118 Sm
-9389 9204 Sl
-9389 9204 Sm
-9466 9281 Sl
-9466 9281 Sm
-9542 9360 Sl
-9542 9360 Sm
-9619 9443 Sl
-9619 9443 Sm
-9696 9527 Sl
-9696 9527 Sm
-9773 9606 Sl
-9773 9606 Sm
-9850 9694 Sl
-9850 9694 Sm
-9927 9785 Sl
-9927 9785 Sm
-10003 9880 Sl
-10003 9880 Sm
-10080 9986 Sl
-10080 9986 Sm
-10157 10094 Sl
-10157 10094 Sm
-10234 10203 Sl
-10234 10203 Sm
-10311 10310 Sl
-10311 10310 Sm
-10388 10421 Sl
-10388 10421 Sm
-10464 10532 Sl
-10464 10532 Sm
-10541 10647 Sl
-10541 10647 Sm
-10618 10771 Sl
-10618 10771 Sm
-10695 10899 Sl
-10695 10899 Sm
-10772 11026 Sl
-10772 11026 Sm
-10849 11165 Sl
-10849 11165 Sm
-10925 11304 Sl
-10925 11304 Sm
-11002 11444 Sl
-11002 11444 Sm
-11079 11583 Sl
-11079 11583 Sm
-11156 11724 Sl
-11156 11724 Sm
-11233 11867 Sl
-11233 11867 Sm
-11310 12008 Sl
-11310 12008 Sm
-11386 12146 Sl
-11386 12146 Sm
-11463 12285 Sl
-11463 12285 Sm
-11540 12415 Sl
-11540 12415 Sm
-11617 12542 Sl
-11617 12542 Sm
-11694 12673 Sl
-11694 12673 Sm
-11771 12805 Sl
-11771 12805 Sm
-11847 12930 Sl
-11847 12930 Sm
-11924 13042 Sl
-11924 13042 Sm
-12001 13147 Sl
-12001 13147 Sm
-12078 13253 Sl
-12078 13253 Sm
-12155 13363 Sl
-12155 13363 Sm
-12232 13484 Sl
-12232 13484 Sm
-12308 13598 Sl
-12308 13598 Sm
-12385 13713 Sl
-12385 13713 Sm
-12462 13830 Sl
-12462 13830 Sm
-12539 13944 Sl
-12539 13944 Sm
-12616 14060 Sl
-12616 14060 Sm
-12693 14176 Sl
-12693 14176 Sm
-12769 14293 Sl
-12769 14293 Sm
-12846 14396 Sl
-12846 14396 Sm
-12923 14487 Sl
-12923 14487 Sm
-13000 14581 Sl
-13000 14581 Sm
-13077 14678 Sl
-13077 14678 Sm
-13154 14778 Sl
-13154 14778 Sm
-13230 14872 Sl
-13230 14872 Sm
-13307 14975 Sl
-13307 14975 Sm
-13384 15082 Sl
-13384 15082 Sm
-13461 15197 Sl
-13461 15197 Sm
-13538 15321 Sl
-13538 15321 Sm
-13615 15450 Sl
-13615 15450 Sm
-13691 15578 Sl
-13691 15578 Sm
-13768 15701 Sl
-13768 15701 Sm
-13845 15823 Sl
-13845 15823 Sm
-13922 15947 Sl
-13922 15947 Sm
-13999 16081 Sl
-13999 16081 Sm
-14076 16231 Sl
-14076 16231 Sm
-14152 16384 Sl
-14152 16384 Sm
-14229 16533 Sl
-14229 16533 Sm
-14306 16680 Sl
-14306 16680 Sm
-14383 16835 Sl
-14383 16835 Sm
-14460 16988 Sl
-14460 16988 Sm
-14537 17130 Sl
-14537 17130 Sm
-14613 17265 Sl
-14613 17265 Sm
-14690 17397 Sl
-14690 17397 Sm
-14767 17529 Sl
-14767 17529 Sm
-14844 17669 Sl
-14844 17669 Sm
-14921 17815 Sl
-14921 17815 Sm
-14998 17968 Sl
-14998 17968 Sm
-15074 18113 Sl
-15074 18113 Sm
-15151 18252 Sl
-15151 18252 Sm
-15228 18390 Sl
-15228 18390 Sm
-15305 18516 Sl
-15305 18516 Sm
-15382 18633 Sl
-15382 18633 Sm
-15459 18735 Sl
-15459 18735 Sm
-15536 18829 Sl
-15536 18829 Sm
-15612 18926 Sl
-15612 18926 Sm
-15689 19033 Sl
-15689 19033 Sm
-15766 19137 Sl
-15766 19137 Sm
-15843 19242 Sl
-15843 19242 Sm
-15920 19348 Sl
-15920 19348 Sm
-15997 19444 Sl
-15997 19444 Sm
-16073 19539 Sl
-16073 19539 Sm
-16150 19633 Sl
-16150 19633 Sm
-16227 19723 Sl
-16227 19723 Sm
-16304 19798 Sl
-16304 19798 Sm
-16381 19863 Sl
-16381 19863 Sm
-16458 19930 Sl
-16458 19930 Sm
-16534 19991 Sl
-16534 19991 Sm
-16611 20043 Sl
-16611 20043 Sm
-16688 20082 Sl
-16688 20082 Sm
-16765 20113 Sl
-16765 20113 Sm
-16842 20142 Sl
-16842 20142 Sm
-16919 20170 Sl
-16919 20170 Sm
-16995 20196 Sl
-16995 20196 Sm
-17072 20221 Sl
-17072 20221 Sm
-17149 20248 Sl
-17149 20248 Sm
-17226 20265 Sl
-17226 20265 Sm
-17303 20282 Sl
-17303 20282 Sm
-17380 20308 Sl
-17380 20308 Sm
-17456 20355 Sl
-17456 20355 Sm
-17533 20404 Sl
-17533 20404 Sm
-17610 20439 Sl
-17610 20439 Sm
-17687 20466 Sl
-17687 20466 Sm
-17764 20478 Sl
-17764 20478 Sm
-17841 20489 Sl
-17841 20489 Sm
-17917 20492 Sl
-17917 20492 Sm
-17994 20472 Sl
-17994 20472 Sm
-18071 20443 Sl
-18071 20443 Sm
-18148 20400 Sl
-18148 20400 Sm
-18225 20354 Sl
-18225 20354 Sm
-18302 20319 Sl
-18302 20319 Sm
-18378 20287 Sl
-18378 20287 Sm
-18455 20268 Sl
-18455 20268 Sm
-18532 20236 Sl
-18532 20236 Sm
-18609 20204 Sl
-18609 20204 Sm
-18686 20174 Sl
-18686 20174 Sm
-18763 20138 Sl
-18763 20138 Sm
-18839 20092 Sl
-18839 20092 Sm
-18916 20043 Sl
-18916 20043 Sm
-18993 19985 Sl
-18993 19985 Sm
-19070 19928 Sl
-19070 19928 Sm
-19147 19869 Sl
-19147 19869 Sm
-19224 19813 Sl
-19224 19813 Sm
-19300 19759 Sl
-19300 19759 Sm
-19377 19699 Sl
-19377 19699 Sm
-19454 19630 Sl
-19454 19630 Sm
-19531 19571 Sl
-19531 19571 Sm
-19608 19516 Sl
-19608 19516 Sm
-19685 19467 Sl
-19685 19467 Sm
-19761 19416 Sl
-19761 19416 Sm
-19838 19362 Sl
-19838 19362 Sm
-19915 19308 Sl
-19915 19308 Sm
-19992 19244 Sl
-19992 19244 Sm
-20069 19186 Sl
-20069 19186 Sm
-20146 19120 Sl
-20146 19120 Sm
-20222 19047 Sl
-20222 19047 Sm
-20299 18964 Sl
-20299 18964 Sm
-20376 18882 Sl
-20376 18882 Sm
-20453 18796 Sl
-20453 18796 Sm
-20530 18705 Sl
-20530 18705 Sm
-20607 18616 Sl
-20607 18616 Sm
-20683 18532 Sl
-20683 18532 Sm
-20760 18458 Sl
-20760 18458 Sm
-20837 18396 Sl
-20837 18396 Sm
-20914 18351 Sl
-20914 18351 Sm
-20991 18304 Sl
-20991 18304 Sm
-21068 18245 Sl
-21068 18245 Sm
-21144 18187 Sl
-21144 18187 Sm
-21221 18128 Sl
-21221 18128 Sm
-21298 18064 Sl
-21298 18064 Sm
-21375 17996 Sl
-21375 17996 Sm
-21452 17927 Sl
-21452 17927 Sm
-21529 17855 Sl
-21529 17855 Sm
-21605 17776 Sl
-21605 17776 Sm
-21682 17706 Sl
-21682 17706 Sm
-21759 17637 Sl
-21759 17637 Sm
-21836 17576 Sl
-21836 17576 Sm
-21913 17512 Sl
-21913 17512 Sm
-21990 17435 Sl
-21990 17435 Sm
-22066 17360 Sl
-22066 17360 Sm
-22143 17290 Sl
-22143 17290 Sm
-22220 17224 Sl
-22220 17224 Sm
-22297 17147 Sl
-22297 17147 Sm
-22374 17071 Sl
-22374 17071 Sm
-22451 16985 Sl
-22451 16985 Sm
-22527 16892 Sl
-22527 16892 Sm
-22604 16791 Sl
-22604 16791 Sm
-22681 16692 Sl
-22681 16692 Sm
-22758 16586 Sl
-22758 16586 Sm
-22835 16476 Sl
-22835 16476 Sm
-22912 16356 Sl
-22912 16356 Sm
-22989 16240 Sl
-22989 16240 Sm
-23065 16122 Sl
-23065 16122 Sm
-23142 16016 Sl
-23142 16016 Sm
-23219 15913 Sl
-23219 15913 Sm
-23296 15803 Sl
-23296 15803 Sm
-23373 15682 Sl
-23373 15682 Sm
-23450 15555 Sl
-23450 15555 Sm
-23526 15438 Sl
-23526 15438 Sm
-23603 15321 Sl
-23603 15321 Sm
-23680 15201 Sl
-23680 15201 Sm
-23757 15067 Sl
-23757 15067 Sm
-23834 14938 Sl
-23834 14938 Sm
-23911 14808 Sl
-23911 14808 Sm
-23987 14678 Sl
-23987 14678 Sm
-24064 14548 Sl
-24064 14548 Sm
-24141 14425 Sl
-24141 14425 Sm
-24218 14305 Sl
-24218 14305 Sm
-24295 14179 Sl
-24295 14179 Sm
-24372 14051 Sl
-24372 14051 Sm
-24448 13918 Sl
-24448 13918 Sm
-24525 13787 Sl
-24525 13787 Sm
-24602 13663 Sl
-24602 13663 Sm
-24679 13547 Sl
-24679 13547 Sm
-24756 13433 Sl
-24756 13433 Sm
-24833 13319 Sl
-24833 13319 Sm
-24909 13210 Sl
-24909 13210 Sm
-24986 13094 Sl
-24986 13094 Sm
-25063 12983 Sl
-25063 12983 Sm
-25140 12877 Sl
-25140 12877 Sm
-25217 12776 Sl
-25217 12776 Sm
-25294 12685 Sl
-25294 12685 Sm
-25370 12598 Sl
-25370 12598 Sm
-25447 12509 Sl
-25447 12509 Sm
-25524 12420 Sl
-25524 12420 Sm
-25601 12340 Sl
-25601 12340 Sm
-25678 12269 Sl
-25678 12269 Sm
-25755 12199 Sl
-25755 12199 Sm
-25831 12129 Sl
-25831 12129 Sm
-25908 12048 Sl
-25908 12048 Sm
-25985 11963 Sl
-25985 11963 Sm
-26062 11873 Sl
-26062 11873 Sm
-26139 11780 Sl
-26139 11780 Sm
-26216 11684 Sl
-26216 11684 Sm
-26292 11590 Sl
-26292 11590 Sm
-26369 11493 Sl
-26369 11493 Sm
-26446 11392 Sl
-26446 11392 Sm
-26523 11290 Sl
-26523 11290 Sm
-26600 11194 Sl
-26600 11194 Sm
-26677 11098 Sl
-26677 11098 Sm
-26753 11009 Sl
-26753 11009 Sm
-26830 10920 Sl
-26830 10920 Sm
-26907 10836 Sl
-26907 10836 Sm
-26984 10757 Sl
-26984 10757 Sm
-27061 10683 Sl
-27061 10683 Sm
-27138 10614 Sl
-27138 10614 Sm
-27214 10544 Sl
-27214 10544 Sm
-27291 10480 Sl
-27291 10480 Sm
-27368 10423 Sl
-27368 10423 Sm
-27445 10365 Sl
-27445 10365 Sm
-27522 10307 Sl
-27522 10307 Sm
-27599 10254 Sl
-27599 10254 Sm
-27675 10196 Sl
-27675 10196 Sm
-27752 10135 Sl
-27752 10135 Sm
-27829 10075 Sl
-27829 10075 Sm
-27906 10014 Sl
-27906 10014 Sm
-27983 9953 Sl
-27983 9953 Sm
-28060 9895 Sl
-28060 9895 Sm
-28136 9841 Sl
-28136 9841 Sm
-28213 9785 Sl
-28213 9785 Sm
-28290 9729 Sl
-28290 9729 Sm
-28367 9672 Sl
-28367 9672 Sm
-28444 9612 Sl
-28444 9612 Sm
-28521 9556 Sl
-28521 9556 Sm
-28597 9497 Sl
-28597 9497 Sm
-28674 9431 Sl
-28674 9431 Sm
-28751 9371 Sl
-28751 9371 Sm
-28828 9311 Sl
-28828 9311 Sm
-28905 9250 Sl
-28905 9250 Sm
-28982 9188 Sl
-28982 9188 Sm
-29058 9122 Sl
-29058 9122 Sm
-29135 9053 Sl
-29135 9053 Sm
-29212 8978 Sl
-29212 8978 Sm
-29289 8894 Sl
-29289 8894 Sm
-29366 8796 Sl
-29366 8796 Sm
-29443 8693 Sl
-29443 8693 Sm
-29519 8581 Sl
-29519 8581 Sm
-29596 8462 Sl
-29596 8462 Sm
-29673 8337 Sl
-29673 8337 Sm
-29750 8207 Sl
-29750 8207 Sm
-29827 8076 Sl
-29827 8076 Sm
-29904 7938 Sl
-29904 7938 Sm
-29980 7795 Sl
-29980 7795 Sm
-30057 7648 Sl
-30057 7648 Sm
-30134 7494 Sl
-30134 7494 Sm
-30211 7343 Sl
-30211 7343 Sm
-30288 7191 Sl
-30288 7191 Sm
-30365 7042 Sl
-30365 7042 Sm
-30442 6893 Sl
-30442 6893 Sm
-30518 6746 Sl
-30518 6746 Sm
-30595 6601 Sl
-30595 6601 Sm
-30672 6459 Sl
+4114 7769 Sm
+4198 7969 Sl
+4198 7969 Sm
+4283 8166 Sl
+4283 8166 Sm
+4367 8363 Sl
+4367 8363 Sm
+4452 8556 Sl
+4452 8556 Sm
+4536 8751 Sl
+4536 8751 Sm
+4621 8943 Sl
+4621 8943 Sm
+4705 9135 Sl
+4705 9135 Sm
+4790 9325 Sl
+4790 9325 Sm
+4874 9518 Sl
+4874 9518 Sm
+4959 9708 Sl
+4959 9708 Sm
+5043 9893 Sl
+5043 9893 Sm
+5128 10075 Sl
+5128 10075 Sm
+5212 10255 Sl
+5212 10255 Sm
+5297 10430 Sl
+5297 10430 Sm
+5381 10599 Sl
+5381 10599 Sm
+5466 10762 Sl
+5466 10762 Sm
+5550 10924 Sl
+5550 10924 Sm
+5635 11085 Sl
+5635 11085 Sm
+5720 11231 Sl
+5720 11231 Sm
+5804 11372 Sl
+5804 11372 Sm
+5889 11504 Sl
+5889 11504 Sm
+5973 11631 Sl
+5973 11631 Sm
+6058 11747 Sl
+6058 11747 Sm
+6142 11852 Sl
+6142 11852 Sm
+6227 11963 Sl
+6227 11963 Sm
+6311 12081 Sl
+6311 12081 Sm
+6396 12202 Sl
+6396 12202 Sm
+6480 12325 Sl
+6480 12325 Sm
+6565 12447 Sl
+6565 12447 Sm
+6649 12568 Sl
+6649 12568 Sm
+6734 12686 Sl
+6734 12686 Sm
+6818 12803 Sl
+6818 12803 Sm
+6903 12911 Sl
+6903 12911 Sm
+6987 13028 Sl
+6987 13028 Sm
+7072 13146 Sl
+7072 13146 Sm
+7156 13282 Sl
+7156 13282 Sm
+7241 13417 Sl
+7241 13417 Sm
+7325 13558 Sl
+7325 13558 Sm
+7410 13697 Sl
+7410 13697 Sm
+7494 13841 Sl
+7494 13841 Sm
+7579 13991 Sl
+7579 13991 Sm
+7664 14149 Sl
+7664 14149 Sm
+7748 14307 Sl
+7748 14307 Sm
+7833 14461 Sl
+7833 14461 Sm
+7917 14609 Sl
+7917 14609 Sm
+8002 14752 Sl
+8002 14752 Sm
+8086 14897 Sl
+8086 14897 Sm
+8171 15036 Sl
+8171 15036 Sm
+8255 15167 Sl
+8255 15167 Sm
+8340 15289 Sl
+8340 15289 Sm
+8424 15407 Sl
+8424 15407 Sm
+8509 15519 Sl
+8509 15519 Sm
+8593 15628 Sl
+8593 15628 Sm
+8678 15744 Sl
+8678 15744 Sm
+8762 15856 Sl
+8762 15856 Sm
+8847 15972 Sl
+8847 15972 Sm
+8931 16085 Sl
+8931 16085 Sm
+9016 16201 Sl
+9016 16201 Sm
+9100 16328 Sl
+9100 16328 Sm
+9185 16460 Sl
+9185 16460 Sm
+9269 16585 Sl
+9269 16585 Sm
+9354 16705 Sl
+9354 16705 Sm
+9439 16826 Sl
+9439 16826 Sm
+9523 16956 Sl
+9523 16956 Sm
+9608 17076 Sl
+9608 17076 Sm
+9692 17195 Sl
+9692 17195 Sm
+9777 17325 Sl
+9777 17325 Sm
+9861 17455 Sl
+9861 17455 Sm
+9946 17578 Sl
+9946 17578 Sm
+10030 17693 Sl
+10030 17693 Sm
+10115 17797 Sl
+10115 17797 Sm
+10199 17896 Sl
+10199 17896 Sm
+10284 17994 Sl
+10284 17994 Sm
+10368 18093 Sl
+10368 18093 Sm
+10453 18191 Sl
+10453 18191 Sm
+10537 18286 Sl
+10537 18286 Sm
+10622 18371 Sl
+10622 18371 Sm
+10706 18446 Sl
+10706 18446 Sm
+10791 18514 Sl
+10791 18514 Sm
+10875 18570 Sl
+10875 18570 Sm
+10960 18627 Sl
+10960 18627 Sm
+11044 18689 Sl
+11044 18689 Sm
+11129 18757 Sl
+11129 18757 Sm
+11214 18829 Sl
+11214 18829 Sm
+11298 18898 Sl
+11298 18898 Sm
+11383 18965 Sl
+11383 18965 Sm
+11467 19034 Sl
+11467 19034 Sm
+11552 19106 Sl
+11552 19106 Sm
+11636 19183 Sl
+11636 19183 Sm
+11721 19266 Sl
+11721 19266 Sm
+11805 19359 Sl
+11805 19359 Sm
+11890 19445 Sl
+11890 19445 Sm
+11974 19525 Sl
+11974 19525 Sm
+12059 19597 Sl
+12059 19597 Sm
+12143 19669 Sl
+12143 19669 Sm
+12228 19736 Sl
+12228 19736 Sm
+12312 19800 Sl
+12312 19800 Sm
+12397 19853 Sl
+12397 19853 Sm
+12481 19898 Sl
+12481 19898 Sm
+12566 19942 Sl
+12566 19942 Sm
+12650 19990 Sl
+12650 19990 Sm
+12735 20031 Sl
+12735 20031 Sm
+12819 20068 Sl
+12819 20068 Sm
+12904 20107 Sl
+12904 20107 Sm
+12989 20156 Sl
+12989 20156 Sm
+13073 20222 Sl
+13073 20222 Sm
+13158 20292 Sl
+13158 20292 Sm
+13242 20363 Sl
+13242 20363 Sm
+13327 20434 Sl
+13327 20434 Sm
+13411 20505 Sl
+13411 20505 Sm
+13496 20568 Sl
+13496 20568 Sm
+13580 20618 Sl
+13580 20618 Sm
+13665 20678 Sl
+13665 20678 Sm
+13749 20735 Sl
+13749 20735 Sm
+13834 20786 Sl
+13834 20786 Sm
+13918 20838 Sl
+13918 20838 Sm
+14003 20879 Sl
+14003 20879 Sm
+14087 20915 Sl
+14087 20915 Sm
+14172 20942 Sl
+14172 20942 Sm
+14256 20968 Sl
+14256 20968 Sm
+14341 20992 Sl
+14341 20992 Sm
+14425 21016 Sl
+14425 21016 Sm
+14510 21041 Sl
+14510 21041 Sm
+14594 21064 Sl
+14594 21064 Sm
+14679 21085 Sl
+14679 21085 Sm
+14764 21099 Sl
+14764 21099 Sm
+14848 21098 Sl
+14848 21098 Sm
+14933 21088 Sl
+14933 21088 Sm
+15017 21076 Sl
+15017 21076 Sm
+15102 21061 Sl
+15102 21061 Sm
+15186 21049 Sl
+15186 21049 Sm
+15271 21039 Sl
+15271 21039 Sm
+15355 21036 Sl
+15355 21036 Sm
+15440 21025 Sl
+15440 21025 Sm
+15524 21012 Sl
+15524 21012 Sm
+15609 20996 Sl
+15609 20996 Sm
+15693 20978 Sl
+15693 20978 Sm
+15778 20969 Sl
+15778 20969 Sm
+15862 20953 Sl
+15862 20953 Sm
+15947 20922 Sl
+15947 20922 Sm
+16031 20884 Sl
+16031 20884 Sm
+16116 20848 Sl
+16116 20848 Sm
+16200 20819 Sl
+16200 20819 Sm
+16285 20792 Sl
+16285 20792 Sm
+16369 20756 Sl
+16369 20756 Sm
+16454 20718 Sl
+16454 20718 Sm
+16538 20681 Sl
+16538 20681 Sm
+16623 20640 Sl
+16623 20640 Sm
+16708 20597 Sl
+16708 20597 Sm
+16792 20543 Sl
+16792 20543 Sm
+16877 20481 Sl
+16877 20481 Sm
+16961 20425 Sl
+16961 20425 Sm
+17046 20375 Sl
+17046 20375 Sm
+17130 20338 Sl
+17130 20338 Sm
+17215 20300 Sl
+17215 20300 Sm
+17299 20268 Sl
+17299 20268 Sm
+17384 20237 Sl
+17384 20237 Sm
+17468 20192 Sl
+17468 20192 Sm
+17553 20148 Sl
+17553 20148 Sm
+17637 20103 Sl
+17637 20103 Sm
+17722 20048 Sl
+17722 20048 Sm
+17806 20003 Sl
+17806 20003 Sm
+17891 19964 Sl
+17891 19964 Sm
+17975 19925 Sl
+17975 19925 Sm
+18060 19887 Sl
+18060 19887 Sm
+18144 19840 Sl
+18144 19840 Sm
+18229 19788 Sl
+18229 19788 Sm
+18313 19737 Sl
+18313 19737 Sm
+18398 19683 Sl
+18398 19683 Sm
+18483 19635 Sl
+18483 19635 Sm
+18567 19592 Sl
+18567 19592 Sm
+18652 19540 Sl
+18652 19540 Sm
+18736 19480 Sl
+18736 19480 Sm
+18821 19411 Sl
+18821 19411 Sm
+18905 19336 Sl
+18905 19336 Sm
+18990 19263 Sl
+18990 19263 Sm
+19074 19173 Sl
+19074 19173 Sm
+19159 19077 Sl
+19159 19077 Sm
+19243 18984 Sl
+19243 18984 Sm
+19328 18895 Sl
+19328 18895 Sm
+19412 18799 Sl
+19412 18799 Sm
+19497 18702 Sl
+19497 18702 Sm
+19581 18587 Sl
+19581 18587 Sm
+19666 18478 Sl
+19666 18478 Sm
+19750 18366 Sl
+19750 18366 Sm
+19835 18257 Sl
+19835 18257 Sm
+19919 18138 Sl
+19919 18138 Sm
+20004 18025 Sl
+20004 18025 Sm
+20088 17918 Sl
+20088 17918 Sm
+20173 17814 Sl
+20173 17814 Sm
+20258 17715 Sl
+20258 17715 Sm
+20342 17611 Sl
+20342 17611 Sm
+20427 17512 Sl
+20427 17512 Sm
+20511 17407 Sl
+20511 17407 Sm
+20596 17301 Sl
+20596 17301 Sm
+20680 17192 Sl
+20680 17192 Sm
+20765 17071 Sl
+20765 17071 Sm
+20849 16948 Sl
+20849 16948 Sm
+20934 16831 Sl
+20934 16831 Sm
+21018 16719 Sl
+21018 16719 Sm
+21103 16605 Sl
+21103 16605 Sm
+21187 16493 Sl
+21187 16493 Sm
+21272 16383 Sl
+21272 16383 Sm
+21356 16273 Sl
+21356 16273 Sm
+21441 16152 Sl
+21441 16152 Sm
+21525 16031 Sl
+21525 16031 Sm
+21610 15914 Sl
+21610 15914 Sm
+21694 15799 Sl
+21694 15799 Sm
+21779 15691 Sl
+21779 15691 Sm
+21863 15588 Sl
+21863 15588 Sm
+21948 15489 Sl
+21948 15489 Sm
+22033 15393 Sl
+22033 15393 Sm
+22117 15305 Sl
+22117 15305 Sm
+22202 15217 Sl
+22202 15217 Sm
+22286 15129 Sl
+22286 15129 Sm
+22371 15035 Sl
+22371 15035 Sm
+22455 14944 Sl
+22455 14944 Sm
+22540 14846 Sl
+22540 14846 Sm
+22624 14740 Sl
+22624 14740 Sm
+22709 14640 Sl
+22709 14640 Sm
+22793 14536 Sl
+22793 14536 Sm
+22878 14436 Sl
+22878 14436 Sm
+22962 14344 Sl
+22962 14344 Sm
+23047 14237 Sl
+23047 14237 Sm
+23131 14124 Sl
+23131 14124 Sm
+23216 14011 Sl
+23216 14011 Sm
+23300 13893 Sl
+23300 13893 Sm
+23385 13781 Sl
+23385 13781 Sm
+23469 13668 Sl
+23469 13668 Sm
+23554 13558 Sl
+23554 13558 Sm
+23638 13453 Sl
+23638 13453 Sm
+23723 13349 Sl
+23723 13349 Sm
+23808 13245 Sl
+23808 13245 Sm
+23892 13148 Sl
+23892 13148 Sm
+23977 13062 Sl
+23977 13062 Sm
+24061 12977 Sl
+24061 12977 Sm
+24146 12898 Sl
+24146 12898 Sm
+24230 12822 Sl
+24230 12822 Sm
+24315 12742 Sl
+24315 12742 Sm
+24399 12661 Sl
+24399 12661 Sm
+24484 12582 Sl
+24484 12582 Sm
+24568 12505 Sl
+24568 12505 Sm
+24653 12423 Sl
+24653 12423 Sm
+24737 12338 Sl
+24737 12338 Sm
+24822 12250 Sl
+24822 12250 Sm
+24906 12166 Sl
+24906 12166 Sm
+24991 12079 Sl
+24991 12079 Sm
+25075 11992 Sl
+25075 11992 Sm
+25160 11910 Sl
+25160 11910 Sm
+25244 11823 Sl
+25244 11823 Sm
+25329 11734 Sl
+25329 11734 Sm
+25413 11641 Sl
+25413 11641 Sm
+25498 11551 Sl
+25498 11551 Sm
+25582 11459 Sl
+25582 11459 Sm
+25667 11371 Sl
+25667 11371 Sm
+25752 11289 Sl
+25752 11289 Sm
+25836 11205 Sl
+25836 11205 Sm
+25921 11118 Sl
+25921 11118 Sm
+26005 11039 Sl
+26005 11039 Sm
+26090 10962 Sl
+26090 10962 Sm
+26174 10883 Sl
+26174 10883 Sm
+26259 10806 Sl
+26259 10806 Sm
+26343 10727 Sl
+26343 10727 Sm
+26428 10644 Sl
+26428 10644 Sm
+26512 10552 Sl
+26512 10552 Sm
+26597 10461 Sl
+26597 10461 Sm
+26681 10367 Sl
+26681 10367 Sm
+26766 10275 Sl
+26766 10275 Sm
+26850 10190 Sl
+26850 10190 Sm
+26935 10106 Sl
+26935 10106 Sm
+27019 10013 Sl
+27019 10013 Sm
+27104 9925 Sl
+27104 9925 Sm
+27188 9828 Sl
+27188 9828 Sm
+27273 9727 Sl
+27273 9727 Sm
+27357 9630 Sl
+27357 9630 Sm
+27442 9542 Sl
+27442 9542 Sm
+27527 9450 Sl
+27527 9450 Sm
+27611 9350 Sl
+27611 9350 Sm
+27696 9243 Sl
+27696 9243 Sm
+27780 9130 Sl
+27780 9130 Sm
+27865 9012 Sl
+27865 9012 Sm
+27949 8891 Sl
+27949 8891 Sm
+28034 8765 Sl
+28034 8765 Sm
+28118 8637 Sl
+28118 8637 Sm
+28203 8506 Sl
+28203 8506 Sm
+28287 8366 Sl
+28287 8366 Sm
+28372 8228 Sl
+28372 8228 Sm
+28456 8092 Sl
+28456 8092 Sm
+28541 7955 Sl
+28541 7955 Sm
+28625 7810 Sl
+28625 7810 Sm
+28710 7663 Sl
+28710 7663 Sm
+28794 7512 Sl
+28794 7512 Sm
+28879 7359 Sl
+28879 7359 Sm
+28963 7206 Sl
+28963 7206 Sm
+29048 7055 Sl
+29048 7055 Sm
+29132 6905 Sl
+29132 6905 Sm
+29217 6755 Sl
+29217 6755 Sm
+29302 6609 Sl
+29302 6609 Sm
+29386 6470 Sl
 /Slw 0.576 def
 3602 4083 3602 22457 Sln
 3602 4595 3279 4595 Sln
@@ -1061,8 +1173,8 @@ dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 (0) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-3602 8065 3279 8065 Sln
-3117 7782 0
+3602 8933 3279 8933 Sln
+3117 8650 0
 /Helvetica-0 findfont 808 yratio mul scalefont setfont
 (.05) stringwidth pop add
 xratio div
@@ -1073,8 +1185,8 @@ dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 (.05) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-3602 11535 3279 11535 Sln
-3117 11252 0
+3602 13270 3279 13270 Sln
+3117 12987 0
 /Helvetica-0 findfont 808 yratio mul scalefont setfont
 (.1) stringwidth pop add
 xratio div
@@ -1085,8 +1197,8 @@ dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 (.1) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-3602 15005 3279 15005 Sln
-3117 14722 0
+3602 17608 3279 17608 Sln
+3117 17325 0
 /Helvetica-0 findfont 808 yratio mul scalefont setfont
 (.15) stringwidth pop add
 xratio div
@@ -1097,8 +1209,8 @@ dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 (.15) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-3602 18475 3279 18475 Sln
-3117 18192 0
+3602 21945 3279 21945 Sln
+3117 21662 0
 /Helvetica-0 findfont 808 yratio mul scalefont setfont
 (.2) stringwidth pop add
 xratio div
@@ -1107,18 +1219,6 @@ dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 0.000 808
 (.2) Stxtl
 (.2) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-3602 21945 3279 21945 Sln
-3117 21662 0
-/Helvetica-0 findfont 808 yratio mul scalefont setfont
-(.25) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 808
-(.25) Stxtl
-(.25) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
 1428 13270 0
@@ -1133,20 +1233,8 @@ dup 4 3 roll exch 90.000 cos mul sub 3 1 roll 90.000 sin mul sub 2 copy
 dup 4 3 roll exch 90.000 cos mul add 3 1 roll 90.000 sin mul add 2 copy
 pop pop pop pop
 3602 4083 31184 4083 Sln
-4114 4083 4114 3760 Sln
-4114 3033 0
-/Helvetica-0 findfont 808 yratio mul scalefont setfont
-(0) stringwidth pop add
-2 div xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 808
-(0) Stxtl
-(0) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-10567 4083 10567 3760 Sln
-10567 3033 0
+4811 4083 4811 3760 Sln
+4811 3033 0
 /Helvetica-0 findfont 808 yratio mul scalefont setfont
 (2) stringwidth pop add
 2 div xratio div
@@ -1157,8 +1245,8 @@ dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 (2) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-17020 4083 17020 3760 Sln
-17020 3033 0
+11276 4083 11276 3760 Sln
+11276 3033 0
 /Helvetica-0 findfont 808 yratio mul scalefont setfont
 (4) stringwidth pop add
 2 div xratio div
@@ -1169,8 +1257,8 @@ dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 (4) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-23473 4083 23473 3760 Sln
-23473 3033 0
+17742 4083 17742 3760 Sln
+17742 3033 0
 /Helvetica-0 findfont 808 yratio mul scalefont setfont
 (6) stringwidth pop add
 2 div xratio div
@@ -1181,8 +1269,8 @@ dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 (6) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-29926 4083 29926 3760 Sln
-29926 3033 0
+24207 4083 24207 3760 Sln
+24207 3033 0
 /Helvetica-0 findfont 808 yratio mul scalefont setfont
 (8) stringwidth pop add
 2 div xratio div
@@ -1191,6 +1279,18 @@ dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 0.000 808
 (8) Stxtl
 (8) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+30673 4083 30673 3760 Sln
+30673 3033 0
+/Helvetica-0 findfont 808 yratio mul scalefont setfont
+(10) stringwidth pop add
+2 div xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 808
+(10) Stxtl
+(10) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
 17393 2144 0
@@ -1207,8 +1307,8 @@ pop pop pop pop
 3742 1148 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
 0.000 646
-(Point Estimate: 4.58\(1.63\)[0].) Stxtl
-(Point Estimate: 4.58\(1.63\)[0].) stringwidth pop xratio div
+(Point Estimate: 5.44\(1.86\)[0].) Stxtl
+(Point Estimate: 5.44\(1.86\)[0].) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
 S showpage
