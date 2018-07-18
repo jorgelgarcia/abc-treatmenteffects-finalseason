@@ -28,7 +28,7 @@ Risk factors are presented in Table~\ref{table:crossval_risk}. BMI is not statis
 \input{AppOutput/Health/crossval_unweighted.tex}
 \begin{tablenotes}
 \footnotesize
-\item Note: This cross-validation exercise randomly samples half of the PSID respondent IDs for use in estimating the transition models. The respondents not used for estimation, but who were present in the PSID sample in 1999, are then simulated from 1999 through 2013. This table compares mean outcomes between the simulated (FAM) and actual (PSID) populations. The $p$-value reports a bootstrap test of equality of the actual means and the forecast means. \textbf{[JJH: How well do we match distributions? Fitting in means is easy.]}
+\item Note: This cross-validation exercise randomly samples half of the PSID respondent IDs for use in estimating the transition models. The respondents not used for estimation, but who were present in the PSID sample in 1999, are then simulated from 1999 through 2013. This table compares mean outcomes between the simulated (FAM) and actual (PSID) populations. The $p$-value reports a bootstrap test of equality of the actual means and the forecast means. \textbf{[JJH: How well do we match distributions? Fitting in means is easy.] [JLG: Our matching of higher moments is not that good. I think we were fine with it because for all practical matters we are working with means but it is a concern.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}

@@ -6,7 +6,7 @@
 % \todo would be nice to have a table that summarizes imputed variables at age 30, imputation method, and number of missing subjects
 
 \noindent Marital status transitions and childbearing in FAM are affected by the subject's mother's education level. The ABC/CARE age-30 subject interview did not ask about mother's education, but the ABC age-21 parent interview did.
-For ABC subjects, we assume that each subject's mother had the same education level at the age-30 subject interview as what was reported in the age-21 parent interview. For CARE subjects, we impute mother's education from an ordered Probit model using race, ethnicity, education, disease conditions, employment status, presence of a health-related work limitation, and a self-report of whether or not the subject was ``poor'' as a child.  The model is estimated using age 30 to 31 PSID subjects with birth years between 1945 and 1981 \textbf{[JJH: In what year?] [JLG: The model is estimated using individuals who were 30 years and born between 1945 and 1981.]}. Each of the model covariate values are taken from the CARE age 30 interview. At the beginning of each simulation repetition, an education level is randomly drawn from the probability distribution for each CARE subject and assigned to be the mother's education level.
+For ABC subjects, we assume that each subject's mother had the same education level at the age-30 subject interview as what was reported in the age-21 parent interview. For CARE subjects, we impute mother's education from an ordered Probit model using race, ethnicity, education, disease conditions, employment status, presence of a health-related work limitation, and a self-report of whether or not the subject was ``poor'' as a child.  The model is estimated using age 30 to 31 PSID subjects with birth years between 1945 and 1981. Each of the model covariate values are taken from the CARE age 30 interview. At the beginning of each simulation repetition, an education level is randomly drawn from the probability distribution for each CARE subject and assigned to be the mother's education level.
 
 \noindent Many FAM transition models depend on a three-level measure of parents' economic status when the subject was a child.
 This is based on the PSID question: ``Were your parents poor when you were growing up, pretty well off, or what?''
@@ -28,7 +28,7 @@ First, self-reported BMI can be biased by factors such as actual height and weig
 Second, it is possible that BMI could increase or decrease systematically in the years between the age-30 subject interview and the age-34 health interview.
 
 \noindent To address the first BMI imputation challenge, we use a variation on the method of \citet*{Courtemanche_etal_2015_Adjusting-Body-Mass} to impute measured BMI in the PSID.
-While the method in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} works for importing height and weight, we apply the following specification \textbf{[JJH: What specification?] [JLG: The specification described next.]} to directly model BMI. Using respondents aged 30 to 40 in the 2002-2010 NHANES waves, we forecast measured BMI from percentile ranks of self-reported BMI using the model specification in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass}. Three variations
+While the method in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} works for importing height and weight, we apply the following specification to directly model BMI. Using respondents aged 30 to 40 in the 2002-2010 NHANES waves, we forecast measured BMI from percentile ranks of self-reported BMI using the model specification in \citet{Courtemanche_etal_2015_Adjusting-Body-Mass}. Three variations
 on the spline interactions of \citet{Courtemanche_etal_2015_Adjusting-Body-Mass} are also considered. After estimating these models using NHANES data, covariate values from the PSID
 age 30--34 data in years 2002--2013 are used to impute measured BMI values for PSID respondents. A Kolmogorov-Sminov (K-S) test and a visual inspection of smoothed histograms are used to compare the distribution of PSID imputed values to the distribution of observed values in the NHANES estimation sample. The model specification used for imputation has the smallest K-S distance between the two distributions.
 
@@ -64,7 +64,7 @@ SSI claiming affects FAM transitions in employment status.
 Lastly, claiming Social Security retirement benefits affects FAM transitions in employment status and insurance category.
 The ABC age-30 subject interview has a single yes/no question about claiming which asks: ``Currently are you receiving income from workman's compensation, disability, or Social Security benefits including Supplemental Security Income?'' CARE asks a similar question. The PSID has separate questions for each benefit type. We use a multinomial logit model to estimate the joint probability of each combination of DI and SSI claiming. The estimation uses PSID respondents aged 25 to 35 who were claiming at least one of the following benefits: workman's compensation, DI, or SSI. A Monte Carlo random draw generated from this distribution is used to assign each ABC/CARE subject's DI- and SSI-claiming status at the start of the simulation. One ABC subject is missing data about whether or not they were claiming and was assumed to not be claiming any benefits.
 
-\noindent As discussed in Section \ref{section:FAM_models}, FAM uses different models to estimate medical costs depending on whether or not a subject is Medicare-eligible. Subjects can enroll in Medicare before the age of 65 if they are claiming DI. The cost estimates for Medicare-eligible subjects depend on the subjects' current disease status at the age-30 interview and their disease status two years prior to the interview. Unfortunately, ABC/CARE does not have disease data two years before the age-30 interview. It is assumed that all subjects did not have their disease conditions in the previous period.
+\noindent As discussed in Section \ref{section:FAM_models}, FAM uses different models to estimate medical costs depending on whether or not a subject is Medicare-eligible. Subjects can enroll in Medicare before the age of 65 if they are claiming DI. The cost estimates for Medicare-eligible subjects depend on the subjects' current disease status at the age-30 interview and their disease status two years prior to the interview. Unfortunately, ABC/CARE does not have disease data two years before the age-30 interview. It is assumed that all subjects do not have their disease conditions in the previous period.
 
 % \todo capital income -- imputed, but not used as an outcome
 
@@ -144,17 +144,13 @@ Then, in the maintenance stage, a patient had a diagnosis in the previous two-ye
 Finally, in the terminal stage, a patient has a diagnosis and dies in the current two-year period.
 The medical costs models tend to underestimate health care spending reported in the National Healthcare Expenditures Account (NHEA) data, due in part to underreporting of Medical costs in MEPS.
 
-\clearpage
-
-\textbf{[JLG: I will study this and send my comments tomorrow. I did not touch this section as you instructed and I didn't even have the time to study it. I don't want to be later blamed for its content. The rest of Appendix G only includes what you edited/wrote.]}
-
 % Pasted from estimation in Technical Appendix:
 \subsubsection{Models for Transition Probabilities}
 \label{section:transition_models}
 
-Let $\mathcal{M}$ denote a set of possible health states with generic state $m$. Transition times are ages of measurement. Let $\mathcal{A}$ be the set indexing age, where $a \in \mathcal{A} = \{a_0, \ldots, a_T\}$ and $a_0$ and $a_T$ denoting the initial a final ages observed respectively---we drop individual subscripts to avoid notational clutter. We define $h_{a,m,m'}$ as the probability of transitioning from state $m$ to state $m'$ at age $a \in \mathcal{A}$, where $m, m' \in \mathcal{M}$.
+Let $\mathcal{M}$ denote a set of possible health states, some of which can be absorbing. Transition times are ages of measurement. Let $\mathcal{A}$ be the set indexing age, where $a \in \mathcal{A} = \{a_0, \ldots, a_T\}$ and $a_0$ and $a_T$ denote the initial and final ages observed, respectively---we drop individual subscripts to avoid notational clutter. We define $h_{a,m,m'}$ as the probability of transitioning from state $m$ to state $m'$ at age $a \in \mathcal{A}$, where $m, m' \in \mathcal{M}$.
 
-We let $\tilde{D}_{0,m}$ be the initial health state. $\tilde{D}_{0,m} = 1$ a person initiates in state $m$ and $\tilde{D}_{0,m} = 0$ otherwise, with associated probability $\Pr \left( \tilde{D}_{0,m} = 1 \right)$. If a transition from state $m$ to $m'$ occurs at age $a$, we denote it by $D_{a,m,m'} = 1$. Otherwise,  $D_{a,m,m'} = 0$. Table~\ref{table:transition} gives the transitions that we study.
+We denote a state transition from $m$ to $m'$ at age $a$ by $D_{a,m,m'} = 1$. If this transition does not happen,  $D_{a,m,m'} = 0$. We let $\tilde{D}_{a,m}$ be the indicator of state $m$ at age $a$. The associated state probability is $\Pr \left( \tilde{D}_{a,m} = 1\right)$. $\tilde{D}_{0,m} = 1$ if a person starts in state $m$ his/her observation span. $\tilde{D}_{0,m} = 0$ otherwise. Table~\ref{table:transition} gives the transitions that we study.
 
 \begin{sidewaystable}[H]
 \begin{threeparttable}
@@ -166,43 +162,45 @@ Note: This table illustrates how health outcomes at age a forecast health outcom
 \end{threeparttable}
 \end{sidewaystable}
 
-We assume that the the transition probability $h_{a,m,m'}$ is characterized by threshold-crossing model generated by an index
+We assume that the the transition probability $h_{a,m,m'}$ is generated by the following index threshold-crossing model
 
 \begin{align}\label{eq:trans}
-I_{a,m,m'} = \bm{W_a} \bm{\beta}_{m,m'} +\bm{\mathit{1}} \left( \tilde{D}_{a-1,m}>0\right) \nu_{m,m'}  + \bm{\mathit{1}} \left( \tilde{D}_{0,m}\geq 0 \right) \nu_{m}  + \left( \# a\right)  \tau_{m} + \varepsilon_{a,m,m'}
+I_{a,m,m'} = \bm{W_a} \bm{\beta}_{m,m'} +\bm{\mathit{1}} \left( \tilde{D}_{a-1,m}>0\right) \nu_{m,m'}  + \bm{\mathit{1}} \left( \tilde{D}_{0,m}\geq 0 \right) \nu_{m}  +  \tau \left( a \right)_{m,m'} + \varepsilon_{a,m,m'},
 \end{align}
 
-\noindent where $\bm{W_a}$ are covariates and $\left( \# a\right)$ is the cardinalization of $a$, measured in years.  $\varepsilon_{a,m,m'}$ is an identically and independently distributed time0varying age-$a$ shock, uncorrelated across ages and health states. We approximate the coefficient on $\left( \# a\right)$, $\tau_{a}$, by splines with knots at ages 35, 45, 55, 65, and 75. Denote the coefficients associated with these splines by $\bm{\tau}_m$.
+\noindent where $\bm{W_a}$ are covariates and $\tau \left( a \right)_{m,m'}$ is a function of age. $\varepsilon_{a,m,m'}$ is an identically and independently distributed time0varying age-$a$ shock, uncorrelated across ages and health states. We approximate the coefficient on $\tau \left( a \right)_{m,m'}$, by splines with knots at ages 35, 45, 55, 65, and 75.
 
-\noindent A number of restrictions are placed on the way feedback is allowed in the model. Our microsimulation model starts the health forecasts at age 30, with the information on observed characteristics available at this age. We restrict it to the individuals for whom we have information from the health follow-up. This allows us to account for components that are crucial for forecasting health outcomes, such as the body mass index (BMI). In sum, the models forecast the probability of being in any of the states in the horizontal axis of Table~\ref{table:transition} at age $a+1$ based on the state at age $a$, which is described by the vertical axis of the table. The crosses indicate if the estimation of the probability of being in a state at age $a+1$ considers the relevant state at age $a$. Absorbing states are an exception. For example, heart disease at age $a$ does not enter in the estimation of transitions for heart disease at age $a+1$ because it is an absorbing state: once a person has heart disease, she carries it through the rest of her life. The same is true for chronic or permanent conditions such as hypertension, having a stroke, etc. \textbf{[JJH: Notice how $j$ suddenly becomes $a$.]}
+\textbf{[JJH: Jorge - how does DI inter the model?] [JLG: It is as you wrote: The indicators of states are vectorial. I wrote it next.] [JJH: How do other states enter? Is it only autoregressive?] [JLG: As described next. We do allow for competing risks and Table~\ref{table:transition} indicates the interdependencies that we allow for.]}
+
+\noindent Equation~\eqref{eq:trans} is an autoregressive transition probability model. To better capture the interdependence of health states, we generalize this model and work with a competing risks model. That is, we let the probability of transitioning from state $m$ to state $m'$ at age $a$ to depend not only on the presence of that state in the period before, indicated by  $\tilde{D}_{a-1,m}$ in Equation~\eqref{eq:trans}, but to depend on a vector of lagged health states and a vector of initial health states. Thus, in our empirical analysis we allow for vectorial versions of both $ \tilde{D}_{a-1,m}$ and  $\tilde{D}_{0,m}$. Table~\ref{table:transition} gives the transitions that we study and lists the interdependence that we allow for. For instance, the probability of transitioning to heart disease is a function of the lagged presence of stroke, disability, mortality, smoking, health insurance, and all of the insurance claims that we consider. Lagged heart disease is not allowed for because heart disease is an absorbing state, which we define below. Equation~\eqref{eq:trans} is modified accordingly to the interdependence listed in Table~\ref{table:transition}.
+
+\noindent A number of restrictions are placed on the way feedback is allowed in the model. Our microsimulation model starts the health forecasts at age 30, with the information on observed characteristics available at this age. We restrict it to the individuals for whom we have information from the health follow-up. This allows us to account for components that are crucial for forecasting health outcomes, such as the body mass index (BMI). In sum, the models forecast the probability of being in any of the states in the horizontal axis of Table~\ref{table:transition} at age $a+1$ based on the state at age $a$, which is described by the vertical axis of the table. The crosses indicate if the estimation of the probability of being in a state at age $a+1$ considers the relevant state at age $a$. Absorbing states are an exception. For example, heart disease at age $a$ does not enter in the estimation of transitions for heart disease at age $a+1$ because it is an absorbing state: once a person has heart disease, she carries it through the rest of her life. The same is true for chronic or permanent conditions such as hypertension, having a stroke, etc.
 
 \noindent There are five other types of states or outcomes, which we model analogously: 
 
 \begin{enumerate}
-\item \textbf{Absorbing states:} $m \in \mathcal{M}$ such that if $D_{a,m',m} = 1$ for any $m' \in \mathcal{M}$, then $D_{a',m',m} = 1 \ \forall a' \geq a$.
-\item \textbf{Binary states:} states that are not absorbing states, such as starting to smoke.
-\item \textbf{Ordered threshold models:} states which transitions are modeled based on a version of Equation~\eqref{eq:trans} recognizing that the observed states is a function of unknown thresholds $\varsigma_m$. Similar to binary outcomes, we allow for state-dependence by including the lagged states on the right-hand side.
-\item Continuous outcomes are modeled as linear models. An example of a continuous outcome is the
-transitions in log(BMI). We allow for state-dependence by including the lagged outcome on the right-hand side. We replace latent variables with realized variables.
-\item Categorical models, but without an ordering, are considered. For example, an individual can transition
+\item \textbf{Absorbing states.} A state $m \in \mathcal{M}$ is absorbing if $m = m'  \ \forall a' \geq a$.
+\item \textbf{Binary states.} States that are not absorbing states, such as the event of starting to smoke.
+\item \textbf{Ordered threshold models:} States which transitions are modeled based on a version of Equation~\eqref{eq:trans} recognizing that the observed states is a function of unknown thresholds $\varsigma_m$. Similar to binary outcomes, we allow for state-dependence by including the lagged states on the right-hand side.
+\item \textbf{Continuous outcomes modeled as linear models.} An example of a continuous outcome is the
+transitions in log(BMI). We allow for state-dependence by including the lagged outcome on the right-hand side. We replace latent variables in Equation~\ref{eq:trans} with realized variables.
+\item \textbf{Categorical models, but without an ordering.} For example, an individual can transition
 to being unemployed, out of the labor force, or working (either part- or full-time). In cases like this, we utilize
 a multinomial logit model, including the lagged outcome on the right-hand side.
 \end{enumerate}
 
-\noindent In total, we have $M$ states (i.e.,\ $\# \mathcal{M}$) 
-
-. The parameters $\mathbf{\theta}_1 = \left(\left\{\beta_m, \gamma_m, \psi_m, \varsigma_m\right\}_{m=1}^M \right)$, can be estimated by maximum likelihood. Given the normality distribution assumption on the time-variant unobservable, the joint probability of all time-intervals until failure, right-censoring, or death conditional on the initial conditions, $\tilde{D}_{0,m}$, is the product of normal univariate probabilities. Since these sequences, conditional on initial conditions, are also independent across diseases, the joint probability over all disease-specific sequences is simply the product of those probabilities.
+\noindent In total, we have $M$ states (i.e.,\ $\# \mathcal{M}$). The parameters $\mathbf{\theta}_1 = \left(\left\{\beta_m, \gamma_m, \psi_m,  \tau \left( a \right) _{m'm} \right\}_{m=1}^M \right)$ for $a \in [0, \ldots \bar{A} ]$ are estimated by maximum likelihood. Given the normality distribution assumption on the time-variant unobservable, the joint probability of all time-intervals until failure, right-censoring, or death conditional on the initial conditions, $\tilde{D}_{0,m}$, is the product of normal univariate probabilities. Since these sequences, conditional on initial conditions, are also independent across diseases, the joint probability over all disease-specific sequences is simply the product of those probabilities.
 
 \noindent For a given subject observed from the initial age, $a_{0}$, to the last age, $a_{T}$, the probability of the observed health history is (omitting the conditioning on covariates for notational simplicity). For each individual for parameter vector $\theta$ is
 
 \begin{align*}
-\mathsterling = \prod^{m}_{m=1} \prod^{a_{T}}_{a=a_{0}} {h_{j},m,m'(\theta)}^{[D_{j,m,m'}]} \\
-\prod_{m \in \mathcal{M}}{[P (\tilde{D}_{a,m}=1)]}^{\tilde{D}_{a,m}}
+\mathsterling = \prod^{m}_{m=1} \prod^{a_{T}}_{a=a_{0}} {h_{j,m,m'}(\theta)}^{[D_{j,m,m'}]} \\
+\prod_{m \in \mathcal{M}}{[P (\tilde{D}_{0,m}=1)]}^{\tilde{D}_{0,m}}
 \end{align*}
 
-\paragraph{Specification Tests for the First-order Markov Assumption in FAM} \label{section:firstorder}
+\textbf{[JJH: How do we integrate disability benefits + the continuous variables?] [JLG: Having disability is one state and we model it as a function of the lagged states indicated in Table G.1. Similarly for continuous outcomes.]} 
 
-\textbf{[JJH: Jorge, what is this? This is god awful. Do we really fit anything other than autoregressive models?]}
+\paragraph{Specification Tests for the First-order Markov Assumption in FAM} \label{section:firstorder}
 
 \noindent The FAM model assumes a vector first-order Markov process. To make this clear, take the example of heart disease. As previously explained and stated in Table~\ref{table:transition}, we forecast ``heart disease'' at age $a+1$ based on hypertension and diabetes at age $a$, as well as other risk factors and health behaviors (smoking, BMI, and physical activity).\footnote{The diseases that help predicting each other are based on research and advice of clinicians, as explained and justified in \citet{Goldman_etal_2015_Future-Elderly-Model-Report}.} In this model, heart disease is assumed to be an absorbing state. That is, if an individual suffers heart disease at age $a$, her probability of having heart disease at age $a+1$ equals one.
 
@@ -225,15 +223,15 @@ Stroke              & 3.94 & 4 & 0.14 \\
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table presents likelihood ratios comparing first- and second-order Markov processes to forecast diseases at age $a+1$, based on diseases and other health and demographic conditions at age $a$. The null hypotheses is the first-order Markov process, and the alternative is the second order.
+\item Note: This table presents likelihood ratios comparing first- and second-order Markov processes to forecast diseases at age $a+1$, based on diseases and other health and demographic conditions at age $a$. The null hypotheses is the first-order Markov process, and the alternative is the second order. Second-order components are allowed as determinants of the disease listed as indicated by Table~\ref{table:transition}.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
-\textbf{[JJH: Jorge, do we cross with income? What is $M$? Which transitions do we suppress?]}
+\textbf{[JJH: Jorge, do we cross with income? What is $M$? Which transitions do we suppress?] [JLG: In addition to allowing for the inderdependencies dictated by Table~\ref{table:transition} we also allow the hazards to be functions of the elements in G.3.3.2. We cross with income in the sense that we feed our income forecast into the FAM. In that way, we really adapted the FAM quite a bit.]}
 
-\noindent The interpretation of the results in Table~\ref{table:lrtests} is the following. The heart disease of Column ``1st vs. 2nd'' tests the null that first-order lags suffice to construct the transition of heart disease from age $a$ to age $a+1$. We test the first-order Markov assumption with respect to other diseases. Limited support on smoking, BMI, and physical activity does not allow us to test the first-order Markov assumption with respect to these variables.\footnote{We lack observations in the auxiliary sample for which information is available for this conditions and the diseases of interest for multiple lags.} We cannot reject that a 1st-order Markov model is enough to forecast heart disease at age $a+1$, if compared to a second-order Markov model. This test has two degrees of freedom because we add second-order lags for hypertension and diabetes in the alternative model (see Table~\ref{table:transition}).\footnote{In work available on request, we find that higher order Markov processes better predictors of heart disease at age $a+1$, relative to a first-order Markov model, for most outcomes. However, for stroke, there is some evidence of higher order dependence.} Unfortunately, limited support for the other components of the transition models do not allow us to make credible tests.\footnote{We would need to drop thousands of observations in the auxiliary samples and perform the tests using very selected samples.} \textbf{[JJH: Which components?]}
+\noindent The interpretation of the results in Table~\ref{table:lrtests} is the following. The heart disease of Column ``1st vs. 2nd'' tests the null that first-order lags suffice to construct the transition of heart disease from age $a$ to age $a+1$. We test the first-order Markov assumption with respect to other diseases. Limited support on smoking, BMI, and physical activity does not allow us to test the first-order Markov assumption with respect to these variables.\footnote{We lack observations in the auxiliary sample for which information is available for this conditions and the diseases of interest for multiple lags.} We cannot reject that a 1st-order Markov model is enough to forecast heart disease at age $a+1$, if compared to a second-order Markov model. This test has two degrees of freedom because we add second-order lags for hypertension and diabetes in the alternative model (see Table~\ref{table:transition}).\footnote{In work available on request, we find that higher order Markov processes better predictors of heart disease at age $a+1$, relative to a first-order Markov model, for most outcomes. However, for stroke, there is some evidence of higher order dependence.} Unfortunately, limited support for the other states of the transition models do not allow us to make credible tests.\footnote{We would need to drop thousands of observations in the auxiliary samples and perform the tests using very selected samples.} \textbf{[JJH: Which components?] [JLG: For states in Table~\ref{table:transition} but not tested in Table G.2.]}
 
-\noindent An alternative test for a first-order Markov process is the following: (i) use a linear probability model approximation to a first-order Markov process and the variables in Table~\ref{table:transition} to forecast the disease of interest adding additional covariate ages using multiple versions \textbf{[JJH: What are multiple versions?]} of the forecasting models; (ii) calculate the correlation of the residuals with higher order lagged variables. Tables~\ref{table:1storderresidsheart} to \ref{table:1storderresidstroke} show these correlations. The results of these tests very strongly support a first-order Markov assumption.
+\noindent An alternative test for a first-order Markov process is the following: (i) use a linear probability model approximation to a first-order Markov process and the variables in Table~\ref{table:transition} to forecast the disease of interest adding additional covariate ages using multiple versions \textbf{[JJH: What are multiple versions? What state variables do we condition on?] [JLG: Depends on the outcomes, but all of the competing risks listed in Table~\ref{table:transition} for each state.]} of the forecasting models; (ii) calculate the correlation of the residuals with higher order lagged variables. Tables~\ref{table:1storderresidsheart} to \ref{table:1storderresidstroke} show these correlations. The results of these tests very strongly support a first-order Markov assumption.
 
 \noindent To illustrate how to read these tests consider Table~\ref{table:1storderresidsheart}. This table reports simple first-order Pearson correlations with the indicated variable. The row presents the residuals from forecasting heart disease at age $a+1$ using different orders of lags, for the diseases listed in Table~\ref{table:transition} (for heart disease, these are hypertension and diabetes). The estimated correlations are low.
 
@@ -322,6 +320,9 @@ on leaving his current state.
 \noindent We estimate the number of children born in two-year periods separately for females and males. We model this using an ordered probit with
 three categories: no new births, one birth, and two births. Based on the PSID data, we found the exclusion of three or more
 births in a two-year period to be appropriate.
+
+\noindent \textbf{[JJH: How do these integrate with (41)?] [JLG: As the rest of the competing risks: With condition on a first-order lag of these outcomes.]}
+
 %
 %\subsubsection{Inverse Hyperbolic Sine Transformation}
 %One problem fitting the wealth distribution is that it has a long right tail and some negative values. We use a
@@ -386,7 +387,7 @@ The simulated financial outcomes are in 2014 USD.
 \noindent To match the biennial structure of the PSID data used to estimate the transition models, the simulation proceeds in two-year increments.\footnote{The end of each two-year step is designed to occur on July 1st to allow for easier matching with population forecasts from Social Security Administration (SSA).}
 Once the new states have been determined, the cross-sectional models for medical costs and QALYs are applied.
 Computation of medical costs includes the people who died to account for end-of-life costs.
-The simulation ends when all simulated ABC/CARE subjects are deceased.\footnote{Less than half of the simulated subjects (48\%) survive to age 80.} \textbf{[JJH: Actually or in the simulation?]}
+The simulation ends when all simulated ABC/CARE subjects are deceased (in simulation).\footnote{Less than half of the simulated subjects (48\%) survive to age 80.} \textbf{[JJH: Actually or in the simulation?] [JLG: In simulation.]}
 
 \noindent Among the ABC/CARE subjects simulated in FAM, the years of completion of the age-30 interview range from 2003 to 2009.
 FAM's two-year time step only allows the simulation of even or odd years.
