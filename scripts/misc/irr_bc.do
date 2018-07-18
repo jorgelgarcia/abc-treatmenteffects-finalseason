@@ -105,7 +105,7 @@ foreach type of numlist 2 5 8  {
 }
 
 // irr
-foreach type of numlist 2  {
+foreach type of numlist 2 5 8 {
 	foreach sex in f m p {
 		di "type `type', sex `sex'"
 		
