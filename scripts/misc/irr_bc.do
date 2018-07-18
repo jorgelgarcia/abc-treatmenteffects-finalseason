@@ -105,13 +105,13 @@ foreach type of numlist 2 5 8  {
 }
 
 // irr
-foreach type of numlist 2 5 8 {
+foreach type of numlist 2 {
 	foreach sex in f m p {
 		di "type `type', sex `sex'"
 		
 		preserve
 		keep if male == "`sex'"
-		summ irr`type'
+		summ irr`type'd abc-	
 		local Nt = r(N)
 		drop if irr`type' <= 0 | irr`type' == .
 		summ irr`type'
@@ -119,12 +119,12 @@ foreach type of numlist 2 5 8 {
 		
 		local perc = `Nc'/`Nt'
 		local perc = `perc'
-		local perc = round(`perc',.01)
+		local perc = round(`perc',.00001)
 		
 		summ  irr`type'
-		local point    = round(r(mean),.01)
+		local point    = round(r(mean),.00001)
 		local pointnr  = r(mean)
-		local pointse  = round(r(sd),.01)
+		local pointse  = round(r(sd),.00001)
 		
 		replace irr`type' = irr`type' - `pointnr' + .03
 		gen     irr`type'`sex'ind = 0
