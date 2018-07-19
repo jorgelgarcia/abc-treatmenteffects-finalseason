@@ -1,111 +1,39 @@
 \subsection{Methods and Analysis}
 
-% \todo capital income -- imputed, but not used as an outcome
-
-% \todo we will include health conditions at age 30 in covariates of health dynamics
-
-% \todo health as a child -- are we going to ignore this?
-
-% \todo summarize disease conditions at age 30? -- important point: one female in control group has cancer at age 30
-
-\subsubsection{Overview}
-\label{section:FAM_models}
-
-\noindent We develop models to estimate the determinants of transitions between health outcomes, labor market outcomes, educational attainment, and family formation, for individuals aged 25 and older.
-Additionally, we estimate transition probabilities by gender, race and ethnicity, and educational attainment as a function of individual characteristics (see below).
-Each transition model includes a subset of variables and relevant interactions from the following list: age, gender, race and ethnicity, education, parents' education, self-reported body mass index (BMI), smoking history, physical activity, binge drinking, lagged health conditions, asthma diagnosis before age 30, number of biological children, past earnings and work status, partnership status (single, cohabiting, married, separated/divorced, or widowed), disability status, and health insurance status.
-We consider three racial and ethnic groups (black non-Hispanic, white non-Hispanic, and Hispanic), and four educational groups (less than high school degree; high school graduate, including some college or associate's degree; college; and more than college).
-
-\noindent The health transition models estimate the probability that a person transitions between health states, e.g. obesity or heart disease, as a function of current health status, demographic characteristics (including race, gender, age, and education), and risk factors (including weight, smoking status, physical activity, asthma, and number of births if female for BMI transitions), enabling us to age the cohorts. This mechanism to model health transitions accounts for the fact that certain health conditions increase the likelihood of comorbidities.
-We estimate a transition model for each of the following health conditions: heart disease, blood pressure, stroke, lung disease, diabetes, and cancer. Each disease model includes gender, race and ethnicity, and educational group as covariates.
-We select conditions that are prevalent in the U.S. and are characterized by significant disparities in outcomes across education, race and ethnicity, and income.
-The reason for this is that the incidence and progression of these conditions can potentially be reduced by preventive services, education policies, and modifications in health behaviors.
-These chronic conditions are treated as absorbing states, i.e., once the individual transitions into a chronic condition, the condition persists until death.
-
-\noindent Additionally, we allow individuals to transition in and out of risk factors, such as smoking, binge drinking, and BMI. These transitions are estimated as a function of demographics, past health, and risk factors.
-In the estimation, changes in risk behaviors alter future health outcomes and risk factors (e.g., smoking cessation may impact changes in BMI, and continuing smoking may affect incidence of lung disease). We also transition mental health, approximated by the Kessler mental distress scale, which is one of the predictors of the medical costs models.
-
-%describe models of ADLs IADLs estimation
-
-\noindent Because the PSID sample covers a broad age range, it is smaller than the HRS sample at older ages where mortality becomes more likely. Also, the PSID does not follow respondents into nursing homes.
-Therefore, the FAM mortality model is estimated using a pooled PSID and HRS sample.
-The mortality model includes these covariates: age, gender, race and ethnicity, education, disease conditions, ADL count, binge drinking and current smoking status.
-Similarly, a partner mortality model is estimated from the pooled PSID and HRS data for transitions into widowhood.
-The covariates in the partner mortality model are age, gender, race and ethnicity, and education.
-These covariates are characteristics of the respondents, not the partners who are facing mortality (FAM does not simulate the characteristics of partners).
-
-\noindent Since the PSID does not follow respondents into nursing homes, the model for nursing home residency is estimated using only HRS data. It is based on these covariates: age, gender, race and ethnicity, education, disease conditions, ADL and IADL counts, and widowhood.
-
-\noindent The marriage transition model estimates transitions between partnership status (we distinguish between single, cohabiting, and married).
-The model is a function of demographics, past employment status, earnings, mother's education and number of children.
-There are also childbearing models that estimate new births for each gender.
-Childbearing is modeled as an ordered Probit model that is a function of past health and birth history, demographics, education, past work status, and past partnership status.
-
-\noindent The employment status model estimates the probability that a person transitions into different employment states (unemployed, out of the labor force, working part-time, or working full-time). This transition is a function of demographics, marital or partnership status, education, health status and behaviors, past earnings and benefits claiming.
-
-% \todo health insurance category -- once it is implemented
-
-% \todo SSI/DI/SS benefits claiming -- once it is implemented
-
-\noindent The combination of transition models allows us to address the aspects of the life-cycle that are most relevant for the proposed analysis. To complete the analysis, there are also models to estimate QALYs, medical expenditure, and Social Security participation.
-
-\noindent We compute a QALY model based on the EQ-5D instrument, a widely-used, health-related
-quality-of-life (HRQoL) measure. %\footnote{Section \ref{sec:model_development_qalys_hrqol} gives some background on HRQoL measures.}
-The scoring system for EQ-5D was first developed using a U.K. sample.\footnote{\citet{Dolan_1997_Modeling_MC}.} Later, a scoring system based on
-a U.S. sample was generated.\footnote{\citet{Shaw_etal_2005_EQ5D_MC}.} The PSID does not ask the appropriate questions for computing EQ-5D, but the MEPS does.
-
-% review this:
-\noindent We forecast EQ-5D scores from the MEPS onto the PSID data using common measures between the MEPS and PSID.
-
-We map EQ-5D scores from the MEPS onto PSID data using common variables between the MEPS and PSID. We then run a linear regression of EQ-5D on PSID variables that are transitioned in FAM (including ADL counts, IADL counts, and diseases).\footnote{The main variables in this prediction are self-reported health and requiring help with ADLs.} The microsimulation uses this linear regression to compute QALYs.
-%
-%We use a crosswalk from MEPS to compute EQ-5D scores for PSID respondents.\footnote{Section \ref{sec:model_development_qalys_eq5d}
-%describes EQ-5D in MEPS. Details of the crosswalk model development are given
-%in \ref{sec:model_development_qalys_crosswalk}.}.
-%The FAM has a more limited specification of functional status than what is available in the PSID. In order to predict
-%HRQoL for the FAM simulation sample, we needed to build a bridge between the FAM-type functional status and the
-%predicted EQ-5D score in the PSID. We use ordinary least squares to model the EQ-5D score predicted as a function of the six chronic conditions and the FAM-specification of functional status,
-%%%
-
-
-\noindent FAM has two versions of each medical cost model. For individuals who are not Medicare-eligible, the cost models are estimated from MEPS data.
-Once an individual becomes Medicare-eligible, their costs are estimated from MCBS data. Both sets of models include the following covariates:
-age, gender, race and ethnicity, education level, relationship status, disease conditions, and earnings.
-The MEPS models also include type of health insurance as a covariate.
-Because MCBS follows respondents for more than two years (the time step length in the FAM simulation), the FAM cost models for the Medicare-eligible population include covariates for the stage of each disease.
-In the initial stage, a patient has a diagnosis in the current two-year period, but did not have the diagnosis in the previous two-year period.
-Then, in the maintenance stage, a patient had a diagnosis in the previous two-year period and survives with the diagnosis in the current two-year period (all disease states are absorbing---it is impossible to transition out of a diagnosis).
-Finally, in the terminal stage, a patient has a diagnosis and dies in the current two-year period.
-The medical costs models tend to underestimate health care spending reported in the National Healthcare Expenditures Account (NHEA) data, due in part to underreporting of Medical costs in MEPS.
-
-% Pasted from estimation in Technical Appendix:
 \subsubsection{Formalizing the FAM: Modeling Transition Probabilities}
 \label{section:transition_models}
 
-We start by providing a formalization of how the FAM models health-state transitions. Examples of health states include heart disease, hypertension, and stroke. We then clarify how the formalization of the health-state transitions is adapted when modeling other outcomes. Examples of these other outcomes include smoking, body-mass index, and binge drinking. We drop individual subscripts to avoid notational clutter.
 
-Let $\mathcal{M}$ denote a set of possible health states, some of which can be absorbing. Transition times are ages of measurement. Let $\mathcal{A}:= [ 0, \ldots, \bar{A}]$ index ages, where $\bar{A}$ is the last age that we forecast. We provide more details on $\bar{A}$ below. We define $h_{a,m,m'}$ as the probability of transitioning from state $m$ to state $m'$ at age $a \in \mathcal{A}$, where $m, m' \in \mathcal{M}$.
+
+\textbf{[JJH: Jorge, are all of these states? Why are they mutually exclusive? How do we model smoking, BMI, etc.?] [JLG: First we provide a model for state transitions in Equation~\ref{eq:trans}. We use version of Equation~\ref{eq:trans} for the rest of outcomes that we model as binary (e.g.,\ starting to smoke), ordered threshold models, continuous models, and so on. These is the list of 5. items that comes after explaining Equation~\ref{eq:trans}. I think that the previous Table G.1 was confusing. As you will see explained next, states are not mutually exclusive.]}
+
+\textbf{[JJH: Is disability just a binary indicator? A table with definitions would be helpful.] [JLG: Tables are being provided now not only with definitions (binary, etc.) but also with how each variables is modeled in terms of Equation~\eqref{eq:trans}.]}
+
+Let $\mathcal{M}$ denote a set of possible health states, some of which can be absorbing. Transition times are ages of measurement. Let $\mathcal{A}:= [ 0, \ldots, \bar{A}]$ index ages, where $\bar{A}$ is the last age that we forecast. We provide more details on $\bar{A}$ below. We define $h_{a,m,m'}$ as the probability of transitioning from state $m$ to state $m'$ at age $a \in \mathcal{A}$, where $m, m' \in \mathcal{M}$. We drop individual subscripts to avoid notational clutter.
 
 We denote a state transition from $m$ to $m'$ at age $a$ by $D_{a,m,m'} = 1$. If this transition does not happen,  $D_{a,m,m'} = 0$. We let $\tilde{D}_{a,m}$ be the indicator of occupancy of state $m$ at age $a$. $\tilde{D}_{a,m} = 0$ otherwise. $\tilde{D}_{a,m}$ is a generic entry in the the vector of age-$a$ state occupancy indicators denoted by $\tilde{\bm{D}}_a$. $\tilde{\bm{D}}_0$ denotes the vector of initial state conditions.
 
-We assume that the transition probability from state $m$ to state $m'$ at age $a$, $h_{a,m,m'}$, is generated by the following index threshold-crossing competing risks model
+The general framework in \citet{Heckman_1981_heterogeneity,Heckman_1981_IncidentalParametersProblem} models the transition probability from state $m$ to state $m'$ at age $a$, $h_{a,m,m'}$, as being generated by the following index threshold-crossing model
 \begin{eqnarray}
-I_{a,m,m'} &=& \bm{\mathit{1}} \left( \tilde{\bm{D}}_{0} \geq 0 \right) \bm{\Omega}_{a,m,m'} + \bm{\mathit{1}} \left( \tilde{\bm{D}}_{a-1} \geq 0\right) \bm{\Lambda}_{a,m,m'}  + \bm{W_a} \bm{\beta}_{a,m,m'}  \nonumber \\ 
-&+&  \bm{B} \bm{\alpha}_{a,m,m'} + \tau \left( a \right)_{m,m'} + \varepsilon_{a,m,m'}, \label{eq:trans}
+I_{a,m,m'} &=& \bm{X_a} \bm{\beta}_{a,m,m'} + \tau \left( a \right)_{m,m'} + \varepsilon_{a,m,m'}, \label{eq:trans0}
 \end{eqnarray}
-where $D_{a,m,m'} = \bm{\mathit{1}}  \left( I_{a,m,m'} \geq 0 \right)$; $\tau \left( a \right)_{m,m'}$ is a function of age;\footnote{In our empirical analysis, we approximate the coefficients on $\tau \left( a \right)_{m,m'}$ using splines with knots at ages 35, 45, 55, 65, and 75.} and $\varepsilon_{a,m,m'}$ is a time-varying age-$a$ shock, uncorrelated across ages, subjects, and health states. As in the forecasts of Section~\ref{section:cbamethodology} we allow the transitions models to depend on baseline variables, denoted by $\bm{B}$, and on variables that can be affected by treatment, which in this case we denote by $\bm{W}_a$ to reinforce that they are not the same variables that we use in Section~\ref{section:cbamethodology}. The variables in $\bm{W}_a$ contain health outcomes and other economic outcomes that are modeled with adapted versions of Equation~\eqref{eq:trans} (e.g.,\ smoking, labor force participation, childrearing). $ \bm{\Omega}_{a,m,m'},  \bm{\Lambda}_{a,m,m'}, \bm{\beta}_{a,m,m'},  \bm{\alpha}_{a,m,m'}$ are the coefficient vectors associated to the initial state indicators, first-order lagged state indicators, current health and other economic outcomes, and baseline variables. In our empirical analysis, we estimate these vectors for each $a \in \mathcal{A}$ and for each possible state transition from $m$ to $m'$ with $m,m' \in \mathcal{M}$.
+where $D_{a,m,m'} = \bm{\mathit{1}}  \left( I_{a,m,m'} \geq 0 \right)$; $\bm{X_a}$ is a vector of covariates with associated coefficient vector $ \bm{\beta}_{a,m,m'}$; $\tau \left( a \right)_{m,m'}$ is a function of age; and $\varepsilon_{a,m,m'}$ is a general time-varying age-$a$ shock. This is a model of state transitions. In the framework of  \citet{Heckman_1981_heterogeneity,Heckman_1981_IncidentalParametersProblem}, this model is supplemented with initial conditions and survival models.
 
-Equation~\eqref{eq:trans} is an adaptation of the framework in \citet{Heckman_1981_heterogeneity,Heckman_1981_IncidentalParametersProblem}. We simplify the modeling and computational procedure in a fundamental way: We do not include a model for initial conditions, and instead allow the index $I_{a,m,m'} $ to be a function of the vector of initial conditions, $\tilde{\bm{D}}_{0}$.
+We simplify the complex reality of having to estimate all possible combinations of transitions from $m$ to $m'$ with $m,m' \in \mathcal{M}$ by modeling the hazard to the event of occupying state $m \in \mathcal{M}$. In this simplification, the states are diseases like heart disease, hypertension, and stroke. We then clarify how this model is adapted to other health and economic outcomes. Examples of these other outcomes include smoking, body-mass index, and binge drinking.
 
-The state probabilities in FAM are derived from Equation~\eqref{eq:trans}. When simulating the model to forecast the health outcomes for the ABC/CARE subjects, we use their observed age-30 conditions as initial conditions  $\tilde{\bm{D}}_0$. The simulation proceeds in an analogous fashion to the simulation in Section~\ref{section:cbamethodology}. The vector $\tilde{\bm{D}}_0$ could have been affected by treatment. \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments} the wide variety of effects on health outcomes that ABC/CARE had. This motivates the inclusion of health into our analysis.
+The index threshold-crossing model for the hazard is 
+\begin{eqnarray}
+I_{a,m} &=&  \bm{\mathit{1}} \left( \tilde{\bm{D}}_{0} \geq 0 \right) \bm{\Omega}_{a,m} + \bm{\mathit{1}} \left( \tilde{\bm{D}}_{a-1} \geq 0\right) \bm{\Lambda}_{a,m} + \bm{X_a} \bm{\beta}_{a,m} + \tau \left( a \right)_{m} + \varepsilon_{a,m}, \label{eq:trans}
+\end{eqnarray}
+where $\tilde{D}_{a,m} = \bm{\mathit{1}}  \left( I_{a,m} \geq 0 \right)$; $\tau \left( a \right)_{m}$ is a function of age;\footnote{In our empirical analysis, we approximate the coefficients on $\tau \left( a \right)_{m,m'}$ using splines with knots at ages 35, 45, 55, 65, and 75.} and $\varepsilon_{a,m}$ is a time-varying age-$a$ shock, uncorrelated across ages, subjects, and health states. As in the forecasts of Section~\ref{section:cbamethodology} we allow the transitions models to depend on baseline variables, denoted by $\bm{B}$, and on variables that can be affected by treatment, which in this case we denote by $\bm{W}_a$ to reinforce that they are not the same variables that we use in Section~\ref{section:cbamethodology}. The variables in $\bm{W}_a$ contain health outcomes and other economic outcomes that are modeled with adapted versions of Equation~\eqref{eq:trans} (e.g.,\ smoking, labor force participation, childrearing). $ \bm{\Omega}_{a,m},  \bm{\Lambda}_{a,m}, \bm{\beta}_{a,m},  \bm{\alpha}_{a,m}$ are the coefficient vectors associated to the initial state indicators, first-order lagged state indicators, current health and other economic outcomes, and baseline variables. In our empirical analysis, we estimate these vectors for each $a \in \mathcal{A}$ and for each possible state transition from $m$ to $m'$ with $m,m' \in \mathcal{M}$.
 
-\noindent The parameter vector $\bm{\theta} := \left[ \left\{ \left\{  \bm{\Omega}_{a,m,m'}, \bm{\Lambda}_{a,m,m'}, \bm{\beta}_{a,m,m'}, \alpha_{a,m,m'}, \tau \left( a \right) _{m,'m}  \right\}_{a \in \mathcal{A}} \right\}_{m \in \mathcal{M}} \right]$ is estimated by maximum likelihood. Given the normality distribution assumption on $\varepsilon_{a,m,m'}$, the joint probability of all time-intervals until failure, right-censoring, or death conditional is the product of normal univariate probabilities. Since these sequences independent across states, the joint probability over all disease-specific sequences is simply the product of those probabilities.
+Instead of supplementing the model in Equation~\eqref{eq:trans} with a model for initial conditions, we directly condition on them in Equation~\eqref{eq:trans}. We explain how we account for mortality below.
 
-\noindent For a given subject observed from the initial age, $0$, to the last age, $\bar{A}$, the probability of the observed health history is (omitting the conditioning on covariates for notational simplicity). For each individual for parameter vector $\theta$ is
-\begin{equation}
-\mathsterling = \prod_{m \in \mathcal{M}} \prod_{a \in \mathcal{A}} {h_{a,m,m'}(\theta)}^{[D_{j,m,m'}]} \prod_{a \in \mathcal{A}}{ h_{a,\bar{M}} }, 
-\end{equation}
-\noindent where $ h_{a,\bar{M}}$ denotes the probability of transitioning to death, and which parameterization we subsume into $\bm{\theta}$. In our empirical analysis, we deterministically set $\bar{A}$ to be $150$. When fitting the model, no individual survives to $a = 100$.
+\textbf{[JJH: But are these not mutually exclusive states? How do we handle joint states?] [JLG: We model state occupancies independently. Thus, the model in Equation~\eqref{eq:trans} is estimated in the non-experimental samples and then initialized and simulated in the ABC/CARE data for each health state and outcome independently.]}
+
+The probability of occupying states is estimates in FAM from Equation~\eqref{eq:trans}. When simulating the model to forecast the health outcomes for the ABC/CARE subjects, we use their observed age-30 conditions as initial conditions  $\tilde{\bm{D}}_0$. The simulation proceeds in an analogous fashion to the simulation in Section~\ref{section:cbamethodology}. The vector $\tilde{\bm{D}}_0$ could have been affected by treatment. \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments} the wide variety of effects on health outcomes that ABC/CARE had. This motivates the inclusion of health into our analysis.
+
+\noindent The parameter vector $\bm{\theta} := \left[ \left\{ \left\{  \bm{\Omega}_{a,m}, \bm{\Lambda}_{a,m}, \bm{\beta}_{a,m}, \alpha_{a,m}, \tau \left( a \right) _{m}  \right\}_{a \in \mathcal{A}} \right\}_{m \in \mathcal{M}} \right]$ is estimated by maximum likelihood. Uncorrelatedess of $\varepsilon_{a,m,m'}$ across ages, health states, and subjects allows us to perform separate estimation of the coefficients characterizing Equation~\eqref{eq:trans} using standard maximum likelihood methods.
 
 We use modified versions of the model in Equation~\eqref{eq:trans} to model the following additional health outcomes: 
 
@@ -118,9 +46,10 @@ transitions in log(BMI). We allow for state-dependence by including the lagged o
 \item \textbf{Categorical models, but without an ordering.} For example, an individual can transition
 to being unemployed, out of the labor force, or working (either part- or full-time). In cases like this, we utilize
 a multinomial Logit model, including the lagged outcome on the right-hand side.
+\item \textbf{Mortality. [JLG: I have no idea of what we do, can you spell it out, Duncan?]}
 \end{enumerate}
 
-The modification of the likelihood function to include the estimation of the parameters characterizing these outcomes is straightforward. The economic outcomes that we include are labor income, for which we use the forecast in Section~\ref{section:cbamethodology}, and three additional economic outcomes which we list and briefly explain their forecast next:
+Given our assumptions, estimation of the parameters characterizing these outcomes is also straightforward. The economic outcomes that we include are labor income, for which we use the forecast in Section~\ref{section:cbamethodology}, and three additional economic outcomes which we list and briefly explain their forecast next:
 
 \begin{enumerate}
 \item \textbf{Employment Status.} We aim to simulate whether an individual is unemployed, out of the labor force, working part-time, or working full-time at age $a$. We do these in two steps. First, we forecast whether the individual is unemployed, out of
@@ -129,112 +58,267 @@ the labor force, or working for pay using a multinomial Logitmodel. Then, condit
 \item \textbf{Childbearing.} We estimate the number of children born in two-age periods separately for females and males. We model this using an ordered Probit with three categories: no new births, one birth, and two births. Based on the PSID data, we found the exclusion of three or more births in a two-year period to be appropriate.
 \end{enumerate}
 
-With Equation~\eqref{eq:trans} and its modified versions in hand, a crucial aspect is important to clarify before: Outcomes \textit{are not mutually exclusive}. For example, a subject can simultaneously have heart disease and a stroke. In fact, having a stroke at age $a-1$ is a determinant for having heart disease at age $a$. But not only having a stroke but also being disabled, smoking, and having health insurance. It is in this sense that our FAM is a model of competing risks. Equation~\eqref{eq:trans} allows that by letting $I_{a,m,m'}$ depend on not only an indicator of state $m$ at age $a-1$ but a vector of health states at age $a-1$ and other health and economic outcomes at age $a$. 
+With Equation~\eqref{eq:trans} and its modified versions in hand, a crucial aspect is important to clarify before: Outcomes \textit{are not mutually exclusive}. For example, a subject can simultaneously have heart disease and a stroke. In fact, having a stroke at age $a-1$ is a determinant of the hazard for having heart disease at age $a$. Other determinants include being disabled, smoking, and having health insurance. Equation~\eqref{eq:trans} allows that by letting $I_{a,m}$ depend on not only an indicator of state $m$ at age $a-1$ but a vector of health states at age $a-1$ and other health and economic outcomes at age $a$. 
 
 Tables~\ref{table:supertab1} to ~\ref{table:supertab3} list the variables determining each of the states and health and economic outcomes that we consider. For each of these we list: (1) its classification---e.g., state, binary outcome, continuous outcome; (2) initial states allowed to determine it---$\tilde{\bm{D}}_0$ in Equation~\eqref{eq:trans}; (3) lagged health states allowing to determine it---$\tilde{\bm{D}}_{a-1}$ in Equation~\eqref{eq:trans}; (4) other health and economic outcomes allowing to determine it---$\bm{W}_a$ in Equation~\eqref{eq:trans}; (5) background variables allowing to determine it---$\bm{B}$) in Equation~\eqref{eq:trans}. In that way, the reader could know with certainty the type of outcome being model, its classification, as well determinants and their categorization according with Equation~\eqref{eq:trans}. The outcomes that help predicting each other are based on research and advice of clinicians, as explained and justified in \citet{Goldman_etal_2015_Future-Elderly-Model-Report}.
 
-\textbf{Supertabs go here}.
-
-\paragraph{Specification Tests for the First-order Markov Assumption in FAM} \label{section:firstorder}
-
-\noindent The FAM model assumes a vector first-order Markov process for health states. In Equation~\eqref{eq:trans}, $\tilde{D}_{a - \ell}$ only enters into the model when $\ell = 1$. For heart disease, hypertension, and stroke, we contrast Equation~\eqref{eq:trans} with the following extension: 
-
-\begin{eqnarray}
-I_{a,m,m'} &=& \bm{\mathit{1}} \left( \tilde{\bm{D}}_{0} \geq 0 \right) \bm{\Omega}_{a,m,m'} + \bm{\mathit{1}} \left( \tilde{\bm{D}}_{a-1} \geq 0\right) \bm{\Lambda}_{a,m,m'}  + \bm{\mathit{1}} \left( \tilde{\bm{D}}_{a-1} \geq 0\right) \tilde{\bm{\Lambda}}_{a,m,m'} \nonumber \\ 
-&+&  \bm{W_a} \bm{\beta}_{a,m,m'}  \bm{B} \bm{\alpha}_{a,m,m'} + \tau \left( a \right)_{m,m'} + \varepsilon_{a,m,m'}, \label{eq:trans1}
-\end{eqnarray}
-
-We use a likelihood test ratio to test the null hypothesis $H_0: \tilde{\bm{\Lambda}}_{a,m,m'}$ in Equation~\eqref{eq:trans1}. Table~\ref{table:lrtests} show the results from these tests. For the health states considered, we do not reject the null hypothesis.
-
-\begin{table}[H]
-\begin{threeparttable}
-\caption{Tests Comparing First-Order and Second Markov Processes for Disease Transition Specifications} \label{table:lrtests}
-\centering
-\footnotesize
-\begin{tabular}{lccc}
+% ABSORBING STATES
+\begin{sidewaystable}[htbp!]
+\caption{Health State Transitions, 1/3} \label{table:supertab1}
+\begin{tiny}
+\begin{tabular}{lllllll}
 \toprule
-Statistic & LR Statistic & Degrees of Freedom & $p$-value \\
-\midrule \\
-Desease & \\
-Heart Disease & 2.18 & 2 & 0.71 \\
-Hypertension   & 0.05 & 1 & 0.83 \\
-Stroke              & 3.94 & 4 & 0.14 \\
-\bottomrule
-\end{tabular}
-\begin{tablenotes}
-\footnotesize
-\item Note: This table presents likelihood ratios contrasting the models in Equations~\ref{eq:trans} and~\eqref{eq:trans1} by testing the null hypothesis $H_0: \tilde{\bm{\Lambda}}_{a,m,m'}$. The variables included in the right-hand-side of each model are in Tables~\ref{table:supertab1} to~\ref{table:supertab3}. 
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
-
-\noindent An alternative test for a first-order Markov process is the following: (i) use a linear probability model approximation to a first-order Markov process and the variables in Tables~\ref{table:supertab1} to ~\ref{table:supertab3} for each outcome of interest; (ii) calculate the correlation of the residuals with higher order lagged variables. Tables~\ref{table:1storderresidsheart} to \ref{table:1storderresidstroke} show these correlations. The results of these tests very strongly support a first-order Markov assumption.
-
-\noindent To illustrate how to read these tests consider Table~\ref{table:1storderresidsheart}. This table reports simple first-order Pearson correlations with the indicated variable. The row presents the residuals from forecasting heart disease at age $a+1$ using different orders of lags. The estimated correlations are low.
-
-\begin{landscape}
-\begin{table}[H]
-\begin{threeparttable}
-\caption{Tests for Linear Probability Forecasts of Heart Disease at $a+1$} \label{table:1storderresidsheart}
-\scriptsize
-\centering
-\begin{tabular}{lcccccccccc} \toprule
-& \multicolumn{10}{c}{Residuals of Forecast of Heart Disease at age $a+1$} \\
-Correlations with	&	Predictor Diabetes &	Hypertension &	Diabetes &	Hypertension &	Diabetes	&	Hypertension &	Diabetes & Hypertension & Diabetes & Hypertension \\
-                    &	at $a - 2$ &	at $a - 2$		&	at $a - 3$ & at $a - 3$		& at $a - 4$		& at $a - 4$		& at $a - 5$	& at $a - 5$	& at $a - 6$	& at $a - 6$	\\
-
-\midrule \\
-&	-0.002	&	-0.006	&	-0.004	& -0.009 &	-0.017	& -0.020	&	-0.015	&	-0.017 &-0.009	&	0.004	\\
-\bottomrule
-\end{tabular}
-\begin{tablenotes}
-\footnotesize
-\item Note: This table presents the correlation between the residuals from forecasting heart disease at age $a+1$ and the predictors indicated in each column.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
-
-\begin{table}[H]
-\begin{threeparttable}
-\caption{Tests for Linear Probability Forecasts of Hypertension at $a+1$} \label{table:1storderresidshyper}
-\centering
-\scriptsize
-\begin{tabular}{lccccc} \toprule
-& \multicolumn{5}{c}{Residuals of Forecast of Hypertension at age $a+1$} \\
-Correlations with	&	Predictor Diabetes & Diabetes & Diabetes & Diabetes & Diabetes 	\\
-                    & at $a - 2$	& at $a - 3$	& at $a - 4$	& at $a - 5$	& at $a - 6$	\\
+& Variable Type & Initial Conditions & Other States & Health Outcomes & Economic Outcomes & Demographics \\
 \midrule
-&	0.003	& 0.009	&	0.012	&	0.008	&	0.001	\\
-\bottomrule
-\end{tabular}
-\begin{tablenotes}
-\footnotesize
-\item Note: This table presents the correlation between the residuals from forecasting hypertension at age $a+1$ and the predictors indicated in each column.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+Heart Disease & Absorbing & Childhood Economic Environment & Hypertension & Smoking & Education & Race \\
+			&& Age 30 Health Status & Diabetes & BMI & Employment Status & Ethnicity \\
+			&& Mid-30s Health Status & & Physical Activity & Earnings & Age \\
+			&& Employment Status &  &  Psychological Distress  &  Health Insurance Status& Gender \\
+			&&  Earnings & &  Asthma &  & \\
+			&& Mother's Education &  & Functional Status &  & \\
+			&& Education& &  & Relationship Status & \\
+			&& & & & Childbearing & \\
+\midrule			
+Hypertension & Absorbing & Childhood Economic Environment & Diabetes & Smoking & Education & Race \\
+			&& Age 30 Health Status &  & BMI & Employment Status & Ethnicity \\
+			&&  Mid-30s Health Status & & Physical Activity & Earnings & Age \\
+			&& Employment Status & &  Psychological Distress & Health Insurance Status & Gender \\
+			&& Earnings  & &  Asthma &  & \\
+			&& Mother's Education  & & Functional Status &  & \\
+			&& Education & &  & Relationship Status  & \\
+			&& & & & Childbearing & \\
+\midrule			
+Stroke & Absorbing & Childhood Economic Environment & Heart Disease & Smoking & Education & Race \\
+			&& Age 30 Health Status & Hypertension & BMI & Employment Status & Ethnicity \\
+			&& Mid-30s Health Status & Diabetes &  Physical Activity & Earnings & Age \\
+			&& Employment Status & Cancer & Psychological Distress & Health Insurance Status & Gender \\
+			&& Earnings  &  &  Asthma &  & \\
+			&& Mother's Education &  & Functional Status &  & \\
+			&& Education & &  & Relationship Status  & \\
+			&& & & & Childbearing & \\
+\midrule		
+Lung Disease & Absorbing & Childhood Economic Environment &  & Smoking & Education & Race \\
+			&& Age 30 Health Status &  & BMI & Employment Status & Ethnicity \\
+			&& Mid-30s Health Status & & Physical Activity & Earnings & Age \\
+			&& Employment Status &   &  Psychological Distress &  Health Insurance Status & Gender \\
+			&& Earnings & & Asthma  & & \\
+			&& Mother's Education &  & Functional Status  & & \\
+			&& Education & & & Relationship Status  & \\
+			&& & & & Childbearing & \\
+\midrule		
+Diabetes & Absorbing & Childhood Economic Environment & & Smoking & Education & Race \\
+			&& Age 30 Health Status &  & BMI & Employment Status & Ethnicity \\
+			&&  Mid-30s Health Status &  & Physical Activity & Earnings & Age \\
+			&& Employment Status &   & Psychological Distress  & Health Insurance Status & Gender \\
+			&&  Earnings & & Asthma  &  & \\
+			&&  Mother's Education & & Functional Status &   & \\
+			&& Education & &  & Relationship Status  & \\
+			&& & & & Childbearing & \\
+\midrule		
 
-\begin{table}[H]
-\begin{threeparttable}
-\caption{Tests for Linear Probability Forecasts of Stroke at $a+1$} \label{table:1storderresidstroke}
-\centering
-\footnotesize
-\begin{tabular}{l *{8}{c}}
-\toprule
-& \multicolumn{8}{c}{Residuals of Forecast of Stroke at age $a+1$} \\
-Correlations with	&	Predictor Cancer &	Diabetes & Heart Disease &	Hypertension &	Cancer	& Diabetes & Heart Disease & Hypertension  \\
-                    &	at $a-2$	&	at $a - 2$ & at $a - 2$	& at $a - 2$	& at $a-3$	& at $a - 3$	& at $a - 3$	& at $a - 3$ \\
-\midrule \\
-&	0.004 &	0.008	&	0.001	&	0.001	&	-0.002	&	0.017 &	-0.004 &	-0.001	\\
+Cancer & Absorbing & Childhood Economic Environment &  & Smoking & Education & Race \\
+			&& Age 30 Health Status & & BMI & Employment Status & Ethnicity \\
+			&& Mid-30s Health Status & & Binge Drinking & Earnings & Age \\
+			&& Employment Status &   & Physical Activity  & Health Insurance Status & Gender \\
+			&& Earnings & & Psychological Distress  & Relationship Status   & \\
+			&& Mother's Education & & Asthma &  & \\
+			&& Education & & Functional Status &  & \\
+			&& & & & Childbearing & \\
+\midrule	
+Disability & Absorbing & Childhood Economic Environment & Heart Disease & Smoking &Education & Race \\
+			&& Age 30 Health Status & Hypertension & BMI & Employment Status & Ethnicity \\
+			&& Mid-30s Health Status & Stroke & Physical Activity & Earnings & Age \\
+			&& Employment Status &  Lung Disease & Psychological Distress  & Health Insurance Status & Gender \\
+			&& Earnings & Diabetes &  Asthma &  & \\
+			&& Mother's Education & Cancer & Functional Status  & & \\
+			&& Education &  Disability &  & Relationship Status  & \\
+			&& & & & Childbearing & \\	
+\midrule
+ Mortality & Absorbing & & Heart Disease & Smoking & Education & Race \\
+&&  & Hypertension & Binge Drinking  & & Ethnicity \\
+&& & Stroke & & & Age \\
+&& & Lung Disease & & & Gender \\
+&& & Diabetes & & & \\
+&& & Cancer & & & \\
+&& & Disability & & & \\
 \bottomrule
 \end{tabular}
-\begin{tablenotes}
-\footnotesize
-\item Note: This table presents the correlation between the residuals from forecasting stroke at age $a+1$ and the predictors indicated in each column.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
-\end{landscape}
+\end{tiny}
+\end{sidewaystable}
+
+% RISK FACTORS
+\begin{sidewaystable}[htbp!]
+\caption{Health State Transitions, 2/3} \label{table:supertab2}
+\begin{tiny}
+\begin{tabular}{lllllll}
+\toprule
+& Variable Type & Initial Conditions & States & Health Outcomes & Economic Outcomes & Demographics \\
+\midrule
+Smoking & Ordered & Age 30 Health Status & Heart Disease & Smoking & Education & Race \\
+ & & Mid-30s Health Status & Lung Disease  & BMI & & Ethnicity \\
+ &  & Education & Diabetes  & Binge Drinking & & Age \\
+ &  & &  & Physical Activity & & \\
+   & & & & Psychological Distress & & Gender \\
+    & & & & Asthma & & \\
+    &  & &  & Functional Status & & \\
+\midrule
+BMI & Continuous & Age 30 Health Status & Heart Disease & Number of Births (if female) & Education & Race \\
+& & Mid-30s Health Status & Hypertension & Smoking & & Ethnicity \\
+ & & Education & Stroke & Binge Drinking & & Age \\
+ &  & & Lung Disease & Physical Activity & & Gender \\
+  &  & & Diabetes & Psychological Distress & & \\
+    & & & Cancer & Asthma & & \\
+    & & & Disability & Functional Status & & \\
+\midrule
+Obesity & Binary & & & BMI & & \\
+\midrule
+Binge Drinking & ? & Age 30 Health Status & Heart Disease & Smoking & Education & Race \\
+ & & Mid-30s Health Status & Hypertension & BMI & & Ethnicity \\
+  & & Education & Stroke & Physical Activity & & Age \\
+  &  & & Lung Disease & Psychological Distress & & Gender \\
+   &  & & Diabetes & Asthma & & \\
+     & & & Cancer & Functional Status & & \\
+     & & & Disability & & & \\
+\midrule
+Physical Activity & ? & Age 30 Health Status & Heart Disease & Smoking & Education & Race \\
+ & & Mid-30s Health Status & Hypertension & BMI & & Ethnicity \\
+  & & Education & Stroke & Binge Drinking & & Age \\
+  &  & & Lung Disease & Psychological Distress & & Gender \\
+   &  & & Diabetes & Asthma & & \\
+   &   & & Cancer & Functional Status & & \\
+   &   & & Disability & &  & \\
+\midrule
+Psychological Distress & ? & Age 30 Health Status & Heart Disease & Smoking & Education & Race \\
+ & & Mid-30s Health Status & Hypertension & BMI & & Ethnicity \\
+ &  & Education & Stroke & Binge Drinking & & Age \\
+   & & & Lung Disease & Physical Activity & & Gender \\
+    & & & Diabetes & Asthma & & \\
+     & & & Cancer & Functional Status & & \\
+     & & & Disability & & & \\
+\midrule
+Asthma & ? & Age-30 Health Status & Heart Disease & Smoking & Education & Race \\
+ & & Mid-30s Health Status & Hypertension & BMI & & Ethnicity \\
+  & & Education & Stroke & Binge Drinking & & Age \\
+   & & & Lung Disease & Physical Activity & & Gender \\
+    & & & Diabetes & Psychological Distress & & \\
+    &  & & Cancer & Functional Status & & \\
+    &  & & Disability & & & \\
+\midrule
+Functional Status & Ordered & Age 30 Health Status & Heart Disease & Smoking & Education & Race \\
+ & & Mid-30s Health Status & Hypertension & BMI & & Ethnicity \\
+ &  & Education & Stroke & Binge Drinking & & Age \\
+  &  & & Lung Disease & Physical Activity & & Gender \\
+  &   & & Diabetes & Psychological Distress & & \\
+   &   & & Cancer & Asthma & & \\
+   &   & & Disability & & & \\
+\bottomrule
+\end{tabular}
+\end{tiny}
+\end{sidewaystable}
+
+
+% ECONOMIC FACTORS
+\begin{sidewaystable}[htbp!]
+\caption{Health State Transitions, 3/3} \label{table:supertab3}
+\begin{tiny}
+\begin{tabular}{lllllll}
+\toprule
+ & Variable Type & Initial Conditions & States & Health Outcomes & Economic Outcomes & Demographics \\
+\midrule		
+Childbearing & ? & Age 30 Health Status & & & Mother's Education & Race \\
+ &  & Mid-30s Health Status & & & Employment Status & Ethnicity \\
+&  & Childbearing History& & & Education & Age \\
+& & Education & & & & Gender \\
+\midrule
+Relationship Status & ? & Education & & & Mother's Education & Race \\
+ & & & & & Employment Status & Ethnicity \\
+& & & & & Education & Age \\
+& & & & & & Gender \\
+ \midrule		
+Partner Mortality & Binary & Education (subject's) & & & Education (subject's) & Race \\
+ & & & & &  & Ethnicity \\
+& & & & & & Age \\
+& & & & & & Gender \\
+ \midrule
+Employment Status & Unordered Categorical & Age 30 Health Status & Heart Disease & Smoking & Employment Status & Race \\
+& & Mid-30s Health Status & Hypertension & BMI & DI Claim & Ethnicity \\
+& & Employment Status & Stroke & Binge Drinking & SS Claim & Age \\
+& & Earnings & Lung Disease &  Physical Activity & Relationship Status & Gender \\
+& & Education & Diabetes & Psychological Distress & Education & \\
+& & & Cancer & Asthma & Earnings & \\
+& & & Disability & Functional Status & & \\
+ \midrule
+Earnings & Continuous? & Age 30 Health Status & Heart Disease & Smoking & Employment Status & Race \\
+& & Mid-30s Health Status & Hypertension & BMI & DI Claim & Ethnicity \\
+& & Employment Status & Stroke & Binge Drinking & SS Claim & Age \\
+& & Earnings & Lung Disease &  Physical Activity & Relationship Status & Gender \\
+& & Education & Diabetes & Psychological Distress & Education & \\
+& & & Cancer & Asthma & Earnings & \\
+& & & Disability & Functional Status & & \\
+\midrule			
+DI Claim & ?& & Heart Disease & Smoking & Employment Status& Race \\
+& & & Hypertension & & Education & Ethnicity \\
+& & & Stroke &  & DI Claim & Age \\
+& & & Lung Disease &  & Earnings & Gender \\
+& & & Diabetes & & & \\
+& & & Cancer & & & \\
+& & & Disability & & & \\
+\midrule			
+SS Claim & ? &  & Heart Disease & Smoking & Employment Status & Race \\
+& & & Hypertension & & Education & Ethnicity \\
+& & & Stroke & & DI Claim & Age \\
+& & & Lung Disease & & Earnings & Gender \\
+& & & Diabetes & & & \\
+& & & Cancer & & & \\
+& & & Disability & & & \\
+\midrule			
+SSI Claim & ? & & Heart Disease & Smoking & Employment Status & Race \\
+& & & Hypertension & & Education & Ethnicity \\
+& & & Stroke & & DI Claim & Age \\
+& & & Lung Disease & & SS Claim & Gender \\
+& & & Diabetes & & SSI Claim & \\
+& & & Cancer & & Earnings & \\
+& & & Disability & & & \\
+\midrule			
+Health Insurance Status & ?&  Employment Status & Heart Disease & Smoking & Employment Status & Race \\
+& & Earnings & Hypertension & & DI Claim & Ethnicity \\
+& & Education & Stroke & & SS Claim & Age \\
+& & & Lung Disease & & Education & Gender \\
+& & & Diabetes & & Medicare Eligibility & \\
+& & & Cancer & & & \\
+& & & Disability & & & \\
+\midrule
+Nursing Home Residency & ? & Education & Heart Disease & Functional Status & Widowhood & Race \\
+& & & Hypertension & & Education & Ethnicity \\
+& & & Stroke & &  Nursing Home Residency & Gender \\
+& & & Lung Disease  & & & Age \\
+&  & & Diabetes & & & \\
+&  & & Cancer & & & \\
+&  & & Disability & & & \\
+\midrule
+Medical Costs & ? & Childhood Medical Costs & Heart Disease & Psychological Distress & Health Insurance Status & Race \\
+& & Age 30 Health Status  & Hypertension & & DI Claim & Ethnicity \\
+& & Mid-30s Health Status & Stroke & & Medicare Eligibility & Age \\
+& & Employment Status & Lung Disease & & Earnings & Gender \\
+& & Earnings  & Diabetes & & Relationship Status &  \\
+& & Education & Cancer & & Education  & \\
+& & & Disability & & & \\
+\bottomrule
+\end{tabular}
+\end{tiny}
+\end{sidewaystable}
+
+Tables~\ref{table:supertab1} through~\ref{table:supertab3} display the covariates used to model the transitions to the states and outcomes listed in the first column. The second column displays the type of state or outcome. Absorbing states are health states that are chronic such that once a subject is diagnosed, he has that health state for the rest of his life. The covariates are categorized into initial conditions, states, health outcomes, economic outcomes, and demographics. Initial conditions are collected from the ABC/CARE data and are not modeled. Age 30 Health Status and Mid-30s Health Status includes health behaviors (e.g., smoking), conditions (e.g., BMI), and diseases (e.g., cancer) measured during the age 30 and mid-30s data collections. States are the absorbing health states listed in Table~\ref{table:supertab1}. Health outcomes are risk factors and other health conditions that are affected by treatment and forecasted beyond the last data collection point. They are not absorbing, however. For example, a subject can change his smoking status over time. Economic outcomes are covariates that are forecasted beyond the last data collection point. Demographics are static characteristics of the individual that moderate the estimated transitions.
+
+
+\subsubsection{Quality-Adjusted Life Years and Medical Costs} \label{section:qalys}
+
+\noindent The combination of transition models allows us to address the aspects of the life-cycle that are most relevant for the proposed analysis. To complete the analysis, there are also models to estimate QALYs, medical expenditure, and Social Security participation. With the forecasted health outcomes in hand, we compute a QALY model based on the EQ-5D instrument, a widely-used, health-related
+quality-of-life (HRQoL) measure. The scoring system for EQ-5D was first developed using a U.K. sample.\footnote{\citet{Dolan_1997_Modeling_MC}.} Later, a scoring system based on
+a U.S. sample was generated.\footnote{\citet{Shaw_etal_2005_EQ5D_MC}.} The PSID does not ask the appropriate questions for computing EQ-5D, but the MEPS does. We forecast EQ-5D scores from the MEPS onto the PSID data using common measures between the MEPS and PSID. We map EQ-5D scores from the MEPS onto PSID data using common variables between the MEPS and PSID. We then run a linear regression of EQ-5D on PSID variables that are transitioned in FAM (including ADL counts, IADL counts, and diseases).\footnote{The main variables in this prediction are self-reported health and requiring help with ADLs.} The microsimulation uses this linear regression to compute QALYs.
+
+\noindent FAM has two versions of each medical cost model. For individuals who are not Medicare-eligible, the cost models are estimated from MEPS data. Once an individual becomes Medicare-eligible, their costs are estimated from MCBS data. Both sets of models include the following covariates:
+age, gender, race and ethnicity, education level, relationship status, disease conditions, and earnings. The MEPS models also include type of health insurance as a covariate. Because MCBS follows respondents for more than two years (the time step length in the FAM simulation), the FAM cost models for the Medicare-eligible population include covariates for the stage of each disease. In the initial stage, a patient has a diagnosis in the current two-year period, but did not have the diagnosis in the previous two-year period. Then, in the maintenance stage, a patient had a diagnosis in the previous two-year period and survives with the diagnosis in the current two-year period (all disease states are absorbing---it is impossible to transition out of a diagnosis). Finally, in the terminal stage, a patient has a diagnosis and dies in the current two-year period. The medical costs models tend to underestimate health care spending reported in the National Healthcare Expenditures Account (NHEA) data, due in part to underreporting of Medical costs in MEPS.
 
 %
 %\subsubsection{Inverse Hyperbolic Sine Transformation}
@@ -360,3 +444,104 @@ Working, if working age & $\times$ & $\times$ & \checkmark & \checkmark \\
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
+\paragraph{Specification Tests for the First-order Markov Assumption in FAM} \label{section:firstorder}
+
+\noindent The FAM model assumes a vector first-order Markov process for health states. In Equation~\eqref{eq:trans}, $\tilde{D}_{a - \ell}$ only enters into the model when $\ell = 1$. For heart disease, hypertension, and stroke, we contrast Equation~\eqref{eq:trans} with the following extension: 
+
+\begin{eqnarray}
+I_{a,m} &=& \bm{\mathit{1}} \left( \tilde{\bm{D}}_{0} \geq 0 \right) \bm{\Omega}_{a,m} + \bm{\mathit{1}} \left( \tilde{\bm{D}}_{a-1} \geq 0\right) \bm{\Lambda}_{a,m}  + \bm{\mathit{1}} \left( \tilde{\bm{D}}_{a-1} \geq 0\right) \tilde{\bm{\Lambda}}_{a,m} \nonumber \\ 
+&+&  \bm{W_a} \bm{\beta}_{a,m}  \bm{B} \bm{\alpha}_{a,m} + \tau \left( a \right)_{m} + \varepsilon_{a,m}, \label{eq:trans1}
+\end{eqnarray}
+
+We use a likelihood ratio test to test the null hypothesis $H_0: \tilde{\bm{\Lambda}}_{a,m,m'}$ in Equation~\eqref{eq:trans1}. Table~\ref{table:lrtests} show the results from these tests. For the health states considered, we do not reject the null hypothesis.
+
+\begin{table}[H]
+\begin{threeparttable}
+\caption{Tests Comparing First-Order and Second Markov Processes for Disease Transition Specifications} \label{table:lrtests}
+\centering
+\footnotesize
+\begin{tabular}{lccc}
+\toprule
+Statistic & LR Statistic & Degrees of Freedom & $p$-value \\
+\midrule \\
+Desease & \\
+Heart Disease & 2.18 & 2 & 0.71 \\
+Hypertension   & 0.05 & 1 & 0.83 \\
+Stroke              & 3.94 & 4 & 0.14 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table presents likelihood ratios contrasting the models in Equations~\ref{eq:trans} and~\eqref{eq:trans1} by testing the null hypothesis $H_0: \tilde{\bm{\Lambda}}_{a,m,m'}$. The variables included in the right-hand-side of each model are in Tables~\ref{table:supertab1} to~\ref{table:supertab3}. 
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\noindent An alternative test for a first-order Markov process is the following: (i) use a linear probability model approximation to a first-order Markov process and the variables in Tables~\ref{table:supertab1} to ~\ref{table:supertab3} for each outcome of interest; (ii) calculate the correlation of the residuals with higher order lagged variables. Tables~\ref{table:1storderresidsheart} to \ref{table:1storderresidstroke} show these correlations. The results of these tests very strongly support a first-order Markov assumption.
+
+\noindent To illustrate how to read these tests consider Table~\ref{table:1storderresidsheart}. This table reports simple first-order Pearson correlations with the indicated variable. The row presents the residuals from forecasting heart disease at age $a+1$ using different orders of lags. The estimated correlations are low.
+
+\begin{landscape}
+\begin{table}[H]
+\begin{threeparttable}
+\caption{Tests for Linear Probability Forecasts of Heart Disease at $a+1$} \label{table:1storderresidsheart}
+\scriptsize
+\centering
+\begin{tabular}{lcccccccccc} \toprule
+& \multicolumn{10}{c}{Residuals of Forecast of Heart Disease at age $a+1$} \\
+Correlations with	&	Predictor Diabetes &	Hypertension &	Diabetes &	Hypertension &	Diabetes	&	Hypertension &	Diabetes & Hypertension & Diabetes & Hypertension \\
+                    &	at $a - 2$ &	at $a - 2$		&	at $a - 3$ & at $a - 3$		& at $a - 4$		& at $a - 4$		& at $a - 5$	& at $a - 5$	& at $a - 6$	& at $a - 6$	\\
+
+\midrule \\
+&	-0.002	&	-0.006	&	-0.004	& -0.009 &	-0.017	& -0.020	&	-0.015	&	-0.017 &-0.009	&	0.004	\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table presents the correlation between the residuals from forecasting heart disease at age $a+1$ and the predictors indicated in each column.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+\begin{threeparttable}
+\caption{Tests for Linear Probability Forecasts of Hypertension at $a+1$} \label{table:1storderresidshyper}
+\centering
+\scriptsize
+\begin{tabular}{lccccc} \toprule
+& \multicolumn{5}{c}{Residuals of Forecast of Hypertension at age $a+1$} \\
+Correlations with	&	Predictor Diabetes & Diabetes & Diabetes & Diabetes & Diabetes 	\\
+                    & at $a - 2$	& at $a - 3$	& at $a - 4$	& at $a - 5$	& at $a - 6$	\\
+\midrule
+&	0.003	& 0.009	&	0.012	&	0.008	&	0.001	\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table presents the correlation between the residuals from forecasting hypertension at age $a+1$ and the predictors indicated in each column.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+\begin{threeparttable}
+\caption{Tests for Linear Probability Forecasts of Stroke at $a+1$} \label{table:1storderresidstroke}
+\centering
+\footnotesize
+\begin{tabular}{l *{8}{c}}
+\toprule
+& \multicolumn{8}{c}{Residuals of Forecast of Stroke at age $a+1$} \\
+Correlations with	&	Predictor Cancer &	Diabetes & Heart Disease &	Hypertension &	Cancer	& Diabetes & Heart Disease & Hypertension  \\
+                    &	at $a-2$	&	at $a - 2$ & at $a - 2$	& at $a - 2$	& at $a-3$	& at $a - 3$	& at $a - 3$	& at $a - 3$ \\
+\midrule \\
+&	0.004 &	0.008	&	0.001	&	0.001	&	-0.002	&	0.017 &	-0.004 &	-0.001	\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item Note: This table presents the correlation between the residuals from forecasting stroke at age $a+1$ and the predictors indicated in each column.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\end{landscape}
