@@ -292,50 +292,21 @@ Correlations with	&	Predictor Cancer &	Diabetes & Heart Disease &	Hypertension &
 \subsubsection{FAM simulation}
 \label{appendix:health-fam-simulation}
 
-\noindent A simulation of the model starts by loading the entering cohort, generated from the ABC/CARE data. Missing values are imputed with the imputation models described in section \ref{section:FAM_ABC_impute}. To this entering cohort, the model applies the transition models for mortality, health, working status, family structure, wealth, and benefit claiming, estimated from PSID, with Monte Carlo decisions to calculate the new states of the population.
-%The simulation is performed 5,000 times and the simulated distributions of key outcomes are summarized over repetitions.
-The simulated financial outcomes are in 2014 USD.
-
+\noindent We estimate the transition models in Equation~\eqref{eq:trans}. With these models in hand, we simulate the health trajectories for the ABC/CARE subjects, by initializing it their with the initial conditions, such as we do for labor income in Section~\ref{section:cbamethodology}. Missing values are imputed with the imputation models described in section \ref{section:FAM_ABC_impute}.
 
 \noindent To match the biennial structure of the PSID data used to estimate the transition models, the simulation proceeds in two-year increments.\footnote{The end of each two-year step is designed to occur on July 1st to allow for easier matching with population forecasts from Social Security Administration (SSA).}
-Once the new states have been determined, the cross-sectional models for medical costs and QALYs are applied.
-Computation of medical costs includes the people who died to account for end-of-life costs.
-The simulation ends when all simulated ABC/CARE subjects are deceased (in the simulation).\footnote{Less than half of the simulated subjects (48\%) survive to age 80.} \textbf{[JJH: Actually or in the simulation?] [JLG: In simulation.] [JJH: So it is open ended?] [JLG: In principle, yes. But all of our subjects either die or have QALYs equal to zero at most at age 95.]}
+Once the new states have been determined, the cross-sectional models for medical costs and QALYs are applied. That is, for each subject and at each age, we map the health conditions into medical costs and QALYs. This enables us to monetize health outcomes. The simulation ends when all simulated ABC/CARE subjects are deceased (in the simulation).\footnote{Less than half of the simulated subjects (48\%) survive to age 80.} \textbf{[JJH: Actually or in the simulation?] [JLG: In simulation.] [JJH: So it is open ended?] [JLG: In principle, yes. But all of our subjects either die or have QALYs equal to zero at most at age 95.]}
 
-\noindent Among the ABC/CARE subjects simulated in FAM, the years of completion of the age-30 interview range from 2003 to 2009.
-FAM's two-year time step only allows the simulation of even or odd years.
-For this reason, we ran the simulation twice---once for the ABC/CARE subjects entering in odd years and again for the ABC/CARE subjects entering in even years.
+\noindent Among the ABC/CARE subjects simulated in FAM, the years of completion of the age-30 interview range from 2003 to 2009. FAM's two-year time step only allows the simulation of even or odd years. For this reason, we ran the simulation twice---once for the ABC/CARE subjects entering in odd years and again for the ABC/CARE subjects entering in even years.
 
-\noindent The simulation model takes as inputs assumptions regarding the normal retirement age, future improvements in mortality, and real medical cost growth.
-% \DEL: interest rates assumptions apply to wealth -- not simulated
-The normal retirement age is assumed to be 67 for all ABC/CARE subjects.
-%% Wage growth has been turned off for this project
-%\noindent Real wage growth projections are taken from the intermediate cost projections in Table VI.F6 of the 2009 Social Security Trustees Report\footnote{\citet{Trustees_2009_Annual-Report-Old-Age-Survivors}.} and then assumed to be 1.1\% annually in subsequent years.
-%These wage-growth assumptions are plotted in Figure \ref{figure:nwi}. In each year of the simulation, the FAM earnings model predicts a subject's earnings in terms of 2009 USD.
-%The earnings are then multiplied by the ratio of the current year index value to the 2009 index value in order to account for real wage growth since 2009. We then inflate our results to 2014 USD. \\
+\noindent The simulation model takes as inputs assumptions regarding the normal retirement age, future improvements in mortality, and real medical cost growth. The normal retirement age is assumed to be 67 for all ABC/CARE subjects, as in Section~\ref{section:cbamethodology}.
 
-\noindent The FAM mortality model represents mortality rates in 2009.
-The estimated mortality probabilities are reduced in simulated future years to represent improvements in mortality from sources such as medical innovation that are not included in the model.
-There are different adjustment factors for the populations under and over the age of 65.
-The mortality reduction factors are taken from the intermediate cost mortality projections in the 2013 Social Security Trustee's Report.
+\noindent The FAM mortality model represents mortality rates in 2009. The estimated mortality probabilities are reduced in simulated future years to represent improvements in mortality from sources such as medical innovation that are not included in the model. There are different adjustment factors for the populations under and over the age of 65. The mortality reduction factors are taken from the intermediate cost mortality projections in the 2013 Social Security Trustee's Report.
 
-%% Not using NWI growth in this project
-%\begin{figure}
-%\caption{National Wage Index} \label{figure:nwi}
-% \centering
-%	 \includegraphics[height=3.5in]{AppOutput/Health/nwi.eps}
-%\floatfoot{
-%\footnotesize
-%\noindent Note: Real wage growth projections are taken from Table VI.F6 in the 2009 Social Security Trustees Report \citep{Trustees_2009_Annual-Report-Old-Age-Survivors}. In years after the Trustees report projections, real wage growth is assumed to be 1.1\% annually.
-%}
-%\end{figure}
-
-\noindent Medical cost growth assumptions are derived from several underlying assumptions about growth in GDP and the labor force.
-The real medical cost growth factor in each year is calculated by first finding the minimum of (i) the year-over-year GDP growth plus year-over-year excess medical cost growth or (ii) the Affordable Care Act cap on year-over-year medical cost growth. In order to obtain the medical cost adjustment factor for the current year of the simulation, FAM takes the cumulative product of the yearly growth factors since 2004 and then divides it by the relative growth in the labor force since 2004.\footnote{The medical cost growth assumptions come from Congressional Budget Office and SSA assumptions.
+\noindent Medical cost growth assumptions are derived from several underlying assumptions about growth in GDP and the labor force. The real medical cost growth factor in each year is calculated by first finding the minimum of (i) the year-over-year GDP growth plus year-over-year excess medical cost growth or (ii) the Affordable Care Act cap on year-over-year medical cost growth. In order to obtain the medical cost adjustment factor for the current year of the simulation, FAM takes the cumulative product of the yearly growth factors since 2004 and then divides it by the relative growth in the labor force since 2004.\footnote{The medical cost growth assumptions come from Congressional Budget Office and SSA assumptions.
 The year-over-year growth assumptions for medical costs are shown in Figure \ref{figure:medgrowth_yearly}.
 The 2010-2019 GDP assumptions are based on CBO's analysis of the President's Budget, March 2009.
 GDP assumptions for 2020-2100 are based on the 2008 OASDI Trustee's Report long-term projection of 2.1\% real GDP growth.}
-
 
 \begin{figure}
 \caption{Year-over-Year Excess Real Growth in Medical Costs} \label{figure:medgrowth_yearly}
@@ -347,20 +318,6 @@ GDP assumptions for 2020-2100 are based on the 2008 OASDI Trustee's Report long-
 \noindent Note: The year-over-year excess real medical cost growth over GDP is used to model medical cost growth in FAM.
 }
 \end{figure}
-
-\begin{comment}
-\subsubsection{Bootstrap Sampling Strategy}
-
-\noindent The data sets used for estimating models in FAM are resampled in order to get estimates of sampling error in simulated outcomes. PSID, HRS, MEPS, and MCBS all have complex survey designs that incorporate stratification and clustering. In each of these data sets, the exact sampling strata and clusters are not publicly available, but approximations are included for the purpose of variance estimation. The bootstrap methods in FAM were developed to implement the sampling strategy of \citet{McCarthy-Snowden_1985_Bootstrap}: randomly select $n_h-1$ sampling units with replacement from stratum $h$, where $n_h$ is the number of sampling units in stratum $h$.
-
-\noindent PSID started with an initial sample of families in 1968. Each generation of children from those families became sample members as they formed their own households. The sample members present in the 1999--2013 PSID waves are used to estimate FAM models. The PSID data used for estimation also includes a sample targeting immigrants that entered in 1997. We randomly select one cluster from each variance estimation stratum in the 1968 and 1997 cohorts, with replacement. Any family (original sample members or their descendants) belonging to that cluster are eligible to be included in the estimation for that bootstrap sample.
-
-\noindent The HRS is resampled at the household level. From each variance estimation stratum, $n_h-1$ households are randomly selected with replacement, where $n_h$ is the number of households in the stratum. Observations for each household member are eligible to be included in the estimation for that bootstrap sample.
-
-\noindent In MCBS, $n_h-1$ individuals are resampled with replacement from each variance estimation stratum, where $n_h$ is the number of individual beneficiaries in the stratum.
-
-\noindent MEPS is resampled by dwelling unit. Each MEPS bootstrap sample randomly selects $n_h-1$ dwelling units with replacement from each variance estimation stratum, where $n_h$ is the number of dwelling units in the stratum. All members of the dwelling unit are eligible to be in the estimation sample.
-\end{comment}
 
 \subsubsection{Medical Costs Before Age 30 Interview}
 \label{appendix:health-costs-before-age30}
