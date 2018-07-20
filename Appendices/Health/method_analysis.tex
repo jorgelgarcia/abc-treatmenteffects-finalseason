@@ -25,15 +25,15 @@ Instead of supplementing the model in Equation~\eqref{eq:trans} with a model for
 
 Despite the many simplifications on the definition of health states and on modeling state occupancies instead of state transitions, Appendix~\ref{appendix:health-validation} documents that our procedure performs well at fitting populations means of the outcomes that we consider.
 
-The probability of occupying states is estimated in FAM from Equation~\eqref{eq:trans}. When simulating the model to forecast the health outcomes for the ABC/CARE subjects, we use their observed age-30 conditions as initial conditions  $\tilde{\bm{D}}_0$. The simulation proceeds in an analogous fashion to the simulation in Section~\ref{section:cbamethodology}---in which case we initialize the forecast with age-21 labor income. The vector $\tilde{\bm{D}}_0$ could have been affected by treatment. \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments} estimate the wide variety of effects on health outcomes that ABC/CARE had. This motivates the inclusion of health outcomes into our analysis.
+The probability of occupying states is estimated in FAM from Equation~\eqref{eq:trans}. When simulating the model to forecast the health outcomes for the ABC/CARE subjects, we use their observed age-30 conditions as initial conditions  $\tilde{\bm{D}}_0$. The majority of these initial conditions relate to health, but we also include economic initial conditions. The simulation proceeds in an analogous fashion to the simulation in Section~\ref{section:cbamethodology}---in which case we initialize the forecast with age-21 labor income. The vector $\tilde{\bm{D}}_0$ could have been affected by treatment. \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments} estimate the wide variety of effects on health outcomes that ABC/CARE had. This motivates the inclusion of health outcomes into our analysis.
 
-We use modified versions of the model in Equation~\eqref{eq:trans} to model the following additional health states and outcomes.
+We use modified versions of Equation~\eqref{eq:trans} to model the following additional health states and outcomes.
 
 \begin{enumerate}
 \item \textbf{Absorbing states.} An absorbing state is a state $m \in \mathcal{M}$ such that once a subject occupies that state he/she never abandons it. That is, $m \in \mathcal{M}$ is an absorbing state if $\tilde{D}_{a,m} = 1$ implies that $\tilde{D}_{a',m} = 1 \ \forall a' \in \mathcal{A}$ with $a' \geq a.$ Once an individual reaches an absorbing stage his/her posterior observations are dropped from the estimation of Equation~\eqref{eq:trans}. An obvious example of an absorbing state is death.
-\item \textbf{Ordered threshold models.} Ordered health outcomes for which a multiple-threshold model is employed as a straightforward modification to Equation~\eqref{eq:trans}. An example of an ordered outcome is intensity of smoking (i.e.,\ never smoker, social smoker, frequent smoker).
+\item \textbf{Ordered threshold models.} Ordered health outcomes are outcomes for which a multiple-threshold model is employed as a straightforward modification to Equation~\eqref{eq:trans}. An example of an ordered outcome is intensity of smoking (i.e.,\ never smoker, social smoker, frequent smoker).
 \item \textbf{Continuous outcomes modeled as linear models.} An example of a continuous outcome is body-mass index (BMI).
-\item \textbf{Categorical models, but without an ordering.} Multiple threshold models without an order (e.g., labor force status is categorized as out of labor force, unemployed, working part time, or working full time).
+\item \textbf{Categorical models, but without an ordering.} Multiple threshold models are outcomes without an order (e.g., labor force status is categorized as out of labor force, unemployed, working part time, or working full time).
 \end{enumerate}
 
 Estimation of the parameters characterizing these outcomes is also performed separately. The economic outcomes that we include are labor income, for which we use the forecast detailed in Section~\ref{section:cbamethodology}, as well as labor force participation, relationship status, and childbearing. 
@@ -349,12 +349,12 @@ We predict a QALY model based on the EQ-5D instrument, a widely-used, health-rel
 \subsubsection{FAM simulation}
 \label{appendix:health-fam-simulation}
 
-\noindent We estimate the transition models in Equation~\eqref{eq:trans}. With these models in hand, we simulate the health trajectories for the ABC/CARE subjects, by initializing it their with the initial conditions, such as we do for labor income in Section~\ref{section:cbamethodology}. Missing values are imputed with the imputation models described in section \ref{section:FAM_ABC_impute}.
+\noindent We estimate the models in Equation~\eqref{eq:trans}. With these models in hand, we simulate the health trajectories for the ABC/CARE subjects, by initializing it their with the initial conditions, such as we do for labor income in Section~\ref{section:cbamethodology}. Missing values are imputed with the imputation models described in section \ref{section:FAM_ABC_impute}.
 
-\noindent To match the biennial structure of the PSID data used to estimate the transition models, the simulation proceeds in two-year increments.\footnote{The end of each two-year step is designed to occur on July 1st to allow for easier matching with population forecasts from Social Security Administration (SSA).}
+\noindent To match the biennial structure of the PSID data used to estimate the models, the simulation proceeds in two-year increments.\footnote{The end of each two-year step is designed to occur on July 1st to allow for easier matching with population forecasts from Social Security Administration (SSA).}
 Once the new states have been determined, the cross-sectional models for medical costs and QALYs are applied. That is, for each subject and at each age, we map the health conditions into medical costs and QALYs. This enables us to monetize health outcomes. The simulation ends when all simulated ABC/CARE subjects are deceased (in the simulation).\footnote{Less than half of the simulated subjects (48\%) survive to age 80.} \textbf{[JJH: Actually or in the simulation?] [JLG: In simulation.] [JJH: So it is open ended?] [JLG: In principle, yes. But all of our subjects either die or have QALYs equal to zero at most at age 95. We quantify the QALYs and medical costs either until the QALYs are equal to zero because of the health conditions or the model predicting death predicts death. But again, this is done separately. So once death is predicted, the medical costs and QALYs are set to zero.]}
 
-\noindent Among the ABC/CARE subjects simulated in FAM, the years of completion of the age-30 interview range from 2003 to 2009. FAM's two-year time step only allows the simulation of even or odd years. For this reason, we ran the simulation twice---once for the ABC/CARE subjects entering in odd years and again for the ABC/CARE subjects entering in even years.
+\noindent Among the ABC/CARE subjects simulated in FAM, the years of completion of the age-30 interview range from 2003 to 2009. FAM's two-year time step only allows the simulation of even or odd years. For this reason, we run the simulation twice---once for the ABC/CARE subjects entering in odd years and again for the ABC/CARE subjects entering in even years.
 
 \noindent The simulation model takes as inputs assumptions regarding the normal retirement age, future improvements in mortality, and real medical cost growth. The normal retirement age is assumed to be 67 for all ABC/CARE subjects, as in Section~\ref{section:cbamethodology}.
 
@@ -424,7 +424,7 @@ Working, if working age & $\times$ & $\times$ & \checkmark & \checkmark \\
 
 \begin{eqnarray}
 I_{a,m} &=& \bm{\mathit{1}} \left( \tilde{\bm{D}}_{0} \geq 0 \right) \bm{\Omega}_{a,m} + \bm{\mathit{1}} \left( \tilde{\bm{D}}_{a-1} \geq 0\right) \bm{\Lambda}_{a,m}  + \bm{\mathit{1}} \left( \tilde{\bm{D}}_{a-2} \geq 0\right) \tilde{\bm{\Lambda}}_{a,m} \nonumber \\ 
-&+&  \bm{W_a} \bm{\beta}_{a,m}  \bm{B} \bm{\alpha}_{a,m} + \tau \left( a \right)_{m} + \varepsilon_{a,m}. \label{eq:trans1}
+&+&  \bm{W_a} \bm{\beta}_{a,m} +  \bm{B} \bm{\alpha}_{a,m} + \tau \left( a \right)_{m} + \varepsilon_{a,m}. \label{eq:trans1}
 \end{eqnarray}
 
 We use a likelihood ratio test to test the null hypothesis $H_0: \tilde{\bm{\Lambda}}_{a,m} = \bm{0}$ in Equation~\eqref{eq:trans1}. Table~\ref{table:lrtests} show the results from these tests. For the health states considered, we do not reject the null hypothesis.
