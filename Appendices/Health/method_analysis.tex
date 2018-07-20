@@ -3,7 +3,7 @@
 \subsubsection{Formalizing the FAM}
 \label{section:transition_models}
 
-Let $\mathcal{M}$ denote a set of possible health states, some of which can be absorbing. Transition times are ages of measurement. Let $\mathcal{A}:= [ 0, \ldots, \bar{A}]$ index ages, where $\bar{A}$ is the last age that we forecast. We provide more details on $\bar{A}$ below. We define $h_{a,m,m'}$ as the probability of transitioning from state $m$ to state $m'$ at age $a \in \mathcal{A}$, where $m, m' \in \mathcal{M}$. We drop individual subscripts to avoid notational clutter.
+Let $\mathcal{M}$ denote a set of possible health states, some of which can be absorbing. Transition times are ages of measurement. Let $\mathcal{A}:= [ 0, \ldots, \bar{A}]$ index ages, where $\bar{A}$ is the last age that we forecast. We define $h_{a,m,m'}$ as the probability of transitioning from state $m$ to state $m'$ at age $a \in \mathcal{A}$, where $m, m' \in \mathcal{M}$. We drop individual subscripts to avoid notational clutter.
 
 We denote a state transition from $m$ to $m'$ at age $a$ by $D_{a,m,m'} = 1$. If this transition does not happen,  $D_{a,m,m'} = 0$. We let $\tilde{D}_{a,m}$ be the indicator of occupancy of state $m$ at age $a$. $\tilde{D}_{a,m} = 0$ otherwise. $\tilde{D}_{a,m}$ is a generic entry in the the vector of age-$a$ state occupancy indicators denoted by $\tilde{\bm{D}}_a$. $\tilde{\bm{D}}_0$ denotes the vector of initial state-occupancy conditions.
 
@@ -19,7 +19,7 @@ The probability of occupying a state $m \in \mathcal{M}$ at age $a \in{A}$ is ge
 \begin{eqnarray}
 I_{a,m} &=&  \bm{\mathit{1}} \left( \tilde{\bm{D}}_{0} \geq 0 \right) \bm{\Omega}_{m} + \bm{\mathit{1}} \left( \tilde{\bm{D}}_{a-1} \geq 0\right) \bm{\Lambda}_{m} + \bm{W_a} \bm{\beta}_{m} + \bm{B} \bm{\alpha}_m + \tau(a)_m + \varepsilon_{a,m}, \label{eq:trans}
 \end{eqnarray}
-where $\tilde{D}_{a,m} = \bm{\mathit{1}}  \left( I_{a,m} \geq 0 \right)$, $\tau \left( a \right)_{m}$ is a function of age,\footnote{In our empirical analysis, we approximate the coefficients on $\tau \left( a \right)_{m}$ using splines with knots at ages 35, 45, 55, 65, and 75.} and $\varepsilon_{a,m}$ is a time-varying age-$a$ shock, uncorrelated across ages, subjects, and health states. As in the forecasts of Section~\ref{section:cbamethodology}, we allow the model to depend on baseline variables, denoted by $\bm{B}$, and on variables that can be affected by treatment, which in this case we denote by $\bm{W}_a$ to reinforce that they are not the same variables that we use in Section~\ref{section:cbamethodology}. The variables in $\bm{W}_a$ contain health outcomes and other economic outcomes that are modeled with adapted versions of Equation~\eqref{eq:trans} (e.g.,\ smoking, labor force participation, childrearing). $ \bm{\Omega}_{m},  \bm{\Lambda}_{m}, \bm{\beta}_{m},  \bm{\alpha}_{m}$ are the coefficient vectors associated with the initial state indicators, first-order lagged state indicators, current health and other economic outcomes, and baseline variables. In our empirical analysis, we estimate these vectors for each state occupancy $m \in \mathcal{M}$.
+where $\tilde{D}_{a,m} = \bm{\mathit{1}}  \left( I_{a,m} \geq 0 \right)$, $\tau \left( a \right)_{m}$ is a function of age,\footnote{In our empirical analysis, we approximate the coefficients on $\tau \left( a \right)_{m}$ using splines with knots at ages 35, 45, 55, 65, and 75.} and $\varepsilon_{a,m}$ is a time-varying age-$a$ shock, uncorrelated across ages, subjects, and health states. As in the forecasts of Section~\ref{section:cbamethodology}, we allow the model to depend on baseline variables, denoted by $\bm{B}$, and on variables that can be affected by treatment, which in this case we denote by $\bm{W}_a$ to reinforce that they are not the same variables that we use in Section~\ref{section:cbamethodology}. The variables in $\bm{W}_a$ contain health outcomes and other economic outcomes (e.g.,\ smoking, labor force participation, childrearing). $ \bm{\Omega}_{m},  \bm{\Lambda}_{m}, \bm{\beta}_{m},  \bm{\alpha}_{m}$ are the coefficient vectors associated with the initial state-occupancy indicators, first-order lagged state-occupancy indicators, current health and other economic outcomes, and baseline variables. In our empirical analysis, we estimate these vectors for each state occupancy $m \in \mathcal{M}$.
 
 Instead of supplementing the model in Equation~\eqref{eq:trans} with a model for initial conditions, we directly condition on them in Equation~\eqref{eq:trans}. Uncorrelatedess of $\varepsilon_{a,m}$ across ages, health states, and subjects together with normality allows us to perform separate estimation of the coefficients characterizing Equation~\eqref{eq:trans} for each $m \in \mathcal{M}$ using maximum likelihood. We estimate $\bm{\theta}_m := \left[   \bm{\Omega}_{m}, \bm{\Lambda}_{m}, \bm{\beta}_{m}, \alpha_{m}, \tau \left( a \right) _{m}  \right]$ for each $m \in \mathcal{M}$.
 
@@ -31,9 +31,8 @@ We use modified versions of Equation~\eqref{eq:trans} to model the following add
 
 \begin{enumerate}
 \item \textbf{Absorbing states.} An absorbing state is a state $m \in \mathcal{M}$ such that once a subject occupies that state he/she never abandons it. That is, $m \in \mathcal{M}$ is an absorbing state if $\tilde{D}_{a,m} = 1$ implies that $\tilde{D}_{a',m} = 1 \ \forall a' \in \mathcal{A}$ with $a' \geq a.$ Once an individual reaches an absorbing stage his/her posterior observations are dropped from the estimation of Equation~\eqref{eq:trans}. An obvious example of an absorbing state is death.
-\item \textbf{Ordered threshold models.} Ordered health outcomes are outcomes for which a multiple-threshold model is employed as a straightforward modification to Equation~\eqref{eq:trans}. An example of an ordered outcome is the level of psychological distress (e.g.,\ low, medium, high).
+\item \textbf{Ordered and unordered threshold models.} Ordered and unordered outcomes are outcomes for which a multiple-threshold model is employed as a straightforward modification to Equation~\eqref{eq:trans}. An example of the former is the level of psychological distress (e.g.,\ low, medium, high). An example of the latter is labor force status (e.g., labor force status is categorized as out of labor force, unemployed, working part time, or working full time).
 \item \textbf{Continuous outcomes modeled as linear models.} An example of a continuous outcome is body-mass index (BMI).
-\item \textbf{Categorical models, but without an ordering.} Multiple threshold models are outcomes without an order (e.g., labor force status is categorized as out of labor force, unemployed, working part time, or working full time).
 \end{enumerate}
 
 Estimation of the parameters characterizing these outcomes is also performed separately. The economic outcomes that we include are labor income, for which we use the forecast detailed in Section~\ref{section:cbamethodology}, as well as labor force participation, relationship status, and childbearing. 
@@ -47,7 +46,7 @@ Tables~\ref{table:supertab1} to~\ref{table:supertab3} list the variables determi
 \begin{tabular}{lllllll}
 \toprule 
 \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)} & \multicolumn{1}{c}{(4)} & \multicolumn{1}{c}{(5)} & \multicolumn{1}{c}{(6)} & \multicolumn{1}{c}{(7)} \\
- & &  \multicolumn{1}{c}{$\tilde{\bm{D}}_0$} &  \multicolumn{1}{c}{$\tilde{\bm{D}}_{a-1}$} & \multicolumn{2}{c}{ $\bm{W}_a$ } &  \multicolumn{1}{c}{$\bm{B}$} \\ 
+ & &  \multicolumn{1}{c}{$\tilde{\bm{D}}_0$} &  \multicolumn{1}{c}{$\tilde{\bm{D}}_{a-1}$} & \multicolumn{1}{c}{ $\bm{W}_a$ } &  \multicolumn{1}{c}{ $\bm{W}_a$ } &  \multicolumn{1}{c}{$\bm{B}$} \\ 
 \multicolumn{1}{c}{Outcome} & \multicolumn{1}{c}{Variable Type} & \multicolumn{1}{c}{Initial Conditions} & \multicolumn{1}{c}{Other States} & \multicolumn{1}{c}{Health Outcomes} & \multicolumn{1}{c}{Economic Outcomes} & \multicolumn{1}{c}{Demographics} \\
 \midrule
 Heart Disease   & Absorbing & Childhood Economic Environment & Hypertension    & Smoking   &                                & Race \\
@@ -111,7 +110,7 @@ Smoking & Binary & Childhood Economic Environment & Heart Disease  & BMI & & Rac
 \begin{tabular}{lllllll}
 \toprule 
 \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)} & \multicolumn{1}{c}{(4)} & \multicolumn{1}{c}{(5)} & \multicolumn{1}{c}{(6)} & \multicolumn{1}{c}{(7)} \\
- & &  \multicolumn{1}{c}{$\tilde{\bm{D}}_0$} &  \multicolumn{1}{c}{$\tilde{\bm{D}}_{a-1}$} & \multicolumn{2}{c}{ $\bm{W}_a$ } &  \multicolumn{1}{c}{$\bm{B}$} \\ 
+ & &  \multicolumn{1}{c}{$\tilde{\bm{D}}_0$} &  \multicolumn{1}{c}{$\tilde{\bm{D}}_{a-1}$} & \multicolumn{1}{c}{ $\bm{W}_a$ } &  \multicolumn{1}{c}{ $\bm{W}_a$ } &  \multicolumn{1}{c}{$\bm{B}$} \\ 
 \multicolumn{1}{c}{Outcome} & \multicolumn{1}{c}{Variable Type} & \multicolumn{1}{c}{Initial Conditions} & \multicolumn{1}{c}{Other States} & \multicolumn{1}{c}{Health Outcomes} & \multicolumn{1}{c}{Economic Outcomes} & \multicolumn{1}{c}{Demographics} \\
 \midrule
 BMI & Continuous & Childhood Economic Environment & & BMI & Marital Status & Race \\
@@ -145,7 +144,7 @@ Paternity & Ordered & Mother's Education & & & Labor Force Participation & Race 
 &  & Education & & & Marital Status  & Ethnicity \\
 &  & & & & Number of Children  & Age \\
 \midrule
-Marital Status & Two-Stage Binary & Mother's Education & & & Labor Force Participation & Race \\
+Marital Status & Binary & Mother's Education & & & Labor Force Participation & Race \\
 & & Education & & & Earnings & Ethnicity \\
 & & & & & Marital Status & Age \\
 & & & & & Number of Children & Gender \\
@@ -165,7 +164,7 @@ Partner Mortality & Binary & Education & & & & Race \\
 \begin{tabular}{lllllll}
 \toprule 
 \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)} & \multicolumn{1}{c}{(4)} & \multicolumn{1}{c}{(5)} & \multicolumn{1}{c}{(6)} & \multicolumn{1}{c}{(7)} \\
- & &  \multicolumn{1}{c}{$\tilde{\bm{D}}_0$} &  \multicolumn{1}{c}{$\tilde{\bm{D}}_{a-1}$} & \multicolumn{2}{c}{ $\bm{W}_a$ } &  \multicolumn{1}{c}{$\bm{B}$} \\ 
+ & &  \multicolumn{1}{c}{$\tilde{\bm{D}}_0$} &  \multicolumn{1}{c}{$\tilde{\bm{D}}_{a-1}$} & \multicolumn{1}{c}{ $\bm{W}_a$ } &  \multicolumn{1}{c}{ $\bm{W}_a$ } &  \multicolumn{1}{c}{$\bm{B}$} \\ 
 \multicolumn{1}{c}{Outcome} & \multicolumn{1}{c}{Variable Type} & \multicolumn{1}{c}{Initial Conditions} & \multicolumn{1}{c}{Other States} & \multicolumn{1}{c}{Health Outcomes} & \multicolumn{1}{c}{Economic Outcomes} & \multicolumn{1}{c}{Demographics} \\
 \midrule
 Labor Force Participation & Unordered Categorical & Childhood Economic& Heart Disease & Smoking & Labor Force Participation & Race \\
@@ -293,6 +292,8 @@ Once the new states have been determined, the cross-sectional models for medical
 
 \noindent The simulation model takes as inputs assumptions regarding the normal retirement age, future improvements in mortality, and real medical cost growth. The normal retirement age is assumed to be 67 for all ABC/CARE subjects, as in Section~\ref{section:cbamethodology}.
 
+\noindent The FAM mortality model represents mortality rates in 2009. The estimated mortality probabilities are reduced in simulated future years to represent improvements in mortality from sources such as medical innovation that are not included in the model. There are different adjustment factors for the populations under and over the age of 65. The mortality reduction factors are taken from the intermediate cost mortality projections in the 2013 Social Security Trustee's Report.
+
 \begin{figure}
 \caption{Year-over-Year Excess Real Growth in Medical Costs} \label{figure:medgrowth_yearly}
  \centering
@@ -303,8 +304,6 @@ Once the new states have been determined, the cross-sectional models for medical
 \noindent Note: The year-over-year excess real medical cost growth over GDP is used to model medical cost growth in FAM.
 }
 \end{figure}
-
-\noindent The FAM mortality model represents mortality rates in 2009. The estimated mortality probabilities are reduced in simulated future years to represent improvements in mortality from sources such as medical innovation that are not included in the model. There are different adjustment factors for the populations under and over the age of 65. The mortality reduction factors are taken from the intermediate cost mortality projections in the 2013 Social Security Trustee's Report.
 
 \noindent Medical cost growth assumptions are derived from several underlying assumptions about growth in GDP and the labor force. The real medical cost growth factor in each year is calculated by first finding the minimum of (i) the year-over-year GDP growth plus year-over-year excess medical cost growth or (ii) the Affordable Care Act cap on year-over-year medical cost growth. In order to obtain the medical cost adjustment factor for the current year of the simulation, FAM takes the cumulative product of the yearly growth factors since 2004 and then divides it by the relative growth in the labor force since 2004.\footnote{The medical cost growth assumptions come from Congressional Budget Office and SSA assumptions.
 The year-over-year growth assumptions for medical costs are shown in Figure \ref{figure:medgrowth_yearly}.
