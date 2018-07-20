@@ -42,248 +42,183 @@ Tables~\ref{table:supertab1} to~\ref{table:supertab3} list the variables determi
 
 % ABSORBING STATES
 \begin{sidewaystable}[htbp!]
-\caption{Health State Transitions, 1/3} \label{table:supertab1}
-\begin{tiny}
+\caption{Determinants of Equation~\eqref{eq:trans}, 1/3} \label{table:supertab1}
+\begin{scriptsize}
 \begin{tabular}{lllllll}
-\toprule
-& Variable Type & Initial Conditions & Other States & Health Outcomes & Economic Outcomes & Demographics \\
+\toprule 
+\multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)} & \multicolumn{1}{c}{(4)} & \multicolumn{1}{c}{(5)} & \multicolumn{1}{c}{(6)} & \multicolumn{1}{c}{(7)} \\
+ & &  \multicolumn{1}{c}{$\tilde{\bm{D}}_0$} &  \multicolumn{1}{c}{$\tilde{\bm{D}}_{a-1}$} & \multicolumn{2}{c}{ $\bm{W}_a$ } &  \multicolumn{1}{c}{$\bm{B}$} \\ 
+\multicolumn{1}{c}{Outcome} & \multicolumn{1}{c}{Variable Type} & \multicolumn{1}{c}{Initial Conditions} & \multicolumn{1}{c}{Other States} & \multicolumn{1}{c}{Health Outcomes} & \multicolumn{1}{c}{Economic Outcomes} & \multicolumn{1}{c}{Demographics} \\
 \midrule
-Heart Disease & Absorbing & Childhood Economic Environment & Hypertension & Smoking & Education & Race \\
-			&& Age 30 Health Status & Diabetes & BMI & Employment Status & Ethnicity \\
-			&& Mid-30s Health Status & & Physical Activity & Earnings & Age \\
-			&& Employment Status &  &  Psychological Distress  &  Health Insurance Status& Gender \\
-			&&  Earnings & &  Asthma &  & \\
-			&& Mother's Education &  & Functional Status &  & \\
-			&& Education& &  & Relationship Status & \\
-			&& & & & Childbearing & \\
+Heart Disease   & Absorbing & Childhood Economic Environment & Hypertension    & Smoking   &                                & Race \\
+			    &           & Education & Diabetes & BMI &  & Ethnicity \\
+			    &           & Asthma & & Physical Activity &  & Age \\
+			    &           &        &  &  &  & Gender \\
 \midrule			
-Hypertension & Absorbing & Childhood Economic Environment & Diabetes & Smoking & Education & Race \\
-			&& Age 30 Health Status &  & BMI & Employment Status & Ethnicity \\
-			&&  Mid-30s Health Status & & Physical Activity & Earnings & Age \\
-			&& Employment Status & &  Psychological Distress & Health Insurance Status & Gender \\
-			&& Earnings  & &  Asthma &  & \\
-			&& Mother's Education  & & Functional Status &  & \\
-			&& Education & &  & Relationship Status  & \\
-			&& & & & Childbearing & \\
+Hypertension & Absorbing & Childhood Economic Environment & Diabetes    & Smoking   &                                & Race \\
+&           & Education &  & BMI &  & Ethnicity \\
+&           &  & & Physical Activity &  & Age \\
+&           &        &  &  &  & Gender \\
 \midrule			
-Stroke & Absorbing & Childhood Economic Environment & Heart Disease & Smoking & Education & Race \\
-			&& Age 30 Health Status & Hypertension & BMI & Employment Status & Ethnicity \\
-			&& Mid-30s Health Status & Diabetes &  Physical Activity & Earnings & Age \\
-			&& Employment Status & Cancer & Psychological Distress & Health Insurance Status & Gender \\
-			&& Earnings  &  &  Asthma &  & \\
-			&& Mother's Education &  & Functional Status &  & \\
-			&& Education & &  & Relationship Status  & \\
-			&& & & & Childbearing & \\
+Stroke & Absorbing & Childhood Economic Environment & Heart Disease    & Smoking   &                                & Race \\
+&           & Education & Hypertension & BMI &  & Ethnicity \\
+&           &  & Diabetes & Physical Activity &  & Age \\
+&           &        & Cancer &  &  & Gender \\
 \midrule		
-Lung Disease & Absorbing & Childhood Economic Environment &  & Smoking & Education & Race \\
-			&& Age 30 Health Status &  & BMI & Employment Status & Ethnicity \\
-			&& Mid-30s Health Status & & Physical Activity & Earnings & Age \\
-			&& Employment Status &   &  Psychological Distress &  Health Insurance Status & Gender \\
-			&& Earnings & & Asthma  & & \\
-			&& Mother's Education &  & Functional Status  & & \\
-			&& Education & & & Relationship Status  & \\
-			&& & & & Childbearing & \\
+Lung Disease & Absorbing & Childhood Economic Environment &   & Smoking   &                                & Race \\
+&           & Education & & BMI &  & Ethnicity \\
+&           & Asthma &  & Physical Activity &  & Age \\
+&           &        &  &  &  & Gender \\
 \midrule		
-Diabetes & Absorbing & Childhood Economic Environment & & Smoking & Education & Race \\
-			&& Age 30 Health Status &  & BMI & Employment Status & Ethnicity \\
-			&&  Mid-30s Health Status &  & Physical Activity & Earnings & Age \\
-			&& Employment Status &   & Psychological Distress  & Health Insurance Status & Gender \\
-			&&  Earnings & & Asthma  &  & \\
-			&&  Mother's Education & & Functional Status &   & \\
-			&& Education & &  & Relationship Status  & \\
-			&& & & & Childbearing & \\
+Diabetes  & Absorbing & Childhood Economic Environment &   & Smoking   &                                & Race \\
+&           & Education &  & BMI &  & Ethnicity \\
+&           &  &  & Physical Activity &  & Age \\
+&           &        &  &  &  & Gender \\
 \midrule		
-
-Cancer & Absorbing & Childhood Economic Environment &  & Smoking & Education & Race \\
-			&& Age 30 Health Status & & BMI & Employment Status & Ethnicity \\
-			&& Mid-30s Health Status & & Binge Drinking & Earnings & Age \\
-			&& Employment Status &   & Physical Activity  & Health Insurance Status & Gender \\
-			&& Earnings & & Psychological Distress  & Relationship Status   & \\
-			&& Mother's Education & & Asthma &  & \\
-			&& Education & & Functional Status &  & \\
-			&& & & & Childbearing & \\
-\midrule	
-Disability & Absorbing & Childhood Economic Environment & Heart Disease & Smoking &Education & Race \\
-			&& Age 30 Health Status & Hypertension & BMI & Employment Status & Ethnicity \\
-			&& Mid-30s Health Status & Stroke & Physical Activity & Earnings & Age \\
-			&& Employment Status &  Lung Disease & Psychological Distress  & Health Insurance Status & Gender \\
-			&& Earnings & Diabetes &  Asthma &  & \\
-			&& Mother's Education & Cancer & Functional Status  & & \\
-			&& Education &  Disability &  & Relationship Status  & \\
-			&& & & & Childbearing & \\	
+Cancer & Absorbing & Childhood Economic Environment &     & Smoking   &                                & Race \\
+&           & Education & & BMI &  & Ethnicity \\
+&           &  &  & Physical Activity &  & Age \\
+&           &        & &  &  & Gender \\
 \midrule
- Mortality & Absorbing & & Heart Disease & Smoking & Education & Race \\
+Mortality & Absorbing & Education & Heart Disease & Smoking &  & Race \\
 &&  & Hypertension & Binge Drinking  & & Ethnicity \\
 && & Stroke & & & Age \\
 && & Lung Disease & & & Gender \\
 && & Diabetes & & & \\
 && & Cancer & & & \\
-&& & Disability & & & \\
+&& & Functional Status & & & \\
+\midrule	
+Functional Status & Ordered & Childhood Economic Environment & Heart Disease & Smoking & & Race \\
+			&& Education & Hypertension & BMI &  & Ethnicity \\
+			&&  & Stroke & Physical Activity & & Age \\
+			&&  &  Lung Disease & Functional Status & & Gender \\
+			&&  & Diabetes &  &  & \\
+			&&  & Cancer & & & \\
+			&&  &   &  &  & \\
+\midrule
+Smoking & Binary & Childhood Economic Environment & Heart Disease  & BMI & & Race \\
+& & Education &  Lung Disease & Binge Drinking & & Ethnicity \\
+&  &  & Diabetes & Physical Activity  & & Age \\
+&  & &  & Psychological Distress & & Gender \\
 \bottomrule
 \end{tabular}
-\end{tiny}
+\end{scriptsize}
 \end{sidewaystable}
 
-% RISK FACTORS
 \begin{sidewaystable}[htbp!]
-\caption{Health State Transitions, 2/3} \label{table:supertab2}
-\begin{tiny}
+\caption{Determinants of Equation~\eqref{eq:trans}, 2/3} \label{table:supertab2}
+\begin{scriptsize}
 \begin{tabular}{lllllll}
-\toprule
-& Variable Type & Initial Conditions & States & Health Outcomes & Economic Outcomes & Demographics \\
+\toprule 
+\multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)} & \multicolumn{1}{c}{(4)} & \multicolumn{1}{c}{(5)} & \multicolumn{1}{c}{(6)} & \multicolumn{1}{c}{(7)} \\
+ & &  \multicolumn{1}{c}{$\tilde{\bm{D}}_0$} &  \multicolumn{1}{c}{$\tilde{\bm{D}}_{a-1}$} & \multicolumn{2}{c}{ $\bm{W}_a$ } &  \multicolumn{1}{c}{$\bm{B}$} \\ 
+\multicolumn{1}{c}{Outcome} & \multicolumn{1}{c}{Variable Type} & \multicolumn{1}{c}{Initial Conditions} & \multicolumn{1}{c}{Other States} & \multicolumn{1}{c}{Health Outcomes} & \multicolumn{1}{c}{Economic Outcomes} & \multicolumn{1}{c}{Demographics} \\
 \midrule
-Smoking & Ordered & Age 30 Health Status & Heart Disease & Smoking & Education & Race \\
- & & Mid-30s Health Status & Lung Disease  & BMI & & Ethnicity \\
- &  & Education & Diabetes  & Binge Drinking & & Age \\
- &  & &  & Physical Activity & & \\
-   & & & & Psychological Distress & & Gender \\
-    & & & & Asthma & & \\
-    &  & &  & Functional Status & & \\
+BMI & Continuous & Childhood Economic Environment & & BMI & Marital Status & Race \\
+& & Education & & & & Ethnicity \\
+ & &  & & & & Age \\
+ &  & & & & & Gender \\
 \midrule
-BMI & Continuous & Age 30 Health Status & Heart Disease & Number of Births (if female) & Education & Race \\
-& & Mid-30s Health Status & Hypertension & Smoking & & Ethnicity \\
- & & Education & Stroke & Binge Drinking & & Age \\
- &  & & Lung Disease & Physical Activity & & Gender \\
-  &  & & Diabetes & Psychological Distress & & \\
-    & & & Cancer & Asthma & & \\
-    & & & Disability & Functional Status & & \\
+Binge Drinking & Binary & Childhood Economic Environment &  Marital Status & Binge Drinking & & Race \\
+ & & Education &  &  & & Ethnicity \\
+  & &  &  &  & & Age \\
+  &  & &  &  & & Gender \\
 \midrule
-Obesity & Binary & & & BMI & & \\
+Physical Activity & Binary & Childhood Economic Environment & Marital Status & Physical Activity & & Race \\
+ & & Education &  & & & Ethnicity \\
+  & &  &  &  & & Age \\
+  &  & &  &  & & Gender \\
 \midrule
-Binge Drinking & ? & Age 30 Health Status & Heart Disease & Smoking & Education & Race \\
- & & Mid-30s Health Status & Hypertension & BMI & & Ethnicity \\
-  & & Education & Stroke & Physical Activity & & Age \\
-  &  & & Lung Disease & Psychological Distress & & Gender \\
-   &  & & Diabetes & Asthma & & \\
-     & & & Cancer & Functional Status & & \\
-     & & & Disability & & & \\
-\midrule
-Physical Activity & ? & Age 30 Health Status & Heart Disease & Smoking & Education & Race \\
- & & Mid-30s Health Status & Hypertension & BMI & & Ethnicity \\
-  & & Education & Stroke & Binge Drinking & & Age \\
-  &  & & Lung Disease & Psychological Distress & & Gender \\
-   &  & & Diabetes & Asthma & & \\
-   &   & & Cancer & Functional Status & & \\
-   &   & & Disability & &  & \\
-\midrule
-Psychological Distress & ? & Age 30 Health Status & Heart Disease & Smoking & Education & Race \\
- & & Mid-30s Health Status & Hypertension & BMI & & Ethnicity \\
- &  & Education & Stroke & Binge Drinking & & Age \\
-   & & & Lung Disease & Physical Activity & & Gender \\
-    & & & Diabetes & Asthma & & \\
-     & & & Cancer & Functional Status & & \\
-     & & & Disability & & & \\
-\midrule
-Asthma & ? & Age-30 Health Status & Heart Disease & Smoking & Education & Race \\
- & & Mid-30s Health Status & Hypertension & BMI & & Ethnicity \\
-  & & Education & Stroke & Binge Drinking & & Age \\
-   & & & Lung Disease & Physical Activity & & Gender \\
-    & & & Diabetes & Psychological Distress & & \\
-    &  & & Cancer & Functional Status & & \\
-    &  & & Disability & & & \\
-\midrule
-Functional Status & Ordered & Age 30 Health Status & Heart Disease & Smoking & Education & Race \\
- & & Mid-30s Health Status & Hypertension & BMI & & Ethnicity \\
- &  & Education & Stroke & Binge Drinking & & Age \\
-  &  & & Lung Disease & Physical Activity & & Gender \\
-  &   & & Diabetes & Psychological Distress & & \\
-   &   & & Cancer & Asthma & & \\
-   &   & & Disability & & & \\
-\bottomrule
-\end{tabular}
-\end{tiny}
-\end{sidewaystable}
-
-
-% ECONOMIC FACTORS
-\begin{sidewaystable}[htbp!]
-\caption{Health State Transitions, 3/3} \label{table:supertab3}
-\begin{tiny}
-\begin{tabular}{lllllll}
-\toprule
- & Variable Type & Initial Conditions & States & Health Outcomes & Economic Outcomes & Demographics \\
+Psychological Distress & Ordered & Childhood Economic Environment & Heart Disease & Smoking & & Race \\
+ & & Education & Hypertension & BMI & & Ethnicity \\
+ &  &  & Stroke & Physical Activity & & Age \\
+   & & & Lung Disease & Psychological Distress & & Gender \\
+    & & & Diabetes & Functional Status & & \\
+     & & & Cancer & & & \\
 \midrule		
-Childbearing & ? & Age 30 Health Status & & & Mother's Education & Race \\
- &  & Mid-30s Health Status & & & Employment Status & Ethnicity \\
-&  & Childbearing History& & & Education & Age \\
-& & Education & & & & Gender \\
-\midrule
-Relationship Status & ? & Education & & & Mother's Education & Race \\
- & & & & & Employment Status & Ethnicity \\
-& & & & & Education & Age \\
+Childbearing & Ordered & Mother's Education  & Cancer & Marital Status & Labor Force Participation & Race \\
+&  & Education  & & & Number of Children & Ethnicity \\
+&  & & & &  & Age \\
 & & & & & & Gender \\
- \midrule		
-Partner Mortality & Binary & Education (subject's) & & & Education (subject's) & Race \\
- & & & & &  & Ethnicity \\
+\midrule		
+Paternity & Ordered & Mother's Education & & & Labor Force Participation & Race \\
+&  & Education & & & Marital Status  & Ethnicity \\
+&  & & & & Number of Children  & Age \\
+\midrule
+Marital Status & Two-Stage Binary & Mother's Education & & & Labor Force Participation & Race \\
+& & Education & & & Earnings & Ethnicity \\
+& & & & & Marital Status & Age \\
+& & & & & Number of Children & Gender \\
+\midrule		
+Partner Mortality & Binary & Education & & & & Race \\
+& & & & &  & Ethnicity \\
 & & & & & & Age \\
 & & & & & & Gender \\
- \midrule
-Employment Status & Unordered Categorical & Age 30 Health Status & Heart Disease & Smoking & Employment Status & Race \\
-& & Mid-30s Health Status & Hypertension & BMI & DI Claim & Ethnicity \\
-& & Employment Status & Stroke & Binge Drinking & SS Claim & Age \\
-& & Earnings & Lung Disease &  Physical Activity & Relationship Status & Gender \\
-& & Education & Diabetes & Psychological Distress & Education & \\
-& & & Cancer & Asthma & Earnings & \\
-& & & Disability & Functional Status & & \\
- \midrule
-Earnings & Continuous? & Age 30 Health Status & Heart Disease & Smoking & Employment Status & Race \\
-& & Mid-30s Health Status & Hypertension & BMI & DI Claim & Ethnicity \\
-& & Employment Status & Stroke & Binge Drinking & SS Claim & Age \\
-& & Earnings & Lung Disease &  Physical Activity & Relationship Status & Gender \\
-& & Education & Diabetes & Psychological Distress & Education & \\
-& & & Cancer & Asthma & Earnings & \\
-& & & Disability & Functional Status & & \\
-\midrule			
-DI Claim & ?& & Heart Disease & Smoking & Employment Status& Race \\
-& & & Hypertension & & Education & Ethnicity \\
-& & & Stroke &  & DI Claim & Age \\
-& & & Lung Disease &  & Earnings & Gender \\
-& & & Diabetes & & & \\
-& & & Cancer & & & \\
-& & & Disability & & & \\
-\midrule			
-SS Claim & ? &  & Heart Disease & Smoking & Employment Status & Race \\
-& & & Hypertension & & Education & Ethnicity \\
-& & & Stroke & & DI Claim & Age \\
-& & & Lung Disease & & Earnings & Gender \\
-& & & Diabetes & & & \\
-& & & Cancer & & & \\
-& & & Disability & & & \\
-\midrule			
-SSI Claim & ? & & Heart Disease & Smoking & Employment Status & Race \\
-& & & Hypertension & & Education & Ethnicity \\
-& & & Stroke & & DI Claim & Age \\
-& & & Lung Disease & & SS Claim & Gender \\
-& & & Diabetes & & SSI Claim & \\
-& & & Cancer & & Earnings & \\
-& & & Disability & & & \\
-\midrule			
-Health Insurance Status & ?&  Employment Status & Heart Disease & Smoking & Employment Status & Race \\
-& & Earnings & Hypertension & & DI Claim & Ethnicity \\
-& & Education & Stroke & & SS Claim & Age \\
-& & & Lung Disease & & Education & Gender \\
-& & & Diabetes & & Medicare Eligibility & \\
-& & & Cancer & & & \\
-& & & Disability & & & \\
+\bottomrule
+\end{tabular}
+\end{scriptsize}
+\end{sidewaystable}
+
+\begin{sidewaystable}[htbp!]
+\caption{Determinants of Equation~\eqref{eq:trans}, 1/3} \label{table:supertab1}
+\begin{scriptsize}
+\begin{tabular}{lllllll}
+\toprule 
+\multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)} & \multicolumn{1}{c}{(4)} & \multicolumn{1}{c}{(5)} & \multicolumn{1}{c}{(6)} & \multicolumn{1}{c}{(7)} \\
+ & &  \multicolumn{1}{c}{$\tilde{\bm{D}}_0$} &  \multicolumn{1}{c}{$\tilde{\bm{D}}_{a-1}$} & \multicolumn{2}{c}{ $\bm{W}_a$ } &  \multicolumn{1}{c}{$\bm{B}$} \\ 
+\multicolumn{1}{c}{Outcome} & \multicolumn{1}{c}{Variable Type} & \multicolumn{1}{c}{Initial Conditions} & \multicolumn{1}{c}{Other States} & \multicolumn{1}{c}{Health Outcomes} & \multicolumn{1}{c}{Economic Outcomes} & \multicolumn{1}{c}{Demographics} \\
 \midrule
-Nursing Home Residency & ? & Education & Heart Disease & Functional Status & Widowhood & Race \\
-& & & Hypertension & & Education & Ethnicity \\
-& & & Stroke & &  Nursing Home Residency & Gender \\
+Labor Force Participation & Unordered Categorical & Childhood Economic& Heart Disease & Smoking & Labor Force Participation & Race \\
+& & Environment, Education & Hypertension & BMI & Disability Insurance Claiming  & Ethnicity \\
+& & & Stroke & Functional Status & Social Security Claiming & Age \\
+& & & Lung Disease &   & Supplemental Security Income Claiming & Gender \\
+& & & Diabetes &  & Earnings &  \\
+& & & Cancer &  & Marital Status & \\
+\midrule
+Full-time Employment & Binary & Childhood Economic & Heart Disease & Smoking & Labor Force Participation & Race \\
+& & Environment, Education & Hypertension & BMI & Disability Insurance Claiming  & Ethnicity \\
+& & & Stroke & Functional Status & Social Security Claiming & Age \\
+& & & Lung Disease &   & Supplemental Security Income Claiming & Gender \\
+& & & Diabetes &  & Earnings & Marital Status \\
+& & & Cancer &  &  & \\
+\midrule			
+Disability Insurance  & Binary & Childhood Economic & Heart Disease & Smoking & Labor Force Participation & Race \\
+Claiming  & & Environment, Education & Hypertension & Functional Status & Disability Insurance Claiming  & Ethnicity \\
+& & & Stroke & & Earnings & Age \\
+& & & Lung Disease &   &  & Gender \\
+& & & Diabetes &  &  &  \\
+& & & Cancer &  & & \\
+\midrule			
+Social Security  & Absorbing & Childhood Economic & Heart Disease & Smoking & Labor Force Participation & Race \\
+Claiming & & Environment, Education & Hypertension & Functional Status & Disability Insurance Claiming  & Ethnicity \\
+& & & Stroke & & Earnings & Age \\
+& & & Lung Disease &   & Marital Status & Gender \\
+& & & Diabetes &  &  &  \\
+& & & Cancer &  & & \\
+\midrule			
+Supplemental Security & Binary & Childhood Economic  & Heart Disease & Smoking & Labor Force Participation & Race \\
+Income Claiming  & & Environment, Education & Hypertension & Functional Status & Disability Insurance Claiming  & Ethnicity \\
+& & & Stroke & & Social Security Claiming & Age \\
+& & & Lung Disease &   & Supplemental Security Income Claiming  & Gender \\
+& & & Diabetes &  & Earnings &  \\
+& & & Cancer &  & Marital Status & \\
+\midrule			
+Health Insurance Type & Unordered Categorical & Childhood Economic & Heart Disease & Smoking & Labor Force Participation & Race \\
+& & Environment, Education & Hypertension & Functional Status & Disability Insurance Claiming  & Ethnicity \\
+& & & Stroke & & Social Security Claiming & Age \\
+& & & Lung Disease &   & Earnings & Gender \\
+& & & Diabetes &  & Marital Status &  \\
+& & & Cancer &  & Health Insurance Type & \\
+\midrule
+Nursing Home Residency & Binary & Education & Heart Disease & Functional Status & Nursing Home Residency & Race \\
+& & & Hypertension & & Widowhood & Ethnicity \\
+& & & Stroke & &   & Gender \\
 & & & Lung Disease  & & & Age \\
 &  & & Diabetes & & & \\
 &  & & Cancer & & & \\
-&  & & Disability & & & \\
-\midrule
-Medical Costs & ? & Childhood Medical Costs & Heart Disease & Psychological Distress & Health Insurance Status & Race \\
-& & Age 30 Health Status  & Hypertension & & DI Claim & Ethnicity \\
-& & Mid-30s Health Status & Stroke & & Medicare Eligibility & Age \\
-& & Employment Status & Lung Disease & & Earnings & Gender \\
-& & Earnings  & Diabetes & & Relationship Status &  \\
-& & Education & Cancer & & Education  & \\
-& & & Disability & & & \\
 \bottomrule
 \end{tabular}
-\end{tiny}
+\end{scriptsize}
 \end{sidewaystable}
 
 \subsubsection{Quality-Adjusted Life Years and Medical Costs} \label{section:qalys}
