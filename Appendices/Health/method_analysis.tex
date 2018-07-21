@@ -11,7 +11,7 @@ In principle, we would like to use the general framework in \citet{Heckman_1981_
 \begin{eqnarray}
 I_{a,m,m'} &=& \bm{Z_a} \bm{\beta}_{a,m,m'} + \tau \left( a \right)_{m,m'} + \varepsilon_{a,m,m'}, \label{eq:trans0}
 \end{eqnarray}
-where $D_{a,m,m'} = \bm{\mathit{1}}  \left( I_{a,m,m'} \geq 0 \right)$, $\bm{Z_a}$ is a vector of covariates with associated coefficient vector $ \bm{\beta}_{a,m,m'}$, $\tau \left( a \right)_{m,m'}$ is a function of age, and $\varepsilon_{a,m,m'}$ is a general time-varying age-$a$ shock. This is a model of state transitions. In the framework of  \citet{Heckman_1981_heterogeneity,Heckman_1981_IncidentalParametersProblem}, this model is supplemented with initial conditions and survival models.
+where $D_{a,m,m'} = \bm{\mathit{1}}  \left( I_{a,m,m'} \geq 0 \right)$, $\bm{Z_a}$ is a vector of covariates with associated coefficient vector $ \bm{\beta}_{a,m,m'}$ and $\tau \left( a \right)_{m,m'}$ is a function of age, and $\varepsilon_{a,m,m'}$ is a general time-varying age-$a$ shock. This is a model of state transitions. In the framework of  \citet{Heckman_1981_heterogeneity,Heckman_1981_IncidentalParametersProblem}, this model is supplemented with initial conditions and survival models.
 
 Instead of using this general model, we simplify a complex reality of multiple health states and general state dependence by modeling state occupancies and simplifying states to be, as a starting point, diseases that we separately model and then simulate. We also adapt this model to other health and economic outcomes. Examples of these other outcomes include smoking, body-mass index, and binge drinking.
 
