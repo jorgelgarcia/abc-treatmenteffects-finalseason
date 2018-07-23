@@ -379,8 +379,7 @@ Stroke              & 3.94 & 4 & 0.14 \\
 
 \noindent An alternative test for a first-order Markov process is based on the following version of a Lagrange multiplier test: (i) use a linear probability model approximation to a first-order Markov process and the variables in Tables~\ref{table:supertab1} to ~\ref{table:supertab3} for each outcome of interest; (ii) calculate the correlation of the residuals with higher order lagged variables. Tables~\ref{table:1storderresidsheart} to \ref{table:1storderresidstroke} show these correlations. The results of these tests strongly support a first-order Markov assumption.
 
-\noindent To illustrate how to read these tests consider Table~\ref{table:1storderresidsheart}. This table reports simple first-order Pearson correlations with the indicated variable. The row presents the residuals from forecasting heart disease at age $a+1$ using different orders of lags. The estimated correlations are small---and jointly statistically insignificant.\footnote{The $p$-value associated with the $F$-test jointly testing a relationship between the residual disease at age $a+1$ and the variables listed in each column using a linear regression is $< .0000$ in Tables~\ref{table:1storderresidsheart} to~\ref{table:1storderresidstroke}.}
-
+\noindent To illustrate how to read these tests consider Table~\ref{table:1storderresidsheart}. This table reports simple first-order Pearson correlations with the indicated variable. The row presents the residuals from forecasting heart disease at age $a$ using different orders of lags. The estimated correlations are small---and jointly statistically insignificant.\footnote{To perform the joint test, we proceed as follows. Let $\hat{D}_{a,m}$ be the residual of the linear-probability approximation of Equation~\eqref{eq:trans}. For each disease in Tables~\ref{table:1storderresidsheart} to~\ref{table:1storderresidstroke}, we regress $\hat{D}_{a,m}$ on the diseases listed in each table's columns. Let $\Xi_m$ denote the coefficients of this regression. We use an $F$-test to test the null hypothesis $H_0: \Xi_m = \bm{0}$. The $p$-values associated with  the $F$-test for Tables~\ref{table:1storderresidsheart} to~\ref{table:1storderresidstroke} are $< .0000$ in the three cases.}
 
 \noindent \textbf{[JJH: Joint test?] [JLG: Computed and now reported in footnote 115]}
 
@@ -391,12 +390,12 @@ Stroke              & 3.94 & 4 & 0.14 \\
 \begin{landscape}
 \begin{table}[H]
 \begin{threeparttable}
-\caption{Tests for Linear Probability Forecasts of Heart Disease at $a+1$} \label{table:1storderresidsheart}
+\caption{Tests for Linear Probability Forecasts of Heart Disease at $a$} \label{table:1storderresidsheart}
 \scriptsize
 \centering
 \begin{tabular}{lcccccccccc} \toprule
-& \multicolumn{10}{c}{Residuals of Forecast of Heart Disease at age $a+1$} \\
-Correlations with	&	Predictor Diabetes &	Hypertension &	Diabetes &	Hypertension &	Diabetes	&	Hypertension &	Diabetes & Hypertension & Diabetes & Hypertension \\
+& \multicolumn{10}{c}{Residuals of Forecast of Heart Disease at age $a$} \\
+Correlations with	&	Diabetes &	Hypertension &	Diabetes &	Hypertension &	Diabetes	&	Hypertension &	Diabetes & Hypertension & Diabetes & Hypertension \\
                     &	at $a - 2$ &	at $a - 2$		&	at $a - 3$ & at $a - 3$		& at $a - 4$		& at $a - 4$		& at $a - 5$	& at $a - 5$	& at $a - 6$	& at $a - 6$	\\
 
 \midrule \\
@@ -405,19 +404,19 @@ Correlations with	&	Predictor Diabetes &	Hypertension &	Diabetes &	Hypertension 
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table presents the correlation between the residuals from forecasting heart disease at age $a+1$ and the predictors indicated in each column.
+\item Note: This table presents the correlation between the residuals from forecasting heart disease at age $a$ and the predictors indicated in each column. The residuals are obtained from a linear-probability approximation of Equation~\eqref{eq:trans}. The right-hand side variables used are listed in Tables~\ref{table:supertab1} to~\ref{table:supertab3}.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 \begin{table}[H]
 \begin{threeparttable}
-\caption{Tests for Linear Probability Forecasts of Hypertension at $a+1$} \label{table:1storderresidshyper}
+\caption{Tests for Linear Probability Forecasts of Hypertension at $a$} \label{table:1storderresidshyper}
 \centering
 \scriptsize
 \begin{tabular}{lccccc} \toprule
-& \multicolumn{5}{c}{Residuals of Forecast of Hypertension at age $a+1$} \\
-Correlations with	&	Predictor Diabetes & Diabetes & Diabetes & Diabetes & Diabetes 	\\
+& \multicolumn{5}{c}{Residuals of Forecast of Hypertension at age $a$} \\
+Correlations with	&	 Diabetes & Diabetes & Diabetes & Diabetes & Diabetes 	\\
                     & at $a - 2$	& at $a - 3$	& at $a - 4$	& at $a - 5$	& at $a - 6$	\\
 \midrule
 &	0.003	& 0.009	&	0.012	&	0.008	&	0.001	\\
@@ -425,20 +424,20 @@ Correlations with	&	Predictor Diabetes & Diabetes & Diabetes & Diabetes & Diabet
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table presents the correlation between the residuals from forecasting hypertension at age $a+1$ and the predictors indicated in each column.
+\item Note: This table presents the correlation between the residuals from forecasting hypertension at age $a$ and the predictors indicated in each column. The residuals are obtained from a linear-probability approximation of Equation~\eqref{eq:trans}. The right-hand side variables used are listed in Tables~\ref{table:supertab1} 
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 \begin{table}[H]
 \begin{threeparttable}
-\caption{Tests for Linear Probability Forecasts of Stroke at $a+1$} \label{table:1storderresidstroke}
+\caption{Tests for Linear Probability Forecasts of Stroke at $a$} \label{table:1storderresidstroke}
 \centering
 \footnotesize
 \begin{tabular}{l *{8}{c}}
 \toprule
-& \multicolumn{8}{c}{Residuals of Forecast of Stroke at age $a+1$} \\
-Correlations with	&	Predictor Cancer &	Diabetes & Heart Disease &	Hypertension &	Cancer	& Diabetes & Heart Disease & Hypertension  \\
+& \multicolumn{8}{c}{Residuals of Forecast of Stroke at age $a$} \\
+Correlations with	&	 Cancer &	Diabetes & Heart Disease &	Hypertension &	Cancer	& Diabetes & Heart Disease & Hypertension  \\
                     &	at $a-2$	&	at $a - 2$ & at $a - 2$	& at $a - 2$	& at $a-3$	& at $a - 3$	& at $a - 3$	& at $a - 3$ \\
 \midrule \\
 &	0.004 &	0.008	&	0.001	&	0.001	&	-0.002	&	0.017 &	-0.004 &	-0.001	\\
@@ -446,7 +445,7 @@ Correlations with	&	Predictor Cancer &	Diabetes & Heart Disease &	Hypertension &
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table presents the correlation between the residuals from forecasting stroke at age $a+1$ and the predictors indicated in each column.
+\item Note: This table presents the correlation between the residuals from forecasting stroke at age $a$ and the predictors indicated in each column. The residuals are obtained from a linear-probability approximation of Equation~\eqref{eq:trans}. The right-hand side variables used are listed in Tables~\ref{table:supertab1} 
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
