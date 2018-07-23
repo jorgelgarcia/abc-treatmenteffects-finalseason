@@ -1,6 +1,6 @@
 \section{Identification and Estimation of Life-Cycle Treatment Effects} \label{appendix:methodology}
 
-This appendix presents our approach to identify and estimate life-cycle treatment effects. Differences in the approach for each outcome are based on different scenarios of data availability. We proceed as follows. Appendix~\ref{app:method_fullobs} focuses on outcomes that are essentially fully observed over the course of the experiment with little attrition. Appendix~\ref{app:method_partialobs} focuses on outcomes that are partially observed over the course of the experiment with a substantial rate of attrition. Appendix~\ref{app:method_noobs}  focuses on outcomes that we do not observe, and thus need to forecast out of sample. Appendices~\ref{app:method_irr} and ~\ref{app:method_cbratio} provide some technical details on the computations of the internal rate of return and the benefit/cost ratios, respectively. Finally, Appendix~\ref{appendix:bootstrap} provides the precise steps for constructing our statistical inference.
+This appendix presents our approach for identifying and estimating life-cycle treatment effects. Differences in the approach used for each outcome are based on different scenarios of data availability. We proceed as follows. Appendix~\ref{app:method_fullobs} focuses on outcomes that are fully observed over the course of the experiment with little attrition. Appendix~\ref{app:method_partialobs} focuses on outcomes that are partially observed over the course of the experiment with substantial rates of attrition. Appendix~\ref{app:method_noobs}  focuses on outcomes that we do not observe, and thus need to forecast out of sample. Appendices~\ref{app:method_irr} and ~\ref{app:method_cbratio} provide technical details on the computations of the internal rate of return and the benefit/cost ratios, respectively. Appendix~\ref{appendix:bootstrap} provides the steps for constructing our statistical inference. Finally, Appendix~\ref{appendix:results} describes our procedure for selecting the background variables that we condition on.
 
 \subsection{Complete Data}\label{app:method_fullobs}
 
@@ -272,29 +272,7 @@ For individual $i$ in experimental sample ($k=e$), an individual $l(i)$ in the a
 
 \noindent And, second, we can use the profiles of the individual(s) in the auxiliary samples as the profiles of the individual $i$ in the experimental sample. This is a non-parametric, one-step strategy: instead of fitting a dynamic relationship in the non-experimental sample and using it to form out-of-sample forecasts, we construct a synthetic cohort and estimate dynamic relationships to impute labor income profiles.
 
-\noindent Table~\ref{table:nvpli} compares the results from the approach we use throughout the main text and the non-parametric approach that we introduce in this section. We present results for labor income. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). We present the discounted net present value (treatment - control) for labor income in 2014 dollars. The approaches are in close agreement.\\
-
-\begin{table}[H]
-\begin{threeparttable}
-\caption{Net Present Value of Labor Income: Parametric and Non-Parametric Approaches}
-\label{table:nvpli}
-\centering
-\begin{tabular}{ccc} \toprule
-\multicolumn{3}{c}{Labor Income} \\
-Pooled & Male & Female \\ \midrule
-\multicolumn{3}{c}{\textbf{a. Parametric (Main Paper)}} \\
-133,032 & 238,105 & 41,908 \\
-(76,634) & (185,375) & (24,606) \\
-\multicolumn{3}{c}{\textbf{b. Non-Parametric (This Section)}} \\
-132,924 & 195,530 & 69,317 \\
-(11,253) & (20,210) & (4,350) \\ \bottomrule
-\end{tabular}
-\begin{tablenotes}
-\footnotesize
-\item Note: This table compares the net-present value of labor income (treatment - control) using the parametric approach of the main text and the approach that we use in this section. All values are discounted to birth and reported in 2014 dollars.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+\noindent Table~\ref{table:predsens} compares the results from the approach we use throughout the main text and the non-parametric approach that we introduce in this section. We present results for labor income. We use pre- and post-treatment variables to match (using the same variables as the main approach of Appendix~\ref{appendix:match}). We present the discounted net present value (treatment - control) for labor income in 2014 dollars, together with the internal rates of return and benefit-cost ratios associated to these net present values. Table~\ref{table:predsens} also presents results from other specifications that we discuss below in Appendix~\ref{appendix:predsensitivity}. The approaches are in close agreement.
 
 \subsubsection{Testing Assumption~\ref{ass:contain}: Support Conditions}\label{app:containsupport}
 
@@ -723,14 +701,16 @@ In the auxiliary samples, we observe outcomes $Y_{n,a}$ for $a \in [a^*, \ldots,
 \begin{sidewaystable}[H]
 \resizebox{\columnwidth}{!}{%
 \begin{threeparttable}
-\caption{Net Present Value of Labor Income and Cost/Benefit Analysis Under Different Specifications for Labor Income Forecasts}
+\caption{Net Present Value of Labor Income and Benefit/Cost Analysis Under Different Specifications for Labor Income Forecasts}
 \label{table:predsens}
 \centering
 \footnotesize
 \input{output/alternative_specifications}
 \begin{tablenotes}
 \footnotesize
-\item Note: This table displays the net present value of labor income in 2014 USD (treatment - control) using the five different specifications for forecasting that are explained below. Specification 1 is our baseline estimate. It also presents the calculation of the internal rate of return and the benefit/cost ratio of the program using these different net present values. Specification 1: forecast based on lagged outcome; no serial autocorrelation; and no fixed effect. Specification 2: forecast based on lagged outcome; arbitrary serial autocorrelation; and no fixed effect. Specification 3: forecast based on lagged outcome; first-order serial autocorrelation; and no fixed effects. Specification 4: forecast based on lagged outcome; no serial autocorrelation; and fixed effect.
+\item Note: This table displays the net present value of labor income in 2014 USD (treatment - control) using the five different specifications for forecasting that are explained below. Specification 1 is our baseline estimate. It also presents the calculation of the internal rate of return and the benefit/cost ratio of the program using these different net present values. Specification 1: forecast based on lagged outcome; no serial autocorrelation; and no fixed effect. Specification 2: forecast based on lagged outcome; arbitrary serial autocorrelation; and no fixed effect. Specification 3: forecast based on lagged outcome; first-order serial autocorrelation; and no fixed effects. Specification 4: forecast based on lagged outcome; no serial autocorrelation; and fixed effect.\\
+\item \\
+\item \textbf{[JLG: Please revisit this table. Specification 1 was obviously outdated and that's why it jumped out to you as very different from the rest of the specifications. We seem to have some decent consistency across the board but, more importantly, between Specification 1 and 5 (nonparametric).]}
 \end{tablenotes}
 \end{threeparttable}
 }
@@ -798,8 +778,6 @@ A sufficient condition for the validity of this procedure is Assumption~\ref{ass
 \item Compute the standard error as the sample standard deviation of the 100*100 re-samples. Compute the $p$-value's as the proportion of times that we reject the null hypothesis, after centering the empirical bootstrap distribution according to the null hypothesis.
 \end{enumerate}
 
-\noindent \textbf{[JJH: What about standard errors for the second -nonparametric- matching procedure?] [JLG: It comes next. We add back the the parametric residuals. I think that we could do better; but also believe that this is valid. We are estimating the conditional mean function with non-parametrically and the residual parametrically. This makes the computation really simple.] [JJH: But can we check the other way? How much difference does it make?] [JLG: Yes. Let us clear G and this won't take more than a morning.]}
-
 \subsubsection{Inference for Non-Parametric Forecasts}
 
 
@@ -812,7 +790,7 @@ A sufficient condition for the validity of this procedure is Assumption~\ref{ass
 
 \item Perform the matching procedure to construct the synthetic cohort, estimate the dynamic relationship and impute the profiles by matching on baseline variables and on variables affected by treatment as explained in Appendix~\ref{appendix:nonpar}. Store the predictions at all ages for individual $i$ in this sample in a vector $\mathcal{\tilde{Y}}_{i,e,s}$, where $\mathcal{\tilde{Y}}_{i,e,s}$ is the vector of forecasts for individual $i$ in the experimental bootstrap sample $s$.
 
-\item Compute the residuals in in step 7 of Appendix~\ref{appendix:bootstrapspreds}.
+\item Compute the residuals in step 7 of Appendix~\ref{appendix:bootstrapspreds}.\footnote{When we compute the residuals using the fully nonparametric model we get the following net present value for labor income: pooled (males and females) 137,133 (s.e.\ 19,989); males 204,256 (s.e.\ 32,212); females 64,522 (s.e.\ 9,987). Table~\ref{table:predsens} shows that these results are closely aligned to the two approaches reported in the paper.}
 
 \item Randomly pair individual $i$ in sample $(e,s)$ with individual $j$ in sample $(n,s')$. This random pairing is stratified by the variables $\bm{B}_k$ and $\bm{X}_{k,a}^d$ defined in the paper. The forecast accounting for forecasting error is $\mathcal{\tilde{Y}}_{i,e,s}+ \bm{\mathcal{E}}_{j,e,s'}$.
 
