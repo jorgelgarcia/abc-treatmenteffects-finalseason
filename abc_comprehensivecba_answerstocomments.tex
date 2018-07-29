@@ -1,0 +1,142 @@
+%Input preamble
+\input{preambleappendix}
+\input{output/mainstatistics}
+\usepackage[stable]{footmisc}
+
+\newcommand*\leftright[2]{%
+  \leavevmode
+  \rlap{#1}%
+  \hspace{0.5\linewidth}%
+  #2}
+
+\newcommand{\orth}{\ensuremath{\perp\!\!\!\perp}}%
+\newcommand{\indep}{\orth}%
+\newcommand{\notorth}{\ensuremath{\perp\!\!\!\!\!\!\diagup\!\!\!\!\!\!\perp}}%
+\newcommand{\notindep}{\notorth}
+
+\externaldocument{abc_comprehensivecba_appendix-pub}
+\externaldocument{abc_comprehensivecba_revised}
+\doublespacing
+
+\begin{document}
+
+\singlespacing
+\begin{titlepage}
+\newgeometry{top=.8in, bottom=.8in, left=.8in, right=.8in}
+
+\title{\Large \textbf{Responses to Comments}}
+
+\maketitle
+\thispagestyle{empty}
+\restoregeometry
+\end{titlepage}
+
+\doublespacing
+
+\noindent We thank you all for the thoughtful comments which have led to substantial improvement in the paper. Itemized responses to each of the questions posed follow.
+
+\section{Evan Taylor}
+
+\noindent Overall, this is a cool paper and I thought it was very clear. Couple of fairly minor comments. 
+
+\begin{enumerate}
+
+\item In the introduction you say ``numerous positive treatment effects.'' Might be nice to list one or two of the major ones for people that are only going to read the introduction. Could be in a footnote. 
+
+\noindent \textit{Answer.} This is a good point, and you are right that the reader could take more out of the first page of the paper with this. Footnote 4, which previously only cited the companion paper in which we document treatment effects now cites that papers and provides examples. We added the following sentence ``Participants in ABC/CARE benefit in terms of both cognitive and socio-emotional skills, education, employment and labor income, and risky behavior and health. The parents of participants benefit in terms of labor income and education.''
+
+\item When you define $\bm{B}$ it does not have an age subscript. But starting on page 14, in Equation~(6a) $\bm{B}$ does have an age subscript. I thought that $\bm{B}$ was baseline characteristics and so are unchanged at every age, and should not have subscript. I understand why the $\gamma$'s have a subscript because the mapping of $\bm{B}$ into $\bm{Y}$ could vary by age, but I think that $\bm{B}$ should be age invariant or at least that's how you initially explain it. 
+
+\noindent \textit{Answer.} You are right and this is a notation mistake in Equations (6a) and (6b) and Table 2. We have corrected that.
+
+\item In the note for Table 2 you say that $R$ is indicator for treatment and I think you mean $D$, although $R=D$.  $R$ is the randomization indicator, correct?
+
+\noindent \textit{Answer.} You are correct. We have corrected this. The footnote table should define $D$ and not $R$, because that is what is being used in the table. $R$ is randomization and $D$ treatment participation.
+
+\item In footnote 29, isn't labor income lower for females in the treatment group? Table 2 panel (a) shows a negative coefficient on D.
+
+\noindent \textit{Answer.} Yes. You are correct. Labor income, at age 30, is higher in the control group although the difference is minor. We have corrected this. This has to do with females in the treatment group participating of the labor force later in their lives. After age 30, treatment-group females pick up and ABC/CARE produces substantial gains in terms of their labor income.
+
+\item You say that the NPV of lifetime labor income is around $\$600,000$ on page 17 but this does not seem to lineup with Figure 3, maybe I'm missing something.
+
+\noindent \textit{Answer.} You are not missing anything. There was an error on what we were reporting. The NPV for labor income when pooling males and females is: \$133,032 (s.e.\ \$76,634). This is more thoroughly reported and broken into gender in Table C.12 of Appendix C.
+
+\item Figure 3 shows the cost of the program as $\$100,000$, but you say on page 23 that the cost is $\$18,000$. Is the y-axis mislabeled?
+
+\noindent \textit{Answer.} There is not mistake in the y-axis label of Figure 1. Here is the way to interpret the costs reported there: $\$18,000$ is the yearly cost of the program and the program lasted 5 years. In addition, the social cost of the program is also contained in that bar. The footnote of the figure does report that.
+
+\item In Section 6, it's a little unclear to me why including health and crime changes the difference between your method and the Kline method so much.  The estimates on lifetime labor income look identical other than the se.  I understand this part because they aren't accounting for model uncertainty but I didn't understand where the difference is the last row are coming from(3.8 vs 7.3).
+
+\noindent \textit{Answer.} First of all, we are not only including health and crime. We are are also including parental labor income. This is a very sizable gain. Now, the fact that when only labor income is considered the estimates across the two methods are ``identical'' should not be interpreted as a victory for the method of Kline and Walters. Remember: That number is obtained using the return to IQ generated in our own data in terms of labor income. Their ``forecasts'' use labor income \textbf{only up to age 27}. Now, the difference between $3.80$ and $7.33$ is coming from the fact that their back-of-the-envelope return to IQ points in other benefits is too weak to encompass the overall benefits of the program.
+\end{enumerate}
+
+\section{Sidharth Moktan}
+
+I think that the paper looks good in general. It provides a template for future cost-benefit analyses, including the Perry, in my opinion. In general, I'd be able to replicate most parts of the analysis. However, I was very confused about the weighting procedure in the parametric approach. If you asked me to replicate, this would be my stumbling point. Our phone conversation cleared things up. One of my comments in the paper describes how the Appendix did not help answer this question. 
+
+\begin{enumerate}
+
+\item Page 7. The text reads: In the experiment, we analyze participants are observed through age $a^* < \bar{A}$. Should this be $a^* \leq \bar{A}$? If $\bar{A}$ is the oldest age considered, doesn't $\bar{A}$ need to be observed?
+
+\noindent \textit{Answer.} There is no mistake in how the text reads. We observe the experimentals up to age $a^*$, but we want to consider a oldest age $\bar{A}$. A methodology is created to fill the observation gap between $a^*$ and $\bar{A}$.
+
+\item Is Remark R-1 saying that Assumption A-1 can be resolved into two further assumptions.
+\noindent \textit{Answer.} That is exactly right. That is why Assumption A-1 has two two inequalities in both (3a) and (3b). In each (3a) and (3b), the first represents invariance across treatment regimes and the second represents invariance across samples.
+
+\item Page 8. Step 1 does not describe the synthetic cohort construction process clearly. I understand that the non-experimental sample is weighted by a similarity weight between non-experimental individuals and the experimental sample, however, the details of this weighting process is unclear. The Mahalanobis algorithm outlined in Appendix C.3.3 constructs a similarity score that is indexed by i and l(i). This implies that each experimental individual i is assigned a weight for each individual l in the non-experimental sample. So, there are i*l weights. It is unclear what happens next. How are the l*i weights used when estimating the production function over the non-experimental sample? Are the scores averaged over all i's for each l, thereby, yielding an average similarity score between each non-exp individual l and the entire experimental sample?
+
+\noindent \textit{Answer.} I believe that this issue cleared up in our conversation. We are following a standard procedure  to ``delimit'' the non-experimental samples as for them to be comparable in baseline characteristics $\bm{B}$ to the experimental sample. The objective is to estimate the production functions of interest in samples that are comparable to the ABC/CARE sample in baseline characteristics, as we discussed. 
+
+\item Page 9. In the explanation of Figure 1, do you mean that the synthetic cohort needs to be comparable to the experimental sample? 
+
+\noindent \textit{Answer.} No. As the text reads, the synthetic cohort needs to be comparable to the non-experimentals for whom $\bm{B} \in \mathcal{B}_0$ and also to the control group. That is because: (i) matching is done based on $bm{B}$ and everyone in the experiment satisfies $\bm{B} \in \mathcal{B}_0$; and (ii) the control group, as the non-experimental sample, received no treatment.
+\end{enumerate}
+
+\section{Tanya Rajan}
+
+\begin{enumerate}
+
+\item Page 8. This might be a semantic issue, but can ``synthetic cohort'' and "non-experimental sample" be used interchangeably?
+
+\noindent \textit{Answer.} No. They are not used interchangeably. Non-experimental sample refers to any of the initial non-experimental samples as given (e.g.,\ CNLSY, NLSY79, PSID). Synthetic cohort refers to the non-experimental sample as modified by Step 1 in Section 3.
+
+\item Page 9. Maybe I missed something, but this is confusing. This seems to suggest that you are only matching on pre-program variables. If there is no treatment effect in the non-experimental sample, how do you use it to forecast the treatment-control differences? Do you also match based on $X^d_{k,a}$? If so, this is not clear in the steps outlined below. Which variables are used?
+
+\noindent \textit{Answer.} No. We do not match on $X^d_{k,a}$ in this part of the paper. The objective of Step 1 is to create a sample that is comparable in terms of $\bm{B}$ to ABC/CARE, i.e.,\ to create the synthetic cohort. In the synthetic cohort, we then estimate the production functions. These functions have $X^d_{k,a}$ as an argument. Applying them, we forecast. However, you are right that an intuitive procedure is to match both on  $\bm{B}$ and $X^d_{k,a}$. That is discussed in Section 3.2.1.
+
+\item Page 19. What variables do you use when matching? [referring to the non-parametric procedure]. 
+
+\noindent \textit{Answer.} Thank for asking for that clarification. As we note in footnote 35, Appendix C.3.5 provides the details of this procedure. In there, we detail the matching. We use the same variables  $X^d_{k,a}$ as in the parametric procedure.
+
+\item Page 19. Table C.12 shows much smaller standard errors for the non-parametric matching specification, so why wouldn't you prefer this method? Would be good to explain.
+
+\noindent \textit{Answer.} You are correct that the standard errors of this procedure are much smaller. Efficiency gains are natural to expect here because the it is a one-step procedure. As we explain earlier in Section 3, however, the parametric procedure makes explicit how economic theory allows us to combine experimental and non-experimental data and obtain testable implications. We would not be able to clearly state these implications if we directly jumped into the nonparametric procedure. 
+
+\item Page 24. Don't the crime cost savings drive your results? This is what is suggested by Figure 3, correct?
+
+\noindent \textit{Answer.} While Figure 3 shows that the NPV associated to crime is the largest, Figure 4 shows that the program is socially efficient even after getting rid of each of the major components one at the time. This leads to your next question. 
+
+\item What do you mean by this? [Referring to social efficiency] Would be good to define a threshold for what is or isn't socially efficient.
+
+\noindent \textit{Answer.} Although the paper is slightly loose on this, it is standard to consider a social program efficient when, once all of its costs and especially those paid by society to fund the program are net accounted for, the benefit/cost ratio is greater than one or the internal rate of return is sizable. Note that in all of our tests of significance for these statistics, the null hypothesis are: (i) $H_0: \text{BC ratio} = 1$  and (ii) $H_0: \text{IRR} = .03$. We use $.03$ for the latter because that is our baseline discount rate. The details of these tests are in Appendices C and H.
+
+\item Table H.1 in the Appendix claims to do a ``removed component" sensitivity analysis but it actually matches the estimates in this graph. For example, crime cost savings amount to $450,000$ and parental labor income to about $116,000$. This suggests that Table H.1 isn't removing the component in the leftmost column--instead it's removing all other components. 
+
+\noindent \textit{Answer.} The NPV column in Table H.1 should coincide with what Figure 3 presents as NPV for a specific category. We list the NPV in the left-most column for the reader to know the amount that we are removing from the overall NPV. In the crime column, the NPV that we remove is $450,000$. This is the amount that the left-most column shows and the NPV associated to crime in Figure 3. The footnote of the table states that ``The first row represents the baseline estimates. The other rows present estimates for scenarios in which we remove the NPV estimates of the component listed in the first [left-most] column.''
+
+\noindent The pooled NPV estimates in Table H.1 do not match Table C.12 in the appendix or the main estimates in the paper even though all these tables say "baseline" next to the estimates in question.
+
+\noindent \textit{Answer.} The estimates do match. In Table C.12 [recall that this table presents NPV for labor income only because that is the exercise at hand], the pooled estimates (Specification 1) report 133,032 (s.e.\ 76,634). In Table H.1 the very same NPV point estimate is reported for subject labor income. This is also consistent with the value reported in Figure 3. 
+
+\item On page 24 you say that this is the "range of plausible values" for for the B/C ratio. Is this a typo? 
+
+\noindent \textit{Answer.}  I am not sure that I was able to read well the question in the document that you sent. But if you compare the ranges that we report with Figure H.1, you will find consistency.
+\end{enumerate}
+
+\section{Rafeh Qureshi}
+
+There aren’t [comments] very many and, apart for the Fix notation, which I and Victor are both a bit confused by, they’re mostly unimportant; you two were quite thorough in reviewing the paper and it’s organized very well. Please, let me know if I can help with this on by reviewing further or checking anything on the data or supplementary literature side. I’ll look a bit more at the appendix as well, but everything seems to be clear and helpfully organized.
+
+\textit{Answer.} The difference between fixing and conditioning is explained in the references provided in the paper. While conditioning refers to the statistical concept of studying the probability distribution for a subpopulation, fixing refers to the economic concept of a state experienced by an individual. Thus, $Y$ conditional on $V = 0$ refers to the random variable $Y$ for the subpopulation for which $V = 0$. $Y$ fixed on $V = 0$ refers to the random variable $Y$ when the population is fixed to the state $V = 0$. Fixing and conditioning become the same in our context, where $R = D$, and $R$ was randomly assigned.
+
+\end{document}
