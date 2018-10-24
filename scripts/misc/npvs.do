@@ -191,7 +191,7 @@ twoway (bar     m part1            if estimate == 1 & sex == 3, color(gs8) lwidt
 		legend(order(1 2) label(1 "Net Present Value") label(2 "Significant at 10%") cols(2))
 			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
 			  5 "Crime" 6 "QALYs*",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
-			  ylabel(-1 0[1.5]4.5, angle(h) glcolor(gs14))
+			  ylabel(-1 0[1.5]6, angle(h) glcolor(gs14))
 			  xtitle("", size(small)) 
 			  ytitle("100,000's (2014 USD)", size(medium))
 			  graphregion(color(white)) plotregion(fcolor(white))
@@ -202,6 +202,25 @@ twoway (bar     m part1            if estimate == 1 & sex == 3, color(gs8) lwidt
 #delimit cr 
 graph export abccare_npvssummredux.eps, replace
 
-
+# delimit
+twoway (bar     m part1            if estimate == 1 & sex == 3 & part1 <= 5, color(gs8) lwidth(medthick) barw(.9))
+       (bar     m part1            if estimate == 1 & sex == 3 & part1 == 6, color("75 0 130") lwidth(medthick) barw(.9))
+       (scatter m part1 if sig == 1 & estimate == 1 & sex == 3, msymbol(circle) mlwidth(medthick) mlcolor(black) mfcolor(black) msize(medium))
+       
+ 
+,	
+		legend(order(1 3) label(1 "Net Present Value") label(3 "Significant at 10%") cols(2))
+			  xlabel(1 "Program Costs" 2 "Total Benefits" 3 "Labor Income" 4 "Parental Labor Income"
+			  5 "Crime" 6 "QALYs*",  angle(h) noticks grid glcolor(gs14) labsize(vsmall)) 
+			  ylabel(-1 0[1.5]6, angle(h) glcolor(gs14))
+			  xtitle("", size(small)) 
+			  ytitle("100,000's (2014 USD)", size(medium))
+			  graphregion(color(white)) plotregion(fcolor(white))
+			  note("Per-annum Rate of Return: Males and Females 13.7% (s.e. 3%)."
+			       "Benefit-cost Ratio: Males and Females 7.3 (s.e. 1.8)."
+			        , size(small))
+			text(-.3 4.5 "{&larr}{&hellip} Components of Total Benefits {&hellip}{&rarr}", size(medium));
+#delimit cr 
+graph export abccare_npvssummredux_color.eps, replace
 
 
