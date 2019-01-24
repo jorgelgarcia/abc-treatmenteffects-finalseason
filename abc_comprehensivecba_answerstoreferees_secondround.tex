@@ -59,15 +59,19 @@ University of Southern California}
 
 \noindent \textbf{Editor, Comment 1. Please send in what you want me and the referees to consider to be the final version. When you send in your revision, make sure to also include a reply to me as well as to the remaining referee, explaining what you did with the comments you received.} 
 
-\noindent \textit{Response.} We are submitting what we consider our final version. Responses to your questions and the referees' questions follow. 
+\noindent \textit{Response.} We are submitting what we consider our final version. Responses to your questions and those of the referees follow. 
 
 \noindent \textbf{Editor, Comment 2. Keep in mind that this is, ultimately, your paper. I very much hope that we can get by with one last round of revisions at this point. I believe this is in our mutual interest. This, obviously, depends much on you providing a dedicated revision. It should not exceed the current length by more than three pages, i.e. not exceed 42 pages, including the references.}
+
+\noindent \textbf{\textit{[JJH: We are at 43 - can we squeeze down?]}}
+
+\noindent \textbf{\textit{[JLG: We are at 43 because the document has lots of comments and clarifications by both of us. If we get rid of those, we are half-page below 42.]}}
 
 \noindent \textit{Response.} We hope so too, and think of this as the final version of our project. We have complied to the page limit that you indicated.
 
 \noindent \textbf{\textit{[JJH: Jorge - I need to see final version. I also need Appendix.]}}
 
-\noindent \textbf{\textit{[JLG: I am integrating your edits to this document, and sending you the revised final paper adding the content that you "OK" in the previous iteration. I am also noting in this document what material I added to the revised version. I also sent the original reports and the Appendix. Note that the revised version complies to the page limit that the editor is requesting, even when there are still some in-line comments by both of us.]}}
+\noindent \textbf{\textit{[JLG: I am integrating your edits to this document, and sending you the revised final paper adding the content that you "OK" in the previous iteration. I am also noting in this document what material I added to the revised version. I also sent the original reports and the Appendix.]}}
 
 \noindent \textbf{Editor, Comment 3. I assume that the material following the references is meant to be an online appendix: please clearly indicate (and confirm) that this is so.}
 
@@ -148,9 +152,9 @@ supp( \bm{Y}_{e,a}^1, \bm{X}^1_{e,a}, \bm{B}_e, \bm{\varepsilon}_{e,a} ) \subset
 supp( \bm{Y}_{e,a}^1, \bm{X}^1_{e,a}, \bm{B}_e, \bm{\varepsilon}_{e,a} ) \subseteq supp( \bm{Y}_{e,a}^d, \bm{X}^d_{e,a}, \bm{B}_e, \bm{\varepsilon}_{e,a} ).  \label{eq:ref3}
 \end{equation}
 
-\noindent \textit{Response.} It is right that we do not observe $\bm{X}_{k,a}^1$ for $k = n$. However, note that we aim to estimate $\phi_{k,a}^d \left( \cdot, \cdot \right)$ in Equation~\eqref{eq:outcome}. Thus, we need to guarantee that the sample that we estimate the function in covers the support of the arguments of these functions. Thus, the support of the inputs and the background variables in the productions functions in the non-experimental sample needs to be ample enough to cover all realized values of the arguments in the experimental data. We document that this holds in Appendix~\ref{app:containsupport}. 
+\noindent \textit{Response.} It is right that we do not observe $\bm{X}_{k,a}^1$ for $k = n$. However, we seek to construct counterfactuals in the ``e'' sample and do require this condition to do so. In our paper, we estimate $\phi_{k,a}^d \left( \cdot, \cdot \right)$ in Equation~\eqref{eq:outcome}. Thus, we need to guarantee that the sample that we used to estimate the function covers the support of the arguments of these functions. Thus, the support of the inputs and the background variables in the productions functions in the non-experimental sample needs to be ample enough to cover all realized values of the arguments in the experimental data. We document that this holds in Appendix~\ref{app:containsupport}. 
 
-There are some typos in what the referee writes because in Equation~\eqref{eq:ref1} the right- and the left-hand side of the equations are the exact same. Equation~\eqref{eq:ref2} is not really a support condition of our interest. We are not trying to use the control-group in the experimental sample to forecast in the treatment-group in the experimental sample, which would seem the implication from what the referee writes. Similarly for what the referee writes in Equation~\eqref{eq:ref3}. A way to understand our assumption, however, is that we are using the non-experimental sample, which given the absence of treatment is a control group, to forecast in the experimental sample and thus we require
+There is a typo in Equation~\eqref{eq:ref1}: the right- and the left-hand side of the equations are the exact same. Equation~\eqref{eq:ref2} is not really a support condition of our interest. We are not trying to use the control-group in the experimental sample to forecast in the treatment-group in the experimental sample, which the referee requests that we do. Similarly for what the referee writes in Equation~\eqref{eq:ref3}. A way to understand our assumption, however, is that we are using the non-experimental sample, which given the absence of treatment is a control group, to forecast in the experimental sample and thus we require
 
 \begin{equation}
 supp( \bm{Y}_{e,a}^d, \bm{X}^d_{e,a}, \bm{B}_e, \bm{\varepsilon}_{e,a} ) \subseteq supp( \bm{Y}_{n,a}^0, \bm{X}^0_{n,a}, \bm{B}_n, \bm{\varepsilon}_{n,a} ).  \label{eq:ref4},
@@ -161,6 +165,8 @@ which holds as a direct consequence of Assumption~\ref{ass:contain}.
 \textbf{\textit{[JJH: Let's reword so we explain why text material is correct.]}}
 
 \textbf{\textit{[JLG: I have reworded the answer. I do feel that it is important (for the editor's reading) to point out that the equations that the referee stated in the report are wrong.]}}
+
+\textbf{\textit{[JJH: Agreed.]}}
 
 \noindent \textbf{Referee 2, Comment 2. [\ldots] It feels that this is more complicated than it needs to be. For example, I don't understand why you need to distinguish between $\bm{\phi}_{k,a}^d \left( \cdot, \cdot \right) $ and $\bm{\varepsilon}_{k,a}^d$. You motivate this with the conditional mean $\Delta_a$ so if I focus on identifying that, one needs to identify}
 
@@ -176,25 +182,21 @@ which holds as a direct consequence of Assumption~\ref{ass:contain}.
 
 \textbf{which seems to be implied by Assumptions~\ref{ass:summary} to \ref{ass:exog}. The second is the support condition Assumption~\ref{ass:contain}. Why not presenting it this way? Am I missing something?}
 
-\noindent \textit{Response.} First, the reason why we include $\bm{\varepsilon}_{k,a}^d$ in Assumption~\ref{ass:summary} is that we are stating invariance in the production function in Equation~\eqref{eq:outcome}. The components of this production function are both $\bm{\phi}_{k,a}^d \left( \cdot, \cdot \right) $ and $\bm{\varepsilon}_{k,a}^d$. Thus, for the production function to be invariant across treatment regimes and samples, we need to state and test invariance conditions for all of the components. We do not want to arbitrarily state invariance conditions on one element of the production function and not in the other, even when $\bm{\phi}_{k,a}^d \left( \cdot, \cdot \right) $ is our forecasting tool. Note also that including $\bm{\varepsilon}_{k,a}^d$ in the invariance assumption provides us with additional implications that we test.
+\noindent \textit{Response.} We find it clarifying to distinguish the components of the technology arising from observables from the components due to unobservables. Note also that including $\bm{\varepsilon}_{k,a}^d$ in the invariance assumption provides us with additional implications that we test. However, you are perfectly correct that if we are only interested in means Equation~\eqref{eq:ref4} suffices. Thank you for the point. Note, however, that as it stands the $\bm{X}_{k,a}^d$ are not exogenous. We can fix arguments. This is stronger than taking means. For the unobservables, we can only specify means.
 
-Second, Assumption~\ref{ass:summary} states and clarifies the economic concept that implies Equation~\eqref{eq:ref4}. We pose the assumption and derive the implications in Equations~\eqref{eq:suff1},~\eqref{eq:suff2}, and~\eqref{eq:nec},  which include Equations~\eqref{eq:ref4}. 
+Assumption~\ref{ass:summary} states and clarifies the economic content that implies Equation~\eqref{eq:ref4}. We pose the assumption and derive the implications in Equations~\eqref{eq:suff1},~\eqref{eq:suff2}, and~\eqref{eq:nec},  which include Equations~\eqref{eq:ref4}. 
 
 The analogous answer applies for the case of identifying distributions, as opposed to conditional means (as the referee points out).
 
 \noindent \textbf{Referee 2, Comment 3. It seems like we need some assumption about $\bm{X}_{e,a}^d$. In general, if Assumptions~\ref{ass:summary} to \ref{ass:exog} hold but I want to identify $\mathbb{E} \left[ \bm{Y}_{e,a} | \bm{B} \in \mathcal{B}_0 \right]$ for $a^* < a$, I typically won't observe $\bm{X}_{e,a}^d$ in the data but if I can't observe $\bm{X}_{e,a}^d$ why is exogeneity useful? Thus it seems that for identification we need an additional assumption about identification of $\bm{X}_{e,a}^d$. It seems like essentially just assuming $G_{e,a}^d \left( \bm{x} \right)$ is identified in my example above.} 
 
-\noindent \textit{Response.} It is an important point that observing $\bm{X}_{e,a}^d$ is necessary and crucial to our forecasting methodology. We do not impose that as an assumption but as part of our empirical procedure because researchers would face different data constraints regarding the inputs that available in the experimental and non-experimental datasets. \textbf{Step 3.} in Section~\ref{sec:forecasting} explains and justifies the election of the inputs that we use. In sum, the inputs need to be observed in both the experimental and the non-experimental samples, satisfy common support, and be relevant in predicting the outcome of interest. 
-
-\textbf{\textit{[JJH: Again - state less aggressively.]}}
-
-\textbf{\textit{[JLG: I have reworded the answer.]}}
+\noindent \textit{Response.} We assume that the referee means ``observation of $\bm{X}_{e,a}^d$'' rather than ``identification.'' We address observation under or support assumption (Assumption~\ref{ass:contain}). \textbf{Step 3} in Section~\ref{sec:forecasting} explains and justifies the inputs that we use. The inputs that generate future values need to be available in the non-experimental sample and generate outcomes in an invariant technology. 
 
 \section*{Comments of Reviewer 3}
 
 \noindent \textbf{Referee 3, Comment 1. A key assumption is that the mapping between predictors and outcomes to be constant across children, parents, and grand-children, once you control for background variables. Can't this assumption be relaxed to allow for interactions between cohort and predictors/outcomes in a parametric/restrictive way? For example, I suppose you could allow for say a (e.g. linear) trend between cohort of birth and these variables. Can data be informative about how one would specify such a trend?}
 
-\noindent \textit{Response.} We only make the assumption for one generation. It is not an OLG model. Indeed, we can allow for general conditioning given support conditions. We do not implement this in our analysis because the choices of $\bm{X}_{k,a}^d$ and $\bm{B}_k$ imply that, empirically, we cannot reject that Assumption~\ref{ass:summary} holds. We clarify this in a footnote when stating Assumption~\ref{ass:summary}.
+\noindent \textit{Response.} We only make this assumption for one generation. Our model is not necessarily an OLG model. Indeed, we can allow for general conditioning given support conditions. We do not implement this in our analysis because the choices of $\bm{X}_{k,a}^d$ and $\bm{B}_k$ imply that, empirically, we cannot reject that Assumption~\ref{ass:summary} holds. We clarify this in a footnote when stating Assumption~\ref{ass:summary}.
 
 \textit{\textbf{[JLG: I suggest adding the following footnote at the end of the statement of Assumption~\ref{ass:summary}. ``This assumption could be generalized to hold conditionally on any set of covariates. For example, one could think of structural invariance conditional on linear or polynomial time trends.'']}}
 
@@ -204,25 +206,29 @@ The analogous answer applies for the case of identifying distributions, as oppos
 
 \noindent \textbf{Referee 3, Comment 2. I didn't fully understand your response to my question of cross-equation restrictions. I understand you use multiple data sets, but it seems to be that there is more than one outcome per data set. Using such restrictions should not only improve efficiency but it would also be important in terms of interpreting the results.} 
 
-\noindent \textit{Response.} Your point is a good one in general. Cross-equation restrictions improve efficiency. Let us clarify that we forecast each of the outcomes in Figure~\ref{figure:main} using different datasets. We believe that the paper extensively explains the datasets for each outcomes. In terms of implementing the strategy, the ``only'' benefit from imposing cross-equation restrictions is to produce additional testable implications as well as efficiency. We clarify that these restrictions can be worked out when stating Assumption~\ref{ass:summary}. As we state above, in our case this are not practical because different outcomes come from different datasets. 
+\noindent \textit{Response.} Your point is a good one in general. Cross-equation restrictions improve efficiency. Let us clarify that we forecast each of the outcomes in Figure~\ref{figure:main} using different datasets. Our paper explains the datasets for each outcome. In terms of implementing the strategy, the ``only'' benefit from imposing cross-equation restrictions is to produce additional testable implications as well as efficiency. We clarify that these restrictions can be worked out when stating Assumption~\ref{ass:summary}. As we state above, in our case this are not practical because different outcomes come from different datasets. 
 
 \textit{\textbf{[JLG: I suggest adding the following footnote at the end of the statement of Assumption~\ref{ass:summary}. ``In addition, cross-equation structural invariance restrictions could in principle be imposed across outcomes. This is not possible in our case because data for forecasting each of our outcomes come from different sources. Researchers interested in applying this method to contexts where the data used to forecast provides several outcomes could include cross-equation restrictions in the testable implications that we derive from Assumption~\ref{ass:summary}.'']}} 
 
 \textit{\textbf{[JLG: I have integrated the proposed modification, with your edits included.]}}
 
+\textit{\textbf{[JJH: I reedited.]}}
+
+\textit{\textbf{[JLG: Your edit is included now in the revised paper and the modified footnote pasted above for reference.]}}
+
 \noindent \textbf{Referee 3, Comment 3. Are the gains in labor income concentrated among those whose health improved? Presumably, the policymakers care about how the joint distributions change. If the paper is supposed to be a template, it would be useful to know how the authors would suggest other researchers could incorporate such restrictions in future work.}
 
-\noindent \textit{Response.} This is correct. However, our capacity to estimate joint distributions of outcomes is restricted by the small sizes of our samples. Small sample size does not allow us to dig into joint distributions giving rise to heterogeneity in our treatment effects. This also relates to the difficulty for us to analyze essential heterogeneity, as you suggested in the previous revision.
+\noindent \textit{Response.} We agree that such distributional analyses would be informative. However, our capacity to estimate joint distributions of outcomes is restricted by the small sizes of our samples. This precludes credible estimation of joint distributions giving rise to heterogeneity in outcomes. This also relates to the difficulty for us to analyze essential heterogeneity, as you suggested in the previous revision.
 
 \noindent \textbf{Referee 3, Comment 4. I am still confused why one needs a randomized experiment if one is willing to make the assumptions you invoke. Under your assumptions, what is so special about experimentally induced variation in inputs. Any variation would do, including observational variation, right? Put differently, suppose you want to use your framework in a setting with only observational variation in inputs. Would I need to change or modify any assumptions? If not, I don't see what role the experiment per se plays.}
 
-\noindent \textit{Response.} You make a useful point. Assumption~\ref{ass:exog} allows us to identify production functions when both the outputs and the inputs are observed. Assumption~\ref{ass:summary} states that the production functions are constant across experimental and non-experimental samples (and then provides testable implications for it). You are right: Identification of the production functions, i.e., Assumption~\ref{ass:exog}, has nothing to do with the experiment. However, once we know that the production functions are constant across experimental and non-experimental samples, we use the production functions estimates in the non-experimental sample to forecast. The experiment is crucial to our procedure because it sets the treatment-control difference in the outcomes of interest through the experimentally-induced changes in the inputs that we use to forecast. This is what many policy changes would do. The experiment gives us a policy-relevant exogenous change in the inputs. It fixes the goal. It defines de policy. We then show how we can relax exogeneity.
+\noindent \textit{Response.} Your point is dead-on. But the experiment allows us to test exogeneity rather than impose it. Assumption~\ref{ass:exog} allows us to identify and estimate production functions in the non-experimental samples when both the outputs and the inputs are observed. Assumption~\ref{ass:summary} states that the production functions are identical across experimental and non-experimental samples (and provides testable implications derived from this). The experiment is also crucial to our procedure because it sets the treatment-control difference in the outcomes of interest through the experimentally-induced changes in the inputs that we use to forecast. This is what many policy changes would do. The experiment gives us a policy-relevant exogenous change in the inputs. It fixes the goal of the analysis in the non-experimental sample. It defines de policy.
 
 \noindent \textbf{Referee 3, Comment 5. The authors conclude with the cautionary note that the program they study was targeted to a disadvantaged. Related to this point, the authors may want to emphasize the homogeneity assumption underlying their forecast exercise. At least in other settings, one would expect there to be considerable heterogeneity in effects even among observationally equivalent children and parents.}
 
 \noindent \textit{Response.} This is a good point that we have added to the cautionary note of the conclusion.
 
-\textit{\textbf{[JLG: I propose that we change the third paragraph of Section~\ref{section:conclusion} to the following. ``We conclude with a cautionary note. The program we study was targeted to a disadvantaged, predominately African-American, relatively homogenous population in a university town in North Carolina. Blind generalization of our findings to other populations is clearly not warranted. In particular, there is no support in this study for universal application of ABC/CARE across all socio-economic groups which could exhibit vastly heterogenous returns to high-quality early childhood education.'']}}
+\textit{\textbf{[JLG: I propose that we change the third paragraph of Section~\ref{section:conclusion} to the following. ``We conclude with a cautionary note. The program we study was targeted to a relatively homogenous, disadvantaged, predominately African-American population in a university town in North Carolina. Blind generalization of our findings to other populations is clearly not warranted. In particular, there is no support in this study for universal application of ABC/CARE across all socio-economic groups which could exhibit vastly heterogenous returns to high-quality early childhood education.'']}}
 
 \textit{\textbf{[JLG: I have integrated the proposed modification, with your edits included.]}}
 
@@ -234,11 +240,16 @@ The analogous answer applies for the case of identifying distributions, as oppos
  
 \noindent \textbf{Referee 4, Comment 2. An alternative form of robustness is to ask what would have happened if the authors had not had access to experimental data through age 30. Suppose they deleted all information in the Abecedarian data set observed after some earlier age, and conducted the projection exercise on the remaining data. What would the estimated rates of return look like? Another way of stating this question: what answers would the authors have reported if forced to write this paper 5, 10, 15, or 20 years ago, using the same projection methodology they developed for the current version? Robustness of the estimates to different possible followup windows would give readers a lot of confidence regarding the authors' results based on the data that happens to be available today. On the other hand, showing that the estimates would have been inaccurate before a particular date would be helpful for researchers interpreting results from more recent evaluations where less time has elapsed since treatment.}
 
-\noindent \textit{Response.} We agree. Your suggested exercise is interesting. We have a small number of inputs, given the choice of inputs that we justify in \textbf{Step 3.} in Section~\ref{sec:forecasting}. However, based on the points that you raised, we created additional material for Section~\ref{section:bcaestimates}. That material assesses the general point that you make in your report. We reproduce it next for your convenience. 
+\noindent \textit{Response.} We agree. Your suggested exercise is interesting. We have a small number of inputs, given the choice of inputs that we justify in \textbf{Step 3} in Section~\ref{sec:forecasting}. However, based on the points that you raised, we created additional material for Section~\ref{section:bcaestimates}. That material assesses the general point that you make in your report. We reproduce it next for your convenience. 
 
 \textit{\textbf{[JLG: The referee stated his one point in various ways. I think that his point is of value and created the following material that I propose to add at the end of our current Section~\ref{section:bcaestimates}.]}}
 
 \textit{\textbf{[JLG: The material proposed is now in the revised paper, with your edits included.]}}
+
+\textit{\textbf{[JJH: Where in Section~\ref{section:bcaestimates}.]}}
+
+\textit{\textbf{[JLG: All the changes are flagged in the revised version now.]}}
+
 %References
 \singlespace
 \bibliographystyle{chicago}
