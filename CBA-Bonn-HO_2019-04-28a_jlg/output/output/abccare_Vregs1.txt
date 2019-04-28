@@ -1,0 +1,13 @@
+	(1)	(2)	(3)	(4)	(5)	(6)
+	years_30y1P	years_30y1Q	years_30y1PQ	si30y_works_job1P	si30y_works_job1Q	si30y_works_job1PQ
+VARIABLES	years_30y	years_30y	years_30y	si30y_works_job	si30y_works_job	si30y_works_job
+						
+P	1.763*		2.588*	-0.015		0.236
+	(0.906)		(1.385)	(0.264)		(0.402)
+Q		0.018	-0.023		-0.003	-0.007
+		(0.020)	(0.029)		(0.006)	(0.009)
+						
+Observations	29	29	29	29	29	29
+R-squared	0.283	0.188	0.303	0.132	0.146	0.160
+Standard errors in parentheses						
+*** p<0.01, ** p<0.05, * p<0.10						

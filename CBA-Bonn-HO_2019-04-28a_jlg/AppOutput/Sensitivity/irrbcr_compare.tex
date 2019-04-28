@@ -1,0 +1,33 @@
+\begin{table}[H]
+\small
+\begin{threeparttable}
+\caption{Internal Rate of Return, Benefit-Cost Ratio Comparisons}
+\label{tab:irrbcr_compare}
+\begin{tabular}{cccc|ccc}
+\hline\hline
+& \multicolumn{3}{c|}{Not Controlling for Imbalance} & \multicolumn{3}{c}{Controlling for Imbalance} \\
+%\cmidrule(lr){2-4} \cmidrule(lr){5-7} 
+Group & Estimate & Standard Error & Confidence Interval & Estimate & Standard Error & Confidence Interval \\
+\hline
+\multicolumn{4}{l|}{\emph{Internal Rate of Return}}\\
+Male & 0.1310 & 0.0548 & (0.0417, 0.1882) & 0.1387 & 0.0564 & (0.0511, 0.1970) \\
+Female & 0.0426 & 0.0906 & (-0.0230, 0.1009) & 0.0462 & 0.1041 & (-0.0302, 0.1139) \\
+Pooled & 0.1057 & 0.0546 & (0.0512, 0.1535) &  0.1129 & 0.0564 & (0.0544, 0.1626) \\
+& & & & & & \\
+\multicolumn{4}{l|}{\emph{Benefit-Cost Ratio}}\\
+Male & 5.1999 & 3.3813 & (1.0632, 9.5777) & 5.3787 & 3.3959 & (1.2778, 9.8837) \\
+Female & 1.3600 & 0.9213 & (0.2086, 2.5500) & 1.3599 & 1.0493 & (0.0672, 2.7033) \\
+Pooled & 3.1944 & 1.5526 & (1.3009, 5.2425) & 3.2740 & 1.5707 & (1.3467, 5.2856) \\
+\hline\hline
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item Note: this table describes how the estimates of the internal rate of return and
+benefit-cost ratios change when we account for the imbalances in baseline characteristics 
+between treatment and control groups. Point estimates are means of the bootstrap distribution. 
+Standard errors are the standard deviation of the bootstrap distribution. The 80\%
+confidence interval are constructed by taking the 10\textsuperscript{th} and 
+90\textsuperscript{th} percentiles of the bootstrap distributions. 
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

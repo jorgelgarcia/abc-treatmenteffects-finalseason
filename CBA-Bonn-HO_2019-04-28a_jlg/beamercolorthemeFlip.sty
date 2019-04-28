@@ -1,0 +1,113 @@
+% HCEO Color Theme, Modified from BEAMER FLIP THEME (Copyright 2012 by Flip Tanedo)
+
+\mode<presentation>
+\newif\ifbeamer@Flip@dark
+\beamer@Flip@darkfalse
+\DeclareOptionBeamer{dark}{\beamer@Flip@darktrue}
+\ProcessOptionsBeamer
+
+
+% Colors have been modified to fit UofC standard color theme
+\definecolor{maroon}{RGB}{0,0,0}				% (UofC Maroon)
+\definecolor{crimsonred}{RGB}{128,0,0}			% (UofC Maroon)
+\definecolor{darkcharcoal}{RGB}{118,118,118}	% Darker gray (Warm Gray UofC)
+\definecolor{charcoal}{RGB}{118,118,118}		% Darker gray (Warm Gray UofC)
+\definecolor{coolgray}{RGB}{214,214,206}		% Cool Gray (UofC)
+\definecolor{blue}{RGB}{21,95,131}			% Blue (UofC)
+\definecolor{lightgreen}{RGB}{138,157,69}	% Light Green (UofC)
+\definecolor{paleale}{RGB}{204,204,102}		% Only for dark BG
+\definecolor{lager}{RGB}{140,110,10}		% Use instead of pale ale for white BG
+\definecolor{violet}{RGB}{53,14,32}			% Violet (UofC)
+\definecolor{jeans}{RGB}{20,30,150}			% A more neutral blue
+
+
+% Define some "invariant colors" so that a color that doen't work with a
+% light/dark background will automatically be substituted with one that does.
+% These will be rewritten in beamercolorthemeFlipDark
+
+	\definecolor{FlipSand}{RGB}{140,110,10}			% lager, Only for light BG
+	\definecolor{FlipGreen}{RGB}{51,153,0}			% lightgreen, works for both
+
+%% Future revision: It would be nice to define these in terms of the palette.
+
+
+\ifbeamer@Flip@dark
+	\setbeamercolor{normal text}{fg=white, bg=black}		
+	\setbeamercolor{structure}{fg=gray, bg=black}		% fg controls bullets
+	\setbeamercolor*{footerlike}{fg=white,bg=black}		% Controls the footerline
+\else
+	% Default to black on white
+	\setbeamercolor*{footerlike}{fg=white,bg=charcoal}	% for charcoal footer
+	\setbeamercolor{structure}{fg=charcoal, bg=white}	% fg controls bullets
+	% \setbeamercolor{normal text}{fg=white, bg=black}	
+\fi
+
+
+
+
+
+% These defined colors can be used in \textcolor{colorname}{text in that color}.
+
+% Colors for Keynote background: DARK
+\definecolor{keynotebottom}{rgb}{0.32,0.3,0.38}
+\definecolor{keynotemiddle}{rgb}{0.08,0.08,0.16}
+\definecolor{keynotetop}{rgb}{0,0,0}
+%%% Example of usage:
+%% \setbeamertemplate{background canvas}[vertical shading]
+%% [bottom=keynotebottom, middle=keynotemiddle, top=keynotetop]
+
+
+
+
+% ALERT AND COMMENT COLORS (just copies of the above colors)
+% (I don't know how ot do this more elegantly)
+\ifbeamer@Flip@dark
+	\definecolor{ALERT}{RGB}{254,193,13}			% crimsonred
+	\definecolor{Alert}{RGB}{138,157,69}			% lightgreen
+	\definecolor{alert}{RGB}{204,204,102}		% paleale		
+	\definecolor{charcoal}{RGB}{51,51,51}		% charcoal
+	\definecolor{comment}{RGB}{80,80,80}		% light charcoal
+	\definecolor{Comment}{RGB}{214,214,206}		% coolgray
+	\definecolor{COMMENT}{RGB}{53,14,32}		% violet
+\else
+	\definecolor{ALERT}{RGB}{254,193,13}			% crimsonred
+	\definecolor{Alert}{RGB}{138,157,69}			% lightgreen
+	\definecolor{alert}{RGB}{140,110,10}		% lager
+	\definecolor{charcoal}{RGB}{80,80,80}		% light charcoal
+	\definecolor{comment}{RGB}{51,51,51}		% charcoal
+	\definecolor{Comment}{RGB}{214,214,206}		% coolgray
+	\definecolor{COMMENT}{RGB}{53,14,32}		% violet
+\fi
+
+
+% A few useful colors
+\setbeamercolor{alerted text}{fg=alert}
+
+% Blocks
+\setbeamercolor{block title}{fg=gray!30!white,bg=charcoal}
+\setbeamercolor{block body}{parent=normal text,bg=gray, fg=white}
+
+\setbeamercolor{block title example}{fg=lightgreen!30!white,bg=lightgreen!40!black}
+\setbeamercolor{block body example}{parent=normal text,bg=lightgreen, fg=white}
+% 
+\setbeamercolor{block title alerted}{fg=crimsonred!30!white,bg=crimsonred!40!black}
+\setbeamercolor{block body alerted}{parent=normal text,bg=crimsonred, fg=white}
+
+\setbeamercolor*{palette primary}{fg=crimsonred,bg=charcoal}
+\setbeamercolor*{palette secondary}{fg=paleale,bg=lager}
+\setbeamercolor*{palette tertiary}{fg=lightgreen,bg=jeans}
+\setbeamercolor*{palette quaternary}{fg=blue,bg=violet}
+
+
+%%%%% These are some structures that I define for use in the outer theme.%%%%%
+
+\setbeamercolor*{crimsontown}{fg=blue,bg=crimsonred}
+\setbeamercolor*{titlelike}{fg=maroon}
+\setbeamercolor*{topbarlike}{fg=crimsonred}
+
+
+
+
+
+\mode
+<all>

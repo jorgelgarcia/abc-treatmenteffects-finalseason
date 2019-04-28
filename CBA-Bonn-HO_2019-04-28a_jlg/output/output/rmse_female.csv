@@ -1,0 +1,3 @@
+mset1control	mset1treat	mset2control	mset2treat	mset3control	mset3treat	mset4	num	label
+207794.9	206770.4	169346.6	167390.9	209916.6	204723.7	169766.4	1	"mean"
+82364.17	81925.68	65925.15	64882.08	83471.92	80958.95	65979.05	2	"semean"

@@ -1,0 +1,11 @@
+Author	Joshua Shea
+Date	July 7, 2016
+
+This folder contains the code used to select the controls, instruments (if necessary---it is
+possible that none are selected using model selection), and IPW variables.
+
+'controls_selection.py' outputs 'best_controls.txt
+
+'instruments_selection.py' outputs 'best_instruments.txt'
+
+'ipw_selection.py' directly modifies the 'outcomes_cba.csv' file to include all the IPW variables

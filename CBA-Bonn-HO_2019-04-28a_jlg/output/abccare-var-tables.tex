@@ -1,0 +1,147 @@
+% Project:			Tables and Gender Differences
+% This file:		Table of variable stats
+% Original date: 	April 26, 2017
+
+%!TEX options = -shell-escape
+
+\documentclass[11pt]{article}
+ 
+\usepackage{color}
+%\input{rgb}
+ 
+%----------Packages----------
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsrefs}
+\usepackage{dsfont}
+\usepackage{float}
+\usepackage{mathrsfs}
+\usepackage{stmaryrd}
+\usepackage[all]{xy}
+\usepackage[mathcal]{eucal}
+\usepackage{verbatim}  %%includes comment environment
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{threeparttablex}
+\usepackage{longtable}
+\usepackage{tablefootnote}
+\usepackage[margin=0.3in]{geometry}
+\usepackage{stackengine}
+\usepackage{readarray}
+\usepackage{natbib}
+\newcounter{index}
+\newcounter{maxlines}
+\newcommand\UL[1]{%
+  \getargsC{#1}%
+  \setcounter{maxlines}{\narg}%
+  \def\thesavedstack{\argi}%
+  \setcounter{index}{1}%
+  \whiledo{\theindex<\themaxlines}{%
+    \stepcounter{index}%
+    \if\csname arg\roman{index}\endcsname-%
+      \def\themark{\rule{\widthof{\argi}}{\thk}}%
+    \else%
+      \def\themark{\rule{0ex}{\thk}}%
+    \fi%
+    \savestack{\thesavedstack}{\stackunder{\thesavedstack}{\themark}}%
+  }%
+  \thesavedstack
+}
+\parskip 1em
+\def\thk{.1ex}
+\setstackgap{S}{2pt}
+
+\renewcommand\thempfootnote{\arabic{mpfootnote}}
+%----------Commands----------
+ 
+%%penalizes orphans
+\clubpenalty=9999
+\widowpenalty=9999
+ 
+%----------Title-------------
+
+\begin{document}
+\title{Table of Variable and Factor Measures of the Control Group}
+\author{Ruby Zhang}
+\maketitle
+
+\section{Variable Measures (10 bootstraps)}
+
+  \subsection{Self-Selected Variables (10 bootstraps)}
+    \subsubsection{Cognitive Skills}
+    \input{abccare-var-iq}
+
+    \subsubsection{Achievement Skills}
+    \input{abccare-var-ach}
+
+    \subsubsection{Non-Cognitive Skills}
+    \input{abccare-var-socioemo}
+
+    \subsubsection{Parenting Skills}
+    \input{abccare-var-parenting}
+
+  \subsection{Variables in Paper (200 bootstraps)}
+    \subsubsection{IQ}
+    \input{abccare-outcome-var-iq}
+
+    \subsubsection{Achievement}
+    \input{abccare-outcome-var-ach}
+
+    \subsubsection{Parenting}
+    \input{abccare-outcome-var-parenting}
+
+    \subsubsection{Social-emotional}
+    \input{abccare-outcome-var-se}
+
+    \subsubsection{Education}
+    \input{abccare-outcome-var-ed}
+
+    \subsubsection{Employment}
+    \input{abccare-outcome-var-emp}
+
+    \subsubsection{Parental income}
+    \input{abccare-outcome-var-parent}
+
+    \subsubsection{Health}
+    \input{abccare-outcome-var-health}
+
+    \subsubsection{Crime}
+    \input{abccare-outcome-var-crime}
+
+\newpage
+
+\section{Factor Measures}
+
+  \subsection{Old Factors (50 bootstraps)}
+
+    \subsubsection{Cognitive Skills}
+    \input{abccare-old-fac-cog}
+
+    \subsubsection{Achievement Skills}
+    \input{abccare-old-fac-ach}
+
+    \subsubsection{Non-Cognitive Skills}
+    \input{abccare-old-fac-ncog}
+
+    \subsubsection{Parenting Skills}
+    \input{abccare-old-fac-parenting}
+
+  \subsection{New Factors (50 bootstraps)}
+    \subsubsection{Cognitive Skills}
+    \input{abccare-new-fac-cog}
+
+    \subsubsection{Achievement Skills}
+    \input{abccare-new-fac-ach}
+
+    \subsubsection{Non-Cognitive Skills}
+    \input{abccare-new-fac-ncog}
+
+    \subsubsection{Parenting Skills}
+    \input{abccare-new-fac-parenting}
+
+\end{document}

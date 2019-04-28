@@ -1,0 +1,16 @@
+\section{Calculating the Benefit/cost Ratio and the IRR}
+
+\noindent We estimate the benefit/cost ratio and the internal rate of return of participation in ABC/CARE for the \textit{average participant} of the program. Let $B_{r,t}$ denote benefits and  $C_{r,t}$ denote costs for group $r$ at age $t$. Then $r$ takes either two values, $0$ for children randomized into the control group or $1$ for children randomized into the treatment group.\\
+
+\noindent Both $B_{r,t}$ and $C_{r,t}$ are in 2014 USD and discounted to $t = 0$. Thus, the benefits $B_t = B_{1,t} - B_{0,t}$ and costs $C_t = C_{1,t} - C_{0,t}$ associated with program participation are the differences between the counter-factual benefits and costs. We use the counter-factual notation for costs because the costs for the control group are not zero: the control group children received some services from the ABC/CARE center and some attended alternative care programs. \\
+
+\noindent The estimate for the benefit/cost ratio is
+\begin{align}
+\mathbf{E} \left( \frac{ \sum_{t=0}^T B_t}{\sum_{t=0}^T C_t} \right).
+\end{align}
+
+\noindent The estimate for the internal rate of return is the value $\rho$ that solves:
+
+\begin{align}
+\sum_{t=0}^T \frac{ \mathbf{E} (B_t - C_t)}{(1+\rho)^t} = 0.
+\end{align}

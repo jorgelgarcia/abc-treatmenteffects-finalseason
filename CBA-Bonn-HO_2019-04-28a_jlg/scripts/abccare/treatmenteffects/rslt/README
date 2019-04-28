@@ -1,0 +1,12 @@
+Author	Joshua Shea
+Date 	July 7, 2016
+
+This folder contains the treatment effect estimates for all the 500+ outcomes 
+using Yu Kyung's code (not yet in the repo as of July 7, 2016).
+
+These are the results that go into making the huge appendix in the paper.
+
+THere should be two folders here:
+
+1. matching
+2. itt

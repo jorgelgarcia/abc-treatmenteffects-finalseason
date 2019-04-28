@@ -1,0 +1,10 @@
+	(1)	(2)	(3)
+	lag0cnlsy	lag1cnlsy	lag2cnlsy
+VARIABLES	dinc_labor	dinc_labor	dinc_labor
+			
+ldinc_labor	0.672***	0.672***	0.672***
+	(0.047)	(0.042)	(0.040)
+			
+Observations	6,891	6,891	6,891
+Robust standard errors in parentheses			
+*** p<0.01, ** p<0.05, * p<0.10			

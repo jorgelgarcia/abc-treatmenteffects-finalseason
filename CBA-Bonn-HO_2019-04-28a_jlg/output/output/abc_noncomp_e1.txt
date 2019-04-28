@@ -1,0 +1,11 @@
+		(1)	(2)	(3)	(4)
+		iq3y_itt	iq3y_iv	iq5y_itt	iq5y_iv
+VARIABLES	LABELS	IQ at age 3y months	IQ at age 3y months	IQ at age 5y months	IQ at age 5y months
+					
+R	Randomization into center-based care (ABC and CARE)	14.970***		6.398**	
+		(2.794)		(2.494)	
+D	Indicator for the actual treatment receipt for center-based care		16.245***		6.943***
+			(2.877)		(2.643)
+					
+Observations		100	100	100	100
+R-squared		0.227	0.289	0.063	0.088

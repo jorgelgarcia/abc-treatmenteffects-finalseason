@@ -1,0 +1,47 @@
+\section{Accounting for Attrition} \label{appendix:attrition}
+
+\noindent We use a standard inverse probability weighting (IPW) scheme based on a logit model that predicts attrition using baseline characteristics.\footnote{\citet{Horvitz_Thompson_1952_JASA}.} We discuss identification below. We describe our model selection process and the selected logit models in Tables \ref{table:nonipw}--\ref{table:ms_attrit_pooled} in Appendix \ref{app:method_identify}. We use the Akaike Information Criteria (AIC) to select the model with the best predictive ability. We use the same notation as in Section~\ref{section:cbamethodology} and a vector of background characteristics used in the randomization protocol; $W$ are background characteristics not used in this protocol.\\
+
+\noindent Formally, let $A=1$ denote the case where we observe $Y$ and $A=0$ denote otherwise. We assume $A$ is independent of $Y$ conditional on $Z$, $R$, $X$, and $W$. More formally, we invoke
+
+\begin{assumption} \label{ass:attr}
+	\begin{align*}
+		A \independent Y | W, Z, X, R.
+	\end{align*}
+\end{assumption}
+
+\noindent Based on this assumption, we identify $\mathbb{E}[Y_r]$ as follows:
+
+\begin{align} \label{eq:case2}
+\mathbb{E}[Y_r] & = \int y f_{Y_r|Z}(y) f_Z(z) dydz \\ \nonumber
+	           & = \int y f_{Y|Z,R=r}(y) f_Z(z) dydz \\ \nonumber
+				& = \int y f_{Y|R=r,W,Z,X}(y) f_{W,X|R=r}(w,x) f_Z(z) dydxdwdz \\ \nonumber
+				& = \int y f_{Y|R=r,W,Z,X,A=1}(y) f_{W,X|R=r,Z}(w,x) f_Z(z) dydxdwdz
+\end{align}
+\noindent where each component of the last expression in \eqref{eq:case2} is straightforward to recover from the data. Using Bayes' Theorem, we can write an equivalent expression to make the IPW scheme explicit. That is, we apply Bayes' Theorem to $f_{W,X|R=r,Z}(w,x)$ and $f_Z(z)$ to obtain
+
+\begin{equation*}
+f_{W,X|R=r,Z}(w,x) = \frac{f_{W,X|R=r,Z,A=1}(w,x) P(A=1|R=r,Z)}{P(A=1|R=r,W,Z,X)}
+\end{equation*}
+and
+\begin{equation*}
+	f_Z(z) = \frac{f_{Z|R=r,A=1}(z) P(R=r,A=1)}{P(R=r,A=1|Z)}.
+\end{equation*}
+\noindent Substituting these expressions into \eqref{eq:case2}, we obtain
+
+\begin{align*} \label{eq:case2ipw}
+\mathbb{E}[Y_r] & = \int y f_{Y,X,W,Z|R=r,A=1}(y,x,w,z) \frac{P(R=r,A=1) P(A=1|R=r,Z)}{P(R=r,A=1|Z) P(A=1|R=r,W,Z,X)} dydxdwdz \\
+	            & = \int y f_{Y,X,W,Z|R=r,A=1}(y,x,w,z) \frac{P(R=r,A=1)}{P(R=r|Z) P(A=1|R=r,W,Z,X)} dydxdwdz. \\
+\end{align*}
+
+\noindent Assumption \ref{ass:attr} generalizes the matching assumption of \citet{Campbell_Conti_etal_2014_EarlyChildhoodInvestments}. It conditions not only on pre-program variables but on fully observed post-treatment variables, $X$. This enables us to account  for two types of selection:  (i) selection into treatment; and (ii) selection into item response. The corresponding sample estimator for $\mathbb{E}[Y_r]$ is
+
+\begin{align*}
+\sum_{i \in \mathcal{I}} y a_{i} w_{i,r} \mathbf{1}(r_i = r)
+\end{align*}
+\noindent where $\mathcal{I}$ indexes the individuals in the sample, $a_i$ indicates whether we observe $Y$ for individual $i$, and
+
+\begin{align*}
+	w_{i,r} = \frac{1}{\pi_r(z_i) \alpha(r_i,w_i,z_i,x_i)} \frac{1}{\sum_k{\frac{\mathbf{1}(r_i = r) \mathbf{1}(a_i = 1)}{\pi_r(z_k)\alpha(r_k,w_k,z_k,x_k)}}},
+\end{align*}
+\noindent with $\pi_r(z) := P(R=r|Z=z)$ and $\alpha(r,w,z,x) := P(A=1|R=r,W=w,Z=z,X=x)$. The weight $\pi_r$ corrects for selection into treatment based on pre-program variables $Z$. The weight $\alpha$ corrects for item non-response based on $R, W, Z, X$. \\

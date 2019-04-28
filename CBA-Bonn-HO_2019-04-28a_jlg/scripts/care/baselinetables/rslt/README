@@ -1,0 +1,7 @@
+Author	Joshua Shea
+Date	July 7, 2016
+
+This folder contains the bootstrapped mean differences for baseline characteristics.
+They are generated using:
+
+../bootstrap.py

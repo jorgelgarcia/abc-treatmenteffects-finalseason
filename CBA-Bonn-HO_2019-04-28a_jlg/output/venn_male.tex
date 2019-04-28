@@ -1,0 +1,49 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\begin{document}
+\begin{tikzpicture}
+
+\begin{scope}[shift={(-2,0)},x={(2,2)},y={($(-2,0)!1!60:(2,2)$)}]
+  \draw[blue, very thick, fill=blue, opacity=.3] (.5,0) ellipse (1 and .5);
+\end{scope}
+\begin{scope}[shift={(-2,0)},x={(2,2)},y={($(-2,0)!1!60:(2,2)$)}]
+  \draw[red, very thick, fill=red, opacity=.3] (1,-.04) ellipse (1 and .5);
+\end{scope}
+
+\begin{scope}[shift={(2,0)},x={(-2,-2)},y={($(2,0)!1!60:(-2,-2)$)}]
+  \draw[black, very thick, fill=black, opacity=.3] (-.9,-0.125) ellipse (2 and .35);
+\end{scope}
+\begin{scope}[shift={(2,0)},x={(-2,-2)},y={($(2,0)!1!60:(-2,-2)$)}]
+  \draw[green, very thick, fill=green, opacity=.3] (-.65,.05) ellipse (2 and .35);
+\end{scope}
+
+\draw (-4.25,2) node[align=center, below][align=center, below] {\footnotesize \textbf{\%7.7} \\ \footnotesize  3.2}; 		%A
+\draw (-0.75,5.5) node[align=center, below] {\footnotesize \%3.3 \\ \footnotesize  0.56}; 						%B
+\draw (3.75,5.25) node[align=center, below] {\footnotesize \textbf{\%4.7} \\ \footnotesize  1.0}; 				%C
+\draw (7.25, 1.75) node[align=center, below] {\footnotesize \%5.5 \\  \footnotesize 2.3}; 						%D
+\draw (-2.5,3.5) node[align=center, below] {\footnotesize \%7.2 \\ \footnotesize  3.9}; 						%AB
+\draw (-.5,-1.5) node[align=center, below] {\footnotesize \textbf{\%12.5} \\ \footnotesize 4.3}; 				%AC
+\draw (2,-2.5) node[align=center, below] {\footnotesize \textbf{\%8.8} \\ \footnotesize  \textbf{5.6}}; 						%AD
+\draw (1.75,3.75) node[align=center, below] {\footnotesize \%6.2 \\ \footnotesize  1.6}; 					%BC
+\draw (4.25,-1.5) node[align=center, below] {\footnotesize \%5.5 \\ \footnotesize  3.0}; 						%BD
+\draw (5.5,3.5) node[align=center, below] {\footnotesize \textbf{\%9.0} \\ \footnotesize  3.4}; 			%CD
+\draw (0.25, 1.75) node[align=center, below] {\footnotesize \textbf{\%10.2} \\ \footnotesize  5.0}; 					%ABC
+\draw (3.25,-1.9) node[align=center, below] {\footnotesize \textbf{\%8.6} \\ \footnotesize  \textbf{6.3}}; 						%ABD
+\draw (0.75,-2.1) node[align=center, below] {\footnotesize \textbf{\%12.2} \\ \footnotesize  \textbf{6.7}}; 			%ACD
+\draw (3.25, 1.75) node[align=center, below] {\footnotesize \%6.2 \\ \footnotesize 1.6}; 					%BCD
+\draw (1.75,0) node[align=center, below] {\footnotesize \textbf{\%14.7} \\ \footnotesize \textbf{10.2}}; 													%ABCD
+
+
+\draw [blue] (-5,-.25) node[align=center, below] {Crime};
+\draw [red] (-4.75,6) node[align=center, below] {Health};
+
+\draw [black] (8,-1.25) node[align=center, below] {Labor Income};
+\draw [green] (7.5,6.5) node[align=center, below] {Parental Income};
+
+
+
+\end{tikzpicture}
+\end{document}
+
+

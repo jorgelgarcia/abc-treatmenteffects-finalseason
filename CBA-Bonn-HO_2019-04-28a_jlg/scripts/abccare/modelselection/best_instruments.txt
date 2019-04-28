@@ -1,0 +1,4 @@
+Best AIC: male hh_sibs0y grandma_county has_relatives 
+
+Best BIC: male hh_sibs0y grandma_county has_relatives 
+

@@ -1,0 +1,33 @@
+\begin{tabular}{>{\bfseries}lcc|cc|cc} \toprule
+	&	\multicolumn{2}{c}{\textbf{\textit{Pooled}}}	&	\multicolumn{2}{c}{\textbf{\textit{Males}}}	&	\multicolumn{2}{c}{\textbf{\textit{Females}}}	\\ \toprule
+Baseline	&	\multicolumn{2}{c}{\textbf{7.33} (s.e. 1.84)}	&	\multicolumn{2}{c}{\textbf{10.19} (s.e. 2.93)}	&	\multicolumn{2}{c}{\textbf{2.61} (s.e. 0.73)}	\\
+\multicolumn{7}{l}{\textit{Baseline: IPW and Controls, Life-span up to predicted death, Treatment vs. Next Best, 50\% Marginal tax 50\% (deadweight loss), Discount rate 3\%, Parental}} \\	
+\multicolumn{7}{l}{\textit{income 0 to 21 (child's age), Labor Income predicted from 21 to 65, All crimes (full costs), Value of life 150,000.}} \\ \\ \midrule	
+Specification	&	\textit{No IPW}	&	\textit{and No Controls}	&	\textit{No IPW}	&	\textit{and No Controls}	&	\textit{No IPW}	&	\textit{and No Controls}	\\
+	&	\textbf{7.31}	&	\textbf{7.99}	&	\textbf{9.80}	&	\textbf{8.83}	&	\textbf{2.57}	&	\textbf{2.82}	\\
+	&	(1.81)	&	(2.18)	&	(2.69)	&	(2.72)	&	(0.72)	&	(0.68)	\\ \midrule
+Prediction	&	\textit{to Age 21}	&	\textit{to Age 30}	&	\textit{to Age 21}	&	\textit{to Age 30}	&	\textit{to Age 21}	&	\textit{to Age 30}	\\
+Span	&	\textbf{1.52}	&	\textbf{3.19}	&	\textbf{2.23}	&	\textbf{3.84}	&	1.46	&	\textbf{1.81}	\\
+	&	(0.36)	&	(1.04)	&	(0.61)	&	(1.60)	&	(0.36)	&	(0.50)	\\ \midrule
+Counter-	&	\textit{vs. Stay at Home}	&	\textit{vs. Alt. Presch.}	&	\textit{vs. Stay at Home}	&	\textit{vs. Alt. Presch.}	&	\textit{vs. Stay at Home}	&	\textit{vs. Alt. Presch.}	\\
+factuals	&	\textbf{5.44}	&	\textbf{9.63}	&	3.30	&	\textbf{11.46}	&	\textbf{5.79}	&	\textbf{2.28}	\\
+	&	(1.86)	&	(3.10)	&	(2.95)	&	(3.16)	&	(1.37)	&	(0.76)	\\ \midrule
+Deadweight-	&	\textit{0\%}	&	\textit{100\%\textit}	&	\textit{0\%}	&	\textit{100\%\textit}	&	\textit{0\%}	&	\textit{100\%\textit}	\\
+loss	&	\textbf{11.01}	&	\textbf{5.50}	&	\textbf{15.38}	&	\textbf{7.59}	&	\textbf{3.83}	&	\textbf{2.01}	\\
+	&	(2.79)	&	(1.37)	&	(4.35)	&	(2.23)	&	(1.04)	&	(0.59)	\\ \midrule
+Discount 	&	\textit{0\%}	&	\textit{7\%}	&	\textit{0\%}	&	\textit{7\%}	&	\textit{0\%}	&	\textit{7\%}	\\
+Rate	&	\textbf{17.40}	&	\textbf{2.91}	&	\textbf{25.45}	&	\textbf{3.78}	&	\textbf{5.06}	&	\textbf{1.49}	\\
+	&	(5.90)	&	(0.59)	&	(10.42)	&	(0.79)	&	(2.82)	&	(0.32)	\\ \midrule
+Parental	&	\textit{Mincer Life-cycle}	&	\textit{Life-cycle Prediction}	&	\textit{Mincer Life-cycle}	&	\textit{Life-cycle Prediction}	&	\textit{Mincer Life-cycle}	&	\textit{Life-cycle Prediction}	\\
+Income	&	\textbf{7.63}	&	\textbf{7.73}	&	\textbf{10.46}	&	\textbf{10.63}	&	\textbf{2.98}	&	\textbf{3.12}	\\
+	&	(1.84)	&	(1.92)	&	(2.94)	&	(2.95)	&	(0.76)	&	(0.85)	\\ \midrule
+Labor	&	\textit{.5\% Annual Decay}	&	\textit{.5\% Annual Growth}	&	\textit{.5\% Annual Decay}	&	\textit{.5\% Annual Growth}	&	\textit{.5\% Annual Decay}	&	\textit{.5\% Annual Growth}	\\
+Income	&	\textbf{7.01}	&	\textbf{7.66}	&	\textbf{9.58}	&	\textbf{10.79}	&	\textbf{2.51}	&	\textbf{2.71}	\\
+	&	(1.80)	&	(1.90)	&	(2.66)	&	(3.24)	&	(0.70)	&	(0.75)	\\ \midrule
+Crime	&	\textit{Drop Major Crimes}	&	\textit{Halve Costs}	&	\textit{Drop Major Crimes}	&	\textit{Halve Costs}	&	\textit{Drop Major Crimes}	&	\textit{Halve Costs}	\\
+	&	\textbf{4.24}	&	\textbf{5.18}	&	\textbf{7.41}	&	\textbf{7.12}	&	\textbf{2.61}	&	\textbf{2.47}	\\
+	&	(1.10)	&	(1.22)	&	(3.43)	&	(2.41)	&	(0.67)	&	(0.66)	\\ \midrule
+Health	&	\textit{Drop All}	&	\textit{Double Value of Life}	&	\textit{Drop All}	&	\textit{Double Value of Life}	&	\textit{Drop All}	&	\textit{Double Value of Life}	\\
+(QALYs)	&	\textbf{6.48}	&	\textbf{8.19}	&	\textbf{9.14}	&	\textbf{11.23}	&	\textbf{2.20}	&	\textbf{3.03}	\\
+	&	(1.79)	&	(2.13)	&	(2.73)	&	(3.40)	&	(0.69)	&	(1.04)	\\ \bottomrule
+\end{tabular} 
